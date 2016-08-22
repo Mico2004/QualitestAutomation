@@ -145,6 +145,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		List<String> listOfNames = record.getCourseRecordingList();
 		
 		record.selectIndexCheckBox(listOfNames.size());
+
 		record.clickOnRecordingTaskThenEditRecording();
 		
 		for(int i=0; i<10; i++) {

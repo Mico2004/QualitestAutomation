@@ -117,11 +117,12 @@ public class TC15458AddMpgFile {
 	@Test
 	public void test17929() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testMpg.mpg";
-		String file_name = "Moshik_testMpg.mpg";
+		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testMpg.mpeg";
+		String file_name = "Moshik_testMpg.mpeg";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		/// 2.login as instructor
+		//dfs
 		tegrity.loginCourses("User1");
 	    course.waitForVisibility(course.sign_out);
 		// 3.Select course

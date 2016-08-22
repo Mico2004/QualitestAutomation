@@ -220,6 +220,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			
 			// 5.2. The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)".
 			if(type_of_user != 3) {
@@ -240,7 +241,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 			
 			// 5.6. The next result display below the current result in case there is next result.
 			Thread.sleep(3000);
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 6. Hover over the chapter icon.
 			search_page.moveToElementAndPerform(search_page.link_icon_list.get(0), driver);
@@ -260,7 +261,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 
 			
 			// 7. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 			Thread.sleep(3000);	
 		}
 		

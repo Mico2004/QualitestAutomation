@@ -1,10 +1,6 @@
 package com.automation.main;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
-import java.util.List;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -159,10 +155,12 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			record.checkStatusExistenceForMaxTTime(450);
 			
 			record.returnToCourseListPage();
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			
+			course.selectCourseThatStartingWith("Ab");
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			record.clickOnRecordingTaskThenEditRecording();
+			
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 			String recording_text = "reocrd" + sdf.format(date); 

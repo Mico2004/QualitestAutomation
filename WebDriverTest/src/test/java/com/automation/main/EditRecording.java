@@ -87,6 +87,7 @@ public class EditRecording extends Page {
 		ConfirmationMenu confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		RecordingHelperPage record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		
+		
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
@@ -96,28 +97,24 @@ public class EditRecording extends Page {
 			}
 		}
 		
-		for(int i=0; i<20; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
+		
+			while(!isElementPresent(By.id("PlayButton_Img"))) {
+					System.out.println("element is not visable");
+					Thread.sleep(1000);	
 			}
-				
+		
+		for(String window_handler: driver.getWindowHandles()) {
+			driver.switchTo().window(window_handler);
+			break;
 		}
 		
-		// exit player frame
-		record.exitInnerFrame();
 		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(1));
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		
 		
 		//changing the name of the title
-		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(driver.findElement(By.id("NewTitle"))));
+		Thread.sleep(4000);
 		driver.findElement(By.id("NewTitle")).clear();
 		driver.findElement(By.id("NewTitle")).sendKeys(target_name);
 		

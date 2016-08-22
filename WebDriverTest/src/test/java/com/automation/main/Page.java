@@ -12,14 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.lang.model.util.ElementScanner6;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.apache.bcel.generic.RETURN;
-import org.eclipse.jetty.util.log.Log;
-import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -35,20 +27,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-
-import com.sun.jna.platform.win32.OaIdl.EXCEPINFO;
-import com.thoughtworks.selenium.webdriven.commands.DragAndDrop;
-
 import atu.testng.reports.ATUReports;
-import atu.testng.reports.listeners.ATUReportsListener;
-import atu.testng.reports.listeners.ConfigurationListener;
-import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
@@ -227,7 +206,7 @@ public class Page {
 		try {
 			Actions builder = new Actions(driver);
 			Action move_to = builder.moveToElement(element).build();
-			Thread.sleep(1000);
+			Thread.sleep(1500);
 			move_to.perform();
 			return move_to;
 
@@ -396,10 +375,10 @@ public class Page {
 	/// sign out from any page except Login page
 	public void signOut() throws InterruptedException {
 		
+		waitForVisibility(sign_out);
 		Actions builder = new Actions(driver);   //  new line
 		builder.sendKeys(Keys.PAGE_UP);   //  new line
 		builder.moveToElement(sign_out).build().perform();
-		waitForVisibility(sign_out);
 		sign_out.click();	
 //		if(driver instanceof InternetExplorerDriver) {
 //			WebElement iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);

@@ -168,10 +168,11 @@ public class AddAdditionalContentFileWindow extends Page {
 
 	// verify location of progressbar
 	public void verifyProgressBar() throws InterruptedException {
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		if(isElemenetDisplayed(By.xpath("//*[@id=\"addFileWindow\"]/form/div[1]/div[4]"))){
 			Point bar=upload_progress_bar.getLocation();
-			if ((upload_progress_bar.isDisplayed())&&(bar.getY()>select_upload_additional_file.getLocation().getY())) {
+			Point Upload = select_upload_additional_file.getLocation();
+			if (bar.getY()>Upload.getY()) {
 				System.out.println("progress bar is visible+location is ok");
 				ATUReports.add("progress bar is visible+location is ok", LogAs.PASSED, null);
 				Assert.assertTrue(true);

@@ -83,8 +83,12 @@ public class PlayerPage extends Page {
 	WebElement add_bookmark_button;
 	@FindBy(id = "InputTextArea")
 	WebElement bookmark_input_text;
+	@FindBy(css = ".BookmarkButton")
+	WebElement delete_button;
 	@FindBy(css = ".BookmarkSelected>.BookmarkButton")
 	List<WebElement> selected_bookmark_buttons_list;
+	@FindBy(xpath = ".//*[@id='BookmarkList']/div")
+	List<WebElement> bookmark_list;
 	@FindBy(id = "tegritySearchBox")
 	WebElement search_box;
 	@FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[3]/a/div[2]/p[2]")
@@ -458,13 +462,15 @@ public class PlayerPage extends Page {
 
 	// This function delete all bookmarks
 	public void deleteAllBookmark() throws InterruptedException {
-		while (selected_bookmark_buttons_list.size() > 0) {
-			for (WebElement we : selected_bookmark_buttons_list) {
-				if (we.getCssValue("name").equals("Delete")) {
-					moveToElement(we, driver).perform();
-					Thread.sleep(5000);
-					clickElement(we);
-					break;
+		int index = 1;
+		while (bookmark_list.size() > 0) {
+			for (WebElement we : bookmark_list) {
+				try {     
+				moveToElement(we, driver).perform();
+					Thread.sleep(1000);
+					clickElement(driver.findElement(By.xpath(".//*[@id='BookmarkList']/div[" +Integer.toString(index) + "]/img[3]" )));
+				}catch(Exception Ex) {
+				
 				}
 			}
 		}

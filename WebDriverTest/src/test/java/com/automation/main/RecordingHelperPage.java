@@ -389,9 +389,8 @@ public class RecordingHelperPage extends Page {
 		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {			    
 				WebElement recordStatus =getStaleElem(By.id("RecordingStatus"+ Integer.toString(i)), driver);
 				//wait.until(ExpectedConditions.visibilityOf(recordStatus));
-				String current_element = getTextFromWebElement(recordStatus);
-						
-						recordStatus.getText();
+				String current_element = getTextFromWebElement(recordStatus);						
+						//recordStatus.getText();
 				if (!current_element.equals("")) {
 					return true;
 				}
@@ -777,24 +776,20 @@ public String getSecondRecordingTitleTest() {
 	public void returnToCourseListPage() throws InterruptedException {
 		for (int i = 0; i < 5; i++) {
 			try {		
-				System.out.println("b1");
+			
 				WebElement wi = driver.findElement(By.xpath("//*[@id='tegrityBreadcrumbsBox']"));	
-				waitForVisibility(check_all_checkbox);
-				System.out.println("b2");
+				waitForVisibility(check_all_checkbox);			
 				check_all_checkbox.click();
 				Actions builder = new Actions(driver);	
-				builder.sendKeys(Keys.PAGE_UP);	
-				System.out.println("b3");
+				builder.sendKeys(Keys.PAGE_UP);				
 				builder.moveToElement(wi).build().perform();					
-				builder.click();			
-				System.out.println("b4");
+				builder.click();					
 				wait.until(ExpectedConditions.visibilityOf(courses_link));
-				courses_link.click();
-				System.out.println("b5");
+				courses_link.click();		
 				Thread.sleep(1000);
 				break;
 			} catch (Exception msg) {
-				System.out.println("b6");
+		
 				
 			}
 		}		
@@ -2370,12 +2365,11 @@ public String getSecondRecordingTitleTest() {
 		Thread.sleep(2000);
 		select_upload_additional_file.click();
 		Thread.sleep(2000);
-		String fullPathToFile = "C:\\Users\\Mickael\\Desktop\\WebDriverTestsrc\\test\\resources\\additional_file.txt"; // System.getProperty("user.dir")																										//// +
+		String fullPathToFile = "src\\test\\resources\\additional_file.txt"; // System.getProperty("user.dir")																										//// +
 																												//// "\\src\\main\\resources\\ImsImportDataCreation.xml";
 
 		uploadFile(fullPathToFile);
-		Thread.sleep(2000);		
-		wait.until(ExpectedConditions.visibilityOf(add_additional_file_button));
+		Thread.sleep(2000);
 		add_additional_file_button.click();
 		Thread.sleep(2000);
 		confirm.clickOnOkButton();
@@ -2424,7 +2418,6 @@ public String getSecondRecordingTitleTest() {
 		StringSelection ss = new StringSelection(path);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 		// native key strokes for CTRL, V and ENTER keys
-		System.out.println("uploadFile1");
 		Robot robot = new Robot();
 
 		robot.keyPress(KeyEvent.VK_CONTROL);
@@ -2434,7 +2427,7 @@ public String getSecondRecordingTitleTest() {
 		Thread.sleep(5000);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
-		System.out.println("uploadFile2");
+
 	}
 
 	// verify there is no Student Tab
@@ -4439,21 +4432,6 @@ public String getSecondRecordingTitleTest() {
 		System.out.println("Verfired that all recordings have delete available status.");
 		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
-	}
-	
-	
-	public boolean tabExists(int tab){
-		waitForVisibility(recordings_tab);
-		boolean exist=false;
-		if(tab==1)
-			exist=additional_content_tab.isDisplayed();
-		else if(tab==2)
-			exist=student_recordings_tab.isDisplayed();
-		else if(tab==3)
-			exist=test_tab.isDisplayed();
-		
-		return exist;			
-		
 	}
 	
 	

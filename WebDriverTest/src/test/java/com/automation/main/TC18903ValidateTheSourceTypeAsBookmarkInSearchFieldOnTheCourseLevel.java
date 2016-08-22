@@ -146,11 +146,12 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 		String bookmarked_recording_title = record.getFirstRecordingTitle();
 		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
 		player_page.verifyTimeBufferStatusForXSec(10);
-//		player_page.addTargetBookmark(bookmark_for_search);
-//		player_page.deleteAllBookmark();
-		player_page.moveToElementAndPerform(driver.findElement(By.cssSelector(".BookmarkSelected")),driver);
+		player_page.deleteAllBookmark();
+		player_page.addTargetBookmark(bookmark_for_search);
+		player_page.exitInnerFrame();
+		//player_page.moveToElementAndPerform(driver.findElement(By.cssSelector(".BookmarkSelected")),driver);
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		Thread.sleep(3000);
 		
 		
@@ -168,15 +169,16 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 				tegrity.loginAsguest();
 			} else {
 				// 2. Login as INSTRUCTOR.
-				tegrity.loginCourses("User1");
+			tegrity.loginCourses("User1");
 			}
 			Thread.sleep(3000);
-			
+	
 			if(type_of_user != 0) {
 				// 3. Open some course.
 				course.selectCourseThatStartingWith(current_course);
 			} else {
 				// Click on "view course list" under "courses" section.
+				Thread.sleep(500);
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
@@ -199,6 +201,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			
 			// 5.2. The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)".
 			if(type_of_user != 0) {
@@ -220,7 +223,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(bookmark_for_search, "Source: Bookmark");
 			
 			// 5.7. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyResultContainOneResultWithTargetTitle(bookmark_for_search);
 			
 			// 6. Hover over the chapter icon.
 			search_page.moveToElement(search_page.link_icon_list.get(0), driver).perform();
@@ -238,6 +241,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 			// 8. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			Thread.sleep(2000);
 			
 			// 9. Click on title of the bookmark.
@@ -249,6 +253,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 			// Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			Thread.sleep(2000);
 			
 			if(type_of_user==3) {
@@ -256,13 +261,21 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 				search_page.clickBackToCourseInBreadcrumbs();
 				Thread.sleep(2000);
 				
-				// TODO: 11. Delete the bookmark from the recording that we mentioned in the preconditions.
+				// 11. Delete the bookmark from the recording that we mentioned in the preconditions.
+				record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
+				player_page.verifyTimeBufferStatusForXSec(10);
+				player_page.deleteAllBookmark();
+				search_page.exitInnerFrame();
+				driver.navigate().back();
+				Thread.sleep(2000);
 				
 				// 12. Search the bookmark from the recording that we mentioned in the preconditions.
+				top_bar_helper.search_box_field.click();
 				top_bar_helper.searchForTargetText(bookmark_for_search);
+				
 				search_page.verifyLoadingSpinnerImage();
 				search_page.waitUntilSpinnerImageDisappear();
-				
+				search_page.exitInnerFrame();
 				// 16.1. The chapter is'nt displayed and ,the empty search results page shall be displayed.
 				search_page.verifySearchResultIsEmpty();
 				
@@ -270,7 +283,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 			Thread.sleep(1000);
 			
 			// 14. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 			Thread.sleep(3000);
 		}
 		
