@@ -133,7 +133,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		initializeCourseObject();
 		
 		String current_course = course.selectCourseThatStartingWith("Ab");
-		
+
 		// Make course public
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
@@ -148,6 +148,22 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 
 		record.clickOnRecordingTaskThenEditRecording();
 		
+=======
+		//Mickaeltry
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
+		course_settings_page.clickOnOkButton();
+		Thread.sleep(1000);
+		
+		// Upload for first recording target close catpion
+		Thread.sleep(2000);
+		List<String> listOfNames = record.getCourseRecordingList();
+		
+		record.selectIndexCheckBox(listOfNames.size());		
+		record.clickOnRecordingTaskThenEditRecording();
+		// comment
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
