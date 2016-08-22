@@ -128,6 +128,9 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws Exception
 	{
+		//git
+		tegrity.loginCourses("User1");tegrity.loginCourses("User1");tegrity.loginCourses("User1");
+		
 		// 1. Validate there is close caption in this course. Search input specified shall be case-insensitive - Upload CloseCaption.
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
