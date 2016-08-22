@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+  <test name="Test">
+    <classes>
+  			
+  			
+  			<class name="com.automation.main.TC15580ExistenceOfUIItemsMove" />
+  			<class name="com.automation.main.TC15583CancelTheMoving" />
+  			<class name="com.automation.main.TC15586TryToMoveWithoutSelectingACourse" />
+  			<class name="com.automation.main.TC15594SearchCourseInMoveWindow" />  			
+  			<class name="com.automation.main.TC15595TryToMoveRecordingWhileItIsBeingCopied" />
+  			<class name="com.automation.main.TC15602TryToMoveRecordingAsAStudent" />
+  			<class name="com.automation.main.TC15899VerifyAMovingCopyingStatusOfADestinationRecording" />
+  			<class name="com.automation.main.TC15654TryToMoveRecordingWhileItIsBeingMoved" />
+  			<class name="com.automation.main.TC15661TryToMoveFailedRecording" />  			
+  			<class name="com.automation.main.TC15582MoveOneRecording" />  		
+  			<class name="com.automation.main.TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists" />		
+  			<class name="com.automation.main.TC15585MoveSeveralRecordings" />  			
+  	<!--	<class name="com.automation.main.TC15588MoveARecordingWithAPodcast" />       N/A CHROME -->
+  			
+  			
+     
+    </classes>
+  </test> <!-- Test -->
+  <listeners>
+		<listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+	</listeners>
+</suite> <!-- Suite -->

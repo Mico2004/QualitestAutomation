@@ -1,0 +1,693 @@
+<html>
+<head>
+<title>TestNG:  Test</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Test</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>13/2/2</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Aug 22 16:58:21 IDT 2016</td>
+</tr>
+<tr><td>Total time:</td><td>1808 seconds (1808050 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab.TC24835VerifyStudentsCantSeePastCourseTab()'><b>TC24835VerifyStudentsCantSeePastCourseTab</b><br>Test class: com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab<br/>
+<a href="#Output-796774130" onClick='toggleBox("Output-796774130", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-796774130" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-796774130">
+STEP305<br/>
+STEP306<br/>
+STEP307<br/>
+STEP308<br/>
+STEP309<br/>
+STEP310<br/>
+STEP311<br/>
+STEP312<br/>
+</div>
+</td>
+<td><div><pre>java.lang.AssertionError: expected [true] but found [false]
+	at com.automation.main.RecordingHelperPage.clickOnRecordingsTab(RecordingHelperPage.java:2490)
+	at com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab.TC24835VerifyStudentsCantSeePastCourseTab(TC24835VerifyStudentsCantSeePastCourseTab.java:211)
+... Removed 28 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace796774130", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace796774130'><pre>java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:94)
+	at org.testng.Assert.failNotEquals(Assert.java:494)
+	at org.testng.Assert.assertTrue(Assert.java:42)
+	at org.testng.Assert.assertTrue(Assert.java:52)
+	at com.automation.main.RecordingHelperPage.clickOnRecordingsTab(RecordingHelperPage.java:2490)
+	at com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab.TC24835VerifyStudentsCantSeePastCourseTab(TC24835VerifyStudentsCantSeePastCourseTab.java:211)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:767)
+	at org.testng.TestRunner.run(TestRunner.java:617)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1123)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+</pre></div></td>
+<td>233</td>
+<td>com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab@f6c48ac</td></tr>
+<tr>
+<td title='com.automation.main.TC17929And17941And17944PastCourses.test17929()'><b>test17929</b><br>Test class: com.automation.main.TC17929And17941And17944PastCourses<br/>
+<a href="#Output-1797159635" onClick='toggleBox("Output-1797159635", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1797159635" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1797159635">
+STEP291<br/>
+STEP292<br/>
+STEP293<br/>
+STEP294<br/>
+STEP295<br/>
+STEP296<br/>
+STEP297<br/>
+STEP298<br/>
+STEP299<br/>
+STEP300<br/>
+STEP301<br/>
+STEP302<br/>
+</div>
+</td>
+<td><div><pre>org.openqa.selenium.TimeoutException: Timed out after 30 seconds waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.xpath: //*[@id=&apos;alertWindow&apos;]/div[2]/button&apos;
+Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
+System info: host: &apos;DESKTOP-DEB4I2G&apos;, ip: &apos;192.168.0.172&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_77&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b), userDataDir=C:\Users\Mickael\AppData\Local\Temp\scoped_dir12088_3494}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=52.0.2743.116, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: b2f87a66b8081d78549fb950779b9c3a
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:261)
+	at com.automation.main.Page.waitForVisibility(Page.java:145)
+	at com.automation.main.ConfirmationMenu.clickOnOkButton(ConfirmationMenu.java:52)
+	at com.automation.main.RecordingHelperPage.toUploadAdditionalContentFile(RecordingHelperPage.java:2381)
+	at com.automation.main.TC17929And17941And17944PastCourses.test17929(TC17929And17941And17944PastCourses.java:328)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[@id=&apos;alertWindow&apos;]/div[2]/button&quot;}
+  (Session info: chrome=52.0.2743.116)
+  (Driver info: chromedriver=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 10.0.10586 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 26 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
+System info: host: &apos;DESKTOP-DEB4I2G&apos;, ip: &apos;192.168.0.172&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_77&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b), userDataDir=C:\Users\Mickael\AppData\Local\Temp\scoped_dir12088_3494}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=52.0.2743.116, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: b2f87a66b8081d78549fb950779b9c3a
+*** Element info: {Using=xpath, value=//*[@id=&apos;alertWindow&apos;]/div[2]/button}
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:500)
+	at org.openqa.selenium.By$ByXPath.findElement(By.java:361)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
+	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+	at com.sun.proxy.$Proxy8.isDisplayed(Unknown Source)
+	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
+	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
+	... 28 more
+... Removed 27 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1797159635", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1797159635'><pre>org.openqa.selenium.TimeoutException: Timed out after 30 seconds waiting for visibility of Proxy element for: DefaultElementLocator &apos;By.xpath: //*[@id=&apos;alertWindow&apos;]/div[2]/button&apos;
+Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
+System info: host: &apos;DESKTOP-DEB4I2G&apos;, ip: &apos;192.168.0.172&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_77&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b), userDataDir=C:\Users\Mickael\AppData\Local\Temp\scoped_dir12088_3494}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=52.0.2743.116, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: b2f87a66b8081d78549fb950779b9c3a
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:261)
+	at com.automation.main.Page.waitForVisibility(Page.java:145)
+	at com.automation.main.ConfirmationMenu.clickOnOkButton(ConfirmationMenu.java:52)
+	at com.automation.main.RecordingHelperPage.toUploadAdditionalContentFile(RecordingHelperPage.java:2381)
+	at com.automation.main.TC17929And17941And17944PastCourses.test17929(TC17929And17941And17944PastCourses.java:328)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:714)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:767)
+	at org.testng.TestRunner.run(TestRunner.java:617)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1123)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+Caused by: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[@id=&apos;alertWindow&apos;]/div[2]/button&quot;}
+  (Session info: chrome=52.0.2743.116)
+  (Driver info: chromedriver=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 10.0.10586 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 26 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
+System info: host: &apos;DESKTOP-DEB4I2G&apos;, ip: &apos;192.168.0.172&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_77&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b), userDataDir=C:\Users\Mickael\AppData\Local\Temp\scoped_dir12088_3494}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=52.0.2743.116, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: b2f87a66b8081d78549fb950779b9c3a
+*** Element info: {Using=xpath, value=//*[@id=&apos;alertWindow&apos;]/div[2]/button}
+	at sun.reflect.GeneratedConstructorAccessor18.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:500)
+	at org.openqa.selenium.By$ByXPath.findElement(By.java:361)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
+	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+	at com.sun.proxy.$Proxy8.isDisplayed(Unknown Source)
+	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
+	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
+	... 28 more
+</pre></div></td>
+<td>212</td>
+<td>com.automation.main.TC17929And17941And17944PastCourses@5442a311</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself.loadPage()'><b>loadPage</b><br>Test class: com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself<br/>
+<a href="#Output-980697799" onClick='toggleBox("Output-980697799", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-980697799" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-980697799">
+STEP3<br/>
+</div>
+</td>
+<td></td>
+<td>5</td>
+<td>com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself@204f30ec</td></tr>
+<tr>
+<td title='com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse.loadPage()'><b>loadPage</b><br>Test class: com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse<br/>
+<a href="#Output-1795816257" onClick='toggleBox("Output-1795816257", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1795816257" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1795816257">
+STEP6<br/>
+</div>
+</td>
+<td></td>
+<td>6</td>
+<td>com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse@146ba0ac</td></tr>
+<tr>
+<td title='com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse.loadPage()'><b>loadPage</b><br>Test class: com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse<br/>
+<a href="#Output-1208532123" onClick='toggleBox("Output-1208532123", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1208532123" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1208532123">
+STEP26<br/>
+</div>
+</td>
+<td></td>
+<td>6</td>
+<td>com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse@548e7350</td></tr>
+<tr>
+<td title='com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse.loginCourses()'><b>loginCourses</b><br>Test class: com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse<br>Test method: Login course page<br/>
+<a href="#Output-220454978" onClick='toggleBox("Output-220454978", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-220454978" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-220454978">
+STEP7<br/>
+STEP8<br/>
+STEP9<br/>
+STEP10<br/>
+STEP11<br/>
+STEP12<br/>
+STEP13<br/>
+STEP14<br/>
+STEP15<br/>
+STEP16<br/>
+STEP17<br/>
+STEP18<br/>
+STEP19<br/>
+STEP20<br/>
+STEP21<br/>
+STEP22<br/>
+STEP23<br/>
+</div>
+</td>
+<td></td>
+<td>22</td>
+<td>com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse@146ba0ac</td></tr>
+<tr>
+<td title='com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse.loginCourses()'><b>loginCourses</b><br>Test class: com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse<br>Test method: Login course page<br/>
+<a href="#Output-1160649162" onClick='toggleBox("Output-1160649162", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1160649162" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1160649162">
+STEP27<br/>
+STEP28<br/>
+STEP29<br/>
+STEP30<br/>
+STEP31<br/>
+STEP32<br/>
+STEP33<br/>
+STEP34<br/>
+STEP35<br/>
+STEP36<br/>
+STEP37<br/>
+STEP38<br/>
+STEP39<br/>
+STEP40<br/>
+STEP41<br/>
+STEP42<br/>
+</div>
+</td>
+<td></td>
+<td>18</td>
+<td>com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse@548e7350</td></tr>
+<tr>
+<td title='com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings.loginCourses()'><b>loginCourses</b><br>Test class: com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings<br>Test method: Verify Past Course Removed When Has No Content<br/>
+<a href="#Output-722417467" onClick='toggleBox("Output-722417467", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-722417467" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-722417467">
+STEP152<br/>
+STEP153<br/>
+STEP154<br/>
+STEP155<br/>
+STEP156<br/>
+STEP157<br/>
+STEP158<br/>
+STEP159<br/>
+STEP160<br/>
+STEP161<br/>
+STEP162<br/>
+STEP163<br/>
+STEP164<br/>
+STEP165<br/>
+STEP166<br/>
+STEP167<br/>
+STEP168<br/>
+STEP169<br/>
+STEP170<br/>
+STEP171<br/>
+STEP172<br/>
+STEP173<br/>
+STEP174<br/>
+STEP175<br/>
+STEP176<br/>
+STEP177<br/>
+STEP178<br/>
+STEP179<br/>
+STEP180<br/>
+STEP181<br/>
+STEP182<br/>
+STEP183<br/>
+STEP184<br/>
+STEP185<br/>
+STEP186<br/>
+STEP187<br/>
+STEP188<br/>
+STEP189<br/>
+STEP190<br/>
+STEP191<br/>
+STEP192<br/>
+STEP193<br/>
+STEP194<br/>
+STEP195<br/>
+STEP196<br/>
+STEP197<br/>
+STEP198<br/>
+STEP199<br/>
+STEP200<br/>
+STEP201<br/>
+STEP202<br/>
+STEP203<br/>
+STEP204<br/>
+STEP205<br/>
+STEP206<br/>
+STEP207<br/>
+</div>
+</td>
+<td></td>
+<td>384</td>
+<td>com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings@754ba872</td></tr>
+<tr>
+<td title='com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus.preTestCreateNewUser()'><b>preTestCreateNewUser</b><br>Test class: com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus<br>Test method: Login course page</td>
+<td></td>
+<td>0</td>
+<td>com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus@6eebc39e</td></tr>
+<tr>
+<td title='com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus.test17901()'><b>test17901</b><br>Test class: com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus<br/>
+<a href="#Output-1574029810" onClick='toggleBox("Output-1574029810", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1574029810" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1574029810">
+STEP134<br/>
+STEP135<br/>
+STEP136<br/>
+STEP137<br/>
+STEP138<br/>
+STEP139<br/>
+STEP140<br/>
+STEP141<br/>
+STEP142<br/>
+STEP143<br/>
+STEP144<br/>
+STEP145<br/>
+STEP146<br/>
+STEP147<br/>
+STEP148<br/>
+STEP149<br/>
+</div>
+</td>
+<td></td>
+<td>43</td>
+<td>com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus@6eebc39e</td></tr>
+<tr>
+<td title='com.automation.main.TC17933VerifypastCourseWithStudentRecording.test17929()'><b>test17929</b><br>Test class: com.automation.main.TC17933VerifypastCourseWithStudentRecording<br>Test method: 17933 - Verify the past course with Student recording<br/>
+<a href="#Output-1385750189" onClick='toggleBox("Output-1385750189", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1385750189" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1385750189">
+STEP245<br/>
+STEP246<br/>
+STEP247<br/>
+STEP248<br/>
+STEP249<br/>
+STEP250<br/>
+STEP251<br/>
+STEP252<br/>
+STEP253<br/>
+STEP254<br/>
+STEP255<br/>
+STEP256<br/>
+STEP257<br/>
+STEP258<br/>
+STEP259<br/>
+STEP260<br/>
+STEP261<br/>
+STEP262<br/>
+STEP263<br/>
+STEP264<br/>
+STEP265<br/>
+STEP266<br/>
+STEP267<br/>
+STEP268<br/>
+STEP269<br/>
+STEP270<br/>
+STEP271<br/>
+STEP272<br/>
+STEP273<br/>
+STEP274<br/>
+STEP275<br/>
+STEP276<br/>
+STEP277<br/>
+STEP278<br/>
+STEP279<br/>
+STEP280<br/>
+STEP281<br/>
+STEP282<br/>
+STEP283<br/>
+STEP284<br/>
+STEP285<br/>
+STEP286<br/>
+STEP287<br/>
+STEP288<br/>
+</div>
+</td>
+<td></td>
+<td>259</td>
+<td>com.automation.main.TC17933VerifypastCourseWithStudentRecording@77cd7a0</td></tr>
+<tr>
+<td title='com.automation.main.TC17938VerifyPastCourseWithTestRecording.test17938()'><b>test17938</b><br>Test class: com.automation.main.TC17938VerifyPastCourseWithTestRecording<br>Test method: Verify Past Course With Test Recording<br/>
+<a href="#Output-108982313" onClick='toggleBox("Output-108982313", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-108982313" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-108982313">
+STEP210<br/>
+STEP211<br/>
+STEP212<br/>
+STEP213<br/>
+STEP214<br/>
+STEP215<br/>
+STEP216<br/>
+STEP217<br/>
+STEP218<br/>
+STEP219<br/>
+STEP220<br/>
+STEP221<br/>
+STEP222<br/>
+STEP223<br/>
+STEP224<br/>
+STEP225<br/>
+STEP226<br/>
+STEP227<br/>
+STEP228<br/>
+STEP229<br/>
+STEP230<br/>
+STEP231<br/>
+STEP232<br/>
+STEP233<br/>
+STEP234<br/>
+STEP235<br/>
+STEP236<br/>
+STEP237<br/>
+STEP238<br/>
+STEP239<br/>
+STEP240<br/>
+STEP241<br/>
+STEP242<br/>
+</div>
+</td>
+<td></td>
+<td>220</td>
+<td>com.automation.main.TC17938VerifyPastCourseWithTestRecording@91161c7</td></tr>
+<tr>
+<td title='com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse.test24766()'><b>test24766</b><br>Test class: com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse<br/>
+<a href="#Output-182670350" onClick='toggleBox("Output-182670350", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-182670350" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-182670350">
+STEP83<br/>
+STEP84<br/>
+STEP85<br/>
+STEP86<br/>
+STEP87<br/>
+STEP88<br/>
+STEP89<br/>
+STEP90<br/>
+STEP91<br/>
+STEP92<br/>
+STEP93<br/>
+STEP94<br/>
+STEP95<br/>
+STEP96<br/>
+STEP97<br/>
+STEP98<br/>
+STEP99<br/>
+STEP100<br/>
+STEP101<br/>
+STEP102<br/>
+STEP103<br/>
+STEP104<br/>
+STEP105<br/>
+STEP106<br/>
+STEP107<br/>
+STEP108<br/>
+STEP109<br/>
+STEP110<br/>
+STEP111<br/>
+STEP112<br/>
+STEP113<br/>
+STEP114<br/>
+STEP115<br/>
+STEP116<br/>
+STEP117<br/>
+STEP118<br/>
+STEP119<br/>
+STEP120<br/>
+STEP121<br/>
+STEP122<br/>
+STEP123<br/>
+STEP124<br/>
+STEP125<br/>
+STEP126<br/>
+STEP127<br/>
+STEP128<br/>
+STEP129<br/>
+STEP130<br/>
+STEP131<br/>
+</div>
+</td>
+<td></td>
+<td>280</td>
+<td>com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse@464bee09</td></tr>
+<tr>
+<td title='com.automation.main.TC17942VerifyTheDisabledTasks.testUiExistence()'><b>testUiExistence</b><br>Test class: com.automation.main.TC17942VerifyTheDisabledTasks<br/>
+<a href="#Output-1117871068" onClick='toggleBox("Output-1117871068", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1117871068" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1117871068">
+STEP45<br/>
+STEP46<br/>
+STEP47<br/>
+STEP48<br/>
+STEP49<br/>
+STEP50<br/>
+STEP51<br/>
+STEP52<br/>
+STEP53<br/>
+STEP54<br/>
+STEP55<br/>
+</div>
+</td>
+<td></td>
+<td>19</td>
+<td>com.automation.main.TC17942VerifyTheDisabledTasks@4dfa3a9d</td></tr>
+<tr>
+<td title='com.automation.main.TC17903VerifyTheUI.testUiExistence()'><b>testUiExistence</b><br>Test class: com.automation.main.TC17903VerifyTheUI<br/>
+<a href="#Output-1550228904" onClick='toggleBox("Output-1550228904", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-1550228904" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-1550228904">
+STEP58<br/>
+STEP59<br/>
+STEP60<br/>
+STEP61<br/>
+STEP62<br/>
+STEP63<br/>
+STEP64<br/>
+STEP65<br/>
+STEP66<br/>
+STEP67<br/>
+STEP68<br/>
+STEP69<br/>
+STEP70<br/>
+STEP71<br/>
+STEP72<br/>
+STEP73<br/>
+STEP74<br/>
+STEP75<br/>
+STEP76<br/>
+STEP77<br/>
+STEP78<br/>
+STEP79<br/>
+STEP80<br/>
+</div>
+</td>
+<td></td>
+<td>32</td>
+<td>com.automation.main.TC17903VerifyTheUI@e25b2fe</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-skipped'>
+<tr><td colspan='4' align='center'><b>SKIPPED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.automation.main.TC17929And17941And17944PastCourses.test17941()'><b>test17941</b><br>Test class: com.automation.main.TC17929And17941And17944PastCourses</td>
+<td></td>
+<td>0</td>
+<td>null</td></tr>
+<tr>
+<td title='com.automation.main.TC17929And17941And17944PastCourses.test17944()'><b>test17944</b><br>Test class: com.automation.main.TC17929And17941And17944PastCourses</td>
+<td></td>
+<td>0</td>
+<td>null</td></tr>
+</table><p>
+</body>
+</html>

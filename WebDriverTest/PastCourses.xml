@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+  <test name="Test">
+    <classes>
+    
+			
+					<!-- Past courses -->
+					<!-- Local pretest 					
+				    <class name="com.automation.main.TestSuitePreSetCopyRecordingsAndPastCourse" />-->	
+					<!--  Static Test Cases  -->	
+    	  	 		<class name="com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself" />
+    	  	 		<class name="com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse" />
+    	  	 		<class name="com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse" />
+    	  	 		<class name="com.automation.main.TC17942VerifyTheDisabledTasks" />
+    	  	 		<class name="com.automation.main.TC17903VerifyTheUI" />
+    	  	 		<class name="com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse" />
+    	  	 		<class name="com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus" />
+    	  	 		<!--  Dynamic Test Cases  -->		
+    	  	 		<class name="com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings" />
+    	  	 		<class name="com.automation.main.TC17938VerifyPastCourseWithTestRecording" />
+    	  	 		<class name="com.automation.main.TC17933VerifypastCourseWithStudentRecording" />
+    	  	 		<class name="com.automation.main.TC17929And17941And17944PastCourses" />
+    	  	 		<class name="com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab" />  
+    	  	 		
+    	  	 		
+
+    </classes>
+  </test> <!-- Test -->
+  <listeners>
+		<listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+	</listeners>
+</suite> <!-- Suite -->

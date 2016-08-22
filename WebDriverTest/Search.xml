@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+  <test name="Test">
+    <classes>
+
+
+			<!-- Search: Search field and search result page -->
+			<!-- Local pretest -->
+			  <class name="com.automation.main.TestSuitePreSetCopyRecordings9" />
+    	  	  <class name="com.automation.main.TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCourseLevelUI" />
+    	  	  <class name="com.automation.main.TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel" />
+    	  	  <class name="com.automation.main.TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseLevel" />
+    	  	  <class name="com.automation.main.TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourseLevel" />
+    	  	  <class name="com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel" /> 
+    	  	  <class name="com.automation.main.TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCourseLevel" />
+    	  	  <class name="com.automation.main.TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel" />
+    	  	  <class name="com.automation.main.TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel" />
+    	  	  <class name="com.automation.main.TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel" />
+    	  	  <class name="com.automation.main.TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheActivCourseLevel" />
+    	  	  <class name="com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel" />
+    	  	  <class name="com.automation.main.TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAllCoursesLevel" />
+    	  	  <class name="com.automation.main.TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel" /> 
+    	  	  <class name="com.automation.main.TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCoursesLevel" />
+    	  	  <class name="com.automation.main.TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCourseLevel" />
+    	  	  <class name="com.automation.main.TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCoursesLevel" />
+ 	  		  <class name="com.automation.main.TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCoursesLevel" />
+    	  	  <class name="com.automation.main.TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel" />
+    	  	  <class name="com.automation.main.TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLevel" />
+    	  	  <class name="com.automation.main.TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel" />
+    	  	  <class name="com.automation.main.TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsInstructor" />
+    	  	  <class name="com.automation.main.TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage" />
+    	  	  <class name="com.automation.main.TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage" /> 
+    	  	  <class name="com.automation.main.TC18895ValidateTheFunctionalityOfSearchFieldInDetailedReportsPage" />
+    	  	  <class name="com.automation.main.TC18897ValidateTheFunctionalityOfSearchFieldInCustomAnalysisPage" />
+    	  	  <class name="com.automation.main.TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNotInRoll" />
+			  <class name="com.automation.main.TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField" />
+			
+  
+    </classes>
+  </test> <!-- Test -->
+  <listeners>
+		<listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+	</listeners>
+</suite> <!-- Suite -->

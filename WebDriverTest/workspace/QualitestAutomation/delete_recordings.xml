@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+	<test name="Test">
+		<classes>
+		
+            <class name="com.automation.main.TestSuitePreSetCopyRecordings" /> 
+            <class name="com.automation.main.TCExistenceOfUIItemsDelete" />
+	 		<class name="com.automation.main.TC15645TryToDeleteCopyingRecording" />
+			<class name="com.automation.main.TestCase15649TryToDeleteMovingRecording" />
+			<class name="com.automation.main.TestCase15640TryToDeleteAStudentRecordingAsAStudent" />
+			<class name="com.automation.main.TestCase15644CancelTheDelete" />
+			<class name="com.automation.main.TestCase15627DeleteARegularRecordingAsInstructor" />
+			<class name="com.automation.main.TestCase15634DeleteAStudentRecordingAsInstructor" />
+			<class name="com.automation.main.TestCase15639TryToDeleteARegularRecordingAsAStudent" />
+		    <class name="com.automation.main.TC15896DeleteALastRecording" />
+			<class name="com.automation.main.TestCase15642DeleteSeveralRecordings" />
+            <class name="com.automation.main.TC15653DeleteFailedRecording" />
+
+		</classes>
+	</test> <!-- Test -->
+
+	<listeners>
+		<listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+	</listeners>
+
+</suite> <!-- Suite -->

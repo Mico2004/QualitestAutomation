@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="3" failed="0" total="3" passed="0">
+  <reporter-output>
+    <line>
+      <![CDATA[STEP1]]>
+    </line>
+  </reporter-output>
+  <suite name="Suite" duration-ms="98" started-at="2016-03-20T11:48:06Z" finished-at="2016-03-20T11:48:06Z">
+    <groups>
+    </groups>
+    <test name="Test" duration-ms="98" started-at="2016-03-20T11:48:06Z" finished-at="2016-03-20T11:48:06Z">
+      <class name="com.automation.main.PreTest">
+        <test-method status="FAIL" signature="setup()[pri:0, instance:com.automation.main.PreTest@3b6eb2ec]" name="setup" is-config="true" duration-ms="0" started-at="2016-03-20T13:48:06Z" finished-at="2016-03-20T13:48:06Z">
+          <exception class="java.lang.NullPointerException">
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException
+	at com.automation.main.DriverSelector.getDriver(DriverSelector.java:51)
+	at com.automation.main.PreTest.setup(PreTest.java:77)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:564)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:213)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)
+	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:175)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:107)
+	at org.testng.TestRunner.privateRun(TestRunner.java:767)
+	at org.testng.TestRunner.run(TestRunner.java:617)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1123)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:207)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:178)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+            <line>
+              <![CDATA[STEP1]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="SKIP" signature="loadPage()[pri:0, instance:com.automation.main.PreTest@3b6eb2ec]" name="loadPage" duration-ms="21" started-at="2016-03-20T13:48:06Z" finished-at="2016-03-20T13:48:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loadPage -->
+        <test-method status="SKIP" signature="testME()[pri:0, instance:com.automation.main.PreTest@3b6eb2ec]" name="testME" duration-ms="2" started-at="2016-03-20T13:48:06Z" finished-at="2016-03-20T13:48:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testME -->
+        <test-method status="SKIP" signature="loginCourses()[pri:0, instance:com.automation.main.PreTest@3b6eb2ec]" name="loginCourses" duration-ms="1" started-at="2016-03-20T13:48:06Z" description="Login course page" depends-on-methods="com.automation.main.PreTest.loadPage" finished-at="2016-03-20T13:48:06Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginCourses -->
+      </class> <!-- com.automation.main.PreTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>

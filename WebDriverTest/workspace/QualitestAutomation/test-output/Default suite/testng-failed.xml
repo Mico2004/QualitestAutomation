@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+    <classes>
+      <class name="com.automation.main.TC15653DeleteFailedRecording">
+        <methods>
+          <include name="TCDeleteFailedRecording"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.automation.main.TC15653DeleteFailedRecording -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+  <test name="Test">
+    <classes>
+
+    	  	<!-- Public Courses -->
+			<!-- Local pretest -->
+			<class name="com.automation.main.TestSuitePreSetCopyRecordings7" />
+			<class name="com.automation.main.TC21807ValidatePublicCoursesUILogIn" />
+			<class name="com.automation.main.TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff" />
+			<class name="com.automation.main.TC21856ValidateThePublicCoursesTabUIAfterChanges" />
+			<class name="com.automation.main.TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveInstructorStudentPermissionsAndValidateThatYourPermissionsAreLikeGuest" />
+			<class name="com.automation.main.TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCourses" />
+			<class name="com.automation.main.PreTestPastCourses" />
+			<class name="com.automation.main.TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses" />
+			<class name="com.automation.main.TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNotPublicCourses" />
+			
+			
+			
+  
+    </classes>
+  </test> <!-- Test -->
+  <listeners>
+		<listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+	</listeners>
+</suite> <!-- Suite -->

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+  <test name="Test">
+    <classes>
+
+		 <!-- Some Tests are missing! -->
+	     <!-- Supported search sources(ADMIN,ANONYMOUS) -->
+	     <!-- Local pretest -->
+         <class name="com.automation.main.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN" />
+      <!-- Compilation error <class name="com.automation.main.TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST" /> -->
+    	 <class name="com.automation.main.TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
+    	 <class name="com.automation.main.TCase22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
+    	 <class name="com.automation.main.TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST" /> 
+    	 <class name="com.automation.main.TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST" />
+    	 <class name="com.automation.main.TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsADMIN" />
+    	 <class name="com.automation.main.TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsGUEST" />	
+    	 <class name="com.automation.main.TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
+    	 <class name="com.automation.main.TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecordingLevelLoginAsGUEST" />
+    	 <class name="com.automation.main.TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
+    	 <class name="com.automation.main.TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsGUEST" /> 
+    	 <class name="com.automation.main.TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
+    	 <class name="com.automation.main.TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsGUEST" />
+    	 <class name="com.automation.main.TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsADMIN" />
+    	 <class name="com.automation.main.TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsGUEST" />
+       <!-- Compilation error <class name="com.automation.main.TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsADMIN" /> -->
+       <!-- Compilation error <class name="com.automation.main.TCase22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST" />-->
+       <!-- Compilation error <class name="com.automation.main.TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST" /> -->
+    	
+       <!-- Compilation error <class name="com.automation.main.TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMINN" /> -->
+       <!-- Compilation error <class name="com.automation.main.TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST" /> -->
+    	 <class name="com.automation.main.TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldRecordingLevelLoginAsADMIN" />
+    	 <class name="com.automation.main.TCase22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldRecordingLevelLoginAsGUEST" />
+       <!-- Compilation error <class name="com.automation.main.TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTheRecordingLevelAsADMIN" /> -->
+       <!-- Compilation error <class name="com.automation.main.TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTheRecordingLevelAsGUSET" /> -->   
+    	  	  	  	  	  	
+    	  	  	
+
+			
+  
+    </classes>
+  </test> <!-- Test -->
+  <listeners>
+		<listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+	</listeners>
+</suite> <!-- Suite -->

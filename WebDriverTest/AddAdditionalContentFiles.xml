@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+  <test name="Test">
+    <classes>
+			
+			<!-- There are missing tests! -->
+			    <!-- Add additional content files-->
+		     	<!-- Local pretest -->
+    	  	  	<class name="com.automation.main.TC15475ExistenceOfUIItems" />
+    	  	  	<class name="com.automation.main.TC15897ViewTheUploadedFile" />
+    	  	  	<class name="com.automation.main.TC15447AddDocFile" />
+    	  	  	
+    	  	  	<class name="com.automation.main.TC15466AddFewFilesWithSameTitle" />
+    	  		<class name="com.automation.main.TC15467CancelTheAdding" /> 
+    	  	  	<class name="com.automation.main.TC15468AddFirstFileVerifyNewTabAdditionalContentCreated" />
+    	  	  	<class name="com.automation.main.TC15470AddFileWithTheSameTitleExistingLink" />
+    	  	  	<class name="com.automation.main.TC15489TryToAddFileDuringAnotherUpload" />
+    	  	  	<class name="com.automation.main.TC15489TryToAddFileDuringAnotherUpload" />
+
+			
+  
+    </classes>
+  </test> <!-- Test -->
+  <listeners>
+		<listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+	</listeners>
+</suite> <!-- Suite -->

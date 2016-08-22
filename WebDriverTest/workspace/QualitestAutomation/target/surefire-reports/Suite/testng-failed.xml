@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Failed suite [Suite]">
+  <listeners>
+    <listener class-name="atu.testng.reports.listeners.ATUReportsListener"/>
+    <listener class-name="atu.testng.reports.listeners.ConfigurationListener"/>
+    <listener class-name="atu.testng.reports.listeners.MethodListener"/>
+  </listeners>
+  <test name="Test(failed)">
+    <classes>
+      <class name="com.automation.main.TestCaseSearchCourseInMoveWindow">
+        <methods>
+          <include name="loadPage"/>
+          <include name="setup"/>
+          <include name="loginCourses"/>
+        </methods>
+      </class> <!-- com.automation.main.TestCaseSearchCourseInMoveWindow -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

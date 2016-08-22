@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+  <test name="Test">
+    <classes>
+
+
+	            <!-- Course Details Content page -->
+			    <!-- Local pretest -->
+		     	<class name="com.automation.main.TestSuitePreSetCopyRecordings10" />
+    	  	  	<class name="com.automation.main.TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThePlayer" />
+    	  	  	<class name="com.automation.main.TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthTheEditor" />
+    	  	  	<class name="com.automation.main.TC15626ValidateCourseContentPageUIAsInstructor" />
+    	  	  	<class name="com.automation.main.TC15647NavigateThrougthALongRecordingsListInRecordingsTab" />
+    	  	    <class name="com.automation.main.TC15686ValidateTheRecordingNameOfNewRecordingIsDisplayedInBold" /> 
+    	  	  	<class name="com.automation.main.TC15761ValidateTabsUIAsStudent" />
+    	  	  	<class name="com.automation.main.TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThePlayerAsStudent" />
+    	  	  	<class name="com.automation.main.TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordings" />
+    	  	  	<class name="com.automation.main.TC15446ValidateExpandingViewingAndCollapsingTheChapters" />
+    	  	  	<class name="com.automation.main.TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser" />
+    	  	  	<class name="com.automation.main.TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin" />
+    	  	  	<class name="com.automation.main.TC15711ValidateResumeBoxUI" />
+    	  	  	<class name="com.automation.main.TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying" />
+    	  	  	<class name="com.automation.main.TC17044ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndSignOut" />
+    	  	  	<class name="com.automation.main.TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBrowser" />
+    	  	  	<class name="com.automation.main.TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack" />
+    	  	  	<class name="com.automation.main.TC17047ValidateResumeBoxWhenSignOut" />
+    	  	  	<class name="com.automation.main.TC17050ValidateUserSeperationWhenWatchingRecording" />
+    	  	  	<class name="com.automation.main.TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying" />
+    	  	  	<class name="com.automation.main.TC17041ValidateResumeBoxWhenRecordingIsPaused" />
+    	  	  
+
+			
+  
+    </classes>
+  </test> <!-- Test -->
+  <listeners>
+		<listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+	</listeners>
+</suite> <!-- Suite -->
