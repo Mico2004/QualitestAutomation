@@ -2365,7 +2365,7 @@ public String getSecondRecordingTitleTest() {
 		Thread.sleep(2000);
 		select_upload_additional_file.click();
 		Thread.sleep(2000);
-		String fullPathToFile = "C:\\Users\\Mickael\\git\\QualitestAutomation\\WebDriverTest\\src\\test\\resources\\additional_file.txt"; 
+		String fullPathToFile = "C:\\Users\\Mickael\\git\\Qualite stAutomation\\WebDriverTest\\src\\test\\resources\\additional_file.txt"; 
 		uploadFile(fullPathToFile);
 		Thread.sleep(2000);
 		add_additional_file_button.click();
@@ -2840,10 +2840,6 @@ public String getSecondRecordingTitleTest() {
 
 		for (WebElement el : additional_content_list) {
 			if ((el.getText().equals(additional_content_name))) {
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 						WebElement recording = driver.findElement(By.linkText((additional_content_name)));
 						waitForVisibility(recording);
 						wait.until(ExpectedConditions.elementToBeClickable(recording));
@@ -4426,7 +4422,19 @@ public String getSecondRecordingTitleTest() {
 		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
-	
+	public boolean tabExists(int tab){
+		waitForVisibility(recordings_tab);
+		boolean exist=false;
+		if(tab==1)
+			exist=additional_content_tab.isDisplayed();
+		else if(tab==2)
+			exist=student_recordings_tab.isDisplayed();
+		else if(tab==3)
+			exist=test_tab.isDisplayed();
+		
+		return exist;			
+		
+	}
 	
 	
 }
