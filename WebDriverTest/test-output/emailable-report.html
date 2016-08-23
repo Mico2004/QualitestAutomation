@@ -31,49 +31,325 @@ div.shootout {padding:2em;border:3px #4854A8 solid}
 <body>
 <table cellspacing="0" cellpadding="0" class="result">
 <tr><th>Test</th><th class="numi">Methods<br/>Passed</th><th class="numi">Scenarios<br/>Passed</th><th class="numi"># skipped</th><th class="numi"># failed</th><th class="numi">Total<br/>Time</th><th class="numi">Included<br/>Groups</th><th class="numi">Excluded<br/>Groups</th></tr>
-<tr><td style="text-align:left;padding-right:2em">Default test</td><td class="numi">0</td><td class="numi">0</td><td class="numi">0</td><td class="numi_attn">1</td><td class="numi">53.0 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+<tr><td style="text-align:left;padding-right:2em">Test</td><td class="numi">4</td><td class="numi">4</td><td class="numi_attn">2</td><td class="numi_attn">11</td><td class="numi">913.5 seconds</td><td class="numi"></td><td class="numi"></td></tr>
 </table>
 <table cellspacing="0" cellpadding="0" class="passed" id="summary">
 <tr><th>Class</th><th>Method</th><th># of<br/>Scenarios</th><th>Start</th><th>Time<br/>(ms)</th></tr>
-<tr><th colspan="4">Default test &#8212; failed</th></tr>
-<tr class="failedodd"><td rowspan="1">com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab</td><td><a href="#m1"><b>TC24835VerifyStudentsCantSeePastCourseTab</b>  </a></td><td class="numi">1</td><td>1471876724770</td><td class="numi">46253</td></tr>
+<tr><th colspan="4">Test &#8212; failed</th></tr>
+<tr class="failedodd"><td rowspan="1">com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab</td><td><a href="#m1"><b>TC24835VerifyStudentsCantSeePastCourseTab</b>  </a></td><td class="numi">1</td><td>1471931075909</td><td class="numi">63962</td></tr>
+<tr class="failedeven"><td rowspan="1">com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse</td><td><a href="#m2"><b>loginCourses</b>  ("Login course page")</a></td><td class="numi">1</td><td>1471930256162</td><td class="numi">66268</td></tr>
+<tr class="failedodd"><td rowspan="1">com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse</td><td><a href="#m3"><b>loginCourses</b>  ("Login course page")</a></td><td class="numi">1</td><td>1471930335981</td><td class="numi">65749</td></tr>
+<tr class="failedeven"><td rowspan="1">com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings</td><td><a href="#m4"><b>loginCourses</b>  ("Verify Past Course Removed When Has No Content")</a></td><td class="numi">1</td><td>1471930717553</td><td class="numi">88658</td></tr>
+<tr class="failedodd"><td rowspan="1">com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus</td><td><a href="#m5"><b>test17901</b>  </a></td><td class="numi">1</td><td>1471930637668</td><td class="numi">74996</td></tr>
+<tr class="failedeven"><td rowspan="1">com.automation.main.TC17933VerifypastCourseWithStudentRecording</td><td><a href="#m6"><b>test17929</b>  ("17933 - Verify the past course with Student recording")</a></td><td class="numi">1</td><td>1471930899338</td><td class="numi">82023</td></tr>
+<tr class="failedodd"><td rowspan="1">com.automation.main.TC17929And17941And17944PastCourses</td><td><a href="#m7"><b>test17929</b>  </a></td><td class="numi">1</td><td>1471930985702</td><td class="numi">85847</td></tr>
+<tr class="failedeven"><td rowspan="1">com.automation.main.TC17938VerifyPastCourseWithTestRecording</td><td><a href="#m8"><b>test17938</b>  ("Verify Past Course With Test Recording")</a></td><td class="numi">1</td><td>1471930811369</td><td class="numi">83540</td></tr>
+<tr class="failedodd"><td rowspan="1">com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse</td><td><a href="#m9"><b>test24766</b>  </a></td><td class="numi">1</td><td>1471930561127</td><td class="numi">72029</td></tr>
+<tr class="failedeven"><td rowspan="1">com.automation.main.TC17942VerifyTheDisabledTasks</td><td><a href="#m10"><b>testUiExistence</b>  </a></td><td class="numi">1</td><td>1471930406788</td><td class="numi">71925</td></tr>
+<tr class="failedodd"><td rowspan="1">com.automation.main.TC17903VerifyTheUI</td><td><a href="#m11"><b>testUiExistence</b>  </a></td><td class="numi">1</td><td>1471930483420</td><td class="numi">73167</td></tr>
+<tr><th colspan="4">Test &#8212; skipped</th></tr>
+<tr class="skippedodd"><td rowspan="2">com.automation.main.TC17929And17941And17944PastCourses</td><td><a href="#m12"><b>test17941</b>  </a></td><td class="numi">1</td><td>1471931071551</td><td class="numi">0</td></tr><tr class="skippedodd"><td><a href="#m13"><b>test17944</b>  </a></td><td class="numi">1</td><td>1471931071554</td><td class="numi">0</td></tr>
+<tr><th colspan="4">Test &#8212; passed</th></tr>
+<tr class="passedodd"><td rowspan="1">com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself</td><td><a href="#m14"><b>loadPage</b>  </a></td><td class="numi">1</td><td>1471930235780</td><td class="numi">7587</td></tr>
+<tr class="passedeven"><td rowspan="1">com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse</td><td><a href="#m15"><b>loadPage</b>  </a></td><td class="numi">1</td><td>1471930248873</td><td class="numi">7286</td></tr>
+<tr class="passedodd"><td rowspan="1">com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse</td><td><a href="#m16"><b>loadPage</b>  </a></td><td class="numi">1</td><td>1471930328367</td><td class="numi">7608</td></tr>
+<tr class="passedeven"><td rowspan="1">com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus</td><td><a href="#m17"><b>preTestCreateNewUser</b>  ("Login course page")</a></td><td class="numi">1</td><td>1471930637590</td><td class="numi">76</td></tr>
 </table>
-<h1>Default test</h1>
-<h2 id="m1">com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab:TC24835VerifyStudentsCantSeePastCourseTab</h2>
+<h1>Test</h1>
+<h2 id="m1">com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse:loginCourses</h2>
 <div style="padding-left:3em">
 <h3>Test Messages</h3>
-STEP3<br/>
-STEP4<br/>
-STEP5<br/>
+STEP7<br/>
+STEP8<br/>
 <h3>Failure</h3>
-<p>no such element: Unable to locate element: {&quot;method&quot;:&quot;name&quot;,&quot;selector&quot;:&quot;targetLink&quot;}
+<p>timeout</p>
+junit.framework.Assert.fail(Assert.java:50)
+<br/>at com.automation.main.LoginHelperPage.loginCourses(LoginHelperPage.java:135)
+<br/>at com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse.loginCourses(TC17906TryToCopyFromActiveCourseToPastCourse.java:99)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m2">com.automation.main.TC17933VerifypastCourseWithStudentRecording:test17929</h2>
+<div style="padding-left:3em">
+<h3>Test Messages</h3>
+STEP50<br/>
+STEP51<br/>
+STEP52<br/>
+STEP53<br/>
+STEP54<br/>
+<h3>Failure</h3>
+<p>no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers&gt;option&quot;}
   (Session info: chrome=52.0.2743.116)
   (Driver info: chromedriver=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 10.0.10586 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 79 milliseconds
+Command duration or timeout: 16 milliseconds
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
-System info: host: &apos;DESKTOP-DEB4I2G&apos;, ip: &apos;192.168.0.172&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_77&apos;
+System info: host: &apos;DESKTOP-DEB4I2G&apos;, ip: &apos;192.168.0.239&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_77&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b), userDataDir=C:\Users\Mickael\AppData\Local\Temp\scoped_dir14488_22219}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=52.0.2743.116, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
-Session ID: 28c969d8f1c611ba47d1458dffb139cd
-*** Element info: {Using=name, value=targetLink}</p>
-sun.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b), userDataDir=C:\Users\Mickael\AppData\Local\Temp\scoped_dir14156_14998}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=52.0.2743.116, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 50af9fa35bf2461809c5ed143edad377
+*** Element info: {Using=css selector, value=#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers&gt;option}</p>
+sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+<br/>at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
 <br/>at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
 <br/>at java.lang.reflect.Constructor.newInstance(Unknown Source)
 <br/>at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
 <br/>at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
 <br/>at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
 <br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
-<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElementByName(RemoteWebDriver.java:461)
-<br/>at org.openqa.selenium.By$ByName.findElement(By.java:303)
-<br/>at org.openqa.selenium.support.ByIdOrName.findElement(ByIdOrName.java:50)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:492)
+<br/>at org.openqa.selenium.By$ByCssSelector.findElement(By.java:430)
 <br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
 <br/>at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
 <br/>at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-<br/>at com.sun.proxy.$Proxy7.getText(Unknown Source)
-<br/>at com.automation.main.AdminDashboardPage.clickOnTargetSubmenuCourses(AdminDashboardPage.java:122)
-<br/>at com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab.TC24835VerifyStudentsCantSeePastCourseTab(TC24835VerifyStudentsCantSeePastCourseTab.java:122)
+<br/>at com.sun.proxy.$Proxy8.getText(Unknown Source)
+<br/>at com.automation.main.ManageAdHocCoursesMembershipWindow.searchForUser(ManageAdHocCoursesMembershipWindow.java:87)
+<br/>at com.automation.main.TC17933VerifypastCourseWithStudentRecording.test17929(TC17933VerifypastCourseWithStudentRecording.java:217)
 <br/>25 lines not shown
 </div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m3">com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse:loginCourses</h2>
+<div style="padding-left:3em">
+<h3>Test Messages</h3>
+STEP12<br/>
+STEP13<br/>
+<h3>Failure</h3>
+<p>timeout</p>
+junit.framework.Assert.fail(Assert.java:50)
+<br/>at com.automation.main.LoginHelperPage.loginCourses(LoginHelperPage.java:135)
+<br/>at com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse.loginCourses(TC17907TryToMoveFromActiveCourseToPastCourse.java:100)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m4">com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus:test17901</h2>
+<div style="padding-left:3em">
+<h3>Test Messages</h3>
+STEP31<br/>
+STEP32<br/>
+STEP33<br/>
+<h3>Failure</h3>
+<p>timeout</p>
+junit.framework.Assert.fail(Assert.java:50)
+<br/>at com.automation.main.LoginHelperPage.loginCourses(LoginHelperPage.java:135)
+<br/>at com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus.test17901(TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus.java:326)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m5">com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse:test24766</h2>
+<div style="padding-left:3em">
+<h3>Test Messages</h3>
+STEP26<br/>
+STEP27<br/>
+STEP28<br/>
+<h3>Failure</h3>
+<p>timeout</p>
+junit.framework.Assert.fail(Assert.java:50)
+<br/>at com.automation.main.LoginHelperPage.loginCourses(LoginHelperPage.java:135)
+<br/>at com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse.test24766(TC24766VerifyCopyFromPastCourseToActiveCourse.java:276)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m6">com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings:loginCourses</h2>
+<div style="padding-left:3em">
+<h3>Test Messages</h3>
+STEP36<br/>
+STEP37<br/>
+STEP38<br/>
+STEP39<br/>
+STEP40<br/>
+<h3>Failure</h3>
+<p>no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers&gt;option&quot;}
+  (Session info: chrome=52.0.2743.116)
+  (Driver info: chromedriver=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 10.0.10586 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 18 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
+System info: host: &apos;DESKTOP-DEB4I2G&apos;, ip: &apos;192.168.0.239&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_77&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b), userDataDir=C:\Users\Mickael\AppData\Local\Temp\scoped_dir16056_7793}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=52.0.2743.116, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: e1b78e743e89fd519b25e117c5069f1a
+*** Element info: {Using=css selector, value=#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers&gt;option}</p>
+sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+<br/>at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+<br/>at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+<br/>at java.lang.reflect.Constructor.newInstance(Unknown Source)
+<br/>at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+<br/>at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:492)
+<br/>at org.openqa.selenium.By$ByCssSelector.findElement(By.java:430)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
+<br/>at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+<br/>at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+<br/>at com.sun.proxy.$Proxy8.getText(Unknown Source)
+<br/>at com.automation.main.ManageAdHocCoursesMembershipWindow.searchForUser(ManageAdHocCoursesMembershipWindow.java:87)
+<br/>at com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings.loginCourses(TC17925VerifyThePastCourseFunctionalityWithRegularRecordings.java:225)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m7">com.automation.main.TC17929And17941And17944PastCourses:test17929</h2>
+<div style="padding-left:3em">
+<h3>Test Messages</h3>
+STEP57<br/>
+STEP58<br/>
+STEP59<br/>
+STEP60<br/>
+STEP61<br/>
+<h3>Failure</h3>
+<p>no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers&gt;option&quot;}
+  (Session info: chrome=52.0.2743.116)
+  (Driver info: chromedriver=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 10.0.10586 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 17 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
+System info: host: &apos;DESKTOP-DEB4I2G&apos;, ip: &apos;192.168.0.239&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_77&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b), userDataDir=C:\Users\Mickael\AppData\Local\Temp\scoped_dir18772_15525}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=52.0.2743.116, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 651458646de5c284753f09592ab25945
+*** Element info: {Using=css selector, value=#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers&gt;option}</p>
+sun.reflect.GeneratedConstructorAccessor18.newInstance(Unknown Source)
+<br/>at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+<br/>at java.lang.reflect.Constructor.newInstance(Unknown Source)
+<br/>at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+<br/>at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:492)
+<br/>at org.openqa.selenium.By$ByCssSelector.findElement(By.java:430)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
+<br/>at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+<br/>at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+<br/>at com.sun.proxy.$Proxy8.getText(Unknown Source)
+<br/>at com.automation.main.ManageAdHocCoursesMembershipWindow.searchForUser(ManageAdHocCoursesMembershipWindow.java:87)
+<br/>at com.automation.main.TC17929And17941And17944PastCourses.test17929(TC17929And17941And17944PastCourses.java:228)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m8">com.automation.main.TC17942VerifyTheDisabledTasks:testUiExistence</h2>
+<div style="padding-left:3em">
+<h3>Test Messages</h3>
+STEP16<br/>
+STEP17<br/>
+STEP18<br/>
+<h3>Failure</h3>
+<p>timeout</p>
+junit.framework.Assert.fail(Assert.java:50)
+<br/>at com.automation.main.LoginHelperPage.loginCourses(LoginHelperPage.java:135)
+<br/>at com.automation.main.TC17942VerifyTheDisabledTasks.testUiExistence(TC17942VerifyTheDisabledTasks.java:99)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m9">com.automation.main.TC17938VerifyPastCourseWithTestRecording:test17938</h2>
+<div style="padding-left:3em">
+<h3>Test Messages</h3>
+STEP43<br/>
+STEP44<br/>
+STEP45<br/>
+STEP46<br/>
+STEP47<br/>
+<h3>Failure</h3>
+<p>no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers&gt;option&quot;}
+  (Session info: chrome=52.0.2743.116)
+  (Driver info: chromedriver=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 10.0.10586 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 15 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
+System info: host: &apos;DESKTOP-DEB4I2G&apos;, ip: &apos;192.168.0.239&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_77&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b), userDataDir=C:\Users\Mickael\AppData\Local\Temp\scoped_dir19224_17539}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=52.0.2743.116, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 5c8e576fca05089c054328ccd615ae18
+*** Element info: {Using=css selector, value=#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers&gt;option}</p>
+sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+<br/>at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+<br/>at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+<br/>at java.lang.reflect.Constructor.newInstance(Unknown Source)
+<br/>at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+<br/>at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:492)
+<br/>at org.openqa.selenium.By$ByCssSelector.findElement(By.java:430)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
+<br/>at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+<br/>at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+<br/>at com.sun.proxy.$Proxy8.getText(Unknown Source)
+<br/>at com.automation.main.ManageAdHocCoursesMembershipWindow.searchForUser(ManageAdHocCoursesMembershipWindow.java:87)
+<br/>at com.automation.main.TC17938VerifyPastCourseWithTestRecording.test17938(TC17938VerifyPastCourseWithTestRecording.java:218)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m10">com.automation.main.TC17903VerifyTheUI:testUiExistence</h2>
+<div style="padding-left:3em">
+<h3>Test Messages</h3>
+STEP21<br/>
+STEP22<br/>
+STEP23<br/>
+<h3>Failure</h3>
+<p>timeout</p>
+junit.framework.Assert.fail(Assert.java:50)
+<br/>at com.automation.main.LoginHelperPage.loginCourses(LoginHelperPage.java:135)
+<br/>at com.automation.main.TC17903VerifyTheUI.testUiExistence(TC17903VerifyTheUI.java:94)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m11">com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab:TC24835VerifyStudentsCantSeePastCourseTab</h2>
+<div style="padding-left:3em">
+<h3>Test Messages</h3>
+STEP64<br/>
+STEP65<br/>
+STEP66<br/>
+STEP67<br/>
+<h3>Failure</h3>
+<p>no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers&gt;option&quot;}
+  (Session info: chrome=52.0.2743.116)
+  (Driver info: chromedriver=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b),platform=Windows NT 10.0.10586 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 14 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
+System info: host: &apos;DESKTOP-DEB4I2G&apos;, ip: &apos;192.168.0.239&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;1.8.0_77&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, chrome={chromedriverVersion=2.22.397933 (1cab651507b88dec79b2b2a22d1943c01833cc1b), userDataDir=C:\Users\Mickael\AppData\Local\Temp\scoped_dir9640_31181}, takesHeapSnapshot=true, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=52.0.2743.116, platform=XP, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 4c7713e248160c5a809bddb252aace30
+*** Element info: {Using=css selector, value=#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers&gt;option}</p>
+sun.reflect.GeneratedConstructorAccessor18.newInstance(Unknown Source)
+<br/>at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+<br/>at java.lang.reflect.Constructor.newInstance(Unknown Source)
+<br/>at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+<br/>at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElementByCssSelector(RemoteWebDriver.java:492)
+<br/>at org.openqa.selenium.By$ByCssSelector.findElement(By.java:430)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
+<br/>at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+<br/>at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+<br/>at com.sun.proxy.$Proxy8.getText(Unknown Source)
+<br/>at com.automation.main.ManageAdHocCoursesMembershipWindow.searchForUser(ManageAdHocCoursesMembershipWindow.java:87)
+<br/>at com.automation.main.ManageAdhocCoursesEnrollmentsPage.enrollInstructorToCourse(ManageAdhocCoursesEnrollmentsPage.java:166)
+<br/>at com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab.TC24835VerifyStudentsCantSeePastCourseTab(TC24835VerifyStudentsCantSeePastCourseTab.java:167)
+<br/>25 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m12">com.automation.main.TC17929And17941And17944PastCourses:test17941</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m13">com.automation.main.TC17929And17941And17944PastCourses:test17944</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m14">com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself:loadPage</h2>
+<div style="padding-left:3em">
+STEP3<br/>
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m15">com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse:loadPage</h2>
+<div style="padding-left:3em">
+STEP6<br/>
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m16">com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse:loadPage</h2>
+<div style="padding-left:3em">
+STEP11<br/>
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h2 id="m17">com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus:preTestCreateNewUser</h2>
 <p class="totop"><a href="#summary">back to summary</a></p>
 </body></html>

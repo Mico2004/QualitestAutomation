@@ -4434,6 +4434,19 @@ public String getSecondRecordingTitleTest() {
 		Assert.assertTrue(true);
 	}
 	
-	
+	public boolean tabExists(int tab){
+		waitForVisibility(recordings_tab);
+		boolean exist=false;
+		if(tab==1)
+			exist=additional_content_tab.isDisplayed();
+		else if(tab==2)
+			exist=student_recordings_tab.isDisplayed();
+		else if(tab==3)
+			exist=test_tab.isDisplayed();
+		
+		return exist;			
+		
+	}
+	//12123
 	
 }

@@ -136,7 +136,8 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		course.selectCourseThatStartingWith("Ab"); boolean
 		additionalExist=record.tabExists(1); boolean
 		StudentExist=record.tabExists(2); boolean
-		TestExist=record.tabExists(3); record.returnToCourseListPage(course);
+		TestExist=record.tabExists(3); 
+		record.returnToCourseListPage(course);
 
 		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record,
 		delete_menu); 
