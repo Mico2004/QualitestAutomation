@@ -106,7 +106,6 @@ tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 	   initializeCourseObject();	
 		
 	
-
 	//ownership change	
 		int i=1;
      String past_course_a=course.selectCourseThatStartingWith("PastCourseA");

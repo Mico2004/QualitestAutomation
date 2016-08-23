@@ -38,7 +38,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
 
 	}
-	
+	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
 	public EditRecordinPropertiesWindow edit_recording_properties_window;
 	public PlayerPage player_page;
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
@@ -51,6 +51,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	public TopBarHelper top_bar_helper;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
+	public ManageAdhocCoursesEnrollmentsPage mange_adhoc_course_enrollments;
 	public RecordingHelperPage record;
 	public ConfirmationMenu confirm_menu;
 	WebDriver driver;
@@ -64,17 +65,13 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	@BeforeClass
 	public void setup() {
 
-		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
+	
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
-
+		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
+		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
+		
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -95,8 +92,6 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
-		
-		
 		
 	}
 	
@@ -125,8 +120,58 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws Exception
 	{
-		// 1. Validate there is recording in past courses Tab. Search input specified shall be case-insensitive.
+		//pre test to unroll course from active courses to past courses 
 		
+		
+		// 1. getting the name of the past course
+		tegrity.loginCourses("User1");
+		initializeCourseObject();
+			
+		String current_course = course.selectCourseThatStartingWith("PastCourseA");
+		Thread.sleep(1000); 
+		
+		record.signOut();
+		Thread.sleep(1000); 
+			
+		
+		//
+		
+		
+		tegrity.loginAdmin("Admin");
+		initializeCourseObject();
+		 
+		// 2. Click on course builder href link
+		admin_dash_board_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+	 	Thread.sleep(10000);
+	 		
+	 	// 3. Click on create course href link 
+	 	driver.switchTo().frame(0);
+	 		
+	 	// Search target course name
+	 	mange_adhoc_course_enrollments.searchAndFilterCourses(current_course);
+	 	Thread.sleep(7000);
+	 	
+	 		
+	 	// Click on result first course (the only one) membership button
+	 	mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
+	 	Thread.sleep(2000);
+	 	
+	 	mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list,"User1");
+	 	System.out.println("removed instructor 1");
+	 	Thread.sleep(1000);
+	 		// Add selected user to instructor list
+	 		mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
+	 		Thread.sleep(3000);   		
+	 		mangage_adhoc_courses_membership_window.ok_button.click();
+	 		Thread.sleep(1000);
+	 	    driver.switchTo().alert().accept();
+	 	    Thread.sleep(2000);
+		 
+		 
+		 
+		 
+		
+		// 1. Validate there is recording in past courses Tab. Search input specified shall be case-insensitive.
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
 		
