@@ -2840,6 +2840,10 @@ public String getSecondRecordingTitleTest() {
 
 		for (WebElement el : additional_content_list) {
 			if ((el.getText().equals(additional_content_name))) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 						WebElement recording = driver.findElement(By.linkText((additional_content_name)));
 						waitForVisibility(recording);
 						wait.until(ExpectedConditions.elementToBeClickable(recording));
@@ -4423,19 +4427,6 @@ public String getSecondRecordingTitleTest() {
 		Assert.assertTrue(true);
 	}
 	
-	public boolean tabExists(int tab){
-		waitForVisibility(recordings_tab);
-		boolean exist=false;
-		if(tab==1)
-			exist=additional_content_tab.isDisplayed();
-		else if(tab==2)
-			exist=student_recordings_tab.isDisplayed();
-		else if(tab==3)
-			exist=test_tab.isDisplayed();
-		
-		return exist;			
-		
-	}
-	//12123asdasd
+	
 	
 }

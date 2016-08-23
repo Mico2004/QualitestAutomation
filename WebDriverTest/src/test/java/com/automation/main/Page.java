@@ -283,14 +283,6 @@ public class Page {
 				if (driver.getTitle().equals(title))// check
 					ATUReports.add(" load page succeeded", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP)); // if
 																													// list
-																													// of
-																													// courses
-																													// are
-																													// present
-																													// "Tegrity
-																													// Lecture
-																													// Capture"
-
 				break;
 			} catch (Exception e) {
 				ATUReports.add(" load page failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
