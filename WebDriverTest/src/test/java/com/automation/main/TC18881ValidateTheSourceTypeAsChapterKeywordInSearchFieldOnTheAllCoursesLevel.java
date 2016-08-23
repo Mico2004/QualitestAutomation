@@ -183,6 +183,8 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
+			Thread.sleep(2000);
 			
 			// 5.2. The breadcrumb structure displayed as follows: "> Courses > Course name >X results found for: "search_criterion". (X seconds)".
 			search_page.verfiyBreadcrumbStructureDisplayedAsCoursesXResultsFound(current_course, recording_chapter_keyword);
@@ -239,6 +241,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 			// 8. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			Thread.sleep(2000);
 			
 			// 9. Click on title of the manual chapter keyword.
@@ -250,6 +253,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 			// 10. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			Thread.sleep(2000);
 			
 			// 11. Click on the recording title of the chapter.
@@ -261,6 +265,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 			// 12. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			Thread.sleep(2000);
 						
 			// 17. Sign Out.

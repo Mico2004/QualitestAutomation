@@ -2,6 +2,7 @@ package com.automation.main;
 
 import java.util.List;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -129,30 +130,16 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 		course_settings_page.clickOnOkButton();
 		Thread.sleep(1000);
 		
-		// Using preset recording: Wed, Apr 13, 11 12 AM 
-		boolean is_found = false;
-		List<String> recording_list = record.getCourseRecordingList();
-		String recording_name = "Wed, Apr 13, 11 12 AM";
-		String recording_text = "sha1:78acd6c";
+		course.selectCourseThatStartingWith("Ab");
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.clickOnRecordingTaskThenEditRecording();
 		
-		if(recording_list.contains(recording_name)) {
-			is_found = true;
-		}
-		
-		if(!is_found) {
-			record.returnToCourseListPage();
-			Thread.sleep(1000);
-			course.selectCourseThatStartingWith("BankValid");
-			Thread.sleep(1000);
-			record.selectTargetRecordingCheckbox(recording_name);
-			record.clickOnRecordingTaskThenCopy();
-			copy.selectTargetCourseFromCourseList(current_course);
-			copy.clickOnCopyButton();
-			Thread.sleep(1000);
-			confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-			Thread.sleep(1000);
-			record.checkStatusExistenceForMaxTTime(360);
-		}
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+		String recording_text = "reocrd" + sdf.format(date); 
+		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
+		Thread.sleep(8000);
+
 		
 		top_bar_helper.clickOnSignOut();
 		
@@ -168,9 +155,30 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 			} else if (type_of_user == 2) {
 				// 2. Login as guest
 				tegrity.loginAsguest();
+			} else {
+				// 2. Login as ADMIN
+				tegrity.loginAdmin("Admin");
 			} 
 			Thread.sleep(3000);
-
+		
+			// 3. Open some course.
+			if(type_of_user == 3) {
+		
+				// Click on "view course list" under "courses" section.
+				Thread.sleep(1000);
+				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
+				
+				// In "All courses" page, search for Ab course.
+				Thread.sleep(8000);
+				admin_dashboard_view_course_list.searchForTargetCourseName(current_course);
+				Thread.sleep(3000);
+				
+				// Click on that course name.
+				admin_dashboard_view_course_list.clickOnFirstCourseLink();
+				Thread.sleep(1000);
+				
+			}
+				
 			// 3. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
 			
@@ -180,9 +188,15 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 			// 4.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			
-			// 4.2. The breadcrumb structure displayed as follows: "Courses > X results found for: "search_criterion". (X seconds)".
-			search_page.verfiyBreadcrumbStructureDisplayedAsCoursesXResultsFound(current_course, recording_text);
+			// 4.2. The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)".
+			if(type_of_user < 3) {
+				search_page.verfiyBreadcrumbStructureDisplayedAsCoursesXResultsFound(current_course, recording_text);
+			} else {	
+				search_page.verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfoundForAdminDashboard(current_course, recording_text);
+			}
+			
 		
 			// 4.3. The recording chapter icon is displayed.
 			search_page.verifyWebElementDisplayed(search_page.video_thumbnails_list.get(0), "The recording capter icon");
@@ -201,7 +215,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(recording_text, "Source: Recording Text");
 			
 			// 4.9. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 5. Click on the chapter icon.
 			search_page.clickOnChapterIconOfRecordingInTargetIndex(1);
@@ -212,6 +226,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 			// 6. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			
 			// 7. Click on title of the chapter.
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
@@ -222,6 +237,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 			// 8. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			
 			// 9. Click on the recording title of the chapter.
 			search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
@@ -232,6 +248,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 			// 10. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			
 			// 11. Sign Out.
 			top_bar_helper.clickOnSignOut();

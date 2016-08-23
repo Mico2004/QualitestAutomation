@@ -123,15 +123,22 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws Exception
 	{
-		// 1. Validate there is recording in past courses Tab. Search input specified shall be case-insensitive.
+		//pre test to the test 
+		//tegrity.loginAdmin("Admin");
+		//initializeCourseObject();
 		
+		//Thread.sleep(1000);
+		//admin_dash_board_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments")
+		
+		
+		// 1. Validate there is recording in past courses Tab. Search input specified shall be case-insensitive.
 		tegrity.loginCourses("User1");
-		initializeCourseObject();
+		
 		
 		course.clickOnPastCoursesTabButton();
 		Thread.sleep(1000);
 		
-		String current_course = course.selectCourseThatStartingWith("Ab");
+		String current_course = course.selectCourseThatStartingWith("PastCourseA");
 		Thread.sleep(1000);
 		
 		// Get Recording Chapter information.

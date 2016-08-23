@@ -99,8 +99,8 @@ public class TC15897ViewTheUploadedFile {
 
 	@Test
 	public void test15897() throws Exception {
-		String fullPathToFile1 = "\\workspace\\QualitestAutomation\\resources\\documents\\chromedriver_win32.zip";
-		String file_name1 = "chromedriver_win32.zip";
+		String fullPathToFile1 = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testPptx.pptx";
+		String file_name1 = "Moshik_testPptx.pptx";
 		String fullPathToFile2 = "\\workspace\\QualitestAutomation\\resources\\documents\\additional_file.doc";
 		String file_name2 = "additional_file.doc";
 	
@@ -115,7 +115,7 @@ public class TC15897ViewTheUploadedFile {
 		//3.1 try to delete older file if exists
 		String download_path1= System.getProperty("user.home") + File.separatorChar +"Downloads"+ File.separatorChar+file_name1;
 		String download_path2= System.getProperty("user.home") + File.separatorChar +"Downloads"+ File.separatorChar+file_name2;
-///delete old downloaded files
+        ///delete old downloaded files
 		record.tryToDeleteOlderFile(download_path1);
 		record.tryToDeleteOlderFile(download_path2);
 		// 4.Select "Course tasks -> Add Additional Content File" menu item
@@ -136,8 +136,7 @@ public class TC15897ViewTheUploadedFile {
 		record.signOut();/////////////////////////end of precondition!!!!!!!!!!!!
 
 		//////// set up for download file
-
-		
+	
 
 		///// end of set up
 
@@ -145,22 +144,27 @@ public class TC15897ViewTheUploadedFile {
 		tegrity.waitForVisibility(tegrity.passfield);
 		/// 2.login as instructor
 		tegrity.loginCourses("User1");
+		
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
 		record.waitForVisibility(record.additional_content_tab);
+		
 		/// 4.select additional content tab
 		record.clickOnAdditionContentTab();
 		record.waitForVisibility(record.getCheckbox());
 	    record.convertAdditionalContantListToNames();
-		///5.verify size is correct :file 1 should be with mb file 2 should be in kb
-	  ///path to 2 files
+		
+	    ///5.verify size is correct :file 1 should be with mb file 2 should be in kb
+	    ///path to 2 files
 	    String mega=File.separatorChar+"WebDriverTest"+fullPathToFile1;
 	    String kb=File.separatorChar+"WebDriverTest"+fullPathToFile2;
-	   ///round up  double format
+	   
+	    ///round up  double format
 	    DecimalFormat df = new DecimalFormat("#.#");
 	    df.setRoundingMode(RoundingMode.CEILING);
 	    String m=df.format(record.convertFileSize(mega,"mb"));
 	    String k=df.format(record.convertFileSize(kb,"kb"));
+	    
 	    ///6.find if file1 should be represented in mega and file 2 in kb
 	    if((Double.valueOf(m)>=1)&&(Double.valueOf(m)<1024)&&(Double.valueOf(k)>=1)&&(Double.valueOf(k)<1024))
 	    {           
