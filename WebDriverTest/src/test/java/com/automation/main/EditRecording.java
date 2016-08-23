@@ -216,6 +216,11 @@ public class EditRecording extends Page {
 	
 	// set target keyword for first chapter 
 	public void setTargetKeywordForFirstChapter(String target_keyword) throws InterruptedException {
+			
+		ConfirmationMenu confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+		RecordingHelperPage record = PageFactory.initElements(driver, RecordingHelperPage.class);
+		
+		
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
@@ -225,27 +230,20 @@ public class EditRecording extends Page {
 			}
 		}
 		
-		for(int i=0; i<20; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					System.out.println("2222");
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-				
-		}
-		
+		while(!isElementPresent(By.id("PlayButton_Img"))) {
+			System.out.println("element is not visable");
+			Thread.sleep(1000);	
+	}
+
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
 			break;
 		}
 		
+		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(1));
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
-		Thread.sleep(1000);
+		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
+		Thread.sleep(2000);
 		
 		driver.findElement(By.id("NewKeyword")).clear();
 		driver.findElement(By.id("NewKeyword")).sendKeys(target_keyword);
@@ -253,27 +251,19 @@ public class EditRecording extends Page {
 		driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
 		Thread.sleep(2000);
 		
-		for(int i=0; i<60; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					System.out.println("2222");
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-				
+		//click on the ok
+		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
+			
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
+			if(ie.getText().contains("Success")){
+				confirm_menu.clickOnOkButtonAfterEditRecord();
+				break;
+			   }			
+			else Thread.sleep(2000);
 		}
 		
-		for(String window_handler: driver.getWindowHandles()) {
-			driver.switchTo().window(window_handler);
-			break;
-		}
+		//return to the course
+	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();	
 		
-
-		driver.findElement(By.cssSelector(".btn.btn-default")).click();
-		Thread.sleep(2000);
 	}
 }
