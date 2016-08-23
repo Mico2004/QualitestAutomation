@@ -2178,7 +2178,7 @@ public class RecordingHelperPage extends Page {
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\src\\test\\resources\\additional_file.txt"; //// System.getProperty("user.dir")
 																												//// +
 																												//// "\\src\\main\\resources\\ImsImportDataCreation.xml";
-
+//dsd
 		uploadFile(fullPathToFile);
 		Thread.sleep(2000);
 		add_additional_file_button.click();
