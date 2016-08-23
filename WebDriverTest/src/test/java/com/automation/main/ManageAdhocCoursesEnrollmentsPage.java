@@ -226,7 +226,8 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		mangage_adhoc_courses_membership_window.ok_button.click();
 		Thread.sleep(2000);
 		System.out.println("d4");
-		driver.switchTo().alert().accept();
+		waitForAlert(60);
+		clickOkInAlertIfPresent();		
 		System.out.println("clicked on ok");
 		System.out.println("d5");
 	}

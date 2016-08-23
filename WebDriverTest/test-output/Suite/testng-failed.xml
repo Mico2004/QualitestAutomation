@@ -8,13 +8,68 @@
   </listeners>
   <test name="Test(failed)">
     <classes>
+      <class name="com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings">
+        <methods>
+          <include name="loginCourses"/>
+          <include name="setup"/>
+          <include name="closeBroswer"/>
+        </methods>
+      </class> <!-- com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings -->
+      <class name="com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab">
+        <methods>
+          <include name="closeBroswer"/>
+          <include name="setup"/>
+          <include name="TC24835VerifyStudentsCantSeePastCourseTab"/>
+        </methods>
+      </class> <!-- com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab -->
+      <class name="com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse">
+        <methods>
+          <include name="closeBroswer"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse -->
       <class name="com.automation.main.TC17938VerifyPastCourseWithTestRecording">
         <methods>
-          <include name="test17938"/>
           <include name="setup"/>
           <include name="closeBroswer"/>
         </methods>
       </class> <!-- com.automation.main.TC17938VerifyPastCourseWithTestRecording -->
+      <class name="com.automation.main.TC17942VerifyTheDisabledTasks">
+        <methods>
+          <include name="closeBroswer"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.automation.main.TC17942VerifyTheDisabledTasks -->
+      <class name="com.automation.main.TestSuitePreSetCopyRecordingsAndPastCourse">
+        <methods>
+          <include name="closeBroswer"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.automation.main.TestSuitePreSetCopyRecordingsAndPastCourse -->
+      <class name="com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus">
+        <methods>
+          <include name="closeBroswer"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus -->
+      <class name="com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself">
+        <methods>
+          <include name="closeBroswer"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself -->
+      <class name="com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse">
+        <methods>
+          <include name="setup"/>
+          <include name="closeBroswer"/>
+        </methods>
+      </class> <!-- com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse -->
+      <class name="com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse">
+        <methods>
+          <include name="setup"/>
+          <include name="closeBroswer"/>
+        </methods>
+      </class> <!-- com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse -->
       <class name="com.automation.main.TC17929And17941And17944PastCourses">
         <methods>
           <include name="test17941"/>
@@ -24,78 +79,18 @@
           <include name="test17929"/>
         </methods>
       </class> <!-- com.automation.main.TC17929And17941And17944PastCourses -->
-      <class name="com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse">
-        <methods>
-          <include name="loginCourses"/>
-          <include name="loadPage"/>
-          <include name="setup"/>
-          <include name="closeBroswer"/>
-        </methods>
-      </class> <!-- com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse -->
-      <class name="com.automation.main.TC17933VerifypastCourseWithStudentRecording">
-        <methods>
-          <include name="closeBroswer"/>
-          <include name="setup"/>
-          <include name="test17929"/>
-        </methods>
-      </class> <!-- com.automation.main.TC17933VerifypastCourseWithStudentRecording -->
       <class name="com.automation.main.TC17903VerifyTheUI">
         <methods>
           <include name="closeBroswer"/>
           <include name="setup"/>
-          <include name="testUiExistence"/>
         </methods>
       </class> <!-- com.automation.main.TC17903VerifyTheUI -->
-      <class name="com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself">
+      <class name="com.automation.main.TC17933VerifypastCourseWithStudentRecording">
         <methods>
           <include name="closeBroswer"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself -->
-      <class name="com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings">
-        <methods>
-          <include name="loginCourses"/>
-          <include name="setup"/>
-          <include name="closeBroswer"/>
-        </methods>
-      </class> <!-- com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings -->
-      <class name="com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse">
-        <methods>
-          <include name="closeBroswer"/>
-          <include name="loginCourses"/>
-          <include name="loadPage"/>
-          <include name="setup"/>
-        </methods>
-      </class> <!-- com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse -->
-      <class name="com.automation.main.TC17942VerifyTheDisabledTasks">
-        <methods>
-          <include name="closeBroswer"/>
-          <include name="setup"/>
-          <include name="testUiExistence"/>
-        </methods>
-      </class> <!-- com.automation.main.TC17942VerifyTheDisabledTasks -->
-      <class name="com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus">
-        <methods>
-          <include name="closeBroswer"/>
-          <include name="setup"/>
-          <include name="preTestCreateNewUser"/>
-          <include name="test17901"/>
-        </methods>
-      </class> <!-- com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus -->
-      <class name="com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse">
-        <methods>
-          <include name="test24766"/>
-          <include name="setup"/>
-          <include name="closeBroswer"/>
-        </methods>
-      </class> <!-- com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse -->
-      <class name="com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab">
-        <methods>
-          <include name="closeBroswer"/>
-          <include name="setup"/>
-          <include name="TC24835VerifyStudentsCantSeePastCourseTab"/>
-        </methods>
-      </class> <!-- com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab -->
+      </class> <!-- com.automation.main.TC17933VerifypastCourseWithStudentRecording -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

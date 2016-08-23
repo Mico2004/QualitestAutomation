@@ -41,6 +41,8 @@ public class ConfirmationMenu extends Page {
 	WebElement correct_error_msg_body;
 	@FindBy(xpath = "//*[@id=\"alertWindow\"]/div[1]/p")
 	WebElement add_additional_content_confirm_note;
+	@FindBy(id = "alertWindow")
+	WebElement alertWindow;
 
 	public ConfirmationMenu(WebDriver browser) {
 		super(browser);
@@ -49,6 +51,8 @@ public class ConfirmationMenu extends Page {
 
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {		
+		waitForVisibility(alertWindow);
+		Thread.sleep(1000);
 		waitForVisibility(ok_button);
 		try {
 			ok_button.click();
@@ -364,6 +368,7 @@ public class ConfirmationMenu extends Page {
 		}
 		
 		try {
+			waitForVisibility(alertWindow);
 			String souce_page = driver.getPageSource();
 			if (!souce_page.contains("Edit Recording Properties")) {
 				System.out.println("Error window title is wrong.");

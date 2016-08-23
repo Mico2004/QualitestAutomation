@@ -109,11 +109,11 @@ public class TC17929And17941And17944PastCourses {
 	@Test
 	public void test17929() throws Exception {
 		
-		
+	
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		Thread.sleep(2000);
 
-		tegrity.loginAdmin("Admin");
+		/*		tegrity.loginAdmin("Admin");
 		Thread.sleep(2000);
 		System.out.println("Past1");
 		// 2. Click on user builder href link
@@ -216,9 +216,7 @@ public class TC17929And17941And17944PastCourses {
 		// Confirm user membership list
 		mangage_adhoc_courses_membership_window.clickOnOkButton();
 
-	/*	mangage_adhoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(
-				By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
-*/
+
 		Thread.sleep(2000);
 		// enroll the super user to the course
 		// Click on result first course (the only one) membership button
@@ -242,9 +240,7 @@ public class TC17929And17941And17944PastCourses {
 		// Confirm user membership list
 		mangage_adhoc_courses_membership_window.clickOnOkButton();
 
-	/*	mangage_adhoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(
-				By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
-*/
+
 		Thread.sleep(2000);
 
 		// Search target course name
@@ -272,9 +268,7 @@ public class TC17929And17941And17944PastCourses {
 		// Confirm user membership list
 		mangage_adhoc_courses_membership_window.clickOnOkButton();
 
-	/*	mangage_adhoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(
-				By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
-*/
+
 		Thread.sleep(2000);
 		// enroll the super user to the course
 		// Click on result first course (the only one) membership button
@@ -298,9 +292,7 @@ public class TC17929And17941And17944PastCourses {
 		// Confirm user membership list
 		mangage_adhoc_courses_membership_window.clickOnOkButton();
 
-	/*	mangage_adhoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(
-				By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
-*/
+
 		Thread.sleep(2000);
 
 		for (String window : driver.getWindowHandles()) {
@@ -333,11 +325,12 @@ public class TC17929And17941And17944PastCourses {
 			driver.switchTo().window(window);
 			break;
 		}
-		course.sign_out.click();
+		course.sign_out.click();*/
 
 		tegrity.loginCourses("SuperUser");
 		Thread.sleep(3000);
-		course.selectCourseThatStartingWith(PastTemp2Course);
+		//course.selectCourseThatStartingWith(PastTemp2Course);
+		course.selectCourseThatStartingWith("PastCourseA");
 		Thread.sleep(3000);
 		record.toUploadAdditionalContentFile(confirm_menu);
 		Thread.sleep(2000);
