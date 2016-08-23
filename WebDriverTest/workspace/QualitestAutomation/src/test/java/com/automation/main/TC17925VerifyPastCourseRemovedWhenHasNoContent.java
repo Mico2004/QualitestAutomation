@@ -1,20 +1,18 @@
 package com.automation.main;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+
 
 public class TC17925VerifyPastCourseRemovedWhenHasNoContent {
 
@@ -51,14 +49,11 @@ public class TC17925VerifyPastCourseRemovedWhenHasNoContent {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 		
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 		
-	
-		
 		wait = new WebDriverWait(driver, 30);
-	
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
@@ -66,23 +61,24 @@ public class TC17925VerifyPastCourseRemovedWhenHasNoContent {
 		course=PageFactory.initElements(driver, CoursesHelperPage.class);
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		
-		
-		
-		
-		
-		
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window=PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		
+
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC17925VerifyPastCourseRemovedWhenHasNoContent at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC17925VerifyPastCourseRemovedWhenHasNoContent at " + DateToStr,
+		 "Starting the test: TC17925VerifyPastCourseRemovedWhenHasNoContent at " + DateToStr, LogAs.PASSED, null);
 
 	}
 	
-	
+	@AfterClass
+	public void closeBroswer() {		
+		this.driver.quit();
+	}
 
-	
-	
-
-	
 	@Test(description = "Login course page")
 	public void loginCourses() throws InterruptedException
 	{
@@ -180,9 +176,6 @@ mange_adhoc_users_page.toAdminDashBoard();
 	    Thread.sleep(2000);
 
 
-
-
-
 // 1. Login with SuperUser.
 		tegrity.loginCourses("User1");// log in courses page
 	   initializeCourseObject();	
@@ -266,18 +259,9 @@ mange_adhoc_users_page.toAdminDashBoard();
 	    driver.switchTo().alert().accept();
 	    Thread.sleep(2000);
 	    
-		// Quit browser
+	    System.out.println("Done.");
+	    ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
-	  Thread.sleep(2000);
-	    driver.quit();
-		
-		
-		
-		
-		
-		
-	
-		
 	}
 	// description = "get courses list"
 		public void initializeCourseObject() throws InterruptedException {

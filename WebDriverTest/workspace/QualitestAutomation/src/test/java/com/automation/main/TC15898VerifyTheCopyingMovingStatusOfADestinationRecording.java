@@ -2,32 +2,20 @@ package com.automation.main;
 
 // Precondition: first recording in second course must be long duration
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.util.List;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -54,13 +42,13 @@ public class TC15898VerifyTheCopyingMovingStatusOfADestinationRecording {
 	public DeleteMenu delete_menu;
 	WebDriver driver;
 	WebDriverWait wait;
-	public static WebDriver thread_driver;
 	CopyMenu copy;
 	String current_course;
 	String target_course;
 	String clickedRecording;
 DesiredCapabilities capability;
-	@BeforeClass
+	
+@BeforeClass
 	public void setup() {
 
 //		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
@@ -68,10 +56,10 @@ DesiredCapabilities capability;
 //		capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
 //		
 //	driver=new InternetExplorerDriver(capability);
-		driver = new FirefoxDriver();
+		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -81,13 +69,19 @@ DesiredCapabilities capability;
 		
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15898VerifyTheCopyingMovingStatusOfADestinationRecording at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15898VerifyTheCopyingMovingStatusOfADestinationRecording at " + DateToStr,
+		 "Starting the test: TC15898VerifyTheCopyingMovingStatusOfADestinationRecording at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	
-//	@AfterClass
-//	public void closeBroswer() {
-//		this.driver.quit();
-//	}
+	@AfterClass
+	public void closeBroswer() {
+		this.driver.quit();
+	}
 
 
 	// @Parameters({"web","title"}) in the future
@@ -114,6 +108,7 @@ DesiredCapabilities capability;
 		
 		// Find the target full course name + delete all recording in target course if they exists
 		target_course = course.selectCourseThatStartingWith("abc");
+		String target_course_url = driver.getCurrentUrl();
 		record.deleteAllRecordings(delete_menu);
 		record.returnToCourseListPage();
 		
@@ -135,6 +130,7 @@ DesiredCapabilities capability;
 		
 		// 6. Click "Copy Recording(s)".
 		copy.clickOnCopyButton();
+		Thread.sleep(1000);
 		
 		// 7. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -171,10 +167,14 @@ DesiredCapabilities capability;
 		// 8. While recording is being copied, click the "Courses" link at the breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(800);
+		Thread.sleep(2000);
 		
 		// 9. Select destination course.
 		course.selectTargetCourse(target_course);
+		
+//		// 8-9. Go to target course url.
+//		driver.navigate().to(target_course_url);
+//		Thread.sleep(3000);
 		
 		// 10. Verify that destination recording has a "Moving/Copying" status.
 		// 10.1. Recr`row is grayed out.
@@ -197,8 +197,8 @@ DesiredCapabilities capability;
 			}
 		}
 		
-		// Quit browser.
-		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 }

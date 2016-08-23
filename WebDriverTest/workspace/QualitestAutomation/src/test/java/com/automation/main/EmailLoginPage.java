@@ -21,15 +21,15 @@ public class EmailLoginPage extends Page {
 	@FindBy(id = "signIn") WebElement sign_in;
 	
 	///login email
-	public void LoginEmailPage() throws InterruptedException
+	public void LoginEmailPage(String email_input_field) throws InterruptedException
 	{try {
 		  
 		  waitForVisibility(email_field);
 		  email_field.clear();
-		  email_field.sendKeys("qualitestmcgrawhill");
+		  email_field.sendKeys(email_input_field);
 		 copy.click();
 			System.out.println("login successfully");
-			ATUReports.add("Login as", "qualitestmcgrawhill", "Success login", "Success login", LogAs.PASSED, null);
+			ATUReports.add("Login as", email_input_field, "Success login", "Success login", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 	}
 	catch(Exception e)

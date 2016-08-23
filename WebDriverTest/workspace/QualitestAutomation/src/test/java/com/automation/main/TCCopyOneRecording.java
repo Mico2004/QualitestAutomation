@@ -1,29 +1,24 @@
 package com.automation.main;
 
-import com.google.common.util.concurrent.Monitor;
 
 import java.awt.List;
 import java.util.ArrayList;
-
+import java.text.DateFormat;
+import java.util.Date;
 import org.junit.AfterClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junit.framework.Assert;
 
 public class TCCopyOneRecording {
@@ -46,6 +41,7 @@ public class TCCopyOneRecording {
 	List recording_list_object;
 	ConfirmationMenu confirm;
     MoveWindow move_menu;
+    
 	@BeforeClass
 	public void setup() {
 		try {
@@ -53,9 +49,15 @@ public class TCCopyOneRecording {
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 			driver = new ChromeDriver();///// MUST FOR TEST TO GET XML
 
-			driver.manage().window().maximize();
+			
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			wait = new WebDriverWait(driver, 30);
+			
+			 Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TCCopyOneRecording at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TCCopyOneRecording at " + DateToStr,
+			 "Starting the test: TCCopyOneRecording at " + DateToStr, LogAs.PASSED, null);	
 		} catch (Exception e) {
 			/// ATUReports.add("Fail Step", LogAs.FAILED, new
 			/// CaptureScreen(ScreenshotOf.DESKTOP));
@@ -106,7 +108,7 @@ public class TCCopyOneRecording {
 
 		// 1.load main page chrome
 		driver =DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
@@ -126,7 +128,7 @@ public class TCCopyOneRecording {
 	//5.take recorder namme for later 
 		String original_recorder_name = driver.findElement(By.id("RecordedBy1")).getText();/// take recorder namme for later 
 		// 6.verify check box is selected and then load copy menu
-		record.checkbox.click();
+		record.getCheckbox().click();
 		
 		copy.verifyCopyMenu(record);// verify copy menu
 		
@@ -142,7 +144,7 @@ public class TCCopyOneRecording {
         course.first_course_button.click();
         Thread.sleep(2000);
         
-        record.checkbox.click();
+        record.getCheckbox().click();
         copy.verifyCopyMenu(record);// verify copy menu
         copy=PageFactory.initElements(driver,CopyMenu.class);
         Thread.sleep(3000);
@@ -311,6 +313,10 @@ public class TCCopyOneRecording {
 		Thread.sleep(15000);
 	///30.Click any chapter:verify plays correctly 
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+		
 	}
 
 	// description = "get courses list"

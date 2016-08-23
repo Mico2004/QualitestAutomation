@@ -4,7 +4,6 @@ import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.io.File;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +11,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
+import java.text.DateFormat;
+import java.util.Date;
+
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
@@ -51,10 +54,11 @@ public class TC15467CancelTheAdding {
 	List<String> for_enroll;
 
 	@BeforeClass
-	public void setup() {
+	
+public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -81,23 +85,33 @@ public class TC15467CancelTheAdding {
 
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
-
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15467CancelTheAdding at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15467CancelTheAdding at " + DateToStr, "Starting the test: TC15467CancelTheAdding at " + DateToStr, LogAs.PASSED, null);	
 	}
-
+	
+	@AfterClass
+	public void closeBroswer() {
+		this.driver.quit();
+	}
+	
 	@Test
-	public void test15447() throws Exception {
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\chromedriver_win32.zip";
-		String file_name = "chromedriver_win32.zip";
+	
+public void test15447() throws Exception {
+		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_Cancel.txt";
+		String file_name = "Moshik_Cancel.txt";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		/// 2.login as instructor
 		tegrity.loginCourses("User1");
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
-		record.waitForVisibility(record.checkbox);
+		record.waitForVisibility(record.getCheckbox());
 
 		record.clickOnAdditionContentTab();
-		record.waitForVisibility(record.checkbox);
+		record.waitForVisibility(record.getCheckbox());
 		// 3.1 click on additional content tab
 
 		// 4.Select "Course tasks -> Add Additional Content File" menu item
@@ -114,8 +128,8 @@ public class TC15467CancelTheAdding {
 		add_additional_content_window.waitForVisibility(add_additional_content_window.upload_progress_bar);
 		add_additional_content_window.cancel_additional_file_button.click();/// add
 		/// 8.verify redirected to recording
-		record.waitForVisibility(record.additional_content_list.get(1));
-		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[2]")).getAttribute("class").equals("active")) {
+		record.waitForVisibility(record.additional_content_list.get(0));
+		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
 			System.out.println("redirected to additional content tab");
 			ATUReports.add("redirected to additional content tab", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -142,8 +156,8 @@ public class TC15467CancelTheAdding {
 		
 
 		/// 8.verify redirected to recording
-		record.waitForVisibility(record.additional_content_list.get(1));
-		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[2]")).getAttribute("class").equals("active")) {
+		record.waitForVisibility(record.additional_content_list.get(0));
+		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
 			System.out.println("redirected to recording tab");
 			ATUReports.add("redirected to recording tab", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -157,7 +171,7 @@ public class TC15467CancelTheAdding {
 
 		// 7.check if redirected to additional content tab
 
-		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[2]")).getAttribute("class").equals("active")) {
+		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
 			System.out.println("redirected to additional content tab");
 			ATUReports.add("redirected to additional content tab", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -169,8 +183,8 @@ public class TC15467CancelTheAdding {
 		// 8.Click on file's title:Standard open file/download dialog is
 		record.convertAdditionalContantListToNames();
 		record.verifyNoAdditionalContentFileName(file_name);
-
-		driver.quit();///////////////////////// for download file!!!!!!!!!!!!!
+		
+		 System.out.println("Done.");
 
 	}
 }

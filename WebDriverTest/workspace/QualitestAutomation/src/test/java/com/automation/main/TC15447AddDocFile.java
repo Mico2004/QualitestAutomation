@@ -1,7 +1,10 @@
 package com.automation.main;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -69,7 +73,7 @@ public class TC15447AddDocFile {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -96,11 +100,23 @@ public class TC15447AddDocFile {
 
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
-
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15447AddDocFile at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15447AddDocFile at " + DateToStr, "Starting the test: TC15447AddDocFile at " + DateToStr, LogAs.PASSED, null);	
 	}
 
+	@AfterClass
+	public void closeBroswer() {
+		
+		this.driver.quit();
+	}
+	
+	
 	@Test
 	public void test17929() throws Exception {
+
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\additional_file.doc";
 		String file_name = "additional_file.doc";
 		// 1.load page
@@ -108,8 +124,6 @@ public class TC15447AddDocFile {
 		/// 2.login as instructor
 		tegrity.loginCourses("User1");
 	    course.waitForVisibility(course.sign_out);
-	    //2.1 delete all additional content as preset
-	    course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
 		Thread.sleep(3000);
@@ -131,7 +145,7 @@ public class TC15447AddDocFile {
 
 		// 7.check if redirected to additional content tab
 
-		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[2]")).getAttribute("class").equals("active")) {
+		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
 			System.out.println("redirected to additional content tab");
 			ATUReports.add("redirected to additional content tab", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -199,8 +213,8 @@ public class TC15447AddDocFile {
 		// 6.verify downloaded file is valid using md5
 		record.VerifyDownloadedFileIsValid(file_name);
 
-		driver.quit();
-
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 
 }

@@ -39,7 +39,7 @@ import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-
+import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
@@ -79,7 +79,7 @@ public class ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
+//		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);

@@ -1,28 +1,23 @@
     package com.automation.main;
    import java.util.List;
 import java.util.ArrayList;
-
+import java.text.DateFormat;
+import java.util.Date;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-	import org.openqa.selenium.ie.InternetExplorerDriver;
-	import org.openqa.selenium.remote.DesiredCapabilities;
-	import org.openqa.selenium.support.PageFactory;
-	import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.testng.internal.junit.ArrayAsserts;
-
-import com.beust.jcommander.Strings;
 
 import atu.testng.reports.ATUReports;
-	import atu.testng.reports.logging.LogAs;
-	import atu.testng.reports.utils.Utils;
-	import atu.testng.selenium.reports.CaptureScreen;
-	import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+import atu.testng.reports.logging.LogAs;
+import atu.testng.reports.utils.Utils;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 	public class TCExistenceOfUIItemsDelete {
 
@@ -54,13 +49,20 @@ import atu.testng.reports.ATUReports;
 				//driver=new FirefoxDriver();
 			     driver=DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 				///ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
-				driver.manage().window().maximize();
+				
 				recording_for_delete=new ArrayList<String>();
 				tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 				  delete=PageFactory.initElements(driver,DeleteMenu.class);
 				record = PageFactory.initElements(driver, RecordingHelperPage.class);
 				copy = PageFactory.initElements(driver, CopyMenu.class);
 			    move_Window= PageFactory.initElements(driver, MoveWindow.class);
+			    
+			    Date curDate = new Date();
+			    String DateToStr = DateFormat.getInstance().format(curDate);
+			    System.out.println("Starting the test: TCExistenceOfUIItemsDelete at " + DateToStr);
+			    ATUReports.add("Message window.", "Starting the test: TCExistenceOfUIItemsDelete at " + DateToStr,
+			    "Starting the test: TCExistenceOfUIItemsDelete at " + DateToStr, LogAs.PASSED, null);	
+			    
 			} catch (Exception e) {
 				ATUReports.add("Fail Step", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 			}
@@ -79,12 +81,10 @@ import atu.testng.reports.ATUReports;
 		 * ScreenshotOf.DESKTOP)); }
 		 */
 
-//	  	@AfterClass
-//		public void closeBroswer() {
-//			this.driver.quit();
-//		}
-
-
+	@AfterClass
+	public void closeBroswer() {
+			this.driver.quit();
+		}
 
 		// @Parameters({"web","title"}) in the future
 		@Test
@@ -103,10 +103,10 @@ import atu.testng.reports.ATUReports;
 			record.verifyDisabledMenu();
 			
 			//5.click one check box
-			record.ClickOneCheckedboxSelected(record.checkbox);
+			record.ClickOneCheckedboxSelected(record.getCheckbox());
 			
 			//6.un-check one check box
-			record.ClickOneCheckedboxNotSelected(record.checkbox);
+			record.ClickOneCheckedboxNotSelected(record.getCheckbox());
 		
 			//7.click all check box
 			record.checkall.click();// make all checkboxes marked
@@ -119,7 +119,7 @@ import atu.testng.reports.ATUReports;
 			record.verifyAllCheckedboxNotSelected();
 			
 			//9.to delete menu
-			record.checkbox.click();
+			record.getCheckbox().click();
 		//list all recording names to check which one is selected and should appear in delete menu
 			record.convertRecordingsListToNames();
 		    int counter=0;
@@ -148,8 +148,10 @@ import atu.testng.reports.ATUReports;
 		  delete.verifySelectedRecordingsInDeleteMenu(recording_for_delete);
 		
 			//14.verify button locations
-		
 			delete.verifyDeleteMenuElementsLocation();
+			
+			System.out.println("Done.");
+			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		}
 
 		// description = "get courses list"

@@ -1,18 +1,12 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.junit.AfterClass;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.text.DateFormat;
+import java.util.Date;
+import org.testng.annotations.AfterClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -20,20 +14,15 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TestSuitePreSetCopyRecordings {
@@ -73,10 +62,11 @@ public class TestSuitePreSetCopyRecordings {
 		// capability=DesiredCapabilities.internetExplorer();
 		// capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
 		//
-
-		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
-		// driver.manage().window().maximize();
+		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		
+		//
 		ATUReports.setWebDriver(driver);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -98,16 +88,21 @@ public class TestSuitePreSetCopyRecordings {
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
-		course = PageFactory.initElements(driver, CoursesHelperPage.class);
+
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TestSuitePreSetCopyRecordings at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordings at " + DateToStr, "Starting the test: TC15563CopyRecordingToTheSameCourse at " + DateToStr, LogAs.PASSED, null);	
 	}
 
-	// @AfterClass
-	// public void closeBroswer() {
-	// this.driver.quit();
-	// }
+	@AfterClass
+	public void closeBroswer() {
+		driver.quit();
+	}
 
 	// @Parameters({"web","title"}) in the future
 	@Test
@@ -134,111 +129,129 @@ public class TestSuitePreSetCopyRecordings {
 		// Ab
 		// Copy all tests from Bank Valid Recording to course starting
 		// with Ab
-		course.waitForVisibility(course.active_courses_tab_button);
+//		course.waitForVisibility(course.active_courses_tab_button);
 		Thread.sleep(2000);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "Ab", 3, record, copy,
+		
+		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("Ab", 2, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("Ab", 3, record, delete_menu);
+
+		
+		
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 3, record, copy,
 				confirm_menu);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "Ab", 0, record, copy,
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 0, record, copy,
 				confirm_menu);
 		// Copy all additional content from Bank Valid Recording to course
 		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "Ab", 1, record, copy,
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 1, record, copy,
 				confirm_menu);
 		// Copy all student recordings from Bank Valid Recording to course
 		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "Ab", 2, record, copy,
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 2, record, copy,
 				confirm_menu);
+		
+		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
+		System.out.println("1");  
+		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
+		System.out.println("3");
+		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
+		System.out.println("4");
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
-		// 2.copy courses to pastcourses a
+//		// 2.copy courses to pastcourses a
+//
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseA", 0, record,
+//				copy, confirm_menu);
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseA", 1, record,
+//				copy, confirm_menu);
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseA", 2, record,
+//				copy, confirm_menu);
+//		// 3.copy courses to pastcourses b
+//
+//		course.waitForVisibility(course.course_list.get(0));
+//		initializeCourseObject();
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseB", 0, record,
+//				copy, confirm_menu);
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseB", 1, record,
+//				copy, confirm_menu);
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseB", 2, record,
+//				copy, confirm_menu);
 
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "PastCourseA", 0, record,
-				copy, confirm_menu);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "PastCourseA", 1, record,
-				copy, confirm_menu);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "PastCourseA", 2, record,
-				copy, confirm_menu);
-		// 3.copy courses to pastcourses b
-
-		course.waitForVisibility(course.course_list.get(0));
-		initializeCourseObject();
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "PastCourseB", 0, record,
-				copy, confirm_menu);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "PastCourseB", 1, record,
-				copy, confirm_menu);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "PastCourseB", 2, record,
-				copy, confirm_menu);
-
-		for (String window : driver.getWindowHandles()) {
-			driver.switchTo().window(window);
-			break;
-		}
-		course.signOut();
-		Thread.sleep(3000);
-
-		////////////////////////// unenrolling user 1 past course A And B
-		////////////////////////// +changing recording ownership
-		////////////////////////// ///////////////////
-		//
-		// // 1. Login with SuperUser.
-		tegrity.loginCourses("User1");// log in courses page
-		initializeCourseObject();
-		// //ownership change
-
-		try {
-			Robot robot = new Robot();
-			robot.setAutoDelay(2000);
-			robot.mouseMove(0, -1000);
-		} catch (AWTException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		String past_course_a = course.selectCourseThatStartingWith("PastCourseA");
-		Thread.sleep(3000);
-		String user1 = PropertyManager.getProperty("User1");
-		String user4 = PropertyManager.getProperty("User4");
-		record.changeRecordingOwnership(confirm_menu, erp_window, user1, null);
-		Thread.sleep(3000);
-		for (String window : driver.getWindowHandles()) {
-			driver.switchTo().window(window);
-			break;
-		}
-		record.returnToCourseListPage();
-		Thread.sleep(3000);
-		String past_course_b = course.selectCourseThatStartingWith("PastCourseB");
-		Thread.sleep(3000);
-
-		record.changeRecordingOwnership(confirm_menu, erp_window, user1, null);
-		Thread.sleep(3000);
-		record.signOut();
-		Thread.sleep(3000);
-		tegrity.loginCourses("User4");// log in courses page to register user in
-										// database
-		Thread.sleep(3000);
-		course.signOut();
-		tegrity.loginAdmin("Admin");
-		Thread.sleep(5000);
-		// 4. Click on course builder href link
-
-		// String
-		// past_course_a="PastCourseAawsserverautomation113032016121315_Name";
-		// String
-		// past_course_b="PastCourseBawsserverautomation113032016121315_Name";
-
-		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		Thread.sleep(10000);
-		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_a, user1,
-				mangage_adhoc_courses_membership_window);
-		Thread.sleep(3000);
-		for (String window : driver.getWindowHandles()) {
-			driver.switchTo().window(window);
-			break;
-		}
-		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_b, user1,
-				mangage_adhoc_courses_membership_window);
-		Thread.sleep(3000);
-
-		driver.quit();
+//		for (String window : driver.getWindowHandles()) {
+//			driver.switchTo().window(window);
+//			break;
+//		}
+//		course.signOut();
+//		Thread.sleep(3000);
+//
+//		////////////////////////// unenrolling user 1 past course A And B
+//		////////////////////////// +changing recording ownership
+//		////////////////////////// ///////////////////
+//		//
+//		// // 1. Login with SuperUser.
+//		tegrity.loginCourses("User1");// log in courses page
+//		initializeCourseObject();
+//		// //ownership change
+//
+//		try {
+//			Robot robot = new Robot();
+//			robot.setAutoDelay(2000);
+//			robot.mouseMove(0, -1000);
+//		} catch (AWTException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		String past_course_a = course.selectCourseThatStartingWith("PastCourseA");
+//		Thread.sleep(3000);
+//		String user1 = PropertyManager.getProperty("User1");
+//		String user4 = PropertyManager.getProperty("User4");
+//		record.changeRecordingOwnership(confirm_menu, erp_window, user1, null);
+//		Thread.sleep(3000);
+//		for (String window : driver.getWindowHandles()) {
+//			driver.switchTo().window(window);
+//			break;
+//		}
+//		record.returnToCourseListPage();
+//		Thread.sleep(3000);
+//		String past_course_b = course.selectCourseThatStartingWith("PastCourseB");
+//		Thread.sleep(3000);
+//
+//		record.changeRecordingOwnership(confirm_menu, erp_window, user1, null);
+//		Thread.sleep(3000);
+//		record.signOut();
+//		Thread.sleep(3000);
+//		tegrity.loginCourses("User4");// log in courses page to register user in
+//										// database
+//		Thread.sleep(3000);
+//		course.signOut();
+//		tegrity.loginAdmin("Admin");
+//		Thread.sleep(5000);
+//		// 4. Click on course builder href link
+//
+//		// String
+//		// past_course_a="PastCourseAawsserverautomation113032016121315_Name";
+//		// String
+//		// past_course_b="PastCourseBawsserverautomation113032016121315_Name";
+//
+//		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+//		Thread.sleep(10000);
+//		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_a, user1,
+//				mangage_adhoc_courses_membership_window);
+//		Thread.sleep(3000);
+//		for (String window : driver.getWindowHandles()) {
+//			driver.switchTo().window(window);
+//			break;
+//		}
+//		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_b, user1,
+//				mangage_adhoc_courses_membership_window);
+//		Thread.sleep(3000);
+//
+//		driver.quit();
 
 	}
 }

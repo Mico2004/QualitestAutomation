@@ -1,42 +1,25 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.text.DateFormat;
+import java.util.Date;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.w3c.dom.stylesheets.LinkStyle;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC19326PublishThePrivateCourse {
@@ -67,14 +50,15 @@ public class TC19326PublishThePrivateCourse {
     DesiredCapabilities capability;
     public AdminDashboardPage admin_dashboard_page;
     public AdminDashboardViewCourseList admin_dashboard_view_course_list;
-	
+    public PlayerPage player_page;
+    public AdminCourseSettingsPage admin_course_settings_page;
     
     @BeforeClass
 	public void setup() {
 
     	driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
     	
-//		driver.manage().window().maximize();
+		
 		ATUReports.setWebDriver(driver);
 	
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -94,14 +78,21 @@ public class TC19326PublishThePrivateCourse {
 		
 		top_bar_helper = PageFactory.initElements(driver, TopBarHelper.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
+		admin_course_settings_page = PageFactory.initElements(driver, AdminCourseSettingsPage.class);
+		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC19326PublishThePrivateCourse at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC19326PublishThePrivateCourse at " + DateToStr,
+		 "Starting the test: TC19326PublishThePrivateCourse at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
-//	
-//	@AfterClass
-//	public void closeBroswer() {
-//		this.driver.quit();
-//	}
-
+	
+	@AfterClass
+	public void closeBroswer() {
+		this.driver.quit();
+	}
 
 	
 	// description = "get courses list"
@@ -122,7 +113,6 @@ public class TC19326PublishThePrivateCourse {
 		initializeCourseObject();
 		
 		String private_course = course.selectCourseThatStartingWith("User");
-		String url_private_course = driver.getCurrentUrl();
 		
 		top_bar_helper.clickOnSignOut();
 		
@@ -130,17 +120,28 @@ public class TC19326PublishThePrivateCourse {
 		// 1. Login as ADMIN 
 		tegrity.loginAdmin("Admin");
 		Thread.sleep(3000);
+		
+		//1.1 pretest make sure that the course will be public
+		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
+		Thread.sleep(2000);		
+		
+		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
+		admin_course_settings_page.clickOnSaveButton();
+		Thread.sleep(2000);	
+		
 		// 2. Click the "Course List" link.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		Thread.sleep(3000);
 		
 		// 3. Select the INSTRUCTOR's private course in the list and click it.
-//		admin_dashboard_view_course_list.searchForTargetCourseName(private_course);
-//		Thread.sleep(3000);
-//		admin_dashboard_view_course_list.clickOnFirstCourseLink();
-//		Thread.sleep(3000);
-		driver.navigate().to(url_private_course);
+		admin_dashboard_view_course_list.searchForTargetCourseName(private_course);
 		Thread.sleep(3000);
+		admin_dashboard_view_course_list.clickOnFirstCourseLink();
+		Thread.sleep(3000);
+//		driver.navigate().to(url_private_course);
+//		Thread.sleep(3000);
+		
+		String url_private_course = driver.getCurrentUrl();
 		
 		// 4. Select the "Course Tasks -> Course Settings" menu item.
 		record.clickOnCourseTaskThenCourseSettings();
@@ -151,7 +152,7 @@ public class TC19326PublishThePrivateCourse {
 		
 		// 6. Check the "Make this course publicly visible" checkbox
 		// 7. Checkbox is checked.
-//		course_settings_page.selectMakeCoursePublicAndVerifyThatItSelected();
+		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		
 		Thread.sleep(2000);
 		
@@ -191,7 +192,6 @@ public class TC19326PublishThePrivateCourse {
 		// 13. Sign out.
 		top_bar_helper.clickOnSignOut();
 		
-		Thread.sleep(2000);
 		
 		// 14. Login as Guest.	
 		tegrity.loginAsguest();
@@ -201,8 +201,11 @@ public class TC19326PublishThePrivateCourse {
 		// 15. Verify that INSTRUCTOR's private course is displayed in "Public Courses" tab.
 		course.clickOnPublicCoursesTab();
 		
-		// 16. Open the course.
+		// 16. Open the course.	
 		course.selectCourseThatStartingWith(private_course);
+
+		Thread.sleep(5000);
+//		course.moveToElement(driver.findElement(ById(private_course), driver)
 		
 		// 17. Play one of it's recordings.
 		record.clickOnRecordingTitleInIndex(1);
@@ -222,12 +225,15 @@ public class TC19326PublishThePrivateCourse {
 		Thread.sleep(2000);
 		course.selectCourseThatStartingWith(private_course);
 		Thread.sleep(2000);
+		
 		// 22. Play one of it's recordings	The recording is being played
 		String recoring_to_play = record.getFirstRecordingTitle();
 		record.clickOnTargetRecordingAndOpenItsPlayback(recoring_to_play);
+		player_page.verifyTimeBufferStatusForXSec(5);
+		
 
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
-		
-	
 	}
 }

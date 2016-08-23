@@ -70,7 +70,7 @@ public class TestCaseCopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		driver=new InternetExplorerDriver(capability);
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);

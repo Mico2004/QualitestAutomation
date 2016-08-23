@@ -3,19 +3,17 @@ package com.automation.main;
 import java.awt.List;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
+import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
 
 //@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -48,7 +46,7 @@ public class TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 		try {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
+			
 
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -57,6 +55,12 @@ public class TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
 			
 			wait = new WebDriverWait(driver, 30);
+			
+			 Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording at " + DateToStr,
+			 "Starting the test: TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording at " + DateToStr, LogAs.PASSED, null);
 		} catch (Exception e) {
 			/// ATUReports.add("Fail Step", LogAs.FAILED, new
 			/// CaptureScreen(ScreenshotOf.DESKTOP));
@@ -84,6 +88,11 @@ public class TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 
 	}
 	
+	@AfterClass
+	public void closeBroswer() {
+		this.driver.quit();
+	}
+	
 
 	@Test
 	public void testME() {
@@ -103,16 +112,16 @@ public class TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 		course.selectCourseThatStartingWith("Ab");
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		
-		wait.until(ExpectedConditions.elementToBeClickable(record.checkbox));
-		record.checkbox.click();
+		wait.until(ExpectedConditions.elementToBeClickable(record.getCheckbox()));
+		record.getCheckbox().click();
 		record.clickOnRecordingTaskThenMove();
 		Thread.sleep(2000);
         //7.verify courses are displayed in alphabetical order
 		record.verifyRecordingSortedByTitle(copy.getCourseList());///verify sorted by title
 		
-		// Quit browser
-		driver.quit();
-	
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+		
 	}
 	
 	// description = "get courses list"
@@ -123,10 +132,10 @@ public class TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 		course.size = course.course_list.size();
 	}
 
-//   @AfterClass
-//   public void quit()
-//   {
-//	driver.quit();
-//   }
+   @AfterClass
+   public void quit()
+   {
+	driver.quit();
+   }
 
 }

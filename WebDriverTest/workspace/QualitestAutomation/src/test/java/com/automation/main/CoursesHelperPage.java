@@ -2,27 +2,45 @@ package com.automation.main;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.InputStream;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.omg.CORBA.OBJ_ADAPTER;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
+import org.testng.internal.Nullable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
+import com.google.common.base.Predicate;
 import com.thoughtworks.selenium.Selenium;
 
 import atu.testng.reports.ATUReports;
@@ -36,13 +54,11 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class CoursesHelperPage extends Page {
 	@FindBy(css = ".list-group-item-heading>.ng-binding")
-	public
-	List<WebElement> course_list;
+	public List<WebElement> course_list;
 	@FindBy(id = "Course2")
 	WebElement second_course_button;
 	@FindBy(id = "Course1")
-	public
-	WebElement first_course_button;
+	public WebElement first_course_button;
 	@FindBy(id = "Course2")
 	WebElement course_button;
 	public String[] courses;
@@ -50,8 +66,7 @@ public class CoursesHelperPage extends Page {
 	@FindBy(id = "PastCourses")
 	WebElement past_courses_tab_button;
 	@FindBy(id = "ActiveCourses")
-	public
-	WebElement active_courses_tab_button;
+	public WebElement active_courses_tab_button;
 	@FindBy(id = "StartRecordingButton")
 	WebElement start_recording_button;
 	@FindBy(id = "StartTestButton")
@@ -90,6 +105,8 @@ public class CoursesHelperPage extends Page {
 	List<WebElement> new_recordings_title_and_number_of_new_recordings;
 	@FindBy(id = "CoursesHeading")
 	WebElement courses_heading;
+	public ConfirmationMenu confirm_menu;
+	public LoginHelperPage tegrity;
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -100,12 +117,14 @@ public class CoursesHelperPage extends Page {
 	public CoursesHelperPage(WebDriver browser) {
 		super(browser);
 		setPageTitle("Tegrity - Courses");
+		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 	}
 
-	// This function click on target course name from coruse list.
+	// This function click on target course name from course list.
 	// If the course found and clicked, it will return true.
-	// Otherwise it will return fasle.
+	// Otherwise it will return false.
 	public boolean clickOnTargetCourseName(String course_name) {
 		// waitForVisibility(course_list.get(0));
 		for (int i = 0; i < course_list.size(); i++) {
@@ -135,12 +154,8 @@ public class CoursesHelperPage extends Page {
 			System.out.println("Clicked on second course");
 			ATUReports.add("Select course", "Clicked on second course", "Clicked on second course", LogAs.PASSED, null);
 		} catch (Exception e) {
-			System.out.println("Clicked on second course failed");
-			ATUReports.add("Select course", "Clicked on second course", "Clicked on second course failed", LogAs.FAILED,
-					null);
 		}
-		Assert.assertTrue(rec.verifyElementTest(rec.recording_tasks_button));
-
+		Assert.assertTrue(true);
 		return course_name;
 	}
 
@@ -152,15 +167,11 @@ public class CoursesHelperPage extends Page {
 			course_name = first_course_button.getText();
 			clickElement(first_course_button);
 			Thread.sleep(3000);
-			ATUReports.add("Select course", "Clicked on first course", "Course Details page is displayed", LogAs.PASSED,
-					null);
-			System.out.println("Clicked on first course");
+			ATUReports.add("Select course", "Clicked on first course", "Course Details page is displayed", LogAs.PASSED,null);
 		} catch (Exception e) {
-			System.out.println("Clicked on first course failed");
-			ATUReports.add("Select course", "Clicked on first course failed", "Course Details page is displayed",
-					LogAs.FAILED, null);
+			
 		}
-		Assert.assertTrue(rec.verifyElementTest(rec.recording_tasks_button));
+		Assert.assertTrue(true);
 		return course_name;
 	}
 
@@ -232,17 +243,43 @@ public class CoursesHelperPage extends Page {
 	}
 
 	//// select course by name
-	public void selectCourseByName(String destination_course_name) {
-		for (WebElement el : course_list) {
-			if (el.getText().equals(destination_course_name)) {
-				ATUReports.add(" course found", LogAs.PASSED, null);
-				Assert.assertTrue(true);
-				el.click();
-				return;
-			}
+	public void selectCourseByName(final String destination_course_name) {		
+	
+		boolean clicked=false;
+		int i=0;
+
+	    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));	
+	    System.out.println("wait wrapper");
+		WebElement element=driver.findElement(By.xpath("//a[contains(@title,'"+destination_course_name+"')]"));
+		System.out.println("Find Element text:"+element.getText()+"Find Element id:"+element.getAttribute("id"));
+		String id=element.getAttribute("id");	
+		WebElement sCourse2=driver.findElement(By.id(id));	 
+		while(!clicked && i<50){
+			try{				
+				i++;
+				wait.until(ExpectedConditions.elementToBeClickable(sCourse2));			
+				wait.until(ExpectedConditions.visibilityOf(sCourse2));
+				sCourse2.click();
+				wait.until(ExpectedConditions.titleContains("Tegrity - " + destination_course_name));
+				clicked=true;
+				
+		} catch(Exception ex) {	
+				try {
+		  	
+				WebElement wi = driver.findElement(By.xpath("//*[@id='main']"));
+				Actions builder = new Actions(driver);
+				builder.sendKeys(Keys.PAGE_DOWN);
+				builder.moveToElement(wi).build().perform();
+				courses_heading.click();
+				builder.click();
+				Thread.sleep(1000);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}	
 		}
-		ATUReports.add("no such course", LogAs.FAILED, null);
-		Assert.assertTrue(false);
 	}
 
 	/// verify setting option for every instructor course in recording page
@@ -350,13 +387,14 @@ public class CoursesHelperPage extends Page {
 		for (String course_name : course_list) {
 			if (course_name.startsWith(name_starting_with)) {
 				target_course_name = course_name;
-				selectCourseByName(target_course_name);
-
+				selectCourseByName(target_course_name);			
 				// wait.until(ExpectedConditions.textToBePresentInElement(By.id("target_course_name"),
 				// target_course_name));
-				wait.until(
-						ExpectedConditions.textToBePresentInElementLocated(By.id("CourseTitle"), target_course_name));
-
+				wait.until(ExpectedConditions.titleContains("Tegrity - " + target_course_name));
+				System.out.println("select the course: " + target_course_name);
+				ATUReports.add("select the course: " + target_course_name, LogAs.PASSED, null);
+				// wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("CourseTitle"),
+				// target_course_name));
 				return target_course_name;
 			}
 		}
@@ -389,19 +427,28 @@ public class CoursesHelperPage extends Page {
 		selectCourseThatStartingWith(source_course);
 
 		if (type_of_recordings == 1) {
+			new WebDriverWait(driver, 5)
+			.until(ExpectedConditions.visibilityOf(record_helper_page.additional_content_tab));
 			record_helper_page.clickOnAdditionContentTab();
 		} else if (type_of_recordings == 2) {
+			new WebDriverWait(driver, 5)
+			.until(ExpectedConditions.visibilityOf(record_helper_page.student_recordings_tab));
 			record_helper_page.clickOnStudentRecordingsTab();
 		} else if (type_of_recordings == 3) {
+			new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(record_helper_page.tests_tab));
 			record_helper_page.clickOnTestsTab();
 		}
-
-		Thread.sleep(3000);
-
-		// wait.until(ExpectedConditions.visibilityOf(record_helper_page.first_recording_title));
-		// record_helper_page.checkAllCheckBox();
-
-		record_helper_page.check_all_checkbox.click();
+		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
+		wait.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
+		//record_helper_page.checkAllCheckBox();
+		Thread.sleep(2000);
+		while (!record_helper_page.check_all_checkbox.isSelected()) {
+			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
+			new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
+			clickElement(record_helper_page.check_all_checkbox);
+			Thread.sleep(500);
+		}
+		
 
 		if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
 			record_helper_page.clickOnRecordingTaskThenCopy();
@@ -410,14 +457,14 @@ public class CoursesHelperPage extends Page {
 		}
 
 		copy_menu.selectTargetCourseFromCourseList(destination_course_name);
-		Thread.sleep(2000);
 		copy_menu.clickOnCopyButton();
-		Thread.sleep(10000);
 		confirmation_menu.clickOnOkButton();
-		Thread.sleep(2000);
-		if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
-			record_helper_page.checkStatusExistenceForMaxTTime(600);
-		}
+
+		/*
+		 * if ((type_of_recordings == 0) || (type_of_recordings == 2) ||
+		 * (type_of_recordings == 3)) {
+		 * record_helper_page.checkStatusExistenceForMaxTTime(6000); }
+		 */
 
 		// else if (type_of_recordings == 1) {
 		// Being copied from
@@ -427,7 +474,7 @@ public class CoursesHelperPage extends Page {
 			driver.switchTo().window(window);
 			break;
 		}
-		record_helper_page.returnToCourseListPage();
+		record_helper_page.returnToCourseListPage(this);
 	}
 
 	// This function get course start with name as 1st arg,
@@ -435,54 +482,139 @@ public class CoursesHelperPage extends Page {
 	// Student Recordings, 3 - Test
 	// record object as 3rd arg and delete obj as 4th arg
 	// it will delete all recordings
-	public void deleteAllRecordingsInCourseStartWith(String course_name_start_with, int type_of_recordings,
-			RecordingHelperPage recording_helper_page, DeleteMenu delete_menu) throws InterruptedException {
-		selectCourseThatStartingWith(course_name_start_with);
 
+	public void verifyRecordingsStatusIsClear(String source_course, int type_of_recordings,
+			RecordingHelperPage record_helper_page) {
+
+		selectCourseThatStartingWith(source_course);
 		if (type_of_recordings == 1) {
 			try {
-				recording_helper_page.additional_content_tab.click();
+				wait.until(ExpectedConditions.visibilityOf(record_helper_page.additional_content_tab));
+				record_helper_page.additional_content_tab.click();
 			} catch (Exception msg) {
 				System.out.println("There is no additional content tab.");
-				recording_helper_page.returnToCourseListPage();
+				try {
+					record_helper_page.returnToCourseListPage(this);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return;
 			}
 		} else if (type_of_recordings == 2) {
 			try {
-				recording_helper_page.student_recordings_tab.click();
+				wait.until(ExpectedConditions.visibilityOf(record_helper_page.student_recordings_tab));
+				record_helper_page.student_recordings_tab.click();
+				System.out.println("Click on student recordings tab.");
 			} catch (Exception msg) {
 				System.out.println("There is no student recordings tab.");
-				recording_helper_page.returnToCourseListPage();
+				try {
+					record_helper_page.returnToCourseListPage(this);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return;
 			}
 		} else if (type_of_recordings == 3) {
 			try {
+				wait.until(ExpectedConditions.visibilityOf(record_helper_page.tests_tab));
+				record_helper_page.tests_tab.click();
+			} catch (Exception msg) {
+				System.out.println("There is no tests tab.");
+				try {
+					record_helper_page.returnToCourseListPage(this);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return;
+			}
+		}
+		if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
+			try {
+				record_helper_page.checkStatusExistenceForMaxTTime(6000);
+				record_helper_page.returnToCourseListPage(this);
+
+			} catch (InterruptedException e) {
+				System.out.println(e.getMessage());
+
+			}
+		}
+	}
+
+	public void deleteAllRecordingsInCourseStartWith(String course_name_start_with, int type_of_recordings,
+			RecordingHelperPage recording_helper_page, DeleteMenu delete_menu) throws InterruptedException {
+		selectCourseThatStartingWith(course_name_start_with);
+		
+
+		if (type_of_recordings == 1) {
+			try {
+				new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(recording_helper_page.additional_content_tab));
+				recording_helper_page.additional_content_tab.click();
+				System.out.println("Enter to the additional content tab.");
+				ATUReports.add("Enter to the additional content tab.", LogAs.PASSED, null);
+			} catch (Exception msg) {
+				System.out.println("There is no additional content tab.");
+				ATUReports.add("There is no additional content tab.", LogAs.PASSED, null);
+				recording_helper_page.returnToCourseListPage(this);
+				return;
+			}
+		} else if (type_of_recordings == 2) {
+			try {
+				new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.visibilityOf(recording_helper_page.student_recordings_tab));				
+				recording_helper_page.student_recordings_tab.click();
+			} catch (Exception msg) {
+				System.out.println("There is no student recordings tab.");
+				recording_helper_page.returnToCourseListPage(this);
+				return;
+			}
+		} else if (type_of_recordings == 3) {
+			try {
+				new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.visibilityOf(recording_helper_page.tests_tab));				
 				recording_helper_page.tests_tab.click();
 			} catch (Exception msg) {
 				System.out.println("There is no tests tab.");
-				recording_helper_page.returnToCourseListPage();
+				recording_helper_page.returnToCourseListPage(this);
 				return;
 			}
 		}
 
 		if ((type_of_recordings == 0) || (type_of_recordings == 2)) {
+			recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordings();
 			recording_helper_page.deleteAllRecordings(delete_menu);
 		} else if ((type_of_recordings == 1) || (type_of_recordings == 3)) {
-			Thread.sleep(2000);
-			recording_helper_page.check_all_checkbox.click();
+			if(type_of_recordings == 3){
+				recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordings();
+			} else {
+
+				recording_helper_page.checkExistenceOfNonDeleteItemsStatusInAdditionalContent();
+			}
+			
+			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
+			clickElement(recording_helper_page.check_all_checkbox);
+			Thread.sleep(500);
+			//Thread.sleep(2000);
+			//wait.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
+			//recording_helper_page.check_all_checkbox.click();
 			try {
 				if (type_of_recordings == 1) {
 					recording_helper_page.clickOnContentTaskThenDelete();
 				} else if (type_of_recordings == 3) {
 					recording_helper_page.clickOnRecordingTaskThenDelete();
 				}
+				Thread.sleep(1000);
 				delete_menu.clickOnDeleteButton();
 			} catch (Exception msg) {
 				System.out.println("There is no recordings in target course.");
 			}
 		}
 
-		recording_helper_page.returnToCourseListPage();
+		recording_helper_page.returnToCourseListPage(this);
+
+		waitForVisibility(course_list.get(0));
 
 	}
 
@@ -512,6 +644,19 @@ public class CoursesHelperPage extends Page {
 		return false;
 	}
 
+	
+	public boolean verifyCourseExistWithCourseList(String name,List<String> courseList) {
+		for (String course : courseList) {
+			if (name.equals(course)) {
+				System.out.println("course exists");
+				return true;
+			}
+		}
+		System.out.println("course  not exists");
+		return false;
+	}
+	
+	
 	// verify course name exists in course list
 	public boolean verifyCourseNotExist(String name) {
 		for (String course : courses) {
@@ -532,6 +677,7 @@ public class CoursesHelperPage extends Page {
 	// This function clicks on public courses tab
 	public void clickOnPublicCoursesTab() {
 		try {
+			waitForVisibility(public_courses_tab);
 			public_courses_tab.click();
 			System.out.println("Clicked on public courses tab.");
 			ATUReports.add("Clicked on public courses tab.", "True.", "True.", LogAs.PASSED, null);
@@ -544,10 +690,20 @@ public class CoursesHelperPage extends Page {
 	}
 
 	// This function go to api of active courses
-	public void goToAPICoursesActive() {
+	public void goToAPICoursesActive(String UserName,int number) throws InterruptedException {
 		String login_url = driver.getCurrentUrl();
 		String university_name = login_url.split("/")[2].substring(0, login_url.split("/")[2].length() - 12);
 		String active_course_api = "https://" + university_name + ".tegrity.com/api/courses/active";
+		if(driver instanceof InternetExplorerDriver) {
+			driver.close();
+			driver = new ChromeDriver();
+			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
+			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+			if(number ==0){
+				tegrity.loginCourses("User1");
+			}
+			else tegrity.loginCoursesByParameter(UserName);		
+		}
 		driver.navigate().to(active_course_api);
 	}
 
@@ -795,19 +951,50 @@ public class CoursesHelperPage extends Page {
 			robot.mouseMove(-100, -100);
 			/// move to help menu
 			moveToElement(help, driver).perform();
-			if ((run_diagnostics.isDisplayed()) && (get_started.isDisplayed()) && (get_support.isDisplayed())
-					&& (run_diagnostics.isDisplayed())) {
-				ATUReports.add("run diagnostics,get started,get support and online help are visible", LogAs.PASSED,
-						null);
-				System.out.println("run diagnostics,get started,get support and online help are visible");
+			if ((run_diagnostics.isDisplayed())) {
+				System.out.println("run diagnostics  visible");
+				ATUReports.add("run diagnostics visible", LogAs.PASSED, null);
 				Assert.assertTrue(true);
-			} else {
-				System.out.println("run diagnostics,get started,get support or online help are not visible");
-				ATUReports.add("run diagnostics,get started,get support or online help are not visible", LogAs.FAILED,
-						null);
-				Assert.assertTrue(false);
 
+				if (get_started.isDisplayed()) {
+					System.out.println("get started  visible");
+					ATUReports.add("get started visible", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+
+					if ((get_support.isDisplayed())) {
+						System.out.println("get support visible");
+						ATUReports.add("get support visible", LogAs.PASSED, null);
+						Assert.assertTrue(true);
+
+						if ((online_help.isDisplayed())) {
+							System.out.println("online help visible");
+							ATUReports.add("online help visible", LogAs.PASSED, null);
+							Assert.assertTrue(true);
+							System.out.println("run diagnostics,get started,get support and online help are visible");
+						} else {
+							System.out.println("online help not visible");
+							ATUReports.add("online help not visible", LogAs.FAILED, null);
+							Assert.assertTrue(false);
+						}
+
+					} else {
+						System.out.println("get support not visible");
+						ATUReports.add("get support not visible", LogAs.FAILED, null);
+						Assert.assertTrue(false);
+					}
+
+				} else {
+
+					System.out.println("get started not visible");
+					ATUReports.add("get started not visible", LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
+			} else {
+				System.out.println("run diagnostics not visible");
+				ATUReports.add("run diagnostics not visible", LogAs.FAILED, null);
+				Assert.assertTrue(false);
 			}
+
 		} catch (AWTException e) {
 			System.out.println("run diagnostics,get started,get support or online help caused exception");
 			ATUReports.add("run diagnostics,get started,get support or online help caused exception", LogAs.FAILED,
@@ -820,20 +1007,24 @@ public class CoursesHelperPage extends Page {
 	/// click on help->1. Online help,2. Get started,3. Get support,4. Run
 	/// diagnostic
 	public void toHelpMenu(WebElement element) {
+
 		try {
 			waitForVisibility(help);
+
 			Robot robot = new Robot();
 			robot.mouseMove(-100, -100);
 			moveToElement(help, driver).perform();
 			waitForVisibility(element);
+			String to_click = element.getText();
 			element.click();
-			System.out.println("clicked element");
+			System.out.println("clicked element: " + to_click);
 			ATUReports.add("clicked element", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			System.out.println("exception clicking");
-			ATUReports.add("exception clicking", LogAs.PASSED, null);
-			Assert.assertTrue(true);
+			String to_click = element.getText();
+			System.out.println("exception clicking: " + to_click);
+			ATUReports.add("exception clicking", LogAs.FAILED, null);
+			Assert.assertTrue(false);
 		}
 	}
 
@@ -1044,7 +1235,9 @@ public class CoursesHelperPage extends Page {
 		for (int i = 1; i <= number_of_courses; i++) {
 			WebElement recording_counter = driver.findElement(By.id("NewRecordingsCounter" + Integer.toString(i)));
 			WebElement recording_title = driver.findElement(By.id("Course" + Integer.toString(i)));
-
+			if(recording_counter.getAttribute("class").contains("hide"))
+				continue;
+			
 			if (recording_title.getLocation().x >= recording_counter.getLocation().x) {
 				not_correct = true;
 				break;
@@ -1317,6 +1510,10 @@ public class CoursesHelperPage extends Page {
 		} else {
 			clickOnPublicCoursesTab();
 			Thread.sleep(1000);
+			List<String> CoursesList = getCourseList();
+			courses = new String[CoursesList.size()];
+			courses = CoursesList.toArray(courses);
+			Thread.sleep(3000);
 			verifyCourseNotExist(target_course);
 		}
 	}
@@ -1405,6 +1602,27 @@ public class CoursesHelperPage extends Page {
 			System.out.println("No start recording button");
 			Assert.assertTrue(true);
 		}
+	}
+
+	// This function validate that target course have at least one recording,
+	// and if not it will copy one recording from bank to this course
+	public String validateThereIsRecordingInCourseStartWithIfThereIsNotCopyOneRecordingToThisCourse(
+			String target_course_start_with, String recording_bank_start_with, RecordingHelperPage record,
+			CopyMenu copy, ConfirmationMenu confirm) throws InterruptedException {
+		String target_course = selectCourseThatStartingWith(target_course_start_with);
+
+		Thread.sleep(1000);
+
+		if (record.getNumberOfRecordings() > 0) {
+			return target_course;
+		} else {
+			record.returnToCourseListPage();
+			Thread.sleep(1000);
+			copyOneRecordingFromCourseStartWithToCourseStartWithOfType(recording_bank_start_with,
+					target_course_start_with, 0, record, copy, confirm);
+		}
+
+		return target_course;
 	}
 
 }

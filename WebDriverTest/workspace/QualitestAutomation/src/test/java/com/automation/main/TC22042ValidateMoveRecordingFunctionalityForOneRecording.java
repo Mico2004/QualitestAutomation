@@ -1,47 +1,31 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.apache.bcel.generic.IF_ACMPEQ;
-import org.eclipse.jetty.io.ClientConnectionFactory.Helper;
-import org.junit.AfterClass;
-import org.omg.Messaging.SyncScopeHelper;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junit.textui.TestRunner;
-import junitx.util.PropertyManager;
+import java.text.DateFormat;
+import java.util.Date;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
@@ -69,12 +53,13 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
-	@BeforeClass
+	
+    @BeforeClass
 	public void setup() {
 
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		//driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -86,15 +71,19 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		confirmation_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-		
-		
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC22042ValidateMoveRecordingFunctionalityForOneRecording at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC22042ValidateMoveRecordingFunctionalityForOneRecording at " + DateToStr,
+		 "Starting the test: TC22042ValidateMoveRecordingFunctionalityForOneRecording at " + DateToStr, LogAs.PASSED, null);
 	}
 	
-//	@org.testng.annotations.AfterClass
-//	public void quitBroswer() {
-//		this.driver.quit();
-//	}
+	@AfterClass
+	public void quitBrowser() {
+		driver.quit();
+	}
 
 	private void setAuthorInfoForReports() {
 		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
@@ -152,20 +141,34 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 			String destination_course_url = driver.getCurrentUrl();
 			System.out.println("Destionation course name for this test is: " + destination_course_name);
 			ATUReports.add("Destionation course name for this test is: " + destination_course_name, LogAs.PASSED, null);
-			record.returnToCourseListPage();
+			//record.returnToCourseListPage();
 			
 			// 2.3. Delete all recordings in abc.
 			//Delete all recording from course starting with Ab
-			course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
+			//course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 			
 			// 2.4. Delete all Stduent Recordings in abc.
 			//Delete all student recordings from course starting with Ab
-			course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
+			//course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
 			
 			// 2.5. Delete all Tests in abc.
 			//Delete all tests from course starting with Ab
-			course.deleteAllRecordingsInCourseStartWith("abc", 3, record, delete_menu);
-	
+			//course.deleteAllRecordingsInCourseStartWith("abc", 3, record, delete_menu);
+			
+			// 2. check that we have old records in the abc course
+			List<String> list_of_records = record.getCourseRecordingList();
+			
+			if(list_of_records.size() == 0) {
+				System.out.println("their isn't old records in this course so the test will not work");
+				ATUReports.add("their isn't old records in this course so the test will not work", LogAs.FAILED, null);
+				Assert.assertTrue(false);
+			} else {
+				System.out.println("their is an old records in this course");
+				ATUReports.add("their is an old records in this course", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			
+			
+			}
 			
 			// 3. Logout.
 			record.signOut();
@@ -186,14 +189,13 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 			// Repeat TC for Recordings, Stduent Recording and Tests Tabs
 			for(int recording_type=0; recording_type<3; recording_type++) {
 				// 6. In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+//				Thread.sleep(8000);
 				admin_dashboard_view_course_list.searchForTargetCourseName(source_course_name);
 				Thread.sleep(3000);
 				
 				// 7. Click on that course name
 				admin_dashboard_view_course_list.clickOnFirstCourseLink();
-				Thread.sleep(1000);
-				
+				Thread.sleep(1000); 
 				
 				if(recording_type==1) {
 					record.clickOnStudentRecordingsTab();
@@ -202,12 +204,13 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				}
 				Thread.sleep(2000);
 				
+				
 				// 8. Click on a checkbox of one recording.
-				record.checkbox.click();
+				record.getCheckbox().click();
 				
 				String checked_recording_title = null;
 				if (recording_type==2) {
-					checked_recording_title = driver.findElement(By.id("RecordingTitle1")).getText();
+					checked_recording_title = record.getFirstRecordingTitleTest();
 				} else {
 					checked_recording_title = record.getFirstRecordingTitle();
 				}
@@ -407,8 +410,35 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 //				admin_dashboard_view_course_list.clickOnFirstCourseLink();
 //				Thread.sleep(3000);	
 				
-				driver.navigate().to(destination_course_url);
+//				driver.navigate().to(destination_course_url);
+//				Thread.sleep(3000);
+				
+				// 31. On the breadcrumb, click on "courses".
+				WebElement iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+				
+				try {		
+					iw.sendKeys(Keys.ENTER);
+					System.out.println("Clicked on the element breadcrumb.");
+					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} catch (Exception msg) {
+					System.out.println("Fail to click on the element." );
+					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
+				
+				//admin_dashboard_page.clickElement(driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1));
+				//record.returnToRecordingPageByClickingBreadcrumbsName(record.breadcrumbs_courses_link);
+				//clickElement(record.breadcrumbs);
+				
+				
+				// In "All courses" page, search for Ab course.
+				admin_dashboard_view_course_list.searchForTargetCourseName(destination_course_name);
 				Thread.sleep(3000);
+						
+				// Click on that course name.
+				admin_dashboard_view_course_list.clickOnFirstCourseLink();
+				Thread.sleep(1000);
 				
 				if(recording_type==1) {
 					record.clickOnStudentRecordingsTab();
@@ -448,17 +478,27 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				}
 				
 				// 39. On the breadcrumb, click on "courses".
-				record.courses_link.click();
+				iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+				try {		
+					iw.sendKeys(Keys.ENTER);
+					System.out.println("Clicked on the element breadcrumb.");
+					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} catch (Exception msg) {
+					System.out.println("Fail to click on the element." );
+					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
 			}
 			
 			Thread.sleep(2000);
 			
 			// 40. Logout.
-			driver.findElement(By.id("SignOutLink")).click();
+			record.signOut();
 		}
 		
-		// Quit the browser
-		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 	

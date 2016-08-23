@@ -1,15 +1,18 @@
 package com.automation.main;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
+import atu.testng.reports.ATUReports;
+import atu.testng.reports.logging.LogAs;
 
 public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsADMIN {
 	// Set Property for ATU Reporter Configuration
@@ -60,7 +63,7 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -93,6 +96,13 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsADMIN at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsADMIN at " + DateToStr,
+		 "Starting the test: TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsADMIN at " + DateToStr, LogAs.PASSED, null);	
+		
 	}
 
 	@Test
@@ -148,8 +158,16 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		/// 11.Enter a "Recording Title" of another Recording from the same
 		/// course and press ENTER
 		player_page.verifySearchReturnEmptyList(recording_name);
-		//12.quit
-		driver.quit();
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+		
 	}
 
+	@AfterClass
+	public void closeBroswer() {
+	
+		this.driver.quit();
+	}
+	
 }

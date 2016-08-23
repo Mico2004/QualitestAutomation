@@ -4,6 +4,8 @@ package com.automation.main;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -69,7 +71,7 @@ public class TestCase15639TryToDeleteARegularRecordingAsAStudent {
         driver=DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		 ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -82,6 +84,12 @@ public class TestCase15639TryToDeleteARegularRecordingAsAStudent {
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
+		
+		Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TestCase15639TryToDeleteARegularRecordingAsAStudent at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TestCase15639TryToDeleteARegularRecordingAsAStudent at " + DateToStr,
+		 "Starting the test: TestCase15639TryToDeleteARegularRecordingAsAStudent at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	
@@ -170,5 +178,7 @@ public class TestCase15639TryToDeleteARegularRecordingAsAStudent {
 			Assert.assertTrue(true);
 		}
 		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 }

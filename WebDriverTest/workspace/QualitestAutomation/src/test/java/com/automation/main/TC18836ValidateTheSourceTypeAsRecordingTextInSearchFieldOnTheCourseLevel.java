@@ -1,11 +1,9 @@
 package com.automation.main;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
-import java.util.List;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -67,9 +65,8 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
-		ATUReports.setWebDriver(driver);
-		ATUReports.add("set driver", true);
+		//ATUReports.setWebDriver(driver);
+		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -90,7 +87,11 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		
-		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourseLevel at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourseLevel at " + DateToStr,
+		 "Starting the test: TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourseLevel at " + DateToStr, LogAs.PASSED, null);	
 		
 	}
 	
@@ -131,32 +132,43 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		course_settings_page.clickOnOkButton();
 		Thread.sleep(1000);
 		
-		// Using preset recording: Wed, Apr 13, 11 12 AM 
-		boolean is_found = false;
-		List<String> recording_list = record.getCourseRecordingList();
-		String recording_name = "Wed, Apr 13, 11 12 AM";
-		String recording_text = "sha1:78acd6c";
-		
-		if(recording_list.contains(recording_name)) {
-			is_found = true;
-		}
-		
-		if(!is_found) {
+
 			record.returnToCourseListPage();
 			Thread.sleep(1000);
+			
 			course.selectCourseThatStartingWith("BankValid");
+		    Thread.sleep(1000);
+			
+			//String recording_name = record.getFirstRecordingTitle();
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			Thread.sleep(1000);
-			record.selectTargetRecordingCheckbox(recording_name);
+			
+
 			record.clickOnRecordingTaskThenCopy();
 			copy.selectTargetCourseFromCourseList(current_course);
 			copy.clickOnCopyButton();
 			Thread.sleep(1000);
+			
 			confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 			Thread.sleep(1000);
-			record.checkStatusExistenceForMaxTTime(360);
-		}
-		
-		top_bar_helper.clickOnSignOut();
+			
+			record.checkStatusExistenceForMaxTTime(450);
+			
+			record.returnToCourseListPage();
+			Thread.sleep(2000);
+			
+			course.selectCourseThatStartingWith("Ab");
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+			record.clickOnRecordingTaskThenEditRecording();
+			
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+			String recording_text = "reocrd" + sdf.format(date); 
+			edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
+			Thread.sleep(8000);
+
+			
+			top_bar_helper.clickOnSignOut();
 		
 		
 		// Looping for Student, Guest and ADMIN
@@ -175,12 +187,13 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 				tegrity.loginAdmin("Admin");
 			}
 			Thread.sleep(3000);
-			
+		
 			// 3. Open some course.
 			if(type_of_user < 3) {
 				course.selectCourseThatStartingWith(current_course);
 			} else {
 				// Click on "view course list" under "courses" section.
+				Thread.sleep(1000);
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
@@ -192,7 +205,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 				admin_dashboard_view_course_list.clickOnFirstCourseLink();
 				Thread.sleep(1000);
 			}
-			
+		
 			
 			// 4. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
@@ -203,6 +216,8 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
 			search_page.waitUntilSpinnerImageDisappear();
+			
+			course.selectCourseThatStartingWith("Ab");
 			
 			// 5.2. The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)".
 			if(type_of_user < 3) {
@@ -228,11 +243,11 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(recording_text, "Source: Recording Text");
 			
 			// 5.9. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
-			search_page.moveToElement(search_page.video_wrap_link_to_focus_list.get(0), driver).perform();
+			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
 			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
@@ -264,21 +279,24 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			
+			
 			// 9. Click on title of the chapter.
+			search_page.exitInnerFrame();
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
 			
 			// 9.1. The Tegrity Player page shall be opened and the recording shall start playing from the caption timestamp.
-			player_page.verifyTimeBufferStatusForXSec(5);
+			player_page.verifyTimeBufferStatusForXSec(15);
 			
 			// 10. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			
 			// 11. Click on the recording title of the chapter.
+			search_page.exitInnerFrame();
 			search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
 			
 			// 11.1. The Tegrity player page with the opened recording at the relevant time.
-			player_page.verifyTimeBufferStatusForXSec(5);
+			player_page.verifyTimeBufferStatusForXSec(15);
 			
 			// 12. Click on the back cursor in the browser to navigate to the search results page.
 			
@@ -293,6 +311,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			search_page.waitUntilSpinnerImageDisappear();
 			
 			// Signout
+			search_page.exitInnerFrame();
 			top_bar_helper.clickOnSignOut();
 		}
 		
@@ -306,7 +325,9 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
 		
-		
+
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 }

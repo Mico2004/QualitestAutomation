@@ -1,47 +1,31 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.apache.bcel.generic.IF_ACMPEQ;
-import org.eclipse.jetty.io.ClientConnectionFactory.Helper;
-import org.junit.AfterClass;
+import java.util.List;
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junit.textui.TestRunner;
-import junitx.util.PropertyManager;
+import java.text.DateFormat;
+import java.util.Date;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC22049ValidateCopyWindowFunctionality {
@@ -74,7 +58,7 @@ public class TC22049ValidateCopyWindowFunctionality {
 
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		//driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -86,15 +70,20 @@ public class TC22049ValidateCopyWindowFunctionality {
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		confirmation_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-		
-		
+
 		wait = new WebDriverWait(driver, 30);
+		 
+		Date curDate = new Date();
+		String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC22049ValidateCopyWindowFunctionality at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC22049ValidateCopyWindowFunctionality at " + DateToStr,
+		 "Starting the test: TC22049ValidateCopyWindowFunctionality at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
-//	@org.testng.annotations.AfterClass
-//	public void quitBroswer() {
-//		this.driver.quit();
-//	}
+	@AfterClass
+	public void quitBrowser() {
+		driver.quit();
+	}
 
 	private void setAuthorInfoForReports() {
 		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
@@ -150,11 +139,24 @@ public class TC22049ValidateCopyWindowFunctionality {
 		String destination_course_url = driver.getCurrentUrl();
 		System.out.println("Destionation course name for this test is: " + destination_course_name);
 		ATUReports.add("Destionation course name for this test is: " + destination_course_name, LogAs.PASSED, null);
-		record.returnToCourseListPage();
-	
-		// 4.2. Delete all recordings from abc.
+		//record.returnToCourseListPage();
+		// 4.2. check that we have an old recods in the course starting with abc
 		//Delete all recording from course starting with Ab
-		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
+		//course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
+		
+		List<String> list_of_records = record.getCourseRecordingList();
+		
+		if(list_of_records.size() == 0) {
+			System.out.println("their isn't old records in this course so the test will not work");
+			ATUReports.add("their isn't old records in this course so the test will not work", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		} else {
+			System.out.println("their is an old records in this course");
+			ATUReports.add("their is an old records in this course", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		
+		
+		}
 		
 		// 5. Logout.
 		record.signOut();
@@ -167,7 +169,6 @@ public class TC22049ValidateCopyWindowFunctionality {
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		
 		// 8. In "All courses" page, search for Ab course.
-		Thread.sleep(8000);
 		admin_dashboard_view_course_list.searchForTargetCourseName(source_course_name);
 		Thread.sleep(3000);
 		
@@ -329,9 +330,29 @@ public class TC22049ValidateCopyWindowFunctionality {
 			}
 		}
 		
+
 		// 34. Go to abc course.
-		driver.navigate().to(destination_course_url);
-		Thread.sleep(2000);
+		WebElement iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+		
+		try {		
+			iw.sendKeys(Keys.ENTER);
+			System.out.println("Clicked on the element breadcrumb.");
+			ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception msg) {
+			System.out.println("Fail to click on the element breadcrumb." );
+			ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+		
+		// In "All courses" page, search for Ab course.
+		admin_dashboard_view_course_list.searchForTargetCourseName(destination_course_name);
+		Thread.sleep(3000);
+				
+		// Click on that course name.
+		admin_dashboard_view_course_list.clickOnFirstCourseLink();
+		Thread.sleep(1000);
+		
 		
 		// 35. Validate that the recording which you have copied is displayed on the list.
 		// 36. validate that the username displayed in the right of 'recorded by: ' of the copied recording ,isn't changed after the copy.
@@ -369,11 +390,11 @@ public class TC22049ValidateCopyWindowFunctionality {
 				ATUReports.add("Username displayed in the right of recorded by.", "True.", "False.", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			}
+			break;	
 		}
 		
-
-		// Quit the browser
-		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 	

@@ -2,21 +2,13 @@ package com.automation.main;
 
 //precondition student first course must have recordings in recordings tab as well as in student recordings tab
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.text.DateFormat;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -24,19 +16,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -67,10 +57,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
-	
-    
-    
-    @BeforeClass
+	@BeforeClass
 	public void setup() {
 
 		
@@ -80,11 +67,11 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 //			
 //		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-	///	ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
+		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
-		ATUReports.setWebDriver(driver);
 		
+		//ATUReports.setWebDriver(driver);
+		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -104,16 +91,18 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		
-		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel at " + DateToStr,
+		 "Starting the test: TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel at " + DateToStr, LogAs.PASSED, null);	
 		
 	}
-	
 	
 	@AfterClass
 	public void closeBroswer() {
 		driver.quit();
 	}
-
 
 	// @Parameters({"web","title"}) in the future
 	@Test
@@ -129,7 +118,6 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws Exception
 	{
@@ -208,7 +196,8 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 			for(String handler: driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				String current_url = driver.getCurrentUrl();
-				if((current_url.equals(new_additional_link_url)) || (current_url.equals(new_additional_link_url + "/"))) {
+				System.out.println(current_url);
+				if((current_url.contains(new_additional_link_url))) {
 					is_website_opened_in_new_tab = true;
 					break;
 				}
@@ -240,7 +229,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 			for(String handler: driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				String current_url = driver.getCurrentUrl();
-				if((current_url.equals(new_additional_link_url)) || (current_url.equals(new_additional_link_url + "/"))) {
+				if((current_url.contains(new_additional_link_url))) {
 					is_website_opened_in_new_tab = true;
 					break;
 				}
@@ -277,6 +266,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
 		
-		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 }

@@ -1,45 +1,29 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-
-import org.apache.http.impl.client.EntityEnclosingRequestWrapper;
-import org.junit.AfterClass;
-import org.omg.PortableInterceptor.AdapterManagerIdHelper;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.os.WindowsRegistryException;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-import com.google.gson.annotations.Until;
-import com.sun.jna.win32.W32APITypeMapper;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
@@ -49,8 +33,7 @@ import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
-import net.sourceforge.htmlunit.corejs.javascript.ast.NewExpression;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class PreTest {
@@ -75,10 +58,10 @@ public class PreTest {
 	@BeforeClass
 	public void setup() {
 
-		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		driver = new FirefoxDriver();
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
+//		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -96,7 +79,13 @@ public class PreTest {
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
 		
 		wait = new WebDriverWait(driver, 30);
-	
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: PreTest at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: PreTest at " + DateToStr,
+		 "Starting the test: PreTest at " + DateToStr, LogAs.PASSED, null);
+		
 	}
 	
 	@AfterClass
@@ -139,7 +128,7 @@ public class PreTest {
 		System.out.println("Current unviersity name: " + university_name);
 
 		// 2. Click on course builder href link
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SelfRegConfig")));
 		
@@ -168,10 +157,10 @@ public class PreTest {
 			} else if(i == 4){
 				course_name = "BAc" + university_name + sdf.format(date);
 			} else if (i == 5) {
-				created_course_list.add("BankValidRecording" + university_name);
+				created_course_list.add("BankValidRecording");
 				continue;
 			} else if (i == 6) {
-				created_course_list.add("BankInValidRecording" + university_name);
+				created_course_list.add("BankInValidRecording");
 				continue;
 			} else if (i == 7) {
 				course_name = "PastCourseA" + university_name + sdf.format(date);
@@ -254,7 +243,7 @@ public class PreTest {
 		}
 
 		// Writing the registered user to user.properties file at src/test/resources that other tests will use it
-		File file_to_write = new File("\\WebDriverTest\\src\\test\\resources\\local.properties");
+		File file_to_write = new File("C:/WebDriverTest/src/test/resources/local.properties");
 		//	String charset = "UTF-8";
 		String charset = "Cp1252";
 		PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file_to_write), charset));
@@ -271,6 +260,7 @@ public class PreTest {
 		writer.println("Admin=mickael");
 		writer.println("Browser=firefox");//for manual testing
 		writer.println("HelpdeskAdmin=hdadmin");
+		writer.println("ExcutiveAdmin=executivead");
 		System.out.println(file_to_write.getPath());
 		writer.close();
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
@@ -302,7 +292,7 @@ public class PreTest {
 			Thread.sleep(1000);
 			// Click on result first course (the only one) membership button
 			mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
-			Thread.sleep(1000);		
+			Thread.sleep(10000);		
 			
 			if(i == 0) {
 				// Search target user name in membership window
@@ -316,12 +306,6 @@ public class PreTest {
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(0));
 				
-				
-				
-				
-				
-				
-				
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(1));	
 
@@ -332,13 +316,7 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(1));
-				
-				
-				
-				
-				
-				
-				
+						
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(2));	
 
@@ -349,9 +327,7 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToStudentList();
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse(created_new_user.get(2));
-				
-				
-				
+					
 				
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(3));	
@@ -361,15 +337,9 @@ public class PreTest {
 
 				// Add selected user to instructor list
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToStudentList();
-				
-								
-				
+			
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse(created_new_user.get(3));
-				
-				
-				
-				
-				
+						
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(4));	
 
@@ -381,8 +351,7 @@ public class PreTest {
 
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(4));
 
-				
-				
+
 			} else if (i == 1) {
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(0));	
@@ -407,9 +376,7 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToStudentList();
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse(created_new_user.get(1));
-
-				
-				
+	
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(2));	
 
@@ -421,8 +388,6 @@ public class PreTest {
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(2));
 
-
-				
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(3));	
 
@@ -659,9 +624,6 @@ public class PreTest {
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(0));
 
-				
-				
-
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(4));	
 
 				// Select first user from user list (the only user it found because of the uniq of the search)
@@ -747,18 +709,8 @@ public class PreTest {
 		driver.findElement(By.id("SignOutLink")).click();
 		
 		
-	
-		driver.quit();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 		
 		
@@ -783,7 +735,7 @@ public class PreTest {
 //			
 //			driver.findElement(By.id("SignOutLink")).click();
 //		}
-		
+
 		
 	}
 

@@ -257,29 +257,25 @@ public class CoursesHelperPage extends Page {
 		while(!clicked && i<50){
 			try{				
 				i++;
-				wait.until(ExpectedConditions.elementToBeClickable(sCourse2));	
-				System.out.println("s1");
-				wait.until(ExpectedConditions.visibilityOf(sCourse2));				
-				sCourse2.click();	
-				System.out.println("s2");
+				wait.until(ExpectedConditions.elementToBeClickable(sCourse2));			
+				wait.until(ExpectedConditions.visibilityOf(sCourse2));
+				sCourse2.click();
+				wait.until(ExpectedConditions.titleContains("Tegrity - " + destination_course_name));
 				clicked=true;
 				
 		} catch(Exception ex) {	
 				try {
 		  	
 				WebElement wi = driver.findElement(By.xpath("//*[@id='main']"));
-				Actions builder = new Actions(driver);				
-				courses_heading.click();
-				System.out.println("s4");
+				Actions builder = new Actions(driver);
 				builder.sendKeys(Keys.PAGE_DOWN);
-				builder.moveToElement(wi).build().perform();				
+				builder.moveToElement(wi).build().perform();
+				courses_heading.click();
 				builder.click();
-				System.out.println("s5");
 				Thread.sleep(1000);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-					System.out.println("s6");
 				}
 
 			}	
@@ -443,9 +439,9 @@ public class CoursesHelperPage extends Page {
 			record_helper_page.clickOnTestsTab();
 		}
 		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
-		Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
-		//record_helper_page.checkAllCheckBox();	
+		//record_helper_page.checkAllCheckBox();
+		Thread.sleep(2000);
 		while (!record_helper_page.check_all_checkbox.isSelected()) {
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 			new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
@@ -459,13 +455,10 @@ public class CoursesHelperPage extends Page {
 		} else if (type_of_recordings == 1) {
 			record_helper_page.clickOnContentTaskThenCopy();
 		}
-		System.out.println("Copy1");
+
 		copy_menu.selectTargetCourseFromCourseList(destination_course_name);
-		System.out.println("Copy2");
 		copy_menu.clickOnCopyButton();
-		System.out.println("Copy3");
 		confirmation_menu.clickOnOkButton();
-		System.out.println("Copy4");
 
 		/*
 		 * if ((type_of_recordings == 0) || (type_of_recordings == 2) ||
@@ -599,12 +592,10 @@ public class CoursesHelperPage extends Page {
 
 				recording_helper_page.checkExistenceOfNonDeleteItemsStatusInAdditionalContent();
 			}
-			while (!recording_helper_page.check_all_checkbox.isSelected()) {
-				new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
-				new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(recording_helper_page.check_all_checkbox));
-				clickElement(recording_helper_page.check_all_checkbox);
-				Thread.sleep(500);
-			}
+			
+			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
+			clickElement(recording_helper_page.check_all_checkbox);
+			Thread.sleep(500);
 			//Thread.sleep(2000);
 			//wait.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
 			//recording_helper_page.check_all_checkbox.click();
@@ -1633,8 +1624,5 @@ public class CoursesHelperPage extends Page {
 
 		return target_course;
 	}
-	
-
-	
 
 }

@@ -1,44 +1,30 @@
+
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.eclipse.jetty.io.ClientConnectionFactory.Helper;
-import org.junit.AfterClass;
+
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTestsTabsAsADMIN {
@@ -49,6 +35,8 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 
 	}
 
+	public TopBarHelper top_bar_helper;
+	public AdvancedServiceSettingsPage advanced_service_settings_page;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
@@ -68,7 +56,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		//driver.manage().window().maximize();
+		//
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -78,14 +66,23 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
+		advanced_service_settings_page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
+		top_bar_helper = PageFactory.initElements(driver, TopBarHelper.class);
 		
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTestsTabsAsADMIN at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTestsTabsAsADMIN at " + DateToStr,
+		 "Starting the test: TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTestsTabsAsADMIN at " + DateToStr, LogAs.PASSED, null);	
+		
 	}
 	
-//	@org.testng.annotations.AfterClass
-//	public void quitBroswer() {
-//		this.driver.quit();
-//	}
+	@AfterClass
+	public void closeBroswer() {
+		driver.quit();
+	}
 
 	private void setAuthorInfoForReports() {
 		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
@@ -115,13 +112,26 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws InterruptedException//
 	{
+		// Precondition
+		initializeCourseObject();
+		tegrity.loginAdmin("Admin");
+		Thread.sleep(4000);
+		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
+		Thread.sleep(2000);
+		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_youtube_integration, "enable youtube integration");
+		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_automated_capitioning, "enable automated captioning");
+		advanced_service_settings_page.clickOnOkbutton();
+		Thread.sleep(2000);
+		top_bar_helper.clickOnSignOut();
+		
+		
+		
 		// 1. Login as User1.
 		tegrity.loginCourses("User1");// log in courses page
-		initializeCourseObject();
+		
 		
 		// 2. Get the full name of the Ab course.
 		String target_course_name = course.selectCourseThatStartingWith("Ab");
@@ -172,7 +182,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				
 				
 				// 8. Make sure no checkbox is checked.
-				wait.until(ExpectedConditions.elementToBeClickable(record.checkbox));
+				wait.until(ExpectedConditions.elementToBeClickable(record.getCheckbox()));
 				record.verifyAllCheckedboxNotSelected();
 				
 				
@@ -237,12 +247,12 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				// 13. Click on a checkbox of one recording.
 				// But first click on search filed to make recording tasks menu go away
 				record.searchbox.click();
-				record.checkbox.click();
+				record.getCheckbox().click();
 				
 				Thread.sleep(1000);
 				
 				// 14. The checkbox is checked.
-				boolean is_first_checkbox_selected = record.checkbox.isSelected();
+				boolean is_first_checkbox_selected = record.getCheckbox().isSelected();
 				
 				if(is_first_checkbox_selected) {
 					System.out.println("First checkbox is selected.");
@@ -295,7 +305,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				this.checkCorrectEnableDisableStatus(record.isEditRecordingPropertiesDisableOrEnable(), true, "Edit Recording Properties");
 				this.checkCorrectEnableDisableStatus(record.isShareRecordingDisableOrEnable(), true, "Share Recording");
 				
-				// 18. Check several checkboxes.
+				// 18. Check several checkboxes .
 				// But first click on search filed to make recording tasks menu go away
 				record.searchbox.click();
 				record.check_all_checkbox.click();
@@ -345,10 +355,10 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				// are all displayed and disabled.
 				this.checkCorrectEnableDisableStatus(record.isEditRecordingDisableOrEnable(), false, "Edit Recording");
 				this.checkCorrectEnableDisableStatus(record.isEditRecordingPropertiesDisableOrEnable(), false, "Edit Recording Properties");
-				this.checkCorrectEnableDisableStatus(record.isShareRecordingDisableOrEnable(), false, "Share Recording");
+				this.checkCorrectEnableDisableStatus(record.isShareRecordingDisableOrEnable(), false, "Share Recording");	
 				
 				record.searchbox.click();
-			}
+			}		// End of regular/student/tests tab for()
 			
 		
 			
@@ -356,10 +366,12 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 			//driver.navigate().back();
 			driver.findElement(By.id("SignOutLink")).click();
 			
-		}
+		}	// End of admin/helpdesk admin for()
 		
-		
-		driver.quit();
+
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
 		
 	}
 	

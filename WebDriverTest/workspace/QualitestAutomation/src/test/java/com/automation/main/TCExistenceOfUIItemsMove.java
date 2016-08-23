@@ -3,14 +3,15 @@ package com.automation.main;
 import java.util.ArrayList;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
@@ -46,13 +47,20 @@ String os;
 			//driver=new FirefoxDriver();
 		     driver=DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 			///ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
-			driver.manage().window().maximize();
+			
 			
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			//  delete=PageFactory.initElements(driver,DeleteMenu.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
 		    move_Window= PageFactory.initElements(driver, MoveWindow.class);
+		    
+		    Date curDate = new Date();
+		    String DateToStr = DateFormat.getInstance().format(curDate);
+		    System.out.println("Starting the test: TCExistenceOfUIItemsMove at " + DateToStr);
+		    ATUReports.add("Message window.", "Starting the test: TCExistenceOfUIItemsMove at " + DateToStr,
+		    "Starting the test: TCExistenceOfUIItemsMove at " + DateToStr, LogAs.PASSED, null);
+		    
 		} catch (Exception e) {
 			ATUReports.add("Fail Step", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 		}
@@ -71,7 +79,10 @@ String os;
 	 * ScreenshotOf.DESKTOP)); }
 	 */
 
-
+    @AfterClass
+	public void closeBroswer() {		
+		this.driver.quit();
+	}
 
 	// @Parameters({"web","title"}) in the future
 	@Test
@@ -90,10 +101,10 @@ String os;
 		record.verifyDisabledMenu();
 		
 		//5.click one check box
-		record.ClickOneCheckedboxSelected(record.checkbox);
+		record.ClickOneCheckedboxSelected(record.getCheckbox());
 		
 		//6.un-check one check box
-		record.ClickOneCheckedboxNotSelected(record.checkbox);
+		record.ClickOneCheckedboxNotSelected(record.getCheckbox());
 	
 		//7.click all check box
 		record.checkall.click();// make all checkboxes marked
@@ -106,7 +117,7 @@ String os;
 		record.verifyAllCheckedboxNotSelected();
 		
 		//9.to move menu
-		record.checkbox.click();
+		record.getCheckbox().click();
 		record.toMoveMenu();
         Thread.sleep(2000);
 		//10.verify move title
@@ -123,7 +134,12 @@ String os;
 		//15.verify search course text
 	    move_Window.verifySearchCourseBoxText();
 		//16.verify button locations
-	  move_Window.verifyMoveMenuElementsLocation();
+	    move_Window.verifyMoveMenuElementsLocation();
+	    
+	    System.out.println("Done.");
+	    ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+	  
+	  
 	}
 
 	// description = "get courses list"

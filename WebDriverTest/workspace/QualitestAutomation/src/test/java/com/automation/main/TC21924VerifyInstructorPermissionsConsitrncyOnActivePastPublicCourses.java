@@ -1,29 +1,11 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.security.PublicKey;
-import java.security.spec.ECPrivateKeySpec;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.function.IntToDoubleFunction;
 
-import org.junit.experimental.theories.Theories;
-import org.omg.CORBA.StringHolder;
-import org.omg.Messaging.SyncScopeHelper;
-import org.omg.PortableInterceptor.NON_EXISTENT;
+import java.util.List;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -35,21 +17,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import com.sun.jna.win32.W32APITypeMapper;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
-import junitx.util.ResourceManager;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.treetable.JTreeTable.ListToTreeSelectionModelWrapper;
+import java.text.DateFormat;
+import java.util.Date;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCourses {
@@ -87,13 +62,14 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
 	public ManageAdhocUsersPage mange_adhoc_users_page;
 	public CreateNewUserWindow create_new_user_window;
+	public AdvancedServiceSettingsPage advanced_service_settings_Page;
 
 	@BeforeClass
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
-		// driver.manage().window().maximize();
+		// 
 		ATUReports.setWebDriver(driver);
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -119,8 +95,15 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		manage_adhoc_courses_enrollments_page = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
 		mange_ad_hoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
-		
+		advanced_service_settings_Page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCourses at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCourses at " + DateToStr,
+		 "Starting the test: TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCourses at " + DateToStr, LogAs.PASSED, null);	
+		
 	}
 
 	
@@ -142,8 +125,19 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		// 1. Make sure the Instructor has past course which is publicly visible.
 		// Login with SuperUser
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		tegrity.loginCourses("SuperUser");// log in courses page
+		
+		//PreTest enter as Admin and checkboxs all
+		tegrity.loginAdmin("Admin");
 		initializeCourseObject();
+		Thread.sleep(3000);
+		
+		//PreTest enable student test +youtube + capition
+		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
+		advanced_service_settings_Page.enableYoutbeCapitionStudent(confirm_menu);	
+		Thread.sleep(2000);
+		top_bar_helper.clickOnSignOut();
+		
+		tegrity.loginCourses("SuperUser");// log in courses page
 		
 		//  Go to PastCourseA (which is past course of User1) and make it public
 		String past_public_course_name = course.selectCourseThatStartingWith("PastCourseA");
@@ -151,7 +145,6 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		course_settings_page.checkAllCourseSettingsCheckboxs();
 		course_settings_page.clickOnOkButton();
 		top_bar_helper.clickOnSignOut();
-		
 		
 		// 2. Make sure to have a user is enrolled to a course as Instructor (User1).
 		tegrity.loginCourses("User1");
@@ -390,6 +383,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 				// 23. Click on "public courses" tab.
 				course.clickOnPublicCoursesTab();
 			} else {
+				
 				course.clickOnPastCoursesTabButton();
 			}
 			Thread.sleep(1000);
@@ -591,6 +585,9 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 }

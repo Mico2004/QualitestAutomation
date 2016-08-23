@@ -1,30 +1,15 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.security.PublicKey;
-import java.security.spec.ECPrivateKeySpec;
+
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.IntToDoubleFunction;
-
-import org.junit.experimental.theories.Theories;
-import org.omg.CORBA.StringHolder;
-import org.omg.Messaging.SyncScopeHelper;
-import org.omg.PortableInterceptor.NON_EXISTENT;
+import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -32,26 +17,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import com.sun.jna.win32.W32APITypeMapper;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
-import junitx.util.ResourceManager;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.treetable.JTreeTable.ListToTreeSelectionModelWrapper;
-
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 
@@ -89,13 +62,15 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
 	public ManageAdhocUsersPage mange_adhoc_users_page;
 	public CreateNewUserWindow create_new_user_window;
+	public AdminCourseSettingsPage admin_course_settings_page;
 
+	
 	@BeforeClass
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
-		// driver.manage().window().maximize();
+		
 		ATUReports.setWebDriver(driver);
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -122,13 +97,20 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		mange_ad_hoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		add_additional_content_link_window = PageFactory.initElements(driver, AddAdditionalContentLinkWindow.class);
-		
+		admin_course_settings_page = PageFactory.initElements(driver, AdminCourseSettingsPage.class);
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);	
 		wait = new WebDriverWait(driver, 30);
-		
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC21856ValidateThePublicCoursesTabUIAfterChanges at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC21856ValidateThePublicCoursesTabUIAfterChanges at " + DateToStr,
+		 "Starting the test: TC21856ValidateThePublicCoursesTabUIAfterChanges at " + DateToStr, LogAs.PASSED, null);	
 	}
 
-	
 	 @AfterClass
 	 public void closeBroswer() {
 		 this.driver.quit();
@@ -152,13 +134,18 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		String Ab_course_name = course.selectCourseThatStartingWith("Ab");
 		
 		top_bar_helper.clickOnSignOut();
-		
-//		Thread.sleep(1000);
+	
 		
 		// 2. Create 1 instructor and 1 student and enroll them to Ab course.
-		tegrity.loginAdmin("Admin");
-		
+		tegrity.loginAdmin("Admin");	
 		Thread.sleep(2000);
+		
+		//make sure that we have public tabs
+		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
+		Thread.sleep(2000);		
+		
+		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
+		admin_course_settings_page.clickOnSaveButton();
 		 
 		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 		 
@@ -271,7 +258,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		record.clickOnCourseTaskThenCourseSettings();
 		
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
-		
+		Thread.sleep(2000);
 		course_settings_page.clickOnOkButton();
 		
 		// 6. Login as Instructor.
@@ -304,6 +291,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		// 15. Unenroll both Instructor and Student from some course.
 		Thread.sleep(2000);
 		
+		
 		// 3. Make sure to have two users which are enroll to the same course, first as Instructor and Second as Student both of the users don't have past courses.
 		// Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
@@ -317,6 +305,8 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 				Thread.sleep(1000);
 			}
 		}
+		
+		
 		
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ab_course_name);
 		
@@ -407,5 +397,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		// 27.3. A hint appears with 'Public Courses' text.
 		course.verifyUIHoveringPublicCoursesTab();
 		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 }}

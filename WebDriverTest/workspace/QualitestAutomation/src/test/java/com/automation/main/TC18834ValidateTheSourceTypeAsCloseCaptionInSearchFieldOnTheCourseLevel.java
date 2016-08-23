@@ -4,10 +4,16 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByClassName;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,7 +21,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
+import com.thoughtworks.selenium.webdriven.commands.IsElementPresent;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -66,9 +72,9 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
-		ATUReports.setWebDriver(driver);
-		ATUReports.add("set driver", true);
+		//
+		//ATUReports.setWebDriver(driver);
+		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -89,7 +95,11 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		
-		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseLevel at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseLevel at " + DateToStr,
+		 "Starting the test: TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseLevel at " + DateToStr, LogAs.PASSED, null);
 		
 	}
 	
@@ -118,12 +128,13 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws Exception
 	{
+		
 		// 1. Validate there is close caption in this course. Search input specified shall be case-insensitive - Upload CloseCaption.
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
 		
 		String current_course = course.selectCourseThatStartingWith("Ab");
-		
+		//Mickaeltryadd a mickael try
 		// Make course public
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
@@ -132,9 +143,11 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		
 		// Upload for first recording target close catpion
 		Thread.sleep(2000);
-		record.selectIndexCheckBox(1);
-		record.clickOnRecordingTaskThenEditRecording();
+		List<String> listOfNames = record.getCourseRecordingList();
 		
+		record.selectIndexCheckBox(listOfNames.size());		
+		record.clickOnRecordingTaskThenEditRecording();
+		// comment
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
@@ -147,7 +160,6 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		for(int i=0; i<20; i++) {
 			try {
 				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					System.out.println("2222");
 					break;
 				} else {
 					Thread.sleep(1000);
@@ -158,28 +170,26 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 				
 		}
 		
-		for(String window_handler: driver.getWindowHandles()) {
-			driver.switchTo().window(window_handler);
-			break;
-		}
-		
+		// exit player frame
+		record.exitInnerFrame();
+		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(4));
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
+		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
+		Thread.sleep(3000);
 		
-		Thread.sleep(2000);
+		// click on the upload link
+		WebElement element = driver.findElement(By.xpath(".//*[@id='AddCaptioningForm']/div[3]/span"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().perform();
+		
 		
 		Robot robot = new Robot();
 		robot.mouseMove(-100, 100);
-		
-		driver.findElement(By.id("UploadFile")).click();
-		driver.findElement(By.id("UploadFile")).click();
-		driver.findElement(By.id("UploadFile")).click();
-		driver.findElement(By.id("UploadFile")).click();
-//		driver.findElement(By.cssSelector(".jcf-button-content")).click();
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 		Thread.sleep(3000);
 		
-		String path = "C:\\Users\\RomanP\\Desktop\\Code\\WebDriverTest\\src\\test\\resources\\CloseCaption.srt";
+		String path = "C:\\WebDriverTest\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
 		
 		// from here you can use as it wrote
 //		path = System.getProperty("user.dir") + path;
@@ -197,36 +207,42 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 
 		Thread.sleep(2000);
 		driver.findElement(By.id("AddCaptioning")).click();
-		Thread.sleep(1000);
-		
-		for(int i=0; i<60; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					System.out.println("2222");
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-				
-		}
-		
+		//Thread.sleep(15000);
+			
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
 			break;
 		}
 		
+		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
+			
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
+			if(ie.getText().contains("Success")){
+				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
+				break;
+			   }			
+			else Thread.sleep(2000);
+		}
+		
+			
+//		for(int i=0; i<70; i++) {
+//			try {
+//				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
+//					System.out.println("2222");
+//					break;
+//				} else {
+//					Thread.sleep(1000);
+//				}
+//			} catch (Exception e) {
+//				Thread.sleep(1000);
+//			}
+//				
+//		}
+		
 
-		driver.findElement(By.cssSelector(".btn.btn-default")).click();
-		Thread.sleep(2000);
-		
-		
-		String text_from_caption_for_test = "QualitestAutomationCaption";
-		
-		top_bar_helper.clickOnSignOut();
-		
+		Thread.sleep(5000);
+		String text_from_caption_for_test = "QualitestAutomationCaption";	
+		record.signOut();
 		
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {
@@ -301,7 +317,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 			
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
-			search_page.moveToElement(search_page.video_wrap_link_to_focus_list.get(0), driver).perform();
+			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
 			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
@@ -334,6 +350,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 			search_page.waitUntilSpinnerImageDisappear();
 			
 			// 9. Click on title of the Closed Caption.
+			search_page.exitInnerFrame();
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
 			
 			// 9.1. The Tegrity Player page is opened and the recording start playing from the caption timestam.
@@ -344,6 +361,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 			search_page.waitUntilSpinnerImageDisappear();
 			
 			// 11. Click on the recording title of the chapter.
+			search_page.exitInnerFrame();
 			search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
 			
 			// 12. The Tegrity player page with the opened recording at the relevant time.
@@ -354,6 +372,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 			search_page.waitUntilSpinnerImageDisappear();
 			
 			// Signout
+			search_page.exitInnerFrame();
 			top_bar_helper.clickOnSignOut();
 		}
 		
@@ -367,7 +386,8 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
 		
-		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 }

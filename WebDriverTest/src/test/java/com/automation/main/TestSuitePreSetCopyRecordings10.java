@@ -75,9 +75,8 @@ public class TestSuitePreSetCopyRecordings10 {
 //		System.setProperty("webdriver.edge.driver", "src/test/resources/MicrosoftWebDriver.exe");
 		// capability=DesiredCapabilities.internetExplorer();
 		// capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
-		//
-		  driver=DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
+		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

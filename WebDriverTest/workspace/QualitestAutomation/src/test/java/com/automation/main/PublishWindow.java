@@ -117,7 +117,7 @@ public class PublishWindow extends Page {
 		try {
 			while(isPublishWindowClosed() == false) {
 				save_button.click();
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 			}
 			
 			System.out.println("Clicked on save button.");

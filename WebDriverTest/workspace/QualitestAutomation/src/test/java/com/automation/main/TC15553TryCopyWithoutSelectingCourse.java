@@ -1,31 +1,19 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -69,7 +57,7 @@ public class TC15553TryCopyWithoutSelectingCourse {
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -78,9 +66,13 @@ public class TC15553TryCopyWithoutSelectingCourse {
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15553TryCopyWithoutSelectingCourse at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15553TryCopyWithoutSelectingCourse at " + DateToStr, "Starting the test: TC15538CancelTheCopying at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
-	@AfterTest
+	@AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
 	}
@@ -119,8 +111,9 @@ public class TC15553TryCopyWithoutSelectingCourse {
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
 		
+		
 		// 5. Click "Copy Recording(s)" button without selecting a course
-		copy.clickOnCopyButton();
+		copy.ClickOnCopyButtonWithoutChoosingCourse();
 		
 		Thread.sleep(1000);
 		
@@ -131,6 +124,7 @@ public class TC15553TryCopyWithoutSelectingCourse {
 		confirm_menu.verifyConfirmationMenuWithTargetHeaderClosed("Error");
 		
 		// 8. Click "Cancel" button.
+		Thread.sleep(2000);
 		copy.clickOnCancelButton(record);
 		
 		// 9. "Copy" window is closed
@@ -145,6 +139,9 @@ public class TC15553TryCopyWithoutSelectingCourse {
 			ATUReports.add("Copy window.", "Copy window is closed", "Copy window is not closed", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
 	}
 }

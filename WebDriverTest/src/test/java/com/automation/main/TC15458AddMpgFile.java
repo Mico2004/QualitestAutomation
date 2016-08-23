@@ -122,7 +122,6 @@ public class TC15458AddMpgFile {
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		/// 2.login as instructor
-		//dfs
 		tegrity.loginCourses("User1");
 	    course.waitForVisibility(course.sign_out);
 		// 3.Select course

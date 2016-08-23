@@ -2365,7 +2365,9 @@ public String getSecondRecordingTitleTest() {
 		Thread.sleep(2000);
 		select_upload_additional_file.click();
 		Thread.sleep(2000);
-		String fullPathToFile = "C:\\Users\\Mickael\\git\\QualitestAutomation\\WebDriverTest\\src\\test\\resources\\additional_file.txt"; 
+		String fullPathToFile = "src\\test\\resources\\additional_file.txt"; // System.getProperty("user.dir")																										//// +
+																												//// "\\src\\main\\resources\\ImsImportDataCreation.xml";
+
 		uploadFile(fullPathToFile);
 		Thread.sleep(2000);
 		add_additional_file_button.click();
@@ -2471,7 +2473,6 @@ public String getSecondRecordingTitleTest() {
 	// menu)
 	public void clickOnRecordingsTab() {
 		try {
-			waitForVisibility(recordings_tab);
 			recordings_tab.click();
 			System.out.println("Clicked on recordings tab");
 			ATUReports.add("Clicked on recordings tab", LogAs.PASSED, null);
@@ -2840,10 +2841,7 @@ public String getSecondRecordingTitleTest() {
 
 		for (WebElement el : additional_content_list) {
 			if ((el.getText().equals(additional_content_name))) {
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 						WebElement recording = driver.findElement(By.linkText((additional_content_name)));
 						waitForVisibility(recording);
 						wait.until(ExpectedConditions.elementToBeClickable(recording));

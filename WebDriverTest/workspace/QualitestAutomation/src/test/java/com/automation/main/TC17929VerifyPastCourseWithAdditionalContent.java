@@ -4,16 +4,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+import java.text.DateFormat;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import junitx.util.PropertyManager;
@@ -49,11 +49,12 @@ public class TC17929VerifyPastCourseWithAdditionalContent {
 		String instructor1;
 		String instructor2;
 	    List <String> for_enroll;
+	    
 		@BeforeClass
 		public void setup() {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
+			
 
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -80,7 +81,18 @@ public class TC17929VerifyPastCourseWithAdditionalContent {
 
 			mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 					ManageAdHocCoursesMembershipWindow.class);
+			
+			 Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TC17929VerifyPastCourseWithAdditionalContent at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC17929VerifyPastCourseWithAdditionalContent at " + DateToStr,
+			 "Starting the test: TC17929VerifyPastCourseWithAdditionalContent at " + DateToStr, LogAs.PASSED, null);	
 
+		}
+
+		@AfterClass
+		public void closeBroswer() {		
+			this.driver.quit();
 		}
 
 		@Test
@@ -236,7 +248,7 @@ public class TC17929VerifyPastCourseWithAdditionalContent {
 			     Thread.sleep(2000);
 			     //8.delete recording
 			     System.out.println("before 8");
-			     record.checkbox.click();
+			     record.getCheckbox().click();
 			     record.clickOnContentTaskThenDelete();
 			     Thread.sleep(2000);
 			     delete_menu.clickOnDeleteButton();
@@ -272,21 +284,16 @@ public class TC17929VerifyPastCourseWithAdditionalContent {
 					 }
 		          course.signOut();
 		          Thread.sleep(3000);
+		          
 		          //login as instructor 2
 		          tegrity.loginCoursesByParameter(instructor2);
 		          Thread.sleep(3000);
 		          initializeCourseObject();
 		          course.clickOnActiveCoursesTabButton();
 		          course.verifyCourseExist(course_with_one_additional_content);
-		        //quit
-		          driver.quit();
-			     
-			
-			     
 		          
-				 
-			
-		
+		          System.out.println("Done.");
+		          ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		           
 	}
 		// description = "get courses list"

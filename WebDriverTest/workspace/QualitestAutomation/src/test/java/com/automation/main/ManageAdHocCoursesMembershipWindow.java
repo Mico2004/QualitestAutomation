@@ -106,11 +106,25 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	
 	public boolean clickOnOkButton() throws InterruptedException {
 		
-		
-		for (int i=0; i<10; i++) {
+		Thread.sleep(2000);
+		waitForVisibility(ok_button);
+		ok_button.click();		
+		waitForAlert(60);
+		try {
+			
+			driver.switchTo().alert().accept();			
+			System.out.println("Accecpt alert message.");
+			return true;
+		}catch (Exception msg) {
+			System.out.println("Accecpt alert message.");
+			return false;
+			}
+		}
+		// Elvira api tryout
+	/*	for (int i=0; i<10; i++) {
 			
 			try {
-				driver.switchTo().alert().accept();
+				driver.switchTo().alert().accept();				
 				System.out.println("Accecpt alert message.");
 				return true;
 			} catch (Exception msg) {
@@ -126,8 +140,8 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			wait.until(ExpectedConditions.alertIsPresent());
 		}
 		
-		return false;
-	}
+		return false;*/
+	
 	
 	public boolean clickOnCancelButton() {
 		try {

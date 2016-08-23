@@ -1,14 +1,9 @@
 package com.automation.main;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
-
+import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +15,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -28,7 +22,6 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheActivCourseLevel {
@@ -71,9 +64,11 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 //			
 //		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
-		ATUReports.setWebDriver(driver);
+		
+		//ATUReports.setWebDriver(driver);
+		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -95,7 +90,11 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		
-		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheActivCourseLevel at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheActivCourseLevel at " + DateToStr,
+		 "Starting the test: TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheActivCourseLevel at " + DateToStr, LogAs.PASSED, null);	
 		
 	}
 	
@@ -203,11 +202,11 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 			// 5.7. The recording title in the format as follows: "Recording: recording_title.
 			search_page.verifyRecordingTitleDisplayInCorrectFormat();
 			
-			// 5.8. The source title in the format as follows: " Source: Chapter".
-			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(recording_chapter, "Source: Chapter");
+//			// 5.8. The source title in the format as follows: " Source: Chapter".
+//			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(recording_chapter, "Source: Chapter");
 			
-			// 5.9. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+//			// 5.9. The next result display below the current result in case there is next result.
+//			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
 			
 			// 6. Click on the chapter icon.
 			search_page.clickOnChapterIconOfRecordingInTargetIndex(1);
@@ -220,6 +219,8 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 			search_page.waitUntilSpinnerImageDisappear();
 			Thread.sleep(2000);
 			
+			search_page.exitInnerFrame();
+			
 			// 8. Click on title of the chapter.
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
 			
@@ -230,6 +231,8 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			Thread.sleep(2000);
+			
+			search_page.exitInnerFrame();
 			
 			// 10. Click on the recording title of the chapter.
 			search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
@@ -242,8 +245,10 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 			search_page.waitUntilSpinnerImageDisappear();
 			Thread.sleep(2000);
 			
+			search_page.exitInnerFrame();
+			
 			// 12. Click on the course name in the breadcrumb.
-			search_page.clickBackToCourseInBreadcrumbs();
+			driver.findElement(By.xpath(".//*[@id='main']/div[2]/div/div[2]/span/a/b")).click(); //search_page.clickBackToCourseInBreadcrumbs();
 		
 			// 13. Sign Out.
 			top_bar_helper.clickOnSignOut();
@@ -259,7 +264,8 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
 		
-		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 }

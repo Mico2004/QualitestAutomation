@@ -69,7 +69,7 @@ public class AddAdditionalContentFileWindow extends Page {
 		Assert.assertEquals("Add Additional Content File", val);
 
 	}
-//FDF
+
 	////// upload additional content
 	public void uploadFile(String path) throws Exception {
 

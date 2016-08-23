@@ -1,29 +1,8 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.security.PublicKey;
-import java.security.spec.ECPrivateKeySpec;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.function.IntToDoubleFunction;
 
-import org.junit.experimental.theories.Theories;
-import org.omg.CORBA.StringHolder;
-import org.omg.Messaging.SyncScopeHelper;
-import org.omg.PortableInterceptor.NON_EXISTENT;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.util.Date;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -31,25 +10,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.w3c.dom.stylesheets.LinkStyle;
-
 import com.sun.jna.win32.W32APITypeMapper;
-
+import java.text.DateFormat;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+
 import junitx.util.PropertyManager;
-import junitx.util.ResourceManager;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.treetable.JTreeTable.ListToTreeSelectionModelWrapper;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
@@ -93,7 +66,7 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
-		// driver.manage().window().maximize();
+		
 		ATUReports.setWebDriver(driver);
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -121,6 +94,12 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording at " + DateToStr,
+		 "Starting the test: TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording at " + DateToStr, LogAs.PASSED, null);
 	}
 
 	
@@ -143,6 +122,7 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
+		
 		
 		// 1.1. Delete all recordings from private course.
 		course.deleteAllRecordingsInCourseStartWith(PropertyManager.getProperty("User1"), 0, record, delete_menu);
@@ -213,6 +193,7 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		
 		// When the "Copy" process is finished, verify that recording is displayed in source course.
 //		record.checkThatRecordingStatusTargetIndexIsEmpty(1, 360);
+		record.checkStatusExistenceForMaxTTime(600);
 		
 		// Click the "Courses" breadcrumb.
 		record.returnToCourseListPage();
@@ -225,7 +206,6 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		Thread.sleep(2000);
 		
 		// 3. Select the recording.
-		record.checkStatusExistenceForMaxTTime(360);
 		record.selectIndexCheckBox(1);
 		String selected_recording = record.getFirstRecordingTitle();
 		
@@ -275,10 +255,11 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		player_page.verifyTimeBufferStatusForXSec(10);
 		
 		//19. Click on the 'Courses' breadcrumb
-		driver.navigate().back();
-		Thread.sleep(1000);
-		record.returnToCourseListPage();
-		Thread.sleep(1000);
+		player_page.returnToCoursesPage(course);
+//		driver.navigate().back();
+//		Thread.sleep(1000);
+//		record.returnToCourseListPage();
+//		Thread.sleep(1000);
 		
 		// 20. Select a non private course (ad).
 		course.selectCourseThatStartingWith("ad");
@@ -333,5 +314,7 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		// 36. The recording is being played.
 		player_page.verifyTimeBufferStatusForXSec(10);
 		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 }}

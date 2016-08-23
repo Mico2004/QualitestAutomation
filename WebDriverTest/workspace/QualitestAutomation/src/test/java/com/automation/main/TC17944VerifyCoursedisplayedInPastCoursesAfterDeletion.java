@@ -5,16 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+import java.text.DateFormat;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import junitx.util.PropertyManager;
@@ -55,7 +55,7 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 		public void setup() {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
+			
 
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -82,14 +82,23 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 
 			mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 					ManageAdHocCoursesMembershipWindow.class);
+			
+			 Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion at " + DateToStr,
+			 "Starting the test: TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion at " + DateToStr, LogAs.PASSED, null);
 
+		}
+		
+		@AfterClass
+		public void closeBroswer() {		
+			this.driver.quit();
 		}
 		
 		@Test
 		public void testUiExistence() throws InterruptedException {
 		
-			
-			
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
@@ -190,19 +199,13 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 			     course.selectCourseThatStartingWith(course_for_delete);
 			     Thread.sleep(3000);
 			     ///check for free status checkbox for edit properties
-		    	record.changeRecordingOwnership(confirm_menu, erp_window, instructor1,record.checkbox);
+		    	record.changeRecordingOwnership(confirm_menu, erp_window, instructor1,record.getCheckbox());
 		           record.clickOnSignOut();
 			     
 				 
 			
 			///////////////////////////////////////////////end of preset
-		           
-			
-			
-			
-			
-			
-			
+		          			
 			// 2.login as admin
 	        tegrity.loginAdmin("Admin");// log in courses page
 			Thread.sleep(5000);
@@ -261,13 +264,21 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 				 ATUReports.add(" doe not contain course: "+course_for_delete, LogAs.FAILED, null);
 				    Assert.assertTrue(false);
 			}
-			//quit
-			    driver.quit();
+			
+			System.out.println("Done.");
+			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+			
+
 		}
+		
 		// description = "get courses list"
 		public void initializeCourseObject() throws InterruptedException {
+
 
 			course = PageFactory.initElements(driver, CoursesHelperPage.class);
 			course.courses = course.getStringFromElement(course.course_list);
 		}
+
+		
+
 }

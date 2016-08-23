@@ -1,21 +1,17 @@
 package com.automation.main;
 
-import java.util.ArrayList;
 
+import org.testng.annotations.AfterClass;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 public class TC15580ExistenceOfUIItemsMove {
 
@@ -35,6 +31,12 @@ public class TC15580ExistenceOfUIItemsMove {
 	DesiredCapabilities capability;
     String os;
 	String [] records_for_delete;
+	
+	
+	@AfterClass
+	public void closeBroswer() {		
+		this.driver.quit();
+	}
 
     @BeforeClass
 	public void setup() {
@@ -42,7 +44,7 @@ public class TC15580ExistenceOfUIItemsMove {
 
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
+			
 			wait = new WebDriverWait(driver, 30);
 			Thread.sleep(2000);
 			ATUReports.setWebDriver(driver);
@@ -54,6 +56,11 @@ public class TC15580ExistenceOfUIItemsMove {
 		} catch (Exception e) {
 		///	ATUReports.add("Fail Step", LogAs.FAILED, null);
 		}
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15580ExistenceOfUIItemsMove at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15580ExistenceOfUIItemsMove at " + DateToStr, "Starting the test: TC15580ExistenceOfUIItemsMove at " + DateToStr, LogAs.PASSED, null);	
 
 	}
 
@@ -88,10 +95,10 @@ public class TC15580ExistenceOfUIItemsMove {
 		record.verifyDisabledMenu();
 		
 		//5.click one check box
-		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.getCheckbox());
 		
 		//6.un-check one check box
-		record.unClickOneCheckBoxOrVerifyNotSelected(record.checkbox);
+		record.unClickOneCheckBoxOrVerifyNotSelected(record.getCheckbox());
 	
 		//7.click all check box
 		record.checkall.click();// make all checkboxes marked
@@ -104,7 +111,7 @@ public class TC15580ExistenceOfUIItemsMove {
 		record.verifyAllCheckedboxNotSelected();
 		
 		//9.to move menu
-		record.checkbox.click();
+		record.getCheckbox().click();
 		record.clickOnRecordingTaskThenMove();
 		Thread.sleep(2000);
 		//10.verify move title
@@ -123,8 +130,8 @@ public class TC15580ExistenceOfUIItemsMove {
 		//16.verify button locations
 	    move_Window.verifyMoveMenuElementsLocation();
 	  
-	  	//Quit the browser
-	    driver.quit();
+	    System.out.println("Done.");
+	    ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 
 	// description = "get courses list"

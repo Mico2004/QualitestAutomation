@@ -1,42 +1,28 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.util.ArrayList;
+import java.util.List;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.w3c.dom.stylesheets.LinkStyle;
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC15823DeleteSeveralContentItems {
@@ -69,7 +55,7 @@ public class TC15823DeleteSeveralContentItems {
 
     	driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
     	
-//		driver.manage().window().maximize();
+//		
 		ATUReports.setWebDriver(driver);
 	
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -84,6 +70,12 @@ public class TC15823DeleteSeveralContentItems {
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		
 		top_bar_helper = PageFactory.initElements(driver, TopBarHelper.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15823DeleteSeveralContentItems at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15823DeleteSeveralContentItems at " + DateToStr,
+		 "Starting the test: TC15823DeleteSeveralContentItems at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	
@@ -121,7 +113,9 @@ public class TC15823DeleteSeveralContentItems {
 		record.selectIndexCheckBox(1);
 		record.selectIndexCheckBox(2);
 		String first_target_additional_content = record.getNameTargetIndexAdditionalContent(1);
+		String first_target_additional_content_type = record.getTypeTargetIndexAdditionalContent(1);
 		String second_target_additional_content = record.getNameTargetIndexAdditionalContent(2);
+		String second_target_additional_content_type = record.getTypeTargetIndexAdditionalContent(2);
 		
 		// 5. Select "Content Tasks -> Delete" menu item.
 		record.clickOnContentTaskThenDelete();
@@ -130,8 +124,10 @@ public class TC15823DeleteSeveralContentItems {
 		delete_menu.verifyDeleteWindowDisplayed();
 		
 		// 7. Verify that only selected item is displayed in "List of Items".
-		delete_menu.verifyTargetRecordingInAdditionalContentDeleteWindowRecordingList(first_target_additional_content);
-		delete_menu.verifyTargetRecordingInAdditionalContentDeleteWindowRecordingList(second_target_additional_content);
+		List<String> target_additional_content_list = new ArrayList<>();
+		target_additional_content_list.add(first_target_additional_content);
+		target_additional_content_list.add(second_target_additional_content);
+		delete_menu.verifyTargetListIsTheSameAsInAddditionalContentDeleteWindowList(target_additional_content_list);
 		
 		// 8. Click the "Delete" button.
 		delete_menu.clickOnDeleteButton();
@@ -143,11 +139,11 @@ public class TC15823DeleteSeveralContentItems {
 		delete_menu.verifyDeleteWindowNotDisplayed();
 		
 		// 11. Verify that selected content item is deleted.
-		record.verifyTargetAdditionalContentNotInAdditionalContentList(first_target_additional_content);
-		record.verifyTargetAdditionalContentNotInAdditionalContentList(second_target_additional_content);
+		record.verifyTargetAdditionalContentIncludingTypeNotInAdditionalContentList(first_target_additional_content, first_target_additional_content_type);
+		record.verifyTargetAdditionalContentIncludingTypeNotInAdditionalContentList(second_target_additional_content, second_target_additional_content_type);
 		
-		
-	
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	
 	}
 }

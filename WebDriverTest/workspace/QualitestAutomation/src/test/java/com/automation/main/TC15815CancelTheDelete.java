@@ -1,42 +1,26 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.w3c.dom.stylesheets.LinkStyle;
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC15815CancelTheDelete {
@@ -68,7 +52,7 @@ public class TC15815CancelTheDelete {
 
     	driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
     	
-//		driver.manage().window().maximize();
+//		
 		ATUReports.setWebDriver(driver);
 	
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -81,6 +65,12 @@ public class TC15815CancelTheDelete {
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15815CancelTheDelete at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15815CancelTheDelete at " + DateToStr,
+		 "Starting the test: TC15815CancelTheDelete at " + DateToStr, LogAs.PASSED, null);
 	}
 	
 	
@@ -117,6 +107,7 @@ public class TC15815CancelTheDelete {
 		// 4. Select content item.
 		record.selectIndexCheckBox(1);
 		String target_additional_content = record.getNameTargetIndexAdditionalContent(1);
+		String target_additional_content_type = record.getTypeTargetIndexAdditionalContent(1);
 		
 		// 5. Select "Content Tasks -> Delete" menu item.
 		record.clickOnContentTaskThenDelete();
@@ -132,8 +123,10 @@ public class TC15815CancelTheDelete {
 		delete_menu.verifyDeleteWindowNotDisplayed();
 		
 		// 9. Verify that selected content item is not deleted.
-		record.verifyTargetAdditionalContentInAdditionalContentList(target_additional_content);
+		record.verifyTargetAdditionalContentIncludingTypeInAdditionalContentList(target_additional_content, target_additional_content_type);
 		
-	
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
 	}
 }

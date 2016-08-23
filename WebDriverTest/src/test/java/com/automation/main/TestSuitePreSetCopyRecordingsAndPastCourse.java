@@ -65,7 +65,10 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		// capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
 		//
 
-		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+
 
 		//
 		ATUReports.setWebDriver(driver);
@@ -123,7 +126,7 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws InterruptedException {
 		// 1. Login with SuperUser.
-
+/*
 		tegrity.loginCourses("SuperUser");// log in courses page
 		initializeCourseObject();
 
@@ -134,28 +137,24 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));
 
 		course.selectCourseThatStartingWith("Ab"); boolean
-		additionalExist=record.tabExists(1); boolean
-		StudentExist=record.tabExists(2); boolean
-		TestExist=record.tabExists(3); 
-		record.returnToCourseListPage(course);
+		additionalExist=course.tabExists(1); boolean
+		StudentExist=course.tabExists(2); boolean
+		TestExist=course.tabExists(3); record.returnToCourseListPage(course);
 
 		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record,
-		delete_menu); 
-		if(additionalExist)
+		delete_menu); if(additionalExist)
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record,
-		delete_menu); 
-		if(StudentExist)
+		delete_menu); if(StudentExist)
 		course.deleteAllRecordingsInCourseStartWith("Ab", 2, record,
-		delete_menu); 
-		if(TestExist)
+		delete_menu); if(TestExist)
 		course.deleteAllRecordingsInCourseStartWith("Ab", 3, record,
 		delete_menu);
 
 		System.out.println("a1");
 		course.selectCourseThatStartingWith("PastCourseA");
-		additionalExist=record.tabExists(1);
-		StudentExist=record.tabExists(2); 
-		TestExist=record.tabExists(3);
+		additionalExist=course.tabExists(1);
+		StudentExist=course.tabExists(2); 
+		TestExist=course.tabExists(3);
 		System.out.println("a2"); 
 		record.returnToCourseListPage(course);
 		Thread.sleep(4000); 
@@ -171,12 +170,11 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		if(TestExist)
 		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 3, record,
 		delete_menu);
-		Thread.sleep(4000);
-		
+
+		System.out.println("a4"); Thread.sleep(4000);
 		System.out.println("a5");
 		course.deleteAllRecordingsInCourseStartWith("PastCourseB", 0, record,
-		delete_menu); 
-		Thread.sleep(4000);
+		delete_menu); Thread.sleep(4000);
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(
 		"BankValidRecording", "Ab", 3, record, copy, confirm_menu);
 		Thread.sleep(4000); 
@@ -229,7 +227,7 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		Thread.sleep(4000);
 
 
-		tegrity.signOut();
+		tegrity.signOut();*/
 
 		tegrity.loginCourses("User1");
 		initializeCourseObject();	

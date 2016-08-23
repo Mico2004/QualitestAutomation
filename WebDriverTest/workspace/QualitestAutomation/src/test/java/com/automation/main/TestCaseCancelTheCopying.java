@@ -71,7 +71,7 @@ public class TestCaseCancelTheCopying {
 		
 		driver = new FirefoxDriver();
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);

@@ -2,31 +2,20 @@ package com.automation.main;
 
 // precondition course in index 3 and 4 is empty of not share recording with name as in second course first recording
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
+
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -63,10 +52,9 @@ public class TC15595TryToMoveRecordingWhileItIsBeingCopied {
 	@BeforeClass
 	public void setup() {
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -79,15 +67,18 @@ public class TC15595TryToMoveRecordingWhileItIsBeingCopied {
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-		
-		
+	 	
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15595TryToMoveRecordingWhileItIsBeingCopied at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15595TryToMoveRecordingWhileItIsBeingCopied at " + DateToStr, "Starting the test: TC15595TryToMoveRecordingWhileItIsBeingCopied at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	
-//	@AfterTest
-//	public void closeBroswer() {
-//		this.driver.quit();
-//	}
+	@AfterClass
+	public void closeBroswer() {
+		this.driver.quit();
+	}
 
 
 	// @Parameters({"web","title"}) in the future
@@ -177,41 +168,47 @@ public class TC15595TryToMoveRecordingWhileItIsBeingCopied {
 		//record.clickOnRecordingTaskThenCopy();
 		record.clickOnRecordingTaskThenMove();
 		
-		// 11. Select destination course.
-		copy.selectTargetCourseFromCourseList(second_target_course);
-
-		// 12. Selected course is marked.
-		copy.isTargetCourseSelected(second_target_course);
+		// 11. click on the OK Error after failed to move
+		confirm_menu.clickOnOkButtonAfterCannotMoveInProcessOrFailRecordings();
 		
-		// 13. Click "Move Recording(s)" button.
-		move_window.clickOnMoveRecordings();
+		// 12. check that we finish moving the record to the destination 
+		record.checkStatusExistenceForMaxTTime(360);
 		
-		// 14. Click "OK" button.
-		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
-		
-		// 15. The source recording has status "Being moved from".
-		record.checkRecordingInIndexIStatus(1, "Being moved from");
-		
-		record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(1, "Being moved from", 30);
-		
-		// 16. When "Move" process is done, verify that source recoding isn't damaged
-		// 16.1. Recording is not displayed in "Recordings" tab
-		if (selected_recording_title.equals(record.getFirstRecordingTitle())) {
-			System.out.println("Recording is displayed in recordings tab");
-			ATUReports.add("Recording is displayed in recordings tab", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		} else {
-			System.out.println("Recording is not displayed in recordings tab");
-			ATUReports.add("Recording is not displayed in recordings tab", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		}
+//		
+//		// 11. Select destination course.
+//		copy.selectTargetCourseFromCourseList(first_target_course);
+//
+//		// 12. Selected course is marked.
+//		copy.isTargetCourseSelected(second_target_course);
+//		
+//		// 13. Click "Move Recording(s)" button.
+//		move_window.clickOnMoveRecordings();
+//		
+//		// 14. Click "OK" button.
+//		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
+//		
+//		// 15. The source recording has status "Being moved from".
+//		record.checkRecordingInIndexIStatus(1, "Being moved from");
+//		
+//		record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(1, "Being moved from", 30);
+//		
+//		// 16. When "Move" process is done, verify that source recoding isn't damaged
+//		// 16.1. Recording is not displayed in "Recordings" tab
+//		if (selected_recording_title.equals(record.getFirstRecordingTitle())) {
+//			System.out.println("Recording is displayed in recordings tab");
+//			ATUReports.add("Recording is displayed in recordings tab", LogAs.FAILED, null);
+//			Assert.assertTrue(false);
+//		} else {
+//			System.out.println("Recording is not displayed in recordings tab");
+//			ATUReports.add("Recording is not displayed in recordings tab", LogAs.PASSED, null);
+//			Assert.assertTrue(true);
+//		}
 		
 //		// 16.2. Recording doesn't have a "Failed" status
 //		record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(1, "Failed", 1);
 		
 		// 17. Click "Courses" link in the breadcrumbs
 		record.returnToCourseListPage();
-		
 		Thread.sleep(2000);
 		
 		
@@ -248,42 +245,45 @@ public class TC15595TryToMoveRecordingWhileItIsBeingCopied {
 		record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(i, "Failed", 1);
 		
 		// 20. Click "Courses" link in the breadcrumbs
-		record.returnToCourseListPage();
+//		record.returnToCourseListPage();
+//		
+//		Thread.sleep(2000);
+//		
+//		// 21. Select second destination course
+//		course.clickOnTargetCourseName(second_target_course);
+//				
+//		// 22. Verify that recording is copied successfully
+//		// 23.1. Recording is displayed in "Recordings" tab
+//		
+//		List<String> recordings_of_second_target_course = record.getCourseRecordingList();
+//		
+//		i = 0;
+//		is_recording_found = false;
+//		for(String recording: recordings_of_second_target_course) {
+//			i++;
+//			
+//			if (recording.equals(selected_recording_title)) {
+//				is_recording_found = true;
+//				break;
+//			}
+//		}
+//		
+//		if (is_recording_found) {
+//			System.out.println("Recording is displayed in recordings tab");
+//			ATUReports.add("Recording is displayed in recordings tab", LogAs.PASSED, null);
+//			Assert.assertTrue(true);
+//		} else {
+//			System.out.println("Recording is not displayed in recordings tab");
+//			ATUReports.add("Recording is not displayed in recordings tab", LogAs.FAILED, null);
+//			Assert.assertTrue(false);
+//		}
+//		
+//		// 23.2. Recording doesn't have a "Failed" status
+//		record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(i, "Failed", 1);
 		
-		Thread.sleep(2000);
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
-		// 21. Select second destination course
-		course.clickOnTargetCourseName(second_target_course);
-				
-		// 22. Verify that recording is copied successfully
-		// 23.1. Recording is displayed in "Recordings" tab
 		
-		List<String> recordings_of_second_target_course = record.getCourseRecordingList();
-		
-		i = 0;
-		is_recording_found = false;
-		for(String recording: recordings_of_second_target_course) {
-			i++;
-			
-			if (recording.equals(selected_recording_title)) {
-				is_recording_found = true;
-				break;
-			}
-		}
-		
-		if (is_recording_found) {
-			System.out.println("Recording is displayed in recordings tab");
-			ATUReports.add("Recording is displayed in recordings tab", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("Recording is not displayed in recordings tab");
-			ATUReports.add("Recording is not displayed in recordings tab", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
-		
-		// 23.2. Recording doesn't have a "Failed" status
-		record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(i, "Failed", 1);
-		
-		driver.quit();
 	}
 }

@@ -73,7 +73,7 @@ public class TestCase15635DeleteAProctoringRecordingAsInstructor {
         driver=DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		 ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -119,7 +119,7 @@ public class TestCase15635DeleteAProctoringRecordingAsInstructor {
 		// 3. Click on "Tests" tab.
 				record.clickOnTestsTab();
 				Thread.sleep(1000);
-				record.checkbox.click();;
+				record.getCheckbox().click();;
 				record.clickOnRecordingTaskThenCopy();
 				copy.selectTargetCourseFromCourseListThatStartWith("Ab");
 				copy.clickOnCopyButton();

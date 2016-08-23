@@ -1,10 +1,16 @@
 package com.automation.main;
 
 import org.testng.annotations.Test;
-
 import com.sun.jna.win32.W32APITypeMapper;
 
+import atu.testng.reports.ATUReports;
+import atu.testng.reports.logging.LogAs;
+
 import org.testng.annotations.BeforeClass;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,14 +18,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.AfterClass;
 
-import atu.testng.reports.ATUReports;
-import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
 
 public class PreTestPastCourses {
 
@@ -50,15 +50,18 @@ public class PreTestPastCourses {
 	public CreateNewUserWindow create_new_user_window;
 	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
 	
-	
+	@AfterClass
+	public void closeBroswer() {		
+		this.driver.quit();
+	}
 	
 	@BeforeClass
 	public void setup() {
 
 		driver=new FirefoxDriver();
-	///	ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
+		///	ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		//
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -83,14 +86,14 @@ public class PreTestPastCourses {
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window=PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		
+		Date curDate = new Date();
+		String DateToStr = DateFormat.getInstance().format(curDate);
+		System.out.println("Starting the test: PreTestPastCourses at " + DateToStr);
+		ATUReports.add("Message window.", "Starting the test: PreTestPastCourses at " + DateToStr,
+		"Starting the test: PreTestPastCourses at " + DateToStr, LogAs.PASSED, null);	
 	
 	}
-	
-	
-
-	
-	
-
 	
 	@Test(description = "Login course page")
 	public void loginCourses() throws InterruptedException
@@ -99,76 +102,69 @@ public class PreTestPastCourses {
 tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
 
-
-
 //1. Login with SuperUser.
 		tegrity.loginCourses("User1");// log in courses page
 	   initializeCourseObject();	
 		
 	
-	//ownership change	
+
+	   //ownership change	
 		int i=1;
-     String past_course_a=course.selectCourseThatStartingWith("PastCourseA");
+		String past_course_a=course.selectCourseThatStartingWith("PastCourseA");
 	    Thread.sleep(3000);
 
 	    ///check for free status checkbox for edit properties
-	    while(record.recordingBeingEditedStatus(driver.findElement(By.id("RecordingStatus"+Integer.toString(i))))==true)
-		{
-			i++;
-		}
-	   driver.findElement(By.id("Checkbox"+Integer.toString(i))).click();
+	    List<String> courses = record.getCourseRecordingList();
+	    if(courses.size() > 0 ) {
+	    	while(record.recordingBeingEditedStatus(driver.findElement(By.id("RecordingStatus"+Integer.toString(i))))==true) {
+	    			i++;
+	    		}
+	    	
+	    	driver.findElement(By.id("Checkbox"+Integer.toString(i))).click();
+	    	record.toEditRecordingPropertiesMenu();
+	    	Thread.sleep(2000);
+	    	
+	    	erp_window.changeOwner("User1");	
+	    	erp_window.save_button.click();
+	    	Thread.sleep(11000);
 	
+	    	System.out.println("before ok");
+	    	confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
+	    	System.out.println("after ok ok");
+	    }
+	    
+	    record.clickOnSignOut();
+        
+	    // 1. Login with SuperUser.
+ 		tegrity.loginCourses("SuperUser");// log in courses page
+ 	    initializeCourseObject();	
 
-		record.toEditRecordingPropertiesMenu();
-		Thread.sleep(2000);
-		erp_window.changeOwner("User1");
-		
-		erp_window.save_button.click();
-		
-
-	  Thread.sleep(11000);
-	
-		System.out.println("before ok");
-    confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
-		System.out.println("after ok ok");
-
-    record.clickOnSignOut();
- // 1. Login with SuperUser.
- 		tegrity.loginCourses("User1");// log in courses page
- 	   initializeCourseObject();	
- 		
- 	
-
- 	  past_course_a=course.selectCourseThatStartingWith("PastCourseA");
-
+ 	   past_course_a=course.selectCourseThatStartingWith("PastCourseA");
+ 	   courses = record.getCourseRecordingList();
+	    
+ 	   if(courses.size() > 0 ) {
  	    ///check for free status checkbox for edit properties
- 	    while(record.recordingBeingEditedStatus(driver.findElement(By.id("RecordingStatus"+Integer.toString(i))))==true)
- 		{
+ 	    while(record.recordingBeingEditedStatus(driver.findElement(By.id("RecordingStatus"+Integer.toString(i))))==true)	{
  			i++;
  		}
- 	   driver.findElement(By.id("Checkbox"+Integer.toString(i))).click();
- 	
-
+ 	    driver.findElement(By.id("Checkbox"+Integer.toString(i))).click();
  		record.toEditRecordingPropertiesMenu();
  		Thread.sleep(2000);
+ 		
  		erp_window.changeOwner("User1");
- 		
  		erp_window.save_button.click();
- 		
-
- 	  Thread.sleep(11000);
+ 		Thread.sleep(11000);
  	
  		System.out.println("before ok");
         confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
  		System.out.println("after ok ok");
-
+ 	   	}
+ 	   
         record.clickOnSignOut();
  		
     	// 1. Login as ADMIN.
  		tegrity.loginAdmin("Admin");
  		Thread.sleep(2000);
- 		
- 		
  		
  		// 2. Click on course builder href link
  		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
@@ -202,20 +198,9 @@ tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
  	    driver.switchTo().alert().accept();
  	    Thread.sleep(2000);
  	    
- 		// Quit browser
 
- 	  Thread.sleep(2000);
- 	    driver.quit();
-   	
-	    
-	
-		
-		
-		
-		
-		
-		
-	
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 	// description = "get courses list"

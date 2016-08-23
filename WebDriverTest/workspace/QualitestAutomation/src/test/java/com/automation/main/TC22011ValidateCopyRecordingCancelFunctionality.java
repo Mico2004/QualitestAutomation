@@ -1,45 +1,30 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.eclipse.jetty.io.ClientConnectionFactory.Helper;
-import org.junit.AfterClass;
+import java.util.List;
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
+import java.text.DateFormat;
+import java.util.Date;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC22011ValidateCopyRecordingCancelFunctionality {
@@ -70,7 +55,7 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		//driver.manage().window().maximize();
+		//
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -83,12 +68,19 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC22011ValidateCopyRecordingCancelFunctionality at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC22011ValidateCopyRecordingCancelFunctionality at " + DateToStr,
+		 "Starting the test: TC22011ValidateCopyRecordingCancelFunctionality at " + DateToStr, LogAs.PASSED, null);	
+		
 	}
 	
-//	@org.testng.annotations.AfterClass
-//	public void quitBroswer() {
-//		this.driver.quit();
-//	}
+	@AfterClass
+	public void quitBroswer() {
+		this.driver.quit();
+	}
 
 	private void setAuthorInfoForReports() {
 		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
@@ -118,7 +110,6 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws InterruptedException//
 	{
@@ -157,7 +148,7 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 		Thread.sleep(3000);
 		
 		// 8. Click on a checkbox of one recording.
-		record.checkbox.click();
+		record.getCheckbox().click();
 		String checked_recording_title = record.getFirstRecordingTitle();
 			
 		// 9. Hover over "Recording tasks" menu.
@@ -280,12 +271,11 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 			Assert.assertTrue(false);
 		}
 		
-		
-		// Quit the browser
-		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+	
 		
 	}
 	
-
 
 }

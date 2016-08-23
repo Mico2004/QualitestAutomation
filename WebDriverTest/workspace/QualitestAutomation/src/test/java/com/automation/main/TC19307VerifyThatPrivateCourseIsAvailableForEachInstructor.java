@@ -1,24 +1,11 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.security.PublicKey;
-import java.security.spec.ECPrivateKeySpec;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.function.IntToDoubleFunction;
 
-import org.junit.experimental.theories.Theories;
-import org.omg.CORBA.StringHolder;
-import org.omg.Messaging.SyncScopeHelper;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -30,22 +17,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import com.sun.jna.win32.W32APITypeMapper;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
 import junitx.util.ResourceManager;
 
@@ -88,9 +67,12 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 	@BeforeClass
 	public void setup() {
 
-		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		/*
+		 * Firefox only
+		 */
+		driver = new FirefoxDriver();
 
-		// driver.manage().window().maximize();
+		
 		ATUReports.setWebDriver(driver);
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -117,9 +99,14 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		mange_ad_hoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
 		
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor at " + DateToStr,
+		 "Starting the test: TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor at " + DateToStr, LogAs.PASSED, null);
 	}
 
-	
 	 @AfterClass
 	 public void closeBroswer() {
 		 this.driver.quit();
@@ -144,7 +131,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		String instructor_public_course = course.selectCourseThatStartingWith("abc");
 		
 		// 2. Open the following URL - https://<UNIVERSITYURL/api/courses/active.
-		course.goToAPICoursesActive();
+		course.goToAPICoursesActive("User1",0);
 		
 		// 3. Make sure there is only one course with true in the <IsPrivate> tag ("Username sandbox course").
 		String parsed_private_course_name = course.veriftyThatOnlyOneCourseSetIsPrivateAsTrueInAPICourseActive();
@@ -199,7 +186,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 
 		 admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 		 
-		 Thread.sleep(4000);
+		 Thread.sleep(10000);
 	
 		 // 10. Create a new user and assign him to a course as Instructor (User1 sandbox course).
 		 Date date = new Date();
@@ -283,7 +270,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		initializeCourseObject();
  
 		// 13. Open the following URL - https://<UNIVERSITYURL/api/courses/active.
-		course.goToAPICoursesActive();
+		course.goToAPICoursesActive(temp_instructor_user_name,1);
 		 
 		 
 		 // 14. Make sure there is only one course  with true in the <IsPrivate> tag . 
@@ -392,7 +379,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		initializeCourseObject(); 
 		 
 		// 25. Open the following URL - https://<UNIVERSITYURL/api/courses/active.
-		course.goToAPICoursesActive();
+		course.goToAPICoursesActive(temp_instructor_user_name,1);
 		
 		// 26. Make sure there is only one course with true in the <IsPrivate> tag.
 		course.veriftyThatOnlyOneCourseSetIsPrivateAsTrueInAPICourseActive();	
@@ -554,7 +541,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		initializeCourseObject();
 		 
 		// 39. Go to url - https://<UNIVERSITYURL/api/courses/active.
-		course.goToAPICoursesActive();
+		course.goToAPICoursesActive(temp_student_user_name,1);
 				 
 				 
 		// 40. Make sure there is only one course with true in the <IsPrivate> tag.
@@ -585,7 +572,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		course_name_of_recordings_page  = record.getCourseTitle();
 		record.verifyThatStringExistsInCourseName(course_name_of_recordings_page.substring(0, username.length()));
 		record.verifyThatStringExistsInCourseName(course_name_of_recordings_page.substring(username.length()+1, course_name_of_recordings_page.length()-1));
-			
+		Thread.sleep(1000);	
 				 
 		// 44. The course details page is disaplyed.
 		record.verifyThatItIsRecordingsPage();
@@ -593,6 +580,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		// 45. The 'Start a Recording' button is present.
 		record.veriftyThatStartRecordingButtonDisplayed();
 		
-		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
 }}

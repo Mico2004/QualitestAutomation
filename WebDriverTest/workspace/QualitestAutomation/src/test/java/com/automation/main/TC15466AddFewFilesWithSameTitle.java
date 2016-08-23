@@ -3,6 +3,7 @@ package com.automation.main;
 import java.io.File;
 import java.util.List;
 
+import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import java.text.DateFormat;
+import java.util.Date;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
@@ -52,7 +55,7 @@ public class TC15466AddFewFilesWithSameTitle {
 		public void setup() {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
+		
 
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -79,13 +82,23 @@ public class TC15466AddFewFilesWithSameTitle {
 
 			mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 					ManageAdHocCoursesMembershipWindow.class);
-
+			
+			 Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TC15466AddFewFilesWithSameTitle at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC15466AddFewFilesWithSameTitle at " + DateToStr, "Starting the test: TC15466AddFewFilesWithSameTitle at " + DateToStr, LogAs.PASSED, null);	
+		}
+			
+		@AfterClass
+		public void closeBroswer() {
+		
+			this.driver.quit();
 		}
 
 		@Test
 		public void test15466() throws Exception {
-			String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\additional_file.doc";
-			String file_name = "additional_file.doc";
+			String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\addFewFilesFile.txt";
+			String file_name = "addFewFilesFile.txt";
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			/// 2.login as instructor
@@ -120,7 +133,7 @@ public class TC15466AddFewFilesWithSameTitle {
 
 			// 7.check if redirected to additional content tab
 
-			if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[2]")).getAttribute("class").equals("active")) {
+			if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
 				System.out.println("redirected to additional content tab");
 				ATUReports.add("redirected to additional content tab", LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -135,7 +148,7 @@ public class TC15466AddFewFilesWithSameTitle {
 			if((i==1)||(i==2))
 			{
 				record.convertAdditionalContantListToNames();
-				if(record.additional_content_list_names.contains("additional_file "+"("+String.valueOf(i)+")"+".doc"))
+				if(record.additional_content_list_names.contains("addFewFilesFile "+"("+String.valueOf(i)+")"+".txt"))
 				{
 					System.out.println(" Uploaded file appears in Additional Content page with mark e.g. filename (number).extension");
 					ATUReports.add(" Uploaded file appears in Additional Content page with mark e.g. filename (number).extension", LogAs.PASSED, null);
@@ -149,10 +162,9 @@ public class TC15466AddFewFilesWithSameTitle {
 				}
 			}
 			}
-			Assert.assertTrue(true);
-
-			driver.quit();///////////////////////// for download file!!!!!!!!!!!!!
-
+			
+			System.out.println("Done.");
+			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
 		}
 }

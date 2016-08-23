@@ -64,7 +64,11 @@ public class GetSupprtWindow extends Page {
 	public void fillSupportWindowAndSend(String from_email,String from_name,String subject,String comments,ConfirmationMenu confirm ,WebDriver driver)
 	{ try {
 		waitForVisibility(support_window_title);
-	    from_email_field.sendKeys(from_email);
+		from_email_field.clear();
+		from_name_field.clear();
+		subject_field.clear();
+		comments_field.clear();
+		from_email_field.sendKeys(from_email);
 	    from_name_field.sendKeys(from_name);
 	    subject_field.sendKeys(subject);
 	    comments_field.sendKeys(comments);
@@ -74,7 +78,7 @@ public class GetSupprtWindow extends Page {
 		}  
 	   waitForVisibility(send_button);
 	    send_button.click();
-	       waitForVisibility(confirm.ok_button);
+	        waitForVisibility(confirm.ok_button);
 	    	confirm.clickOnOkButtonAfterConfirmEmailSentSuccessfully();
 	    	ATUReports.add("email sent", LogAs.PASSED, null);
 			System.out.println("email sent");

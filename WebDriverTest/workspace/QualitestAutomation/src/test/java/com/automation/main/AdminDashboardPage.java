@@ -43,24 +43,38 @@ public class AdminDashboardPage extends Page {
 	public
 	List<WebElement> users_submenu;
 	@FindBy(css="#ServiceSettingsBox>ul>li>a") List<WebElement> services_setting_submenu;
+	@FindBy (xpath="//*[@id='CoursesBox']/ul/li[4]/a") WebElement manageAdHockCourses;
 
+	
+	// This function get String with the name of target submenu of Courses and clicks on it
 	public void clickOnTargetSubmenuCourses(String target) {
 //		wait.until(ExpectedConditions.visibilityOf(courses_submenu.get(0)));
 		for (int i = 0; i < courses_submenu.size(); i++) {
 			if (courses_submenu.get(i).getText().equals(target)) {
 				try {
-					courses_submenu.get(i).click();
-					System.out.println("Click on target: " + target);
-					break;
+					Thread.sleep(1500);
+					waitForVisibility(courses_submenu.get(i));
+					courses_submenu.get(i).click();					
+					System.out.println("Click on target submenu of Courses: " + target);
+					ATUReports.add("Click on target submenu of Courses.", "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
+					return;
 				} catch (Exception msg) {
-					System.out.println("Not click on target: " + target);
-					System.err.println("ERROR msg: " + msg);
+					System.out.println("Not click on target submenu of Courses: " + target);
+					System.out.println("ERROR msg: " + msg.getMessage());
+					ATUReports.add("Click on target submenu of Courses.", "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, null);
+					return;
 				}
 
 			}
 		}
+		
+		System.out.println("Not found the target submenu to click on: " + target);
+		ATUReports.add("Click on target submenu of Courses.", "Clicked on target submenu.", "Target submenu not found.", LogAs.FAILED, null);
+		Assert.assertTrue(false);
 	}
 
+	
+	// This function get String with the name of target submenu of Users and clicks on it
 	public void clickOnTargetSubmenuUsers(String target) throws InterruptedException {
 		
 //		wait.until(ExpectedConditions.visibilityOfAllElements(users_submenu));
@@ -83,15 +97,24 @@ public class AdminDashboardPage extends Page {
 			if (users_submenu.get(i).getText().equals(target)) {
 				try {
 					users_submenu.get(i).click();
-					System.out.println("Click on target: " + target);
-					break;
+					System.out.println("Click on target submenu of Users: " + target);
+					ATUReports.add("Click on target submenu of Users.", "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
+					return;
 				} catch (Exception msg) {
-					System.out.println("Not click on target: " + target);
-					System.err.println("ERROR msg: " + msg);
+					System.out.println("Not click on target submenu of Users menu: " + target);
+					System.out.println("ERROR msg: " + msg);
+					ATUReports.add("Click on target submenu of Users.", "Clicked on target submenu.", "Not clicked on target submenu.", LogAs.FAILED, null);
+					return;
 				}
 
 			}
 		}
+		
+		
+		
+		System.out.println("Not found the target submenu to click on: " + target);
+		ATUReports.add("Click on target submenu of Users.", "Clicked on target submenu.", "Target submenu not found.", LogAs.FAILED, null);
+		Assert.assertTrue(false);
 	}
 
 	// This function go to admin dashboard by using its url
@@ -102,20 +125,34 @@ public class AdminDashboardPage extends Page {
 		driver.navigate().to(course_page_url);
 	}
 
+	
+	// This function get String with the name of target submenu of Service Settings and Maintenance and clicks on it
 	public void clickOnTargetSubmenuAdvancedServices(String target) {
 
 		for (int i = 0; i < services_setting_submenu.size(); i++) {
 			if (services_setting_submenu.get(i).getText().equals(target)) {
 				try {
 					services_setting_submenu.get(i).click();
-					System.out.println("Click on target: " + target);
-					break;
+					System.out.println("Click on target submenu of Service Settings and Maintenance: " + target);
+					ATUReports.add("Click on target submenu of Service Settings and Maintenance.", "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
+					return;
 				} catch (Exception msg) {
-					System.out.println("Not click on target: " + target);
-					System.err.println("ERROR msg: " + msg);
+					System.out.println("Not click on target submenu of Serivce Settings and Maintenance: " + target);
+					System.out.println("ERROR msg: " + msg);
+					ATUReports.add("Click on target submenu of Service Settings and Maintenance.", "Clicked on target submenu.", "Not clicked on target submenu.", LogAs.FAILED, null);
+					return;
 				}
 
 			}
 		}
+		
+		System.out.println("Not found the target submenu to click on: " + target);
+		ATUReports.add("Click on target submenu of Service Settings and Maintenance.", "Clicked on target submenu.", "Target submenu not found.", LogAs.FAILED, null);
+		Assert.assertTrue(false);
 	}
+
+
+	
+	
+	
 }

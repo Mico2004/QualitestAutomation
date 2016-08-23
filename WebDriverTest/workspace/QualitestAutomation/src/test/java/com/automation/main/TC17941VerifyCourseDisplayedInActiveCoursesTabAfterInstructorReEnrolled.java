@@ -4,16 +4,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+import java.text.DateFormat;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import junitx.util.PropertyManager;
@@ -51,11 +51,12 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 	String instructor2;
 	String student;
     List<String> for_enroll;
+    
 	@BeforeClass
 	public void setup() {
 
 		driver = new FirefoxDriver();
-		driver.manage().window().maximize();
+		
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -82,9 +83,20 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnrolled at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnrolled at " + DateToStr,
+		 "Starting the test: TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnrolled at " + DateToStr, LogAs.PASSED, null);	
 
 	}
 
+	@AfterClass
+	public void closeBroswer() {		
+		this.driver.quit();
+	}
+	
 	@Test
 	public void test17941() throws InterruptedException {
 
@@ -104,8 +116,7 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 		// // ownership change
 		
 		String past_course_a = course.selectCourseThatStartingWith("PastCourseA");/// get
-																					/// course
-																					/// name
+																					/// course																			/// name
 		Thread.sleep(3000);
 		course.signOut();
 		Thread.sleep(2000);
@@ -153,7 +164,7 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 		Thread.sleep(3000);
 		course.selectCourseThatStartingWith(past_course_a);
 		Thread.sleep(3000);
-        record.changeRecordingOwnership(confirm_menu, erp_window,instructor1,record.checkbox);
+        record.changeRecordingOwnership(confirm_menu, erp_window,instructor1,record.getCheckbox());
 		record.clickOnSignOut();
 
 		/////////////////////////////////////////////// end of preset
@@ -241,8 +252,9 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 	   //19.Verify that "Past Courses" tab is not displayed
 		
 		course.verifyNoPastCoursesTab();
-		// quit
-		driver.quit();
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 
 	// description = "get courses list"

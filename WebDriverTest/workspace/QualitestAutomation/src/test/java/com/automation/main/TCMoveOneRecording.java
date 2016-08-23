@@ -5,22 +5,9 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.PrimitiveIterator.OfDouble;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import java.text.DateFormat;
+import java.util.Date;
 import javax.xml.parsers.ParserConfigurationException;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.params.HttpParams;
-import org.apache.xalan.templates.ElemAttributeSet;
-import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -28,13 +15,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import junit.framework.Assert;
@@ -68,21 +51,27 @@ public class TCMoveOneRecording {
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 			driver = new ChromeDriver();/////MUST FOR TEST TO GET XML	
 		
-			driver.manage().window().maximize();
+			
              tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
+             
+             Date curDate = new Date();
+             String DateToStr = DateFormat.getInstance().format(curDate);
+             System.out.println("Starting the test: TCMoveOneRecording at " + DateToStr);
+             ATUReports.add("Message window.", "Starting the test: TCMoveOneRecording at " + DateToStr,
+             "Starting the test: TCMoveOneRecording at " + DateToStr, LogAs.PASSED, null);
+             
 		} catch (Exception e) {
 			/// ATUReports.add("Fail Step", LogAs.FAILED, new
 			/// CaptureScreen(ScreenshotOf.DESKTOP));
 		}
 	}
-	/*
-	@AfterClass
+
+    @AfterClass
 	public void quit()
 	{
 		driver.quit();
-		System.out.println("driver quited successfully");
 	}
-	*/
+	
 	@Test
 	public void moveRecording() throws InterruptedException, ParserConfigurationException, Exception, IOException {
 		// 1.load main page chrome
@@ -96,7 +85,7 @@ public class TCMoveOneRecording {
 	   
 	  	// 1.load main page 
 	        driver=DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
+			
             tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
@@ -112,7 +101,7 @@ public class TCMoveOneRecording {
 	    String first_course=course.first_course_button.getText();
 		course.selectFirstCourse(record);
         //5.verify check box is selected and then  load move menu
-      record.checkbox.click();
+      record.getCheckbox().click();
       record.clickOnRecordingTaskThenMove();
       move_menu=PageFactory.initElements(driver,MoveWindow.class);
         //6.source course is not displayed in move window list
@@ -128,7 +117,7 @@ public class TCMoveOneRecording {
         course = PageFactory.initElements(driver, CoursesHelperPage.class);
         course.first_course_button.click();
         Thread.sleep(2000);
-        record.checkbox.click();
+        record.getCheckbox().click();
         record.clickOnRecordingTaskThenMove();
         move_menu=PageFactory.initElements(driver,MoveWindow.class);
         Thread.sleep(3000);
@@ -170,7 +159,7 @@ public class TCMoveOneRecording {
 	     course.selectFirstCourse(record);
 		String original_recorder_name = driver.findElement(By.id("RecordedBy1")).getText();/// take recorder namme for later 
 		//Select destination course:verify check box is selected and then  load move menu
-        record.checkbox.click();
+        record.getCheckbox().click();
         record.clickOnRecordingTaskThenMove();        //Select destination course:mark destination course by clicking on it
         String destination_course_name=move_menu.course_list.get(0).getText();
         move_menu.course_list.get(0).click();
@@ -242,7 +231,10 @@ public class TCMoveOneRecording {
 		Thread.sleep(15000);
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 	
-	
+
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+			
 	}
 
 	// description = "get courses list"

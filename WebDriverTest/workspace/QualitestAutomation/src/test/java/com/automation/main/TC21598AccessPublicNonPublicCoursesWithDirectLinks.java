@@ -2,13 +2,20 @@ package com.automation.main;
 
 import java.util.List;
 
-import org.jboss.netty.channel.ReceiveBufferSizePredictor;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import java.text.DateFormat;
+import java.util.Date;
+import atu.testng.reports.ATUReports;
+import atu.testng.reports.logging.LogAs;
 
 public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 	// Set Property for ATU Reporter Configuration
@@ -58,7 +65,7 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -90,8 +97,20 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 		run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		publish_window=PageFactory.initElements(driver, PublishWindow.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC21598AccessPublicNonPublicCoursesWithDirectLinks at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC21598AccessPublicNonPublicCoursesWithDirectLinks at " + DateToStr,
+		 "Starting the test: TC21598AccessPublicNonPublicCoursesWithDirectLinks at " + DateToStr, LogAs.PASSED, null);	
 	}
 
+	@AfterClass
+	public void closeBroswer() {		
+		this.driver.quit();
+	}
+
+	
 	@Test
 	public void test21598() throws Exception {
 		///pre condition
@@ -109,16 +128,24 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 		record.toCourseSettingsPage();
 		// 5.verify unchecked visibility of course 
 		course_settings.uncheckCourseVisibility();
-	//6.Go back the to course content page
+	    //6.Go back the to course content page
 		record.returnToCourseListPage();
 		course.waitForVisibility(course.sign_out);
        //7.Copy the URL
-       String current_url=driver.getCurrentUrl(); 	
+	   Thread.sleep(3000);
+       String current_url=driver.getCurrentUrl();   
        //8.sign out
        course.signOut();
        ///9.Past the copied url to the browser and press enter
        driver.get(current_url);
        course.waitForVisibility(course.sign_out);
+       
+       if((driver instanceof InternetExplorerDriver)) {
+           System.out.println("This test is not working in IE.");
+           ATUReports.add("This test is not working in IE.", "Done.", "Done.", LogAs.FAILED, null);
+       	   Assert.assertTrue(false);      
+       }
+    
        //10.Validate the course that we mention in the preconditions is not displayed in the course list.
 	   initializeCourseObject();
 	   course.verifyCourseNotExist(course_name);
@@ -129,32 +156,36 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 		tegrity.loginCourses("User1");
 		course.waitForVisibility(course.active_courses_tab_button);
 		// 13.click on course
-				String course_name2=course.selectCourseThatStartingWith("Ab");
-				// 14.to course settings
-				record.waitForVisibility(record.course_tasks_button);
-				record.toCourseSettingsPage();
-				// 15.verify checked visibility of course 
-				course_settings.checkCourseVisibility();
-				///16.sign-out
-				record.waitForVisibility(record.sign_out);
-				record.returnToCourseListPage();
-			    course.waitForVisibility(course.sign_out);
-				course.signOut();
+		String course_name2=course.selectCourseThatStartingWith("Ab");
+		// 14.to course settings
+		record.waitForVisibility(record.course_tasks_button);
+		record.toCourseSettingsPage();
+		// 15.verify checked visibility of course 
+		course_settings.checkCourseVisibility();
+		///16.sign-out
+		record.waitForVisibility(record.sign_out);
+		record.returnToCourseListPage();
+		course.waitForVisibility(course.sign_out);
+		course.signOut();
 	   //17.Past the copied url to the browser and press enter
-				driver.get(current_url);
-				course.waitForVisibility(course.public_courses_tab_button);
-				//18.verify course exists and start a recording
-				initializeCourseObject();
-				course.verifyCourseExist(course_name2);
-				course.selectCourseByName(course_name2);
-				record.waitForVisibility(record.checkbox);
-				record.verifyFirstExpandableRecording();
-				Thread.sleep(2000);
-				// 19.player is working
-				driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-				Thread.sleep(15000);
-				player_page.verifyTimeBufferStatusForXSec(10);// check source display
-                driver.quit();
+		driver.get(current_url);
+		course.waitForVisibility(course.public_courses_tab_button);
+		//18.verify course exists and start a recording
+		initializeCourseObject();
+		course.verifyCourseExist(course_name2);
+		course.selectCourseByName(course_name2);
+		record.waitForVisibility(record.getCheckbox());
+		record.verifyFirstExpandableRecording();
+		Thread.sleep(2000);
+				
+		// 19.player is working
+		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+		Thread.sleep(15000);
+		player_page.verifyTimeBufferStatusForXSec(10);// check source display
+				
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+               
 	}
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {

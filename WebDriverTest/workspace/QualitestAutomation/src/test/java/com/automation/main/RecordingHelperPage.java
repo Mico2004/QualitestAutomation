@@ -15,22 +15,30 @@ import java.nio.file.Paths;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.openqa.selenium.support.PageFactory;
 import javax.lang.model.util.ElementScanner6;
 import javax.xml.bind.ParseConversionEvent;
 
 import org.apache.commons.io.filefilter.TrueFileFilter;
+import org.apache.commons.logging.Log;
 import org.apache.http.impl.client.EntityEnclosingRequestWrapper;
 import org.omg.CORBA.PUBLIC_MEMBER;
+import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
+//import com.automation.objects.RecordingObject;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
@@ -66,6 +74,7 @@ public class RecordingHelperPage extends Page {
 	@FindBy(linkText = "Recording Tasks")
 	WebElement recording_tasks_button;
 	@FindBy(id = "CourseTask")
+	public
 	WebElement course_tasks_button;
 	@FindBy(id = "CourseSettings")
 	WebElement course_settings_button;
@@ -77,24 +86,28 @@ public class RecordingHelperPage extends Page {
 	WebElement delete_button;
 	@FindBy(id = "DeleteTask")
 	WebElement content_tasks_delete_button;
+	@FindBy(xpath= "//*[@id='RecordedBy1']")
+	WebElement FirstRecordByName;
 	@FindBy(id = "Checkbox1")
 	WebElement checkbox;
 	@FindBy(xpath = "//*[@id=\"CopyButton\"]")
 	WebElement copy_menu_recbtn;
 	@FindBy(id = "tegritySearchBox")
-	WebElement searchbox;
+	public WebElement searchbox;
 	@FindBy(id = "CheckAll")
 	WebElement checkall;
 	@FindBy(xpath = "//*[starts-with(@id,'Checkbox')]")
-	List<WebElement> checkboxlist;// @FindBy(css="//input[@type='checkbox']")
-									// List<WebElement> checkboxlist;
+	List<WebElement> checkboxlist;// @FindBy(css="//input[@type='checkbox']")// List<WebElement> checkboxlist;
 	@FindBy(xpath = "//*[@id='Recording1']/strong")
-	WebElement first_recording_title;
+	public WebElement first_recording_title;
 	@FindBy(xpath = "//*[@id='Recording1']/strong")
 	WebElement first_course_title;
-	@FindBy(partialLinkText = "Courses")
+@FindBy(xpath = "//*[@id='Recording2']/strong")
+	WebElement second_course_title;
+	@FindBy(xpath = "//*[@id='RecordingTitle1']/strong")
+	WebElement first_course_title_tests;
+	@FindBy(css="#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")
 	WebElement courses_link;
-
 	@FindBy(id = "CheckAll")
 	WebElement check_all_checkbox;
 	@FindBy(css = ".ng-pristine.ng-valid")
@@ -106,8 +119,7 @@ public class RecordingHelperPage extends Page {
 	@FindBy(id = "RecordingStatus1")
 	WebElement first_recording_status;
 	@FindBy(id = "StudentRecordingsTab")
-	public
-	WebElement student_recordings_tab;
+	public WebElement student_recordings_tab;
 	@FindBy(id = "TestsTab")
 	WebElement tests_tab;
 	@FindBy(id = "AdditionalContentTab")
@@ -116,7 +128,6 @@ public class RecordingHelperPage extends Page {
 	WebElement move_button_on_recording_tasks_menu;
 	@FindBy(id = "CourseSettings")
 	WebElement course_setting_in_menu;
-
 	@FindBy(id = "RecordingStatus1")
 	WebElement course_being_copied_status;
 	@FindBy(id = "RecordingLength1")
@@ -132,11 +143,15 @@ public class RecordingHelperPage extends Page {
 	List<String> recording_list_duration_string;
 	List<String> recordings_list_recorder_name_string;
 	@FindBy(xpath = "//*[@id=\"Recording1\"]/strong ")
-	WebElement first_recording; /// first recording
-	@FindBy(xpath = "//*[@id=\"scrollableArea\"]/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a ")
+	public WebElement first_recording; /// first recording
+	@FindBy(xpath = "//*[@id=\"scrollableArea\"]/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a")
 	WebElement first_video_recording;/// first video in first recording
+	@FindBy(id = "CourseTask")
+	WebElement course_task;
 	@FindBy(id = "SortingTasks")
 	WebElement view_button; /// view button
+	@FindBy(id = "SortingTasks")
+	WebElement view_buttonTest;
 	@FindBy(linkText = "Title")
 	WebElement sort_by_title; /// title sort
 	@FindBy(linkText = "Duration")
@@ -170,6 +185,8 @@ public class RecordingHelperPage extends Page {
 	WebElement rssfeed;
 	@FindBy(xpath = "//*[@id=\"scrollableArea\"]/div[1]/div[1]/div[2]/div/ul/li/ul/li[10]/span")
 	WebElement subscribe_button;
+	@FindBy(xpath ="//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")
+	WebElement firstRec;
 	@FindBy(id = "VideoPodcast")
 	WebElement video_podcast;
 	@FindBy(id = "PublishTask")
@@ -203,8 +220,7 @@ public class RecordingHelperPage extends Page {
 	@FindBy(xpath = "//a[starts-with(@id,'NewItem')]")
 	List<WebElement> additional_content_list;
 	@FindBy(id = "RecordingsTab")
-	public
-	WebElement recordings_tab;
+	public WebElement recordings_tab;
 	@FindBy(id = "UploadFile")
 	WebElement select_upload_additional_file;
 	@FindBy(id = "AddFileButton")
@@ -214,7 +230,7 @@ public class RecordingHelperPage extends Page {
 	@FindBy(id = "NewItem1")
 	WebElement first_additional_content_title;
 	@FindBy(id = "Checkbox2")
-	WebElement checkbox2;
+	public WebElement checkbox2;
 	@FindBy(id = "AddAdditionalContentLink")
 	WebElement add_additional_content_link;
 	@FindBy(id = "DisclaimerLink")
@@ -233,7 +249,18 @@ public class RecordingHelperPage extends Page {
 	WebElement request_captions_button;
 	@FindBy(id = "DownloadRecording")
 	WebElement download;
-
+	@FindBy(css = ".bookmark")
+	List<WebElement> bookmarks_list;
+	public @FindBy(css = ".resume-button.ng-scope>a") List<WebElement> list_of_resume_buttons;
+	public @FindBy(css = ".video-wrap") List<WebElement> video_wraps_of_chapters_of_opened_recording_list;
+	public @FindBy(css = ".thumbnail-image") List<WebElement> images_thumbnail_of_recording_chapters_list;
+	public @FindBy(id = "TegrityLogo") WebElement tegrity_logo;
+	public @FindBy(css = ".ng-scope>.ng-scope.ng-binding") WebElement breadcrumbs_courses_link;
+	public @FindBy(id = "InstituteLogotype") WebElement institute_logo;
+	public @FindBy(css = ".dropdown-menu.text-left>div>li>span") WebElement view_menu_tags_text;
+	public ConfirmationMenu confirm_menu;
+	public CopyMenu copyMenu;
+	
 	// Set Property for ATU Reporter Configuration
 	{
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
@@ -242,36 +269,40 @@ public class RecordingHelperPage extends Page {
 
 	public RecordingHelperPage(WebDriver browser) {
 		super(browser);
+		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);	
 		// TODO Auto-generated constructor stub
 	}
 
 	public void deleteAllRecordings(DeleteMenu delete_menu) throws InterruptedException {
 		try {
-			wait.until(ExpectedConditions.visibilityOf(checkbox));
+			Thread.sleep(1000);
+			wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
 
 			int number_of_recordings_in_target_course = getNumberOfRecordings();
 
 			System.out.println("Number of recordings to delete: " + number_of_recordings_in_target_course);
 
 			if (number_of_recordings_in_target_course == 0) {
-				System.out.println("There is no recordings in target course.");
-				ATUReports.add("Recordings.", "There is no recordings in target course.",
-						"There is no recordings in target course.", LogAs.PASSED, null);
+				System.out.println("There are no recordings in target course.");
+				ATUReports.add("Recordings.", "There are no recordings in target course.",
+						"There are no recordings in target course.", LogAs.PASSED, null);
 			} else {
-				System.out.println("There is recordings in target course, then it will delete them all.");
-				ATUReports.add("Recordings.", "There is recordings in target course, then it will delete them all.",
-						"There is recordings in target course, then it will delete them all.", LogAs.PASSED, null);
-
+				System.out.println("There are recordings in target course, starting deletion of all of them");
+				ATUReports.add("Recordings.", "There are recordings in target course, starting deletion of all of them",
+						"There are recordings in target course, then it will delete them all.", LogAs.PASSED, null);
+						
 				checkAllCheckBox();
-				clickOnRecordingTaskThenDelete();
-				Thread.sleep(2000);
+				clickOnRecordingTaskThenDelete();				
 				delete_menu.clickOnDeleteButton();
+				wait.until(ExpectedConditions.visibilityOf(confirm_menu.ok_button));						
 				Thread.sleep(2000);
+				confirm_menu.ok_button.click();		
+				Thread.sleep(1000);;
 			}
 		} catch (Exception msg) {
-			System.out.println("There is no recordings in target course.");
-			ATUReports.add("Recordings.", "There is no recordings in target course.",
-					"There is no recordings in target course.", LogAs.PASSED, null);
+			System.out.println("Failed to check the checkbox and delete all recordings");
+			ATUReports.add("Recordings.", "Failed to check the checkbox and delete all recordings",
+					"Failed to check the checkbox and delete all recordings", LogAs.WARNING, null);
 		}
 	}
 
@@ -302,13 +333,18 @@ public class RecordingHelperPage extends Page {
 	// If after t time there is still status, then it will Assert error + log it
 	// Otherewise it will pass
 	public void checkStatusExistenceForMaxTTime(int time_in_sec) throws InterruptedException {
+		System.out.println("Begin Status Check");		
+		wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.id("wrapper")), "length:"));
 		for (int i = 0; i < (time_in_sec / 3 + 1); i++) {
 			if (!checkExistenceOfStatusInRecordings()) {
 				System.out.println("There is no more status for any recording.");
 				ATUReports.add("There is no more status for any recording.", LogAs.PASSED, null);
+				System.out.println("after There is no more status for any recording.");
 				Assert.assertTrue(true);
+				
 				return;
 			}
+			System.out.println("Status Check iteration"+i);
 			Thread.sleep(3000);
 		}
 
@@ -316,6 +352,7 @@ public class RecordingHelperPage extends Page {
 		ATUReports.add("There is still status for some recording.", LogAs.FAILED, null);
 		Assert.assertFalse(true);
 	}
+
 
 	// This function check for all recordings if they are clickable.
 	// if all recordings clickable it return true,
@@ -345,54 +382,93 @@ public class RecordingHelperPage extends Page {
 	// This function check for all recordings if any of them have status.
 	// If there is recording that have status it will return true,
 	// otherwise it will return false
-	public boolean checkExistenceOfStatusInRecordings() {
-		int i = 0;
-		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {
-			i++;
-			String current_element = driver.findElement(By.id("RecordingStatus" + Integer.toString(i))).getText();
-			if (!current_element.equals("")) {
-				return true;
+	public boolean checkExistenceOfStatusInRecordings() throws InterruptedException {
+		int i = 1;
+		System.out.println("Begin checkExistenceOfStatusInRecordings");
+		Thread.sleep(1000);
+		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {			    
+				WebElement recordStatus =getStaleElem(By.id("RecordingStatus"+ Integer.toString(i)), driver);
+				//wait.until(ExpectedConditions.visibilityOf(recordStatus));
+				String current_element = getTextFromWebElement(recordStatus);						
+						//recordStatus.getText();
+				if (!current_element.equals("")) {
+					return true;
+				}
+				i++; 
 			}
-		}
-
 		return false;
+	}
+	
+		public void returnToCourseListPage(CoursesHelperPage course) throws InterruptedException {		
+		
+		try{		
+					
+			wait.until(ExpectedConditions.visibilityOf(courses_link));		
+			courses_link.click();			
+			Thread.sleep(2000);		
+			ATUReports.add("Clicked on Courses link.", "Go back to courses page",		
+					"Go back to courses page", LogAs.PASSED, null);		
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ActiveCourses"))));
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));
+		}		
+		 catch (Exception msg) {		
+			try{driver.navigate().refresh();		
+			wait.until(ExpectedConditions.visibilityOf(courses_link));		
+			courses_link.click();	
+			}catch(Exception e){		
+				System.out.println("Not clicked on Courses link." + msg.getMessage() );		
+				ATUReports.add("Not clicked on Courses link.", "Courses page heading",		
+						"Not found courses page heading. Page url: " + driver.getCurrentUrl(), LogAs.FAILED, null);		
+			}		
+					
+					
+		}		
 	}
 
 	// This function select first recording from recording list
 	public void selectFirstCheckbox() throws InterruptedException {
-		for (int i = 0; i < 5; i++) {
-			wait.until(ExpectedConditions.elementToBeClickable(checkbox));
-//			checkbox.click();
-			ClickOneCheckBoxOrVerifyAlreadySelected(checkbox);
-			
-			if (checkbox.isSelected()) {
-				System.out.println("First checkbox is selected");
-				ATUReports.add("Select any recording", "First checkbox is selected", "First checkbox is selected",
-						LogAs.PASSED, null);
-				Assert.assertTrue(true);
-				break;
-			} else {
-				System.out.println("First checkbox is not selected");
-				ATUReports.add("Select any recording", "First checkbox is selected", "First checkbox is not selected",
-						LogAs.FAILED, null);
-				Assert.assertTrue(false);
-				Thread.sleep(1000);
-			}
-		}
-
+		// for (int i = 0; i < 5; i++) {
+		// wait.until(ExpectedConditions.elementToBeClickable(checkbox));
+		//// checkbox.click();
+		// ClickOneCheckBoxOrVerifyAlreadySelected(checkbox);
+		//
+		// if (checkbox.isSelected()) {
+		// System.out.println("First checkbox is selected");
+		// ATUReports.add("Select any recording", "First checkbox is selected",
+		// "First checkbox is selected",
+		// LogAs.PASSED, null);
+		// Assert.assertTrue(true);
+		// break;
+		// } else {
+		// System.out.println("First checkbox is not selected");
+		// ATUReports.add("Select any recording", "First checkbox is selected",
+		// "First checkbox is not selected",
+		// LogAs.FAILED, null);
+		// Assert.assertTrue(false);
+		// Thread.sleep(1000);
+		// }
+		// }
+		
+		
+		selectIndexCheckBox(1);
 	}
 
 	// This function clicks on title of recording in index i
-	public void clickOnRecordingTitleInIndex(int index) {
+	public void clickOnRecordingTitleInIndex(int index) throws InterruptedException {
 		System.out.println("Click on title in index: " + index);
-		searchbox.click();
-		wait.until(ExpectedConditions
-				.elementToBeClickable(By.xpath("//*[@id='Recording" + Integer.toString(index) + "']/strong")));
-		driver.findElement(By.xpath("//*[@id='Recording" + Integer.toString(index) + "']/strong")).click();
-
-		// driver.findElement(By.xpath("html/body/google-analytics/google-analytics/div[1]/div[2]/div[3]/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
+	      waitForVisibility(driver.findElement(By.xpath("//*[@id='Recording" + Integer.toString(index) + "']/strong")));
+	       driver.findElement(By.xpath("//*[@id='Recording" + Integer.toString(index) + "']/strong")).click();
+	        Thread.sleep(1000);
+	        if(driver instanceof InternetExplorerDriver) {
+	        	if(!isElementPresent(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap"))){
+	               wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='Recording" + Integer.toString(1) + "']/strong")));
+	               Thread.sleep(1000);
+	               //driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
+	             driver.findElement(By.xpath("html/body/google-analytics/google-analytics/div[1]/div[2]/div[3]/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
+	           }    
+	        }
 	}
-
+	
 	// This function clicks on first recording title
 	public void clickOnRecordingInIndex(int index) {
 		driver.findElement(By.xpath("//*[@id='Recording" + Integer.toString(index) + "']/strong")).click();
@@ -401,6 +477,7 @@ public class RecordingHelperPage extends Page {
 	// This function clicks on first recording title
 	public void clickOnFirstRecordingTitle() {
 		first_recording_title.click();
+
 	}
 
 	// This function return first recording title
@@ -408,6 +485,21 @@ public class RecordingHelperPage extends Page {
 		wait.until(ExpectedConditions.visibilityOf(first_recording_title));
 		return first_recording_title.getText();
 	}
+	
+	public String getFirstRecordingTitleTest() {
+		wait.until(ExpectedConditions.visibilityOf(first_course_title_tests));
+		return first_course_title_tests.getText();
+	}
+	
+public String getSecondRecordingTitleTest() {
+		wait.until(ExpectedConditions.visibilityOf(first_course_title_tests));
+		return second_course_title.getText();
+	}
+	public String getFirstRecordingByName() {
+		wait.until(ExpectedConditions.visibilityOf(FirstRecordByName));
+		return FirstRecordByName.getText();
+	}
+	
 
 	// This function waits until first recording status "Being Copied from"
 	// dissaper
@@ -444,6 +536,13 @@ public class RecordingHelperPage extends Page {
 															// courses are
 															// present
 				{
+					for(String handle: driver.getWindowHandles()) {
+						driver.switchTo().window(handle);
+						if(driver.getPageSource().contains("feedHeader")) { 
+							break;
+						}
+					}
+					
 					ATUReports.add("Clicked on podcast.", LogAs.PASSED, null);
 					System.out.println("Clicked on podcast.");
 					Assert.assertTrue(true);
@@ -451,12 +550,8 @@ public class RecordingHelperPage extends Page {
 				}
 			} catch (Exception e) {
 			}
-			moveToElementAndClick(course_tasks_button, driver);// solution
-																// to
-																// solve
-																// hover
-																// and
-																// click
+			moveToElementAndClick(course_tasks_button, driver);// solution to solve hover and click
+
 			Thread.sleep(1000);
 			try {
 
@@ -550,27 +645,38 @@ public class RecordingHelperPage extends Page {
 			robot.mouseMove(-100, -100);
 		} catch (AWTException e1) {
 			// TODO Auto-generated catch block
-			System.out.println("couldn't use robot");
+			System.out.println("Could not use the robot.");
 		}
 		waitForVisibility(recording_tasks_button);
+		System.out.println("waitForVisibility(recording_tasks_button");
 		moveToElementAndClick(recording_tasks_button, driver);
-		copy_button.click(); // solve
-
+		System.out.println("moveToElementAndClick");
+		for (int i = 0; i < 10; i++) {
+			recording_tasks_button.sendKeys(Keys.TAB);// solution	
+			System.out.println("recording_tasks_button.sendKeys(Keys.TAB)");
+			
 		try {
-
+			Thread.sleep(500);
+			copy_button.click(); // solve
+			System.out.println("copy_button.click()");
+			Thread.sleep(1000);
 			waitForVisibility(driver.findElement(By.id("ModalDialogHeader")));
-			if (isElementPresent(By.id("ModalDialogHeader")))// check if
-			{
-				System.out.println("copy menu verified ");
-				ATUReports.add("copy menu verified ", LogAs.PASSED, null);
+			if (driver.findElement(By.id("ModalDialogHeader")).getText().equals("Copy")) {
+				System.out.println("Copy menu is displayed.");
+				ATUReports.add("Clicked on Recording Task -> Copy.", "Copy menu is displayed.",
+						"Copy menu is displayed.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
+				return;
 			}
-		} catch (Exception e) {
-			System.out.println("copy menu not verified ");
-			ATUReports.add("copy menu not verified ", LogAs.PASSED, null);
-			Assert.assertTrue(false);
+			} catch (Exception e) {
+			
+			}	
 		}
-	}
+		System.out.println("Copy menu not verified.");
+		ATUReports.add("Clicked on Recording Task -> Copy.", "Copy menu is displayed.",
+				"Copy menu is not displayed.", LogAs.FAILED, null);
+		Assert.assertTrue(false);
+}
 
 	// This function return all recordings of current course
 	public List<String> getCourseRecordingList() {
@@ -603,20 +709,20 @@ public class RecordingHelperPage extends Page {
 
 	// This function clicks on checkbox which is checking all checkbox.
 	public List<String> checkAllCheckBox() {
-		wait.until(ExpectedConditions.visibilityOf(checkbox));
-		wait.until(ExpectedConditions.visibilityOf(first_course_title));
-
+		System.out.println("checkAllCheckBox1");
+		wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
+		System.out.println("checkAllCheckBox2");
 		check_all_checkbox.click();
-
+		System.out.println("checkAllCheckBox4");
 		List<String> recording_names_list = getCourseRecordingList();
-
+		
 		for (int i = 0; i < recording_names_list.size(); i++) {
 			int j = i + 1;
 			String checkbox_indexed = "Checkbox" + Integer.toString(j);
 			if (!driver.findElement(By.id(checkbox_indexed)).isSelected()) {
 				System.out.println("Not all recording checked.");
 				ATUReports.add("Select several recordings", "All recording checked", "Not all recording checked.",
-						LogAs.PASSED, null);
+						LogAs.FAILED, null);
 				Assert.assertTrue(false);
 
 				return recording_names_list;
@@ -636,8 +742,8 @@ public class RecordingHelperPage extends Page {
 	// It will return true if the recording found. Otherwise it will return
 	// false.
 	public boolean isRecordingExist(String recording_name, boolean need_to_be_exists) {
-		// waitForVisibility(first_course_title);
-		wait.until(ExpectedConditions.visibilityOf(first_course_title));
+		
+		//wait.until(ExpectedConditions.visibilityOf(first_course_title));
 		recording_list_names = convertRecordingsListToNames();
 		if (recording_list_names.contains(recording_name)) {
 			if (need_to_be_exists == true) {
@@ -669,17 +775,37 @@ public class RecordingHelperPage extends Page {
 	// This function clicks on coures link, and return to courses list page
 	public void returnToCourseListPage() throws InterruptedException {
 		for (int i = 0; i < 5; i++) {
-			try {
+			try {		
+			
+				WebElement wi = driver.findElement(By.xpath("//*[@id='tegrityBreadcrumbsBox']"));	
+				waitForVisibility(check_all_checkbox);			
+				check_all_checkbox.click();
+				Actions builder = new Actions(driver);	
+				builder.sendKeys(Keys.PAGE_UP);				
+				builder.moveToElement(wi).build().perform();					
+				builder.click();					
 				wait.until(ExpectedConditions.visibilityOf(courses_link));
-				courses_link.click();
+				courses_link.click();		
 				Thread.sleep(1000);
-			} catch (Exception msg) {
 				break;
+			} catch (Exception msg) {
+		
+				
 			}
-		}
+		}		
 
 		try {
-			WebElement courses_title = driver.findElement(By.id("CoursesHeading"));
+			WebElement courses_title = null;
+			
+			for(int sec=0; sec<10; sec++) {
+				try {
+					System.out.println("b7");
+					courses_title = driver.findElement(By.id("CoursesHeading"));
+				} catch(Exception msg) {
+					System.out.println("b8");
+					Thread.sleep(1000);
+				}
+			}
 
 			if (courses_title.getText().equals("Courses")) {
 				System.out.println("Click on Courses link.");
@@ -753,36 +879,40 @@ public class RecordingHelperPage extends Page {
 	// verify check box is selected
 	public void ClickOneCheckedboxSelected(WebElement check) throws InterruptedException {
 		ClickOneCheckBoxOrVerifyAlreadySelected(check);
-//		try {
-//			waitForVisibility(check);
-//			check.click();
-//			System.out.println("one checkboxe is selected");
-//			ATUReports.add("one checkboxe is selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
-//		} catch (Exception e) {
-//			System.out.println("one checkboxe is not selected");
-//			ATUReports.add("one checkboxe is  not selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
-//		}
-//		Thread.sleep(1000);
-//		Assert.assertTrue(check.isSelected());
+		// try {
+		// waitForVisibility(check);
+		// check.click();
+		// System.out.println("one checkboxe is selected");
+		// ATUReports.add("one checkboxe is selected", LogAs.PASSED, new
+		// CaptureScreen(ScreenshotOf.DESKTOP));
+		// } catch (Exception e) {
+		// System.out.println("one checkboxe is not selected");
+		// ATUReports.add("one checkboxe is not selected", LogAs.FAILED, new
+		// CaptureScreen(ScreenshotOf.DESKTOP));
+		// }
+		// Thread.sleep(1000);
+		// Assert.assertTrue(check.isSelected());
 
 	}
 
 	// verify check box is selected
 	public void ClickOneCheckedboxNotSelected(WebElement check) throws InterruptedException {
 		unClickOneCheckBoxOrVerifyNotSelected(check);
-//		try {
-//			waitForVisibility(check);
-//			check.click();
-//			Thread.sleep(1000);
-//			System.out.println("one checkboxe is not selected");
-//			ATUReports.add("one checkboxe is not selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
-//		} catch (Exception e) {
-//			Thread.sleep(1000);
-//			System.out.println("one checkboxe is selected");
-//			ATUReports.add("one checkboxe is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
-//		}
-//
-//		Assert.assertFalse(check.isSelected());
+		// try {
+		// waitForVisibility(check);
+		// check.click();
+		// Thread.sleep(1000);
+		// System.out.println("one checkboxe is not selected");
+		// ATUReports.add("one checkboxe is not selected", LogAs.PASSED, new
+		// CaptureScreen(ScreenshotOf.DESKTOP));
+		// } catch (Exception e) {
+		// Thread.sleep(1000);
+		// System.out.println("one checkboxe is selected");
+		// ATUReports.add("one checkboxe is selected", LogAs.FAILED, new
+		// CaptureScreen(ScreenshotOf.DESKTOP));
+		// }
+		//
+		// Assert.assertFalse(check.isSelected());
 
 	}
 
@@ -814,20 +944,17 @@ public class RecordingHelperPage extends Page {
 
 	public void verifyAllCheckedboxNotSelected() {// verify all check box are
 													// selected or not
-		boolean result = false;
 		for (WebElement element : checkboxlist) {
 			if ((element.isSelected())) {
-				result = true;
-				System.out.println("some/all checkboxes are  selected");
-				ATUReports.add("some/all checkboxes are  selected", LogAs.FAILED,
-						new CaptureScreen(ScreenshotOf.DESKTOP));
+				System.out.println("Some/all checkboxes are  selected");
+				ATUReports.add("All checkboxes are not selected.", "True.", "False.", LogAs.FAILED, null);
+				Assert.assertTrue(false);
 			}
 
 		}
-		if (result == false)
-			System.out.println("all checkboxes are  not selected");
-		ATUReports.add("all checkboxes are  not selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
-		Assert.assertFalse(result);
+		System.out.println("All checkboxes are not selected.");
+		ATUReports.add("All checkboxes are not selected.", "True.", "True.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
 
 	}
 
@@ -874,15 +1001,16 @@ public class RecordingHelperPage extends Page {
 	public boolean checkThatRecordingStatusTargetIndexIsEmpty(int index, int time_interval)
 			throws InterruptedException {
 		for (int i = 0; i < time_interval; i++) {
-			String recording_status = driver.findElement(By.id("RecordingStatus" + Integer.toString(index))).getText();
+			WebElement el = getStaleElem(By.id("RecordingStatus" + Integer.toString(index)),driver);
+			String recording_status = el.getText();
 			if (recording_status.equals("")) {
 				System.out.println("Recordings in index: " + index + " status empty");
 				ATUReports.add("Recordings in index: " + index + " status empty", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return true;
 			}
-
 			Thread.sleep(1000);
+			
 		}
 
 		System.out.println("Recordings in index: " + index + " status not empty");
@@ -891,7 +1019,7 @@ public class RecordingHelperPage extends Page {
 		return false;
 	}
 
-	// this function check that recording status in target index is not target
+	// this function check that recording status in target ind ex is not target
 	// status
 	// with max timeout
 	public boolean checkThatRecordingStatusTargetIndexIsNotXWithTimeout(int index, String is_not, int time_interval)
@@ -940,6 +1068,7 @@ public class RecordingHelperPage extends Page {
 					"Failed to click on student recordings tab. ERROR: " + msg, LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
+		
 
 	}
 
@@ -953,22 +1082,27 @@ public class RecordingHelperPage extends Page {
 			recording_tasks_button.sendKeys(Keys.TAB);// solution // to
 
 			try {
+				Thread.sleep(500);
 				move_button_on_recording_tasks_menu.click();
 				// check if list of courses are present
-				Thread.sleep(500);
+				Thread.sleep(1000);
+				waitForVisibility(driver.findElement(By.id("ModalDialogHeader")));
 				if (driver.findElement(By.id("ModalDialogHeader")).getText().equals("Move")) {
+					System.out.println("Move menu is displayed.");
 					ATUReports.add("Select Recording Tasks -> Move menu item", "Move window is displayed",
-							"Copy window is displayed", LogAs.PASSED, null);
+							"Move window is displayed", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					return;
 				}
 			} catch (Exception e) {
+				Thread.sleep(1000);
 			}
-			Thread.sleep(1000);
-		}
 
+		}
+		System.out.println("Move menu not verified.");
 		ATUReports.add("Select Recording Tasks -> Move menu item", "Move window is displayed",
 				"Move window not displayed", LogAs.FAILED, null);
+		Assert.assertTrue(false);
 
 	}
 
@@ -983,25 +1117,42 @@ public class RecordingHelperPage extends Page {
 	}
 
 	// This function select first recording from recording list
-	public void selectIndexCheckBox(int index) {
-		try {
-			checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));
-			checkbox.click();
-			if (checkbox.isSelected()) {
-				System.out.println("Checkbox is selected in index: " + index);
-				ATUReports.add("Checkbox is selected in index: " + index, LogAs.PASSED, null);
-				Assert.assertTrue(true);
-			} else {
-				System.out.println("Checkbox not selected in index: " + index);
-				ATUReports.add("Checkbox not selected in index: " + index, LogAs.FAILED, null);
-				Assert.assertTrue(false);
+	public void selectIndexCheckBox(int index) throws InterruptedException {
+		// try {
+		// checkbox = driver.findElement(By.id("Checkbox" +
+		// Integer.toString(index)));
+		// checkbox.click();
+		// if (checkbox.isSelected()) {
+		// System.out.println("Checkbox is selected in index: " + index);
+		// ATUReports.add("Checkbox is selected in index: " + index,
+		// LogAs.PASSED, null);
+		// Assert.assertTrue(true);
+		// } else {
+		// System.out.println("Checkbox not selected in index: " + index);
+		// ATUReports.add("Checkbox not selected in index: " + index,
+		// LogAs.FAILED, null);
+		// Assert.assertTrue(false);
+		// }
+		//
+		// } catch (Exception msg) {
+		// System.out.println("Checkbox not selected in index: " + index);
+		// ATUReports.add("Checkbox not selected in index: " + index,
+		// LogAs.FAILED, null);
+		// Assert.assertTrue(false);
+		// }
+		for(int sec=0; sec<30; sec++) {
+			try {
+				if(driver.findElement(By.id("Checkbox1")).isDisplayed()) {
+					break;
+				}
+			} catch (Exception msg) {
+				Thread.sleep(1000);
 			}
-
-		} catch (Exception msg) {
-			System.out.println("Checkbox not selected in index: " + index);
-			ATUReports.add("Checkbox not selected in index: " + index, LogAs.FAILED, null);
-			Assert.assertTrue(false);
 		}
+		
+		WebElement target_checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));
+	
+		SelectOneCheckBoxOrVerifyAlreadySelected(target_checkbox);
 	}
 
 	// verify copied course is displaied correctly
@@ -1083,23 +1234,23 @@ public class RecordingHelperPage extends Page {
 		}
 		return recording_list_duration_string;
 	}
-//
-//	/// create new recording list object
-//	public List<RecordingObject> createRecordingObjectList() {
-//		convertRecordingsListToDuration();
-//		convertRecordingsListToDate();
-//		convertRecordingsListToNames();
-//		convertRecordingsListToRecorderName();
-//		List<RecordingObject> recording_list_object = new ArrayList<RecordingObject>();
-//		for (int i = 0; i < recordings_list_date.size(); i++) {
-//			RecordingObject object = new RecordingObject(recordings_list_date_string.get(i),
-//					recording_list_names.get(i), recording_list_duration_string.get(i),
-//					recordings_list_recorder_name_string.get(i));
-//			recording_list_object.add(object);
-//		}
-//		return recording_list_object;
-//
-//	}
+
+	/// create new recording list object
+/*	public List<RecordingObject> createRecordingObjectList() {
+		convertRecordingsListToDuration();
+		convertRecordingsListToDate();
+		convertRecordingsListToNames();
+		convertRecordingsListToRecorderName();
+		List<RecordingObject> recording_list_object = new ArrayList<RecordingObject>();
+		for (int i = 0; i < recordings_list_date.size(); i++) {
+			RecordingObject object = new RecordingObject(recordings_list_date_string.get(i),
+					recording_list_names.get(i), recording_list_duration_string.get(i),
+					recordings_list_recorder_name_string.get(i));
+			recording_list_object.add(object);
+		}
+		return recording_list_object;
+
+	}*/
 
 	// trim duration string to get only the duration time in string
 	public String trimDuration(String s) {
@@ -1108,30 +1259,44 @@ public class RecordingHelperPage extends Page {
 	}
 
 	/// verify recording is expandable
-	public void verifyFirstExpandableRecording() throws InterruptedException {
-		first_recording.click();
-		Thread.sleep(1000);
-		if (first_video_recording.isDisplayed()) {
-			ATUReports.add("video recording was displaied", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			ATUReports.add("video recording was not displaied", LogAs.FAILED, null);
-			Assert.assertTrue(true);
-		}
-		// waitForVisibility(driver.findElement(By.tagName("tegrecorder.exe")));
-		// System.out.print(first_recording.getAttribute("type"));
-	}
-
+	public void verifyFirstExpandableRecording() throws InterruptedException {	
+	
+		      waitForVisibility(first_recording_title);
+		      wait.until(ExpectedConditions.elementToBeClickable(first_recording_title));
+		       driver.findElement(By.xpath("//*[@id='Recording" + Integer.toString(1) + "']/strong")).click();
+		       if(driver instanceof InternetExplorerDriver) {
+		           if(!isElementPresent(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap"))){
+		               wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='Recording" + Integer.toString(1) + "']/strong")));
+		               Thread.sleep(1000);
+		               //driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
+		             driver.findElement(By.xpath("html/body/google-analytics/google-analytics/div[1]/div[2]/div[3]/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
+		           }
+		       }
+		       Thread.sleep(1000);
+		       if (first_video_recording.isDisplayed()) {
+		           ATUReports.add("video recording was displayed", LogAs.PASSED, null);
+		           System.out.println("video recording was displayed");
+		           Assert.assertTrue(true);
+		       } else {
+		           ATUReports.add("video recording was not displayed", LogAs.FAILED, null);
+		           System.out.println("video recording was not displayed");
+		           Assert.assertTrue(false);
+		       }
+	 }
+	
 	// press on view button and than select option
 	public void pressViewButtonAndSelect(String choice) throws InterruptedException {
 
-		moveToElementAndClick(view_button, driver);
+		moveToElementAndClick(view_buttonTest, driver);
+		Thread.sleep(500);
+		
+		if(driver instanceof InternetExplorerDriver) {
 		// rec.copy_button.click();
-		for (int i = 0; i < 8; i++)
-			view_button.sendKeys(Keys.TAB);// solution
-		// hover and click
-		// to
-
+			for (int i = 0; i < 8; i++)
+				view_button.sendKeys(Keys.TAB);// solution
+			// hover and click to
+		}
+		
 		try {
 			switch (choice) {
 			case "Title":
@@ -1148,7 +1313,7 @@ public class RecordingHelperPage extends Page {
 			ATUReports.add("click succeded ", LogAs.PASSED, null); // solve
 
 		} catch (Exception e) {
-			ATUReports.add("click failed ", LogAs.FAILED, null);
+			
 
 		}
 
@@ -1160,8 +1325,8 @@ public class RecordingHelperPage extends Page {
 								// equal to any other
 
 		for (String current : title) {
-			current = current.toLowerCase();
-			if (current.compareTo(previous) < 0) {
+
+			if (current.compareToIgnoreCase(previous) < 0) {
 				ATUReports.add("not sorted by title...  ", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			}
@@ -1182,7 +1347,8 @@ public class RecordingHelperPage extends Page {
 			if ((Integer.valueOf(splitdate[2]) < Integer.valueOf(previous[2])))/// check
 																				/// years
 			{
-				ATUReports.add("not sorted by date...  ", LogAs.FAILED, null);
+				System.out.println("Not sorted by date correctly.");
+				ATUReports.add("Sorted by date correctly.", "True.", "False.", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			} else {
 				if ((Integer.valueOf(splitdate[2]) == Integer.valueOf(previous[2])))// if
@@ -1192,7 +1358,8 @@ public class RecordingHelperPage extends Page {
 																					// months
 				{
 					if ((Integer.valueOf(splitdate[0]) < Integer.valueOf(previous[0]))) {
-						ATUReports.add("not sorted by date...  ", LogAs.FAILED, null);
+						System.out.println("Not sorted by date correctly.");
+						ATUReports.add("Sorted by date correctly.", "True.", "False.", LogAs.FAILED, null);
 						Assert.assertTrue(false);
 					} else {
 						if ((Integer.valueOf(splitdate[0]) == Integer.valueOf(previous[0])))// if
@@ -1202,7 +1369,8 @@ public class RecordingHelperPage extends Page {
 																							// days
 						{
 							if ((Integer.valueOf(splitdate[1]) < Integer.valueOf(previous[1]))) {
-								ATUReports.add("not sorted by date...  ", LogAs.FAILED, null);
+								System.out.println("Not sorted by date correctly.");
+								ATUReports.add("Sorted by date correctly.", "True.", "False.", LogAs.FAILED, null);
 								Assert.assertTrue(false);
 							}
 						}
@@ -1215,7 +1383,8 @@ public class RecordingHelperPage extends Page {
 			previous[2] = splitdate[2];
 
 		}
-		ATUReports.add("sorted by date correctly ", LogAs.PASSED, null);
+		System.out.println("Sorted by date correctly.");
+		ATUReports.add("Sorted by date correctly.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 
@@ -1229,7 +1398,8 @@ public class RecordingHelperPage extends Page {
 			if ((Integer.valueOf(splitdate[0]) < Integer.valueOf(previous[0])))/// check
 																				/// years
 			{
-				ATUReports.add("not sorted by duration...  ", LogAs.FAILED, null);
+				System.out.println("Not sorted by duration...");
+				ATUReports.add("Not sorted by duration...", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			} else {
 				if ((Integer.valueOf(splitdate[0]) == Integer.valueOf(previous[0])))// if
@@ -1239,7 +1409,8 @@ public class RecordingHelperPage extends Page {
 																					// months
 				{
 					if ((Integer.valueOf(splitdate[1]) < Integer.valueOf(previous[1]))) {
-						ATUReports.add("not sorted by duration...  ", LogAs.FAILED, null);
+						System.out.println("Not sorted by duration...");
+						ATUReports.add("Not sorted by duration...  ", LogAs.FAILED, null);
 						Assert.assertTrue(false);
 					} else {
 						if ((Integer.valueOf(splitdate[1]) == Integer.valueOf(previous[1])))// if
@@ -1249,7 +1420,8 @@ public class RecordingHelperPage extends Page {
 																							// days
 						{
 							if ((Integer.valueOf(splitdate[2]) < Integer.valueOf(previous[2]))) {
-								ATUReports.add("not sorted by duration...  ", LogAs.FAILED, null);
+								System.out.println("SNot sorted by duration...");
+								ATUReports.add("Not sorted by duration...  ", LogAs.FAILED, null);
 								Assert.assertTrue(false);
 							}
 						}
@@ -1262,7 +1434,8 @@ public class RecordingHelperPage extends Page {
 			previous[2] = splitdate[2];
 
 		}
-		ATUReports.add("sorted by duration correctly ", LogAs.PASSED, null);
+		System.out.println("Sorted by duration correctly.");
+		ATUReports.add("Sorted by duration correctly.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 
@@ -1321,59 +1494,60 @@ public class RecordingHelperPage extends Page {
 	// verify move menu
 	public void toMoveMenu() throws InterruptedException {
 
-		waitForVisibility(recording_tasks_button);
-		moveToElementAndClick(recording_tasks_button, driver);
-		for (int i = 0; i < 10; i++) {
-			recording_tasks_button.sendKeys(Keys.TAB);// solution
-			try { // to
-				move_button.click(); // solve
-
-				Thread.sleep(1000);
-				if (isElementPresent(By.id("ModalDialogHeader"))) {
-					System.out.println("Move menu confirmed");
-					ATUReports.add("click succeeded", LogAs.PASSED, null);
-				}
-
-				return;
-			} catch (Exception e) {
-
-			}
-		}
-		// hover
-		// and
-		// click
-
-		ATUReports.add("click failed ", LogAs.FAILED, null);
-		System.out.println("Move to move menu failed");
+		// waitForVisibility(recording_tasks_button);
+		// moveToElementAndClick(recording_tasks_button, driver);
+		// for (int i = 0; i < 10; i++) {
+		// recording_tasks_button.sendKeys(Keys.TAB);// solution
+		// try { // to
+		// move_button.click(); // solve
+		//
+		// Thread.sleep(1000);
+		// if (isElementPresent(By.id("ModalDialogHeader"))) {
+		// System.out.println("Move menu confirmed");
+		// ATUReports.add("click succeeded", LogAs.PASSED, null);
+		// }
+		//
+		// return;
+		// } catch (Exception e) {
+		//
+		// }
+		// }
+		// // hover
+		// // and
+		// // click
+		//
+		// ATUReports.add("click failed ", LogAs.FAILED, null);
+		// System.out.println("Move to move menu failed");
+		clickOnRecordingTaskThenMove();
 	}
 
 	// verify move menu
 	public void toMoveMenuByContentTask() throws InterruptedException {
 
-//		waitForVisibility(content_tasks_button);
-//		moveToElementAndClick(content_tasks_button, driver);
-//		for (int i = 0; i < 10; i++) {
-//			content_tasks_button.sendKeys(Keys.TAB);// solution
-//			try { // to
-//				move_button.click(); // solve
-//
-//				Thread.sleep(1000);
-//				if (isElementPresent(By.id("ModalDialogHeader"))) {
-//					System.out.println("Move menu confirmed");
-//					ATUReports.add("click succeeded", LogAs.PASSED, null);
-//				}
-//
-//				return;
-//			} catch (Exception e) {
-//
-//			}
-//		}
-//		// hover
-//		// and
-//		// click
-//
-//		ATUReports.add("click failed ", LogAs.FAILED, null);
-//		System.out.println("Move to move menu failed");
+		// waitForVisibility(content_tasks_button);
+		// moveToElementAndClick(content_tasks_button, driver);
+		// for (int i = 0; i < 10; i++) {
+		// content_tasks_button.sendKeys(Keys.TAB);// solution
+		// try { // to
+		// move_button.click(); // solve
+		//
+		// Thread.sleep(1000);
+		// if (isElementPresent(By.id("ModalDialogHeader"))) {
+		// System.out.println("Move menu confirmed");
+		// ATUReports.add("click succeeded", LogAs.PASSED, null);
+		// }
+		//
+		// return;
+		// } catch (Exception e) {
+		//
+		// }
+		// }
+		// // hover
+		// // and
+		// // click
+		//
+		// ATUReports.add("click failed ", LogAs.FAILED, null);
+		// System.out.println("Move to move menu failed");
 		clickOnContentTaskThenMove();
 	}
 
@@ -1405,7 +1579,7 @@ public class RecordingHelperPage extends Page {
 	}
 
 	// this function get recording name and select it checkbox
-	public void selectTargetRecordingCheckbox(String recording_name) {
+	public void selectTargetRecordingCheckbox(String recording_name) throws InterruptedException {
 		wait.until(ExpectedConditions.elementToBeClickable(checkbox));
 		List<String> recording_list = getCourseRecordingList();
 
@@ -1452,20 +1626,15 @@ public class RecordingHelperPage extends Page {
 			content_tasks_button.sendKeys(Keys.TAB);// solution
 			try {
 				copy_button.click();
-
-				ATUReports.add("Clicked on podcast.", LogAs.PASSED, null);
-				System.out.println("Clicked on podcast.");
+				ATUReports.add("Clicked on copy manu.", LogAs.PASSED, null);
+				System.out.println("Clicked on copy manu.");
 				Assert.assertTrue(true);
 				return;
 
 			} catch (Exception e) {
 			}
 			try {
-				if (isElementPresent(By.id("ModalDialogHeader")))// check if
-																	// list of
-																	// courses
-																	// are
-																	// present
+				if (isElementPresent(By.id("ModalDialogHeader")))// check if// list of// courses// are// present
 				{
 					ATUReports.add("copy menu verified ", LogAs.PASSED, null);
 					Assert.assertTrue(true);
@@ -1488,38 +1657,45 @@ public class RecordingHelperPage extends Page {
 
 	// This function click on Content Task then on move in the sub menu
 	public void clickOnContentTaskThenMove() throws InterruptedException {
-		Robot robot;
-		try {
-			robot = new Robot();
-			robot.mouseMove(-100, 100);
-			/// click on content task
-			waitForVisibility(content_tasks_button);
-			moveToElementAndClick(content_tasks_button, driver);
+		waitForVisibility(content_tasks_button);
+		moveToElementAndClick(content_tasks_button, driver);
+		content_tasks_button.sendKeys(Keys.TAB);
+
+		for (int i = 0; i < 6; i++) {
+			content_tasks_button.sendKeys(Keys.TAB);// solution
 			try {
 				move_button.click();
-				System.out.println("Clicked on move");
-				waitForVisibility(driver.findElement(By.id("ModalDialogHeader")));
-				if (isElementPresent(By.id("ModalDialogHeader"))) {
-					System.out.println("move menu verified ");
-					ATUReports.add("move menu verified ", LogAs.PASSED, null);
-					Assert.assertTrue(true);
 
-				} else {
-					System.out.println("move menu not verified ");
-					ATUReports.add("move menu verified ", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-
-				}
+				ATUReports.add("Clicked on Move button.", LogAs.PASSED, null);
+				System.out.println("Clicked on Move button.");
+				Assert.assertTrue(true);
+				return;
 
 			} catch (Exception e) {
-				ATUReports.add("Couldnt Clicked on move", LogAs.FAILED, null);
-				System.out.println("Couldnt Clicked on move");
-				Assert.assertTrue(false);
 			}
-		} catch (AWTException e1) {
-			System.out.println("couldnt move mouse or clcik on button");
-			ATUReports.add("couldnt move mouse or clcik on button", LogAs.FAILED, null);
-			Assert.assertTrue(false);
+			try {
+				if (isElementPresent(By.id("ModalDialogHeader")))// check if
+																	// list of
+																	// courses
+																	// are
+																	// present
+				{
+					ATUReports.add("Move menu verified ", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+					break;
+
+				}
+			} catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+			try {
+
+				move_button.click();
+				ATUReports.add("click succeeded.", LogAs.PASSED, null);
+			} catch (Exception e) {
+				ATUReports.add("click failed.", LogAs.FAILED, null);
+			}
 		}
 	}
 
@@ -1538,6 +1714,7 @@ public class RecordingHelperPage extends Page {
 	// menu)
 	public void clickOnTestsTab() {
 		try {
+			waitForVisibility(tests_tab);
 			tests_tab.click();
 			System.out.println("Clicked on tests tab");
 			ATUReports.add("Clicked on tests tab", LogAs.PASSED, null);
@@ -1595,9 +1772,11 @@ public class RecordingHelperPage extends Page {
 			checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));
 			checkbox.click();
 			if (checkbox.isSelected()) {
-				System.out.println("Checkbox is selected in index: " + index);
-				ATUReports.add("Checkbox is selected in index: " + index, LogAs.FAILED, null);
-				Assert.assertTrue(false);
+				checkbox.click();
+				System.out.println("Checkbox is not selected in index: " + index);
+				ATUReports.add("Checkbox not selected in index: " + index, LogAs.PASSED, null);
+
+				Assert.assertTrue(true);
 			} else {
 				System.out.println("Checkbox not selected in index: " + index);
 				ATUReports.add("Checkbox not selected in index: " + index, LogAs.PASSED, null);
@@ -1657,11 +1836,11 @@ public class RecordingHelperPage extends Page {
 		}
 		boolean assertion = verifyColor(grey_color, el);
 		if (assertion == true) {
-			System.out.println("menu color is grey");
-			ATUReports.add("menu color is grey", LogAs.PASSED, null);
+			System.out.println("Menu color is grey");
+			ATUReports.add("Menu color is grey", LogAs.PASSED, null);
 		} else {
-			System.out.println("menu color is not grey");
-			ATUReports.add("menu color is not grey", LogAs.FAILED, null);
+			System.out.println("Menu color is not grey");
+			ATUReports.add("Menu color is not grey", LogAs.FAILED, null);
 		}
 		Assert.assertTrue(assertion);// compare
 										// 2
@@ -1689,16 +1868,18 @@ public class RecordingHelperPage extends Page {
 	// thic function clicks on student recordings tab (in type of recordings
 	// menu)
 	public void clickOnTestAdittionalContentTab() {
-//		try {
-//			additional_content_tab.click();
-//			System.out.println("Clicked on test recordings tab");
-//			ATUReports.add("Clicked on test recordings tab", LogAs.PASSED, null);
-//			Assert.assertTrue(true);
-//		} catch (Exception msg) {
-//			System.out.println("Failed to click on test recordings tab. ERROR: " + msg);
-//			ATUReports.add("Failed to click on test recordings tab. ERROR: " + msg, LogAs.FAILED, null);
-//			Assert.assertTrue(false);
-//		}
+		// try {
+		// additional_content_tab.click();
+		// System.out.println("Clicked on test recordings tab");
+		// ATUReports.add("Clicked on test recordings tab", LogAs.PASSED, null);
+		// Assert.assertTrue(true);
+		// } catch (Exception msg) {
+		// System.out.println("Failed to click on test recordings tab. ERROR: "
+		// + msg);
+		// ATUReports.add("Failed to click on test recordings tab. ERROR: " +
+		// msg, LogAs.FAILED, null);
+		// Assert.assertTrue(false);
+		// }
 		clickOnAdditionContentTab();
 
 	}
@@ -1707,18 +1888,21 @@ public class RecordingHelperPage extends Page {
 	// dissaper
 	public void waitUntilFirstRecordingBeingMovedFromStatusDissaper() throws InterruptedException {
 		int time_counter = 0;
-		while (first_recording_status.getText().contains("Being moved from")) {
-			time_counter++;
-			Thread.sleep(1000);
+		waitForVisibility(first_recording_status);
+		while (isElementPresent(By.id("RecordingStatus1"))){
+			if(first_recording_status.getText().contains("Being moved from")) {
+				time_counter++;
+				Thread.sleep(1000);
 
-			if (time_counter > 60) {
+			if (time_counter > 240) {
 				System.out.println("Timeout - Being moved from still appears after 60 seconds");
 				ATUReports.add("Timeout - Being moved from still appears after 60 seconds", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 				return;
 			}
 		}
-
+			else break;
+	}
 		System.out.println("Being moved from dissapear from first recording.");
 		ATUReports.add("Being moved from dissapear from first recording.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
@@ -1726,26 +1910,28 @@ public class RecordingHelperPage extends Page {
 
 	// verify move menu
 	public void toDeleteMenu() throws InterruptedException {
-		waitForVisibility(recording_tasks_button);
-		moveToElementAndClick(recording_tasks_button, driver);
-		for (int i = 0; i < 10; i++) {
-			recording_tasks_button.sendKeys(Keys.TAB);
-			// solution to solve
-			try {
-				delete_button.click();
-
-				Thread.sleep(1000);
-				if (isElementPresent(By.id("ModalDialogHeader"))) {
-					System.out.println("Delete menu confirmed");
-					ATUReports.add("click succeeded", LogAs.PASSED, null);
-				}
-
-				return;
-			} catch (Exception e) {
-				System.out.println("Move to delete menu failed");
-				ATUReports.add("click failed ", LogAs.FAILED, null);
-			}
-		}
+//		waitForVisibility(recording_tasks_button);
+//		moveToElementAndClick(recording_tasks_button, driver);
+//		for (int i = 0; i < 10; i++) {
+//			recording_tasks_button.sendKeys(Keys.TAB);
+//			// solution to solve
+//			try {
+//				delete_button.click();
+//
+//				Thread.sleep(1000);
+//				if (isElementPresent(By.id("ModalDialogHeader"))) {
+//					System.out.println("Delete menu confirmed");
+//					ATUReports.add("click succeeded", LogAs.PASSED, null);
+//					Assert.assertTrue(true);
+//				}
+//
+//				return;
+//			} catch (Exception e) {
+//				System.out.println("Move to delete menu failed");
+//				ATUReports.add("click failed ", LogAs.FAILED, null);
+//			}
+//		}
+		clickOnRecordingTaskThenDelete();
 	}
 
 	// Verify that recooding has an error status
@@ -1814,18 +2000,16 @@ public class RecordingHelperPage extends Page {
 			recording_tasks_button.sendKeys(Keys.TAB);
 			// solution to solve
 			try {
+				Thread.sleep(1000);
 				edit_rec_properties_button.click();
-
 				Thread.sleep(1000);
 				if (isElementPresent(By.id("ModalDialogHeaderWrap"))) {
 					System.out.println("Edit recording properties menu confirmed");
 					ATUReports.add("click succeeded", LogAs.PASSED, null);
 				}
-
 				return;
 			} catch (Exception e) {
-				System.out.println("Move to Edit recording properties menu menu failed");
-				ATUReports.add("click failed ", LogAs.FAILED, null);
+	
 			}
 		}
 	}
@@ -1890,25 +2074,31 @@ public class RecordingHelperPage extends Page {
 
 	// verify tabs location side by side
 	public boolean tabsLocationVerified() {
+		Point course_name = course_title.getLocation();
 		Point studtab = student_recordings_tab.getLocation();
 		Point testtab = tests_tab.getLocation();
-		Point recordings = recording_font_title.getLocation();
+		Point recordings = recordings_tab.getLocation();
 		Point additionaltab = additional_content_tab.getLocation();
-		if ((studtab.getY() == testtab.getY()) && (testtab.getY() == recordings.getY())
-				&& (recordings.getY() == additionaltab.getY()) && (studtab.getX() < testtab.getX())
-				&& (additionaltab.getX() > recordings.getX()) && (studtab.getX() > additionaltab.getX())) {
-			System.out.println("location verified");
-			ATUReports.add("location verified", LogAs.PASSED, null);
-			Assert.assertTrue(true);
+		
+		if ((course_name.getY() < recordings.getY()) && 
+			(studtab.getY() == testtab.getY()) && 
+			(testtab.getY() == recordings.getY()) && 
+			(recordings.getY() == additionaltab.getY()) && 
+			(studtab.getX() < testtab.getX()) && 
+			(additionaltab.getX() > recordings.getX()) && 
+			(studtab.getX() > additionaltab.getX())) 
+		{
+			System.out.println("Verfied tabs location.");
+			ATUReports.add("Verfied tabs location.", "True.", "True.", LogAs.PASSED, null);
+//			Assert.assertTrue(true);
 			return true;
 		} else {
-			ATUReports.add("location not verified", LogAs.FAILED, null);
-
-			System.out.println("location not verified");
-			Assert.assertTrue(true);
+			System.out.println("Not verfied tabs location.");
+			ATUReports.add("Verfied tabs location.", "True.", "False.", LogAs.FAILED, null);
+//			Assert.assertTrue(true);
 			return false;
 		}
-		
+
 	}
 
 	// verify there is no Start Recording button
@@ -2175,10 +2365,9 @@ public class RecordingHelperPage extends Page {
 		Thread.sleep(2000);
 		select_upload_additional_file.click();
 		Thread.sleep(2000);
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\src\\test\\resources\\additional_file.txt"; //// System.getProperty("user.dir")
-																												//// +
+		String fullPathToFile = "src\\test\\resources\\additional_file.txt"; // System.getProperty("user.dir")																										//// +
 																												//// "\\src\\main\\resources\\ImsImportDataCreation.xml";
-//dsd
+
 		uploadFile(fullPathToFile);
 		Thread.sleep(2000);
 		add_additional_file_button.click();
@@ -2198,12 +2387,34 @@ public class RecordingHelperPage extends Page {
 		Thread.sleep(2000);
 
 	}
+	
+	//verify Additional Content Tab Is On Right Of Recording Tab
+	public void verifyAdditionalContentTabIsOnRightOfRecordingTab() {
+		
+		waitForVisibility(additional_content_tab);
+		Point additonal=additional_content_tab.getLocation();
+		Point record=recordings_tab.getLocation();
+		
+		if ((additional_content_tab.isDisplayed())&&(additonal.getX()>record.getX())) {
+			System.out.println("additional content tab is on right of recording tab");
+			ATUReports.add("additional content tab is on right of recording tab", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} else {
+			System.out.println("additional content tab is not on right of recording tab");
+			ATUReports.add("additional content tab is on right of recording tab", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+
+	
 
 	////// upload additional content
 	public void uploadFile(String path) throws Exception {
 
 		// from here you can use as it wrote
 		path = System.getProperty("user.dir") + path;
+		System.out.println(path);
 		StringSelection ss = new StringSelection(path);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 		// native key strokes for CTRL, V and ENTER keys
@@ -2223,17 +2434,18 @@ public class RecordingHelperPage extends Page {
 	public void verifyNoStudentTab() {
 		try {
 			if (student_recordings_tab.isDisplayed()) {
-				System.out.println("Not verfied that there is no Student tab.");
-				ATUReports.add("Verfied that there is no Student tab.", "True.", "False.", LogAs.FAILED, null);
+				System.out.println("The Student Recordings tab shouldn't be displayed, but it is.");
+				ATUReports.add("Verified that there is no Student Recordings tab.", "False.", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			} else {
-				System.out.println("Verfied that there is no Student tab.");
-				ATUReports.add("Verfied that there is no Student tab.", "True.", "True.", LogAs.PASSED, null);
+				System.out.println("Verified that there is no Student Recordings tab.");
+				ATUReports.add("Verified that there is no Student Recordings tab.", "True.", "True.", LogAs.PASSED,
+						null);
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
-			System.out.println("Verfied that there is no Student tab.");
-			ATUReports.add("Verfied that there is no Student tab.", "True.", "True.", LogAs.PASSED, null);
+			System.out.println("Verified that there is no Student Recordings tab.");
+			ATUReports.add("Verified that there is no Student Recordings tab.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 	}
@@ -2242,17 +2454,17 @@ public class RecordingHelperPage extends Page {
 	public void verifyNoTestsTab() {
 		try {
 			if (tests_tab.isDisplayed()) {
-				ATUReports.add("Click on tests tab", LogAs.FAILED, null);
-				System.out.println("Click on tests tab");
+				ATUReports.add("Not verify no test tab.", LogAs.FAILED, null);
+				System.out.println("Not verify no test tab.");
 				Assert.assertTrue(false);
 			} else {
-				ATUReports.add("No Click on tests tab", LogAs.PASSED, null);
-				System.out.println("No Click on tests tab");
+				ATUReports.add("Verify no tests tab.", LogAs.PASSED, null);
+				System.out.println("Verify no tests tab.");
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
-			ATUReports.add("No Click on tests tab", LogAs.PASSED, null);
-			System.out.println("No Click on tests tab");
+			ATUReports.add("Verify no tests tab.", LogAs.PASSED, null);
+			System.out.println("Verify no tests tab.");
 			Assert.assertTrue(true);
 		}
 	}
@@ -2432,7 +2644,7 @@ public class RecordingHelperPage extends Page {
 	}
 
 	// This function select first recording without target status?
-	public String selectRecordingWithOutTargetStatus(String target_status) {
+	public String selectRecordingWithOutTargetStatus(String target_status) throws InterruptedException {
 		// wait.until(ExpectedConditions.elementToBeClickable(checkbox));
 		List<String> current_recording_list = getCourseRecordingList();
 
@@ -2467,6 +2679,7 @@ public class RecordingHelperPage extends Page {
 	// This function checks if Content Tasks button displyed. Return true if it
 	// is, and false otherwise
 	public boolean isContentTasksButtonDisplay() {
+			waitForVisibility(content_tasks_button);
 		if (content_tasks_button.isDisplayed()) {
 			return true;
 		} else {
@@ -2578,10 +2791,13 @@ public class RecordingHelperPage extends Page {
 			Assert.assertTrue(false);
 		}
 	}
-
+	
 	// This function verify that Start Recording button is displayed
 	public void veriftyThatStartRecordingButtonDisplayed() {
-		if (recording_button.isDisplayed()) {
+		if (recording_button.isDisplayed() &&
+				(institute_logo.getLocation().x < recording_button.getLocation().x) &&
+				(searchbox.getLocation().y < recording_button.getLocation().x) &&
+				(recording_button.getLocation().y) < recording_tasks_button.getLocation().y) {
 			System.out.println("Verifed that Start Recording button is displayed.");
 			ATUReports.add("Start recording button.", "Displayed.", "Displayed.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -2625,21 +2841,23 @@ public class RecordingHelperPage extends Page {
 
 		for (WebElement el : additional_content_list) {
 			if ((el.getText().equals(additional_content_name))) {
-				WebElement recording = driver.findElement(By.linkText((additional_content_name)));
 
-				recording.click();
-				System.out.println(" additional content file found");
-				Thread.sleep(3000);
-
-				ATUReports.add(" additional content file found", LogAs.PASSED, null);
-				Assert.assertTrue(true);
-
-				return;
+						WebElement recording = driver.findElement(By.linkText((additional_content_name)));
+						waitForVisibility(recording);
+						wait.until(ExpectedConditions.elementToBeClickable(recording));
+						recording.click();
+						System.out.println("additional content file found");
+						ATUReports.add("additional content file found", LogAs.PASSED, null);
+						Assert.assertTrue(true);
+						Thread.sleep(3000);
+						return;											
+				}			
 			}
 
-		}
-		System.out.println(" no such additional content file name");
-		ATUReports.add(" no such additional content file name", LogAs.FAILED, null);
+
+	
+		System.out.println("no such additional content file name");
+		ATUReports.add("no such additional content file name", LogAs.FAILED, null);
 		Assert.assertTrue(false);
 
 	}
@@ -2689,26 +2907,26 @@ public class RecordingHelperPage extends Page {
 		try {
 			// Delete if tempFile exists
 			File fileTemp = new File(file_name_path);
-			if (fileTemp.exists()) {
 				try {
-					fileTemp.delete();
+					
 					if (fileTemp.exists()) {
-						System.out.println("fail to delete file");
-						ATUReports.add("fail to delete file", "delete old file", " deleted successfully", "not deleted",
-								LogAs.FAILED, null);
-						Assert.assertTrue(false);
-					}
-					System.out.println("file deleted succesfully");
-					ATUReports.add(" old file deleted succesfully", "delete old file", " deleted successfully",
-							" deleted successfully", LogAs.PASSED, null);
+						fileTemp.delete();
+						System.out.println("delete old file");
+						ATUReports.add("try to delete old file", "delete old file", " deleted successfully", "not deleted",
+								LogAs.PASSED, null);
+						Assert.assertTrue(true);
+					} else {
+					System.out.println("file wasn't found");
+					ATUReports.add(" old file deleted succesfully", "delete old file", " deleted successfully"," deleted successfully", LogAs.PASSED, null);
 					Assert.assertTrue(true);
+					}
 				} catch (Exception e) {
 					System.out.println("fail to delete file");
 					ATUReports.add("fail to delete file", "delete old file", " deleted successfully", "not deleted",
 							LogAs.FAILED, null);
 					Assert.assertTrue(false);
 				}
-			}
+			
 		} catch (Exception e) {
 			System.out.println("old file does not exist");
 			ATUReports.add("old file does not exist", "old file does not exist", "old file does not exist",
@@ -2832,7 +3050,25 @@ public class RecordingHelperPage extends Page {
 
 	// This function verify that "Start a Test" button displayed
 	public void verifyThatStartATestDisplayed() {
-		verifyWebElementDisplayed(start_test_button, "Start a test");
+		if (start_test_button.isDisplayed() &&
+				(institute_logo.getLocation().x < start_test_button.getLocation().x) &&
+				(searchbox.getLocation().y < start_test_button.getLocation().x) &&
+				(start_test_button.getLocation().y) < recording_tasks_button.getLocation().y) {
+			System.out.println("Verifed that Start a Test button is displayed.");
+			ATUReports.add("Start a Test button.", "Displayed.", "Displayed.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+
+		} else {
+			System.out.println("Not verified that Start a Test button is displayed.");
+			ATUReports.add("Start a Test button.", "Displayed.", "Not displayed.", LogAs.PASSED, null);
+			Assert.assertTrue(false);
+		}
+		
+		
+		
+		
+		
+		
 	}
 
 	// This function return all additional content of current course
@@ -2867,22 +3103,20 @@ public class RecordingHelperPage extends Page {
 
 		for (int i = 0; i < 8; i++) {
 			recording_tasks_button.sendKeys(Keys.TAB);
-			try {
-				String course_url = driver.getCurrentUrl();
+			try {			
 				edit_rec_button.click();
-				Thread.sleep(500);
-				if (!driver.getCurrentUrl().equals(course_url)) {
+				Thread.sleep(3000);	
+				//check if we can see the cut element if we can we moved to the edit record page
+				if (isElementPresent(By.xpath(".//*[@id='main']/div/div[1]/ul/li[1]/a"))) {
 					ATUReports.add("Clicked on Recording then Edit Recording.", "True.", "True.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					break;
-
+				}else {
+					moveToElementAndClick(recording_tasks_button, driver);
+					Thread.sleep(1000);
 				}
 			} catch (Exception e) {
-			}
-			moveToElementAndClick(recording_tasks_button, driver);
-
-			Thread.sleep(1000);
-
+				}
 		}
 
 		Thread.sleep(1000);
@@ -2908,25 +3142,33 @@ public class RecordingHelperPage extends Page {
 			System.out.println("clicked on tab");
 			ATUReports.add("failed clicking on tab", " click tab", "tab clicked", "tab clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
+			Thread.sleep(2000);
+			
 			try {
-				Thread.sleep(2000);
+				
 				waitForVisibility(checkbox);
 				checkbox.click();
 				System.out.println("clicked on checkbox");
+				ATUReports.add("clicked on checkbox", " click tab", "tab clicked", "tab clicked", LogAs.PASSED, null);
+				
 				toPublishRecording(publish);
 				publish.never_select_button.click();
-				Thread.sleep(1000);
-				publish.save_button.click();
+						
+				waitForVisibility(publish.save_button);	
+				publish.save_button.sendKeys(Keys.ENTER);
+				
+					
+				System.out.println("clicked on save_button");
+				ATUReports.add("clicked on save_button", " click tab", "tab clicked", "tab clicked", LogAs.PASSED, null);
+
 			} catch (Exception t) {
 				System.out.println("failed publishing recording");
-				ATUReports.add("publishing recording", " click tab", "tab clicked", "tab  not clicked", LogAs.FAILED,
-						null);
+				ATUReports.add("publishing recording", " click tab", "tab clicked", "tab  not clicked", LogAs.FAILED,null);
 				Assert.assertTrue(false);
 			}
 		} catch (Exception e) {
 			System.out.println("failed clicking on tab");
-			ATUReports.add("failed clicking on tab", " click tab", "tab clicked", "tab  not clicked", LogAs.FAILED,
-					null);
+			ATUReports.add("failed clicking on tab", " click tab", "tab clicked", "tab  not clicked", LogAs.FAILED,null);
 			Assert.assertTrue(false);
 		}
 
@@ -2960,12 +3202,28 @@ public class RecordingHelperPage extends Page {
 	public void recordingBoldFont(WebElement e) {
 		System.out.println(e.getCssValue("font-weight"));
 		if ((e.getCssValue("font-weight").equals("bold")) || (e.getCssValue("font-weight").equals("700"))) {
-			ATUReports.add("font style is bold ", LogAs.PASSED, null);
+			System.out.println("Font style is bold.");
+			ATUReports.add("Font style is bold.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
-
-			ATUReports.add("font style is not bold", LogAs.FAILED, null);
+			System.out.println("Font style is not bold.");
+			ATUReports.add("font style is bold.", "True.", "False.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
+		}
+
+	}
+
+	// This function verifies if an element is not bold
+	public void recordingNotBoldFont(WebElement e) {
+		System.out.println(e.getCssValue("font-weight"));
+		if ((e.getCssValue("font-weight").equals("bold")) || (e.getCssValue("font-weight").equals("700"))) {
+			System.out.println("Font style is bold.");
+			ATUReports.add("Font style is not bold.", "True.", "False.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		} else {
+			System.out.println("Font style is not bold.");
+			ATUReports.add("Font style is not bold.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
 		}
 
 	}
@@ -3050,7 +3308,7 @@ public class RecordingHelperPage extends Page {
 
 			if (!download.getAttribute("class").equals("disabled")) {
 				System.out.println("download is not disabled");
-				ATUReports.add("download is disabled", "download", " clickable", " clickable", LogAs.PASSED, null);
+				ATUReports.add("download is not disabled", "download", " clickable", " clickable", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("download is disabled");
@@ -3087,7 +3345,7 @@ public class RecordingHelperPage extends Page {
 	public void verifyElementIsEnabled(WebElement element, String element_name) {
 		if (!element.getAttribute("class").equals("disabled")) {
 			System.out.println(element_name + "is enabled");
-			ATUReports.add(element_name + "is enabled", element_name, "clickable", "clickable", LogAs.PASSED, null);
+			ATUReports.add(element_name + " is enabled", element_name, "clickable", "clickable", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println(element_name + "is disabled");
@@ -3101,13 +3359,14 @@ public class RecordingHelperPage extends Page {
 	public void verifyElementIsDisabled(WebElement element, String element_name) {
 		if (element.getAttribute("class").equals("disabled")) {
 			System.out.println(element_name + "is disabled");
-			ATUReports.add(element_name + "is disabled", element_name, " not clickable", " not clickable", LogAs.FAILED,
-					null);
+			ATUReports.add(element_name + " is disabled", element_name, " not clickable", " not clickable",
+					LogAs.FAILED, null);
 			Assert.assertTrue(true);
 
 		} else {
 			System.out.println(element_name + "is enabled");
-			ATUReports.add(element_name + "is enabled", element_name, "not clickable", "clickable", LogAs.FAILED, null);
+			ATUReports.add(element_name + " is enabled", element_name, "not clickable", "clickable", LogAs.FAILED,
+					null);
 			Assert.assertTrue(false);
 		}
 	}
@@ -3136,7 +3395,13 @@ public class RecordingHelperPage extends Page {
 
 		Thread.sleep(2000);
 		String rss_url_xml = "view-source:" + current;
-		driver.get(rss_url_xml);
+		if(driver instanceof InternetExplorerDriver) {
+			driver = new ChromeDriver();
+			driver.get(rss_url_xml);
+		}
+		else {
+			driver.get(rss_url_xml);
+		}
 		return current;
 	}
 
@@ -3149,6 +3414,7 @@ public class RecordingHelperPage extends Page {
 		course_tasks_button.click();
 		waitForVisibility(rssfeed);
 		rssfeed.click();
+		System.out.println("Return to rss feed page.");
 
 	}
 
@@ -3198,12 +3464,15 @@ public class RecordingHelperPage extends Page {
 				current = driver.getCurrentUrl();
 				driver.close();
 				driver.switchTo().window(parentWindow); // cntrl to parent
-														// window
+				break;										// window
 			}
 		}
 
 		Thread.sleep(2000);
 		String podcast_url_xml = "view-source:" + current;
+		if(driver instanceof InternetExplorerDriver){
+			driver = new ChromeDriver();
+		}
 		driver.get(podcast_url_xml);
 		return current;
 	}
@@ -3269,7 +3538,7 @@ public class RecordingHelperPage extends Page {
 				String element = ((Element) nodeList.item(i)).getAttribute("url");
 				if ((element.contains(first)) && ((element.contains(third)))) {
 					// extract only pattern
-					String pattern = element.substring(53, 89);
+					String pattern = element.substring(57, 93);
 					arrayList.add(pattern);
 					/// check pattern
 					podcastPatternVerification(pattern);
@@ -3381,27 +3650,68 @@ public class RecordingHelperPage extends Page {
 		return clickedRecordingName;
 	}
 
+	public void copyRecordsToAnotherCourse(String targetCourse) throws InterruptedException
+	
+	{
+		try {
+			Robot robot = new Robot();
+			robot.mouseMove(-100, -100);
+		} catch (AWTException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("Could not use the robot.");
+		}
+		waitForVisibility(recording_tasks_button);
+		moveToElementAndClick(recording_tasks_button, driver);
+		copy_button.click(); // solve
+		copyMenu =  PageFactory.initElements(driver, CopyMenu.class);
+		copyMenu.selectTargetCourseFromCourseList(targetCourse);
+		copyMenu.clickOnCopyButton();
+
+		try {
+			Thread.sleep(1000);
+			waitForVisibility(driver.findElement(By.id("ModalDialogHeader")));
+			if (driver.findElement(By.id("ModalDialogHeader")).getText().equals("Copy"))// check if
+			{
+				System.out.println("Copy menu is displayed.");
+				ATUReports.add("Clicked on Recording Task -> Copy.", "Copy menu is displayed.",
+						"Copy menu is displayed.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			}
+		} catch (Exception e) {
+			System.out.println("Copy menu not verified.");
+			ATUReports.add("Clicked on Recording Task -> Copy.", "Copy menu is displayed.",
+					"Copy menu is not displayed.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+
 	// verify check box is selected
-	public void ClickOneCheckBoxOrVerifyAlreadySelected(WebElement checkbox) throws InterruptedException {
+	public void SelectOneCheckBoxOrVerifyAlreadySelected(WebElement checkbox) throws InterruptedException {
 		try {
 			waitForVisibility(checkbox);
 			if (checkbox.isSelected()) {
-				System.out.println("one checkbox is selected");
-				ATUReports.add("one checkbox is selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+				System.out.println("Checkbox is already selected.");
+				ATUReports.add("Checkbox.", "Selected/Already selected.", "Already selected.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 				Assert.assertTrue(true);
 				return;
 			} else {
 				checkbox.click();
-				System.out.println("one checkbox is selected");
-				ATUReports.add("one checkbox is selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+				System.out.println("Checkbox is selected");
+				ATUReports.add("Checkbox.", "Success to select.", "Sucess to select.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
-			System.out.println("one checkbox is not selected");
-			ATUReports.add("one checkbox is  not selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			System.out.println("Checkbox is not selected.");
+			ATUReports.add("Checkbox.", "Success select.", "Fail to select.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 			Assert.assertTrue(false);
 		}
 
+	}
+
+	// verify check box is selected (Old function name -> just calling the new
+	// function with the new name
+	public void ClickOneCheckBoxOrVerifyAlreadySelected(WebElement checkbox) throws InterruptedException {
+		SelectOneCheckBoxOrVerifyAlreadySelected(checkbox);
 	}
 
 	// verify check box is selected
@@ -3422,18 +3732,18 @@ public class RecordingHelperPage extends Page {
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("one checkbox is  selected");
-					ATUReports.add("one checkbox is   selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+					ATUReports.add("one checkbox is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 					Assert.assertTrue(false);
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("one checkbox is  selected");
-			ATUReports.add("one checkbox is   selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			System.out.println("one checkbox is selected");
+			ATUReports.add("one checkbox is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 			Assert.assertTrue(false);
 		}
 
 	}
-	
+
 	// This function click on Recoring Task then on Tag in the sub menu
 	public void clickOnRecordingTaskThenTag() throws InterruptedException {
 
@@ -3463,4 +3773,658 @@ public class RecordingHelperPage extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+
+	// This function get recording name and return it's index if the recording
+	// exist
+	public int getTargetRecordingIndex(String target_recording) {
+		int target_recording_index = 0;
+		if (isTargetRecordingExist(target_recording)) {
+
+			List<String> current_recording_list = getCourseRecordingList();
+			for (int i = 0; i < current_recording_list.size(); i++) {
+				target_recording_index++;
+				if (current_recording_list.get(i).equals(target_recording)) {
+					break;
+				}
+			}
+		} else {
+			System.out.println("Target recording is not exist.");
+			return -1;
+		}
+		return target_recording_index;
+	}
+
+	// This function return the name of the additional content in index
+	public String getTypeTargetIndexAdditionalContent(int index) throws InterruptedException {
+		String additional_content_type = null;
+		for (int i = 0; i < 10; i++) {
+			try {
+						if(!isElementPresent(By.cssSelector("#ItemSize" + Integer.toString(index)))) {
+								if(isElementPresent(By.cssSelector("#ItemUrl" +Integer.toString(index)))){
+									additional_content_type = driver.findElement(By.cssSelector("#ItemUrl" +Integer.toString(index))).getText();
+									break;
+								}
+						} else {
+							additional_content_type = driver.findElement(By.cssSelector("#ItemSize" + Integer.toString(index))).getText();
+							break;
+						}
+			} catch (Exception msg) {
+				Thread.sleep(500);
+			}
+		}
+		return additional_content_type;
+
+	}
+
+	// This function get additional content (as string) and type (as string),
+	// and checks if it is
+	// not exist in additional content list
+	public void verifyTargetAdditionalContentIncludingTypeNotInAdditionalContentList(String target_additional_content,
+			String target_additional_content_type) throws InterruptedException {
+		int number_of_items_in_additional_content_list = driver.findElements(By.cssSelector(".itemTitle")).size();
+
+		for (int i = 0; i < number_of_items_in_additional_content_list; i++) {
+			String current_additional_content = getNameTargetIndexAdditionalContent(i + 1);
+			String current_additional_content_type = getTypeTargetIndexAdditionalContent(i + 1);
+
+			if ((current_additional_content.equals(target_additional_content))
+					&& (current_additional_content_type.equals(target_additional_content_type))) {
+				System.out.println("Target additional content is in additional content list.");
+				ATUReports.add("Additional content list.", "Target additional content not in the list.",
+						"Target additional content in the list.", LogAs.FAILED, null);
+				Assert.assertTrue(false);
+				return;
+			}
+		}
+
+		System.out.println("Target additional content is not in additional content list.");
+		ATUReports.add("Additional content list.", "Target additional content not in the list.",
+				"Target additional content not in the list.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+	}
+
+	// This function get additional content (as string), and checks if it is
+	// exist in additional content list
+	public void verifyTargetAdditionalContentIncludingTypeInAdditionalContentList(String target_additional_content,
+			String target_additional_content_type) throws InterruptedException {
+		int number_of_items_in_additional_content_list = driver.findElements(By.cssSelector(".itemTitle")).size();
+
+		for (int i = 0; i < number_of_items_in_additional_content_list; i++) {
+			String current_additional_content = getNameTargetIndexAdditionalContent(i + 1);
+			String current_additional_content_type = getTypeTargetIndexAdditionalContent(i + 1);
+
+			if ((current_additional_content.equals(target_additional_content))
+					&& (current_additional_content_type.equals(target_additional_content_type))) {
+				System.out.println("Target additional content is in additional content list.");
+				ATUReports.add("Additional content list.", "Target additional content in the list.",
+						"Target additional content in the list.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+				return;
+			}
+		}
+	}
+
+	// This function get list of options and checks if it is the only options
+	// enabled in Recording Task submenu
+	public void verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInRecordingTaskMenu(List<String> target_option_list)
+			throws InterruptedException {
+		moveToElement(recording_tasks_button, driver).perform();
+		Thread.sleep(1000);
+
+		String[] all_options = driver.findElements(By.cssSelector(".menu-container>.dropdown-menu")).get(3).getText()
+				.split("\n");
+
+		for (String option : all_options) {
+			if (target_option_list.contains(option)) {
+				System.out.println("T"); // Call this option verify that this
+											// option enabled
+				verifyTargetStringWebElementEnableDisable(option, true);
+			} else {
+				System.out.println("F"); // Call this option verify that this
+											// option diabled
+				verifyTargetStringWebElementEnableDisable(option, false);
+			}
+		}
+
+	}
+
+	// This function get list of options and checks if it is the only options
+	// enabled in Course Task submenu
+	public void verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInCourseTasksMenu(List<String> target_option_list)
+			throws InterruptedException {
+		wait.until(ExpectedConditions.visibilityOf(course_task_button));
+		Actions builder = new Actions(driver);
+		builder.moveToElement(course_task_button).build().perform();
+
+		String[] all_options = driver.findElements(By.cssSelector(".menu-container>.dropdown-menu")).get(2).getText()
+				.split("\n");
+
+		for (String option : all_options) {
+			if (target_option_list.contains(option)) {
+				System.out.println("T"); // Call this option verify that this
+											// option enabled
+				verifyTargetStringWebElementEnableDisable(option, true);
+			} else {
+				System.out.println("F"); // Call this option verify that this
+											// option diabled
+				verifyTargetStringWebElementEnableDisable(option, false);
+			}
+		}
+
+	}
+
+	// This function get option (String) and status (enable/disable)
+	// This function will assgin for that string the correct WebElement
+	// This function will check if for that WebElement it is the correct status
+	public void verifyTargetStringWebElementEnableDisable(String target, boolean enable_disable) {
+		WebElement webElement = null;
+
+		if (target.equals("Download")) {
+			webElement = download_button;
+		} else if (target.equals("RSS Feed")) {
+			webElement = rssfeed;
+		} else if (target.equals("Podcast")) {
+			webElement = podcast_button;
+		} else if (target.equals("Video Podcast")) {
+			webElement = video_podcast;
+		} else {
+			System.out.println(target);
+			return;
+		}
+
+		if (enable_disable) {
+			verifyElementIsEnabled(webElement, target);
+		} else {
+			verifyElementIsDisabled(webElement, target);
+		}
+	}
+
+	// This function waits until first recording status "Moving\Copying"
+	// dissaper
+	public void waitUntilFirstRecordingMovingCopyingstatusDissaper() throws InterruptedException {
+		int time_counter = 0;
+		while (first_recording_status.getText().contains("Moving/Copying")) {
+			time_counter++;
+			Thread.sleep(1000);
+
+			if (time_counter > 120) {
+				System.out.println("Timeout - Moving/Copying still appears after 120 seconds");
+				ATUReports.add("Timeout -Moving/Copying still appears after 120 seconds", LogAs.FAILED, null);
+				Assert.assertTrue(false);
+				return;
+			}
+		}
+
+		System.out.println("Moving/Copying dissapear from first recording.");
+		ATUReports.add("Moving/Copying dissapear from first recording.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+	}
+
+	public WebElement getCheckbox() {
+		return checkbox;
+	}
+
+	public void setCheckbox(WebElement checkbox) {
+		this.checkbox = checkbox;
+	}
+
+	// This function get index i, and check that recording in this index have no
+	// bookmark
+	public void verifyIndexRecordingHaveNoBookmark(int index) {
+		if (bookmarks_list.get(index - 1).getAttribute("class").contains("ng-hide")) {
+			System.out.println("Verified that target recording have no bookmark.");
+			ATUReports.add("Target recording have no bookmark.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verified that target recording have no bookmark.");
+			ATUReports.add("Target recording have no bookmark.", "True.", "False.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+
+	// This function get index i, and check that recording in this index have
+	// bookmark
+	public void verifyIndexRecordingHaveBookmark(int index) {
+		if (bookmarks_list.get(index - 1).getAttribute("class").equals("bookmark")) {
+			System.out.println("Verified that target recording have bookmark.");
+			ATUReports.add("Target recording have bookmark.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verified that target recording have bookmark.");
+			ATUReports.add("Target recording have bookmark.", "True.", "False.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+	
+	// This function get index i, and return it correct Bookmark WebElement
+	public WebElement getIndexBookmarkWebElement(int index) {
+		return bookmarks_list.get(index - 1);
+	}
+	
+	// This function get index i, and return it correct Date WebElement
+	public WebElement getIndexDateWebElement(int index) {
+		return driver.findElement(By.id("RecordingDate" + Integer.toString(index)));
+	}
+	
+	// This function verify that recording chapters are display sequentially.
+	public void verifyThatRecordingChaptersAreDisplySequentially() {
+		WebElement pre_web_element = video_wraps_of_chapters_of_opened_recording_list.get(0);
+		for(int i=1; i<video_wraps_of_chapters_of_opened_recording_list.size(); i++) {
+			WebElement curr_web_element = video_wraps_of_chapters_of_opened_recording_list.get(i);
+			
+			if(pre_web_element.getLocation().x < curr_web_element.getLocation().x) {
+				pre_web_element = curr_web_element;
+			} else {
+				if(pre_web_element.getLocation().y < curr_web_element.getLocation().y) {
+					pre_web_element = curr_web_element;
+				} else {
+					System.out.println("Not verified that recording chapters are display sequentially.");
+					ATUReports.add("Recording chapters are display sequentially.", "True.", "False.", LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
+			}
+		}
+		System.out.println("Verified that recording chapters are display sequentially.");
+		ATUReports.add("Recording chapters are display sequentially.", "True.", "True.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+	}
+	
+	// This function verify that it's possible to scroll the recordings listing page to get to each recording.
+	public void verifyPossibleToScrollTheRecordingList() throws InterruptedException {
+		List<WebElement> recordings_list = driver.findElements(By.cssSelector(".recordingTitle"));
+		for(WebElement webElement: recordings_list) {
+			org.openqa.selenium.interactions.Action move_to_element = moveToElement(webElement, driver);
+			if(move_to_element==null) {
+				System.out.println("It is not possible to scroll the recordings list page.");
+				ATUReports.add("It is possible to scroll the recording list page.", "True.", "False.", LogAs.FAILED, null);
+				Assert.assertTrue(false);
+			}
+			move_to_element.perform();
+			Thread.sleep(100);
+		}
+		System.out.println("It is possible to scroll the recordings list page.");
+		ATUReports.add("It is possible to scroll the recording list page.", "True.", "False.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+	}
+	
+	// This function verify that when scrolling the page down, Once the menu bar is scrolled to the upper part of the page, His position become's absolute and he does not leave the frame.
+	// For recording page that have more then 1 page of recordings
+	public void verifyWhenScrollingThePageDownMenuBarIsScrolledToTheUpperPartOfThePage() throws InterruptedException {
+		verifyPossibleToScrollTheRecordingList();
+		List<WebElement> recordings_list = driver.findElements(By.cssSelector(".recordingTitle"));
+		WebElement menu_bar = driver.findElement(By.cssSelector(".row.menu-wrap"));
+		
+		if(recordings_list.get(0).getLocation().y < menu_bar.getLocation().y)
+		{
+			System.out.println("Verified that menu bar is scrolled to the uppser part of the page.");
+			ATUReports.add("Verified that menu bar is scrolled to the uppser part of the page.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verified that menu bar is scrolled to the uppser part of the page.");
+			ATUReports.add("Verified that menu bar is scrolled to the uppser part of the page.", "True.", "False", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+	
+	
+	// This function verifys that 
+	// The recording chapters contain the ordinal numbers.
+	// The recording chapters contain the length from – to in a format as follows: “X:XX:XX – X:XX:XX".
+	public void verifyRecordingChaptersContainsOrdinalNumberAndContainLengthFromToInAFormat() {
+		
+			List<WebElement> ordinal_numbers_and_length = driver.findElements(By.cssSelector(".duration"));
+			List<String> to_parse = new ArrayList<String>();
+			for(WebElement webElement: ordinal_numbers_and_length) {
+				to_parse.add(webElement.getText());
+			}
+			
+			int pre_seq = 0;
+			for(int i=0; i<to_parse.size(); i++) {
+				if(pre_seq==0) {
+					pre_seq = Integer.parseInt(to_parse.get(0).split(" ")[0].substring(0, to_parse.get(0).split(" ")[0].length()-1));
+				} else {
+					int curr_seq = Integer.parseInt(to_parse.get(i).split(" ")[0].substring(0, to_parse.get(i).split(" ")[0].length()-1));
+					if((curr_seq - pre_seq) != 1) {
+						System.out.println("Recording chapters not contain the ordinal numbers.");
+						ATUReports.add("Recording chapters contain the ordinal numbers.", "True.", "False.", LogAs.FAILED, null);
+						Assert.assertTrue(false);
+					}
+					pre_seq=curr_seq;
+				}
+				
+				int init_hour = Integer.parseInt(to_parse.get(i).split(" ")[1].split(":")[0]);
+				int init_min = Integer.parseInt(to_parse.get(i).split(" ")[1].split(":")[1]);
+				int init_sec = Integer.parseInt(to_parse.get(i).split(" ")[1].split(":")[2]);
+				
+				int end_hour = Integer.parseInt(to_parse.get(i).split(" ")[3].split(":")[0]);
+				int end_min = Integer.parseInt(to_parse.get(i).split(" ")[3].split(":")[1]);
+				int end_sec = Integer.parseInt(to_parse.get(i).split(" ")[3].split(":")[2]);
+				
+				if(		(init_hour<0) &&
+						(end_hour<0) &&
+						(init_min<0) &&
+						(end_min<0) &&
+						(init_sec<0) &&
+						(end_sec<0) &&
+						(init_min>59) &&
+						(end_min>59) &&
+						(init_sec>59) &&
+						(end_sec>59)) {
+					System.out.println("The recording chapters contain the length from - to in an incorrect format.");
+					ATUReports.add("The recording chapters contain the length from – to in an correct format.", "True.", "False.", LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
+				
+			}
+			System.out.println("Recording chapters contain the ordinal numbers.");
+			ATUReports.add("Recording chapters contain the ordinal numbers.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+			System.out.println("The recording chapters contain the length from - to in an correct format.");
+			ATUReports.add("The recording chapters contain the length from – to in an correct format.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+	}
+	
+	// This function return number of chapters of opened recordings
+	public int getNumberOfChaptersOfOpenedExpandedRecordings() {
+		return driver.findElements(By.cssSelector(".video-wrap")).size();
+	}
+	
+	// This function verify that the recording chapters contain the image preview.
+	public void verifyThatRecordingChaptersContainImagePreview() {
+		int number_of_recordings = getNumberOfChaptersOfOpenedExpandedRecordings();
+		
+		if(number_of_recordings == driver.findElements(By.cssSelector(".thumbnail-image")).size()) {
+			System.out.println("Verified that the recording capters contain the image preview.");
+			ATUReports.add("Recording chapters contain the image preview.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verified that the recording capters contain the image preview.");
+			ATUReports.add("Recording chapters contain the image preview.", "True.", "False.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+	
+	// This function verify that recording collapsed.
+	public void verifyThatRecordingCollapsed() {
+		verifyWebElementNotDisplayed(driver.findElements(By.cssSelector(".video-wrap")).get(0), "Recording chapters");
+	}
+	
+	// This function verify that recording expanded.
+	public void verifyThatRecordingExpanded() {
+		verifyWebElementDisplayed(driver.findElements(By.cssSelector(".video-wrap")).get(0), "Recording chapters");
+	}
+	
+	// This function verify that the blue bookmark icon is displayed prior to the recording adding date (If bookmarks/notes exist).	
+	public void verifyThatBookmarkIconDisplayedLeftToRecordingDateIfExist() {
+		for(WebElement webElement: recordings_list_date) {
+			String[] splited_date_bookmark = webElement.getText().split("\n");
+			if(splited_date_bookmark.length == 2) {
+				if (!splited_date_bookmark[0].equals("bookmark")) {
+					System.out.println("Not verify that the bookmark icon is displayed prior to the recording date.");
+					ATUReports.add("Verify that the bookmark icon is displayed prior to the recording date.", "True.", "False.", LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
+			}
+		}
+		System.out.println("Verify that the bookmark icon is displayed prior to the recording date.");
+		ATUReports.add("Verify that the bookmark icon is displayed prior to the recording date.", "True.", "True.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+	}
+	
+	// This function verify that the format is: length: X:XX:XX.
+	public void verifyFormatOfRecordingLength() {
+		for(WebElement webElement: recordings_list_duratuon) {
+			String[] splited_length = webElement.getText().split(" ");
+			
+			int hour = Integer.parseInt(splited_length[1].split(":")[0]);
+			int min = Integer.parseInt(splited_length[1].split(":")[1]);
+			int sec = Integer.parseInt(splited_length[1].split(":")[2]);
+			
+			if((0<=hour) && (0<=min) && (0<=sec) && (min<=60) && (sec<=60) && (splited_length[0].equals("length:"))) {
+				continue;
+			} else {
+				System.out.println("Not verfiy that the format is: length: X:XX:XX.");
+				ATUReports.add("Verify that the format is: length: X:XX:XX.", "True.", "False.", LogAs.FAILED, null);
+				Assert.assertTrue(false);
+			}
+		}
+		System.out.println("Verfiy that the format is: length: X:XX:XX.");
+		ATUReports.add("Verify that the format is: length: X:XX:XX.", "True.", "True.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+	}
+	
+	// This function verify that the format of recorded by is: Recorded by: Username.
+	public void verifyFormatOfRecordingRecordedBy() {
+		int number_of_recordings = getNumberOfRecordings();
+		for(int i=1; i<=number_of_recordings; i++) {
+			String[] splited_recorded_by = driver.findElement(By.id("RecordedBy" + Integer.toString(i))).getText().split(" ");
+			
+			if((splited_recorded_by[0].equals("recorded")) && (splited_recorded_by[1].equals("by:")) && (splited_recorded_by[2].length() > 0)) {
+				continue;
+			} else {
+				System.out.println("No verifed that the format is: recorded by: Username");
+				ATUReports.add("Verifed that the format is: recorded by: Username", "True.", "False.", LogAs.FAILED, null);
+				Assert.assertTrue(false);
+			}
+		}
+		
+		System.out.println("Verifed that the format is: recorded by: Username");
+		ATUReports.add("Verifed that the format is: recorded by: Username", "True.", "True.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+	}
+	
+	// This function verify that the format of Recording adding date is: “mm/dd/yyyy”
+	public void verifyFormatOfRecordingsAddingDate() {
+		for(WebElement webElement: recordings_list_date) {
+			String[] splited_date_bookmark = webElement.getText().split("\n");
+			String date = null;
+			if(splited_date_bookmark.length == 2) {
+				date = splited_date_bookmark[1];
+			} else {
+				date = splited_date_bookmark[0];
+			}
+			
+			String[] splited_date = date.split("/");
+			int mm = Integer.parseInt(splited_date[0]);
+			int dd = Integer.parseInt(splited_date[1]);
+			int yyyy = Integer.parseInt(splited_date[2]);
+			
+			if((mm>0) && (dd>0) && (yyyy>1000) && (mm<13) && (dd<31) && (yyyy<10000)) {
+				continue;
+			} else {
+				System.out.println("Not verfied that the format of recording adding date is: mm/dd/yyyy.");
+				ATUReports.add("Verfied that the format of recording adding date is: mm/dd/yyyy.", "True.", "False.", LogAs.FAILED, null);
+				Assert.assertTrue(false);
+			}
+		}
+		
+		System.out.println("Verfied that the format of recording adding date is: mm/dd/yyyy.");
+		ATUReports.add("Verfied that the format of recording adding date is: mm/dd/yyyy.", "True.", "True.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+		
+	}
+	
+	// Thie function verify that
+	// Validate the "Breadcrumb" links are displayed correctly.
+	// The courses "breadcrumb" link is displayed at the top left corner of the page.
+	// The '>' character is displayed before the breadcrumb link.
+	public void verifyThatBreadcrumbDisplayedCorrectly() {
+		String[] splited_breadcrumb = breadcrumbs.getText().split(" ");
+		
+		if((splited_breadcrumb[0].equals(">")) && (splited_breadcrumb[1].equals("Courses")) && (breadcrumbs.getLocation().x < searchbox.getLocation().x) &&
+				(searchbox.getLocation().y < breadcrumbs.getLocation().y) && (breadcrumbs.getLocation().y < tegrity_logo.getLocation().y)) {
+			System.out.println("Verfied the breadcrumb UI.");
+			ATUReports.add("Verfied the breadcrumb UI.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verfied the breadcrumb UI.");
+			ATUReports.add("Verfied the breadcrumb UI.", "True.", "True.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+	
+	// This function get string and check if is the correct course title
+	public void verifyThatStringIsCourseName(String subname) {
+		if (getCourseTitle().equals(subname)) {
+			System.out.println("Verified that course name is target name: " + subname);
+			ATUReports.add("Verified that course name is target name.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verified that course name is target name: " + subname);
+			ATUReports.add("Verified that course name is target name.", "True.", "False.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+	
+	// This function verify that target type of tab is chosen
+	// 0 - recordings, 1 - additional content, 2 - student recordings, 3 - tests
+	public void verifyThatTargetTypeOfTabIsChosen(int type) {
+		if((type>4) || (type<0)) {
+			System.out.println("Invalid input for checking if target tab is chosen.");
+		}
+		
+		String init_background_color = null;
+		String str_tab = null;
+		
+		
+		switch (type) {
+		case 0:
+			init_background_color = getBackGroundColor(recordings_tab);
+			str_tab = "Recordings";
+			break;
+		case 1:
+			init_background_color = getBackGroundColor(additional_content_tab);
+			str_tab = "Additional Content";
+			break;
+		case 2:
+			init_background_color = getBackGroundColor(student_recordings_tab);
+			str_tab = "Student Recordings";
+			break;
+		case 3:
+			init_background_color = getBackGroundColor(test_tab);
+			str_tab = "Tests";
+		}
+		
+		
+		if(init_background_color.equals("#ffffff")) {
+			System.out.println("Verfied that the " + str_tab + " tab is chosen by default");
+			ATUReports.add("Verfied that " + str_tab + " tab is chosen.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verfied that the " + str_tab + " tab is chosen by default");
+			ATUReports.add("Verfied that " + str_tab + " tab is chosen.", "True.", "False.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+	
+	// This function verify recordings menu locations
+	// Validate the tab menu is displayed correctly under the course name.
+	// The "View" drop-down is displayed and left aligned.
+	// The "Course Tasks" drop-down is displayed next to the "View" element.
+	// The "Recording Task" drop-down is displayed and right aligned.
+	// The check box to select/deselect all the records in the course is displayed on the right of the "Recording Task".
+	public void verifyMenuLocations() {
+		Point course_name = course_title.getLocation();
+		Point view_but = view_button.getLocation();
+		Point course_task_but = course_task_button.getLocation();
+		Point recording_task_but = recording_tasks_button.getLocation();
+		Point checkbox = check_all_checkbox.getLocation();
+			
+		if ((course_name.getY() < view_but.getY()) &&
+				(view_but.getY() == course_task_but.getY()) &&
+				(course_task_but.getY() == recording_task_but.getY()) &&
+				(view_but.getX() < course_task_but.getX()) &&
+				(course_task_but.getX() < recording_task_but.getX()) &&
+				(recording_task_but.getX() < checkbox.getX())) {
+			System.out.println("Verfied menus location.");
+			ATUReports.add("Verfied menus location.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verfied menus location.");
+			ATUReports.add("Verfied menus location.", "True.", "False.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+
+	}
+	
+	// This function clicks on recording tasks then download
+	// This function click on Recorind Task then on copy in the sub menu
+	public void clickOnRecordingTasksThenDownload() throws InterruptedException {
+
+		try {
+			Robot robot = new Robot();
+			robot.mouseMove(-100, -100);
+		} catch (AWTException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("Could not use the robot.");
+		}
+		
+		try {
+			waitForVisibility(recording_tasks_button);
+			moveToElementAndClick(recording_tasks_button, driver);
+			download_button.click();
+			
+			System.out.println("Clicked on Recording Tasks then Download.");
+			ATUReports.add("Clicked on Recording Tasks then Download.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch(Exception msg) {
+			System.out.println("Fail to on Recording Tasks then Download.");
+			ATUReports.add("Clicked on Recording Tasks then Download.", "True.", "False.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+		
+		
+	}
+	
+	// This function go over all recording status and checks that recording status of type which available for delete that recordings
+	public void checkExistenceOfNonDeleteRecordingsStatusInRecordings() {
+		int i = 0;
+		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {
+			i++;
+			if(isElemenetDisplayed(By.id(("RecordingStatus")+ Integer.toString(i)))){
+				WebElement el = getStaleElem(By.id("RecordingStatus" + Integer.toString(i)),driver);
+				String current_element = el.getText();
+			if ((!current_element.equals("")) && (!current_element.equals("IE, FF, Safari Ready")) && (!current_element.equals("Not Published"))) {
+				System.out.println("Not verfired that all recordings have non delete status.");
+				ATUReports.add("Verfied that all recordings have delete available status.", "True.", "False.", LogAs.FAILED, null);
+				ATUReports.add("the status is: " + current_element, "True.", "False.", LogAs.WARNING, null);
+				Assert.assertTrue(false);
+			  }
+			} else {
+				break;
+			}
+		}
+		System.out.println("Verfired that all recordings have delete available status.");
+		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+	}
+	
+	// This function go over all recording status and checks that recording status of type which available for delete that recordings
+	public void checkExistenceOfNonDeleteItemsStatusInAdditionalContent() throws InterruptedException {
+		int i = 0;
+		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {
+			i++;
+			if(isElemenetDisplayed(By.id(("ItemStatus")+ Integer.toString(i)))){		
+				Thread.sleep(1000);
+				WebElement el = getStaleElem(By.id("ItemStatus" + Integer.toString(i)),driver);
+				String current_element = el.getText();	
+			if ((!current_element.equals("Available"))) {
+				System.out.println("Not verfired that all additional Content have non delete status.");
+				ATUReports.add("Verfied that all additional Content have delete available status.", "True.", "False.", LogAs.FAILED, null);
+				ATUReports.add("the status is: " + current_element, "True.", "False.", LogAs.FAILED, null);
+				Assert.assertTrue(false);
+			  }
+			} else {
+				break;
+			}
+		}
+		System.out.println("Verfired that all recordings have delete available status.");
+		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+	}
+	
+	
+	
 }

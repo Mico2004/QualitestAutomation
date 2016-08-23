@@ -1,26 +1,22 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+
+import java.text.DateFormat;
+import java.util.Date;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -50,6 +46,10 @@ public class TCExixtenceOfUIItems {
 	DesiredCapabilities capability;
 String os;
 	
+@AfterClass
+public void closeBroswer() {		
+	this.driver.quit();
+}
 
 @BeforeClass
 	public void setup() {
@@ -63,12 +63,19 @@ String os;
 			///
 		//	driver = new FirefoxDriver();
 			ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
-			driver.manage().window().maximize();
+			
 
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
+			
+			 Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TCExixtenceOfUIItems at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TCExixtenceOfUIItems at " + DateToStr,
+			 "Starting the test: TCExixtenceOfUIItems at " + DateToStr, LogAs.PASSED, null);
+			 
 		} catch (Exception e) {
 			ATUReports.add("Fail Step", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 		}
@@ -110,8 +117,8 @@ String os;
 		course.selectCourse(record);
 		record.verifyRecordingMenuColor();
 		record.verifyDisabledMenu();
-		record.ClickOneCheckedboxSelected(record.checkbox);
-		record.ClickOneCheckedboxNotSelected(record.checkbox);
+		record.ClickOneCheckedboxSelected(record.getCheckbox());
+		record.ClickOneCheckedboxNotSelected(record.getCheckbox());
 		record.checkall.click();// make all checkboxes marked
 		Thread.sleep(2000);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -129,6 +136,9 @@ String os;
 		copy.verifySearchCourseBox();
 		copy.verifySearchCourseBoxText();
 		copy.verifyCopyMenuElementsLocation();
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 
 	// description = "get courses list"

@@ -2,21 +2,11 @@ package com.automation.main;
 
 //precondition student first course must have recordings in recordings tab as well as in student recordings tab
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.text.DateFormat;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -24,20 +14,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
-import junitx.util.PropertyManager;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
@@ -77,9 +65,11 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 //			
 //		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
-		ATUReports.setWebDriver(driver);
+		//
+		//ATUReports.setWebDriver(driver);
+		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -99,7 +89,11 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		
-		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel at " + DateToStr,
+		 "Starting the test: TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel at " + DateToStr, LogAs.PASSED, null);	
 		
 	}
 	
@@ -142,7 +136,7 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 		
 		
 		// Upload additional content link
-		record.clickOnAdditionContentTab();
+        // record.clickOnAdditionContentTab();
 		record.toUploadAdditionalContentLink();
 		
 		Date date = new Date();
@@ -150,8 +144,8 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 		String new_additional_link_title = "newname" + sdf.format(date);
 		String new_additional_link_url = "http://www." + new_additional_link_title + ".com";
 		
-		add_additional_content_link_window.createNewAdditionalContentLink(confirm_menu, new_additional_link_title, new_additional_link_url);
-		
+		add_additional_content_link_window.createNewAdditionalContentLink(confirm_menu, new_additional_link_title, new_additional_link_url);	
+		record.waitForVisibility(record.sign_out);
 		top_bar_helper.clickOnSignOut();
 		
 		
@@ -162,7 +156,7 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 				tegrity.loginCourses("User1");
 			} else if (type_of_user == 1) {
 				// 2. Login as Student.
-				tegrity.loginCourses("User1");
+				tegrity.loginCourses("User4");
 			} else if (type_of_user == 2) {
 				// 2. Login as guest
 				tegrity.loginAsguest();
@@ -217,24 +211,23 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 			search_page.verifyThatSourceTitleInTheFormatSourceLink();
 			
 			// 5.6. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 6. Hover over the link icon.
-			search_page.moveToElement(search_page.link_icon_list.get(0), driver).perform();
+			search_page.moveToElementAndPerform(search_page.link_icon_list.get(0), driver);
 			
 			// 6.1. The word "Link" displayed as a hint.
 			search_page.verifyWebElementHaveTargetAttributeTitle(search_page.link_icon_list.get(0), "Link");
 			
 			// 7. Click on the link icon.
+			String current_url = driver.getCurrentUrl();
 			search_page.link_icon_list.get(0).click();
-			
 			
 			// 7.1. The website open in new Tab/window.
 			boolean is_website_opened_in_new_tab = false;
 			for(String handler: driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
-				String current_url = driver.getCurrentUrl();
-				if((current_url.equals(new_additional_link_url)) || (current_url.equals(new_additional_link_url + "/"))) {
+				if(!current_url.equals(driver.getCurrentUrl())) {
 					is_website_opened_in_new_tab = true;
 					break;
 				}
@@ -258,6 +251,7 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 			}
 			
 			// 8. Click on title of the link.
+			current_url = driver.getCurrentUrl();
 			search_page.title_urls_list.get(0).click();
 			Thread.sleep(1000);
 			
@@ -265,8 +259,7 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 			is_website_opened_in_new_tab = false;
 			for(String handler: driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
-				String current_url = driver.getCurrentUrl();
-				if((current_url.equals(new_additional_link_url)) || (current_url.equals(new_additional_link_url + "/"))) {
+				if(!current_url.equals(driver.getCurrentUrl())) {
 					is_website_opened_in_new_tab = true;
 					break;
 				}
@@ -303,6 +296,8 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
 		
-		
+
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 }

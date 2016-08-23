@@ -3,17 +3,16 @@ package com.automation.main;
 import java.awt.List;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
+import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
 
 public class TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings {
@@ -45,13 +44,20 @@ public class TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings {
 		try {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
+			
 
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
+			
+			 Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings at " + DateToStr,
+			 "Starting the test: TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings at " + DateToStr, LogAs.PASSED, null);
+			
 		} catch (Exception e) {
 			/// ATUReports.add("Fail Step", LogAs.FAILED, new
 			/// CaptureScreen(ScreenshotOf.DESKTOP));
@@ -97,7 +103,7 @@ public class TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings {
 		record.clickOnStudentRecordingsTab();
 		Thread.sleep(2000);
 		//5.select check box
-		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.checkbox);// check box is selected
+		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.getCheckbox());// check box is selected
       ;
         //6.to move menu
      
@@ -105,9 +111,8 @@ public class TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings {
 		//7.verify courses are displayed in alphabetical order
 		record.verifyRecordingSortedByTitle(copy.getCourseList());///verify sorted by title
 		
-		// Quit browser
-		driver.quit();
-	
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 	
 	// description = "get courses list"

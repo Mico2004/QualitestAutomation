@@ -1,42 +1,28 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
+
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-
-import org.junit.AfterClass;
-import org.omg.Messaging.SyncScopeHelper;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC15538CancelTheCopying {
@@ -59,6 +45,7 @@ public class TC15538CancelTheCopying {
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
+    
 	@BeforeClass
 	public void setup() {
 
@@ -72,7 +59,7 @@ public class TC15538CancelTheCopying {
 		
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
-		//driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -80,13 +67,19 @@ public class TC15538CancelTheCopying {
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15538CancelTheCopying at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15538CancelTheCopying at " + DateToStr, "Starting the test: TC15538CancelTheCopying at " + DateToStr, LogAs.PASSED, null);	
+		
 	}
 	
-//	@org.testng.annotations.AfterClass
-//	public void quitBroswer() {
-//		this.driver.quit();
-//	}
-
+	@AfterClass
+	public void closeBroswer() {
+		this.driver.quit();
+	}
+	
 	private void setAuthorInfoForReports() {
 		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
 	}
@@ -145,8 +138,8 @@ public class TC15538CancelTheCopying {
 		System.out.println("Target course: " + targetCourse);
 		
 		//6. Click "Cancel" button.
-		copy.clickOnCancelButton(record);
-		
+		Thread.sleep(2000);
+		copy.clickOnCancelButton(record);	
 		Thread.sleep(3000);
 		
 
@@ -173,11 +166,11 @@ public class TC15538CancelTheCopying {
 		
 		if(current_recording_list.contains(clickedRecording)) {
 			System.out.println("Recording is exist");
-			ATUReports.add("Recording title.", "Recording is exist.", "Recording is exist.", LogAs.FAILED, null);
+			ATUReports.add("Recording title.", "Recording is not exist.", "Recording is exist.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		} else {
 			System.out.println("Recording is not exist.");
-			ATUReports.add("Recording title.", "Recording is exist.", "Recording is not exist.", LogAs.PASSED, null);
+			ATUReports.add("Recording title.", "Recording is not exist.", "Recording is not exist.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 		
@@ -236,7 +229,8 @@ public class TC15538CancelTheCopying {
 			Assert.assertTrue(true);
 		}
 		
-		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 

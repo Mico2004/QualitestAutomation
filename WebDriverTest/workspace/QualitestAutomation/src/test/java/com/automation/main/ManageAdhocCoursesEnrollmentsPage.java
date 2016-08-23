@@ -77,7 +77,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		for(int i=0; i<30; i++) {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(filter_search_input));
-				filter_search_input.sendKeys(Keys.CONTROL + "a");
+				filter_search_input.sendKeys(Keys.CONTROL + Keys.chord("a"));
 				filter_search_input.sendKeys(Keys.DELETE);
 				filter_search_input.sendKeys(set_to);
 				if (filter_search_input.getAttribute("value").equals(set_to)) {
@@ -138,6 +138,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	/// delete"
 	public boolean clickOnFirstCourseDeleteButton() {
 		try {
+			waitForVisibility(first_course_delete_button);
 			first_course_delete_button.click();
 			System.out.println("Clicked on first course delete button");
 			Thread.sleep(3000);
@@ -214,14 +215,20 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		clickOnFirstCourseMembershipButton();
 		Thread.sleep(3000);
 		/// 5.unroll instructor
+		System.out.println("d1");
 		mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list, user);
 		Thread.sleep(3000);
+		System.out.println("d2");
 		mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
 		Thread.sleep(2000);
+		System.out.println("d3");
+		waitForVisibility(mangage_adhoc_courses_membership_window.ok_button);
 		mangage_adhoc_courses_membership_window.ok_button.click();
 		Thread.sleep(2000);
+		System.out.println("d4");
 		driver.switchTo().alert().accept();
 		System.out.println("clicked on ok");
+		System.out.println("d5");
 	}
 	/// un-enrolls instructor to course
 		public void unEnrollStusentsFromCourse(String course, String user,ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window) throws InterruptedException {

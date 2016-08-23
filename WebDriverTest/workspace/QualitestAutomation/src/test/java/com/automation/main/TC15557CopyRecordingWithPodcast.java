@@ -1,12 +1,8 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
@@ -20,13 +16,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -35,7 +30,9 @@ import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
+import java.text.DateFormat;
+import java.util.Date;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC15557CopyRecordingWithPodcast {
@@ -78,7 +75,7 @@ public class TC15557CopyRecordingWithPodcast {
 		driver = new FirefoxDriver();
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -93,10 +90,15 @@ public class TC15557CopyRecordingWithPodcast {
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15557CopyRecordingWithPodcast at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15557CopyRecordingWithPodcast at " + DateToStr, "Starting the test: TC15557CopyRecordingWithPodcast at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	
-	@AfterTest
+	@AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
 	}
@@ -156,6 +158,8 @@ public class TC15557CopyRecordingWithPodcast {
 			System.out.println("Current course: " + currentCourse);
 			
 			//5. Select source recording (first recording from podcast list)
+			List<String> current_recording_list = record.getCourseRecordingList(); 
+			
 			record.clickOnCourseTaskThenPodcast();
 			for (String handle : driver.getWindowHandles()) {
 			    driver.switchTo().window(handle);
@@ -165,7 +169,15 @@ public class TC15557CopyRecordingWithPodcast {
 			}
 			
 			wait.until(ExpectedConditions.visibilityOf(driver.findElements(By.cssSelector(".entry>h3>a>span")).get(0)));
-			String recording_title = driver.findElements(By.cssSelector(".entry>h3>a>span")).get(0).getText();
+			List<WebElement> rss_recording_list = driver.findElements(By.cssSelector(".entry>h3>a>span"));
+			String recording_title = null;
+			for(int i=0; i<rss_recording_list.size();i++) {
+				if(current_recording_list.contains(rss_recording_list.get(i).getText())) {
+					recording_title = rss_recording_list.get(i).getText();
+					break;
+				}
+			}
+//			String recording_title = driver.findElements(By.cssSelector(".entry>h3>a>span")).get(0).getText();
 			
 			System.out.println(recording_title);
 			
@@ -194,7 +206,7 @@ public class TC15557CopyRecordingWithPodcast {
 			//8. Click "Copy Recording(s)" button.
 			copy.clickOnCopyButton();
 			
-			Thread.sleep(1000);
+
 			
 			//9. Click "OK" button.
 			confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -352,8 +364,9 @@ public class TC15557CopyRecordingWithPodcast {
 		    	Assert.assertTrue(false);
 			}
 		    
-//		    // Quit the browser
-//		    driver.quit();
+		    System.out.println("Done.");
+		    ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
 		}
 	}
 }

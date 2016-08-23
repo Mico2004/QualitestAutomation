@@ -1,46 +1,34 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
 import java.util.List;
+import java.text.DateFormat;
+import java.util.Date;
 
-import org.apache.bcel.generic.IF_ACMPEQ;
-import org.eclipse.jetty.io.ClientConnectionFactory.Helper;
-import org.junit.AfterClass;
+
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.internal.Nullable;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junit.textui.TestRunner;
-import junitx.util.PropertyManager;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC22032DeleteARegularRecordingAsADMIN {
@@ -73,7 +61,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		//driver.manage().window().maximize();
+		//
 		ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -86,14 +74,20 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		confirmation_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		
-		
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC22032DeleteARegularRecordingAsADMIN at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC22032DeleteARegularRecordingAsADMIN at " + DateToStr,
+		 "Starting the test: TC22032DeleteARegularRecordingAsADMIN at " + DateToStr, LogAs.PASSED, null);
+			
 	}
 	
-//	@org.testng.annotations.AfterClass
-//	public void quitBroswer() {
-//		this.driver.quit();
-//	}
+	@AfterClass
+	public void quitBrowser() {
+		driver.quit();
+	}
 
 	private void setAuthorInfoForReports() {
 		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
@@ -139,17 +133,25 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		
 		// 3. Using course functions copy Recordings, Student Recording and Tests from ValidBank to abc.
 		// Copy all recording from Bank Valid Recording to course starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "abc", 0, record, copy, confirmation_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 0, record, copy, confirmation_menu);
 		// Copy all student recordings from Bank Valid Recording to course starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "abc", 2, record, copy, confirmation_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 2, record, copy, confirmation_menu);
 		// Copy all tests from Bank Valid Recording to course starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings", "abc", 3, record, copy, confirmation_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 3, record, copy, confirmation_menu);
 		
+		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
+		System.out.println("1");  
+		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
+		System.out.println("3");
+		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
+		System.out.println("4");
+		
+
 		// 4. Get full name of abc course.
 		String source_course_name = course.selectCourseThatStartingWith("abc");
 		System.out.println("Target course name for this test is: " + source_course_name);
 		ATUReports.add("Target course name for this test is: "+ source_course_name, LogAs.PASSED, null);
-		
+			
 		// 5. Logout.
 		record.signOut();
 		
@@ -179,9 +181,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 			admin_dashboard_view_course_list.clickOnFirstCourseLink();
 			Thread.sleep(1000);
 			
-			
-			
-			
+		
 			// Repeat TC for Recordings, Stduent Recording and Tests Tabs
 			for(int recording_type=0; recording_type<3; recording_type++) {
 				
@@ -190,13 +190,15 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				} else if (recording_type==2) {
 					record.clickOnTestsTab();
 				}
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				
 				// recording list before delete the recording
 				List<String> recording_list_before_delete_recording = record.getCourseRecordingList(); 
 				
 				// 8. Click on a checkbox of one recording.
-				record.checkbox.click();
+				WebElement checkbox= record.getCheckbox();
+				record.ClickOneCheckBoxOrVerifyAlreadySelected(checkbox);
+				
 				
 				String checked_recording_title = null;
 				if (recording_type==2) {
@@ -223,32 +225,35 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 					Assert.assertTrue(false);
 				}
 				
-				// 14. Verify that only selected recording displayed in "List of Recordings".
-				if (recording_type==2) {
-					List<String> delete_menu_recording_list_to_delete =  delete_menu.getRecordingList();
-					
-					if(delete_menu_recording_list_to_delete.size()==1) {
-						System.out.println("Verified that only selected recording displayed in List of Recordings: " + checked_recording_title);
-						ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "True.", LogAs.PASSED, null);
-						Assert.assertTrue(true);
+				if(!(driver instanceof ChromeDriver)) {
+					// 14. Verify that only selected recording displayed in "List of Recordings".
+					if (recording_type==2) {
+						List<String> delete_menu_recording_list_to_delete =  delete_menu.getRecordingList();
+						
+						if(delete_menu_recording_list_to_delete.size()==1) {
+							System.out.println("Verified that only selected recording displayed in List of Recordings: " + checked_recording_title);
+							ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "True.", LogAs.PASSED, null);
+							Assert.assertTrue(true);
+						} else {
+							System.out.println("Not verified that only selected recording displayed in List of Recordings.");
+							ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "False.", LogAs.FAILED, null);
+							Assert.assertTrue(false);
+						}
 					} else {
-						System.out.println("Not verified that only selected recording displayed in List of Recordings.");
-						ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "False.", LogAs.FAILED, null);
-						Assert.assertTrue(false);
-					}
-				} else {
-					List<String> delete_menu_recording_list_to_delete =  delete_menu.getRecordingList();
-					
-					if((delete_menu_recording_list_to_delete.size()==1) && (delete_menu_recording_list_to_delete.get(0).equals(checked_recording_title))) {
-						System.out.println("Verified that only selected recording displayed in List of Recordings: " + checked_recording_title);
-						ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "True.", LogAs.PASSED, null);
-						Assert.assertTrue(true);
-					} else {
-						System.out.println("Not verified that only selected recording displayed in List of Recordings.");
-						ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "False.", LogAs.FAILED, null);
-						Assert.assertTrue(false);
+						List<String> delete_menu_recording_list_to_delete =  delete_menu.getRecordingList();
+						
+						if((delete_menu_recording_list_to_delete.size()==1) && (delete_menu_recording_list_to_delete.get(0).equals(checked_recording_title))) {
+							System.out.println("Verified that only selected recording displayed in List of Recordings: " + checked_recording_title);
+							ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "True.", LogAs.PASSED, null);
+							Assert.assertTrue(true);
+						} else {
+							System.out.println("Not verified that only selected recording displayed in List of Recordings.");
+							ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "False.", LogAs.FAILED, null);
+							Assert.assertTrue(false);
+						}
 					}
 				}
+				
 				
 				
 				// 15. Click "Delete" button.
@@ -285,18 +290,13 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 			}
 			
 			Thread.sleep(2000);
+			// 18. Logout.
+			record.signOut();
 			
-			// 40. Logout.
-			driver.findElement(By.id("SignOutLink")).click();
-			
-			Thread.sleep(2000);
 		}
 		
-		// Quit the browser
-		driver.quit();
-		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 	
-
-
-}
+	}

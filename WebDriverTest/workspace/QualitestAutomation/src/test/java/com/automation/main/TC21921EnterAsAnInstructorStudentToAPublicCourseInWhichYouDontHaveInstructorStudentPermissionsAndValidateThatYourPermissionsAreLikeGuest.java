@@ -1,55 +1,32 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.security.PublicKey;
-import java.security.spec.ECPrivateKeySpec;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.IntToDoubleFunction;
-
-import org.junit.experimental.theories.Theories;
-import org.omg.CORBA.StringHolder;
-import org.omg.Messaging.SyncScopeHelper;
-import org.omg.PortableInterceptor.NON_EXISTENT;
+import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import com.sun.jna.win32.W32APITypeMapper;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
-import junitx.util.ResourceManager;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.treetable.JTreeTable.ListToTreeSelectionModelWrapper;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveInstructorStudentPermissionsAndValidateThatYourPermissionsAreLikeGuest {
@@ -94,7 +71,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
-		// driver.manage().window().maximize();
+		// 
 		ATUReports.setWebDriver(driver);
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -123,9 +100,15 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
 		
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveInstructorStudentPermissionsAndValidateThatYourPermissionsAreLikeGuest at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveInstructorStudentPermissionsAndValidateThatYourPermissionsAreLikeGuest at " + DateToStr,
+		 "Starting the test: TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveInstructorStudentPermissionsAndValidateThatYourPermissionsAreLikeGuest at " + DateToStr, LogAs.PASSED, null);	
+		
 	}
 
-	
 	 @AfterClass
 	 public void closeBroswer() {
 		 this.driver.quit();
@@ -242,11 +225,12 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", temp_course_name, 0, record, copy, confirm_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", temp_course_name, 1, record, copy, confirm_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", temp_course_name, 2, record, copy, confirm_menu);
-		
+//		
 		top_bar_helper.clickOnSignOut();
 		
+		
 		// 29. Repeat the test as the Student from the precondition.
-		for(int user_type=0; user_type<1; user_type++) {
+		for(int user_type=0; user_type<2; user_type++) {
 			if(user_type==0) {
 				// 5. Login as INSTRUCTOR.
 				tegrity.loginCourses("User1");
@@ -284,24 +268,34 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			record.verifyNoStartTest();
 			
 			// 13. Hover over "Course tasks" menu.
-			record.moveToElement(record.course_task_button, driver).perform();
-			Thread.sleep(1000);
+			wait.until(ExpectedConditions.visibilityOf(record.course_task_button));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(record.course_task_button).build().perform();
+			Thread.sleep(3000);
 			
 			// 14. Validate that the options: "RSS feed", "Podcast" and "Video podcast" are the ONLY menu options and they are all enabled (clickable).
-			record.verifyElementIsEnabled(record.rssfeed, "RSS feed");
-			record.verifyElementIsEnabled(record.podcast_button, "Podcast");
-			record.verifyElementIsEnabled(record.video_podcast, "Video podcast");
+//			record.verifyElementIsEnabled(record.rssfeed, "RSS feed");
+//			record.verifyElementIsEnabled(record.podcast_button, "Podcast");
+//			record.verifyElementIsEnabled(record.video_podcast, "Video podcast");
+			List<String> target_option_list1 = new ArrayList<String>();
+			target_option_list1.add("RSS Feed");
+			target_option_list1.add("Podcast");
+			target_option_list1.add("Video Podcast");
+			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInCourseTasksMenu(target_option_list1);
 			
 			
 			// 15. Click on a checkbox of a specific recording.
-			record.selectFirstCheckbox();
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			
 			// 16. Hover over "Recording tasks" menu.
 			record.moveToElement(record.recording_tasks_button, driver).perform();
 			Thread.sleep(1000);
 			
 			// 17. Validate that the option "Download recording" is the ONLY displayed menu option and it is enabled (clickable).
-			record.verifyElementIsEnabled(record.download_button, "Download recording");
+//			record.verifyElementIsEnabled(record.download_button, "Download recording");
+			List<String> target_option_list = new ArrayList<String>();
+			target_option_list.add("Download");
+			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInRecordingTaskMenu(target_option_list);
 			
 			// 18. Click on the "Additional Content" tab.
 			record.clickOnAdditionContentTab();
@@ -312,9 +306,10 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			Thread.sleep(1000);
 			
 			// 20. Validate that the options: "RSS feed", "Podcast" and "Video podcast" are the ONLY menu options and they are all enabled (clickable)
-			record.verifyElementIsEnabled(record.rssfeed, "RSS feed");
-			record.verifyElementIsEnabled(record.podcast_button, "Podcast");
-			record.verifyElementIsEnabled(record.video_podcast, "Video podcast");
+//			record.verifyElementIsEnabled(record.rssfeed, "RSS feed");
+//			record.verifyElementIsEnabled(record.podcast_button, "Podcast");
+//			record.verifyElementIsEnabled(record.video_podcast, "Video podcast");
+			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInCourseTasksMenu(target_option_list1);
 			
 			// 21. Validate the 'Content tasks' button is not displayed.
 			record.verifyThatContentTaskButtonNotDisplayed();
@@ -328,9 +323,10 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			Thread.sleep(1000);
 			
 			// 24. Validate that the options: "RSS feed", "Podcast" and "Video podcast" are the ONLY menu options and they are all enabled (clickable).
-			record.verifyElementIsEnabled(record.rssfeed, "RSS feed");
-			record.verifyElementIsEnabled(record.podcast_button, "Podcast");
-			record.verifyElementIsEnabled(record.video_podcast, "Video podcast");
+//			record.verifyElementIsEnabled(record.rssfeed, "RSS feed");
+//			record.verifyElementIsEnabled(record.podcast_button, "Podcast");
+//			record.verifyElementIsEnabled(record.video_podcast, "Video podcast");
+			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInCourseTasksMenu(target_option_list1);
 			
 			// 25. Click on a checkbox of a specific recording.
 			record.selectFirstCheckbox();
@@ -340,7 +336,9 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			Thread.sleep(1000);
 			
 			// 27. Validate that the option "Download recording" is the ONLY displayed menu option and it is enabled (clickable).
-			record.verifyElementIsEnabled(record.download_button, "Download recording");
+//			record.verifyElementIsEnabled(record.download_button, "Download recording");
+			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInRecordingTaskMenu(target_option_list);
+			
 			
 			// 28. Validate the 'Tests' tab is not displayed.
 			record.verifyNoTestsTab();
@@ -348,69 +346,65 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			// Sign out
 			top_bar_helper.clickOnSignOut();
 			
-			// 30. Uncheck make this course public and uneroll SuperUser.
-			tegrity.loginCourses("SuperUser");
-			course.selectCourseThatStartingWith(temp_course_name);
-			record.clickOnCourseTaskThenCourseSettings();
-			course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
-			course_settings_page.clickOnOkButton();
-			Thread.sleep(1000);
-			top_bar_helper.clickOnSignOut();
-			
-			
-			
-			
-			tegrity.loginAdmin("Admin");
-			
-			// Click on course builder href link
 			Thread.sleep(2000);
-			admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SelfRegConfig")));
-					
-
-			// Click on create course href link 
-			driver.switchTo().frame(0);
-			//mange_adhoc_course_enrollments.clickOnNewCourse();
-			admin_dashboard_page.waitForVisibility(manage_adhoc_courses_enrollments_page.new_course_button);
-			
-			for(int j=0;j<5;j++) {
-				try {
-					driver.switchTo().alert().accept();
-					break;
-				} catch (Exception msg) {
-					Thread.sleep(1000);
-				}
-			}
-			
-			// Search target course name
-			manage_adhoc_courses_enrollments_page.searchAndFilterCourses(temp_course_name);
-						
-			Thread.sleep(1000);
-			// Click on result first course (the only one) membership button
-			manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton();
-			Thread.sleep(1000);		
-			
-			
-			// Search target user name in membership window
-			mange_ad_hoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(PropertyManager.getProperty("SuperUser"));
-
-
-			// Remove selected user to instructor list
-			mange_ad_hoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
-			mange_ad_hoc_courses_membership_window.waitForVisibility(mange_ad_hoc_courses_membership_window.ok_button);
-			
-			// Confirm user membership list
-			mange_ad_hoc_courses_membership_window.clickOnOkButton();
-			mange_ad_hoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
-			
-			
-		
-			
 		}
 		
-		
-		
+		// 30. Uncheck make this course public and uneroll SuperUser.
+		tegrity.loginCourses("SuperUser");
+		course.selectCourseThatStartingWith(temp_course_name);
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings_page.clickOnOkButton();
+		Thread.sleep(1000);
+		top_bar_helper.clickOnSignOut();
+					
+		Thread.sleep(2000);
+			
+		tegrity.loginAdmin("Admin");
+			
+		// Click on course builder href link
+		Thread.sleep(5000);
+		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SelfRegConfig")));
+					
 
-		
+		// Click on create course href link 
+		driver.switchTo().frame(0);
+		//mange_adhoc_course_enrollments.clickOnNewCourse();
+		admin_dashboard_page.waitForVisibility(manage_adhoc_courses_enrollments_page.new_course_button);
+			
+		for(int j=0;j<5;j++) {
+			try {
+				driver.switchTo().alert().accept();
+				break;
+			} catch (Exception msg) {
+				Thread.sleep(1000);
+			}
+		}
+			
+		// Search target course name
+		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(temp_course_name);
+						
+		Thread.sleep(1000);
+		// Click on result first course (the only one) membership button
+		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton();
+		Thread.sleep(1000);		
+			
+			
+		// Search target user name in membership window
+		mange_ad_hoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(PropertyManager.getProperty("SuperUser"));
+
+
+		// Remove selected user to instructor list
+		mange_ad_hoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
+		mange_ad_hoc_courses_membership_window.waitForVisibility(mange_ad_hoc_courses_membership_window.ok_button);
+			
+		// Confirm user membership list
+		mange_ad_hoc_courses_membership_window.clickOnOkButton();
+		mange_ad_hoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
+			
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
 		
 }}

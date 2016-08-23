@@ -30,20 +30,9 @@ package com.automation.main;
 */
 //Precondition: Failed recording should be in course: "z 15660 - Try to copy failed recording"
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.util.List;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -54,9 +43,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -88,7 +76,8 @@ public class TC15660TryToCopyFailedRecording {
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
-	@BeforeClass
+	
+    @BeforeClass
 	public void setup() {
 
 //		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
@@ -96,10 +85,10 @@ public class TC15660TryToCopyFailedRecording {
 //		capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
 //		
 //	driver=new InternetExplorerDriver(capability);
-		driver = new FirefoxDriver();
+		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 	///	ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -110,12 +99,17 @@ public class TC15660TryToCopyFailedRecording {
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		
 		wait = new WebDriverWait(driver, 10);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15660TryToCopyFailedRecording at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15660TryToCopyFailedRecording at " + DateToStr, "Starting the test: TC15660TryToCopyFailedRecording at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
-//	@AfterTest
-//	public void closeBroswer() {
-//		this.driver.quit();
-//	}
+	@AfterTest
+	public void closeBroswer() {
+		this.driver.quit();
+	}
 
 	// @Parameters({"web","title"}) in the future
 	@Test
@@ -140,7 +134,7 @@ public class TC15660TryToCopyFailedRecording {
 		initializeCourseObject();
 		
 		// 2. Select course (named start with: "BankInvalidRecordings").
-		course.selectCourseThatStartingWith("BankInvalidRecordings");
+		course.selectCourseThatStartingWith("BankInvalidRecording");
 	
 		wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
 		
@@ -177,7 +171,8 @@ public class TC15660TryToCopyFailedRecording {
 			Assert.assertTrue(false);
 		}
 
-		// Browser quit
-		driver.quit();
+
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 }
