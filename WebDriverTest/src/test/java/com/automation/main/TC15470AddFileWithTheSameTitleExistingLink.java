@@ -97,9 +97,9 @@ public class TC15470AddFileWithTheSameTitleExistingLink {
 		}
 
 		@Test
-		public void test15470() throws Exception {
-			String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\addFileWithTheSameTitle.doc";
-			String file_name = "addFileWithTheSameTitle.doc";
+		public void test15470() throws Exception {                                           
+			String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\SameTitle.doc";
+			String file_name = "SameTitle.doc";
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			/// 2.login as instructor
@@ -114,7 +114,7 @@ public class TC15470AddFileWithTheSameTitleExistingLink {
 			///4.pre-test try upload link with same name
 			record.toUploadAdditionalContentLink();
 			add_additional_content_link_window.waitForVisibility(add_additional_content_link_window.additional_content_link_title_input);
-			add_additional_content_link_window.createNewAdditionalContentLink(confirm_menu,"addFileWithTheSameTitle.doc","addFileWithTheSameTitle.doc");
+			add_additional_content_link_window.createNewAdditionalContentLink(confirm_menu,"SameTitle.doc","SameTitle.doc");
 			record.waitForVisibility(record.course_task_button);
 			// 4.Select "Course tasks -> Add Additional Content File" menu item
 			record.toUploadAdditionalContentFile();

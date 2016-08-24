@@ -101,7 +101,7 @@
                     <div class="method-list-content failed suite-Suite">
                       <span>
                         <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel" hash-for-method="loginCourses">loginCourses</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel" hash-for-method="loginCourses">loginCourses</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Suite -->
@@ -115,7 +115,7 @@
                     <div class="method-list-content passed suite-Suite">
                       <span>
                         <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel" hash-for-method="loadPage">loadPage</a> <!-- method navigator-link -->
+                        <a href="#" class="method navigator-link" panel-name="suite-Suite" title="com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel" hash-for-method="loadPage">loadPage</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Suite -->
@@ -133,7 +133,7 @@
           <div class="suite-Suite-class-failed">
             <div class="main-panel-header rounded-window-top">
               <img src="failed.png"/>
-              <span class="class-name">com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel</span>
+              <span class="class-name">com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
@@ -141,85 +141,16 @@
                   <a name="loginCourses">
                   </a> <!-- loginCourses -->
                   <span class="method-name">loginCourses</span>
-                  <div class="stack-trace"><b>"org.openqa.selenium.remote.UnreachableBrowserException: Error communicating with the remote browser. It may have died.
-Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
-System info: host: &apos;QA-2-Win8_1-64&apos;, ip: &apos;192.168.0.235&apos;, os.name: &apos;Windows 8.1&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_91&apos;
-Driver info: driver.version: RemoteWebDriver
-Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, pageLoadStrategy=normal, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=true, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:17533/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=true, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]
-Session ID: dcd9b563-7260-40e6-b761-0aa52a6eec85
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:665)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:413)
-	at org.openqa.selenium.By$ById.findElement(By.java:218)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
-	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at com.sun.proxy.$Proxy7.isDisplayed(Unknown Source)
-	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
-	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
-	at com.automation.main.Page.waitForVisibility(Page.java:124)
-	at com.automation.main.LoginHelperPage.loginAdmin(LoginHelperPage.java:160)
-	at com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel.loginCourses(TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel.java:171)
-Caused by: org.openqa.selenium.WebDriverException: org.apache.http.conn.HttpHostConnectException: Connect to localhost:17533 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: connect
-Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
-System info: host: &apos;QA-2-Win8_1-64&apos;, ip: &apos;192.168.0.235&apos;, os.name: &apos;Windows 8.1&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_91&apos;
-Driver info: driver.version: RemoteWebDriver
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:91)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:644)
-	... 39 more
-Caused by: org.apache.http.conn.HttpHostConnectException: Connect to localhost:17533 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: connect
-	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:158)
-	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:353)
-	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:380)
-	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236)
-	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:184)
-	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:88)
-	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110)
-	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184)
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:71)
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.openqa.selenium.remote.internal.ApacheHttpClient.fallBackExecute(ApacheHttpClient.java:144)
-	at org.openqa.selenium.remote.internal.ApacheHttpClient.execute(ApacheHttpClient.java:90)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:142)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:82)
-	... 40 more
-Caused by: java.net.ConnectException: Connection refused: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
-	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
-	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
-	at java.net.PlainSocketImpl.connect(Unknown Source)
-	at java.net.SocksSocketImpl.connect(Unknown Source)
-	at java.net.Socket.connect(Unknown Source)
-	at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:74)
-	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:141)
-	... 53 more
-... Removed 24 stack frames<br/> org.openqa.selenium.remote.UnreachableBrowserException: Error communicating with the remote browser. It may have died.
-Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
-System info: host: &apos;QA-2-Win8_1-64&apos;, ip: &apos;192.168.0.235&apos;, os.name: &apos;Windows 8.1&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_91&apos;
-Driver info: driver.version: RemoteWebDriver
-Capabilities [{browserAttachTimeout=0, enablePersistentHover=false, ie.forceCreateProcessApi=false, pageLoadStrategy=normal, ie.usePerProcessProxy=false, ignoreZoomSetting=true, handlesAlerts=true, version=11, platform=WINDOWS, nativeEvents=true, ie.ensureCleanSession=false, elementScrollBehavior=0, ie.browserCommandLineSwitches=, requireWindowFocus=false, browserName=internet explorer, initialBrowserUrl=http://localhost:17533/, takesScreenshot=true, javascriptEnabled=true, ignoreProtectedModeSettings=true, enableElementCacheCleanup=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=dismiss}]
-Session ID: dcd9b563-7260-40e6-b761-0aa52a6eec85
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:665)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:413)
-	at org.openqa.selenium.By$ById.findElement(By.java:218)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
-	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at com.sun.proxy.$Proxy7.isDisplayed(Unknown Source)
-	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
-	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
-	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
-	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
-	at com.automation.main.Page.waitForVisibility(Page.java:124)
-	at com.automation.main.LoginHelperPage.loginAdmin(LoginHelperPage.java:160)
-	at com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel.loginCourses(TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel.java:171)
+                  <div class="stack-trace"><b>"java.lang.AssertionError: expected [true] but found [false]
+	at com.automation.main.AdminDashboardViewCourseList.clickOnFirstCourseLink(AdminDashboardViewCourseList.java:102)
+	at com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.loginCourses(TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.java:240)
+... Removed 28 stack frames<br/> java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:94)
+	at org.testng.Assert.failNotEquals(Assert.java:494)
+	at org.testng.Assert.assertTrue(Assert.java:42)
+	at org.testng.Assert.assertTrue(Assert.java:52)
+	at com.automation.main.AdminDashboardViewCourseList.clickOnFirstCourseLink(AdminDashboardViewCourseList.java:102)
+	at com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.loginCourses(TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.java:240)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -244,42 +175,7 @@ Session ID: dcd9b563-7260-40e6-b761-0aa52a6eec85
 	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:207)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:178)
-Caused by: org.openqa.selenium.WebDriverException: org.apache.http.conn.HttpHostConnectException: Connect to localhost:17533 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: connect
-Build info: version: &apos;2.53.1&apos;, revision: &apos;a36b8b1cd5757287168e54b817830adce9b0158d&apos;, time: &apos;2016-06-30 19:26:09&apos;
-System info: host: &apos;QA-2-Win8_1-64&apos;, ip: &apos;192.168.0.235&apos;, os.name: &apos;Windows 8.1&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;6.3&apos;, java.version: &apos;1.8.0_91&apos;
-Driver info: driver.version: RemoteWebDriver
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:91)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:644)
-	... 39 more
-Caused by: org.apache.http.conn.HttpHostConnectException: Connect to localhost:17533 [localhost/127.0.0.1, localhost/0:0:0:0:0:0:0:1] failed: Connection refused: connect
-	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:158)
-	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:353)
-	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:380)
-	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236)
-	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:184)
-	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:88)
-	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110)
-	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184)
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:71)
-	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:55)
-	at org.openqa.selenium.remote.internal.ApacheHttpClient.fallBackExecute(ApacheHttpClient.java:144)
-	at org.openqa.selenium.remote.internal.ApacheHttpClient.execute(ApacheHttpClient.java:90)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:142)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:82)
-	... 40 more
-Caused by: java.net.ConnectException: Connection refused: connect
-	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
-	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
-	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
-	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
-	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
-	at java.net.PlainSocketImpl.connect(Unknown Source)
-	at java.net.SocksSocketImpl.connect(Unknown Source)
-	at java.net.Socket.connect(Unknown Source)
-	at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:74)
-	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:141)
-	... 53 more
-"</b><br>org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:665)<br>org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)<br>org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:413)<br>org.openqa.selenium.By$ById.findElement(By.java:218)<br>org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)<br>org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)<br>org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)<br>com.sun.proxy.$Proxy7.isDisplayed(Unknown Source)<br>org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)<br>org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)<br>org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)<br>org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)<br>org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)<br>com.automation.main.Page.waitForVisibility(Page.java:124)<br>com.automation.main.LoginHelperPage.loginAdmin(LoginHelperPage.java:160)<br>com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel.loginCourses(TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel.java:171)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)<br>java.lang.reflect.Method.invoke(Unknown Source)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br>org.testng.TestRunner.privateRun(TestRunner.java:767)<br>org.testng.TestRunner.run(TestRunner.java:617)<br>org.testng.SuiteRunner.runTest(SuiteRunner.java:334)<br>org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)<br>org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)<br>org.testng.SuiteRunner.run(SuiteRunner.java:240)<br>org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br>org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)<br>org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)<br>org.testng.TestNG.runSuitesLocally(TestNG.java:1123)<br>org.testng.TestNG.run(TestNG.java:1031)<br>org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:115)<br>org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:207)<br>org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:178)<br>
+"</b><br>org.testng.Assert.fail(Assert.java:94)<br>org.testng.Assert.failNotEquals(Assert.java:494)<br>org.testng.Assert.assertTrue(Assert.java:42)<br>org.testng.Assert.assertTrue(Assert.java:52)<br>com.automation.main.AdminDashboardViewCourseList.clickOnFirstCourseLink(AdminDashboardViewCourseList.java:102)<br>com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.loginCourses(TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.java:240)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)<br>java.lang.reflect.Method.invoke(Unknown Source)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:714)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:901)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1231)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)<br>org.testng.TestRunner.privateRun(TestRunner.java:767)<br>org.testng.TestRunner.run(TestRunner.java:617)<br>org.testng.SuiteRunner.runTest(SuiteRunner.java:334)<br>org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)<br>org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)<br>org.testng.SuiteRunner.run(SuiteRunner.java:240)<br>org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)<br>org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)<br>org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)<br>org.testng.TestNG.runSuitesLocally(TestNG.java:1123)<br>org.testng.TestNG.run(TestNG.java:1031)<br>org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:115)<br>org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:207)<br>org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:178)<br>
 </div> <!-- stack-trace -->
                   <em>
 (Login course page)                  </em>
@@ -290,7 +186,7 @@ Caused by: java.net.ConnectException: Connection refused: connect
           <div class="suite-Suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel</span>
+              <span class="class-name">com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
@@ -319,7 +215,7 @@ Caused by: java.net.ConnectException: Connection refused: connect
   &lt;/listeners&gt;
   &lt;test name=&quot;Test&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel&quot;/&gt;
+      &lt;class name=&quot;com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Test --&gt;
 &lt;/suite&gt; &lt;!-- Suite --&gt;
@@ -362,17 +258,17 @@ data.addColumn('number', 'Time (ms)');
 data.addRows(2);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'loginCourses')
-data.setCell(0, 2, 'com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel')
-data.setCell(0, 3, 70524);
+data.setCell(0, 2, 'com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel')
+data.setCell(0, 3, 474528);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'loadPage')
-data.setCell(1, 2, 'com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel')
-data.setCell(1, 3, 1575);
+data.setCell(1, 2, 'com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel')
+data.setCell(1, 3, 4857);
 window.suiteTableData['Suite']= { tableData: data, tableDiv: 'times-div-Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 minutes</span>
+              <span class="suite-total-time">Total running time: 7 minutes</span>
               <div id="times-div-Suite">
               </div> <!-- times-div-Suite -->
             </div> <!-- times-div -->
@@ -384,9 +280,14 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="reporter-method-div">
-              <span class="reporter-method-name">loginCourses</span>
+              <span class="reporter-method-name">loadPage</span>
               <div class="reporter-method-output-div">
                 <span class="reporter-method-output">STEP4</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">loginCourses</span>
+              <div class="reporter-method-output-div">
                 <span class="reporter-method-output">STEP5</span>
                 <span class="reporter-method-output">STEP6</span>
                 <span class="reporter-method-output">STEP7</span>
@@ -401,6 +302,121 @@ return data;
                 <span class="reporter-method-output">STEP16</span>
                 <span class="reporter-method-output">STEP17</span>
                 <span class="reporter-method-output">STEP18</span>
+                <span class="reporter-method-output">STEP19</span>
+                <span class="reporter-method-output">STEP20</span>
+                <span class="reporter-method-output">STEP21</span>
+                <span class="reporter-method-output">STEP22</span>
+                <span class="reporter-method-output">STEP23</span>
+                <span class="reporter-method-output">STEP24</span>
+                <span class="reporter-method-output">STEP25</span>
+                <span class="reporter-method-output">STEP26</span>
+                <span class="reporter-method-output">STEP27</span>
+                <span class="reporter-method-output">STEP28</span>
+                <span class="reporter-method-output">STEP29</span>
+                <span class="reporter-method-output">STEP30</span>
+                <span class="reporter-method-output">STEP31</span>
+                <span class="reporter-method-output">STEP32</span>
+                <span class="reporter-method-output">STEP33</span>
+                <span class="reporter-method-output">STEP34</span>
+                <span class="reporter-method-output">STEP35</span>
+                <span class="reporter-method-output">STEP36</span>
+                <span class="reporter-method-output">STEP37</span>
+                <span class="reporter-method-output">STEP38</span>
+                <span class="reporter-method-output">STEP39</span>
+                <span class="reporter-method-output">STEP40</span>
+                <span class="reporter-method-output">STEP41</span>
+                <span class="reporter-method-output">STEP42</span>
+                <span class="reporter-method-output">STEP43</span>
+                <span class="reporter-method-output">STEP44</span>
+                <span class="reporter-method-output">STEP45</span>
+                <span class="reporter-method-output">STEP46</span>
+                <span class="reporter-method-output">STEP47</span>
+                <span class="reporter-method-output">STEP48</span>
+                <span class="reporter-method-output">STEP49</span>
+                <span class="reporter-method-output">STEP50</span>
+                <span class="reporter-method-output">STEP51</span>
+                <span class="reporter-method-output">STEP52</span>
+                <span class="reporter-method-output">STEP53</span>
+                <span class="reporter-method-output">STEP54</span>
+                <span class="reporter-method-output">STEP55</span>
+                <span class="reporter-method-output">STEP56</span>
+                <span class="reporter-method-output">STEP57</span>
+                <span class="reporter-method-output">STEP58</span>
+                <span class="reporter-method-output">STEP59</span>
+                <span class="reporter-method-output">STEP60</span>
+                <span class="reporter-method-output">STEP61</span>
+                <span class="reporter-method-output">STEP62</span>
+                <span class="reporter-method-output">STEP63</span>
+                <span class="reporter-method-output">STEP64</span>
+                <span class="reporter-method-output">STEP65</span>
+                <span class="reporter-method-output">STEP66</span>
+                <span class="reporter-method-output">STEP67</span>
+                <span class="reporter-method-output">STEP68</span>
+                <span class="reporter-method-output">STEP69</span>
+                <span class="reporter-method-output">STEP70</span>
+                <span class="reporter-method-output">STEP71</span>
+                <span class="reporter-method-output">STEP72</span>
+                <span class="reporter-method-output">STEP73</span>
+                <span class="reporter-method-output">STEP74</span>
+                <span class="reporter-method-output">STEP75</span>
+                <span class="reporter-method-output">STEP76</span>
+                <span class="reporter-method-output">STEP77</span>
+                <span class="reporter-method-output">STEP78</span>
+                <span class="reporter-method-output">STEP79</span>
+                <span class="reporter-method-output">STEP80</span>
+                <span class="reporter-method-output">STEP81</span>
+                <span class="reporter-method-output">STEP82</span>
+                <span class="reporter-method-output">STEP83</span>
+                <span class="reporter-method-output">STEP84</span>
+                <span class="reporter-method-output">STEP85</span>
+                <span class="reporter-method-output">STEP86</span>
+                <span class="reporter-method-output">STEP87</span>
+                <span class="reporter-method-output">STEP88</span>
+                <span class="reporter-method-output">STEP89</span>
+                <span class="reporter-method-output">STEP90</span>
+                <span class="reporter-method-output">STEP91</span>
+                <span class="reporter-method-output">STEP92</span>
+                <span class="reporter-method-output">STEP93</span>
+                <span class="reporter-method-output">STEP94</span>
+                <span class="reporter-method-output">STEP95</span>
+                <span class="reporter-method-output">STEP96</span>
+                <span class="reporter-method-output">STEP97</span>
+                <span class="reporter-method-output">STEP98</span>
+                <span class="reporter-method-output">STEP99</span>
+                <span class="reporter-method-output">STEP100</span>
+                <span class="reporter-method-output">STEP101</span>
+                <span class="reporter-method-output">STEP102</span>
+                <span class="reporter-method-output">STEP103</span>
+                <span class="reporter-method-output">STEP104</span>
+                <span class="reporter-method-output">STEP105</span>
+                <span class="reporter-method-output">STEP106</span>
+                <span class="reporter-method-output">STEP107</span>
+                <span class="reporter-method-output">STEP108</span>
+                <span class="reporter-method-output">STEP109</span>
+                <span class="reporter-method-output">STEP110</span>
+                <span class="reporter-method-output">STEP111</span>
+                <span class="reporter-method-output">STEP112</span>
+                <span class="reporter-method-output">STEP113</span>
+                <span class="reporter-method-output">STEP114</span>
+                <span class="reporter-method-output">STEP115</span>
+                <span class="reporter-method-output">STEP116</span>
+                <span class="reporter-method-output">STEP117</span>
+                <span class="reporter-method-output">STEP118</span>
+                <span class="reporter-method-output">STEP119</span>
+                <span class="reporter-method-output">STEP120</span>
+                <span class="reporter-method-output">STEP121</span>
+                <span class="reporter-method-output">STEP122</span>
+                <span class="reporter-method-output">STEP123</span>
+                <span class="reporter-method-output">STEP124</span>
+                <span class="reporter-method-output">STEP125</span>
+                <span class="reporter-method-output">STEP126</span>
+                <span class="reporter-method-output">STEP127</span>
+                <span class="reporter-method-output">STEP128</span>
+                <span class="reporter-method-output">STEP129</span>
+                <span class="reporter-method-output">STEP130</span>
+                <span class="reporter-method-output">STEP131</span>
+                <span class="reporter-method-output">STEP132</span>
+                <span class="reporter-method-output">STEP133</span>
               </div> <!-- reporter-method-output-div -->
             </div> <!-- reporter-method-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -418,26 +434,26 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">setup</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">loadPage</span>
-                <span class="method-start">4232 ms</span>
+                <span class="method-start">10473 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">loginCourses</span>
-                <span class="method-start">5810 ms</span>
+                <span class="method-start">15333 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">closeBroswer</span>
-                <span class="method-start">76345 ms</span>
+                <span class="method-start">489863 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

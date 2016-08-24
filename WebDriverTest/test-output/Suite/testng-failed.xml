@@ -8,14 +8,14 @@
   </listeners>
   <test name="Test(failed)">
     <classes>
-      <class name="com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel">
+      <class name="com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel">
         <methods>
           <include name="setup"/>
           <include name="loadPage"/>
           <include name="closeBroswer"/>
           <include name="loginCourses"/>
         </methods>
-      </class> <!-- com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel -->
+      </class> <!-- com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

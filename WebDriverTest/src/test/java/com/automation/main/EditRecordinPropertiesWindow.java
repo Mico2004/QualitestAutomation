@@ -123,10 +123,10 @@ public class EditRecordinPropertiesWindow extends Page {
 			recording_title.clear();
 			recording_title.sendKeys(name);
 			System.out.println("enetered new name");
-			Thread.sleep(1000);
 			save_button.click();
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
 			System.out.println("save succeded");
+			Thread.sleep(2000);
 			confirm.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		} catch (Exception e) {
 			System.out.println("clicked on recording title input failed");
