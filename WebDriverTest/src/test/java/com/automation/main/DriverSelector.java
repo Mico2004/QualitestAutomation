@@ -74,7 +74,6 @@ public class DriverSelector {
 			capability = DesiredCapabilities.internetExplorer();
 			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
 			capability.setCapability("ignoreZoomSetting", true);
-			capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 			driver = new InternetExplorerDriver(capability);
 			driver.manage().window().maximize();
 			
