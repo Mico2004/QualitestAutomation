@@ -124,9 +124,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 	public void loginCourses() throws Exception
 	{
 		// TOODO: 1. Validate there is bookmark in this course. Search input specified shall be case-insensitive.
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");		   
-		Date date = new Date();
-		System.out.println(dateFormat.format(date)+":TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLevel");
+	
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
 		
@@ -139,12 +137,15 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 		Thread.sleep(1000);
 		
 		// TODO: Delete all bookmarks and create new bookmark
+		 Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
 		String bookmark_for_search = "NewBookmark" + sdf.format(date);
 		
 		String bookmarked_recording_title = record.getFirstRecordingTitle();
 		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
 		player_page.verifyTimeBufferStatusForXSec(10);
+		
+		player_page.deleteAllBookmark();
 		player_page.addTargetBookmark(bookmark_for_search);
 		
 		for(String handler: driver.getWindowHandles()) {
@@ -199,7 +200,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(bookmark_for_search, "Source: Bookmark");
 			
 			// 4.7. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 5. Click on the chapter icon.
 			search_page.clickElement(search_page.link_icon_list.get(0));

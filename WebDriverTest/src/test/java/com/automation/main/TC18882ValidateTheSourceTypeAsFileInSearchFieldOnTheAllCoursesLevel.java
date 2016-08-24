@@ -162,10 +162,12 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 				break;
 			}
 		}
+		
 		Thread.sleep(1000);
 		record.clickOnContentTaskThenCopy();
 		copy.selectTargetCourseFromCourseListThatStartWith("Ab");
 		Thread.sleep(2000);
+		
 		copy.clickOnCopyButton();
 		Thread.sleep(10000);
 		confirm_menu.clickOnOkButton();
@@ -175,7 +177,6 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 		
 		top_bar_helper.clickOnSignOut();
 		Thread.sleep(2000);
-		
 		
 		
 		// Looping for INSTRUCTOR, Student and Guest
@@ -216,7 +217,7 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 			
 			// 4.6. The next result display below the current result in case there is next result.
 			Thread.sleep(3000);
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 5. Click on the file icon.
 			// 5.1. The file download to the local client's machine.

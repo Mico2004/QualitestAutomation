@@ -1,5 +1,10 @@
 package com.automation.main;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -139,10 +144,96 @@ public class EditRecording extends Page {
 	
 		
 	}
+	
+	
+	public void addCaptionSrtToFirstChapterRecording() throws InterruptedException, AWTException {
+		
+		ConfirmationMenu confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+		RecordingHelperPage record = PageFactory.initElements(driver, RecordingHelperPage.class);
+		
+		
+		for(int i=0; i<10; i++) {
+			try {
+				driver.switchTo().frame(0);
+				break;
+			} catch (Exception e) {
+				Thread.sleep(1000);
+			}
+		}
+		
+		while(!isElementPresent(By.id("PlayButton_Img"))) {
+			System.out.println("element is not visable");
+			Thread.sleep(1000);	
+		}
+		
+		
+		Thread.sleep(2000);
+		for(String window_handler: driver.getWindowHandles()) {
+			driver.switchTo().window(window_handler);
+			break;
+		}
+		
+		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
+		
+		Thread.sleep(2000);
+		
+		// click on the upload link
+		WebElement element = driver.findElement(By.xpath(".//*[@id='AddCaptioningForm']/div[3]/span"));
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().perform();
+		
+		
+		Robot robot = new Robot();
+		robot.mouseMove(-100, 100);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(3000);
+		
+		String path = "C:\\WebDriverTest\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
+		
+		// from here you can use as it wrote
+//		path = System.getProperty("user.dir") + path;
+		StringSelection ss = new StringSelection(path);
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+		
+		// native key strokes for CTRL, V and ENTER keys
+		robot.keyPress(KeyEvent.VK_CONTROL);
+		robot.keyPress(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_V);
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+		Thread.sleep(3000);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		
+		Thread.sleep(2000);
+		driver.findElement(By.id("AddCaptioning")).click();
+		Thread.sleep(1000);
+		
+		for(String window_handler: driver.getWindowHandles()) {
+			driver.switchTo().window(window_handler);
+			break;
+		}
+		
+		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
+			
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
+			if(ie.getText().contains("Success")){
+				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
+				break;
+			   }			
+			else Thread.sleep(3000);
+		}
+	
+	}
+	
 
 
 	// Change first chapter recording name
 	public void changeFirstChapterRecordingNameToTargetName(String target_name) throws InterruptedException {
+		
+
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
@@ -153,27 +244,15 @@ public class EditRecording extends Page {
 		}
 		
 		
-		for(int i=0; i<20; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					System.out.println("2222");
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-				
+		while(!isElementPresent(By.id("PlayButton_Img"))) {
+			System.out.println("element is not visable");
+			Thread.sleep(1000);	
 		}
 			
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
 			break;
 		}
-		
-		
-		
 		
 		System.out.println(driver.findElements(By.cssSelector(".optionList>li>a")).get(1).getText());
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();

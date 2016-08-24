@@ -137,7 +137,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 		record.clickOnRecordingTaskThenEditRecording();
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-		edit_recording.changeFirstChapterRecordingNameToTargetName("NewChapterName" + sdf.format(date));
+		edit_recording.changeFirstChapterRecordingNameToTargetNameNew("NewChapterName" + sdf.format(date));
 		
 		for(String handler: driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
@@ -205,7 +205,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(recording_chapter, "Source: Chapter");
 				
 			// 4.9. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 				
 			// 5. Click on the chapter icon.
 			search_page.clickOnChapterIconOfRecordingInTargetIndex(1);

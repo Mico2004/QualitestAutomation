@@ -155,7 +155,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 				tegrity.loginCourses("User1");
 			} else if (type_of_user == 1) {
 				// 2. Login as Student.
-				tegrity.loginCourses("User1");
+				tegrity.loginCourses("User4");
 			} else if (type_of_user == 2) {
 				// 2. Login as guest
 				tegrity.loginAsguest();
@@ -185,7 +185,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 			search_page.verifyThatSourceTitleInTheFormatSourceLink();
 			
 			// 4.6. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 5. Click on the link icon.
 			search_page.link_icon_list.get(0).click();

@@ -57,11 +57,6 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 	public void setup() {
 
 		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
@@ -166,9 +161,11 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		
 		// 7. Change the name of the chapter that we mentioned in the preconditions to "abc?<>".
 		driver.navigate().to(course_url);
-		Thread.sleep(3000);
+		Thread.sleep(4000);
+		
 		record.selectIndexCheckBox(1);
 		Thread.sleep(500);
+		
 		record.clickOnRecordingTaskThenEditRecording();
 		Thread.sleep(2000);
 		
@@ -176,9 +173,6 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		new_chapter_name = "abc?<>";
 		
 		edit_recording.changeFirstChapterRecordingNameToTargetName(new_chapter_name);
-		
-		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
-		Thread.sleep(2000);
 		
 		// 8. Search the "abc?<>" chapter in the search field.
 		// 8.1. The chapter is'nt displayed.
