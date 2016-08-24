@@ -81,9 +81,9 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		search_page = PageFactory.initElements(driver, SearchPage.class);
 		
 		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);
-		
+		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
-		
+		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
 		add_additional_content_link_window = PageFactory.initElements(driver, AddAdditionalContentLinkWindow.class);
 		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
@@ -128,19 +128,15 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		
 		
 		// 1. getting the name of the past course
-		tegrity.loginCourses("User1");
+		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
 			
 		String current_course = course.selectCourseThatStartingWith("PastCourseA");
+		System.out.println("The course that selected is: " + current_course);
 		Thread.sleep(1000); 
-		
-		record.signOut();
-		Thread.sleep(1000); 
-			
 		
 		// 2. move course from the bank to the past courses 
-		tegrity.loginCourses("SuperUser");
-		Thread.sleep(1000); 
+		record.returnToCourseListPage();	
 		
 		//2.1 enter to the bank
 		course.selectCourseThatStartingWith("BankValid");
@@ -153,13 +149,15 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		// 2.3 select the first checkbox and enter to the copy menu
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenCopy();
+		Thread.sleep(1000); 
+		
 		copy.selectTargetCourseFromCourseList(current_course);
 		Thread.sleep(1000); 
 		
 		// 2.4 select the copy button and wait for the record to move
 		copy.clickOnCopyButton();
-		copy.selectTargetCourseFromCourseList(current_course);
-		
+		Thread.sleep(1000); 
+	
 		// 2.5 click on the ok button
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		
@@ -171,7 +169,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		
 		// 3. enter as admin and unroll the course 
 		tegrity.loginAdmin("Admin");
-		initializeCourseObject();
+		Thread.sleep(2000);
 		 
 		// 3.1 Click on course builder href link
 		admin_dash_board_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
@@ -182,9 +180,8 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	 		
 	 	// 3.3 Search target course name
 	 	mange_adhoc_course_enrollments.searchAndFilterCourses(current_course);
-	 	Thread.sleep(7000);
-	 	
-	 		
+	 	Thread.sleep(4000);
+	 			
 	 	// 3.4 Click on result first course (the only one) membership button
 	 	mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 	 	Thread.sleep(2000);
@@ -205,6 +202,9 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	 	// 3.8 click on the alert
 	 	driver.switchTo().alert().accept();
 	 	Thread.sleep(2000);
+	 	
+	 	//3.9 switch to main
+	 	mangage_adhoc_courses_membership_window.exitInnerFrame();
 	 	record.signOut();
 		
 	 	/// end pre test
@@ -216,6 +216,9 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		Thread.sleep(1000);
 		
 		course.selectCourseThatStartingWith("PastCourseA");
+		Thread.sleep(1000);
+		
+		record.clickOnStudentRecordingsTab();
 		Thread.sleep(1000);
 		
 		// Get Recording Chapter information.
