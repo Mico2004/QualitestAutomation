@@ -94,10 +94,10 @@ public class TC17929And17941And17944PastCourses {
 
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
-		System.out.println("Starting the test: TC17929And17941And17944PastCourses at " + DateToStr);
+		System.out.println("Starting the test: TC17929VerifyPastCourseWithAdditionalContent at " + DateToStr);
 		ATUReports.add("Message window.",
-				"Starting the test: TC17929And17941And17944PastCourses at " + DateToStr,
-				"Starting the test: TC17929And17941And17944PastCourses at " + DateToStr, LogAs.PASSED, null);
+				"Starting the test: TC17929VerifyPastCourseWithAdditionalContent at " + DateToStr,
+				"Starting the test: TC17929VerifyPastCourseWithAdditionalContent at " + DateToStr, LogAs.PASSED, null);
 
 	}
 
@@ -109,11 +109,11 @@ public class TC17929And17941And17944PastCourses {
 	@Test
 	public void test17929() throws Exception {
 		
-	
+		
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		Thread.sleep(2000);
 
-		/*		tegrity.loginAdmin("Admin");
+		tegrity.loginAdmin("Admin");
 		Thread.sleep(2000);
 		System.out.println("Past1");
 		// 2. Click on user builder href link
@@ -216,7 +216,9 @@ public class TC17929And17941And17944PastCourses {
 		// Confirm user membership list
 		mangage_adhoc_courses_membership_window.clickOnOkButton();
 
-
+	/*	mangage_adhoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(
+				By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
+*/
 		Thread.sleep(2000);
 		// enroll the super user to the course
 		// Click on result first course (the only one) membership button
@@ -240,7 +242,9 @@ public class TC17929And17941And17944PastCourses {
 		// Confirm user membership list
 		mangage_adhoc_courses_membership_window.clickOnOkButton();
 
-
+	/*	mangage_adhoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(
+				By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
+*/
 		Thread.sleep(2000);
 
 		// Search target course name
@@ -268,7 +272,9 @@ public class TC17929And17941And17944PastCourses {
 		// Confirm user membership list
 		mangage_adhoc_courses_membership_window.clickOnOkButton();
 
-
+	/*	mangage_adhoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(
+				By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
+*/
 		Thread.sleep(2000);
 		// enroll the super user to the course
 		// Click on result first course (the only one) membership button
@@ -292,7 +298,9 @@ public class TC17929And17941And17944PastCourses {
 		// Confirm user membership list
 		mangage_adhoc_courses_membership_window.clickOnOkButton();
 
-
+	/*	mangage_adhoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(
+				By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
+*/
 		Thread.sleep(2000);
 
 		for (String window : driver.getWindowHandles()) {
@@ -325,12 +333,16 @@ public class TC17929And17941And17944PastCourses {
 			driver.switchTo().window(window);
 			break;
 		}
+<<<<<<< HEAD
 		course.sign_out.click();*/
 //ss
+=======
+		course.sign_out.click();
+
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 		tegrity.loginCourses("SuperUser");
 		Thread.sleep(3000);
-		//course.selectCourseThatStartingWith(PastTemp2Course);
-		course.selectCourseThatStartingWith("PastCourseA");
+		course.selectCourseThatStartingWith(PastTemp2Course);
 		Thread.sleep(3000);
 		record.toUploadAdditionalContentFile(confirm_menu);
 		Thread.sleep(2000);

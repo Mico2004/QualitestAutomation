@@ -1,15 +1,21 @@
 package com.automation.main;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 import org.apache.bcel.generic.FieldGenOrMethodGen;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -44,6 +50,7 @@ public class CreateNewUserWindow extends Page {
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucNewUserControl_ucDialog_txtConfPassword") WebElement confirm_password_input;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucNewUserControl_ucDialog_btnOK") WebElement ok_button;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucNewUserControl_ucDialog_btnCancel") WebElement cancel_button;
+	@FindBy(id="ctl00_ContentPlaceHolder1_ucNewUserControl_ucDialog_pDialog") WebElement create_new_user_modal_window;
 	
 	public boolean setEmail(String email) {
 		try {
@@ -113,16 +120,28 @@ public class CreateNewUserWindow extends Page {
 		setEmail(email);
 		setPassword(password);
 		setConfirmPassword(confirm_password);
-		clickOnOkButton();
 		
 		for(int i=0;i<20;i++) {
-			try {				
-				driver.switchTo().alert().accept();
+			
+			try {
+				clickOnOkButton();
+				Thread.sleep(4000);
+				driver.switchTo().alert().accept();					
 				break;
 			} catch (Exception msg) {
 				Thread.sleep(1000);
 			}
 		}
+		
+		
+//		for(int i=0;i<20;i++) {
+//			try {				
+//				driver.switchTo().alert().accept();
+//				break;
+//			} catch (Exception msg) {
+//				Thread.sleep(1000);
+//			}
+//		}
 		
 		System.out.println("New user created. Username: " + user_name + ". User id: " + user_id + ". Password: " + password);
 		

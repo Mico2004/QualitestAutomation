@@ -1,14 +1,11 @@
 package com.automation.main;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
+
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
-
+import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -20,13 +17,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel {
@@ -69,11 +66,11 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 //			
 //		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		///ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
+		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
-		ATUReports.setWebDriver(driver);
-		
+//		
+		//ATUReports.setWebDriver(driver);
+		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -95,7 +92,11 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		
-		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel at " + DateToStr,
+		 "Starting the test: TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel at " + DateToStr, LogAs.PASSED, null);
 		
 	}
 	
@@ -138,12 +139,59 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		
 		// Get 4 recording titles
 		List<String> recording_list = record.getCourseRecordingList();
+		int numberOfRecords = recording_list.size();
 		
-		if(recording_list.size() < 5) {
-			System.out.println("There is not enouth recording in recording list.");
-			ATUReports.add("Recording list.", "Enouth recording.", "Not enouth recordings.", LogAs.FAILED, null);
-			Assert.assertTrue(false);
+		//if we have last then 4 records we need to copy record from the bank
+		if(numberOfRecords < 4) {
+		
+			top_bar_helper.clickOnSignOut();
+			Thread.sleep(1000);
+			
+			tegrity.loginCourses("SuperUser");
+			Thread.sleep(1000);
+			
+			course.selectCourseThatStartingWith("BankValid");
+			
+			if(numberOfRecords <4 ) {		
+				record.selectIndexCheckBox(1);
+			}
+			else if (numberOfRecords <3){
+				record.selectIndexCheckBox(2);
+			} else if (numberOfRecords <2){
+				record.selectIndexCheckBox(3);
+			}else if (numberOfRecords <1){
+				record.selectIndexCheckBox(4);
+			}
+			  record.clickOnRecordingTaskThenCopy();
+			  Thread.sleep(1000);
+			  
+			  copy.selectTargetCourseFromCourseList(current_course);
+			  copy.clickOnCopyButton();
+			  
+			  course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
+			  record.returnToCourseListPage();
+			  Thread.sleep(1000);
+		  
+			  course.selectCourseThatStartingWith("Ab");
+			
 		}
+		
+        //change to unique records names before the test starts	
+//		for(int index = 1 ; index<=4 ; index++) {
+//			
+//			record.selectIndexCheckBox(index);
+//			Date date = new Date();
+//			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
+//			String new_recording_name = "NewName" + sdf.format(date);
+//			
+//			record.toEditRecordingPropertiesMenu();
+//			edit_recording_properties_window.changeRecordingName(new_recording_name, confirm_menu);
+//			record.waitForVisibility(record.checkbox);
+//			record.unselectIndexCheckBox(index);
+//			
+//		}
+		
+        recording_list = record.getCourseRecordingList();
 		
 		String recording_for_instructor = recording_list.get(0);
 		String recording_for_student = recording_list.get(1);
@@ -151,7 +199,6 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		String recording_for_admin = recording_list.get(3);
 		
 		top_bar_helper.clickOnSignOut();
-		
 		
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {
@@ -228,11 +275,11 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(recording_title_for_the_test, "Source: Recording Title");
 			
 			// 5.9. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
-			search_page.moveToElement(search_page.video_wrap_link_to_focus_list.get(0), driver).perform();
+			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
 			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
@@ -297,9 +344,9 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 				Thread.sleep(2000);
 				
 				// 14. Change the name of the recording title that we mentioned in the preconditions.
-				Date date = new Date();
-				SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
-				String new_recording_name = "NewName" + sdf.format(date);
+				 Date date = new Date();
+				 SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
+				 String new_recording_name = "NewName" + sdf.format(date);
 				
 				int recording_title_index = -1;
 				List<String> current_recording_list = record.getCourseRecordingList();
@@ -346,7 +393,8 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
 		
-		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 }

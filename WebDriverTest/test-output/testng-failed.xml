@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]">
-  <test name="Default test(failed)">
+<suite name="Failed suite [Suite]">
+  <listeners>
+    <listener class-name="atu.testng.reports.listeners.ATUReportsListener"/>
+    <listener class-name="atu.testng.reports.listeners.ConfigurationListener"/>
+    <listener class-name="atu.testng.reports.listeners.MethodListener"/>
+  </listeners>
+  <test name="Test(failed)">
     <classes>
-      <class name="com.automation.main.TC17929And17941And17944PastCourses">
+      <class name="com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel">
         <methods>
-          <include name="test17941"/>
-          <include name="test17944"/>
           <include name="setup"/>
+          <include name="loadPage"/>
           <include name="closeBroswer"/>
-          <include name="test17929"/>
+          <include name="loginCourses"/>
         </methods>
-      </class> <!-- com.automation.main.TC17929And17941And17944PastCourses -->
+      </class> <!-- com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

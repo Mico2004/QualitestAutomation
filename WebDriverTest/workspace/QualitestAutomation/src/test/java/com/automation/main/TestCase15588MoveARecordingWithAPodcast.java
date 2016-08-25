@@ -65,14 +65,10 @@ public class TestCase15588MoveARecordingWithAPodcast {
 	@BeforeClass
 	public void setup() {
 
-		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-		capability=DesiredCapabilities.internetExplorer();
-		capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
-		
-	    driver=new InternetExplorerDriver(capability);
+		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 		
 		ATUReports.setWebDriver(driver);
 	
@@ -111,7 +107,7 @@ public class TestCase15588MoveARecordingWithAPodcast {
 
 	
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	public void loginCourses() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("Instructor");// log in courses page

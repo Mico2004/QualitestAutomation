@@ -86,7 +86,7 @@ public class TestCaseMoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 //		driver = new FirefoxDriver();
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -145,7 +145,7 @@ public class TestCaseMoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		// 2.4. Select source course.
 		current_course = course.selectSecondCourse(record);
 		
-		wait.until(ExpectedConditions.elementToBeClickable(record.checkbox));
+		wait.until(ExpectedConditions.elementToBeClickable(record.getCheckbox()));
 		
 		// 2.5. Select source recording.
 		record.selectFirstCheckbox();
@@ -176,7 +176,7 @@ public class TestCaseMoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		// 3. Select source course.
 		current_course = course.selectSecondCourse(record);
 		
-		wait.until(ExpectedConditions.elementToBeClickable(record.checkbox));
+		wait.until(ExpectedConditions.elementToBeClickable(record.getCheckbox()));
 		
 		// 4. Select source recording.
 		String first_recording_name = record.getFirstRecordingTitle();

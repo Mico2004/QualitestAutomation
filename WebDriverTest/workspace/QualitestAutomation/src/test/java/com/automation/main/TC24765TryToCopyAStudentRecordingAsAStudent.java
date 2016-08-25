@@ -2,32 +2,20 @@ package com.automation.main;
 
 //precondition student first course must have recordings in recordings tab as well as in student recordings tab
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.text.DateFormat;
+import java.util.Date;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -59,7 +47,8 @@ public class TC24765TryToCopyAStudentRecordingAsAStudent {
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
-	@BeforeClass
+	
+    @BeforeClass
 	public void setup() {
 
 		
@@ -71,7 +60,7 @@ public class TC24765TryToCopyAStudentRecordingAsAStudent {
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -80,6 +69,12 @@ public class TC24765TryToCopyAStudentRecordingAsAStudent {
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC24765TryToCopyAStudentRecordingAsAStudent at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC24765TryToCopyAStudentRecordingAsAStudent at " + DateToStr,
+		 "Starting the test: TC24765TryToCopyAStudentRecordingAsAStudent at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	
@@ -182,5 +177,8 @@ public class TC24765TryToCopyAStudentRecordingAsAStudent {
 			Assert.assertTrue(false);
 		}
 		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+	
 	}
 }

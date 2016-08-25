@@ -25,7 +25,7 @@ public class EulaPage extends Page {
 		if((accept_button.isDisplayed())&&(decline_button.isDisplayed())&&(eula_message.isDisplayed()))
 		{
 			System.out.println("accept and decline buttons and eula message are visible");
-			ATUReports.add("accept and decline buttons and eula message are not visible","3 elements","visible"," not visible",LogAs.PASSED, null);
+			ATUReports.add("accept and decline buttons and eula message are not visible","3 elements:accept,declineand eula message","visible"," not visible",LogAs.PASSED, null);
 
 			if(message.equals(eula_message.getText()))
 		{
@@ -43,7 +43,7 @@ public class EulaPage extends Page {
 		else 
 		{
 			System.out.println("accept and decline buttons and eula message are not visible");
-			ATUReports.add("accept and decline buttons and eula message are not visible","3 elements","visible"," not visible",LogAs.FAILED, null);
+			ATUReports.add("accept and decline buttons and eula message are not visible","3 elements:accept,declineand eula message","visible"," not visible",LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 	

@@ -1,55 +1,26 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.security.PublicKey;
-import java.security.spec.ECPrivateKeySpec;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.function.IntToDoubleFunction;
 
-import org.junit.experimental.theories.Theories;
-import org.omg.CORBA.StringHolder;
-import org.omg.Messaging.SyncScopeHelper;
-import org.omg.PortableInterceptor.NON_EXISTENT;
+import java.util.Date;
+import java.util.List;
+import java.text.DateFormat;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import com.sun.jna.win32.W32APITypeMapper;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
-import junitx.util.ResourceManager;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.treetable.JTreeTable.ListToTreeSelectionModelWrapper;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC21807ValidatePublicCoursesUILogIn {
@@ -87,13 +58,14 @@ public class TC21807ValidatePublicCoursesUILogIn {
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
 	public ManageAdhocUsersPage mange_adhoc_users_page;
 	public CreateNewUserWindow create_new_user_window;
-
+	public AdminCourseSettingsPage admin_course_settings_page;
+	
 	@BeforeClass
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
-		// driver.manage().window().maximize();
+		// 
 		ATUReports.setWebDriver(driver);
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -119,16 +91,22 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		manage_adhoc_courses_enrollments_page = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
 		mange_ad_hoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
-		
+		admin_course_settings_page = PageFactory.initElements(driver, AdminCourseSettingsPage.class);
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC21807ValidatePublicCoursesUILogIn at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC21807ValidatePublicCoursesUILogIn at " + DateToStr,
+		 "Starting the test: TC21807ValidatePublicCoursesUILogIn at " + DateToStr, LogAs.PASSED, null);	
+		
 	}
 
+	@AfterClass
+	public void closeBroswer() {		
+		this.driver.quit();
+	}
 	
-	 @AfterClass
-	 public void closeBroswer() {
-		 this.driver.quit();
-	 }
-
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -142,18 +120,18 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		// 1. Make sure to two users which are enrolled to the same course, onse as INSTRUCTOR and other as STUDENT (User1 and User4).
 		// 2. Make sure the course is publicly visible (Click on "Manage Course Settings" in the "Course" section).
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		tegrity.loginCourses("User1");// log in courses page
-		initializeCourseObject();
+		tegrity.loginAdmin("Admin");	
+		initializeCourseObject();	
+		Thread.sleep(2000);
 		
-		course.selectCourseThatStartingWith("Ab");
+		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
+		Thread.sleep(2000);		
 		
-		record.clickOnCourseTaskThenCourseSettings();
+		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
+		admin_course_settings_page.clickOnSaveButton();
 		
-		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
-		
-		course_settings_page.clickOnOkButton();
-		
-		top_bar_helper.clickOnSignOut();
+		admin_course_settings_page.waitForVisibility(driver.findElement(By.id("SignOutLink")));
+		driver.findElement(By.id("SignOutLink")).click();
 		
 		// 3. Log in as INSTRUCTOR.
 		tegrity.loginCourses("User1");
@@ -182,7 +160,8 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		// 11. Validate the list of courses is sorted by their names (AaBaCc sorting is used).
 		course.verifyThatListOfCoursesIsSortedByTheirNames();
 		
-		// 12. Validate every course record contains information as follows: course name: ‘X recording(s) – Y new | last updated: mm/dd/yyyy’.
+		// 12. Validate every course record contains information as follows: course name: ‘X recording(s) – Y new | last updated: mm/dd/yyyy’.	
+		Thread.sleep(2000);
 		course.verifyEveryCourseRecordContainsCorrectInformation();
 		
 		// 13. Validate total quantity of new recordings in the course is displayed on the right side of the course line.
@@ -196,7 +175,6 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		
 		// 16. Click on "Login as guest" blue button (at the bottom of the login screen).
 		tegrity.loginAsguest();
-		
 		Thread.sleep(2000);
 		
 		// 17. The courses list page is displayed (under the tab "Public Courses" which is the only one available).
@@ -211,7 +189,9 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		// 20. Validate the list of courses is sorted by their names (AaBaCc sorting is used).
 		course.verifyThatListOfCoursesIsSortedByTheirNames();
 		
+		
 		// 21. Validate every course record contains information as follows: course name: ‘X recording(s) – Y new | last updated: mm/dd/yyyy’.
+		Thread.sleep(2000);
 		course.verifyEveryCourseRecordContainsCorrectInformation();
 		
 		// 22. Validate total quantity of new recordings in the course isn't displayed on the right side of the course line.
@@ -250,7 +230,9 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		// 33. Validate the list of courses is sorted by their names (AaBaCc sorting is used).
 		course.verifyThatListOfCoursesIsSortedByTheirNames();
 		
+		
 		// 34. Validate every course record contains information as follows: course name: ‘X recording(s) – Y new | last updated: mm/dd/yyyy’.
+		Thread.sleep(2000);
 		course.verifyEveryCourseRecordContainsCorrectInformation();
 		
 		// 35. Validate total quantity of new recordings in the course is displayed on the right side of the course line.
@@ -258,6 +240,9 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		
 		// 36. Validate when a user hovers over the course name the hint with the course name is displayed to the user
 		course.verifyThatWhenUserHoverOverFirstCourseNameTheHingWithTheCourseNameDispalyed();
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 		
 }}

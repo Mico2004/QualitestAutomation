@@ -11,11 +11,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.net.NetworkUtils;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,7 +18,8 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+import java.text.DateFormat;
+import java.util.Date;
 import com.sun.jna.platform.unix.X11.Cursor;
 
 import atu.testng.reports.ATUReports;
@@ -54,6 +50,7 @@ public class TC17903VerifyTheUI {
 
 	@BeforeClass
 	public void setup() {
+
 		try {
 
 			/// System.setProperty("webdriver.ie.driver",
@@ -62,17 +59,29 @@ public class TC17903VerifyTheUI {
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 			/// ATUReports.add("selected browser type", LogAs.PASSED, new
 			/// CaptureScreen(ScreenshotOf.DESKTOP));
-			driver.manage().window().maximize();
+			
 			recording_for_delete = new ArrayList<String>();
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			delete = PageFactory.initElements(driver, DeleteMenu.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
 			move_Window = PageFactory.initElements(driver, MoveWindow.class);
+			
+			 Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TC17903VerifyTheUI at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC17903VerifyTheUI at " + DateToStr,
+			 "Starting the test: TC17903VerifyTheUI at " + DateToStr, LogAs.PASSED, null);
+			 
 		} catch (Exception e) {
 			ATUReports.add("Fail Step", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 		}
 
+	}
+
+	@AfterClass
+	public void closeBroswer() {		
+		this.driver.quit();
 	}
 
 	// @Parameters({"web","title"}) in the future
@@ -84,11 +93,11 @@ public class TC17903VerifyTheUI {
 
 		tegrity.loginCourses("User1");// log in courses page
 		Thread.sleep(3000);
-
+		initializeCourseObject();
 		// 3.Click Past Courses Tab button (without selecting a recording)
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		course.clickOnPastCoursesTabButton();
-		initializeCourseObject();
+		
 		// 4.click course
 		Thread.sleep(3000);
 		course.selectFirstCourse(record);
@@ -172,20 +181,31 @@ public class TC17903VerifyTheUI {
 		Thread.sleep(2000);
 		// 11.Validate the tab menu is displayed correctly under the tab name.
 		// record.moveToElementAndClick(record.view_button, driver);
+		System.out.println("UI1");
 		Point checkbox_select_all = record.checkall.getLocation();
+		System.out.println("UI2");
 		Point view = record.view_button.getLocation();
+		System.out.println("UI3");
 		Point rec_tasks = record.recording_tasks_button.getLocation();
+		System.out.println("UI4");
 		System.out.println(rec_tasks);
 		System.out.println(view);
 		Point course_tasks = record.course_task_button.getLocation();
-		if ((rec_tasks.getX() > 1500) && (view.getY() == rec_tasks.getY()) && (view.getX() < 100)
-				&& (course_tasks.getX() > record.view_button.getLocation().getX())
-				&& (course_tasks.getX() < checkbox_select_all.getX())) {
-			System.out.println(
-					"courses button right to view button,view dropdown alligned left,recording tasks alligned right and checkbox is right to it");
-			ATUReports.add(
-					"courses button right to view button,view dropdown alligned left,recording tasks alligned right",
-					LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+		System.out.println("rec_tasks.getX(): "+rec_tasks.getX());
+		System.out.println("view.getY(): "+view.getY());
+		System.out.println("rec_tasks.getY(): "+rec_tasks.getY());
+		System.out.println("view.getX(): "+view.getX());
+		System.out.println("course_tasks.getX(): "+course_tasks.getX());
+		System.out.println("record.view_button.getLocation().getX(): "+view.getX());
+		System.out.println("checkbox_select_all.getX()): "+checkbox_select_all.getX());
+		if ((rec_tasks.getX() > course_tasks.getX()) && 
+		    (view.getY() == rec_tasks.getY()) && 
+		    (view.getX() < course_tasks.getX())	&& 
+		    (course_tasks.getX() > record.view_button.getLocation().getX())	&& 
+		    (course_tasks.getX() < checkbox_select_all.getX())) 
+		{
+			System.out.println(	"courses button right to view button,view dropdown alligned left,recording tasks alligned right and checkbox is right to it");
+			ATUReports.add(	"courses button right to view button,view dropdown alligned left,recording tasks alligned right",LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 
 			Assert.assertTrue(true);
 		} else {
@@ -235,10 +255,10 @@ public class TC17903VerifyTheUI {
 		}
 		// 14.click one check box
 		record.searchbox.click();
-		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.getCheckbox());
 
 		// 15.un-check one check box
-		record.unClickOneCheckBoxOrVerifyNotSelected(record.checkbox);
+		record.unClickOneCheckBoxOrVerifyNotSelected(record.getCheckbox());
 
 		// 16.click all check box
 		record.checkall.click();// make all checkboxes marked
@@ -250,7 +270,8 @@ public class TC17903VerifyTheUI {
 		record.checkall.click();// make all checkboxes unmarked
 		record.verifyAllCheckedboxNotSelected();
 
-		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 
 	// description = "get courses list"

@@ -25,6 +25,7 @@ public class EditRecordinPropertiesWindow extends Page {
 	}
 
 	@FindBy(id = "EditButton")
+	public
 	WebElement save_button;
 	@FindBy(id = "recordingPropertiesRecordedBy")
 	WebElement owner_button;

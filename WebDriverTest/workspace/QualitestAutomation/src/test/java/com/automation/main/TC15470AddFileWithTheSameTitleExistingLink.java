@@ -2,7 +2,6 @@ package com.automation.main;
 
 import java.io.File;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,8 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 
@@ -49,11 +50,17 @@ public class TC15470AddFileWithTheSameTitleExistingLink {
 		String instructor2;
 		List<String> for_enroll;
 
+		
+		@AfterClass
+		public void closeBroswer() {
+			this.driver.quit();
+		} 
+		
 		@BeforeClass
 		public void setup() {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
+			
 
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -81,20 +88,23 @@ public class TC15470AddFileWithTheSameTitleExistingLink {
 
 			mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 					ManageAdHocCoursesMembershipWindow.class);
+			
+			Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TC15470AddFileWithTheSameTitleExistingLink at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC15470AddFileWithTheSameTitleExistingLink at " + DateToStr, "Starting the test: TC15470AddFileWithTheSameTitleExistingLink at " + DateToStr, LogAs.PASSED, null);	
 
 		}
 
 		@Test
 		public void test15470() throws Exception {
-			String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\additional_file.doc";
-			String file_name = "additional_file.doc";
+			String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\addFileWithTheSameTitle.doc";
+			String file_name = "addFileWithTheSameTitle.doc";
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			/// 2.login as instructor
 			tegrity.loginCourses("User1");
 			
-			//3.delete additional content
-			course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
 		     course.waitForVisibility(course.course_list.get(1));
 			// 4.Select course
 			course.selectCourseThatStartingWith("Ab");
@@ -104,7 +114,7 @@ public class TC15470AddFileWithTheSameTitleExistingLink {
 			///4.pre-test try upload link with same name
 			record.toUploadAdditionalContentLink();
 			add_additional_content_link_window.waitForVisibility(add_additional_content_link_window.additional_content_link_title_input);
-			add_additional_content_link_window.createNewAdditionalContentLink(confirm_menu,"additional_file.doc","additional_file.doc");
+			add_additional_content_link_window.createNewAdditionalContentLink(confirm_menu,"addFileWithTheSameTitle.doc","addFileWithTheSameTitle.doc");
 			record.waitForVisibility(record.course_task_button);
 			// 4.Select "Course tasks -> Add Additional Content File" menu item
 			record.toUploadAdditionalContentFile();
@@ -120,7 +130,7 @@ public class TC15470AddFileWithTheSameTitleExistingLink {
 
 			// 7.check if redirected to additional content tab
 
-			if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[2]")).getAttribute("class").equals("active")) {
+			if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
 				System.out.println("redirected to additional content tab");
 				ATUReports.add("redirected to additional content tab", LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -137,8 +147,9 @@ public class TC15470AddFileWithTheSameTitleExistingLink {
 			///9.Verify that number mark isn't added to file's title
 	    	record.verifyNoCopiesExist(record.additional_content_list_names,file_name);
 			
-			driver.quit();
-
+	    	System.out.println("Done.");
+	    	ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+	    	
 		}
 
 }

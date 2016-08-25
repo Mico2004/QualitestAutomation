@@ -1,18 +1,19 @@
 package com.automation.main;
 
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+import atu.testng.reports.ATUReports;
+import atu.testng.reports.logging.LogAs;
 import junitx.util.PropertyManager;
 
 public class TC17925VerifyPastCourseWithRemovedWhenHasNoContent {
@@ -47,11 +48,12 @@ public class TC17925VerifyPastCourseWithRemovedWhenHasNoContent {
 	String instructor1;
 	String instructor2;
     List <String> for_enroll;
+    
 	@BeforeClass
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -78,7 +80,18 @@ public class TC17925VerifyPastCourseWithRemovedWhenHasNoContent {
 
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC17925VerifyPastCourseWithRemovedWhenHasNoContent at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC17925VerifyPastCourseWithRemovedWhenHasNoContent at " + DateToStr,
+		 "Starting the test: TC17925VerifyPastCourseWithRemovedWhenHasNoContent at " + DateToStr, LogAs.PASSED, null);
 
+	}
+
+	@AfterClass
+	public void closeBroswer() {		
+		this.driver.quit();
 	}
 
 	@Test
@@ -176,7 +189,7 @@ public class TC17925VerifyPastCourseWithRemovedWhenHasNoContent {
              ///copy one recording to course
 		     course.selectCourseThatStartingWith("BankValidRecording");
 		     Thread.sleep(3000);
-		     record.checkbox.click();
+		     record.getCheckbox().click();
 		     record.clickOnRecordingTaskThenCopy();
 		     Thread.sleep(3000);
 		     copy.selectTargetCourseFromCourseList(course_with_one_recording);
@@ -198,7 +211,7 @@ public class TC17925VerifyPastCourseWithRemovedWhenHasNoContent {
 		     Thread.sleep(3000);
 		     course.selectCourseByName(course_with_one_recording);
 		     Thread.sleep(3000);
-		     record.changeRecordingOwnership(confirm_menu, erp_window, instructor1,record.checkbox);
+		     record.changeRecordingOwnership(confirm_menu, erp_window, instructor1,record.getCheckbox());
 		     Thread.sleep(2000);
 		     for (String window : driver.getWindowHandles()) {
 				 driver.switchTo().window(window);
@@ -242,7 +255,7 @@ public class TC17925VerifyPastCourseWithRemovedWhenHasNoContent {
 		     course.selectCourseThatStartingWith(course_with_one_recording);
 		     Thread.sleep(3000);
 		     //delete recording
-		     record.checkbox.click();
+		     record.getCheckbox().click();
 		     record.toDeleteMenu();
 		     Thread.sleep(2000);
 		     delete_menu.clickOnDeleteButton();
@@ -269,17 +282,12 @@ public class TC17925VerifyPastCourseWithRemovedWhenHasNoContent {
 	          initializeCourseObject();
 	          course.clickOnActiveCoursesTabButton();
 	          course.verifyCourseExist(course_with_one_recording);
-	        //quit
-	          driver.quit();
-		     
-		
-		     
-	          
-			 
-		
-	
+
+	          System.out.println("Done.");
+	          ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	           
 }
+	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 

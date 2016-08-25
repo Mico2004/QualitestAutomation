@@ -1,33 +1,24 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
+
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver.When;
+
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -75,7 +66,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -87,10 +78,15 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		top_bar_helper = PageFactory.initElements(driver, TopBarHelper.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15655TryToCopyRecordingWhileItIsBeingMoved at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15655TryToCopyRecordingWhileItIsBeingMoved at " + DateToStr, "Starting the test: TC15655TryToCopyRecordingWhileItIsBeingMoved at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	
-	@AfterTest
+	@AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
 	}
@@ -114,20 +110,19 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws InterruptedException
 	{
-		// Preset login as SuperUser, and delete all recording in Ba, Then copy one recording from ValidBank to Ba.
-		tegrity.loginCourses("SuperUser");// log in courses page
-		initializeCourseObject();
 		
-		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
-		Thread.sleep(3000);
-		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
-		top_bar_helper.clickOnSignOut();
-		Thread.sleep(1000);
+	
 		
 		
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
+		
+		// Preset login and delete all recording in Ba, Then copy one recording from Ab to Ba.
+		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
+		Thread.sleep(3000);
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "Ba", 0, record, copy, confirm_menu);
+		
 		
 		
 		// Pretest go to first and second target and delete all recordings
@@ -186,10 +181,10 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 			Assert.assertTrue(false);
 		}
 		
-		// 11. The source recording has status "Being copying from".
+		// 11. The source recording has status "Being moved from".
 		record.verifyTargetRecordingHaveTargetStatus(selected_recording_name, "Being moved from");
 		
-		// 12. While recording has a "Being copying from", select "Recording Tasks -> Copy" menu item.
+		// 12. While recording has a "Being moved from", select "Recording Tasks -> Copy" menu item.
 		record.selectTargetRecordingCheckbox(selected_recording_name);
 		record.clickOnRecordingTaskThenCopy();
 		
@@ -254,7 +249,8 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 			Assert.assertTrue(false);
 		}
 		
-//		// Quit browser
-//		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+		
 	}
 }

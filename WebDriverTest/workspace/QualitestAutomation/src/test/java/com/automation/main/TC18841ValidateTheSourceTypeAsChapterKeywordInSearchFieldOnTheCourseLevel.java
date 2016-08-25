@@ -1,14 +1,11 @@
 package com.automation.main;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +17,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -28,7 +24,6 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCourseLevel {
@@ -73,7 +68,9 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-
+//		
+		//ATUReports.setWebDriver(driver);
+		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -95,7 +92,11 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		
-		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCourseLevel at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCourseLevel at " + DateToStr,
+		 "Starting the test: TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCourseLevel at " + DateToStr, LogAs.PASSED, null);	
 		
 	}
 	
@@ -126,10 +127,10 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 	{
 		// 1. Validate there is manual chapter keyword in this chapter. Search input specified shall be case-insensitive.
 		
-		tegrity.loginCourses("User1");
+		//tegrity.loginCourses("User1");
 		initializeCourseObject();
 		
-		String current_course = course.selectCourseThatStartingWith("Ab");
+		String current_course =course.selectCourseThatStartingWith("Ab");
 		
 		// Make course public
 		record.clickOnCourseTaskThenCourseSettings();
@@ -142,14 +143,14 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
 		String recording_chapter_keyword = "NewKeyword" + sdf.format(date);
 		
-		String recording_title = record.getFirstRecordingTitle();
-		record.clickCheckBoxByName(recording_title);
+		List<String> listOfNames = record.getCourseRecordingList();
+		record.selectIndexCheckBox(listOfNames.size());
 		record.clickOnRecordingTaskThenEditRecording();
 		
-		edit_recording.setTargetKeywordForFirstChapter(recording_chapter_keyword);
+		//edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_chapter_keyword);
 		
-		top_bar_helper.clickOnSignOut();
-		Thread.sleep(3000);
+		//record.signOut();
+		//Thread.sleep(3000);
 		
 		
 		// Looping for Student, Guest and ADMIN
@@ -226,7 +227,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
-			search_page.moveToElement(search_page.video_wrap_link_to_focus_list.get(0), driver).perform();
+			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
 			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
@@ -260,6 +261,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			Thread.sleep(2000);
 			
 			// 9. Click on title of the manual chapter keyword.
+			search_page.exitInnerFrame();
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
 			
 			// 9.1. The Tegrity Player page is opened and the recording start playing from the chapter start timestamp.
@@ -271,6 +273,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			Thread.sleep(2000);
 			
 			// 11. Click on the recording title of the chapter.
+			search_page.exitInnerFrame();
 			search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
 			
 			// 11.1. The Tegrity player page with the opened recording at the relevant time.
@@ -279,6 +282,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			// 12. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			Thread.sleep(2000);
 			
 			if((type_of_user!=2) && (type_of_user == 1)) {
@@ -290,48 +294,51 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 				}
 				Thread.sleep(2000);
 				
-				// TODO: 14. Change the manual chapter keyword from the recording that we mentioned in the preconditions.
-				date = new Date();
-				String new_recording_chapter_keyword = "NewerKeyword" + sdf.format(date);		
+				if(type_of_user ==0 || type_of_user==3) {
+					
+					// TODO: 14. Change the manual chapter keyword from the recording that we mentioned in the preconditions.
+					date = new Date();
+					String new_recording_chapter_keyword = "NewerKeyword" + sdf.format(date);		
 				
-				record.clickCheckBoxByName(recording_title);
-				record.clickOnRecordingTaskThenEditRecording();
+					listOfNames = record.getCourseRecordingList();
+					record.selectIndexCheckBox(listOfNames.size());
+					record.clickOnRecordingTaskThenEditRecording();
 				
-				edit_recording.setTargetKeywordForFirstChapter(new_recording_chapter_keyword);
+					edit_recording.changeFirstChapterRecordingNameToTargetName(new_recording_chapter_keyword);
 				
-				if(type_of_user!=3) {
-					search_page.clickBackToCourseInBreadcrumbs();
-				} else {
-					search_page.clickBackToCourseInBreadcrumbsForAdminDashBoard();
+					if(type_of_user!=3) {
+						search_page.clickBackToCourseInBreadcrumbs();
+					} else {
+						search_page.clickBackToCourseInBreadcrumbsForAdminDashBoard();
+					}
+				
+					Thread.sleep(2000);
+				
+					// 15. Search the new manual chapter keyword.
+					top_bar_helper.searchForTargetText(new_recording_chapter_keyword);
+					search_page.verifyLoadingSpinnerImage();
+					search_page.waitUntilSpinnerImageDisappear();
+					search_page.exitInnerFrame();
+				
+					// 15.1. The chapter is displayed with all the details that we mentioned.
+					search_page.verifyResultContainOneResultWithTargetTitle(new_recording_chapter_keyword);
+					
+					// 16. Search the old manual chapter keyword.
+					top_bar_helper.searchForTargetText(recording_chapter_keyword);
+					search_page.verifyLoadingSpinnerImage();
+					search_page.waitUntilSpinnerImageDisappear();
+					search_page.exitInnerFrame();
+				
+					// 16.1. The chapter is'nt displayed and ,the empty search results page shall be displayed.
+					search_page.verifySearchResultIsEmpty();
+				
+					recording_chapter_keyword = new_recording_chapter_keyword;
 				}
-				
-				Thread.sleep(2000);
-				
-
-				
-				// 15. Search the new manual chapter keyword.
-				top_bar_helper.searchForTargetText(new_recording_chapter_keyword);
-				search_page.verifyLoadingSpinnerImage();
-				search_page.waitUntilSpinnerImageDisappear();
-				
-				// 15.1. The chapter is displayed with all the details that we mentioned.
-				search_page.verifyResultContainOneResultWithTargetTitle(new_recording_chapter_keyword);
-				
-				
-				// 16. Search the old manual chapter keyword.
-				top_bar_helper.searchForTargetText(recording_chapter_keyword);
-				search_page.verifyLoadingSpinnerImage();
-				search_page.waitUntilSpinnerImageDisappear();
-				
-				// 16.1. The chapter is'nt displayed and ,the empty search results page shall be displayed.
-				search_page.verifySearchResultIsEmpty();
-				
-				recording_chapter_keyword = new_recording_chapter_keyword;
 			}
 			Thread.sleep(1000);
 			
 			// 17. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 			Thread.sleep(3000);
 		}
 		
@@ -345,7 +352,8 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
 		
-		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 }

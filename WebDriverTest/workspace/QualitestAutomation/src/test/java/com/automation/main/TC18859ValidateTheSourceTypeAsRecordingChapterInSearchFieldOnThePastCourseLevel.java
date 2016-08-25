@@ -1,14 +1,9 @@
 package com.automation.main;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
-
+import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +15,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -28,7 +22,6 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel {
@@ -38,7 +31,8 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
 
 	}
-	
+	public ManageAdhocCoursesEnrollmentsPage mange_adhoc_course_enrollments;
+	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
 	public EditRecordinPropertiesWindow edit_recording_properties_window;
 	public PlayerPage player_page;
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
@@ -73,8 +67,9 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
-
+//		
+		//ATUReports.setWebDriver(driver);
+		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -96,15 +91,19 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		
-		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel at " + DateToStr,
+		 "Starting the test: TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel at " + DateToStr, LogAs.PASSED, null);	
 		
 	}
 	
 	
 	@AfterClass
-	public void closeBroswer() {
-		driver.quit();
-	}
+	//public void closeBroswer() {
+	//	driver.quit();
+	//}
 
 
 	// @Parameters({"web","title"}) in the future
@@ -125,19 +124,97 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws Exception
 	{
-		// 1. Validate there is recording in past courses Tab. Search input specified shall be case-insensitive.
+		//pre test to unroll course from active courses to past courses 
 		
+		
+		// 1. getting the name of the past course
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
+			
+		String current_course = course.selectCourseThatStartingWith("PastCourseA");
+		Thread.sleep(1000); 
+		
+		record.signOut();
+		Thread.sleep(1000); 
+			
+		
+		// 2. move course from the bank to the past courses 
+		tegrity.loginCourses("SuperUser");
+		Thread.sleep(1000); 
+		
+		//2.1 enter to the bank
+		course.selectCourseThatStartingWith("BankValid");
+		Thread.sleep(1000); 
+		
+		// 2.2 get to the student tab
+		record.clickOnStudentRecordingsTab();
+		Thread.sleep(1000); 
+		
+		// 2.3 select the first checkbox and enter to the copy menu
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.clickOnRecordingTaskThenCopy();
+		Thread.sleep(1000); 
+		
+		// 2.4 select the copy button and wait for the record to move
+		copy.clickOnCopyButton();	
+		record.checkStatusExistenceForMaxTTime(360);
+		Thread.sleep(1000); 
+		
+		record.signOut();
+		Thread.sleep(1000); 
+		
+		// 3. enter as admin and unroll the course 
+		tegrity.loginAdmin("Admin");
+		initializeCourseObject();
+		 
+		// 3.1 Click on course builder href link
+		admin_dash_board_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+	 	Thread.sleep(10000);
+	 		
+	 	// 3.2 Click on create course href link 
+	 	driver.switchTo().frame(0);
+	 		
+	 	// 3.3 Search target course name
+	 	mange_adhoc_course_enrollments.searchAndFilterCourses(current_course);
+	 	Thread.sleep(7000);
+	 	
+	 		
+	 	// 3.4 Click on result first course (the only one) membership button
+	 	mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
+	 	Thread.sleep(2000);
+	 	
+	 	// 3.5 remove the instractour from the course 
+	 	mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list,"User1");
+	 	System.out.println("removed instructor 1");
+	 	Thread.sleep(1000);
+	 		
+	 	// 3.6 Add selected user to instructor list
+	 	mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
+	 	Thread.sleep(3000);   	
+	 
+	 	// 3.7 click on the ok button
+	 	mangage_adhoc_courses_membership_window.ok_button.click();
+	 	Thread.sleep(1000);
+	 	    
+	 	// 3.8 click on the alert
+	 	driver.switchTo().alert().accept();
+	 	Thread.sleep(2000);
+	 	record.signOut();
+		
+	 	/// end pre test
+		
+		// 1. Validate there is recording in past courses Tab. Search input specified shall be case-insensitive.
+		tegrity.loginCourses("User1");
 		
 		course.clickOnPastCoursesTabButton();
 		Thread.sleep(1000);
 		
-		String current_course = course.selectCourseThatStartingWith("PastCourseA");
+		course.selectCourseThatStartingWith("PastCourseA");
 		Thread.sleep(1000);
 		
 		// Get Recording Chapter information.
-		record.first_recording_title.click();
+		record.verifyFirstExpandableRecording();
+		//record.first_recording_title.click();
 		Thread.sleep(1000);
 		String recording_chapter = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 
@@ -199,10 +276,11 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		Thread.sleep(2000);
 			
 		// 8. Click on title of the chapter.
+		search_page.exitInnerFrame();
 		search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
 			
 		// 8.1. The Tegrity Player page is opened and the recording start playing from the chapter start time.
-		player_page.verifyTimeBufferStatusForXSec(5);
+		player_page.verifyTimeBufferStatusForXSec(10);
 			
 		// 9. Click on the back cursor in the browser to navigate to the search results page.
 		driver.navigate().back();
@@ -210,10 +288,11 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		Thread.sleep(2000);
 			
 		// 10. Click on the recording title of the chapter.
+		search_page.exitInnerFrame();
 		search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
 			
 		// 10.1. The Tegrity player page with the opened recording at the relevant time.
-		player_page.verifyTimeBufferStatusForXSec(5);
+		player_page.verifyTimeBufferStatusForXSec(10);
 			
 		// 11. Click on the back cursor in the browser to navigate to the search results page.
 		driver.navigate().back();
@@ -221,15 +300,15 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		Thread.sleep(2000);
 			
 		// 12. Click on the course name in the breadcrumb.
+		search_page.exitInnerFrame();
 		search_page.clickBackToCourseInBreadcrumbs();
 		
 		// 13. Sign Out.
 		top_bar_helper.clickOnSignOut();
 		Thread.sleep(3000);
 
-		
-		
-		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 }

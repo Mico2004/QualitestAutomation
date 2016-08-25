@@ -91,7 +91,7 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
                 "Starting the test: TCase24766VerifyCopyFromPastCourseToActiveCourse at " + DateToStr, LogAs.PASSED, null);	
                 
 			}
-
+//s
 			@Test
 			public void test24766() throws Exception {
 				////pre conditions:creating instructor1 who has 2 past courses and 1 active

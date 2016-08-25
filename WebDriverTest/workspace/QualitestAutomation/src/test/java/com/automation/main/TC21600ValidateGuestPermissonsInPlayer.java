@@ -1,14 +1,16 @@
 package com.automation.main;
 
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.util.List;
-
+import java.text.DateFormat;
+import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -55,6 +57,7 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 		public RunDiagnosticsPage run_diagnostics;
 		public PlayerPage player_page;
 		public PublishWindow publish_window;
+		public AdminCourseSettingsPage admin_course_settings_page;
 		String instructor1;
 		String instructor2;
 		List<String> for_enroll;
@@ -63,7 +66,10 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 		public void setup() {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
+			
+			if(!(driver instanceof FirefoxDriver)) {
+				
+			}
 
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -95,15 +101,41 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 			help_page = PageFactory.initElements(driver, HelpPage.class);
 			run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
+			admin_course_settings_page = PageFactory.initElements(driver, AdminCourseSettingsPage.class);
+			
+			 Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TC21600ValidateGuestPermissonsInPlayer at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC21600ValidateGuestPermissonsInPlayer at " + DateToStr,
+			 "Starting the test: TC21600ValidateGuestPermissonsInPlayer at " + DateToStr, LogAs.PASSED, null);	
 		}
 
+		@AfterClass
+		public void closeBroswer() {		
+			this.driver.quit();
+		}
+		
 		@Test
 		public void test21600() throws Exception {
 			/// pre conditions
 
 			// 1.load page
-			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		   tegrity.waitForVisibility(tegrity.passfield);
+		    tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		    
+		    //make sure that we have public tab
+		    tegrity.loginAdmin("Admin");
+			Thread.sleep(1000);
+			
+		    admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
+			Thread.sleep(2000);		
+			
+			admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
+			admin_course_settings_page.clickOnSaveButton();
+			
+			admin_course_settings_page.waitForVisibility(driver.findElement(By.id("SignOutLink")));
+			driver.findElement(By.id("SignOutLink")).click();
+			
+		    tegrity.waitForVisibility(tegrity.passfield);
 			//2.login as guest
 			tegrity.loginAsguest();
 			//3.select course
@@ -113,9 +145,10 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 			record.waitForVisibility(record.sign_out);
 			record.verifyNoStartRecording();
 			//5.Click on some recording
-			record.clickOnRecordingsTab();
-			 Thread.sleep(2000);
-			 
+			if(!(driver instanceof InternetExplorerDriver)) {
+				record.clickOnRecordingsTab();
+			}
+			 Thread.sleep(2000);	 
 			 //6.Click on some recording
 			 record.verifyFirstExpandableRecording();
 			 driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
@@ -155,6 +188,9 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 					Assert.assertTrue(false);
 				}
 		
-		 driver.quit();
+
+			    System.out.println("Done.");
+			    ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+			    
 		}
 }

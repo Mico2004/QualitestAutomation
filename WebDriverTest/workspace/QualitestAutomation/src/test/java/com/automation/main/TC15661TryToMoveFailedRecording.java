@@ -30,31 +30,20 @@ package com.automation.main;
 */
 //Precondition: Failed recording should be in course: "z 15660 - Try to copy failed recording"
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.util.List;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -86,14 +75,14 @@ public class TC15661TryToMoveFailedRecording {
 	String targetCourse;
 	String clickedRecording;
 DesiredCapabilities capability;
-	@BeforeClass
+	
+@BeforeClass
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
 		ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -102,13 +91,18 @@ DesiredCapabilities capability;
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15661TryToMoveFailedRecording at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15661TryToMoveFailedRecording at " + DateToStr,
+		 "Starting the test: TC15661TryToMoveFailedRecording at " + DateToStr, LogAs.PASSED, null);
 	}
-/*	
-	@AfterTest
+
+	@AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
 	}
-*/
+
 	// @Parameters({"web","title"}) in the future
 	@Test
 	public void loadPage() throws InterruptedException {
@@ -132,7 +126,7 @@ DesiredCapabilities capability;
 		initializeCourseObject();
 		
 		// 2. Select course (named start with: "BankInvalidRecordings").
-		course.selectCourseThatStartingWith("BankInvalidRecordings");
+		course.selectCourseThatStartingWith("BankInvalidRecording");
 		
 		Thread.sleep(3000);
 		
@@ -171,8 +165,8 @@ DesiredCapabilities capability;
 			Assert.assertTrue(false);
 		}
 		
-		// Quit the browser
-		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
 	}
 }

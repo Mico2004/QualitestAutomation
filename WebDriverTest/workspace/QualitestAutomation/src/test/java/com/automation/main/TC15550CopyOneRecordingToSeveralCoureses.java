@@ -1,45 +1,28 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.awt.TexturePaint;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
-import org.junit.AfterClass;
+import java.util.ArrayList;
+import java.util.List;
+import java.text.DateFormat;
+import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC15550CopyOneRecordingToSeveralCoureses {
@@ -77,7 +60,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 //		
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
-		driver.manage().window().maximize();
+//		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -90,10 +73,15 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		
 		wait = new WebDriverWait(driver, 10);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15550CopyOneRecordingToSeveralCoureses at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15550CopyOneRecordingToSeveralCoureses at " + DateToStr, "Starting the test: TC15550CopyOneRecordingToSeveralCoureses at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	
-	@AfterTest
+	@AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
 	}
@@ -229,14 +217,10 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 				record.checkRecordingInIndexIStatus((i + 1), "Being copied from");
 				// 16. Recording's status change after the copying is done
 				//record.checkStatusExistenceForMaxTTime(120);
-				record.checkThatRecordingStatusTargetIndexIsEmpty((i + 1), 360);
+				record.checkThatRecordingStatusTargetIndexIsEmpty((i + 1), 440);
 				break;
 			}
 		}
-		
-		
-		
-		
 		
 		
 		// 17. Verify that source recording is not removed from source course.
@@ -253,8 +237,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 		for(int i = 0; i < target_course_list.size(); i++) {
 		
 			// 19. Select destination course.
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Course" + Integer.toString(i + 1))));
-			
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Course" + Integer.toString(i + 1))));		
 			boolean isTargetCourseClicked = course.clickOnTargetCourseName(target_course_list.get(i));
 	
 			if (isTargetCourseClicked) {
@@ -262,7 +245,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 			} else {
 				System.out.println("Target course name is not clicked: " + target_course_list.get(i));
 			}
-			
+			Thread.sleep(500);
 			// 20. Verify that recording is copied to course.
 			isRecordingExist = record.isRecordingExist(source_recording, true);
 			
@@ -271,8 +254,8 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 			
 		}
 		
-		
-//		this.driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
 	}
 }

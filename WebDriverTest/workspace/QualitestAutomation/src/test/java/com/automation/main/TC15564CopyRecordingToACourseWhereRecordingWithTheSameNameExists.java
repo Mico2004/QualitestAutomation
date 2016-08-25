@@ -1,32 +1,25 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
+import java.util.List;
+import java.text.DateFormat;
+import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.sun.jna.win32.W32APITypeMapper;
-
+import org.testng.annotations.AfterClass;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -35,8 +28,7 @@ import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
-import net.sourceforge.htmlunit.corejs.javascript.ast.NewExpression;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
@@ -73,7 +65,7 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -84,10 +76,15 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists at " + DateToStr, "Starting the test: TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	
-	@AfterTest
+	@AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
 	}
@@ -270,7 +267,7 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 
 		player_page.verifyTimeBufferStatusForXSec(10);
 		
-		// Quit the browser
-		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 }

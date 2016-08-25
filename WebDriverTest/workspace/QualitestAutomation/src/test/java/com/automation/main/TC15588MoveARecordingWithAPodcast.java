@@ -1,41 +1,26 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.hamcrest.core.IsInstanceOf;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.util.List;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
+import java.util.Date;
+import com.automation.main.DriverSelector.BrowserType;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC15588MoveARecordingWithAPodcast {
@@ -63,14 +48,15 @@ public class TC15588MoveARecordingWithAPodcast {
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
-	@BeforeClass
+	
+    @BeforeClass
 	public void setup() {
 
-		driver = new FirefoxDriver();
-		driver.manage().window().maximize();
+		
+		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		
 		
-	
+
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -82,13 +68,18 @@ public class TC15588MoveARecordingWithAPodcast {
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15538CancelTheCopying at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15538CancelTheCopying at " + DateToStr, "Starting the test: TC15538CancelTheCopying at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 
-//	@AfterTest
-//	public void closeBroswer() {
-//		this.driver.quit();
-//	}
+	@AfterClass
+	public void closeBroswer() {
+		this.driver.quit();
+	}
 
 
 	// @Parameters({"web","title"}) in the future
@@ -288,8 +279,9 @@ public class TC15588MoveARecordingWithAPodcast {
 	
 	    player_page.verifyPartiallyUrl(url_of_podcast_student.split("/")[5]);
 	    
-	    // Quit the browser
-	    driver.quit();
+	    System.out.println("Done.");
+	    ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
 
 	}
 }

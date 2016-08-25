@@ -1,29 +1,10 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.security.PublicKey;
-import java.security.spec.ECPrivateKeySpec;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.function.IntToDoubleFunction;
 
-import org.junit.experimental.theories.Theories;
-import org.omg.CORBA.StringHolder;
-import org.omg.Messaging.SyncScopeHelper;
-import org.omg.PortableInterceptor.NON_EXISTENT;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.util.Date;
+
+import java.text.DateFormat;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -35,21 +16,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import com.sun.jna.win32.W32APITypeMapper;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
-import junitx.util.ResourceManager;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.treetable.JTreeTable.ListToTreeSelectionModelWrapper;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
@@ -93,7 +66,7 @@ public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
-		// driver.manage().window().maximize();
+		
 		ATUReports.setWebDriver(driver);
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -121,6 +94,12 @@ public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording at " + DateToStr,
+		 "Starting the test: TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	
@@ -147,6 +126,12 @@ public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
 		// 2. Select the private course.
 		course.selectCourseThatStartingWith(PropertyManager.getProperty("User1"));
 		
+		if(record.getNumberOfRecordings() == 0) {
+			record.returnToCourseListPage();
+			course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", PropertyManager.getProperty("User1"), 0, record, copy, confirm_menu);
+			course.selectCourseThatStartingWith(PropertyManager.getProperty("User1"));
+		}
+		
 		// 3. Select the recording.
 		String selected_recording_name = record.getFirstRecordingTitle();
 		record.selectFirstCheckbox();
@@ -164,5 +149,6 @@ public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
 		Thread.sleep(3000);
 		record.verifyThatTargetRecordingNotExistInRecordingList(selected_recording_name);
 		
-
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 }}

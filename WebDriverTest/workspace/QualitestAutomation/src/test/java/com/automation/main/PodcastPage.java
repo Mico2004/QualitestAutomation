@@ -89,4 +89,26 @@ public class PodcastPage extends Page {
 			}
 		}
 	}
+	
+	// This function watch all podcast(mp3)
+	public void clickAndWatchAllPodcast() throws InterruptedException {
+		waitForVisibility(podcast_titles.get(0));
+		for(int i=0; i<podcast_titles.size(); i++) {
+			try {
+				driver.findElements(By.cssSelector(".enclosure>a")).get(i).click();
+				Thread.sleep(5000);
+				driver.navigate().back();
+				waitForVisibility(podcast_titles.get(0));
+				Thread.sleep(1000);
+			} catch(Exception msg) {
+				System.out.println("Fail to watch all podcasts.");
+				ATUReports.add("Watch all podcasts.", "True.", "True.", LogAs.FAILED, null);
+				Assert.assertTrue(false);
+			}
+			
+		}
+		System.out.println("Watch all podcasts.");
+		ATUReports.add("Watch all podcasts.", "True.", "True.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+	}
 }

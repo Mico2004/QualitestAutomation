@@ -1,47 +1,32 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.apache.bcel.generic.IF_ACMPEQ;
-import org.eclipse.jetty.io.ClientConnectionFactory.Helper;
-import org.junit.AfterClass;
+import java.util.List;
+import java.text.DateFormat;
+import java.util.Date;
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junit.textui.TestRunner;
-import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
@@ -74,7 +59,7 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		//driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -86,15 +71,22 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		confirmation_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-		
-		
+			
 		wait = new WebDriverWait(driver, 30);
+		
+
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC24922ValidateCopyRecordingFunctionalityForOneRecording at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC24922ValidateCopyRecordingFunctionalityForOneRecording at " + DateToStr,
+		 "Starting the test: TC24922ValidateCopyRecordingFunctionalityForOneRecording at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
-//	@org.testng.annotations.AfterClass
-//	public void quitBroswer() {
-//		this.driver.quit();
-//	}
+	@AfterClass
+	public void closeBroswer() {		
+		this.driver.quit();
+	}
+
 
 	private void setAuthorInfoForReports() {
 		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
@@ -203,11 +195,11 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				Thread.sleep(2000);
 				
 				// 8. Click on a checkbox of one recording.
-				record.checkbox.click();
+				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 				
 				String checked_recording_title = null;
 				if (recording_type==2) {
-					checked_recording_title = driver.findElement(By.id("RecordingTitle1")).getText();
+					checked_recording_title = record.getFirstRecordingTitleTest();
 				} else {
 					checked_recording_title = record.getFirstRecordingTitle();
 				}
@@ -332,74 +324,42 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 //				}
 //				Thread.sleep(1000);
 				
+					
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				// 28. The moved recording's name is colored in grey.
-				// 29. The status of the recording (from the left of the recording date) has become "Being moving from".
-				List<String> just_after_clicked_on_moved_recording_list = record.getCourseRecordingList();
-				
-				for(int i=0; i<just_after_clicked_on_moved_recording_list.size(); i++) {
-					if(just_after_clicked_on_moved_recording_list.get(i).equals(checked_recording_title)) {
-						record.checkRecordingInIndexIStatus(i+1, "Being copied from");
-						if (recording_type==2) {
-							if(driver.findElement(By.id("RecordingTitle" + Integer.toString(i+1))).getAttribute("disabled").equals("true")) {
-								System.out.println("The moved recordings name is colored in grey (disabled).");
-								ATUReports.add("Recordings grey out.", "True.", "True.", LogAs.PASSED, null);
-								Assert.assertTrue(true);
+				if(!(driver instanceof ChromeDriver)) {
+					// 28. The moved recording's name is colored in grey.
+					// 29. The status of the recording (from the left of the recording date) has become "Being moving from".
+					String just_after_clicked_on_moved_recording_list = null;
+					if(recording_type==2)
+					   just_after_clicked_on_moved_recording_list = record.getFirstRecordingTitleTest();
+					else 
+						just_after_clicked_on_moved_recording_list = record.getFirstRecordingTitle();
+						
+						if(just_after_clicked_on_moved_recording_list.equals(checked_recording_title)) {
+							record.checkRecordingInIndexIStatus(1, "Being copied from");
+							if (recording_type==2) {
+								if(driver.findElement(By.id("RecordingTitle" + Integer.toString(1))).getAttribute("disabled").equals("true")) {
+									System.out.println("The moved recordings name is colored in grey (disabled).");
+									ATUReports.add("Recordings grey out.", "True.", "True.", LogAs.PASSED, null);
+									Assert.assertTrue(true);
+								} else {
+									System.out.println("The moved recordings name is not colored in grey (disabled).");
+									ATUReports.add("Recordings grey out.", "True.", "False.", LogAs.FAILED, null);
+									Assert.assertTrue(false);
+								}							
 							} else {
-								System.out.println("The moved recordings name is not colored in grey (disabled).");
-								ATUReports.add("Recordings grey out.", "True.", "False.", LogAs.FAILED, null);
-								Assert.assertTrue(false);
-							}
-							break;
-						} else {
-							if(driver.findElement(By.id("Recording" + Integer.toString(i+1))).getAttribute("disabled").equals("true")) {
-								System.out.println("The moved recordings name is colored in grey (disabled).");
-								ATUReports.add("Recordings grey out.", "True.", "True.", LogAs.PASSED, null);
-								Assert.assertTrue(true);
-							} else {
-								System.out.println("The moved recordings name is not colored in grey (disabled).");
-								ATUReports.add("Recordings grey out.", "True.", "False.", LogAs.FAILED, null);
-								Assert.assertTrue(false);
-							}
-							break;
+								if(driver.findElement(By.id("Recording" + Integer.toString(1))).getAttribute("disabled").equals("true")) {
+									System.out.println("The moved recordings name is colored in grey (disabled).");
+									ATUReports.add("Recordings grey out.", "True.", "True.", LogAs.PASSED, null);
+									Assert.assertTrue(true);
+								} else {
+									System.out.println("The moved recordings name is not colored in grey (disabled).");
+									ATUReports.add("Recordings grey out.", "True.", "False.", LogAs.FAILED, null);
+									Assert.assertTrue(false);
+								}								
+							}	
 						}
-						
-
-						
 					}
-				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				
 				// 30. The record status ("being copying from") disappeared after a while (the record stays where its at).
 				record.checkStatusExistenceForMaxTTime(360);
@@ -441,8 +401,37 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 //				admin_dashboard_view_course_list.clickOnFirstCourseLink();
 //				Thread.sleep(3000);	
 				
-				driver.navigate().to(destination_course_url);
+//				driver.navigate().to(destination_course_url);
+//				Thread.sleep(3000);
+				
+				// 31. On the breadcrumb, click on "courses".
+				
+				//admin_dashboard_page.clickElement(driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1));
+				WebElement iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+				
+				try {		
+					iw.sendKeys(Keys.ENTER);
+					System.out.println("Clicked on the element breadcrumb.");
+					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} catch (Exception msg) {
+					System.out.println("Fail to click on the element breadcrumb." );
+					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
+				admin_dashboard_view_course_list.verifyAllCoursesPage();
+				
+				
+				
+				// In "All courses" page, search for Ab course.
+				admin_dashboard_view_course_list.searchForTargetCourseName(destination_course_name);
 				Thread.sleep(3000);
+						
+				// Click on that course name.
+				admin_dashboard_view_course_list.clickOnFirstCourseLink();
+				Thread.sleep(1000);
+				
+				
 				
 				if(recording_type==1) {
 					record.clickOnStudentRecordingsTab();
@@ -482,17 +471,29 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				}
 				
 				// 39. On the breadcrumb, click on "courses".
-				record.courses_link.click();
+//				record.courses_link.click();
+				iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+				
+				try {		
+					iw.sendKeys(Keys.ENTER);
+					System.out.println("Clicked on the element breadcrumb." );
+					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} catch (Exception msg) {
+					System.out.println("Fail to click on the element breadcrumb." );
+					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
 			}
 			
 			Thread.sleep(2000);
 			
 			// 40. Logout.
-			driver.findElement(By.id("SignOutLink")).click();
+			record.signOut();
 		}
 		
-		// Quit the browser
-		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 	

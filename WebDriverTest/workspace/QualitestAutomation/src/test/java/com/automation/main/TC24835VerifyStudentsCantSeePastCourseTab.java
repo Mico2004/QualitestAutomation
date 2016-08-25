@@ -4,14 +4,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import java.text.DateFormat;
+import java.util.Date;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+import org.testng.annotations.AfterClass;
+import atu.testng.reports.ATUReports;
+import atu.testng.reports.logging.LogAs;
 import junitx.util.PropertyManager;
 
 public class TC24835VerifyStudentsCantSeePastCourseTab {
@@ -52,7 +55,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -80,6 +83,13 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC24835VerifyStudentsCantSeePastCourseTab at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC24835VerifyStudentsCantSeePastCourseTab at " + DateToStr,
+		 "Starting the test: TC24835VerifyStudentsCantSeePastCourseTab at " + DateToStr, LogAs.PASSED, null);
+		
 	}
 
 	@Test
@@ -198,7 +208,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		Thread.sleep(3000);
 		record.clickOnRecordingsTab();
 		Thread.sleep(2000);
-		record.checkbox.click();/// only one recording
+		record.getCheckbox().click();/// only one recording
 		Thread.sleep(2000);
 		///copy courses to first past course
 		record.clickOnRecordingTaskThenCopy();
@@ -238,7 +248,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		//// End of Preset/////////////
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 		
 	////setup!!!!!!!!!!!!!
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -331,24 +341,37 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
     	tegrity.loginCoursesByParameter(student);
     	Thread.sleep(3000);
     	// 15.Verify the 'Past Courses' tab isn't displayed
-    			course.verifyNoPastCoursesTab();
-    			Thread.sleep(2000);
-    			course.clickOnActiveCoursesTabButton();
-    			Thread.sleep(2000);
-    			// 16.Verfiy the un-enrolled course isn't displayed in the 'Active
-    			// Courses' tab
-    			initializeCourseObject();
-    			course.verifyCourseNotExist(past_course_student);
-    			course.verifyCourseNotExist(past_course_student2);
-    			// 17.sign out
-    			course.signOut();
-    			driver.quit();
+    	course.verifyNoPastCoursesTab();
+    	Thread.sleep(2000);
+
+    	course.clickOnActiveCoursesTabButton();
+    	Thread.sleep(2000);
+    			
+    	// 16.Verfiy the un-enrolled course isn't displayed in the 'Active
+    	// Courses' tab
+    	initializeCourseObject();
+    	course.verifyCourseNotExist(past_course_student);
+    	course.verifyCourseNotExist(past_course_student2);
+    			
+    	// 17.sign out
+    	course.signOut();
+    		
+    	System.out.println("Done.");
+    	ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);		
+    			
 	}
 
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
+
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		course.courses = course.getStringFromElement(course.course_list);
+	}
+	
+	@AfterClass
+	public void closeBroswer() {
+	
+		this.driver.quit();
 	}
 }

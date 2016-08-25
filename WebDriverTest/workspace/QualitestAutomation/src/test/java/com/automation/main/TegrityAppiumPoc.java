@@ -115,7 +115,7 @@ public class TegrityAppiumPoc {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 

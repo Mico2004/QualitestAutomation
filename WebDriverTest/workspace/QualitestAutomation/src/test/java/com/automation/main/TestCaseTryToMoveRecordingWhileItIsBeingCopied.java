@@ -69,7 +69,7 @@ public class TestCaseTryToMoveRecordingWhileItIsBeingCopied {
 	driver=new InternetExplorerDriver(capability);
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -82,12 +82,10 @@ public class TestCaseTryToMoveRecordingWhileItIsBeingCopied {
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 	}
 	
-	
 	@AfterTest
 	public void closeBroswer() {
 		this.driver.quit();
 	}
-
 
 	// @Parameters({"web","title"}) in the future
 	@Test

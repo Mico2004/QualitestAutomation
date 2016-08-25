@@ -1,25 +1,12 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.security.PublicKey;
-import java.security.spec.ECPrivateKeySpec;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.function.IntToDoubleFunction;
-
-import org.junit.experimental.theories.Theories;
-import org.omg.CORBA.StringHolder;
-import org.omg.Messaging.SyncScopeHelper;
-import org.omg.PortableInterceptor.NON_EXISTENT;
+import java.text.DateFormat;
+import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -29,27 +16,16 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import com.sun.jna.win32.W32APITypeMapper;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
-import junitx.util.ResourceManager;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.treetable.JTreeTable.ListToTreeSelectionModelWrapper;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC19316CreateAndDeleteAPrivateCourse {
@@ -91,10 +67,13 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 
 	@BeforeClass
 	public void setup() {
-
-		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
-		// driver.manage().window().maximize();
+		/*
+		 * Firefox only
+		 */
+//		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		driver = new FirefoxDriver();
+		
+		//
 		ATUReports.setWebDriver(driver);
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -123,13 +102,20 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
 		
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC19316CreateAndDeleteAPrivateCourse at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC19316CreateAndDeleteAPrivateCourse at " + DateToStr,
+		 "Starting the test: TC19316CreateAndDeleteAPrivateCourse at " + DateToStr, LogAs.PASSED, null);	
+		
 	}
 
 	
-//	 @AfterClass
-//	 public void closeBroswer() {
-//		 this.driver.quit();
-//	 }
+	 @AfterClass
+	 public void closeBroswer() {
+		 this.driver.quit();
+	 }
 
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -260,7 +246,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);// log in courses page
 		
 		// 7. Verify that INSTRUCTOR's private course is displayed.
-		course.goToAPICoursesActive();
+		course.goToAPICoursesActive("User1",0);
 		
 		course.veriftyThatOnlyOneCourseSetIsPrivateAsTrueInAPICourseActive();
 		
@@ -718,4 +704,8 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		course.clickOnPastCoursesTabButton();
 		Thread.sleep(2000);
 		course.verifyCourseExist(temp_another_course_name);
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
 }}

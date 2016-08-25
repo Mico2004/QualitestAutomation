@@ -3,6 +3,8 @@ package com.automation.main;
 import java.io.File;
 import java.util.List;
 
+
+import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,6 +16,9 @@ import org.testng.annotations.Test;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import java.text.DateFormat;
+import java.util.Date;
+
 
 public class TC15475ExistenceOfUIItems {
 	// Set Property for ATU Reporter Configuration
@@ -48,12 +53,16 @@ public class TC15475ExistenceOfUIItems {
 		String instructor2;
 		List<String> for_enroll;
 
+		@AfterClass
+		public void closeBroswer() {
+			this.driver.quit();
+		}
 
 		@BeforeClass
 		public void setup() {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
+			
 
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -80,6 +89,11 @@ public class TC15475ExistenceOfUIItems {
 
 			mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 					ManageAdHocCoursesMembershipWindow.class);
+			
+			Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TC15475ExistenceOfUIItems at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC15475ExistenceOfUIItems at " + DateToStr, "Starting the test: TC15475ExistenceOfUIItems at " + DateToStr, LogAs.PASSED, null);	
 
 		}
 
@@ -133,7 +147,7 @@ public class TC15475ExistenceOfUIItems {
             
 			// 8.check if redirected to additional content tab
 
-			if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[2]")).getAttribute("class").equals("active")) {
+			if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
 				System.out.println("redirected to additional content tab");
 				ATUReports.add("redirected to additional content tab", LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -142,9 +156,12 @@ public class TC15475ExistenceOfUIItems {
 				ATUReports.add("not redirected to additional content tab", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			}
+			
             //9.signout
+			record.waitForVisibility(record.sign_out);
 			record.signOut();
-			tegrity.waitForVisibility(tegrity.usernamefield);
+			Thread.sleep(4000);
+			//tegrity.waitForVisibility(tegrity.usernamefield);
 			//10.login as student
 			tegrity.loginCourses("User4");
 			course.waitForVisibility(course.first_course_button);
@@ -158,8 +175,9 @@ public class TC15475ExistenceOfUIItems {
 			Thread.sleep(6000);
 			record.convertAdditionalContantListToNames();
 			record.selectAdditionalContentByName(file_name);
-			driver.quit();
-
+			
+			System.out.println("Done.");
+			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		}
 
 }

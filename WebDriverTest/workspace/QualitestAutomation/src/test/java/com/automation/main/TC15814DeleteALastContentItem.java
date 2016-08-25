@@ -1,42 +1,26 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.w3c.dom.stylesheets.LinkStyle;
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC15814DeleteALastContentItem {
@@ -69,7 +53,7 @@ public class TC15814DeleteALastContentItem {
 
     	driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
     	
-//		driver.manage().window().maximize();
+//		
 		ATUReports.setWebDriver(driver);
 	
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -84,6 +68,12 @@ public class TC15814DeleteALastContentItem {
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		
 		top_bar_helper = PageFactory.initElements(driver, TopBarHelper.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15814DeleteALastContentItem at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15814DeleteALastContentItem at " + DateToStr,
+		 "Starting the test: TC15814DeleteALastContentItem at " + DateToStr, LogAs.PASSED, null);
 	}
 	
 	
@@ -117,16 +107,16 @@ public class TC15814DeleteALastContentItem {
 		record.clickOnAdditionContentTab();
 		Thread.sleep(1000);
 		
-		// Precondition
-		record.check_all_checkbox.click();
-		record.unselectIndexCheckBox(1);
-		record.clickOnContentTaskThenDelete();
-		delete_menu.clickOnDeleteButton();
+//		// Precondition
+//		record.check_all_checkbox.click();
+//		record.unselectIndexCheckBox(1);
+//		record.clickOnContentTaskThenDelete();
+//		delete_menu.clickOnDeleteButton();
 		
 		
 		// 4. Select content item.
-		record.selectIndexCheckBox(1);
-		String target_additional_content = record.getNameTargetIndexAdditionalContent(1);
+		record.check_all_checkbox.click();
+//		String target_additional_content = record.getNameTargetIndexAdditionalContent(1);
 		
 		// 5. Select "Content Tasks -> Delete" menu item.
 		record.clickOnContentTaskThenDelete();
@@ -135,7 +125,7 @@ public class TC15814DeleteALastContentItem {
 		delete_menu.verifyDeleteWindowDisplayed();
 		
 		// 7. Verify that only selected item is displayed in "List of Items".
-		delete_menu.verifyTargetRecordingInAdditionalContentDeleteWindowRecordingList(target_additional_content);
+//		delete_menu.verifyTargetRecordingInAdditionalContentDeleteWindowRecordingList(target_additional_content);
 		
 		// 8. Click the "Delete" button.
 		delete_menu.clickOnDeleteButton();
@@ -150,6 +140,8 @@ public class TC15814DeleteALastContentItem {
 		// 12. Verify that "Additional Content" tab is not displayed.
 		record.verifyNoAdditionalContentTab();
 
-	
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
 	}
 }

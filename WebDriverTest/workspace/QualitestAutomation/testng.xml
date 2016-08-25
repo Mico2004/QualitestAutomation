@@ -4,7 +4,7 @@
   <test name="Test">
     <classes>
    
-      <class name="com.automation.main.TestCaseSearchCourseInMoveWindow"/>
+      <class name="com.automation.main.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel"/>
 
     </classes>
   </test> <!-- Test -->

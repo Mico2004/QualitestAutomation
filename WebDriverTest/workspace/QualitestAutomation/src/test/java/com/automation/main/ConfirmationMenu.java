@@ -28,7 +28,9 @@ public class ConfirmationMenu extends Page {
 
 	// @FindBy(partialLinkText="Ok") WebElement ok_button;
 	@FindBy(xpath = "//*[@id='alertWindow']/div[2]/button")
-	WebElement ok_button;
+	public WebElement ok_button;
+	@FindBy(css = ".btn.btn-default")
+	public WebElement ok_buttonCss;
 	@FindBy(id = "ModalDialogHeader")
 	WebElement header_title;
 	@FindBy(id = "ModalDialogHeader")
@@ -47,6 +49,7 @@ public class ConfirmationMenu extends Page {
 
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {
+		waitForVisibility(ok_button);
 		try {
 			ok_button.click();
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
@@ -67,7 +70,7 @@ public class ConfirmationMenu extends Page {
 	// appears in HTML source code.
 	public void clickOnOkButtonAfterConfirmCopyRecordings() throws InterruptedException {
 		try {
-//			String souce_page = driver.getPageSource();
+			// String souce_page = driver.getPageSource();
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
@@ -95,7 +98,9 @@ public class ConfirmationMenu extends Page {
 	// appears in HTML source code.
 	public void clickOnOkButtonAfterConfirmCopyRecording() throws InterruptedException {
 		try {
-//			String souce_page = driver.getPageSource();
+			// wait.until(ExpectedConditions.t(header_title_list.get(0),
+			// "Success"));
+			// String souce_page = driver.getPageSource();
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				System.out.println("Error window title is wrong");
 				ATUReports.add("Error window title is wrong", LogAs.FAILED, null);
@@ -257,7 +262,7 @@ public class ConfirmationMenu extends Page {
 	// appears in HTML source code.
 	public void clickOnOkButtonAfterConfirmMoveRecordings() throws InterruptedException {
 		try {
-//			String souce_page = driver.getPageSource();
+			// String souce_page = driver.getPageSource();
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
@@ -343,20 +348,38 @@ public class ConfirmationMenu extends Page {
 	}
 
 	public void clickOnOkButtonAfterConfirmEditRecordingProperties() throws InterruptedException {
+		for(int i=0; i<30; i++) {
+			try {
+				if(driver.findElement(By.cssSelector(".emphasis.ng-binding")).getText().contains("Recording properties have been queued for edit")) {
+					break;
+				} else {
+					System.out.println(error_msg_body_list.get(0).getText());
+					Thread.sleep(1000);
+				}
+			} catch (Exception msg) {
+				Thread.sleep(1000);
+			}
+			
+		}
+		
 		try {
 			String souce_page = driver.getPageSource();
 			if (!souce_page.contains("Edit Recording Properties")) {
+				System.out.println("Error window title is wrong.");
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
 			if (!souce_page.contains("Recording properties have been queued for edit")) {
+				System.out.println("Error window description is wrong.");
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
+			System.out.println("Clicked on OK button.");
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
+			System.out.println("Fail click on OK button.");
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
@@ -445,15 +468,16 @@ public class ConfirmationMenu extends Page {
 	// appears in HTML source code.
 	public void clickOnOkButtonAfterConfirmAddAdditionalContentFile(String file_name) throws InterruptedException {
 		try {
-			String souce_page = driver.getPageSource();
-			if (!souce_page.contains("Success")) {
+			Thread.sleep(1000);
+			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
-			if (!souce_page.contains(file_name + " was uploaded successfully")) {
+			if (!error_msg_body_list.get(0).getText().contains(file_name + " was uploaded successfully")) {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
+			waitForVisibility(ok_button);
 			ok_button.click();
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -466,12 +490,12 @@ public class ConfirmationMenu extends Page {
 
 	public void clickOnOkButtonAfterConfirmAddAdditionalContentLink() throws InterruptedException {
 		try {
-			String souce_page = driver.getPageSource();
-			if (!souce_page.contains("Success")) {
+			
+			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
-			if (!souce_page.contains("Additional content link is successfully added.")) {
+			if (!error_msg_body_list.get(0).getText().contains("Additional content link is successfully added.")) {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
@@ -487,12 +511,12 @@ public class ConfirmationMenu extends Page {
 
 	public void clickOnOkButtonAfterConfirmEmailSetting() throws InterruptedException {
 		try {
-			String souce_page = driver.getPageSource();
-			if (!souce_page.contains("Success")) {
+
+			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
-			if (!souce_page.contains("Settings have been updated")) {
+			if (!error_msg_body_list.get(0).getText().contains("Settings have been updated")) {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
@@ -510,12 +534,12 @@ public class ConfirmationMenu extends Page {
 	public void clickOnOkButtonAfterConfirmEmailSentSuccessfully() throws InterruptedException {
 		// TODO Auto-generated method stub
 		try {
-			String souce_page = driver.getPageSource();
-			if (!souce_page.contains("Success")) {
+
+			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
-			if (!souce_page.contains("Email sent successfully")) {
+			if (!error_msg_body_list.get(0).getText().contains("Email sent successfully")) {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
@@ -529,16 +553,16 @@ public class ConfirmationMenu extends Page {
 		Thread.sleep(3000);
 	}
 
-	/// confirmation after changing  setting
+	/// confirmation after changing setting
 	public void clickonokbuttonafterEulaChangeSetting() throws InterruptedException {
 
 		try {
-			String souce_page = driver.getPageSource();
-			if (!souce_page.contains("Success")) {
+
+			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
-			if (!souce_page.contains("Settings have been updated")) {
+			if (!error_msg_body_list.get(0).getText().contains("Settings have been updated")) {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
@@ -551,18 +575,19 @@ public class ConfirmationMenu extends Page {
 		}
 		Thread.sleep(3000);
 	}
+	
 	
 	// This function verify that confirm window is close
 	public void verifyConfirmationMenuWithTargetHeaderClosed(String target_header) {
 		boolean is_closed = true;
-		
-		for(int i=0; i<header_title_list.size(); i++) {
-			if(header_title_list.get(i).equals(target_header)) {
+
+		for (int i = 0; i < header_title_list.size(); i++) {
+			if (header_title_list.get(i).equals(target_header)) {
 				is_closed = false;
 				break;
 			}
 		}
-	
+
 		if (is_closed) {
 			System.out.println("Confirm window is closed.");
 			ATUReports.add("Confirm window.", "Closed.", "Closed.", LogAs.PASSED, null);
@@ -574,4 +599,52 @@ public class ConfirmationMenu extends Page {
 		}
 	}
 
+	//This function cick on ok afte adding srt file from the local computer
+	public void clickOnOkButtonAfterAddCloseCaptioning() throws InterruptedException
+	{
+		try {		
+			if (!header_title_list.get(0).getText().contains("Success")) {
+				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
+				Assert.assertEquals(false, true);
+			}
+			if (!error_msg_body_list.get(0).getText().contains("Closed captions were added successfully")) {
+				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
+				Assert.assertEquals(false, true);
+			}
+			Thread.sleep(4000);
+			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
+			ok_buttonCss.click();
+			ok_button.click();
+			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception e) {
+			
+		}
+		Thread.sleep(3000);
+	}
+	
+	
+	public void clickOnOkButtonAfterEditRecord() throws InterruptedException
+	{
+		try {		
+			if (!header_title_list.get(0).getText().contains("Success")) {
+				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
+				Assert.assertEquals(false, true);
+			}
+			if (!error_msg_body_list.get(0).getText().contains("Add operation completed successfully!")) {
+				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
+				Assert.assertEquals(false, true);
+			}
+			Thread.sleep(4000);
+			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
+			ok_buttonCss.click();
+			ok_button.click();
+			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception e) {
+			
+		}
+		Thread.sleep(3000);
+	}
+	
 }

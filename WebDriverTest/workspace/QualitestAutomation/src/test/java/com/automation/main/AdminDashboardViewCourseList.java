@@ -43,6 +43,7 @@ public class AdminDashboardViewCourseList extends Page {
 	@FindBy(id = "jqg_gridData_1")
 	WebElement first_course_in_list_checkbox;
 	@FindBy(css = ".linksStyle")
+	public
 	WebElement first_course_link;
 	@FindBy(xpath = "//*[@id=\"2\"]/td[5]/a") WebElement second_course_link;
 	@FindBy(xpath = "//*[@id=\"main\"]/div[1]/h2") WebElement all_courses_title;
@@ -76,6 +77,7 @@ public class AdminDashboardViewCourseList extends Page {
 
 	public void searchForTargetCourseName(String course_name) {
 		try {
+			waitForVisibility(first_course_link);
 			course_name_search_box.sendKeys(course_name);
 			course_name_search_box.sendKeys(Keys.ENTER);
 			System.out.println("Searched for course named: " + course_name);
@@ -89,17 +91,20 @@ public class AdminDashboardViewCourseList extends Page {
 
 	public void clickOnFirstCourseLink() {
 		try {
+			waitForVisibility(first_course_link);
 			first_course_link.click();
 			System.out.println("Clicked on first course link.");
 			ATUReports.add("Clicked on first course link.", "Success.", "Success.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on first course link.");
-			ATUReports.add("Clicked on first course link.", "Success.", "Fail.", LogAs.PASSED, null);
+			ATUReports.add("Clicked on first course link.", "Success.", "Fail.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
 		}
 	}
 
 	/// clcik link by its first characters
-	public void clickOnCourseLinkStartingWith(String word) {
+	public String clickOnCourseLinkStartingWith(String word) {
 		try {
 
 			for (WebElement e : courses_link) {
@@ -107,19 +112,20 @@ public class AdminDashboardViewCourseList extends Page {
 					e.click();
 					System.out.println("Clicked on first course link.");
 					ATUReports.add("Clicked on first course link.", "Success.", "Success.", LogAs.PASSED, null);
-					return;
+					return e.getText();
 				}
 			}
 
 		} catch (Exception msg) {
 			System.out.println("Fail to click on first course link.");
-			ATUReports.add("Clicked on first course link.", "Success.", "Fail.", LogAs.PASSED, null);
+			ATUReports.add("Clicked on first course link.", "Success.", "Fail.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
 		}
+       return null;
 	}
 
 	/// verify all courses page
-	public void verifyAllCoursesPage() throws Exception {
-		Thread.sleep(500);
+	public void verifyAllCoursesPage() {
 		System.out.println(all_courses_title.getText());
 		waitForVisibility(all_courses_title);
 		if (all_courses_title.getText().contains("All Courses")) {

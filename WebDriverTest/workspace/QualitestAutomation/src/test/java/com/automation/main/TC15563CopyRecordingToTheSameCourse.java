@@ -2,31 +2,21 @@ package com.automation.main;
 
 // precondition no double naming 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
+import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -74,7 +64,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -85,10 +75,15 @@ public class TC15563CopyRecordingToTheSameCourse {
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15563CopyRecordingToTheSameCourse at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15563CopyRecordingToTheSameCourse at " + DateToStr, "Starting the test: TC15563CopyRecordingToTheSameCourse at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	
-	@AfterTest
+	@AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
 	}
@@ -131,7 +126,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		copy.clickOnCopyButton();
 		Thread.sleep(1000);
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		record.checkStatusExistenceForMaxTTime(120);
+		record.checkStatusExistenceForMaxTTime(360);
 		record.returnToCourseListPage();
 		
 		
@@ -264,8 +259,8 @@ public class TC15563CopyRecordingToTheSameCourse {
 		
 		
 		//14. After copying is finished, statuses at both recordings will disappear.
-		record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(index_copied_status, "Being copied from", 180);
-		record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(index_moving_copying_status, "Moving/Copying", 180);
+			record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(index_copied_status, "Being copied from", 300);
+			record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(index_moving_copying_status, "Moving/Copying", 60);
 		
 		//15. Verify that source recording is not removed from course.
 		all_recordings_list = record.getCourseRecordingList();
@@ -315,7 +310,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		//18. Recording is displayed and playing correctly.
 		player_page.verifyTimeBufferStatusForXSec(10);
 		
-//		// Quit the browser
-//		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 }

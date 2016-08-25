@@ -11,6 +11,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -63,6 +64,7 @@ public class MoveWindow extends Page {
 	// This function clicks on delete button of copy menu
 	public void clickOnMoveRecordings() throws InterruptedException {
 		try {
+			waitForVisibility(move_button);
 			move_button.click();
 			System.out.println("Clicked on move recordings button.");
 			ATUReports.add("Clicked on move recordings button.", LogAs.PASSED, null);
@@ -100,6 +102,7 @@ public class MoveWindow extends Page {
 	// This function clicks on delete button of copy menu
 	public void clickOnCancelButton() throws InterruptedException {
 		try {
+			wait.until(ExpectedConditions.visibilityOf(cancel_button));
 			cancel_button.click();
 			System.out.println("Clicked on cancel button.");
 			ATUReports.add("Clicked on cancel button.", LogAs.PASSED, null);

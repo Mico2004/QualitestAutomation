@@ -1,19 +1,18 @@
 package com.automation.main;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import junitx.util.PropertyManager;
@@ -51,11 +50,12 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 			String instructor2;
 			List<String> for_enroll;
 			List <String> list_student;
+			
 			@BeforeClass
 			public void setup() {
 
 				driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-				driver.manage().window().maximize();
+				
 
 				tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -83,11 +83,18 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 						ManageAdHocCoursesMembershipWindow.class);
                 player_page=PageFactory.initElements(driver, PlayerPage.class);
+                
+                Date curDate = new Date();
+                String DateToStr = DateFormat.getInstance().format(curDate);
+                System.out.println("Starting the test: TCase24766VerifyCopyFromPastCourseToActiveCourse at " + DateToStr);
+                ATUReports.add("Message window.", "Starting the test: TCase24766VerifyCopyFromPastCourseToActiveCourse at " + DateToStr,
+                "Starting the test: TCase24766VerifyCopyFromPastCourseToActiveCourse at " + DateToStr, LogAs.PASSED, null);	
+                
 			}
 
 			@Test
 			public void test24766() throws Exception {
-////pre conditions:creating instructor1 who has 2 past courses and 1 active
+				////pre conditions:creating instructor1 who has 2 past courses and 1 active
 				
 				// 1.load page
 				tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -277,7 +284,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 					     Thread.sleep(3000);
 					     record.convertRecordingsListToNames();
 					     String recordings=record.getFirstRecordingTitle();
-					record.checkbox.click();
+					record.getCheckbox().click();
 					//5.Select the "Recording Tasks -> Copy" menu item
 					record.clickOnRecordingTaskThenCopy();
 					Thread.sleep(3000);
@@ -292,7 +299,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 						record.clickOnAdditionContentTab();
 						Thread.sleep(4000);
 						String additional_content=record.first_additional_content_title.getText();
-						record.checkbox.click();	
+						record.getCheckbox().click();	
 			///8.Select the "Content tasks -> Copy" menu item
 				
 						record.clickOnContentTaskThenCopy();
@@ -307,7 +314,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 						record.clickOnStudentRecordingsTab();
 						Thread.sleep(2000);
 						String student_recording=record.getFirstRecordingTitle();
-						record.checkbox.click();	
+						record.getCheckbox().click();	
 			///10.Select the "Content tasks -> Copy" menu item
 						record.clickOnRecordingTaskThenCopy();
 						Thread.sleep(3000);
@@ -410,16 +417,15 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				// System.out.println(driver.getPageSource());
 			}
 			
-				driver.quit();
-
+			System.out.println("Done.");
+			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);	
+			
 			}
 			
-				
-
-			
-
-		
-			
+			@AfterClass
+			public void closeBroswer() {		
+				this.driver.quit();
+			}
 			// description = "get courses list"
 			public void initializeCourseObject() throws InterruptedException {
 

@@ -1,31 +1,20 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+import java.util.List;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
+import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -57,7 +46,8 @@ public class TC15567SearchCoursesInCopyWindow {
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
-	@BeforeClass
+	
+    @BeforeClass
 	public void setup() {
 
 		
@@ -71,7 +61,7 @@ public class TC15567SearchCoursesInCopyWindow {
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		driver.manage().window().maximize();
+		
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -80,10 +70,15 @@ public class TC15567SearchCoursesInCopyWindow {
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+		
+		Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC15567SearchCoursesInCopyWindow at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15567SearchCoursesInCopyWindow at " + DateToStr, "Starting the test: TC15567SearchCoursesInCopyWindow at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	
-	@AfterTest
+    @AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
 	}
@@ -298,7 +293,7 @@ public class TC15567SearchCoursesInCopyWindow {
 			}
 		}
 		
-//		// Quit the browser
-//		driver.quit();
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 }

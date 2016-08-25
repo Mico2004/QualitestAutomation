@@ -7,6 +7,7 @@ import org.testng.Assert;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import junitx.util.PropertyManager;
 
 public class RunDiagnosticsPage extends Page {
 public RunDiagnosticsPage(WebDriver browser) {
@@ -19,9 +20,9 @@ public RunDiagnosticsPage(WebDriver browser) {
 
 	
 	///verify run diagnostics page
-	public void verifyRunDiagnosticsPage()
+	public void verifyRunDiagnosticsPage(String university)
 	{    
-		verifyHelpPageUrl(driver);
+		verifyHelpPageUrl(driver,university);
 		if(picture.isDisplayed())
 		{
 			
@@ -37,10 +38,12 @@ public RunDiagnosticsPage(WebDriver browser) {
 		}
 	}
 	///verify run diagnostics url
-	public void verifyHelpPageUrl(WebDriver driver)
+	public void verifyHelpPageUrl(WebDriver driver,String university)
 	{
-		String url=driver.getCurrentUrl()+"/#/diagnostic";
-		if(url.contains(url))
+	   
+	    
+		String url=university+"/#/diagnostic";
+		if(url.contains(driver.getCurrentUrl()))
 		{
 			System.out.println("run diagnostics url verified");
 			ATUReports.add("run diagnostics url verified", LogAs.PASSED, null);

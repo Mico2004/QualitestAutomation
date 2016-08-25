@@ -36,12 +36,15 @@ public class ManageAdhocUsersPage extends Page {
 		// TODO Auto-generated constructor stub
 	}
 
-	@FindBy(id="ctl00_ContentPlaceHolder1_lbNewUser")
+	@FindBy(id = "ctl00_ContentPlaceHolder1_lbNewUser")
 	public WebElement new_user_button;
-	@FindBy(linkText="Admin Dashboard") WebElement to_admin_dashboard;
-	
+	@FindBy(linkText = "Admin Dashboard")
+	WebElement to_admin_dashboard;
+	@FindBy(id = "ctl00_ContentPlaceHolder1_txtSearch") WebElement filter_search_user_input;
+	@FindBy(id = "ctl00_ContentPlaceHolder1_btnSearch") WebElement filter_search_button;
+
 	public void clickOnNewUser() throws InterruptedException {
-		for(int i=0; i<10; i++) {
+		for (int i = 0; i < 10; i++) {
 			try {
 				new_user_button.click();
 				System.out.println("Clicked on new user button.");
@@ -51,23 +54,23 @@ public class ManageAdhocUsersPage extends Page {
 				Thread.sleep(1000);
 			}
 		}
-		
+
 	}
-//back to admin dash board
-	public void toAdminDashBoard() throws InterruptedException
-{
-	to_admin_dashboard.click();
-	Thread.sleep(2000);
-}
-	///create new user
-	public void createNewUser(String name,CreateNewUserWindow create_new_user_window) throws InterruptedException
-	{
-	
+
+	// back to admin dash board
+	public void toAdminDashBoard() throws InterruptedException {
+		to_admin_dashboard.click();
+		Thread.sleep(2000);
+	}
+
+	/// create new user
+	public void createNewUser(String name, CreateNewUserWindow create_new_user_window) throws InterruptedException {
+
 		// 3. Click on create course href link
 		driver.switchTo().frame(0);
 		Thread.sleep(4000);
 		clickOnNewUser();
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 
 		create_new_user_window.createNewUser(name, name, "abc@com.com", "111", "111");
 		Thread.sleep(1000);
@@ -78,6 +81,26 @@ public class ManageAdhocUsersPage extends Page {
 		} catch (Exception msg) {
 
 		}
+	}
+	
+	// This function get username and search for it
+	public void searchForTargetUser(String username_to_search) throws InterruptedException {
+		getIntoFrame(0);
+		waitForVisibility(filter_search_user_input);
+		sendKeysToWebElementInput(filter_search_user_input, username_to_search);
+		
+		try{
+			filter_search_button.click();
+			System.out.println("Searched for target username: " + username_to_search);
+			ATUReports.add("Searched for target username: " + username_to_search, "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			exitInnerFrame();
+		} catch(Exception msg) {
+			System.out.println("Fail to search for target username: " + username_to_search);
+			ATUReports.add("Searched for target username: " + username_to_search, "True.", "False.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+		
 	}
 
 }

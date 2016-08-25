@@ -2,44 +2,28 @@ package com.automation.main;
 
 //precondition student first course must have recordings in recordings tab as well as in student recordings tab
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
+import java.text.DateFormat;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCourseLevelUI {
@@ -78,8 +62,9 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		driver.manage().window().maximize();
-	
+		
+		//ATUReports.setWebDriver(driver);
+		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -94,7 +79,11 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
 		
-		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCourseLevelUI at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCourseLevelUI at " + DateToStr,
+		 "Starting the test: TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCourseLevelUI at " + DateToStr, LogAs.PASSED, null);
 		
 	}
 	
@@ -141,7 +130,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		top_bar_helper.verifyTargetTextInSearchField("Search in this course...");
 		
 		// 6. Hover over the search field with the mouse pointer - A hint is displayed to the user: "Search in this course...".
-		top_bar_helper.moveToElement(top_bar_helper.search_box_field, driver).perform();
+		top_bar_helper.moveToElementAndPerform(top_bar_helper.search_box_field, driver);
 		top_bar_helper.verifyWebElementHaveTargetAttributeTitle(top_bar_helper.search_box_field, "Search in this course...");
 		Thread.sleep(1000);
 		
@@ -149,10 +138,10 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		top_bar_helper.search_box_field.click();
 		
 		// Get information about first chapter
-		record.first_recording_title.click();
+		record.clickOnRecordingTitleInIndex(1);
 		Thread.sleep(1000);
 		String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
-		
+		//String first_chapter_title =  driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a/div[2]/p[2]")).getText();	
 		String header_default_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
 		
 		// 8. Search the first chapter from the recording that we mentioned in the preconditions and press ENTER.
@@ -162,6 +151,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		search_page.verifyLoadingSpinnerImage();
 		
 		search_page.waitUntilSpinnerImageDisappear();
+		search_page.exitInnerFrame();
 		
 		// 8.2. The header is displayed with the default color and the logo at the top left cornner of the UI page.
 		String header_search_page_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
@@ -211,7 +201,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		// 9. Hover over the chapter icon.
 		Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
-		search_page.moveToElement(search_page.video_wrap_link_to_focus_list.get(0), driver).perform();
+		search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
 		Thread.sleep(2000);
 		
 		// 9.1. The chapter icon become a bit bigger in size.
@@ -261,9 +251,13 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		// 17. Change the name of the first chapter from the recording that we mentioned in the preconditions.
 		Thread.sleep(3000);
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		Thread.sleep(500);
+		
+		
 		record.clickOnRecordingTaskThenEditRecording();
+		
+		
 		Thread.sleep(2000);
 		
 		Date date = new Date();
@@ -285,6 +279,10 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		top_bar_helper.searchForTargetText(first_chapter_title);
 		search_page.waitUntilSpinnerImageDisappear();
 		search_page.verifySearchResultIsEmpty();
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
 		
 	}
 }

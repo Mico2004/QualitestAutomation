@@ -3,15 +3,18 @@ package com.automation.main;
 import java.awt.List;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import atu.testng.reports.ATUReports;
+import atu.testng.reports.logging.LogAs;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 public class TC17367VerifySortingOfCoursesInMoveWindowOfProctoringRecordings {
 	// Set Property for ATU Reporter Configuration
@@ -38,13 +41,20 @@ public class TC17367VerifySortingOfCoursesInMoveWindowOfProctoringRecordings {
 				try {
 					
             		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-					driver.manage().window().maximize();
+					
 
 					tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 					record = PageFactory.initElements(driver, RecordingHelperPage.class);
 					copy = PageFactory.initElements(driver, CopyMenu.class);
 					player_page = PageFactory.initElements(driver, PlayerPage.class);
+					
+					 Date curDate = new Date();
+					 String DateToStr = DateFormat.getInstance().format(curDate);
+					 System.out.println("Starting the test: TC17367VerifySortingOfCoursesInMoveWindowOfProctoringRecordings at " + DateToStr);
+					 ATUReports.add("Message window.", "Starting the test: TC17367VerifySortingOfCoursesInMoveWindowOfProctoringRecordings at " + DateToStr,
+					 "Starting the test: TC17367VerifySortingOfCoursesInMoveWindowOfProctoringRecordings at " + DateToStr, LogAs.PASSED, null);	
+					
 				} catch (Exception e) {
 					/// ATUReports.add("Fail Step", LogAs.FAILED, new
 					/// CaptureScreen(ScreenshotOf.DESKTOP));
@@ -74,15 +84,14 @@ public class TC17367VerifySortingOfCoursesInMoveWindowOfProctoringRecordings {
 				Thread.sleep(2000);
 				//5.select check box
 			
-		        record.checkbox.click();
+		        record.getCheckbox().click();
 				///6.select move menu
 		        record.clickOnRecordingTaskThenMove();
 		        //7.verify courses are displayed in alphabetical order
 				record.verifyRecordingSortedByTitle(copy.getCourseList());///verify sorted by title
 				
-				// Quit browser
-				driver.quit();
-			
+				System.out.println("Done.");
+				ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 			}
 			
 			// description = "get courses list"

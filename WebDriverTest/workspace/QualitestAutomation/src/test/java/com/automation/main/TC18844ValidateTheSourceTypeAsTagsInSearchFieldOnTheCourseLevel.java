@@ -1,17 +1,15 @@
 package com.automation.main;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import java.text.DateFormat;
+import javax.naming.InitialContext;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,14 +17,11 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
@@ -62,16 +57,15 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 	@BeforeClass
 	public void setup() {
 
+		driver = new FirefoxDriver();
+//		
+	
+		initTest();
 		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
-		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
-
-
+		
+	}
+	
+	public void initTest() {
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -93,11 +87,12 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		tag_menu = PageFactory.initElements(driver, TagMenu.class);
 		
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel at " + DateToStr,
+		 "Starting the test: TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel at " + DateToStr, LogAs.PASSED, null);	
 	}
-	
 	
 	@AfterClass
 	public void closeBroswer() {
@@ -145,12 +140,24 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 		record.clickOnRecordingTaskThenTag();
 		
 		tag_menu.deleteAllExistingTags();
+
 		tag_menu.createNewTag(tags_for_search);
+		
+		
 		Thread.sleep(1000);
 		tag_menu.clickOnApplyButton();
 		Thread.sleep(1000);
 		
 		top_bar_helper.clickOnSignOut();
+		
+		driver.quit();
+		
+		
+		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		
+		initTest();
+		initializeCourseObject();
+		loadPage();
 		
 		
 		// Looping for Student, Guest and ADMIN
@@ -226,7 +233,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 			
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
-			search_page.moveToElement(search_page.video_wrap_link_to_focus_list.get(0), driver).perform();
+			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
 			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
@@ -257,6 +264,11 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 			// 8. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+		
+			for(String handler: driver.getWindowHandles()) {
+				driver.switchTo().window(handler);
+				break;
+			}
 			
 			// 9. Click on title of the tags.
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
@@ -268,6 +280,11 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			
+			for(String handler: driver.getWindowHandles()) {
+				driver.switchTo().window(handler);
+				break;
+			}
+			
 			// 11. Click on the recording title of the chapter.
 			search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
 			
@@ -277,10 +294,30 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 			// 12. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			Thread.sleep(1000);
+			
+			for(String handler: driver.getWindowHandles()) {
+				driver.switchTo().window(handler);
+				break;
+			}
 
 			if(type_of_user==0) {
-				// 13. Click on the course name in the breadcrumb.
-				search_page.clickBackToCourseInBreadcrumbs();
+				driver.quit();
+				
+				
+				driver = new FirefoxDriver();
+//				
+				initTest();
+				initializeCourseObject();
+				loadPage();
+				tegrity.loginCourses("User1");
+				
+				course.selectCourseThatStartingWith(current_course);
+				
+				
+				
+//				// 13. Click on the course name in the breadcrumb.
+//				search_page.clickBackToCourseInBreadcrumbs();
 				
 				// 14. Change the name of the tag from the recording that we mentioned in the preconditions.
 				// Edit tags for first recording
@@ -302,6 +339,20 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 				tag_menu.clickOnApplyButton();
 				Thread.sleep(1000);
 				
+				
+				driver.quit();
+				
+				
+				driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+				
+				initTest();
+				initializeCourseObject();
+				loadPage();
+				tegrity.loginCourses("User1");
+				
+				course.selectCourseThatStartingWith(current_course);
+				
+				
 				// 15. Search the tag with the new name.
 				top_bar_helper.searchForTargetText(new_tags_for_search);
 				search_page.verifyLoadingSpinnerImage();
@@ -321,17 +372,20 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 			
 			// Signout
 			top_bar_helper.clickOnSignOut();
+		
 		}
 		
 		// Unpublic Ab course1. 
-		tegrity.loginCourses("User1");
-						
+		tegrity.loginCourses("User1");				
 		course.selectCourseThatStartingWith("Ab");
 						
 		// Make course public
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
-		course_settings_page.clickOnOkButton();		
+		course_settings_page.clickOnOkButton();	
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
 }

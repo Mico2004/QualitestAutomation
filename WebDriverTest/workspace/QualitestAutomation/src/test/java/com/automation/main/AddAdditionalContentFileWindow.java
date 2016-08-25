@@ -6,9 +6,12 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.sql.Driver;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -72,18 +75,28 @@ public class AddAdditionalContentFileWindow extends Page {
 
 		// from here you can use as it wrote
 		path = System.getProperty("user.dir") + path;
-		StringSelection ss = new StringSelection(path);
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-		// native key strokes for CTRL, V and ENTER keys
-		Robot robot = new Robot();
-
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(5000);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
+		select_upload_additional_file.sendKeys(path);
+//		StringSelection ss = new StringSelection(path);	
+//		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+//		
+//		Robot robot = new Robot();
+//		//focus on the webpage
+//		robot.mouseMove(35,35);
+//
+//		clickElement(driver.findElement(By.id("main")));
+//		//clickElement(driver.findElement(By.id("main")));
+//		Actions builder = new Actions(driver);
+//		builder.moveToElement(driver.findElement(By.id("main"))).build().perform();
+//
+//		builder.click();
+//		// native key strokes for CTRL, V and ENTER keys
+//		robot.keyPress(KeyEvent.VK_CONTROL);
+//		robot.keyPress(KeyEvent.VK_V);
+//		robot.keyRelease(KeyEvent.VK_V);
+//		robot.keyRelease(KeyEvent.VK_CONTROL);
+//		Thread.sleep(5000);
+//		robot.keyPress(KeyEvent.VK_ENTER);
+//		robot.keyRelease(KeyEvent.VK_ENTER);
 
 	}
 
@@ -91,7 +104,7 @@ public class AddAdditionalContentFileWindow extends Page {
 	public void uploadFileByPath(String path, ConfirmationMenu confirm) throws Exception {
 
 		String file_name = path.substring(51);
-		select_upload_additional_file.click();
+		//select_upload_additional_file.click();
 		Thread.sleep(2000);
 
 		uploadFile(path);
@@ -154,21 +167,21 @@ public class AddAdditionalContentFileWindow extends Page {
 	}
 
 	// verify location of progressbar
-	public void verifyProgressBar() {
-		waitForVisibility(upload_progress_bar);
-	Point bar=upload_progress_bar.getLocation();
-	
-		if ((upload_progress_bar.isDisplayed())&&(bar.getY()>select_upload_additional_file.getLocation().getY())) {
-			System.out.println("progress bar is visible+location is ok");
-			ATUReports.add("progress bar is visible+location is ok", LogAs.PASSED, null);
-
-			Assert.assertTrue(true);
-			return;
+	public void verifyProgressBar() throws InterruptedException {
+		Thread.sleep(500);
+		if(isElemenetDisplayed(By.xpath("//*[@id=\"addFileWindow\"]/form/div[1]/div[4]"))){
+			Point bar=upload_progress_bar.getLocation();
+			Point Upload = select_upload_additional_file.getLocation();
+			if (bar.getY()>Upload.getY()) {
+				System.out.println("progress bar is visible+location is ok");
+				ATUReports.add("progress bar is visible+location is ok", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+				return;
+			}
 		} else {
-			System.out.println("progress bar is not visible");
-			ATUReports.add("progress bar is not visible", LogAs.FAILED, null);
-
-			Assert.assertTrue(false);
+			System.out.println("progress bar is not Displayed");
+			ATUReports.add("progress bar is not Displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
 		}
 	}
 
@@ -176,7 +189,7 @@ public class AddAdditionalContentFileWindow extends Page {
 	public void toUploadFileByPathThenSelectFile(String path) throws Exception {
 
 		String file_name = path.substring(51);
-		select_upload_additional_file.click();
+		//select_upload_additional_file.click();
 		Thread.sleep(2000);
 
 		uploadFile(path);
@@ -209,8 +222,9 @@ public class AddAdditionalContentFileWindow extends Page {
 		public void uploadFileByPathNoConfirmation(String path) throws Exception {
 
 			String file_name = path.substring(51);
-			select_upload_additional_file.click();
+			//select_upload_additional_file.click();
 			Thread.sleep(2000);
+
 
 			uploadFile(path);
 			Thread.sleep(2000);
@@ -258,10 +272,11 @@ public class AddAdditionalContentFileWindow extends Page {
 		public void verifyUploadedPercent()
 		{
 			String percent=uploaded_percent.getText();
-		System.out.println(percent);	
+			System.out.println(percent);	
 			String number=percent.substring(10,percent.length()-1);
-		System.out.println(number);			
-			if ((percent.contains("Uploaded: "))&&(percent.contains("%"))&&(Integer.valueOf(number)>=0)&&(Integer.valueOf(number)<=100)) {
+			System.out.println(number);	
+			double numberInt= Double.valueOf(number);
+			if ((percent.contains("Uploaded: "))&&(percent.contains("%"))&&(numberInt>=0)&&(numberInt<=100)) {
 				System.out.println("uploaded percent is verified");
 				ATUReports.add("uploaded percent is verified", LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -313,11 +328,12 @@ public class AddAdditionalContentFileWindow extends Page {
 	///	Verify that upload section consists information as descripted
 		public void  verifyUploadInfoCorrectness(String file_name)
 		{
+			verifyUploadEstimatedTime();
 			verifyUploadSpeed();
 			verifyUploadedPercent();
 			verifyUploadFileName(file_name);
 			verifyUploadElapsedTime();
-			verifyUploadEstimatedTime();
+			
 		
 		}
 		

@@ -1,28 +1,13 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.security.PublicKey;
-import java.security.spec.ECPrivateKeySpec;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.function.IntToDoubleFunction;
-
-import org.junit.experimental.theories.Theories;
-import org.omg.CORBA.StringHolder;
-import org.omg.Messaging.SyncScopeHelper;
+import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -30,24 +15,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import com.sun.jna.win32.W32APITypeMapper;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
-import junitx.util.ResourceManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
@@ -84,41 +59,53 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
 	public ManageAdhocUsersPage mange_adhoc_users_page;
 	public CreateNewUserWindow create_new_user_window;
+	public AdvancedServiceSettingsPage advanced_service_settings_page;
 
 	@BeforeClass
 	public void setup() {
 
-		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		 driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		 
+		 
+		 ATUReports.setWebDriver(driver);
 
-		// driver.manage().window().maximize();
-		ATUReports.setWebDriver(driver);
+			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
-		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
+			record = PageFactory.initElements(driver, RecordingHelperPage.class);
+			copy = PageFactory.initElements(driver, CopyMenu.class);
+			
+			mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
+			create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
 
-		record = PageFactory.initElements(driver, RecordingHelperPage.class);
-		copy = PageFactory.initElements(driver, CopyMenu.class);
+			confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+
+			move_window = PageFactory.initElements(driver, MoveWindow.class);
+
+			delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
+
+			course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
+
+			admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
+
+			top_bar_helper = PageFactory.initElements(driver, TopBarHelper.class);
+			admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
+			manage_adhoc_courses_enrollments_page = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
+			mange_ad_hoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
+			advanced_service_settings_page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
+			
+			//DesiredCapabilities capabilities = null;
+			//capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
+			
+			wait = new WebDriverWait(driver, 30);
+		 
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents at " + DateToStr,
+		 "Starting the test: TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents at " + DateToStr, LogAs.PASSED, null);	
 		
-		mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
-		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
-
-		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-
-		move_window = PageFactory.initElements(driver, MoveWindow.class);
-
-		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
-
-		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
-
-		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
-
-		top_bar_helper = PageFactory.initElements(driver, TopBarHelper.class);
-		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
-		manage_adhoc_courses_enrollments_page = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
-		mange_ad_hoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
-		
-		wait = new WebDriverWait(driver, 30);
 	}
-
+	
 	
 	 @AfterClass
 	 public void closeBroswer() {
@@ -146,11 +133,20 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		// 2. Logout.
 		top_bar_helper.clickOnSignOut();
 		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		
 		// 3. Create a new user, don't enroll him to any courses.
-		 tegrity.loginAdmin("Admin");	
+		tegrity.loginAdmin("Admin");	
 		 
 		 Thread.sleep(1000);
 		 wait.until(ExpectedConditions.visibilityOf(admin_dashboard_page.users_submenu.get(1)));
+		 
+//		 admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
+//		 
+//		 advanced_service_settings_page.disableEulaCheckboxAndClickOk(confirm_menu);
+//		 
+//		 wait.until(ExpectedConditions.visibilityOf(admin_dashboard_page.users_submenu.get(1)));
+		 	 
 		 admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 		 
 		 Date date = new Date();
@@ -171,8 +167,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		 mange_adhoc_users_page.clickOnNewUser();
 			
 		 create_new_user_window.createNewUser(temp_student_user_name, temp_student_user_name, "abc@com.com", "111", "111");
-	
-	
+		 
 		
 		 for(String window: driver.getWindowHandles()) {
 		 	driver.switchTo().window(window);
@@ -204,6 +199,8 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		// 6. Sign out.
 		top_bar_helper.clickOnSignOut();
 		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		
 		// 7. Enroll this USER as STUDENT to any course.
 		tegrity.loginAdmin("Admin");	
 		 
@@ -222,6 +219,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 				 Thread.sleep(1000);
 			 }
 		 }
+		 
 		 
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(instructor_public_course);
@@ -264,7 +262,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 			
 		top_bar_helper.clickOnSignOut();
 		
-		
+
 		// 8. Login as STUDENT.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCoursesByParameter(temp_student_user_name);// log in courses page
@@ -273,11 +271,11 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		// 9. Verify that private course is not displayed.
 		// 10. Open the following URL - https://<UNIVERSITYURL/api/courses/active.
 		// 11. Make sure there is NO course with true in the <IsPrivate> tag.
-		course.goToAPICoursesActive();
+		course.goToAPICoursesActive(temp_student_user_name,1);
 		Thread.sleep(1000);
 		course.veriftyThatNoCourseSetIsPrivateAsTrueInAPICourseActive();
 		
-	
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 			
-
 }}

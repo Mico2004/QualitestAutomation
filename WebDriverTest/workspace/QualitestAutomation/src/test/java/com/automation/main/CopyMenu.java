@@ -10,7 +10,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -50,7 +53,7 @@ public class CopyMenu extends Page {
 	@FindBy(id = "CancelButton")
 	WebElement CancelButton;
 	String[] copy_course_list;// string of courses name
-	@FindBy(xpath = "//*[@id=\"courseListSelect\"]/option[2]")
+	@FindBy(xpath = "//*[@id=\"courseListSelect\"]/option[1]")
 	WebElement first_course_on_the_list;
 	@FindBy(id = "CancelButton")
 	WebElement cancel_button;
@@ -65,16 +68,19 @@ public class CopyMenu extends Page {
 	// This function clicks on copy button of copy menu
 	public void clickOnCopyButton() throws InterruptedException {
 		try {
+			wait.until(ExpectedConditions.visibilityOf(copy_button));
 			copy_button.click();
 			System.out.println("Clicked on copy button");
 			ATUReports.add("Clicked on copy button", LogAs.PASSED, null);
 			Assert.assertTrue(true);
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("CopyButton")));
+			
 		} catch (Exception e) {
 			System.out.println("Fail click on copy button");
 			ATUReports.add("Fail click on copy button", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(500);
+
 	}
 
 	// This function go over all course in copy menu select them.
@@ -104,6 +110,7 @@ public class CopyMenu extends Page {
 	// This function clicks on cancel button of copy menu
 	public void clickOnCancelButton(RecordingHelperPage rec) throws InterruptedException {
 		try {
+			Thread.sleep(1000);
 			rec.clickElement(this.cancel_button);
 			System.out.println("Clicked on cancel button");
 			ATUReports.add("Clicked on cancel button.", LogAs.PASSED, null);
@@ -134,10 +141,10 @@ public class CopyMenu extends Page {
 	// then it return true if it success, and false otherwise.
 	public boolean selectTargetCourseFromCourseList(String target_course_name) throws InterruptedException {
 
-		waitForVisibility(first_course_on_the_list);
-
 		String selected_course = null;
-
+		wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.visibilityOf(first_course_on_the_list));
+		
 		for (int i = 0; i < course_list.size(); i++) {
 			selected_course = course_list.get(i).getText();
 			if (selected_course.equals(target_course_name)) {
@@ -173,7 +180,7 @@ public class CopyMenu extends Page {
 			selectedCourse = course_list.get(i).getText();
 			if (!selectedCourse.equals(currentCourse)) {
 				clickElement(course_list.get(i));
-				ATUReports.add("course is selected from course list.", LogAs.PASSED, null);
+				ATUReports.add("the course: " + selectedCourse + " is selected from course list.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				break;
 			}
@@ -254,7 +261,7 @@ public class CopyMenu extends Page {
 	}
 	
 	///verify element location such as buttons,search courses
- public void verifyCopyMenuElementsLocation()
+    public void verifyCopyMenuElementsLocation()
  {
 	    Point searchbox = search_box.getLocation();
 		Point searchboxbutton = search_button.getLocation();
@@ -274,7 +281,6 @@ public class CopyMenu extends Page {
 	}
  }
 
-
 	// verify copy menu background color is same as recording background color
 	public void verifyMenuColor(RecordingHelperPage rec) throws InterruptedException {
 		Thread.sleep(2000);
@@ -293,19 +299,23 @@ public class CopyMenu extends Page {
 	// "verify info text"
 	public void verifyInfoText() throws InterruptedException {
 		String infotext = "Choose course(s) that you would like to copy your selected recording(s) to.";
+		try {
 		if (infotext.equals(info_text.getText())) {
 			System.out.println("info text verified");
 			ATUReports.add("info text verified", LogAs.PASSED, null);
+			Assert.assertTrue(true);
 		} else {
 			System.out.println("info text unverified");
-			ATUReports.add("info text unverified", LogAs.FAILED, null);
+			ATUReports.add("failed info text unverified", LogAs.FAILED, null);
+			Assert.assertTrue(false);
 		}
+		} catch(Exception e) {
+			System.out.println("failed to get the info text");
+			ATUReports.add("failed to get the info text", LogAs.FAILED, null);
+			Assert.assertTrue(false);
 
-		Assert.assertEquals(infotext, info_text.getText());
-
+		}
 	}
-
-
 
 	// This function clicks on search button of copy menu
 	public void clickOnSearchButton() throws InterruptedException {
@@ -525,7 +535,9 @@ public class CopyMenu extends Page {
 		for (int i = 0; i < course_list.size(); i++) {
 			if (target_courses.contains(course_list.get(i).getText())) {
 				course_list_text.add(course_list.get(i).getText());
-				course_list.get(i).sendKeys(Keys.LEFT_CONTROL);
+				if(!(driver instanceof ChromeDriver)) {
+					course_list.get(i).sendKeys(Keys.LEFT_CONTROL);
+				}
 				clickElement(course_list.get(i));
 			}
 		}
@@ -545,7 +557,7 @@ public class CopyMenu extends Page {
 	
 	
 	// This function clicks on copy button of copy menu
-		public void clickOnCopyButton(RecordingHelperPage rec) throws InterruptedException {	
+	public void clickOnCopyButton(RecordingHelperPage rec) throws InterruptedException {	
 			try {
 				copy_button.click();
 				ATUReports.add("Clicked on copy button.", LogAs.PASSED, null);
@@ -559,9 +571,25 @@ public class CopyMenu extends Page {
 			Thread.sleep(3000);
 		}
 		
+		
+	public void ClickOnCopyButtonWithoutChoosingCourse() throws InterruptedException {
+			try {
+				wait.until(ExpectedConditions.elementToBeClickable(copy_button));
+				copy_button.click();
+				System.out.println("Get the Error Dailog manu.");
+				ATUReports.add("Get the Error Dailog manu.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			} catch(Exception e) {
+				ATUReports.add("Failed To get the Error Dailog.", LogAs.FAILED, null);
+				System.out.println("Failed To get the Error Dailog menu.");
+				Assert.assertTrue(false);
+			}
+			Thread.sleep(3000);
+		}
+		
 		// This function get course name, and select it course from course list,
 				// then it return true if it success, and false otherwise.
-				public boolean selectTargetCourseFromCourseListThatStartWith(String name_starting_with) throws InterruptedException {
+	public boolean selectTargetCourseFromCourseListThatStartWith(String name_starting_with) throws InterruptedException {
 
 					waitForVisibility(first_course_on_the_list);
 

@@ -4,14 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-
+import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -65,7 +64,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+		
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -96,14 +95,27 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		help_page = PageFactory.initElements(driver, HelpPage.class);
 		run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC21597ValidateMenuBarsFunctionlityAsGuestat " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC21597ValidateMenuBarsFunctionlityAsGuest at " + DateToStr,
+		 "Starting the test: TC21597ValidateMenuBarsFunctionlityAsGuest at " + DateToStr, LogAs.PASSED, null);	
+		
 	}
 
+	@AfterClass
+	public void closeBroswer() {		
+		this.driver.quit();
+	}
+	
 	@Test
-	public void test21578() throws Exception {
+	public void TC21597() throws Exception {
 		//// pre condition
 
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		String university_url=tegrity.pageUrl.substring(0, tegrity.pageUrl.length()-8);
 		/// 2.login as user1
 		tegrity.loginCourses("User1");
 		course.waitForVisibility(course.active_courses_tab_button);
@@ -118,7 +130,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		}
 		/// 6.Enable 'Require first time users to accept a EULA' in 'Advance
 		/// Servie Settings' as admin
-		course_settings.sign_out.click();
+		course_settings.signOut();
 		tegrity.waitForVisibility(tegrity.usernamefield);
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
@@ -179,7 +191,8 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		}
 		course.waitForVisibility(driver.findElement(By.id("PublicCourses")));
 		/// 6.check redirected to public courses tab
-		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/ul/li[3]")).getAttribute("class").equals("active")) {
+		//if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/ul/li[3]")).getAttribute("class").equals("active")) {
+		if (driver.findElement(By.cssSelector(".active>#PublicCourses")).isDisplayed()) {
 			System.out.println("redirected to public courses tab");
 			ATUReports.add("redirected to public courses tab", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -251,7 +264,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 			ATUReports.add("elements location is not ok", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		/// 17.Hover over "Help" work item menue
+		/// 17.Hover over "Help" work item menu
 		course.verifyHelpElements();
 
 		//// Click on "Online help" menu item.
@@ -267,7 +280,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 				driver.switchTo().window(windowHandle);
 				help_page = PageFactory.initElements(driver, HelpPage.class);
 
-				help_page.verifyHelpPageUrl(driver);
+				help_page.verifyHelpPageUrlGuest(driver);
 				driver.close(); // closing child window
 				driver.switchTo().window(parentWindow); // cntrl to parent
 														// window
@@ -290,20 +303,20 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		support_window.waitForVisibility(support_window.support_window_info);
 		support_window.verifySupportWindow();
 		// 23.fill window with email,user name and comments and then send
-		support_window.fillSupportWindowAndSend("rndsupport@tegrity.com", "Admin", subject, comment,
+		support_window.fillSupportWindowAndSend("rndsupport@tegrity.com", "Guest", subject, comment,
 				confirm_menu, driver);
 		/// 24.Open your email account
 		driver.get("http://www.fakemailgenerator.com/#/armyspy.com/Snothe/");
-		email_login.LoginEmailPage();
+		email_login.LoginEmailPage("qualitestmcgrawhill");
 		/// 25.Make sure you recived the email
         Thread.sleep(3000);
        
-		email_inbox.verifyEmailMessage(driver, subject, sender, comment);
+		email_inbox.verifyEmailMessage(driver, subject, sender, comment,"Guest (rndsupport@tegrity.com)");
 		/// 26.Click on "Run diagnostic" menu item.
 		// 1.load page
 		Thread.sleep(3000);
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-Thread.sleep(3000);
+		Thread.sleep(3000);
 		/// 2.LoginHelperPage as guest
 	//	tegrity.loginAsguest();
 		/// 26.1 Click on "run diagnostics" menu item
@@ -318,7 +331,7 @@ Thread.sleep(3000);
 				driver.switchTo().window(windowHandle);
 				run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 
-				run_diagnostics.verifyRunDiagnosticsPage();
+				run_diagnostics.verifyRunDiagnosticsPage(university_url);
 				driver.close(); // closing child window
 				driver.switchTo().window(parentWindow); // cntrl to parent
 														// window
@@ -328,13 +341,13 @@ Thread.sleep(3000);
 		course.selectCourseThatStartingWith("abc");
 		record.waitForVisibility(record.sign_out);
 		// 29.clcik on additional content tab
-	////	record.clickOnAdditionContentTab();
+	    ////record.clickOnAdditionContentTab();
 
 		// 30.verify top bar menu
 		/// record.verifyTopBarMenu();
 		// 31.click recording and play it
 		record.clickOnRecordingsTab();
-		record.waitForVisibility(record.checkbox);
+		record.waitForVisibility(record.getCheckbox());
 		Thread.sleep(3000);
 		record.verifyFirstExpandableRecording();
 		Thread.sleep(2000);
@@ -353,6 +366,8 @@ Thread.sleep(3000);
 		course.waitForVisibility(course.sign_out);
 		// 32.verify top bar menu
 		/// record.verifyTopBarMenu();
-		 driver.quit();
+
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 }

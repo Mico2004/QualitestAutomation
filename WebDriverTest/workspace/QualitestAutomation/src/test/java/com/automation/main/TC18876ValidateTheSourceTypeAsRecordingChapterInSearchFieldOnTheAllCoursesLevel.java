@@ -1,14 +1,11 @@
 package com.automation.main;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -20,7 +17,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -72,7 +68,9 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-
+		//
+		//ATUReports.setWebDriver(driver);
+		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -94,7 +92,11 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		
-		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAllCoursesLevel at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAllCoursesLevel at " + DateToStr,
+		 "Starting the test: TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAllCoursesLevel at " + DateToStr, LogAs.PASSED, null);
 		
 	}
 	
@@ -215,7 +217,8 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			Thread.sleep(2000);
-				
+			search_page.exitInnerFrame();
+			
 			// 7. Click on title of the chapter.
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
 				
@@ -226,6 +229,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			Thread.sleep(2000);
+			search_page.exitInnerFrame();
 				
 			// 9. Click on the recording title of the chapter.
 			search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
@@ -237,6 +241,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			Thread.sleep(2000);
+			search_page.exitInnerFrame();
 				
 			// 11. Click on the course name in the breadcrumb.
 			search_page.clickBackToCoursesInBreadcrumbs();
@@ -255,9 +260,9 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
 
-		
-		
-		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
 		
 	}
 }

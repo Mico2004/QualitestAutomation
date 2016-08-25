@@ -1,47 +1,24 @@
 package com.automation.main;
 
 
-import java.awt.AWTException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
 
-import org.apache.bcel.generic.IF_ACMPEQ;
-import org.eclipse.jetty.io.ClientConnectionFactory.Helper;
-import org.junit.AfterClass;
-import org.omg.Messaging.SyncScopeHelper;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
+
+import org.testng.annotations.AfterClass;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junit.textui.TestRunner;
-import junitx.util.PropertyManager;
+import java.text.DateFormat;
+import java.util.Date;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
@@ -76,7 +53,7 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		//driver.manage().window().maximize();
+		//
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -91,15 +68,20 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 		publish_window = PageFactory.initElements(driver, PublishWindow.class);
 		top_bar_helper = PageFactory.initElements(driver, TopBarHelper.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
-		
-		
+	
 		wait = new WebDriverWait(driver, 30);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC22033ValidateFunctionalityPublishWindowAsAdmin at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC22033ValidateFunctionalityPublishWindowAsAdmin at " + DateToStr,
+		 "Starting the test: TC22033ValidateFunctionalityPublishWindowAsAdmin at " + DateToStr, LogAs.PASSED, null);
 	}
 	
-//	@org.testng.annotations.AfterClass
-//	public void quitBroswer() {
-//		this.driver.quit();
-//	}
+	@AfterClass
+	public void quitBrowser() {
+		driver.quit();
+	}
 
 	private void setAuthorInfoForReports() {
 		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
@@ -209,11 +191,12 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			record.clickOnTargetRecordingAndOpenItsPlayback(checked_recording_name);
 			player_page.verifyTimeBufferStatusForXSec(10);
 			
-			driver.navigate().back();
-			Thread.sleep(1000);
+//			driver.navigate().back();
+//			Thread.sleep(1000);
 			
 			
 			// 20. Sign out.
+			top_bar_helper.exitInnerFrame();
 			top_bar_helper.clickOnSignOut();
 			
 			// 21. Login as a different user who is enrolled as a STUDENT to the same course (User4).
@@ -245,26 +228,20 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			record.clickOnTargetRecordingAndOpenItsPlayback(checked_recording_name);
 			player_page.verifyTimeBufferStatusForXSec(10);
 			
-			driver.navigate().back();
-			Thread.sleep(1000);
+//			for(String handler: driver.getWindowHandles()) {
+//				driver.switchTo().window(handler);
+//				break;
+//			}
 			
 			// 30. Logout.
+			top_bar_helper.exitInnerFrame();
 			top_bar_helper.clickOnSignOut();
+			
 		}
-		
-		// 31. Quit the browser.
-		driver.quit();
-		
-		
-		
-		
 
-		
-		
-		
+			System.out.println("Done.");
+			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 	}
-	
-
 
 }

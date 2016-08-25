@@ -60,7 +60,7 @@ try{
 	driver=new FirefoxDriver();
 	ATUReports.add("selected browser type", LogAs.PASSED,
 				  new CaptureScreen( ScreenshotOf.DESKTOP));
-		driver.manage().window().maximize();
+		
 		
 		
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -144,14 +144,14 @@ catch(Exception e)
 	@Test(dependsOnMethods = "verifyDisabledMenu", description = "verify  1 check boxes checkboxes are selected")
 	public void verifyCheckedboxSelected() throws InterruptedException {
 
-		record.ClickOneCheckedboxSelected(record.checkbox);
+		record.ClickOneCheckedboxSelected(record.getCheckbox());
 
 	}
 
 	@Test(dependsOnMethods = "verifyCheckedboxSelected", description = "verify  many check boxes checkboxes are selected")
 	public void verifyCheckedboxNotSelected() throws InterruptedException {
 
-		record.ClickOneCheckedboxNotSelected(record.checkbox);
+		record.ClickOneCheckedboxNotSelected(record.getCheckbox());
 	}
 
 	@Test(dependsOnMethods = "verifyCheckedboxNotSelected", description = "verify  many check boxes checkboxes are selected") //
