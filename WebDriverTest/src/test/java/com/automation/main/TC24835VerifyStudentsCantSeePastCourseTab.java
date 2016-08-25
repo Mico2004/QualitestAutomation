@@ -48,7 +48,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 	public PlayerPage player_page;
 	String instructor1;
 	String instructor2;
-	List<String> for_enroll;
+	List<String> list_superuser;
 	List<String> list_student;
 
 	@BeforeClass
@@ -107,10 +107,10 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		past_course_student = "StudentPastCourse" + sdf.format(date);
 		past_course_student2 = "StudentPastCourse2" + sdf.format(date);
-		for_enroll = new ArrayList<String>();
+		list_superuser = new ArrayList<String>();
 		list_student = new ArrayList<String>();
 
-		for_enroll.add(superuser);
+		list_superuser.add(superuser);
 		list_student.add(student);
 
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -164,7 +164,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		}
 		Thread.sleep(3000);
 		// enroll instructors
-		mange_adhoc_course_enrollments.enrollInstructorToCourse(past_course_student, for_enroll,
+		mange_adhoc_course_enrollments.enrollInstructorToCourse(past_course_student, list_superuser,
 				mangage_adhoc_courses_membership_window);
 		Thread.sleep(5000);
 
@@ -183,7 +183,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		}
 		Thread.sleep(3000);
 		// enroll instructors
-		mange_adhoc_course_enrollments.enrollInstructorToCourse(past_course_student2, for_enroll,
+		mange_adhoc_course_enrollments.enrollInstructorToCourse(past_course_student2, list_superuser,
 				mangage_adhoc_courses_membership_window);
 		Thread.sleep(5000);
 
@@ -203,46 +203,16 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 
 		admin_dashboard_page.signOut();
 		Thread.sleep(3000);
-		tegrity.loginCourses("SuperUser");
-		Thread.sleep(3000);
-		course.selectCourseThatStartingWith("BankValidRecordings");
+		tegrity.loginCourses("SuperUser");				
 		initializeCourseObject();
-		Thread.sleep(3000);
-		record.clickOnRecordingsTab();
-		Thread.sleep(2000);
-		record.getCheckbox().click();/// only one recording
-		Thread.sleep(2000);
-		///copy courses to first past course
-		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(3000);
-		copy.selectTargetCourseFromCourseList(past_course_student);
-		Thread.sleep(2000);
-		copy.clickOnCopyButton();
-		Thread.sleep(2000);
-		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(2000);
-		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
-		Thread.sleep(2000);
-		for (String window : driver.getWindowHandles()) {
-			driver.switchTo().window(window);
-			break;
-		}
 		
-		///copy to second course
-		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(3000);
-		copy.selectTargetCourseFromCourseList(past_course_student2);
+		
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", past_course_student, 0, record, copy, confirm_menu);
 		Thread.sleep(2000);
-		copy.clickOnCopyButton();
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", past_course_student2, 0, record, copy, confirm_menu);
 		Thread.sleep(2000);
-		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(2000);
-		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
-		Thread.sleep(2000);
-		for (String window : driver.getWindowHandles()) {
-			driver.switchTo().window(window);
-			break;
-		}
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record); 
+		Thread.sleep(2000);		
 		record.sign_out.click();
 		tegrity.waitForVisibility(tegrity.button_login);
 		driver.quit();

@@ -51,6 +51,8 @@ public class ConfirmationMenu extends Page {
 
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {		
+		Thread.sleep(2000);
+		if(!isAlertPresent()){
 		waitForVisibility(alertWindow);
 		Thread.sleep(1000);
 		waitForVisibility(ok_button);
@@ -62,8 +64,13 @@ public class ConfirmationMenu extends Page {
 		} catch (Exception e) {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
-		}
+		} 
 		Thread.sleep(3000);
+		}else{
+			ATUReports.add("Additional content file path wasn't found, check resources.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+			
+		}
 	}
 
 	// This function clicks on ok button of copy menu

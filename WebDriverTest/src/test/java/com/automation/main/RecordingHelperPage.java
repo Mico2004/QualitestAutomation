@@ -2365,7 +2365,7 @@ public String getSecondRecordingTitleTest() {
 		Thread.sleep(2000);
 		select_upload_additional_file.click();
 		Thread.sleep(2000);
-		String fullPathToFile = "C:\\Users\\Mickael\\git\\Qualite stAutomation\\WebDriverTest\\src\\test\\resources\\additional_file.txt"; 
+		String fullPathToFile = "C:\\Users\\Mickael\\git\\QualitestAutomation\\WebDriverTest\\src\\test\\resources\\additional_file.txt"; 
 		uploadFile(fullPathToFile);
 		Thread.sleep(2000);
 		add_additional_file_button.click();
@@ -2411,7 +2411,7 @@ public String getSecondRecordingTitleTest() {
 	public void uploadFile(String path) throws Exception {
 
 		// from here you can use as it wrote
-		path = System.getProperty("user.dir") + path;
+		//path = System.getProperty("user.dir") + "\\FileName.txt";
 		System.out.println(path);
 		StringSelection ss = new StringSelection(path);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
@@ -4423,6 +4423,7 @@ public String getSecondRecordingTitleTest() {
 		Assert.assertTrue(true);
 	}
 	public boolean tabExists(int tab){
+		System.out.println("tabexist1");
 		waitForVisibility(recordings_tab);
 		boolean exist=false;
 		if(tab==1)

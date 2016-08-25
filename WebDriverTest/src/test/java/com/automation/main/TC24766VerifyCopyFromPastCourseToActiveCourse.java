@@ -341,11 +341,10 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 				course.clickOnActiveCoursesTabButton();
 				Thread.sleep(2000);
 				course.selectCourseThatStartingWith("Ab");
-				Thread.sleep(3000);
 				///13.Verfiy the copied recording was moved correctly
 			  record.clickOnRecordingsTab();
 				record.convertRecordingsListToNames();
-			int index=record.recording_list_names.indexOf(recordings);
+			int index=record.recording_list_names.indexOf(recordings)+1;
 			if((record.recording_list_names.contains(recordings))&&(record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(index, "Error", 1)))	
 			{
 				System.out.println("Verfiy the copied recording was moved correctly");
@@ -381,7 +380,7 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 			Thread.sleep(2000);
 		//16.Verfiy the copied aditional content was moved correctly
 			record.convertAdditionalContantListToNames();
-			 index=record.additional_content_list_names.indexOf(additional_content);
+			 index=record.additional_content_list_names.indexOf(additional_content)+1;
 			if((record.additional_content_list_names.contains(additional_content))&&(record.checkThatAdditionalContentFileStatusTargetIndexIsNotXWithTimeout(index, "Error", 1)))	
 			{
 				System.out.println("Verfiy the copied aditional content was moved correctly");
@@ -400,7 +399,7 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 			record.clickOnStudentRecordingsTab();
 			Thread.sleep(2000);
 			record.convertRecordingsListToNames();
-			 index=record.recording_list_names.indexOf(student_recording);
+			 index=record.recording_list_names.indexOf(student_recording)+1;
 			if((record.recording_list_names.contains(student_recording))&&(record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(index, "Error", 1)))	
 			{
 				System.out.println("Verfiy the copied student recording was moved correctly");

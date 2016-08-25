@@ -10,7 +10,6 @@
     <classes>
       <class name="com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings">
         <methods>
-          <include name="loginCourses"/>
           <include name="setup"/>
           <include name="closeBroswer"/>
         </methods>

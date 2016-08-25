@@ -6,20 +6,21 @@
     
 			
 					<!-- Past courses -->
-					<!-- Local pretest 					-->	
-				    <class name="com.automation.main.TestSuitePreSetCopyRecordingsAndPastCourse" />
+					<!-- Local pretest -->	
+				<!--	 <class name="com.automation.main.Testing" /> 	-->	
+					<class name="com.automation.main.TestSuitePreSetCopyRecordingsAndPastCourse" /> 
 					<!--  Static Test Cases  -->	
-    	  	 		<class name="com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself" />
+   	  	 	 		<class name="com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself" />
     	  	 		<class name="com.automation.main.TC17906TryToCopyFromActiveCourseToPastCourse" />
     	  	 		<class name="com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse" />
     	  	 		<class name="com.automation.main.TC17942VerifyTheDisabledTasks" />
-    	  	 		<class name="com.automation.main.TC17903VerifyTheUI" />
+    	  	 		<class name="com.automation.main.TC17903VerifyTheUI" /> 
     	  	 		<class name="com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse" />
-    	  	 		<class name="com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus" />
+    	  	 		<class name="com.automation.main.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus" /> 
     	  	 		<!--  Dynamic Test Cases  -->		
-    	  	 		<class name="com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings" />
+    	            <class name="com.automation.main.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings" />
     	  	 		<class name="com.automation.main.TC17938VerifyPastCourseWithTestRecording" />
-    	  	 		<class name="com.automation.main.TC17933VerifypastCourseWithStudentRecording" />
+    	  	 		<class name="com.automation.main.TC17933VerifypastCourseWithStudentRecording" /> 
     	  	 		<class name="com.automation.main.TC17929And17941And17944PastCourses" />
     	  	 		<class name="com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab" />  
     	  	 		

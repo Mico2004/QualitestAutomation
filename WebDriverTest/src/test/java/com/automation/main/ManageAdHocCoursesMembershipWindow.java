@@ -9,6 +9,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -204,11 +205,18 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			
 			System.out.println("Fail to select  user from user list.");
 			return false;
-		} catch (Exception msg) {
+		}catch(UnhandledAlertException ex){
+			System.out.println("Alert pop up");
+			clickOkInAlertIfPresent();
+			return false;
+		}
+			
+		catch (Exception msg) {
 			System.out.println("Fail to select  user from user list.");
 			return false;
 		}
 	}
+	
 	
 	
 	//////this function verifies if instructor is enrolled to course or not expected variable give us the condition it should be(enrolled or un enrolled)
@@ -297,15 +305,25 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	
 	// This function wait x second until instructor enroll to a course
 	public void waitMaxTimeUntillInstructorEnrollToCourse(String instructor_name) throws InterruptedException {
-		
+		try{
 		for (int i=0; i<60;i++) {
 			if(selectIrUserFromUserList(instructor_elements_list, instructor_name)) {
 				break;
 			} else {
 				Thread.sleep(1000);
 			}
-		}
-	}
+		}	
+		}catch(UnhandledAlertException ex){
+			System.out.println("Alert pop up");
+			clickOkInAlertIfPresent();
+			
+		}			
+			
+			
+			
+			}
+		
+	
 	
 	// This function wait x second until student enroll to a course
 	public void waitMaxTimeUntillStudentEnrollToCourse(String student_name) throws InterruptedException {
