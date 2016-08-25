@@ -132,24 +132,24 @@ public class TestSuitePreSetCopyRecordings {
 //		course.waitForVisibility(course.active_courses_tab_button);
 		Thread.sleep(2000);
 		
-		course.deleteAllRecordingsInCourseStartWith("ad", 0, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("ad", 1, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("ad", 2, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("ad", 3, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("Ab", 2, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("Ab", 3, record, delete_menu);
 
 		
 		
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "ad", 3, record, copy,
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 3, record, copy,
 				confirm_menu);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "ad", 0, record, copy,
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 0, record, copy,
 				confirm_menu);
 		// Copy all additional content from Bank Valid Recording to course
 		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "ad", 1, record, copy,
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 1, record, copy,
 				confirm_menu);
 		// Copy all student recordings from Bank Valid Recording to course
 		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "ad", 2, record, copy,
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 2, record, copy,
 				confirm_menu);
 		
 		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);

@@ -242,8 +242,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		mangage_adhoc_courses_membership_window.ok_button.click();
 		Thread.sleep(2000);
 		System.out.println("d4");
-		waitForAlert(60);
-		clickOkInAlertIfPresent();		
+		driver.switchTo().alert().accept();
 		System.out.println("clicked on ok");
 		System.out.println("d5");
 		ATUReports.add("Enrolled "+user+"to course "+course+" as student ","user enrolled to course","user enrolled to course", LogAs.PASSED, null);

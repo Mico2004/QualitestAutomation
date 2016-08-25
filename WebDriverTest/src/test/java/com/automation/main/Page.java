@@ -196,20 +196,24 @@ public class Page {
 			/// Log.();
 		}
 	}
+<<<<<<< HEAD
 
 	public Action moveToElementAndPerform(WebElement element, WebDriver driver)
 			throws NoSuchElementException, InterruptedException {
+=======
+	
+	public void moveToElementAndPerform(WebElement element, WebDriver driver) throws NoSuchElementException, InterruptedException {
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 		waitForVisibility(element);
 		try {
+			
 			Actions builder = new Actions(driver);
-			Action move_to = builder.moveToElement(element).build();
-			Thread.sleep(1500);
-			move_to.perform();
-			return move_to;
+			builder.moveToElement(element).build().perform();
+			Thread.sleep(3000);
+			builder.moveToElement(element).build().perform();
 
 		} catch (NoSuchElementException e) {
-			return null;
-			/// Log.();
+			
 		}
 	}
 

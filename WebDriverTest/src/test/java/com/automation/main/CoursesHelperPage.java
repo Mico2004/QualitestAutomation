@@ -258,6 +258,7 @@ public class CoursesHelperPage extends Page {
 		while (!clicked && i < 50) {
 			try {
 				i++;
+<<<<<<< HEAD
 				wait.until(ExpectedConditions.elementToBeClickable(sCourse2));
 				System.out.println("s1");
 				wait.until(ExpectedConditions.visibilityOf(sCourse2));
@@ -267,10 +268,31 @@ public class CoursesHelperPage extends Page {
 
 			} catch (Exception ex) {
 				clicked = handlesClickIsNotVisible(sCourse2);
+=======
+				wait.until(ExpectedConditions.elementToBeClickable(sCourse2));			
+				wait.until(ExpectedConditions.visibilityOf(sCourse2));
+				sCourse2.click();
+				wait.until(ExpectedConditions.titleContains("Tegrity - " + destination_course_name));
+				clicked=true;
+				
+		} catch(Exception ex) {	
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 				try {
+<<<<<<< HEAD
 					Thread.sleep(5000);
 					System.out.println("s3.1");
 				} catch (InterruptedException e) {
+=======
+		  	
+				WebElement wi = driver.findElement(By.xpath("//*[@id='main']"));
+				Actions builder = new Actions(driver);
+				builder.sendKeys(Keys.PAGE_DOWN);
+				builder.moveToElement(wi).build().perform();
+				courses_heading.click();
+				builder.click();
+				Thread.sleep(1000);
+				} catch (Exception e) {
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -462,9 +484,13 @@ public class CoursesHelperPage extends Page {
 			record_helper_page.clickOnTestsTab();
 		}
 		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
-		Thread.sleep(2000);
 		wait.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
+<<<<<<< HEAD
 		// record_helper_page.checkAllCheckBox();
+=======
+		//record_helper_page.checkAllCheckBox();
+		Thread.sleep(2000);
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 		while (!record_helper_page.check_all_checkbox.isSelected()) {
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 			new WebDriverWait(driver, 10)
@@ -478,13 +504,10 @@ public class CoursesHelperPage extends Page {
 		} else if (type_of_recordings == 1) {
 			record_helper_page.clickOnContentTaskThenCopy();
 		}
-		System.out.println("Copy1");
+
 		copy_menu.selectTargetCourseFromCourseList(destination_course_name);
-		System.out.println("Copy2");
 		copy_menu.clickOnCopyButton();
-		System.out.println("Copy3");
 		confirmation_menu.clickOnOkButton();
-		System.out.println("Copy4");
 
 		/*
 		 * if ((type_of_recordings == 0) || (type_of_recordings == 2) ||
@@ -617,6 +640,7 @@ public class CoursesHelperPage extends Page {
 
 				recording_helper_page.checkExistenceOfNonDeleteItemsStatusInAdditionalContent();
 			}
+<<<<<<< HEAD
 			while (!recording_helper_page.check_all_checkbox.isSelected()) {
 				new WebDriverWait(driver, 10)
 						.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
@@ -628,6 +652,15 @@ public class CoursesHelperPage extends Page {
 			// Thread.sleep(2000);
 			// wait.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
 			// recording_helper_page.check_all_checkbox.click();
+=======
+			
+			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
+			clickElement(recording_helper_page.check_all_checkbox);
+			Thread.sleep(500);
+			//Thread.sleep(2000);
+			//wait.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
+			//recording_helper_page.check_all_checkbox.click();
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 			try {
 				if (type_of_recordings == 1) {
 					recording_helper_page.clickOnContentTaskThenDelete();

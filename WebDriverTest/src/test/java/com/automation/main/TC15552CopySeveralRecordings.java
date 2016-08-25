@@ -204,7 +204,7 @@ public class TC15552CopySeveralRecordings {
 		}
 		
 		// 14. Recording's status change after the copying is done
-		record.checkStatusExistenceForMaxTTime(300);
+		record.checkStatusExistenceForMaxTTime(600);
 				
 			
 		// 15. Get first course recording list.

@@ -63,7 +63,7 @@ public class DeleteMenu extends Page {
 	public void clickOnDeleteButton() throws InterruptedException {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(delete_button));
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			delete_button.click();
 			System.out.println("Clicked on delete button.");
 			ATUReports.add("Click Delete button", "Clicked on delete button", "Clicked on delete button", LogAs.PASSED,null);
@@ -75,7 +75,7 @@ public class DeleteMenu extends Page {
 					LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 	}
 
 	public List<String> getRecordingList() {

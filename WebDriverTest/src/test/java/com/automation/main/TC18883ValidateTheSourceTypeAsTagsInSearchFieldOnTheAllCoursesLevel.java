@@ -196,7 +196,7 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(tags_for_search, "Source: Tags");
 			
 			// 4.9. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 5. Click on the tags icon.
 			search_page.clickOnChapterIconOfRecordingInTargetIndex(1);

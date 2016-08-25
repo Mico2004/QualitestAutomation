@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -65,7 +66,9 @@ public class TestSuitePreRecordingsAdmin {
 		// capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
 		//
 
-		driver = new FirefoxDriver();
+		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 
 		
 		ATUReports.setWebDriver(driver);

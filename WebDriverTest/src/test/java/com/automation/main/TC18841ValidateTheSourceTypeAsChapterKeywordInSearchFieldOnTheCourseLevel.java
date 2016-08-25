@@ -127,7 +127,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 	{
 		// 1. Validate there is manual chapter keyword in this chapter. Search input specified shall be case-insensitive.
 		
-		//tegrity.loginCourses("User1");
+		tegrity.loginCourses("User1");
 		initializeCourseObject();
 		
 		String current_course =course.selectCourseThatStartingWith("Ab");
@@ -147,10 +147,10 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		record.selectIndexCheckBox(listOfNames.size());
 		record.clickOnRecordingTaskThenEditRecording();
 		
-		//edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_chapter_keyword);
+		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_chapter_keyword);
 		
-		//record.signOut();
-		//Thread.sleep(3000);
+		record.signOut();
+		Thread.sleep(3000);
 		
 		
 		// Looping for Student, Guest and ADMIN

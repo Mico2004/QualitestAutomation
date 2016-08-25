@@ -41,8 +41,6 @@ public class ConfirmationMenu extends Page {
 	WebElement correct_error_msg_body;
 	@FindBy(xpath = "//*[@id=\"alertWindow\"]/div[1]/p")
 	WebElement add_additional_content_confirm_note;
-	@FindBy(id = "alertWindow")
-	WebElement alertWindow;
 
 	public ConfirmationMenu(WebDriver browser) {
 		super(browser);
@@ -50,15 +48,18 @@ public class ConfirmationMenu extends Page {
 	}
 
 	// This function clicks on ok button of copy menu
+<<<<<<< HEAD
 	public void clickOnOkButton() throws InterruptedException {		
 		Thread.sleep(2000);
 		if(!isAlertPresent()){
 		waitForVisibility(alertWindow);
 		Thread.sleep(1000);
+=======
+	public void clickOnOkButton() throws InterruptedException {
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 		waitForVisibility(ok_button);
 		try {
 			ok_button.click();
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='alertWindow']/div[2]/button")));
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
@@ -375,7 +376,6 @@ public class ConfirmationMenu extends Page {
 		}
 		
 		try {
-			waitForVisibility(alertWindow);
 			String souce_page = driver.getPageSource();
 			if (!souce_page.contains("Edit Recording Properties")) {
 				System.out.println("Error window title is wrong.");

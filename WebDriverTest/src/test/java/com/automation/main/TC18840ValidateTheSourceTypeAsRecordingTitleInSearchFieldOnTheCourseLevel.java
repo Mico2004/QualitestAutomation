@@ -176,20 +176,20 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			
 		}
 		
-        //change to unique records names before the test starts	
-//		for(int index = 1 ; index<=4 ; index++) {
-//			
-//			record.selectIndexCheckBox(index);
-//			Date date = new Date();
-//			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
-//			String new_recording_name = "NewName" + sdf.format(date);
-//			
-//			record.toEditRecordingPropertiesMenu();
-//			edit_recording_properties_window.changeRecordingName(new_recording_name, confirm_menu);
-//			record.waitForVisibility(record.checkbox);
-//			record.unselectIndexCheckBox(index);
-//			
-//		}
+       // change to unique records names before the test starts	
+		for(int index = 1 ; index<=4 ; index++) {
+			
+			record.selectIndexCheckBox(index);
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
+			String new_recording_name = "NewName" + sdf.format(date);
+			
+			record.toEditRecordingPropertiesMenu();
+			edit_recording_properties_window.changeRecordingName(new_recording_name, confirm_menu);	
+			Thread.sleep(2000);
+			record.unselectIndexCheckBox(index);
+			
+		}
 		
         recording_list = record.getCourseRecordingList();
 		
@@ -228,6 +228,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 				course.selectCourseThatStartingWith(current_course);
 			} else {
 				// Click on "view course list" under "courses" section.
+				Thread.sleep(2000);
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
@@ -310,6 +311,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			// 8. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			Thread.sleep(2000);
 			
 			// 9. Click on title of the chapter.
@@ -321,6 +323,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			// 10. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			Thread.sleep(2000);
 			
 			// 11. Click on the recording title of the chapter.
@@ -332,6 +335,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			// 12. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
 			Thread.sleep(2000);
 			
 			if((type_of_user!=2) && (type_of_user!=1)) {
@@ -365,7 +369,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 				top_bar_helper.searchForTargetText(new_recording_name);
 				search_page.verifyLoadingSpinnerImage();
 				search_page.waitUntilSpinnerImageDisappear();
-				
+				search_page.exitInnerFrame();
 				// 15.1. The chapter is displayed with all the details that we mentioned.
 				search_page.verifyResultContainOneResultWithTargetTitle(new_recording_name);
 				
@@ -374,13 +378,13 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 				top_bar_helper.searchForTargetText(recording_title_for_the_test);
 				search_page.verifyLoadingSpinnerImage();
 				search_page.waitUntilSpinnerImageDisappear();
-				
+				search_page.exitInnerFrame();
 				// 16.1. The chapter is'nt displayed and ,the empty search results page shall be displayed.
 				search_page.verifySearchResultIsEmpty();
 			}
 			
 			// 17. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			record.signOut();;
 		}
 		
 		// Unpublic Ab course1. 

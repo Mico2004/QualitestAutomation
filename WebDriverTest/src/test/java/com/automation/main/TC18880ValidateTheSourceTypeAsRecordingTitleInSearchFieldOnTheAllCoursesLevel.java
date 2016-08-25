@@ -144,7 +144,8 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String recording_title_for_the_test = "NewRecordingName" + sdf.format(date);
-		record.selectIndexCheckBox(1);
+		
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.toEditRecordingPropertiesMenu();
 		edit_recording_properties_window.changeRecordingName(recording_title_for_the_test, confirm_menu);
 		Thread.sleep(2000);
@@ -198,8 +199,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(recording_title_for_the_test, "Source: Recording Title");
 			
 			// 5.9. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
-			
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();			
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
@@ -261,7 +261,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 			
 			search_page.exitInnerFrame();
 			// 17. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 		}
 		
 		// Unpublic Ab course1. 

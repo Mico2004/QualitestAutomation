@@ -292,7 +292,8 @@ public class RecordingHelperPage extends Page {
 						"There are recordings in target course, then it will delete them all.", LogAs.PASSED, null);
 						
 				checkAllCheckBox();
-				clickOnRecordingTaskThenDelete();				
+				clickOnRecordingTaskThenDelete();	
+				
 				delete_menu.clickOnDeleteButton();
 				wait.until(ExpectedConditions.visibilityOf(confirm_menu.ok_button));						
 				Thread.sleep(2000);
@@ -340,8 +341,7 @@ public class RecordingHelperPage extends Page {
 				System.out.println("There is no more status for any recording.");
 				ATUReports.add("There is no more status for any recording.", LogAs.PASSED, null);
 				System.out.println("after There is no more status for any recording.");
-				Assert.assertTrue(true);
-				
+				Assert.assertTrue(true);	
 				return;
 			}
 			System.out.println("Status Check iteration"+i);
@@ -386,15 +386,17 @@ public class RecordingHelperPage extends Page {
 		int i = 1;
 		System.out.println("Begin checkExistenceOfStatusInRecordings");
 		Thread.sleep(1000);
-		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {			    
+		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {			    		
+			i++;
+			if(isElemenetDisplayed(By.id(("RecordingStatus")+ Integer.toString(i)))){
 				WebElement recordStatus =getStaleElem(By.id("RecordingStatus"+ Integer.toString(i)), driver);
 				//wait.until(ExpectedConditions.visibilityOf(recordStatus));
 				String current_element = getTextFromWebElement(recordStatus);						
 						//recordStatus.getText();
 				if (!current_element.equals("")) {
 					return true;
-				}
-				i++; 
+				}		
+			   } 		
 			}
 		return false;
 	}
@@ -509,9 +511,9 @@ public String getSecondRecordingTitleTest() {
 			time_counter++;
 			Thread.sleep(1000);
 
-			if (time_counter > 60) {
-				System.out.println("Timeout - Being copied from still appears after 60 seconds");
-				ATUReports.add("Timeout - Being copied from still appears after 60 seconds", LogAs.FAILED, null);
+			if (time_counter > 80) {
+				System.out.println("Timeout - Being copied from still appears after 80 seconds");
+				ATUReports.add("Timeout - Being copied from still appears after 80 seconds", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 				return;
 			}
@@ -730,7 +732,7 @@ public String getSecondRecordingTitleTest() {
 		}
 
 		System.out.println("All recording checked.");
-		ATUReports.add("Select several recordings", "All recording checked", "All recording checked", LogAs.PASSED,
+		ATUReports.add("All recording checked.", "All recording checked", "All recording checked", LogAs.PASSED,
 				null);
 		Assert.assertTrue(true);
 
@@ -1894,9 +1896,9 @@ public String getSecondRecordingTitleTest() {
 				time_counter++;
 				Thread.sleep(1000);
 
-			if (time_counter > 240) {
-				System.out.println("Timeout - Being moved from still appears after 60 seconds");
-				ATUReports.add("Timeout - Being moved from still appears after 60 seconds", LogAs.FAILED, null);
+			if (time_counter > 260) {
+				System.out.println("Timeout - Being moved from still appears after 260 seconds");
+				ATUReports.add("Timeout - Being moved from still appears after 260 seconds", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 				return;
 			}
@@ -2365,7 +2367,9 @@ public String getSecondRecordingTitleTest() {
 		Thread.sleep(2000);
 		select_upload_additional_file.click();
 		Thread.sleep(2000);
-		String fullPathToFile = "C:\\Users\\Mickael\\git\\QualitestAutomation\\WebDriverTest\\src\\test\\resources\\additional_file.txt"; 
+		String fullPathToFile = "src\\test\\resources\\additional_file.txt"; // System.getProperty("user.dir")																										//// +
+																												//// "\\src\\main\\resources\\ImsImportDataCreation.xml";
+
 		uploadFile(fullPathToFile);
 		Thread.sleep(2000);
 		add_additional_file_button.click();
@@ -2471,7 +2475,6 @@ public String getSecondRecordingTitleTest() {
 	// menu)
 	public void clickOnRecordingsTab() {
 		try {
-			waitForVisibility(recordings_tab);
 			recordings_tab.click();
 			System.out.println("Clicked on recordings tab");
 			ATUReports.add("Clicked on recordings tab", LogAs.PASSED, null);
@@ -2839,7 +2842,12 @@ public String getSecondRecordingTitleTest() {
 	public void selectAdditionalContentByName(String additional_content_name) throws InterruptedException {
 
 		for (WebElement el : additional_content_list) {
+<<<<<<< HEAD
 			if ((el.getText().equals(additional_content_name))) {
+=======
+			if ((el.getText().equals(additional_content_name))) {
+
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 						WebElement recording = driver.findElement(By.linkText((additional_content_name)));
 						waitForVisibility(recording);
 						wait.until(ExpectedConditions.elementToBeClickable(recording));
@@ -4377,8 +4385,9 @@ public String getSecondRecordingTitleTest() {
 	}
 	
 	// This function go over all recording status and checks that recording status of type which available for delete that recordings
-	public void checkExistenceOfNonDeleteRecordingsStatusInRecordings() {
+	public void checkExistenceOfNonDeleteRecordingsStatusInRecordings() throws InterruptedException {
 		int i = 0;
+		Thread.sleep(1000);
 		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {
 			i++;
 			if(isElemenetDisplayed(By.id(("RecordingStatus")+ Integer.toString(i)))){

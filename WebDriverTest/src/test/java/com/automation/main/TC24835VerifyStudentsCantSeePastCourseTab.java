@@ -129,7 +129,6 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 
 		create_new_course_window.createNewCourse(past_course_student, past_course_student);
 		Thread.sleep(1000);
-		create_new_course_window.waitForAlert(60);
 		try {
 			driver.switchTo().alert().accept();
 
@@ -149,7 +148,6 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		Thread.sleep(3000);
 		create_new_course_window.createNewCourse(past_course_student2, past_course_student2);
 		Thread.sleep(1000);
-		create_new_course_window.waitForAlert(60);
 		try {
 			driver.switchTo().alert().accept();
 

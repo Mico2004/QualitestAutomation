@@ -203,7 +203,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 				}
 			}
 			
-			System.out.println("Fail to select  user from user list.");
+			System.out.println("The user isn't on the list.");
 			return false;
 		}catch(UnhandledAlertException ex){
 			System.out.println("Alert pop up");

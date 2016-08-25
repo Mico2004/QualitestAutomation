@@ -1,15 +1,9 @@
 package com.automation.main;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
+
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -89,8 +83,7 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
-
-		
+	
 	}
 	
 	
@@ -133,103 +126,15 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		// Upload for first recording target close catpion
 		Thread.sleep(2000);
 		List<String> listOfRecorders = record.getCourseRecordingList();
-		record.selectIndexCheckBox(4);
+		record.selectIndexCheckBox(listOfRecorders.size());
 		record.clickOnRecordingTaskThenEditRecording();
 		
-		for(int i=0; i<10; i++) {
-			try {
-				driver.switchTo().frame(0);
-				break;
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-		}
-		
-		for(int i=0; i<20; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					System.out.println("2222");
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-				
-		}
+		edit_recording.addCaptionSrtToFirstChapterRecording();
 		Thread.sleep(2000);
-		for(String window_handler: driver.getWindowHandles()) {
-			driver.switchTo().window(window_handler);
-			break;
-		}
-		
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
-		
-		Thread.sleep(2000);
-		
-//		driver.findElement(By.id("UploadFile")).click();
-//		driver.findElement(By.id("UploadFile")).click();
-//		driver.findElement(By.id("UploadFile")).click();
-//		driver.findElement(By.id("UploadFile")).click();
-////		driver.findElement(By.cssSelector(".jcf-button-content")).click();
-//		robot.keyPress(KeyEvent.VK_ENTER);
-//		robot.keyRelease(KeyEvent.VK_ENTER);
-//		Thread.sleep(3000);
-		// click on the upload link
-		// click on the upload link
-		WebElement element = driver.findElement(By.xpath(".//*[@id='AddCaptioningForm']/div[3]/span"));
-		Actions actions = new Actions(driver);
-		actions.moveToElement(element).click().perform();
-		
-		
-		Robot robot = new Robot();
-		robot.mouseMove(-100, 100);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		Thread.sleep(3000);
-		
-		String path = "C:\\WebDriverTest\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
-		
-		// from here you can use as it wrote
-//		path = System.getProperty("user.dir") + path;
-		StringSelection ss = new StringSelection(path);
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-		
-		// native key strokes for CTRL, V and ENTER keys
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(3000);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		
-		Thread.sleep(2000);
-		driver.findElement(By.id("AddCaptioning")).click();
-		Thread.sleep(1000);
-		
-		for(String window_handler: driver.getWindowHandles()) {
-			driver.switchTo().window(window_handler);
-			break;
-		}
-		
-		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
-			
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			if(ie.getText().contains("Success")){
-				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
-				break;
-			   }			
-			else Thread.sleep(3000);
-		}
-
+		record.exitInnerFrame();
 		String text_from_caption_for_test = "QualitestAutomationCaption";
 		record.signOut();
-		
-		
+			
 		// Looping for INSTRUCTOR, Student and Guest
 		for(int type_of_user = 0; type_of_user < 3; type_of_user++) {
 			if(type_of_user == 0) {
@@ -274,7 +179,7 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 			search_page.verifyThatSourceTitleInTheFormatSourceClosedCaption();
 			
 			// 4.9. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 5. Click on the Closed Caption icon.
 			search_page.clickOnChapterIconOfRecordingInTargetIndex(1);

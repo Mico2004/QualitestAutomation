@@ -57,18 +57,10 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 	@BeforeClass
 	public void setup() {
 
-		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
+	
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
- 		
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
@@ -123,9 +115,7 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 		initializeCourseObject();
 		
 		String current_course = course.validateThereIsRecordingInCourseStartWithIfThereIsNotCopyOneRecordingToThisCourse("Ab", "BankValid", record, copy, confirm_menu);
-		
-		
-		
+
 		// Get information about first chapter
 		course.selectCourseThatStartingWith("Ab");
 		record.first_recording_title.click();
@@ -155,7 +145,7 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 			
 			// 3. Click on "Detailed reports" from "Reports" drop dawn list.
 			top_bar_helper.clickOnReportThenWeekly();
-			
+			Thread.sleep(1000);
 			
 			// 4. Validate the search field is display at the top right of the UI page below the top navigation bar.
 			top_bar_helper.verifySearchFieldDisplayedAtTopRight();

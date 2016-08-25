@@ -31,7 +31,8 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
 
 	}
-	
+	public ManageAdhocCoursesEnrollmentsPage mange_adhoc_course_enrollments;
+	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
 	public EditRecordinPropertiesWindow edit_recording_properties_window;
 	public PlayerPage player_page;
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
@@ -80,9 +81,9 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		search_page = PageFactory.initElements(driver, SearchPage.class);
 		
 		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);
-		
+		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
-		
+		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
 		add_additional_content_link_window = PageFactory.initElements(driver, AddAdditionalContentLinkWindow.class);
 		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
@@ -100,9 +101,9 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	
 	
 	@AfterClass
-	//public void closeBroswer() {
-	//	driver.quit();
-	//}
+	public void closeBroswer() {
+		driver.quit();
+	}
 
 
 	// @Parameters({"web","title"}) in the future
@@ -123,22 +124,101 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws Exception
 	{
-		//pre test to the test 
-		//tegrity.loginAdmin("Admin");
-		//initializeCourseObject();
+		//pre test to unroll course from active courses to past courses 
 		
-		//Thread.sleep(1000);
-		//admin_dash_board_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments")
 		
+		// 1. getting the name of the past course
+		tegrity.loginCourses("SuperUser");
+		initializeCourseObject();
+			
+		String current_course = course.selectCourseThatStartingWith("PastCourseA");
+		System.out.println("The course that selected is: " + current_course);
+		Thread.sleep(1000); 
+		
+		// 2. move course from the bank to the past courses 
+		record.returnToCourseListPage();	
+		
+		//2.1 enter to the bank
+		course.selectCourseThatStartingWith("BankValid");
+		Thread.sleep(1000); 
+		
+		// 2.2 get to the student tab
+		record.clickOnStudentRecordingsTab();
+		Thread.sleep(1000); 
+		
+		// 2.3 select the first checkbox and enter to the copy menu
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.clickOnRecordingTaskThenCopy();
+		Thread.sleep(1000); 
+		
+		copy.selectTargetCourseFromCourseList(current_course);
+		Thread.sleep(1000); 
+		
+		// 2.4 select the copy button and wait for the record to move
+		copy.clickOnCopyButton();
+		Thread.sleep(1000); 
+	
+		// 2.5 click on the ok button
+		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
+		
+		record.checkStatusExistenceForMaxTTime(360);
+		Thread.sleep(1000); 
+		
+		record.signOut();
+		Thread.sleep(1000); 
+		
+		// 3. enter as admin and unroll the course 
+		tegrity.loginAdmin("Admin");
+		Thread.sleep(2000);
+		 
+		// 3.1 Click on course builder href link
+		admin_dash_board_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+	 	Thread.sleep(10000);
+	 		
+	 	// 3.2 Click on create course href link 
+	 	driver.switchTo().frame(0);
+	 		
+	 	// 3.3 Search target course name
+	 	mange_adhoc_course_enrollments.searchAndFilterCourses(current_course);
+	 	Thread.sleep(4000);
+	 			
+	 	// 3.4 Click on result first course (the only one) membership button
+	 	mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
+	 	Thread.sleep(2000);
+	 	
+	 	// 3.5 remove the instractour from the course 
+	 	mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list,"User1");
+	 	System.out.println("removed instructor 1");
+	 	Thread.sleep(1000);
+	 		
+	 	// 3.6 Add selected user to instructor list
+	 	mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
+	 	Thread.sleep(3000);   	
+	 
+	 	// 3.7 click on the ok button
+	 	mangage_adhoc_courses_membership_window.ok_button.click();
+	 	Thread.sleep(1000);
+	 	    
+	 	// 3.8 click on the alert
+	 	driver.switchTo().alert().accept();
+	 	Thread.sleep(2000);
+	 	
+	 	//3.9 switch to main
+	 	mangage_adhoc_courses_membership_window.exitInnerFrame();
+	 	record.signOut();
+		
+	 	/// end pre test
 		
 		// 1. Validate there is recording in past courses Tab. Search input specified shall be case-insensitive.
 		tegrity.loginCourses("User1");
 		
-		
 		course.clickOnPastCoursesTabButton();
 		Thread.sleep(1000);
 		
-		String current_course = course.selectCourseThatStartingWith("PastCourseA");
+		course.selectCourseThatStartingWith("PastCourseA");
+		Thread.sleep(1000);
+		
+		record.clickOnStudentRecordingsTab();
 		Thread.sleep(1000);
 		
 		// Get Recording Chapter information.

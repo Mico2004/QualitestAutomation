@@ -40,6 +40,7 @@ public class SearchPage extends Page {
 	@FindBy(css = ".search-course.ng-binding") List<WebElement> course_titles_list;
 	@FindBy(css = ".search-recording.ng-scope") List<WebElement> recording_titles_list;
 	@FindBy(css = ".search-recording.ng-scope>.ng-binding") List<WebElement> recording_link_titles_list;
+	@FindBy(xpath= ".//*[@id='main']/div[2]/div/div[2]/div/span[2]/a") WebElement search_first_record_title_name;
 	@FindBy(css = ".search-source.ng-binding") List<WebElement> source_titles_list;
 	@FindBy(css = ".video-wrap.linkToFocus") List<WebElement> video_wrap_link_to_focus_list;
 	@FindBy(css = ".linkToFocus") List<WebElement> link_icon_list;
@@ -283,8 +284,8 @@ public class SearchPage extends Page {
 	public void clickOnChapterTitleOfRecordingInTargetIndex(int index) throws InterruptedException {
 		for(int i=0; i<10; i++) {
 			try {
-				title_urls_list.get(index-1).click();
-				//title_first_chapter.click();
+				//title_urls_list.get(index-1).click();
+				title_first_chapter.click();
 				Thread.sleep(2000);
 				System.out.println("Clicked on target title recording in index: " + index);
 				ATUReports.add("Clicked on target title recording in index: " + index, "True.", "True.", LogAs.PASSED, null);

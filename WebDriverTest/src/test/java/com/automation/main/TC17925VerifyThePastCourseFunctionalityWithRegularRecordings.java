@@ -87,10 +87,10 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
-		System.out.println("Starting the test: TC17925VerifyThePastCourseFunctionalityWithRegularRecordings at " + DateToStr);
+		System.out.println("Starting the test: TC17925VerifyPastCourseRemovedWhenHasNoContent at " + DateToStr);
 		ATUReports.add("Message window.",
-				"Starting the test: TC17925VerifyThePastCourseFunctionalityWithRegularRecordings at " + DateToStr,
-				"Starting the test: TC17925VerifyThePastCourseFunctionalityWithRegularRecordings at " + DateToStr, LogAs.PASSED,
+				"Starting the test: TC17925VerifyPastCourseRemovedWhenHasNoContent at " + DateToStr,
+				"Starting the test: TC17925VerifyPastCourseRemovedWhenHasNoContent at " + DateToStr, LogAs.PASSED,
 				null);
 
 	}

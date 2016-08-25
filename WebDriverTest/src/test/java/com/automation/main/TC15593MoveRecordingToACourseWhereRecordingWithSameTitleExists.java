@@ -157,7 +157,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		
 		// Wait until the copy status will disspear, becuase if we will move + copy it will fail to move
-		record.checkStatusExistenceForMaxTTime(360);
+		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
 		
 		// 2.10. Click on "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
@@ -228,7 +228,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		// TODO: improve it by new function that checking target by index recording
 		// 10. After copying is finished, recording's status will disappear.
-		record.checkStatusExistenceForMaxTTime(360);
+		record.waitUntilFirstRecordingBeingMovedFromStatusDissaper();
 		
 		// 11. After moving is finished, recording will disappear from recordings list.
 		List<String> current_recording_list = record.getCourseRecordingList();
