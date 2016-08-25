@@ -55,17 +55,9 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 	@BeforeClass
 	public void setup() {
 
-		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
-//			
-//		driver=new InternetExplorerDriver(capability);
-//		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
-
-		
+	
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -211,7 +203,7 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		
 		// TODO: improve it by new function that checking target by index recording
 		// 10. After copying is finished, recording's status will disappear.
-		record.checkStatusExistenceForMaxTTime(180);
+		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
 //		record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(1, "Being copied from", 180);
 		
 		// 11. Click on "Courses" link at breadcrumbs.
@@ -246,10 +238,13 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 			Assert.assertTrue(false);
 		}
 		
-		// 14. Click on new recording's title.
+		// 14. wait for the record to finish moving/coping
+		record.checkStatusExistenceForMaxTTime(180);
+		
+		// 15. Click on new recording's title.
 		record.clickOnRecordingTitleInIndex(i);
 		
-		// 15. Click on any chapter. 
+		// 16. Click on any chapter. 
 		Thread.sleep(2000);
 		
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
@@ -263,8 +258,7 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		
 		//WebDriverWait w = new WebDriverWait(driver, 10);
 		
-		
-
+	
 		player_page.verifyTimeBufferStatusForXSec(10);
 		
 		System.out.println("Done.");

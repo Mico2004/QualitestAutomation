@@ -209,7 +209,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		search_page.verifySourceTitleDisplayInCorrectFormat();
 		
 		// 8.14. The next result display below the current result in case there is next result.
-		search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+		search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 		
 		// 9. Hover over the chapter icon.
 		Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
@@ -271,8 +271,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		Thread.sleep(2000);
 		
 		date = new Date();
-		String new_chapter_name = "newname" + sdf.format(date);
-		
+		String new_chapter_name = "newname" + sdf.format(date);	
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(new_chapter_name);
 		
 		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
