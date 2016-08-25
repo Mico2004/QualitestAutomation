@@ -29,6 +29,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -1606,11 +1607,16 @@ public String getSecondRecordingTitleTest() {
 	// menu)
 	public void clickOnAdditionContentTab() {
 		try {
+			Thread.sleep(1000);
+			waitForVisibility(additional_content_tab);
 			additional_content_tab.click();
 			System.out.println("Clicked on additional tab");
 			ATUReports.add("Clicked on additional tab", LogAs.PASSED, null);
 			Assert.assertTrue(true);
-		} catch (Exception msg) {
+		} catch (WebDriverException msg){
+			handlesClickIsNotVisible(additional_content_tab);
+			
+		}catch (Exception msg) {
 			System.out.println("Failed to click on additional tab. ERROR: " + msg);
 			ATUReports.add("Failed to click on additional tab. ERROR: " + msg, LogAs.FAILED, null);
 			Assert.assertTrue(false);
