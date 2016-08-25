@@ -2842,12 +2842,8 @@ public String getSecondRecordingTitleTest() {
 	public void selectAdditionalContentByName(String additional_content_name) throws InterruptedException {
 
 		for (WebElement el : additional_content_list) {
-<<<<<<< HEAD
-			if ((el.getText().equals(additional_content_name))) {
-=======
 			if ((el.getText().equals(additional_content_name))) {
 
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 						WebElement recording = driver.findElement(By.linkText((additional_content_name)));
 						waitForVisibility(recording);
 						wait.until(ExpectedConditions.elementToBeClickable(recording));

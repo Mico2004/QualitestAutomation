@@ -333,13 +333,7 @@ public class TC17929And17941And17944PastCourses {
 			driver.switchTo().window(window);
 			break;
 		}
-<<<<<<< HEAD
-		course.sign_out.click();*/
-//ss
-=======
 		course.sign_out.click();
-
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 		tegrity.loginCourses("SuperUser");
 		Thread.sleep(3000);
 		course.selectCourseThatStartingWith(PastTemp2Course);

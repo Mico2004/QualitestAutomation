@@ -12,11 +12,17 @@
         <methods>
           <include name="setup"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <include name="closeBroswer"/>
 =======
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
           <include name="loadPage"/>
           <include name="closeBroswer"/>
           <include name="loginCourses"/>
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+=======
 >>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
         </methods>
       </class> <!-- com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel -->

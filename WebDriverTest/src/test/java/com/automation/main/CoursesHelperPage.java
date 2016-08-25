@@ -244,31 +244,20 @@ public class CoursesHelperPage extends Page {
 	}
 
 	//// select course by name
-	public void selectCourseByName(final String destination_course_name) {
+	public void selectCourseByName(final String destination_course_name) {		
+		
+		boolean clicked=false;
+		int i=0;
 
-		boolean clicked = false;
-		int i = 0;
-
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));
-		System.out.println("wait wrapper");
-		WebElement element = driver.findElement(By.xpath("//a[contains(@title,'" + destination_course_name + "')]"));
-		System.out.println("Find Element text:" + element.getText() + "Find Element id:" + element.getAttribute("id"));
-		String id = element.getAttribute("id");
-		WebElement sCourse2 = driver.findElement(By.id(id));
-		while (!clicked && i < 50) {
-			try {
+	    wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));	
+	    System.out.println("wait wrapper");
+		WebElement element=driver.findElement(By.xpath("//a[contains(@title,'"+destination_course_name+"')]"));
+		System.out.println("Find Element text:"+element.getText()+"Find Element id:"+element.getAttribute("id"));
+		String id=element.getAttribute("id");	
+		WebElement sCourse2=driver.findElement(By.id(id));	 
+		while(!clicked && i<50){
+			try{				
 				i++;
-<<<<<<< HEAD
-				wait.until(ExpectedConditions.elementToBeClickable(sCourse2));
-				System.out.println("s1");
-				wait.until(ExpectedConditions.visibilityOf(sCourse2));
-				sCourse2.click();
-				System.out.println("s2");
-				clicked = true;
-
-			} catch (Exception ex) {
-				clicked = handlesClickIsNotVisible(sCourse2);
-=======
 				wait.until(ExpectedConditions.elementToBeClickable(sCourse2));			
 				wait.until(ExpectedConditions.visibilityOf(sCourse2));
 				sCourse2.click();
@@ -276,13 +265,7 @@ public class CoursesHelperPage extends Page {
 				clicked=true;
 				
 		} catch(Exception ex) {	
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 				try {
-<<<<<<< HEAD
-					Thread.sleep(5000);
-					System.out.println("s3.1");
-				} catch (InterruptedException e) {
-=======
 		  	
 				WebElement wi = driver.findElement(By.xpath("//*[@id='main']"));
 				Actions builder = new Actions(driver);
@@ -292,29 +275,12 @@ public class CoursesHelperPage extends Page {
 				builder.click();
 				Thread.sleep(1000);
 				} catch (Exception e) {
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				/*
-				 * try {
-				 * 
-				 * 
-				 * WebElement wi =
-				 * driver.findElement(By.xpath("//*[@id='main']")); Actions
-				 * builder = new Actions(driver);
-				 * 
-				 * //courses_heading.click();
-				 * 
-				 * builder.moveToElement(wi, 10, 25).click().build().perform();
-				 * 
-				 * System.out.println("s4"); builder.sendKeys(Keys.PAGE_DOWN);
-				 * builder.moveToElement(wi).build().perform(); builder.click();
-				 * System.out.println("s5"); Thread.sleep(1000); } catch
-				 * (Exception e) { // TODO Auto-generated catch block
-				 * e.printStackTrace(); System.out.println("s6"); }
-				 */
-			}
+
+			}	
+
 		}
 	}
 
@@ -485,12 +451,7 @@ public class CoursesHelperPage extends Page {
 		}
 		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 		wait.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
-<<<<<<< HEAD
-		// record_helper_page.checkAllCheckBox();
-=======
-		//record_helper_page.checkAllCheckBox();
 		Thread.sleep(2000);
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 		while (!record_helper_page.check_all_checkbox.isSelected()) {
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 			new WebDriverWait(driver, 10)
@@ -595,11 +556,11 @@ public class CoursesHelperPage extends Page {
 	public void deleteAllRecordingsInCourseStartWith(String course_name_start_with, int type_of_recordings,
 			RecordingHelperPage recording_helper_page, DeleteMenu delete_menu) throws InterruptedException {
 		selectCourseThatStartingWith(course_name_start_with);
+		
 
 		if (type_of_recordings == 1) {
 			try {
-				new WebDriverWait(driver, 5)
-						.until(ExpectedConditions.visibilityOf(recording_helper_page.additional_content_tab));
+				new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(recording_helper_page.additional_content_tab));
 				recording_helper_page.additional_content_tab.click();
 				System.out.println("Enter to the additional content tab.");
 				ATUReports.add("Enter to the additional content tab.", LogAs.PASSED, null);
@@ -612,7 +573,7 @@ public class CoursesHelperPage extends Page {
 		} else if (type_of_recordings == 2) {
 			try {
 				new WebDriverWait(driver, 5)
-						.until(ExpectedConditions.visibilityOf(recording_helper_page.student_recordings_tab));
+				.until(ExpectedConditions.visibilityOf(recording_helper_page.student_recordings_tab));				
 				recording_helper_page.student_recordings_tab.click();
 			} catch (Exception msg) {
 				System.out.println("There is no student recordings tab.");
@@ -621,7 +582,8 @@ public class CoursesHelperPage extends Page {
 			}
 		} else if (type_of_recordings == 3) {
 			try {
-				new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(recording_helper_page.tests_tab));
+				new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.visibilityOf(recording_helper_page.tests_tab));				
 				recording_helper_page.tests_tab.click();
 			} catch (Exception msg) {
 				System.out.println("There is no tests tab.");
@@ -634,33 +596,19 @@ public class CoursesHelperPage extends Page {
 			recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordings();
 			recording_helper_page.deleteAllRecordings(delete_menu);
 		} else if ((type_of_recordings == 1) || (type_of_recordings == 3)) {
-			if (type_of_recordings == 3) {
+			if(type_of_recordings == 3){
 				recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordings();
 			} else {
-
 				recording_helper_page.checkExistenceOfNonDeleteItemsStatusInAdditionalContent();
 			}
-<<<<<<< HEAD
-			while (!recording_helper_page.check_all_checkbox.isSelected()) {
-				new WebDriverWait(driver, 10)
-						.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
-				new WebDriverWait(driver, 10)
-						.until(ExpectedConditions.elementToBeClickable(recording_helper_page.check_all_checkbox));
-				clickElement(recording_helper_page.check_all_checkbox);
-				Thread.sleep(500);
-			}
-			// Thread.sleep(2000);
-			// wait.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
-			// recording_helper_page.check_all_checkbox.click();
-=======
 			
-			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
-			clickElement(recording_helper_page.check_all_checkbox);
+			new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
+			Thread.sleep(2000);
+			recording_helper_page.SelectOneCheckBoxOrVerifyAlreadySelected(recording_helper_page.check_all_checkbox);
 			Thread.sleep(500);
 			//Thread.sleep(2000);
 			//wait.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
 			//recording_helper_page.check_all_checkbox.click();
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 			try {
 				if (type_of_recordings == 1) {
 					recording_helper_page.clickOnContentTaskThenDelete();
@@ -679,6 +627,7 @@ public class CoursesHelperPage extends Page {
 		waitForVisibility(course_list.get(0));
 
 	}
+
 
 	// verify there is no past courses tab
 	public void verifyNoPastCoursesTab() {
