@@ -140,7 +140,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		// changing the first chapter
 		Thread.sleep(3000);
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 		Thread.sleep(1000);
 		//String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 		//String first_chapter_title =  driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a/div[2]/p[2]")).getText();	
@@ -150,7 +150,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-		String first_chapter_title = "newname" + sdf.format(date);
+		String first_chapter_title = "newname_newname_newname_newname_newname_newname_newname_newname_newname" + sdf.format(date);
 		
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(first_chapter_title);
 		
@@ -274,7 +274,6 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		String new_chapter_name = "newname" + sdf.format(date);	
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(new_chapter_name);
 		
-		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
 		Thread.sleep(2000);
 		
 		

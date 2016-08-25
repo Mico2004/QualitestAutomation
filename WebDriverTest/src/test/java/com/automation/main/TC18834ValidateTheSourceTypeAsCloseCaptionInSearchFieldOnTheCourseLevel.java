@@ -1,9 +1,6 @@
 package com.automation.main;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
+
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -12,8 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByClassName;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -63,12 +58,6 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 	@BeforeClass
 	public void setup() {
 
-		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
@@ -134,7 +123,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		initializeCourseObject();
 		
 		String current_course = course.selectCourseThatStartingWith("Ab");
-		//Mickaeltryadd a mickael try
+	
 		// Make course public
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
@@ -147,99 +136,9 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		
 		record.selectIndexCheckBox(listOfNames.size());		
 		record.clickOnRecordingTaskThenEditRecording();
-		// comment
-		for(int i=0; i<10; i++) {
-			try {
-				driver.switchTo().frame(0);
-				break;
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-		}
+	
+		edit_recording.addCaptionSrtToFirstChapterRecording();
 		
-		for(int i=0; i<20; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-				
-		}
-		
-		// exit player frame
-		record.exitInnerFrame();
-		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(4));
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
-		Thread.sleep(3000);
-		
-		// click on the upload link
-		WebElement element = driver.findElement(By.xpath(".//*[@id='AddCaptioningForm']/div[3]/span"));
-		Actions actions = new Actions(driver);
-		actions.moveToElement(element).click().perform();
-		
-		
-		Robot robot = new Robot();
-		robot.mouseMove(-100, 100);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		Thread.sleep(3000);
-		
-		String path = "C:\\WebDriverTest\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
-		
-		// from here you can use as it wrote
-//		path = System.getProperty("user.dir") + path;
-		StringSelection ss = new StringSelection(path);
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-		
-		// native key strokes for CTRL, V and ENTER keys
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(5000);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-
-		Thread.sleep(2000);
-		driver.findElement(By.id("AddCaptioning")).click();
-		//Thread.sleep(15000);
-			
-		for(String window_handler: driver.getWindowHandles()) {
-			driver.switchTo().window(window_handler);
-			break;
-		}
-		
-		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
-			
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			if(ie.getText().contains("Success")){
-				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
-				break;
-			   }			
-			else Thread.sleep(2000);
-		}
-		
-			
-//		for(int i=0; i<70; i++) {
-//			try {
-//				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-//					System.out.println("2222");
-//					break;
-//				} else {
-//					Thread.sleep(1000);
-//				}
-//			} catch (Exception e) {
-//				Thread.sleep(1000);
-//			}
-//				
-//		}
-		
-
 		Thread.sleep(5000);
 		String text_from_caption_for_test = "QualitestAutomationCaption";	
 		record.exitInnerFrame();
