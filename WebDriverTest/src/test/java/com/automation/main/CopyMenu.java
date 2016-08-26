@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -66,8 +67,8 @@ public class CopyMenu extends Page {
 	
 
 	// This function clicks on copy button of copy menu
-	public void clickOnCopyButton() throws InterruptedException {
-		try {
+	public void clickOnCopyButton() throws WebDriverException {
+				
 			System.out.println("Copy1");
 			wait.until(ExpectedConditions.visibilityOf(copy_button));
 			wait.until(ExpectedConditions.elementToBeClickable(copy_button));
@@ -76,13 +77,7 @@ public class CopyMenu extends Page {
 			System.out.println("Clicked on copy button");
 			ATUReports.add("Clicked on copy button", LogAs.PASSED, null);			
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("CopyButton")));
-			Assert.assertTrue(true);
-			
-		} catch (Exception e) {
-			System.out.println("Fail click on copy button" + e.getMessage());
-			ATUReports.add("Fail click on copy button","Button clicked" ,e.getMessage(),LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
+			Assert.assertTrue(true);	
 
 	}
 

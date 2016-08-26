@@ -141,6 +141,10 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		
 		
 		tegrity.loginAdmin("Admin");
+		
+		
+	Thread.sleep(4000);	
+		
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		for(int i=0; i<10; i++) {
 			try {
@@ -302,11 +306,11 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		course.verifyRecordingsStatusIsClear("PastCourseB", 0, record);
 		System.out.println("5"); 
 		Thread.sleep(4000);
-
-
-		tegrity.signOut();
-
-		tegrity.loginCourses("User1");
+			
+		
+		course.signOut();
+		System.out.println("6"); 
+		tegrity.loginCourses("User1");		
 		initializeCourseObject();	
 		Thread.sleep(2000);
 		course.selectCourseThatStartingWith("PastCourseA");	
