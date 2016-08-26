@@ -70,16 +70,17 @@ public class CopyMenu extends Page {
 		try {
 			System.out.println("Copy1");
 			wait.until(ExpectedConditions.visibilityOf(copy_button));
+			wait.until(ExpectedConditions.elementToBeClickable(copy_button));
 			System.out.println("Copy2");
 			copy_button.click();		
 			System.out.println("Clicked on copy button");
-			ATUReports.add("Clicked on copy button", LogAs.PASSED, null);
-			Assert.assertTrue(true);
+			ATUReports.add("Clicked on copy button", LogAs.PASSED, null);			
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("CopyButton")));
+			Assert.assertTrue(true);
 			
 		} catch (Exception e) {
-			System.out.println("Fail click on copy button");
-			ATUReports.add("Fail click on copy button", LogAs.FAILED, null);
+			System.out.println("Fail click on copy button" + e.getMessage());
+			ATUReports.add("Fail click on copy button","Button clicked" ,e.getMessage(),LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 
@@ -151,16 +152,16 @@ public class CopyMenu extends Page {
 			selected_course = course_list.get(i).getText();
 			if (selected_course.equals(target_course_name)) {
 				clickElement(course_list.get(i));
-				System.out.println("course is selected from course list: " + target_course_name);
-				ATUReports.add("course is selected from course list: " + target_course_name, LogAs.PASSED, null);
+				System.out.println("course is selected from Copy manu course list: " + target_course_name);
+				ATUReports.add("course is selected from Copy manu course list: " + target_course_name, LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				break;
 			}
 
 		}
 		if (selected_course == null) {
-			System.out.println("course is not selected from course list: " + target_course_name);
-			ATUReports.add("course is not selected from course list: " + target_course_name, LogAs.FAILED, null);
+			System.out.println("course is not selected from Copy manu course list: " + target_course_name);
+			ATUReports.add("course is not selected from Copy manu course list: " + target_course_name, LogAs.FAILED, null);
 			Assert.assertTrue(false);
 			return false;
 		}

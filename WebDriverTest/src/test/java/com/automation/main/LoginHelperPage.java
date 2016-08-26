@@ -120,7 +120,7 @@ public class LoginHelperPage extends Page {
 		if (driver.getCurrentUrl().contains("eula")) {
 			try {
 				eula_accept_button.click();
-				System.out.println("Clicked on accept EULT button");
+				System.out.println("Clicked on accept EULA button");
 			} catch (Exception msg) {
 				System.out.println("No EULA button.");
 			}

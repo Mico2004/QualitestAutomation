@@ -63,10 +63,10 @@ public class Page {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(element));
 			element.click();
-			System.out.println("Clicked on the element.");
-			ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
+			System.out.println("Clicked on "+element.getText()+" element");
+			ATUReports.add("Clicked on "+element.getText()+" element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED, null);
 		} catch (Exception msg) {
-
+			ATUReports.add("Clicked on "+element.getText()+" element", "Clicked succeeded..", "Clicked failed..", LogAs.FAILED, null);	
 		}
 
 	}
