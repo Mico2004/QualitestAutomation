@@ -773,6 +773,7 @@ public String getSecondRecordingTitleTest() {
 			return true;
 		}
 	}
+	
 
 	// This function clicks on coures link, and return to courses list page
 	public void returnToCourseListPage() throws InterruptedException {
@@ -1275,7 +1276,7 @@ public String getSecondRecordingTitleTest() {
 		           }
 		       }
 		       Thread.sleep(1000);
-		       if (first_video_recording.isDisplayed()) {
+		       if (isElemenetDisplayed(By.xpath("//*[@id=\"scrollableArea\"]/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a"))) {
 		           ATUReports.add("video recording was displayed", LogAs.PASSED, null);
 		           System.out.println("video recording was displayed");
 		           Assert.assertTrue(true);
@@ -2681,7 +2682,6 @@ public String getSecondRecordingTitleTest() {
 	// This function checks if Content Tasks button displyed. Return true if it
 	// is, and false otherwise
 	public boolean isContentTasksButtonDisplay() {
-			waitForVisibility(content_tasks_button);
 		if (content_tasks_button.isDisplayed()) {
 			return true;
 		} else {

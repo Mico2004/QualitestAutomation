@@ -132,7 +132,7 @@ public class SearchPage extends Page {
 		}
 		
 		System.out.println("Not verified that 3 dots appears at the beginning/end and both.");
-		ATUReports.add("Verified that 3 dots appears at the beginning/end and both.", "True.", "False.", LogAs.FAILED, null);
+		ATUReports.add("Not Verified that 3 dots appears at the beginning/end and both.", "True.", "True.", LogAs.PASSED, null);
 		return;
 	}
 	

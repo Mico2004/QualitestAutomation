@@ -175,7 +175,7 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 		
 		System.out.println("Target additional content for the test is: " + target_additional_content_for_the_test);
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		Thread.sleep(2000);
 		
 		

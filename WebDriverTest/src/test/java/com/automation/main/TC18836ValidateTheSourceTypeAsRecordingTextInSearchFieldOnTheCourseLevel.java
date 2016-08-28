@@ -133,39 +133,39 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		Thread.sleep(1000);
 		
 
-			record.returnToCourseListPage();
-			Thread.sleep(1000);
+		record.returnToCourseListPage();
+		Thread.sleep(1000);
 			
-			course.selectCourseThatStartingWith("BankValid");
-		    Thread.sleep(1000);
+		course.selectCourseThatStartingWith("BankValid");
+		Thread.sleep(1000);
 			
 			//String recording_name = record.getFirstRecordingTitle();
-			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-			Thread.sleep(1000);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		Thread.sleep(1000);
 			
 
-			record.clickOnRecordingTaskThenCopy();
-			copy.selectTargetCourseFromCourseList(current_course);
-			copy.clickOnCopyButton();
-			Thread.sleep(1000);
+		record.clickOnRecordingTaskThenCopy();
+		copy.selectTargetCourseFromCourseList(current_course);
+		copy.clickOnCopyButton();
+		Thread.sleep(1000);
 			
-			confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-			Thread.sleep(1000);
+	    confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
+		Thread.sleep(1000);
 			
-			record.checkStatusExistenceForMaxTTime(450);
+		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
 			
-			record.returnToCourseListPage();
-			Thread.sleep(2000);
+		record.returnToCourseListPage();
+		Thread.sleep(2000);
 			
-			course.selectCourseThatStartingWith("Ab");
-			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-			record.clickOnRecordingTaskThenEditRecording();
+		course.selectCourseThatStartingWith("Ab");
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.clickOnRecordingTaskThenEditRecording();
 			
-			Date date = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-			String recording_text = "reocrd" + sdf.format(date); 
-			edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
-			Thread.sleep(8000);
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+		String recording_text = "reocrd" + sdf.format(date); 
+		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
+		Thread.sleep(8000);
 
 			
 			top_bar_helper.clickOnSignOut();

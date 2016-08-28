@@ -589,12 +589,12 @@ public class CoursesHelperPage extends Page {
 			if(type_of_recordings == 3){
 				recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordings();
 			} else {
-
 				recording_helper_page.checkExistenceOfNonDeleteItemsStatusInAdditionalContent();
 			}
 			
-			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
-			clickElement(recording_helper_page.check_all_checkbox);
+			new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
+			Thread.sleep(2000);
+			recording_helper_page.SelectOneCheckBoxOrVerifyAlreadySelected(recording_helper_page.check_all_checkbox);
 			Thread.sleep(500);
 			//Thread.sleep(2000);
 			//wait.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));

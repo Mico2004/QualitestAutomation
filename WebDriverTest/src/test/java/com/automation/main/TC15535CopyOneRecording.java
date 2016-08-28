@@ -203,7 +203,7 @@ public class TC15535CopyOneRecording {
 		String status = record.course_being_copied_status.getText();
 		confirm.verifyCopySourceRecordingStatus(status); ///
 
-		record.checkStatusExistenceForMaxTTime(360);
+		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
 
 		//course.course_list.get(1).click();
 		course.selectFirstCourse(record);
@@ -213,19 +213,11 @@ public class TC15535CopyOneRecording {
 		Thread.sleep(3000);
 
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
 		//23.dispaly recording
-		player_page.verifyTimeBufferStatusForXSec(15);// check source display
+		player_page.verifyTimeBufferStatusForXSec(5);// check source display
 
-		///// to go back to crecording window handler
-		for (String handler : driver.getWindowHandles()) {
-			driver.switchTo().window(handler);
-			// System.out.println("=========================================");
-			// System.out.println(driver.getPageSource());
-		}
-		
 		//16.return to course page
-		record.returnToCourseListPage();/// return to course list page
+		player_page.returnToCoursesPage(course);/// return to course list page
 		Thread.sleep(2000);
 
 		//17.click on course and go to recording page
@@ -283,24 +275,19 @@ public class TC15535CopyOneRecording {
 		
 		//course.course_list.get(1).click();
 		course.selectFirstCourse(record);
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(3000);
 		//23.dispaly recording
-		player_page.verifyTimeBufferStatusForXSec(15);// check source display
+		player_page.verifyTimeBufferStatusForXSec(5);// check source display
 
-		///// to go back to crecording window handler
-		for (String handler : driver.getWindowHandles()) {
-			driver.switchTo().window(handler);
-			// System.out.println("=========================================");
-			// System.out.println(driver.getPageSource());
-		}
+
 		//24.Click "Courses" link at breadcrumbs
-		record.returnToCourseListPage();
+		player_page.returnToCoursesPage(course);
 		Thread.sleep(3000);
 
 		//25.sign-out
@@ -316,11 +303,11 @@ public class TC15535CopyOneRecording {
 		//29."Recording Chapters" are expanded
 		Thread.sleep(3000);
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(3000);
 		///30.Click any chapter:verify plays correctly 
-		player_page.verifyTimeBufferStatusForXSec(10);// check source display
+		player_page.verifyTimeBufferStatusForXSec(5);// check source display
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

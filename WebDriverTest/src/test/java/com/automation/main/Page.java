@@ -204,14 +204,13 @@ public class Page {
 	public void moveToElementAndPerform(WebElement element, WebDriver driver) throws NoSuchElementException, InterruptedException {
 		waitForVisibility(element);
 		try {
-			
 			Actions builder = new Actions(driver);
 			builder.moveToElement(element).build().perform();
-			Thread.sleep(3000);
-			builder.moveToElement(element).build().perform();
+			Thread.sleep(1000);
 
 		} catch (NoSuchElementException e) {
-			
+		
+			/// Log.();
 		}
 	}
 	
