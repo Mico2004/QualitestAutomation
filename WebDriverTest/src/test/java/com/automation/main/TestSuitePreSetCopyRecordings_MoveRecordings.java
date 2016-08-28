@@ -23,8 +23,10 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 
+
+
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TestSuitePreSetCopyRecordings5 {
+public class TestSuitePreSetCopyRecordings_MoveRecordings {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -97,8 +99,9 @@ public class TestSuitePreSetCopyRecordings5 {
 		
 		Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TestSuitePreSetCopyRecordings5 at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordings at5 " + DateToStr, "Starting the test: TestSuitePreSetCopyRecordings5 at " + DateToStr, LogAs.PASSED, null);
+		 System.out.println("Starting the test: TestSuitePreSetCopyRecordings_MoveRecordings at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordings_MoveRecordings " + DateToStr,
+		 "Starting the test: TestSuitePreSetCopyRecordings_MoveRecordings at " + DateToStr, LogAs.PASSED, null);
 	
 	}
 
@@ -168,8 +171,6 @@ public class TestSuitePreSetCopyRecordings5 {
 		System.out.println("3");
 		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
 		System.out.println("4");
-		
-
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

@@ -1,18 +1,8 @@
 package com.automation.main;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.io.IOException;
-import java.net.URL;
+
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,19 +17,14 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TestSuitePreSetCopyRecordings7 {
+public class TestSuitePreSetCopyRecordings_Login {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -112,8 +97,9 @@ public class TestSuitePreSetCopyRecordings7 {
 		
 		Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TestSuitePreSetCopyRecordings at7 " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordings at7 " + DateToStr, "Starting the test: TestSuitePreSetCopyRecordings7 at " + DateToStr, LogAs.PASSED, null);
+		 System.out.println("Starting the test: TestSuitePreSetCopyRecordings_Login at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordings_Login " + DateToStr,
+		 "Starting the test: TestSuitePreSetCopyRecordings_Login at " + DateToStr, LogAs.PASSED, null);
 	
 	}
 
@@ -183,13 +169,12 @@ public class TestSuitePreSetCopyRecordings7 {
 		System.out.println("3");
 		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
 		System.out.println("4");
-
-		
 		
 
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
 //		// 2.copy courses to pastcourses a
 //
 //		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseA", 0, record,

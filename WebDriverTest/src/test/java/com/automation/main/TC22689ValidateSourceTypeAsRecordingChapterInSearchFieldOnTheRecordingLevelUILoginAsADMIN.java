@@ -207,6 +207,8 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 
 		///12.The header is displayed with the default color and the logo at the top left cornner of the UI page.
 		///// to go back to crecording window handler
+	    	
+			     
 	        curr_win=driver.getWindowHandle();	
 	        for (String handler : driver.getWindowHandles()) {
 	        		driver.switchTo().window(handler);
@@ -221,8 +223,10 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 			Thread.sleep(2000);
 			
 			///14.search results page in the format as follows: "recording name - Search Results".
-			//driver.switchTo().frame("playerContainer.ng-isolate-scope");		
-		
+			for (String handler : driver.getWindowHandles()) {
+        		driver.switchTo().window(handler);
+        		break;		
+			}
 			player_page.verifySearchResultPage(recording_to_search);
 			
 		    ///15.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"

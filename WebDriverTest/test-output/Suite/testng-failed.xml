@@ -10,28 +10,9 @@
     <classes>
       <class name="com.automation.main.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN">
         <methods>
-<<<<<<< HEAD
-=======
-          <include name="setup"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
           <include name="closeBroswer"/>
-=======
-=======
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
-          <include name="loadPage"/>
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
-          <include name="closeBroswer"/>
-<<<<<<< HEAD
           <include name="test22662"/>
           <include name="setup"/>
-=======
-          <include name="loginCourses"/>
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
-=======
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
         </methods>
       </class> <!-- com.automation.main.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN -->
     </classes>

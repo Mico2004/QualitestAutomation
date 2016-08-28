@@ -95,7 +95,7 @@ public class PlayerPage extends Page {
 	WebElement second_record_player;
 	@FindBy(id = "NumbOfRes")
 	WebElement list_of_results;
-	@FindBy(id = "undefined_TXT")
+	@FindBy(xpath = "html/body/div[3]/div[6]/div")
 	WebElement search_result_title;
 	@FindBy(linkText = "Course")
 	WebElement course_breadcrumbs;
@@ -419,15 +419,9 @@ public class PlayerPage extends Page {
 	/// verify search result page by recording name that was searched
 	public void verifySearchResultPage(String recording) throws InterruptedException {
 		
-		Object[] handles = driver.getWindowHandles().toArray();
-		 for (int a = handles.length - 1; a >= 0 ; a--) { // Backwards is faster with FF since it requires two windows
-             try {
-            	 driver.switchTo().window((String) handles[a]);
-            	 waitForVisibility(search_result_title);
-              } catch (Exception ex) {
-                 Thread.sleep(2000);  
-             }
-		 }
+		
+		 new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(search_result_title));
+		
 		String text = search_result_title.getText();
 		if ((text.contains(recording)) && (text.contains("- Search Results"))) {
 			System.out.println("result search page verified for recording: " + recording);
