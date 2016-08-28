@@ -222,7 +222,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 			
 			///14.search results page in the format as follows: "recording name - Search Results".
 			//driver.switchTo().frame("playerContainer.ng-isolate-scope");		
-			driver.switchTo().defaultContent();
+		
 			player_page.verifySearchResultPage(recording_to_search);
 			
 		    ///15.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
