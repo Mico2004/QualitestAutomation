@@ -39,26 +39,33 @@ public class EditRecordinPropertiesWindow extends Page {
 
 	// change ownership of recording
 	public void changeOwner(String name) {
+		String val="";
 		try {
+			waitForVisibility(owner_button);
 			owner_button.click();
 			System.out.println("clicked on owner scroll");
 			for (WebElement el : owner_button_select) {
-				String val = el.getText();
+				val = el.getText();
 				if (val.contains(name)) {
-
+					
 					el.click();
 					owner_button.sendKeys(Keys.ENTER);
 					// moveToElementAndClick(el, driver);
 					System.out.println("user selected");
-
+					ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership successfully", LogAs.PASSED, null);
+					
 					return;
+				}else{
+					ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership failed", LogAs.FAILED, null);
+					
+					
 				}
 
 			}
 			System.out.println("user1 selection failed");
 		} catch (Exception e) {
 			System.out.println("clicked on owner scroll failed");
-
+			ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership failed", LogAs.FAILED, null);
 		}
 	}
 

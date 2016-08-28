@@ -25,7 +25,7 @@ public class AddAdditionalContentFileWindow extends Page {
 		super(browser);
 		// TODO Auto-generated constructor stub
 	}
-
+//ewds
 	@FindBy(id = "ModalDialogHeader")
 	WebElement additional_content_file_title;
 	@FindBy(id = "InfoText")

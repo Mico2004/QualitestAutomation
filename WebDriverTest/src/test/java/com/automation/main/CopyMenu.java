@@ -68,8 +68,10 @@ public class CopyMenu extends Page {
 	// This function clicks on copy button of copy menu
 	public void clickOnCopyButton() throws InterruptedException {
 		try {
+			System.out.println("Copy1");
 			wait.until(ExpectedConditions.visibilityOf(copy_button));
-			copy_button.click();
+			System.out.println("Copy2");
+			copy_button.click();		
 			System.out.println("Clicked on copy button");
 			ATUReports.add("Clicked on copy button", LogAs.PASSED, null);
 			Assert.assertTrue(true);

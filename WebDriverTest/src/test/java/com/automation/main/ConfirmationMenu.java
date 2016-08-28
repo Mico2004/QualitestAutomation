@@ -41,14 +41,22 @@ public class ConfirmationMenu extends Page {
 	WebElement correct_error_msg_body;
 	@FindBy(xpath = "//*[@id=\"alertWindow\"]/div[1]/p")
 	WebElement add_additional_content_confirm_note;
-
+	@FindBy(id = "alertWindow")
+	WebElement alertWindow;
+	
+	
 	public ConfirmationMenu(WebDriver browser) {
 		super(browser);
 		// TODO Auto-generated constructor stub
 	}
 
 	// This function clicks on ok button of copy menu
-	public void clickOnOkButton() throws InterruptedException {
+
+	public void clickOnOkButton() throws InterruptedException {		
+		Thread.sleep(2000);
+		if(!isAlertPresent()){
+		waitForVisibility(alertWindow);
+		Thread.sleep(1000);
 		waitForVisibility(ok_button);
 		try {
 			ok_button.click();
@@ -57,8 +65,13 @@ public class ConfirmationMenu extends Page {
 		} catch (Exception e) {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
-		}
+		} 
 		Thread.sleep(3000);
+		}else{
+			ATUReports.add("Additional content file path wasn't found, check resources.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+			
+		}
 	}
 
 	// This function clicks on ok button of copy menu

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import org.apache.tools.ant.taskdefs.Javadoc;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
@@ -107,6 +108,11 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		
 		return false;
 	}
+	
+	public boolean firstCourseIsDisplayed(){
+		return first_course_name.isDisplayed();
+		
+	}
 
 	public boolean clickOnFirstCourseMembershipButton() throws InterruptedException {
 		for(int i=0; i<30; i++) {
@@ -179,6 +185,8 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	}
 	/// enrolls student or students list to course
 		public void enrollStudentsToCourse(String course,List<String>  users,ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window) throws InterruptedException {
+			String u="";
+			try{
 			driver.switchTo().frame(0);
 			Thread.sleep(2000);
 			// Search target course name
@@ -187,9 +195,11 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			// Click on result first course (the only one) membership button
 			clickOnFirstCourseMembershipButton();
 			Thread.sleep(2000);
+			
 		    for(String user:users)
 		    {
 		    mangage_adhoc_courses_membership_window.searchForUser(user);
+		    u=user;
 			Thread.sleep(5000);
 			// Select first user from user list (the only user it found because of
 			// the uniq of the search)
@@ -202,11 +212,17 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			mangage_adhoc_courses_membership_window.ok_button.click();
 			Thread.sleep(1000);
 			driver.switchTo().alert().accept();
+			ATUReports.add("Enrolled "+u+"to course "+course+" as student ","user enrolled to course","user enrolled to course", LogAs.PASSED, null);
+			}catch(Exception e){
+				ATUReports.add("Enrolled "+u+"to course "+course+" as student ","user enrolled to course","user not enrolled to course", LogAs.FAILED, null);
+				
+				
+			}
 		}
 	/// un-enrolls instructor to course
 	public void unEnrollInstructorToCourse(String course, String user,ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window) throws InterruptedException {
 		// Click on create course href link
-		driver.switchTo().frame(0);
+	try{driver.switchTo().frame(0);
         Thread.sleep(2000);
         // Search target course name
 		searchAndFilterCourses(course);
@@ -229,6 +245,12 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		driver.switchTo().alert().accept();
 		System.out.println("clicked on ok");
 		System.out.println("d5");
+		ATUReports.add("Enrolled "+user+"to course "+course+" as student ","user enrolled to course","user enrolled to course", LogAs.PASSED, null);
+	}catch(Exception e){
+		ATUReports.add("Enrolled "+user+"to course "+course+" as student ","user enrolled to course","user not enrolled to course", LogAs.FAILED, null);
+		
+		
+	}
 	}
 	/// un-enrolls instructor to course
 		public void unEnrollStusentsFromCourse(String course, String user,ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window) throws InterruptedException {

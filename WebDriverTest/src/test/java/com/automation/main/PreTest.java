@@ -243,7 +243,7 @@ public class PreTest {
 		}
 
 		// Writing the registered user to user.properties file at src/test/resources that other tests will use it
-		File file_to_write = new File("C:/WebDriverTest/src/test/resources/local.properties");
+		File file_to_write = new File("src/test/resources/local.properties");
 		//	String charset = "UTF-8";
 		String charset = "Cp1252";
 		PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file_to_write), charset));

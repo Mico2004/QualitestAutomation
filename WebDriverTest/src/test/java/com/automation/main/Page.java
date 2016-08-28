@@ -18,8 +18,10 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
@@ -40,11 +42,9 @@ public class Page {
 	public WebDriver driver;
 	public WebDriverWait wait;
 	@FindBy(id = "InstituteLogotype")
-	public
-	WebElement logo;
+	public WebElement logo;
 	@FindBy(id = "SignOutLink")
-	public
-	WebElement sign_out;
+	public WebElement sign_out;
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -66,14 +66,13 @@ public class Page {
 			System.out.println("Clicked on the element.");
 			ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
 		} catch (Exception msg) {
-			
+
 		}
 
 	}
-	
+
 	// clicking element
-	public void clickElementWithDescription(WebElement element, String description) 
-	{
+	public void clickElementWithDescription(WebElement element, String description) {
 		try {
 			element.click();
 			System.out.println("Clicked on " + description + " element.");
@@ -132,52 +131,49 @@ public class Page {
 			return false;
 		}
 	}
-	
+
 	public String getTextFromWebElement(WebElement element) {
-		
-	    try {
-	        return element.getText();
-	    } catch (StaleElementReferenceException e) {
-	        System.out.println("Attempting to recover from StaleElementReferenceException ...");
-	        return getTextFromWebElement(element);
-	    } catch (NoSuchElementException ele) {
-	        System.out.println("Attempting to recover from NoSuchElementException ...");
-	        return getTextFromWebElement(element);
-	    }
-		
+
+		try {
+			return element.getText();
+		} catch (StaleElementReferenceException e) {
+			System.out.println("Attempting to recover from StaleElementReferenceException ...");
+			return getTextFromWebElement(element);
+		} catch (NoSuchElementException ele) {
+			System.out.println("Attempting to recover from NoSuchElementException ...");
+			return getTextFromWebElement(element);
+		}
+
 	}
-	
-	
-	
 
 	public boolean isElemenetDisplayed(By by) {
 		try {
 			driver.findElement(by).isDisplayed();
-			
+
 			return true;
 		} catch (NoSuchElementException e) {
 			return false;
-		}	
+		}
 	}
-	
+
 	public WebElement getStaleElem(By by, WebDriver driver) {
-	    try {
-	        return driver.findElement(by);
-	    } catch (StaleElementReferenceException e) {
-	        System.out.println("Attempting to recover from StaleElementReferenceException ...");
-	        return getStaleElem(by, driver);
-	    } catch (NoSuchElementException ele) {
-	        System.out.println("Attempting to recover from NoSuchElementException ...");
-	        return getStaleElem(by, driver);
-	    }
+		try {
+			return driver.findElement(by);
+		} catch (StaleElementReferenceException e) {
+			System.out.println("Attempting to recover from StaleElementReferenceException ...");
+			return getStaleElem(by, driver);
+		} catch (NoSuchElementException ele) {
+			System.out.println("Attempting to recover from NoSuchElementException ...");
+			return getStaleElem(by, driver);
+		}
 	}
-	
+
 	/// hover to element and click on it
 	public void moveToElementAndClick(WebElement element, WebDriver driver) throws NoSuchElementException {
 		waitForVisibility(element);
 		try {
 			Actions builder = new Actions(driver);
-			builder.moveToElement(element).click().build().perform();			
+			builder.moveToElement(element).click().build().perform();
 			System.out.println("Hovered and clicked on WebElement.");
 			ATUReports.add("Hovered and clicked on WebElement.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -200,8 +196,10 @@ public class Page {
 			/// Log.();
 		}
 	}
+
 	
 	public void moveToElementAndPerform(WebElement element, WebDriver driver) throws NoSuchElementException, InterruptedException {
+
 		waitForVisibility(element);
 		try {
 			Actions builder = new Actions(driver);
@@ -213,7 +211,7 @@ public class Page {
 			/// Log.();
 		}
 	}
-	
+
 	public boolean isClickable(WebElement driver) {// is element clickable
 		try {
 
@@ -234,7 +232,7 @@ public class Page {
 		String text = "";
 		try {
 			text = element.getCssValue("background-color").toString();
-		} catch(Exception msg) {
+		} catch (Exception msg) {
 			return "";
 		}
 		try {
@@ -249,7 +247,7 @@ public class Page {
 		} catch (Exception msg) {
 			return text;
 		}
-		
+
 	}
 
 	public String[] getStringFromElement(List<WebElement> text)/// text
@@ -309,7 +307,13 @@ public class Page {
 		}
 	}
 
-	public boolean verifyColor(String expected, WebElement element) throws InterruptedException {// returns// if// color// is// equal// or// not											
+	public boolean verifyColor(String expected, WebElement element) throws InterruptedException {// returns//
+																									// if//
+																									// color//
+																									// is//
+																									// equal//
+																									// or//
+																									// not
 
 		// record.moveToElementAndClick(record.recording_tasks_button, driver);
 		waitForVisibility(element);
@@ -364,16 +368,18 @@ public class Page {
 
 	/// sign out from any page except Login page
 	public void signOut() throws InterruptedException {
+
 		
-		waitForVisibility(sign_out);
-		Actions builder = new Actions(driver);   //  new line
-		builder.sendKeys(Keys.PAGE_UP);   //  new line
+		Actions builder = new Actions(driver); // new line
+		builder.sendKeys(Keys.PAGE_UP); // new line
 		builder.moveToElement(sign_out).build().perform();
-		sign_out.click();	
-//		if(driver instanceof InternetExplorerDriver) {
-//			WebElement iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
-//			iw.sendKeys(Keys.ENTER);	
-//		}
+		waitForVisibility(sign_out);
+		sign_out.click();
+		// if(driver instanceof InternetExplorerDriver) {
+		// WebElement iw =
+		// driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+		// iw.sendKeys(Keys.ENTER);
+		// }
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -382,8 +388,12 @@ public class Page {
 				Assert.assertTrue(false);
 			}
 			try {
-				if (driver.getTitle().equals("Tegrity Lecture Capture"))// check if element is present											
-				{	
+				if (driver.getTitle().equals("Tegrity Lecture Capture"))// check
+																		// if
+																		// element
+																		// is
+																		// present
+				{
 					System.out.println("LogOut from user succeeded.");
 					ATUReports.add(" Login page correctly displaied", LogAs.PASSED, null);
 					Assert.assertTrue(true);
@@ -397,7 +407,7 @@ public class Page {
 
 			Thread.sleep(1000);
 		}
-		
+
 	}
 
 	// counts number of times pattern string appears in sourcecode
@@ -588,7 +598,7 @@ public class Page {
 	// This function verify that WebElement is displayed, and String with
 	// description
 	public void verifyWebElementDisplayed(WebElement web_element, String description) {
-			waitForVisibility(web_element);
+		waitForVisibility(web_element);
 		if (web_element.isDisplayed()) {
 			System.out.println(description + " is displayed.");
 			ATUReports.add(description + " is displayed.", "True.", "True.", LogAs.PASSED, null);
@@ -709,36 +719,42 @@ public class Page {
 			Assert.assertTrue(false);
 		}
 	}
-	
-	// This function get two WebElement and check if the first is to the right (by location) to the second
+
+	// This function get two WebElement and check if the first is to the right
+	// (by location) to the second
 	public void isFirstWebElementToTheRightSecondWebElement(WebElement first_webelement, WebElement second_webelement) {
-		if(first_webelement.getLocation().x <= second_webelement.getLocation().x) {
+		if (first_webelement.getLocation().x <= second_webelement.getLocation().x) {
 			System.out.println("The first WebElement is to the right to the second WebElement.");
-			ATUReports.add("The first WebElement is to the right to the second WebElement.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add("The first WebElement is to the right to the second WebElement.", "True.", "True.",
+					LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("The first WebElement is not to the right to the second WebElement.");
-			ATUReports.add("The first WebElement is to the right to the second WebElement.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("The first WebElement is to the right to the second WebElement.", "True.", "False.",
+					LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 	}
-	
-	// This function get WebElement and excpected text, and check if that text appear in the WebElement
+
+	// This function get WebElement and excpected text, and check if that text
+	// appear in the WebElement
 	public void verifyWebElementTargetText(WebElement web_element, String target_text) {
-		if(web_element.getText().equals(target_text)) {
+		if (web_element.getText().equals(target_text)) {
 			System.out.println("Verified that target web element have target text: " + target_text);
 			ATUReports.add("WebElement have target text.", target_text, target_text, LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
-			System.out.println("Not verified that target web element have target text: " + target_text + " != " + web_element.getText());
+			System.out.println("Not verified that target web element have target text: " + target_text + " != "
+					+ web_element.getText());
 			ATUReports.add("WebElement have target text.", target_text, web_element.getText(), LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 	}
-	
+
 	// This function verify that there is vertical scrolling
 	public void verifyThereVerticalScrolling() {
-		boolean scrolling_bar = (boolean) ((JavascriptExecutor)driver).executeScript("return Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight)>document.documentElement.clientHeight ;");
+		boolean scrolling_bar = (boolean) ((JavascriptExecutor) driver).executeScript(
+				"return Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight)>document.documentElement.clientHeight ;");
 		if (scrolling_bar) {
 			System.out.println("Verified that there is vertical scrolling.");
 			ATUReports.add("Verify there is vertical scrolling.", "True.", "True.", LogAs.PASSED, null);
@@ -749,10 +765,11 @@ public class Page {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
 	// This function verify that there is horizontal scrolling
 	public void verifyThereHorizontalScrolling() {
-		boolean scrolling_bar = (boolean) ((JavascriptExecutor)driver).executeScript("return Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth)>document.documentElement.clientWidth ;");
+		boolean scrolling_bar = (boolean) ((JavascriptExecutor) driver).executeScript(
+				"return Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth)>document.documentElement.clientWidth ;");
 		if (scrolling_bar) {
 			System.out.println("Verified that there is horizontal scrolling.");
 			ATUReports.add("Verify there is horizontal scrolling.", "True.", "True.", LogAs.PASSED, null);
@@ -763,10 +780,10 @@ public class Page {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
 	// This function verify that WebElement is selected
 	public void verifyWebElementSelected(WebElement webElement) {
-		if(webElement.isSelected()) {
+		if (webElement.isSelected()) {
 			System.out.println("Verfied that WebElement selected.");
 			ATUReports.add("Verfied that WebElement selected.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -776,10 +793,10 @@ public class Page {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
 	// This function verify that WebElement is not selected
 	public void verifyWebElementNotSelected(WebElement webElement) {
-		if(webElement.isSelected()) {
+		if (webElement.isSelected()) {
 			System.out.println("Not verfied that WebElement not selected.");
 			ATUReports.add("Verfied that WebElement not selected.", "True.", "False.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
@@ -789,23 +806,23 @@ public class Page {
 			Assert.assertTrue(true);
 		}
 	}
-	
-	// This function exit inner frame 
+
+	// This function exit inner frame
 	public void exitInnerFrame() {
-		for(String handler: driver.getWindowHandles()) {
+		for (String handler : driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
 			break;
 		}
 	}
-	
+
 	// This function get into index frame
-	public void getIntoFrame(int frame_index)  {
-//		driver.switchTo().frame(frame_index);
-		for(int i=0; i<10; i++) {
+	public void getIntoFrame(int frame_index) {
+		// driver.switchTo().frame(frame_index);
+		for (int i = 0; i < 10; i++) {
 			try {
 				driver.switchTo().frame(frame_index);
 				break;
-			} catch(Exception msg) {
+			} catch (Exception msg) {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -814,19 +831,18 @@ public class Page {
 				}
 			}
 		}
-		
+
 	}
-	
+
 	// This function get string and verify that it is valid date
 	// Valid date format: mm/dd/yyyy
 	public void verifyThatTargetStringIsValidDate(String target_date) {
 		String[] splited_date = target_date.split("/");
 		int mm = Integer.parseInt(splited_date[0]);
 		int dd = Integer.parseInt(splited_date[1]);
-		
+
 		int yyyy = Integer.parseInt(splited_date[2]);
-		if((0 < mm) && (0 < dd) && (999 < yyyy) &&
-			(12 >= mm) && (31 >= dd) && (9999 >= yyyy)) {
+		if ((0 < mm) && (0 < dd) && (999 < yyyy) && (12 >= mm) && (31 >= dd) && (9999 >= yyyy)) {
 			System.out.println("Target date is valid: " + target_date);
 			ATUReports.add("Target date is valid: " + target_date, "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -836,143 +852,217 @@ public class Page {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
 	// This function verify that WebElement target attribute is target string
-	public void verifyWebElementHaveTargetAttributeWithTargetValue(WebElement web_element, String target_attribute, String target_text) {
-		if (web_element.getAttribute(target_attribute).replaceAll("  ", " ").equals(target_text.replaceAll("  ", " "))) {
+	public void verifyWebElementHaveTargetAttributeWithTargetValue(WebElement web_element, String target_attribute,
+			String target_text) {
+		if (web_element.getAttribute(target_attribute).replaceAll("  ", " ")
+				.equals(target_text.replaceAll("  ", " "))) {
 			System.out.println(target_text + " is displayed in " + target_attribute + " attribute.");
-			ATUReports.add("Target text is displayed in " + target_attribute + " attribute.", target_text, target_text, LogAs.PASSED, null);
+			ATUReports.add("Target text is displayed in " + target_attribute + " attribute.", target_text, target_text,
+					LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println(target_text + " is not displayed in " + target_attribute + " attribute.");
-			ATUReports.add("Target text is not displayed in " + target_attribute + " attribute.", target_text, web_element.getAttribute(target_attribute),
-					LogAs.FAILED, null);
+			ATUReports.add("Target text is not displayed in " + target_attribute + " attribute.", target_text,
+					web_element.getAttribute(target_attribute), LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 	}
-	
-	// This function send keys to input, and verify that this keys appear in input
+
+	// This function send keys to input, and verify that this keys appear in
+	// input
 	public void sendKeysToWebElementInput(WebElement web_element, String target_input) {
 		try {
 			web_element.clear();
 			web_element.sendKeys(target_input);
-			
-			if(web_element.getAttribute("value").equals(target_input)) {
+
+			if (web_element.getAttribute("value").equals(target_input)) {
 				System.out.println("Target keys sent to WebElement: " + target_input);
 				ATUReports.add("Target keys sent.", target_input, target_input, LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
-				System.out.println("Target keys sent: " + target_input + ", but not appear in the input itself: " + web_element.getAttribute("value"));
-				ATUReports.add("Target keys send.", target_input, web_element.getAttribute("value"), LogAs.FAILED, null);
+				System.out.println("Target keys sent: " + target_input + ", but not appear in the input itself: "
+						+ web_element.getAttribute("value"));
+				ATUReports.add("Target keys send.", target_input, web_element.getAttribute("value"), LogAs.FAILED,
+						null);
 				Assert.assertTrue(false);
 			}
-		} catch(Exception msg) {
+		} catch (Exception msg) {
 			System.out.println("Fail to sent target keys: " + target_input);
 			ATUReports.add("Target keys sent.", "True.", "False", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 	}
-	
-	// This function verify that element contains one of the elements of the list
+
+	// This function verify that element contains one of the elements of the
+	// list
 	public String verifyTargetStringContainOneOfElementOfList(String target_string, List<String> list) {
-		for(String next: list) {
-			if(target_string.contains(next)) {
+		for (String next : list) {
+			if (target_string.contains(next)) {
 				System.out.println("Verfied that element: " + target_string + " in the list.");
-				ATUReports.add("Verfied that element: " + target_string + " in the list." , "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add("Verfied that element: " + target_string + " in the list.", "True.", "True.",
+						LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return next;
 			}
 		}
-		
+
 		System.out.println("Not verfied that element: " + target_string + " in the list.");
-		ATUReports.add("Verfied that element: " + target_string + " in the list." , "True.", "False.", LogAs.FAILED, null);
+		ATUReports.add("Verfied that element: " + target_string + " in the list.", "True.", "False.", LogAs.FAILED,
+				null);
 		Assert.assertTrue(false);
 		return null;
 	}
-	
-	// This function get list of WebElement and return list of each WebElement text
+
+	// This function get list of WebElement and return list of each WebElement
+	// text
 	public List<String> getTextContentListOfWebElementList(List<WebElement> webelements_list) {
-		List<String> text_content_list = new ArrayList<String>(); 
-		
-		for(WebElement webElement: webelements_list) {
+		List<String> text_content_list = new ArrayList<String>();
+
+		for (WebElement webElement : webelements_list) {
 			String text_content = webElement.getText();
-			if(text_content.length() != 0) {
+			if (text_content.length() != 0) {
 				text_content_list.add(text_content);
 			}
-			
+
 		}
-		
+
 		return text_content_list;
 	}
-	
-	// This function list of WebElement and return list of each WebElement title attribute
+
+	// This function list of WebElement and return list of each WebElement title
+	// attribute
 	public List<String> getTitleAttributeListOfWebElementList(List<WebElement> webelements_list) {
 		List<String> title_attribute_list = new ArrayList<String>();
-		
-		for(WebElement webElement: webelements_list) {
+
+		for (WebElement webElement : webelements_list) {
 			String tittle_attribute = webElement.getAttribute("title");
 			if (tittle_attribute.length() != 0) {
 				title_attribute_list.add(tittle_attribute);
 			}
 		}
-		
+
 		return title_attribute_list;
 	}
-	
-	// This function get string and return same string as one word (without spaces)
+
+	// This function get string and return same string as one word (without
+	// spaces)
 	public String removeSpacesFromString(String target_string) {
 		return target_string.replaceAll(" ", "");
 	}
-    public void waitForAlert(long timeOutInSeconds) {
-        int i = 0;
-        while (i < timeOutInSeconds) {
-               try {
-                     driver.switchTo().alert();
-                     break;
-               } catch (NoAlertPresentException e) {
-                     try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-                     i++;
-                     continue;
-               }
-        }
- }
 
- public boolean isAlertPresent() {       
-        try {
-               driver.switchTo().alert();
-               driver.switchTo().defaultContent();
-               return true;
-        } catch (NoAlertPresentException e) {
-               return false;
-        }
- }
+	public void waitForAlert(long timeOutInSeconds) {
+		int i = 0;
+		while (i < timeOutInSeconds) {
+			try {
+				driver.switchTo().alert();
+				break;
+			} catch (NoAlertPresentException e) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				i++;
+				continue;
+			}
+		}
+	}
 
- public void clickOkInAlertIfPresent() {
-        try {
-               System.out.println("Trying to obtain alert...");
-               // Get a handle to the open alert, prompt or confirmation
-               Alert alert = driver.switchTo().alert();           
-               try{
-                     // Get the text of the alert or prompt
-            	   System.out.println("Selecting OK in alert: '" + alert.getText().replace("\n", "") + "'");
-               } catch (Exception ex) {
-            	   System.out.println(ex.getClass().getSimpleName() + " occured on alert processing.");
-               }
-               // And acknowledge the alert (equivalent to clicking "OK")
-               alert.accept();
-               Thread.sleep(1000);
-               //makeScreenshot();
-        } catch (NoAlertPresentException e) {
-        	System.out.println(e.getMessage());
-        	System.out.println("No alerts appeared");
-        } catch (Exception e) {
-        	System.out.println(e.getClass().getSimpleName() + " occured on alert processing.");
-        }
+	public boolean isAlertPresent() {
+		try {
+			driver.switchTo().alert();
+			driver.switchTo().defaultContent();
+			return true;
+		} catch (NoAlertPresentException e) {
+			return false;
+		}
+	}
 
-}
+	public void clickOkInAlertIfPresent() {
+		try {
+			System.out.println("Trying to obtain alert...");
+			// Get a handle to the open alert, prompt or confirmation
+			Alert alert = driver.switchTo().alert();
+			try {
+				// Get the text of the alert or prompt
+				System.out.println("Selecting OK in alert: '" + alert.getText().replace("\n", "") + "'");
+			} catch (Exception ex) {
+				System.out.println(ex.getClass().getSimpleName() + " occured on alert processing.");
+			}
+			// And acknowledge the alert (equivalent to clicking "OK")					
+			driver.switchTo().alert().accept();				
+			Thread.sleep(1000);
+			// makeScreenshot();
+		} catch (NoAlertPresentException e) {
+			System.out.println(e.getMessage());
+			System.out.println("No alerts appeared");
+		} catch (Exception e) {
+			System.out.println(e.getClass().getSimpleName() + " occured on alert processing.");
+		}
+
+	}
+
+	public boolean handlesClickIsNotVisible(WebElement element) {
+		WebElement div = driver.findElement(By.xpath("//*[@id='main']"));
+		Actions builder = new Actions(driver);
+		builder.moveToElement(div, 10, 10).click().build().perform();
+		String elementText = element.getText();
+		System.out.println("s1");
+		builder.sendKeys(Keys.PAGE_UP);
+		builder.sendKeys(Keys.PAGE_UP);
+		int i = 0;
+		boolean elementFound = false;
+
+		do {
+
+			builder.sendKeys(Keys.PAGE_DOWN);
+			try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("s3");
+			builder.moveToElement(element).build().perform();
+			System.out.println("s5");
+			int z=0;
+			while (z<3 && elementFound==false){
+			try {
+				builder.moveToElement(div, 10, 10).click().build().perform();
+				//builder.moveToElement(element).build().perform();					
+				element.click();
+				elementFound = true;
+				Thread.sleep(1500);
+			} catch (WebDriverException e) {
+				elementFound = false;	
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			z++;
+			}
+			
+			i++;
+			System.out.println("s6");
+			} while (!elementFound && i < 10);
+		System.out.println("s7");
+		if (elementFound) {
+			ATUReports.add("Scanning page succeeded: the course was clicked", elementText, "The course is clicked.",
+					"The course is clicked.", LogAs.PASSED, null);
+			System.out.println("s8");
+			Assert.assertTrue(true);
+			return true;
+			
+		} else {
+			ATUReports.add("Scanning page failed: the course wasn't found", elementText, "The course is clicked.",
+					"The course wasn't", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+			return false;
+		}
+
+	}
+
 }

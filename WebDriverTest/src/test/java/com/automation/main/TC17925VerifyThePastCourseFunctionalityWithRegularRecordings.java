@@ -101,7 +101,7 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 	}
 
 	@Test(description = "Verify Past Course Removed When Has No Content")
-	public void loginCourses() throws InterruptedException {
+	public void TC17925() throws InterruptedException {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		user = "Past17925TempUser" + sdf.format(date);			

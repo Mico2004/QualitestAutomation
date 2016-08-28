@@ -334,7 +334,6 @@ public class TC17929And17941And17944PastCourses {
 			break;
 		}
 		course.sign_out.click();
-
 		tegrity.loginCourses("SuperUser");
 		Thread.sleep(3000);
 		course.selectCourseThatStartingWith(PastTemp2Course);

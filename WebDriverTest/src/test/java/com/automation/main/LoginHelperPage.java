@@ -61,7 +61,7 @@ public class LoginHelperPage extends Page {
 		setPageTitle("Tegrity Lecture Capture");
 		/// setPageUrl("https://qualitest4-prod.tegrity.com/#/login");
 		// setPageUrl("https://reg-qabr.tegrity.com/#/login");
-		setPageUrl("https://awsserverautomation-qa-5.tegrity.com/#/login");
+		setPageUrl("https://awsserverautomation-qa-1.tegrity.com/#/login");
 		
 //		setPageUrl("https://awsserverautomation1.tegrity.com/#/login");
 		/// setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University"))););////"https://reg-qabr.tegrity.com/#/login"
@@ -107,13 +107,10 @@ public class LoginHelperPage extends Page {
 	{
 		wait.until(ExpectedConditions.visibilityOf(usernamefield));
 		fillUser(user_name);
-
-		fillPass();
-
-		waitForVisibility(button_login);
-
+		fillPass();		
 		try {
 			clickElement(button_login);
+			waitForVisibility(button_login);
 			ATUReports.add("Login as", user_name, "Success login", "Success login", LogAs.PASSED, null);
 		} catch (Exception e) {
 			ATUReports.add("Login as", user_name, "Success login", "Success fail", LogAs.FAILED, null);
@@ -148,8 +145,7 @@ public class LoginHelperPage extends Page {
 
 			Thread.sleep(1000);
 		}
-		Thread.sleep(1000);
-
+		Thread.sleep(3000);
 		Assert.assertEquals(driver.getTitle(), "Tegrity - Courses");
 	}
 
@@ -164,7 +160,7 @@ public class LoginHelperPage extends Page {
 
 		waitForVisibility(button_login);
 
-		try {
+		try {		
 			clickElement(button_login);
 			ATUReports.add("Login as", user_name, "Success login", "Success login", LogAs.PASSED, null);
 		} catch (Exception e) {

@@ -2416,7 +2416,7 @@ public String getSecondRecordingTitleTest() {
 	public void uploadFile(String path) throws Exception {
 
 		// from here you can use as it wrote
-		path = System.getProperty("user.dir") + path;
+		//path = System.getProperty("user.dir") + "\\FileName.txt";
 		System.out.println(path);
 		StringSelection ss = new StringSelection(path);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
@@ -4427,7 +4427,20 @@ public String getSecondRecordingTitleTest() {
 		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
-	
+	public boolean tabExists(int tab){
+		System.out.println("tabexist1");
+		waitForVisibility(recordings_tab);
+		boolean exist=false;
+		if(tab==1)
+			exist=additional_content_tab.isDisplayed();
+		else if(tab==2)
+			exist=student_recordings_tab.isDisplayed();
+		else if(tab==3)
+			exist=test_tab.isDisplayed();
+		
+		return exist;			
+		
+	}
 	
 	
 }
