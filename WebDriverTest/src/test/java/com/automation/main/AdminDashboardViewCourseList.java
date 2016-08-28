@@ -126,8 +126,8 @@ public class AdminDashboardViewCourseList extends Page {
 
 	/// verify all courses page
 	public void verifyAllCoursesPage() {
-		System.out.println(all_courses_title.getText());
 		waitForVisibility(all_courses_title);
+		System.out.println(all_courses_title.getText());
 		if (all_courses_title.getText().contains("All Courses")) {
 			System.out.println("title matches");
 			ATUReports.add("title matches", "All courses", "matches", "matches", LogAs.PASSED, null);
