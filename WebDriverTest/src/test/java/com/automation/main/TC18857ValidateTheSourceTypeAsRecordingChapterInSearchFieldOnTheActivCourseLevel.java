@@ -185,6 +185,7 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
 			search_page.waitUntilSpinnerImageDisappear();
+			Thread.sleep(500);
 			
 			// 5.2. The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)".
 			search_page.verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfound(current_course, recording_chapter);
@@ -248,8 +249,8 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 			search_page.exitInnerFrame();
 			
 			// 12. Click on the course name in the breadcrumb.
-			driver.findElement(By.xpath(".//*[@id='main']/div[2]/div/div[2]/span/a/b")).click(); //search_page.clickBackToCourseInBreadcrumbs();
-		
+			//driver.findElement(By.xpath(".//*[@id='main']/div[2]/div/div[2]/span/a/b")).click(); //search_page.clickBackToCourseInBreadcrumbs();
+			player_page.returnToCoursesPage(course);
 			// 13. Sign Out.
 			top_bar_helper.clickOnSignOut();
 			Thread.sleep(3000);

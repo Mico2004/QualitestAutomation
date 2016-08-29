@@ -102,8 +102,9 @@ public class EditRecording extends Page {
 			}
 		}
 		
-		
-			while(!isElementPresent(By.id("PlayButton_Img"))) {
+			int i = 0; 
+			while(!isElementPresent(By.id("PlayButton_Img")) || i < 20) {
+					i++;
 					System.out.println("element is not visable");
 					Thread.sleep(1000);	
 			}
@@ -189,7 +190,8 @@ public class EditRecording extends Page {
 		robot.keyRelease(KeyEvent.VK_ENTER);
 		Thread.sleep(3000);
 		
-		String path = "C:\\WebDriverTest\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
+		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
+
 		
 		// from here you can use as it wrote
 //		path = System.getProperty("user.dir") + path;
@@ -244,9 +246,11 @@ public class EditRecording extends Page {
 		}
 		
 		
-		while(!isElementPresent(By.id("PlayButton_Img"))) {
-			System.out.println("element is not visable");
-			Thread.sleep(1000);	
+		int index = 0; 
+		while(!isElementPresent(By.id("PlayButton_Img")) || index< 20) {
+			index++;
+				System.out.println("element is not visable");
+				Thread.sleep(1000);	
 		}
 			
 		for(String window_handler: driver.getWindowHandles()) {
@@ -309,10 +313,12 @@ public class EditRecording extends Page {
 			}
 		}
 		
-		while(!isElementPresent(By.id("PlayButton_Img"))) {
-			System.out.println("element is not visable");
-			Thread.sleep(1000);	
-	}
+		int index = 0; 
+		while(!isElementPresent(By.id("PlayButton_Img")) || index< 20) {
+			index++;
+				System.out.println("element is not visable");
+				Thread.sleep(1000);	
+		}
 
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);

@@ -132,7 +132,7 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		
 		// 3. Open some course.
 		course.selectCourseThatStartingWith("Ba");
-		
+		Thread.sleep(1000);
 		// 3.1 wait until the status will disappear
 		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 		// 4. Set the focus to the field with a mouse pointer.
@@ -148,11 +148,9 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 
 		String new_chapter_name = "/\\[]:;|=,+*?<>";
 		
-		edit_recording.changeFirstChapterRecordingNameToTargetName(new_chapter_name);
-		
-		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
-		Thread.sleep(2000);
-		
+		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(new_chapter_name);
+		Thread.sleep(1000);
+	
 		// 6. Search the "/\[]:;|=,+*?<>" chapter in the search field.
 		// 6.1. The chapter is'nt displayed.
 		String course_url = driver.getCurrentUrl();
@@ -174,7 +172,8 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 
 		new_chapter_name = "abc?<>";
 		
-		edit_recording.changeFirstChapterRecordingNameToTargetName(new_chapter_name);
+		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(new_chapter_name);
+		Thread.sleep(2500);
 		
 		// 8. Search the "abc?<>" chapter in the search field.
 		// 8.1. The chapter is'nt displayed.

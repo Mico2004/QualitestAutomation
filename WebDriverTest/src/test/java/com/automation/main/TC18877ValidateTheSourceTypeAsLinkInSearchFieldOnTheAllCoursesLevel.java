@@ -131,7 +131,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		
 		
 		// Upload additional content link

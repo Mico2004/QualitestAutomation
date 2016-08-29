@@ -371,7 +371,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 			}
 			
 			// Signout
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 		
 		}
 		
