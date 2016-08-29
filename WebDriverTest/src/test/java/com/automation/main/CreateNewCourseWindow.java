@@ -78,9 +78,10 @@ public class CreateNewCourseWindow extends Page {
 		wait.until(ExpectedConditions.textToBePresentInElementValue(course_name_input, course_name));
 		setCourseId(course_id);
 		wait.until(ExpectedConditions.textToBePresentInElementValue(course_id_input, course_id));
-		clickOnOkButton();
-		
-		System.out.println("New user created. Course name: " + course_name + ". Course id: " + course_id);
+		clickOnOkButton();		
+		System.out.println("New course created. Course name: " + course_name + ". Course id: " + course_id);
+		waitForAlert(60);
+	
 	}
 	
 	

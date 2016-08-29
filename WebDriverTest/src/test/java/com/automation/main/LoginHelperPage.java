@@ -105,12 +105,22 @@ public class LoginHelperPage extends Page {
 	public void loginCourses(String user_name) throws InterruptedException// login
 																			// courses
 	{
+		Thread.sleep(6000);
+		System.out.println("loginCourses1"); 
 		wait.until(ExpectedConditions.visibilityOf(usernamefield));
+		System.out.println("loginCourses2");
+		wait.until(ExpectedConditions.visibilityOf(passfield));
+		System.out.println("loginCourses3");
+		wait.until(ExpectedConditions.visibilityOf(button_login));
+		System.out.println("loginCourses4");
+		wait.until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
+		System.out.println("loginCourses5");
+		Thread.sleep(1000);
 		fillUser(user_name);
+		System.out.println("loginCourses6");
 		fillPass();		
 		try {
-			clickElement(button_login);
-			waitForVisibility(button_login);
+			clickElement(button_login);		
 			ATUReports.add("Login as", user_name, "Success login", "Success login", LogAs.PASSED, null);
 		} catch (Exception e) {
 			ATUReports.add("Login as", user_name, "Success login", "Success fail", LogAs.FAILED, null);

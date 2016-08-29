@@ -67,9 +67,9 @@ public class CopyMenu extends Page {
 	
 
 	// This function clicks on copy button of copy menu
-	public void clickOnCopyButton() throws WebDriverException {
+	public void clickOnCopyButton()  {
 				
-			System.out.println("Copy1");
+			try{System.out.println("Copy1");
 			wait.until(ExpectedConditions.visibilityOf(copy_button));
 			wait.until(ExpectedConditions.elementToBeClickable(copy_button));
 			System.out.println("Copy2");
@@ -77,7 +77,12 @@ public class CopyMenu extends Page {
 			System.out.println("Clicked on copy button");
 			ATUReports.add("Clicked on copy button", LogAs.PASSED, null);			
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("CopyButton")));
-			Assert.assertTrue(true);	
+			Assert.assertTrue(true);	}
+			catch(Exception e){
+				System.out.println(e.getMessage() +" message 2"+e.getLocalizedMessage());
+				
+				
+			}
 
 	}
 
@@ -109,7 +114,8 @@ public class CopyMenu extends Page {
 	public void clickOnCancelButton(RecordingHelperPage rec) throws InterruptedException {
 		try {
 			Thread.sleep(1000);
-			rec.clickElement(this.cancel_button);
+			waitForVisibility(cancel_button);			
+			cancel_button.click();
 			System.out.println("Clicked on cancel button");
 			ATUReports.add("Clicked on cancel button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);

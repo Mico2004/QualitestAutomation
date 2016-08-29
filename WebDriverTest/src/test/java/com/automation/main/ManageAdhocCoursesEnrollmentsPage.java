@@ -245,9 +245,9 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		driver.switchTo().alert().accept();
 		System.out.println("clicked on ok");
 		System.out.println("d5");
-		ATUReports.add("Enrolled "+user+"to course "+course+" as student ","user enrolled to course","user enrolled to course", LogAs.PASSED, null);
+		ATUReports.add("unEnrolled "+user+" from course "+course,"user unenrolled from course","user unenrolled from course", LogAs.PASSED, null);
 	}catch(Exception e){
-		ATUReports.add("Enrolled "+user+"to course "+course+" as student ","user enrolled to course","user not enrolled to course", LogAs.FAILED, null);
+		ATUReports.add("unEnrolled "+user+" from course "+course,"user unenrolled from course","failed", LogAs.FAILED, null);
 		
 		
 	}

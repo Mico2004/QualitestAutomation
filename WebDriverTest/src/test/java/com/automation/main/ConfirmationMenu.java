@@ -363,7 +363,7 @@ public class ConfirmationMenu extends Page {
 	}
 
 	public void clickOnOkButtonAfterConfirmEditRecordingProperties() throws InterruptedException {
-		for(int i=0; i<30; i++) {
+		for(int i=0; i<90; i++) {
 			try {
 				if(driver.findElement(By.cssSelector(".emphasis.ng-binding")).getText().contains("Recording properties have been queued for edit")) {
 					break;

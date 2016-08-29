@@ -192,6 +192,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	///select user by name using its name from eleemnt list
 	public boolean selectIrUserFromUserList(List<WebElement> list,String name) {
 		try {
+			waitForVisibility(first_user_of_user_list);
 			for(WebElement el:list) { 
 				String val=el.getText();
 				

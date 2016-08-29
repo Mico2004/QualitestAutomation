@@ -141,6 +141,8 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 			driver.switchTo().window(window);
 			break;
 		}
+		
+		
 		/// 5.build new course past course 2
 		driver.switchTo().frame(0);
 		Thread.sleep(4000);
@@ -149,9 +151,11 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		create_new_course_window.createNewCourse(past_course_student2, past_course_student2);
 		Thread.sleep(1000);
 		try {
-			driver.switchTo().alert().accept();
+		
+		mange_adhoc_course_enrollments.clickOkInAlertIfPresent();
 
 		} catch (Exception msg) {
+			System.out.print("Alert Handle"+msg.getMessage());
 
 		}
 		Thread.sleep(1000);

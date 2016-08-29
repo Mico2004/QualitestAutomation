@@ -460,27 +460,38 @@ public class CoursesHelperPage extends Page {
 			Thread.sleep(500);
 		}
 
-		if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
-			record_helper_page.clickOnRecordingTaskThenCopy();
-		} else if (type_of_recordings == 1) {
-			record_helper_page.clickOnContentTaskThenCopy();
-		}
 		int i = 0;
 		boolean copySuccess = false;
-		while (i < 3 || !copySuccess) {
+		while (i < 3 && !copySuccess) {
 			try {
+				if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
+					record_helper_page.clickOnRecordingTaskThenCopy();
+				} else if (type_of_recordings == 1) {
+					record_helper_page.clickOnContentTaskThenCopy();
+				}
+
+				System.out.println("CopyHandle");
 				copy_menu.selectTargetCourseFromCourseList(destination_course_name);
+				System.out.println("CopyHandle1");
 				copy_menu.clickOnCopyButton();
+				System.out.println("CopyHandle2");
 				confirmation_menu.clickOnOkButton();
+				System.out.println("CopyHandle3");
 				copySuccess = true;
 			} catch (Exception e) {
+				System.out.println("CopyHandleException" + i);
 				i++;
-				WebElement div = driver.findElement(By.xpath("//*[@id='main']"));
+				driver.navigate().refresh();
+				Thread.sleep(5000);
+				/*	WebElement div = driver.findElement(By.xpath("//*[@id='main']"));
 				Actions builder = new Actions(driver);
-				builder.moveToElement(div, 10, 10).click().build().perform();
-				if (i >= 3)
+				builder.moveToElement(div, 10, 10).click().build().perform();*/
+				if (i >= 3) {
 					ATUReports.add("Copy failed", "Copy Success", e.getMessage(), LogAs.FAILED, null);
-				Assert.assertTrue(false);
+					System.out.println(e.getMessage());
+					Assert.assertTrue(false);
+
+				}
 			}
 		}
 
@@ -658,13 +669,16 @@ public class CoursesHelperPage extends Page {
 
 	// verify course name exists in course list
 	public boolean verifyCourseExist(String name) {
-		for (String course : courses) {
-			if (name.equals(course)) {
+		List <String> courses=getCourseList();
+		for (int i=0;i<courses.size();i++) {
+			if (courses.get(i).equals(name)) {
 				System.out.println("course exists");
+				ATUReports.add("Course existence verification",name,"Course "+ name+" Found in course list ","Course "+ name+" Found in course list " ,LogAs.PASSED,null);
 				return true;
 			}
 		}
 		System.out.println("course  not exists");
+		ATUReports.add("Course existence verification",name,"Course "+ name+" wasn't Found in course list ","Course "+ name+" wasn't Found in course list " ,LogAs.FAILED,null);
 		return false;
 	}
 

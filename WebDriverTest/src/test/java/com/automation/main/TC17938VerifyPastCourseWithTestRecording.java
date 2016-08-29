@@ -213,9 +213,9 @@ public class TC17938VerifyPastCourseWithTestRecording {
 			// enroll the super user to the course
 			// Click on result first course (the only one) membership button
 			mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
-
+			String superuser=PropertyManager.getProperty("SuperUser");
 			// Search target user name in membership window
-			mangage_adhoc_courses_membership_window.searchForUser(PropertyManager.getProperty("SuperUser"));
+			mangage_adhoc_courses_membership_window.searchForUser(superuser);
 
 			// Select first user from user list (the only user it found because of
 			// the uniq of the search)
@@ -284,7 +284,7 @@ public class TC17938VerifyPastCourseWithTestRecording {
 			initializeCourseObject();
 			course.clickOnPastCoursesTabButton();
 			Thread.sleep(2000);		
-			course.verifyCourseExist(PastTempCourse);
+			course.verifyCourseExist(PastTempCourse+"_Name");
 
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

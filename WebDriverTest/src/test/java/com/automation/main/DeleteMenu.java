@@ -62,16 +62,17 @@ public class DeleteMenu extends Page {
 	// This function clicks on delete button of copy menu
 	public void clickOnDeleteButton() throws InterruptedException {
 		try {
+			System.out.println("delete1");
 			wait.until(ExpectedConditions.visibilityOf(delete_button));
 			Thread.sleep(2000);
+			System.out.println("delete2");
 			delete_button.click();
 			System.out.println("Clicked on delete button.");
 			ATUReports.add("Click Delete button", "Clicked on delete button", "Clicked on delete button", LogAs.PASSED,null);
-			Assert.assertTrue(true);
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("DeleteButton")));
+			Assert.assertTrue(true);			
 		} catch (Exception e) {
-			System.out.println("Fail click on delete button.");
-			ATUReports.add("Click Delete button", "Clicked on delete button", "Fail click on delete button",
+			System.out.println("Fail click on delete button." +e.getMessage());
+			ATUReports.add("Click Delete button", "Clicked on delete button", e.getMessage(),"Fail click on delete button",
 					LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}

@@ -35,6 +35,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.internal.WrapsDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -252,6 +253,8 @@ public class RecordingHelperPage extends Page {
 	WebElement download;
 	@FindBy(css = ".bookmark")
 	List<WebElement> bookmarks_list;
+	@FindBy(css=".video-outer:nth-of-type(2)")
+	WebElement visibleFirstChapter;
 	public @FindBy(css = ".resume-button.ng-scope>a") List<WebElement> list_of_resume_buttons;
 	public @FindBy(css = ".video-wrap") List<WebElement> video_wraps_of_chapters_of_opened_recording_list;
 	public @FindBy(css = ".thumbnail-image") List<WebElement> images_thumbnail_of_recording_chapters_list;
@@ -714,6 +717,7 @@ public String getSecondRecordingTitleTest() {
 	public List<String> checkAllCheckBox() {
 		System.out.println("checkAllCheckBox1");
 		wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
+		wait.until(ExpectedConditions.elementToBeClickable(check_all_checkbox));
 		System.out.println("checkAllCheckBox2");
 		check_all_checkbox.click();
 		System.out.println("checkAllCheckBox4");
@@ -1028,7 +1032,9 @@ public String getSecondRecordingTitleTest() {
 	public boolean checkThatRecordingStatusTargetIndexIsNotXWithTimeout(int index, String is_not, int time_interval)
 			throws InterruptedException {
 		for (int i = 0; i < time_interval; i++) {
-			String recording_status = driver.findElement(By.id("RecordingStatus" + Integer.toString(index))).getText();
+			
+			System.out.print("RecordingStatus" + (Integer.toString(index)+1));
+			String recording_status = driver.findElement(By.id("RecordingStatus" + (Integer.toString(index)))).getText();
 			if (!recording_status.equals(is_not)) {
 				System.out.println("Recordings in index: " + index + " is not: " + is_not);
 				ATUReports.add("Recordings in index: " + index + " is not: " + is_not, LogAs.PASSED, null);
@@ -1474,25 +1480,37 @@ public String getSecondRecordingTitleTest() {
 
 	/// selects recording by name
 	public void selectRecordingByName(String original_recorder_name) throws InterruptedException {
-
-		for (WebElement el : recordings_list) {
-			if ((el.getText().equals(original_recorder_name))) {
-				WebElement recording = driver.findElement(By.linkText((original_recorder_name)));
-
+		WebElement recording=null;
+		System.out.println(original_recorder_name);
+		try{
+			for (WebElement el : recordings_list) {			
+		
+			System.out.println(el.getText());
+			if ((el.getText().equals(original_recorder_name))) {				
+				recording= driver.findElement(By.linkText((original_recorder_name)));
+				waitForVisibility(recording);
+				recording.getText();
 				recording.click();
-				System.out.println(" course found");
-				ATUReports.add(" course found", LogAs.PASSED, null);
+				waitForVisibility(visibleFirstChapter);
+				System.out.println(" Recording found");
+				ATUReports.add(" Recording found", LogAs.PASSED, null);
 				Assert.assertTrue(true);
-
 				return;
 			}
-
 		}
-		System.out.println(" no such course found");
-		ATUReports.add("no such course", LogAs.FAILED, null);
-		Assert.assertTrue(false);
+		
+		}catch(WebDriverException e){
+			handlesClickIsNotVisible(recording);
+			waitForVisibility(visibleFirstChapter);
+			System.out.println(" no such recording found");
+			ATUReports.add("no such recording", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+			
+		}
+		}
+		
 
-	}
+	
 
 	// verify move menu
 	public void toMoveMenu() throws InterruptedException {
@@ -2421,7 +2439,7 @@ public String getSecondRecordingTitleTest() {
 	public void uploadFile(String path) throws Exception {
 
 		// from here you can use as it wrote
-		//path = System.getProperty("user.dir") + "\\FileName.txt";
+		path = System.getProperty("user.dir") + "\\src\\test\\resources\\additional_file.txt";
 		System.out.println(path);
 		StringSelection ss = new StringSelection(path);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
@@ -2480,15 +2498,24 @@ public String getSecondRecordingTitleTest() {
 	// thic function clicks on Recordings tab tab (in type of recordings
 	// menu)
 	public void clickOnRecordingsTab() {
+		boolean clicked=false;
+		int i=0;
+		while(i<3 && !clicked){
 		try {
+			waitForVisibility(recordings_tab);
 			recordings_tab.click();
 			System.out.println("Clicked on recordings tab");
 			ATUReports.add("Clicked on recordings tab", LogAs.PASSED, null);
+			clicked=true;
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
+			clicked=handlesClickIsNotVisible(recordings_tab);
+			if(i>=3){
 			System.out.println("Failed to click on recordings tab. ERROR: " + msg);
 			ATUReports.add("Failed to click on recordings tab. ERROR: " + msg, LogAs.FAILED, null);
-			Assert.assertTrue(false);
+			Assert.assertTrue(false);}
+		}
+		i++;
 		}
 	}
 
@@ -2536,7 +2563,7 @@ public String getSecondRecordingTitleTest() {
 	public boolean checkThatAdditionalContentFileStatusTargetIndexIsNotXWithTimeout(int index, String is_not,
 			int time_interval) throws InterruptedException {
 		for (int i = 0; i < time_interval; i++) {
-			String recording_status = driver.findElement(By.id("ItemStatus" + Integer.toString(index))).getText();
+			String recording_status = driver.findElement(By.id("ItemStatus" + (Integer.toString(index)))).getText();
 			if (!recording_status.equals(is_not)) {
 				System.out.println("additional content file in index: " + index + " is not: " + is_not);
 				ATUReports.add("additional content file in index: " + index + " is not: " + is_not, LogAs.PASSED, null);
@@ -3969,6 +3996,10 @@ public String getSecondRecordingTitleTest() {
 	}
 
 	public WebElement getCheckbox() {
+
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Checkbox1")));
+			wait.until(ExpectedConditions.elementToBeClickable(By.id("Checkbox1")));		
+		
 		return checkbox;
 	}
 
@@ -4447,6 +4478,21 @@ public String getSecondRecordingTitleTest() {
 		return exist;			
 		
 	}
-	
+	public void clickOnFirstVisibleChapter()
+	{
+		try{
+			waitForVisibility(visibleFirstChapter);
+			visibleFirstChapter.click();
+		}catch(Exception e){
+			ATUReports.add("Clicked on first chapter", true);
+			boolean clicked=handlesClickIsNotVisible(visibleFirstChapter);
+			if(!clicked)
+				ATUReports.add("Clicked on first chapter", false);
+			else
+				ATUReports.add("Clicked on first chapter", true);
+		}
+		
+		
+	}
 	
 }
