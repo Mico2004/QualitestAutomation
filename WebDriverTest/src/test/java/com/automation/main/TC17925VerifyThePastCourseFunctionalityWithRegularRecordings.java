@@ -87,10 +87,10 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
-		System.out.println("Starting the test: TC17925VerifyPastCourseRemovedWhenHasNoContent at " + DateToStr);
+		System.out.println("Starting the test: TC17925VerifyThePastCourseFunctionalityWithRegularRecordings at " + DateToStr);
 		ATUReports.add("Message window.",
-				"Starting the test: TC17925VerifyPastCourseRemovedWhenHasNoContent at " + DateToStr,
-				"Starting the test: TC17925VerifyPastCourseRemovedWhenHasNoContent at " + DateToStr, LogAs.PASSED,
+				"Starting the test: TC17925VerifyThePastCourseFunctionalityWithRegularRecordings at " + DateToStr,
+				"Starting the test: TC17925VerifyThePastCourseFunctionalityWithRegularRecordings at " + DateToStr, LogAs.PASSED,
 				null);
 
 	}
@@ -101,7 +101,7 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 	}
 
 	@Test(description = "Verify Past Course Removed When Has No Content")
-	public void TC17925() throws InterruptedException {
+	public void loginCourses() throws InterruptedException {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		user = "Past17925TempUser" + sdf.format(date);			
@@ -347,9 +347,8 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 		record.toEditRecordingPropertiesMenu();
 		Thread.sleep(2000);
 		erp_window.changeOwner(user);
-
-		erp_window.save_button.click();
-
+		erp_window.clickOnSaveButton();
+		erp_window.waitUntilEditRecordingProperiesClosed();		
 		Thread.sleep(5000);
 
 		System.out.println("before ok");

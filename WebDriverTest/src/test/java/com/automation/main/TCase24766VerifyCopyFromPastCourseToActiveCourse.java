@@ -98,7 +98,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				
 				// 1.load page
 				tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-				instructor1 = "inst110032016025435";
+			/*	instructor1 = "inst110032016025435";
 				
 				String superuser = PropertyManager.getProperty("SuperUser");
 				// String
@@ -258,7 +258,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				 driver.switchTo().window(window);
 				 break;
 				 }
-				 mange_adhoc_course_enrollments.sign_out.click();
+				 mange_adhoc_course_enrollments.sign_out.click();*/
 				
 				
 				
@@ -267,21 +267,33 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 
 /////////////////// test17929 begins///////////////
 				 
-				 
-				 
-				 
+				 		System.out.println("1");
+						String past_course_a="PastCourseAawsserverautomation-qa-"+PropertyManager.getProperty("User1").substring(4, PropertyManager.getProperty("User1").length())+"_Name";
+				 		String courseA="Abawsserverautomation-qa-"+PropertyManager.getProperty("User1").substring(4, PropertyManager.getProperty("User1").length())+"_Name";
 			////1. login as a instructor and change ownership
-						tegrity.loginCoursesByParameter(instructor1);
-						Thread.sleep(3000);
+				 		System.out.println("1.1");
+						tegrity.loginCourses("User1");
+						System.out.println("2");
+						Thread.sleep(3000);						 
+						System.out.println("a3");
+						course.deleteAllRecordingsInCourseStartWith("Ab", 0, record,delete_menu); 
+						
+						course.deleteAllRecordingsInCourseStartWith("Ab", 1, record,delete_menu); 
+						
+						course.deleteAllRecordingsInCourseStartWith("Ab", 2, record,delete_menu); 
 			///2.click past courses tab
 						course.clickOnPastCoursesTabButton();
+						System.out.println("3: "+past_course_a);
 						Thread.sleep(3000);
 			///3.select past course
-						course.selectCourseByName(past_course_a);
+												
+						course.selectCourseThatStartingWith(past_course_a);
 						Thread.sleep(3000);
+						System.out.println("4");
                         ///4.Select the recording
-					     record.recordings_tab.click(); 
+					     record.clickOnRecordingsTab();
 					     Thread.sleep(3000);
+					     System.out.println("5");
 					     record.convertRecordingsListToNames();
 					     String recordings=record.getFirstRecordingTitle();
 					record.getCheckbox().click();
@@ -289,7 +301,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 					record.clickOnRecordingTaskThenCopy();
 					Thread.sleep(3000);
 					//6.Select an active course and click the 'Copy' button
-					copy.selectTargetCourseFromCourseList(active_course);
+					copy.selectTargetCourseFromCourseList(courseA);
 					Thread.sleep(2000);
 						copy.clickOnCopyButton();
 					Thread.sleep(3000);
@@ -304,7 +316,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				
 						record.clickOnContentTaskThenCopy();
 					  Thread.sleep(3000);
-						copy.selectTargetCourseFromCourseList(active_course);
+						copy.selectTargetCourseFromCourseList(courseA);
 						Thread.sleep(2000);
 							copy.clickOnCopyButton();
 						Thread.sleep(3000);	    
@@ -318,7 +330,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 			///10.Select the "Content tasks -> Copy" menu item
 						record.clickOnRecordingTaskThenCopy();
 						Thread.sleep(3000);
-						copy.selectTargetCourseFromCourseList(active_course);
+						copy.selectTargetCourseFromCourseList(courseA);
 						Thread.sleep(2000);
 							copy.clickOnCopyButton();
 						Thread.sleep(3000);	  
@@ -330,7 +342,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
                       Thread.sleep(3000);
 				course.clickOnActiveCoursesTabButton();
 				Thread.sleep(2000);
-				course.selectCourseByName(active_course);
+				course.selectCourseByName(courseA);
 				Thread.sleep(3000);
 				///13.Verfiy the copied recording was moved correctly
 			  record.clickOnRecordingsTab();
@@ -364,7 +376,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 			
 			record.returnToCourseListPage();
 			Thread.sleep(3000);
-			course.selectCourseByName(active_course);
+			course.selectCourseByName(courseA);
 			Thread.sleep(3000);
 			///15.select couese and press additional content tab
 			record.clickOnAdditionContentTab();

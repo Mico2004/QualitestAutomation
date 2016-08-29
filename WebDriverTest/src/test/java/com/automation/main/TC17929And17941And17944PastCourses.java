@@ -558,7 +558,7 @@ public class TC17929And17941And17944PastCourses {
 		tegrity.loginCoursesByParameter(user);
 		Thread.sleep(2000);
 		course.clickOnPastCoursesTabButton();
-		course.verifyCourseExist(PastTempCourse);
+		course.verifyCourseExist(PastTempCourse+"_Name");
 		course.signOut();
 
 	}

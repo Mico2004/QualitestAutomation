@@ -53,12 +53,14 @@ public class ConfirmationMenu extends Page {
 	// This function clicks on ok button of copy menu
 
 	public void clickOnOkButton() throws InterruptedException {		
-		Thread.sleep(2000);
+		
 		if(!isAlertPresent()){
+			try {
+		Thread.sleep(3000);
 		waitForVisibility(alertWindow);
 		Thread.sleep(1000);
 		waitForVisibility(ok_button);
-		try {
+		
 			ok_button.click();
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -361,7 +363,7 @@ public class ConfirmationMenu extends Page {
 	}
 
 	public void clickOnOkButtonAfterConfirmEditRecordingProperties() throws InterruptedException {
-		for(int i=0; i<30; i++) {
+		for(int i=0; i<90; i++) {
 			try {
 				if(driver.findElement(By.cssSelector(".emphasis.ng-binding")).getText().contains("Recording properties have been queued for edit")) {
 					break;

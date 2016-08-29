@@ -120,31 +120,13 @@ public class CreateNewUserWindow extends Page {
 		setEmail(email);
 		setPassword(password);
 		setConfirmPassword(confirm_password);
-		
-		for(int i=0;i<20;i++) {
-			
-			try {
-				clickOnOkButton();
-				Thread.sleep(4000);
-				driver.switchTo().alert().accept();					
-				break;
-			} catch (Exception msg) {
-				Thread.sleep(1000);
-			}
-		}
-		
-		
-//		for(int i=0;i<20;i++) {
-//			try {				
-//				driver.switchTo().alert().accept();
-//				break;
-//			} catch (Exception msg) {
-//				Thread.sleep(1000);
-//			}
-//		}
+		clickOnOkButton();		
+		waitForAlert(60);
+		driver.switchTo().alert().accept();			
+
 		
 		System.out.println("New user created. Username: " + user_name + ". User id: " + user_id + ". Password: " + password);
-		
+		ATUReports.add("User Creation",user_name,"New User was created","New User was created",LogAs.PASSED,null);
 	}
 	
 	

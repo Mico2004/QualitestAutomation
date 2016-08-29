@@ -60,13 +60,15 @@ public class Page {
 
 	public void clickElement(WebElement element) // clicking element
 	{
+		String text=element.getText();
 		try {
-			wait.until(ExpectedConditions.visibilityOf(element));
+			
+			wait.until(ExpectedConditions.elementToBeClickable(element));
 			element.click();
-			System.out.println("Clicked on the element.");
-			ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
+			System.out.println("Clicked on "+element.getText()+" element");
+			ATUReports.add("Clicked on "+text+" element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED, null);
 		} catch (Exception msg) {
-
+			ATUReports.add("Clicked on "+text+" element", "Clicked succeeded..", "Clicked failed..", LogAs.FAILED, null);	
 		}
 
 	}
@@ -367,27 +369,31 @@ public class Page {
 	}
 
 	/// sign out from any page except Login page
-	public void signOut() throws InterruptedException {
+	public void signOut() {
 
-		
+		System.out.println("signOut1");
 		Actions builder = new Actions(driver); // new line
 		builder.sendKeys(Keys.PAGE_UP); // new line
 		builder.moveToElement(sign_out).build().perform();
 		waitForVisibility(sign_out);
+		System.out.println("signOut2");
 		sign_out.click();
+		System.out.println("signOut3");
 		// if(driver instanceof InternetExplorerDriver) {
 		// WebElement iw =
 		// driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
 		// iw.sendKeys(Keys.ENTER);
 		// }
 
-		for (int second = 0;; second++) {
+		for (int second = 0;second<60; second++) {
+			try {
+				Thread.sleep(2000);
 			if (second >= 60) {
 				System.out.println("LogOut from user not succeeded.");
 				ATUReports.add(" Login page timeout", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			}
-			try {
+		
 				if (driver.getTitle().equals("Tegrity Lecture Capture"))// check
 																		// if
 																		// element
@@ -399,15 +405,18 @@ public class Page {
 					Assert.assertTrue(true);
 					break;
 				} else {
+					Thread.sleep(3000);
+					System.out.println("Sign_out.Click");
 					sign_out.click();
 				}
 			} catch (Exception e) {
+				System.out.println("Sign_out.Click exception:" +e.getMessage());
 				break;
 			}
 
-			Thread.sleep(1000);
+			
 		}
-
+		System.out.println("signOut5");
 	}
 
 	// counts number of times pattern string appears in sourcecode
@@ -1050,15 +1059,15 @@ public class Page {
 			} while (!elementFound && i < 10);
 		System.out.println("s7");
 		if (elementFound) {
-			ATUReports.add("Scanning page succeeded: the course was clicked", elementText, "The course is clicked.",
-					"The course is clicked.", LogAs.PASSED, null);
+			ATUReports.add("Scanning page succeeded: the element was clicked", elementText, "The element is clicked.",
+					"The element is clicked.", LogAs.PASSED, null);
 			System.out.println("s8");
 			Assert.assertTrue(true);
 			return true;
 			
 		} else {
-			ATUReports.add("Scanning page failed: the course wasn't found", elementText, "The course is clicked.",
-					"The course wasn't", LogAs.FAILED, null);
+			ATUReports.add("Scanning page failed: the element wasn't found", elementText, "The element is clicked.",
+					"The element wasn't", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 			return false;
 		}

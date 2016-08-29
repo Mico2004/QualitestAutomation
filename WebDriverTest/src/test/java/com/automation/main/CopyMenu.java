@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -66,22 +67,22 @@ public class CopyMenu extends Page {
 	
 
 	// This function clicks on copy button of copy menu
-	public void clickOnCopyButton() throws InterruptedException {
-		try {
-			System.out.println("Copy1");
+	public void clickOnCopyButton()  {
+				
+			try{System.out.println("Copy1");
 			wait.until(ExpectedConditions.visibilityOf(copy_button));
+			wait.until(ExpectedConditions.elementToBeClickable(copy_button));
 			System.out.println("Copy2");
 			copy_button.click();		
 			System.out.println("Clicked on copy button");
-			ATUReports.add("Clicked on copy button", LogAs.PASSED, null);
-			Assert.assertTrue(true);
+			ATUReports.add("Clicked on copy button", LogAs.PASSED, null);			
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("CopyButton")));
-			
-		} catch (Exception e) {
-			System.out.println("Fail click on copy button");
-			ATUReports.add("Fail click on copy button", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
+			Assert.assertTrue(true);	}
+			catch(Exception e){
+				System.out.println(e.getMessage() +" message 2"+e.getLocalizedMessage());
+				
+				
+			}
 
 	}
 
@@ -113,7 +114,8 @@ public class CopyMenu extends Page {
 	public void clickOnCancelButton(RecordingHelperPage rec) throws InterruptedException {
 		try {
 			Thread.sleep(1000);
-			rec.clickElement(this.cancel_button);
+			waitForVisibility(cancel_button);			
+			cancel_button.click();
 			System.out.println("Clicked on cancel button");
 			ATUReports.add("Clicked on cancel button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -151,16 +153,16 @@ public class CopyMenu extends Page {
 			selected_course = course_list.get(i).getText();
 			if (selected_course.equals(target_course_name)) {
 				clickElement(course_list.get(i));
-				System.out.println("course is selected from course list: " + target_course_name);
-				ATUReports.add("course is selected from course list: " + target_course_name, LogAs.PASSED, null);
+				System.out.println("course is selected from Copy manu course list: " + target_course_name);
+				ATUReports.add("course is selected from Copy manu course list: " + target_course_name, LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				break;
 			}
 
 		}
 		if (selected_course == null) {
-			System.out.println("course is not selected from course list: " + target_course_name);
-			ATUReports.add("course is not selected from course list: " + target_course_name, LogAs.FAILED, null);
+			System.out.println("course is not selected from Copy manu course list: " + target_course_name);
+			ATUReports.add("course is not selected from Copy manu course list: " + target_course_name, LogAs.FAILED, null);
 			Assert.assertTrue(false);
 			return false;
 		}

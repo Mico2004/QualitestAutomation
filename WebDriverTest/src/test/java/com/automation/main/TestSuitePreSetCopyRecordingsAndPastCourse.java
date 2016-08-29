@@ -120,7 +120,19 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		// 1. Login with SuperUser.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		Thread.sleep(2000);
-		String login_url = driver.getCurrentUrl();
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	String login_url = driver.getCurrentUrl();
 		String university_name  = login_url.split("/")[2].substring(0,  login_url.split("/")[2].length() - 12);
 		String user = PropertyManager.getProperty("User1");
 		System.out.println("PastCourseA"+university_name+user.substring(5, user.length()));
@@ -129,6 +141,10 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		
 		
 		tegrity.loginAdmin("Admin");
+		
+		
+	Thread.sleep(4000);	
+		
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		for(int i=0; i<10; i++) {
 			try {
@@ -288,13 +304,13 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		System.out.println("4"); 
 		Thread.sleep(4000);
 		course.verifyRecordingsStatusIsClear("PastCourseB", 0, record);
-		System.out.println("4"); 
+		System.out.println("5"); 
 		Thread.sleep(4000);
-
-
-		tegrity.signOut();
-
-		tegrity.loginCourses("User1");
+			
+		
+		course.signOut();
+		System.out.println("6"); 
+		tegrity.loginCourses("User1");		
 		initializeCourseObject();	
 		Thread.sleep(2000);
 		course.selectCourseThatStartingWith("PastCourseA");	
@@ -344,112 +360,7 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
-		// // 2.copy courses to pastcourses a
-		//
-		// course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording",
-		// "PastCourseA", 0, record,
-		// copy, confirm_menu);
-		// course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording",
-		// "PastCourseA", 1, record,
-		// copy, confirm_menu);
-		// course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording",
-		// "PastCourseA", 2, record,
-		// copy, confirm_menu);
-		// // 3.copy courses to pastcourses b
-		//
-		// course.waitForVisibility(course.course_list.get(0));
-		// initializeCourseObject();
-		// course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording",
-		// "PastCourseB", 0, record,
-		// copy, confirm_menu);
-		// course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording",
-		// "PastCourseB", 1, record,
-		// copy, confirm_menu);
-		// course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording",
-		// "PastCourseB", 2, record,
-		// copy, confirm_menu);
-
-		// for (String window : driver.getWindowHandles()) {
-		// driver.switchTo().window(window);
-		// break;
-		// }
-		// course.signOut();
-		// Thread.sleep(3000);
-		//
-		// ////////////////////////// unenrolling user 1 past course A And B
-		// ////////////////////////// +changing recording ownership
-		// ////////////////////////// ///////////////////
-		// //
-		// // // 1. Login with SuperUser.
-		// tegrity.loginCourses("User1");// log in courses page
-		// initializeCourseObject();
-		// // //ownership change
-		//
-		// try {
-		// Robot robot = new Robot();
-		// robot.setAutoDelay(2000);
-		// robot.mouseMove(0, -1000);
-		// } catch (AWTException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		//
-		// String past_course_a =
-		// course.selectCourseThatStartingWith("PastCourseA");
-		// Thread.sleep(3000);
-		// String user1 = PropertyManager.getProperty("User1");
-		// String user4 = PropertyManager.getProperty("User4");
-		// record.changeRecordingOwnership(confirm_menu, erp_window, user1,
-		// null);
-		// Thread.sleep(3000);
-		// for (String window : driver.getWindowHandles()) {
-		// driver.switchTo().window(window);
-		// break;
-		// }
-		// record.returnToCourseListPage();
-		// Thread.sleep(3000);
-		// String past_course_b =
-		// course.selectCourseThatStartingWith("PastCourseB");
-		// Thread.sleep(3000);
-		//
-		// record.changeRecordingOwnership(confirm_menu, erp_window, user1,
-		// null);
-		// Thread.sleep(3000);
-		// record.signOut();
-		// Thread.sleep(3000);
-		// tegrity.loginCourses("User4");// log in courses page to register user
-		// in
-		// // database
-		// Thread.sleep(3000);
-		// course.signOut();
-		// tegrity.loginAdmin("Admin");
-		// Thread.sleep(5000);
-		// // 4. Click on course builder href link
-		//
-		// // String
-		// //
-		// past_course_a="PastCourseAawsserverautomation113032016121315_Name";
-		// // String
-		// //
-		// past_course_b="PastCourseBawsserverautomation113032016121315_Name";
-		//
-		// admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc
-		// Courses / Enrollments (Course Builder)");
-		// Thread.sleep(10000);
-		// mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_a,
-		// user1,
-		// mangage_adhoc_courses_membership_window);
-		// Thread.sleep(3000);
-		// for (String window : driver.getWindowHandles()) {
-		// driver.switchTo().window(window);
-		// break;
-		// }
-		// mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_b,
-		// user1,
-		// mangage_adhoc_courses_membership_window);
-		// Thread.sleep(3000);
-		//
-		// driver.quit();
+	
 
 	}
 }

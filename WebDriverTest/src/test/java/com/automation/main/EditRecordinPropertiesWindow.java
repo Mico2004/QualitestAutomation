@@ -52,17 +52,10 @@ public class EditRecordinPropertiesWindow extends Page {
 					owner_button.sendKeys(Keys.ENTER);
 					// moveToElementAndClick(el, driver);
 					System.out.println("user selected");
-					ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership successfully", LogAs.PASSED, null);
-					
+					ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership successfully", LogAs.PASSED, null);					
 					return;
-				}else{
-					ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership failed", LogAs.FAILED, null);
-					
-					
 				}
-
-			}
-			System.out.println("user1 selection failed");
+			}			
 		} catch (Exception e) {
 			System.out.println("clicked on owner scroll failed");
 			ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership failed", LogAs.FAILED, null);
@@ -77,6 +70,16 @@ public class EditRecordinPropertiesWindow extends Page {
 			return false;
 		} catch (org.openqa.selenium.NoSuchElementException msg) {
 			return true;
+		}
+	}
+	
+	public void waitUntilEditRecordingProperiesClosed() {
+		try {
+			
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ModalDialogHeader")));	
+			ATUReports.add("Verifying edit window is closed", "edit window is closed","edit window is closed",LogAs.PASSED,null);
+		} catch (Exception msg) {
+			ATUReports.add("Verifying edit window is closed", "edit window isn't closed","edit window isn't closed",LogAs.FAILED,null);
 		}
 	}
 
@@ -110,6 +113,7 @@ public class EditRecordinPropertiesWindow extends Page {
 	// This function clicks on Save button
 	public void clickOnSaveButton() {
 		try {
+			wait.until(ExpectedConditions.elementToBeClickable(save_button));
 			save_button.click();
 			System.out.println("Clicked on save button.");
 			ATUReports.add("Clicked on save button.", "Success.", "Success.", LogAs.PASSED, null);
