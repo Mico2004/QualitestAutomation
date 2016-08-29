@@ -259,30 +259,43 @@ public class CoursesHelperPage extends Page {
 			try {
 				i++;
 				wait.until(ExpectedConditions.elementToBeClickable(sCourse2));
+				System.out.println("s1");
 				wait.until(ExpectedConditions.visibilityOf(sCourse2));
 				sCourse2.click();
-				wait.until(ExpectedConditions.titleContains("Tegrity - " + destination_course_name));
+				System.out.println("s2");
 				clicked = true;
 
 			} catch (Exception ex) {
+				clicked = handlesClickIsNotVisible(sCourse2);
 				try {
-
-					WebElement wi = driver.findElement(By.xpath("//*[@id='main']"));
-					Actions builder = new Actions(driver);
-					builder.sendKeys(Keys.PAGE_DOWN);
-					builder.moveToElement(wi).build().perform();
-					courses_heading.click();
-					builder.click();
-					Thread.sleep(1000);
-				} catch (Exception e) {
+					Thread.sleep(5000);
+					System.out.println("s3.1");
+				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				/*
+				 * try {
+				 * 
+				 * 
+				 * WebElement wi =
+				 * driver.findElement(By.xpath("//*[@id='main']")); Actions
+				 * builder = new Actions(driver);
+				 * 
+				 * //courses_heading.click();
+				 * 
+				 * builder.moveToElement(wi, 10, 25).click().build().perform();
+				 * 
+				 * System.out.println("s4"); builder.sendKeys(Keys.PAGE_DOWN);
+				 * builder.moveToElement(wi).build().perform(); builder.click();
+				 * System.out.println("s5"); Thread.sleep(1000); } catch
+				 * (Exception e) { // TODO Auto-generated catch block
+				 * e.printStackTrace(); System.out.println("s6"); }
+				 */
 			}
-
 		}
 	}
+
 
 	/// verify setting option for every instructor course in recording page
 	public boolean verifyCoursesForInstructor(String xml_url) throws InterruptedException {
