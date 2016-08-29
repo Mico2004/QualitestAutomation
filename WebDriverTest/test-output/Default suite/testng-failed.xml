@@ -3,15 +3,13 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.automation.main.TC17929And17941And17944PastCourses">
+      <class name="com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse">
         <methods>
-          <include name="test17941"/>
-          <include name="test17944"/>
+          <include name="test24766"/>
           <include name="setup"/>
           <include name="closeBroswer"/>
-          <include name="test17929"/>
         </methods>
-      </class> <!-- com.automation.main.TC17929And17941And17944PastCourses -->
+      </class> <!-- com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
