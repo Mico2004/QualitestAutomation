@@ -2718,7 +2718,7 @@ public String getSecondRecordingTitleTest() {
 	// This function checks if Content Tasks button displyed. Return true if it
 	// is, and false otherwise
 	public boolean isContentTasksButtonDisplay() {
-		waitForVisibility(content_tasks_button);
+	;
 		if (content_tasks_button.isDisplayed()) {
 			return true;
 		} else {
