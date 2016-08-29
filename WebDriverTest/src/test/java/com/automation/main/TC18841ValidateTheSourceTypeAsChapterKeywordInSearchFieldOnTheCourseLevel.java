@@ -223,7 +223,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(recording_chapter_keyword, "Source: Chapter Keyword");
 			
 			// 5.9. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();

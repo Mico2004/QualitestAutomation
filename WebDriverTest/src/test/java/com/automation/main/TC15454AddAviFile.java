@@ -145,7 +145,7 @@ public class TC15454AddAviFile {
 
 		// 7.check if redirected to additional content tab
 
-		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
+		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("new-theme").equals("active")) {
 			System.out.println("redirected to additional content tab");
 			ATUReports.add("redirected to additional content tab", LogAs.PASSED, null);
 			Assert.assertTrue(true);

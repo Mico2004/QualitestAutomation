@@ -130,6 +130,8 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		
 		course.selectCourseThatStartingWith("Ba");
 		
+		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
+		
 		Thread.sleep(3000);
 		record.selectIndexCheckBox(1);
 		Thread.sleep(500);

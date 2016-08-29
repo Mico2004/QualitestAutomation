@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testng-results skipped="2" failed="3" total="18" passed="13">
+=======
+<testng-results skipped="0" failed="1" total="1" passed="0">
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
   <reporter-output>
     <line>
       <![CDATA[STEP1]]>
@@ -64,6 +68,7 @@
     <line>
       <![CDATA[STEP21]]>
     </line>
+<<<<<<< HEAD
     <line>
       <![CDATA[STEP22]]>
     </line>
@@ -1747,36 +1752,154 @@
     <line>
       <![CDATA[STEP582]]>
     </line>
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
   </reporter-output>
+<<<<<<< HEAD
   <suite name="Suite" duration-ms="3151139" started-at="2016-08-29T11:00:57Z" finished-at="2016-08-29T11:53:29Z">
+=======
+<<<<<<< HEAD
+  <suite name="Suite" duration-ms="141917" started-at="2016-08-28T11:10:43Z" finished-at="2016-08-28T11:13:05Z">
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+  <suite name="Default suite" duration-ms="69008" started-at="2016-08-25T13:12:01Z" finished-at="2016-08-25T13:13:10Z">
+=======
+  <suite name="Suite" duration-ms="491587" started-at="2016-08-24T10:07:09Z" finished-at="2016-08-24T10:15:20Z">
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+=======
+  <suite name="Suite" duration-ms="491587" started-at="2016-08-24T10:07:09Z" finished-at="2016-08-24T10:15:20Z">
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
     <groups>
     </groups>
+<<<<<<< HEAD
     <test name="Test" duration-ms="3151139" started-at="2016-08-29T11:00:57Z" finished-at="2016-08-29T11:53:29Z">
+=======
+<<<<<<< HEAD
+    <test name="Test" duration-ms="141917" started-at="2016-08-28T11:10:43Z" finished-at="2016-08-28T11:13:05Z">
+      <class name="com.automation.main.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.automation.main.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN@61009542]" name="setup" is-config="true" duration-ms="10188" started-at="2016-08-28T14:10:43Z" finished-at="2016-08-28T14:10:53Z">
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <test name="Default test" duration-ms="69008" started-at="2016-08-25T13:12:01Z" finished-at="2016-08-25T13:13:10Z">
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
       <class name="com.automation.main.TC17929And17941And17944PastCourses">
+<<<<<<< HEAD
         <test-method status="PASS" signature="setup()[pri:0, instance:com.automation.main.TC17929And17941And17944PastCourses@6eebc39e]" name="setup" is-config="true" duration-ms="3527" started-at="2016-08-29T14:41:29Z" finished-at="2016-08-29T14:41:33Z">
+=======
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.automation.main.TC17929And17941And17944PastCourses@26be92ad]" name="setup" is-config="true" duration-ms="5124" started-at="2016-08-25T16:12:01Z" finished-at="2016-08-25T16:12:06Z">
+=======
+    <test name="Test" duration-ms="491587" started-at="2016-08-24T10:07:09Z" finished-at="2016-08-24T10:15:20Z">
+      <class name="com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel@49e4cb85]" name="setup" is-config="true" duration-ms="10469" started-at="2016-08-24T13:07:09Z" finished-at="2016-08-24T13:07:19Z">
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+=======
+    <test name="Test" duration-ms="491587" started-at="2016-08-24T10:07:09Z" finished-at="2016-08-24T10:15:20Z">
+      <class name="com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel@49e4cb85]" name="setup" is-config="true" duration-ms="10469" started-at="2016-08-24T13:07:09Z" finished-at="2016-08-24T13:07:19Z">
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
           <reporter-output>
             <line>
               <![CDATA[STEP506]]>
             </line>
             <line>
+<<<<<<< HEAD
               <![CDATA[STEP507]]>
+=======
+              <![CDATA[STEP2]]>
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
             </line>
           </reporter-output>
         </test-method> <!-- setup -->
+<<<<<<< HEAD
         <test-method status="FAIL" signature="test17929()[pri:0, instance:com.automation.main.TC17929And17941And17944PastCourses@6eebc39e]" name="test17929" duration-ms="206076" started-at="2016-08-29T14:41:33Z" finished-at="2016-08-29T14:44:59Z">
+=======
+<<<<<<< HEAD
+        <test-method status="FAIL" signature="test22662()[pri:0, instance:com.automation.main.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN@61009542]" name="test22662" duration-ms="130414" started-at="2016-08-28T14:10:53Z" finished-at="2016-08-28T14:13:04Z">
+          <exception class="org.openqa.selenium.TimeoutException">
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <test-method status="FAIL" signature="test17929()[pri:0, instance:com.automation.main.TC17929And17941And17944PastCourses@26be92ad]" name="test17929" duration-ms="62732" started-at="2016-08-25T16:12:06Z" finished-at="2016-08-25T16:13:08Z">
+          <exception class="atu.testng.reports.exceptions.ATUReporterStepFailedException">
+=======
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+        <test-method status="PASS" signature="loadPage()[pri:0, instance:com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel@49e4cb85]" name="loadPage" duration-ms="4857" started-at="2016-08-24T13:07:19Z" finished-at="2016-08-24T13:07:24Z">
+          <reporter-output>
+            <line>
+              <![CDATA[STEP4]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- loadPage -->
+        <test-method status="FAIL" signature="loginCourses()[pri:0, instance:com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel@49e4cb85]" name="loginCourses" duration-ms="474528" started-at="2016-08-24T13:07:24Z" description="Login course page" depends-on-methods="com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.loadPage" finished-at="2016-08-24T13:15:18Z">
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
           <exception class="java.lang.AssertionError">
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
             <message>
-              <![CDATA[expected [true] but found [false]]]>
+              <![CDATA[Timed out after 30 seconds waiting for visibility of Proxy element for: DefaultElementLocator 'By.id: undefined_TXT'
+Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'
+System info: host: 'QA-2-Win8_1-64', ip: '192.168.0.235', os.name: 'Windows 8.1', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_91'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=47.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 90814ed3-5ad4-4d0c-b50b-f58eba84a496]]>
             </message>
             <full-stacktrace>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+              <![CDATA[org.openqa.selenium.TimeoutException: Timed out after 30 seconds waiting for visibility of Proxy element for: DefaultElementLocator 'By.id: undefined_TXT'
+Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'
+System info: host: 'QA-2-Win8_1-64', ip: '192.168.0.235', os.name: 'Windows 8.1', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_91'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=47.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 90814ed3-5ad4-4d0c-b50b-f58eba84a496
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:80)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:261)
+	at com.automation.main.Page.waitForVisibility(Page.java:124)
+	at com.automation.main.PlayerPage.verifySearchResultPage(PlayerPage.java:421)
+	at com.automation.main.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN.test22662(TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN.java:226)
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+              <![CDATA[[ATU Custom Reporter Step Failed Exception]
+	at atu.testng.reports.ATUReports.stepFailureHandler(Unknown Source)
+	at atu.testng.reports.ATUReports.add(Unknown Source)
+	at com.automation.main.Page.handlesClickIsNotVisible(Page.java:1061)
+	at com.automation.main.CoursesHelperPage.selectCourseByName(CoursesHelperPage.java:269)
+	at com.automation.main.CoursesHelperPage.selectCourseThatStartingWith(CoursesHelperPage.java:407)
+	at com.automation.main.TC17929And17941And17944PastCourses.test17929(TC17929And17941And17944PastCourses.java:333)
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
               <![CDATA[java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:94)
 	at org.testng.Assert.failNotEquals(Assert.java:494)
 	at org.testng.Assert.assertTrue(Assert.java:42)
 	at org.testng.Assert.assertTrue(Assert.java:52)
+<<<<<<< HEAD
 	at com.automation.main.ConfirmationMenu.clickOnOkButton(ConfirmationMenu.java:69)
 	at com.automation.main.RecordingHelperPage.toUploadAdditionalContentFile(RecordingHelperPage.java:2401)
 	at com.automation.main.TC17929And17941And17944PastCourses.test17929(TC17929And17941And17944PastCourses.java:328)
+=======
+	at com.automation.main.AdminDashboardViewCourseList.clickOnFirstCourseLink(AdminDashboardViewCourseList.java:102)
+	at com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.loginCourses(TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.java:240)
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+=======
+              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:94)
+	at org.testng.Assert.failNotEquals(Assert.java:494)
+	at org.testng.Assert.assertTrue(Assert.java:42)
+	at org.testng.Assert.assertTrue(Assert.java:52)
+	at com.automation.main.AdminDashboardViewCourseList.clickOnFirstCourseLink(AdminDashboardViewCourseList.java:102)
+	at com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.loginCourses(TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.java:240)
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -1801,11 +1924,84 @@
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+<<<<<<< HEAD
+=======
+=======
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:207)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:178)
+<<<<<<< HEAD
+Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"id","selector":"undefined_TXT"}
+Command duration or timeout: 25 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'
+System info: host: 'QA-2-Win8_1-64', ip: '192.168.0.235', os.name: 'Windows 8.1', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_91'
+Driver info: org.openqa.selenium.firefox.FirefoxDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=47.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: 90814ed3-5ad4-4d0c-b50b-f58eba84a496
+*** Element info: {Using=id, value=undefined_TXT}
+	at sun.reflect.GeneratedConstructorAccessor14.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:206)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:158)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:678)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:363)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElementById(RemoteWebDriver.java:413)
+	at org.openqa.selenium.By$ById.findElement(By.java:218)
+	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:355)
+	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
+	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
+	at com.sun.proxy.$Proxy6.isDisplayed(Unknown Source)
+	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:302)
+	at org.openqa.selenium.support.ui.ExpectedConditions.access$100(ExpectedConditions.java:41)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:288)
+	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:285)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:238)
+	... 27 more
+Caused by: org.openqa.selenium.NoSuchElementException: Unable to locate element: {"method":"id","selector":"undefined_TXT"}
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'
+System info: host: 'QA-2-Win8_1-64', ip: '192.168.0.235', os.name: 'Windows 8.1', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_91'
+Driver info: driver.version: unknown
+	at <anonymous class>.FirefoxDriver.prototype.findElementInternal_(file:///C:/Users/moshikk/AppData/Local/Temp/anonymous6737382778700713781webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10770)
+	at <anonymous class>.FirefoxDriver.prototype.findElement(file:///C:/Users/moshikk/AppData/Local/Temp/anonymous6737382778700713781webdriver-profile/extensions/fxdriver@googlecode.com/components/driver-component.js:10779)
+	at <anonymous class>.DelayedCommand.prototype.executeInternal_/h(file:///C:/Users/moshikk/AppData/Local/Temp/anonymous6737382778700713781webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12661)
+	at <anonymous class>.DelayedCommand.prototype.executeInternal_(file:///C:/Users/moshikk/AppData/Local/Temp/anonymous6737382778700713781webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12666)
+	at <anonymous class>.DelayedCommand.prototype.execute/<(file:///C:/Users/moshikk/AppData/Local/Temp/anonymous6737382778700713781webdriver-profile/extensions/fxdriver@googlecode.com/components/command-processor.js:12608)
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+=======
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:207)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:178)
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 ]]>
             </full-stacktrace>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+          </exception> <!-- atu.testng.reports.exceptions.ATUReporterStepFailedException -->
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
           </exception> <!-- java.lang.AssertionError -->
+<<<<<<< HEAD
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+=======
+          </exception> <!-- java.lang.AssertionError -->
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
           <reporter-output>
             <line>
+<<<<<<< HEAD
               <![CDATA[STEP508]]>
             </line>
             <line>
@@ -2278,6 +2474,8 @@
         <test-method status="PASS" signature="loginCourses()[pri:0, instance:com.automation.main.TestSuitePreSetCopyRecordingsAndPastCourse@57fffcd7]" name="loginCourses" duration-ms="829827" started-at="2016-08-29T14:01:04Z" description="Past Courses Pretest" finished-at="2016-08-29T14:14:54Z">
           <reporter-output>
             <line>
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
               <![CDATA[STEP3]]>
             </line>
             <line>
@@ -2334,6 +2532,7 @@
             <line>
               <![CDATA[STEP21]]>
             </line>
+<<<<<<< HEAD
             <line>
               <![CDATA[STEP22]]>
             </line>
@@ -2802,12 +3001,199 @@
             <line>
               <![CDATA[STEP177]]>
             </line>
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
           </reporter-output>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        </test-method> <!-- test22662 -->
+        <test-method status="PASS" signature="closeBroswer()[pri:0, instance:com.automation.main.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN@61009542]" name="closeBroswer" is-config="true" duration-ms="1288" started-at="2016-08-28T14:13:04Z" finished-at="2016-08-28T14:13:05Z">
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        </test-method> <!-- test17929 -->
+        <test-method status="SKIP" signature="test17941()[pri:0, instance:com.automation.main.TC17929And17941And17944PastCourses@26be92ad]" name="test17941" duration-ms="2" started-at="2016-08-25T16:13:08Z" depends-on-methods="com.automation.main.TC17929And17941And17944PastCourses.test17929" finished-at="2016-08-25T16:13:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test17941 -->
+        <test-method status="SKIP" signature="test17944()[pri:0, instance:com.automation.main.TC17929And17941And17944PastCourses@26be92ad]" name="test17944" duration-ms="0" started-at="2016-08-25T16:13:08Z" depends-on-methods="com.automation.main.TC17929And17941And17944PastCourses.test17941" finished-at="2016-08-25T16:13:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- test17944 -->
+        <test-method status="PASS" signature="closeBroswer()[pri:0, instance:com.automation.main.TC17929And17941And17944PastCourses@26be92ad]" name="closeBroswer" is-config="true" duration-ms="1114" started-at="2016-08-25T16:13:08Z" finished-at="2016-08-25T16:13:10Z">
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
         </test-method> <!-- loginCourses -->
+<<<<<<< HEAD
         <test-method status="PASS" signature="closeBroswer()[pri:0, instance:com.automation.main.TestSuitePreSetCopyRecordingsAndPastCourse@57fffcd7]" name="closeBroswer" is-config="true" duration-ms="1451" started-at="2016-08-29T14:14:54Z" finished-at="2016-08-29T14:14:55Z">
+=======
+        <test-method status="FAIL" signature="closeBroswer()[pri:0, instance:com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel@49e4cb85]" name="closeBroswer" is-config="true" duration-ms="0" started-at="2016-08-24T13:15:18Z" finished-at="2016-08-24T13:15:18Z">
+          <exception class="org.openqa.selenium.remote.UnreachableBrowserException">
+            <message>
+              <![CDATA[Error communicating with the remote browser. It may have died.
+Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'
+System info: host: 'QA-2-Win8_1-64', ip: '192.168.0.235', os.name: 'Windows 8.1', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_91'
+Driver info: driver.version: RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=47.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: a8fad7df-3587-4089-ae00-96484daaf4b0]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.remote.UnreachableBrowserException: Error communicating with the remote browser. It may have died.
+Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'
+System info: host: 'QA-2-Win8_1-64', ip: '192.168.0.235', os.name: 'Windows 8.1', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_91'
+Driver info: driver.version: RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=47.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: a8fad7df-3587-4089-ae00-96484daaf4b0
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:665)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:701)
+	at org.openqa.selenium.remote.RemoteWebDriver.quit(RemoteWebDriver.java:526)
+	at com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.closeBroswer(TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.java:106)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:564)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:213)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)
+	at org.testng.internal.TestMethodWorker.invokeAfterClassMethods(TestMethodWorker.java:225)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:114)
+	at org.testng.TestRunner.privateRun(TestRunner.java:767)
+	at org.testng.TestRunner.run(TestRunner.java:617)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1123)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:207)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:178)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connect to 127.0.0.1:7055 [/127.0.0.1] failed: Connection refused: connect
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:353)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:380)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:184)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:88)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:71)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.openqa.selenium.remote.internal.ApacheHttpClient.fallBackExecute(ApacheHttpClient.java:144)
+	at org.openqa.selenium.remote.internal.ApacheHttpClient.execute(ApacheHttpClient.java:90)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:142)
+	at org.openqa.selenium.firefox.internal.NewProfileExtensionConnection.execute(NewProfileExtensionConnection.java:160)
+	at org.openqa.selenium.firefox.FirefoxDriver$LazyCommandExecutor.execute(FirefoxDriver.java:380)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:644)
+	... 27 more
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:74)
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:141)
+	... 42 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.remote.UnreachableBrowserException -->
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+=======
+        </test-method> <!-- loginCourses -->
+        <test-method status="FAIL" signature="closeBroswer()[pri:0, instance:com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel@49e4cb85]" name="closeBroswer" is-config="true" duration-ms="0" started-at="2016-08-24T13:15:18Z" finished-at="2016-08-24T13:15:18Z">
+          <exception class="org.openqa.selenium.remote.UnreachableBrowserException">
+            <message>
+              <![CDATA[Error communicating with the remote browser. It may have died.
+Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'
+System info: host: 'QA-2-Win8_1-64', ip: '192.168.0.235', os.name: 'Windows 8.1', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_91'
+Driver info: driver.version: RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=47.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: a8fad7df-3587-4089-ae00-96484daaf4b0]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.remote.UnreachableBrowserException: Error communicating with the remote browser. It may have died.
+Build info: version: '2.53.1', revision: 'a36b8b1cd5757287168e54b817830adce9b0158d', time: '2016-06-30 19:26:09'
+System info: host: 'QA-2-Win8_1-64', ip: '192.168.0.235', os.name: 'Windows 8.1', os.arch: 'amd64', os.version: '6.3', java.version: '1.8.0_91'
+Driver info: driver.version: RemoteWebDriver
+Capabilities [{applicationCacheEnabled=true, rotatable=false, handlesAlerts=true, databaseEnabled=true, version=47.0.1, platform=WINDOWS, nativeEvents=false, acceptSslCerts=true, webStorageEnabled=true, locationContextEnabled=true, browserName=firefox, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true}]
+Session ID: a8fad7df-3587-4089-ae00-96484daaf4b0
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:665)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:701)
+	at org.openqa.selenium.remote.RemoteWebDriver.quit(RemoteWebDriver.java:526)
+	at com.automation.main.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.closeBroswer(TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel.java:106)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:564)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:213)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)
+	at org.testng.internal.TestMethodWorker.invokeAfterClassMethods(TestMethodWorker.java:225)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:114)
+	at org.testng.TestRunner.privateRun(TestRunner.java:767)
+	at org.testng.TestRunner.run(TestRunner.java:617)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1198)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1123)
+	at org.testng.TestNG.run(TestNG.java:1031)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:207)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:178)
+Caused by: org.apache.http.conn.HttpHostConnectException: Connect to 127.0.0.1:7055 [/127.0.0.1] failed: Connection refused: connect
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:158)
+	at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:353)
+	at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:380)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:184)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:88)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:71)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.openqa.selenium.remote.internal.ApacheHttpClient.fallBackExecute(ApacheHttpClient.java:144)
+	at org.openqa.selenium.remote.internal.ApacheHttpClient.execute(ApacheHttpClient.java:90)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:142)
+	at org.openqa.selenium.firefox.internal.NewProfileExtensionConnection.execute(NewProfileExtensionConnection.java:160)
+	at org.openqa.selenium.firefox.FirefoxDriver$LazyCommandExecutor.execute(FirefoxDriver.java:380)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:644)
+	... 27 more
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at org.apache.http.conn.socket.PlainConnectionSocketFactory.connectSocket(PlainConnectionSocketFactory.java:74)
+	at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:141)
+	... 42 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.remote.UnreachableBrowserException -->
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBroswer -->
+<<<<<<< HEAD
       </class> <!-- com.automation.main.TestSuitePreSetCopyRecordingsAndPastCourse -->
       <class name="com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself">
         <test-method status="PASS" signature="setup()[pri:0, instance:com.automation.main.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself@6d4b1c02]" name="setup" is-config="true" duration-ms="4420" started-at="2016-08-29T14:14:55Z" finished-at="2016-08-29T14:15:00Z">
@@ -3796,6 +4182,9 @@
           </reporter-output>
         </test-method> <!-- closeBroswer -->
       </class> <!-- com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse -->
+=======
+      </class> <!-- com.automation.main.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN -->
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
     </test> <!-- Test -->
   </suite> <!-- Suite -->
 </testng-results>

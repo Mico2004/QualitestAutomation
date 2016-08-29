@@ -140,7 +140,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		// changing the first chapter
 		Thread.sleep(3000);
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		Thread.sleep(1000);
 		//String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 		//String first_chapter_title =  driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a/div[2]/p[2]")).getText();	
@@ -150,7 +150,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-		String first_chapter_title = "newname_newname_newname_newname_newname_newname_newname_newname_newname" + sdf.format(date);
+		String first_chapter_title = "newname" + sdf.format(date);
 		
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(first_chapter_title);
 		
@@ -185,8 +185,8 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		search_page.verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfound(current_course, first_chapter_title);
 		
 //		// 8.5. The recording chapter icon is displayed. (the play icon appears with hover over the recording). - Checking the same in step 9
-//		search_page.moveToElement(search_page.video_thumbnails_list.get(0), driver).perform();
-//		search_page.verifyWebElementDisplayed(driver.findElement(By.cssSelector(".play-button")), "The play icon");
+		search_page.moveToElementAndPerform(search_page.video_thumbnails_list.get(0), driver);
+		search_page.verifyWebElementDisplayed(driver.findElement(By.cssSelector(".play-button")), "The play icon");
 		
 		// 8.6. The respective recording chapter snapshot is displayed in the icon - Cannot be automated (TODO: check another way later).
 		
@@ -218,7 +218,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		// 9.1. The chapter icon become a bit bigger in size.
 		Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
-
+	
 		if((after_hovring.x < before_hovring.x) && (after_hovring.y < before_hovring.y)) {
 			System.out.println("Verifed that chapter icon become a bit bigger in size.");
 			ATUReports.add("Verifed that chapter icon become a bit bigger in size.", "True.", "True.", LogAs.PASSED, null);

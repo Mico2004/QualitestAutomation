@@ -133,6 +133,8 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		// 3. Open some course.
 		course.selectCourseThatStartingWith("Ba");
 		
+		// 3.1 wait until the status will disappear
+		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 		// 4. Set the focus to the field with a mouse pointer.
 		top_bar_helper.search_box_field.click();
 	

@@ -144,9 +144,6 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 			break;
 		}
 		
-		search_page.clickBackToCourseInBreadcrumbs();
-		
-		
 		// Make course public
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();

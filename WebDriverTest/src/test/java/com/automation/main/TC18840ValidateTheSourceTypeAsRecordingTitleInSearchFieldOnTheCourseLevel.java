@@ -146,7 +146,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		
 			top_bar_helper.clickOnSignOut();
 			Thread.sleep(1000);
-			
+		
 			tegrity.loginCourses("SuperUser");
 			Thread.sleep(1000);
 			
@@ -221,6 +221,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 				tegrity.loginAdmin("Admin");
 				recording_title_for_the_test = recording_for_admin;
 			}
+		
 			Thread.sleep(3000);
 			
 			if(type_of_user < 3) {

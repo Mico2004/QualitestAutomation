@@ -8,6 +8,7 @@
   </listeners>
   <test name="Test(failed)">
     <classes>
+<<<<<<< HEAD
       <class name="com.automation.main.TC17933VerifypastCourseWithStudentRecording">
         <methods>
           <include name="closeBroswer"/>
@@ -55,10 +56,35 @@
         </methods>
       </class> <!-- com.automation.main.TC17938VerifyPastCourseWithTestRecording -->
       <class name="com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse">
+=======
+      <class name="com.automation.main.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN">
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
         <methods>
+<<<<<<< HEAD
+=======
           <include name="setup"/>
           <include name="closeBroswer"/>
+<<<<<<< HEAD
+=======
+=======
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+          <include name="loadPage"/>
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+          <include name="closeBroswer"/>
+<<<<<<< HEAD
+          <include name="test22662"/>
+          <include name="setup"/>
+=======
+          <include name="loginCourses"/>
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
         </methods>
+<<<<<<< HEAD
       </class> <!-- com.automation.main.TC17907TryToMoveFromActiveCourseToPastCourse -->
       <class name="com.automation.main.TC17903VerifyTheUI">
         <methods>
@@ -91,6 +117,9 @@
           <include name="setup"/>
         </methods>
       </class> <!-- com.automation.main.TC24835VerifyStudentsCantSeePastCourseTab -->
+=======
+      </class> <!-- com.automation.main.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN -->
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
