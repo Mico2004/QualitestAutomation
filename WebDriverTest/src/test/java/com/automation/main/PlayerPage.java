@@ -221,7 +221,7 @@ public class PlayerPage extends Page {
 					if(k_same_buffering_time == 10) {
 						System.out.println("The time buffer status is not moving in seconds.");
 						ATUReports.add("The time buffer.", "The time buffer is moving correctly.",
-								"The time buffer status is not moving in seconds.", LogAs.FAILED, null);
+								"The time buffer status is not moving in seconds.", LogAs.WARNING, null);
 						// Assert.assertTrue(false);
 						return false;
 					}
@@ -234,7 +234,7 @@ public class PlayerPage extends Page {
 				if (j_buffering_time == max_buffering_waiting_time) {
 					System.out.println("The time buffer status is stuck on Buffering status and not moving.");
 					ATUReports.add("The time buffer.", "The time buffer is moving correctly.",
-							"The time buffer status is stuck on Buffering status and not moving.", LogAs.FAILED, null);
+							"The time buffer status is stuck on Buffering status and not moving.", LogAs.WARNING, null);
 					// Assert.assertTrue(false);
 					return false;
 				}

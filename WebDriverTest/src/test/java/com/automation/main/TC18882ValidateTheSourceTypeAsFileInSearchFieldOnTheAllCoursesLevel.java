@@ -156,11 +156,13 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 		List<String> current_additional_content_list = record.getCoursAdditionalContentList();
 		String target_additional_content_for_the_test = null;
 		for(int i = 0; i<current_additional_content_list.size(); i++) {
+			if(record.isElemenetDisplayed(By.id("ItemSize" + Integer.toString(i+1)))){
 			if(driver.findElement(By.id("ItemSize" + Integer.toString(i+1))).getText().contains("file")) {
 				record.selectIndexCheckBox(i+1);
 				target_additional_content_for_the_test = current_additional_content_list.get(i);
 				break;
 			}
+		  }	
 		}
 		
 		Thread.sleep(1000);

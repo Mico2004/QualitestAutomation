@@ -173,12 +173,13 @@ public class EditRecording extends Page {
 			driver.switchTo().window(window_handler);
 			break;
 		}
-		
+		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(4));
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
 		
 		Thread.sleep(2000);
 		
 		// click on the upload link
+		record.waitForVisibility(driver.findElement(By.xpath(".//*[@id='AddCaptioningForm']/div[3]/span")));
 		WebElement element = driver.findElement(By.xpath(".//*[@id='AddCaptioningForm']/div[3]/span"));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(element).click().perform();
