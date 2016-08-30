@@ -100,7 +100,7 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 		this.driver.quit();
 	}
 
-	@Test(description = "Verify Past Course Removed When Has No Content")
+	@Test(description = "TC17925VerifyThePastCourseFunctionalityWithRegularRecordings")
 	public void loginCourses() throws InterruptedException {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
