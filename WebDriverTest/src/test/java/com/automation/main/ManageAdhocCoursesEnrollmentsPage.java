@@ -77,9 +77,9 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	public void setFilterSearchBox(String set_to) throws InterruptedException {
 		for(int i=0; i<30; i++) {
 			try {
-				wait.until(ExpectedConditions.visibilityOf(filter_search_input));
-				filter_search_input.sendKeys(Keys.CONTROL + Keys.chord("a"));
-				filter_search_input.sendKeys(Keys.DELETE);
+				Thread.sleep(5000);
+				wait.until(ExpectedConditions.visibilityOf(filter_search_input));				
+				filter_search_input.clear();				
 				filter_search_input.sendKeys(set_to);
 				if (filter_search_input.getAttribute("value").equals(set_to)) {
 					break;
