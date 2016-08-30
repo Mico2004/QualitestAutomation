@@ -139,7 +139,7 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		String PastCourseA="PastCourseA"+university_name+user.substring(5, user.length());
 		String PastCourseB="PastCourseB"+university_name+user.substring(5, user.length());
 		
-		
+	
 		tegrity.loginAdmin("Admin");
 		
 		
