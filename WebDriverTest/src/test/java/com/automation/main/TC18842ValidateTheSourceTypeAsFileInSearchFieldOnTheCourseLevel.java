@@ -144,6 +144,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 		
 		record.returnToCourseListPage();
 		
+		course.selectCourseThatStartingWith("Ab");
 		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
 		course.selectCourseThatStartingWith("BankValid");

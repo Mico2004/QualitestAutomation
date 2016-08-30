@@ -156,8 +156,8 @@ public class TC15897ViewTheUploadedFile {
 		
 	    ///5.verify size is correct :file 1 should be with mb file 2 should be in kb
 	    ///path to 2 files
-	    String mega=File.separatorChar+"WebDriverTest"+fullPathToFile1;
-	    String kb=File.separatorChar+"WebDriverTest"+fullPathToFile2;
+	    String mega= System.getProperty("user.dir") +fullPathToFile1;
+	    String kb = System.getProperty("user.dir")+fullPathToFile2;
 	   
 	    ///round up  double format
 	    DecimalFormat df = new DecimalFormat("#.#");

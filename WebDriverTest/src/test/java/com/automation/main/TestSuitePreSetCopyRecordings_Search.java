@@ -39,7 +39,7 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TestSuitePreSetCopyRecordings9 {
+public class TestSuitePreSetCopyRecordings_Search {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -78,9 +78,9 @@ public class TestSuitePreSetCopyRecordings9 {
 		//
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 		driver = new ChromeDriver();
-
-
 		driver.manage().window().maximize();
+
+		//
 		
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
@@ -112,8 +112,9 @@ public class TestSuitePreSetCopyRecordings9 {
 		
 		Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TestSuitePreSetCopyRecordings at9 " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordings9 at " + DateToStr, "Starting the test: TestSuitePreSetCopyRecordings9 at " + DateToStr, LogAs.PASSED, null);
+		 System.out.println("Starting the test: TestSuitePreSetCopyRecordings_Search at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordings_Search at " + DateToStr,
+		 "Starting the test: TestSuitePreSetCopyRecordings_Search at " + DateToStr, LogAs.PASSED, null);
 	
 	}
 
@@ -183,13 +184,13 @@ public class TestSuitePreSetCopyRecordings9 {
 		System.out.println("3");
 		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
 		System.out.println("4");
-
 		
 		
-
+	
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
 //		// 2.copy courses to pastcourses a
 //
 //		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseA", 0, record,

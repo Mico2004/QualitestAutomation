@@ -285,7 +285,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
 			
 			// 9.1. The Tegrity Player page shall be opened and the recording shall start playing from the caption timestamp.
-			player_page.verifyTimeBufferStatusForXSec(15);
+			player_page.verifyTimeBufferStatusForXSec(5);
 			
 			// 10. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
@@ -296,7 +296,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
 			
 			// 11.1. The Tegrity player page with the opened recording at the relevant time.
-			player_page.verifyTimeBufferStatusForXSec(15);
+			player_page.verifyTimeBufferStatusForXSec(5);
 			
 			// 12. Click on the back cursor in the browser to navigate to the search results page.
 			

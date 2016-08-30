@@ -3,6 +3,7 @@ package com.automation.main;
 
 import java.text.DateFormat;
 import java.util.Date;
+import org.testng.annotations.AfterClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,7 +14,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -24,9 +24,8 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 
 
-
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TestSuitePreSetCopyRecordings3 {
+public class TestSuitePreSetCopyRecordings_DeleteAdditional {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -66,11 +65,8 @@ public class TestSuitePreSetCopyRecordings3 {
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-
+		
 		//
-		
-		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
 		ATUReports.setWebDriver(driver);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -97,16 +93,16 @@ public class TestSuitePreSetCopyRecordings3 {
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		
-		Date curDate = new Date();
+		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TestSuitePreSetCopyRecordings3 at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordings at3 " + DateToStr, "Starting the test: TestSuitePreSetCopyRecordings3 at " + DateToStr, LogAs.PASSED, null);
-	
+		 System.out.println("Starting the test: TestSuitePreSetCopyRecordings_DeleteAdditional at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordings_DeleteAdditional at " + DateToStr,
+		 "Starting the test: TestSuitePreSetCopyRecordings_DeleteAdditional at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
 	public void closeBroswer() {
-		this.driver.quit();
+		driver.quit();
 	}
 
 	// @Parameters({"web","title"}) in the future
@@ -135,37 +131,30 @@ public class TestSuitePreSetCopyRecordings3 {
 		// Copy all tests from Bank Valid Recording to course starting
 		// with Ab
 //		course.waitForVisibility(course.active_courses_tab_button);
-		Thread.sleep(2000);		
+		Thread.sleep(2000);
 		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record, delete_menu);
-		Thread.sleep(2000);		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
-		Thread.sleep(2000);		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 2, record, delete_menu);
-		Thread.sleep(2000);		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 3, record, delete_menu);
-		Thread.sleep(2000);		
 
 		
 		
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 3, record, copy,
+				confirm_menu);
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 0, record, copy,
 				confirm_menu);
-		Thread.sleep(2000);		
+		// Copy all additional content from Bank Valid Recording to course
+		// starting with Ab
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 1, record, copy,
 				confirm_menu);
-		Thread.sleep(2000);			
-		// Copy all additional content from Bank Valid Recording to course
+		// Copy all student recordings from Bank Valid Recording to course
 		// starting with Ab
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 2, record, copy,
 				confirm_menu);
-		Thread.sleep(2000);			
-		// Copy all student recordings from Bank Valid Recording to course
-		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 3, record, copy,
-				confirm_menu);		
 		
 		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
-		System.out.println("1");		
+		System.out.println("1");  
 		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
 		System.out.println("3");
 		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);

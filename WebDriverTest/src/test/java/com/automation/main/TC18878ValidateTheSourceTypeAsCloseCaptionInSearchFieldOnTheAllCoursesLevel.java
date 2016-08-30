@@ -133,6 +133,8 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		Thread.sleep(2000);
 		record.exitInnerFrame();
 		String text_from_caption_for_test = "QualitestAutomationCaption";
+		
+		player_page.returnToCoursesPage(course);
 		record.signOut();
 			
 		// Looping for INSTRUCTOR, Student and Guest

@@ -146,7 +146,7 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 		
 		record.returnToCourseListPage();
 		
-		
+		course.selectCourseThatStartingWith("Ab");
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
 		course.selectCourseThatStartingWith("BankValid");
 		Thread.sleep(1000);
@@ -230,10 +230,8 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 			// 6.1. The file download to the local client's machine.
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
 			
-			
-			
 			// 7. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 			Thread.sleep(3000);	
 		}
 		

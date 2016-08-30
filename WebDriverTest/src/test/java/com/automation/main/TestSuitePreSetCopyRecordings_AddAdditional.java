@@ -39,7 +39,7 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TestSuitePreSetCopyRecordings13 {
+public class TestSuitePreSetCopyRecordings_AddAdditional {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -78,9 +78,9 @@ public class TestSuitePreSetCopyRecordings13 {
 		//
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 		driver = new ChromeDriver();
-
-
 		driver.manage().window().maximize();
+
+		//
 		
 		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
@@ -112,8 +112,9 @@ public class TestSuitePreSetCopyRecordings13 {
 		
 		Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TestSuitePreSetCopyRecordings13 at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordings13 at " + DateToStr, "Starting the test: TestSuitePreSetCopyRecordings13 at " + DateToStr, LogAs.PASSED, null);
+		 System.out.println("Starting the test: TestSuitePreSetCopyRecordings_AddAdditional " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordings_AddAdditional " + DateToStr,
+		 "Starting the test: TestSuitePreSetCopyRecordings_AddAdditional at " + DateToStr, LogAs.PASSED, null);
 	
 	}
 

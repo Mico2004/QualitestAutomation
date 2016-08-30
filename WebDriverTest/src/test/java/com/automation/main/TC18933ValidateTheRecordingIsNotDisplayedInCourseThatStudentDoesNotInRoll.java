@@ -124,13 +124,13 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
 		
-		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
+		//course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
 		
-		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
+		//course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
 		
 		course.selectCourseThatStartingWith("Ba");
-		
-		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
+		Thread.sleep(1000);
+		//record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 		
 		Thread.sleep(3000);
 		record.selectIndexCheckBox(1);
@@ -172,6 +172,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		// 7. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(new_chapter_name);
 		search_page.waitUntilSpinnerImageDisappear();
+		
 		search_page.verifySearchResultIsEmpty();
 		
 		// 8. Sign Out.

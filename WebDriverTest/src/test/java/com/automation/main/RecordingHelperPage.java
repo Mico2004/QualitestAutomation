@@ -512,15 +512,18 @@ public String getSecondRecordingTitleTest() {
 	// dissaper
 	public void waitUntilFirstRecordingBeingCopiedFromStatusDissaper() throws InterruptedException {
 		int time_counter = 0;
-		while (first_recording_status.getText().contains("Being copied from")) {
+		String statusName = getTextFromWebElement(first_recording_status);
+		while (statusName.contains("Being copied from")) {
 			time_counter++;
 			Thread.sleep(1000);
-
+			
 			if (time_counter > 80) {
 				System.out.println("Timeout - Being copied from still appears after 80 seconds");
 				ATUReports.add("Timeout - Being copied from still appears after 80 seconds", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 				return;
+			} else {
+				statusName = getTextFromWebElement(first_recording_status);
 			}
 		}
 
@@ -2654,7 +2657,7 @@ public String getSecondRecordingTitleTest() {
 	// This function checks if Content Tasks button displyed. Return true if it
 	// is, and false otherwise
 	public boolean isContentTasksButtonDisplay() {
-		waitForVisibility(content_tasks_button);
+	;
 		if (content_tasks_button.isDisplayed()) {
 			return true;
 		} else {
