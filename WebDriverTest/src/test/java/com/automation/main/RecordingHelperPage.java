@@ -25,6 +25,7 @@ import org.apache.http.impl.client.EntityEnclosingRequestWrapper;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -36,8 +37,10 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.internal.WrapsDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 //import com.automation.objects.RecordingObject;
@@ -280,8 +283,9 @@ public class RecordingHelperPage extends Page {
 	public void deleteAllRecordings(DeleteMenu delete_menu) throws InterruptedException {
 		try {
 			Thread.sleep(1000);
+			System.out.println("deleteAllRecordings1");
 			wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
-
+			System.out.println("deleteAllRecordings2");
 			int number_of_recordings_in_target_course = getNumberOfRecordings();
 
 			System.out.println("Number of recordings to delete: " + number_of_recordings_in_target_course);
@@ -298,14 +302,11 @@ public class RecordingHelperPage extends Page {
 				checkAllCheckBox();
 				clickOnRecordingTaskThenDelete();	
 				
-				delete_menu.clickOnDeleteButton();
-				wait.until(ExpectedConditions.visibilityOf(confirm_menu.ok_button));						
-				Thread.sleep(2000);
-				confirm_menu.ok_button.click();		
+				delete_menu.clickOnDeleteButton();				
 				Thread.sleep(1000);;
 			}
 		} catch (Exception msg) {
-			System.out.println("Failed to check the checkbox and delete all recordings");
+			System.out.println("Failed to check the checkbox and delete all recordings"+msg.getLocalizedMessage());
 			ATUReports.add("Recordings.", "Failed to check the checkbox and delete all recordings",
 					"Failed to check the checkbox and delete all recordings", LogAs.WARNING, null);
 		}
@@ -613,75 +614,59 @@ public String getSecondRecordingTitleTest() {
 
 	// This function click on Recorind Task then on delete in the sub menu
 	public void clickOnRecordingTaskThenDelete() throws InterruptedException {
-
-		waitForVisibility(recording_tasks_button);
-		moveToElementAndClick(recording_tasks_button, driver);
-		for (int i = 0; i < 10; i++) {
-			recording_tasks_button.sendKeys(Keys.TAB);// solution
-			try { // to
-				Thread.sleep(500);
-				delete_button.click(); // solve
-
-				Thread.sleep(1000);
-				if (isElementPresent(By.id("ModalDialogHeader"))) {
-					System.out.println("Delete window displayed");
-					ATUReports.add("Select Recording Tasks -> Delete menu items", "Delete window is displayed",
-							"Delete window is displayed", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				}
-
-				return;
-			} catch (Exception e) {
-
-			}
+		
+		WebElement element=recording_tasks_button;
+		String id="DeleteTask2";
+		try {
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
+			System.out.println("Delete window displayed");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, null);
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
 		}
-
-		ATUReports.add("Select Recording Tasks -> Delete menu items", "Delete window is displayed",
-				"Delete window not displayed", LogAs.FAILED, null);
-		System.out.println("Delete window not displayed");
-		Assert.assertTrue(false);
-
 	}
+
+		
+
+	
 
 	// This function click on Recorind Task then on copy in the sub menu
 	public void clickOnRecordingTaskThenCopy() throws InterruptedException {
-
+		
+		WebElement element=recording_tasks_button;
+		String id="CopyTask2";
 		try {
-			Robot robot = new Robot();
-			robot.mouseMove(-100, -100);
-		} catch (AWTException e1) {
-			// TODO Auto-generated catch block
-			System.out.println("Could not use the robot.");
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
+			System.out.println("copy window displayed");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, null);
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
 		}
-		waitForVisibility(recording_tasks_button);
-		System.out.println("waitForVisibility(recording_tasks_button");
-		moveToElementAndClick(recording_tasks_button, driver);
-		System.out.println("moveToElementAndClick");
-		for (int i = 0; i < 10; i++) {
-			recording_tasks_button.sendKeys(Keys.TAB);// solution	
-			System.out.println("recording_tasks_button.sendKeys(Keys.TAB)");
-			
-		try {
-			Thread.sleep(500);
-			copy_button.click(); // solve
-			System.out.println("copy_button.click()");
-			Thread.sleep(1000);
-			waitForVisibility(driver.findElement(By.id("ModalDialogHeader")));
-			if (driver.findElement(By.id("ModalDialogHeader")).getText().equals("Copy")) {
-				System.out.println("Copy menu is displayed.");
-				ATUReports.add("Clicked on Recording Task -> Copy.", "Copy menu is displayed.",
-						"Copy menu is displayed.", LogAs.PASSED, null);
-				Assert.assertTrue(true);
-				return;
-			}
-			} catch (Exception e) {
-			
-			}	
-		}
-		System.out.println("Copy menu not verified.");
-		ATUReports.add("Clicked on Recording Task -> Copy.", "Copy menu is displayed.",
-				"Copy menu is not displayed.", LogAs.FAILED, null);
-		Assert.assertTrue(false);
+	
 }
 
 	// This function return all recordings of current course
@@ -690,16 +675,21 @@ public String getSecondRecordingTitleTest() {
 		List<String> recording_names_list = new ArrayList<String>();
 
 		try {
-			wait.until(ExpectedConditions.visibilityOf(first_recording_title));
+			new WebDriverWait(driver, 5)
+			.until(ExpectedConditions.visibilityOf(first_recording_title));
+			
 		} catch (Exception msg) {
 
 		}
 
 		for (int i = 0; i < recordings_list.size(); i++) {
+			System.out.println("getCourseRecordingListfor"+i);
 			String current_name = recordings_list.get(i).getText();
 			if (current_name.equals("Recordings")) {
+				System.out.println("getCourseRecordingListif"+i);
 				continue;
 			} else if (current_name.equals("Recording Tasks")) {
+				System.out.println("getCourseRecordingListelse"+i);
 				continue;
 			}
 			recording_names_list.add(current_name);
@@ -1085,35 +1075,27 @@ public String getSecondRecordingTitleTest() {
 	// This function click on Recorind Task then on move in the sub menu
 	public void clickOnRecordingTaskThenMove() throws InterruptedException {
 
-		waitForVisibility(recording_tasks_button);
-		moveToElementAndClick(recording_tasks_button, driver);
-
-		for (int i = 0; i < 10; i++) {
-			recording_tasks_button.sendKeys(Keys.TAB);// solution // to
-
-			try {
-				Thread.sleep(500);
-				move_button_on_recording_tasks_menu.click();
-				// check if list of courses are present
-				Thread.sleep(1000);
-				waitForVisibility(driver.findElement(By.id("ModalDialogHeader")));
-				if (driver.findElement(By.id("ModalDialogHeader")).getText().equals("Move")) {
-					System.out.println("Move menu is displayed.");
-					ATUReports.add("Select Recording Tasks -> Move menu item", "Move window is displayed",
-							"Move window is displayed", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-					return;
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-
+		WebElement element=recording_tasks_button;
+		String id="MoveTask2";
+		try {
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
+			System.out.println("Delete window displayed");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, null);
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
 		}
-		System.out.println("Move menu not verified.");
-		ATUReports.add("Select Recording Tasks -> Move menu item", "Move window is displayed",
-				"Move window not displayed", LogAs.FAILED, null);
-		Assert.assertTrue(false);
-
 	}
 
 	// this function get index and return status of recording in that index
@@ -1645,84 +1627,51 @@ public String getSecondRecordingTitleTest() {
 	// This function click on Content Task then on copy in the sub menu
 	public void clickOnContentTaskThenCopy() throws InterruptedException {
 
-		waitForVisibility(content_tasks_button);
-		moveToElementAndClick(content_tasks_button, driver);
-		content_tasks_button.sendKeys(Keys.TAB);
-
-		for (int i = 0; i < 6; i++) {
-			content_tasks_button.sendKeys(Keys.TAB);// solution
-			try {
-				copy_button.click();
-				ATUReports.add("Clicked on copy manu.", LogAs.PASSED, null);
-				System.out.println("Clicked on copy manu.");
-				Assert.assertTrue(true);
-				return;
-
-			} catch (Exception e) {
-			}
-			try {
-				if (isElementPresent(By.id("ModalDialogHeader")))// check if// list of// courses// are// present
-				{
-					ATUReports.add("copy menu verified ", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-					break;
-
-				}
-			} catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-			try {
-
-				copy_button.click();
-				ATUReports.add("click succeeded", LogAs.PASSED, null);
-			} catch (Exception e) {
-				ATUReports.add("click failed ", LogAs.FAILED, null);
-			}
+		WebElement element=content_tasks_button;
+		String id="CopyTask";
+		try {
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
+			System.out.println("Delete window displayed");
+			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, null);
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
 		}
 	}
 
 	// This function click on Content Task then on move in the sub menu
 	public void clickOnContentTaskThenMove() throws InterruptedException {
-		waitForVisibility(content_tasks_button);
-		moveToElementAndClick(content_tasks_button, driver);
-		content_tasks_button.sendKeys(Keys.TAB);
-
-		for (int i = 0; i < 6; i++) {
-			content_tasks_button.sendKeys(Keys.TAB);// solution
-			try {
-				move_button.click();
-
-				ATUReports.add("Clicked on Move button.", LogAs.PASSED, null);
-				System.out.println("Clicked on Move button.");
-				Assert.assertTrue(true);
-				return;
-
-			} catch (Exception e) {
-			}
-			try {
-				if (isElementPresent(By.id("ModalDialogHeader")))// check if
-																	// list of
-																	// courses
-																	// are
-																	// present
-				{
-					ATUReports.add("Move menu verified ", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-					break;
-
-				}
-			} catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-			try {
-
-				move_button.click();
-				ATUReports.add("click succeeded.", LogAs.PASSED, null);
-			} catch (Exception e) {
-				ATUReports.add("click failed.", LogAs.FAILED, null);
-			}
+		WebElement element=content_tasks_button;
+		String id="MoveTask";
+		try {
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
+			System.out.println("Delete window displayed");
+			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, null);
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
 		}
 	}
 
@@ -1978,44 +1927,26 @@ public String getSecondRecordingTitleTest() {
 	// This function click on Content Task then on delete in the sub menu
 	public void clickOnContentTaskThenDelete() throws InterruptedException {
 
-		waitForVisibility(content_tasks_button);
-		moveToElementAndClick(content_tasks_button, driver);
-		content_tasks_button.sendKeys(Keys.TAB);
-
-		for (int i = 0; i < 6; i++) {
-			content_tasks_button.sendKeys(Keys.TAB);// solution
-			try {
-				content_tasks_delete_button.click();
-
-				System.out.println("Clicked on content tasks then delete button.");
-				ATUReports.add("Click on Content Tasks then Delete.", "Click succeeded.", "Click succeeded.",
-						LogAs.PASSED, null);
-				Assert.assertTrue(true);
-				return;
-
-			} catch (Exception e) {
-			}
-
-			try {
-				if (isElementPresent(By.id("ModalDialogHeader"))) {
-					System.out.println("Delete menu verified.");
-					ATUReports.add("Delete menu.", "Delete menu verified.", "Delete menu verified.", LogAs.PASSED,
-							null);
-					Assert.assertTrue(true);
-					break;
-				}
-			} catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-			try {
-				content_tasks_delete_button.click();
-				ATUReports.add("Click on Content Tasks then Delete.", "Click succeeded.", "Click succeeded.",
-						LogAs.PASSED, null);
-			} catch (Exception e) {
-				ATUReports.add("Click on Content Tasks then Delete.", "Click succeeded.", "Click failed.", LogAs.FAILED,
-						null);
-			}
+		WebElement element=content_tasks_button;
+		String id="DeleteTask";
+		try {
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
+			System.out.println("Delete window displayed");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, null);
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
 		}
 	}
 
@@ -2381,6 +2312,7 @@ public String getSecondRecordingTitleTest() {
 
 	/// clicks on content task->upload additonal content file
 	public void toUploadAdditionalContentFile(ConfirmationMenu confirm) throws InterruptedException, Exception {
+	try{	
 		Robot robot = new Robot();
 		robot.delay(3000);
 		robot.mouseMove(0, -100);
@@ -2399,7 +2331,10 @@ public String getSecondRecordingTitleTest() {
 		Thread.sleep(2000);
 		add_additional_file_button.click();
 		Thread.sleep(2000);
-		confirm.clickOnOkButton();
+		confirm.clickOnOkButton();}
+	catch(Exception e){
+		System.out.println(e.getMessage());
+	}
 	}
 
 	/// clicks on content task->upload additonal content file by path
@@ -2440,13 +2375,16 @@ public String getSecondRecordingTitleTest() {
 	public void uploadFile(String path) throws Exception {
 
 		// from here you can use as it wrote
+		System.out.println("uploadFile1");
 		path = System.getProperty("user.dir") + "\\src\\test\\resources\\additional_file.txt";
 		System.out.println(path);
+		System.out.println("uploadFile2");
 		StringSelection ss = new StringSelection(path);
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+		System.out.println("uploadFile3");
 		// native key strokes for CTRL, V and ENTER keys
 		Robot robot = new Robot();
-
+		System.out.println("uploadFile4");
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
@@ -2454,6 +2392,7 @@ public String getSecondRecordingTitleTest() {
 		Thread.sleep(5000);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
+		System.out.println("uploadFile5");
 
 	}
 
@@ -3134,28 +3073,27 @@ public String getSecondRecordingTitleTest() {
 	// This function click on Recoring Task then on Edit Recording in the sub
 	// menu
 	public void clickOnRecordingTaskThenEditRecording() throws InterruptedException {
-		waitForVisibility(recording_tasks_button);
-		moveToElementAndClick(recording_tasks_button, driver);
-
-		for (int i = 0; i < 8; i++) {
-			recording_tasks_button.sendKeys(Keys.TAB);
-			try {			
-				edit_rec_button.click();
-				Thread.sleep(3000);	
-				//check if we can see the cut element if we can we moved to the edit record page
-				if (isElementPresent(By.xpath(".//*[@id='main']/div/div[1]/ul/li[1]/a"))) {
-					ATUReports.add("Clicked on Recording then Edit Recording.", "True.", "True.", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-					break;
-				}else {
-					moveToElementAndClick(recording_tasks_button, driver);
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				}
+		WebElement element=recording_tasks_button;
+		String id="EditRecording";
+		try {
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@id='main']/div/div[1]/ul/li[1]/a")));			
+			System.out.println("edit page displayed");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, null);
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
 		}
-
-		Thread.sleep(1000);
 
 	}
 
@@ -3782,30 +3720,25 @@ public String getSecondRecordingTitleTest() {
 
 	// This function click on Recoring Task then on Tag in the sub menu
 	public void clickOnRecordingTaskThenTag() throws InterruptedException {
-
+		WebElement element=recording_tasks_button;
+		String id="TagsListTask2";
 		try {
-			Robot robot = new Robot();
-			robot.mouseMove(-100, -100);
-		} catch (AWTException e1) {
-			// TODO Auto-generated catch block
-			System.out.println("couldn't use robot");
-		}
-		waitForVisibility(recording_tasks_button);
-		moveToElementAndClick(recording_tasks_button, driver);
-		tag_button.click(); // solve
-		Thread.sleep(1000);
-		try {
-
-			waitForVisibility(driver.findElement(By.id("ModalDialogHeader")));
-			if (isElementPresent(By.id("ModalDialogHeader")))// check if
-			{
-				System.out.println("Tag menu verified.");
-				ATUReports.add("Tag menu verified.", LogAs.PASSED, null);
-				Assert.assertTrue(true);
-			}
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
+			System.out.println("tag window displayed");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
 		} catch (Exception e) {
-			System.out.println("Tag menu not verified.");
-			ATUReports.add("Tag menu not verified.", LogAs.PASSED, null);
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, null);
+			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
 		}
 	}
@@ -4422,18 +4355,18 @@ public String getSecondRecordingTitleTest() {
 	public void checkExistenceOfNonDeleteRecordingsStatusInRecordings() throws InterruptedException {
 		int i = 0;
 		Thread.sleep(1000);
-		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {
-			i++;
-			if(isElemenetDisplayed(By.id(("RecordingStatus")+ Integer.toString(i)))){
-				WebElement el = getStaleElem(By.id("RecordingStatus" + Integer.toString(i)),driver);
-				String current_element = el.getText();
+		for (WebElement e : driver.findElements(By.cssSelector(".recordingStatus"))) {
+			
+			
+				String current_element = e.getText();
+				System.out.println(current_element);
 			if ((!current_element.equals("")) && (!current_element.equals("IE, FF, Safari Ready")) && (!current_element.equals("Not Published"))) {
 				System.out.println("Not verfired that all recordings have non delete status.");
 				ATUReports.add("Verfied that all recordings have delete available status.", "True.", "False.", LogAs.FAILED, null);
 				ATUReports.add("the status is: " + current_element, "True.", "False.", LogAs.WARNING, null);
 				Assert.assertTrue(false);
 			  }
-			} else {
+			 else {
 				break;
 			}
 		}
@@ -4466,8 +4399,10 @@ public String getSecondRecordingTitleTest() {
 		Assert.assertTrue(true);
 	}
 	public boolean tabExists(int tab){
+		try{
 		System.out.println("tabexist1");
 		waitForVisibility(recordings_tab);
+		System.out.println("tabexist2");
 		boolean exist=false;
 		if(tab==1)
 			exist=additional_content_tab.isDisplayed();
@@ -4475,8 +4410,15 @@ public String getSecondRecordingTitleTest() {
 			exist=student_recordings_tab.isDisplayed();
 		else if(tab==3)
 			exist=test_tab.isDisplayed();
-		
+		System.out.println("tabexist3");
 		return exist;			
+		}
+		catch(Exception msg){
+			System.out.println(msg.getMessage());
+			return false;
+			
+			
+		}
 		
 	}
 	public void clickOnFirstVisibleChapter()
