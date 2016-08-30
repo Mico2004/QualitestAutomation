@@ -72,7 +72,8 @@ public class DriverSelector {
 		case IE:
 			System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
 			capability = DesiredCapabilities.internetExplorer();
-			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
+			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);			
+			capability.setCapability("nativeEvents",false);			
 			capability.setCapability("ignoreZoomSetting", true);
 			driver = new InternetExplorerDriver(capability);
 			driver.manage().window().maximize();
