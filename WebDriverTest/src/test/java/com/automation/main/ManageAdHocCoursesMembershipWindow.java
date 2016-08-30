@@ -69,8 +69,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	public boolean setSearchUserInput(String set_to) {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(search_user_input));
-			search_user_input.sendKeys(Keys.CONTROL + "a");
-			search_user_input.sendKeys(Keys.DELETE);
+			search_user_input.clear();
 			search_user_input.sendKeys(set_to);
 			System.out.println("Setting user input search to: " + set_to);
 			return true;
@@ -83,14 +82,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	public void searchForUser(String user_name) throws InterruptedException {
 		setSearchUserInput(user_name);
 		clickOnSearchUserButton();
-		
-		for(int i=0; i<30; i++) {
-			if(first_user_of_user_list.getText().contains(user_name)) {
-				break;
-			}
-			Thread.sleep(1000);
-		}
-		
+		wait.until(ExpectedConditions.textToBePresentInElement(first_user_of_user_list, user_name));		
 	}
 	
 	public boolean selectFirstUserFromUserList() {
