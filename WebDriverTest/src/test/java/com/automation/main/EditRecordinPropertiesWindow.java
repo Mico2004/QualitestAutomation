@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 
@@ -75,8 +76,8 @@ public class EditRecordinPropertiesWindow extends Page {
 	
 	public void waitUntilEditRecordingProperiesClosed() {
 		try {
-			
-			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ModalDialogHeader")));	
+			new WebDriverWait(driver, 120)
+			.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ModalDialogHeader")));		
 			ATUReports.add("Verifying edit window is closed", "edit window is closed","edit window is closed",LogAs.PASSED,null);
 		} catch (Exception msg) {
 			ATUReports.add("Verifying edit window is closed", "edit window isn't closed","edit window isn't closed",LogAs.FAILED,null);
