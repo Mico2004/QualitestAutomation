@@ -87,15 +87,13 @@ public class AdminDashboardPage extends Page {
 
 
 
-
-
 		try {
 		System.out.println("clickOnTargetSubmenuCourses1");
 		waitForVisibility(CoursesBox);
 		System.out.println("clickOnTargetSubmenuCourses2");
 	//	wait.until(ExpectedConditions.visibilityOfAllElements(dashboardSections));
 		System.out.println("clickOnTargetSubmenuCourses3");
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		System.out.println("clickOnTargetSubmenuCourses4");
 		
 		switch(target){
