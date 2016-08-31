@@ -75,8 +75,8 @@ public class AddAdditionalContentFileWindow extends Page {
 
 		// from here you can use as it wrote
 		path = System.getProperty("user.dir") + path;
-	//	select_upload_additional_file.sendKeys(path);
-		select_upload_additional_file.sendKeys("C:\\Users\\Mickael\\git\\QualitestAutomation\\WebDriverTest\\src\\test\\resources\\additional_file.txt");
+		select_upload_additional_file.sendKeys(path);
+		//select_upload_additional_file.sendKeys("C:\\Users\\Mickael\\git\\QualitestAutomation\\WebDriverTest\\src\\test\\resources\\additional_file.txt");
 		
 		
 		

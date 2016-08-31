@@ -876,6 +876,21 @@ public String getSecondRecordingTitleTest() {
 			return true;
 		}
 	}
+	
+	
+	public void mouseHoverJScript(WebElement HoverElement) {
+		
+			if (isElementPresent(HoverElement)) {
+				
+				String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
+				((JavascriptExecutor) driver).executeScript(mouseOverScript,HoverElement);
+
+			} else {
+				System.out.println("Element was not visible to hover");
+
+			}
+		
+	}
 
 	// verify check box is selected
 	public void ClickOneCheckedboxSelected(WebElement check) throws InterruptedException {
@@ -1808,11 +1823,13 @@ public String getSecondRecordingTitleTest() {
 		moveToElementAndClick(recording_tasks_button, driver);
 
 		waitForVisibility(recording_tasks_button);
-		moveToElementAndClick(recording_tasks_button, driver);
-		for (int i = 0; i < 5; i++) {
-			recording_tasks_button.sendKeys(Keys.TAB);// solution
+		mouseHoverJScript(recording_tasks_button);
+		//moveToElementAndClick(recording_tasks_button, driver);
+		//for (int i = 0; i < 5; i++) {
+		//	recording_tasks_button.sendKeys(Keys.TAB);// solution
 
-		}
+		//}
+		
 		boolean assertion = verifyColor(grey_color, el);
 		if (assertion == true) {
 			System.out.println("Menu color is grey");

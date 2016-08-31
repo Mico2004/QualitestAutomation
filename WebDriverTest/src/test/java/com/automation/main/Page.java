@@ -323,6 +323,22 @@ public class Page {
 		return expected.equals(actual_color);
 
 	}
+	
+	
+	public static boolean isElementPresent(WebElement element) {
+		boolean flag = false;
+		try {
+			if (element.isDisplayed()
+					|| element.isEnabled())
+				flag = true;
+		} catch (NoSuchElementException e) {
+			flag = false;
+		} catch (StaleElementReferenceException e) {
+			flag = false;
+		}
+		return flag;
+	}
+	
 
 	/// verify correct date
 	public void verifyDate(String date) {

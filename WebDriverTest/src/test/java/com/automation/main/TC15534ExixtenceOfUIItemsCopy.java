@@ -115,6 +115,7 @@ String os;
 		/// driver.navigate().refresh();
 		record.checkall.click();// make all checkboxes unmarked
 		
+		
 		/// record.checkall.click();// make all checkboxes unmarked
 		record.verifyAllCheckedboxNotSelected();
 		
