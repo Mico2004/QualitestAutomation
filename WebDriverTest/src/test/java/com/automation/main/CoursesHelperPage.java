@@ -362,6 +362,9 @@ public class CoursesHelperPage extends Page {
 	public void clickOnPastCoursesTabButton() {
 		try {
 			past_courses_tab_button.click();
+			WebElement tabParent=past_courses_tab_button.findElement(By.xpath(".."));
+			wait.until(ExpectedConditions.attributeContains(tabParent, "class", "active"));	
+			Thread.sleep(2000);
 			System.out.println("Click on past course tab.");
 			ATUReports.add("Click on past course tab.", LogAs.PASSED, null);
 		} catch (Exception msg) {
@@ -675,6 +678,7 @@ public class CoursesHelperPage extends Page {
 	public boolean verifyCourseExist(String name) {
 		List <String> courses=getCourseList();
 		for (int i=0;i<courses.size();i++) {
+			System.out.println("course name to compare: "+courses.get(i));
 			if (courses.get(i).equals(name)) {
 				System.out.println("course exists");
 				ATUReports.add("Course existence verification",name,"Course "+ name+" Found in course list ","Course "+ name+" Found in course list " ,LogAs.PASSED,null);
@@ -682,7 +686,7 @@ public class CoursesHelperPage extends Page {
 			}
 		}
 		System.out.println("course  not exists");
-		ATUReports.add("Course existence verification",name,"Course "+ name+" wasn't Found in course list ","Course "+ name+" wasn't Found in course list " ,LogAs.FAILED,null);
+		ATUReports.add("Course existence verification",name,"Course "+ name+" Found in course list ","Course "+ name+" wasn't Found in course list " ,LogAs.FAILED,null);
 		return false;
 	}
 
