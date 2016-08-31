@@ -56,11 +56,14 @@ public class DeleteMenu extends Page {
 	WebElement additional_content_recording_list_select;
 	@FindBy(css = "#deleteContentSelector>option")
 	List<WebElement> additional_content_delete_recording_list;
+	@FindBy(id="alertWindow")
+	WebElement alertWindow;
 
 	String[] delete_recording_string_list;
 
 	// This function clicks on delete button of copy menu
 	public void clickOnDeleteButton() throws InterruptedException {
+		String alertWindowText="";
 		try {
 			System.out.println("delete1");
 			wait.until(ExpectedConditions.visibilityOf(delete_button));
@@ -71,9 +74,11 @@ public class DeleteMenu extends Page {
 			ATUReports.add("Click Delete button", "Clicked on delete button", "Clicked on delete button", LogAs.PASSED,null);
 			Assert.assertTrue(true);			
 		} catch (Exception e) {
+			if(alertWindow.isDisplayed())
+				alertWindowText=alertWindow.getText();			
 			System.out.println("Fail click on delete button." +e.getMessage());
-			ATUReports.add("Click Delete button", "Clicked on delete button", e.getMessage(),"Fail click on delete button",
-					LogAs.FAILED, null);
+			ATUReports.add("Click Delete button", "Clicked on delete button", e.getMessage(),"Fail click on delete button, Alert Window text: "+alertWindowText,
+					LogAs.WARNING, null);
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(2000);

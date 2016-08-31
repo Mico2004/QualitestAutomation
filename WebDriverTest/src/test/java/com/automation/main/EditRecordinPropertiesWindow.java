@@ -80,7 +80,7 @@ public class EditRecordinPropertiesWindow extends Page {
 			.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ModalDialogHeader")));		
 			ATUReports.add("Verifying edit window is closed", "edit window is closed","edit window is closed",LogAs.PASSED,null);
 		} catch (Exception msg) {
-			ATUReports.add("Verifying edit window is closed", "edit window isn't closed","edit window isn't closed",LogAs.FAILED,null);
+			ATUReports.add("Verifying edit window is closed", "edit window isn't closed","edit window isn't closed",LogAs.WARNING,null);
 		}
 	}
 

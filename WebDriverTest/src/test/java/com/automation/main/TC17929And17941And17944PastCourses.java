@@ -106,7 +106,7 @@ public class TC17929And17941And17944PastCourses {
 		this.driver.quit();
 	}
 
-	@Test
+	@Test (description="test17929 - Verify the past course functionality with additional content")
 	public void test17929() throws Exception {
 		
 		
@@ -390,7 +390,7 @@ public class TC17929And17941And17944PastCourses {
 
 	}
 
-	@Test(dependsOnMethods = "test17929")
+	@Test(description="Verify that course is displayed in Active Courses tab after instructor is re-enrolled",   dependsOnMethods = "test17929")
 	public void test17941() throws Exception {
 
 		Thread.sleep(2000);
@@ -485,12 +485,12 @@ public class TC17929And17941And17944PastCourses {
 		Thread.sleep(2000);
 		tegrity.loginCoursesByParameter(user);
 		Thread.sleep(2000);
-		course.verifyCourseExist(PastTempCourse);
+		course.verifyCourseExist(PastTempCourse+"_Name");
 		course.signOut();
 
 	}
 
-	@Test(dependsOnMethods = "test17941")
+	@Test(description="Verify that course is displayed in Past Courses after deletion", dependsOnMethods = "test17941")
 	public void test17944() throws Exception {
 		Thread.sleep(2000);
 		tegrity.loginCoursesByParameter(user);
