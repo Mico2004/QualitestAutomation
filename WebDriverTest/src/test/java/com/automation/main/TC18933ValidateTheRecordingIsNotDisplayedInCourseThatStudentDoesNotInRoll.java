@@ -43,6 +43,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 	public TopBarHelper top_bar_helper;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
+	public CourseSettingsPage course_settings_page;
 	public RecordingHelperPage record;
 	public ConfirmationMenu confirm_menu;
 	WebDriver driver;
@@ -81,7 +82,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);
 		
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
-		
+		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
 		
 		 Date curDate = new Date();
@@ -117,6 +118,18 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws InterruptedException
 	{
+		//make sure that the course Ba will not be public
+		
+		tegrity.loginCourses("User1");
+		
+		course.selectCourseThatStartingWith("Ba");
+						
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings_page.clickOnOkButton();
+		
+		
 		//1. Validate there is recording in this course. Search input specified shall be case-insensitive.
 		// Login as User1
 		// Copy one recording to Ba
@@ -178,6 +191,15 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		// 8. Sign Out.
 		top_bar_helper.clickOnSignOut();
 		Thread.sleep(3000);
+		
+		tegrity.loginCourses("User1");
+		
+		course.selectCourseThatStartingWith("Ba");
+						
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
+		course_settings_page.clickOnOkButton();
 
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

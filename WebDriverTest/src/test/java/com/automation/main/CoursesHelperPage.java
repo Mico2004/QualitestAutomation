@@ -249,12 +249,20 @@ public class CoursesHelperPage extends Page {
 		boolean clicked = false;
 		int i = 0;
 
+		
+		
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));
 		System.out.println("wait wrapper");
 		WebElement element = driver.findElement(By.xpath("//a[contains(@title,'" + destination_course_name + "')]"));
 		System.out.println("Find Element text:" + element.getText() + "Find Element id:" + element.getAttribute("id"));
 		String id = element.getAttribute("id");
 		WebElement sCourse2 = driver.findElement(By.id(id));
+		String CourseId=sCourse2.getAttribute("id");
+		
+		
+		((JavascriptExecutor) driver).executeScript("document.getElementById(\""+CourseId+"\").click();");
+		
+		/*
 		while (!clicked && i < 50) {
 			try {
 				i++;
@@ -274,26 +282,9 @@ public class CoursesHelperPage extends Page {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				/*
-				 * try {
-				 * 
-				 * 
-				 * WebElement wi =
-				 * driver.findElement(By.xpath("//*[@id='main']")); Actions
-				 * builder = new Actions(driver);
-				 * 
-				 * //courses_heading.click();
-				 * 
-				 * builder.moveToElement(wi, 10, 25).click().build().perform();
-				 * 
-				 * System.out.println("s4"); builder.sendKeys(Keys.PAGE_DOWN);
-				 * builder.moveToElement(wi).build().perform(); builder.click();
-				 * System.out.println("s5"); Thread.sleep(1000); } catch
-				 * (Exception e) { // TODO Auto-generated catch block
-				 * e.printStackTrace(); System.out.println("s6"); }
-				 */
+			 
 			}
-		}
+		}*/
 	}
 
 

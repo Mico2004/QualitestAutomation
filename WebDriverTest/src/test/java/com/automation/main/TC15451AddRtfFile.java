@@ -142,7 +142,7 @@ public class TC15451AddRtfFile {
 		/// path function so is
 		// add file
 		add_additional_content_window.uploadFileByPath(fullPathToFile, confirm_menu);
-
+		
 		// 7.check if redirected to additional content tab
 
 		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
