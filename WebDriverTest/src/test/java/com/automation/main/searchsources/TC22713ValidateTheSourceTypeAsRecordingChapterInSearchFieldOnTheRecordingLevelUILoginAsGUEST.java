@@ -142,16 +142,15 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			course_settings.waitForVisibility(course_settings.getOk_button());
 			course_settings.CheckAllowStudentDownload();
 
-
 			// 3.Click on sign out
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 			Thread.sleep(1500);
 			admin_dashboard_page.signOut();
+			
 			///4. login as guest
 			tegrity.waitForVisibility(tegrity.passfield);
 			tegrity.loginAsguest();
 
-	
 			// 5.Select a course
 			course.waitForVisibility(course.first_course_button);
 			String course_name=course.selectCourseThatStartingWith("Ab");
@@ -161,9 +160,11 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			Thread.sleep(2000);
 			record.convertRecordingsListToNames();
 			record.convertRecordingsListToRecorderName();
+			
 			String instructor=record.getIndexRecorderNameOfRecording(1);
 			String recording_to_search=record.recording_list_names.get(0);
 			Thread.sleep(2000);
+			
 			record.verifyFirstExpandableRecording();
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 			Thread.sleep(15000);
@@ -185,16 +186,14 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			///9.Validate the text in the Tegrity Player page: "Search in this recording..."
 			player_page.verifySearchBoxHint();
 			Thread.sleep(2000);
+			
 			//10.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
-
-
 			player_page.verifySearchForRecordingExist(recording_to_search);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
 
 
 			Thread.sleep(2000);
 			//11.The tegrity logo is displayed on the bottom footer bar right side.
-
 			player_page.verifyTegrityLogoVisibilityAndLocation();
 
 
