@@ -334,6 +334,7 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 																					// courses
 																					// page
 		initializeCourseObject();
+		Thread.sleep(2000);
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", PastTempCourse, 0, record,
 				copy, confirm_menu);
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", PastTemp2Course, 0, record,
