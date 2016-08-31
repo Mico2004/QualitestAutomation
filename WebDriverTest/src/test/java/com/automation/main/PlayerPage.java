@@ -117,8 +117,7 @@ public class PlayerPage extends Page {
 	@FindBy(id = "tegrityTopNavigationBar")
 	WebElement top_bar;
 	@FindBy(id = "PlayButton_Img")
-	public
-	WebElement play_button;
+	public WebElement play_button;
 	public @FindBy(id = "//*[contains(@id, 'Row_Span_CC_')]") /// "SearchResult_");
 	WebElement caption;
 	public @FindBy(xpath = "//*[@id=\"DownDiv\"]/table/tbody/tr[1]/th") /// "SearchResult_");
@@ -130,10 +129,12 @@ public class PlayerPage extends Page {
 	public @FindBy(xpath = "//*[@id=\"BookmarkList\"]/div/div/div[2]") /// "SearchResult_");
 	List<WebElement> bookmark_duration_time;
 	public @FindBy(id = "NextButton_Img") WebElement next_button;
-	@FindBy(xpath = ".//*[@id='Instructor_MAIN__SEG1__SAMPLE1_Img']")
-	WebElement tegrity_logo;
+	@FindBy(id = "InstituteLogotype")
+	WebElement tegrity_universty_logo;
 	@FindBy(xpath =".//*[@id='DownDiv']/table/tbody/tr[1]/th[3]")
 	WebElement context_title;
+	@FindBy(id= "TegrityLogo")
+	WebElement tegrity_logo;
 	
 	
 	
@@ -254,10 +255,37 @@ public class PlayerPage extends Page {
 		return true;
 	}
 	
-	public void verifyTegrityLogoVisibilityAndLocation() {
+	public void verifyUniversityLogoVisibilityAndLocation() {
+		
+		waitForVisibility(tegrity_universty_logo);
+		if(isElemenetDisplayed(By.id("InstituteLogotype"))){
+			System.out.println("The tegrity University logo is displayed.");
+			ATUReports.add("The tegrity logo is displayed.",LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+		} else {
+			System.out.println("The tegrity University logo is not displayed.");
+			ATUReports.add("The tegrity University logo is not displayed.",LogAs.FAILED, null);
+			Assert.assertTrue(false);	
+		}
+		
+		Point logo_location = tegrity_universty_logo.getLocation();
+		Point serach_box= search_box.getLocation();
+		
+		if((logo_location.x < serach_box.x) && (serach_box.y < logo_location.y)) {
+			System.out.println("Verifed that logo at the top left cornner.");
+			ATUReports.add("Verifed that logo at the top left cornner", "True.", "True.", LogAs.PASSED, null);
+		} else {
+			System.out.println("Not Verifed that logo at the top left cornner.");
+			ATUReports.add("Not Verifed that logo at the top left cornner.", "True.", "False.", LogAs.FAILED, null);
+		}
+		
+	}
+	
+	public void verifyTegrityLogoVisibilityAndLocation(){
 		
 		waitForVisibility(tegrity_logo);
-		if(isElemenetDisplayed(By.xpath(".//*[@id='Instructor_MAIN__SEG1__SAMPLE1_Img']"))){
+		if(isElemenetDisplayed(By.id("TegrityLogo"))){
 			System.out.println("The tegrity logo is displayed.");
 			ATUReports.add("The tegrity logo is displayed.",LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -269,17 +297,20 @@ public class PlayerPage extends Page {
 		}
 		
 		Point logo_location = tegrity_logo.getLocation();
-		Point  conrext= context_title.getLocation();
+		Point play_button_location= play_button.getLocation();
 		
-		if((conrext.x < logo_location.x) && (logo_location.y < conrext.y)) {
-			System.out.println("Verifed that logo at the top left cornner.");
+		if((play_button_location.x < logo_location.x)) {
+			System.out.println("Verifed that logo at the buttom right cornner.");
 			ATUReports.add("Verifed that logo at the top left cornner", "True.", "True.", LogAs.PASSED, null);
 		} else {
-			System.out.println("Not Verifed that logo at the top left cornner.");
+			System.out.println("Not Verifed that logo at the buttom right cornner.");
 			ATUReports.add("Not Verifed that logo at the top left cornner.", "True.", "False.", LogAs.FAILED, null);
 		}
 		
+		
+		
 	}
+	
 	
 
 	// TODO: get video with alert in FireFox and rework on this function.
