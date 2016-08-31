@@ -79,7 +79,9 @@ public class CourseSettingsPage extends Page {
 	WebElement allow_students_download_checkbox;
 	@FindBy(id = "AllowToDownload")
 	WebElement allow_download;
-
+	@FindBy(id = "PubliclyVisibleAvaliable")
+	WebElement checkbox_enable_PubliclyVisible;
+	
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {
 		try {
@@ -182,6 +184,25 @@ public class CourseSettingsPage extends Page {
 
 	// This function force select make course public if not selected, otherwise
 	// it do nothing
+	public void UnselectedMakeCoursePublic() {
+			waitForVisibility(checkbox_enable_PubliclyVisible);
+			if (checkbox_enable_PubliclyVisible.isSelected()) {
+				try {
+					checkbox_enable_PubliclyVisible.click();
+					System.out.println("Unselected make course public.");
+					ATUReports.add("Unselected make course public if selected.", "True.", "True.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} catch (Exception msg) {
+					System.out.println("Fail to unselected make course public if selected.");
+					ATUReports.add("Unselected make course public if selected.", "True.", "False", LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
+			} else {			System.out.println("Already it is unselected make course public.");
+				ATUReports.add("Unselected make course public if selected.", "True.", "True.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			}
+	}
+	
 	public void makeSureThatMakeCoursePublicIsSelected() {
 		if (checkbox_make_course_public_visable.isSelected()) {
 			System.out.println("The checkbox of make course public already selected.");

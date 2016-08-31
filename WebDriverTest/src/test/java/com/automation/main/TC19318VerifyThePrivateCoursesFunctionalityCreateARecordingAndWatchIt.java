@@ -151,7 +151,7 @@ public class TC19318VerifyThePrivateCoursesFunctionalityCreateARecordingAndWatch
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
 		// When the "Copy" process is finished, verify that recording is displayed in source course.
-		record.checkStatusExistenceForMaxTTime(360);
+		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
 		record.verifyThatTargetRecordingExistInRecordingList(selected_recording_name);
 		
 		// Click the "Courses" breadcrumb.

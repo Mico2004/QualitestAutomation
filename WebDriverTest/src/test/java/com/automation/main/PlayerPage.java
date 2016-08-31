@@ -130,7 +130,13 @@ public class PlayerPage extends Page {
 	public @FindBy(xpath = "//*[@id=\"BookmarkList\"]/div/div/div[2]") /// "SearchResult_");
 	List<WebElement> bookmark_duration_time;
 	public @FindBy(id = "NextButton_Img") WebElement next_button;
-
+	@FindBy(xpath = ".//*[@id='Instructor_MAIN__SEG1__SAMPLE1_Img']")
+	WebElement tegrity_logo;
+	@FindBy(xpath =".//*[@id='DownDiv']/table/tbody/tr[1]/th[3]")
+	WebElement context_title;
+	
+	
+	
 	// This function get as input number of seconds.
 	// It will check if the player plays for this number of seconds.
 	public boolean verifyTimeBufferStatusForXSec(int seconds) throws InterruptedException {
@@ -247,6 +253,34 @@ public class PlayerPage extends Page {
 		Assert.assertTrue(true);
 		return true;
 	}
+	
+	public void verifyTegrityLogoVisibilityAndLocation() {
+		
+		waitForVisibility(tegrity_logo);
+		if(isElemenetDisplayed(By.xpath(".//*[@id='Instructor_MAIN__SEG1__SAMPLE1_Img']"))){
+			System.out.println("The tegrity logo is displayed.");
+			ATUReports.add("The tegrity logo is displayed.",LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+		} else {
+			System.out.println("The tegrity logo is not displayed.");
+			ATUReports.add("The tegrity logo is not displayed.",LogAs.FAILED, null);
+			Assert.assertTrue(false);	
+		}
+		
+		Point logo_location = tegrity_logo.getLocation();
+		Point  conrext= context_title.getLocation();
+		
+		if((conrext.x < logo_location.x) && (logo_location.y < conrext.y)) {
+			System.out.println("Verifed that logo at the top left cornner.");
+			ATUReports.add("Verifed that logo at the top left cornner", "True.", "True.", LogAs.PASSED, null);
+		} else {
+			System.out.println("Not Verifed that logo at the top left cornner.");
+			ATUReports.add("Not Verifed that logo at the top left cornner.", "True.", "False.", LogAs.FAILED, null);
+		}
+		
+	}
+	
 
 	// TODO: get video with alert in FireFox and rework on this function.
 	public boolean verifyTimeBufferStatusForXSecAlertVersion(int seconds) throws InterruptedException {

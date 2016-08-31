@@ -66,6 +66,7 @@ public class TestSuitePreSetCopyRecordings_Search {
 	public CreateNewCourseWindow create_new_course_window;
 	public ManageAdhocUsersPage mange_adhoc_users_page;
 	public CreateNewUserWindow create_new_user_window;
+	public CourseSettingsPage course_settings_page;
 	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
 	public EditRecordinPropertiesWindow erp_window;
 
@@ -94,7 +95,7 @@ public class TestSuitePreSetCopyRecordings_Search {
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-
+		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
 
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
@@ -138,9 +139,21 @@ public class TestSuitePreSetCopyRecordings_Search {
 	}
 
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException {
-		// 1. Login with SuperUser.
+	public void loginCourses() throws Exception {
 		
+		//pre test to search
+		tegrity.loginAdmin("Admin");
+		Thread.sleep(2000);		
+
+		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
+		Thread.sleep(2000);		
+
+		course_settings_page.UnselectedMakeCoursePublic();
+		
+		record.signOut();
+		Thread.sleep(2000);
+		
+		// 1. Login with SuperUser.
 		tegrity.loginCourses("SuperUser");// log in courses page
 		initializeCourseObject();
 
@@ -186,7 +199,8 @@ public class TestSuitePreSetCopyRecordings_Search {
 		System.out.println("4");
 		
 		
-	
+		
+
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

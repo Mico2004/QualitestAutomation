@@ -392,15 +392,14 @@ public class RecordingHelperPage extends Page {
 		System.out.println("Begin checkExistenceOfStatusInRecordings");
 		Thread.sleep(1000);
 		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {			    		
-			i++;
-			if(isElemenetDisplayed(By.id(("RecordingStatus")+ Integer.toString(i)))){
+			if(isElementPresent(By.id(("RecordingStatus")+ Integer.toString(i)))){
 				WebElement recordStatus =getStaleElem(By.id("RecordingStatus"+ Integer.toString(i)), driver);
-				//wait.until(ExpectedConditions.visibilityOf(recordStatus));
+				wait.until(ExpectedConditions.visibilityOf(recordStatus));
 				String current_element = getTextFromWebElement(recordStatus);						
-						//recordStatus.getText();
 				if (!current_element.equals("")) {
 					return true;
-				}		
+				}
+				i++;
 			   } 		
 			}
 		return false;
