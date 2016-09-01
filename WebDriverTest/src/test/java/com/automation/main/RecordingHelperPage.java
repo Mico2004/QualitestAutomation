@@ -2933,15 +2933,15 @@ public String getSecondRecordingTitleTest() {
 		for (String file_name : additional_content_list_names) {
 
 			if (file_name.equals(name)) {
-				System.out.println(" selected file name is  displayed.");
-				ATUReports.add(" selected file name is  displayed.", LogAs.FAILED, null);
+				System.out.println("selected file name is  displayed.");
+				ATUReports.add("selected file name is  displayed.", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 				return;
 			}
 
 		}
-		System.out.println(" selected file name is not displayed.");
-		ATUReports.add(" selected file name is not displayed.", LogAs.PASSED, null);
+		System.out.println("selected file name is not displayed.");
+		ATUReports.add("selected file name is not displayed.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 
 	}

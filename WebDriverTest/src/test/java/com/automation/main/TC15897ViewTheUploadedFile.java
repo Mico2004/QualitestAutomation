@@ -281,7 +281,7 @@ public class TC15897ViewTheUploadedFile {
 							ATUReports.add("file is bigger or smaller for mega representation", LogAs.FAILED, null);
 							Assert.assertTrue(false);
 						}
-			    Thread.sleep(5000);
+			    Thread.sleep(6000);
 			///record.waitForVisibility(driver.findElement(By.xpath("//*[@id=\"ItemSize2\"]/span")));
 			    if((driver.findElement(By.xpath("//*[@id=\"ItemSize2\"]/span")).getText().contains("Mb"))&&(driver.findElement(By.xpath("//*[@id=\"ItemSize1\"]/span")).getText().contains("Kb")))
 			    {

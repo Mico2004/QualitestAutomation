@@ -113,8 +113,7 @@ public class ConfirmationMenu extends Page {
 	// appears in HTML source code.
 	public void clickOnOkButtonAfterConfirmCopyRecording() throws InterruptedException {
 		try {
-			// wait.until(ExpectedConditions.t(header_title_list.get(0),
-			// "Success"));
+			wait.until(ExpectedConditions.visibilityOf(header_title_list.get(0)));
 			// String souce_page = driver.getPageSource();
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				System.out.println("Error window title is wrong");

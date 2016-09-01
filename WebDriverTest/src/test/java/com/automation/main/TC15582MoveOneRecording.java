@@ -166,6 +166,7 @@ public class TC15582MoveOneRecording {
 		// move menu
 		record.getCheckbox().click();
 		record.clickOnRecordingTaskThenMove();
+		Thread.sleep(1000);
 		// Select destination course:mark destination course by clicking on it
 		String destination_course_name = move_menu.course_list.get(0).getText();
 		move_menu.course_list.get(0).click();
