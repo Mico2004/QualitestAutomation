@@ -578,11 +578,12 @@ public String getSecondRecordingTitleTest() {
 
 	// This function click on Course Task then on Settings in the sub menu
 	public void clickOnCourseTaskThenCourseSettings() throws InterruptedException {
-		WebElement element=course_task;
+		WebElement element=start_recording_button;
 		String id="CourseSettings";
 		try {
 			System.out.println("clickOnRecordingTaskThen1");
 			waitForVisibility(element);
+			Thread.sleep(2000);
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("course_settings displayed");
 			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",

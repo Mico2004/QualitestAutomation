@@ -657,7 +657,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			
+			ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 		}
 		Thread.sleep(3000);
 	}

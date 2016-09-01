@@ -140,7 +140,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		
 		//2.1 enter to the bank
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(1000); 
+		Thread.sleep(3000); 
 		
 		// 2.2 get to the student tab
 		record.clickOnStudentRecordingsTab();
