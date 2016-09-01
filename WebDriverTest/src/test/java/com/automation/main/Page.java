@@ -68,7 +68,7 @@ public class Page {
 			System.out.println("Clicked on "+element.getText()+" element");
 			ATUReports.add("Clicked on "+text+" element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED, null);
 		} catch (Exception msg) {
-			ATUReports.add("Clicked on "+text+" element", "Clicked succeeded..", "Clicked failed..", LogAs.FAILED, null);	
+			
 		}
 
 	}

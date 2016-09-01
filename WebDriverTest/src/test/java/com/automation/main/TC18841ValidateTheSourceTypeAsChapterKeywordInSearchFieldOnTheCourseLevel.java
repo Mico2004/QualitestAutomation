@@ -60,10 +60,6 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 	public void setup() {
 
 		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
 //		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));

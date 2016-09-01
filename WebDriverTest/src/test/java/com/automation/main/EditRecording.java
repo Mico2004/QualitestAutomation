@@ -5,18 +5,11 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.util.List;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.Listeners;
 
 import atu.testng.reports.ATUReports;
@@ -24,6 +17,7 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class EditRecording extends Page {
@@ -57,7 +51,8 @@ public class EditRecording extends Page {
 				
 		}
 		
-		
+		System.out.println("Wait that the element edit chapter will click from the list.");
+		ATUReports.add("Wait that the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
 		
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
@@ -69,7 +64,10 @@ public class EditRecording extends Page {
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		
-//		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
+		System.out.println("The element edit chapter was clicked");
+		ATUReports.add("The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
+		
+		
 		Thread.sleep(2000);
 		
 		String name = driver.findElement(By.id("NewTitle")).getAttribute("value");
@@ -106,8 +104,12 @@ public class EditRecording extends Page {
 			while(!isElementPresent(By.id("PlayButton_Img")) || i < 20) {
 					i++;
 					System.out.println("element is not visable");
-					Thread.sleep(1000);	
+					Thread.sleep(2000);	
 			}
+			
+			System.out.println("Wait that the element edit chapter will click from the list.");
+			ATUReports.add("Wait that the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
+			
 		
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
@@ -117,6 +119,9 @@ public class EditRecording extends Page {
 		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(1));
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
+		
+		System.out.println("The element edit chapter was clicked");
+		ATUReports.add("The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
 		
 		
 		//changing the name of the title
@@ -128,6 +133,9 @@ public class EditRecording extends Page {
 		driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
 		Thread.sleep(2000);
 		
+		
+		System.out.println("Click on the apply.");
+		ATUReports.add("Click on the apply.", "True.", "True.", LogAs.PASSED, null);
 		
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
@@ -162,11 +170,14 @@ public class EditRecording extends Page {
 			}
 		}
 		
-		while(!isElementPresent(By.id("PlayButton_Img"))) {
+		int i = 0 ; 
+		while(!isElementPresent(By.id("PlayButton_Img")) || i<20) {
 			System.out.println("element is not visable");
-			Thread.sleep(1000);	
+			Thread.sleep(2000);	
 		}
 		
+		System.out.println("Wait that the element add closed caption will click from the list.");
+		ATUReports.add("Wait that the element add closed caption will click from the list.", "True.", "True.", LogAs.PASSED, null);
 		
 		Thread.sleep(2000);
 		for(String window_handler: driver.getWindowHandles()) {
@@ -184,6 +195,8 @@ public class EditRecording extends Page {
 		Actions actions = new Actions(driver);
 		actions.moveToElement(element).click().perform();
 		
+		System.out.println("The element add caption was clicked");
+		ATUReports.add("The elementadd caption was clicked", "True.", "True.", LogAs.PASSED, null);
 		
 		Robot robot = new Robot();
 		robot.mouseMove(-100, 100);
@@ -214,6 +227,9 @@ public class EditRecording extends Page {
 		driver.findElement(By.id("AddCaptioning")).click();
 		Thread.sleep(1000);
 		
+		System.out.println("The element add caption was clicked");
+		ATUReports.add("The elementadd caption was clicked", "True.", "True.", LogAs.PASSED, null);
+		
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
 			break;
@@ -236,7 +252,9 @@ public class EditRecording extends Page {
 	// Change first chapter recording name
 	public void changeFirstChapterRecordingNameToTargetName(String target_name) throws InterruptedException {
 		
-
+		ConfirmationMenu confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+		RecordingHelperPage record = PageFactory.initElements(driver, RecordingHelperPage.class);
+		
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
@@ -251,9 +269,12 @@ public class EditRecording extends Page {
 		while(!isElementPresent(By.id("PlayButton_Img")) || index< 20) {
 			index++;
 				System.out.println("element is not visable");
-				Thread.sleep(1000);	
+				Thread.sleep(2000);	
 		}
 			
+		System.out.println("Wait that the element edit chapter will click from the list.");
+		ATUReports.add("Wait that the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
+		
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
 			break;
@@ -264,7 +285,9 @@ public class EditRecording extends Page {
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		
-//		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
+		System.out.println("The element edit chapter was clicked");
+		ATUReports.add("The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
+		
 		Thread.sleep(2000);
 		
 		driver.findElement(By.id("NewTitle")).clear();
@@ -273,28 +296,19 @@ public class EditRecording extends Page {
 		driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
 		Thread.sleep(2000);
 		
-		for(int i=0; i<60; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-//					System.out.println("2222");
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-				
+		//click on the ok
+		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
+			
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
+			if(ie.getText().contains("Success")){
+				confirm_menu.clickOnOkButtonAfterEditRecord();
+				break;
+			   }			
+			else Thread.sleep(2000);
 		}
 		
-		for(String window_handler: driver.getWindowHandles()) {
-			driver.switchTo().window(window_handler);
-			break;
-		}
-		
-
-		driver.findElement(By.cssSelector(".btn.btn-default")).click();
-		Thread.sleep(2000);
+		//return to the course
+	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();	
 	
 	}
 	
@@ -318,8 +332,11 @@ public class EditRecording extends Page {
 		while(!isElementPresent(By.id("PlayButton_Img")) || index< 20) {
 			index++;
 				System.out.println("element is not visable");
-				Thread.sleep(1000);	
+				Thread.sleep(2000);	
 		}
+		
+		System.out.println("Wait the the element edit chapter will click from the list.");
+		ATUReports.add("Wait the the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
 
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
@@ -330,6 +347,9 @@ public class EditRecording extends Page {
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		Thread.sleep(2000);
+		
+		System.out.println("The element edit chapter was Clicked");
+		ATUReports.add("The element edit chapter was Clicked.", "True.", "True.", LogAs.PASSED, null);
 		
 		driver.findElement(By.id("NewKeyword")).clear();
 		driver.findElement(By.id("NewKeyword")).sendKeys(target_keyword);
@@ -351,5 +371,7 @@ public class EditRecording extends Page {
 		//return to the course
 	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();	
 		
+	    System.out.println("Wait the the element edit chapter will click from the list.");
+		ATUReports.add("Wait the the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
 	}
 }

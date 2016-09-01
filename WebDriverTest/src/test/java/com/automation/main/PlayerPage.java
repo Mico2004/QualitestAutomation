@@ -135,8 +135,22 @@ public class PlayerPage extends Page {
 	WebElement context_title;
 	@FindBy(id= "TegrityLogo")
 	WebElement tegrity_logo;
-	
-	
+	@FindBy(id= "Back30_Img")
+	WebElement Back30_seconds;
+	@FindBy(id= "PrevButton_Img")
+	WebElement PrevButton;
+	@FindBy(id= "NextButton_Img")
+	WebElement NextButton;
+	@FindBy(id= "VolumeImage")
+	WebElement VolumeImage;	
+	@FindBy(id= "ControlPanelDivTextBox")
+	WebElement ControlPanelDivTextBox;
+	@FindBy(id= "DragEventsBlockerDiv")
+	WebElement DragEventsBlockerDiv;
+	@FindBy(id= "VolumeSliderButton")
+	WebElement VolumeSliderButton;
+	@FindBy(id= "FastForwardSliderButton_Img")
+	WebElement FastForwardSlide;
 	
 	// This function get as input number of seconds.
 	// It will check if the player plays for this number of seconds.
@@ -306,11 +320,22 @@ public class PlayerPage extends Page {
 			System.out.println("Not Verifed that logo at the buttom right cornner.");
 			ATUReports.add("Not Verifed that logo at the top left cornner.", "True.", "False.", LogAs.FAILED, null);
 		}
-		
-		
-		
+	
 	}
 	
+	public void verifyPlayersButtonsAndTimeBuffer() {
+		
+		waitForVisibility(play_button);
+		if (play_button.isDisplayed()) {
+			System.out.println("Verfied that user cannot add bookmark.");
+			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "True.", LogAs.PASSED, null);
+			
+		} else {
+			System.out.println("Not verfied that user cannot add bookmark.");
+			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "False.", LogAs.FAILED, null);
+		}
+	
+	}
 	
 
 	// TODO: get video with alert in FireFox and rework on this function.

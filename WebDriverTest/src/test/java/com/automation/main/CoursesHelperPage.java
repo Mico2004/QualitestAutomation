@@ -362,6 +362,9 @@ public class CoursesHelperPage extends Page {
 	public void clickOnPastCoursesTabButton() {
 		try {
 			past_courses_tab_button.click();
+			WebElement tabParent=past_courses_tab_button.findElement(By.xpath(".."));
+			wait.until(ExpectedConditions.attributeContains(tabParent, "class", "active"));	
+			Thread.sleep(2000);
 			System.out.println("Click on past course tab.");
 			ATUReports.add("Click on past course tab.", LogAs.PASSED, null);
 		} catch (Exception msg) {
@@ -596,7 +599,8 @@ public class CoursesHelperPage extends Page {
 			} catch (Exception msg) {
 				System.out.println("There is no additional content tab.");
 				ATUReports.add("There is no additional content tab.", LogAs.PASSED, null);
-				recording_helper_page.returnToCourseListPage(this);
+				waitForVisibility(recording_helper_page.course_link);
+				recording_helper_page.course_link.click();
 				return;
 			}
 		} else if (type_of_recordings == 2) {

@@ -208,7 +208,8 @@ public class RecordingHelperPage extends Page {
 	WebElement start_recording_button;
 	@FindBy(id = "StartTestButton")
 	WebElement start_test_button;
-
+	@FindBy(xpath=".//*[@id='tegrityBreadcrumbsBox']/li/a")
+	WebElement course_link;
 	@FindBy(id = "UploadRecording")
 	WebElement upload_recording;
 	@FindBy(id = "UploadVideoFile")
@@ -516,7 +517,7 @@ public String getSecondRecordingTitleTest() {
 			time_counter++;
 			Thread.sleep(1000);
 			
-			if (time_counter > 80) {
+			if (time_counter > 120) {
 				System.out.println("Timeout - Being copied from still appears after 80 seconds");
 				ATUReports.add("Timeout - Being copied from still appears after 80 seconds", LogAs.FAILED, null);
 				Assert.assertTrue(false);
@@ -577,39 +578,25 @@ public String getSecondRecordingTitleTest() {
 
 	// This function click on Course Task then on Settings in the sub menu
 	public void clickOnCourseTaskThenCourseSettings() throws InterruptedException {
-		// waitForVisibility(checkbox);
-		// checkbox.click();
-		// String clickedRecordingName = first_course_title.getText();
-		waitForVisibility(course_tasks_button);
-		course_tasks_button.sendKeys(Keys.TAB);
-
-		for (int i = 0; i < 10; i++) {
-			course_tasks_button.sendKeys(Keys.TAB);// solution
-			try { // to
-				course_settings_button.click();
-
-				Thread.sleep(1000);
-				if (isElementPresent(By.id("CourseSettings"))) {
-					ATUReports.add("Clicked on course settings.", LogAs.PASSED, null);
-					System.out.println("Clicked on course settings.");
-					Assert.assertTrue(true);
-					break;
-
-				}
-
-			} catch (Exception e) {
-
-			}
-		}
-		Thread.sleep(1000);
+		WebElement element=course_task;
+		String id="CourseSettings";
 		try {
-
-			course_settings_button.click();
-			ATUReports.add("Click succeeded.", LogAs.PASSED, null);
-			System.out.println("Click succeeded.");
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("course_settings displayed");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Thread.sleep(1500);
+			Assert.assertTrue(true);
+			return;
 		} catch (Exception e) {
-			ATUReports.add("Click failed.", LogAs.FAILED, null);
-			System.out.println("Click failed.");
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, null);
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
 		}
 
 	}
