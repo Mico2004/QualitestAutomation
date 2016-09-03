@@ -763,37 +763,17 @@ public String getSecondRecordingTitleTest() {
 	// This function clicks on coures link, and return to courses list page
 	public void returnToCourseListPage() throws InterruptedException {
 		for (int i = 0; i < 5; i++) {
-			try {		
-			
-				WebElement wi = driver.findElement(By.xpath("//*[@id='tegrityBreadcrumbsBox']"));	
-				waitForVisibility(check_all_checkbox);			
-				check_all_checkbox.click();
-				Actions builder = new Actions(driver);	
-				builder.sendKeys(Keys.PAGE_UP);				
-				builder.moveToElement(wi).build().perform();					
-				builder.click();					
+			try {
 				wait.until(ExpectedConditions.visibilityOf(courses_link));
-				courses_link.click();		
+				courses_link.click();
 				Thread.sleep(1000);
-				break;
 			} catch (Exception msg) {
-		
-				
+				break;
 			}
 		}		
 
 		try {
-			WebElement courses_title = null;
-			
-			for(int sec=0; sec<10; sec++) {
-				try {
-					System.out.println("b7");
-					courses_title = driver.findElement(By.id("CoursesHeading"));
-				} catch(Exception msg) {
-					System.out.println("b8");
-					Thread.sleep(1000);
-				}
-			}
+			WebElement courses_title = driver.findElement(By.id("CoursesHeading"));
 
 			if (courses_title.getText().equals("Courses")) {
 				System.out.println("Click on Courses link.");
@@ -813,7 +793,6 @@ public String getSecondRecordingTitleTest() {
 					"Not found courses page heading. Page url: " + driver.getCurrentUrl(), LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-
 	}
 
 	// This function clicks on signout link, and return to login page

@@ -257,7 +257,7 @@ public class TC24762CopyOneStudentRecording {
 				// System.out.println(driver.getPageSource());
 			}
 			//21.Click "Courses" link at breadcrumbs
-			record.returnToCourseListPage();
+			player_page.returnToCoursesPage(course);
 			Thread.sleep(3000);
 
 			//click on courses

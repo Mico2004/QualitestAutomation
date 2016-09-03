@@ -221,7 +221,7 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		
 		// TODO: improve it by new function that checking target by index recording
 		// 14. After copying is finished, recording's status will disappear.
-		record.checkStatusExistenceForMaxTTime(180);
+		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
 //		record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(1, "Being copied from", 180);
 		
 		// 15. Click on "Courses" link at breadcrumbs.

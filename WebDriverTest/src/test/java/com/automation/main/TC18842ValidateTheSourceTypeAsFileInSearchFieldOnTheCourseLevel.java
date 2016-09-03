@@ -68,6 +68,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 		 * This test is Chrome only test!
 		 */
 		driver=new ChromeDriver();
+		driver.manage().window().maximize();
 //		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
@@ -143,9 +144,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 		Thread.sleep(1000);
 		
 		record.returnToCourseListPage();
-		
-		//course.selectCourseThatStartingWith("Ab");
-		
+
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
 		course.selectCourseThatStartingWith("BankValid");
 		Thread.sleep(1000);
@@ -168,7 +167,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 		copy.selectTargetCourseFromCourseListThatStartWith("Ab");
 		Thread.sleep(2000);
 		copy.clickOnCopyButton();
-		Thread.sleep(10000);
+		Thread.sleep(8000);
 		confirm_menu.clickOnOkButton();
 		Thread.sleep(2000);
 		
@@ -194,7 +193,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);	
+			Thread.sleep(5000);	
 			
 			if(type_of_user != 3) {
 				// 3. Open some course.

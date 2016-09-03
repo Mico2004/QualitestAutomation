@@ -236,6 +236,7 @@ public class TC15582MoveOneRecording {
 		record.pressViewButtonAndSelect("Date");/// 2 times sort by date to make
 												/// recording first
 		record.pressViewButtonAndSelect("Date");
+		Thread.sleep(2000);
 		//record.searchbox.click();// prevent ekement not clickable
 		record.verifyFirstExpandableRecording();
 		Thread.sleep(2000);

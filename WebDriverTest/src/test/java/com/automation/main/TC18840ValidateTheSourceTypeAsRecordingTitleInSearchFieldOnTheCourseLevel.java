@@ -385,7 +385,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			}
 			
 			// 17. Sign Out.
-			record.signOut();;
+			record.signOut();
 		}
 		
 		// Unpublic Ab course1. 

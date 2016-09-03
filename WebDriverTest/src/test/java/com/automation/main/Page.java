@@ -410,11 +410,7 @@ public class Page {
 				Assert.assertTrue(false);
 			}
 		
-				if (driver.getTitle().equals("Tegrity Lecture Capture"))// check
-																		// if
-																		// element
-																		// is
-																		// present
+				if (driver.getTitle().equals("Tegrity Lecture Capture"))// check// if// element// is// present
 				{
 					System.out.println("LogOut from user succeeded.");
 					ATUReports.add(" Login page correctly displaied", LogAs.PASSED, null);

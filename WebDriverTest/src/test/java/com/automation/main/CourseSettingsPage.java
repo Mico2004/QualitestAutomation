@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -85,11 +86,13 @@ public class CourseSettingsPage extends Page {
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {
 		try {
-			Actions builder = new Actions(driver);  //  new line
-			builder.sendKeys(Keys.PAGE_DOWN); //  new line
-			builder.moveToElement(ok_button).build().perform(); //  new line
+			//Actions builder = new Actions(driver);  //  new line
+			//builder.sendKeys(Keys.PAGE_DOWN); //  new line
+			//builder.moveToElement(ok_button).build().perform(); //  new line
 			waitForVisibility(ok_button);
-			ok_button.click();
+			String id = "SaveButton";
+			//ok_button.click();
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("Clicked on ok button.");
 			ATUReports.add("Clicked on ok button.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
