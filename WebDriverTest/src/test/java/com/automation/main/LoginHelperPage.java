@@ -105,7 +105,7 @@ public class LoginHelperPage extends Page {
 	public void loginCourses(String user_name) throws InterruptedException// login
 																			// courses
 	{
-		Thread.sleep(6000);
+		Thread.sleep(2000);
 		System.out.println("loginCourses1"); 
 		wait.until(ExpectedConditions.visibilityOf(usernamefield));
 		System.out.println("loginCourses2");
@@ -273,8 +273,10 @@ public class LoginHelperPage extends Page {
 	}
 
 	/// login as guest
-	public void loginAsguest() {
+	public void loginAsguest() throws InterruptedException {
+		
 		waitForVisibility(Login_as_guest_button);
+		
 		try {
 			clickElement(Login_as_guest_button);
 			ATUReports.add("Login as guest", "click on login as guest", "Success login", "Success login", LogAs.PASSED,
@@ -283,6 +285,29 @@ public class LoginHelperPage extends Page {
 			ATUReports.add("Login as guest", "click on login as guest", "Success login", "Success fail", LogAs.FAILED,
 					null);
 		}
+		
+		for (int second = 0;; second++) {
+			if (second >= 60)
+				Assert.fail("timeout");
+			try {
+				if (driver.getTitle().equals("Tegrity - Courses"))//check if tegrity courses home page is visible
+				{ 
+					ATUReports.add("Tegrity courses home page is visible", "Course List page is displayed",
+							"Course List page is displayed", LogAs.PASSED, null);
+
+					break;
+				} else {
+					Login_as_guest_button.click();
+				}
+			} catch (Exception e) {
+				System.out.println("Tegrity courses home page didn't load");
+			}
+
+			Thread.sleep(1000);
+		}
+		Thread.sleep(3000);
+		Assert.assertEquals(driver.getTitle(), "Tegrity - Courses");
+	
 	}
 
 	/// verify visibilty of login as guest button

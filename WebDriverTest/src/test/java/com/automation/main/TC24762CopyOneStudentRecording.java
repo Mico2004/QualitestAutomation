@@ -45,7 +45,6 @@ public class TC24762CopyOneStudentRecording {
 
 				System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 				driver = new ChromeDriver();///// MUST FOR TEST TO GET XML
-
 				
 				tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 				wait = new WebDriverWait(driver, 30);
@@ -114,8 +113,9 @@ public class TC24762CopyOneStudentRecording {
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
+			confirm = PageFactory.initElements(driver, ConfirmationMenu.class);
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
+			
 			// 2.login as instructor
 			tegrity.loginCourses("User1");// log in courses page
 			// initialize course
@@ -129,18 +129,18 @@ public class TC24762CopyOneStudentRecording {
 	    	record.clickOnStudentRecordingsTab();
 			record.waitForVisibility(record.first_recording);
 			Thread.sleep(3000);
-			record = PageFactory.initElements(driver, RecordingHelperPage.class);
+		
 			//5.take recorder namme for later 
 			String original_recorder_name = driver.findElement(By.id("RecordedBy1")).getText();/// take recorder namme for later 
 			// 6.verify check box is selected and then load copy menu
 			Thread.sleep(1000);
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
         	record.verifyCopyMenu();// verify copy menu
-
+       
 			//7.return to recording page and than to course page
-			copy.CancelButton.click();// return to recording page
-			System.out.println("clicked on cancel button");
+			copy.clickOnCancelButton(record);
 			Thread.sleep(2000);
+			
 			record.returnToCourseListPage();
 			Thread.sleep(2000);
 			//8. Verify Only courses where this USER signed as INSTRUCTOR are displayed in "Course List"
@@ -149,10 +149,11 @@ public class TC24762CopyOneStudentRecording {
 			record.waitForVisibility(record.student_recordings_tab);
 			record.clickOnStudentRecordingsTab();
 			Thread.sleep(3000);
+			
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			record.verifyCopyMenu();// verify copy menu
-			copy=PageFactory.initElements(driver,CopyMenu.class);
 			Thread.sleep(3000);
+			
 			copy.copy_course_list = copy.getStringFromElement(copy.course_list);
 			int course_number=copy.course_list.size(); 
 			int count_instructors= course.patternAppearenceinString(xml_source_code,"<CurrentUserRole>Instructor</CurrentUserRole>");
@@ -186,25 +187,24 @@ public class TC24762CopyOneStudentRecording {
 
 
 
-			//9.take recorder namme for later 
-
-
-
+			//9.take recorder name for later 
 			String destination_course_name = copy.course_list.get(1).getText();
 			System.out.println(copy.course_list.get(1).getText());
+			
 			//11.select target course
 			copy.selectTargetCourseFromCourseList(copy.course_list.get(1).getText());
 			Thread.sleep(2000);
+			
 			//12.verify background color of copy menu
-			System.out.println(
-					copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]"))));
-			copy.verifyBlueColor(
-					copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]")))); 
+			System.out.println(copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]"))));
+			copy.verifyBlueColor(copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]")))); 
+			
 			//13.Click the "Copy Recording(s)" button
 			copy.clickOnCopyButton(record);// click copy button ConfirmationMenu
-			confirm = PageFactory.initElements(driver, ConfirmationMenu.class);
+		
 			//14.click on ok button
 			confirm.clickOnOkButton();// click on ok button String
+			
 			//15.verify "being copy from" status
 			record.waitForVisibility(record.course_being_copied_status);
 			String status = record.course_being_copied_status.getText();
@@ -257,7 +257,7 @@ public class TC24762CopyOneStudentRecording {
 				// System.out.println(driver.getPageSource());
 			}
 			//21.Click "Courses" link at breadcrumbs
-			record.returnToCourseListPage();
+			player_page.returnToCoursesPage(course);
 			Thread.sleep(3000);
 
 			//click on courses
@@ -267,7 +267,7 @@ public class TC24762CopyOneStudentRecording {
 			Thread.sleep(3000);
             record.waitForVisibility(record.student_recordings_tab);
 			record.clickOnStudentRecordingsTab();
-        Thread.sleep(3000);
+			Thread.sleep(3000);
             //22.verify date,duration,recorder name as original
         	
 			//fill recording list with data :duration,date,names,recorder names

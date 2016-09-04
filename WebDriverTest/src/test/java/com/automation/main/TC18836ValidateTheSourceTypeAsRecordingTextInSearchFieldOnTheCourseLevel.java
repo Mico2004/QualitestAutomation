@@ -139,7 +139,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		course.selectCourseThatStartingWith("BankValid");
 		Thread.sleep(1000);
 			
-			//String recording_name = record.getFirstRecordingTitle();
+		//String recording_name = record.getFirstRecordingTitle();
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		Thread.sleep(1000);
 			
@@ -168,7 +168,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		Thread.sleep(8000);
 
 			
-			top_bar_helper.clickOnSignOut();
+		record.signOut();
 		
 		
 		// Looping for Student, Guest and ADMIN
@@ -312,7 +312,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			
 			// Signout
 			search_page.exitInnerFrame();
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 		}
 		
 		// Unpublic Ab course1. 

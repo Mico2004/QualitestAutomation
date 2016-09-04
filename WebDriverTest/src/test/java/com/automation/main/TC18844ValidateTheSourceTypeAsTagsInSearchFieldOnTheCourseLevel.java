@@ -136,7 +136,8 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 		String tags_for_search = "NewTag" + sdf.format(date);
 		
 		String recording_of_the_tag = record.getFirstRecordingTitle();
-		record.selectIndexCheckBox(1);
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);
 		record.clickOnRecordingTaskThenTag();
 		
 		tag_menu.deleteAllExistingTags();
@@ -148,7 +149,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 		tag_menu.clickOnApplyButton();
 		Thread.sleep(1000);
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		
 		driver.quit();
 		

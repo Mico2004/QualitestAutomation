@@ -140,7 +140,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		
 		//2.1 enter to the bank
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(1000); 
+		Thread.sleep(3000); 
 		
 		// 2.2 get to the student tab
 		record.clickOnStudentRecordingsTab();
@@ -313,7 +313,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		search_page.clickBackToCourseInBreadcrumbs();
 		
 		// 13. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		Thread.sleep(3000);
 
 		System.out.println("Done.");

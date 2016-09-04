@@ -141,7 +141,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 		Thread.sleep(8000);
 
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		
 		
 		// Looping for Student and Guest
@@ -251,7 +251,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 			search_page.exitInnerFrame();
 			
 			// 11. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 		}
 		
 		// Unpublic Ab course1. 

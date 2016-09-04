@@ -145,7 +145,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 		
 		add_additional_content_link_window.createNewAdditionalContentLink(confirm_menu, new_additional_link_title, new_additional_link_url);
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		
 		
 		// Looping for Student, Guest and ADMIN
@@ -253,7 +253,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 			}
 			
 			// Signout
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 		}
 		
 		// Unpublic Ab course1. 

@@ -132,9 +132,10 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		
 		// Upload for first recording target close catpion
 		Thread.sleep(2000);
-		List<String> listOfNames = record.getCourseRecordingList();
+
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);	
 		
-		record.selectIndexCheckBox(listOfNames.size());		
 		record.clickOnRecordingTaskThenEditRecording();
 	
 		edit_recording.addCaptionSrtToFirstChapterRecording();
@@ -142,21 +143,17 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		Thread.sleep(5000);
 		String text_from_caption_for_test = "QualitestAutomationCaption";	
 		
-		player_page.returnToCoursesPage(course);
-		record.signOut();
 		
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {
-			if(type_of_user == 0) {
-				// 2. Login as INSTRUCTOR.
-				tegrity.loginCourses("User1");
-			} else if (type_of_user == 1) {
+	
+			 if (type_of_user == 1) {
 				// 2. Login as Student.
 				tegrity.loginCourses("User4");
 			} else if (type_of_user == 2) {
 				// 2. Login as guest
 				tegrity.loginAsguest();
-			} else {
+			} else if(type_of_user == 3) {
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
@@ -274,7 +271,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 			
 			// Signout
 			search_page.exitInnerFrame();
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 		}
 		
 		// Unpublic Ab course1. 

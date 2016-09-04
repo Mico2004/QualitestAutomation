@@ -60,10 +60,6 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 	public void setup() {
 
 		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
 //		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
@@ -143,8 +139,8 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
 		String recording_chapter_keyword = "NewKeyword" + sdf.format(date);
 		
-		List<String> listOfNames = record.getCourseRecordingList();
-		record.selectIndexCheckBox(listOfNames.size());
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);	
 		record.clickOnRecordingTaskThenEditRecording();
 		
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_chapter_keyword);
@@ -300,8 +296,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 					date = new Date();
 					String new_recording_chapter_keyword = "NewerKeyword" + sdf.format(date);		
 				
-					listOfNames = record.getCourseRecordingList();
-					record.selectIndexCheckBox(listOfNames.size());
+					record.selectIndexCheckBox(recordNumber);	
 					record.clickOnRecordingTaskThenEditRecording();
 				
 					edit_recording.changeFirstChapterRecordingNameToTargetName(new_recording_chapter_keyword);

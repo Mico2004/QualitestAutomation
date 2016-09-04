@@ -697,7 +697,9 @@ public class RecordingHelperPage extends Page {
 	}
 
 	// This function clicks on checkbox which is checking all checkbox.
-	public List<String> checkAllCheckBox() {
+	
+	public List<String> checkAllCheckBox()
+ {
 		System.out.println("checkAllCheckBox1");
 		wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
 		wait.until(ExpectedConditions.elementToBeClickable(check_all_checkbox));
@@ -4363,6 +4365,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 	// This function go over all recording status and checks that recording status of type which available for delete that recordings
+	
 	public void checkExistenceOfNonDeleteRecordingsStatusInRecordings() throws InterruptedException {
 		int i = 0;
 		Thread.sleep(1000);
@@ -4385,6 +4388,26 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
+	
+	
+	public int checkExistenceOfNonEditRecordingsStatusInRecordings() throws InterruptedException {
+		int i = 1;
+		Thread.sleep(1000);
+		for (WebElement e : driver.findElements(By.cssSelector(".recordingStatus"))) {
+				String current_element = getTextFromWebElement(e);
+				System.out.println(current_element);
+			if ((!current_element.equals(""))) {
+				System.out.println("This record canot been edit.");
+				ATUReports.add("This record canot been edit.", "True.", "True.", LogAs.PASSED, null);
+				i++;
+			  }
+			 else {
+				break;
+			}
+		}
+		return i;
+	}
+	
 	
 	// This function go over all recording status and checks that recording status of type which available for delete that recordings
 	public void checkExistenceOfNonDeleteItemsStatusInAdditionalContent() throws InterruptedException {

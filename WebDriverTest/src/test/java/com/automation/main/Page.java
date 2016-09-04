@@ -69,6 +69,7 @@ public class Page {
 			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
 					null);
 		} catch (Exception msg) {
+
 			try {
 				System.out.println("Clicked failed trying again with JS");
 				String id = element.getAttribute("id");
@@ -80,6 +81,9 @@ public class Page {
 				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded..", "Clicked failed..",
 						LogAs.FAILED, null);
 			}
+
+
+			
 
 		}
 

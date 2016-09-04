@@ -142,7 +142,7 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 		String recording_chapter = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		Thread.sleep(3000);
 		
 		
@@ -252,7 +252,7 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 			//driver.findElement(By.xpath(".//*[@id='main']/div[2]/div/div[2]/span/a/b")).click(); //search_page.clickBackToCourseInBreadcrumbs();
 			player_page.returnToCoursesPage(course);
 			// 13. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 			Thread.sleep(3000);
 		}
 		

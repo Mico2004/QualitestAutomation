@@ -133,7 +133,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			tegrity.waitForVisibility(tegrity.passfield);
 
-			// 2.login as guest
+			// 2.login as Admin
 			tegrity.loginAdmin("Admin");
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 
@@ -213,7 +213,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			}
 
 
-
 			//15.The university logo is displayed on the top footer bar left side.
 			player_page.verifyUniversityLogoVisibilityAndLocation();
 
@@ -258,7 +257,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 
 
 			//					
-			//					///16.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
+			/////16.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
 			//			player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(3);
 			//			
 

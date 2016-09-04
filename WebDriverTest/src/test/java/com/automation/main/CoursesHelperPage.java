@@ -244,13 +244,11 @@ public class CoursesHelperPage extends Page {
 	}
 
 	//// select course by name
-	public void selectCourseByName(final String destination_course_name) {
+	public void selectCourseByName(final String destination_course_name) throws InterruptedException {
 
-		boolean clicked = false;
-		int i = 0;
+		//boolean clicked = false;
+		//int i = 0;
 
-		
-		
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));
 		System.out.println("wait wrapper");
 		WebElement element = driver.findElement(By.xpath("//a[contains(@title,'" + destination_course_name + "')]"));
@@ -259,10 +257,19 @@ public class CoursesHelperPage extends Page {
 		WebElement sCourse2 = driver.findElement(By.id(id));
 		String CourseId=sCourse2.getAttribute("id");
 		
+		for(int index=0; index<5 ; index ++){
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+CourseId+"\").click();");
+			Thread.sleep(1000);
+			if(isElementPresent(By.id("CourseTitle"))) {
+				System.out.println("successflly selet the course.");
+				ATUReports.add("successflly selet the course.", LogAs.PASSED, null);
+				break;			
+			}
+		}
 		
-		((JavascriptExecutor) driver).executeScript("document.getElementById(\""+CourseId+"\").click();");
 		
 		/*
+		 * 
 		while (!clicked && i < 50) {
 			try {
 				i++;
@@ -389,7 +396,7 @@ public class CoursesHelperPage extends Page {
 
 	// This function get string that some course starting with, and select that
 	// course.
-	public String selectCourseThatStartingWith(String name_starting_with) {
+	public String selectCourseThatStartingWith(String name_starting_with) throws InterruptedException {
 		System.out.println("select1");
 		List<String> course_list = getCourseList();
 		System.out.println("select2");
@@ -526,7 +533,7 @@ public class CoursesHelperPage extends Page {
 	// it will delete all recordings
 
 	public void verifyRecordingsStatusIsClear(String source_course, int type_of_recordings,
-			RecordingHelperPage record_helper_page) {
+			RecordingHelperPage record_helper_page) throws InterruptedException {
 
 		selectCourseThatStartingWith(source_course);
 		if (type_of_recordings == 1) {
@@ -599,7 +606,8 @@ public class CoursesHelperPage extends Page {
 			} catch (Exception msg) {
 				System.out.println("There is no additional content tab.");
 				ATUReports.add("There is no additional content tab.", LogAs.PASSED, null);
-				recording_helper_page.returnToCourseListPage(this);
+				waitForVisibility(recording_helper_page.course_link);
+				recording_helper_page.course_link.click();
 				return;
 			}
 		} else if (type_of_recordings == 2) {

@@ -121,6 +121,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		//make sure that the course Ba will not be public
 		
 		tegrity.loginCourses("User1");
+		initializeCourseObject();
 		
 		course.selectCourseThatStartingWith("Ba");
 						
@@ -128,14 +129,14 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
-		
+		record.signOut();
 		
 		//1. Validate there is recording in this course. Search input specified shall be case-insensitive.
 		// Login as User1
 		// Copy one recording to Ba
 		// Change that recording first chapter to target chapter name
 		tegrity.loginCourses("SuperUser");
-		initializeCourseObject();
+
 		
 		//course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
 		
@@ -156,11 +157,9 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		String new_chapter_name = "newname" + sdf.format(date);
 		
 		edit_recording.changeFirstChapterRecordingNameToTargetName(new_chapter_name);
-		
-		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
 		Thread.sleep(2000);
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		
 		// 2. Log in as STUDENT (User4).
 		tegrity.loginCourses("User4");

@@ -52,11 +52,11 @@ public class ConfirmationMenu extends Page {
 
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {		
+
 		waitForVisibility(alertWindow);
 		if(!isAlertPresent()){
 			try {
 		Thread.sleep(3000);		
-		Thread.sleep(1000);
 		waitForVisibility(ok_button);		
 			ok_button.click();
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
@@ -66,11 +66,8 @@ public class ConfirmationMenu extends Page {
 			Assert.assertTrue(false);
 		} 
 		Thread.sleep(3000);
-		}else{
-			ATUReports.add("Additional content file path wasn't found, check resources.", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-			
-		}
+		
+	}
 	}
 
 	// This function clicks on ok button of copy menu
@@ -627,6 +624,7 @@ public class ConfirmationMenu extends Page {
 			ok_buttonCss.click();
 			ok_button.click();
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			System.out.println("Clicked on OK button.");
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			
@@ -653,7 +651,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			
+			ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 		}
 		Thread.sleep(3000);
 	}
