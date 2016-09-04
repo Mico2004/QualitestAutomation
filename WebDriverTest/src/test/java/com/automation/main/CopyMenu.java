@@ -146,6 +146,7 @@ public class CopyMenu extends Page {
 	public boolean selectTargetCourseFromCourseList(String target_course_name) throws InterruptedException {
 
 		String selected_course = null;
+		Thread.sleep(1500);
 		wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOf(first_course_on_the_list));
 		
