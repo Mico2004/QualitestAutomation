@@ -1072,17 +1072,23 @@ public String getSecondRecordingTitleTest() {
 	// thic function clicks on student recordings tab (in type of recordings
 	// menu)
 	public void clickOnStudentRecordingsTab() {
+		WebElement element=student_recordings_tab;
+		String id="StudentRecordingsTab";
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(student_recordings_tab));
-			student_recordings_tab.click();
-			System.out.println("Clicked on student recordings tab");
-			ATUReports.add("Click Student Recordings tab", "Clicked on student recordings tab",
-					"Clicked on student recordings tab", LogAs.PASSED, null);
+			System.out.println("StudentRecordingsTab1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");		
+			System.out.println("StudentRecordingsTab3");
+			ATUReports.add("Select StudentRecordingsTab -> "+id, id+" was click",
+					id+" was clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
-		} catch (Exception msg) {
-			System.out.println("Failed to click on student recordings tab. ERROR: " + msg);
-			ATUReports.add("Click Student Recordings tab", "Clicked on student recordings tab",
-					"Failed to click on student recordings tab. ERROR: " + msg, LogAs.FAILED, null);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("StudentRecordingsTab4");
+			ATUReports.add("Select StudentRecordingsTab -> "+id, id+" was click",
+					id+" wasn't clicked", LogAs.FAILED, null);
+			System.out.println(id+" was clicked");
 			Assert.assertTrue(false);
 		}
 		
@@ -1624,7 +1630,31 @@ public String getSecondRecordingTitleTest() {
 	// thic function clicks on additional tab tab (in type of recordings
 	// menu)
 	public void clickOnAdditionContentTab() {
+		WebElement element=additional_content_tab;
+		String id="AdditionalContentTab";
 		try {
+			System.out.println("AdditionalContentTab1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("AdditionalContentTab2");	
+			ATUReports.add("Select additional_content_tab -> "+id, id+" was click",
+					id+" was clicked", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("AdditionalContentTab6");
+			ATUReports.add("Select additional_content_tab -> "+id, id+" was click",
+					id+" wasn't clicked", LogAs.FAILED, null);
+			System.out.println(id+" was clicked");
+			Assert.assertTrue(false);
+		}
+	}
+		
+		
+		
+		
+/*		try {   // old clickOnAdditionContentTab implementation
 			Thread.sleep(1000);
 			waitForVisibility(additional_content_tab);
 			additional_content_tab.click();
@@ -1638,8 +1668,8 @@ public String getSecondRecordingTitleTest() {
 			System.out.println("Failed to click on additional tab. ERROR: " + msg);
 			ATUReports.add("Failed to click on additional tab. ERROR: " + msg, LogAs.FAILED, null);
 			Assert.assertTrue(false);
-		}
-	}
+		}*/
+	
 
 	// This function click on Content Task then on copy in the sub menu
 	public void clickOnContentTaskThenCopy() throws InterruptedException {
@@ -1706,15 +1736,23 @@ public String getSecondRecordingTitleTest() {
 	// this function clicks on tests tab (in type of recordings
 	// menu)
 	public void clickOnTestsTab() {
+		WebElement element=test_tab;
+		String id="TestsTab";
 		try {
-			waitForVisibility(tests_tab);
-			tests_tab.click();
-			System.out.println("Clicked on tests tab");
-			ATUReports.add("Clicked on tests tab", LogAs.PASSED, null);
+			System.out.println("TestsTab1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("TestsTab2");			
+			ATUReports.add("Select TestsTab -> "+id, id+" was click",
+					id+" was clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
-		} catch (Exception msg) {
-			System.out.println("Failed to click on tests tab. ERROR: " + msg);
-			ATUReports.add("Failed to click ontests tab. ERROR: " + msg, LogAs.FAILED, null);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("TestsTab4");
+			ATUReports.add("Select TestsTab -> "+id, id+" was click",
+					id+" wasn't clicked", LogAs.FAILED, null);
+			System.out.println(id+" was clicked");
 			Assert.assertTrue(false);
 		}
 
@@ -1844,21 +1882,7 @@ public String getSecondRecordingTitleTest() {
 
 	}
 
-	// thic function clicks on student recordings tab (in type of recordings
-	// menu)
-	public void clickOnTestTab() {
-		try {
-			test_tab.click();
-			System.out.println("Clicked on test recordings tab");
-			ATUReports.add("Clicked on test recordings tab", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} catch (Exception msg) {
-			System.out.println("Failed to click on test recordings tab. ERROR: " + msg);
-			ATUReports.add("Failed to click on test recordings tab. ERROR: " + msg, LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
 
-	}
 
 	// thic function clicks on student recordings tab (in type of recordings
 	// menu)
