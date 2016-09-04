@@ -117,8 +117,8 @@ public class TC17929And17941And17944PastCourses {
 		
 		
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		Thread.sleep(2000);
-
+		Thread.sleep(2000);		
+		
 		tegrity.loginAdmin("Admin");
 		Thread.sleep(2000);
 		System.out.println("Past1");
