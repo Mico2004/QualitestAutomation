@@ -716,8 +716,8 @@ public String getSecondRecordingTitleTest() {
 		System.out.println("checkAllCheckBox1");
 		wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
 		wait.until(ExpectedConditions.elementToBeClickable(check_all_checkbox));
-		System.out.println("checkAllCheckBox2");
-		check_all_checkbox.click();
+		System.out.println("checkAllCheckBox2");		
+		((JavascriptExecutor) driver).executeScript("document.getElementById(\"CheckAll\").click();");		
 		System.out.println("checkAllCheckBox4");
 		List<String> recording_names_list = getCourseRecordingList();
 		
@@ -1502,7 +1502,7 @@ public String getSecondRecordingTitleTest() {
 				recording= driver.findElement(By.linkText((original_recorder_name)));
 				waitForVisibility(recording);
 				recording.getText();
-				recording.click();
+				clickElement(recording);
 				waitForVisibility(visibleFirstChapter);
 				System.out.println(" Recording found");
 				ATUReports.add(" Recording found", LogAs.PASSED, null);
@@ -1978,7 +1978,8 @@ public String getSecondRecordingTitleTest() {
 
 		WebElement element=content_tasks_button;
 		String id="DeleteTask";
-		try {
+		try {			
+			new WebDriverWait(driver, 120).until((ExpectedConditions.invisibilityOfElementWithText(By.id("scrollableArea"), "Uploading")));
 			System.out.println("clickOnRecordingTaskThen1");
 			waitForVisibility(element);
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
@@ -4426,22 +4427,28 @@ public String getSecondRecordingTitleTest() {
 	
 	// This function go over all recording status and checks that recording status of type which available for delete that recordings
 	public void checkExistenceOfNonDeleteItemsStatusInAdditionalContent() throws InterruptedException {
-		int i = 0;
-		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {
-			i++;
-			if(isElemenetDisplayed(By.id(("ItemStatus")+ Integer.toString(i)))){		
+		int i = 1;
+		List<WebElement> elements=driver.findElements(By.cssSelector(".recordingData"));
+		int size=elements.size()+1;
+		
+		while(i<=size) {
+			System.out.println("loop"+i);
+				
 				Thread.sleep(1000);
-				WebElement el = getStaleElem(By.id("ItemStatus" + Integer.toString(i)),driver);
+				System.out.println("in if");
+				WebElement el = driver.findElement(By.id("ItemStatus" + Integer.toString(i)));
 				String current_element = el.getText();	
+				System.out.println(current_element);
 			if ((!current_element.equals("Available"))) {
+				new WebDriverWait(driver, 180).until(ExpectedConditions.textToBePresentInElement(el, "Available"));
 				System.out.println("Not verfired that all additional Content have non delete status.");
-				ATUReports.add("Verfied that all additional Content have delete available status.", "True.", "False.", LogAs.FAILED, null);
+				ATUReports.add("Verfied that all additional Content have delete available status.", "True.", "Status of "+i+" content is: "+current_element, LogAs.FAILED, null);
 				ATUReports.add("the status is: " + current_element, "True.", "False.", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			  }
-			} else {
-				break;
-			}
+			 
+			
+			i++;
 		}
 		System.out.println("Verfired that all recordings have delete available status.");
 		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
