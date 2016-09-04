@@ -53,11 +53,11 @@ public class ConfirmationMenu extends Page {
 	// This function clicks on ok button of copy menu
 
 	public void clickOnOkButton() throws InterruptedException {		
-		
+		waitForVisibility(alertWindow);
 		if(!isAlertPresent()){
 			try {
 		Thread.sleep(3000);
-		waitForVisibility(alertWindow);
+		
 		Thread.sleep(1000);
 		waitForVisibility(ok_button);
 		
