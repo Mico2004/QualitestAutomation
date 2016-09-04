@@ -209,7 +209,8 @@ public class RecordingHelperPage extends Page {
 	WebElement start_recording_button;
 	@FindBy(id = "StartTestButton")
 	WebElement start_test_button;
-
+	@FindBy(xpath=".//*[@id='tegrityBreadcrumbsBox']/li/a")
+	WebElement course_link;
 	@FindBy(id = "UploadRecording")
 	WebElement upload_recording;
 	@FindBy(id = "UploadVideoFile")
@@ -503,16 +504,16 @@ public class RecordingHelperPage extends Page {
 		return first_course_title_tests.getText();
 	}
 	
-public String getSecondRecordingTitleTest() {
+	public String getSecondRecordingTitleTest() {
 		wait.until(ExpectedConditions.visibilityOf(first_course_title_tests));
 		return second_course_title.getText();
 	}
+	
 	public String getFirstRecordingByName() {
 		wait.until(ExpectedConditions.visibilityOf(FirstRecordByName));
 		return FirstRecordByName.getText();
 	}
 	
-
 	// This function waits until first recording status "Being Copied from"
 	// dissaper
 	public void waitUntilFirstRecordingBeingCopiedFromStatusDissaper() throws InterruptedException {
@@ -522,7 +523,7 @@ public String getSecondRecordingTitleTest() {
 			time_counter++;
 			Thread.sleep(1000);
 			
-			if (time_counter > 80) {
+			if (time_counter > 120) {
 				System.out.println("Timeout - Being copied from still appears after 80 seconds");
 				ATUReports.add("Timeout - Being copied from still appears after 80 seconds", LogAs.FAILED, null);
 				Assert.assertTrue(false);
@@ -583,39 +584,26 @@ public String getSecondRecordingTitleTest() {
 
 	// This function click on Course Task then on Settings in the sub menu
 	public void clickOnCourseTaskThenCourseSettings() throws InterruptedException {
-		// waitForVisibility(checkbox);
-		// checkbox.click();
-		// String clickedRecordingName = first_course_title.getText();
-		waitForVisibility(course_tasks_button);
-		course_tasks_button.sendKeys(Keys.TAB);
-
-		for (int i = 0; i < 10; i++) {
-			course_tasks_button.sendKeys(Keys.TAB);// solution
-			try { // to
-				course_settings_button.click();
-
-				Thread.sleep(1000);
-				if (isElementPresent(By.id("CourseSettings"))) {
-					ATUReports.add("Clicked on course settings.", LogAs.PASSED, null);
-					System.out.println("Clicked on course settings.");
-					Assert.assertTrue(true);
-					break;
-
-				}
-
-			} catch (Exception e) {
-
-			}
-		}
-		Thread.sleep(1000);
+		WebElement element=start_recording_button;
+		String id="CourseSettings";
 		try {
-
-			course_settings_button.click();
-			ATUReports.add("Click succeeded.", LogAs.PASSED, null);
-			System.out.println("Click succeeded.");
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			Thread.sleep(2000);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("course_settings displayed");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Thread.sleep(1500);
+			Assert.assertTrue(true);
+			return;
 		} catch (Exception e) {
-			ATUReports.add("Click failed.", LogAs.FAILED, null);
-			System.out.println("Click failed.");
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, null);
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
 		}
 
 	}
@@ -646,10 +634,6 @@ public String getSecondRecordingTitleTest() {
 		}
 	}
 
-		
-
-	
-
 	// This function click on Recorind Task then on copy in the sub menu
 	public void clickOnRecordingTaskThenCopy() throws InterruptedException {
 		
@@ -678,6 +662,7 @@ public String getSecondRecordingTitleTest() {
 }
 
 	// This function return all recordings of current course
+	
 	public List<String> getCourseRecordingList() {
 
 		List<String> recording_names_list = new ArrayList<String>();
@@ -746,7 +731,8 @@ public String getSecondRecordingTitleTest() {
 	// all title of all recordings in course.
 	// It will return true if the recording found. Otherwise it will return
 	// false.
-	public boolean isRecordingExist(String recording_name, boolean need_to_be_exists) {
+	
+public boolean isRecordingExist(String recording_name, boolean need_to_be_exists) {
 		
 		//wait.until(ExpectedConditions.visibilityOf(first_course_title));
 		recording_list_names = convertRecordingsListToNames();
@@ -781,37 +767,17 @@ public String getSecondRecordingTitleTest() {
 	// This function clicks on coures link, and return to courses list page
 	public void returnToCourseListPage() throws InterruptedException {
 		for (int i = 0; i < 5; i++) {
-			try {		
-			
-				WebElement wi = driver.findElement(By.xpath("//*[@id='tegrityBreadcrumbsBox']"));	
-				waitForVisibility(check_all_checkbox);			
-				check_all_checkbox.click();
-				Actions builder = new Actions(driver);	
-				builder.sendKeys(Keys.PAGE_UP);				
-				builder.moveToElement(wi).build().perform();					
-				builder.click();					
+			try {
 				wait.until(ExpectedConditions.visibilityOf(courses_link));
-				courses_link.click();		
+				courses_link.click();
 				Thread.sleep(1000);
-				break;
 			} catch (Exception msg) {
-		
-				
+				break;
 			}
 		}		
 
 		try {
-			WebElement courses_title = null;
-			
-			for(int sec=0; sec<10; sec++) {
-				try {
-					System.out.println("b7");
-					courses_title = driver.findElement(By.id("CoursesHeading"));
-				} catch(Exception msg) {
-					System.out.println("b8");
-					Thread.sleep(1000);
-				}
-			}
+			WebElement courses_title = driver.findElement(By.id("CoursesHeading"));
 
 			if (courses_title.getText().equals("Courses")) {
 				System.out.println("Click on Courses link.");
@@ -831,7 +797,6 @@ public String getSecondRecordingTitleTest() {
 					"Not found courses page heading. Page url: " + driver.getCurrentUrl(), LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-
 	}
 
 	// This function clicks on signout link, and return to login page
@@ -2023,6 +1988,7 @@ public String getSecondRecordingTitleTest() {
 	}
 
 	// check if recording has a being copied from status
+	
 	public boolean recordingBeingEditedStatus(WebElement element) {
 		String val = element.getText();
 		if (val.equals("Recording is being edited.")) {
@@ -2976,15 +2942,15 @@ public String getSecondRecordingTitleTest() {
 		for (String file_name : additional_content_list_names) {
 
 			if (file_name.equals(name)) {
-				System.out.println(" selected file name is  displayed.");
-				ATUReports.add(" selected file name is  displayed.", LogAs.FAILED, null);
+				System.out.println("selected file name is  displayed.");
+				ATUReports.add("selected file name is  displayed.", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 				return;
 			}
 
 		}
-		System.out.println(" selected file name is not displayed.");
-		ATUReports.add(" selected file name is not displayed.", LogAs.PASSED, null);
+		System.out.println("selected file name is not displayed.");
+		ATUReports.add("selected file name is not displayed.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 
 	}
@@ -3652,18 +3618,13 @@ public String getSecondRecordingTitleTest() {
 
 	// verify copy menu
 	public String verifyCopyMenu() throws InterruptedException {
-		try {
-			Robot robot = new Robot();
-			robot.mouseMove(-100, -100);
-		} catch (AWTException e1) {
-			// TODO Auto-generated catch block
-			System.out.println("couldn't use robot");
-		}
 
 		String clickedRecordingName = first_course_title.getText();
-		waitForVisibility(recording_tasks_button);
-		moveToElementAndClick(recording_tasks_button, driver);
-		copy_button.click();
+		WebElement element=recording_tasks_button;
+		String id="CopyTask2";
+		System.out.println("clickOnRecordingTaskThen1");
+		waitForVisibility(element);
+		((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 		if (isElementPresent(By.id("copyCourseWindow"))) {
 			System.out.println("copy menu verified");
 			ATUReports.add("copy menu verified", LogAs.PASSED, null);

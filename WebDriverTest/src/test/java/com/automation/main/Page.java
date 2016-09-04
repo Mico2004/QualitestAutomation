@@ -323,13 +323,7 @@ public class Page {
 
 	public boolean verifyColor(String expected, WebElement element) throws InterruptedException {// returns//
 																									// if//
-																									// color//
-																									// is//
-																									// equal//
-																									// or//
-																									// not
-
-		// record.moveToElementAndClick(record.recording_tasks_button, driver);
+																									// color//	// record.moveToElementAndClick(record.recording_tasks_button, driver);
 		waitForVisibility(element);
 		String actual_color = element.getCssValue("color");
 		return expected.equals(actual_color);
@@ -337,11 +331,10 @@ public class Page {
 	}
 	
 	
-	public static boolean isElementPresent(WebElement element) {
+	public  boolean isElementPresent(WebElement element) {
 		boolean flag = false;
 		try {
-			if (element.isDisplayed()
-					|| element.isEnabled())
+			if (element.isDisplayed()|| element.isEnabled())
 				flag = true;
 		} catch (NoSuchElementException e) {
 			flag = false;
@@ -415,18 +408,13 @@ public class Page {
 
 		for (int second = 0;second<60; second++) {
 			try {
-				Thread.sleep(2000);
 			if (second >= 60) {
 				System.out.println("LogOut from user not succeeded.");
 				ATUReports.add(" Login page timeout", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			}
 		
-				if (driver.getTitle().equals("Tegrity Lecture Capture"))// check
-																		// if
-																		// element
-																		// is
-																		// present
+				if (driver.getTitle().equals("Tegrity Lecture Capture"))// check// if// element// is// present
 				{
 					System.out.println("LogOut from user succeeded.");
 					ATUReports.add(" Login page correctly displaied", LogAs.PASSED, null);
