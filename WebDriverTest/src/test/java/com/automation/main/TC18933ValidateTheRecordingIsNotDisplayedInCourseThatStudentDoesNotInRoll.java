@@ -147,7 +147,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		//record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 		
 		Thread.sleep(3000);
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		Thread.sleep(500);
 		record.clickOnRecordingTaskThenEditRecording();
 		Thread.sleep(2000);

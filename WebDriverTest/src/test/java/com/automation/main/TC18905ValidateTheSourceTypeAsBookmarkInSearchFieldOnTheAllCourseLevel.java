@@ -145,6 +145,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
 		player_page.verifyTimeBufferStatusForXSec(10);
 		
+		
 		player_page.deleteAllBookmark();
 		player_page.addTargetBookmark(bookmark_for_search);
 		

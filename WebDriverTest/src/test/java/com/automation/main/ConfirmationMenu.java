@@ -52,24 +52,25 @@ public class ConfirmationMenu extends Page {
 
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {		
-
-		waitForVisibility(alertWindow);
-		if(!isAlertPresent()){
-			try {
-		Thread.sleep(3000);		
-		waitForVisibility(ok_button);		
+		
+		
+		Thread.sleep(3000);
+		try {
+			if(isAlertPresent()){
+				Thread.sleep(1000);
+				clickOkInAlertIfPresent();
+			}
+			waitForVisibility(ok_button);		
 			ok_button.click();
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
-		} 
-		Thread.sleep(3000);
-		
+		}  
+		Thread.sleep(3000);	
 	}
-	}
-
+	
 	// This function clicks on ok button of copy menu
 	// It also checks that the window need to contain the following:
 	// title = "Success"
@@ -623,8 +624,8 @@ public class ConfirmationMenu extends Page {
 			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
 			ok_buttonCss.click();
 			ok_button.click();
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
-			System.out.println("Clicked on OK button.");
+			/*ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			System.out.println("Clicked on OK button.");*/
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			

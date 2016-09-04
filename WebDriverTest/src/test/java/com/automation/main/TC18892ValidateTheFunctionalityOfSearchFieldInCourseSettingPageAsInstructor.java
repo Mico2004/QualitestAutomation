@@ -134,7 +134,8 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		//record.first_recording.click();
 		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		Thread.sleep(2000);
-		record.clickOnRecordingTaskThenEditRecording();
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);
 		String first_chapter_title = edit_recording.getTitleOffirstChapterRecordingName();
 	
 		Thread.sleep(1000);
