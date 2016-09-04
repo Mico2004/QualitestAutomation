@@ -56,6 +56,7 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import java.io.StringReader;
 
 import java.util.Set;
+import java.util.concurrent.TimeoutException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -258,6 +259,11 @@ public class RecordingHelperPage extends Page {
 	List<WebElement> bookmarks_list;
 	@FindBy(css=".video-outer:nth-of-type(2)")
 	WebElement visibleFirstChapter;
+	@FindBy(css = ".video-thumbnail")
+	List<WebElement> visibleChapters;
+	
+	
+	
 	public @FindBy(css = ".resume-button.ng-scope>a") List<WebElement> list_of_resume_buttons;
 	public @FindBy(css = ".video-wrap") List<WebElement> video_wraps_of_chapters_of_opened_recording_list;
 	public @FindBy(css = ".thumbnail-image") List<WebElement> images_thumbnail_of_recording_chapters_list;
@@ -4464,21 +4470,28 @@ public String getSecondRecordingTitleTest() {
 		}
 		
 	}
-	public void clickOnFirstVisibleChapter()
-	{
-		try{
+
+	public void clickOnFirstVisibleChapter() {
+		try {
 			waitForVisibility(visibleFirstChapter);
-			visibleFirstChapter.click();
-		}catch(Exception e){
-			ATUReports.add("Clicked on first chapter", true);
-			boolean clicked=handlesClickIsNotVisible(visibleFirstChapter);
-			if(!clicked)
-				ATUReports.add("Clicked on first chapter", false);
-			else
-				ATUReports.add("Clicked on first chapter", true);
+			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
+			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",
+					LogAs.PASSED, null);
+		} catch (org.openqa.selenium.TimeoutException e) {
+			try {
+				((JavascriptExecutor) driver)
+						.executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
+				ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",
+						LogAs.PASSED, null);
+			} catch (Exception e1) {
+				ATUReports.add("Clicked on first chapter failed", e1.getMessage(), LogAs.FAILED, null);
+				e1.printStackTrace();
+			}
+
+		} catch (Exception e) {
+			ATUReports.add("Clicked on first chapter failed", e.getMessage(), LogAs.FAILED, null);
 		}
-		
-		
+
 	}
-	
+
 }
