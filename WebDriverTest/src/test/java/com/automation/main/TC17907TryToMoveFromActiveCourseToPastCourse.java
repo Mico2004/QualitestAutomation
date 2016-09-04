@@ -95,7 +95,8 @@ public class TC17907TryToMoveFromActiveCourseToPastCourse {
 	
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws InterruptedException
-	{
+	{	
+		
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

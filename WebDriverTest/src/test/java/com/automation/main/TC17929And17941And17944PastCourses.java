@@ -47,6 +47,7 @@ public class TC17929And17941And17944PastCourses {
 	public ManageAdhocUsersPage mange_adhoc_users_page;
 	public CreateNewUserWindow create_new_user_window;
 	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
+	public AddAdditionalContentFileWindow add_additional_content_window;
 	public Page page;
 	String instructor1;
 	String instructor2;
@@ -54,6 +55,7 @@ public class TC17929And17941And17944PastCourses {
 	String user;
 	String PastTempCourse;
 	String PastTemp2Course;
+	String fullPathToFile;
 
 	@BeforeClass
 	public void setup() {
@@ -61,6 +63,8 @@ public class TC17929And17941And17944PastCourses {
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
+		
+		fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testDocx.docx";
 
 		wait = new WebDriverWait(driver, 30);
 		page=PageFactory.initElements(driver, Page.class);
@@ -80,6 +84,8 @@ public class TC17929And17941And17944PastCourses {
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
 
 		mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
+		
+		add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 
 		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
 
@@ -223,6 +229,8 @@ public class TC17929And17941And17944PastCourses {
 		// enroll the super user to the course
 		// Click on result first course (the only one) membership button
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
+		
+		
 
 		// Search target user name in membership window
 		mangage_adhoc_courses_membership_window.searchForUser(PropertyManager.getProperty("SuperUser"));
@@ -325,8 +333,17 @@ public class TC17929And17941And17944PastCourses {
 		Thread.sleep(3000);
 		course.selectCourseThatStartingWith(PastTempCourse);
 		Thread.sleep(3000);
-		record.toUploadAdditionalContentFile(confirm_menu);
+		record.toUploadAdditionalContentFile();
 		Thread.sleep(2000);
+		// 5.verify additional content file title info
+		add_additional_content_window.verifyAdditionalContentFileWindowTitle();
+		add_additional_content_window.verifyAdditionalContentFileWindowInfo();
+		/// 6.verify The name of the selected file (in line with the format
+		/// extension) is displayed prior to the "Select" button inside upload
+		/// path function so is
+		// add file
+		add_additional_content_window.uploadFileByPath(fullPathToFile, confirm_menu);
+		
 
 		Thread.sleep(2000);
 		for (String window : driver.getWindowHandles()) {
@@ -338,8 +355,18 @@ public class TC17929And17941And17944PastCourses {
 		Thread.sleep(3000);
 		course.selectCourseThatStartingWith(PastTemp2Course);
 		Thread.sleep(3000);
-		record.toUploadAdditionalContentFile(confirm_menu);
+		// 4.Select "Course tasks -> Add Additional Content File" menu item
+		record.toUploadAdditionalContentFile();
 		Thread.sleep(2000);
+		// 5.verify additional content file title info
+		add_additional_content_window.verifyAdditionalContentFileWindowTitle();
+		add_additional_content_window.verifyAdditionalContentFileWindowInfo();
+		/// 6.verify The name of the selected file (in line with the format
+		/// extension) is displayed prior to the "Select" button inside upload
+		/// path function so is
+	
+		add_additional_content_window.uploadFileByPath(fullPathToFile, confirm_menu);
+	
 
 		Thread.sleep(2000);
 		for (String window : driver.getWindowHandles()) {
@@ -497,8 +524,16 @@ public class TC17929And17941And17944PastCourses {
 		Thread.sleep(3000);
 		course.selectCourseThatStartingWith(PastTempCourse);
 		Thread.sleep(3000);
-		record.toUploadAdditionalContentFile(confirm_menu);
+		record.toUploadAdditionalContentFile();
 		Thread.sleep(2000);
+		// 5.verify additional content file title info
+		add_additional_content_window.verifyAdditionalContentFileWindowTitle();
+		add_additional_content_window.verifyAdditionalContentFileWindowInfo();
+		/// 6.verify The name of the selected file (in line with the format
+		/// extension) is displayed prior to the "Select" button inside upload
+		/// path function so is
+		// add file
+		add_additional_content_window.uploadFileByPath(fullPathToFile, confirm_menu);
 
 		Thread.sleep(2000);
 		for (String window : driver.getWindowHandles()) {

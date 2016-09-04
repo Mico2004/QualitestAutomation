@@ -66,7 +66,7 @@ public class VerifySortingOfCoursesInMoveWindowOfProctoringRecordings {
 				course.selectFirstCourse(record);
 				record = PageFactory.initElements(driver, RecordingHelperPage.class);
 				//4.click on  test tab
-				record.clickOnTestTab();
+				record.clickOnTestsTab();
 				Thread.sleep(2000);
 				//5.select check box
 			
