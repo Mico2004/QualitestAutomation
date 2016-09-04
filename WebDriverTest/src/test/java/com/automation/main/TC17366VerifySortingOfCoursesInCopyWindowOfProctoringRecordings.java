@@ -82,7 +82,7 @@ public class TC17366VerifySortingOfCoursesInCopyWindowOfProctoringRecordings {
 			course.selectCourseThatStartingWith("Ab");
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			//4.click on  student tab
-			record.clickOnTestTab();
+			record.clickOnTestsTab();
 			Thread.sleep(2000);
 			
 			//5.select check box
