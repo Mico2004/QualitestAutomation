@@ -311,13 +311,7 @@ public class Page {
 
 	public boolean verifyColor(String expected, WebElement element) throws InterruptedException {// returns//
 																									// if//
-																									// color//
-																									// is//
-																									// equal//
-																									// or//
-																									// not
-
-		// record.moveToElementAndClick(record.recording_tasks_button, driver);
+																									// color//	// record.moveToElementAndClick(record.recording_tasks_button, driver);
 		waitForVisibility(element);
 		String actual_color = element.getCssValue("color");
 		return expected.equals(actual_color);

@@ -498,16 +498,16 @@ public class RecordingHelperPage extends Page {
 		return first_course_title_tests.getText();
 	}
 	
-public String getSecondRecordingTitleTest() {
+	public String getSecondRecordingTitleTest() {
 		wait.until(ExpectedConditions.visibilityOf(first_course_title_tests));
 		return second_course_title.getText();
 	}
+	
 	public String getFirstRecordingByName() {
 		wait.until(ExpectedConditions.visibilityOf(FirstRecordByName));
 		return FirstRecordByName.getText();
 	}
 	
-
 	// This function waits until first recording status "Being Copied from"
 	// dissaper
 	public void waitUntilFirstRecordingBeingCopiedFromStatusDissaper() throws InterruptedException {
@@ -628,10 +628,6 @@ public String getSecondRecordingTitleTest() {
 		}
 	}
 
-		
-
-	
-
 	// This function click on Recorind Task then on copy in the sub menu
 	public void clickOnRecordingTaskThenCopy() throws InterruptedException {
 		
@@ -660,6 +656,7 @@ public String getSecondRecordingTitleTest() {
 }
 
 	// This function return all recordings of current course
+	
 	public List<String> getCourseRecordingList() {
 
 		List<String> recording_names_list = new ArrayList<String>();
@@ -694,7 +691,9 @@ public String getSecondRecordingTitleTest() {
 	}
 
 	// This function clicks on checkbox which is checking all checkbox.
-	public List<String> checkAllCheckBox() {
+	
+	public List<String> checkAllCheckBox()
+ {
 		System.out.println("checkAllCheckBox1");
 		wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
 		wait.until(ExpectedConditions.elementToBeClickable(check_all_checkbox));
@@ -728,7 +727,8 @@ public String getSecondRecordingTitleTest() {
 	// all title of all recordings in course.
 	// It will return true if the recording found. Otherwise it will return
 	// false.
-	public boolean isRecordingExist(String recording_name, boolean need_to_be_exists) {
+	
+public boolean isRecordingExist(String recording_name, boolean need_to_be_exists) {
 		
 		//wait.until(ExpectedConditions.visibilityOf(first_course_title));
 		recording_list_names = convertRecordingsListToNames();
@@ -1959,6 +1959,7 @@ public String getSecondRecordingTitleTest() {
 	}
 
 	// check if recording has a being copied from status
+	
 	public boolean recordingBeingEditedStatus(WebElement element) {
 		String val = element.getText();
 		if (val.equals("Recording is being edited.")) {
@@ -3588,18 +3589,13 @@ public String getSecondRecordingTitleTest() {
 
 	// verify copy menu
 	public String verifyCopyMenu() throws InterruptedException {
-		try {
-			Robot robot = new Robot();
-			robot.mouseMove(-100, -100);
-		} catch (AWTException e1) {
-			// TODO Auto-generated catch block
-			System.out.println("couldn't use robot");
-		}
 
 		String clickedRecordingName = first_course_title.getText();
-		waitForVisibility(recording_tasks_button);
-		moveToElementAndClick(recording_tasks_button, driver);
-		copy_button.click();
+		WebElement element=recording_tasks_button;
+		String id="CopyTask2";
+		System.out.println("clickOnRecordingTaskThen1");
+		waitForVisibility(element);
+		((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 		if (isElementPresent(By.id("copyCourseWindow"))) {
 			System.out.println("copy menu verified");
 			ATUReports.add("copy menu verified", LogAs.PASSED, null);
@@ -4338,6 +4334,7 @@ public String getSecondRecordingTitleTest() {
 	}
 	
 	// This function go over all recording status and checks that recording status of type which available for delete that recordings
+	
 	public void checkExistenceOfNonDeleteRecordingsStatusInRecordings() throws InterruptedException {
 		int i = 0;
 		Thread.sleep(1000);
@@ -4360,6 +4357,26 @@ public String getSecondRecordingTitleTest() {
 		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
+	
+	
+	public int checkExistenceOfNonEditRecordingsStatusInRecordings() throws InterruptedException {
+		int i = 1;
+		Thread.sleep(1000);
+		for (WebElement e : driver.findElements(By.cssSelector(".recordingStatus"))) {
+				String current_element = getTextFromWebElement(e);
+				System.out.println(current_element);
+			if ((!current_element.equals(""))) {
+				System.out.println("This record canot been edit.");
+				ATUReports.add("This record canot been edit.", "True.", "True.", LogAs.PASSED, null);
+				i++;
+			  }
+			 else {
+				break;
+			}
+		}
+		return i;
+	}
+	
 	
 	// This function go over all recording status and checks that recording status of type which available for delete that recordings
 	public void checkExistenceOfNonDeleteItemsStatusInAdditionalContent() throws InterruptedException {

@@ -132,9 +132,10 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		
 		// Upload for first recording target close catpion
 		Thread.sleep(2000);
-		List<String> listOfNames = record.getCourseRecordingList();
+
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);	
 		
-		record.selectIndexCheckBox(listOfNames.size());		
 		record.clickOnRecordingTaskThenEditRecording();
 	
 		edit_recording.addCaptionSrtToFirstChapterRecording();

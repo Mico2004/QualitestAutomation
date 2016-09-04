@@ -140,7 +140,8 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		// changing the first chapter
 		Thread.sleep(3000);
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);
 		Thread.sleep(1000);
 		//String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 		//String first_chapter_title =  driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a/div[2]/p[2]")).getText();	
@@ -263,7 +264,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		// 17. Change the name of the first chapter from the recording that we mentioned in the preconditions.
 		Thread.sleep(3000);
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.selectIndexCheckBox(recordNumber);
 		Thread.sleep(500);
 		
 		

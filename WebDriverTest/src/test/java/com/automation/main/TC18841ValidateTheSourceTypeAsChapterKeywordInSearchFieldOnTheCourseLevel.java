@@ -139,8 +139,8 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
 		String recording_chapter_keyword = "NewKeyword" + sdf.format(date);
 		
-		List<String> listOfNames = record.getCourseRecordingList();
-		record.selectIndexCheckBox(listOfNames.size());
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);	
 		record.clickOnRecordingTaskThenEditRecording();
 		
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_chapter_keyword);
@@ -296,8 +296,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 					date = new Date();
 					String new_recording_chapter_keyword = "NewerKeyword" + sdf.format(date);		
 				
-					listOfNames = record.getCourseRecordingList();
-					record.selectIndexCheckBox(listOfNames.size());
+					record.selectIndexCheckBox(recordNumber);	
 					record.clickOnRecordingTaskThenEditRecording();
 				
 					edit_recording.changeFirstChapterRecordingNameToTargetName(new_recording_chapter_keyword);

@@ -133,7 +133,8 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 		Thread.sleep(1000);
 		
 		// Change first chapter name
-		record.selectIndexCheckBox(1);
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);
 		record.clickOnRecordingTaskThenEditRecording();
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");

@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 import org.testng.annotations.Listeners;
 
 import atu.testng.reports.ATUReports;
@@ -139,20 +138,19 @@ public class EditRecording extends Page {
 		ATUReports.add("Click on the apply.", "True.", "True.", LogAs.PASSED, null);
 		
 		//click on the ok
-		
-			while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
-				
-				WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-				if(ie.getText().contains("Success")){
-					confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
-					break;
-				   }			
-				else if(ie.getText().contains("Error")){
-					ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
-					Assert.assertEquals(false, true);
-				}	
-				else Thread.sleep(3000);
+		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
+			
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
+			String message = getTextFromWebElement(ie);
+			if(message.contains("Success")){
+				confirm_menu.clickOnOkButtonAfterEditRecord();
+				break;
+			} else if(ie.getText().contains("Error")) {
+				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
+				System.out.println("Get an error while click on apply.");		
 			}
+			else Thread.sleep(3000);
+		}
 		
 		//return to the course
 	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();
@@ -248,11 +246,10 @@ public class EditRecording extends Page {
 			if(ie.getText().contains("Success")){
 				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 				break;
-			   }			
-			else if(ie.getText().contains("Error")){
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
-				Assert.assertEquals(false, true);
-			}	
+			} else if(ie.getText().contains("Error")) {
+				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
+				System.out.println("Get an error while click on apply.");		
+			}
 			else Thread.sleep(3000);
 		}
 	
@@ -312,13 +309,12 @@ public class EditRecording extends Page {
 			
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
 			if(ie.getText().contains("Success")){
-				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
+				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
-			   }			
-			else if(ie.getText().contains("Error")){
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
-				Assert.assertEquals(false, true);
-			}	
+			} else if(ie.getText().contains("Error")) {
+				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
+				System.out.println("Get an error while click on apply.");		
+			}
 			else Thread.sleep(3000);
 		}
 		
@@ -377,13 +373,12 @@ public class EditRecording extends Page {
 			
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
 			if(ie.getText().contains("Success")){
-				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
+				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
-			   }			
-			else if(ie.getText().contains("Error")){
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
-				Assert.assertEquals(false, true);
-			}	
+			} else if(ie.getText().contains("Error")) {
+				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
+				System.out.println("Get an error while click on apply.");		
+			}
 			else Thread.sleep(3000);
 		}
 		

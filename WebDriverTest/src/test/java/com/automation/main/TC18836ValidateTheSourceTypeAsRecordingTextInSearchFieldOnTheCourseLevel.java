@@ -139,7 +139,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		course.selectCourseThatStartingWith("BankValid");
 		Thread.sleep(1000);
 			
-			//String recording_name = record.getFirstRecordingTitle();
+		//String recording_name = record.getFirstRecordingTitle();
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		Thread.sleep(1000);
 			
