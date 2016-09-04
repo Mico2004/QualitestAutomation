@@ -60,15 +60,27 @@ public class Page {
 
 	public void clickElement(WebElement element) // clicking element
 	{
-		String text=element.getText();
+		String text = element.getText();
 		try {
-			
+
 			wait.until(ExpectedConditions.elementToBeClickable(element));
 			element.click();
-			System.out.println("Clicked on "+element.getText()+" element");
-			ATUReports.add("Clicked on "+text+" element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED, null);
+			System.out.println("Clicked on " + element.getText() + " element");
+			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+					null);
 		} catch (Exception msg) {
-			ATUReports.add("Clicked on "+text+" element", "Clicked succeeded..", "Clicked failed..", LogAs.FAILED, null);	
+			try {
+				System.out.println("Clicked failed trying again with JS");
+				String id = element.getAttribute("id");
+				((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
+				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+						null);
+
+			} catch (Exception e1) {
+				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded..", "Clicked failed..",
+						LogAs.FAILED, null);
+			}
+
 		}
 
 	}
