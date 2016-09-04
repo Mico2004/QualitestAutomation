@@ -313,7 +313,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		search_page.clickBackToCourseInBreadcrumbs();
 		
 		// 13. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		Thread.sleep(3000);
 
 		System.out.println("Done.");

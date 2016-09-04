@@ -150,7 +150,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 		edit_recording_properties_window.changeRecordingName(recording_title_for_the_test, confirm_menu);
 		Thread.sleep(2000);
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		
 		
 		// Looping for Student, Guest and ADMIN

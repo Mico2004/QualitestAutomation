@@ -325,11 +325,10 @@ public class Page {
 	}
 	
 	
-	public static boolean isElementPresent(WebElement element) {
+	public  boolean isElementPresent(WebElement element) {
 		boolean flag = false;
 		try {
-			if (element.isDisplayed()
-					|| element.isEnabled())
+			if (element.isDisplayed()|| element.isEnabled())
 				flag = true;
 		} catch (NoSuchElementException e) {
 			flag = false;
@@ -403,7 +402,6 @@ public class Page {
 
 		for (int second = 0;second<60; second++) {
 			try {
-				Thread.sleep(2000);
 			if (second >= 60) {
 				System.out.println("LogOut from user not succeeded.");
 				ATUReports.add(" Login page timeout", LogAs.FAILED, null);

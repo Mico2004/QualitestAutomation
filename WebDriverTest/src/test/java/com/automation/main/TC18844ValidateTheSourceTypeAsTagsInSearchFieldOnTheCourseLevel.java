@@ -148,7 +148,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 		tag_menu.clickOnApplyButton();
 		Thread.sleep(1000);
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		
 		driver.quit();
 		

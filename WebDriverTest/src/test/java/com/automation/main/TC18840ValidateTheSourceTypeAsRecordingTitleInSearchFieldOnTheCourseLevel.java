@@ -198,7 +198,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		String recording_for_guest = recording_list.get(2);
 		String recording_for_admin = recording_list.get(3);
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {

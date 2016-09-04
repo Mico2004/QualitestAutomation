@@ -156,7 +156,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 		Thread.sleep(1000);
 		String recording_chapter = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		Thread.sleep(3000);
 		
 		for(int type_of_user=0; type_of_user<3; type_of_user++) {
@@ -244,7 +244,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 			search_page.clickBackToCoursesInBreadcrumbs();
 			
 			// 12. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 			Thread.sleep(3000);
 		}
 		

@@ -14,6 +14,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
+import com.thoughtworks.selenium.webdriven.commands.IsElementPresent;
+
 import java.text.DateFormat;
 import java.util.Date;
 import atu.testng.reports.ATUReports;
@@ -141,9 +144,9 @@ public class TC15601TryToCopyRecordingAsAStudent {
 			ATUReports.add("Copy button.", "Copy button is not displayed in recording tasks menu.", "Copy button is displayed in recording tasks menu.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		
+		Thread.sleep(1000);
 		// Verify that Student recordings tab exist
-		if(record.student_recordings_tab.isDisplayed()) {
+		if(record.isElementPresent(record.student_recordings_tab)) {
 			System.out.println("Student recordings tab is exist.");
 			ATUReports.add("Student Recordings Tab.", "Exists.", "Exists.", LogAs.PASSED, null);
 		} else {

@@ -151,7 +151,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 		
 		edit_recording.setTargetKeywordForFirstChapter(recording_chapter_keyword);
 		
-		top_bar_helper.clickOnSignOut();
+		record.signOut();
 		Thread.sleep(3000);
 		
 		
@@ -269,7 +269,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 			Thread.sleep(2000);
 						
 			// 17. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			record.signOut();
 			Thread.sleep(3000);
 		}
 		

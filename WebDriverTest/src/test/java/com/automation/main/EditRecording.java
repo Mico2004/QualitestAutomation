@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 
 import atu.testng.reports.ATUReports;
@@ -138,15 +139,20 @@ public class EditRecording extends Page {
 		ATUReports.add("Click on the apply.", "True.", "True.", LogAs.PASSED, null);
 		
 		//click on the ok
-		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
-			
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			if(ie.getText().contains("Success")){
-				confirm_menu.clickOnOkButtonAfterEditRecord();
-				break;
-			   }			
-			else Thread.sleep(2000);
-		}
+		
+			while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
+				
+				WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
+				if(ie.getText().contains("Success")){
+					confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
+					break;
+				   }			
+				else if(ie.getText().contains("Error")){
+					ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
+					Assert.assertEquals(false, true);
+				}	
+				else Thread.sleep(3000);
+			}
 		
 		//return to the course
 	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();
@@ -228,8 +234,8 @@ public class EditRecording extends Page {
 		driver.findElement(By.id("AddCaptioning")).click();
 		Thread.sleep(1000);
 		
-		System.out.println("The element add caption was clicked");
-		ATUReports.add("The elementadd caption was clicked", "True.", "True.", LogAs.PASSED, null);
+		System.out.println("The file close caption was added.");
+		ATUReports.add("The file close caption was added.", "True.", "True.", LogAs.PASSED, null);
 		
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
@@ -243,6 +249,10 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 				break;
 			   }			
+			else if(ie.getText().contains("Error")){
+				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
+				Assert.assertEquals(false, true);
+			}	
 			else Thread.sleep(3000);
 		}
 	
@@ -302,10 +312,14 @@ public class EditRecording extends Page {
 			
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
 			if(ie.getText().contains("Success")){
-				confirm_menu.clickOnOkButtonAfterEditRecord();
+				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 				break;
 			   }			
-			else Thread.sleep(2000);
+			else if(ie.getText().contains("Error")){
+				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
+				Assert.assertEquals(false, true);
+			}	
+			else Thread.sleep(3000);
 		}
 		
 		//return to the course
@@ -363,10 +377,14 @@ public class EditRecording extends Page {
 			
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
 			if(ie.getText().contains("Success")){
-				confirm_menu.clickOnOkButtonAfterEditRecord();
+				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 				break;
 			   }			
-			else Thread.sleep(2000);
+			else if(ie.getText().contains("Error")){
+				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
+				Assert.assertEquals(false, true);
+			}	
+			else Thread.sleep(3000);
 		}
 		
 		//return to the course
