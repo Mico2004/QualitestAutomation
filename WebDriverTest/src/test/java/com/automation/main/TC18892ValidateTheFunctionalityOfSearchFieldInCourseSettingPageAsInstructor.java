@@ -132,7 +132,6 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		
 		// Get information about first chapter
 		//record.first_recording.click();
-		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		Thread.sleep(2000);
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);

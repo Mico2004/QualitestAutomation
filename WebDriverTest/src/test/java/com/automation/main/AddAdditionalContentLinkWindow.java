@@ -38,11 +38,11 @@ public void fillUrl(String url)
 }
 ///create new additional content link by title and url
 	public void createNewAdditionalContentLink(ConfirmationMenu confirm, String title,String url) throws InterruptedException
-{
-fillTitle(title);
-fillUrl(url);
-add_additional_link_button.click();
-waitForVisibility(confirm.ok_button);
-confirm.clickOnOkButtonAfterConfirmAddAdditionalContentLink();
-}
+	{
+		fillTitle(title);
+		fillUrl(url);
+		add_additional_link_button.click();
+		waitForVisibility(confirm.ok_button);
+		confirm.clickOnOkButtonAfterConfirmAddAdditionalContentLink();
+	}
 }

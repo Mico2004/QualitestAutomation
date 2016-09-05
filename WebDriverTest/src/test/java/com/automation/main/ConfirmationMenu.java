@@ -496,6 +496,28 @@ public class ConfirmationMenu extends Page {
 		}
 		Thread.sleep(3000);
 	}
+	
+	
+	public void clickOnOkButtonAfterErrorClickOnTheApply() throws InterruptedException {
+		try {
+			Thread.sleep(1000);
+			if (!header_title_list.get(0).getText().contains("Error")) {
+				ATUReports.add("Error window title is wrong.", LogAs.PASSED, null);
+				
+			}
+			if (!error_msg_body_list.get(0).getText().contains("An error has occurred.")) {
+				ATUReports.add("Error window description is wrong.", LogAs.PASSED, null);
+			}
+			waitForVisibility(ok_button);
+			ok_button.click();
+			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception e) {
+			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+		Thread.sleep(3000);
+	}
 
 	public void clickOnOkButtonAfterConfirmAddAdditionalContentLink() throws InterruptedException {
 		try {

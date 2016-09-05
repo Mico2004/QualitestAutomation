@@ -291,6 +291,7 @@ public class TC24762CopyOneStudentRecording {
 			record.pressViewButtonAndSelect("Title");
 
 			record.convertRecordingsListToNames();
+			Thread.sleep(1000);
 			record.verifyRecordingSortedByTitle(record.recording_list_names);
 			record.pressViewButtonAndSelect("Date");
 			Thread.sleep(1000);

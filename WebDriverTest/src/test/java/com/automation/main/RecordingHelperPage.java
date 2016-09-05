@@ -401,7 +401,6 @@ public class RecordingHelperPage extends Page {
 		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {			    		
 			if(isElementPresent(By.id(("RecordingStatus")+ Integer.toString(i)))){
 				WebElement recordStatus =getStaleElem(By.id("RecordingStatus"+ Integer.toString(i)), driver);
-				wait.until(ExpectedConditions.visibilityOf(recordStatus));
 				String current_element = getTextFromWebElement(recordStatus);						
 				if (!current_element.equals("")) {
 					return true;
@@ -523,9 +522,9 @@ public class RecordingHelperPage extends Page {
 			time_counter++;
 			Thread.sleep(1000);
 			
-			if (time_counter > 120) {
-				System.out.println("Timeout - Being copied from still appears after 80 seconds");
-				ATUReports.add("Timeout - Being copied from still appears after 80 seconds", LogAs.FAILED, null);
+			if (time_counter > 200) {
+				System.out.println("Timeout - Being copied from still appears after 200 seconds");
+				ATUReports.add("Timeout - Being copied from still appears after 200 seconds", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 				return;
 			} else {
@@ -4413,7 +4412,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void checkExistenceOfNonDeleteItemsStatusInAdditionalContent() throws InterruptedException {
 		int i = 1;
 		List<WebElement> elements=driver.findElements(By.cssSelector(".recordingData"));
-		int size=elements.size()+1;
+		int size=elements.size();
 		
 		while(i<=size) {
 			System.out.println("loop"+i);

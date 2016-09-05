@@ -140,7 +140,8 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		Thread.sleep(1000);
 			
 		//String recording_name = record.getFirstRecordingTitle();
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);	
 		Thread.sleep(1000);
 			
 

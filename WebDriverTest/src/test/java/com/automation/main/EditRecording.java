@@ -145,9 +145,11 @@ public class EditRecording extends Page {
 			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
-			} else if(ie.getText().contains("Error")) {
+			} else if(message.contains("Error")) {
 				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
-				System.out.println("Get an error while click on apply.");		
+				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
+				System.out.println("Get an error while click on apply.");	
+				break;
 			}
 			else Thread.sleep(3000);
 		}
@@ -240,15 +242,17 @@ public class EditRecording extends Page {
 			break;
 		}
 		
-		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
-			
+		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){		
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			if(ie.getText().contains("Success")){
+			String message = getTextFromWebElement(ie);
+			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 				break;
-			} else if(ie.getText().contains("Error")) {
+			} else if(message.contains("Error")) {
 				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
-				System.out.println("Get an error while click on apply.");		
+				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
+				System.out.println("Get an error while click on apply.");	
+				break;
 			}
 			else Thread.sleep(3000);
 		}
@@ -308,12 +312,15 @@ public class EditRecording extends Page {
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
 			
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			if(ie.getText().contains("Success")){
+			String message = getTextFromWebElement(ie);
+			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
-			} else if(ie.getText().contains("Error")) {
+			} else if(message.contains("Error")) {
 				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
-				System.out.println("Get an error while click on apply.");		
+				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
+				System.out.println("Get an error while click on apply.");	
+				break;
 			}
 			else Thread.sleep(3000);
 		}
@@ -369,15 +376,17 @@ public class EditRecording extends Page {
 		Thread.sleep(2000);
 		
 		//click on the ok
-		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
-			
+		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){	
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			if(ie.getText().contains("Success")){
+			String message = getTextFromWebElement(ie);
+			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
-			} else if(ie.getText().contains("Error")) {
+			} else if(message.contains("Error")) {
 				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
-				System.out.println("Get an error while click on apply.");		
+				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
+				System.out.println("Get an error while click on apply.");	
+				break;
 			}
 			else Thread.sleep(3000);
 		}

@@ -277,11 +277,14 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 			
 			// Switch back to main window, and close new window
 			driver.close();
+			
 			for(String handler: driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				break;
 			}
-			
+			if(type_of_user < 3) {
+				record.returnToCourseListPage();
+			}
 			// Signout
 			record.signOut();
 		}

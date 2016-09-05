@@ -61,7 +61,9 @@ public class SearchPage extends Page {
 	}
 	
 	//The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)".
-	public void verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfound(String course_name, String searching_criterion) {
+	public void verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfound(String course_name, String searching_criterion) throws InterruptedException {
+		waitForVisibility(breadcrumbs_box);
+		Thread.sleep(5000);
 		String structure_displayed = breadcrumbs_box.getText();
 		
 		String[] splited_structure_displayed = structure_displayed.split(">");
@@ -77,6 +79,8 @@ public class SearchPage extends Page {
 		} else {
 			System.out.println("Not verfid breadcrumb structure displayed as required.");
 			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "False", LogAs.FAILED, null);
+			ATUReports.add("splited_structure_displayed" +structure_displayed, "True.", "False", LogAs.FAILED, null);
+			
 		}
 	
 	}
@@ -374,7 +378,9 @@ public class SearchPage extends Page {
 	}
 	
 	//The breadcrumb structure displayed as follows: "> Admin Dashboard > Courses > Course name > X results found for: "search_criterion". (X seconds)".
-	public void verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfoundForAdminDashboard(String course_name, String searching_criterion) {
+	public void verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfoundForAdminDashboard(String course_name, String searching_criterion) throws InterruptedException {
+		waitForVisibility(breadcrumbs_box);
+		Thread.sleep(5000);
 		String structure_displayed = breadcrumbs_box.getText();
 			
 		String[] splited_structure_displayed = structure_displayed.split(">");
@@ -390,6 +396,7 @@ public class SearchPage extends Page {
 			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verfid breadcrumb structure displayed as required.");
+			ATUReports.add("splited_structure_displayed" +structure_displayed, "True.", "False", LogAs.FAILED, null);
 			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "False", LogAs.FAILED, null);
 		}
 		
@@ -444,7 +451,9 @@ public class SearchPage extends Page {
 	
 	
 	//The breadcrumb structure displayed as follows: "> Courses > X results found for: "search_criterion". (X seconds)".
-	public void verfiyBreadcrumbStructureDisplayedAsCoursesXResultsFound(String course_name, String searching_criterion) {
+	public void verfiyBreadcrumbStructureDisplayedAsCoursesXResultsFound(String course_name, String searching_criterion) throws InterruptedException {
+		waitForVisibility(breadcrumbs_box);
+		Thread.sleep(5000);
 		String structure_displayed = breadcrumbs_box.getText();
 			
 		String[] splited_structure_displayed = structure_displayed.split(">");
@@ -458,6 +467,7 @@ public class SearchPage extends Page {
 			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verfid breadcrumb structure displayed as required.");
+			ATUReports.add("splited_structure_displayed" +structure_displayed, "True.", "False", LogAs.FAILED, null);
 			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "False", LogAs.FAILED, null);
 		}
 		
