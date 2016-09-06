@@ -22,6 +22,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel {
@@ -246,6 +247,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 			
 		// 5. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(recording_chapter);
+		Thread.sleep(2000);
 			
 		// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 		search_page.verifyLoadingSpinnerImage();
@@ -315,7 +317,47 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		// 13. Sign Out.
 		record.signOut();
 		Thread.sleep(3000);
-
+		
+		//14. after class 
+		// 3. enter as admin and unroll the course 
+		tegrity.loginAdmin("Admin");
+		Thread.sleep(2000);
+		 
+		// 3.1 Click on course builder href link
+		admin_dash_board_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+	 	Thread.sleep(10000);
+	 		
+	 	// 3.2 Click on create course href link 
+	 	driver.switchTo().frame(0);
+	 		
+	 	// 3.3 Search target course name
+	 	mange_adhoc_course_enrollments.searchAndFilterCourses(current_course);
+	 	Thread.sleep(4000);
+		
+	 	// 3.4 Click on result first course (the only one) membership button
+	 	mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
+	 	Thread.sleep(2000);
+	 	
+	 	// 3.5 add the instractour from the course 
+	 	String user = PropertyManager.getProperty("User1");
+	 	mangage_adhoc_courses_membership_window.searchForUser(user);
+	 	mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
+	 	System.out.println("add instructor 1");
+	 	Thread.sleep(1000);
+	 		
+	 	// 3.6 Add selected user to instructor list
+	 	mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
+	 	Thread.sleep(3000);   	
+	 
+	 	// 3.7 click on the ok button
+	 	mangage_adhoc_courses_membership_window.ok_button.click();
+	 	Thread.sleep(1000);
+	 	    
+	 	// 3.8 click on the alert
+	 	driver.switchTo().alert().accept();
+	 	Thread.sleep(2000);
+	 	
+	
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		

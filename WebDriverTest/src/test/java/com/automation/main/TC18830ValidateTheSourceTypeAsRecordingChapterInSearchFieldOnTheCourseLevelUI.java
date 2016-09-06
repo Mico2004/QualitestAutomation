@@ -116,11 +116,10 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		// 2. Log in as INSTRCTOR.
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
-		
-		
-		
+			
 		// 3. Open some course.
 		current_course = course.selectCourseThatStartingWith("Ab");
+		Thread.sleep(1000);
 		System.out.println("Current course: " + current_course);
 		//course.selectCourse(record);
 		
@@ -159,6 +158,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		// 8. Search the first chapter from the recording that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(first_chapter_title);
+		
 		
 		// 8.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 		search_page.verifyLoadingSpinnerImage();

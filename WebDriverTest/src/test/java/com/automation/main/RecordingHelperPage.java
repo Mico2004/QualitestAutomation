@@ -852,7 +852,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void mouseHoverJScript(WebElement HoverElement) {
 		
 			if (isElementPresent(HoverElement)) {
-				
+					
 				String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
 				((JavascriptExecutor) driver).executeScript(mouseOverScript,HoverElement);
 
@@ -3203,7 +3203,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 
 	}
-
+	
 	// This function verifies if an element is not bold
 	public void recordingNotBoldFont(WebElement e) {
 		System.out.println(e.getCssValue("font-weight"));
@@ -3218,10 +3218,32 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 
 	}
+	
+	public void returnToAdminPageByClickingBreadcrumbsName(WebElement element) {
+		try {
+			waitForVisibility(element);
+			element.click();
+			System.out.println("click on course name");
+			ATUReports.add("click on course name", "course name", "clicked", "clicked", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			if(!isElementPresent(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li/a"))){
+				waitForVisibility(element);
+				element.click();
+			}
+	
+		} catch (Exception exception) {
+			
+			System.out.println("failed clicking on course name breadcrumbs");
+			ATUReports.add("click on course name", "course name", "clicked", " not clicked", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+	
 
 	//// return to recordings page
 	public void returnToRecordingPageByClickingBreadcrumbsName(WebElement element) {
 		try {
+			waitForVisibility(element);
 			element.click();
 			System.out.println("click on course name");
 			ATUReports.add("click on course name", "course name", "clicked", "clicked", LogAs.PASSED, null);
@@ -4411,9 +4433,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// This function go over all recording status and checks that recording status of type which available for delete that recordings
 	public void checkExistenceOfNonDeleteItemsStatusInAdditionalContent() throws InterruptedException {
 		int i = 1;
+		wait.until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]"), "class", "active"));
+		Thread.sleep(1000);
 		List<WebElement> elements=driver.findElements(By.cssSelector(".recordingData"));
-		int size=elements.size();
 		
+		int size=elements.size();
+		System.out.print(size);
 		while(i<=size) {
 			System.out.println("loop"+i);
 				

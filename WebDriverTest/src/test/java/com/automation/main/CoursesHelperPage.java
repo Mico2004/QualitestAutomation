@@ -664,7 +664,7 @@ public class CoursesHelperPage extends Page {
 
 		recording_helper_page.returnToCourseListPage(this);
 
-		waitForVisibility(course_list.get(0));
+	
 
 	}
 

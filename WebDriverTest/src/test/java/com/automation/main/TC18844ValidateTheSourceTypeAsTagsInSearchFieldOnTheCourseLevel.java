@@ -201,6 +201,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 			
 			// 5. Search the "Tags" and that we mentioned in the preconditions press ENTER.
 			top_bar_helper.searchForTargetText(tags_for_search);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();

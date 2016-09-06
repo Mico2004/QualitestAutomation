@@ -189,6 +189,7 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 			
 			// 5. Search the URL of the link that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(new_additional_link_url);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();

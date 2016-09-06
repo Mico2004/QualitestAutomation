@@ -62,11 +62,17 @@ public class SearchPage extends Page {
 	
 	//The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)".
 	public void verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfound(String course_name, String searching_criterion) throws InterruptedException {
-		waitForVisibility(breadcrumbs_box);
-		Thread.sleep(5000);
+		
 		String structure_displayed = breadcrumbs_box.getText();
 		
 		String[] splited_structure_displayed = structure_displayed.split(">");
+		
+		if(splited_structure_displayed.length <4) {
+			String array = splited_structure_displayed.toString();
+			System.out.println("the error breadcrmbs is:" + array);
+			ATUReports.add("the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, null);
+			return;
+		}
 		String[] splited_third_structure_displayed = splited_structure_displayed[3].trim().split(" ");
 		String third_structure = splited_third_structure_displayed[0] + " results found for: \"" + searching_criterion + "\". " + splited_third_structure_displayed[splited_third_structure_displayed.length-2] +" seconds)";
 
@@ -384,6 +390,13 @@ public class SearchPage extends Page {
 		String structure_displayed = breadcrumbs_box.getText();
 			
 		String[] splited_structure_displayed = structure_displayed.split(">");
+		
+		if(splited_structure_displayed.length <5) {
+			String array = splited_structure_displayed.toString();
+			System.out.println("the error breadcrmbs is:" + array);
+			ATUReports.add("the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, null);
+			return;
+		}
 		String[] splited_third_structure_displayed = splited_structure_displayed[4].trim().split(" ");
 		String third_structure = splited_third_structure_displayed[0] + " results found for: \"" + searching_criterion + "\". " + splited_third_structure_displayed[splited_third_structure_displayed.length-2] +" seconds)";
 
@@ -452,11 +465,18 @@ public class SearchPage extends Page {
 	
 	//The breadcrumb structure displayed as follows: "> Courses > X results found for: "search_criterion". (X seconds)".
 	public void verfiyBreadcrumbStructureDisplayedAsCoursesXResultsFound(String course_name, String searching_criterion) throws InterruptedException {
+		
 		waitForVisibility(breadcrumbs_box);
-		Thread.sleep(5000);
 		String structure_displayed = breadcrumbs_box.getText();
 			
 		String[] splited_structure_displayed = structure_displayed.split(">");
+		
+		if(splited_structure_displayed.length <3) {
+			String array = splited_structure_displayed.toString();
+			System.out.println("the error breadcrmbs is:" + array);
+			ATUReports.add("the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, null);
+			return;
+		}
 		String[] splited_third_structure_displayed = splited_structure_displayed[2].trim().split(" ");
 		String third_structure = splited_third_structure_displayed[0] + " results found for: \"" + searching_criterion + "\". " + splited_third_structure_displayed[splited_third_structure_displayed.length-2] +" seconds)";
 

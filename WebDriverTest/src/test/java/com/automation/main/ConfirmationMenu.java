@@ -642,8 +642,9 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
+			wait.until(ExpectedConditions.elementToBeClickable(ok_button));
 			ok_buttonCss.click();
 			ok_button.click();
 			/*ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
@@ -667,8 +668,9 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
+			wait.until(ExpectedConditions.elementToBeClickable(ok_button));
 			ok_buttonCss.click();
 			ok_button.click();
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);

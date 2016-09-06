@@ -1,6 +1,8 @@
 package com.automation.main;
 
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -83,6 +85,12 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCoursesLevel at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCoursesLevel at " + DateToStr,
+		 "Starting the test: TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCoursesLevel at " + DateToStr, LogAs.PASSED, null);	
 	
 	}
 	
@@ -154,6 +162,7 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 			
 			// 4. Search some "Closed Caption" and press ENTER.
 			top_bar_helper.searchForTargetText(text_from_caption_for_test);
+			Thread.sleep(2000);
 			
 			// 4.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();

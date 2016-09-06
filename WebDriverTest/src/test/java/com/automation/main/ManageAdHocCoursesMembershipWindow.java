@@ -97,6 +97,8 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 		}
 	}
 	
+	
+	
 	public boolean clickOnOkButton() throws InterruptedException {
 		
 		Thread.sleep(2000);

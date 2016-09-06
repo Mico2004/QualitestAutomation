@@ -194,10 +194,11 @@ public class TC22007ValidateCopyWindowUI {
 		
 		// Fill in a name of an Instructor into the text field, pick that Instructor from the autocomplete dropdown & click on "List Courses"
 		driver.findElement(By.id("members_value")).sendKeys(username);
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.id("SearchButton")).click();
+		Thread.sleep(1000);
 		
 		// A "Choose a course that you would like to move your selected recording(s) to" text below the Instructor's search field
 		copy.verifyChooseACourseThatCopyAndItsPlaceBelowTheInstructorSearchField();

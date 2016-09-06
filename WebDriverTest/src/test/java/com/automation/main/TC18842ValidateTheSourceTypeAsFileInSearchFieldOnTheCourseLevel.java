@@ -218,6 +218,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 			
 			// 5. Search the "File" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(target_additional_content_for_the_test);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();

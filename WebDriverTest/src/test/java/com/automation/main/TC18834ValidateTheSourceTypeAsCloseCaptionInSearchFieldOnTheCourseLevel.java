@@ -138,11 +138,13 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		
 		record.clickOnRecordingTaskThenEditRecording();
 	
+
 		edit_recording.addCaptionSrtToFirstChapterRecording();
 		
 		Thread.sleep(5000);
 		String text_from_caption_for_test = "QualitestAutomationCaption";	
 		
+		player_page.returnToCoursesPage(course);
 		
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {
@@ -182,6 +184,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 			
 			// 5. Search the URL of the link that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(text_from_caption_for_test);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
