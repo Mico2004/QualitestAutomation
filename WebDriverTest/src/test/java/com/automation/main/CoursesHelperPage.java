@@ -20,6 +20,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -261,12 +262,18 @@ public class CoursesHelperPage extends Page {
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+CourseId+"\").click();");
 			Thread.sleep(1000);
 			if(isElementPresent(By.id("CourseTitle"))) {
-				System.out.println("successflly selet the course.");
-				ATUReports.add("successflly selet the course.", LogAs.PASSED, null);
+				System.out.println("successflly select the course.");
+				ATUReports.add("successflly select the course.", LogAs.PASSED, null);
 				break;			
-			}
+			}			
 		}
-		
+		try{
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("CourseTitle")));
+		}catch(TimeoutException e){
+			System.out.println("Course wasn't selected successfully: couese title isn't visible");
+			ATUReports.add("Course wasn't selected successfully: couese title isn't visible", LogAs.FAILED, null);	
+			
+		}
 		
 		/*
 		 * 
@@ -396,12 +403,12 @@ public class CoursesHelperPage extends Page {
 
 	// This function get string that some course starting with, and select that
 	// course.
-	public String selectCourseThatStartingWith(String name_starting_with) throws InterruptedException {
+	public String selectCourseThatStartingWith(String name_starting_with) throws InterruptedException {	
+		Thread.sleep(1000);
 		System.out.println("select1");
 		List<String> course_list = getCourseList();
 		System.out.println("select2");
-		String target_course_name = null;
-
+		String target_course_name = null;				
 		for (String course_name : course_list) {
 			if (course_name.startsWith(name_starting_with)) {
 				System.out.println("select3");
@@ -593,9 +600,8 @@ public class CoursesHelperPage extends Page {
 	}
 
 	public void deleteAllRecordingsInCourseStartWith(String course_name_start_with, int type_of_recordings,
-			RecordingHelperPage recording_helper_page, DeleteMenu delete_menu) throws InterruptedException {
-		selectCourseThatStartingWith(course_name_start_with);
-
+			RecordingHelperPage recording_helper_page, DeleteMenu delete_menu) throws InterruptedException {		
+	try{	selectCourseThatStartingWith(course_name_start_with);
 		if (type_of_recordings == 1) {
 			try {
 				new WebDriverWait(driver, 5)
@@ -665,7 +671,10 @@ public class CoursesHelperPage extends Page {
 		recording_helper_page.returnToCourseListPage(this);
 
 		waitForVisibility(course_list.get(0));
-
+	}catch(Exception e){
+		System.out.println("Error"+e.getMessage());
+		
+	}
 	}
 
 	// verify there is no past courses tab
