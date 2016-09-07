@@ -102,8 +102,8 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		tegrity.loginCourses("User1");		
 		Thread.sleep(4000); 
 		System.out.println("a3");
-		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record,delete_menu); 		
-		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record,delete_menu); 		
+		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record,delete_menu);		
+		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record,delete_menu);		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 2, record,delete_menu); 
 		Thread.sleep(3000);
 		String des_start_with = "Ab";
