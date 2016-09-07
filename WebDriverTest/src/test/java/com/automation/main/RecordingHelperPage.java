@@ -804,7 +804,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// This function clicks on signout link, and return to login page
 	public void clickOnSignOut() throws InterruptedException {
 		try {
-			signout_link.click();
+		//	signout_link.click();
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");
 			System.out.println("Click on signout link.");
 			ATUReports.add("Click on signout link.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -1470,7 +1471,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				waitForVisibility(recording);
 				recording.getText();
 				clickElement(recording);
-				waitForVisibility(visibleFirstChapter);
+			//	waitForVisibility(visibleFirstChapter);
 				System.out.println(" Recording found");
 				ATUReports.add(" Recording found", LogAs.PASSED, null);
 				Assert.assertTrue(true);
