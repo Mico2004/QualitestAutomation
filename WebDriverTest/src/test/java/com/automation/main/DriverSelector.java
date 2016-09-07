@@ -58,6 +58,12 @@ public class DriverSelector {
 		
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			capabilities.setCapability("marionette", true);
+			FirefoxProfile prfl = new FirefoxProfile();
+		    prfl.setPreference("browser.startup.homepage", "about:blank");
+		    prfl.setPreference("browser.startup.homepage_override.mstone", "ignore");
+		    prfl.setPreference("startup.homepage_welcome_url", "about:blank");
+		    prfl.setPreference("startup.homepage_welcome_url.additional", "about:blank");
+		    capabilities.setCapability(FirefoxDriver.PROFILE, prfl);
 			driver = new FirefoxDriver(capabilities);
 			
 			// capability.setPlatform(Platform.WIN8_1);

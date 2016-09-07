@@ -14,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -97,9 +98,6 @@ public class AdminDashboardPage extends Page {
 	{
 //		wait.until(ExpectedConditions.visibilityOf(courses_submenu.get(0)));
 
-
-
-
 		try {
 		System.out.println("clickOnTargetSubmenuCourses1");
 		waitForVisibility(CoursesBox);
@@ -141,20 +139,12 @@ public class AdminDashboardPage extends Page {
 					ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, null);
 					Assert.assertTrue(false);
 					return;
-
-				
-
-
-			
+	
 		}
-		
-
-
-
 		
 	}
 
-	
+
 	// This function get String with the name of target submenu of Users and clicks on it
 	public void clickOnTargetSubmenuUsers(String target) throws InterruptedException 
 		
@@ -218,13 +208,8 @@ public class AdminDashboardPage extends Page {
 			
 		}
 		
-
-
-
-		
 	}
 
-	
 	// This function get String with the name of target submenu of Service Settings and Maintenance and clicks on it
 	public void clickOnTargetSubmenuAdvancedServices(String target) {
 
