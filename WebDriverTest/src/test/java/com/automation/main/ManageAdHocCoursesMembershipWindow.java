@@ -69,6 +69,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	public boolean setSearchUserInput(String set_to) {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(search_user_input));
+			Thread.sleep(1000);
 			search_user_input.clear();
 			search_user_input.sendKeys(set_to);
 			System.out.println("Setting user input search to: " + set_to);
@@ -99,17 +100,18 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	
 	public boolean clickOnOkButton() throws InterruptedException {
 		
-		Thread.sleep(2000);
-		waitForVisibility(ok_button);
-		ok_button.click();		
-		waitForAlert(60);
+		Thread.sleep(2000);	
 		try {
-			
-			driver.switchTo().alert().accept();			
+			waitForVisibility(ok_button);
+			ok_button.click();		
+			waitForAlert(60);
+			clickOkInAlertIfPresent();			
 			System.out.println("Accecpt alert message.");
+			ATUReports.add("Click enrollment diaglog OK button", "OK button was clicked","OK button was clicked",LogAs.PASSED,null);
 			return true;
 		}catch (Exception msg) {
-			System.out.println("Accecpt alert message.");
+			System.out.println("Didn't Accecpt alert message."+msg.getMessage());
+			ATUReports.add("Click enrollment diaglog OK button", "OK button was clicked","Clicked Failed:"+msg.getLocalizedMessage(),LogAs.FAILED,null);
 			return false;
 			}
 		}
