@@ -30,6 +30,7 @@ public class EditRecording extends Page {
 	public String getTitleOffirstChapterRecordingName() throws InterruptedException{
 		
 		RecordingHelperPage record = PageFactory.initElements(driver, RecordingHelperPage.class);
+		
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
@@ -38,20 +39,12 @@ public class EditRecording extends Page {
 				Thread.sleep(1000);
 			}
 		}
-		
-		
-		for(int i=0; i<20; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					System.out.println("2222");
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-				
+			
+		int i = 0; 
+		while(!isElementPresent(By.id("PlayButton_Img")) || i < 20) {
+				i++;
+				System.out.println("element is not visable");
+				Thread.sleep(2000);	
 		}
 		
 		System.out.println("Wait that the element edit chapter will click from the list.");
@@ -61,8 +54,8 @@ public class EditRecording extends Page {
 			driver.switchTo().window(window_handler);
 			break;
 		}
+		
 		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(1));
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		
@@ -79,9 +72,8 @@ public class EditRecording extends Page {
 			break;
 		}
 		
-
-		driver.findElements(By.cssSelector(".ng-scope.ng-binding")).get(1).click();
-		Thread.sleep(2000);
+		//return to the course
+	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();
 		
 		return name;
 		

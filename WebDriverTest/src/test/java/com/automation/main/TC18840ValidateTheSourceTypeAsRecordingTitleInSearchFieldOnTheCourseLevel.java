@@ -178,7 +178,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		
        // change to unique records names before the test starts	
-		for(int index = 1 ; index<=4 ; index++) {
+		for(int index = 0 ; index<=3 ; index++) {
 			
 			record.selectIndexCheckBox(recordNumber+index);
 			Date date = new Date();
@@ -188,16 +188,16 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			record.toEditRecordingPropertiesMenu();
 			edit_recording_properties_window.changeRecordingName(new_recording_name, confirm_menu);	
 			Thread.sleep(2000);
-			record.unselectIndexCheckBox(index);
+			record.unselectIndexCheckBox(recordNumber+index);
 			
 		}
 		
         recording_list = record.getCourseRecordingList();
 		
-		String recording_for_instructor = recording_list.get(recordNumber);
-		String recording_for_student = recording_list.get(recordNumber+1);
-		String recording_for_guest = recording_list.get(recordNumber+2);
-		String recording_for_admin = recording_list.get(recordNumber+3);
+		String recording_for_instructor = recording_list.get(recordNumber-1);
+		String recording_for_student = recording_list.get(recordNumber);
+		String recording_for_guest = recording_list.get(recordNumber+1);
+		String recording_for_admin = recording_list.get(recordNumber+2);
 		
 		record.signOut();
 		

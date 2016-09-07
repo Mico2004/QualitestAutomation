@@ -415,8 +415,8 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				
 				// 31. On the breadcrumb, click on "courses".
 				//WebElement iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
-				WebElement iw = driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a"));
-				record.returnToAdminPageByClickingBreadcrumbsName(iw);
+				
+				record.returnToAdminPageByClickingBreadcrumbsName(record.courses_admin);
 				
 //				try {		
 //					iw.sendKeys(Keys.ENTER);
@@ -480,7 +480,7 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				}
 				
 				// 39. On the breadcrumb, click on "courses".
-				record.returnToRecordingPageByClickingBreadcrumbsName(record.breadcrumbs_courses_link);
+				record.returnToAdminPageByClickingBreadcrumbsName(record.courses_admin);
 //				iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
 //				try {		
 //					iw.sendKeys(Keys.ENTER);

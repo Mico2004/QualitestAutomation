@@ -617,7 +617,8 @@ public class CoursesHelperPage extends Page {
 				recording_helper_page.student_recordings_tab.click();
 			} catch (Exception msg) {
 				System.out.println("There is no student recordings tab.");
-				recording_helper_page.returnToCourseListPage(this);
+				waitForVisibility(recording_helper_page.course_link);
+				recording_helper_page.course_link.click();
 				return;
 			}
 		} else if (type_of_recordings == 3) {
@@ -626,7 +627,8 @@ public class CoursesHelperPage extends Page {
 				recording_helper_page.tests_tab.click();
 			} catch (Exception msg) {
 				System.out.println("There is no tests tab.");
-				recording_helper_page.returnToCourseListPage(this);
+				waitForVisibility(recording_helper_page.course_link);
+				recording_helper_page.course_link.click();
 				return;
 			}
 		}

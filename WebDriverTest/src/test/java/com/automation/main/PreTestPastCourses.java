@@ -42,7 +42,10 @@ public class PreTestPastCourses {
 	String currentCourse;
 	String targetCourse;
 	String clickedRecording;
-
+	String past_course;
+	String past_courseA;
+	String past_courseB;
+	
 	public AdminDashboardPage admin_dashboard_page;
 	public ManageAdhocCoursesEnrollmentsPage mange_adhoc_course_enrollments;
 	public CreateNewCourseWindow create_new_course_window;
@@ -102,25 +105,29 @@ public class PreTestPastCourses {
 tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
 
-//1. Login with SuperUser.
+	//1. Login with SuperUser.
 		tegrity.loginCourses("User1");// log in courses page
 	   initializeCourseObject();	
-		
-	
 
 	   //ownership change	
-		int i=1;
-		String past_course_a=course.selectCourseThatStartingWith("PastCourseA");
+	   for(int i=1; i<=2;i++) {
+	   		if(i == 1){
+	   			past_course=course.selectCourseThatStartingWith("PastCourseA");
+				past_courseA = past_course;
+	   		} else {
+	   			past_course=course.selectCourseThatStartingWith("PastCourseB");
+				past_courseB = past_course;
+	   		}
 	    Thread.sleep(3000);
-
+	    int j=1;
 	    ///check for free status checkbox for edit properties
 	    List<String> courses = record.getCourseRecordingList();
 	    if(courses.size() > 0 ) {
-	    	while(record.recordingBeingEditedStatus(driver.findElement(By.id("RecordingStatus"+Integer.toString(i))))==true) {
-	    			i++;
+	    	while(record.recordingBeingEditedStatus(driver.findElement(By.id("RecordingStatus"+Integer.toString(j))))==true) {
+	    			j++;
 	    		}
 	    	
-	    	driver.findElement(By.id("Checkbox"+Integer.toString(i))).click();
+	    	driver.findElement(By.id("Checkbox"+Integer.toString(j))).click();
 	    	record.toEditRecordingPropertiesMenu();
 	    	Thread.sleep(2000);
 	    	
@@ -131,16 +138,23 @@ tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 	    	System.out.println("before ok");
 	    	confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 	    	System.out.println("after ok ok");
+	    	
+	    	record.returnToCourseListPage();
 	    }
-	    
+	   }
 	    record.clickOnSignOut();
         
 	    // 1. Login with SuperUser.
  		tegrity.loginCourses("SuperUser");// log in courses page
  	    initializeCourseObject();	
-
- 	   past_course_a=course.selectCourseThatStartingWith("PastCourseA");
- 	   courses = record.getCourseRecordingList();
+ 	   for(int i=1; i<=2;i++) {
+ 		   
+ 	   if(i == 1){
+  			past_course=course.selectCourseThatStartingWith("PastCourseA");
+  		} else {
+  			past_course=course.selectCourseThatStartingWith("PastCourseB");
+  		}
+ 	   List<String> courses = record.getCourseRecordingList();
 	    
  	   if(courses.size() > 0 ) {
  	    ///check for free status checkbox for edit properties
@@ -158,12 +172,15 @@ tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
  		System.out.println("before ok");
         confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
  		System.out.println("after ok ok");
+ 		
+ 		record.returnToCourseListPage();
  	   	}
- 	   
+ 	   }
         record.clickOnSignOut();
  		
     	// 1. Login as ADMIN.
  		tegrity.loginAdmin("Admin");
+ 		initializeCourseObject();	
  		Thread.sleep(2000);
  		
  		// 2. Click on course builder href link
@@ -177,7 +194,13 @@ tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
  		Thread.sleep(2000);
  		
  		// Search target course name
- 		mange_adhoc_course_enrollments.searchAndFilterCourses(past_course_a);
+ 		 for(int i=1; i<=2;i++) {  
+ 		 	   if(i == 1){
+ 		  			past_course=past_courseA;
+ 		  		} else {
+ 		  			past_course=past_courseB;
+ 		  		}
+ 		mange_adhoc_course_enrollments.searchAndFilterCourses(past_course);
  		
  		Thread.sleep(7000);
  	
@@ -197,7 +220,7 @@ tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
  		Thread.sleep(1000);
  	    driver.switchTo().alert().accept();
  	    Thread.sleep(2000);
- 	    
+ 		}
 
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

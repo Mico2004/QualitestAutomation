@@ -100,8 +100,8 @@ public void setup() {
 	@Test
 	
 public void test15447() throws Exception {
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_Cancel.txt";
-		String file_name = "Moshik_Cancel.txt";
+		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_Cancel.doc";
+		String file_name = "Moshik_Cancel.doc";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		/// 2.login as instructor
