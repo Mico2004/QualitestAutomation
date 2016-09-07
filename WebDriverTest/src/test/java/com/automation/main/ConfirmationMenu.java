@@ -52,24 +52,25 @@ public class ConfirmationMenu extends Page {
 
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {		
-
-		waitForVisibility(alertWindow);
-		if(!isAlertPresent()){
-			try {
-		Thread.sleep(3000);		
-		waitForVisibility(ok_button);		
+		
+		
+		Thread.sleep(3000);
+		try {
+			if(isAlertPresent()){
+				Thread.sleep(1000);
+				clickOkInAlertIfPresent();
+			}
+			waitForVisibility(ok_button);		
 			ok_button.click();
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
-		} 
-		Thread.sleep(3000);
-		
+		}  
+		Thread.sleep(3000);	
 	}
-	}
-
+	
 	// This function clicks on ok button of copy menu
 	// It also checks that the window need to contain the following:
 	// title = "Success"
@@ -495,6 +496,28 @@ public class ConfirmationMenu extends Page {
 		}
 		Thread.sleep(3000);
 	}
+	
+	
+	public void clickOnOkButtonAfterErrorClickOnTheApply() throws InterruptedException {
+		try {
+			Thread.sleep(1000);
+			if (!header_title_list.get(0).getText().contains("Error")) {
+				ATUReports.add("Error window title is wrong.", LogAs.PASSED, null);
+				
+			}
+			if (!error_msg_body_list.get(0).getText().contains("An error has occurred.")) {
+				ATUReports.add("Error window description is wrong.", LogAs.PASSED, null);
+			}
+			waitForVisibility(ok_button);
+			ok_button.click();
+			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception e) {
+			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+		Thread.sleep(3000);
+	}
 
 	public void clickOnOkButtonAfterConfirmAddAdditionalContentLink() throws InterruptedException {
 		try {
@@ -619,12 +642,13 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
+			wait.until(ExpectedConditions.elementToBeClickable(ok_button));
 			ok_buttonCss.click();
 			ok_button.click();
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
-			System.out.println("Clicked on OK button.");
+			/*ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			System.out.println("Clicked on OK button.");*/
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			
@@ -644,8 +668,9 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
-			Thread.sleep(4000);
+			Thread.sleep(5000);
 			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
+			wait.until(ExpectedConditions.elementToBeClickable(ok_button));
 			ok_buttonCss.click();
 			ok_button.click();
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);

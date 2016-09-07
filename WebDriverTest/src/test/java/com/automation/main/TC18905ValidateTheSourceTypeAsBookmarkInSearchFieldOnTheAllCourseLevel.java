@@ -144,6 +144,8 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 		String bookmarked_recording_title = record.getFirstRecordingTitle();
 		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
 		player_page.verifyTimeBufferStatusForXSec(10);
+		//record.clickOnFirstVisibleChapter();
+		
 		
 		player_page.deleteAllBookmark();
 		player_page.addTargetBookmark(bookmark_for_search);

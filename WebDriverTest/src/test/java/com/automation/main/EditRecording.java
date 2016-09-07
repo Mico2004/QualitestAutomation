@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -27,6 +28,9 @@ public class EditRecording extends Page {
 	}
 
 	public String getTitleOffirstChapterRecordingName() throws InterruptedException{
+		
+		RecordingHelperPage record = PageFactory.initElements(driver, RecordingHelperPage.class);
+		
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
@@ -35,20 +39,12 @@ public class EditRecording extends Page {
 				Thread.sleep(1000);
 			}
 		}
-		
-		
-		for(int i=0; i<20; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					System.out.println("2222");
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-				
+			
+		int i = 0; 
+		while(!isElementPresent(By.id("PlayButton_Img")) || i < 20) {
+				i++;
+				System.out.println("element is not visable");
+				Thread.sleep(2000);	
 		}
 		
 		System.out.println("Wait that the element edit chapter will click from the list.");
@@ -59,8 +55,7 @@ public class EditRecording extends Page {
 			break;
 		}
 		
-		System.out.println(driver.findElements(By.cssSelector(".optionList>li>a")).get(1).getText());
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
+		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(1));
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		
@@ -77,9 +72,8 @@ public class EditRecording extends Page {
 			break;
 		}
 		
-
-		driver.findElements(By.cssSelector(".ng-scope.ng-binding")).get(1).click();
-		Thread.sleep(2000);
+		//return to the course
+	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();
 		
 		return name;
 		
@@ -136,7 +130,6 @@ public class EditRecording extends Page {
 		
 		System.out.println("Click on the apply.");
 		ATUReports.add("Click on the apply.", "True.", "True.", LogAs.PASSED, null);
-		
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
 			
@@ -145,9 +138,12 @@ public class EditRecording extends Page {
 			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
-			} else if(ie.getText().contains("Error")) {
-				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
-				System.out.println("Get an error while click on apply.");		
+			} else if(message.contains("Error")) {
+				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, null);
+				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
+				System.out.println("Get an error while click on apply.");	
+				driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
+				Thread.sleep(2000);
 			}
 			else Thread.sleep(3000);
 		}
@@ -194,39 +190,15 @@ public class EditRecording extends Page {
 		
 		Thread.sleep(2000);
 		
-		// click on the upload link
-		record.waitForVisibility(driver.findElement(By.xpath(".//*[@id='AddCaptioningForm']/div[3]/span")));
-		WebElement element = driver.findElement(By.xpath(".//*[@id='AddCaptioningForm']/div[3]/span"));
-		Actions actions = new Actions(driver);
-		actions.moveToElement(element).click().perform();
-		
+	
 		System.out.println("The element add caption was clicked");
 		ATUReports.add("The elementadd caption was clicked", "True.", "True.", LogAs.PASSED, null);
 		
-		Robot robot = new Robot();
-		robot.mouseMove(-100, 100);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		Thread.sleep(3000);
-		
-		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
 
+		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
 		
-		// from here you can use as it wrote
-//		path = System.getProperty("user.dir") + path;
-		StringSelection ss = new StringSelection(path);
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-		
-		// native key strokes for CTRL, V and ENTER keys
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(3000);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
+		driver.findElement(By.id("UploadFile")).sendKeys(path);
+
 		
 		Thread.sleep(2000);
 		driver.findElement(By.id("AddCaptioning")).click();
@@ -240,15 +212,18 @@ public class EditRecording extends Page {
 			break;
 		}
 		
-		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
-			
+		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){		
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			if(ie.getText().contains("Success")){
+			String message = getTextFromWebElement(ie);
+			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 				break;
-			} else if(ie.getText().contains("Error")) {
-				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
-				System.out.println("Get an error while click on apply.");		
+			} else if(message.contains("Error")) {
+				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, null);
+				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
+				System.out.println("Get an error while click on apply.");	
+				driver.findElement(By.id("AddCaptioning")).click();
+				Thread.sleep(2000);
 			}
 			else Thread.sleep(3000);
 		}
@@ -308,12 +283,16 @@ public class EditRecording extends Page {
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
 			
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			if(ie.getText().contains("Success")){
+			String message = getTextFromWebElement(ie);
+			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
-			} else if(ie.getText().contains("Error")) {
-				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
-				System.out.println("Get an error while click on apply.");		
+			} else if(message.contains("Error")) {
+				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, null);
+				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
+				System.out.println("Get an error while click on apply.");	
+				driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
+				Thread.sleep(2000);
 			}
 			else Thread.sleep(3000);
 		}
@@ -369,15 +348,18 @@ public class EditRecording extends Page {
 		Thread.sleep(2000);
 		
 		//click on the ok
-		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
-			
+		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){	
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			if(ie.getText().contains("Success")){
+			String message = getTextFromWebElement(ie);
+			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
-			} else if(ie.getText().contains("Error")) {
-				ATUReports.add("Get an error while click on apply.", LogAs.FAILED, null);
-				System.out.println("Get an error while click on apply.");		
+			} else if(message.contains("Error")) {
+				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, null);
+				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
+				System.out.println("Get an error while click on apply.");	
+				driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
+				Thread.sleep(2000);
 			}
 			else Thread.sleep(3000);
 		}

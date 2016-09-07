@@ -134,7 +134,8 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 		String tags_for_search = "NewTag" + sdf.format(date);
 		
 		String recording_of_the_tag = record.getFirstRecordingTitle();
-		record.selectIndexCheckBox(1);
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);
 		record.clickOnRecordingTaskThenTag();
 		
 		tag_menu.deleteAllExistingTags();
@@ -171,6 +172,7 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 			
 			// 4. Search the "Tags" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(tags_for_search);
+			Thread.sleep(2000);
 			
 			// 4.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();

@@ -116,11 +116,10 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		// 2. Log in as INSTRCTOR.
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
-		
-		
-		
+			
 		// 3. Open some course.
 		current_course = course.selectCourseThatStartingWith("Ab");
+		Thread.sleep(1000);
 		System.out.println("Current course: " + current_course);
 		//course.selectCourse(record);
 		
@@ -160,6 +159,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		// 8. Search the first chapter from the recording that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(first_chapter_title);
 		
+		
 		// 8.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 		search_page.verifyLoadingSpinnerImage();
 		
@@ -184,11 +184,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		// 8.4. The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)".
 		search_page.verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfound(current_course, first_chapter_title);
-		
-//		// 8.5. The recording chapter icon is displayed. (the play icon appears with hover over the recording). - Checking the same in step 9
-		search_page.moveToElementAndPerform(search_page.video_thumbnails_list.get(0), driver);
-		search_page.verifyWebElementDisplayed(driver.findElement(By.cssSelector(".play-button")), "The play icon");
-		
+				
 		// 8.6. The respective recording chapter snapshot is displayed in the icon - Cannot be automated (TODO: check another way later).
 		
 		// 8.7. The start time of the chapter within recording is displayed over the chapter icon.
@@ -215,7 +211,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		// 9. Hover over the chapter icon.
 		Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 		search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		
 		// 9.1. The chapter icon become a bit bigger in size.
 		Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();

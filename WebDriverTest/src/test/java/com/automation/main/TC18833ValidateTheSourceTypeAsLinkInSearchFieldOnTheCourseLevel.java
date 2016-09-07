@@ -189,6 +189,7 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 			
 			// 5. Search the URL of the link that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(new_additional_link_url);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
@@ -277,11 +278,14 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 			
 			// Switch back to main window, and close new window
 			driver.close();
+			
 			for(String handler: driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				break;
 			}
-			
+			if(type_of_user < 3) {
+				record.returnToCourseListPage();
+			}
 			// Signout
 			record.signOut();
 		}

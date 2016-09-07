@@ -371,7 +371,7 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				}
 				
 				// 30. The record is disappeared from the list after a while.
-				record.checkStatusExistenceForMaxTTime(360);
+				record.checkStatusExistenceForMaxTTime(450);
 				Thread.sleep(2000);
 				List<String> after_moving_complete_recording_list = record.getCourseRecordingList();
 				
@@ -414,18 +414,20 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 //				Thread.sleep(3000);
 				
 				// 31. On the breadcrumb, click on "courses".
-				WebElement iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+				//WebElement iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
 				
-				try {		
-					iw.sendKeys(Keys.ENTER);
-					System.out.println("Clicked on the element breadcrumb.");
-					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				} catch (Exception msg) {
-					System.out.println("Fail to click on the element." );
-					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
+				record.returnToAdminPageByClickingBreadcrumbsName(record.courses_admin);
+				
+//				try {		
+//					iw.sendKeys(Keys.ENTER);
+//					System.out.println("Clicked on the element breadcrumb.");
+//					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
+//					Assert.assertTrue(true);
+//				} catch (Exception msg) {
+//					System.out.println("Fail to click on the element." );
+//					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
+//					Assert.assertTrue(false);
+//				}
 				
 				//admin_dashboard_page.clickElement(driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1));
 				//record.returnToRecordingPageByClickingBreadcrumbsName(record.breadcrumbs_courses_link);
@@ -478,17 +480,18 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				}
 				
 				// 39. On the breadcrumb, click on "courses".
-				iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
-				try {		
-					iw.sendKeys(Keys.ENTER);
-					System.out.println("Clicked on the element breadcrumb.");
-					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				} catch (Exception msg) {
-					System.out.println("Fail to click on the element." );
-					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
+				record.returnToAdminPageByClickingBreadcrumbsName(record.courses_admin);
+//				iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+//				try {		
+//					iw.sendKeys(Keys.ENTER);
+//					System.out.println("Clicked on the element breadcrumb.");
+//					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
+//					Assert.assertTrue(true);
+//				} catch (Exception msg) {
+//					System.out.println("Fail to click on the element." );
+//					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
+//					Assert.assertTrue(false);
+//				}
 			}
 			
 			Thread.sleep(2000);

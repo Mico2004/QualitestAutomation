@@ -477,7 +477,7 @@ public class CoursesHelperPage extends Page {
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 			new WebDriverWait(driver, 10)
 					.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
-			((JavascriptExecutor) driver).executeScript("document.getElementById(\"CheckAll\").click();");			 					
+			clickElement(record_helper_page.check_all_checkbox);		 					
 			Thread.sleep(1000);
 		}
 

@@ -332,19 +332,9 @@ public class TC22049ValidateCopyWindowFunctionality {
 		
 
 		// 34. Go to abc course.
-		WebElement iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+		record.returnToAdminPageByClickingBreadcrumbsName(record.courses_admin);
 		
-		try {		
-			iw.sendKeys(Keys.ENTER);
-			System.out.println("Clicked on the element breadcrumb.");
-			ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} catch (Exception msg) {
-			System.out.println("Fail to click on the element breadcrumb." );
-			ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
-		
+
 		// In "All courses" page, search for Ab course.
 		admin_dashboard_view_course_list.searchForTargetCourseName(destination_course_name);
 		Thread.sleep(3000);

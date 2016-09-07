@@ -57,41 +57,50 @@ public class TopBarHelper extends Page {
 
 	// This function clicks on sign out
 	public void clickOnSignOut() {
-		try {
-			wait.until(ExpectedConditions.elementToBeClickable(sign_out));
+			
+			System.out.println("signOut1");
+			Actions builder = new Actions(driver); // new line
+			builder.sendKeys(Keys.PAGE_UP); // new line
+			builder.moveToElement(sign_out).build().perform();
+			waitForVisibility(sign_out);
+			System.out.println("signOut2");
 			sign_out.click();
-			System.out.println("Clicked on Sign Out.");
-			ATUReports.add("Sign Out.", "Clicked.", "Clicked.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} catch (Exception msg) {
-			System.out.println("Not clicked on Sign Out.");
-			ATUReports.add("Sign Out.", "Clicked.", "Not clicked.", LogAs.FAILED, null);
-			Assert.assertFalse(false);
-		}
-		
-		for(int i=0; i<30; i++) {
-			try {
-				wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ButtonLogin"))));	
-				System.out.println("Get into login page.");
-				ATUReports.add("Get into login page.", "True.", "True.", LogAs.PASSED, null);
-				Assert.assertTrue(true);
-				return;
-			} catch(Exception msg) {
-				try{
-					sign_out.click();
-				}catch(Exception ex){
+			System.out.println("signOut3");
+			// if(driver instanceof InternetExplorerDriver) {
+			// WebElement iw =
+			// driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+			// iw.sendKeys(Keys.ENTER);
+			// }
+
+			for (int second = 0;second<60; second++) {
+				try {
+				if (second >= 60) {
+					System.out.println("LogOut from user not succeeded.");
+					ATUReports.add(" Login page timeout", LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
+			
+					if (driver.getTitle().equals("Tegrity Lecture Capture"))// check// if// element// is// present
+					{
+						System.out.println("LogOut from user succeeded.");
+						ATUReports.add(" Login page correctly displaied", LogAs.PASSED, null);
+						Assert.assertTrue(true);
+						break;
+					} else {
+						Thread.sleep(3000);
+						System.out.println("Sign_out.Click");
+						sign_out.click();
+					}
+				} catch (Exception e) {
 					
 				}
+
+				
 			}
+			System.out.println("signOut5");	
+			
 		}
 		
-		System.out.println("Not get into login page.");
-		ATUReports.add("Get into login page.", "True.", "False.", LogAs.FAILED, null);
-		Assert.assertTrue(false);
-		
-		
-	}
-
 	// This function return username of logged user
 	public String getUsernameOfLoggedUser() {
 		try {

@@ -7,6 +7,7 @@ import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -140,7 +141,8 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		Thread.sleep(1000);
 			
 		//String recording_name = record.getFirstRecordingTitle();
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);	
 		Thread.sleep(1000);
 			
 
@@ -191,6 +193,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			// 3. Open some course.
 			if(type_of_user < 3) {
 				course.selectCourseThatStartingWith(current_course);
+				Thread.sleep(1000);
 			} else {
 				// Click on "view course list" under "courses" section.
 				Thread.sleep(1000);
@@ -212,12 +215,13 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			
 			// 5. Search the "Recording Text" recording that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(recording_text);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
 			search_page.waitUntilSpinnerImageDisappear();
 			
-			course.selectCourseThatStartingWith("Ab");
+			
 			
 			// 5.2. The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)".
 			if(type_of_user < 3) {
@@ -248,6 +252,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
+			//record.mouseHoverJScript(search_page.video_wrap_link_to_focus_list.get(0));
 			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.

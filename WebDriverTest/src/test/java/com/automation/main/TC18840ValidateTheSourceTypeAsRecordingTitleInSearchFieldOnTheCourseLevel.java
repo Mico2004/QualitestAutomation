@@ -175,11 +175,12 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			  course.selectCourseThatStartingWith("Ab");
 			
 		}
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		
        // change to unique records names before the test starts	
-		for(int index = 1 ; index<=4 ; index++) {
+		for(int index = 0 ; index<=3 ; index++) {
 			
-			record.selectIndexCheckBox(index);
+			record.selectIndexCheckBox(recordNumber+index);
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
 			String new_recording_name = "NewName" + sdf.format(date);
@@ -187,16 +188,16 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			record.toEditRecordingPropertiesMenu();
 			edit_recording_properties_window.changeRecordingName(new_recording_name, confirm_menu);	
 			Thread.sleep(2000);
-			record.unselectIndexCheckBox(index);
+			record.unselectIndexCheckBox(recordNumber+index);
 			
 		}
 		
         recording_list = record.getCourseRecordingList();
 		
-		String recording_for_instructor = recording_list.get(0);
-		String recording_for_student = recording_list.get(1);
-		String recording_for_guest = recording_list.get(2);
-		String recording_for_admin = recording_list.get(3);
+		String recording_for_instructor = recording_list.get(recordNumber-1);
+		String recording_for_student = recording_list.get(recordNumber);
+		String recording_for_guest = recording_list.get(recordNumber+1);
+		String recording_for_admin = recording_list.get(recordNumber+2);
 		
 		record.signOut();
 		
@@ -248,6 +249,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			
 			// 5. Search the "Recording Title" that we mentioned in the preconditionsand press ENTER.
 			top_bar_helper.searchForTargetText(recording_title_for_the_test);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();

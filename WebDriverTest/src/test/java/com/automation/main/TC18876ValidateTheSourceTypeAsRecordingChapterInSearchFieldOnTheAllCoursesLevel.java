@@ -178,7 +178,8 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 				
 			// 4. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(recording_chapter);
-				
+			Thread.sleep(2000);
+			
 			// 4.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
 			search_page.waitUntilSpinnerImageDisappear();

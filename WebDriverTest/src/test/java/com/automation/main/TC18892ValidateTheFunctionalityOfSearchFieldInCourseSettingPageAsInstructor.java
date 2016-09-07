@@ -86,9 +86,9 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC15538CancelTheCopying at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC15538CancelTheCopying at " + DateToStr,
-		 "Starting the test: TC15538CancelTheCopying at " + DateToStr, LogAs.PASSED, null);
+		 System.out.println("Starting the test: TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsInstructor at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsInstructor at " + DateToStr,
+		 "Starting the test: TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsInstructor at " + DateToStr, LogAs.PASSED, null);
 		
 	}
 	
@@ -132,9 +132,12 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		
 		// Get information about first chapter
 		//record.first_recording.click();
-		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		Thread.sleep(2000);
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);
+		
 		record.clickOnRecordingTaskThenEditRecording();
+		Thread.sleep(2000);
 		String first_chapter_title = edit_recording.getTitleOffirstChapterRecordingName();
 	
 		Thread.sleep(1000);

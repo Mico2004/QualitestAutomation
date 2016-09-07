@@ -69,7 +69,7 @@ public class TagMenu extends Page {
 	
 	// This function click on edit for select tag
 	public void clickOnEditForSelectedTag() {
-		clickElement(driver.findElement(By.cssSelector(".ng-scope.selected>.editCell>.editTag")));
+		clickElement(driver.findElement(By.cssSelector(".editTag.tagIcon")));
 	}
 	
 	// This function change selected tag to target tag

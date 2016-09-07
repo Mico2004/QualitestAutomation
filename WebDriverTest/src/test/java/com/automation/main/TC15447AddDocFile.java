@@ -73,8 +73,6 @@ public class TC15447AddDocFile {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
-
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		wait = new WebDriverWait(driver, 30);

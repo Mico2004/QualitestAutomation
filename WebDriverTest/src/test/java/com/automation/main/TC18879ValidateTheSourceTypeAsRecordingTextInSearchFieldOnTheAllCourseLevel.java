@@ -184,6 +184,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 			
 			// 4. Search the "Recording Text" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(recording_text);
+			Thread.sleep(2000);
 			
 			// 4.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();

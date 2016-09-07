@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -75,6 +76,16 @@ public class AdminDashboardViewCourseList extends Page {
 	// }
 	// }
 
+	
+	public void moveToCoursesThroughGet(String url){
+		
+		driver.get(url);
+		System.out.println("Moving to the course through get method.");
+		ATUReports.add("Moving to the course through get method", LogAs.PASSED, null);		
+		new WebDriverWait(driver, 30).until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[1]"), "class", "active"));
+		
+	}
+	
 	public void searchForTargetCourseName(String course_name) {
 		try {
 			waitForVisibility(first_course_link);

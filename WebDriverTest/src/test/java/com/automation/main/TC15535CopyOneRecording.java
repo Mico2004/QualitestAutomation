@@ -207,10 +207,10 @@ public class TC15535CopyOneRecording {
 
 		//course.course_list.get(1).click();
 		course.selectFirstCourse(record);
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 		//23.dispaly recording

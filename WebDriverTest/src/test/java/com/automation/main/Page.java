@@ -1,5 +1,7 @@
 package com.automation.main;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.io.File;
 import java.io.InputStream;
 import java.io.StringReader;
@@ -78,8 +80,7 @@ public class Page {
 						null);
 
 			} catch (Exception e1) {
-				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded..", "Clicked failed..",
-						LogAs.FAILED, null);
+				
 			}
 
 
@@ -225,15 +226,21 @@ public class Page {
 	
 	public void moveToElementAndPerform(WebElement element, WebDriver driver) throws NoSuchElementException, InterruptedException {
 
+
 		waitForVisibility(element);
 		try {
+			Robot robot = new Robot();
+			robot.mouseMove(-100, 100);
 			Actions builder = new Actions(driver);
-			builder.moveToElement(element).build().perform();
-			Thread.sleep(1000);
+			Action mouseOver = builder.moveToElement(element).build();
+			mouseOver.perform();
 
 		} catch (NoSuchElementException e) {
 		
 			/// Log.();
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -435,8 +442,7 @@ public class Page {
 					sign_out.click();
 				}
 			} catch (Exception e) {
-				System.out.println("Sign_out.Click exception:" +e.getMessage());
-				break;
+				
 			}
 
 			

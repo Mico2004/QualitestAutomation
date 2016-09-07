@@ -174,6 +174,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 			
 			// 5. Search the "Recording Title" that we mentioned in the preconditionsand press ENTER.
 			top_bar_helper.searchForTargetText(recording_title_for_the_test);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
