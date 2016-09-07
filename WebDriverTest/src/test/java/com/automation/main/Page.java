@@ -138,7 +138,14 @@ public class Page {
 
 	public void waitForVisibility(WebElement element)// visibility of an element
 	{
-		wait.until(ExpectedConditions.visibilityOf(element));
+		try {
+			Thread.sleep(1000);	
+			wait.until(ExpectedConditions.visibilityOf(element));
+		} catch (InterruptedException e) {
+			System.out.println("Waiting for element visibiliy failed");
+			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,null);
+			e.printStackTrace();
+		}
 	}
 
 	public boolean isElementPresent(By by) {
@@ -396,19 +403,17 @@ public class Page {
 	/// sign out from any page except Login page
 	public void signOut() {
 
-		System.out.println("signOut1");
-		Actions builder = new Actions(driver); // new line
+		System.out.println("signOut1");		
+		((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");
+		
+	/*	Actions builder = new Actions(driver); // new line
 		builder.sendKeys(Keys.PAGE_UP); // new line
 		builder.moveToElement(sign_out).build().perform();
 		waitForVisibility(sign_out);
 		System.out.println("signOut2");
-		sign_out.click();
+		sign_out.click();*/
 		System.out.println("signOut3");
-		// if(driver instanceof InternetExplorerDriver) {
-		// WebElement iw =
-		// driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
-		// iw.sendKeys(Keys.ENTER);
-		// }
+
 
 		for (int second = 0;second<60; second++) {
 			try {
