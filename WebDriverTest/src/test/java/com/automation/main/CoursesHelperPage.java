@@ -677,6 +677,12 @@ public class CoursesHelperPage extends Page {
 	}
 	}
 
+	public String getCurrentUrlCoursePage() {
+		String currUrl = ((JavascriptExecutor) driver).executeScript("return window.document.location.href").toString();
+		return currUrl;
+	}
+	
+	
 	// verify there is no past courses tab
 	public void verifyNoPastCoursesTab() {
 		try {

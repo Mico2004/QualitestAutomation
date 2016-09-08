@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -113,7 +114,8 @@ public void test15467() throws Exception {
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
 		record.waitForVisibility(record.getCheckbox());
-
+		
+		
 		record.clickOnAdditionContentTab();
 		record.waitForVisibility(record.getCheckbox());
 		// 3.1 click on additional content tab
