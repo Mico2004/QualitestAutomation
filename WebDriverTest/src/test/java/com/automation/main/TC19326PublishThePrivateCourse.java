@@ -113,10 +113,10 @@ public class TC19326PublishThePrivateCourse {
 		initializeCourseObject();
 		
 		String private_course = course.selectCourseThatStartingWith("User");
+		String url =  course.getCurrentUrlCoursePage(); 
 		
 		top_bar_helper.clickOnSignOut();
-		
-		
+			
 		// 1. Login as ADMIN 
 		tegrity.loginAdmin("Admin");
 		Thread.sleep(3000);
@@ -133,11 +133,9 @@ public class TC19326PublishThePrivateCourse {
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		Thread.sleep(3000);
 		
-		// 3. Select the INSTRUCTOR's private course in the list and click it.
-		admin_dashboard_view_course_list.searchForTargetCourseName(private_course);
-		Thread.sleep(3000);
-		admin_dashboard_view_course_list.clickOnFirstCourseLink();
-		Thread.sleep(3000);
+		// 3. Select the INSTRUCTOR's private course in the list and click it(move to the course through url
+		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
+		Thread.sleep(1000);
 //		driver.navigate().to(url_private_course);
 //		Thread.sleep(3000);
 		

@@ -1,20 +1,46 @@
 package com.automation.main;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-import atu.testng.reports.ATUReports;
-import atu.testng.reports.logging.LogAs;
 
-public class TCase22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN {
+import com.automation.main.AddAdditionalContentFileWindow;
+import com.automation.main.AdminDashboardPage;
+import com.automation.main.AdminDashboardViewCourseList;
+import com.automation.main.AdvancedServiceSettingsPage;
+import com.automation.main.ConfirmationMenu;
+import com.automation.main.CopyMenu;
+import com.automation.main.CourseSettingsPage;
+import com.automation.main.CoursesHelperPage;
+import com.automation.main.CreateNewCourseWindow;
+import com.automation.main.CreateNewUserWindow;
+import com.automation.main.DeleteMenu;
+import com.automation.main.DriverSelector;
+import com.automation.main.EditRecordinPropertiesWindow;
+import com.automation.main.EmailAndConnectionSettingsPage;
+import com.automation.main.EmailInboxPage;
+import com.automation.main.EmailLoginPage;
+import com.automation.main.EulaPage;
+import com.automation.main.GetSupprtWindow;
+import com.automation.main.HelpPage;
+import com.automation.main.LoginHelperPage;
+import com.automation.main.ManageAdHocCoursesMembershipWindow;
+import com.automation.main.ManageAdhocCoursesEnrollmentsPage;
+import com.automation.main.ManageAdhocUsersPage;
+import com.automation.main.MoveWindow;
+import com.automation.main.PlayerPage;
+import com.automation.main.PublishWindow;
+import com.automation.main.RecordingHelperPage;
+import com.automation.main.RunDiagnosticsPage;
+
+public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST {
 	// Set Property for ATU Reporter Configuration
 	{
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
@@ -59,12 +85,6 @@ public class TCase22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecor
 	String instructor2;
 	List<String> for_enroll;
 
-	@AfterClass
-	public void closeBroswer() {
-	
-		this.driver.quit();
-	}
-	
 	@BeforeClass
 	public void setup() {
 
@@ -102,85 +122,86 @@ public class TCase22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecor
 		run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
-		
-		 Date curDate = new Date();
-		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TCase22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TCase22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN at " + DateToStr,
-		 "Starting the test: TCase22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN at " + DateToStr, LogAs.PASSED, null);
-		
 	}
 
 	@Test
-	public void test22662() throws Exception {
+	public void test22746() throws Exception {
+
+		////pre conditions
+
+		
+		/// pre conditions
+
+		// 1.load page
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		String url_topass = tegrity.pageUrl;
+		/// 2.login as user1
+		tegrity.loginCourses("User1");
+		course.waitForVisibility(course.active_courses_tab_button);
+
+		// 3.click on course
+		String course_name = course.selectCourseThatStartingWith("Ab");
+		
+		 // 4.to course settings
+		 record.waitForVisibility(record.course_tasks_button);
+		 record.toCourseSettingsPage();
+		
+		 // 5.verify checked visibility of course(make it public)
+		 course_settings.checkCourseVisibility();
+		 Thread.sleep(2000);
+		 course_settings.signOut();
+		
+		
+		tegrity.waitForVisibility(tegrity.passfield);
+		// 6.login as student
+		tegrity.loginCourses("User4");
+		course.waitForVisibility(course.first_course_button);
+
+		//7 take course being copied to name and then return
+		course.selectCourseByName(course_name);
+		record.waitForVisibility(record.first_recording);
+
+		//8.Click on the recording's title.
+		record.verifyFirstExpandableRecording();
+
+		///9.Click on the first chapter
+		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+		Thread.sleep(15000);
+		// 10.Select the Recording by clicking on one of the chapters
+		player_page.verifyTimeBufferStatusForXSec(2);// check source display
+
+		///11.add bookmark
 
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-        String recording_name=sdf.format(date);
-		// 1.load page
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		tegrity.waitForVisibility(tegrity.passfield);
-		
-		// 2.login as user1
-		tegrity.loginCourses("User1");
-		course.waitForVisibility(course.first_course_button);
-		
-		//2.1 take course being copied to name and then return
-		String course_name=course.selectCourseThatStartingWith("Ab");
-		String url =  course.getCurrentUrlCoursePage(); 
+		String bookmark_to_add=sdf.format(date);
+		Thread.sleep(1000);
+		player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
 
+
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+		}
+		/// 12.sign out super user
 		record.signOut();
 		Thread.sleep(1000);
 		tegrity.waitForVisibility(tegrity.passfield);
-		
-		// 2.login as admin
-		tegrity.loginAdmin("Admin");
-		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
-		// 3.Click on "View Course List" link
-		Thread.sleep(1500);
-		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
-		// 4.verify all courses page
-		admin_view_course_list.verifyAllCoursesPage();
-		// 5.Select a course
-		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
-		admin_view_course_list.moveToCoursesThroughGet(url);
-		/// 6.Click on one of the Recording link
-		record.waitForVisibility(record.checkbox2);
-		Thread.sleep(1000);
-		record.checkbox2.click();
-		record.toEditRecordingPropertiesMenu();
-		erp_window.waitForVisibility(erp_window.save_button);
-		erp_window.changeRecordingName(recording_name, confirm_menu);
 
-		// 7.Click on one of the Recording link
-		record.verifyFirstExpandableRecording();
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
-		// 8.Select the Recording by clicking on one of the chapters
-		player_page.verifyTimeBufferStatusForXSec(10);// check source display
-	
-		///// to go back to crecording window handler
-		String curr_win=driver.getWindowHandle();	
+		// 13.login as guest
+		tegrity.loginAsguest();
+		course.waitForVisibility(course.sign_out);
+		
+		///16.The "Bookmark" is not displayed on the search results 
+		String to_search=bookmark_to_add;  ///search bookmark
+		course.verifySearchReturnEmptyListAsUserOrGuest(to_search);
+
 		for (String handler : driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
-				}
-			
-		/// 9.Enter invalid "Recording Title" in the search field and press
-		/// ENTER
-		player_page.verifySearchReturnEmptyList("asdasfasffafa");
-		for(String handler: driver.getWindowHandles())
-		{
 			driver.switchTo().window(handler);
-			break;
 		}
-		/// 10.Enter a "Recording Title" of another Recording from the same
-		/// course and press ENTER
-		player_page.verifySearchReturnEmptyList(recording_name);
-		
-		System.out.println("Done.");
-		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
-		
 
+
+
+		///10.quit
+		driver.quit();
 	}
-
 }

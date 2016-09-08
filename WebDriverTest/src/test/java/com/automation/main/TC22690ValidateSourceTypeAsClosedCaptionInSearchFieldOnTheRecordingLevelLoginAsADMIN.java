@@ -173,6 +173,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		// 5.copy recording to course
 		record.clickOnRecordingTaskThenCopy();
 		copy.selectTargetCourseFromCourseListThatStartWith("Ab");
+		String url =  course.getCurrentUrlCoursePage(); 
 		copy.clickOnCopyButton();
 		confirm_menu.waitForVisibility(confirm_menu.ok_button);
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -199,7 +200,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		// 5.Select a course
 		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
 		Thread.sleep(1000);
-	     String	course_name=admin_view_course_list.clickOnCourseLinkStartingWith("Ab");
+		admin_view_course_list.moveToCoursesThroughGet(url);
 		/// 6.Click on one of the Recording link
 			Thread.sleep(1000);
 	     record.waitForVisibility(record.first_recording);

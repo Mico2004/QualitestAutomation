@@ -129,6 +129,7 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 			
 			// 2. Get the full name of the Ab course.
 			String source_course_name = course.selectCourseThatStartingWith("Ab");
+			String url_source =  course.getCurrentUrlCoursePage(); 
 			System.out.println("Target course name for this test is: " + source_course_name);
 			ATUReports.add("Target course name for this test is: "+ source_course_name, LogAs.PASSED, null);
 			
@@ -141,6 +142,7 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 			
 			// 2.2. Get the full name of abc course.
 			String destination_course_name = course.selectCourseThatStartingWith("abc");
+			String url_destination =  course.getCurrentUrlCoursePage(); 
 			String destination_course_url = driver.getCurrentUrl();
 			System.out.println("Destionation course name for this test is: " + destination_course_name);
 			ATUReports.add("Destionation course name for this test is: " + destination_course_name, LogAs.PASSED, null);
@@ -177,13 +179,9 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 			
 			// Repeat TC for Recordings, Stduent Recording and Tests Tabs
 			for(int recording_type=0; recording_type<3; recording_type++) {
-				// 6. In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
-				admin_dashboard_view_course_list.searchForTargetCourseName(source_course_name);
-				Thread.sleep(3000);
-				
-				// 7. Click on that course name
-				admin_dashboard_view_course_list.clickOnFirstCourseLink();
+				// 6. move to the course through url
+				Thread.sleep(5000);
+				admin_dashboard_view_course_list.moveToCoursesThroughGet(url_source);	
 				Thread.sleep(1000);
 				
 				
@@ -405,34 +403,30 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 //				Thread.sleep(3000);
 				
 				// 31. On the breadcrumb, click on "courses".
-				
+				record.returnToAdminPageByClickingBreadcrumbsName(record.courses_admin);
 				//admin_dashboard_page.clickElement(driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1));
-				WebElement iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+//				WebElement iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+//				
+//				try {		
+//					iw.sendKeys(Keys.ENTER);
+//					System.out.println("Clicked on the element breadcrumb.");
+//					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
+//					Assert.assertTrue(true);
+//				} catch (Exception msg) {
+//					System.out.println("Fail to click on the element breadcrumb." );
+//					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
+//					Assert.assertTrue(false);
+//				}
+//				admin_dashboard_view_course_list.verifyAllCoursesPage();
 				
-				try {		
-					iw.sendKeys(Keys.ENTER);
-					System.out.println("Clicked on the element breadcrumb.");
-					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				} catch (Exception msg) {
-					System.out.println("Fail to click on the element breadcrumb." );
-					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
-				admin_dashboard_view_course_list.verifyAllCoursesPage();
 				
 				
 				
-				// In "All courses" page, search for Ab course.
-				admin_dashboard_view_course_list.searchForTargetCourseName(destination_course_name);
-				Thread.sleep(3000);
-						
-				// Click on that course name.
-				admin_dashboard_view_course_list.clickOnFirstCourseLink();
+				// . move to the course through url
+				Thread.sleep(5000);
+				admin_dashboard_view_course_list.moveToCoursesThroughGet(url_destination);	
 				Thread.sleep(1000);
-				
-				
-				
+					
 				if(recording_type==1) {
 					record.clickOnStudentRecordingsTab();
 				} else if (recording_type==2) {
@@ -472,18 +466,18 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				
 				// 39. On the breadcrumb, click on "courses".
 //				record.courses_link.click();
-				iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
-				
-				try {		
-					iw.sendKeys(Keys.ENTER);
-					System.out.println("Clicked on the element breadcrumb." );
-					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				} catch (Exception msg) {
-					System.out.println("Fail to click on the element breadcrumb." );
-					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
+				//iw = driver.findElements(By.cssSelector(".ng-scope>.ng-scope.ng-binding")).get(1);
+				record.returnToAdminPageByClickingBreadcrumbsName(record.courses_admin);
+//				try {		
+//					iw.sendKeys(Keys.ENTER);
+//					System.out.println("Clicked on the element breadcrumb." );
+//					ATUReports.add("Clicked on element.", "True.", "True.", LogAs.PASSED, null);
+//					Assert.assertTrue(true);
+//				} catch (Exception msg) {
+//					System.out.println("Fail to click on the element breadcrumb." );
+//					ATUReports.add("Clicked on element.", "True.", "False", LogAs.FAILED, null);
+//					Assert.assertTrue(false);
+//				}
 			}
 			
 			Thread.sleep(2000);

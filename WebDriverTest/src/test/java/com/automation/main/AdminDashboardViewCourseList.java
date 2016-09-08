@@ -77,10 +77,7 @@ public class AdminDashboardViewCourseList extends Page {
 	// }
 	// }
 
-	
-	
-	
-	
+
 	public void moveToCoursesThroughGet(String url){
 		
 	
