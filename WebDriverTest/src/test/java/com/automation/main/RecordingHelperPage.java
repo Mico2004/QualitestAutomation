@@ -347,8 +347,13 @@ public class RecordingHelperPage extends Page {
 	// If after t time there is still status, then it will Assert error + log it
 	// Otherewise it will pass
 	public void checkStatusExistenceForMaxTTime(int time_in_sec) throws InterruptedException {
-		System.out.println("Begin Status Check");		
-		wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.id("wrapper")), "length:"));
+		System.out.println("Begin Status Check");	
+		try{
+		new WebDriverWait(driver, 5).until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.id("wrapper")), "length:"));
+		}catch(org.openqa.selenium.TimeoutException msg){
+			ATUReports.add("There are no recordings in this course tab ",LogAs.PASSED, null);
+			return;
+		}		
 		for (int i = 0; i < (time_in_sec / 3 + 1); i++) {
 			if (!checkExistenceOfStatusInRecordings()) {
 				System.out.println("There is no more status for any recording.");
