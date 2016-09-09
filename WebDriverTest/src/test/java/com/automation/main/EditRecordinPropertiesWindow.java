@@ -3,6 +3,7 @@ package com.automation.main;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -114,14 +115,14 @@ public class EditRecordinPropertiesWindow extends Page {
 	// This function clicks on Save button
 	public void clickOnSaveButton() {
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(save_button));
-			save_button.click();
+			wait.until(ExpectedConditions.visibilityOf(save_button));			
+		    ((JavascriptExecutor) driver).executeScript("document.getElementById(\""+save_button.getAttribute("id")+"\").click();");
 			System.out.println("Clicked on save button.");
 			ATUReports.add("Clicked on save button.", "Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on save button.");
-			ATUReports.add("Clicked on save button.", "Success.", "Fail.", LogAs.FAILED, null);
+			ATUReports.add("Clicked on save button.", "Success.", "Fail."+msg.getMessage(), LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 	}
