@@ -290,9 +290,12 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		Thread.sleep(4000); System.out.println("a11");
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "PastCourseB",0, record, copy, confirm_menu);
 		Thread.sleep(4000); System.out.println("a12");
-		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record); System.out.println("1"); Thread.sleep(4000);
-		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record); System.out.println("3"); Thread.sleep(4000);
-		course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record); System.out.println("4"); Thread.sleep(4000);
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
+		System.out.println("1"); Thread.sleep(4000);
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record); 
+		System.out.println("3"); Thread.sleep(4000);
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record); 
+		System.out.println("4"); Thread.sleep(4000);
 
 		course.verifyRecordingsStatusIsClear("PastCourseA", 0, record);	
 		System.out.println("1"); 
