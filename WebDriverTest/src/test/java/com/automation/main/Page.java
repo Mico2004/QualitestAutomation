@@ -31,6 +31,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.asserts.LoggingAssert;
+
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
@@ -432,20 +434,19 @@ public class Page {
 		
 				if (driver.getTitle().equals("Tegrity Lecture Capture"))// check// if// element// is// present
 				{
-					System.out.println("LogOut from user succeeded.");
-					ATUReports.add(" Login page correctly displaied", LogAs.PASSED, null);
+					System.out.println("Signout from user succeeded");
+					ATUReports.add(" Login page correctly displayed", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					break;
-				} else {
+				} else if(driver.getTitle().equals("Tegrity - Courses")){
 					Thread.sleep(3000);
-					System.out.println("Sign_out.Click");
-					sign_out.click();
+					((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");					
+				}else{
+					Thread.sleep(3000);
 				}
 			} catch (Exception e) {
-				
-			}
-
-			
+				ATUReports.add("Sign Out failed", e.getMessage(), LogAs.FAILED,null);
+			}			
 		}
 		System.out.println("signOut5");
 	}
