@@ -297,18 +297,6 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record); 
 		System.out.println("4"); Thread.sleep(4000);
 
-		course.verifyRecordingsStatusIsClear("PastCourseA", 0, record);	
-		System.out.println("1"); 
-		Thread.sleep(4000);
-		course.verifyRecordingsStatusIsClear("PastCourseA", 2, record);
-		System.out.println("3"); 
-		Thread.sleep(4000);
-		course.verifyRecordingsStatusIsClear("PastCourseA", 3, record);
-		System.out.println("4"); 
-		Thread.sleep(4000);
-		course.verifyRecordingsStatusIsClear("PastCourseB", 0, record);
-		System.out.println("5"); 
-		Thread.sleep(4000);
 			
 		
 		course.signOut();
