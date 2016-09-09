@@ -41,7 +41,7 @@ public class LoginHelperPage extends Page {
 	public WebElement passfield;
 	@FindBy(id = "ButtonLogin")
 	WebElement button_login;
-	@FindBy(css = "#main > form > div.form-container > div:nth-child(2) > span")
+	@FindBy(css = "[class=\"form-row\"]>.error-text")
 	WebElement errorHeader;
 	@FindBy(css = ".btn.btn-primary")
 	WebElement eula_accept_button;
@@ -61,7 +61,7 @@ public class LoginHelperPage extends Page {
 		setPageTitle("Tegrity Lecture Capture");
 		/// setPageUrl("https://qualitest4-prod.tegrity.com/#/login");
 		// setPageUrl("https://reg-qabr.tegrity.com/#/login");
-		setPageUrl("https://awsserverautomation-perf-1.tegrity.com/#/login");
+		setPageUrl("https://awsserverautomation-qa-1.tegrity.com/#/login");
 		
 //		setPageUrl("https://awsserverautomation1.tegrity.com/#/login");
 		/// setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University"))););////"https://reg-qabr.tegrity.com/#/login"
@@ -244,32 +244,28 @@ public class LoginHelperPage extends Page {
 		
 		
 
-		for (int second = 0;; second++) {
+		for (int second = 0;second >= 60; second++) {
 			if (second >= 60)
 				Assert.fail("timeout");
 			try {
-				if (driver.getTitle().equals("Tegrity - Courses"))// check if
-				// tegrity
-				// courses
-				// home page
-				// is
-				// visible
-				{ //
+				if (driver.getTitle().equals("Tegrity - Courses"))// check if tegrity courses home page visible				
+				{ 
 					ATUReports.add("Tegrity courses home page is visible", "Course List page is displayed",
 							"Course List page is displayed", LogAs.PASSED, null);
-
 					break;
 				}
 			} catch (Exception e) {
 				ATUReports.add("Tegrity courses home page didn't load", "Course List page is displayed",
 						"Course List page is not displayed", LogAs.FAILED, null);
 			}
-
 			Thread.sleep(1000);
 		}
-		Thread.sleep(1000);
-
-		Assert.assertEquals(driver.getTitle(), "Tegrity - Courses");
+		if (driver.getTitle().equals("Tegrity Lecture Capture")){
+			ATUReports.add("Login Failed", errorHeader.getText(), LogAs.FAILED, null);	
+			Assert.assertEquals(driver.getTitle(), "Tegrity - Courses");
+		}
+		
+		
 	}
 
 	/// login as guest
