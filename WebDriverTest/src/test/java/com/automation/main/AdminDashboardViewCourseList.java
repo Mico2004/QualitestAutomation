@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -76,9 +77,10 @@ public class AdminDashboardViewCourseList extends Page {
 	// }
 	// }
 
-	
+
 	public void moveToCoursesThroughGet(String url){
 		
+	
 		driver.get(url);
 		System.out.println("Moving to the course through get method.");
 		ATUReports.add("Moving to the course through get method", LogAs.PASSED, null);		

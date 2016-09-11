@@ -131,6 +131,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 		initializeCourseObject();
 		
 		String current_course = course.selectCourseThatStartingWith("Ab");
+		String url =  course.getCurrentUrlCoursePage(); 
 		
 		// Make course public
 		record.clickOnCourseTaskThenCourseSettings();
@@ -183,11 +184,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 				
 				// In "All courses" page, search for Ab course.
 				Thread.sleep(8000);
-				admin_dashboard_view_course_list.searchForTargetCourseName(current_course);
-				Thread.sleep(3000);
-				
-				// Click on that course name.
-				admin_dashboard_view_course_list.clickOnFirstCourseLink();
+				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
 				Thread.sleep(1000);
 			}
 			

@@ -159,7 +159,10 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		
 		// 6. Enter to the course page (Course2).
 		course.selectCourseThatStartingWith(current_course);
+		//getting the url for the admin
+		String url =  course.getCurrentUrlCoursePage(); 
 		Thread.sleep(1000);
+
 		
 		// 7.1. The uploaded recording is displayed with no "bookmark" symbol displayed.
 		record.verifyIndexRecordingHaveNoBookmark(1);
@@ -218,12 +221,9 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		// 18. Open the course that contains "ex1" recording.
 		// In "All courses" page, search for abc course.
 		Thread.sleep(8000);
-		admin_dashboard_view_course_list.searchForTargetCourseName(current_course);
-		Thread.sleep(3000);
 		
-		// Click on that course name.
-		admin_dashboard_view_course_list.clickOnFirstCourseLink();
-		Thread.sleep(3000);
+		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
+		
 		
 		// 19. Validate the bookmark symbol is displayed in the "ex1" recording information.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {

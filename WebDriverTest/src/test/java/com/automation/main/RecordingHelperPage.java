@@ -16,14 +16,6 @@ import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.support.PageFactory;
-import javax.lang.model.util.ElementScanner6;
-import javax.xml.bind.ParseConversionEvent;
-
-import org.apache.commons.io.filefilter.TrueFileFilter;
-import org.apache.commons.logging.Log;
-import org.apache.http.impl.client.EntityEnclosingRequestWrapper;
-import org.omg.CORBA.PUBLIC_MEMBER;
-import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -36,8 +28,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.internal.WrapsDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -153,6 +143,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement first_recording; /// first recording
 	@FindBy(xpath = "//*[@id=\"scrollableArea\"]/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a")
 	WebElement first_video_recording;/// first video in first recording
+	@FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[3]/a/div[2]/p[2]")
+	WebElement second_record_player;
 	@FindBy(id = "CourseTask")
 	WebElement course_task;
 	@FindBy(id = "SortingTasks")
@@ -1806,6 +1798,31 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 	}
 
+	public void unselectallCheckbox() {
+		try {	
+			if (check_all_checkbox.isSelected()) {
+				check_all_checkbox.click();
+				System.out.println("Checkbox all is not selected");
+				ATUReports.add("Checkbox all is not selected", LogAs.PASSED, null);
+
+				Assert.assertTrue(true);
+			} else {
+				check_all_checkbox.click();
+				check_all_checkbox.click();
+				System.out.println("Checkbox all is selected");
+				ATUReports.add("Checkbox all is selected", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			}
+
+		} catch (Exception msg) {
+			System.out.println("Checkbox all is not selected");
+			ATUReports.add("Checkbox all is not selected", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		}
+	}
+	
+	
+	
 	// This function get recording name.
 	// It check if the recording name is exist as first recording, if so it
 	// returns true.
@@ -2950,22 +2967,23 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	// verify additional content file name is not displayed in additional
 	// content tab list
-	public void verifyNoAdditionalContentFileName(String name) throws InterruptedException {
+	public Boolean verifyNoAdditionalContentFileName(String name) throws InterruptedException {
 		Thread.sleep(3000);
 		convertAdditionalContantListToNames();
 		for (String file_name : additional_content_list_names) {
 
 			if (file_name.equals(name)) {
 				System.out.println("selected file name is  displayed.");
-				ATUReports.add("selected file name is  displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				Assert.assertTrue(false);
-				return;
+				ATUReports.add("selected file name is  displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
+				return false;
+
 			}
 
 		}
 		System.out.println("selected file name is not displayed.");
 		ATUReports.add("selected file name is not displayed.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
+		return true;
 
 	}
 
@@ -4575,6 +4593,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			
 		}
 		
+	}
+	
+	public String getSecondRecord() {
+		//waitForVisibility(second_record_player);
+		return second_record_player.getText();
 	}
 
 	public void clickOnFirstVisibleChapter() {

@@ -149,6 +149,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 
 		// 4. Get full name of abc course.
 		String source_course_name = course.selectCourseThatStartingWith("abc");
+		String url =  course.getCurrentUrlCoursePage(); 
 		System.out.println("Target course name for this test is: " + source_course_name);
 		ATUReports.add("Target course name for this test is: "+ source_course_name, LogAs.PASSED, null);
 			
@@ -172,13 +173,9 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 			// 7. Click on "view course list" under "courses" section.
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			
-			// 8. In "All courses" page, search for Ab course.
-			Thread.sleep(8000);
-			admin_dashboard_view_course_list.searchForTargetCourseName(source_course_name);
-			Thread.sleep(3000);
-			
-			// 9. Click on that course name
-			admin_dashboard_view_course_list.clickOnFirstCourseLink();
+			// 6. move to the course through url
+			Thread.sleep(5000);
+			admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
 			Thread.sleep(1000);
 			
 		

@@ -146,15 +146,16 @@ public class LoginHelperPage extends Page {
 			try {
 				if (driver.getTitle().equals("Tegrity - Courses"))//check if tegrity courses home page is visible
 				{ 
+					
 					ATUReports.add("Tegrity courses home page is visible", "Course List page is displayed",
 							"Course List page is displayed", LogAs.PASSED, null);
-
 					break;
 				} else {
 					button_login.click();
 				}
 			} catch (Exception e) {
 				System.out.println("Tegrity courses home page didn't load");
+				System.out.println(driver.getTitle());
 			}
 
 			Thread.sleep(1000);

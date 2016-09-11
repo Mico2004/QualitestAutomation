@@ -126,6 +126,7 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 			
 			// 2. Get the full name of the Ab course.
 			String source_course_name = course.selectCourseThatStartingWith("Ab");
+			String url_source =  course.getCurrentUrlCoursePage(); 
 			System.out.println("Target course name for this test is: " + source_course_name);
 			ATUReports.add("Target course name for this test is: "+ source_course_name, LogAs.PASSED, null);
 			
@@ -139,6 +140,7 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 			// 2.2. Get the full name of abc course.
 			String destination_course_name = course.selectCourseThatStartingWith("abc");
 			String destination_course_url = driver.getCurrentUrl();
+			String url_destination =  course.getCurrentUrlCoursePage(); 
 			System.out.println("Destionation course name for this test is: " + destination_course_name);
 			ATUReports.add("Destionation course name for this test is: " + destination_course_name, LogAs.PASSED, null);
 			//record.returnToCourseListPage();
@@ -188,14 +190,10 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 			
 			// Repeat TC for Recordings, Stduent Recording and Tests Tabs
 			for(int recording_type=0; recording_type<3; recording_type++) {
-				// 6. In "All courses" page, search for Ab course.
-//				Thread.sleep(8000);
-				admin_dashboard_view_course_list.searchForTargetCourseName(source_course_name);
-				Thread.sleep(3000);
-				
-				// 7. Click on that course name
-				admin_dashboard_view_course_list.clickOnFirstCourseLink();
-				Thread.sleep(1000); 
+				// 6. move to the course through url
+				Thread.sleep(5000);
+				admin_dashboard_view_course_list.moveToCoursesThroughGet(url_source);	
+				Thread.sleep(1000);
 				
 				if(recording_type==1) {
 					record.clickOnStudentRecordingsTab();
@@ -434,13 +432,11 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				//clickElement(record.breadcrumbs);
 				
 				
-				// In "All courses" page, search for Ab course.
-				admin_dashboard_view_course_list.searchForTargetCourseName(destination_course_name);
-				Thread.sleep(3000);
-						
-				// Click on that course name.
-				admin_dashboard_view_course_list.clickOnFirstCourseLink();
+				//  move to the course through url
+				Thread.sleep(5000);
+				admin_dashboard_view_course_list.moveToCoursesThroughGet(url_destination);	
 				Thread.sleep(1000);
+
 				
 				if(recording_type==1) {
 					record.clickOnStudentRecordingsTab();

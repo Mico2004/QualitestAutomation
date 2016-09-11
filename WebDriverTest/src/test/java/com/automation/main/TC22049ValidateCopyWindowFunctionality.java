@@ -124,6 +124,7 @@ public class TC22049ValidateCopyWindowFunctionality {
 		
 		// 2. Get full name of Ab course.
 		String source_course_name = course.selectCourseThatStartingWith("Ab");
+		String url_source=  course.getCurrentUrlCoursePage();
 		System.out.println("Target course name for this test is: " + source_course_name);
 		ATUReports.add("Target course name for this test is: "+ source_course_name, LogAs.PASSED, null);
 		
@@ -137,6 +138,7 @@ public class TC22049ValidateCopyWindowFunctionality {
 		// 4.1. Get path of abc course.
 		String destination_course_name = course.selectCourseThatStartingWith("abc");
 		String destination_course_url = driver.getCurrentUrl();
+		String url_destination =  course.getCurrentUrlCoursePage(); 
 		System.out.println("Destionation course name for this test is: " + destination_course_name);
 		ATUReports.add("Destionation course name for this test is: " + destination_course_name, LogAs.PASSED, null);
 		//record.returnToCourseListPage();
@@ -168,12 +170,9 @@ public class TC22049ValidateCopyWindowFunctionality {
 		// 7. Click on "view course list" under "courses" section.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		
-		// 8. In "All courses" page, search for Ab course.
-		admin_dashboard_view_course_list.searchForTargetCourseName(source_course_name);
-		Thread.sleep(3000);
-		
-		// 9. Click on that course name.
-		admin_dashboard_view_course_list.clickOnFirstCourseLink();
+		// 8-9. move to the course through url
+		Thread.sleep(5000);
+		admin_dashboard_view_course_list.moveToCoursesThroughGet(url_source);	
 		Thread.sleep(1000);
 		
 		// 10. Click on a checkbox of one recording.
@@ -335,12 +334,9 @@ public class TC22049ValidateCopyWindowFunctionality {
 		record.returnToAdminPageByClickingBreadcrumbsName(record.courses_admin);
 		
 
-		// In "All courses" page, search for Ab course.
-		admin_dashboard_view_course_list.searchForTargetCourseName(destination_course_name);
-		Thread.sleep(3000);
-				
-		// Click on that course name.
-		admin_dashboard_view_course_list.clickOnFirstCourseLink();
+		//  move to the course through url
+		Thread.sleep(5000);
+		admin_dashboard_view_course_list.moveToCoursesThroughGet(url_destination);	
 		Thread.sleep(1000);
 		
 		

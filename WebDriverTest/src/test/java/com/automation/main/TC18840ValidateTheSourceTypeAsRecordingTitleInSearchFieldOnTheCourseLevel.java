@@ -130,7 +130,8 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		initializeCourseObject();
 		
 		String current_course = course.selectCourseThatStartingWith("Ab");
-		
+		String url =  course.getCurrentUrlCoursePage(); 
+
 		// Make course public
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
@@ -188,7 +189,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			record.toEditRecordingPropertiesMenu();
 			edit_recording_properties_window.changeRecordingName(new_recording_name, confirm_menu);	
 			Thread.sleep(2000);
-			record.unselectIndexCheckBox(recordNumber+index);
+			record.unselectallCheckbox();
 			
 		}
 		
@@ -235,11 +236,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 				
 				// In "All courses" page, search for Ab course.
 				Thread.sleep(8000);
-				admin_dashboard_view_course_list.searchForTargetCourseName(current_course);
-				Thread.sleep(3000);
-				
-				// Click on that course name.
-				admin_dashboard_view_course_list.clickOnFirstCourseLink();
+				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
 				Thread.sleep(1000);
 			}
 			

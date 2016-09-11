@@ -95,37 +95,43 @@ public class TC15582MoveOneRecording {
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		move_menu = PageFactory.initElements(driver, MoveWindow.class);
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// 2.login as instructor
 		tegrity.loginCourses("User1");// log in courses page
 
 		/// initialize courses
 		initializeCourseObject();
+		
 		// 4.select first course
 		String first_course = course.first_course_button.getText();
 		course.selectFirstCourse(record);
+		
 		// 5.verify check box is selected and then load move menu
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
-		move_menu = PageFactory.initElements(driver, MoveWindow.class);
+		
 		// 6.source course is not displayed in move window list
 		move_menu.verifySourceCourseNotInMoveMenuCourseList(first_course);
+		
 		// 7.return to recording page and than to course page
-		move_menu.cancel_button.click();
-		System.out.println("clicked on cancel button");
+		move_menu.clickOnCancelButton();
 		Thread.sleep(2000);
+		
 		record.returnToCourseListPage();
 		Thread.sleep(2000);
+		
 		// 8. Verify Only courses where this USER signed as INSTRUCTOR are
 		// displayed in "Course List"
-
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		course.first_course_button.click();
 		Thread.sleep(2000);
-		record.getCheckbox().click();
+		
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
 		move_menu = PageFactory.initElements(driver, MoveWindow.class);
 		Thread.sleep(3000);
+		
 		move_menu.move_course_list = move_menu.getStringFromElement(move_menu.course_list);
 		int course_number = move_menu.course_list.size();
 		int count_instructors = course.patternAppearenceinString(xml_source_code,
@@ -158,26 +164,31 @@ public class TC15582MoveOneRecording {
 		}
 
 		// 9.Select destination course:select first course
-		move_menu.cancel_button.click();
+		move_menu.clickOnCancelButton();
 		Thread.sleep(2000);
 		course.selectFirstCourse(record);
-		String original_recorder_name = "recorded by: mickaelins1 name";//driver.findElement(By.id("RecordedBy1")).getText();//take recorder name for later
+		String original_recorder_name =driver.findElement(By.id("RecordedBy1")).getText();//take recorder name for later
+		
 		// Select destination course:verify check box is selected and then load
 		// move menu
-		record.getCheckbox().click();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
 		Thread.sleep(1000);
+		
 		// Select destination course:mark destination course by clicking on it
 		String destination_course_name = move_menu.course_list.get(0).getText();
 		move_menu.course_list.get(0).click();
 		System.out.println("first destination was marked");
+		
 		/// 10.Click "Move Recording(s)"
 		move_menu.moveRecording.click();
 		System.out.println("moving recording");
 		Thread.sleep(2000);
+		
 		// 11.click on ok button in confirmation menu
 		confirm = PageFactory.initElements(driver, ConfirmationMenu.class);
 		confirm.clickOnOkButton();
+		
 		// source recording name to check not exists later in course page
 		String source_recording=record.first_recording.getText();
 		/// 12.The source recording has status "Being moving from"
@@ -237,7 +248,7 @@ public class TC15582MoveOneRecording {
 												/// recording first
 		record.pressViewButtonAndSelect("Date");
 		Thread.sleep(2000);
-		//record.searchbox.click();// prevent ekement not clickable
+		record.searchbox.click();// prevent ekement not clickable
 		record.verifyFirstExpandableRecording();
 		Thread.sleep(2000);
 		// 27.player is working

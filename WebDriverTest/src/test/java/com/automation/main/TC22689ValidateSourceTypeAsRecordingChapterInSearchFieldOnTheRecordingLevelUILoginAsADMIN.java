@@ -152,6 +152,21 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.waitForVisibility(tegrity.passfield);
 		
+		// 2.login as user1
+		tegrity.loginCourses("User1");
+		course.waitForVisibility(course.first_course_button);
+				
+				//2.1 take course being copied to name and then return
+		String course_name=course.selectCourseThatStartingWith("Ab");
+		String url =  course.getCurrentUrlCoursePage(); 
+
+		record.signOut();
+		Thread.sleep(1000);
+		tegrity.waitForVisibility(tegrity.passfield);
+
+
+		
+		
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
@@ -173,7 +188,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		
 		// 5.Select a course
 		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
-	    String course_name=admin_view_course_list.clickOnCourseLinkStartingWith("Ab");
+		admin_view_course_list.moveToCoursesThroughGet(url);
 	
 		// 7.Click on one of the Recording link
 	    record.waitForVisibility(record.first_recording);

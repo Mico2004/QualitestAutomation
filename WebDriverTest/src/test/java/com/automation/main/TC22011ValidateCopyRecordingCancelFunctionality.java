@@ -119,6 +119,7 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 		
 		// 2. Get the full name of the Ab course.
 		String target_course_name = course.selectCourseThatStartingWith("Ab");
+		String url =  course.getCurrentUrlCoursePage(); 
 		System.out.println("Target course name for this test is: " + target_course_name);
 		ATUReports.add("Target course name for this test is: "+ target_course_name, LogAs.PASSED, null);
 		
@@ -134,18 +135,11 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 		// 5. Click on "view course list" under "courses" section.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		
-			
-		// 6. In "All courses" page search for the full name of the Ab course.
+		
+		// 6. move to the course through url
 		Thread.sleep(5000);
-
-		admin_dashboard_view_course_list.searchForTargetCourseName(target_course_name);
-			
-		Thread.sleep(3000);
-			
-		// 7. Click on that course.
-		admin_dashboard_view_course_list.clickOnFirstCourseLink();
-			
-		Thread.sleep(3000);
+		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
+		Thread.sleep(1000);
 		
 		// 8. Click on a checkbox of one recording.
 		record.getCheckbox().click();

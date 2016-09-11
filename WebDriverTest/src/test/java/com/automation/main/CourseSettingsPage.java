@@ -103,6 +103,7 @@ public class CourseSettingsPage extends Page {
 		}
 		Thread.sleep(3000);
 	}
+	
 
 	// This function force select enable audio checkbox
 	public void enableVideoPodcast() throws InterruptedException {

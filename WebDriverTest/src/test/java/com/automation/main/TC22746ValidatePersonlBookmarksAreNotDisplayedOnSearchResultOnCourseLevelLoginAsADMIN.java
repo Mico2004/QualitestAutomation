@@ -1,4 +1,4 @@
-package com.automation.main.searchsources;
+package com.automation.main;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,7 +40,7 @@ import com.automation.main.PublishWindow;
 import com.automation.main.RecordingHelperPage;
 import com.automation.main.RunDiagnosticsPage;
 
-public class TCase22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldRecordingLevelLoginAsGUEST {
+public class TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsADMIN {
 	// Set Property for ATU Reporter Configuration
 	{
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
@@ -125,138 +125,77 @@ public class TCase22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldR
 	}
 
 	@Test
-	public void test22662() throws Exception {
+	public void test22746() throws Exception {
 
-	
-        String recording_name="\\/[]:;|=,+*?<>";
+		////pre conditions
+
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.waitForVisibility(tegrity.passfield);
-	
-		// 2.login as user1
-		tegrity.loginCourses("User1");
-		course.waitForVisibility(course.sign_out);
-	
-		// 3.Click on course
-		Thread.sleep(1500);
+		// 2.login as student
+		tegrity.loginCourses("User4");
+		course.waitForVisibility(course.first_course_button);
+
+		//2.1 take course being copied to name and then return
 		String course_name=course.selectCourseThatStartingWith("Ab");
-
-		/// 4.change Recording name
-		record.waitForVisibility(record.getCheckbox());
-		Thread.sleep(1000);
-		record.getCheckbox().click();
-		record.toEditRecordingPropertiesMenu();
-		erp_window.waitForVisibility(erp_window.save_button);
-		erp_window.changeRecordingName(recording_name, confirm_menu);
-
-		///5.sign out and login as guest
-		record.waitForVisibility(record.sign_out);
-		record.signOut();
-		tegrity.waitForVisibility(tegrity.passfield);
-		tegrity.loginAsguest();
-		
-		///6.select course by name
-		
-		course.waitForVisibility(course.first_course_button);
-		Thread.sleep(2000);
-		initializeCourseObject();
-		course.selectCourseByName(course_name);
-		
-		// 7.Click on one of the Recording link
+		String url =  course.getCurrentUrlCoursePage(); 
 		record.waitForVisibility(record.first_recording);
+
+		//3.Click on the recording's title.
 		record.verifyFirstExpandableRecording();
+
+		///4.Click on the first chapter
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 		Thread.sleep(15000);
-	
-		// 8.Select the Recording by clicking on one of the chapters
-		player_page.verifyTimeBufferStatusForXSec(10);// check source display
-	
-		///// to go back to crecording window handler
-		String curr_win=driver.getWindowHandle();	
-		for (String handler : driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
-		break;		
-		}
-			
-		/// 9.Enter invalid "Recording Title" in the search field and press
-		/// ENTER
-		player_page.verifySearchReturnEmptyList(recording_name);
-	    recording_name="abc?<>";
-		
-	    ///10.return to recording page
-	    player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(2));
-		player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
-	    record.waitForVisibility(record.first_recording);
-	    record.signOut();
-	    
-	    //11.login as user1
-	    tegrity.waitForVisibility(tegrity.passfield);
-		tegrity.loginCourses("User1");
-		course.waitForVisibility(course.sign_out);
-	
-		// 12.Click on course
-		Thread.sleep(1500);
-		initializeCourseObject();
-		course.selectCourseByName(course_name);
+		// 5.Select the Recording by clicking on one of the chapters
+		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 
-		/// 13.change Recording name
-		record.waitForVisibility(record.getCheckbox());
+		///6.add bookmark
+
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+		String bookmark_to_add=sdf.format(date);
 		Thread.sleep(1000);
-		record.getCheckbox().click();
-		record.toEditRecordingPropertiesMenu();
-		erp_window.waitForVisibility(erp_window.save_button);
-		erp_window.changeRecordingName(recording_name, confirm_menu);
+		player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
 
-		///14.sign out and login as guest
-		record.waitForVisibility(record.sign_out);
-		record.signOut();
-		tegrity.waitForVisibility(tegrity.passfield);
-		tegrity.loginAsguest();
-		
-		///6.select course by name
-		
-		course.waitForVisibility(course.first_course_button);
-		Thread.sleep(2000);
-		initializeCourseObject();
-		course.selectCourseByName(course_name);
-	    
-	    
-	   ///11.change recording name
-		record.clickCheckBoxByName("\\/[]:;|=,+*?<>");
-		record.toEditRecordingPropertiesMenu();
-		erp_window.waitForVisibility(erp_window.save_button);
-		erp_window.changeRecordingName(recording_name, confirm_menu);
 
-		// 12.Click on one of the Recording link
-		record.verifyFirstExpandableRecording();
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
-		// 13.Select the Recording by clicking on one of the chapters
-		player_page.verifyTimeBufferStatusForXSec(10);// check source display
-	
-		///// to go back to crecording window handler
-		
 		for (String handler : driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
-		break;		
+			driver.switchTo().window(handler);
 		}
-			
-		///14.Enter invalid "Recording Title" in the search field and press
-		/// ENTER
-		player_page.verifySearchReturnEmptyList(recording_name);
-	    
+		/// 6.sign out super user
+		record.signOut();
+		Thread.sleep(1000);
+		tegrity.waitForVisibility(tegrity.passfield);
 
-	
-	    ///11.quit
-	      driver.quit();
-	}
+		// 2.login as admin
+		tegrity.loginAdmin("Admin");
+		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
+		// 3.Click on "View Course List" link
+		Thread.sleep(1500);
+		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
+		// 4.verify all courses page
+		admin_view_course_list.verifyAllCoursesPage();
+		// 5.Select a course
+		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
+		Thread.sleep(1000);
+		admin_view_course_list.moveToCoursesThroughGet(url);	
 
-	
-	// description = "get courses list"
-	public void initializeCourseObject() throws InterruptedException {
+		/// 6.Search the "Bookmark" that we mentioned in the preconditions and press ENTER.
+		Thread.sleep(1000);
+		record.waitForVisibility(record.first_recording);
 
-		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
-		course.size = course.course_list.size();
+		record.convertRecordingsListToNames();
+		///7.The "Bookmark" is not displayed on the search results 
+		String to_search=bookmark_to_add;  ///search bookmark
+		record.verifySearchReturnEmptyListAsAdmin(to_search);
+
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+		}
+
+
+
+		///10.quit
+		driver.quit();
 	}
 }

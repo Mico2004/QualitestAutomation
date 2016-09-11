@@ -1,4 +1,4 @@
-package com.automation.main.searchsources;
+package com.automation.main;
 
 import java.util.List;
 
@@ -37,8 +37,9 @@ import com.automation.main.PlayerPage;
 import com.automation.main.PublishWindow;
 import com.automation.main.RecordingHelperPage;
 import com.automation.main.RunDiagnosticsPage;
+import com.automation.main.SearchPage;
 
-public class TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsADMIN {
+public class TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN {
 	// Set Property for ATU Reporter Configuration
 	{
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
@@ -79,6 +80,7 @@ public class TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevel
 	public PlayerPage player_page;
 	public PublishWindow publish_window;
 	public AdminDashboardViewCourseList admin_view_course_list;
+	public SearchPage search_window;
 	String instructor1;
 	String instructor2;
 	List<String> for_enroll;
@@ -120,108 +122,103 @@ public class TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevel
 		run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
+     	search_window=PageFactory.initElements(driver, SearchPage.class);
+	
+	
 	}
 
 	@Test
-	public void test22693() throws Exception {
+	public void test22662() throws Exception {
 
 		////pre conditions
 
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.waitForVisibility(tegrity.passfield);
-		// 2.login as super-user
-		tegrity.loginCourses("SuperUser");
+
+		// 2.login as user1
+		tegrity.loginCourses("User1");
 		course.waitForVisibility(course.first_course_button);
-		
+				
 		//2.1 take course being copied to name and then return
 		String course_name=course.selectCourseThatStartingWith("Ab");
-		record.waitForVisibility(record.first_recording);
-		record.returnToCourseListPage();
-		
-		// 3.Click on "BankValid" link
-		course.selectCourseThatStartingWith("BankValid");
-		record.waitForVisibility(record.recordings_tab);
-		Thread.sleep(3000);
-		// 4.verify all courses page
-		record.clickCheckBoxByName("This Recording Has Bookmark");
-		// 5.copy recording to course
-		record.clickOnRecordingTaskThenCopy();
-		copy.selectTargetCourseFromCourseListThatStartWith("Ab");
-		copy.clickOnCopyButton();
-		confirm_menu.waitForVisibility(confirm_menu.ok_button);
-		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		///5.1 wait for finish copying
-		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
-		/// 6.sign out super user
+		String url =  course.getCurrentUrlCoursePage(); 
+
 		record.signOut();
 		Thread.sleep(1000);
 		tegrity.waitForVisibility(tegrity.passfield);
 
+				
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
+
+		//3.Validate "Allow students to download recordings" option in "Manage Course Settings" from "Courses" section is enable
+		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
+		course_settings.waitForVisibility(course_settings.getOk_button());
+		course_settings.CheckAllowStudentDownload();
+
+
 		// 3.Click on "View Course List" link
+		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		Thread.sleep(1500);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
+
 		// 4.verify all courses page
 		admin_view_course_list.verifyAllCoursesPage();
 		// 5.Select a course
 		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
-		Thread.sleep(1000);
-		admin_view_course_list.searchForTargetCourseName(course_name);
-		Thread.sleep(3000);
-		admin_view_course_list.clickOnFirstCourseLink();
-		
-		/// 6.Click on one of the Recording link
-		Thread.sleep(1000);
+		admin_view_course_list.moveToCoursesThroughGet(url);
+
+		// 6.Click on one of the Recording link
 		record.waitForVisibility(record.first_recording);
-
+		Thread.sleep(2000);
 		record.convertRecordingsListToNames();
-		String rec=record.recording_list_names.get(0);
-		record.verifyFirstExpandableRecording();
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
-		// 8.Select the Recording by clicking on one of the chapters
-		player_page.verifyTimeBufferStatusForXSec(2);// check source display
+		record.convertRecordingsListToRecorderName();
+		String instructor=record.getIndexRecorderNameOfRecording(1);
+		String recording_to_search=record.recording_list_names.get(0);
+		Thread.sleep(3000);
+		
+	    ///7.Search some "Recording Chapter" and press ENTER.
 
-		for (String handler : driver.getWindowHandles()) {
-			driver.switchTo().window(handler);
-		}
-		//9.Search the Recording by entering the "Recording Title" you chose before and press ENTER.
-		//  plus +10.The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
-		String to_search="bookmark";  ///search bookmark
-		player_page.verifySearchForRecordingExist(to_search);
-		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		record.verifySearchReturnAnyListAsAdmin(recording_to_search);
+        
+        
+		///8.Validate the search field is display at the top right of the UI page below the top navigation bar.
+		player_page.veriySearchBoxLocation();
+		Thread.sleep(2000);
+		
+		
+		///10.Validate the number of results that displayed in the breadcrumb is indeed the actual number of results you received.
+		search_window.verifySearchResultNumberAsWrittenAsAdmin();
+	
+	    /////11.cant verify download so skipping straight forward to player and serach there
+		///Click on the result row.
+         search_window.clickOnChapterIconOfRecordingInTargetIndex(1);
+		//12.The Tegrity Player page is opened and the recording start playing from the chapter start time.
 
-		///10.The next result display below the current result in case there is next result.
-		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
-
-		///11.search results page in the format as follows: "recording name - Search Results".
-
-		player_page.verifySearchResultPage(rec);
-		///12.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
-		player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(5);
-		////
 		for (String handler : driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
 			break;
 		}
-		System.out.println(player_page.breadcrumbs_box_elements_list.get(1).getText());
-		System.out.println(player_page.breadcrumbs_box_elements_list.get(0).getText());
-		///13.The breadcrumb structure is displayed as follows: "> Courses > course name".
-		player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
 
-		///14.verify return to recordings page
-		player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
-		//15.navigate back to player recording
-		driver.navigate().back();
-		Thread.sleep(15000);
-		player_page.verifyTimeBufferStatusForXSec(2);// check source display
-		//16.click on "Courses" and verify course page
+		Thread.sleep(10000);
+		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
-		player_page.returnToCoursesPageAsAdmin(course);
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+			break;
+		}
 
-		driver.quit();
+	
+	//13.search:
+		Thread.sleep(3000);
+		player_page.verifySearchForRecordingExist(recording_to_search);
+	
+		//14.Validate the number of results that displayed in the breadcrumb is indeed the actual number of results you received.
+        record.verifySearchResultNumberAsWritten();
+	///15.quit
+        driver.quit();
+	
 	}
 }

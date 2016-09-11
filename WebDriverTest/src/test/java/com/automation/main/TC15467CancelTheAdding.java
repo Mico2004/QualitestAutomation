@@ -2,12 +2,17 @@ package com.automation.main;
 
 import java.awt.Robot;
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -99,7 +104,7 @@ public void setup() {
 	
 	@Test
 	
-public void test15447() throws Exception {
+public void test15467() throws Exception {
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_Cancel.doc";
 		String file_name = "Moshik_Cancel.doc";
 		// 1.load page
@@ -109,7 +114,8 @@ public void test15447() throws Exception {
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
 		record.waitForVisibility(record.getCheckbox());
-
+		
+		
 		record.clickOnAdditionContentTab();
 		record.waitForVisibility(record.getCheckbox());
 		// 3.1 click on additional content tab
@@ -125,19 +131,17 @@ public void test15447() throws Exception {
 		/// path function so is
 		// 7. add file and cancel uploading
 		add_additional_content_window.toUploadFileByPathThenSelectFile(fullPathToFile);
-		add_additional_content_window.waitForVisibility(add_additional_content_window.upload_progress_bar);
-		add_additional_content_window.cancel_additional_file_button.click();/// add
-		/// 8.verify redirected to recording
-		record.waitForVisibility(record.additional_content_list.get(0));
-		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
-			System.out.println("redirected to additional content tab");
-			ATUReports.add("redirected to additional content tab", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println(" not redirected to additional content tab");
-			ATUReports.add(" not redirected to additional content tab", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
+		//add_additional_content_window.waitForVisibility(add_additional_content_window.upload_progress_bar);
+		add_additional_content_window.cancel_additional_file_button.click();///cancel the uploading
+		//confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);
+		
+		record.clickOnAdditionContentTab();
+		wait.until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]"), "class", "active"));
+		record.convertAdditionalContantListToNames();
+		boolean isFileNotdisplayed = record.verifyNoAdditionalContentFileName(file_name);
+		 if(isFileNotdisplayed == false) {
+			 confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);	 
+		 }
 
 		// 4.Select "Course tasks -> Add Additional Content File" menu item
 		record.toUploadAdditionalContentFile();
@@ -147,44 +151,28 @@ public void test15447() throws Exception {
 		add_additional_content_window.verifyAdditionalContentFileWindowInfo();
 		// 7. add file and cancel uploading
 		add_additional_content_window.toUploadFileByPathThenSelectFile(fullPathToFile);
-		Thread.sleep(500);/// location
+		 Thread.sleep(500);/// location
 		 Robot robot=new Robot();
 		 robot.mouseMove(100,100);
-		 int mask = InputEvent.BUTTON1_DOWN_MASK;
-		 robot.mousePress(mask);
-		 robot.mouseRelease(mask);
+		 if(!(driver instanceof InternetExplorerDriver)){
+			 int mask = InputEvent.BUTTON1_DOWN_MASK;
+			 robot.mousePress(mask);
+			 robot.mouseRelease(mask);
+		 } else {
+
+			 robot.keyPress(KeyEvent.VK_ESCAPE);
+			 robot.keyRelease(KeyEvent.VK_ESCAPE);
+		 }
 		
-
-		/// 8.verify redirected to recording
-		record.waitForVisibility(record.additional_content_list.get(0));
-		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
-			System.out.println("redirected to recording tab");
-			ATUReports.add("redirected to recording tab", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("not redirected to recording tab");
-			ATUReports.add("not redirected to recording tab", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
-
-		// 8.check file is not uploaded
-
-		// 7.check if redirected to additional content tab
-
-		if (driver.findElement(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]")).getAttribute("class").equals("active")) {
-			System.out.println("redirected to additional content tab");
-			ATUReports.add("redirected to additional content tab", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("not redirected to additional content tab");
-			ATUReports.add("not redirected to additional content tab", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
-		// 8.Click on file's title:Standard open file/download dialog is
-		record.convertAdditionalContantListToNames();
-		record.verifyNoAdditionalContentFileName(file_name);
+		 record.clickOnAdditionContentTab();
+		 wait.until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]"), "class", "active"));
+		 record.convertAdditionalContantListToNames();
+		 isFileNotdisplayed = record.verifyNoAdditionalContentFileName(file_name);
+		 if(isFileNotdisplayed == false) {
+			 confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);	 
+		 }
 		
 		 System.out.println("Done.");
-
+		 ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 }

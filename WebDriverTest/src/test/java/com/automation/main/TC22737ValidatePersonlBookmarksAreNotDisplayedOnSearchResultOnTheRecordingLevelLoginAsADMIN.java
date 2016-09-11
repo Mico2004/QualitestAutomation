@@ -154,6 +154,7 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		
 		//2.1 take course being copied to name and then return
 		String course_name=course.selectCourseThatStartingWith("Ab");
+		String url =  course.getCurrentUrlCoursePage(); 
 		record.waitForVisibility(record.first_recording);
 	
 		//3.Click on the recording's title.
@@ -193,10 +194,7 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		// 5.Select a course
 		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
 		Thread.sleep(1000);
-		admin_view_course_list.searchForTargetCourseName(course_name);
-		Thread.sleep(3000);
-		admin_view_course_list.clickOnFirstCourseLink();
-		
+		admin_view_course_list.moveToCoursesThroughGet(url);			
 		/// 6.Click on one of the Recording link
 		Thread.sleep(1000);
 		record.waitForVisibility(record.first_recording);
