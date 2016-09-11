@@ -96,7 +96,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			wait = new WebDriverWait(driver, 30);
 			add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 			publish_window = PageFactory.initElements(driver, PublishWindow.class);
-			email_setting = PageFactory.initElements(driver, EmailAndConnectionSettingsPage.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
 			delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
@@ -113,9 +112,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
 			support_window = PageFactory.initElements(driver, GetSupprtWindow.class);
 			mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
-			email_login = PageFactory.initElements(driver, EmailLoginPage.class);
 			create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
-			email_inbox = PageFactory.initElements(driver, EmailInboxPage.class);
 			mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 					ManageAdHocCoursesMembershipWindow.class);
 			help_page = PageFactory.initElements(driver, HelpPage.class);
@@ -161,13 +158,14 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			record.convertRecordingsListToNames();
 			record.convertRecordingsListToRecorderName();
 			
-			String instructor=record.getIndexRecorderNameOfRecording(1);
-			String recording_to_search=record.recording_list_names.get(0);
-			Thread.sleep(2000);
 			
 			record.verifyFirstExpandableRecording();
+			Thread.sleep(2000);
+			
+			String recording_to_search=record.getSecondRecord();
+			Thread.sleep(2000);
+						
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
 
 			// 7.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display
@@ -201,7 +199,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			player_page.verifyPlayersButtonsAndTimeBuffer();
 
 
-
 			///13.The next result display below the current result in case there is next result.
 			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
 
@@ -211,7 +208,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 				driver.switchTo().window(handler);
 				break;
 			}
-
 
 			//15.The university logo is displayed on the top footer bar left side.
 			player_page.verifyUniversityLogoVisibilityAndLocation();
@@ -225,18 +221,17 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			///17.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
 			player_page.waitForVisibility(player_page.columns_title_text.get(0));
 			player_page.verifySearchColumns();
+			
 			///18.The search result items is displayed as rows in the table.
-
 			player_page.verifySearchResultsTableAreInRows();
 
 			///19.Hover over the chapter icon:The background color change to deep gray.
-
-			player_page.moveToElement(player_page.search_result_location.get(0), driver).perform();
+			player_page.moveToElementAndPerform(player_page.search_result.get(0), driver);
 			Thread.sleep(1000);
 			player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 
 			///20.Click on the result row.
-			player_page.search_result_location.get(0).click();
+			player_page.SearchResultContext.get(0).click();
 
 			//21.The Tegrity Player page is opened and the recording start playing from the chapter start time.
 
@@ -253,14 +248,10 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 				break;
 			}
 
-
-
-
 			//					
 			/////16.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
-			//			player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(3);
+			//		player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(3);
 			//			
-
 
 
 			///22.verify return to recordings page
@@ -280,26 +271,26 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 
 		
 			//27.Search the "Recording Chapter" from the recording that we mentioned in the preconditions .
-			record.verifySearchReturnAnyListAsUserOrGuest(recording_to_search);
-			Thread.sleep(2000);
-		
-			///!!!!!!!!!!!!!!!!29.download recording with player controllers(Not Possible)
-			///return to player
-			record.breadcrumbs_box_elements_list.get(2).click();
-			record.waitForVisibility(record.first_recording);
-
-			Thread.sleep(2000);
-			record.verifyFirstExpandableRecording();
-			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
-
-
-			// to go back to crecording window handler
-
-			for (String handler : driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
-				break;		
-			}
+//			record.verifySearchReturnAnyListAsUserOrGuest(recording_to_search);
+//			Thread.sleep(2000);
+//		
+//			///!!!!!!!!!!!!!!!!29.download recording with player controllers(Not Possible)
+//			///return to player
+//			record.breadcrumbs_box_elements_list.get(2).click();
+//			record.waitForVisibility(record.first_recording);
+//
+//			Thread.sleep(2000);
+//			record.verifyFirstExpandableRecording();
+//			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+//			Thread.sleep(15000);
+//
+//
+//			// to go back to crecording window handler
+//
+//			for (String handler : driver.getWindowHandles()) {
+//				driver.switchTo().window(handler);
+//				break;		
+//			}
 
 
 			///30.Validate the search field is display at the top right of the UI page below the top navigation bar.
@@ -320,14 +311,8 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 
 			player_page.verifyTegrityLogoVisibilityAndLocation();
 
-
-
-
-
 			///34.Recording timeline, controls and tasks is displayed.
 			player_page.verifyPlayersButtonsAndTimeBuffer();
-
-
 
 			///35.The next result display below the current result in case there is next result.
 			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
@@ -338,7 +323,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 				driver.switchTo().window(handler);
 				break;
 			}
-
 
 
 			//37.The university logo is displayed on the top footer bar left side.
@@ -359,7 +343,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 
 			///41.Hover over the chapter icon:The background color change to deep gray.
 
-			player_page.moveToElement(player_page.search_result_location.get(0), driver).perform();
+			player_page.moveToElementAndPerform(player_page.search_result.get(0), driver);
 			Thread.sleep(1000);
 			player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 

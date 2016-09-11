@@ -1,9 +1,10 @@
 package com.automation.main;
 
-import java.security.Identity;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -18,49 +19,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-
 import java.awt.AWTException;
 import java.awt.Frame;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.security.Identity;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-import javax.lang.model.util.ElementScanner6;
-import javax.print.DocFlavor.STRING;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
-
-import atu.testng.reports.ATUReports;
-import atu.testng.reports.listeners.ATUReportsListener;
-import atu.testng.reports.listeners.ConfigurationListener;
-import atu.testng.reports.listeners.MethodListener;
-import atu.testng.reports.logging.LogAs;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import net.sourceforge.htmlunit.corejs.javascript.ast.ParseProblem;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class PlayerPage extends Page {
@@ -89,6 +60,8 @@ public class PlayerPage extends Page {
 	List<WebElement> selected_bookmark_buttons_list;
 	@FindBy(xpath = ".//*[@id='BookmarkList']/div")
 	List<WebElement> bookmark_list;
+	@FindBy(css = "#BookmarkList")
+	WebElement bookmark_listCss;
 	@FindBy(id = "tegritySearchBox")
 	WebElement search_box;
 	@FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[3]/a/div[2]/p[2]")
@@ -98,6 +71,8 @@ public class PlayerPage extends Page {
 	@FindBy(xpath = "html/body/div[3]/div[6]/div")
 	WebElement search_result_title;
 	@FindBy(linkText = "Course")
+	WebElement bookmarks_title;
+	@FindBy(css = "#undefined_TXT")
 	WebElement course_breadcrumbs;
 	@FindBy(xpath = "//*[@id=\"tegrityBreadcrumbsBox\"]/li[2]/a")
 	WebElement course_name_breadcrumbs;
@@ -128,11 +103,14 @@ public class PlayerPage extends Page {
 	List<WebElement> bookmark_names;
 	public @FindBy(xpath = "//*[@id=\"BookmarkList\"]/div/div/div[2]") /// "SearchResult_");
 	List<WebElement> bookmark_duration_time;
-	public @FindBy(id = "NextButton_Img") WebElement next_button;
+	public @FindBy(id = "NextButton_Img")
+	WebElement next_button;
 	@FindBy(id = "InstituteLogotype")
 	WebElement tegrity_universty_logo;
 	@FindBy(xpath =".//*[@id='DownDiv']/table/tbody/tr[1]/th[3]")
 	WebElement context_title;
+	@FindBy(css = ".SearchResultContext")
+	List<WebElement> SearchResultContext;
 	@FindBy(id= "TegrityLogo")
 	WebElement tegrity_logo;
 	@FindBy(id= "Back30_Img")
@@ -151,6 +129,11 @@ public class PlayerPage extends Page {
 	WebElement VolumeSliderButton;
 	@FindBy(id= "FastForwardSliderButton_Img")
 	WebElement FastForwardSlide;
+	@FindBy(css= ".SearchResultTime")
+	List<WebElement> SearchResultTimes;
+	@FindBy(css= ".SearchResultLocation")
+	List<WebElement> SearchResultlocation;
+
 	
 	// This function get as input number of seconds.
 	// It will check if the player plays for this number of seconds.
@@ -296,6 +279,110 @@ public class PlayerPage extends Page {
 		
 	}
 	
+	public void verifyBackgroundColor(String Color , WebElement element){
+		
+	String colorToCheck = ""; 	
+	String text = "";
+		try {
+			text = element.getCssValue("background-color").toString();
+			// Split css value of rgb
+			String[] numbers = text.replace("rgba(", "").replace(")", "").split(",");
+			int number1 = Integer.parseInt(numbers[0]);
+			numbers[1] = numbers[1].trim();
+			int number2 = Integer.parseInt(numbers[1]);
+			numbers[2] = numbers[2].trim();
+			int number3 = Integer.parseInt(numbers[2]);
+			colorToCheck =  String.format("#%02x%02x%02x", number1, number2, number3);
+		} catch (Exception msg) {
+				System.out.println("Not Verifed that the color is dark grey.");
+				ATUReports.add("Not Verifed that the color is dark grey.", "True.", "False.", LogAs.FAILED, null);
+		}	
+	if(colorToCheck.equals(Color)) {
+		System.out.println(" Verifed that the color is dark grey.");
+		ATUReports.add(" Verifed that the color is dark grey.", "True.", "True.", LogAs.PASSED, null);
+	} else {
+		System.out.println("Not Verifed that the color is dark grey.");
+		ATUReports.add("Not Verifed that the color is dark grey.", "True.", "False.", LogAs.FAILED, null);
+	}
+	
+
+	}
+	
+	public void verifySearchResultsTableAreInRows(){
+		
+		if(SearchResultContext.size() != SearchResultTimes.size() ||  SearchResultContext.size()!= SearchResultlocation.size()) {		
+			System.out.println("The size of the lists aren't equal.");
+			ATUReports.add("The size of the lists aren't equal.", "True.", "False.", LogAs.FAILED, null);				
+		} else {
+			System.out.println("The size of the lists are at the same size.");
+			ATUReports.add("The size of the lists are at the same size.", "True.", "True..", LogAs.PASSED, null);
+				
+		}
+		
+		int i=0;
+		for (WebElement e : driver.findElements(By.cssSelector(".SearchResultLocation"))) {			    		
+				String current_element = getTextFromWebElement(e);						
+				if (!current_element.equals("Recording Chapter")) {
+					System.out.println("Not Verify that the results of the row of location are fine.");
+					ATUReports.add("Not verify that the results of the row of location are fine.", "True.", "false", LogAs.FAILED, null);
+					break;
+				}
+				i++;
+			   } 		
+		
+		System.out.println("Verify that the results of the row of location are fine.");
+		ATUReports.add("Verify that the results of the row of location are fine.", "True.", "false", LogAs.PASSED, null);
+		
+		i=0;
+		for (WebElement e : driver.findElements(By.cssSelector(".SearchResultTime"))) {			    		
+				String current_element = getTextFromWebElement(e);						
+				
+				if (!checkThatTheTimeIsValid(current_element)) {
+					System.out.println("Not verify that the results of the row of time are fine.");
+					ATUReports.add("verify that the results of the row of time are fine.", "True.", "false", LogAs.FAILED, null);
+					break;
+				}
+				i++;
+			   } 	
+	
+		System.out.println("Verify that the results of the row of time are fine.");
+		ATUReports.add("Verify that the results of the row of time are fine.", "True.", "false", LogAs.PASSED, null);
+		
+		i=0;
+		for (WebElement e : driver.findElements(By.cssSelector(".SearchResultContext"))) {			    		
+				String current_element = getTextFromWebElement(e);						
+				
+				if (!current_element.isEmpty()) {
+					System.out.println("Not Verify that the results of the row of time are fine.");
+					ATUReports.add("Not verify that the results of the row of time are fine.", "True.", "false", LogAs.FAILED, null);
+					break;
+				}
+				i++;
+			   } 	
+	
+		System.out.println("Verify that the results of the row of time are fine.");
+		ATUReports.add("Verify that the results of the row of time are fine.", "True.", "false", LogAs.PASSED, null);
+		
+	}
+	
+	
+	public void verifySearchReturnAnyListAsUserOrGuest(String searchString){
+		
+	}
+	
+	
+	
+	public boolean checkThatTheTimeIsValid(String time){
+	
+		DateFormat df = new SimpleDateFormat("h:mm:ss",Locale.US);
+	    try {
+	        df.parse(time);
+	        return true;
+	    } catch ( ParseException exc ) {
+	    	return false;
+	    }  		
+	}
+	
 	public void verifyTegrityLogoVisibilityAndLocation(){
 		
 		waitForVisibility(tegrity_logo);
@@ -323,18 +410,61 @@ public class PlayerPage extends Page {
 	
 	}
 	
-	public void verifyPlayersButtonsAndTimeBuffer() {
+
+	public void verifyWebElementIsDisplay(WebElement webelement ){
 		
-		waitForVisibility(play_button);
-		if (play_button.isDisplayed()) {
-			System.out.println("Verfied that user cannot add bookmark.");
-			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "True.", LogAs.PASSED, null);
+		waitForVisibility(webelement);
+		if (isElementPresent(webelement)) {
+			System.out.println("Verfied that" + webelement.getText() + "displayed.");
+			ATUReports.add("Verfied that" + webelement.getText() + "displayed.", "True.", "True.", LogAs.PASSED, null);
 			
 		} else {
-			System.out.println("Not verfied that user cannot add bookmark.");
-			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "False.", LogAs.FAILED, null);
+			System.out.println("Not Verfied that" + webelement.getText() + "displayed.");
+			ATUReports.add("Not Verfied that" + webelement.getText() + "displayed.", "True.", "False.", LogAs.FAILED, null);
 		}
 	
+	}
+	
+	public void verifybookmarkTitle(){
+		
+		//verify that bookmarks title is displayed 		
+		verifyWebElementIsDisplay(bookmarks_title);
+		
+		//verify that the bookmarks book is display
+		verifyWebElementIsDisplay(bookmark_listCss);
+		
+	}
+	
+
+	public void verifyPlayersButtonsAndTimeBuffer() {
+		
+		//verify that play button is display
+		verifyWebElementIsDisplay(play_button);
+		
+		//verify that play button is display
+		verifyWebElementIsDisplay(NextButton);
+		
+		//verify that play button is display
+		verifyWebElementIsDisplay(PrevButton);
+		
+		//verify that play button is display
+		verifyWebElementIsDisplay(Back30_seconds);
+		
+		//verify that play button is display
+		verifyWebElementIsDisplay(DragEventsBlockerDiv);
+		
+		//verify that play button is display
+		verifyWebElementIsDisplay(VolumeImage);
+				
+		//verify that play button is display
+		verifyWebElementIsDisplay(ControlPanelDivTextBox);
+		
+		//verify that play button is display
+		verifyWebElementIsDisplay(VolumeSliderButton);
+		
+		//verify that play button is display
+		verifyWebElementIsDisplay(FastForwardSlide);
+		
 	}
 	
 
@@ -475,13 +605,7 @@ public class PlayerPage extends Page {
 
 			Thread.sleep(2000);
 			search_box.clear();
-			Thread.sleep(1000);
-			search_box.sendKeys(to_search);
-			Robot robot = new Robot();
-			robot.mouseMove(-1000, 100);
-			robot.keyPress(KeyEvent.VK_ENTER);
-			Thread.sleep(200);
-			robot.keyRelease(KeyEvent.VK_ENTER);
+			search_box.sendKeys(to_search + Keys.ENTER);	
 			Thread.sleep(1000);
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
@@ -1034,10 +1158,4 @@ public class PlayerPage extends Page {
 		System.out.println("Finshed.");
 		
 	}
-
-	public String getSecondRecord() {
-		waitForVisibility(second_record_player);
-		return second_record_player.getText();
-	}
-
 }
