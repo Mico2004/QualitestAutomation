@@ -164,8 +164,6 @@ public class TestSuitePreSetCopyRecordings_Admin {
 		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
 		System.out.println("4");
 		
-
-		Thread.sleep(60*10000);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

@@ -56,10 +56,7 @@ public class TC15897ViewTheUploadedFile {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		
-
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		wait = new WebDriverWait(driver, 30);
 		add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -202,7 +199,7 @@ public class TC15897ViewTheUploadedFile {
 
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 		driver = new ChromeDriver();
-		
+		driver.manage().window().maximize();
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 

@@ -115,6 +115,7 @@ public class TC19326PublishThePrivateCourse {
 		String private_course = course.selectCourseThatStartingWith("User");
 		String url =  course.getCurrentUrlCoursePage(); 
 		
+		
 		top_bar_helper.clickOnSignOut();
 			
 		// 1. Login as ADMIN 

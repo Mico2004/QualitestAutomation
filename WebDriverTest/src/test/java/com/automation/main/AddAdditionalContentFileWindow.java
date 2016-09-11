@@ -77,9 +77,7 @@ public class AddAdditionalContentFileWindow extends Page {
 		path = System.getProperty("user.dir") + path;
 		select_upload_additional_file.sendKeys(path);
 		//select_upload_additional_file.sendKeys("C:\\Users\\Mickael\\git\\QualitestAutomation\\WebDriverTest\\src\\test\\resources\\additional_file.txt");
-		
-		
-		
+
 //		StringSelection ss = new StringSelection(path);	
 //		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
 //		
