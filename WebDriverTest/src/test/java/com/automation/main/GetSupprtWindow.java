@@ -7,6 +7,8 @@ import org.testng.Assert;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 public class GetSupprtWindow extends Page {
 
@@ -32,7 +34,7 @@ public class GetSupprtWindow extends Page {
 	{
 		if(support_window_title.isDisplayed())
 		{
-			ATUReports.add("support window is visible", LogAs.FAILED, null);
+			ATUReports.add("support window is visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("support window is visible");
 			Assert.assertTrue(false);
 		}
@@ -55,7 +57,7 @@ public class GetSupprtWindow extends Page {
 		}
 		else {
 			
-			ATUReports.add("support window is not visible", LogAs.FAILED, null);
+			ATUReports.add("support window is not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("get started block is  not visible");
 			Assert.assertTrue(false);
 		}
@@ -87,7 +89,7 @@ public class GetSupprtWindow extends Page {
 		catch(Exception e)
 	    {
 			System.out.println("failed clicking send");
-			ATUReports.add("email  failed", LogAs.FAILED, null);
+			ATUReports.add("email  failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("email  failed");
 			Assert.assertTrue(false);
 	    }

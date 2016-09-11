@@ -18,6 +18,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class EditRecordinPropertiesWindow extends Page {
@@ -60,7 +62,7 @@ public class EditRecordinPropertiesWindow extends Page {
 			}			
 		} catch (Exception e) {
 			System.out.println("clicked on owner scroll failed");
-			ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership failed", LogAs.FAILED, null);
+			ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 
@@ -101,12 +103,12 @@ public class EditRecordinPropertiesWindow extends Page {
 			// System.out.println("Recording name not changed to target: " +
 			// target_name + ". Instead: " + recording_name.getText());
 			// ATUReports.add("Recording name not changed to target.",
-			// target_name, recording_name.getText(), LogAs.FAILED, null);
+			// target_name, recording_name.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			// Assert.assertTrue(false);
 			// }
 		} catch (Exception msg) {
 			System.out.println("Fail to change recording name.");
-			ATUReports.add("Recording name changed.", "Success.", "Fail.", LogAs.FAILED, null);
+			ATUReports.add("Recording name changed.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -122,7 +124,7 @@ public class EditRecordinPropertiesWindow extends Page {
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on save button.");
-			ATUReports.add("Clicked on save button.", "Success.", "Fail."+msg.getMessage(), LogAs.FAILED, null);
+			ATUReports.add("Clicked on save button.", "Success.", "Fail."+msg.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

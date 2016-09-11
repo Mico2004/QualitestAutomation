@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junit.framework.Assert;
 
 public class EmailLoginPage extends Page {
@@ -35,7 +37,7 @@ public class EmailLoginPage extends Page {
 	catch(Exception e)
 	{
 		System.out.println("failed sign in  to gmail inbox");
-		ATUReports.add("Login as", "qualitestmcgrawhill", "Success login", "Success fail", LogAs.FAILED, null);
+		ATUReports.add("Login as", "qualitestmcgrawhill", "Success login", "Success fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 	}
 	}

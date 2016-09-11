@@ -20,6 +20,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PrivateAccessor;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -76,7 +78,7 @@ public class TopBarHelper extends Page {
 				try {
 				if (second >= 60) {
 					System.out.println("LogOut from user not succeeded.");
-					ATUReports.add(" Login page timeout", LogAs.FAILED, null);
+					ATUReports.add(" Login page timeout", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			
@@ -125,7 +127,7 @@ public class TopBarHelper extends Page {
 		} else {
 			System.out.println("Not verfied that search field is displayed at top right of the page.");
 			ATUReports.add("Verfied search field is displayed at top right of the page.", "True.", "False.",
-					LogAs.FAILED, null);
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -140,7 +142,7 @@ public class TopBarHelper extends Page {
 		} else {
 			System.out.println("No verfied that target text appears in search field: " + target_text);
 			ATUReports.add("Verfied that target text appears in search field.", target_text,
-					search_box_field.getAttribute("placeholder"), LogAs.FAILED, null);
+					search_box_field.getAttribute("placeholder"), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -154,7 +156,7 @@ public class TopBarHelper extends Page {
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Fail to search for target text: " + target_text);
-			ATUReports.add("Searched for target text.", "", "Fail to search.", LogAs.FAILED, null);
+			ATUReports.add("Searched for target text.", "", "Fail to search.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -169,7 +171,7 @@ public class TopBarHelper extends Page {
 			ATUReports.add("Verfied that the logo at the top left corner.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verfied that the logo at the top left corner.");
-			ATUReports.add("Verfied that the logo at the top left corner.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Verfied that the logo at the top left corner.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 
 	}
@@ -215,7 +217,7 @@ public class TopBarHelper extends Page {
 				weekly_summary.click();
 				ATUReports.add("click succeeded", LogAs.PASSED, null);
 			} catch (Exception e) {
-				ATUReports.add("click failed ", LogAs.FAILED, null);
+				ATUReports.add("click failed ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		}
 	}
@@ -262,7 +264,7 @@ public class TopBarHelper extends Page {
 				detailed_reports.click();
 				ATUReports.add("click succeeded", LogAs.PASSED, null);
 			} catch (Exception e) {
-				ATUReports.add("click failed ", LogAs.FAILED, null);
+				ATUReports.add("click failed ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		}
 	}
@@ -309,7 +311,7 @@ public class TopBarHelper extends Page {
 				custom_analysis.click();
 				ATUReports.add("click succeeded", LogAs.PASSED, null);
 			} catch (Exception e) {
-				ATUReports.add("click failed ", LogAs.FAILED, null);
+				ATUReports.add("click failed ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		}
 	}

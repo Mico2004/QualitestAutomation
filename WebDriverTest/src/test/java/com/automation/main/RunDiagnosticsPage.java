@@ -7,6 +7,8 @@ import org.testng.Assert;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
 
 public class RunDiagnosticsPage extends Page {
@@ -33,7 +35,7 @@ public RunDiagnosticsPage(WebDriver browser) {
 		else
 		{
 			System.out.println("run diagnostics page not  verified");
-			ATUReports.add("run diagnostics page not verified", LogAs.FAILED, null);
+			ATUReports.add("run diagnostics page not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -52,7 +54,7 @@ public RunDiagnosticsPage(WebDriver browser) {
 		else
 		{
 			System.out.println("run diagnostics page  url not  verified");
-			ATUReports.add("run diagnostics page url not verified", LogAs.FAILED, null);
+			ATUReports.add("run diagnostics page url not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

@@ -71,7 +71,7 @@ public class AdminCourseSettingsPage extends Page {
 			Assert.assertTrue(true);
 		} catch(Exception msg) {
 			System.out.println("Fail to click on save button.");
-			ATUReports.add("Clicked on save button.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Clicked on save button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

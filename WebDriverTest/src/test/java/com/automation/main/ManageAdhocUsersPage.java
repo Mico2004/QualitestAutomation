@@ -97,7 +97,7 @@ public class ManageAdhocUsersPage extends Page {
 			exitInnerFrame();
 		} catch(Exception msg) {
 			System.out.println("Fail to search for target username: " + username_to_search);
-			ATUReports.add("Searched for target username: " + username_to_search, "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Searched for target username: " + username_to_search, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		

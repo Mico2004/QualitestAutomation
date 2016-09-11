@@ -15,6 +15,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class PublishWindow extends Page {
@@ -63,7 +65,7 @@ public class PublishWindow extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Publish window is close.");
-			ATUReports.add("Publish window.", "Open.", "Close.", LogAs.FAILED, null);
+			ATUReports.add("Publish window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -79,7 +81,7 @@ public class PublishWindow extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Publish window is open.");
-			ATUReports.add("Publish window.", "Close.", "Open.", LogAs.FAILED, null);
+			ATUReports.add("Publish window.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -91,7 +93,7 @@ public class PublishWindow extends Page {
 		if(selected == 0) {
 			if(is_selected) {
 				System.out.println("Never option is selected.");
-				ATUReports.add("Never option.", "Not selected.", "Selected.", LogAs.FAILED, null);
+				ATUReports.add("Never option.", "Not selected.", "Selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			} else {
 				System.out.println("Never option is not selected.");
@@ -105,7 +107,7 @@ public class PublishWindow extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Never option is not selected.");
-				ATUReports.add("Never option.", "Selected.", "Not selected.", LogAs.FAILED, null);
+				ATUReports.add("Never option.", "Selected.", "Not selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -125,7 +127,7 @@ public class PublishWindow extends Page {
 			Assert.assertTrue(true);
 		} catch(Exception msg) {
 			System.out.println("Not clicked on save button.");
-			ATUReports.add("Clicked on save button.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Clicked on save button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

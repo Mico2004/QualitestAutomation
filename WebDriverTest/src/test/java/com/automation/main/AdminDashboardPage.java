@@ -136,7 +136,7 @@ public class AdminDashboardPage extends Page {
 				} catch (Exception msg) {
 					System.out.println("Not click on target submenu of Courses: " + targetLink.getText().toString());
 					System.out.println("ERROR msg: " + msg.getMessage());
-					ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, null);
+					ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 					return;
 	
@@ -198,7 +198,7 @@ public class AdminDashboardPage extends Page {
 				} catch (Exception msg) {
 					System.out.println("Not click on target submenu of Users: " + targetLink.getText().toString());
 					System.out.println("ERROR msg: " + msg.getMessage());
-					ATUReports.add("Click on target submenu of Users:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, null);
+					ATUReports.add("Click on target submenu of Users:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 					return;
 
@@ -223,7 +223,7 @@ public class AdminDashboardPage extends Page {
 				} catch (Exception msg) {
 					System.out.println("Not click on target submenu of Serivce Settings and Maintenance: " + target);
 					System.out.println("ERROR msg: " + msg);
-					ATUReports.add("Click on target submenu of Service Settings and Maintenance.", "Clicked on target submenu.", "Not clicked on target submenu.", LogAs.FAILED, null);
+					ATUReports.add("Click on target submenu of Service Settings and Maintenance.", "Clicked on target submenu.", "Not clicked on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					return;
 				}
 
@@ -231,7 +231,7 @@ public class AdminDashboardPage extends Page {
 		}
 		
 		System.out.println("Not found the target submenu to click on: " + target);
-		ATUReports.add("Click on target submenu of Service Settings and Maintenance.", "Clicked on target submenu.", "Target submenu not found.", LogAs.FAILED, null);
+		ATUReports.add("Click on target submenu of Service Settings and Maintenance.", "Clicked on target submenu.", "Target submenu not found.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 	}
 

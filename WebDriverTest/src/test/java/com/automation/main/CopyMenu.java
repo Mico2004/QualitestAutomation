@@ -69,7 +69,8 @@ public class CopyMenu extends Page {
 	// This function clicks on copy button of copy menu
 	public void clickOnCopyButton()  {
 				
-			try{System.out.println("Copy1");
+			try{
+			System.out.println("Copy1");
 			wait.until(ExpectedConditions.visibilityOf(copy_button));
 			wait.until(ExpectedConditions.elementToBeClickable(copy_button));
 			System.out.println("Copy2");
@@ -103,7 +104,7 @@ public class CopyMenu extends Page {
 			ATUReports.add("All courses selected.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add("All courses selected.", LogAs.FAILED, null);
+			ATUReports.add("All courses selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -121,7 +122,7 @@ public class CopyMenu extends Page {
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on cancel button");
-			ATUReports.add("Fail click on cancel button.", LogAs.FAILED, null);
+			ATUReports.add("Fail click on cancel button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -135,7 +136,7 @@ public class CopyMenu extends Page {
 			ATUReports.add("Clicked on ESC button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Fail click on ESC button.", LogAs.FAILED, null);
+			ATUReports.add("Fail click on ESC button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -163,7 +164,7 @@ public class CopyMenu extends Page {
 		}
 		if (selected_course == null) {
 			System.out.println("course is not selected from Copy manu course list: " + target_course_name);
-			ATUReports.add("course is not selected from Copy manu course list: " + target_course_name, LogAs.FAILED, null);
+			ATUReports.add("course is not selected from Copy manu course list: " + target_course_name, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return false;
 		}
@@ -192,7 +193,7 @@ public class CopyMenu extends Page {
 
 		}
 		if (selectedCourse == null) {
-			ATUReports.add("course is not selected from course list.", LogAs.FAILED, null);
+			ATUReports.add("course is not selected from course list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -209,7 +210,7 @@ public class CopyMenu extends Page {
 			ATUReports.add("copy menu title verified ", LogAs.PASSED, null);
 		} else {
 			System.out.println("copy menu title not verified  ");
-			ATUReports.add("copy menu title not verified  ", LogAs.FAILED, null);
+			ATUReports.add("copy menu title not verified  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		Assert.assertEquals("Copy", val);
 
@@ -222,7 +223,7 @@ public class CopyMenu extends Page {
 		if (copy_course_list.length != course.courses.length) {
 			Assert.assertTrue(false);
 			System.out.println("different numbers of  courses in copy menu and courses page ");
-			ATUReports.add("different numbers of  courses in copy menu and courses page ", LogAs.FAILED, null);
+			ATUReports.add("different numbers of  courses in copy menu and courses page ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 			for (String e : copy_course_list) {
 				course_copy_map.add(e);
@@ -230,7 +231,7 @@ public class CopyMenu extends Page {
 			for (String s : course.courses) {
 				if (!course_copy_map.contains(s)) {
 					Assert.assertTrue(false);
-					ATUReports.add("courses in copy menu and courses page are not matched ", LogAs.FAILED, null);
+					ATUReports.add("courses in copy menu and courses page are not matched ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 			}
 			Assert.assertTrue(true);
@@ -295,7 +296,7 @@ public class CopyMenu extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("copy menu background color is not  same as recording background color");
-			ATUReports.add("copy menu background color is not  same as recording background color", LogAs.FAILED, null);
+			ATUReports.add("copy menu background color is not  same as recording background color", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -311,12 +312,12 @@ public class CopyMenu extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("info text unverified");
-			ATUReports.add("failed info text unverified", LogAs.FAILED, null);
+			ATUReports.add("failed info text unverified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		} catch(Exception e) {
 			System.out.println("failed to get the info text");
-			ATUReports.add("failed to get the info text", LogAs.FAILED, null);
+			ATUReports.add("failed to get the info text", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 
 		}
@@ -331,7 +332,7 @@ public class CopyMenu extends Page {
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on search button.");
-			ATUReports.add("Click the Search button", "Clicked on search button", "Fail click on search button", LogAs.FAILED, null);
+			ATUReports.add("Click the Search button", "Clicked on search button", "Fail click on search button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -358,7 +359,7 @@ public class CopyMenu extends Page {
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Value in search input box not deleted");
-			ATUReports.add("Delete text in search box", "Value in search input box deleted successfully", "Value in search input box not deleted", LogAs.FAILED, null);
+			ATUReports.add("Delete text in search box", "Value in search input box deleted successfully", "Value in search input box not deleted", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -375,7 +376,7 @@ public class CopyMenu extends Page {
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("The following keys not sent unsuccessfully: " + keys_to_send);
-			ATUReports.add("Enter text in search box", keys_to_send, "Success", "Failed", LogAs.FAILED, null);
+			ATUReports.add("Enter text in search box", keys_to_send, "Success", "Failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -394,12 +395,12 @@ public class CopyMenu extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Text is not displayed in search textbox");
-				ATUReports.add("Text is not displayed in search textbox", is_this_text_displayed, current_text_in_search_box, LogAs.FAILED, null);
+				ATUReports.add("Text is not displayed in search textbox", is_this_text_displayed, current_text_in_search_box, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} catch (Exception e) {
 			System.out.println("Failed to get text from search box.");
-			ATUReports.add("Failed to get text from search box.", LogAs.FAILED, null);
+			ATUReports.add("Failed to get text from search box.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -428,7 +429,7 @@ public class CopyMenu extends Page {
 		}
 
 		System.out.println("Target course is not selected: " + target_course_name);
-		ATUReports.add("Target course is not selected: " + target_course_name, LogAs.FAILED, null);
+		ATUReports.add("Target course is not selected: " + target_course_name, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 		return false;
 
@@ -444,7 +445,7 @@ public class CopyMenu extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("color of course selected is not blue...");
-			ATUReports.add("color of course selected is not blue...", LogAs.FAILED, null);
+			ATUReports.add("color of course selected is not blue...", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -482,7 +483,7 @@ public class CopyMenu extends Page {
 //				ATUReports.add("copy menu verified", LogAs.PASSED, null);
 //		} catch (Exception e) {
 //		System.out.println("no copy menu verification");
-//			ATUReports.add("no copy menu verification", LogAs.FAILED, null);
+//			ATUReports.add("no copy menu verification", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 //
 //		}
 		 rec.clickOnRecordingTaskThenCopy();
@@ -514,7 +515,7 @@ public class CopyMenu extends Page {
 					ATUReports.add("click succeeded", LogAs.PASSED, null);
 			} catch (Exception e) {
 				System.out.println("click failed ");
-				ATUReports.add("click failed ", LogAs.FAILED, null);
+				ATUReports.add("click failed ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
 			}
 	 
@@ -553,7 +554,7 @@ public class CopyMenu extends Page {
 			Assert.assertTrue(true);
 		} else {
 		System.out.println("All courses selected.");
-			ATUReports.add("All courses selected.", LogAs.FAILED, null);
+			ATUReports.add("All courses selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -570,7 +571,7 @@ public class CopyMenu extends Page {
 				Assert.assertTrue(true);
 			} catch(Exception e) {
 				System.out.println("Fail click on copy button.");
-				ATUReports.add("Fail click on copy button.", LogAs.FAILED, null);
+				ATUReports.add("Fail click on copy button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 			Thread.sleep(3000);
@@ -585,7 +586,7 @@ public class CopyMenu extends Page {
 				ATUReports.add("Get the Error Dailog manu.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} catch(Exception e) {
-				ATUReports.add("Failed To get the Error Dailog.", LogAs.FAILED, null);
+				ATUReports.add("Failed To get the Error Dailog.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Failed To get the Error Dailog menu.");
 				Assert.assertTrue(false);
 			}
@@ -613,7 +614,7 @@ public class CopyMenu extends Page {
 					}
 					if (selected_course == null) {
 						System.out.println("course is not selected from course list: " + selected_course);
-						ATUReports.add("course is not selected from course list: " + selected_course, LogAs.FAILED, null);
+						ATUReports.add("course is not selected from course list: " + selected_course, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 						return false;
 					}
@@ -632,7 +633,7 @@ public class CopyMenu extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Verified that it not contain default text: Type Instructor Name...");
-				ATUReports.add("Verify default text,", "Verified", "Not verified", LogAs.FAILED, null);
+				ATUReports.add("Verify default text,", "Verified", "Not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -649,7 +650,7 @@ public class CopyMenu extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Not verified that list courses button is displayed next to the search field.");
-				ATUReports.add("Is list courses button is displayed next to the search filed.", "True.", "False.", LogAs.FAILED, null);
+				ATUReports.add("Is list courses button is displayed next to the search filed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 				
@@ -686,7 +687,7 @@ public class CopyMenu extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Not verified message: Choose course(s) that you would like to copy your selected recording(s) to.");
-				ATUReports.add("Message verfieid.", "Verified.", "Not verified.", LogAs.FAILED, null);
+				ATUReports.add("Message verfieid.", "Verified.", "Not verified.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 			
@@ -699,7 +700,7 @@ public class CopyMenu extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Location of the message is not correct below instructor search field.");
-				ATUReports.add("Location of the message.", "Correct.", "Not correct: " + search_field_location.y + "!<" + message_location.y, LogAs.FAILED, null);
+				ATUReports.add("Location of the message.", "Correct.", "Not correct: " + search_field_location.y + "!<" + message_location.y, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -718,7 +719,7 @@ public class CopyMenu extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Not verified that search button to the right of the course search field and above the cancel / copy recordings.");
-				ATUReports.add("Verify location of search button.", "Verified.", "Not verified.", LogAs.FAILED, null);
+				ATUReports.add("Verify location of search button.", "Verified.", "Not verified.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -752,7 +753,7 @@ public class CopyMenu extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Copy menu is close.");
-				ATUReports.add("Copy menu.", "Open.", "Close.", LogAs.FAILED, null);
+				ATUReports.add("Copy menu.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -764,7 +765,7 @@ public class CopyMenu extends Page {
 			
 			if(!is_closed) {
 				System.out.println("Copy menu is open.");
-				ATUReports.add("Copy menu.", "Close.", "Open.", LogAs.FAILED, null);
+				ATUReports.add("Copy menu.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			} else {
 				System.out.println("Copy menu is close.");

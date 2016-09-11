@@ -115,7 +115,7 @@ public class DeleteMenu extends Page {
 		} catch (Exception e) {
 			System.out.println("Fail click on cancel button.");
 			ATUReports.add("Click cancel button", "Clicked on cancel button", "Fail click on delete cancel",
-					LogAs.FAILED, null);
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -131,7 +131,7 @@ public class DeleteMenu extends Page {
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on ESC button.");
-			ATUReports.add("Fail click on ESC button.", LogAs.FAILED, null);
+			ATUReports.add("Fail click on ESC button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -145,7 +145,7 @@ public class DeleteMenu extends Page {
 			ATUReports.add("delete menu title verified ", LogAs.PASSED, null);
 			System.out.println("delete menu title verified ");
 		} else {
-			ATUReports.add("delete menu title not verified  ", LogAs.FAILED, null);
+			ATUReports.add("delete menu title not verified  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("delete menu title not verified  ");
 		}
 		Assert.assertEquals("Delete", val);
@@ -162,7 +162,7 @@ public class DeleteMenu extends Page {
 			System.out.println("move menu background color is same as recording background color");
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add("move menu background color is not  same as recording background color", LogAs.FAILED, null);
+			ATUReports.add("move menu background color is not  same as recording background color", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("move menu background color is  not same as recording background color");
 
 			Assert.assertTrue(false);
@@ -184,7 +184,7 @@ public class DeleteMenu extends Page {
 			System.out
 					.println("The following info is not present: Are you sure you want to delete the following items?");
 			ATUReports.add("The following info is present: Are you sure you want to delete the following items?",
-					"True.", "False.", LogAs.FAILED, null);
+					"True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -195,13 +195,13 @@ public class DeleteMenu extends Page {
 		delete_recording_string_list = getStringFromElement(recording_list);
 		if (delete_recording_string_list.length != recordings.size()) {
 			Assert.assertTrue(false);
-			ATUReports.add("different numbers of  recordings in delete menu and recording page ", LogAs.FAILED, null);
+			ATUReports.add("different numbers of  recordings in delete menu and recording page ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 			for (String e : delete_recording_string_list) {
 
 				if (!recordings.contains(e)) {
 					Assert.assertTrue(false);
-					ATUReports.add("recording in delete menu and recording page are not matched ", LogAs.FAILED, null);
+					ATUReports.add("recording in delete menu and recording page are not matched ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					System.out.println("recording in delete menu and recording page are not matched ");
 				}
 			}
@@ -251,7 +251,7 @@ public class DeleteMenu extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Delete window is not displayed.");
-			ATUReports.add("Delete window.", "Displayed.", "Not displayed.", LogAs.FAILED, null);
+			ATUReports.add("Delete window.", "Displayed.", "Not displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -266,7 +266,7 @@ public class DeleteMenu extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Delete window is displayed.");
-			ATUReports.add("Delete window.", "Not displayed.", "Displayed.", LogAs.FAILED, null);
+			ATUReports.add("Delete window.", "Not displayed.", "Displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -284,12 +284,12 @@ public class DeleteMenu extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Delete window title is: " + window_title);
-				ATUReports.add("Delete window title.", "Delete.", window_title, LogAs.FAILED, null);
+				ATUReports.add("Delete window title.", "Delete.", window_title, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} catch (Exception msg) {
 			System.out.println("Delete window not displayed.");
-			ATUReports.add("Delete window title.", "Not displayed.", "Not displayed.", LogAs.FAILED, null);
+			ATUReports.add("Delete window title.", "Not displayed.", "Not displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -318,7 +318,7 @@ public class DeleteMenu extends Page {
 		} else {
 			System.out.println("Target recording not in recording list.");
 			ATUReports.add("Recording list.", "Target recording in the list.", "Target recording not in the list.",
-					LogAs.FAILED, null);
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return false;
 		}
@@ -333,7 +333,7 @@ public class DeleteMenu extends Page {
 		} else {
 			System.out.println("Target recording is not the only recording in recording list.");
 			ATUReports.add("Recording list.", "Target recording is the only recording in the list.",
-					"Target recording is not the only recording in the list.", LogAs.FAILED, null);
+					"Target recording is not the only recording in the list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -344,7 +344,7 @@ public class DeleteMenu extends Page {
 		
 		if(current_additional_content_list.size() != target_additional_content_list.size()) {
 			System.out.println("The size of target list and delete menu list is no the same.");
-			ATUReports.add("Delete menu list same as target list.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Delete menu list same as target list.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} else {
 			for(String item_of_list: target_additional_content_list) {
@@ -357,7 +357,7 @@ public class DeleteMenu extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Delete menu list not same as target list.");
-				ATUReports.add("Delete menu list same as target list.", "True.", "False.", LogAs.FAILED, null);
+				ATUReports.add("Delete menu list same as target list.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}

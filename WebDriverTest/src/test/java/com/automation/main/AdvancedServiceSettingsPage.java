@@ -17,6 +17,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 public class AdvancedServiceSettingsPage extends Page {
 	// Set Property for ATU Reporter Configuration
@@ -91,7 +93,7 @@ public class AdvancedServiceSettingsPage extends Page {
 		} catch (Exception e) {
 			System.out.println("failed clicking on student testing checkbox");
 			ATUReports.add("Click student testing checkbox", "student testing checkbox status", "Success select", "failed select",
-					LogAs.FAILED, null);
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
@@ -182,7 +184,7 @@ public class AdvancedServiceSettingsPage extends Page {
 		} catch (Exception e) {
 			System.out.println("failed clicking on student testing checkbox");
 			ATUReports.add("Click student testing checkbox", "student testing checkbox status", "Success select", "failed select",
-					LogAs.FAILED, null);
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 		
@@ -208,7 +210,7 @@ public class AdvancedServiceSettingsPage extends Page {
 			} catch (Exception e) {
 				System.out.println("failed clicking on youtube checkbox");
 				ATUReports.add("Click youtube checkbox", "student youtube status", "Success select", "failed select",
-						LogAs.FAILED, null);
+						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		
 	
@@ -236,7 +238,7 @@ public class AdvancedServiceSettingsPage extends Page {
 			} catch (Exception e) {
 				System.out.println("failed clicking on Captioning checkbox");
 				ATUReports.add("Click Captioning checkbox", "student Captioning status", "Success select", "failed select",
-						LogAs.FAILED, null);
+						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		
 	
@@ -265,8 +267,7 @@ public class AdvancedServiceSettingsPage extends Page {
 			}
 		} catch (Exception e) {
 			System.out.println("failed clicking on eula checkbox");
-			ATUReports.add("unClick eula checkbox", "eula checkbox status", "Success select", "failed select",
-					LogAs.FAILED, null);
+			ATUReports.add("unClick eula checkbox", "eula checkbox status", "Success select", "failed select",	LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 
 	}

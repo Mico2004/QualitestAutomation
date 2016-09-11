@@ -62,7 +62,7 @@ public class PodcastPage extends Page {
 					Assert.assertTrue(true);
 				} catch(Exception e) {
 					System.out.println("Fail click on podcast title: " + podcast_title);
-					ATUReports.add("Fail click on podcast title: " + podcast_title, LogAs.FAILED, null);
+					ATUReports.add("Fail click on podcast title: " + podcast_title, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 				Thread.sleep(3000);
@@ -82,7 +82,7 @@ public class PodcastPage extends Page {
 					Assert.assertTrue(true);
 				} catch(Exception e) {
 					System.out.println("Fail click on podcast title: " + podcast_title);
-					ATUReports.add("Fail click on podcast title: " + podcast_title, LogAs.FAILED, null);
+					ATUReports.add("Fail click on podcast title: " + podcast_title, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 				Thread.sleep(3000);
@@ -102,7 +102,7 @@ public class PodcastPage extends Page {
 				Thread.sleep(1000);
 			} catch(Exception msg) {
 				System.out.println("Fail to watch all podcasts.");
-				ATUReports.add("Watch all podcasts.", "True.", "True.", LogAs.FAILED, null);
+				ATUReports.add("Watch all podcasts.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 			

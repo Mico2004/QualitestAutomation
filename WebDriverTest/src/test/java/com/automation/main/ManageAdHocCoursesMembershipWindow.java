@@ -230,7 +230,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	    		Assert.assertTrue(true);
 	    	} else {
 	    		System.out.println(" selected user is not displaied in instructor list.");
-	    		ATUReports.add(" selected user is not displaied in instructor list.", LogAs.FAILED, null);
+	    		ATUReports.add(" selected user is not displaied in instructor list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    		Assert.assertTrue(false);
 	    	}
 		}
@@ -244,7 +244,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 					Assert.assertTrue(true);
 				} else {
 					System.out.println(" selected user is  displaied in instructor list.");
-					ATUReports.add(" selected user is  displaied in instructor list.", LogAs.FAILED, null);
+					ATUReports.add(" selected user is  displaied in instructor list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 		}
@@ -264,7 +264,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	    		Assert.assertTrue(true);
 	    	} else {
 	    		System.out.println(" selected user is not displaied in student list.");
-	    		ATUReports.add(" selected user is not displaied in student list.", LogAs.FAILED, null);
+	    		ATUReports.add(" selected user is not displaied in student list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    		Assert.assertTrue(false);
 	    	}
 		}
@@ -278,7 +278,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 					Assert.assertTrue(true);
 				} else {
 					System.out.println(" selected user is  displaied in student list");
-					ATUReports.add(" selected user is  displaied in student list", LogAs.FAILED, null);
+					ATUReports.add(" selected user is  displaied in student list", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 		}
@@ -295,7 +295,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 		} catch (Exception msg) {
 			System.out.println("Fail to remove selected to students list.");
 			Assert.assertTrue(false);
-			ATUReports.add("Fail to remove selected to students list.", LogAs.FAILED, null);
+			ATUReports.add("Fail to remove selected to students list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 		}
 	}

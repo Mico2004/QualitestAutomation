@@ -176,7 +176,7 @@ public class PlayerPage extends Page {
 				if (i == 24) {
 					System.out.println("Switching to player frame.");
 					ATUReports.add("Switching to player frame.", "Success to switch to player frame.",
-							"Fail to switch to player frame.", LogAs.FAILED, null);
+							"Fail to switch to player frame.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 					return false;
 				} else {
@@ -279,7 +279,7 @@ public class PlayerPage extends Page {
 			
 		} else {
 			System.out.println("The tegrity University logo is not displayed.");
-			ATUReports.add("The tegrity University logo is not displayed.",LogAs.FAILED, null);
+			ATUReports.add("The tegrity University logo is not displayed.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);	
 		}
 		
@@ -291,7 +291,7 @@ public class PlayerPage extends Page {
 			ATUReports.add("Verifed that logo at the top left cornner", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not Verifed that logo at the top left cornner.");
-			ATUReports.add("Not Verifed that logo at the top left cornner.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Not Verifed that logo at the top left cornner.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		
 	}
@@ -306,7 +306,7 @@ public class PlayerPage extends Page {
 			
 		} else {
 			System.out.println("The tegrity logo is not displayed.");
-			ATUReports.add("The tegrity logo is not displayed.",LogAs.FAILED, null);
+			ATUReports.add("The tegrity logo is not displayed.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);	
 		}
 		
@@ -318,7 +318,7 @@ public class PlayerPage extends Page {
 			ATUReports.add("Verifed that logo at the top left cornner", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not Verifed that logo at the buttom right cornner.");
-			ATUReports.add("Not Verifed that logo at the top left cornner.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Not Verifed that logo at the top left cornner.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	
 	}
@@ -332,7 +332,7 @@ public class PlayerPage extends Page {
 			
 		} else {
 			System.out.println("Not verfied that user cannot add bookmark.");
-			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	
 	}
@@ -347,7 +347,7 @@ public class PlayerPage extends Page {
 			if (seconds <= 0) {
 				System.out.println("Please give positive number of seconds as input for verifing buffer status.");
 				ATUReports.add("Please give positive number of seconds as input for verifing buffer status.",
-						LogAs.FAILED, null);
+						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 				return false;
 			}
@@ -360,7 +360,7 @@ public class PlayerPage extends Page {
 				String current_seconds = time_buffer_status.getText().split("/")[0].split(":")[2];
 				if (initial_seconds.equals(current_seconds)) {
 					System.out.println("The time buffer status is not moving in seconds.");
-					ATUReports.add("The time buffer status is not moving in seconds.", LogAs.FAILED, null);
+					ATUReports.add("The time buffer status is not moving in seconds.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 					return false;
 				}
@@ -388,7 +388,7 @@ public class PlayerPage extends Page {
 			System.out.println("Current url is not contains partially url from podcast page: " + current_url + " != "
 					+ partially_url);
 			ATUReports.add("Current url is not contains partially url from podcast page: " + current_url + " != "
-					+ partially_url, LogAs.FAILED, null);
+					+ partially_url, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -397,7 +397,7 @@ public class PlayerPage extends Page {
 	public void verifyThatUserCannotAddBookmark() {
 		if (add_bookmark_button.isDisplayed()) {
 			System.out.println("Not verfied that user cannot add bookmark.");
-			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 			System.out.println("Verfied that user cannot add bookmark.");
 			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "True.", LogAs.PASSED, null);
@@ -458,13 +458,13 @@ public class PlayerPage extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("results found for " + to_search);
-				ATUReports.add("search for results", to_search, "empty list", "not empty list", LogAs.FAILED, null);
+				ATUReports.add("search for results", to_search, "empty list", "not empty list", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 
 		} catch (Exception e) {
 			System.out.println("problem with searching");
-			ATUReports.add("problem with searching", LogAs.FAILED, null);
+			ATUReports.add("problem with searching", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -491,7 +491,7 @@ public class PlayerPage extends Page {
 			waitForVisibility(list_of_results);
 			if (list_of_results.getText().contains("No results found for:")) {
 				System.out.println("no results found for " + to_search);
-				ATUReports.add("search for results", to_search, "empty list", "not empty list", LogAs.FAILED, null);
+				ATUReports.add("search for results", to_search, "empty list", "not empty list", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			} else {
 				System.out.println("results found for " + to_search);
@@ -501,7 +501,7 @@ public class PlayerPage extends Page {
 
 		} catch (Exception e) {
 			System.out.println("problem with searching");
-			ATUReports.add("problem with searching", LogAs.FAILED, null);
+			ATUReports.add("problem with searching", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -521,7 +521,7 @@ public class PlayerPage extends Page {
 		} else {
 			System.out.println("result search page not verified for recording: " + recording);
 			ATUReports.add("result search page  verified for recording: ", recording, "contains", "not contains",
-					LogAs.FAILED, null);
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -537,7 +537,7 @@ public class PlayerPage extends Page {
 		} else {
 			System.out.println("course breadcrumbs and course name breadcrumbs were not verified");
 			ATUReports.add("course breadcrumbs and course name breadcrumbs were verified", "breadcrumbs", "contains",
-					"not contains", LogAs.FAILED, null);
+					"not contains", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -589,7 +589,7 @@ public class PlayerPage extends Page {
 		} else {
 			System.out.println("course breadcrumbs and course name breadcrumbs were not verified");
 			ATUReports.add("course breadcrumbs and course name breadcrumbs were verified", "breadcrumbs", "contains",
-					"not contains", LogAs.FAILED, null);
+					"not contains", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -613,7 +613,7 @@ public class PlayerPage extends Page {
 			System.out.println("list is bigger or equal to 0 : " + res_num);
 		} else {
 			System.out.println("list is smaller then 0 : " + res_num);
-			ATUReports.add("list is smaller then 0 ", res_num, "bigger", "smaller", LogAs.FAILED, null);
+			ATUReports.add("list is smaller then 0 ", res_num, "bigger", "smaller", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		String seconds = result.substring(end + 2, result.length() - 5);
@@ -621,7 +621,7 @@ public class PlayerPage extends Page {
 			System.out.println("seconds are bigger or equal to 0 : " + seconds);
 		} else {
 			System.out.println("seconds are then 0 : " + seconds);
-			ATUReports.add("list is smaller then 0 ", seconds, "bigger", "smaller", LogAs.FAILED, null);
+			ATUReports.add("list is smaller then 0 ", seconds, "bigger", "smaller", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		String sentence = res_num + " results found for: " + record_name + ". (" + seconds + " sec)";
@@ -639,7 +639,7 @@ public class PlayerPage extends Page {
 			ATUReports.add(
 					"The search results statistics in the format as follows: "
 							+ "X results found for: search criterion. (XX sec)",
-					"parameters", "contains", "not contains", LogAs.FAILED, null);
+					"parameters", "contains", "not contains", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -714,7 +714,7 @@ public class PlayerPage extends Page {
 			}
 		} else {
 			System.out.println("course name unknown");
-			ATUReports.add("course name unknown", "breadcrumbs", "contains", "not contains", LogAs.FAILED, null);
+			ATUReports.add("course name unknown", "breadcrumbs", "contains", "not contains", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -732,7 +732,7 @@ public class PlayerPage extends Page {
 		} else {
 			System.out.println("position is not correct");
 			ATUReports.add("verify search box location is under top-bar", "location", "location correct",
-					"location not correct", LogAs.FAILED, null);
+					"location not correct", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -748,7 +748,7 @@ public class PlayerPage extends Page {
 		} else {
 			System.out.println("hint in search box is not correct");
 			ATUReports.add("hint in search box is correct", "hint", "Search in this recording...", "bad message",
-					LogAs.FAILED, null);
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -774,7 +774,7 @@ public class PlayerPage extends Page {
 		} else {
 			System.out.println("course breadcrumbs and course name breadcrumbs were not verified");
 			ATUReports.add("course breadcrumbs and course name breadcrumbs were verified", "breadcrumbs", "contains",
-					"not contains", LogAs.FAILED, null);
+					"not contains", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -800,7 +800,7 @@ public class PlayerPage extends Page {
 			}
 		} else {
 			System.out.println("course name unknown");
-			ATUReports.add("course name unknown", "breadcrumbs", "contains", "not contains", LogAs.FAILED, null);
+			ATUReports.add("course name unknown", "breadcrumbs", "contains", "not contains", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -826,7 +826,7 @@ public class PlayerPage extends Page {
 			}
 		} else {
 			System.out.println("course name unknown");
-			ATUReports.add("course name unknown", "breadcrumbs", "contains", "not contains", LogAs.FAILED, null);
+			ATUReports.add("course name unknown", "breadcrumbs", "contains", "not contains", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -839,7 +839,7 @@ public class PlayerPage extends Page {
 			if (time_out == 120) {
 				System.out.println("time out");
 				Assert.assertTrue(false);
-				ATUReports.add("Time out", LogAs.FAILED, null);
+				ATUReports.add("Time out", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				return caption_to;
 			}
 			Thread.sleep(500);
@@ -854,7 +854,7 @@ public class PlayerPage extends Page {
 		} catch (Exception e) {
 
 			System.out.println("failed click on play button to pause");
-			ATUReports.add("failed clicking", LogAs.FAILED, null);
+			ATUReports.add("failed clicking", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		ATUReports.add("got caption string in time", LogAs.PASSED, null);
@@ -884,7 +884,7 @@ public class PlayerPage extends Page {
 			}
 		} else {
 			System.out.println("course name unknown");
-			ATUReports.add("course name unknown", "breadcrumbs", "contains", "not contains", LogAs.FAILED, null);
+			ATUReports.add("course name unknown", "breadcrumbs", "contains", "not contains", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -907,7 +907,7 @@ public class PlayerPage extends Page {
 		} else {
 			System.out.println("not verified columns search text title");
 			ATUReports.add("verify columns search text title", "columns title", "displayed", "not displayed",
-					LogAs.FAILED, null);
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -946,7 +946,7 @@ public class PlayerPage extends Page {
 		}
 		System.out.println("not verified bookmark name and time");
 		ATUReports.add("verify bookmark name and time", "bookmark name and time", "displayed correctly",
-				"not displayed or displayed not correctly", LogAs.FAILED, null);
+				"not displayed or displayed not correctly", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 
 	}
@@ -959,7 +959,7 @@ public class PlayerPage extends Page {
 			if (time_out == 120) {
 				System.out.println("time out");
 				Assert.assertTrue(false);
-				ATUReports.add("Time out", LogAs.FAILED, null);
+				ATUReports.add("Time out", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
 			}
 			Thread.sleep(500);
@@ -974,7 +974,7 @@ public class PlayerPage extends Page {
 		} catch (Exception e) {
 
 			System.out.println("failed click on play button to pause");
-			ATUReports.add("failed clicking", LogAs.FAILED, null);
+			ATUReports.add("failed clicking", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		ATUReports.add("got right time", LogAs.PASSED, null);

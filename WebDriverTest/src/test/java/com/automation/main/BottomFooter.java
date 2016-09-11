@@ -16,6 +16,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class BottomFooter extends Page {
@@ -38,7 +40,7 @@ public class BottomFooter extends Page {
 			ATUReports.add("Verifed that the Tegrity logo is displayed on botton in the left side.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verifed that the Tegrity logo is displayed on botton in the left side.");
-			ATUReports.add("Verifed that the Tegrity logo is displayed on botton in the left side.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Verifed that the Tegrity logo is displayed on botton in the left side.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	

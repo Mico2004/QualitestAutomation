@@ -7,6 +7,8 @@ import org.testng.Assert;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 public class HelpPage extends Page {
 
@@ -27,7 +29,7 @@ public class HelpPage extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("help page not verified");
-			ATUReports.add("help page not verified", LogAs.FAILED, null);
+			ATUReports.add("help page not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -41,7 +43,7 @@ public class HelpPage extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("help page url not verified");
-			ATUReports.add("help page url not verified", LogAs.FAILED, null);
+			ATUReports.add("help page url not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -55,7 +57,7 @@ public class HelpPage extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("help page url not verified");
-			ATUReports.add("help page url not verified", LogAs.FAILED, null);
+			ATUReports.add("help page url not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

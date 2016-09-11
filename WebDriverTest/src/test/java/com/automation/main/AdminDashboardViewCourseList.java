@@ -71,7 +71,7 @@ public class AdminDashboardViewCourseList extends Page {
 	// return true;
 	// } catch (Exception msg) {
 	// ATUReports.add("Is first checkbox of first coursw shown?", "True",
-	// "False", LogAs.FAILED, null);
+	// "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	// return false;
 	// }
 	// }
@@ -95,7 +95,7 @@ public class AdminDashboardViewCourseList extends Page {
 			ATUReports.add("Searched for course", "Success", "Success", LogAs.PASSED, null);
 		} catch (Exception msg) {
 			System.out.println("Fail to search for course named: " + course_name);
-			ATUReports.add("Searched for course", "Success", "Fail", LogAs.FAILED, null);
+			ATUReports.add("Searched for course", "Success", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 
 	}
@@ -109,7 +109,7 @@ public class AdminDashboardViewCourseList extends Page {
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on first course link.");
-			ATUReports.add("Clicked on first course link.", "Success.", "Fail.", LogAs.FAILED, null);
+			ATUReports.add("Clicked on first course link.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -129,7 +129,7 @@ public class AdminDashboardViewCourseList extends Page {
 
 		} catch (Exception msg) {
 			System.out.println("Fail to click on first course link.");
-			ATUReports.add("Clicked on first course link.", "Success.", "Fail.", LogAs.FAILED, null);
+			ATUReports.add("Clicked on first course link.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
        return null;
@@ -145,7 +145,7 @@ public class AdminDashboardViewCourseList extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("title doesnt matche");
-			ATUReports.add("title doesnt matche", "All courses", "matches", "not matches", LogAs.FAILED, null);
+			ATUReports.add("title doesnt matche", "All courses", "matches", "not matches", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

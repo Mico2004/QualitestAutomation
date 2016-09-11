@@ -10,6 +10,8 @@ import org.openqa.selenium.support.FindBy;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junit.framework.Assert;
 
 public class EmailInboxPage extends Page{
@@ -39,7 +41,7 @@ public class EmailInboxPage extends Page{
 		  i++;
 		}
 	System.out.println("click not succeded");
-	ATUReports.add("click message","name", "click succeded", "click not succeded", LogAs.FAILED, null);
+	ATUReports.add("click message","name", "click succeded", "click not succeded", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
    Assert.assertTrue(false);
  return -1;
  }
@@ -63,7 +65,7 @@ public class EmailInboxPage extends Page{
    else
    {
 		System.out.println("email from and comment not verified");
-		ATUReports.add("email from and comment not verified","comment+from", "verified", " not verified", LogAs.FAILED, null);
+		ATUReports.add("email from and comment not verified","comment+from", "verified", " not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	   Assert.assertTrue(false);
 
    }

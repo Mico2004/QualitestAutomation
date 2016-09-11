@@ -18,6 +18,8 @@ import org.testng.Assert;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 public class AddAdditionalContentFileWindow extends Page {
 
@@ -64,7 +66,7 @@ public class AddAdditionalContentFileWindow extends Page {
 			ATUReports.add("Add Additional Content File window title verified ", LogAs.PASSED, null);
 		} else {
 			System.out.println("Add Additional Content File window not verified  ");
-			ATUReports.add("Add Additional Content File window title not verified  ", LogAs.FAILED, null);
+			ATUReports.add("Add Additional Content File window title not verified  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		Assert.assertEquals("Add Additional Content File", val);
 
@@ -132,7 +134,7 @@ public class AddAdditionalContentFileWindow extends Page {
 			ATUReports.add("Add Additional Content File window info verified ", LogAs.PASSED, null);
 		} else {
 			System.out.println("Add Additional Content File window info not verified  ");
-			ATUReports.add("Add Additional Content File window info not verified  ", LogAs.FAILED, null);
+			ATUReports.add("Add Additional Content File window info not verified  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		Assert.assertEquals("Select a file to upload as additional content to this course.", val);
 
@@ -147,7 +149,7 @@ public class AddAdditionalContentFileWindow extends Page {
 			ATUReports.add("name of selected file is correctly displayed in inputbox.", LogAs.PASSED, null);
 		} else {
 			System.out.println("name of selected file is not correctly displayed in inputbox.");
-			ATUReports.add("name of selected file is not correctly displayed in inputbox.", LogAs.FAILED, null);
+			ATUReports.add("name of selected file is not correctly displayed in inputbox.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		Assert.assertEquals("name of selected file is not correctly displayed in inputbox.", val);
 	}
@@ -164,7 +166,7 @@ public class AddAdditionalContentFileWindow extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("location of selected file is not prior to select button");
-			ATUReports.add("location of selected file is not prior to select button", LogAs.FAILED, null);
+			ATUReports.add("location of selected file is not prior to select button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -217,7 +219,7 @@ public class AddAdditionalContentFileWindow extends Page {
 			return;
 		} else {
 			System.out.println("select button is not disabled");
-			ATUReports.add("select button is not disabled", LogAs.FAILED, null);
+			ATUReports.add("select button is not disabled", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
 			Assert.assertTrue(false);
 		}
@@ -254,7 +256,7 @@ public class AddAdditionalContentFileWindow extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("location of selected file is not correct");
-				ATUReports.add("location of selected file is not correct", LogAs.FAILED, null);
+				ATUReports.add("location of selected file is not correct", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 
@@ -268,7 +270,7 @@ public class AddAdditionalContentFileWindow extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("speed is not verified");
-				ATUReports.add("speed is not verified", LogAs.FAILED, null);
+				ATUReports.add("speed is not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -286,7 +288,7 @@ public class AddAdditionalContentFileWindow extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("uploaded percent is not verified");
-				ATUReports.add("uploaded percent is not verified", LogAs.FAILED, null);
+				ATUReports.add("uploaded percent is not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -299,7 +301,7 @@ public class AddAdditionalContentFileWindow extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("file name is not verified");
-				ATUReports.add("file name is not verified", LogAs.FAILED, null);
+				ATUReports.add("file name is not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -312,7 +314,7 @@ public class AddAdditionalContentFileWindow extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("elapsed time is not verified");
-				ATUReports.add("elapsed time is not verified", LogAs.FAILED, null);
+				ATUReports.add("elapsed time is not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -325,7 +327,7 @@ public class AddAdditionalContentFileWindow extends Page {
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("estimated time is not verified");
-				ATUReports.add("estimated time is not verified", LogAs.FAILED, null);
+				ATUReports.add("estimated time is not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}

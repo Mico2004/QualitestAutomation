@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junit.framework.Assert;
 
 public class EulaPage extends Page {
@@ -35,7 +37,7 @@ public class EulaPage extends Page {
 		}
 		else {
 			System.out.println(" eula message dont  matches the one written in  admin advanced services");
-			ATUReports.add(" eula message matches the one written in  admin advanced services","eula message and the one in admin advanced settings","equal"," not equal",LogAs.FAILED, null);
+			ATUReports.add(" eula message matches the one written in  admin advanced services","eula message and the one in admin advanced settings","equal"," not equal",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
 			Assert.assertTrue(false);
 		}
@@ -43,7 +45,7 @@ public class EulaPage extends Page {
 		else 
 		{
 			System.out.println("accept and decline buttons and eula message are not visible");
-			ATUReports.add("accept and decline buttons and eula message are not visible","3 elements:accept,declineand eula message","visible"," not visible",LogAs.FAILED, null);
+			ATUReports.add("accept and decline buttons and eula message are not visible","3 elements:accept,declineand eula message","visible"," not visible",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	
@@ -62,14 +64,14 @@ public class EulaPage extends Page {
 		}
 		else {
 			System.out.println("click on decline failed");
-			ATUReports.add("click on decline failed", LogAs.FAILED, null);
+			ATUReports.add("click on decline failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
 	catch(Exception e)
 	{
 		System.out.println("click on decline exception");
-		ATUReports.add("click on decline exception", LogAs.FAILED, null);
+		ATUReports.add("click on decline exception", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 	}
 	}
@@ -86,14 +88,14 @@ public class EulaPage extends Page {
 			}
 			else {
 				System.out.println("click on accept failed");
-				ATUReports.add("click on accept failed", LogAs.FAILED, null);
+				ATUReports.add("click on accept failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
 		catch(Exception e)
 		{
 			System.out.println("click on accept exception");
-			ATUReports.add("click on accept exception", LogAs.FAILED, null);
+			ATUReports.add("click on accept exception", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		}

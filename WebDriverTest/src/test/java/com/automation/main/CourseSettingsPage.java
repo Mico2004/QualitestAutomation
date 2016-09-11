@@ -98,7 +98,7 @@ public class CourseSettingsPage extends Page {
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on ok button.");
-			ATUReports.add("Clickedon ok button.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Clickedon ok button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -114,7 +114,7 @@ public class CourseSettingsPage extends Page {
 				Assert.assertTrue(true);
 			} catch (Exception e) {
 				System.out.println("Fail to enable video podcast checkbox.");
-				ATUReports.add("Fail to enable video podcast checkbox.", LogAs.FAILED, null);
+				ATUReports.add("Fail to enable video podcast checkbox.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} else {
@@ -136,7 +136,7 @@ public class CourseSettingsPage extends Page {
 				Assert.assertTrue(true);
 			} catch (Exception e) {
 				System.out.println("Fail to enable audio podcast checkbox.");
-				ATUReports.add("Fail to enable audio podcast checkbox.", LogAs.FAILED, null);
+				ATUReports.add("Fail to enable audio podcast checkbox.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} else {
@@ -156,7 +156,7 @@ public class CourseSettingsPage extends Page {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Course setting is not display.");
-			ATUReports.add("Course setting page.", "Display.", "Not display.", LogAs.FAILED, null);
+			ATUReports.add("Course setting page.", "Display.", "Not display.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -175,12 +175,12 @@ public class CourseSettingsPage extends Page {
 			} else {
 				System.out.println("Selected make this course public but verified that it not selected.");
 				ATUReports.add("Selected this course public and verify that it selected.", "True.", "False.",
-						LogAs.FAILED, null);
+						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} catch (Exception msg) {
 			System.out.println("Fail to select the checkbox of make this course public.");
-			//ATUReports.add("Select make this course public.", "True.", "False.", LogAs.FAILED, null);
+			//ATUReports.add("Select make this course public.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			//Assert.assertTrue(false);
 		}
 	}
@@ -197,7 +197,7 @@ public class CourseSettingsPage extends Page {
 					Assert.assertTrue(true);
 				} catch (Exception msg) {
 					System.out.println("Fail to unselected make course public if selected.");
-					ATUReports.add("Unselected make course public if selected.", "True.", "False", LogAs.FAILED, null);
+					ATUReports.add("Unselected make course public if selected.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			} else {			System.out.println("Already it is unselected make course public.");
@@ -228,7 +228,7 @@ public class CourseSettingsPage extends Page {
 				Assert.assertTrue(true);
 			} catch (Exception msg) {
 				System.out.println("Fail to unselected make course public if selected.");
-				ATUReports.add("Unselected make course public if selected.", "True.", "False", LogAs.FAILED, null);
+				ATUReports.add("Unselected make course public if selected.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} else {			System.out.println("Already it is unselected make course public.");
@@ -251,7 +251,7 @@ public class CourseSettingsPage extends Page {
 				Assert.assertTrue(true);
 			} catch (Exception msg) {
 				System.out.println("Fail to select RSS feed checkbox.");
-				ATUReports.add("Selected RSS feed checkbox.", "True.", "False.", LogAs.FAILED, null);
+				ATUReports.add("Selected RSS feed checkbox.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -275,7 +275,7 @@ public class CourseSettingsPage extends Page {
 			} catch (Exception msg) {
 				System.out.println("Fail to select allow students to download recordings checkbox.");
 				ATUReports.add("Selected allow students to download recordings checkbox.", "True.", "False.",
-						LogAs.FAILED, null);
+						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -295,7 +295,7 @@ public class CourseSettingsPage extends Page {
 				Assert.assertTrue(true);
 			} catch (Exception msg) {
 				System.out.println("Fail to select allow students to record checkbox.");
-				ATUReports.add("Selected allow students to record checkbox.", "True.", "False.", LogAs.FAILED, null);
+				ATUReports.add("Selected allow students to record checkbox.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -354,7 +354,7 @@ public class CourseSettingsPage extends Page {
 				} else {
 					System.out.println("Clicked on course visibility");
 					ATUReports.add("Clicked on course visibility", "visibility checkbox", "unchecked", "checked",
-							LogAs.FAILED, null);
+							LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			} else {
@@ -365,7 +365,7 @@ public class CourseSettingsPage extends Page {
 			}
 		} catch (Exception e) {
 			System.out.println("Fail click on  visibility checkbox.");
-			ATUReports.add("Fail click on  visibility checkbox.", LogAs.FAILED, null);
+			ATUReports.add("Fail click on  visibility checkbox.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -385,7 +385,7 @@ public class CourseSettingsPage extends Page {
 				} else {
 					System.out.println("Clicked on course visibility");
 					ATUReports.add("Clicked on course visibility", "visibility checkbox", "checked", "unchecked",
-							LogAs.FAILED, null);
+							LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			} else {
@@ -396,7 +396,7 @@ public class CourseSettingsPage extends Page {
 			}
 		} catch (Exception e) {
 			System.out.println("Fail click on  visibility checkbox.");
-			ATUReports.add("Fail click on  visibility checkbox.", LogAs.FAILED, null);
+			ATUReports.add("Fail click on  visibility checkbox.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -416,7 +416,7 @@ public class CourseSettingsPage extends Page {
 				} else {
 					System.out.println("Not Clicked on enable student testing checkbox");
 					ATUReports.add("Clicked on enable student testing checkbox", "visibility checkbox", "checked",
-							"unchecked", LogAs.FAILED, null);
+							"unchecked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			} else {
@@ -427,7 +427,7 @@ public class CourseSettingsPage extends Page {
 			}
 		} catch (Exception e) {
 			System.out.println("Fail click on  enable student testing checkbox");
-			ATUReports.add("Fail click on enable student testing checkbox", LogAs.FAILED, null);
+			ATUReports.add("Fail click on enable student testing checkbox", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -447,7 +447,7 @@ public class CourseSettingsPage extends Page {
 				} else {
 					System.out.println("Not Clicked on allow student downloading checkbox");
 					ATUReports.add("Clicked on allow student downloading checkbox", "visibility checkbox", "checked",
-							"unchecked", LogAs.FAILED, null);
+							"unchecked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			} else {
@@ -458,7 +458,7 @@ public class CourseSettingsPage extends Page {
 			}
 		} catch (Exception e) {
 			System.out.println("Fail click on  allow student downloading checkbox");
-			ATUReports.add("Fail click on allow student downloading checkbox", LogAs.FAILED, null);
+			ATUReports.add("Fail click on allow student downloading checkbox", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
