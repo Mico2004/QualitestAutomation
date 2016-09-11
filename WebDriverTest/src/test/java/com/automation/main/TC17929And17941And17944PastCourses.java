@@ -595,7 +595,9 @@ public class TC17929And17941And17944PastCourses {
 		course.clickOnPastCoursesTabButton();
 		course.verifyCourseExist(PastTempCourse+"_Name");
 		course.signOut();
-
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED,null );
+		Assert.assertTrue(true);
 	}
 
 	// description = "get courses list"
