@@ -215,7 +215,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		Thread.sleep(2000);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record); 
 		Thread.sleep(2000);		
-		record.sign_out.click();
+		course.signOut();
 		tegrity.waitForVisibility(tegrity.button_login);
 		driver.quit();
 
@@ -281,7 +281,8 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		Thread.sleep(3000);
 		/// 6. login as student
 		tegrity.loginCoursesByParameter(student);
-		course.waitForVisibility(course.course_list.get(0));
+		Thread.sleep(3000);
+		initializeCourseObject();
 		// 7.Verify the 'Past Courses' tab isn't displayed
 		course.verifyNoPastCoursesTab();
 		Thread.sleep(2000);

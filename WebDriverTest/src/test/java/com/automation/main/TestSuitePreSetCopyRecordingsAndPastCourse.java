@@ -140,7 +140,7 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		String PastCourseB="PastCourseB"+university_name+user.substring(5, user.length());
 		
 	
-		tegrity.loginAdmin("Admin");
+	tegrity.loginAdmin("Admin");
 		
 		
 	Thread.sleep(4000);	
@@ -239,7 +239,7 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		TestExist=record.tabExists(3);
 		System.out.println("a2"); 
 		record.returnToCourseListPage(course);
-		Thread.sleep(4000); 
+		Thread.sleep(4000);
 		System.out.println("a3");
 		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 0, record,
 		delete_menu); 
@@ -258,19 +258,19 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		course.deleteAllRecordingsInCourseStartWith("PastCourseB", 0, record,
 		delete_menu); 
 		System.out.println("a5.1");
-		Thread.sleep(4000);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 3, record, copy, confirm_menu);
 		Thread.sleep(4000); 
-		System.out.println("a6");
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 0, record, copy, confirm_menu);
 		Thread.sleep(4000); 
+		System.out.println("a6");
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 1, record, copy, confirm_menu);
+		Thread.sleep(4000); 
 		System.out.println("a7"); 
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "Ab", 1, record, copy, confirm_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "Ab", 2, record, copy, confirm_menu);
 		Thread.sleep(4000); 
 		System.out.println("a7");
 		// Copy all student recordings from Bank Valid Recording to course 
 		//starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "Ab", 2, record, copy, confirm_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "Ab", 3, record, copy, confirm_menu);
 		Thread.sleep(4000);
 		System.out.println("a8");
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "PastCourseA", 3, record, copy, confirm_menu);
@@ -279,6 +279,9 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		Thread.sleep(4000); 
 		// Copy all additional content from Bank Valid Recording to course 
 		// starting with Ab
+	
+
+		
 		System.out.println("a9");
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "PastCourseA", 1, record, copy, confirm_menu);
 		Thread.sleep(4000);

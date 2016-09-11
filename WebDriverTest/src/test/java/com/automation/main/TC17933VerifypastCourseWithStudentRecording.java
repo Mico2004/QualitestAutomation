@@ -240,12 +240,12 @@ public class TC17933VerifypastCourseWithStudentRecording {
 			driver.switchTo().window(window);
 			break;
 		}
-		mange_adhoc_course_enrollments.waitForVisibility(driver.findElement(By.id("SignOutLink")));
-		driver.findElement(By.id("SignOutLink")).click();
+		
+		tegrity.signOut();
 
 		System.out.println("Past6");
 		// 1. Login with SuperUser.
-		tegrity.loginCoursesByParameter(PropertyManager.getProperty("SuperUser"));// log
+		tegrity.loginCourses("SuperUser");// log
 																					// in
 																					// courses
 																					// page

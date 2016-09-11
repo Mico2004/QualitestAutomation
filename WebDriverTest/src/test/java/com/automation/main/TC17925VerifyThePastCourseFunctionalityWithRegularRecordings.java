@@ -314,10 +314,8 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 		for (String window : driver.getWindowHandles()) {
 			driver.switchTo().window(window);
 			break;
-		}
-		mange_adhoc_course_enrollments.waitForVisibility(driver.findElement(By.id("SignOutLink")));
-		driver.findElement(By.id("SignOutLink")).click();
-
+		}		
+		tegrity.signOut();
 		System.out.println("Past6");
 		
 		// login with instructor so the courses will be registered in DB
