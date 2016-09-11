@@ -189,7 +189,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			record.toEditRecordingPropertiesMenu();
 			edit_recording_properties_window.changeRecordingName(new_recording_name, confirm_menu);	
 			Thread.sleep(2000);
-			record.unselectIndexCheckBox(recordNumber+index);
+			record.unselectallCheckbox();
 			
 		}
 		
