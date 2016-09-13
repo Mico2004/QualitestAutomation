@@ -1,5 +1,6 @@
 package com.automation.main;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -8,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -39,6 +41,9 @@ import com.automation.main.PlayerPage;
 import com.automation.main.PublishWindow;
 import com.automation.main.RecordingHelperPage;
 import com.automation.main.RunDiagnosticsPage;
+
+import atu.testng.reports.ATUReports;
+import atu.testng.reports.logging.LogAs;
 
 public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST {
 	// Set Property for ATU Reporter Configuration
@@ -119,8 +124,19 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
 			admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
+			
+			 Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST at " + DateToStr,
+			 "Starting the test: TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST at " + DateToStr, LogAs.PASSED, null);	
 		}
-
+	
+		@AfterClass
+		public void closeBroswer() {
+			driver.quit();
+		}
+		
 		@Test
 		public void test22662() throws Exception {
 
@@ -151,7 +167,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			// 5.Select a course
 			course.waitForVisibility(course.first_course_button);
 			String course_name=course.selectCourseThatStartingWith("Ab");
-
+			String recordname = record.getFirstRecordingTitle();
 			// 6.Click on one of the Recording link
 			record.waitForVisibility(record.first_recording);
 			Thread.sleep(2000);
@@ -160,7 +176,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			
 			
 			record.verifyFirstExpandableRecording();
-			Thread.sleep(2000);
 			
 			String recording_to_search=record.getSecondRecord();
 			Thread.sleep(2000);
@@ -202,21 +217,22 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			///13.The next result display below the current result in case there is next result.
 			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
 
+	
 			//14. The Bookmarks and Notes window is displayed.
 			player_page.verifybookmarkTitle();
+			
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				break;
 			}
-
+			
 			//15.The university logo is displayed on the top footer bar left side.
 			player_page.verifyUniversityLogoVisibilityAndLocation();
 
 			///16.search results page in the format as follows: "recording name - Search Results".
-			driver.switchTo().frame(0);
-			player_page = PageFactory.initElements(driver, PlayerPage.class);
 			Thread.sleep(2000);
-			player_page.verifySearchResultPage(recording_to_search);
+			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
+			player_page.verifySearchResultPage(recordname);
 
 			///17.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
 			player_page.waitForVisibility(player_page.columns_title_text.get(0));
@@ -268,8 +284,9 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(0));
 			Thread.sleep(500);
 			player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
-
-		
+			driver.navigate().back();
+			Thread.sleep(4000);
+			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			//27.Search the "Recording Chapter" from the recording that we mentioned in the preconditions .
 //			record.verifySearchReturnAnyListAsUserOrGuest(recording_to_search);
 //			Thread.sleep(2000);
@@ -287,10 +304,10 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 //
 //			// to go back to crecording window handler
 //
-//			for (String handler : driver.getWindowHandles()) {
-//				driver.switchTo().window(handler);
-//				break;		
-//			}
+			for (String handler : driver.getWindowHandles()) {
+				driver.switchTo().window(handler);
+				break;		
+			}
 
 
 			///30.Validate the search field is display at the top right of the UI page below the top navigation bar.
@@ -300,8 +317,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			player_page.verifySearchBoxHint();
 			Thread.sleep(2000);
 			//32.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
-
-
 			player_page.verifySearchForRecordingExist(recording_to_search);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
 
@@ -329,10 +344,9 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			player_page.verifyUniversityLogoVisibilityAndLocation();
 
 			///38.search results page in the format as follows: "recording name - Search Results".
-			driver.switchTo().frame(0);
-			player_page = PageFactory.initElements(driver, PlayerPage.class);
+			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
 			Thread.sleep(2000);
-			player_page.verifySearchResultPage(recording_to_search);
+			player_page.verifySearchResultPage(recordname);
 
 			///39.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
 			player_page.waitForVisibility(player_page.columns_title_text.get(0));
@@ -348,7 +362,8 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 
 			///42.quit
-			driver.quit();
+			System.out.println("Done.");
+			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
 		}
 }
