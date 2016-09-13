@@ -122,8 +122,8 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
 		
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
-		
-		top_bar_helper.clickOnSignOut();
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 2. Log in as INSTRUCTOR.

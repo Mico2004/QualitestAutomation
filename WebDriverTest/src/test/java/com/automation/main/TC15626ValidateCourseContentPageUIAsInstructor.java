@@ -178,7 +178,10 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 1, record, copy, confirm_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 2, record, copy, confirm_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 3, record, copy, confirm_menu);
-		
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 1,record);
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record);
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record);
 		// 11. Sign Out.
 		top_bar_helper.clickOnSignOut();
 		

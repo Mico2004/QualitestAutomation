@@ -135,7 +135,8 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 		record.returnToCourseListPage();
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
-		top_bar_helper.clickOnSignOut();
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 2. Repeat for INSTRUCTOR and STUDENT.

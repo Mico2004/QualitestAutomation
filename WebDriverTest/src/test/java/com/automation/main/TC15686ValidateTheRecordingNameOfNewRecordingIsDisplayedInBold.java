@@ -134,7 +134,7 @@ public class TC15686ValidateTheRecordingNameOfNewRecordingIsDisplayedInBold {
 		record.returnToCourseListPage();
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
-		
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// 5. Open the "Course details" page.
 		course.selectCourseThatStartingWith("Ba");
 		Thread.sleep(1000);

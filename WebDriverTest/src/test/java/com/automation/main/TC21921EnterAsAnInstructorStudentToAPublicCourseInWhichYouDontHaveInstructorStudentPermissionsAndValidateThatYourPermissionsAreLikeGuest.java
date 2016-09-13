@@ -125,8 +125,11 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 	public void loginCourses() throws Exception
 	{
 		// 1. Make sure to have a course to which both of the users are not enrolled to neither as Student nor Instructor - Create course and enroll SuperUser.
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		tegrity.loginAdmin("Admin");
+
+		
+		
+		
+		/*tegrity.loginAdmin("Admin");
 		initializeCourseObject();
 		
 		
@@ -194,7 +197,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			break;
 		}
 		manage_adhoc_courses_enrollments_page.waitForVisibility(driver.findElement(By.id("SignOutLink")));
-		driver.findElement(By.id("SignOutLink")).click();
+		driver.findElement(By.id("SignOutLink")).click();*/
 		
 		// 2. Make sure that course is publicly visible (Click on "Manage Course Settings" in the "Course" section).
 		// 3. That course must have these course settings enabled:
@@ -204,9 +207,12 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 		// Enable MP3 Podcast
 		// Enable Video Podcast
 		// Enable RSS feed
-		tegrity.loginCourses("SuperUser");
 		
-		course.selectCourseThatStartingWith(temp_course_name);
+	// Login as super user for course settings and copying recordings
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		tegrity.loginCourses("SuperUser");
+		initializeCourseObject();
+		course.selectCourseThatStartingWith("BAc");
 		
 		record.clickOnCourseTaskThenCourseSettings();
 		
@@ -222,22 +228,23 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 		record.returnToCourseListPage();
 		
 		// 4. Make sure the course has at least one of each type of recording and an additional content file.
-		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", temp_course_name, 0, record, copy, confirm_menu);
-		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", temp_course_name, 1, record, copy, confirm_menu);
-		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", temp_course_name, 2, record, copy, confirm_menu);
-//		
-		top_bar_helper.clickOnSignOut();
+	/*	course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "BAc", 0, record, copy, confirm_menu);
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "BAc", 1, record, copy, confirm_menu);
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "BAc", 2, record, copy, confirm_menu);
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 1,record);
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record);*/
+		course.signOut();
 		
 		
 		// 29. Repeat the test as the Student from the precondition.
-		for(int user_type=0; user_type<2; user_type++) {
-			if(user_type==0) {
-				// 5. Login as INSTRUCTOR.
-				tegrity.loginCourses("User1");
-			} else {
-				// 5. Login as student.
-				tegrity.loginCourses("User4");
-			}
+		
+	
+				// 5. Login as a user with both student and instructor enrollments
+	   tegrity.loginCourses("User3");
+	   initializeCourseObject();	
+			
+			
 			
 			
 			// 6. Click on "public courses" tab.
@@ -245,7 +252,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			Thread.sleep(1000);
 			
 			// 7. Click on a public course.
-			course.selectCourseThatStartingWith(temp_course_name);
+			course.selectCourseThatStartingWith("BAc");
 			Thread.sleep(1000);
 			
 			// 8. Click on some recording.
@@ -255,11 +262,39 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			// 9. Click on a specific chapter - the recording page opens, the recording is running.
 			player_page.verifyTimeBufferStatusForXSec(5);
 			
+			for(int i=0; i<10; i++) {
+				try {
+					driver.switchTo().frame(0);
+					break;
+				} catch(Exception msg) {
+					Thread.sleep(1000);
+				}
+			}
+			
 			// 10. Validate that you cannot write any bookmarks to the recording - There is not 'Add' button in the 'Bookmarks and Notes' controller.
 			player_page.verifyThatUserCannotAddBookmark();
 			
+			
+			player_page.setElementTextJS(player_page.add_bookmark_button, "testBookmarkisNotAdded");
+			System.out.println("1");
+			player_page.clickElementJS(player_page.add_bookmark_button);
+			System.out.println("2");
+			player_page.waitForAlert(60);
+			
+			try{
+				System.out.println("2.1");
+				player_page.clickOkInAlertIfPresent();
+				System.out.println("3");
+				ATUReports.add("Click on add bookmark and check fail alert is present", "Alert is present","Alert is present",LogAs.PASSED,null);	
+				System.out.println("6");
+				Thread.sleep(1000);
+			}catch(Exception e){
+				ATUReports.add("Click on add bookmark and check fail alert is present", "Alert is present","Alert isn't present",LogAs.FAILED,null);
+			}
 			// 11. In the breadcrumbs, click on the course name.
+			System.out.println("7");
 			driver.navigate().back();
+			System.out.println("8");
 			
 			Thread.sleep(1000);
 			
@@ -272,17 +307,14 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			Actions builder = new Actions(driver);
 			builder.moveToElement(record.course_task_button).build().perform();
 			Thread.sleep(3000);
+
 			
-			// 14. Validate that the options: "RSS feed", "Podcast" and "Video podcast" are the ONLY menu options and they are all enabled (clickable).
-//			record.verifyElementIsEnabled(record.rssfeed, "RSS feed");
-//			record.verifyElementIsEnabled(record.podcast_button, "Podcast");
-//			record.verifyElementIsEnabled(record.video_podcast, "Video podcast");
+			
 			List<String> target_option_list1 = new ArrayList<String>();
 			target_option_list1.add("RSS Feed");
 			target_option_list1.add("Podcast");
 			target_option_list1.add("Video Podcast");
-			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInCourseTasksMenu(target_option_list1);
-			
+			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInCourseTasksMenu(target_option_list1);			
 			
 			// 15. Click on a checkbox of a specific recording.
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -313,7 +345,8 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			
 			// 21. Validate the 'Content tasks' button is not displayed.
 			record.verifyThatContentTaskButtonNotDisplayed();
-			
+			record.verifyNoStartRecording();
+			record.verifyNoStartTest();
 			// 22. Click on the 'Student Recordings' tab.
 			record.clickOnStudentRecordingsTab();
 			Thread.sleep(1000);
@@ -338,29 +371,31 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			// 27. Validate that the option "Download recording" is the ONLY displayed menu option and it is enabled (clickable).
 //			record.verifyElementIsEnabled(record.download_button, "Download recording");
 			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInRecordingTaskMenu(target_option_list);
-			
+			record.verifyNoStartRecording();
+			record.verifyNoStartTest();
 			
 			// 28. Validate the 'Tests' tab is not displayed.
 			record.verifyNoTestsTab();
 			
 			// Sign out
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			
 			Thread.sleep(2000);
-		}
+		
 		
 		// 30. Uncheck make this course public and uneroll SuperUser.
 		tegrity.loginCourses("SuperUser");
-		course.selectCourseThatStartingWith(temp_course_name);
+		initializeCourseObject();
+		course.selectCourseThatStartingWith("BAc");
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
 		Thread.sleep(1000);
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 					
 		Thread.sleep(2000);
 			
-		tegrity.loginAdmin("Admin");
+		/*tegrity.loginAdmin("Admin");
 			
 		// Click on course builder href link
 		Thread.sleep(5000);
@@ -402,7 +437,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 		// Confirm user membership list
 		mange_ad_hoc_courses_membership_window.clickOnOkButton();
 		mange_ad_hoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
-			
+			*/
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 

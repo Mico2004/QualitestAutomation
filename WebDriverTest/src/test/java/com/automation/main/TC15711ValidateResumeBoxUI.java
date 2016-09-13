@@ -132,7 +132,7 @@ public class TC15711ValidateResumeBoxUI {
 		// Copy one recording to Ba course
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
-		
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// Logout.
 		top_bar_helper.clickOnSignOut();
 		Thread.sleep(1000);

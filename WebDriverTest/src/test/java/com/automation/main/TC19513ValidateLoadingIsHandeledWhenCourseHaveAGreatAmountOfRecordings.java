@@ -132,7 +132,7 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 		initializeCourseObject();
 		
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 2, record, copy, confirm_menu);
-		
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record);
 		course.selectCourseThatStartingWith("BankValid");
 		int number_of_recording = record.getNumberOfRecordings();
 		

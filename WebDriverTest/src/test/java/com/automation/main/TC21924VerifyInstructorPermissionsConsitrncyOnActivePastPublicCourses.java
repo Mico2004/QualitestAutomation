@@ -23,6 +23,7 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -135,7 +136,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
 		advanced_service_settings_Page.enableYoutbeCapitionStudent(confirm_menu);	
 		Thread.sleep(2000);
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		tegrity.loginCourses("SuperUser");// log in courses page
 		
@@ -187,6 +188,8 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			// 8. Hover over on "Course tasks" menu.
 			record.moveToElement(record.course_task_button, driver).perform();
 			
+			
+			
 			// 9. Validate that the options are: "Course settings", "Upload a recording", "Upload video file", "Upload audio file", "Add additional content file", "Add additional content link", "Get live webcast", separated grey line, "RSS feed", "Podcast", "Video podcast".
 			// "Course settings" - CourseSettings
 			record.verifyWebElementDisplayed(record.course_settings_button, "Course settings");
@@ -208,6 +211,8 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			record.verifyWebElementDisplayed(record.podcast_button, "Podcast");
 			// "Video podcast" - VideoPodcast
 			record.verifyWebElementDisplayed(record.video_podcast, "Video podcast");
+			// "Tag" - TagsListTask2
+			record.verifyWebElementDisplayed(record.tag_button, "Tag");
 			
 			
 			// 10. Check a checkbox of one recording on both browsers.
@@ -226,7 +231,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			// "Publish" - PublishTask
 			record.verifyWebElementDisplayed(record.publish_button, "Publish");
 			// "Tag" - TagsListTask2
-			record.verifyWebElementDisplayed(record.tag_button, "Tag");
+			//			record.verifyWebElementDisplayed(record.tag_button, "Tag");
 			// "Upload to YouTube" - uploadToYoutube
 			record.verifyWebElementDisplayed(record.upload_to_youtube_button, "Upload to YouTube");
 			// "Request Captions" - requestCaptions
@@ -241,7 +246,18 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			record.verifyWebElementDisplayed(record.share_recording_button, "Share recording");
 			
 			
-			
+			List<String> target_option_list_PublicCourse = new ArrayList<String>();
+			target_option_list_PublicCourse.add("Move");
+			target_option_list_PublicCourse.add("Copy");
+			target_option_list_PublicCourse.add("Delete");
+			target_option_list_PublicCourse.add("Publish");
+			//target_option_list_PastCourse.add("Tag");
+			target_option_list_PublicCourse.add("Upload to YouTube");
+			target_option_list_PublicCourse.add("Request Captions");
+			target_option_list_PublicCourse.add("Edit recording");
+			target_option_list_PublicCourse.add("Edit recording properties");
+			target_option_list_PublicCourse.add("Share recording");
+			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInRecordingTaskMenu(target_option_list_PublicCourse);
 			// 13. Validate that both buttons "Start a test" and "Start a recording" in the top right of the screen are displayed.
 			record.veriftyThatStartRecordingButtonDisplayed();
 			record.verifyThatStartATestDisplayed();
@@ -435,8 +451,18 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			record.verifyWebElementDisplayed(record.edit_rec_properties_button, "Edit recording properties");
 			// "Share recording" - ShareRecording
 			record.verifyWebElementDisplayed(record.share_recording_button, "Share recording");
-			
-			
+			List<String> target_option_list_PastCourse = new ArrayList<String>();
+			target_option_list_PastCourse.add("Move");
+			target_option_list_PastCourse.add("Copy");
+			target_option_list_PastCourse.add("Delete");
+			target_option_list_PastCourse.add("Publish");
+			target_option_list_PastCourse.add("Tag");
+			target_option_list_PastCourse.add("Upload to YouTube");
+			target_option_list_PastCourse.add("Request Captions");
+			target_option_list_PastCourse.add("Edit recording");
+			target_option_list_PastCourse.add("Edit recording properties");
+			target_option_list_PastCourse.add("Share recording");
+			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInRecordingTaskMenu(target_option_list_PastCourse);
 			// 31. Validate that on both browsers both buttons "Start a test" and "Start a recording" in the top right of the screen are not displayed.
 			record.verifyNoStartRecording();
 			record.verifyNoStartTest();
