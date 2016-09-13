@@ -145,7 +145,7 @@ public class TC15535CopyOneRecording {
 //		//8. Verify Only courses where this USER signed as INSTRUCTOR are displayed in "Course List"
 //		course.selectFirstCourse(record);
 
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenCopy();// verify copy menu
 		copy=PageFactory.initElements(driver,CopyMenu.class);
 		Thread.sleep(3000);
