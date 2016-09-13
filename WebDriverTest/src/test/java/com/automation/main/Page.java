@@ -455,7 +455,7 @@ public class Page {
 					break;
 				} else if(driver.getTitle().equals("Tegrity - Courses")){
 					System.out.println("LogOut from user not succeeded 1");
-					Thread.sleep(3000);
+					Thread.sleep(4000);
 					((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");					
 				}else{
 					Thread.sleep(3000);
