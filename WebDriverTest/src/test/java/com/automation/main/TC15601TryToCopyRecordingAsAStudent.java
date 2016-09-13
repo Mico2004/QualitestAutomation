@@ -17,6 +17,8 @@ import org.testng.annotations.Test;
 
 import com.thoughtworks.selenium.webdriven.commands.IsElementPresent;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.text.DateFormat;
 import java.util.Date;
 import atu.testng.reports.ATUReports;
@@ -102,7 +104,7 @@ public class TC15601TryToCopyRecordingAsAStudent {
 
 	
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	public void loginCourses() throws InterruptedException, AWTException
 	{
 		// 1. Login as Student.
 		tegrity.loginCourses("User4");
@@ -127,7 +129,7 @@ public class TC15601TryToCopyRecordingAsAStudent {
 		}
 		
 		// 3. Select any recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 4. Click "Recording Tasks" button.
 		record.recording_tasks_button.click();
@@ -159,8 +161,13 @@ public class TC15601TryToCopyRecordingAsAStudent {
 		
 		Thread.sleep(1000);
 		
+		// after clicking on the record task we should move the mouse that we can see the checkbox
+		Robot robot = new Robot();
+		robot.delay(1000);
+		robot.mouseMove(-100, 100);
+		
 		// 7. Select any recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 8. Click "Recording Tasks" button.
 		record.recording_tasks_button.click();
