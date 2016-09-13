@@ -531,10 +531,10 @@ public class PlayerPage extends Page {
 	public void verifyThatUserCannotAddBookmark() {
 		if (add_bookmark_button.isDisplayed()) {
 			System.out.println("Not verfied that user cannot add bookmark.");
-			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "False.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 			System.out.println("Verfied that user cannot add bookmark.");
-			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "True.", LogAs.INFO, null);
 		}
 	}
 
