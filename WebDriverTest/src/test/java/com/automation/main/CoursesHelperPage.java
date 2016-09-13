@@ -1635,7 +1635,7 @@ public class CoursesHelperPage extends Page {
 
 		// wait.until(ExpectedConditions.visibilityOf(record_helper_page.first_recording_title));
 
-		record_helper_page.selectFirstCheckbox();
+		record_helper_page.SelectOneCheckBoxOrVerifyAlreadySelected(record_helper_page.checkbox);;
 
 		if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
 			record_helper_page.clickOnRecordingTaskThenCopy();
