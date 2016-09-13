@@ -143,7 +143,7 @@ public class RecordingHelperPage extends Page {
 	public WebElement first_recording; /// first recording
 	@FindBy(xpath = "//*[@id=\"scrollableArea\"]/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a")
 	WebElement first_video_recording;/// first video in first recording
-	@FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[3]/a/div[2]/p[2]")
+	@FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[3]/a/div[2]")
 	WebElement second_record_player;
 	@FindBy(id = "CourseTask")
 	WebElement course_task;
@@ -582,7 +582,7 @@ public class RecordingHelperPage extends Page {
 
 	// This function click on Course Task then on Settings in the sub menu
 	public void clickOnCourseTaskThenCourseSettings() throws InterruptedException {
-		WebElement element=start_recording_button;
+		WebElement element=course_tasks_button;
 		String id="CourseSettings";
 		try {
 			System.out.println("clickOnRecordingTaskThen1");
@@ -1274,34 +1274,45 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// press on view button and than select option
 	public void pressViewButtonAndSelect(String choice) throws InterruptedException {
 
-		moveToElementAndClick(view_buttonTest, driver);
-		Thread.sleep(500);
-		
-		if(driver instanceof InternetExplorerDriver) {
-		// rec.copy_button.click();
-			for (int i = 0; i < 8; i++)
-				view_button.sendKeys(Keys.TAB);// solution
-			// hover and click to
-		}
-		
-		try {
+		WebElement element=view_buttonTest;
+		String id = null;
+		try {	
+			waitForVisibility(element);
 			switch (choice) {
-			case "Title":
-				sort_by_title.click();
+			case "Title":				
+				id= "Title";
 				break;
 			case "Date":
-				sort_by_date.click();
+				id = "Date";
 				break;
 			case "Duration":
-				sort_by_duration.click();
+				id = "Duration";
 				break;
 
 			}
-			ATUReports.add("click succeded ", LogAs.PASSED, null); // solve
+			String script=
+			"var aTags = document.getElementsByTagName(\'a\');"
+			+ " var searchText = \""+id+"\";"
+			+ "  var found;"
+			+ " for (var i = 0; i < aTags.length; i++)"
+			+ " {"
+			+ "if"
+			+ " (aTags[i].textContent == searchText)"
+			+ " {found = aTags[i];break;}"
+			+ "}"
+			+ " $(aTags[i]).click();";
+			
+			((JavascriptExecutor) driver).executeScript(script);
+			System.out.println("press on sort record" + choice);	
+			ATUReports.add("Select sort_recording_tab -> "+choice, choice+" was click",
+					choice+" was clicked", LogAs.PASSED, null);
+			Assert.assertTrue(true);
 
 		} catch (Exception e) {
-			
-
+			System.out.println(e.getMessage());
+			ATUReports.add("click not succeded ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println(choice+" was clicked");
+			Assert.assertTrue(false);
 		}
 
 	}
@@ -3734,7 +3745,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				Assert.assertTrue(true);
 				return;
 			} else {
-				checkbox.click();
+				
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);			
+				//checkbox.click();
 				System.out.println("Checkbox is selected");
 				ATUReports.add("Checkbox.", "Success to select.", "Sucess to select.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 				Assert.assertTrue(true);
@@ -4596,7 +4609,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 	public String getSecondRecord() {
-		//waitForVisibility(second_record_player);
+		waitForVisibility(second_record_player);
 		return second_record_player.getText();
 	}
 
