@@ -413,17 +413,22 @@ public class RecordingHelperPage extends Page {
 		public void returnToCourseListPage(CoursesHelperPage course) throws InterruptedException {		
 		
 		try{		
-					
+			System.out.println("returnToCourseListPage1");		
 			wait.until(ExpectedConditions.visibilityOf(courses_link));		
 			courses_link.click();			
 			Thread.sleep(2000);		
+			System.out.println("returnToCourseListPage2");	
 			ATUReports.add("Clicked on Courses link.", "Go back to courses page",		
 					"Go back to courses page", LogAs.PASSED, null);		
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ActiveCourses"))));
+			System.out.println("returnToCourseListPage3");	
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));
+			System.out.println("returnToCourseListPage4");	
 		}		
 		 catch (Exception msg) {		
-			try{driver.navigate().refresh();		
+			 System.out.println("returnToCourseListPage5");	
+			try{
+				driver.navigate().refresh();		
 			wait.until(ExpectedConditions.visibilityOf(courses_link));		
 			courses_link.click();	
 			}catch(Exception e){		
@@ -431,36 +436,14 @@ public class RecordingHelperPage extends Page {
 				ATUReports.add("Not clicked on Courses link.", "Courses page heading",		
 						"Not found courses page heading. Page url: " + driver.getCurrentUrl(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
 			}		
-					
+			System.out.println("returnToCourseListPage6");			
 					
 		}		
+		System.out.println("returnToCourseListPage7");	
 	}
 
 	// This function select first recording from recording list
-	public void selectFirstCheckbox() throws InterruptedException {
-		// for (int i = 0; i < 5; i++) {
-		// wait.until(ExpectedConditions.elementToBeClickable(checkbox));
-		//// checkbox.click();
-		// ClickOneCheckBoxOrVerifyAlreadySelected(checkbox);
-		//
-		// if (checkbox.isSelected()) {
-		// System.out.println("First checkbox is selected");
-		// ATUReports.add("Select any recording", "First checkbox is selected",
-		// "First checkbox is selected",
-		// LogAs.PASSED, null);
-		// Assert.assertTrue(true);
-		// break;
-		// } else {
-		// System.out.println("First checkbox is not selected");
-		// ATUReports.add("Select any recording", "First checkbox is selected",
-		// "First checkbox is not selected",
-		// LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		// Assert.assertTrue(false);
-		// Thread.sleep(1000);
-		// }
-		// }
-		
-		
+	public void selectFirstCheckbox() throws InterruptedException {		
 		selectIndexCheckBox(1);
 	}
 
@@ -766,12 +749,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	// This function clicks on coures link, and return to courses list page
 	public void returnToCourseListPage() throws InterruptedException {
+		System.out.println("returnToCourseListPage0");
 		for (int i = 0; i < 5; i++) {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(courses_link));
 				courses_link.click();
 				Thread.sleep(1000);
 			} catch (Exception msg) {
+				System.out.println("Catch returnToCourseListPage"+msg.getMessage());				
 				break;
 			}
 		}		
@@ -1104,42 +1089,20 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 
 	// This function select first recording from recording list
-	public void selectIndexCheckBox(int index) throws InterruptedException {
-		// try {
-		// checkbox = driver.findElement(By.id("Checkbox" +
-		// Integer.toString(index)));
-		// checkbox.click();
-		// if (checkbox.isSelected()) {
-		// System.out.println("Checkbox is selected in index: " + index);
-		// ATUReports.add("Checkbox is selected in index: " + index,
-		// LogAs.PASSED, null);
-		// Assert.assertTrue(true);
-		// } else {
-		// System.out.println("Checkbox not selected in index: " + index);
-		// ATUReports.add("Checkbox not selected in index: " + index,
-		// LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		// Assert.assertTrue(false);
-		// }
-		//
-		// } catch (Exception msg) {
-		// System.out.println("Checkbox not selected in index: " + index);
-		// ATUReports.add("Checkbox not selected in index: " + index,
-		// LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		// Assert.assertTrue(false);
-		// }
-		for(int sec=0; sec<30; sec++) {
-			try {
-				if(driver.findElement(By.id("Checkbox1")).isDisplayed()) {
-					break;
-				}
-			} catch (Exception msg) {
-				Thread.sleep(1000);
-			}
-		}
+	public void selectIndexCheckBox(int index) throws InterruptedException {	
+		try{
+		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id("Checkbox"+index)));
 		
 		WebElement target_checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));
 	
 		SelectOneCheckBoxOrVerifyAlreadySelected(target_checkbox);
+		}
+		catch(Exception e){
+			System.out.println("catch selectIndexCheckBox");
+			ATUReports.add("Fail to select checkbox","Check succeeded","Check failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			
+			
+		}
 	}
 
 	// verify copied course is displaied correctly
@@ -3730,18 +3693,18 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			waitForVisibility(checkbox);
 			if (checkbox.isSelected()) {
 				System.out.println("Checkbox is already selected.");
-				ATUReports.add("Checkbox.", "Selected/Already selected.", "Already selected.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+				ATUReports.add("Checkbox.", "Selected/Already selected.", "Already selected.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
 			} else {
 				checkbox.click();
 				System.out.println("Checkbox is selected");
-				ATUReports.add("Checkbox.", "Success to select.", "Sucess to select.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+				ATUReports.add("Checkbox.", "Success to select.", "Sucess to select.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
 			System.out.println("Checkbox is not selected.");
-			ATUReports.add("Checkbox.", "Success select.", "Fail to select.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add("Checkbox.", "Success select.", "Fail to select.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -3925,7 +3888,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// This function get list of options and checks if it is the only options
 	// enabled in Course Task submenu
 	public void verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInCourseTasksMenu(List<String> target_option_list)
-			throws InterruptedException {
+			throws InterruptedException { 
 		wait.until(ExpectedConditions.visibilityOf(course_task_button));
 		Actions builder = new Actions(driver);
 		builder.moveToElement(course_task_button).build().perform();
@@ -3949,21 +3912,39 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	// This function get option (String) and status (enable/disable)
 	// This function will assgin for that string the correct WebElement
-	// This function will check if for that WebElement it is the correct status
 	public void verifyTargetStringWebElementEnableDisable(String target, boolean enable_disable) {
+	// This function will check if for that WebElement it is the correct status
 		WebElement webElement = null;
-
-		if (target.equals("Download")) {
-			webElement = download_button;
-		} else if (target.equals("RSS Feed")) {
-			webElement = rssfeed;
-		} else if (target.equals("Podcast")) {
-			webElement = podcast_button;
-		} else if (target.equals("Video Podcast")) {
-			webElement = video_podcast;
-		} else {
-			System.out.println(target);
-			return;
+		
+		
+		switch (target){
+		case "Download": 		webElement = download_button; 
+		break;
+		case "RSS Feed": 		webElement = rssfeed; 		  
+		break;
+		case "Podcast": 		webElement = podcast_button;  
+		break;
+		case "Video Podcast": 	webElement = video_podcast;   
+		break;
+		case "Move": 		webElement = move_button_on_recording_tasks_menu; 
+		break;
+		case "Copy": 		webElement = copy_button2; 
+		break;
+		case "Delete": 		webElement = delete_button; 
+		break;
+		case "Publish": 		webElement = publish_button; 		  
+		break;
+		case "Upload to YouTube": 		webElement = upload_to_youtube_button;  
+		break;
+		case "Request Captions": 	webElement = request_captions_button;   
+		break;
+		case "Edit recording": 	webElement = edit_rec_button;   
+		break;
+		case "Edit recording properties": 	webElement = edit_rec_properties_button;   
+		break;
+		case "Share recording": 	webElement = share_recording_button;   
+		break;	
+		
 		}
 
 		if (enable_disable) {
