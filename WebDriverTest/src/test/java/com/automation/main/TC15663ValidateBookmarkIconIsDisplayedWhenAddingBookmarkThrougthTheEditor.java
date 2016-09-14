@@ -150,7 +150,7 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		record.verifyIndexRecordingHaveNoBookmark(1);
 		
 		// 7. Check the "ex3" checkbox.
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 8. Hove the "Recording Task" Drop down.
 		// 9. Choose the "Edit Recording" option

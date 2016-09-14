@@ -128,7 +128,7 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 		//course.selectCourse(record);
 		
 		// 3. Select recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String selected_recording_title = record.getFirstRecordingTitle();
 		
 		// 4. Select "Recording Tasks -> Copy"

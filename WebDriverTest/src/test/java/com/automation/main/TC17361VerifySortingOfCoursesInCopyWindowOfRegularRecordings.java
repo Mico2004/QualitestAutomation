@@ -82,7 +82,7 @@ public class TC17361VerifySortingOfCoursesInCopyWindowOfRegularRecordings {
 		initializeCourseObject();
 		course.selectCourseThatStartingWith("Ab");
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
-		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.getCheckbox());// check box is selected
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
         Thread.sleep(2000);
 	
         record.clickOnRecordingTaskThenCopy();

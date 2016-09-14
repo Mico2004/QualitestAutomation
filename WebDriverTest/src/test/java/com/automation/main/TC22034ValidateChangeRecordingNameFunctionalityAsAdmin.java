@@ -142,7 +142,7 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 		Thread.sleep(1000);
 		
 		// 8. Click on a checkbox of one recording.
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String checked_recording_title = record.getFirstRecordingTitle();
 		
 		// 10. The "Edit recording properties" option is enabled.

@@ -83,7 +83,7 @@ public class TC17369VerifySortingOfCoursesInCopyWindowOfAdittinalContent {
 		record.clickOnAdditionContentTab();
 		Thread.sleep(2000);
 		//5.select check box
-		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.getCheckbox());// check box is selected
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
         
 		///6.select copy menu
     	record.clickOnContentTaskThenCopy();

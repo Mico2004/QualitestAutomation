@@ -113,7 +113,7 @@ DesiredCapabilities capability;
 		record.checkThatRecordingStatusTargetIndexIsEmpty(1,120);
 	
 		// 3.1 Select recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String selected_recording_title = record.getFirstRecordingTitle().replaceAll(" ", "");
 		//List<String> initial_recording_list = record.getCourseRecordingList();
 		

@@ -107,7 +107,7 @@ public class TC15649TryToDeleteMovingRecording {
 		
 		// 3. Select recording.
 		String selected_recording_name = record.getFirstRecordingTitle();
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		System.out.println("Selected recording name: " + selected_recording_name);
 		
 		// 4. Select "Recording Tasks -> Move" menu item.
@@ -156,7 +156,7 @@ public class TC15649TryToDeleteMovingRecording {
 		
 		
 		// 12. While recording is being moved, select "Recording Tasks -> Delete" menu item.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenDelete();
 		
 		Thread.sleep(1000);

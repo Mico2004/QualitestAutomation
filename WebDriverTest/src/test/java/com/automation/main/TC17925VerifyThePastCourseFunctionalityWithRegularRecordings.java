@@ -341,7 +341,7 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 
 		course.selectCourseThatStartingWith(PastTempCourse);
 
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 
 		record.toEditRecordingPropertiesMenu();
 		Thread.sleep(2000);

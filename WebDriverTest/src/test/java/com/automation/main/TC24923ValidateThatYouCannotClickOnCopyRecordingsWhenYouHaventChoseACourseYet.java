@@ -148,7 +148,7 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 
 		
 		// 9. Click on a checkbox of one recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 10. Hover over "Recording tasks" menu.
 		// 11. Click on the menu item "Copy".

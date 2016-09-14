@@ -211,7 +211,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			
 			
 			// 10. Check a checkbox of one recording on both browsers.
-			record.selectFirstCheckbox();
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			
 			// 11. Hover over on "Recording tasks" menu.
 			record.moveToElement(record.recording_tasks_button, driver).perform();
@@ -407,7 +407,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			
 			
 			// 28. Check a checkbox of one recording on both browsers.
-			record.selectFirstCheckbox();
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 					
 			// 29. Hover over on "Recording tasks" menu.
 			record.moveToElement(record.recording_tasks_button, driver).perform();

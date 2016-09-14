@@ -437,7 +437,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		Thread.sleep(2000);
 		
 		// Select first recording
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String selected_recording = record.getFirstRecordingTitle();
 		
 		// Click on Recording Tasks -> copy
@@ -625,7 +625,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		record.clickOnAdditionContentTab();
 		
 		// Select first addition content
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// Click on Content Tasks -> Copy
 		record.clickOnContentTaskThenCopy();

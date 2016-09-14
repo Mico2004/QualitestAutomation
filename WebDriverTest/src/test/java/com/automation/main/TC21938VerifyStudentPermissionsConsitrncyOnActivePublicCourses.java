@@ -215,7 +215,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			
 			
 			// 9. Check a checkbox of one recording on both browsers.
-			record.selectFirstCheckbox();
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			
 			// 10. Hover over on "Recording tasks" menu.
 			record.moveToElementAndClick(record.recording_tasks_button, driver);

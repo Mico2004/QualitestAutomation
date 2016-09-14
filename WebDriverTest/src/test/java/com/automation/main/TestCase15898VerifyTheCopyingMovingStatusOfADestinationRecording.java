@@ -113,7 +113,7 @@ DesiredCapabilities capability;
 		// 3. Select recording.
 		String selected_recording_name = record.getFirstRecordingTitle();
 		System.out.println("Record to select: " + selected_recording_name);
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		Thread.sleep(1000);
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();

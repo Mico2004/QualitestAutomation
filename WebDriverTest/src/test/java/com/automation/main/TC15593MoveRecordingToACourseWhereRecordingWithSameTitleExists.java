@@ -138,7 +138,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		wait.until(ExpectedConditions.elementToBeClickable(record.getCheckbox()));
 		
 		// 2.5. Select source recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String init_first_recording_name = record.getFirstRecordingTitle();
 		
 		// 2.6. Select "Recording Tasks -> Copy" menu item.
@@ -180,7 +180,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 			Assert.assertTrue(true);
 			
 			//so select this recoding
-			record.selectFirstCheckbox();
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		} else {
 			System.out.println("Recording name is not same as in precondition.");
 			ATUReports.add("Recording name is not same as in precondition.", LogAs.FAILED, null);

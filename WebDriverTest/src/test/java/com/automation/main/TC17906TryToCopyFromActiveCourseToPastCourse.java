@@ -117,7 +117,7 @@ public class TC17906TryToCopyFromActiveCourseToPastCourse {
 		System.out.println("Current course: " + currentCourse);
 		
 		// 6. Select the recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 7. Select the "Recording Tasks -> Copy" menu item.
 		record.clickOnRecordingTaskThenCopy();
@@ -151,7 +151,7 @@ public class TC17906TryToCopyFromActiveCourseToPastCourse {
 		Thread.sleep(2000);
 	
 		// 11. Select the content item.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 12. Select the "Content tasks -> Copy" menu item.
 		record.clickOnContentTaskThenCopy();

@@ -118,7 +118,7 @@ public class TestCaseSearchCoursesInCopyWindow {
 		Thread.sleep(1000);
 		
 		// 3. Select recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		Thread.sleep(1000);
 		

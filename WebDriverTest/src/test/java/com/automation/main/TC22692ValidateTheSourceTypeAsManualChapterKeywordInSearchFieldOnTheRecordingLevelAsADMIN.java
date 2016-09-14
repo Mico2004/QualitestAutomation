@@ -182,7 +182,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 			
 			//7.Validate there is manual chapter keyword in the recording. Search input specified shall be case-insensitive.
 			String keyword_to_search="manual chapter keyword";
-			record.selectFirstCheckbox();
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			record.toEditRecordingMenu();
 			String recording_name=record.recording_list_names.get(0);
 		    edit_recording.setTargetKeywordForFirstChapter(keyword_to_search);

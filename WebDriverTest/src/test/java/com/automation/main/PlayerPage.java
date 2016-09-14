@@ -790,11 +790,11 @@ public class PlayerPage extends Page {
 		driver.switchTo().frame(0);
 		waitForVisibility(player_timer);
 		System.out.println("player timer visible");
-		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("PlaceHolder_StatusBarAreaTextBox"),
-				"Buffering"));
+		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("PlaceHolder_StatusBarAreaTextBox"),"Buffering"));
 		String timer = player_timer.getText();
+		String subTimer = timer.substring(0,6); 
 		System.out.println(timer);
-		if (timer.contains(location)) {
+		if (timer.contains(subTimer)) {
 			System.out.println("player starts playing at: " + location);
 			ATUReports.add("player starts playing at correct time", "parameters", "correct", "correct", LogAs.PASSED,
 					null);
@@ -802,8 +802,8 @@ public class PlayerPage extends Page {
 
 		} else {
 			System.out.println("player not starts playing at: " + location);
-			ATUReports.add("player starts playing at correct time", "parameters", "correct", " not correct",
-					LogAs.PASSED, null);
+			ATUReports.add("player not starts playing at correct time", "parameters", "correct", " not correct",
+					LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 	}

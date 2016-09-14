@@ -114,7 +114,7 @@ public class TC15635DeleteAProctoringRecordingAsInstructor {
 		Thread.sleep(1000);
 		
 		// 4. Select recording to delete.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		List<String> initial_recording_list = record.getCourseRecordingList();
 		String selected_recording_title = initial_recording_list.get(0);

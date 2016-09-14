@@ -140,7 +140,7 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 	
 		// 5. Change the name of the chapter that we mentioned in the preconditions to "/\[]:;|=,+*?<>".
 		Thread.sleep(3000);
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		Thread.sleep(500);
 		record.clickOnRecordingTaskThenEditRecording();
 		Thread.sleep(2000);

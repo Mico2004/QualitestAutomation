@@ -74,7 +74,7 @@ public class VerifySortingOfCoursesInCopyWindowOfProctoringRecordings {
 			record.clickOnStudentRecordingsTab();
 			Thread.sleep(2000);
 			//5.select check box
-			record.ClickOneCheckedboxSelected(record.getCheckbox());// check box is selected
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 	        record.getCheckbox().click();
 			///6.select copy menu
 	        copy.verifyCopyMenu(record);

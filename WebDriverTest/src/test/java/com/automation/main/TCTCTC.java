@@ -148,7 +148,7 @@ public class  TCTCTC {
 		Thread.sleep(1000);
 		
 		// 3. select record
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		System.out.println("choosing record");
 		
 		Thread.sleep(1000);

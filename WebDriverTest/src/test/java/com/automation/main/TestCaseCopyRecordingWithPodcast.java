@@ -141,7 +141,7 @@ public class TestCaseCopyRecordingWithPodcast {
 		System.out.println("Current course: " + currentCourse);
 		
 		//5. Select source recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String first_recording_title = record.getFirstRecordingTitle();
 		System.out.println("Selected recording for copy: " + first_recording_title);
 		

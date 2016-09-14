@@ -35,7 +35,6 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 //import com.automation.objects.RecordingObject;
 import org.testng.asserts.LoggingAssert;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -43,12 +42,9 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-
 import java.io.StringReader;
-
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Result;
@@ -57,7 +53,6 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
@@ -436,33 +431,6 @@ public class RecordingHelperPage extends Page {
 		}		
 	}
 
-	// This function select first recording from recording list
-	public void selectFirstCheckbox() throws InterruptedException {
-		// for (int i = 0; i < 5; i++) {
-		// wait.until(ExpectedConditions.elementToBeClickable(checkbox));
-		//// checkbox.click();
-		// ClickOneCheckBoxOrVerifyAlreadySelected(checkbox);
-		//
-		// if (checkbox.isSelected()) {
-		// System.out.println("First checkbox is selected");
-		// ATUReports.add("Select any recording", "First checkbox is selected",
-		// "First checkbox is selected",
-		// LogAs.PASSED, null);
-		// Assert.assertTrue(true);
-		// break;
-		// } else {
-		// System.out.println("First checkbox is not selected");
-		// ATUReports.add("Select any recording", "First checkbox is selected",
-		// "First checkbox is not selected",
-		// LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		// Assert.assertTrue(false);
-		// Thread.sleep(1000);
-		// }
-		// }
-		
-		
-		selectIndexCheckBox(1);
-	}
 
 	// This function clicks on title of recording in index i
 	public void clickOnRecordingTitleInIndex(int index) throws InterruptedException {
@@ -863,54 +831,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 	}
 
-	// verify check box is selected
-	public void ClickOneCheckedboxSelected(WebElement check) throws InterruptedException {
-		ClickOneCheckBoxOrVerifyAlreadySelected(check);
-		// try {
-		// waitForVisibility(check);
-		// check.click();
-		// System.out.println("one checkboxe is selected");
-		// ATUReports.add("one checkboxe is selected", LogAs.PASSED, new
-		// CaptureScreen(ScreenshotOf.DESKTOP));
-		// } catch (Exception e) {
-		// System.out.println("one checkboxe is not selected");
-		// ATUReports.add("one checkboxe is not selected", LogAs.FAILED, new
-		// CaptureScreen(ScreenshotOf.DESKTOP));
-		// }
-		// Thread.sleep(1000);
-		// Assert.assertTrue(check.isSelected());
-
-	}
-
-	// verify check box is selected
-	public void ClickOneCheckedboxNotSelected(WebElement check) throws InterruptedException {
-		unClickOneCheckBoxOrVerifyNotSelected(check);
-		// try {
-		// waitForVisibility(check);
-		// check.click();
-		// Thread.sleep(1000);
-		// System.out.println("one checkboxe is not selected");
-		// ATUReports.add("one checkboxe is not selected", LogAs.PASSED, new
-		// CaptureScreen(ScreenshotOf.DESKTOP));
-		// } catch (Exception e) {
-		// Thread.sleep(1000);
-		// System.out.println("one checkboxe is selected");
-		// ATUReports.add("one checkboxe is selected", LogAs.FAILED, new
-		// CaptureScreen(ScreenshotOf.DESKTOP));
-		// }
-		//
-		// Assert.assertFalse(check.isSelected());
-
-	}
-
-	public void verifyAllCheckedboxSelected() throws InterruptedException {// verify
-																			// all
-																			// check
-																			// box
-																			// are
-																			// selected
-																			// or
-																			// not
+	public void verifyAllCheckedboxSelected() throws InterruptedException {// verify// all// check// box// are// selected// or// not
 
 		for (WebElement el : checkboxlist) {
 			if ((el.isSelected())) {
@@ -3760,27 +3681,21 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	}
 
-	// verify check box is selected (Old function name -> just calling the new
-	// function with the new name
-	public void ClickOneCheckBoxOrVerifyAlreadySelected(WebElement checkbox) throws InterruptedException {
-		SelectOneCheckBoxOrVerifyAlreadySelected(checkbox);
-	}
-
 	// verify check box is selected
 	public void unClickOneCheckBoxOrVerifyNotSelected(WebElement check) throws InterruptedException {
 		try {
-			waitForVisibility(checkbox);
-			if (!checkbox.isSelected()) {
+			waitForVisibility(check);
+			if (!check.isSelected()) {
 				System.out.println("one checkbox is not selected");
 				ATUReports.add("one checkbox is not selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 				Assert.assertTrue(true);
 				return;
 			} else {
-				checkbox.click();
-				if (!checkbox.isSelected()) {
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check);			
+				//checkbox.click();
+				if (!check.isSelected()) {
 					System.out.println("one checkbox is not selected");
-					ATUReports.add("one checkbox is not selected", LogAs.PASSED,
-							new CaptureScreen(ScreenshotOf.DESKTOP));
+					ATUReports.add("one checkbox is not selected", LogAs.PASSED,new CaptureScreen(ScreenshotOf.DESKTOP));
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("one checkbox is  selected");

@@ -101,10 +101,10 @@ String os;
 		record.verifyDisabledMenu();
 		
 		//5.click one check box
-		record.ClickOneCheckedboxSelected(record.getCheckbox());
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		//6.un-check one check box
-		record.ClickOneCheckedboxNotSelected(record.getCheckbox());
+		record.unClickOneCheckBoxOrVerifyNotSelected(record.checkbox);
 	
 		//7.click all check box
 		record.checkall.click();// make all checkboxes marked

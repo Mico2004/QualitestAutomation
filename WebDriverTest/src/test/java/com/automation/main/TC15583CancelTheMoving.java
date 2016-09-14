@@ -133,7 +133,7 @@ public class TC15583CancelTheMoving {
 		// 3. Select source recording.
 		// 4. Select "Recording Tasks -> Move" menu item.
 		clickedRecording = record.getFirstRecordingTitle();
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
 		System.out.println("Clicked on recording: " + clickedRecording);
 		
@@ -198,7 +198,7 @@ public class TC15583CancelTheMoving {
 		//13. Select source recording.
 		//14. Select "Recording Tasks -> Move" menu item.
 		clickedRecording = record.getFirstRecordingTitle();
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
 		System.out.println("Clicked on recording: " + clickedRecording);
 		

@@ -133,8 +133,8 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		
 		// Upload for first recording target close catpion
 		Thread.sleep(2000);
-		List<String> listOfRecorders = record.getCourseRecordingList();
-		record.selectIndexCheckBox(listOfRecorders.size()-1);
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);	
 		record.clickOnRecordingTaskThenEditRecording();
 		
 		edit_recording.addCaptionSrtToFirstChapterRecording();
@@ -222,9 +222,6 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			
-	
-
-
 			// 11. Sign Out.
 			search_page.exitInnerFrame();
 			record.signOut();

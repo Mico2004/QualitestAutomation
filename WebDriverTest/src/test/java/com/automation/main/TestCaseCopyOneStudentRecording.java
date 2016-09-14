@@ -124,13 +124,13 @@ public class TestCaseCopyOneStudentRecording {
 		record.clickOnStudentRecordingsTab();
 		
 		// 4. Select source recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String selected_recording_name = record.getFirstRecordingTitle();
 		
 		Thread.sleep(1000);
 		
 		// 5. Selected checkbox is checked.
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 6. Select "Recording Tasks -> Copy" menu item.
 		record.clickOnRecordingTaskThenCopy();

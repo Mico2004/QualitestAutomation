@@ -101,7 +101,7 @@ public class TC15812ExistenceofUIitems {
 		Thread.sleep(1000);
 		
 		// 4. Select content item.
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String target_recording = record.getNameTargetIndexAdditionalContent(1);
 		
 		System.out.println(target_recording);

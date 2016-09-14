@@ -116,7 +116,7 @@ public class TC15645TryToDeleteCopyingRecording {
 		// 3. Select recording.
 		String selected_recording_name = record.getFirstRecordingTitle();
 		System.out.println("Record to select: " + selected_recording_name);
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		Thread.sleep(1000);
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
@@ -241,7 +241,7 @@ public class TC15645TryToDeleteCopyingRecording {
 		}
 		
 		// Select first checkbox
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 
 		// Init recording list
 		init_recording_list = record.getCourseRecordingList();

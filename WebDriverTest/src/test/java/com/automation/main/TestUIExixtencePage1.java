@@ -144,14 +144,14 @@ catch(Exception e)
 	@Test(dependsOnMethods = "verifyDisabledMenu", description = "verify  1 check boxes checkboxes are selected")
 	public void verifyCheckedboxSelected() throws InterruptedException {
 
-		record.ClickOneCheckedboxSelected(record.getCheckbox());
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 
 	}
 
 	@Test(dependsOnMethods = "verifyCheckedboxSelected", description = "verify  many check boxes checkboxes are selected")
 	public void verifyCheckedboxNotSelected() throws InterruptedException {
 
-		record.ClickOneCheckedboxNotSelected(record.getCheckbox());
+		record.unClickOneCheckBoxOrVerifyNotSelected(record.checkbox);
 	}
 
 	@Test(dependsOnMethods = "verifyCheckedboxNotSelected", description = "verify  many check boxes checkboxes are selected") //

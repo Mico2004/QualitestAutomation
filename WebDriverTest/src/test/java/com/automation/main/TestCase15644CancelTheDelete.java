@@ -115,7 +115,7 @@ public class TestCase15644CancelTheDelete {
 		//course.selectCourse(record);
 		
 		// 3. Select recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String selected_recording_title = record.getFirstRecordingTitle();
 		List<String> initial_recording_list = record.getCourseRecordingList();
 		
