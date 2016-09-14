@@ -129,6 +129,7 @@ public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
 		if(record.getNumberOfRecordings() == 0) {
 			record.returnToCourseListPage();
 			course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", PropertyManager.getProperty("User1"), 0, record, copy, confirm_menu);
+			course.verifyRecordingsStatusIsClear("Ab", 0,record);
 			course.selectCourseThatStartingWith(PropertyManager.getProperty("User1"));
 		}
 		

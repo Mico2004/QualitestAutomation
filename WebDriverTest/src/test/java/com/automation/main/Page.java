@@ -135,6 +135,36 @@ public class Page {
 		Assert.assertEquals(text, element.getAttribute("value"));
 
 	}
+	
+	public void setElementTextJS(WebElement element, String text) // setting
+	// element text
+	{	
+		String id="";
+	
+		try {
+			id = element.getAttribute("id");
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").setAttribute(\"text\", \""+text+"\");");
+			ATUReports.add("Set text: " + id + " element", "Text was set", "Text was set", LogAs.PASSED,
+					null);		
+		} catch (Exception msg) {
+
+			try {
+				System.out.println("Set text failed trying again with selenium");
+				wait.until(ExpectedConditions.elementToBeClickable(element));
+				element.sendKeys(text);
+				System.out.println("Set text:" + element.getText());
+				ATUReports.add("Set text: " + id + " element", "Text was set", "Text was set", LogAs.PASSED,
+						null);		
+			} catch (Exception e1) {
+				ATUReports.add("Set text: " + id + " element", "Text was set", "Text was set", LogAs.PASSED,
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
+				
+			}
+		}
+	}
+
+
+	
 
 	public boolean verifyElement(WebElement element) {
 		try {
@@ -438,6 +468,7 @@ public class Page {
 		System.out.println("signOut1");		
 		((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");
 		Thread.sleep(2000);
+		new WebDriverWait(driver, 10).until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
 		System.out.println("signOut3");
 		for (int second = 0;second<=60; second++) {
 		
@@ -656,6 +687,9 @@ public class Page {
 	// This function verify that WebElement is displayed, and String with
 	// description
 	public void verifyWebElementDisplayed(WebElement web_element, String description) {
+			
+		
+		
 		waitForVisibility(web_element);
 		if (web_element.isDisplayed()) {
 			System.out.println(description + " is displayed.");
@@ -746,7 +780,45 @@ public class Page {
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
+	
+	// Verify that
+		// The next result display below the current result in case there is next
+		// result.
+		public void verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultOneResult(List<WebElement> list) {
+			if (list.size() > 1) {
+				boolean not_correct = false;
+				int prepoint = list.get(0).getLocation().y;
+				for (int i = 1; i < list.size() - 1; i++) {
+					int currpoint = list.get(i).getLocation().y;
+					if (prepoint < currpoint) {
+						prepoint = currpoint;
+						continue;
+					} else {
+						System.out.println("!!!!!!!!");
+						System.out.println(prepoint);
+						System.out.println(currpoint);
+						System.out.println("!!!!!!!");
+						not_correct = true;
+						break;
+					}
+				}
 
+				if (!not_correct) {
+					System.out.println("Verified that next result display below the current result.");
+					ATUReports.add("Verified that next result display below the current result.", "True.", "True.",
+							LogAs.PASSED, null);
+				} else {
+					System.out.println("Not verified that next result display below the current result.");
+					ATUReports.add("Verified that next result display below the current result.", "True.", "False",
+							LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}
+			} else {
+				System.out.println("There is 1 or 0 results.");
+				ATUReports.add("There is 1 or 0 results.", "Expect for more then 1 results.", "1 or 0 results.",
+						LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		}
+	
 	/// this function verifies visibility of university logo all helpers will
 	/// inherit from page
 	public void verifyLogoVisibilityAndLocation() {
@@ -1030,7 +1102,7 @@ public class Page {
 	}
 
 	public boolean isAlertPresent() {
-		try {
+		try {		
 			driver.switchTo().alert();
 			driver.switchTo().defaultContent();
 			return true;

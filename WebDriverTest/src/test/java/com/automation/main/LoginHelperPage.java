@@ -121,7 +121,7 @@ public class LoginHelperPage extends Page {
 			
 			
 		}
-
+		System.out.println("loginCourses7");
 		Thread.sleep(1000);
 		if (driver.getCurrentUrl().contains("eula")) {
 			try {
@@ -131,7 +131,7 @@ public class LoginHelperPage extends Page {
 				System.out.println("No EULA button.");
 			}
 		}
-
+		System.out.println("loginCourses8");
 		for (int second = 0;; second++) {
 			if (second >= 60)
 				Assert.fail("timeout");
@@ -152,6 +152,7 @@ public class LoginHelperPage extends Page {
 
 			Thread.sleep(1000);
 		}
+		System.out.println("loginCourses8");
 		Thread.sleep(3000);
 		Assert.assertEquals(driver.getTitle(), "Tegrity - Courses");
 	}

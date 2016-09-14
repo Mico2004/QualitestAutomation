@@ -98,7 +98,7 @@ public class TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementS
 		this.driver.quit();
 	}
 
-	@Test(description = "Login course page")
+	@Test(description = "17901 - Create a past course and verify it's appearance accordingly to the enrollement status")
 	public void preTestCreateNewUser() throws InterruptedException {
 
 		/////////// pre-test create new user+enrolling to PastCourseA///////////

@@ -215,19 +215,19 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
 			///// to go back to crecording window handler	
-			for (String handler : driver.getWindowHandles()) {
+		for (String handler : driver.getWindowHandles()) {
 					driver.switchTo().window(handler);
 			break;		
 			}
 				
-			///9.Validate the search field is display at the top right of the UI page below the top navigation bar.
-	        player_page.veriySearchBoxLocation();
+		///9.Validate the search field is display at the top right of the UI page below the top navigation bar.
+	     player_page.veriySearchBoxLocation();
 	      
-	        ///10.Validate the text in the Tegrity Player page: "Search in this recording..."
-	        player_page.verifySearchBoxHint();
+	      ///10.Validate the text in the Tegrity Player page: "Search in this recording..."
+	     player_page.verifySearchBoxHint();
 	        
-		//11.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
-	        player_page.verifySearchForRecordingExist(recording_to_search);
+	     //11.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
+	     player_page.verifySearchForRecordingExist(recording_text);
 
 		///12.The header is displayed with the default color and the logo at the top left cornner of the UI page.
 		///// to go back to crecording window handler
@@ -241,12 +241,15 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 			player_page.verifyLogoVisibilityAndLocation();
 			
 			///13.The next result display below the current result in case there is next result.
-			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
+			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultOneResult(player_page.search_result);
 			Thread.sleep(2000);
 			
 			///14.search results page in the format as follows: "recording name - Search Results".
 			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
 			player_page.verifySearchResultPage(recording_to_search);
+			
+			//12. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
+			player_page.verifyResultsStatisticsInFormat(recording_text);
 			
 		    ///15.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
 			player_page.waitForVisibility(player_page.columns_title_text.get(0));
@@ -282,7 +285,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 				
 			// 18. check that we are in the record page
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
-				
+					
 			// 19. change the name of the first recording chapter at the edit recored properties 
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			record.clickOnRecordingTaskThenEditRecording();
@@ -292,90 +295,87 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 			edit_recording.changeFirstChapterRecordingNameToTargetNameNew(new_recording_text);
 			Thread.sleep(2000);
 			
-			// 20. Search the "new_recording Text" recording that we mentioned in the preconditions and press ENTER.
-			top_bar_helper.searchForTargetText(new_recording_text);
-			Thread.sleep(2000);
-			
-			// 21. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
-			search_page.verifyLoadingSpinnerImage();
-			search_page.waitUntilSpinnerImageDisappear();
-			
-			// 22. The next result display below the current result in case there is next result.
-			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
-			
-			
-			// 23. Search the "recording Text" recording that we mentioned in the preconditions and press ENTER.
-			top_bar_helper.searchForTargetText(recording_text);
-			Thread.sleep(2000);
-			
-			// 24. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
-			search_page.verifyLoadingSpinnerImage();
-			search_page.waitUntilSpinnerImageDisappear();
-			
-			// 25. verify that the search result is empty
-			search_page.verifySearchResultIsEmpty();
-			
-			// 26. return to record page
-			record.returnToRecordingPageByClickingBreadcrumbsName(record.breadcrumbs);
-			
-			// 27.
+			//20. return to the relevant course
+			admin_view_course_list.moveToCoursesThroughGet(url);
+				
+			// 21. go back to the player
 		    record.verifyFirstExpandableRecording();
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		
-			// 28.Select the Recording by clicking on one of the chapters
+			
+			
+			// 22.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
 				///// to go back to crecording window handler	
-			for (String handler : driver.getWindowHandles()) {
+				for (String handler : driver.getWindowHandles()) {
 						driver.switchTo().window(handler);
 				break;		
-			}
-					
-			///29.Validate the search field is display at the top right of the UI page below the top navigation bar.
-		    player_page.veriySearchBoxLocation();
-		      
-		    ///30.Validate the text in the Tegrity Player page: "Search in this recording..."
-		    player_page.verifySearchBoxHint();
-		        
-			//31.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
-		    player_page.verifySearchForRecordingExist(recording_to_search);
-
-			///32.The header is displayed with the default color and the logo at the top left cornner of the UI page.
-			///// to go back to crecording window handler
-
-		     for (String handler : driver.getWindowHandles()) {
-		        		driver.switchTo().window(handler);
-		        		break;		
-		       }
-				
-			 Thread.sleep(2000);
-			 player_page.verifyLogoVisibilityAndLocation();
-				
-			 ///33.The next result display below the current result in case there is next result.
-			 player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
-			 Thread.sleep(2000);
-				
-			///34.search results page in the format as follows: "recording name - Search Results".
-			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
-			player_page.verifySearchResultPage(recording_to_search);
-				
-			///35.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
-			player_page.waitForVisibility(player_page.columns_title_text.get(0));
-						player_page.verifySearchColumns();
-				
-			///36.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
-			player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(1);
-					
-				
-			for (String handler : driver.getWindowHandles()) {
-					driver.switchTo().window(handler);
-					break;
 				}
-			
-			///37.The breadcrumb structure is displayed as follows: "> Courses > course name".
-			player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
 						
 			
+			///23.Validate the search field is display at the top right of the UI page below the top navigation bar.
+	        player_page.veriySearchBoxLocation();
+	      
+	        ///24.Validate the text in the Tegrity Player page: "Search in this recording..."
+	        player_page.verifySearchBoxHint();
+	        
+	        //25.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
+	        player_page.searchRecord(recording_text);
+				
+			///26.The header is displayed with the default color and the logo at the top left cornner of the UI page.
+			///// to go back to crecording window handler
+	    	
+			//27. verify that the search is empty 	
+			player_page.verifySearchResultIsEmpty();	
+ 
+			
+	        player_page.verifySearchForRecordingExist(new_recording_text);
+	        
+
+		///29.The header is displayed with the default color and the logo at the top left cornner of the UI page.
+		///// to go back to crecording window handler
+	    	
+	        //30. verify that the search is not empty 	
+	        player_page.verifySearchResultIsNotEmpty();
+	        
+	        for (String handler : driver.getWindowHandles()) {
+        		driver.switchTo().window(handler);
+        		break;		
+        }
+		
+	        Thread.sleep(2000);
+	            
+	        //31. verify that the search is not empty 	
+			player_page.verifyLogoVisibilityAndLocation();
+			
+			///32.The next result display below the current result in case there is next result.
+			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultOneResult(player_page.search_result);
+			Thread.sleep(2000);
+			
+			///33.search results page in the format as follows: "recording name - Search Results".
+			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
+			player_page.verifySearchResultPage(recording_to_search);
+			
+			//12. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
+			player_page.verifyResultsStatisticsInFormat(recording_text);
+			
+		    ///34.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
+			player_page.waitForVisibility(player_page.columns_title_text.get(0));
+					player_page.verifySearchColumns();
+			
+			///35.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
+			player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(0);
+				
+			
+			for (String handler : driver.getWindowHandles()) {
+				driver.switchTo().window(handler);
+				break;
+			}
+		
+			///36.The breadcrumb structure is displayed as follows: "> Courses > course name".
+			player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
+
+
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	   

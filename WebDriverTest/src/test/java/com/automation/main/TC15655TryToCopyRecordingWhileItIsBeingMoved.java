@@ -122,7 +122,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
 		Thread.sleep(3000);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "Ba", 0, record, copy, confirm_menu);
-		
+		course.verifyRecordingsStatusIsClear("Ab", 0,record);
 		
 		
 		// Pretest go to first and second target and delete all recordings

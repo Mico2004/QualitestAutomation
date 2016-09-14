@@ -141,7 +141,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
 		
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
-		
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		course.selectCourseThatStartingWith("Ba");
 		Thread.sleep(1000);
 		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();

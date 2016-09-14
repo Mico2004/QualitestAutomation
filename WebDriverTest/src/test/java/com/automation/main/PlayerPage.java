@@ -534,10 +534,10 @@ public class PlayerPage extends Page {
 	public void verifyThatUserCannotAddBookmark() {
 		if (add_bookmark_button.isDisplayed()) {
 			System.out.println("Not verfied that user cannot add bookmark.");
-			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "False.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 			System.out.println("Verfied that user cannot add bookmark.");
-			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add("Verfied that user cannot add bookmark.", "True.", "True.", LogAs.INFO, null);
 		}
 	}
 
@@ -605,6 +605,20 @@ public class PlayerPage extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+
+	public void searchRecord(String to_search) throws InterruptedException{
+
+		Thread.sleep(2000);
+		search_box.clear();
+		search_box.sendKeys(to_search + Keys.ENTER);	
+		Thread.sleep(1000);
+		search_box.clear();
+		
+		System.out.println("search the record: " + to_search);
+		ATUReports.add("search the record: " + to_search, LogAs.PASSED, null);
+		
+	}
+	
 
 	//// search for course
 	public void verifySearchForRecordingExist(String to_search) {
@@ -674,6 +688,33 @@ public class PlayerPage extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	
+	public void verifySearchResultIsEmpty() {
+		if(SearchResultTimes.size() == 0 && SearchResultContext.size() == 0 && SearchResultlocation.size()==0) {
+			System.out.println("Verified that search result is empty.");
+			ATUReports.add("Verified that search result is empty.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verified that search result is empty.");
+			ATUReports.add("Verified that search result is empty.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//			Assert.assertTrue(false);
+		}
+	}
+	
+	
+	public void verifySearchResultIsNotEmpty() {
+		if(SearchResultTimes.size() >= 1 && SearchResultContext.size() >= 1 && SearchResultlocation.size()>= 1) {
+			System.out.println("Verified that search result is not empty.");
+			ATUReports.add("Verified that search result is not empty.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verified that search result is not empty.");
+			ATUReports.add("Not verified that search result is not empty.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//			Assert.assertTrue(false);
+		}
+	}
+	
 
 	// This function add String to bookmark
 	public void addTargetBookmark(String target_bookmark) {
@@ -730,6 +771,7 @@ public class PlayerPage extends Page {
 	/// The search results statistics in the format as follows: "X results found
 	/// for: search criterion. (XX sec)"
 	public void verifyResultsStatisticsInFormat(String record_name) {
+		String sentence;
 		System.out.println(list_of_results.getText());
 		String result = list_of_results.getText();
 		int i = 0;
@@ -744,6 +786,8 @@ public class PlayerPage extends Page {
 		String res_num = result.substring(0, i - 1);
 		if ((Integer.parseInt(result.substring(0, i - 1)) >= 0)) {
 			System.out.println("list is bigger or equal to 0 : " + res_num);
+			ATUReports.add("list is bigger or equal then 0 ", res_num, "bigger", "smaller", LogAs.PASSED,null);
+			Assert.assertTrue(true);
 		} else {
 			System.out.println("list is smaller then 0 : " + res_num);
 			ATUReports.add("list is smaller then 0 ", res_num, "bigger", "smaller", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -757,15 +801,16 @@ public class PlayerPage extends Page {
 			ATUReports.add("list is smaller then 0 ", seconds, "bigger", "smaller", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		String sentence = res_num + " results found for: " + record_name + ". (" + seconds + " sec)";
+		int NumOfresult = Integer.parseInt(res_num);
+		if(NumOfresult <= 1){
+			sentence = res_num + " result found for: " + record_name + ". (" + seconds + " sec)";
+		}
+		else sentence = res_num + " results found for: " + record_name + ". (" + seconds + " sec)";
 		System.out.println(sentence);
 		if (result.equals(sentence)) {
-			System.out.println("The search results statistics in the format as follows: "
-					+ "X results found for: search criterion. (XX sec)");
-			ATUReports.add(
-					"The search results statistics in the format as follows: "
-							+ "X results found for: search criterion. (XX sec)",
-					"parameters", "contains", "contains", LogAs.PASSED, null);
+			System.out.println("The search results statistics in the format as follows: "+ "X results found for: search criterion. (XX sec)");
+			ATUReports.add("The search results statistics in the format as follows: "
+							+ "X results found for: search criterion. (XX sec)","parameters", "contains", "contains", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("The search results statistics Not  in the format as followsed ");

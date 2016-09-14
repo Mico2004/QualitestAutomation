@@ -406,7 +406,7 @@ public class CoursesHelperPage extends Page {
 	public String selectCourseThatStartingWith(String name_starting_with) throws InterruptedException {	
 		Thread.sleep(1000);
 		System.out.println("select1");
-		List<String> course_list = getCourseList();
+	    List<String> course_list = getCourseList();
 		System.out.println("select2");
 		String target_course_name = null;				
 		for (String course_name : course_list) {
@@ -1647,12 +1647,12 @@ public class CoursesHelperPage extends Page {
 		copy_menu.selectTargetCourseFromCourseListThatStartWith(des_start_with);
 		Thread.sleep(2000);
 		copy_menu.clickOnCopyButton();
-		Thread.sleep(10000);
+		Thread.sleep(1000);
 		confirmation_menu.clickOnOkButton();
 		Thread.sleep(2000);
-		if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
+	/*	if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
 			record_helper_page.checkStatusExistenceForMaxTTime(600);
-		}
+		}*/
 
 		// else if (type_of_recordings == 1) {
 		// Being copied from

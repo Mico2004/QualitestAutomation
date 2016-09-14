@@ -136,6 +136,7 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		record.returnToCourseListPage();
 		course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 2, record, copy, confirm_menu);
+		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record);
 		top_bar_helper.clickOnSignOut();
 		Thread.sleep(1000);
 		
