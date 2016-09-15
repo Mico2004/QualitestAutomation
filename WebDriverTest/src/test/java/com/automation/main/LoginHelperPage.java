@@ -8,9 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import org.openqa.selenium.support.FindBy;
-
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -112,8 +112,7 @@ public class LoginHelperPage extends Page {
 			fillPass();
 			clickElement(button_login);
 			try {
-				new WebDriverWait(driver, 30)
-						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
+				new WebDriverWait(driver, 30).until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
 			} catch (TimeoutException e) {
 				ATUReports.add("Login Timeout (Screenshot)", user_name, "Login Success", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
