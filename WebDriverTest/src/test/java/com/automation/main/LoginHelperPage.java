@@ -1,8 +1,8 @@
 package com.automation.main;
 
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,7 +26,11 @@ import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class LoginHelperPage extends Page {
-
+	// Set Property for ATU Reporter Configuration
+		{
+			System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");		
+		}
+		
 	@FindBy(name = "UserName")
 	WebElement usernamefield;
 	@FindBy(name = "Password")
@@ -41,23 +45,21 @@ public class LoginHelperPage extends Page {
 	WebElement Login_as_guest_button;
 	@FindBy(xpath = "//*[@id=\"main\"]/form/div[2]/div[6]/p")
 	WebElement Login_as_guest_info;
+	private CoursesHelperPage course;
 
-	// Set Property for ATU Reporter Configuration
-	{
-		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
-
-	}
+	
 
 	public LoginHelperPage(WebDriver driver) throws Exception {
 		super(driver);
 		setPageTitle("Tegrity Lecture Capture");
 		/// setPageUrl("https://qualitest4-prod.tegrity.com/#/login");
 		// setPageUrl("https://reg-qabr.tegrity.com/#/login");
-		setPageUrl("https://awsserverautomation-perf-1.tegrity.com/#/login");
+		setPageUrl("https://awsserverautomation-qa-1.tegrity.com/#/login");
 		
-//		setPageUrl("https://awsserverautomation1.tegrity.com/#/login");
+		// setPageUrl("https://awsserverautomation1.tegrity.com/#/login");
 		/// setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University"))););////"https://reg-qabr.tegrity.com/#/login"
-		  //  setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
+		// setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
+		
 	}
 
 	public void setUserText(String text) {
@@ -80,7 +82,7 @@ public class LoginHelperPage extends Page {
 
 	}
 
-	public void fillUser(String user_name)// fill user name
+	public void fillUserFromProperyFile(String user_name)// fill user name
 	{
 		String user = PropertyManager.getProperty(user_name);
 		setUserText(user);
@@ -93,206 +95,160 @@ public class LoginHelperPage extends Page {
 		setPassText(pass);
 
 	}
+	public void initializeCourse(){
+		course = PageFactory.initElements(driver, CoursesHelperPage.class);
+	}
 
 	public void loginCourses(String user_name) throws InterruptedException// login
 																			// courses
 	{
-		try {	
-		Thread.sleep(2000);
-		System.out.println("loginCourses1"); 
-		wait.until(ExpectedConditions.visibilityOf(usernamefield));
-		System.out.println("loginCourses2");
-		wait.until(ExpectedConditions.visibilityOf(passfield));
-		System.out.println("loginCourses3");
-		wait.until(ExpectedConditions.visibilityOf(button_login));
-		System.out.println("loginCourses4");
-		wait.until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
-		System.out.println("loginCourses5");
-		Thread.sleep(4000);
-		fillUser(user_name);
-		System.out.println("loginCourses6");
-		fillPass();		
 		
-			clickElement(button_login);		
-			ATUReports.add("Login as", user_name, "Success login", "Success login", LogAs.PASSED, null);
-		} catch (Exception e) {
-			ATUReports.add("Login as", user_name, "Success login", "Success fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-			
-			
-		}
-		System.out.println("loginCourses7");
-		Thread.sleep(1000);
-		if (driver.getCurrentUrl().contains("eula")) {
+		initializeCourse();
+		try {
+			waitForVisibility(usernamefield);
+			waitForVisibility(button_login);
+			waitForVisibility(passfield);
+			fillUserFromProperyFile(user_name);
+			fillPass();
+			clickElement(button_login);
 			try {
-				eula_accept_button.click();
-				System.out.println("Clicked on accept EULA button");
-			} catch (Exception msg) {
-				System.out.println("No EULA button.");
-			}
-		}
-		System.out.println("loginCourses8");
-		for (int second = 0;; second++) {
-			if (second >= 60)
-				Assert.fail("timeout");
-			try {
-				if (driver.getTitle().equals("Tegrity - Courses"))//check if tegrity courses home page is visible
-				{ 
-					
-					ATUReports.add("Tegrity courses home page is visible", "Course List page is displayed",
-							"Course List page is displayed", LogAs.PASSED, null);
-					break;
-				} else {
-					button_login.click();
-				}
-			} catch (Exception e) {
-				System.out.println("Tegrity courses home page didn't load");
-				System.out.println(driver.getTitle());
-			}
+				new WebDriverWait(driver, 30)
+						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
+			} catch (TimeoutException e) {
+				ATUReports.add("Login Timeout (Screenshot)", user_name, "Login Success", LogAs.FAILED,
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
-			Thread.sleep(1000);
+			}
+			if (driver.getTitle().contains("Tegrity EULA")) {
+				try {
+					eula_accept_button.click();
+					System.out.println("Clicked on accept Eula button");
+					ATUReports.add("Click on EULA accept", "Accept clicked", "Accept clicked", LogAs.PASSED, null);
+					new WebDriverWait(driver, 30)
+							.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
+					;
+				} catch (Exception msg) {
+					System.out.println("No EULA button.");
+					ATUReports.add("Click on EULA accept", "Accept clicked", "Acceot wasn't clicked", LogAs.FAILED,
+							new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}
+			} else if (driver.getTitle().contains("Tegrity - Courses")) {
+				ATUReports.add("Tegrity courses home page is visible", "Course List page is displayed",
+						"Course List page is displayed", LogAs.PASSED, null);
+			}
+		} catch (Exception e) {
+			ATUReports.add("Login Failed (Screenshot)", user_name, "Login Success", LogAs.FAILED,
+					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
-		System.out.println("loginCourses8");
-		Thread.sleep(3000);
-		Assert.assertEquals(driver.getTitle(), "Tegrity - Courses");
+		Thread.sleep(2000);
+		try{
+			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElements(course.course_list));
+		}catch(Exception e){
+			System.out.println("No Courses for the user");
+		}
+	
 	}
 
 	public void loginAdmin(String user_name) throws InterruptedException// login
 																		// courses
 	{
-		Thread.sleep(2000);
-		waitForVisibility(button_login);
-		fillUser(user_name);
-
-		fillPass();
-
-		waitForVisibility(button_login);
-
-		try {		
+		try {
+			Thread.sleep(2000);
+			waitForVisibility(usernamefield);
+			waitForVisibility(button_login);
+			waitForVisibility(passfield);
+			fillUserFromProperyFile(user_name);
+			fillPass();
 			clickElement(button_login);
+			new WebDriverWait(driver, 30).until(ExpectedConditions.titleContains("Tegrity"));
 			ATUReports.add("Login as", user_name, "Success login", "Success login", LogAs.PASSED, null);
 		} catch (Exception e) {
-			ATUReports.add("Login as", user_name, "Success login", "Success fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Login as", user_name, "Success login", "Success fail (Screenshot)", LogAs.FAILED,
+					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 
-		// for (int second = 0;; second++) {
-		// if (second >= 60)
-		// Assert.fail("timeout");
-		// try {
-		// if (driver.getTitle().equals("Tegrity - Courses"))// check if tegrity
-		// courses home page is visible
-		// { //
-		// ATUReports.add("Tegrity courses home page is visible", "Course List
-		// page is displayed", "Course List page is displayed", LogAs.PASSED,
-		// null);
-		//
-		// break;
-		// }
-		// } catch (Exception e) {
-		// ATUReports.add("Tegrity courses home page didn't load", "Course List
-		// page is displayed", "Course List page is not displayed",
-		// LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		// }
-		//
-		// Thread.sleep(1000);
-		// }
-		// Thread.sleep(1000);
-		//
-		// Assert.assertEquals(driver.getTitle(),"Tegrity - Courses");
 	}
 
 	/// login using parameter not with local property
 	public void loginCoursesByParameter(String user_name) throws InterruptedException// login
 	// courses
 	{
-		Thread.sleep(2000);
-		waitForVisibility(usernamefield);
-		setUserText(user_name);
-		fillPass();
-
-		waitForVisibility(button_login);
-
+		initializeCourse();
 		try {
+			waitForVisibility(usernamefield);
+			waitForVisibility(button_login);
+			waitForVisibility(passfield);
+			setUserText(user_name);
+			fillPass();
 			clickElement(button_login);
-			ATUReports.add("Login as", user_name, "Success login", "Success login", LogAs.PASSED, null);
-		} catch (Exception e) {
-			ATUReports.add("Login as", user_name, "Success login", "Success fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		}
-
-		Thread.sleep(1000);
-		
-		if(!(driver instanceof ChromeDriver)) {
-			 if (driver.getCurrentUrl().contains("eula")) {			
 			try {
-				eula_accept_button.click();
-				System.out.println("Clicked on accept Eula button");
-			} catch (Exception msg) {
-				System.out.println("No EULA button.");
-			}	  
-		}}
-		
-		
+				new WebDriverWait(driver, 30)
+						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
+			} catch (TimeoutException e) {
+				ATUReports.add("Login Timeout (Screenshot)", user_name, "Login Success", LogAs.FAILED,
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
-		for (int second = 0;; second++) {
-			if (second >= 120)
-				Assert.fail("timeout");
-			try {
-				if (driver.getTitle().equals("Tegrity - Courses"))// check if tegrity courses home page visible				
-				{ 
-					ATUReports.add("Tegrity courses home page is visible", "Course List page is displayed",
-							"Course List page is displayed", LogAs.PASSED, null);
-					break;
-				}
-			} catch (Exception e) {
-				ATUReports.add("Tegrity courses home page didn't load", "Course List page is displayed",
-						"Course List page is not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
-			Thread.sleep(1000);
+			if (driver.getTitle().contains("Tegrity EULA")) {
+				try {
+					eula_accept_button.click();
+					System.out.println("Clicked on accept Eula button");
+					ATUReports.add("Click on EULA accept", "Accept clicked", "Accept clicked", LogAs.PASSED, null);
+					new WebDriverWait(driver, 30)
+							.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
+					;
+				} catch (Exception msg) {
+					System.out.println("No EULA button.");
+					ATUReports.add("Click on EULA accept", "Accept clicked", "Acceot wasn't clicked", LogAs.FAILED,
+							new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}
+			} else if (driver.getTitle().contains("Tegrity - Courses")) {
+				ATUReports.add("Tegrity courses home page is visible", "Course List page is displayed",
+						"Course List page is displayed", LogAs.PASSED, null);
+			}
+		} catch (Exception e) {
+			ATUReports.add("Login Failed (Screenshot)", user_name, "Login Success", LogAs.FAILED,
+					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
-		if (driver.getTitle().equals("Tegrity Lecture Capture")){
-			ATUReports.add("Login Failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
-			Assert.assertEquals(driver.getTitle(), "Tegrity - Courses");
+		try{
+			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElements(course.course_list));
+		}catch(Exception e){
+			System.out.println("No Courses for the user");
 		}
-		
-		
 	}
 
 	/// login as guest
 	public void loginAsguest() throws InterruptedException {
-		
-		waitForVisibility(Login_as_guest_button);
-		
 		try {
+			initializeCourse();
+			waitForVisibility(usernamefield);
+			waitForVisibility(button_login);
+			waitForVisibility(passfield);
+			waitForVisibility(Login_as_guest_button);
 			clickElement(Login_as_guest_button);
-			ATUReports.add("Login as guest", "click on login as guest", "Success login", "Success login", LogAs.PASSED,
-					null);
-		} catch (Exception e) {
-			ATUReports.add("Login as guest", "click on login as guest", "Success login", "Success fail", LogAs.FAILED,
-					null);
-		}
-		
-		for (int second = 0;; second++) {
-			if (second >= 60)
-				Assert.fail("timeout");
 			try {
-				if (driver.getTitle().equals("Tegrity - Courses"))//check if tegrity courses home page is visible
-				{ 
-					ATUReports.add("Tegrity courses home page is visible", "Course List page is displayed",
-							"Course List page is displayed", LogAs.PASSED, null);
-
-					break;
-				} else {
-					Login_as_guest_button.click();
-				}
-			} catch (Exception e) {
-				System.out.println("Tegrity courses home page didn't load");
+				new WebDriverWait(driver, 30)
+						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
+			} catch (TimeoutException e) {
+				ATUReports.add("Login Timeout (Screenshot)", "Login Success", LogAs.FAILED,
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
-
-			Thread.sleep(1000);
+			if (driver.getTitle().contains("Tegrity - Courses")) {
+				ATUReports.add("Tegrity courses home page is visible", "Course List page is displayed",
+						"Course List page is displayed", LogAs.PASSED, null);
+			} else {
+				ATUReports.add("Login Failed (Screenshot)",  "Login Success", LogAs.FAILED,
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		} catch (Exception e) {
+			ATUReports.add("Login Failed (Screenshot)",  "Login Success", LogAs.FAILED,
+					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
-		Thread.sleep(3000);
-		Assert.assertEquals(driver.getTitle(), "Tegrity - Courses");
-	
+		try{
+			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElements(course.course_list));
+		}catch(Exception e){
+			System.out.println("No Courses for the user");
+		}
 	}
 
 	/// verify visibilty of login as guest button
@@ -329,18 +285,16 @@ public class LoginHelperPage extends Page {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
 	// This function verify that login as guest button is not displayed
 	public void verifyThatLoginAsGuestButtonNotDisplayed() {
 		verifyWebElementNotDisplayed(Login_as_guest_button, "Login as guest button");
 	}
-	
-	// This function verify that the text: "Some courses may allow guest access" is not displayed
+
+	// This function verify that the text: "Some courses may allow guest access"
+	// is not displayed
 	public void verifyThatTheTextSomeCoursesMyAllowGuestAccessNotDisplayed() {
 		verifyWebElementNotDisplayed(Login_as_guest_info, "The text: Some courses may allow guest access");
 	}
 
- }
-	
-	
-
+}
