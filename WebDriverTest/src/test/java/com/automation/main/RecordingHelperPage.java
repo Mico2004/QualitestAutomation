@@ -3866,14 +3866,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// enabled in Recording Task submenu
 	public void verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInRecordingTaskMenu(List<String> target_option_list)
 			throws InterruptedException {
-		//moveToElement(recording_tasks_button, driver).perform();
-	
+		moveToElement(recording_tasks_button, driver).perform();
 		Thread.sleep(1000);
 
-		String [] all_options = driver.findElement(By.xpath(".//li[@class='menu-container']/ul[@class='dropdown-menu text-left']")).getText().split("\n");
-		System.out.println(driver.findElement(By.xpath("//li[@class='menu-container']/ul[@class='dropdown-menu text-left']")).getText());
+		String[] all_options = driver.findElements(By.cssSelector(".menu-container>.dropdown-menu")).get(3).getText()
+				.split("\n");
+
 		for (String option : all_options) {
-			System.out.println("The option is"+ option);
 			if (target_option_list.contains(option)) {
 				System.out.println("T"); // Call this option verify that this
 											// option enabled
