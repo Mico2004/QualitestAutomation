@@ -55,6 +55,7 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 	public CreateNewUserWindow create_new_user_window;
 	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
 	public EditRecordinPropertiesWindow erp_window;
+	
 
 	@BeforeClass
 	public void setup() {
@@ -231,7 +232,8 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		System.out.println("pastpreset4");
 		if(TestExist)
 		course.deleteAllRecordingsInCourseStartWith("Ab", 3, record,delete_menu);
-		System.out.println("pastpreset5");		
+		System.out.println("pastpreset5");
+		
 		course.selectCourseThatStartingWith("PastCourseA");
 		System.out.println("pastpreset6");
 		additionalExist=record.tabExists(1);
@@ -241,14 +243,18 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		record.returnToCourseListPage(course);
 		Thread.sleep(4000);
 		System.out.println("a3");
+		
 		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 0, record,
 		delete_menu); 
+		
 		if(additionalExist)
 		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 1, record,
 		delete_menu); 
+		
 		if(StudentExist)
 		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 2, record,
 		delete_menu); 
+		
 		if(TestExist)
 		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 3, record,
 		delete_menu);
@@ -299,57 +305,8 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		System.out.println("3"); Thread.sleep(4000);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record); 
 		System.out.println("4"); Thread.sleep(4000);
-
-			
-		
 		course.signOut();
-		System.out.println("6"); 
-		tegrity.loginCourses("User1");		
-		initializeCourseObject();	
-		Thread.sleep(2000);
-		course.selectCourseThatStartingWith("PastCourseA");	
-		Thread.sleep(2000);
-		wait.until(ExpectedConditions.visibilityOf(record.course_title));
-		String past_courseA = record.course_title.getText().toString();		
-		record.returnToCourseListPage();
-		Thread.sleep(3000);
-		course.selectCourseThatStartingWith("PastCourseB");
-		Thread.sleep(2000);
-		wait.until(ExpectedConditions.visibilityOf(record.course_title));
-		String past_courseB = record.course_title.getText().toString();		
-		record.returnToCourseListPage();
-		record.signOut();
-		wait.until(ExpectedConditions.visibilityOf(tegrity.usernamefield));
 
-		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
-		/// 2.Click the "Course Builder" link
-		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		Thread.sleep(10000);
-		/// 3.Click the "Membership" link related to the course+unenroll
-		/// instructor 1
-		System.out.println("before 3");
-		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseA, PropertyManager.getProperty("User1"),
-				mangage_adhoc_courses_membership_window);
-		Thread.sleep(4000);
-	
-		for (String window : driver.getWindowHandles()) {
-			driver.switchTo().window(window);
-			break;
-		}
-
-		System.out.println("before 3");
-		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseB, PropertyManager.getProperty("User1"),
-				mangage_adhoc_courses_membership_window);
-		Thread.sleep(4000);
-
-		for (String window : driver.getWindowHandles()) {
-			driver.switchTo().window(window);
-			break;
-		}
-
-		mange_adhoc_course_enrollments.clickOnAdminDashboard();
-		Thread.sleep(2000);
 
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
