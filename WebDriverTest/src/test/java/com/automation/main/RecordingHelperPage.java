@@ -442,17 +442,23 @@ public class RecordingHelperPage extends Page {
 	// This function clicks on title of recording in index i
 	public void clickOnRecordingTitleInIndex(int index) throws InterruptedException {
 		System.out.println("Click on title in index: " + index);
-	      waitForVisibility(driver.findElement(By.xpath("//*[@id='Recording" + Integer.toString(index) + "']/strong")));
-	       driver.findElement(By.xpath("//*[@id='Recording" + Integer.toString(index) + "']/strong")).click();
-	        Thread.sleep(1000);
-	        if(driver instanceof InternetExplorerDriver) {
-	        	if(!isElementPresent(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap"))){
-	               wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='Recording" + Integer.toString(1) + "']/strong")));
-	               Thread.sleep(1000);
-	               //driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
-	             driver.findElement(By.xpath("html/body/google-analytics/google-analytics/div[1]/div[2]/div[3]/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
-	           }    
-	        }
+		WebElement element=first_recording;
+		String id="Recording" + Integer.toString(index);
+		try {
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("recording chapter was expaned");
+			ATUReports.add("recording chapter was expaned", LogAs.PASSED, null);							
+			Thread.sleep(1500);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("recording chapter wasn't expaned");
+			ATUReports.add("recording chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		
 	}
 	
 	// This function clicks on first recording title
@@ -1155,20 +1161,26 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	/// verify recording is expandable
 	public void verifyFirstExpandableRecording() throws InterruptedException {	
-	
-		      waitForVisibility(first_recording_title);
-		      wait.until(ExpectedConditions.elementToBeClickable(first_recording_title));
-		       driver.findElement(By.xpath("//*[@id='Recording" + Integer.toString(1) + "']/strong")).click();
-		       if(driver instanceof InternetExplorerDriver) {
-		           if(!isElementPresent(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap"))){
-		               wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='Recording" + Integer.toString(1) + "']/strong")));
-		               Thread.sleep(1000);
-		               //driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
-		             driver.findElement(By.xpath("html/body/google-analytics/google-analytics/div[1]/div[2]/div[3]/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
-		           }
-		       }
-		       Thread.sleep(1000);
-		       if (isElemenetDisplayed(By.xpath("//*[@id=\"scrollableArea\"]/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a"))) {
+
+		      System.out.println("Click on title in index: " + 1);
+				WebElement element=first_recording;
+				String id="Recording1";
+				try {
+					waitForVisibility(element);
+					((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+					System.out.println("recording chapter was expaned");
+					ATUReports.add("recording chapter was expaned", LogAs.PASSED, null);							
+					Thread.sleep(1500);
+					Assert.assertTrue(true);
+					return;
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					System.out.println("recording chapter wasn't expaned");
+					ATUReports.add("recording chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				}
+		         
+		       if (isElementPresent(firsr_record_player_name)) {
 		           ATUReports.add("video recording was displayed", LogAs.PASSED, null);
 		           System.out.println("video recording was displayed");
 		           Assert.assertTrue(true);
@@ -1917,24 +1929,32 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	// verify move menu
 	public void toEditRecordingPropertiesMenu() throws InterruptedException {
-		waitForVisibility(recording_tasks_button);
-		moveToElementAndClick(recording_tasks_button, driver);
-		for (int i = 0; i < 10; i++) {
-			recording_tasks_button.sendKeys(Keys.TAB);
-			// solution to solve
-			try {
-				Thread.sleep(1000);
-				edit_rec_properties_button.click();
-				Thread.sleep(1000);
-				if (isElementPresent(By.id("ModalDialogHeaderWrap"))) {
-					System.out.println("Edit recording properties menu confirmed");
-					ATUReports.add("click succeeded", LogAs.PASSED, null);
-				}
-				return;
-			} catch (Exception e) {
-	
-			}
+
+		WebElement element=recording_tasks_button;
+		String id="EditRecordingProperties";
+		try {			
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
+			System.out.println("Delete window displayed");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
 		}
+		
+		
+		
+		
 	}
 
 	// check if recording has a being copied from status
@@ -2633,8 +2653,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for (int i = 0; i < current_recording_list.size(); i++) {
 			if (current_recording_list.get(i).equals(target_recording)) {
 				clickOnRecordingTitleInIndex(i + 1);
-				Thread.sleep(1000);
-				driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+				clickOnTheFirstCaptherWithOutTheExpand();
 				break;
 			}
 		}
@@ -4499,24 +4518,23 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void checkExistenceOfNonDeleteItemsStatusInAdditionalContentAndUncheckUndeleteableContent() throws InterruptedException {
 		int i = 1;
 		wait.until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]"), "class", "active"));
-		Thread.sleep(1000);
 		List<WebElement> elements=driver.findElements(By.cssSelector(".recordingData"));
 		
 		int size=elements.size();
 		System.out.print(size);
 		while(i<=size) {
-			System.out.println("loop"+i);
-				
-				Thread.sleep(1000);
+				System.out.println("loop"+i);
+				Thread.sleep(200);
 				System.out.println("in if");
 				WebElement el = driver.findElement(By.id("ItemStatus" + Integer.toString(i)));
 				String current_element = el.getText();	
 				System.out.println(current_element);
 			if ((!current_element.equals("Available"))) {
 				try{
-				new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElement(el, "Available"));
+				new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(el, "Available"));
 				}catch(org.openqa.selenium.TimeoutException msg){}
-				((JavascriptExecutor) driver).executeScript("document.getElementById(\""+"Checkbox+i"+"\").click();");				
+				String uncheckId = "Checkbox" + Integer.toString(i);                              
+				((JavascriptExecutor) driver).executeScript("document.getElementById(\""+uncheckId+"\").click();");				
 				System.out.println("Unchecked checkbox: "+i);
 				ATUReports.add("Unchecked checkbox: "+i, "", LogAs.PASSED, null);					
 			  }			 
@@ -4560,7 +4578,6 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void clickOnFirstVisibleChapter() {
 		try {
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.className(".panel-collapse collapse in")));
-			Thread.sleep(2000);
 			System.out.println("clickOnFirstVisibleChapter1");
 			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
 			System.out.println("clickOnFirstVisibleChapter1");
@@ -4594,6 +4611,26 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	}
 	
+	
+	public void clickOnTheFirstCaptherWithOutTheExpand(){
+	
+		try{
+			System.out.println("clickOnFirstVisibleChapter1");
+			waitForVisibility(first_video_recording);
+			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
+			System.out.println("clickOnFirstVisibleChapter1");
+			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
+		} catch (org.openqa.selenium.TimeoutException e) {
+		
+			System.out.println("clickOnFirstVisibleChapter3");
+			((JavascriptExecutor) driver)
+					.executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
+			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
+			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
+				
+		}
+	}
+
 	public boolean checkIfThereAreRecordingsInTab(){
 		try{
 			Thread.sleep(1500);
