@@ -196,8 +196,7 @@ public class TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevel
 		record.convertRecordingsListToNames();
 		String rec=record.recording_list_names.get(0);
 		record.verifyFirstExpandableRecording();
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 

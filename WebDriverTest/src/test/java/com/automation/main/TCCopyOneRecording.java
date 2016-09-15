@@ -239,8 +239,8 @@ public class TCCopyOneRecording {
 		record.verifyFirstExpandableRecording();
 		Thread.sleep(3000);
 		System.out.println("post 1st 19");
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		record.clickOnTheFirstCaptherWithOutTheExpand();
+
 	//20.dispaly recording
 		player_page.verifyTimeBufferStatusForXSec(15);// check source display
 
@@ -309,8 +309,7 @@ public class TCCopyOneRecording {
 	record.verifyFirstExpandableRecording();
 		Thread.sleep(5000);
 		System.out.println("post 1st 29");
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 	///30.Click any chapter:verify plays correctly 
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 		

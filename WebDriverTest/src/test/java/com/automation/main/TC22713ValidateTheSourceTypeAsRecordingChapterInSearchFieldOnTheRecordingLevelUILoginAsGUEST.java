@@ -185,7 +185,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			String recording_to_search=record.getFirstRecordPlayerName();
 			Thread.sleep(2000);
 						
-			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+			record.clickOnTheFirstCaptherWithOutTheExpand();
 
 			// 7.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display

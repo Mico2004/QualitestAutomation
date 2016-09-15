@@ -212,7 +212,8 @@ public class TC15535CopyOneRecording {
 		record.verifyFirstExpandableRecording();
 		Thread.sleep(2000);
 
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+		//driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		//23.dispaly recording
 		player_page.verifyTimeBufferStatusForXSec(5);// check source display
 
@@ -280,7 +281,7 @@ public class TC15535CopyOneRecording {
 		record.verifyFirstExpandableRecording();
 		Thread.sleep(1000);
 
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		Thread.sleep(3000);
 		//23.dispaly recording
 		player_page.verifyTimeBufferStatusForXSec(5);// check source display

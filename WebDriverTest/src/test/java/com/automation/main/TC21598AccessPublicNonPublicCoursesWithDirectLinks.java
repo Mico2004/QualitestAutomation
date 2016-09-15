@@ -179,8 +179,7 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 		Thread.sleep(2000);
 				
 		// 19.player is working
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 				
 		System.out.println("Done.");

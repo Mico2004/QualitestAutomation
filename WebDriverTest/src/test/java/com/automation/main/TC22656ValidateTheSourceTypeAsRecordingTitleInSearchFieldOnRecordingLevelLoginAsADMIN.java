@@ -180,8 +180,8 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			 // 7.Click on one of the Recording link
 		     record.verifyFirstExpandableRecording();
 		     record.convertRecordingsListToNames();
-		     driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		     Thread.sleep(15000);
+		     record.clickOnTheFirstCaptherWithOutTheExpand();
+	
 		     // 8.verify recording displaying correctly
 		     player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
@@ -192,9 +192,7 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			//9.Search the Recording by entering the "Recording Title" you chose before and press ENTER.	
 			String recording_to_search=record.recording_list_names.get(0);///get first recording name the one we played
 			player_page.verifySearchForRecordingExist(recording_to_search);
-			
-			
-	
+		
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				break;

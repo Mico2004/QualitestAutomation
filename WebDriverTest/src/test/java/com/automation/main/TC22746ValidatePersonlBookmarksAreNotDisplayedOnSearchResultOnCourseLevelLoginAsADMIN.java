@@ -145,8 +145,7 @@ public class TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 		record.verifyFirstExpandableRecording();
 
 		///4.Click on the first chapter
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		// 5.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 

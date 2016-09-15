@@ -203,8 +203,7 @@ public class TCMoveOneRecording {
 	    record.verifyFirstExpandableRecording();
 		Thread.sleep(2000);
 		//22.player is working
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 		///// to go back to crecording window handler
 		for (String handler : driver.getWindowHandles()) {
@@ -227,8 +226,7 @@ public class TCMoveOneRecording {
 		record.verifyFirstExpandableRecording();
 		Thread.sleep(2000);
 		//27.player is working
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 	
 

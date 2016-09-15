@@ -148,8 +148,8 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 
 		// 7.Click on one of the Recording link
 		record.verifyFirstExpandableRecording();
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		record.clickOnTheFirstCaptherWithOutTheExpand();
+		
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
