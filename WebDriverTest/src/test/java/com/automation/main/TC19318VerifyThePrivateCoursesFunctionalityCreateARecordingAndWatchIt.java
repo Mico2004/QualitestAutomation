@@ -127,7 +127,7 @@ public class TC19318VerifyThePrivateCoursesFunctionalityCreateARecordingAndWatch
 		
 		// Select the recording.
 		String selected_recording_name = record.getFirstRecordingTitle();
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// Select the "Recording Tasks -> Copy" menu item.
 		record.clickOnRecordingTaskThenCopy();

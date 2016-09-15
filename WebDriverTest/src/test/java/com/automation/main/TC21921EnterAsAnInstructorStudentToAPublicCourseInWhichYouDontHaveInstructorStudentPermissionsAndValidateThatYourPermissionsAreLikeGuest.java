@@ -371,7 +371,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInCourseTasksMenu(target_option_list1);
 			
 			// 25. Click on a checkbox of a specific recording.
-			record.selectFirstCheckbox();
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			
 			// 26. Hover over "Recording tasks" menu.
 			record.moveToElement(record.recording_tasks_button, driver).perform();

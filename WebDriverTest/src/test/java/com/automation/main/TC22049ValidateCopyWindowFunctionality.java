@@ -176,7 +176,7 @@ public class TC22049ValidateCopyWindowFunctionality {
 		Thread.sleep(1000);
 		
 		// 10. Click on a checkbox of one recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String checked_recording_title = record.getFirstRecordingTitle();
 		String checked_recording_recorder_username = record.getIndexRecorderNameOfRecording(1);
 		

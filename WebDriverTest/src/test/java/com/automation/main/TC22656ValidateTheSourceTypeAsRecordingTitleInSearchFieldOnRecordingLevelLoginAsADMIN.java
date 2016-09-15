@@ -101,7 +101,6 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 		public void setup() {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
 
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -115,7 +114,6 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			course = PageFactory.initElements(driver, CoursesHelperPage.class);
 			confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 			course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
-			wait = new WebDriverWait(driver, 30);
 			move_window = PageFactory.initElements(driver, MoveWindow.class);
 			erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 			admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
@@ -177,38 +175,44 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			admin_view_course_list.moveToCoursesThroughGet(url);
 			/// 6.Click on one of the Recording link
 			Thread.sleep(1000);
-		     record.waitForVisibility(record.first_recording);
+		    record.waitForVisibility(record.first_recording);
 			
-
-			// 7.Click on one of the Recording link
-			record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
+			 // 7.Click on one of the Recording link
 		     record.verifyFirstExpandableRecording();
 		     record.convertRecordingsListToNames();
 		     driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
-			// 8.verify recording displaying correctly
-			player_page.verifyTimeBufferStatusForXSec(10);// check source display
+		     Thread.sleep(15000);
+		     // 8.verify recording displaying correctly
+		     player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
 
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 			}
-			//9.Search the Recording by entering the "Recording Title" you chose before and press ENTER.
-			//  plus +10.The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
-			
+			//9.Search the Recording by entering the "Recording Title" you chose before and press ENTER.	
 			String recording_to_search=record.recording_list_names.get(0);///get first recording name the one we played
-
 			player_page.verifySearchForRecordingExist(recording_to_search);
-			player_page = PageFactory.initElements(driver, PlayerPage.class);
-
+			
+			
+	
+			for (String handler : driver.getWindowHandles()) {
+				driver.switchTo().window(handler);
+				break;
+			}
+			
 			///10.The next result display below the current result in case there is next result.
 			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
 
 			///11.search results page in the format as follows: "recording name - Search Results".
-
+			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
+			Thread.sleep(2000);
 			player_page.verifySearchResultPage(recording_to_search);
-			///12.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
-			player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(3);
+			
+			//12. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
+			player_page.verifyResultsStatisticsInFormat(recording_to_search);
+			
+			///13.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
+			player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(0);
 			////
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
@@ -233,8 +237,7 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(2));
 
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
-			System.out.println("11111111111111111111111111111111111111111111111111111111111111111");
-		
+				
 
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

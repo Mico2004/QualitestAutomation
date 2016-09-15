@@ -139,7 +139,7 @@ public class TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording {
 		
 		// 7. Select the recording.
 		String selected_recording_name = record.getFirstRecordingTitle();
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 8. Select the "Recording Tasks -> Move" menu item.
 		record.clickOnRecordingTaskThenMove();
@@ -195,7 +195,7 @@ public class TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording {
 		
 		// 20. Select the recording.
 		selected_recording_name = record.getFirstRecordingTitle();
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 21. Select the "Recording Tasks -> Move" menu item.
 		record.clickOnRecordingTaskThenMove();

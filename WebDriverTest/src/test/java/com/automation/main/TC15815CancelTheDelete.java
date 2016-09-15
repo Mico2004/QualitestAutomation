@@ -105,7 +105,7 @@ public class TC15815CancelTheDelete {
 		Thread.sleep(1000);
 		
 		// 4. Select content item.
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String target_additional_content = record.getNameTargetIndexAdditionalContent(1);
 		String target_additional_content_type = record.getTypeTargetIndexAdditionalContent(1);
 		

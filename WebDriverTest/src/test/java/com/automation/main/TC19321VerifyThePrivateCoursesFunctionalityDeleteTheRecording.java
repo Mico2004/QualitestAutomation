@@ -135,7 +135,7 @@ public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
 		
 		// 3. Select the recording.
 		String selected_recording_name = record.getFirstRecordingTitle();
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 4. Select the "Recording Tasks -> Delete" menu item.
 		record.clickOnRecordingTaskThenDelete();

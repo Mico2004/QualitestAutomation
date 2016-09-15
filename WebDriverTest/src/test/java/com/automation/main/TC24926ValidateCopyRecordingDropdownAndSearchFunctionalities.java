@@ -172,7 +172,7 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				wait.until(ExpectedConditions.visibilityOf(record.getCheckbox()));
 				
 				// 8. Click on a checkbox of one recording.
-				record.selectFirstCheckbox();
+				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 				
 				// 9. Hover over "Recording tasks" menu.
 				// 10. Click on the menu item "Copy".

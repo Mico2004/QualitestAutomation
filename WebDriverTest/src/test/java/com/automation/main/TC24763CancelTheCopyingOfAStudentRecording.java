@@ -133,7 +133,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 4. Select source recording.
 		// 5. Select "Recording Tasks -> Copy" menu item.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		clickedRecording = copy.verifyCopyMenu(record);
 		System.out.println("Clicked on recording: " + clickedRecording);
 		
@@ -222,7 +222,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 15. Select source recording.
 		// 16. Select "Recording Tasks -> Copy" menu item.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		clickedRecording = copy.verifyCopyMenu(record);
 		System.out.println("Clicked on recording: " + clickedRecording);
 		

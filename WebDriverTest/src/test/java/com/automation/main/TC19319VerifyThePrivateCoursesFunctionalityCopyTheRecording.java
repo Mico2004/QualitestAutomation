@@ -140,7 +140,7 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		
 		// Select the recording.
 		record.getFirstRecordingTitle();
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// Select the "Recording Tasks -> Copy" menu item.
 		record.clickOnRecordingTaskThenCopy();
@@ -168,7 +168,7 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		Thread.sleep(1000);
 		record.unselectIndexCheckBox(1);
 		Thread.sleep(1000);
-		record.selectIndexCheckBox(2);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 		
 		// Select the "Recording Tasks -> Copy" menu item.
 		record.clickOnRecordingTaskThenCopy();

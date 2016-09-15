@@ -95,10 +95,10 @@ public class TC15580ExistenceOfUIItemsMove {
 		record.verifyDisabledMenu();
 		
 		//5.click one check box
-		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.getCheckbox());
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		//6.un-check one check box
-		record.unClickOneCheckBoxOrVerifyNotSelected(record.getCheckbox());
+		record.unClickOneCheckBoxOrVerifyNotSelected(record.checkbox);
 	
 		//7.click all check box
 		record.checkall.click();// make all checkboxes marked

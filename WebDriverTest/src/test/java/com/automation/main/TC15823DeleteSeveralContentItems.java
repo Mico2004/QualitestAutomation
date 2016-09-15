@@ -110,8 +110,8 @@ public class TC15823DeleteSeveralContentItems {
 		Thread.sleep(1000);
 		
 		// 4. Select content item.
-		record.selectIndexCheckBox(1);
-		record.selectIndexCheckBox(2);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 		String first_target_additional_content = record.getNameTargetIndexAdditionalContent(1);
 		String first_target_additional_content_type = record.getTypeTargetIndexAdditionalContent(1);
 		String second_target_additional_content = record.getNameTargetIndexAdditionalContent(2);

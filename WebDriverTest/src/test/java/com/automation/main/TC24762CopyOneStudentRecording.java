@@ -4,6 +4,7 @@ import java.awt.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -124,6 +125,7 @@ public class TC24762CopyOneStudentRecording {
 			course = PageFactory.initElements(driver, CoursesHelperPage.class);
 			//course.selectFirstCourse(record);
 			String course_name=course.selectCourseThatStartingWith("Ab");
+				
 			record.waitForVisibility(record.first_recording);
 			//4.1  Click the 'Student Recording' tab
 	    	record.clickOnStudentRecordingsTab();

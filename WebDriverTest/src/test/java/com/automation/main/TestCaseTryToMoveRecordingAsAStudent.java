@@ -114,7 +114,7 @@ public class TestCaseTryToMoveRecordingAsAStudent {
 		//course.selectCourse(record);
 		
 		// 3. Select any recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 4. Click "Recording Tasks" button.
 		record.recording_tasks_button.click();
@@ -138,7 +138,7 @@ public class TestCaseTryToMoveRecordingAsAStudent {
 		Thread.sleep(1000);
 		
 		// 7. Select any recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 8. Click "Recording Tasks" button.
 		record.recording_tasks_button.click();

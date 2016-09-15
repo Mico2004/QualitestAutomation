@@ -154,7 +154,12 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
 			course_settings.waitForVisibility(course_settings.getOk_button());
 			course_settings.CheckAllowStudentDownload();
-
+			
+			Thread.sleep(500);
+			admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
+			course_settings.makeSureThatMakeCoursePublicIsSelected();
+			course_settings.clickOnOkButton();
+		
 			// 3.Click on sign out
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 			Thread.sleep(1500);
@@ -177,7 +182,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			
 			record.verifyFirstExpandableRecording();
 			
-			String recording_to_search=record.getSecondRecord();
+			String recording_to_search=record.getFirstRecordPlayerName();
 			Thread.sleep(2000);
 						
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
@@ -185,8 +190,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			// 7.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
-			///// to go back to crecording window handler
-			String curr_win=driver.getWindowHandle();	
+			///// to go back to crecording window handler	
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				break;		
@@ -233,6 +237,9 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			Thread.sleep(2000);
 			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
 			player_page.verifySearchResultPage(recordname);
+			
+			//40. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
+			player_page.verifyResultsStatisticsInFormat(recording_to_search);
 
 			///17.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
 			player_page.waitForVisibility(player_page.columns_title_text.get(0));
@@ -309,7 +316,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 				break;		
 			}
 
-
 			///30.Validate the search field is display at the top right of the UI page below the top navigation bar.
 			player_page.veriySearchBoxLocation();
 
@@ -346,7 +352,11 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			///38.search results page in the format as follows: "recording name - Search Results".
 			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
 			Thread.sleep(2000);
+		
 			player_page.verifySearchResultPage(recordname);
+			
+			//40. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
+			player_page.verifyResultsStatisticsInFormat(recording_to_search);
 
 			///39.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
 			player_page.waitForVisibility(player_page.columns_title_text.get(0));
@@ -361,6 +371,21 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			Thread.sleep(1000);
 			player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 
+			// Signout
+			player_page.exitInnerFrame();
+			record.signOut();
+			
+			// Unpublic Ab course1. 
+			tegrity.loginCourses("User1");
+							
+			course.selectCourseThatStartingWith("Ab");
+							
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+			course_settings.clickOnOkButton();
+				
+			
 			///42.quit
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

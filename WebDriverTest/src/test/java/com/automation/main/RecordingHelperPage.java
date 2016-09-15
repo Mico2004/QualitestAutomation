@@ -35,7 +35,6 @@ import org.testng.Assert;
 import org.testng.annotations.Listeners;
 //import com.automation.objects.RecordingObject;
 import org.testng.asserts.LoggingAssert;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -43,12 +42,9 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-
 import java.io.StringReader;
-
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Result;
@@ -57,7 +53,6 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
@@ -143,8 +138,10 @@ public class RecordingHelperPage extends Page {
 	public WebElement first_recording; /// first recording
 	@FindBy(xpath = "//*[@id=\"scrollableArea\"]/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a")
 	WebElement first_video_recording;/// first video in first recording
-	@FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[3]/a/div[2]/p[2]")
+	@FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[3]/a/div[2]")
 	WebElement second_record_player;
+	@FindBy(xpath = "//*[@id=\"scrollableArea\"]/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a/div[2]")
+	WebElement firsr_record_player_name;
 	@FindBy(id = "CourseTask")
 	WebElement course_task;
 	@FindBy(id = "SortingTasks")
@@ -442,11 +439,6 @@ public class RecordingHelperPage extends Page {
 		System.out.println("returnToCourseListPage7");	
 	}
 
-	// This function select first recording from recording list
-	public void selectFirstCheckbox() throws InterruptedException {		
-		selectIndexCheckBox(1);
-	}
-
 	// This function clicks on title of recording in index i
 	public void clickOnRecordingTitleInIndex(int index) throws InterruptedException {
 		System.out.println("Click on title in index: " + index);
@@ -565,7 +557,7 @@ public class RecordingHelperPage extends Page {
 
 	// This function click on Course Task then on Settings in the sub menu
 	public void clickOnCourseTaskThenCourseSettings() throws InterruptedException {
-		WebElement element=start_recording_button;
+		WebElement element=course_tasks_button;
 		String id="CourseSettings";
 		try {
 			System.out.println("clickOnRecordingTaskThen1");
@@ -849,54 +841,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 	}
 
-	// verify check box is selected
-	public void ClickOneCheckedboxSelected(WebElement check) throws InterruptedException {
-		ClickOneCheckBoxOrVerifyAlreadySelected(check);
-		// try {
-		// waitForVisibility(check);
-		// check.click();
-		// System.out.println("one checkboxe is selected");
-		// ATUReports.add("one checkboxe is selected", LogAs.PASSED, new
-		// CaptureScreen(ScreenshotOf.DESKTOP));
-		// } catch (Exception e) {
-		// System.out.println("one checkboxe is not selected");
-		// ATUReports.add("one checkboxe is not selected", LogAs.FAILED, new
-		// CaptureScreen(ScreenshotOf.DESKTOP));
-		// }
-		// Thread.sleep(1000);
-		// Assert.assertTrue(check.isSelected());
-
-	}
-
-	// verify check box is selected
-	public void ClickOneCheckedboxNotSelected(WebElement check) throws InterruptedException {
-		unClickOneCheckBoxOrVerifyNotSelected(check);
-		// try {
-		// waitForVisibility(check);
-		// check.click();
-		// Thread.sleep(1000);
-		// System.out.println("one checkboxe is not selected");
-		// ATUReports.add("one checkboxe is not selected", LogAs.PASSED, new
-		// CaptureScreen(ScreenshotOf.DESKTOP));
-		// } catch (Exception e) {
-		// Thread.sleep(1000);
-		// System.out.println("one checkboxe is selected");
-		// ATUReports.add("one checkboxe is selected", LogAs.FAILED, new
-		// CaptureScreen(ScreenshotOf.DESKTOP));
-		// }
-		//
-		// Assert.assertFalse(check.isSelected());
-
-	}
-
-	public void verifyAllCheckedboxSelected() throws InterruptedException {// verify
-																			// all
-																			// check
-																			// box
-																			// are
-																			// selected
-																			// or
-																			// not
+	public void verifyAllCheckedboxSelected() throws InterruptedException {// verify// all// check// box// are// selected// or// not
 
 		for (WebElement el : checkboxlist) {
 			if ((el.isSelected())) {
@@ -1238,34 +1183,45 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// press on view button and than select option
 	public void pressViewButtonAndSelect(String choice) throws InterruptedException {
 
-		moveToElementAndClick(view_buttonTest, driver);
-		Thread.sleep(500);
-		
-		if(driver instanceof InternetExplorerDriver) {
-		// rec.copy_button.click();
-			for (int i = 0; i < 8; i++)
-				view_button.sendKeys(Keys.TAB);// solution
-			// hover and click to
-		}
-		
-		try {
+		WebElement element=view_buttonTest;
+		String id = null;
+		try {	
+			waitForVisibility(element);
 			switch (choice) {
-			case "Title":
-				sort_by_title.click();
+			case "Title":				
+				id= "Title";
 				break;
 			case "Date":
-				sort_by_date.click();
+				id = "Date";
 				break;
 			case "Duration":
-				sort_by_duration.click();
+				id = "Duration";
 				break;
 
 			}
-			ATUReports.add("click succeded ", LogAs.PASSED, null); // solve
+			String script=
+			"var aTags = document.getElementsByTagName(\'a\');"
+			+ " var searchText = \""+id+"\";"
+			+ "  var found;"
+			+ " for (var i = 0; i < aTags.length; i++)"
+			+ " {"
+			+ "if"
+			+ " (aTags[i].textContent == searchText)"
+			+ " {found = aTags[i];break;}"
+			+ "}"
+			+ " $(aTags[i]).click();";
+			
+			((JavascriptExecutor) driver).executeScript(script);
+			System.out.println("press on sort record" + choice);	
+			ATUReports.add("Select sort_recording_tab -> "+choice, choice+" was click",
+					choice+" was clicked", LogAs.PASSED, null);
+			Assert.assertTrue(true);
 
 		} catch (Exception e) {
-			
-
+			System.out.println(e.getMessage());
+			ATUReports.add("click not succeded ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println(choice+" was clicked");
+			Assert.assertTrue(false);
 		}
 
 	}
@@ -2336,7 +2292,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		select_upload_additional_file.click();
 		Thread.sleep(2000);
 		String fullPathToFile = "src\\test\\resources\\additional_file.txt"; // System.getProperty("user.dir")																										//// +
-																												//// "\\src\\main\\resources\\ImsImportDataCreation.xml";
+	//// "\\src\\main\\resources\\ImsImportDataCreation.xml";
 
 		uploadFile(fullPathToFile);
 		Thread.sleep(2000);
@@ -2350,15 +2306,37 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	/// clicks on content task->upload additonal content file by path
 	public void toUploadAdditionalContentFile() throws InterruptedException, Exception {
-		Robot robot = new Robot();
-		robot.delay(3000);
-		robot.mouseMove(0, -100);
-		Thread.sleep(2000);
-		course_tasks_button.click();
-		Thread.sleep(2000);
-		add_additional_content_file.click();
-		Thread.sleep(2000);
-
+//		Robot robot = new Robot();
+//		robot.delay(3000);
+//		robot.mouseMove(0, -100);
+//		Thread.sleep(2000);
+//		course_tasks_button.click();
+//		Thread.sleep(2000);
+//		add_additional_content_file.click();
+//		Thread.sleep(2000);
+		
+		WebElement element=course_task_button;
+		String id="AddAdditionalContentFile";
+		try {
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
+			System.out.println("Delete window displayed");
+			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
+		}
+		
 	}
 	
 	//verify Additional Content Tab Is On Right Of Recording Tab
@@ -2387,7 +2365,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		// from here you can use as it wrote
 		System.out.println("uploadFile1");
-		path = System.getProperty("user.dir") + "\\src\\test\\resources\\additional_file.txt";
+		String new_path = System.getProperty("user.dir") + path;
+	
+		
 		System.out.println(path);
 		System.out.println("uploadFile2");
 		StringSelection ss = new StringSelection(path);
@@ -3698,7 +3678,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				Assert.assertTrue(true);
 				return;
 			} else {
-				checkbox.click();
+				
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);			
+				//checkbox.click();
 				System.out.println("Checkbox is selected");
 				ATUReports.add("Checkbox.", "Success to select.", "Sucess to select.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -3711,27 +3693,21 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	}
 
-	// verify check box is selected (Old function name -> just calling the new
-	// function with the new name
-	public void ClickOneCheckBoxOrVerifyAlreadySelected(WebElement checkbox) throws InterruptedException {
-		SelectOneCheckBoxOrVerifyAlreadySelected(checkbox);
-	}
-
 	// verify check box is selected
 	public void unClickOneCheckBoxOrVerifyNotSelected(WebElement check) throws InterruptedException {
 		try {
-			waitForVisibility(checkbox);
-			if (!checkbox.isSelected()) {
+			waitForVisibility(check);
+			if (!check.isSelected()) {
 				System.out.println("one checkbox is not selected");
 				ATUReports.add("one checkbox is not selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 				Assert.assertTrue(true);
 				return;
 			} else {
-				checkbox.click();
-				if (!checkbox.isSelected()) {
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check);			
+				//checkbox.click();
+				if (!check.isSelected()) {
 					System.out.println("one checkbox is not selected");
-					ATUReports.add("one checkbox is not selected", LogAs.PASSED,
-							new CaptureScreen(ScreenshotOf.DESKTOP));
+					ATUReports.add("one checkbox is not selected", LogAs.PASSED,new CaptureScreen(ScreenshotOf.DESKTOP));
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("one checkbox is  selected");
@@ -4583,9 +4559,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 	}
 	
-	public String getSecondRecord() {
-		//waitForVisibility(second_record_player);
-		return second_record_player.getText();
+	public String getFirstRecordPlayerName() {
+		waitForVisibility(firsr_record_player_name);
+		return firsr_record_player_name.getText();
 	}
 
 	public void clickOnFirstVisibleChapter() {

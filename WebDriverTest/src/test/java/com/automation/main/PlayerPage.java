@@ -1,18 +1,15 @@
 package com.automation.main;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.List;
 import java.util.Locale;
-
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -71,9 +68,9 @@ public class PlayerPage extends Page {
 	WebElement second_record_player;
 	@FindBy(id = "NumbOfRes")
 	WebElement list_of_results;
-	@FindBy(xpath = "html/body/div[3]/div[6]/div")
+	@FindBy(xpath = ".//*[@id='Projector_CPTN']/div/span") ////html/body/div[2]/div[4]/div/span")
 	WebElement search_result_title;
-	@FindBy(linkText = "Course")
+	@FindBy(xpath = ".//*[@id='Links_CPTN_TEXT']/span")
 	WebElement bookmarks_title;
 	@FindBy(css = "#undefined_TXT")
 	WebElement course_breadcrumbs;
@@ -126,16 +123,19 @@ public class PlayerPage extends Page {
 	WebElement VolumeImage;	
 	@FindBy(id= "ControlPanelDivTextBox")
 	WebElement ControlPanelDivTextBox;
-	@FindBy(id= "DragEventsBlockerDiv")
-	WebElement DragEventsBlockerDiv;
+	@FindBy(id= "VolumeSliderDiv")
+	WebElement VolumeSliderDiv;
 	@FindBy(id= "VolumeSliderButton")
 	WebElement VolumeSliderButton;
 	@FindBy(id= "FastForwardSliderButton_Img")
 	WebElement FastForwardSlide;
+	@FindBy(id= "TimeSliderLine")
+	WebElement TimeSliderLine;
 	@FindBy(css= ".SearchResultTime")
 	List<WebElement> SearchResultTimes;
 	@FindBy(css= ".SearchResultLocation")
 	List<WebElement> SearchResultlocation;
+	
 
 	
 	// This function get as input number of seconds.
@@ -255,7 +255,7 @@ public class PlayerPage extends Page {
 		return true;
 	}
 	
-	public void verifyUniversityLogoVisibilityAndLocation() {
+	public void verifyUniversityLogoVisibilityAndLocation() throws InterruptedException {
 		
 		waitForVisibility(tegrity_universty_logo);
 		if(isElemenetDisplayed(By.id("InstituteLogotype"))){
@@ -268,11 +268,11 @@ public class PlayerPage extends Page {
 			ATUReports.add("The tegrity University logo is not displayed.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);	
 		}
-		
+		Thread.sleep(1000);
 		Point logo_location = tegrity_universty_logo.getLocation();
 		Point serach_box= search_box.getLocation();
 		
-		if((logo_location.x < serach_box.x) && (serach_box.y < logo_location.y)) {
+		if((logo_location.x < serach_box.x)) {
 			System.out.println("Verifed that logo at the top left cornner.");
 			ATUReports.add("Verifed that logo at the top left cornner", "True.", "True.", LogAs.PASSED, null);
 		} else {
@@ -301,7 +301,7 @@ public class PlayerPage extends Page {
 				ATUReports.add("Not Verifed that the color is dark grey.", "True.", "False.", LogAs.FAILED, null);
 		}	
 	if(colorToCheck.equals(Color)) {
-		System.out.println(" Verifed that the color is dark grey.");
+		System.out.println("Verifed that the color is dark grey.");
 		ATUReports.add(" Verifed that the color is dark grey.", "True.", "True.", LogAs.PASSED, null);
 	} else {
 		System.out.println("Not Verifed that the color is dark grey.");
@@ -325,7 +325,7 @@ public class PlayerPage extends Page {
 		int i=0;
 		for (WebElement e : driver.findElements(By.cssSelector(".SearchResultLocation"))) {			    		
 				String current_element = getTextFromWebElement(e);						
-				if (!current_element.equals("Recording Chapter")) {
+				if (!current_element.equals("Recording Chapter") && !current_element.equals("Recording Title") ) {
 					System.out.println("Not Verify that the results of the row of location are fine.");
 					ATUReports.add("Not verify that the results of the row of location are fine.", "True.", "false", LogAs.FAILED, null);
 					break;
@@ -342,7 +342,7 @@ public class PlayerPage extends Page {
 				
 				if (!checkThatTheTimeIsValid(current_element)) {
 					System.out.println("Not verify that the results of the row of time are fine.");
-					ATUReports.add("verify that the results of the row of time are fine.", "True.", "false", LogAs.FAILED, null);
+					ATUReports.add("Not verify that the results of the row of time are fine.", "True.", "false", LogAs.FAILED, null);
 					break;
 				}
 				i++;
@@ -355,16 +355,16 @@ public class PlayerPage extends Page {
 		for (WebElement e : driver.findElements(By.cssSelector(".SearchResultContext"))) {			    		
 				String current_element = getTextFromWebElement(e);						
 				
-				if (!current_element.isEmpty()) {
-					System.out.println("Not Verify that the results of the row of time are fine.");
-					ATUReports.add("Not verify that the results of the row of time are fine.", "True.", "false", LogAs.FAILED, null);
+				if (current_element.isEmpty()) {
+					System.out.println("Not Verify that the results of the row of context are fine.");
+					ATUReports.add("Not verify that the results of the row of context are fine.", "True.", "false", LogAs.FAILED, null);
 					break;
 				}
 				i++;
 			   } 	
 	
-		System.out.println("Verify that the results of the row of time are fine.");
-		ATUReports.add("Verify that the results of the row of time are fine.", "True.", "false", LogAs.PASSED, null);
+		System.out.println("Verify that the results of the row of context are fine.");
+		ATUReports.add("Verify that the results of the row of context are fine.", "True.", "false", LogAs.PASSED, null);
 		
 	}
 	
@@ -418,12 +418,12 @@ public class PlayerPage extends Page {
 		
 		waitForVisibility(webelement);
 		if (isElementPresent(webelement)) {
-			System.out.println("Verfied that" + webelement.getText() + "displayed.");
-			ATUReports.add("Verfied that" + webelement.getText() + "displayed.", "True.", "True.", LogAs.PASSED, null);
+			System.out.println("Verfied that " + webelement.getAttribute("id").toString() + " displayed.");
+			ATUReports.add("Verfied that" + webelement.getAttribute("id").toString() + "displayed.", "True.", "True.", LogAs.PASSED, null);
 			
 		} else {
-			System.out.println("Not Verfied that" + webelement.getText() + "displayed.");
-			ATUReports.add("Not Verfied that" + webelement.getText() + "displayed.", "True.", "False.", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println("Not Verfied that " + webelement.getAttribute("id").toString() + " displayed.");
+			ATUReports.add("Not Verfied that " + webelement.getAttribute("id").toString() + " displayed.", "True.", "False.", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
 		}
 	
@@ -455,7 +455,10 @@ public class PlayerPage extends Page {
 		verifyWebElementIsDisplay(Back30_seconds);
 		
 		//verify that play button is display
-		verifyWebElementIsDisplay(DragEventsBlockerDiv);
+		verifyWebElementIsDisplay(TimeSliderLine);
+		
+		//verify that play button is display
+		verifyWebElementIsDisplay(VolumeSliderDiv);
 		
 		//verify that play button is display
 		verifyWebElementIsDisplay(VolumeImage);
@@ -603,6 +606,20 @@ public class PlayerPage extends Page {
 		}
 	}
 
+	public void searchRecord(String to_search) throws InterruptedException{
+
+		Thread.sleep(2000);
+		search_box.clear();
+		search_box.sendKeys(to_search + Keys.ENTER);	
+		Thread.sleep(1000);
+		search_box.clear();
+		
+		System.out.println("search the record: " + to_search);
+		ATUReports.add("search the record: " + to_search, LogAs.PASSED, null);
+		
+	}
+	
+
 	//// search for course
 	public void verifySearchForRecordingExist(String to_search) {
 		try {
@@ -611,6 +628,7 @@ public class PlayerPage extends Page {
 			search_box.clear();
 			search_box.sendKeys(to_search + Keys.ENTER);	
 			Thread.sleep(1000);
+			search_box.clear();
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				break;
@@ -636,11 +654,12 @@ public class PlayerPage extends Page {
 
 	/// verify search result page by recording name that was searched
 	public void verifySearchResultPage(String recording) throws InterruptedException {
+			
 		
-		
-		 new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(search_result_title));
-		
-		String text = search_result_title.getText();
+		//WebElement titleResult =(WebElement)((JavascriptExecutor) driver).executeScript("document.getElementById(\"undefined_TXT\");");
+		WebElement titleResult = driver.findElements(By.id("undefined_TXT")).get(2);
+		String text = titleResult.getText(); 
+			
 		if ((text.contains(recording)) && (text.contains("- Search Results"))) {
 			System.out.println("result search page verified for recording: " + recording);
 			ATUReports.add("result search page verified for recording: ", recording, "contains", "contains",
@@ -669,6 +688,33 @@ public class PlayerPage extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	
+	public void verifySearchResultIsEmpty() {
+		if(SearchResultTimes.size() == 0 && SearchResultContext.size() == 0 && SearchResultlocation.size()==0) {
+			System.out.println("Verified that search result is empty.");
+			ATUReports.add("Verified that search result is empty.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verified that search result is empty.");
+			ATUReports.add("Verified that search result is empty.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//			Assert.assertTrue(false);
+		}
+	}
+	
+	
+	public void verifySearchResultIsNotEmpty() {
+		if(SearchResultTimes.size() >= 1 && SearchResultContext.size() >= 1 && SearchResultlocation.size()>= 1) {
+			System.out.println("Verified that search result is not empty.");
+			ATUReports.add("Verified that search result is not empty.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not verified that search result is not empty.");
+			ATUReports.add("Not verified that search result is not empty.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//			Assert.assertTrue(false);
+		}
+	}
+	
 
 	// This function add String to bookmark
 	public void addTargetBookmark(String target_bookmark) {
@@ -725,6 +771,7 @@ public class PlayerPage extends Page {
 	/// The search results statistics in the format as follows: "X results found
 	/// for: search criterion. (XX sec)"
 	public void verifyResultsStatisticsInFormat(String record_name) {
+		String sentence;
 		System.out.println(list_of_results.getText());
 		String result = list_of_results.getText();
 		int i = 0;
@@ -739,6 +786,8 @@ public class PlayerPage extends Page {
 		String res_num = result.substring(0, i - 1);
 		if ((Integer.parseInt(result.substring(0, i - 1)) >= 0)) {
 			System.out.println("list is bigger or equal to 0 : " + res_num);
+			ATUReports.add("list is bigger or equal then 0 ", res_num, "bigger", "smaller", LogAs.PASSED,null);
+			Assert.assertTrue(true);
 		} else {
 			System.out.println("list is smaller then 0 : " + res_num);
 			ATUReports.add("list is smaller then 0 ", res_num, "bigger", "smaller", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -752,15 +801,16 @@ public class PlayerPage extends Page {
 			ATUReports.add("list is smaller then 0 ", seconds, "bigger", "smaller", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		String sentence = res_num + " results found for: " + record_name + ". (" + seconds + " sec)";
+		int NumOfresult = Integer.parseInt(res_num);
+		if(NumOfresult <= 1){
+			sentence = res_num + " result found for: " + record_name + ". (" + seconds + " sec)";
+		}
+		else sentence = res_num + " results found for: " + record_name + ". (" + seconds + " sec)";
 		System.out.println(sentence);
 		if (result.equals(sentence)) {
-			System.out.println("The search results statistics in the format as follows: "
-					+ "X results found for: search criterion. (XX sec)");
-			ATUReports.add(
-					"The search results statistics in the format as follows: "
-							+ "X results found for: search criterion. (XX sec)",
-					"parameters", "contains", "contains", LogAs.PASSED, null);
+			System.out.println("The search results statistics in the format as follows: "+ "X results found for: search criterion. (XX sec)");
+			ATUReports.add("The search results statistics in the format as follows: "
+							+ "X results found for: search criterion. (XX sec)","parameters", "contains", "contains", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("The search results statistics Not  in the format as followsed ");
@@ -785,11 +835,11 @@ public class PlayerPage extends Page {
 		driver.switchTo().frame(0);
 		waitForVisibility(player_timer);
 		System.out.println("player timer visible");
-		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("PlaceHolder_StatusBarAreaTextBox"),
-				"Buffering"));
+		wait.until(ExpectedConditions.invisibilityOfElementWithText(By.id("PlaceHolder_StatusBarAreaTextBox"),"Buffering"));
 		String timer = player_timer.getText();
+		String subTimer = timer.substring(0,6); 
 		System.out.println(timer);
-		if (timer.contains(location)) {
+		if (timer.contains(subTimer)) {
 			System.out.println("player starts playing at: " + location);
 			ATUReports.add("player starts playing at correct time", "parameters", "correct", "correct", LogAs.PASSED,
 					null);
@@ -797,8 +847,8 @@ public class PlayerPage extends Page {
 
 		} else {
 			System.out.println("player not starts playing at: " + location);
-			ATUReports.add("player starts playing at correct time", "parameters", "correct", " not correct",
-					LogAs.PASSED, null);
+			ATUReports.add("player not starts playing at correct time", "parameters", "correct", " not correct",
+					LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 	}

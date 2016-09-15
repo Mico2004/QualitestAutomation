@@ -90,7 +90,7 @@ public class VerifySortingOfCoursesInCopyWindowOfRegularRecordings {
 		initializeCourseObject();
 		course.selectFirstCourse(record);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
-		record.ClickOneCheckedboxSelected(record.getCheckbox());// check box is selected
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
         record.getCheckbox().click();
 		copy.verifyCopyMenu(record);
 		//7.verify courses are displayed in alphabetical order

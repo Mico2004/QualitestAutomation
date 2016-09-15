@@ -54,7 +54,8 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
-	@BeforeClass
+	
+    @BeforeClass
 	public void setup() {
 
 		
@@ -98,13 +99,6 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -114,11 +108,12 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
+	@Test(description = "Login course page")
 	public void loginCourses() throws InterruptedException
 	{
 		// 1. Validate there is recording in this course.
 		// 2. Log in as INSTRUCTOR.
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
 		

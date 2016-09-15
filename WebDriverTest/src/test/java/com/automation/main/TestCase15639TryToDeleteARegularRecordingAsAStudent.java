@@ -126,16 +126,7 @@ public class TestCase15639TryToDeleteARegularRecordingAsAStudent {
 		System.out.println("Current course: " + currentCourse);
 		
 		// 3. Select recording to delete.
-		try {
-			record.selectFirstCheckbox();
-			System.out.println("First checkbox selected.");
-			ATUReports.add("First checkbox selected.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} catch (Exception msg) {
-			System.out.println("First checkbox fail to be selected.");
-			ATUReports.add("First checkbox fail to be selected.", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 4. Verify that "Delete" menu item isn't dispalyed in menu.
 		record.recording_tasks_button.click();

@@ -117,8 +117,8 @@ public void closeBroswer() {
 		course.selectCourse(record);
 		record.verifyRecordingMenuColor();
 		record.verifyDisabledMenu();
-		record.ClickOneCheckedboxSelected(record.getCheckbox());
-		record.ClickOneCheckedboxNotSelected(record.getCheckbox());
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.unClickOneCheckBoxOrVerifyNotSelected(record.checkbox);
 		record.checkall.click();// make all checkboxes marked
 		Thread.sleep(2000);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);

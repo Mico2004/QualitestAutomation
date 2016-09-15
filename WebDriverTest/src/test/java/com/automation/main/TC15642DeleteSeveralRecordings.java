@@ -122,8 +122,9 @@ public class TC15642DeleteSeveralRecordings {
 			course.selectCourseThatStartingWith("BankValid");
 			
 			//  4.2 select the two first records
-			record.ClickOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-			record.ClickOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+			
 			
 			// 4.3 copy record from the bank to the target course	
 			record.copyRecordsToAnotherCourse(currentCourse);

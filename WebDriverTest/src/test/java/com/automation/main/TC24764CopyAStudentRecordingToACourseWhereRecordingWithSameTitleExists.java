@@ -124,7 +124,7 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		Thread.sleep(2000);
 		
 		// Select source recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String init_first_recording_name = record.getFirstRecordingTitle();
 		
 		// Select "Recording Tasks -> Copy" menu item.
@@ -166,7 +166,7 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 			Assert.assertTrue(true);
 			
 			//so select this recoding
-			record.selectFirstCheckbox();
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		} else {
 			System.out.println("Recording name is not same as in precondition.");
 			ATUReports.add("Recording name.", "Recording name is same as in precondition.", "Recording name is not same as in precondition.", LogAs.FAILED, null);

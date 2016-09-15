@@ -255,10 +255,10 @@ public class TC17903VerifyTheUI {
 		}
 		// 14.click one check box
 		record.searchbox.click();
-		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.getCheckbox());
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 
 		// 15.un-check one check box
-		record.unClickOneCheckBoxOrVerifyNotSelected(record.getCheckbox());
+		record.unClickOneCheckBoxOrVerifyNotSelected(record.checkbox);
 
 		// 16.click all check box
 		record.checkall.click();// make all checkboxes marked

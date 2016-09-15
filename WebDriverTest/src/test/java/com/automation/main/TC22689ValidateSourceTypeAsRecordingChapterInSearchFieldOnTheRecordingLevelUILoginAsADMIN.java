@@ -2,6 +2,7 @@ package com.automation.main;
 
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.omg.CORBA.PUBLIC_MEMBER;
@@ -66,6 +67,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	String targetCourse;
 	String clickedRecording;
 	WebDriver driver2;
+	public EditRecording edit_recording;
 	public AdminDashboardPage admin_dashboard_page;
 	public ManageAdhocCoursesEnrollmentsPage mange_adhoc_course_enrollments;
 	public CreateNewCourseWindow create_new_course_window;
@@ -82,11 +84,14 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	public EmailLoginPage email_login;
 	public EmailInboxPage email_inbox;
 	public RunDiagnosticsPage run_diagnostics;
+	public EditRecordinPropertiesWindow edit_recording_properties_window;
 	public PlayerPage player_page;
 	public PublishWindow publish_window;
 	public AdminDashboardViewCourseList admin_view_course_list;
 	String instructor1;
 	String instructor2;
+	public SearchPage search_page;
+	public TopBarHelper top_bar_helper;
 	List<String> for_enroll;
 
 	
@@ -105,9 +110,8 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		wait = new WebDriverWait(driver, 30);
-		add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
-		publish_window = PageFactory.initElements(driver, PublishWindow.class);
-		email_setting = PageFactory.initElements(driver, EmailAndConnectionSettingsPage.class);
+
+		edit_recording = PageFactory.initElements(driver, EditRecording.class);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
@@ -127,13 +131,12 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		email_login = PageFactory.initElements(driver, EmailLoginPage.class);
 		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
 		email_inbox = PageFactory.initElements(driver, EmailInboxPage.class);
-		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
-				ManageAdHocCoursesMembershipWindow.class);
-		help_page = PageFactory.initElements(driver, HelpPage.class);
-		run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
+		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,ManageAdHocCoursesMembershipWindow.class);
+		top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
+		search_page = PageFactory.initElements(driver, SearchPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
-		
+		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
 		System.out.println("Starting the test: TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN at " + DateToStr);
@@ -156,17 +159,25 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		tegrity.loginCourses("User1");
 		course.waitForVisibility(course.first_course_button);
 				
-				//2.1 take course being copied to name and then return
+		//2.1 take course being copied to name and then return
 		String course_name=course.selectCourseThatStartingWith("Ab");
 		String url =  course.getCurrentUrlCoursePage(); 
 
+		
+		//2.2 edit the first chapter for the rest of the test
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.clickOnRecordingTaskThenEditRecording();
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+		String recording_text = "NewChapterName" + sdf.format(date); 
+		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
+		Thread.sleep(2000);
+			
 		record.signOut();
 		Thread.sleep(1000);
 		tegrity.waitForVisibility(tegrity.passfield);
 
 
-		
-		
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
@@ -195,8 +206,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	    record.convertRecordingsListToNames();
 	    record.convertRecordingsListToRecorderName();
 	    
-	   	String instructor=record.getIndexRecorderNameOfRecording(1);
-	   	
+	
 	   	String recording_to_search=record.recording_list_names.get(0);
 	    record.verifyFirstExpandableRecording();
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
@@ -204,27 +214,24 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
-	///// to go back to crecording window handler
-			String curr_win=driver.getWindowHandle();	
-			for (String handler : driver.getWindowHandles()) {
+			///// to go back to crecording window handler	
+		for (String handler : driver.getWindowHandles()) {
 					driver.switchTo().window(handler);
 			break;		
 			}
 				
-			///9.Validate the search field is display at the top right of the UI page below the top navigation bar.
-	        player_page.veriySearchBoxLocation();
+		///9.Validate the search field is display at the top right of the UI page below the top navigation bar.
+	     player_page.veriySearchBoxLocation();
 	      
-	        ///10.Validate the text in the Tegrity Player page: "Search in this recording..."
-	        player_page.verifySearchBoxHint();
+	      ///10.Validate the text in the Tegrity Player page: "Search in this recording..."
+	     player_page.verifySearchBoxHint();
 	        
-		//11.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
-	        player_page.verifySearchForRecordingExist(recording_to_search);
+	     //11.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
+	     player_page.verifySearchForRecordingExist(recording_text);
 
 		///12.The header is displayed with the default color and the logo at the top left cornner of the UI page.
 		///// to go back to crecording window handler
-	    	
-			     
-	        curr_win=driver.getWindowHandle();	
+
 	        for (String handler : driver.getWindowHandles()) {
 	        		driver.switchTo().window(handler);
 	        		break;		
@@ -234,25 +241,23 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 			player_page.verifyLogoVisibilityAndLocation();
 			
 			///13.The next result display below the current result in case there is next result.
-			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
+			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultOneResult(player_page.search_result);
 			Thread.sleep(2000);
 			
 			///14.search results page in the format as follows: "recording name - Search Results".
-			for (String handler : driver.getWindowHandles()) {
-        		driver.switchTo().window(handler);
-        		break;		
-			}
+			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
 			player_page.verifySearchResultPage(recording_to_search);
 			
+			//12. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
+			player_page.verifyResultsStatisticsInFormat(recording_text);
+			
 		    ///15.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
-		 player_page.waitForVisibility(player_page.columns_title_text.get(0));
+			player_page.waitForVisibility(player_page.columns_title_text.get(0));
 					player_page.verifySearchColumns();
 			
 			///16.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
-			player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(3);
-			
-		
-			
+			player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(0);
+				
 			
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
@@ -264,19 +269,113 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 
 			///14.verify return to recordings page
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
+			
 			//15.navigate back to player recording
 			driver.navigate().back();
 			Thread.sleep(4000);
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
+			
 			//16.click on "Courses" and verify course page
-
 			player_page.returnToCoursesPageAsAdmin(course);
 			////17.navigate back to player then to recordings page
 			driver.navigate().back();
-			player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(2));
-
+			
+			Thread.sleep(4000);
+			player_page.verifyTimeBufferStatusForXSec(2);// check source display
+				
+			// 18. check that we are in the record page
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
+					
+			// 19. change the name of the first recording chapter at the edit recored properties 
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+			record.clickOnRecordingTaskThenEditRecording();
+			date = new Date();
+			sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+			String new_recording_text = "NewChapterName" + sdf.format(date); 
+			edit_recording.changeFirstChapterRecordingNameToTargetNameNew(new_recording_text);
+			Thread.sleep(2000);
+			
+			//20. return to the relevant course
+			admin_view_course_list.moveToCoursesThroughGet(url);
+				
+			// 21. go back to the player
+		    record.verifyFirstExpandableRecording();
+			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+			
+			
+			// 22.Select the Recording by clicking on one of the chapters
+			player_page.verifyTimeBufferStatusForXSec(10);// check source display
+
+				///// to go back to crecording window handler	
+				for (String handler : driver.getWindowHandles()) {
+						driver.switchTo().window(handler);
+				break;		
+				}
+						
+			
+			///23.Validate the search field is display at the top right of the UI page below the top navigation bar.
+	        player_page.veriySearchBoxLocation();
+	      
+	        ///24.Validate the text in the Tegrity Player page: "Search in this recording..."
+	        player_page.verifySearchBoxHint();
+	        
+	        //25.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
+	        player_page.searchRecord(recording_text);
+				
+			///26.The header is displayed with the default color and the logo at the top left cornner of the UI page.
+			///// to go back to crecording window handler
+	    	
+			//27. verify that the search is empty 	
+			player_page.verifySearchResultIsEmpty();	
+ 
+			
+	        player_page.verifySearchForRecordingExist(new_recording_text);
+	        
+
+		///29.The header is displayed with the default color and the logo at the top left cornner of the UI page.
+		///// to go back to crecording window handler
+	    	
+	        //30. verify that the search is not empty 	
+	        player_page.verifySearchResultIsNotEmpty();
+	        
+	        for (String handler : driver.getWindowHandles()) {
+        		driver.switchTo().window(handler);
+        		break;		
+        }
 		
+	        Thread.sleep(2000);
+	            
+	        //31. verify that the search is not empty 	
+			player_page.verifyLogoVisibilityAndLocation();
+			
+			///32.The next result display below the current result in case there is next result.
+			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultOneResult(player_page.search_result);
+			Thread.sleep(2000);
+			
+			///33.search results page in the format as follows: "recording name - Search Results".
+			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
+			player_page.verifySearchResultPage(recording_to_search);
+			
+			//12. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
+			player_page.verifyResultsStatisticsInFormat(recording_text);
+			
+		    ///34.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
+			player_page.waitForVisibility(player_page.columns_title_text.get(0));
+					player_page.verifySearchColumns();
+			
+			///35.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
+			player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(0);
+				
+			
+			for (String handler : driver.getWindowHandles()) {
+				driver.switchTo().window(handler);
+				break;
+			}
+		
+			///36.The breadcrumb structure is displayed as follows: "> Courses > course name".
+			player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
+
+
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	   

@@ -137,9 +137,9 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.selectCourseThatStartingWith("BankValid");
 		
-		record.selectIndexCheckBox(1);
-		record.selectIndexCheckBox(2);
-		
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+	
 		record.clickOnRecordingTaskThenCopy();
 		copy.selectTargetCourseFromCourseListThatStartWith(current_course);
 		copy.clickOnCopyButton();

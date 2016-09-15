@@ -113,7 +113,7 @@ public class TC15899VerifyAMovingCopyingStatusOfADestinationRecording {
 		// 3. Select recording.
 		String selected_recording_name = record.getFirstRecordingTitle();
 		System.out.println("Record to select: " + selected_recording_name);
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 4. Select "Recording Tasks -> Move"
 		record.clickOnRecordingTaskThenMove();

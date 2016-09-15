@@ -120,7 +120,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		// come back to courses, go to Ab course, and copy one recording to abc then return to courses page list
 		record.returnToCourseListPage();
 		course.selectCourseThatStartingWith("Ab");
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenCopy();
 		copy.selectTargetCourseFromCourseList(copy_to);
 		copy.clickOnCopyButton();
@@ -136,7 +136,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		//course.selectCourse(record);
 		
 		//3. Select recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		String selected_recording_title = record.getFirstRecordingTitle();
 		

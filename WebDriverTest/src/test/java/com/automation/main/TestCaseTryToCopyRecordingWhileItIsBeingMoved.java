@@ -120,7 +120,7 @@ public class TestCaseTryToCopyRecordingWhileItIsBeingMoved {
 		
 		// 3. Select recording.
 		String selected_recording_name = record.getFirstRecordingTitle();
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		System.out.println("Selected recording name: " + selected_recording_name);
 		
 		// 4. Select "Recording Tasks -> Move" menu item.
@@ -168,7 +168,7 @@ public class TestCaseTryToCopyRecordingWhileItIsBeingMoved {
 		record.checkRecordingInIndexIStatus(1, "Being moved from");
 		
 		// 12. While recording has a "Being copying from", select "Recording Tasks -> Copy" menu item.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenCopy();
 		
 		Thread.sleep(1000);

@@ -145,7 +145,7 @@ public class TestCase15635DeleteAProctoringRecordingAsInstructor {
 		
 		// 4. Select recording to delete.
 	   record.convertRecordingsListToNames();
-		record.selectFirstCheckbox();
+	   record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String selected_recording_title=record.recording_list_names.get(0);
 		List<String> initial_recording_list = record.getCourseRecordingList();
 		

@@ -193,8 +193,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				List<String> recording_list_before_delete_recording = record.getCourseRecordingList(); 
 				
 				// 8. Click on a checkbox of one recording.
-				WebElement checkbox= record.getCheckbox();
-				record.ClickOneCheckBoxOrVerifyAlreadySelected(checkbox);
+				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 				
 				
 				String checked_recording_title = null;

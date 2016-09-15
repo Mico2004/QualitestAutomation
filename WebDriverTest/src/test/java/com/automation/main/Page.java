@@ -487,7 +487,7 @@ public class Page {
 					break;
 				} else if(driver.getTitle().equals("Tegrity - Courses")){
 					System.out.println("LogOut from user not succeeded 1");
-					Thread.sleep(3000);
+					Thread.sleep(4000);
 					((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");					
 				}else{
 					Thread.sleep(3000);
@@ -788,7 +788,45 @@ public class Page {
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
+	
+	// Verify that
+		// The next result display below the current result in case there is next
+		// result.
+		public void verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultOneResult(List<WebElement> list) {
+			if (list.size() > 1) {
+				boolean not_correct = false;
+				int prepoint = list.get(0).getLocation().y;
+				for (int i = 1; i < list.size() - 1; i++) {
+					int currpoint = list.get(i).getLocation().y;
+					if (prepoint < currpoint) {
+						prepoint = currpoint;
+						continue;
+					} else {
+						System.out.println("!!!!!!!!");
+						System.out.println(prepoint);
+						System.out.println(currpoint);
+						System.out.println("!!!!!!!");
+						not_correct = true;
+						break;
+					}
+				}
 
+				if (!not_correct) {
+					System.out.println("Verified that next result display below the current result.");
+					ATUReports.add("Verified that next result display below the current result.", "True.", "True.",
+							LogAs.PASSED, null);
+				} else {
+					System.out.println("Not verified that next result display below the current result.");
+					ATUReports.add("Verified that next result display below the current result.", "True.", "False",
+							LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}
+			} else {
+				System.out.println("There is 1 or 0 results.");
+				ATUReports.add("There is 1 or 0 results.", "Expect for more then 1 results.", "1 or 0 results.",
+						LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		}
+	
 	/// this function verifies visibility of university logo all helpers will
 	/// inherit from page
 	public void verifyLogoVisibilityAndLocation() {

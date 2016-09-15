@@ -113,7 +113,7 @@ DesiredCapabilities capability;
 		//course.selectCourse(record);
 		
 		//3. Select recording.
-		record.selectFirstCheckbox();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		//4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
