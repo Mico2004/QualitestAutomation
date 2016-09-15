@@ -31,13 +31,14 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.asserts.LoggingAssert;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junit.framework.Assert;
+
 
 ///@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class Page {
@@ -56,7 +57,7 @@ public class Page {
 
 	}
 
-	public Page(WebDriver browser) {
+	public Page(WebDriver browser) {	
 		driver = browser;
 		wait = new WebDriverWait(driver, 30);
 		ATUReports.setWebDriver(driver);
@@ -196,7 +197,7 @@ public class Page {
 		try {
 			Thread.sleep(1000);	
 			wait.until(ExpectedConditions.visibilityOf(element));
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			System.out.println("Waiting for element visibiliy failed");
 			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,null);
 			e.printStackTrace();
@@ -666,6 +667,8 @@ public class Page {
 	// This function get WebElement and String, and force that WebElement to be
 	// unselected
 	public void forceWebElementToBeUnselected(WebElement web_element, String description) {
+		try{
+			waitForVisibility(web_element);
 		if (!web_element.isSelected()) {
 			System.out.println(description + " already unselected.");
 			ATUReports.add(description + " unselected.", "True.", "True.", LogAs.PASSED, null);
@@ -681,6 +684,11 @@ public class Page {
 				ATUReports.add(description + " unselected.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
+		}
+		}catch(Exception e){
+			System.out.println("Fail to unselect " + description + ".");
+			ATUReports.add(description + " unselected.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);			
 		}
 	}
 

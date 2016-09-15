@@ -54,7 +54,7 @@ public class ConfirmationMenu extends Page {
 	public void clickOnOkButton() throws InterruptedException {		
 		
 		
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		try {
 			if(isAlertPresent()){
 				Thread.sleep(1000);
@@ -68,7 +68,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}  
-		Thread.sleep(3000);	
+		Thread.sleep(1000);	
 	}
 	
 	// This function clicks on ok button of copy menu

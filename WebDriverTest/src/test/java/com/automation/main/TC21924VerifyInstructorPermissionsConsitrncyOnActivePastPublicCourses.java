@@ -22,6 +22,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import junitx.util.PropertyManager;
+
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -64,6 +66,8 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 	public ManageAdhocUsersPage mange_adhoc_users_page;
 	public CreateNewUserWindow create_new_user_window;
 	public AdvancedServiceSettingsPage advanced_service_settings_Page;
+	public ManageAdhocCoursesEnrollmentsPage mange_adhoc_course_enrollments;
+	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
 
 	@BeforeClass
 	public void setup() {
@@ -90,13 +94,16 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
+		
+		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
 
 		top_bar_helper = PageFactory.initElements(driver, TopBarHelper.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		manage_adhoc_courses_enrollments_page = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
-		mange_ad_hoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
+		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		advanced_service_settings_Page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
+		
 		wait = new WebDriverWait(driver, 30);
 		
 		 Date curDate = new Date();
@@ -123,25 +130,69 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 	@Test
 	public void loginCourses() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
+		wait.until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
+		String login_url = driver.getCurrentUrl();
+		String university_name  = login_url.split("/")[2].substring(0,  login_url.split("/")[2].length() - 12);
+		String PastCourseA="PastCourseA"+university_name+PropertyManager.getProperty("User1").substring(5, PropertyManager.getProperty("User1").length());
+		
+		
+	
+	tegrity.loginAdmin("Admin");	
+	Thread.sleep(3000);
+	
+	//PreTest enable student test +youtube + capition
+	admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
+	advanced_service_settings_Page.enableYoutbeCapitionStudent(confirm_menu);	
+	Thread.sleep(2000);
+		
+	Thread.sleep(4000);	
+		
+		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+		for(int i=0; i<10; i++) {
+			try {
+				driver.switchTo().frame(0);
+				break;
+			} catch(Exception msg) {
+				Thread.sleep(1000);
+			}
+		}
+		
+		mange_adhoc_course_enrollments.searchAndFilterCourses(PastCourseA);
+		
+		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
+		
+		mangage_adhoc_courses_membership_window.searchForUser(PropertyManager.getProperty("User1"));	
+		Thread.sleep(2000);
+		// Select first user from user list (the only user it found because of the uniq of the search)
+		mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
+
+		// Add selected user to instructor list
+		mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
+		
+		mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(PropertyManager.getProperty("User1"));
+		
+		mangage_adhoc_courses_membership_window.waitForVisibility(mangage_adhoc_courses_membership_window.ok_button);
+		
+		// Confirm user membership list
+		mangage_adhoc_courses_membership_window.clickOnOkButton();
+		
+			for(String window: driver.getWindowHandles()) {
+			driver.switchTo().window(window);
+			break;
+		}
+		mange_adhoc_course_enrollments.signOut();
+		
+		
+		
 		// 1. Make sure the Instructor has past course which is publicly visible.
 		// Login with SuperUser
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
-		//PreTest enter as Admin and checkboxs all
-		tegrity.loginAdmin("Admin");
-		initializeCourseObject();
-		Thread.sleep(3000);
-		
-		//PreTest enable student test +youtube + capition
-		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
-		advanced_service_settings_Page.enableYoutbeCapitionStudent(confirm_menu);	
-		Thread.sleep(2000);
-		top_bar_helper.signOut();
 		
 		tegrity.loginCourses("SuperUser");// log in courses page
-		
-		//  Go to PastCourseA (which is past course of User1) and make it public
-		String past_public_course_name = course.selectCourseThatStartingWith("PastCourseA");
+		initializeCourseObject();
+		//  Go to PastCourseA (which is past course of User1) and make it public	
+		String past_public_course_name = course.selectCourseThatStartingWith("PastCourseA");		
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.checkAllCourseSettingsCheckboxs();
 		course_settings_page.clickOnOkButton();
@@ -211,10 +262,11 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			record.verifyWebElementDisplayed(record.podcast_button, "Podcast");
 			// "Video podcast" - VideoPodcast
 			record.verifyWebElementDisplayed(record.video_podcast, "Video podcast");
-			// "Tag" - TagsListTask2
-			record.verifyWebElementDisplayed(record.tag_button, "Tag");
 			
 			
+	
+						
+						
 			// 10. Check a checkbox of one recording on both browsers.
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			
@@ -244,20 +296,9 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			record.verifyWebElementDisplayed(record.edit_rec_properties_button, "Edit recording properties");
 			// "Share recording" - ShareRecording
 			record.verifyWebElementDisplayed(record.share_recording_button, "Share recording");
-			
-			
-			List<String> target_option_list_PublicCourse = new ArrayList<String>();
-			target_option_list_PublicCourse.add("Move");
-			target_option_list_PublicCourse.add("Copy");
-			target_option_list_PublicCourse.add("Delete");
-			target_option_list_PublicCourse.add("Publish");
-			//target_option_list_PastCourse.add("Tag");
-			target_option_list_PublicCourse.add("Upload to YouTube");
-			target_option_list_PublicCourse.add("Request Captions");
-			target_option_list_PublicCourse.add("Edit recording");
-			target_option_list_PublicCourse.add("Edit recording properties");
-			target_option_list_PublicCourse.add("Share recording");
-			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInRecordingTaskMenu(target_option_list_PublicCourse);
+			// "Tag" - TagsListTask2			
+			record.verifyWebElementDisplayed(record.tag_button, "Tag");
+		
 			// 13. Validate that both buttons "Start a test" and "Start a recording" in the top right of the screen are displayed.
 			record.veriftyThatStartRecordingButtonDisplayed();
 			record.verifyThatStartATestDisplayed();
@@ -438,6 +479,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			// "Publish" - PublishTask
 			record.verifyWebElementDisplayed(record.publish_button, "Publish");
 			// "Tag" - TagsListTask2
+			if(type_of_course!=0) // tag isn't displayed in past courses
 			record.verifyWebElementDisplayed(record.tag_button, "Tag");
 			// "Upload to YouTube" - uploadToYoutube
 			record.verifyWebElementDisplayed(record.upload_to_youtube_button, "Upload to YouTube");
@@ -451,18 +493,19 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			record.verifyWebElementDisplayed(record.edit_rec_properties_button, "Edit recording properties");
 			// "Share recording" - ShareRecording
 			record.verifyWebElementDisplayed(record.share_recording_button, "Share recording");
-			List<String> target_option_list_PastCourse = new ArrayList<String>();
+		/*	List<String> target_option_list_PastCourse = new ArrayList<String>();
 			target_option_list_PastCourse.add("Move");
 			target_option_list_PastCourse.add("Copy");
 			target_option_list_PastCourse.add("Delete");
 			target_option_list_PastCourse.add("Publish");
+			if(type_of_course!=0) // tag isn't displayed in past courses
 			target_option_list_PastCourse.add("Tag");
 			target_option_list_PastCourse.add("Upload to YouTube");
 			target_option_list_PastCourse.add("Request Captions");
 			target_option_list_PastCourse.add("Edit recording");
 			target_option_list_PastCourse.add("Edit recording properties");
 			target_option_list_PastCourse.add("Share recording");
-			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInRecordingTaskMenu(target_option_list_PastCourse);
+			record.verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInRecordingTaskMenu(target_option_list_PastCourse);*/
 			// 31. Validate that on both browsers both buttons "Start a test" and "Start a recording" in the top right of the screen are not displayed.
 			record.verifyNoStartRecording();
 			record.verifyNoStartTest();
@@ -607,6 +650,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		Thread.sleep(1000);
 		record.returnToCourseListPage();
 		Thread.sleep(1000);
+		course.clickOnPastCoursesTabButton();
 		course.selectCourseThatStartingWith(past_public_course_name);
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();

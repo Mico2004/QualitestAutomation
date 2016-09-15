@@ -568,6 +568,7 @@ public class RecordingHelperPage extends Page {
 		try {
 			System.out.println("clickOnRecordingTaskThen1");
 			waitForVisibility(element);
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "Course Settings"));
 			Thread.sleep(2000);
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("course_settings displayed");
@@ -3911,7 +3912,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// This function will check if for that WebElement it is the correct status
 		WebElement webElement = null;
 		
-		
+		System.out.println(target);
 		switch (target){
 		case "Download": 		webElement = download_button; 
 		break;
@@ -3939,12 +3940,18 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		break;
 		case "Share recording": 	webElement = share_recording_button;   
 		break;	
+		case "Tag": 	webElement = tag_button;   
+		break;	
+		default:	webElement = download_button; 
+		break;
 		
 		}
 
 		if (enable_disable) {
+			System.out.println("if");
 			verifyElementIsEnabled(webElement, target);
 		} else {
+			System.out.println("else");
 			verifyElementIsDisabled(webElement, target);
 		}
 	}
