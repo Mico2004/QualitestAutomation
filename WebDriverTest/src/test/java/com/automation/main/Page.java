@@ -57,8 +57,7 @@ public class Page {
 
 	}
 
-	public Page(WebDriver browser) {
-		super();
+	public Page(WebDriver browser) {	
 		driver = browser;
 		wait = new WebDriverWait(driver, 30);
 		ATUReports.setWebDriver(driver);
