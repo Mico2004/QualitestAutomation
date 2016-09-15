@@ -512,7 +512,7 @@ public class RecordingHelperPage extends Page {
 			}
 		}
 
-		System.out.println("Being copied from dissapear from first recording.");
+		System.out.println("Being copied from disappeared from first recording.");
 		ATUReports.add("Being copied from dissapear from first recording.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
@@ -648,11 +648,10 @@ public class RecordingHelperPage extends Page {
 		List<String> recording_names_list = new ArrayList<String>();
 
 		try {
-			new WebDriverWait(driver, 5)
-			.until(ExpectedConditions.visibilityOf(first_recording_title));
+			new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(first_recording_title));
 			
 		} catch (Exception msg) {
-
+			System.out.println("TimeoutGetCourseRecordingList");
 		}
 
 		for (int i = 0; i < recordings_list.size(); i++) {
