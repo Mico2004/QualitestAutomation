@@ -38,29 +38,29 @@ public class MoveWindow extends Page {
 	}
 
 	@FindBy(id = "MoveButton")
-	WebElement move_button;
+	public WebElement move_button;
 	@FindBy(id = "ModalDialogHeader")
-	WebElement move_menu_title;
+	public WebElement move_menu_title;
 	
 	@FindBy(xpath = "//*[@id=\"courseListSelect\"]/option")
-	List<WebElement> course_list;
+	public  List<WebElement> course_list;
 	@FindBy(id = "CancelButton")
-	WebElement cancel_button;
+	public WebElement cancel_button;
 	@FindBy(id = "InfoText")
-	WebElement info_text;
+	public WebElement info_text;
 	@FindBy(id = "courseSearchText")
-	WebElement search_box;
+	public WebElement search_box;
 	@FindBy(id = "MoveButton")
-	WebElement moveRecording;
+	public WebElement moveRecording;
 	@FindBy(id = "CancelButton")
-	WebElement cancelButton;
+	public WebElement cancelButton;
 	@FindBy(name = "searchCourse")
-	WebElement search_button;
-	String[] move_course_list;// string of courses name
+	public WebElement search_button;
+	public String[] move_course_list;// string of courses name
 	@FindBy(id = "ModalDialogHeaderWrap")
-	WebElement move_menu_background;
+	public WebElement move_menu_background;
 	@FindBy(id = "courseListSelect")
-	WebElement course_list_select;
+	public WebElement course_list_select;
 	// This function clicks on delete button of copy menu
 	public void clickOnMoveRecordings() throws InterruptedException {
 		try {

@@ -16,9 +16,12 @@ public class EulaPage extends Page {
 		super(browser);
 		// TODO Auto-generated constructor stub
 	}
-	@FindBy(xpath="//*[@id=\"main\"]/div/div[1]/p") WebElement eula_message;
-	@FindBy(xpath="//*[@id=\"main\"]/div/div[2]/form/input[1]") WebElement accept_button;
-	@FindBy(xpath="//*[@id=\"main\"]/div/div[2]/form/input[2]") WebElement decline_button;
+	@FindBy(xpath="//*[@id=\"main\"]/div/div[1]/p")
+	public WebElement eula_message;
+	@FindBy(xpath="//*[@id=\"main\"]/div/div[2]/form/input[1]")
+	public WebElement accept_button;
+	@FindBy(xpath="//*[@id=\"main\"]/div/div[2]/form/input[2]")
+	public WebElement decline_button;
 	
 	
 	//this function verifies visibility of accept decline and eula message later compares eula message equals message was configured

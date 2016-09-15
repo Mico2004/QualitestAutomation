@@ -31,22 +31,22 @@ public class SearchPage extends Page {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@FindBy(css = ".loading-spinner-img")WebElement loading_spinner_image;
-	@FindBy(xpath = ".//*[@id='main']/div[2]/div[1]/div[2]/span/a")WebElement title_first_chapter;
-	@FindBy(id = "tegrityBreadcrumbsBox") WebElement breadcrumbs_box;
-	@FindBy(css = ".video-thumbnail") List<WebElement> video_thumbnails_list;
-	@FindBy(css = ".thumbnail-image") List<WebElement> thumbnail_images_list;
-	@FindBy(css = ".duration") List<WebElement> duration_time_list; 
-	@FindBy(css = ".title") List<WebElement> title_list;
-	@FindBy(css = ".title>.ng-binding") List<WebElement> title_urls_list;
-	@FindBy(css = ".search-course.ng-binding") List<WebElement> course_titles_list;
-	@FindBy(css = ".search-recording.ng-scope") List<WebElement> recording_titles_list;
-	@FindBy(css = ".search-recording.ng-scope>.ng-binding") List<WebElement> recording_link_titles_list;
-	@FindBy(xpath= ".//*[@id='main']/div[2]/div/div[2]/div/span[2]/a") WebElement search_first_record_title_name;
-	@FindBy(css = ".search-source.ng-binding") List<WebElement> source_titles_list;
-	@FindBy(css = ".video-wrap.linkToFocus") List<WebElement> video_wrap_link_to_focus_list;
-	@FindBy(css = ".linkToFocus") List<WebElement> link_icon_list;
-	@FindBy(css = "#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding") List<WebElement> breadcrumbs_box_elements_list;
+	@FindBy(css = ".loading-spinner-img")public WebElement loading_spinner_image;
+	@FindBy(xpath = ".//*[@id='main']/div[2]/div[1]/div[2]/span/a")public WebElement title_first_chapter;
+	@FindBy(id = "tegrityBreadcrumbsBox")public  WebElement breadcrumbs_box;
+	@FindBy(css = ".video-thumbnail")public  List<WebElement> video_thumbnails_list;
+	@FindBy(css = ".thumbnail-image")public  List<WebElement> thumbnail_images_list;
+	@FindBy(css = ".duration")public  List<WebElement> duration_time_list; 
+	@FindBy(css = ".title")public  List<WebElement> title_list;
+	@FindBy(css = ".title>.ng-binding")public  List<WebElement> title_urls_list;
+	@FindBy(css = ".search-course.ng-binding")public  List<WebElement> course_titles_list;
+	@FindBy(css = ".search-recording.ng-scope")public  List<WebElement> recording_titles_list;
+	@FindBy(css = ".search-recording.ng-scope>.ng-binding")public  List<WebElement> recording_link_titles_list;
+	@FindBy(xpath= ".//*[@id='main']/div[2]/div/div[2]/div/span[2]/a") public WebElement search_first_record_title_name;
+	@FindBy(css = ".search-source.ng-binding")public  List<WebElement> source_titles_list;
+	@FindBy(css = ".video-wrap.linkToFocus")public  List<WebElement> video_wrap_link_to_focus_list;
+	@FindBy(css = ".linkToFocus")public  List<WebElement> link_icon_list;
+	@FindBy(css = "#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")public  List<WebElement> breadcrumbs_box_elements_list;
 	
 	
 	// This function verify that loading spinner image displayed

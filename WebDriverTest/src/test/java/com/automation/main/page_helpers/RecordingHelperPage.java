@@ -60,71 +60,67 @@ import org.xml.sax.InputSource;
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class RecordingHelperPage extends Page {
 	@FindBy(xpath = "//*[@id=\"wrapper\"]/div[1]")
-	public
-	WebElement background;
+	public WebElement background;
 	@FindBy(id = "StartRecordingButton")
-	WebElement recording_button;
+	public WebElement recording_button;
 	@FindBy(linkText = "Recording Tasks")
-	WebElement recording_tasks_button;
+	public WebElement recording_tasks_button;
 	@FindBy(id = "CourseTask")
-	public
-	WebElement course_tasks_button;
+	public WebElement course_tasks_button;
 	@FindBy(id = "CourseSettings")
-	WebElement course_settings_button;
+	public WebElement course_settings_button;
 	@FindBy(id = "Podcast")
-	WebElement podcast_button;
+	public WebElement podcast_button;
 	@FindBy(linkText = "Copy")
-	WebElement copy_button;
+	public WebElement copy_button;
 	@FindBy(id = "DeleteTask2")
-	WebElement delete_button;
+	public WebElement delete_button;
 	@FindBy(id = "DeleteTask")
-	WebElement content_tasks_delete_button;
+	public WebElement content_tasks_delete_button;
 	@FindBy(xpath= "//*[@id='RecordedBy1']")
-	WebElement FirstRecordByName;
+	public WebElement FirstRecordByName;
 	@FindBy(id = "Checkbox1")
-	WebElement checkbox;
+	public WebElement checkbox;
 	@FindBy(xpath = "//*[@id=\"CopyButton\"]")
-	WebElement copy_menu_recbtn;
+	public WebElement copy_menu_recbtn;
 	@FindBy(id = "tegritySearchBox")
 	public WebElement searchbox;
 	@FindBy(id = "CheckAll")
-	WebElement checkall;
+	public WebElement checkall;
 	@FindBy(xpath = "//*[starts-with(@id,'Checkbox')]")
-	List<WebElement> checkboxlist;// @FindBy(css="//input[@type='checkbox']")// List<WebElement> checkboxlist;
+	public List<WebElement> checkboxlist;// @FindBy(css="//input[@type='checkbox']")// List<WebElement> checkboxlist;
 	@FindBy(xpath = "//*[@id='Recording1']/strong")
 	public WebElement first_recording_title;
 	@FindBy(xpath = "//*[@id='Recording1']/strong")
 	WebElement first_course_title;
-@FindBy(xpath = "//*[@id='Recording2']/strong")
+	@FindBy(xpath = "//*[@id='Recording2']/strong")
 	WebElement second_course_title;
 	@FindBy(xpath = "//*[@id='RecordingTitle1']/strong")
 	WebElement first_course_title_tests;
 	@FindBy(css="#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")
-	WebElement courses_link;
+	public WebElement courses_link;
 	@FindBy(id = "CheckAll")
-	WebElement check_all_checkbox;
+	public WebElement check_all_checkbox;
 	@FindBy(css = ".ng-pristine.ng-valid")
-	List<WebElement> recordings_list_checkbox;
+	public List<WebElement> recordings_list_checkbox;
 	@FindBy(id = "CourseTask")
-	public
-	WebElement course_task_button;
+	public WebElement course_task_button;
 	@FindBy(id = "SignOutLink")
-	WebElement signout_link;
+	public  WebElement signout_link;
 	@FindBy(id = "RecordingStatus1")
-	WebElement first_recording_status;
+	public WebElement first_recording_status;
 	@FindBy(id = "StudentRecordingsTab")
 	public WebElement student_recordings_tab;
 	@FindBy(id = "TestsTab")
-	WebElement tests_tab;
+	public  WebElement tests_tab;
 	@FindBy(id = "AdditionalContentTab")
-	public
-	WebElement additional_content_tab;
+	public WebElement additional_content_tab;
 	@FindBy(id = "MoveTask2")
-	WebElement move_button_on_recording_tasks_menu;
+	public WebElement move_button_on_recording_tasks_menu;
 	@FindBy(id = "CourseSettings")
 	WebElement course_setting_in_menu;
 	@FindBy(id = "RecordingStatus1")
-	WebElement course_being_copied_status;
+	public WebElement course_being_copied_status;
 	@FindBy(id = "RecordingLength1")
 	WebElement duration_first_rec;
 	@FindBy(xpath = "//*[starts-with(@id,'RecordingLength')]")
@@ -133,9 +129,9 @@ public class RecordingHelperPage extends Page {
 	List<WebElement> recordings_list_date;
 	@FindBy(xpath = "//*[starts-with(@id,'RecordedBy')]")
 	List<WebElement> recordings_list_recordr_name;/// recorder name list
-	List<String> recordings_list_date_string;
+	public List<String> recordings_list_date_string;
 	public List<String> recording_list_names;
-	List<String> recording_list_duration_string;
+	public List<String> recording_list_duration_string;
 	List<String> recordings_list_recorder_name_string;
 	@FindBy(xpath = "//*[@id=\"Recording1\"]/strong ")
 	public WebElement first_recording; /// first recording
@@ -148,76 +144,75 @@ public class RecordingHelperPage extends Page {
 	@FindBy(id = "CourseTask")
 	WebElement course_task;
 	@FindBy(id = "SortingTasks")
-	WebElement view_button; /// view button
+	public WebElement view_button; /// view button
 	@FindBy(id = "SortingTasks")
 	WebElement view_buttonTest;
 	@FindBy(linkText = "Title")
-	WebElement sort_by_title; /// title sort
+	public WebElement sort_by_title; /// title sort
 	@FindBy(linkText = "Duration")
-	WebElement sort_by_duration; /// title sort
+	public WebElement sort_by_duration; /// title sort
 	@FindBy(linkText = "Date")
-	WebElement sort_by_date; /// title sort
+	public WebElement sort_by_date; /// title sort
 	@FindBy(id = "RecordingsTab")
-	WebElement recording_font_title;///
+	public WebElement recording_font_title;///
 	@FindBy(linkText = "Move")
-	WebElement move_button;///
+	public WebElement move_button;///
 	@FindBy(id = "ContentTasks")
-	public
-	WebElement content_tasks_button;
+	public WebElement content_tasks_button;
 	@FindBy(id = "UserName")
 	WebElement user_name;
 	@FindBy(id = "CopyTask2")
-	WebElement copy_button2;
+	public WebElement copy_button2;
 	// @FindBy (xpath="//*[@class=\"recordingInfoContainer ng-scope\"]/div")
 	// List <WebElement> recordings_list;
 	@FindBy(id = "TestsTab")
-	WebElement test_tab;
+	public WebElement test_tab;
 	@FindBy(id = "EditRecordingProperties")
-	WebElement edit_rec_properties_button;
+	public WebElement edit_rec_properties_button;
 	@FindBy(xpath=".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")
-	WebElement courses_admin;
+	public WebElement courses_admin;
 	@FindBy(xpath = "//a[starts-with(@id,'Recording')]")
 	List<WebElement> recordings_list;
 	@FindBy(xpath = "//a[starts-with(@id,'NewItem')]")
 	List<WebElement> addition_content_list;
 	@FindBy(id = "tegrityBreadcrumbsBox")
-	WebElement breadcrumbs;
+	public  WebElement breadcrumbs;
 	@FindBy(id = "RSSFeed")
-	WebElement rssfeed;
+	public WebElement rssfeed;
 	@FindBy(xpath = "//*[@id=\"scrollableArea\"]/div[1]/div[1]/div[2]/div/ul/li/ul/li[10]/span")
-	WebElement subscribe_button;
+	public  WebElement subscribe_button;
 	@FindBy(xpath ="//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")
-	WebElement firstRec;
+	public  WebElement firstRec;
 	@FindBy(id = "VideoPodcast")
-	WebElement video_podcast;
+	public WebElement video_podcast;
 	@FindBy(id = "PublishTask")
-	WebElement publish_button;
+	public WebElement publish_button;
 	@FindBy(id = "TagsListTask2")
-	WebElement tag_button;
+	public WebElement tag_button;
 	@FindBy(id = "DownloadRecording")
-	WebElement download_button;
+	public WebElement download_button;
 	@FindBy(id = "EditRecording")
-	WebElement edit_rec_button;
+	public WebElement edit_rec_button;
 	@FindBy(id = "ShareRecording")
-	WebElement share_recording_button;
+	public WebElement share_recording_button;
 	@FindBy(id = "StartRecordingButton")
-	WebElement start_recording_button;
+	public WebElement start_recording_button;
 	@FindBy(id = "StartTestButton")
-	WebElement start_test_button;
+	public WebElement start_test_button;
 	@FindBy(xpath=".//*[@id='tegrityBreadcrumbsBox']/li/a")
-	WebElement course_link;
+	public WebElement course_link;
 	@FindBy(id = "UploadRecording")
-	WebElement upload_recording;
+	public WebElement upload_recording;
 	@FindBy(id = "UploadVideoFile")
-	WebElement upload_video_file;
+	public WebElement upload_video_file;
 	@FindBy(id = "UploadAudioFile")
-	WebElement upload_audio_file;
+	public WebElement upload_audio_file;
 	@FindBy(id = "AddAdditionalContentFile")
-	WebElement Add_Additional_Content_File;
+	public WebElement Add_Additional_Content_File;
 	@FindBy(id = "AddAdditionalContentLink")
-	WebElement Add_Additional_Content_Link;
+	public WebElement Add_Additional_Content_Link;
 	@FindBy(id = "GetLiveWebcast")
-	WebElement get_live_webcast;
+	public WebElement get_live_webcast;
 	public List<String> additional_content_list_names;
 	@FindBy(xpath = "//a[starts-with(@id,'NewItem')]")
 	public
@@ -225,37 +220,37 @@ public class RecordingHelperPage extends Page {
 	@FindBy(id = "RecordingsTab")
 	public WebElement recordings_tab;
 	@FindBy(id = "UploadFile")
-	WebElement select_upload_additional_file;
+	public WebElement select_upload_additional_file;
 	@FindBy(id = "AddFileButton")
-	WebElement add_additional_file_button;
+	public WebElement add_additional_file_button;
 	@FindBy(id = "CourseTitle")
-	WebElement course_title;
+	public WebElement course_title;
 	@FindBy(id = "NewItem1")
-	WebElement first_additional_content_title;
+	public WebElement first_additional_content_title;
 	@FindBy(id = "Checkbox2")
 	public WebElement checkbox2;
 	@FindBy(id = "AddAdditionalContentLink")
-	WebElement add_additional_content_link;
+	public WebElement add_additional_content_link;
 	@FindBy(id = "DisclaimerLink")
-	WebElement disclaimer;
+	public WebElement disclaimer;
 	@FindBy(id = "HelpLink")
-	WebElement help;
+	public WebElement help;
 	@FindBy(id = "ReportsLink")
-	WebElement reports;
+	public WebElement reports;
 	@FindBy(id = "MyAccountLink")
-	WebElement my_account;
+	public WebElement my_account;
 	@FindBy(id = "AddAdditionalContentFile")
-	WebElement add_additional_content_file;
+	public WebElement add_additional_content_file;
 	@FindBy(id = "uploadToYoutube")
-	WebElement upload_to_youtube_button;
+	public WebElement upload_to_youtube_button;
 	@FindBy(id = "requestCaptions")
-	WebElement request_captions_button;
+	public WebElement request_captions_button;
 	@FindBy(id = "DownloadRecording")
-	WebElement download;
+	public WebElement download;
 	@FindBy(css = ".bookmark")
 	List<WebElement> bookmarks_list;
 	@FindBy(css=".video-outer:nth-of-type(2)")
-	WebElement visibleFirstChapter;
+	public WebElement visibleFirstChapter;
 	@FindBy(css = ".video-thumbnail")
 	List<WebElement> visibleChapters;
 	

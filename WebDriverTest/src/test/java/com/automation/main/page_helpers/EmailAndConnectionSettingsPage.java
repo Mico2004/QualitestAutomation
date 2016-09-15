@@ -12,12 +12,12 @@ public class EmailAndConnectionSettingsPage extends Page {
 	}
 
 
-	@FindBy(id="sending-field") WebElement sending_user;
-	@FindBy(id="administrator-field") WebElement admin_email;
-	@FindBy(id="helpdesk-field") WebElement helpdesk_email;
-	@FindBy(id="connect-field") WebElement connect_checkbox;
-	@FindBy(id="ApplyChangesButton") WebElement ok_button;
-	@FindBy(id="CancelButton") WebElement cancel_button;
+	@FindBy(id="sending-field") public WebElement sending_user;
+	@FindBy(id="administrator-field")public  WebElement admin_email;
+	@FindBy(id="helpdesk-field") public WebElement helpdesk_email;
+	@FindBy(id="connect-field") public WebElement connect_checkbox;
+	@FindBy(id="ApplyChangesButton")public  WebElement ok_button;
+	@FindBy(id="CancelButton") public WebElement cancel_button;
 	
 	
 	///fill email setting page using sending user,admin email,helpdesk email

@@ -57,53 +57,53 @@ public class CoursesHelperPage extends Page {
 	@FindBy(css = ".list-group-item-heading>.ng-binding")
 	public List<WebElement> course_list;
 	@FindBy(id = "Course2")
-	WebElement second_course_button;
+	public WebElement second_course_button;
 	@FindBy(id = "Course1")
 	public WebElement first_course_button;
 	@FindBy(id = "Course2")
-	WebElement course_button;
+	public WebElement course_button;
 	public String[] courses;
 	public int size; // courses list size
 	@FindBy(id = "PastCourses")
-	WebElement past_courses_tab_button;
+	public WebElement past_courses_tab_button;
 	@FindBy(id = "ActiveCourses")
 	public WebElement active_courses_tab_button;
 	@FindBy(id = "StartRecordingButton")
-	WebElement start_recording_button;
+	public WebElement start_recording_button;
 	@FindBy(id = "StartTestButton")
-	WebElement start_test_button;
+	public WebElement start_test_button;
 	@FindBy(id = "PublicCourses")
-	WebElement public_courses_tab;
+	public WebElement public_courses_tab;
 	@FindBy(id = "PublicCourses")
-	WebElement public_courses_tab_button;
+	public WebElement public_courses_tab_button;
 	@FindBy(id = "UserName")
-	WebElement user_name;
+	public WebElement user_name;
 	@FindBy(xpath = "//*[@id=\"startHelpFrame\"]/div")
-	WebElement get_started_box;
+	public WebElement get_started_box;
 	@FindBy(id = "DisclaimerLink")
-	WebElement disclaimer;
+	public WebElement disclaimer;
 	@FindBy(id = "HelpLink")
-	WebElement help;
+	public WebElement help;
 	@FindBy(id = "ReportsLink")
-	WebElement reports;
+	public WebElement reports;
 	@FindBy(id = "MyAccountLink")
-	WebElement my_account;
+	public WebElement my_account;
 	@FindBy(id = "PrivateCourses")
-	WebElement private_courses_tab_button;
+	public WebElement private_courses_tab_button;
 	@FindBy(id = "OnlineHelp")
-	WebElement online_help;
+	public  WebElement online_help;
 	@FindBy(id = "GetStarted")
-	WebElement get_started;
+	public WebElement get_started;
 	@FindBy(id = "GetSupport")
-	WebElement get_support;
+	public WebElement get_support;
 	@FindBy(id = "RunDiagnostics")
-	WebElement run_diagnostics;
+	public WebElement run_diagnostics;
 	@FindBy(xpath = "//*[@id=\"startHelpFrame\"]/div")
-	WebElement get_started_block;
+	public WebElement get_started_block;
 	@FindBy(linkText = "close")
-	WebElement close_get_started_block;
+	public WebElement close_get_started_block;
 	@FindBy(css = ".pull-right>b>span")
-	List<WebElement> new_recordings_title_and_number_of_new_recordings;
+	public List<WebElement> new_recordings_title_and_number_of_new_recordings;
 	@FindBy(id = "CoursesHeading")
 	WebElement courses_heading;
 	public ConfirmationMenu confirm_menu;

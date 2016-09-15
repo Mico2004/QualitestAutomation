@@ -39,49 +39,49 @@ public class CourseSettingsPage extends Page {
 	}
 
 	@FindBy(id = "EnableAudioPodcast")
-	WebElement enable_mp3_podcast_button;
+	public WebElement enable_mp3_podcast_button;
 	@FindBy(id = "EnableVideoPodcast")
-	WebElement enable_video_podcast_button;
+	public WebElement enable_video_podcast_button;
 	@FindBy(id = "SaveButton")
-	WebElement ok_button;
+	public WebElement ok_button;
 	@FindBy(id = "CourseSettings")
-	WebElement course_setting_title;
+	public WebElement course_setting_title;
 	@FindBy(id = "PubliclyVisible")
-	WebElement checkbox_make_course_public_visable;
+	public WebElement checkbox_make_course_public_visable;
 	@FindBy(id = "AllowToRecord")
-	WebElement checkbox_allow_students_to_record;
+	public WebElement checkbox_allow_students_to_record;
 	@FindBy(id = "AllowToDownload")
-	WebElement checkbox_allow_students_to_download_recordings;
+	public WebElement checkbox_allow_students_to_download_recordings;
 	@FindBy(id = "EnableFeed")
-	WebElement checkbox_enable_rss_feed;
+	public WebElement checkbox_enable_rss_feed;
 	@FindBy(id = "EnableCounter")
-	WebElement checkbox_enable_counter;
+	public WebElement checkbox_enable_counter;
 	@FindBy(id = "PublishAfterUpload")
-	WebElement checkbox_publish_after_upload;
+	public WebElement checkbox_publish_after_upload;
 	@FindBy(id = "AutomaticallyPublish")
-	WebElement checkbox_automatically_publish;
+	public WebElement checkbox_automatically_publish;
 	@FindBy(id = "RequireAuthentication")
-	WebElement checkbox_require_authentication;
+	public WebElement checkbox_require_authentication;
 	@FindBy(id = "EnableVideoStreaming")
-	WebElement checkbox_enable_video_streaming;
+	public WebElement checkbox_enable_video_streaming;
 	@FindBy(id = "DisableStudentPrinting")
-	WebElement checkbox_disable_student_printing;
+	public WebElement checkbox_disable_student_printing;
 	@FindBy(id = "EnableWebcast")
-	WebElement checkbox_enable_webcast;
+	public WebElement checkbox_enable_webcast;
 	@FindBy(id = "PostToTwitter")
-	WebElement checkbox_post_to_twitter;
+	public WebElement checkbox_post_to_twitter;
 	@FindBy(id = "EnableStudentTesting")
-	WebElement checkbox_enable_student_testing;
+	public WebElement checkbox_enable_student_testing;
 	@FindBy(id = "PubliclyVisible")
-	WebElement visibility_of_course_checkbox;
+	public WebElement visibility_of_course_checkbox;
 	@FindBy(id = "EnableStudentTesting")
-	WebElement enable_student_testing_checkbox;
+	public WebElement enable_student_testing_checkbox;
 	@FindBy(id = "AllowToDownload")
-	WebElement allow_students_download_checkbox;
+	public WebElement allow_students_download_checkbox;
 	@FindBy(id = "AllowToDownload")
-	WebElement allow_download;
+	public WebElement allow_download;
 	@FindBy(id = "PubliclyVisibleAvaliable")
-	WebElement checkbox_enable_PubliclyVisible;
+	public WebElement checkbox_enable_PubliclyVisible;
 	
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {
