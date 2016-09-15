@@ -171,10 +171,13 @@ public class CoursesHelperPage extends Page {
 			Thread.sleep(3000);
 			ATUReports.add("Select course", "Clicked on first course", "Course Details page is displayed", LogAs.PASSED,
 					null);
+			Assert.assertTrue(true);
 		} catch (Exception e) {
-
+			ATUReports.add("Select course", "Clicked on first course", "Course Details page isn't displayed", LogAs.PASSED,
+					 new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
 		}
-		Assert.assertTrue(true);
+		
 		return course_name;
 	}
 
