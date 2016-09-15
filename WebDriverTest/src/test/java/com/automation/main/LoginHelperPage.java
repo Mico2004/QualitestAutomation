@@ -1,6 +1,8 @@
 package com.automation.main;
 
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -53,7 +55,7 @@ public class LoginHelperPage extends Page {
 		setPageTitle("Tegrity Lecture Capture");
 		/// setPageUrl("https://qualitest4-prod.tegrity.com/#/login");
 		// setPageUrl("https://reg-qabr.tegrity.com/#/login");
-		setPageUrl("https://awsserverautomation-perf-1.tegrity.com/#/login");
+		setPageUrl("https://awsserverautomation-perf-4.tegrity.com/#/login");
 		
 //		setPageUrl("https://awsserverautomation1.tegrity.com/#/login");
 		/// setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University"))););////"https://reg-qabr.tegrity.com/#/login"
@@ -123,8 +125,11 @@ public class LoginHelperPage extends Page {
 		}
 		System.out.println("loginCourses7");
 		Thread.sleep(1000);
-		if (driver.getCurrentUrl().contains("eula")) {
-			try {
+		String currUrl = ((JavascriptExecutor) driver).executeScript("return window.document.location.href").toString();
+		if (currUrl.contains("eula")) {
+			try {			
+				Thread.sleep(1000);
+				eula_accept_button.click();
 				eula_accept_button.click();
 				System.out.println("Clicked on accept EULA button");
 			} catch (Exception msg) {
