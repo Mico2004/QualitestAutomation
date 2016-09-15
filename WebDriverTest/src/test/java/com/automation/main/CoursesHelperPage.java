@@ -108,6 +108,7 @@ public class CoursesHelperPage extends Page {
 	WebElement courses_heading;
 	public ConfirmationMenu confirm_menu;
 	public LoginHelperPage tegrity;
+	
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -117,7 +118,7 @@ public class CoursesHelperPage extends Page {
 
 	public CoursesHelperPage(WebDriver browser) {
 		super(browser);
-		setPageTitle("Tegrity - Courses");
+		//setPageTitle("Tegrity - Courses");
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -180,8 +181,12 @@ public class CoursesHelperPage extends Page {
 	// this function return list of all courses
 	public List<String> getCourseList() {
 		List<String> current_course_list = new ArrayList<String>();
-
-		for (WebElement course : course_list) {
+		try{	
+		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElements(course_list));
+		}catch(Exception e){
+			
+			
+		}for (WebElement course : course_list) {
 			current_course_list.add(course.getText());
 		}
 
@@ -268,7 +273,7 @@ public class CoursesHelperPage extends Page {
 			}			
 		}
 		try{
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("CourseTitle")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("CourseTitle")));		
 		}catch(TimeoutException e){
 			System.out.println("Course wasn't selected successfully: couese title isn't visible");
 			ATUReports.add("Course wasn't selected successfully: couese title isn't visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
@@ -527,17 +532,6 @@ public class CoursesHelperPage extends Page {
 				}
 			}
 		}
-
-		/*
-		 * if ((type_of_recordings == 0) || (type_of_recordings == 2) ||
-		 * (type_of_recordings == 3)) {
-		 * record_helper_page.checkStatusExistenceForMaxTTime(6000); }
-		 */
-
-		// else if (type_of_recordings == 1) {
-		// Being copied from
-		// }
-		//
 		for (String window : driver.getWindowHandles()) {
 			driver.switchTo().window(window);
 			break;
