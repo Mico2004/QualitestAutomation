@@ -617,8 +617,7 @@ public class CoursesHelperPage extends Page {
 		selectCourseThatStartingWith(course_name_start_with);
 		if (type_of_recordings == 1) {
 			try {
-				new WebDriverWait(driver, 5)
-						.until(ExpectedConditions.visibilityOf(recording_helper_page.additional_content_tab));
+				new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(recording_helper_page.additional_content_tab));
 				recording_helper_page.additional_content_tab.click();
 				System.out.println("Enter to the additional content tab.");
 				ATUReports.add("Enter to the additional content tab.", LogAs.PASSED, null);
@@ -656,9 +655,7 @@ public class CoursesHelperPage extends Page {
 		} else if ((type_of_recordings == 1) || (type_of_recordings == 3)) {
 			if (type_of_recordings == 3) {
 				recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordingsAndUncheckUndeleteableRecordings();
-			} else {
-				recording_helper_page.checkExistenceOfNonDeleteItemsStatusInAdditionalContentAndUncheckUndeleteableContent();
-			}
+			} 
 
 			new WebDriverWait(driver, 5)
 					.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
@@ -670,7 +667,8 @@ public class CoursesHelperPage extends Page {
 			// recording_helper_page.check_all_checkbox.click();
 			try {
 				if (type_of_recordings == 1) {
-					recording_helper_page.clickOnContentTaskThenDelete();
+						recording_helper_page.checkExistenceOfNonDeleteItemsStatusInAdditionalContentAndUncheckUndeleteableContent();	
+					    recording_helper_page.clickOnContentTaskThenDelete();
 				} else if (type_of_recordings == 3) {
 					recording_helper_page.clickOnRecordingTaskThenDelete();
 				}
