@@ -151,7 +151,7 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 			 Thread.sleep(2000);	 
 			 //6.Click on some recording
 			 record.verifyFirstExpandableRecording();
-			 driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+			 record.clickOnTheFirstCaptherWithOutTheExpand();
 			 Thread.sleep(15000);
 		//	 player_page.verifyTimeBufferStatusForXSec(10);// check source display
 			 ///// to go back to crecording window handler

@@ -209,7 +209,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	
 	   	String recording_to_search=record.recording_list_names.get(0);
 	    record.verifyFirstExpandableRecording();
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+	    record.clickOnTheFirstCaptherWithOutTheExpand();
 	
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
@@ -300,7 +300,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 				
 			// 21. go back to the player
 		    record.verifyFirstExpandableRecording();
-			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+		    record.clickOnTheFirstCaptherWithOutTheExpand();
 			
 			
 			// 22.Select the Recording by clicking on one of the chapters

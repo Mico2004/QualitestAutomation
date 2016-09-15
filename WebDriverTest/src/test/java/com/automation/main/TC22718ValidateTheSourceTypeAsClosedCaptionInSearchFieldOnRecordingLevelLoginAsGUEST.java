@@ -198,8 +198,7 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 	     record.verifyFirstExpandableRecording();
 	     record.convertRecordingsListToNames();
-	     driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+	     record.clickOnTheFirstCaptherWithOutTheExpand();
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 		String caption_rec_in_time=player_page.getCaptionInTime("0:00:47");

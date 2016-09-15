@@ -59,18 +59,10 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	@BeforeClass
 	public void setup() {
 
-		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
+
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -129,16 +121,21 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		
 		
 		// 1. getting the name of the past course
-		tegrity.loginCourses("SuperUser");
+		tegrity.loginCourses("User1");
 		initializeCourseObject();
-			
+		Thread.sleep(1000); 
+		
+		course.clickOnPastCoursesTabButton();
+		
 		String current_course = course.selectCourseThatStartingWith("PastCourseA");
 		System.out.println("The course that selected is: " + current_course);
 		Thread.sleep(1000); 
 		
 		// 2. move course from the bank to the past courses 
-		record.returnToCourseListPage();	
+		record.signOut();	
 		
+		tegrity.loginCourses("SuperUser");
+		Thread.sleep(1000); 
 		//2.1 enter to the bank
 		course.selectCourseThatStartingWith("BankValid");
 		Thread.sleep(3000); 
@@ -166,48 +163,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		Thread.sleep(1000); 
 		
 		record.signOut();
-		Thread.sleep(1000); 
-		
-		// 3. enter as admin and unroll the course 
-		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
-		 
-		// 3.1 Click on course builder href link
-		admin_dash_board_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-	 	Thread.sleep(10000);
-	 		
-	 	// 3.2 Click on create course href link 
-	 	driver.switchTo().frame(0);
-	 		
-	 	// 3.3 Search target course name
-	 	mange_adhoc_course_enrollments.searchAndFilterCourses(current_course);
-	 	Thread.sleep(4000);
-	 			
-	 	// 3.4 Click on result first course (the only one) membership button
-	 	mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
-	 	Thread.sleep(2000);
-	 	
-	 	// 3.5 remove the instractour from the course 
-	 	mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list,"User1");
-	 	System.out.println("removed instructor 1");
-	 	Thread.sleep(1000);
-	 		
-	 	// 3.6 Add selected user to instructor list
-	 	mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
-	 	Thread.sleep(3000);   	
-	 
-	 	// 3.7 click on the ok button
-	 	mangage_adhoc_courses_membership_window.ok_button.click();
-	 	Thread.sleep(1000);
-	 	    
-	 	// 3.8 click on the alert
-	 	driver.switchTo().alert().accept();
-	 	Thread.sleep(2000);
-	 	
-	 	//3.9 switch to main
-	 	mangage_adhoc_courses_membership_window.exitInnerFrame();
-	 	record.signOut();
-		
+		Thread.sleep(1000); 	
 	 	/// end pre test
 		
 		// 1. Validate there is recording in past courses Tab. Search input specified shall be case-insensitive.
@@ -318,46 +274,6 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		record.signOut();
 		Thread.sleep(3000);
 		
-		//14. after class 
-		// 3. enter as admin and unroll the course 
-		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
-		 
-		// 3.1 Click on course builder href link
-		admin_dash_board_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-	 	Thread.sleep(10000);
-	 		
-	 	// 3.2 Click on create course href link 
-	 	driver.switchTo().frame(0);
-	 		
-	 	// 3.3 Search target course name
-	 	mange_adhoc_course_enrollments.searchAndFilterCourses(current_course);
-	 	Thread.sleep(4000);
-		
-	 	// 3.4 Click on result first course (the only one) membership button
-	 	mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
-	 	Thread.sleep(2000);
-	 	
-	 	// 3.5 add the instractour from the course 
-	 	String user = PropertyManager.getProperty("User1");
-	 	mangage_adhoc_courses_membership_window.searchForUser(user);
-	 	mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
-	 	System.out.println("add instructor 1");
-	 	Thread.sleep(1000);
-	 		
-	 	// 3.6 Add selected user to instructor list
-	 	mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
-	 	Thread.sleep(3000);   	
-	 
-	 	// 3.7 click on the ok button
-	 	mangage_adhoc_courses_membership_window.ok_button.click();
-	 	Thread.sleep(1000);
-	 	    
-	 	// 3.8 click on the alert
-	 	driver.switchTo().alert().accept();
-	 	Thread.sleep(2000);
-	 	
-	
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		

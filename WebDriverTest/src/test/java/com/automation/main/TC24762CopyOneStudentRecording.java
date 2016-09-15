@@ -247,8 +247,7 @@ public class TC24762CopyOneStudentRecording {
 			record.verifyFirstExpandableRecording();
 			Thread.sleep(3000);
 
-			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
+			record.clickOnTheFirstCaptherWithOutTheExpand();
 			//20.dispaly recording
 			player_page.verifyTimeBufferStatusForXSec(15);// check source display
 

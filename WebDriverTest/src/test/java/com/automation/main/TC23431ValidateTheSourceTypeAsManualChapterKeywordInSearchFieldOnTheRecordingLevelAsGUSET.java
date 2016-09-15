@@ -212,8 +212,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		record.waitForVisibility(record.first_recording);
 	    Thread.sleep(2000);
 		record.verifyFirstExpandableRecording();
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 
 		// 7.Select the Recording by clicking on one of the chapters
 
@@ -355,10 +354,8 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 		Thread.sleep(2000);
 		record.verifyFirstExpandableRecording();
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
-
-
+		record.clickOnTheFirstCaptherWithOutTheExpand();
+		
 		// to go back to crecording window handler
 
 		for (String handler : driver.getWindowHandles()) {

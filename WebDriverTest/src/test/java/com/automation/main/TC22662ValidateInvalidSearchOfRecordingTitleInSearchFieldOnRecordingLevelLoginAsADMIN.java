@@ -98,7 +98,7 @@ public class TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -112,7 +112,6 @@ public class TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
-		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
@@ -143,9 +142,7 @@ public class TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 	@Test
 	public void test22662() throws Exception {
 
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-        String recording_name=sdf.format(date);
+		
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.waitForVisibility(tegrity.passfield);
@@ -175,39 +172,49 @@ public class TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 		admin_view_course_list.moveToCoursesThroughGet(url);
 		/// 6.Click on one of the Recording link
 		record.waitForVisibility(record.checkbox2);
-		Thread.sleep(1000);
-		record.checkbox2.click();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+        String recording_name="NewName" + sdf.format(date);
+		
 		record.toEditRecordingPropertiesMenu();
 		erp_window.waitForVisibility(erp_window.save_button);
 		erp_window.changeRecordingName(recording_name, confirm_menu);
 
 		// 7.Click on one of the Recording link
 		record.verifyFirstExpandableRecording();
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 	
-		///// to go back to crecording window handler
-		String curr_win=driver.getWindowHandle();	
+		/// to go back to crecording window handler	
 		for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
-		break;		
+				break;		
 		}
 		System.out.println(player_page.breadcrumbs_box_elements_list.get(0));
 			
 		/// 9.Enter invalid "Recording Title" in the search field and press
 		/// ENTER
+		
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+			break;		
+		}
+		
 		player_page.verifySearchReturnEmptyList("asdasfasffafa");
 	
 		/// 10.Enter a "Recording Title" of another Recording from the same
 		/// course and press ENTER
-		player_page.verifySearchReturnEmptyList(recording_name);
-		for(String handler: driver.getWindowHandles())
-		{
+		
+		for (String handler : driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
-			break;
-		}
+			break;		
+	}
+		
+		player_page.verifySearchReturnEmptyList(recording_name);
+
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}

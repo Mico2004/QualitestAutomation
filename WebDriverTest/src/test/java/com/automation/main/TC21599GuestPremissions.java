@@ -212,9 +212,9 @@ public class TC21599GuestPremissions {
 		 Thread.sleep(3000);
 		 //21.Click on some recording
 		 record.verifyFirstExpandableRecording();
-		 driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		 Thread.sleep(15000);
-		 player_page.verifyTimeBufferStatusForXSec(20);// check source display
+		 record.clickOnTheFirstCaptherWithOutTheExpand();
+
+		 player_page.verifyTimeBufferStatusForXSec(15);// check source display
 		 ///// to go back to recording window handler
 		 for (String handler : driver.getWindowHandles()) {
 		 driver.switchTo().window(handler);
@@ -421,7 +421,7 @@ public class TC21599GuestPremissions {
         record.waitForVisibility(record.first_recording);
 		record.verifyFirstExpandableRecording();
 		record.waitForVisibility(driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")));
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		Thread.sleep(15000);
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 		String rss_feed_course_link = driver.getCurrentUrl();
