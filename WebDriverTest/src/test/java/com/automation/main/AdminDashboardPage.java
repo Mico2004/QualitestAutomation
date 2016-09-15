@@ -76,6 +76,20 @@ public class AdminDashboardPage extends Page {
 	@FindBy (xpath="//*[@id='UsersBox']/ul/li/a[text() = 'Impersonate User']") 
 	WebElement ImpersonateUser;
 	
+	@FindBy (xpath="//*[@id='ServiceSettingsBox']/ul/li/a[text() = 'Customize User Interface']") 
+	WebElement customizeUserInterface;
+	@FindBy (xpath="//*[@id='ServiceSettingsBox']/ul/li/a[text() = 'Set Recorder Enforced Login']") 
+	WebElement setRecorderEnforcedLogin;
+	@FindBy (xpath="//*[@id='ServiceSettingsBox']/ul/li/a[text() = 'Set Email and Connection Settings']") 
+	WebElement setEmailandConnectionSettings;
+	@FindBy (xpath="//*[@id='ServiceSettingsBox']/ul/li/a[text() = 'Advanced Service Settings']") 
+	WebElement advancedServiceSettings;
+	@FindBy (xpath="//*[@id='ServiceSettingsBox']/ul/li/a[text() = 'Reprocess Tegrity Recordings']") 
+	WebElement reprocessTegrityRecordings;
+
+	
+	
+	
 	@FindBy (id="StatusBox")
 	WebElement StatusBox;
 	@FindBy (id="RecordersRecordingsBox")
@@ -88,6 +102,7 @@ public class AdminDashboardPage extends Page {
 	WebElement EventsAlertsBox;
 	@FindBy (id="CoursesBox")
 	WebElement CoursesBox;
+
 	@FindBy (id="IntegrationBox")
 	WebElement IntegrationBox;
 	List <WebElement> dashboardSections;
@@ -212,27 +227,58 @@ public class AdminDashboardPage extends Page {
 
 	// This function get String with the name of target submenu of Service Settings and Maintenance and clicks on it
 	public void clickOnTargetSubmenuAdvancedServices(String target) {
+		
+		
 
-		for (int i = 0; i < services_setting_submenu.size(); i++) {
-			if (services_setting_submenu.get(i).getText().equals(target)) {
-				try {
-					services_setting_submenu.get(i).click();
-					System.out.println("Click on target submenu of Service Settings and Maintenance: " + target);
-					ATUReports.add("Click on target submenu of Service Settings and Maintenance.", "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
+
+
+
+		try {
+		System.out.println("clickOnTargetSubmenuAdvanceServiceSet1");
+		waitForVisibility(ServiceSettingsBox);
+		System.out.println("clickOnTargetSubmenuAdvanceServiceSet2");
+
+		Thread.sleep(2000);
+		System.out.println("clickOnTargetSubmenuAdvanceServiceSet4");
+		
+		switch(target){
+		case "Customize User Interface": 
+			targetLink=customizeUserInterface;
+			break;
+		case "Set Recorder Enforced Login": 
+			targetLink=setRecorderEnforcedLogin;
+			break;
+		case "Set Email and Connection Settings": 
+			targetLink=setEmailandConnectionSettings;
+			break;
+		case "Advanced Service Settings": 
+			targetLink=advancedServiceSettings;
+			break;
+		case "Reprocess Tegrity Recordings": 
+			targetLink=reprocessTegrityRecordings;
+			break;		
+			default: targetLink=advancedServiceSettings;
+		}
+		linkText=targetLink.getText();
+		System.out.println("clickOnTargetSubmenuAdvanceServiceSet5");
+				
+					waitForVisibility(targetLink);
+					System.out.println("clickOnTargetSubmenuAdvanceServiceSet6");
+					targetLink.click();					
+					System.out.println("clickOnTargetSubmenuAdvanceServiceSet7");
+					System.out.println("clickOnTargetSubmenuAdvanceServiceSet: "+linkText  );
+					ATUReports.add("Click on target submenu of AdvanceServiceSet:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
 					return;
 				} catch (Exception msg) {
-					System.out.println("Not click on target submenu of Serivce Settings and Maintenance: " + target);
-					System.out.println("ERROR msg: " + msg);
-					ATUReports.add("Click on target submenu of Service Settings and Maintenance.", "Clicked on target submenu.", "Not clicked on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-					return;
-				}
-
-			}
+					System.out.println("Not click on target submenu of AdvanceServiceSet: " + targetLink.getText().toString());
+					System.out.println("ERROR msg: " + msg.getMessage());
+					ATUReports.add("Click on target submenu of AdvanceServiceSet:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+					return;			
 		}
 		
-		System.out.println("Not found the target submenu to click on: " + target);
-		ATUReports.add("Click on target submenu of Service Settings and Maintenance.", "Clicked on target submenu.", "Target submenu not found.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		Assert.assertTrue(false);
+		
 	}
 
 
