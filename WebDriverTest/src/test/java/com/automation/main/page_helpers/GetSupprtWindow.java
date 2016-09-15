@@ -23,7 +23,7 @@ public class GetSupprtWindow extends Page {
 	@FindBy(id = "name-field2") WebElement to_name_field;
 	@FindBy(id = "subject-field") WebElement subject_field;
 	@FindBy(id = "textarea-field") WebElement comments_field;
-	@FindBy(xpath = "//*[@id=\"supportWindow\"]/div[2]/form/span[1]") WebElement support_window_info;
+	@FindBy(xpath = "//*[@id=\"supportWindow\"]/div[2]/form/span[1]")public WebElement support_window_info;
 	@FindBy(tagName = "Cancel") WebElement cancel_button;
 	@FindBy(css=".btn.btn-primary.pull-right" ) WebElement send_button;
 	

@@ -34,19 +34,19 @@ public class LoginHelperPage extends Page {
 		}
 		
 	@FindBy(name = "UserName")
-	WebElement usernamefield;
+	public WebElement usernamefield;
 	@FindBy(name = "Password")
 	public WebElement passfield;
 	@FindBy(id = "ButtonLogin")
-	WebElement button_login;
+	public WebElement button_login;
 	@FindBy(css = "[class=\"form-row\"]>.error-text")
-	WebElement errorHeader;
+	public WebElement errorHeader;
 	@FindBy(css = ".btn.btn-primary")
-	WebElement eula_accept_button;
+	public WebElement eula_accept_button;
 	@FindBy(xpath = "//*[@id=\"main\"]/form/div[2]/div[6]/button")
-	WebElement Login_as_guest_button;
+	public WebElement Login_as_guest_button;
 	@FindBy(xpath = "//*[@id=\"main\"]/form/div[2]/div[6]/p")
-	WebElement Login_as_guest_info;
+	public WebElement Login_as_guest_info;
 	private CoursesHelperPage course;
 
 	

@@ -51,7 +51,7 @@ public class PlayerPage extends Page {
 	@FindBy(id = "PauseButton_Img")
 	WebElement pause_button;
 	@FindBy(id = "Add_Img")
-	WebElement add_bookmark_button;
+	public WebElement add_bookmark_button;
 	@FindBy(id = "InputTextArea")
 	WebElement bookmark_input_text;
 	@FindBy(css = ".BookmarkButton")
@@ -77,7 +77,7 @@ public class PlayerPage extends Page {
 	@FindBy(xpath = "//*[@id=\"tegrityBreadcrumbsBox\"]/li[2]/a")
 	WebElement course_name_breadcrumbs;
 	@FindBy(xpath = "//*[@id=\"playerContainer\"]")
-	WebElement iframe;
+	public  WebElement iframe;
 	public @FindBy(xpath = "//*[contains(@id, 'SearchResult_')]") /// "SearchResult_");
 	List<WebElement> search_result;
 	@FindBy(id = "TimeSliderButton")
@@ -108,9 +108,9 @@ public class PlayerPage extends Page {
 	@FindBy(id = "InstituteLogotype")
 	WebElement tegrity_universty_logo;
 	@FindBy(xpath =".//*[@id='DownDiv']/table/tbody/tr[1]/th[3]")
-	WebElement context_title;
+	public WebElement context_title;
 	@FindBy(css = ".SearchResultContext")
-	List<WebElement> SearchResultContext;
+	public List<WebElement> SearchResultContext;
 	@FindBy(id= "TegrityLogo")
 	WebElement tegrity_logo;
 	@FindBy(id= "Back30_Img")

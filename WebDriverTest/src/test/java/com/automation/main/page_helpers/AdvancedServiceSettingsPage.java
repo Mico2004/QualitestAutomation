@@ -33,15 +33,18 @@ public class AdvancedServiceSettingsPage extends Page {
 	}
 
 	@FindBy(xpath = "//*[@id=\"main\"]/div/div[5]/div/label/input")
-	WebElement eula_checkbox;
+	public WebElement eula_checkbox;
 	@FindBy(xpath = "//*[@id=\"main\"]/div/div[6]/button[1]")
-	WebElement ok;
+	public WebElement ok;
 	@FindBy(xpath = "//*[@id=\"main\"]/div/div[6]/button[2]")
-	WebElement cancel;
-	@FindBy(xpath="//*[@id='main']/div/div[4]/div[1]/label/input") WebElement enable_student_testing_checkbox;
+	public WebElement cancel;
+	@FindBy(xpath="//*[@id='main']/div/div[4]/div[1]/label/input")
+	public WebElement enable_student_testing_checkbox;
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div[1]/label/input") WebElement enable_youtube_integration;
-	@FindBy(xpath=".//*[@id='main']/div/div[2]/div[1]/label/input") WebElement enable_automated_capitioning;
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div[1]/label/input")
+	public WebElement enable_youtube_integration;
+	@FindBy(xpath=".//*[@id='main']/div/div[2]/div[1]/label/input")
+	public WebElement enable_automated_capitioning;
 	@FindBy(xpath=".//*[@id='tegrityBreadcrumbsBox']/li/a") WebElement adminDashboard;
 
 	public void enableYoutbeCapitionStudent(ConfirmationMenu confirm) {

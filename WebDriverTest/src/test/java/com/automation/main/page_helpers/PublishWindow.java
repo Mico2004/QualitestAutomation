@@ -26,7 +26,8 @@ public class PublishWindow extends Page {
 	}
 	
 	@FindBy(id = "ModalDialogHeader")WebElement publish_window_title;
-	@FindBy(id = "NeverOption") WebElement never_option;
+	@FindBy(id = "NeverOption")
+	public WebElement never_option;
 	@FindBy(id = "SubmitButton") WebElement save_button;
 	@FindBy(id = "AlwaysOption")
 	WebElement always_select_button;

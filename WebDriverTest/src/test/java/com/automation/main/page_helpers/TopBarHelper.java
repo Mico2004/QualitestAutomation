@@ -32,25 +32,25 @@ public class TopBarHelper extends Page {
 	}
 
 	@FindBy(id = "SignOutLink")
-	WebElement sign_out_button;
+	public WebElement sign_out_button;
 	@FindBy(id = "UserName")
-	WebElement username;
+	public WebElement username;
 	@FindBy(id = "tegritySearchBox")
 	public WebElement search_box_field;
 	@FindBy(id = "InstituteLogotype")
-	WebElement institute_logo;
+	public WebElement institute_logo;
 	@FindBy(css = ".university-logo-container.ng-scope.ng-isolate-scope")
-	WebElement header;
+	public WebElement header;
 	@FindBy(id = "MyAccountLink")
-	WebElement my_account_link;
+	public WebElement my_account_link;
 	@FindBy(id = "ReportsLink")
-	WebElement report_menu;
+	public WebElement report_menu;
 	@FindBy(id = "WeeklySummary")
-	WebElement weekly_summary;
+	public WebElement weekly_summary;
 	@FindBy(id = "DetailedReports")
-	WebElement detailed_reports;
+	public WebElement detailed_reports;
 	@FindBy(id = "CustomAnalysis")
-	WebElement custom_analysis;
+	public WebElement custom_analysis;
 
 	// This function clicks on my account link
 	public void clickOnMyAccountLink() {

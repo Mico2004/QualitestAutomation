@@ -40,30 +40,31 @@ public class CopyMenu extends Page {
 		// TODO Auto-generated constructor stub
 	}
 
-	@FindBy(xpath = "//*[@id=\"courseListSelect\"]/option") List<WebElement> course_list;
+	@FindBy(xpath = "//*[@id=\"courseListSelect\"]/option")
+	public List<WebElement> course_list;
 	@FindBy(xpath = "//*[@id=\"ModalDialogHeaderWrap\"]")
-	WebElement copy_title;
+	public WebElement copy_title;
 	@FindBy(id = "InfoText")
-	WebElement info_text;
+	public WebElement info_text;
 	@FindBy(id = "courseSearchText")
-	WebElement search_box;
+	public WebElement search_box;
 	@FindBy(name = "searchCourse")
-	WebElement search_button;
+	public WebElement search_button;
 	@FindBy(id = "CopyButton")
-	WebElement CopyRecording;
+	public  WebElement CopyRecording;
 	@FindBy(id = "CancelButton")
-	WebElement CancelButton;
-	String[] copy_course_list;// string of courses name
+	public  WebElement CancelButton;
+	public String[] copy_course_list;// string of courses name
 	@FindBy(xpath = "//*[@id=\"courseListSelect\"]/option[1]")
-	WebElement first_course_on_the_list;
+	public WebElement first_course_on_the_list;
 	@FindBy(id = "CancelButton")
-	WebElement cancel_button;
+	public WebElement cancel_button;
 	@FindBy(xpath = "html/body/div[2]/div")
-	WebElement outside_of_copy_menu_scope;
+	public WebElement outside_of_copy_menu_scope;
 	@FindBy(id = "CopyButton")
-	WebElement copy_button;
+	public WebElement copy_button;
 	@FindBy(id = "courseListSelect")
-	WebElement course_list_select;
+	public WebElement course_list_select;
 	
 
 	// This function clicks on copy button of copy menu
@@ -760,7 +761,7 @@ public class CopyMenu extends Page {
 		
 		
 		// This function verify that copy menu close
-		protected void verifyThatCopyMenuClose() {
+		public void verifyThatCopyMenuClose() {
 			boolean is_closed = isCopyMenuClosed();
 			
 			if(!is_closed) {
