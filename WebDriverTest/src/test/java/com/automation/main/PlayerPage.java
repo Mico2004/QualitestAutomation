@@ -575,14 +575,13 @@ public class PlayerPage extends Page {
 
 			Thread.sleep(2000);
 			search_box.clear();
+			search_box.sendKeys(to_search + Keys.ENTER);	
 			Thread.sleep(1000);
-			search_box.sendKeys(to_search);
-			Robot robot = new Robot();
-			robot.mouseMove(-1000, 100);
-			robot.keyPress(KeyEvent.VK_ENTER);
-			Thread.sleep(200);
-			robot.keyRelease(KeyEvent.VK_ENTER);
-			Thread.sleep(1000);
+			search_box.clear();
+			
+			System.out.println("search the record: " + to_search);
+			ATUReports.add("search the record: " + to_search, LogAs.PASSED, null);
+			
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				break;
