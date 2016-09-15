@@ -117,10 +117,8 @@ public class TC17938VerifyPastCourseWithTestRecording {
 			create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
 
 			mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
-					ManageAdHocCoursesMembershipWindow.class);
-
-			Thread.sleep(2000);
-
+					ManageAdHocCoursesMembershipWindow.class);		
+			
 			tegrity.loginAdmin("Admin");
 			Thread.sleep(2000);
 			System.out.println("Past1");
@@ -170,7 +168,7 @@ public class TC17938VerifyPastCourseWithTestRecording {
 			mange_adhoc_course_enrollments.clickOnNewCourse();
 			create_new_course_window.waitForVisibility(create_new_course_window.course_id_input);
 			String PastTempCourse = "PastTempCourse" + sdf.format(date);
-			create_new_course_window.createNewCourse(PastTempCourse + "_Name", PastTempCourse + sdf.format(date));
+			create_new_course_window.createNewCourse(PastTempCourse + "_Name", PastTempCourse );
 
 			for (int j = 0; j < 5; j++) {
 				try {
@@ -249,6 +247,7 @@ public class TC17938VerifyPastCourseWithTestRecording {
 			initializeCourseObject();
 			course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", PastTempCourse, 3, record,
 					copy, confirm_menu);
+			System.out.println("Past7");
 			course.verifyRecordingsStatusIsClear("BankValidRecording", 3, record);
 
 			course.signOut();

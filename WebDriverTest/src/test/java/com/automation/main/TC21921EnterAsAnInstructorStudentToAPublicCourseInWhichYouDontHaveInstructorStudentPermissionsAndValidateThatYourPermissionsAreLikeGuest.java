@@ -210,6 +210,15 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 		
 	// Login as super user for course settings and copying recordings
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		tegrity.loginCoursesByParameter("User108092016110914");		
+		
+		
+		
+		
+		
+		
+		
+		
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
 		course.selectCourseThatStartingWith("BAc");
