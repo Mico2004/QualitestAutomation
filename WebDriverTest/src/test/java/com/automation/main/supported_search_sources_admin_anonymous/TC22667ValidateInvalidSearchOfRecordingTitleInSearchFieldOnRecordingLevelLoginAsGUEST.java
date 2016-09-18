@@ -100,8 +100,7 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
-
+		
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		wait = new WebDriverWait(driver, 30);
@@ -144,15 +143,28 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 	@Test
 		public void test22667() throws Exception {
 
-
-			Date date = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-	        String recording_name=sdf.format(date);
-			
 	        // 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			tegrity.waitForVisibility(tegrity.passfield);
-		
+			
+			//pre test - edit the second chapter name to be unique
+			tegrity.loginCourses("User1");
+			course.selectCourseThatStartingWith("Ab");
+			
+			record.waitForVisibility(record.checkbox2);
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+			
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+	        String recording_name="ChapterNewName" + sdf.format(date);
+			
+			record.toEditRecordingPropertiesMenu();
+			erp_window.waitForVisibility(erp_window.save_button);
+			erp_window.changeRecordingName(recording_name, confirm_menu);
+			
+			
+			record.signOut();
+			
 			// 2.login as guest
 			tegrity.loginAsguest();
 			
@@ -169,6 +181,7 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 			record.clickOnTheFirstCaptherWithOutTheExpand();		
 			// 8.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
+			
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				break;		
@@ -181,12 +194,13 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 			/// 10.Enter a "Recording Title" of another Recording from the same
 		    /// course and press ENTER
 		
+			for(String handler: driver.getWindowHandles()){
+				driver.switchTo().window(handler);
+				break;
+			}		
+			
 			player_page.verifySearchReturnEmptyList(recording_name);
-			for(String handler: driver.getWindowHandles())
-			{
-			driver.switchTo().window(handler);
-			break;
-			}			
+				
 			
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

@@ -151,7 +151,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	}
 
 	@Test
-	public void test22662() throws Exception {
+	public void TC22689() throws Exception {
 
 		////pre conditions
 		
@@ -173,8 +173,8 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		record.clickOnRecordingTaskThenEditRecording();
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-		String recording_text = "NewChapterName" + sdf.format(date); 
-		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
+		String RecordingChapter = "NewChapterName" + sdf.format(date); 
+		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(RecordingChapter);
 		Thread.sleep(2000);
 			
 		record.signOut();
@@ -231,7 +231,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	     player_page.verifySearchBoxHint();
 	        
 	     //11.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
-	     player_page.verifySearchForRecordingExist(recording_text);
+	     player_page.verifySearchForRecordingExist(RecordingChapter);
 
 		///12.The header is displayed with the default color and the logo at the top left cornner of the UI page.
 		///// to go back to crecording window handler
@@ -253,7 +253,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 			player_page.verifySearchResultPage(recording_to_search);
 			
 			//12. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
-			player_page.verifyResultsStatisticsInFormat(recording_text);
+			player_page.verifyResultsStatisticsInFormat(RecordingChapter);
 			
 		    ///15.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
 			player_page.waitForVisibility(player_page.columns_title_text.get(0));
@@ -324,7 +324,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	        player_page.verifySearchBoxHint();
 	        
 	        //25.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
-	        player_page.searchRecord(recording_text);
+	        player_page.searchRecord(RecordingChapter);
 				
 			///26.The header is displayed with the default color and the logo at the top left cornner of the UI page.
 			///// to go back to crecording window handler
@@ -361,7 +361,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 			player_page.verifySearchResultPage(recording_to_search);
 			
 			//12. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
-			player_page.verifyResultsStatisticsInFormat(recording_text);
+			player_page.verifyResultsStatisticsInFormat(new_recording_text);
 			
 		    ///34.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
 			player_page.waitForVisibility(player_page.columns_title_text.get(0));
