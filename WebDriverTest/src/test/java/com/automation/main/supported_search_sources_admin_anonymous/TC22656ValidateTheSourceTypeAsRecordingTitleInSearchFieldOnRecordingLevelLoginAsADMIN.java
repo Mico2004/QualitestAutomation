@@ -179,10 +179,12 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			Thread.sleep(1000);
 		    record.waitForVisibility(record.first_recording);
 			
+		     record.convertRecordingsListToNames();
+
 			 // 7.Click on one of the Recording link
 		     record.verifyFirstExpandableRecording();
-		     record.convertRecordingsListToNames();
 		     record.clickOnTheFirstCaptherWithOutTheExpand();
+		    	   
 	
 		     // 8.verify recording displaying correctly
 		     player_page.verifyTimeBufferStatusForXSec(10);// check source display
@@ -200,12 +202,19 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 				break;
 			}
 			
+			System.out.println(player_page.breadcrumbs_box_elements_list.get(1).getText());
+			System.out.println(player_page.breadcrumbs_box_elements_list.get(0).getText());
+			///13.The breadcrumb structure is displayed as follows: "> Courses > course name".
+			player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
+			
+			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
+			Thread.sleep(2000);
+			
+			
 			///10.The next result display below the current result in case there is next result.
 			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
 
-			///11.search results page in the format as follows: "recording name - Search Results".
-			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
-			Thread.sleep(2000);
+			///11.search results page in the format as follows: "recording name - Search Results".		
 			player_page.verifySearchResultPage(recording_to_search);
 			
 			//12. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
@@ -218,10 +227,7 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 				driver.switchTo().window(handler);
 				break;
 			}
-			System.out.println(player_page.breadcrumbs_box_elements_list.get(1).getText());
-			System.out.println(player_page.breadcrumbs_box_elements_list.get(0).getText());
-			///13.The breadcrumb structure is displayed as follows: "> Courses > course name".
-			player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
+		
 
 			///14.verify return to recordings page
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
@@ -234,11 +240,12 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			player_page.returnToCoursesPageAsAdmin(course);
 			////17.navigate back to player then to recordings page
 			driver.navigate().back();
-			player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(2));
-
-			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
-				
-
+			Thread.sleep(4000);
+			player_page.verifyTimeBufferStatusForXSec(2);// check source display
+			
+			player_page.returnToAdminPage(admin_dashboard_page);
+			
+			
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		}	

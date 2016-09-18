@@ -671,11 +671,15 @@ public class PlayerPage extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
 
 	/// The breadcrumb structure is displayed as follows: "> Courses > course
 	/// name".
 	public void verifyBreadcrumbsForSearcRecoding(String course_name) {
-		if ((course_name.equals(course_name_breadcrumbs.getText())) && (course_breadcrumbs.isDisplayed())) {
+				
+		String courses_name = breadcrumbs_box_elements_list.get(1).getText();
+		String courses = breadcrumbs_box_elements_list.get(0).getText();		
+		if (course_name.equals(courses_name) &&  courses.equals("Courses")) {
 			System.out.println("course breadcrumbs and course name breadcrumbs were verified");
 			ATUReports.add("course breadcrumbs and course name breadcrumbs were verified", "breadcrumbs", "contains",
 					"contains", LogAs.PASSED, null);
@@ -806,13 +810,13 @@ public class PlayerPage extends Page {
 		}
 		else sentence = res_num + " results found for: " + record_name + ". (" + seconds + " sec)";
 		System.out.println(sentence);
-		if (result.equals(sentence)) {
+		if (sentence.contains(result)) {
 			System.out.println("The search results statistics in the format as follows: "+ "X results found for: search criterion. (XX sec)");
 			ATUReports.add("The search results statistics in the format as follows: "
 							+ "X results found for: search criterion. (XX sec)","parameters", "contains", "contains", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
-			System.out.println("The search results statistics Not  in the format as followsed ");
+			System.out.println("The search results statistics Not in the format as followsed ");
 			ATUReports.add(
 					"The search results statistics in the format as follows: "
 							+ "X results found for: search criterion. (XX sec)",
@@ -895,6 +899,35 @@ public class PlayerPage extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	
+	public void returnToAdminPage(AdminDashboardPage admin ) {
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+			break;
+		}
+		if ((breadcrumbs_box_elements_list.get(0).getText()).equals("Admin Dashboard")) {
+			System.out.println("correct Admin");
+			ATUReports.add("correct Admin", "contains", "contains", "contains", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			try {
+				breadcrumbs_box_elements_list.get(0).click();
+				waitForVisibility(admin.CoursesBox);
+				System.out.println("verify admin dashboard page");
+				ATUReports.add("verify course page", "breadcrumbs", "contains", "contains", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+
+			} catch (Exception e) {
+					
+			}
+		} else {
+			System.out.println("course name unknown");
+			ATUReports.add("course name unknown", "breadcrumbs", "contains", "not contains", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	
 
 	/// this function verifies top bar is in top right and under it located the
 	/// search box
@@ -1065,6 +1098,39 @@ public class PlayerPage extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	
+	public void returnToCoursePageByNameAsUserOrGuest(CoursesHelperPage course){
+		
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+			break;
+		}
+		if ((breadcrumbs_box_elements_list.get(0).getText()).equals("Courses")) {
+			System.out.println("correct name: Courses ");
+			ATUReports.add("correct name: Courses", "contains", "contains", "contains", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			try {
+				breadcrumbs_box_elements_list.get(0).click();
+				waitForVisibility(course.first_course_button);
+				System.out.println("verify course page");
+				ATUReports.add("verify course page", "breadcrumbs", "contains", "contains", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+
+			} catch (Exception e) {
+
+			}
+		} else {
+			System.out.println("course name unknown");
+			ATUReports.add("course name unknown", "breadcrumbs", "contains", "not contains", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		
+		
+		
+		
+	}
+	
 
 	//// The search results on a recording level is displayed in the table with
 	//// the columns as follows:"Location", "Time", "Context".

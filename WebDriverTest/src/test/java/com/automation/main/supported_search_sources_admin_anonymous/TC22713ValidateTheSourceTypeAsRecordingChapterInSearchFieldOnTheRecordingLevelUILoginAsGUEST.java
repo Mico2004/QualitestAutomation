@@ -154,9 +154,9 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
 			course_settings.waitForVisibility(course_settings.getOk_button());
 			course_settings.CheckAllowStudentDownload();
-			
-			Thread.sleep(500);
+	
 			admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
+			Thread.sleep(500);
 			course_settings.makeSureThatMakeCoursePublicIsSelected();
 			course_settings.clickOnOkButton();
 		
