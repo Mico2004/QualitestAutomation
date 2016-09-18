@@ -124,17 +124,17 @@ public class LoginHelperPage extends Page {
 				try {
 					eula_accept_button.click();
 					System.out.println("Clicked on accept Eula button");
-					ATUReports.add("Click on EULA accept", "Accept clicked", "Accept clicked", LogAs.PASSED, null);
+					ATUReports.add("Click on EULA accept", user_name,"Accept clicked", "Accept clicked", LogAs.PASSED, null);
 					new WebDriverWait(driver, 30)
 							.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
 					;
 				} catch (Exception msg) {
 					System.out.println("No EULA button.");
-					ATUReports.add("Click on EULA accept", "Accept clicked", "Acceot wasn't clicked", LogAs.FAILED,
+					ATUReports.add("Click on EULA accept", user_name, "Accept clicked", "Acceot wasn't clicked", LogAs.FAILED,
 							new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 			} else if (driver.getTitle().contains("Tegrity - Courses")) {
-				ATUReports.add("Tegrity courses home page is visible", "Course List page is displayed",
+				ATUReports.add("Tegrity courses home page is visible", user_name,"Course List page is displayed",
 						"Course List page is displayed", LogAs.PASSED, null);
 			}
 		} catch (Exception e) {
@@ -194,13 +194,13 @@ public class LoginHelperPage extends Page {
 				try {
 					eula_accept_button.click();
 					System.out.println("Clicked on accept Eula button");
-					ATUReports.add("Click on EULA accept", "Accept clicked", "Accept clicked", LogAs.PASSED, null);
+					ATUReports.add("Click on EULA accept", user_name,"Accept clicked", "Accept clicked", LogAs.PASSED, null);
 					new WebDriverWait(driver, 30)
 							.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
 					;
 				} catch (Exception msg) {
 					System.out.println("No EULA button.");
-					ATUReports.add("Click on EULA accept", "Accept clicked", "Acceot wasn't clicked", LogAs.FAILED,
+					ATUReports.add("Click on EULA accept", user_name,"Accept clicked", "Acceot wasn't clicked", LogAs.FAILED,
 							new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 			} else if (driver.getTitle().contains("Tegrity - Courses")) {
@@ -231,18 +231,18 @@ public class LoginHelperPage extends Page {
 				new WebDriverWait(driver, 30)
 						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
 			} catch (TimeoutException e) {
-				ATUReports.add("Login Timeout (Screenshot)", "Login Success", LogAs.FAILED,
+				ATUReports.add("Login Timeout (Screenshot)","Guest","Login Success","Login Failed", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 			if (driver.getTitle().contains("Tegrity - Courses")) {
-				ATUReports.add("Tegrity courses home page is visible", "Course List page is displayed",
+				ATUReports.add("Tegrity courses home page is visible","Guest", "Course List page is displayed",
 						"Course List page is displayed", LogAs.PASSED, null);
 			} else {
-				ATUReports.add("Login Failed (Screenshot)",  "Login Success", LogAs.FAILED,
+				ATUReports.add("Login Failed (Screenshot)","Guest",  "Login Success", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		} catch (Exception e) {
-			ATUReports.add("Login Failed (Screenshot)",  "Login Success", LogAs.FAILED,
+			ATUReports.add("Login Failed (Screenshot)", "Guest", "Login Success", LogAs.FAILED,
 					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		try{
