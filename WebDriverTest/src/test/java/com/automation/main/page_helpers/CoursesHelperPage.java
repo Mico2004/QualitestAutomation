@@ -684,7 +684,7 @@ public class CoursesHelperPage extends Page {
 		
 	}
 	}
-
+	
 	public String getCurrentUrlCoursePage() {
 		String currUrl = ((JavascriptExecutor) driver).executeScript("return window.document.location.href").toString();
 		return currUrl;
