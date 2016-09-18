@@ -29,8 +29,7 @@ public class EditRecordinPropertiesWindow extends Page {
 	}
 
 	@FindBy(id = "EditButton")
-	public
-	WebElement save_button;
+	public WebElement save_button;
 	@FindBy(id = "recordingPropertiesRecordedBy")
 	WebElement owner_button;
 	@FindBy(xpath = "//*[@id=\"recordingPropertiesRecordedBy\"]/option")
@@ -147,5 +146,21 @@ public class EditRecordinPropertiesWindow extends Page {
 			System.out.println("clicked on recording title input failed");
 
 		}
+	}
+	
+	public String getRecordName(ConfirmationMenu confirm) {
+		String recordName = null;
+	try {
+		recordName = recording_title.getText();
+		save_button.click();
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
+		System.out.println("save succeded");
+		Thread.sleep(2000);
+		confirm.clickOnOkButtonAfterConfirmEditRecordingProperties();
+	} catch (Exception e) {
+		System.out.println("clicked on recording title input failed");
+
+	}
+		return recordName;
 	}
 }

@@ -153,24 +153,13 @@ public class TC22049ValidateCopyWindowFunctionality {
 		String url_destination =  course.getCurrentUrlCoursePage(); 
 		System.out.println("Destionation course name for this test is: " + destination_course_name);
 		ATUReports.add("Destionation course name for this test is: " + destination_course_name, LogAs.PASSED, null);
-		//record.returnToCourseListPage();
+		
+		record.returnToCourseListPage();
 		// 4.2. check that we have an old recods in the course starting with abc
 		//Delete all recording from course starting with Ab
-		//course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
-		
-		List<String> list_of_records = record.getCourseRecordingList();
-		
-		if(list_of_records.size() == 0) {
-			System.out.println("their isn't old records in this course so the test will not work");
-			ATUReports.add("their isn't old records in this course so the test will not work", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		} else {
-			System.out.println("their is an old records in this course");
-			ATUReports.add("their is an old records in this course", LogAs.PASSED, null);
-			Assert.assertTrue(true);
+		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		
 		
-		}
 		
 		// 5. Logout.
 		record.signOut();

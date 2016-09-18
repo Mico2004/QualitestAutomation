@@ -29,6 +29,7 @@ import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.DeleteMenu;
+import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
@@ -56,6 +57,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
+	public EditRecordinPropertiesWindow edit_recording_properties_window;
 	public DeleteMenu delete_menu;
 	public MoveWindow move_window;
 	public AdminDashboardPage admin_dashboard_page;
@@ -85,7 +87,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		confirmation_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-		
+		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		wait = new WebDriverWait(driver, 30);
 		
 		 Date curDate = new Date();
@@ -210,7 +212,8 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				
 				String checked_recording_title = null;
 				if (recording_type==2) {
-					checked_recording_title = driver.findElement(By.id("RecordingTitle1")).getText();
+					record.toEditRecordingPropertiesMenu();		
+					checked_recording_title =edit_recording_properties_window.getRecordName(confirmation_menu);
 				} else {
 					checked_recording_title = record.getFirstRecordingTitle();
 				}
@@ -261,9 +264,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 						}
 					}
 				}
-				
-				
-				
+					
 				// 15. Click "Delete" button.
 				delete_menu.clickOnDeleteButton();
 				
@@ -285,6 +286,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				// 17. Verify that selected recording is deleted - Selected recording is not displayed in "Recordings" tab.
 				List<String> recording_list_after_delete_recording = record.getCourseRecordingList();
 				
+				if(recording_type != 2)
 				if((!recording_list_after_delete_recording.contains(checked_recording_title)) && ((recording_list_before_delete_recording.size() - recording_list_after_delete_recording.size())==1)) {
 					System.out.println("Verified that selected recording is deleted and not displayed.");
 					ATUReports.add("Recording is not dispaly in recording list.", "True.", "True.", LogAs.PASSED, null);
@@ -293,6 +295,22 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 					System.out.println("Not verified that selected recording is deleted and not displayed.");
 					ATUReports.add("Recording is not dispaly in recording list.", "True.", "False.", LogAs.FAILED, null);
 					Assert.assertTrue(false);
+				}
+				// the name in the test tab aren't unique
+				else{
+					record.toEditRecordingPropertiesMenu();		
+					String checked_recording_title_after =edit_recording_properties_window.getRecordName(confirmation_menu);
+									
+					if(!checked_recording_title.equals(checked_recording_title_after) &&((recording_list_before_delete_recording.size() - recording_list_after_delete_recording.size())==1)) {
+						System.out.println("Verified that selected recording is deleted and not displayed.");
+						ATUReports.add("Recording is not dispaly in recording list.", "True.", "True.", LogAs.PASSED, null);
+						Assert.assertTrue(true);
+					} else {
+						System.out.println("Not verified that selected recording is deleted and not displayed.");
+						ATUReports.add("Recording is not dispaly in recording list.", "True.", "False.", LogAs.FAILED, null);
+						Assert.assertTrue(false);
+					}
+								
 				}
 		
 			}

@@ -447,15 +447,15 @@ public class RecordingHelperPage extends Page {
 		try {
 			waitForVisibility(element);
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
-			System.out.println("recording chapter was expaned");
-			ATUReports.add("recording chapter was expaned", LogAs.PASSED, null);							
+			System.out.println("The screen chapter was expaned");
+			ATUReports.add("The screen chapter was expaned", LogAs.PASSED, null);							
 			Thread.sleep(1500);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			System.out.println("recording chapter wasn't expaned");
-			ATUReports.add("recording chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println("The screen chapter wasn't expaned");
+			ATUReports.add("The screen chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -568,8 +568,6 @@ public class RecordingHelperPage extends Page {
 		try {
 			System.out.println("clickOnRecordingTaskThen1");
 			waitForVisibility(element);
-			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "Course Settings"));
-			Thread.sleep(2000);
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("course_settings displayed");
 			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
@@ -4630,8 +4628,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		} catch (org.openqa.selenium.TimeoutException e) {
 		
 			System.out.println("clickOnFirstVisibleChapter3");
-			((JavascriptExecutor) driver)
-					.executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
+			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
 			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
 			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
 				
