@@ -44,7 +44,7 @@ public class TC15635DeleteAProctoringRecordingAsInstructor {
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
 
 	}
-
+//
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
