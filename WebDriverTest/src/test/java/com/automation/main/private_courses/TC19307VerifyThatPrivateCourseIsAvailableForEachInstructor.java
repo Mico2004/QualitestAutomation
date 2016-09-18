@@ -141,6 +141,11 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 	{
 		// 1. Login as an existing Instructor (User1).
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+	/*	tegrity.loginCoursesByParameter("InstructorTemp14092016082749");
+		initializeCourseObject();
+		course.verifyCourseExist("User113092016032614 sandbox course");
+		Thread.sleep(5000);*/
+		
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
@@ -300,7 +305,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 
 		 Thread.sleep(5000);
 		
-		 course.verifyCourseExist(parsed_private_course_name);
+		 course.verifyCourseExist(temp_instructor_user_name+" sandbox course");
 		 
 		 
 		 private_course_name_from_course_list = course.selectCourseThatStartingWith(temp_instructor_user_name);
@@ -408,7 +413,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 
 		 wait.until(ExpectedConditions.visibilityOf(course.course_list.get(0)));
 		
-		 course.verifyCourseExist(parsed_private_course_name);
+		 course.verifyCourseExist(temp_instructor_user_name+" sandbox course");
 		 
 		 // 28. Sign Out.
 		 top_bar_helper.clickOnSignOut();

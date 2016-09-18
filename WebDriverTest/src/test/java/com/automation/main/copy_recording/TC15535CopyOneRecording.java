@@ -214,7 +214,7 @@ public class TC15535CopyOneRecording {
 		confirm.verifyCopySourceRecordingStatus(status); ///
 
 		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
-
+		record.returnToCourseListPage();
 		//course.course_list.get(1).click();
 		course.selectFirstCourse(record);
 		Thread.sleep(2000);

@@ -224,7 +224,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		 
 		 Thread.sleep(1000);
 		
-		wait.until(ExpectedConditions.visibilityOf(admin_dashboard_page.courses_submenu.get(1)));
+		
 		 
 		 // Enroll the user as student to a course.
 		 admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
