@@ -24,6 +24,7 @@ import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
 import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecording;
 import com.automation.main.page_helpers.EmailAndConnectionSettingsPage;
 import com.automation.main.page_helpers.EmailInboxPage;
 import com.automation.main.page_helpers.EmailLoginPage;
@@ -75,6 +76,7 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 	public AddAdditionalContentFileWindow add_additional_content_window;
 	public AdvancedServiceSettingsPage advanced_services_setting_page;
 	public HelpPage help_page;
+	public EditRecording edit_recording;
 	public CourseSettingsPage course_settings;
 	public EmailAndConnectionSettingsPage email_setting;
 	public EulaPage eula_page;
@@ -93,7 +95,6 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -122,6 +123,7 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		email_inbox = PageFactory.initElements(driver, EmailInboxPage.class);
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
+		edit_recording = PageFactory.initElements(driver, EditRecording.class);
 		help_page = PageFactory.initElements(driver, HelpPage.class);
 		run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
@@ -138,14 +140,11 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 	@Test
 	public void test22662() throws Exception {
 
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-        String recording_name=sdf.format(date);
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.waitForVisibility(tegrity.passfield);
 		
-		// 2.login as user1
+		// 2.login as user1 to get the GGID
 		tegrity.loginCourses("User1");
 		course.waitForVisibility(course.first_course_button);
 				
@@ -171,12 +170,28 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		/// 6.Click on one of the Recording link
 		record.waitForVisibility(record.checkbox2);
 		Thread.sleep(1000);
-		record.checkbox2.click();
-		record.toEditRecordingPropertiesMenu();
-		erp_window.waitForVisibility(erp_window.save_button);
-		erp_window.changeRecordingName(recording_name, confirm_menu);
-
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+        String recording_name="ChapterNewName" + sdf.format(date);
+		
+        record.clickOnRecordingTaskThenEditRecording();
+        
+		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_name);
+		
+		
+		record.signOut();
+		
+		// 2.login as admin
+		tegrity.loginAdmin("Admin");
+		
+		// return to courses 
+		admin_view_course_list.moveToCoursesThroughGet(url);
+		
 		// 7.Click on one of the Recording link
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		
 		record.verifyFirstExpandableRecording();
 		record.clickOnTheFirstCaptherWithOutTheExpand();
 		
@@ -184,20 +199,18 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
 		
-		///// to go back to crecording window handler
-		String curr_win=driver.getWindowHandle();	
+		///// to go back to crecording window handler	
 		for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
-		break;		
+				break;		
 		}
 		
-		///System.out.println(player_page.breadcrumbs_box_elements_list.get(0));
+		System.out.println(player_page.breadcrumbs_box_elements_list.get(0));
 		///9.Validate the search field is display at the top right of the UI page below the top navigation bar.
         player_page.veriySearchBoxLocation();
         ///10.Validate the text in the Tegrity Player page: "Search in this recording..."
         player_page.verifySearchBoxHint();
-        
-		
+        	
 		/// 11.Enter a "Recording Title" of another Recording from the same
 		/// course and press ENTER
 		player_page.verifySearchReturnEmptyList(recording_name);
