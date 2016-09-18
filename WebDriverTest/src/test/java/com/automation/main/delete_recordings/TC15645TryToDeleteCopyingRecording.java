@@ -113,7 +113,6 @@ public class TC15645TryToDeleteCopyingRecording {
 		// Find the target full course name + delete all recording in target
 		// course if they exists
 		target_course = course.selectCourseThatStartingWith("abc");
-		String target_course_url = driver.getCurrentUrl();
 		record.deleteAllRecordings(delete_menu);
 		record.returnToCourseListPage();
 
@@ -125,7 +124,7 @@ public class TC15645TryToDeleteCopyingRecording {
 		// 3. Select recording.
 		String selected_recording_name = record.getFirstRecordingTitle();
 		System.out.println("Record to select: " + selected_recording_name);
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.check_all_checkbox);
 		Thread.sleep(1000);
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
@@ -138,7 +137,7 @@ public class TC15645TryToDeleteCopyingRecording {
 		Thread.sleep(1000);
 
 		// 7. Click "OK" button.
-		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
+		confirm_menu.clickOnOkButtonAfterConfirmCopyRecordings();
 
 		// 7.1. Message is closed.
 		boolean is_closed = confirm_menu.isConfirmationMenuClosed();
@@ -230,27 +229,28 @@ public class TC15645TryToDeleteCopyingRecording {
 		// 10.1. Recr`row is grayed out.
 		// 10.2. Recording has a "Moving/Copying" status.
 		current_recording_list = record.getCourseRecordingList();
-
+		int index = 0;
 		for (int i = 0; i < current_recording_list.size(); i++) {
-			if (current_recording_list.get(i).equals(selected_recording_name)) {
-				record.checkRecordingInIndexIStatus(i + 1, "Moving/Copying");
-				if (!record.isIndexRecordingClickable(i + 1)) {
+			String recording_status = driver.findElement(By.id("RecordingStatus" + Integer.toString(i+1))).getText();
+				if(recording_status.equals("Moving/Copying")){
+					if(!record.isIndexRecordingClickable(i + 1)){
 					System.out.println("Recording is grayed out");
 					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is grayed out",
 							LogAs.PASSED, null);
 					Assert.assertTrue(true);
+					index = i+1;
 				} else {
 					System.out.println("Recording is not grayed out");
 					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is not grayed out",
 							LogAs.FAILED, null);
 					Assert.assertTrue(false);
 				}
-
 			}
 		}
 		
-		// Select first checkbox
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		
+		// Select checkbox
+		record.selectIndexCheckBox(index);
 
 		// Init recording list
 		init_recording_list = record.getCourseRecordingList();
