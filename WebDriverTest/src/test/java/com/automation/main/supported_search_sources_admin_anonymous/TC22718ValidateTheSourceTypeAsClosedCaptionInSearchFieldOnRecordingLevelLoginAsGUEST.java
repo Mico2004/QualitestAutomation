@@ -139,6 +139,7 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		top_bar_helper=PageFactory.initElements(driver, TopBarHelper.class);
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
+	
 		
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
@@ -158,7 +159,12 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		course.waitForVisibility(course.first_course_button);
 		// 3.Click on course
 		String course_name = course.selectCourseThatStartingWith("Ab");
-			    
+			
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings.makeSureThatMakeCoursePublicIsSelected();
+		course_settings.clickOnOkButton();
+		Thread.sleep(1000);
+		
 		//4. select record and add close caption
 		record.waitForVisibility(record.recordings_tab); 
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -243,8 +249,19 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		
 		//15.click on "Courses" and verify course page
 		player_page.returnToCoursesPage(course);
-	
-	
+		
+		record.signOut();
+		
+		// Unpublic Ab course1. 
+		tegrity.loginCourses("User1");
+				
+		course.selectCourseThatStartingWith("Ab");
+				
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings.clickOnOkButton();
+
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}

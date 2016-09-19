@@ -101,8 +101,7 @@ public class TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 		public void setup() {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
-
+			
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 			wait = new WebDriverWait(driver, 30);
@@ -115,7 +114,6 @@ public class TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 			course = PageFactory.initElements(driver, CoursesHelperPage.class);
 			confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 			course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
-			wait = new WebDriverWait(driver, 30);
 			move_window = PageFactory.initElements(driver, MoveWindow.class);
 			erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 			admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
