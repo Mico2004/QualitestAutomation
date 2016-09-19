@@ -114,7 +114,7 @@ public class TC15453AddPdfFile {
 	}
 	
 	
-	@Test
+	@Test (description="TC 15453 Add Pdf File")
 	public void test17929() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testPdf.pdf";
