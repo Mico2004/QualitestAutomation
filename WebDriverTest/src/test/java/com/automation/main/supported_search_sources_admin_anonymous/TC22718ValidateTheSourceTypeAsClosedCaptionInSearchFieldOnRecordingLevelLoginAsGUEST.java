@@ -165,7 +165,7 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		String course_name = course.selectCourseThatStartingWith("Ab");
 			    
 		//4. select record and add close caption
-		record.waitForVisibility(record.recordings_tab); io
+		record.waitForVisibility(record.recordings_tab); 
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 				
 		record.clickOnRecordingTaskThenEditRecording();
