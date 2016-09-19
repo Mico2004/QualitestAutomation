@@ -7,7 +7,7 @@
     			
 		    <!-- Login As Guest -->
 			<!-- Local pretest -->
-			<class name="com.automation.main.TestSuitePreSetCopyRecordings6" />
+			<class name="com.automation.main.TestSuitePreSetCopyRecordings_Login" />
 			<class name="com.automation.main.TC21578LoginAsGuestUI" />
 			<class name="com.automation.main.TC21597ValidateMenuBarsFunctionlityAsGuest" />
 			<class name="com.automation.main.TC21598AccessPublicNonPublicCoursesWithDirectLinks" />

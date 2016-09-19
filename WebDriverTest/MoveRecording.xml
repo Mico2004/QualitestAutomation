@@ -5,6 +5,9 @@
     <classes>
   			
   			
+  			<!-- Move recordings -->
+			<!-- Local pretest -->
+			<class name="com.automation.main.TestSuitePreSetCopyRecordings_MoveRecordings" />
   			<class name="com.automation.main.TC15580ExistenceOfUIItemsMove" />
   			<class name="com.automation.main.TC15583CancelTheMoving" />
   			<class name="com.automation.main.TC15586TryToMoveWithoutSelectingACourse" />
