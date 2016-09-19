@@ -1048,6 +1048,7 @@ public class PlayerPage extends Page {
 			time_out++;
 		}
 		try {
+			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
 			pause_button.click();
 			System.out.println("clicked on play button to pause");
 			caption_to = driver.findElement(By.id("CC")).getText();
@@ -1056,6 +1057,7 @@ public class PlayerPage extends Page {
 		} catch (Exception e) {
 
 			System.out.println("failed click on play button to pause");
+			e.printStackTrace();
 			ATUReports.add("failed clicking", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}

@@ -194,6 +194,7 @@ public class EditRecording extends Page {
 		System.out.println("The element add caption was clicked");
 		ATUReports.add("The elementadd caption was clicked", "True.", "True.", LogAs.PASSED, null);
 		
+
 		driver.findElement(By.id("UploadFile")).sendKeys(path);
 
 		
