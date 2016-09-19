@@ -110,7 +110,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
+
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -124,7 +124,6 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
-		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
@@ -132,15 +131,11 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
 		eula_page = PageFactory.initElements(driver, EulaPage.class);
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
-		support_window = PageFactory.initElements(driver, GetSupprtWindow.class);
-		mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
-		email_login = PageFactory.initElements(driver, EmailLoginPage.class);
+		
 		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
 		email_inbox = PageFactory.initElements(driver, EmailInboxPage.class);
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
-		help_page = PageFactory.initElements(driver, HelpPage.class);
-		run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		top_bar_helper=PageFactory.initElements(driver, TopBarHelper.class);
