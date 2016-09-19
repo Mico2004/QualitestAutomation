@@ -155,7 +155,7 @@ public class EditRecording extends Page {
 	}
 	
 	
-	public void addCaptionSrtToFirstChapterRecording() throws InterruptedException, AWTException {
+	public void addCaptionSrtToFirstChapterRecording(String path) throws InterruptedException, AWTException {
 		
 		ConfirmationMenu confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		RecordingHelperPage record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -193,9 +193,6 @@ public class EditRecording extends Page {
 	
 		System.out.println("The element add caption was clicked");
 		ATUReports.add("The elementadd caption was clicked", "True.", "True.", LogAs.PASSED, null);
-		
-
-		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
 		
 		driver.findElement(By.id("UploadFile")).sendKeys(path);
 

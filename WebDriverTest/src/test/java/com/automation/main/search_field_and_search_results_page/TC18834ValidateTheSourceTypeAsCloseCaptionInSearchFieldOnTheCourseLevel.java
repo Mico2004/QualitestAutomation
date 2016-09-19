@@ -155,8 +155,9 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		
 		record.clickOnRecordingTaskThenEditRecording();
 	
-
-		edit_recording.addCaptionSrtToFirstChapterRecording();
+		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
+		
+		edit_recording.addCaptionSrtToFirstChapterRecording(path);
 		
 		Thread.sleep(5000);
 		String text_from_caption_for_test = "QualitestAutomationCaption";	

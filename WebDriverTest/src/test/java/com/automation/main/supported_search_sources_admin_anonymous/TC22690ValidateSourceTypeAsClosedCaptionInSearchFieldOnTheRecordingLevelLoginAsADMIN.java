@@ -32,6 +32,7 @@ import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
 import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecording;
 import com.automation.main.page_helpers.EmailAndConnectionSettingsPage;
 import com.automation.main.page_helpers.EmailInboxPage;
 import com.automation.main.page_helpers.EmailLoginPage;
@@ -85,6 +86,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 	public AddAdditionalContentFileWindow add_additional_content_window;
 	public AdvancedServiceSettingsPage advanced_services_setting_page;
 	public HelpPage help_page;
+	public EditRecording edit_recording;
 	public CourseSettingsPage course_settings;
 	public EmailAndConnectionSettingsPage email_setting;
 	public EulaPage eula_page;
@@ -110,10 +112,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
-
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		wait = new WebDriverWait(driver, 30);
 		add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 		publish_window = PageFactory.initElements(driver, PublishWindow.class);
@@ -129,16 +128,14 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		advanced_services_setting_page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
-		eula_page = PageFactory.initElements(driver, EulaPage.class);
-		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
-		
+		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);	
 		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
-		email_inbox = PageFactory.initElements(driver, EmailInboxPage.class);
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		top_bar_helper=PageFactory.initElements(driver, TopBarHelper.class);
+		edit_recording = PageFactory.initElements(driver, EditRecording.class);
 		
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
@@ -154,33 +151,30 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String recording_name=sdf.format(date);
+		
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.waitForVisibility(tegrity.passfield);
-		// 2.login as super-user
-		tegrity.loginAdmin("SuperUser");
+		// 2.login as instractor
+		tegrity.loginAdmin("User1");
 		course.waitForVisibility(course.first_course_button);
-		// 3.Click on "BankValid" link
-	    course.selectCourseThatStartingWith("BankValid");
-		record.waitForVisibility(record.recordings_tab);
-	    Thread.sleep(3000);
-		// 4.verify all courses page
-		record.clickCheckBoxByName("This Recording Has Closed Captions");
-		// 5.copy recording to course
-		record.clickOnRecordingTaskThenCopy();
-		copy.selectTargetCourseFromCourseListThatStartWith("Ab");
+		// 3.Click on course
+	    String course_name = course.selectCourseThatStartingWith("Ab");
+	    
+	    //4. select record and add close caption
+		record.waitForVisibility(record.recordings_tab); 
 		String url =  course.getCurrentUrlCoursePage(); 
-		copy.clickOnCopyButton();
-		confirm_menu.waitForVisibility(confirm_menu.ok_button);
-		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		///5.1 wait for finish copying
-        record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
-		/// 6.sign out super user
+//		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+//		
+//		record.clickOnRecordingTaskThenEditRecording();
+//		
+//		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
+//		edit_recording.addCaptionSrtToFirstChapterRecording(path);
+//		
+//		Thread.sleep(5000);
+//		String text_from_caption_for_test = "QualitestAutomationCaption";	
+//		
 		record.signOut();
-		Thread.sleep(1000);
-
-		
-
 		////////////////End of pre confitions
 
 		///////start test
@@ -198,55 +192,63 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		Thread.sleep(1000);
 		admin_view_course_list.moveToCoursesThroughGet(url);
 		/// 6.Click on one of the Recording link
-			Thread.sleep(1000);
+		Thread.sleep(1000);
 	     record.waitForVisibility(record.first_recording);
 		
-
-//		record.checkbox2.click();
-	    
-//		record.toEditRecordingPropertiesMenu();
-//		erp_window.waitForVisibility(erp_window.save_button);
-//		erp_window.changeRecordingName(recording_name, confirm_menu);
-
 		// 7.Click on one of the Recording link
-		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
-	     record.verifyFirstExpandableRecording();
 	     record.convertRecordingsListToNames();
+	     record.verifyFirstExpandableRecording();
 	     record.clickOnTheFirstCaptherWithOutTheExpand();
+	     
 		// 8.Select the Recording by clicking on one of the chapters
-		player_page.verifyTimeBufferStatusForXSec(10);// check source display
+		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 		String caption_rec_in_time=player_page.getCaptionInTime("0:00:47");
 		System.out.println(caption_rec_in_time);
 
 		for (String handler : driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
+			break;
+			
 		}
 		//9.Search the Recording by entering the "Recording Title" you chose before and press ENTER.
 		//  plus +10.The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
 		
 		String recording_to_search=record.recording_list_names.get(0);///get first recording name the one we played
 
-		player_page.verifySearchForRecordingExist(recording_to_search);
-		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		player_page.verifySearchForRecordingExist(caption_rec_in_time);
+		
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+			
+		}
 
+		System.out.println(player_page.breadcrumbs_box_elements_list.get(1).getText());
+		System.out.println(player_page.breadcrumbs_box_elements_list.get(0).getText());
+
+		/// The breadcrumb structure is displayed as follows: " > Admin Dashboard > Courses > course name"
+		player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
+		
+		driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
+		Thread.sleep(2000);
+		
 		///10.The next result display below the current result in case there is next result.
 		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
 
 		///11.search results page in the format as follows: "recording name - Search Results".
-
 		player_page.verifySearchResultPage(recording_to_search);
+		
+		//12. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
+		player_page.verifyResultsStatisticsInFormat(caption_rec_in_time);
+				
 		///12.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
-		player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(3);
+		player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(0);
 		////
 		for (String handler : driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
 			break;
 		}
-		System.out.println(player_page.breadcrumbs_box_elements_list.get(1).getText());
-		System.out.println(player_page.breadcrumbs_box_elements_list.get(0).getText());
-		///13.The breadcrumb structure is displayed as follows: "> Courses > course name".
-		player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
 
+		
 		///14.verify return to recordings page
 		player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
 		//15.navigate back to player recording
@@ -261,122 +263,58 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(2));
 
 		player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
-		System.out.println("11111111111111111111111111111111111111111111111111111111111111111");
 		///18.upload a caption
 		// Upload for first recording target close catpion
 		Thread.sleep(2000);
-		record.selectIndexCheckBox(1);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenEditRecording();
-
-		for(int i=0; i<10; i++) {
-			try {
-				driver.switchTo().frame(0);
-				break;
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-		}
-
-		for(int i=0; i<20; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					System.out.println("2222");
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-
-		}
-
-		for(String window_handler: driver.getWindowHandles()) {
-			driver.switchTo().window(window_handler);
-			break;
-		}
-
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
-
-		Thread.sleep(2000);
-
-		Robot robot = new Robot();
-		robot.mouseMove(-100, 100);
-
-		driver.findElement(By.id("UploadFile")).click();
-		driver.findElement(By.id("UploadFile")).click();
-		driver.findElement(By.id("UploadFile")).click();
-		driver.findElement(By.id("UploadFile")).click();
-		//  driver.findElement(By.cssSelector(".jcf-button-content")).click();
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		Thread.sleep(3000);
-
+		
 		String path = "WebDriverTest\\workspace\\QualitestAutomation\\resources\\documents\\sync.srt";
-
-		// from here you can use as it wrote
-		//  path = System.getProperty("user.dir") + path;
-		StringSelection ss = new StringSelection(path);
-		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-
-		// native key strokes for CTRL, V and ENTER keys
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
+		edit_recording.addCaptionSrtToFirstChapterRecording(path);
+		
 		Thread.sleep(5000);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-
-		Thread.sleep(2000);
-		driver.findElement(By.id("AddCaptioning")).click();
-		Thread.sleep(1000);
-
-		for(int i=0; i<60; i++) {
-			try {
-				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
-					System.out.println("2222");
-					break;
-				} else {
-					Thread.sleep(1000);
-				}
-			} catch (Exception e) {
-				Thread.sleep(1000);
-			}
-
-		}
-
-		for(String window_handler: driver.getWindowHandles()) {
-			driver.switchTo().window(window_handler);
+		
+		//return to the course
+	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();	
+	    
+	    // open the player again
+	    record.verifyFirstExpandableRecording();
+	    record.clickOnTheFirstCaptherWithOutTheExpand();
+	     
+		// 8.Select the Recording by clicking on one of the chapters
+		player_page.verifyTimeBufferStatusForXSec(2);// check source display
+		
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
 			break;
 		}
-
-
-		driver.findElement(By.cssSelector(".btn.btn-default")).click();
-		Thread.sleep(2000);
-    //19.play recording again
-     	driver.switchTo().frame(0);
-	    player_page.play_button.click();
-     	
 	
+		//search the old caption 
+		player_page.verifySearchReturnEmptyList(caption_rec_in_time);
 		
 		
-////20.get caption time
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+			break;
+		}
 		String caption_rec_in_time2=player_page.getCaptionInTime("0:00:47");
-		System.out.println(caption_rec_in_time);
-	///21.compare the captions show they are different
-	if(caption_rec_in_time.equals(caption_rec_in_time2))
-	{
-		System.out.println("same captions");
-		ATUReports.add("same captions", LogAs.FAILED, null);
-
-		Assert.assertTrue(false);
-	}
-	else {
-		System.out.println("different captions");
-		ATUReports.add("different captions", LogAs.PASSED, null);
-		Assert.assertTrue(true);
-	}
+		
+		player_page.verifySearchResultPage(caption_rec_in_time2);
+	
+		////20.get caption time	
+//		System.out.println(caption_rec_in_time);
+//	///21.compare the captions show they are different
+//	if(caption_rec_in_time.equals(caption_rec_in_time2))
+//	{
+//		System.out.println("same captions");
+//		ATUReports.add("same captions", LogAs.FAILED, null);
+//		Assert.assertTrue(false);
+//	}
+//	else {
+//		System.out.println("different captions");
+//		ATUReports.add("different captions", LogAs.PASSED, null);
+//		Assert.assertTrue(true);
+//	}
 	
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
