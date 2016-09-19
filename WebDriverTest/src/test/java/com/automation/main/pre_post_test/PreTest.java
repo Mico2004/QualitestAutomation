@@ -71,6 +71,9 @@ public class PreTest {
 	public RecordingHelperPage record;
 	CopyMenu copy;
 	public ConfirmationMenu confirm_menu;
+	String SuperUsername="";
+	String user1Username="";
+	
 	
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -248,6 +251,7 @@ public class PreTest {
 			String user_name = "";
 			if (i == 0) {
 				user_name = "User1" + sdf.format(date);
+				user1Username=user_name;
 			} else if (i == 1) {
 				user_name = "User2" + sdf.format(date);
 			} else if (i == 2) {
@@ -256,6 +260,7 @@ public class PreTest {
 				user_name = "User4" + sdf.format(date);
 			} else {
 				user_name = "SuperUser" + sdf.format(date);
+				SuperUsername = user_name;
 			}
 			
 			created_new_user.add(user_name);
@@ -759,13 +764,13 @@ public class PreTest {
 		}
 		mange_adhoc_course_enrollments.waitForVisibility(driver.findElement(By.id("SignOutLink")));
 		mange_adhoc_course_enrollments.signOut();
-		tegrity.loginCourses("SuperUser");
-	    initializeCourseObject();
+		tegrity.loginCoursesByParameter(SuperUsername);
+		initializeCourseObject();
 	    course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseA", 3, record, copy, confirm_menu);
 	    course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseB", 3, record, copy, confirm_menu);
 		course.signOut();
 		System.out.println("6"); 
-		tegrity.loginCourses("User1");		
+		tegrity.loginCoursesByParameter(user1Username);		
 		initializeCourseObject();	
 		Thread.sleep(2000);
 		course.selectCourseThatStartingWith("PastCourseA");	
@@ -790,7 +795,7 @@ public class PreTest {
 		/// 3.Click the "Membership" link related to the course+unenroll
 		/// instructor 1
 		System.out.println("before 3");
-		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseA, PropertyManager.getProperty("User1"),
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseA, user1Username,
 				mangage_adhoc_courses_membership_window);
 		Thread.sleep(4000);
 	
@@ -800,7 +805,17 @@ public class PreTest {
 		}
 
 		System.out.println("before 3");
-		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseB, PropertyManager.getProperty("User1"),
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseB, user1Username,
+				mangage_adhoc_courses_membership_window);
+		Thread.sleep(4000);
+		
+
+		System.out.println("before 4");
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseB, SuperUsername,
+				mangage_adhoc_courses_membership_window);
+		Thread.sleep(4000);
+		System.out.println("before 5");
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseB, SuperUsername,
 				mangage_adhoc_courses_membership_window);
 		Thread.sleep(4000);
 
@@ -812,7 +827,7 @@ public class PreTest {
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
 		Thread.sleep(2000);
 		admin_dashboard_page.signOut();
-		tegrity.loginCourses("SuperUser");
+		tegrity.loginCourses(SuperUsername);
 		initializeCourseObject();
 		course.verifyRecordingsStatusIsClear("BankValid", 3, record);
 		
