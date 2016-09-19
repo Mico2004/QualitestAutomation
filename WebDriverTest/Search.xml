@@ -5,9 +5,9 @@
     <classes>
 
 
-			<!-- Search: Search field and search result page -->
-			<!-- Local pretest -->
-			  <class name="com.automation.main.TestSuitePreSetCopyRecordings9" />
+		   	  <!-- Search: Search field and search result page -->
+			  <!-- Local pretest -->
+			  <class name="com.automation.main.TestSuitePreSetCopyRecordings_Search" />
     	  	  <class name="com.automation.main.TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCourseLevelUI" />
     	  	  <class name="com.automation.main.TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel" />
     	  	  <class name="com.automation.main.TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseLevel" />

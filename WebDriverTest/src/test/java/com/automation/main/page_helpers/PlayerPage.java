@@ -965,15 +965,7 @@ public class PlayerPage extends Page {
 
 	/// The breadcrumb structure is displayed as follows: " > Admin Dashboard >
 	/// Courses > course name"
-	public void verifyBreadcrumbsForSearcRecordingAsAdmin(String course_name) { //// checking
-																				//// if
-																				//// course
-																				//// name
-																				//// displayed
-																				//// and
-																				//// the
-																				//// word
-																				//// "Course"
+	public void verifyBreadcrumbsForSearcRecordingAsAdmin(String course_name) { //// checking//// if//// course//// name//// displayed//// and//// the//// word//// "Course"
 		if ((course_name.equals(breadcrumbs_box_elements_list.get(2).getText()))
 				&& (breadcrumbs_box_elements_list.get(1).getText().equals("Courses"))
 				&& (breadcrumbs_box_elements_list.get(0).getText().equals("Admin Dashboard"))) {

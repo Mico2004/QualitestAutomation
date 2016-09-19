@@ -153,8 +153,9 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);	
 		record.clickOnRecordingTaskThenEditRecording();
+		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
 		
-		edit_recording.addCaptionSrtToFirstChapterRecording();
+		edit_recording.addCaptionSrtToFirstChapterRecording(path);
 		Thread.sleep(2000);
 		record.exitInnerFrame();
 		String text_from_caption_for_test = "QualitestAutomationCaption";

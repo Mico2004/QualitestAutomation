@@ -3,16 +3,21 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
- 			
+ 		
+ 		
+ 		
+ 		 <!-- Copy Recording -->
+	     <!-- Local pretest -->
+		 <class name="com.automation.main.TestSuitePreSetCopyRecordings_CopyRecordings" />	
 	  	 <class name="com.automation.main.TC15534ExixtenceOfUIItemsCopy"/>
-	     <class name="com.automation.main.TC15535CopyOneRecording"/>
 	     <class name="com.automation.main.TC15538CancelTheCopying"/> 						
 	     <class name="com.automation.main.TC15550CopyOneRecordingToSeveralCoureses"/>    
  	     <class name="com.automation.main.TC15552CopySeveralRecordings"/>
 	     <class name="com.automation.main.TC15553TryCopyWithoutSelectingCourse"/>      			
 	     <class name="com.automation.main.TC15563CopyRecordingToTheSameCourse"/>		 
 	     <class name="com.automation.main.TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists"/>
-	     <class name="com.automation.main.TC15567SearchCoursesInCopyWindow"/>     
+	     <class name="com.automation.main.TC15567SearchCoursesInCopyWindow"/>  
+	       <class name="com.automation.main.TC15535CopyOneRecording"/>   
 	     <class name="com.automation.main.TC15579TryToCopyRecordingWhileItIsBeingCopied"/>
 	     <class name="com.automation.main.TC15601TryToCopyRecordingAsAStudent"/>     
 	     <class name="com.automation.main.TC15655TryToCopyRecordingWhileItIsBeingMoved"/>

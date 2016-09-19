@@ -16,6 +16,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.automation.main.page_helpers.Page;
+import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
@@ -56,12 +57,12 @@ public class LoginHelperPage extends Page {
 		setPageTitle("Tegrity Lecture Capture");
 		/// setPageUrl("https://qualitest4-prod.tegrity.com/#/login");
 		// setPageUrl("https://reg-qabr.tegrity.com/#/login");
-		setPageUrl("https://awsserverautomation-perf-1.tegrity.com/#/login");
+	//	setPageUrl("https://awsserverautomation-perf-1.tegrity.com/#/login");
 	
 		
 		// setPageUrl("https://awsserverautomation1.tegrity.com/#/login");
 		/// setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University"))););////"https://reg-qabr.tegrity.com/#/login"
-		// setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
+		 setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 		
 	}
 

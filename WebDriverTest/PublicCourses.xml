@@ -4,9 +4,10 @@
   <test name="Test">
     <classes>
 
+    	  
     	  	<!-- Public Courses -->
 			<!-- Local pretest -->
-			<class name="com.automation.main.TestSuitePreSetCopyRecordings7" />
+			<class name="com.automation.main.TestSuitePreSetCopyRecordings_PublicCourses" />
 			<class name="com.automation.main.TC21807ValidatePublicCoursesUILogIn" />
 			<class name="com.automation.main.TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff" />
 			<class name="com.automation.main.TC21856ValidateThePublicCoursesTabUIAfterChanges" />

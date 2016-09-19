@@ -185,6 +185,8 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");
+		Thread.sleep(1500);
+		
 		
 		// return to courses 
 		admin_view_course_list.moveToCoursesThroughGet(url);

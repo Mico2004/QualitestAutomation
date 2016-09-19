@@ -3,13 +3,17 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
-  			
-  	 <class name="com.automation.main.TC15815CancelTheDelete"/>
-     <class name="com.automation.main.TC15824TryToDeleteContentAsAStudent"/>
-     <class name="com.automation.main.TC15812ExistenceofUIitems"/>
-     <class name="com.automation.main.TC15813DeleteAnItem"/>     
-     <class name="com.automation.main.TC15823DeleteSeveralContentItems"/>
-     <class name="com.automation.main.TC15814DeleteALastContentItem"/>
+    
+    
+            <!-- Delete Additional content -->
+			<!-- Local pretest -->
+			<class name="com.automation.main.TestSuitePreSetCopyRecordings_DeleteAdditional" />	
+  	 		<class name="com.automation.main.TC15815CancelTheDelete"/>
+     		<class name="com.automation.main.TC15824TryToDeleteContentAsAStudent"/>
+     		<class name="com.automation.main.TC15812ExistenceofUIitems"/>
+     		<class name="com.automation.main.TC15813DeleteAnItem"/>     
+     		<class name="com.automation.main.TC15823DeleteSeveralContentItems"/>
+     		<class name="com.automation.main.TC15814DeleteALastContentItem"/>
       
         
     </classes>
