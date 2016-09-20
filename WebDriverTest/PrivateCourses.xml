@@ -3,10 +3,11 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
+  		
   					
   	   <!-- Private Courses -->
 	   <!-- Local pretest -->
-       <class name="com.automation.main.TestSuitePreSetCopyRecordings" />
+      <class name="com.automation.main.TestSuitePreSetCopyRecordings_PrivateCourses" /> 
        <class name="com.automation.main.TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor"/>  
        <class name="com.automation.main.TC19316CreateAndDeleteAPrivateCourse"/>  
        <class name="com.automation.main.TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents"/>  

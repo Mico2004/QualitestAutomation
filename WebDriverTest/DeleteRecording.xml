@@ -3,17 +3,22 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
-  		 <class name="com.automation.main.TC15640TryToDeleteAStudentRecordingAsAStudent"/>   
-  		<class name="com.automation.main.TC15634DeleteAStudentRecordingAsInstructor"/>
-  		<class name="com.automation.main.TC15649TryToDeleteMovingRecording"/>  
-   	    <class name="com.automation.main.TC15639TryToDeleteARegularRecordingAsAStudent"/> 
- 	      <class name="com.automation.main.TC15644CancelTheDelete"/>   
-   	     <class name="com.automation.main.TC15653DeleteFailedRecording"/> 
-         <class name="com.automation.main.TC15645TryToDeleteCopyingRecording"/> 
- 		  <class name="com.automation.main.TC15627DeleteARegularRecordingAsInstructor"/>
-   	     <class name="com.automation.main.TC15635DeleteAProctoringRecordingAsInstructor"/>
-   	     <class name="com.automation.main.TC15896DeleteALastRecording"/>  
-	      <class name="com.automation.main.TC15642DeleteSeveralRecordings"/>  
+    
+    
+            <!-- Delete recordings -->
+			<!-- Local pretest -->
+			<class name="com.automation.main.TestSuitePreSetCopyRecordings_DeleteRecordings" />
+  		    <class name="com.automation.main.TC15640TryToDeleteAStudentRecordingAsAStudent"/>   
+  		   	<class name="com.automation.main.TC15634DeleteAStudentRecordingAsInstructor"/>
+  			<class name="com.automation.main.TC15649TryToDeleteMovingRecording"/>  
+   	    	<class name="com.automation.main.TC15639TryToDeleteARegularRecordingAsAStudent"/> 
+ 	      	<class name="com.automation.main.TC15644CancelTheDelete"/>   
+   	     	<class name="com.automation.main.TC15653DeleteFailedRecording"/> 
+         	<class name="com.automation.main.TC15645TryToDeleteCopyingRecording"/> 
+ 		  	<class name="com.automation.main.TC15627DeleteARegularRecordingAsInstructor"/>
+   	     	<class name="com.automation.main.TC15635DeleteAProctoringRecordingAsInstructor"/>
+   	     	<class name="com.automation.main.TC15896DeleteALastRecording"/>  
+	      	<class name="com.automation.main.TC15642DeleteSeveralRecordings"/>  
 	  
            
      

@@ -114,7 +114,7 @@ public class TC15451AddRtfFile {
 	}
 	
 	
-	@Test
+	@Test (description="TC 15451 Add Rtf File")
 	public void test17929() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testRtf.rtf";

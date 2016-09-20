@@ -4,19 +4,37 @@
   <test name="Test">
     <classes>
 			
-			<!-- There are missing tests! -->
+			  	
 			    <!-- Add additional content files-->
 		     	<!-- Local pretest -->
+		     <class name="com.automation.main.TestSuitePreSetCopyRecordings_AddAdditional" />
     	  	  	<class name="com.automation.main.TC15475ExistenceOfUIItems" />
+    	  	  	<class name="com.automation.main.TC15471UploadTheFile" />
     	  	  	<class name="com.automation.main.TC15897ViewTheUploadedFile" />
     	  	  	<class name="com.automation.main.TC15447AddDocFile" />
-    	  	  	
+    	  	    <class name="com.automation.main.TC15448AddPptFile" />
+    	  	    <class name="com.automation.main.TC15449AddPptxFile" />
+    	  	    <class name="com.automation.main.TC15450AddDocxFile" />
+        	  	<class name="com.automation.main.TC15451AddRtfFile" />
+    	  	    <class name="com.automation.main.TC15452AddTxtFile" />
+    	  	    <class name="com.automation.main.TC15453AddPdfFile" />
+    	  	    <class name="com.automation.main.TC15454AddAviFile" />
+    	  	    <class name="com.automation.main.TC15455AddMp3File" />
+    	  	    <class name="com.automation.main.TC15456AddMp4File" />
+    	  	    <class name="com.automation.main.TC15457AddMovFile" />
+    	  	    <class name="com.automation.main.TC15458AddMpgFile" />
+    	  	    <class name="com.automation.main.TC15459AddZipFile" />    	 
+    	  	    <class name="com.automation.main.TC15460AddRarFile" />
+    	  	    <class name="com.automation.main.TC15461AddGifFile" />
+    	  	    <class name="com.automation.main.TC15462AddJpgFile" />
+    	  	    <class name="com.automation.main.TC15463AddPngFile" />
+    	  	    <class name="com.automation.main.TC15464AddXlsFile" />
+    	  	    <class name="com.automation.main.TC15465AddXlsxFile" />  	  	  	
     	  	  	<class name="com.automation.main.TC15466AddFewFilesWithSameTitle" />
-    	  		<class name="com.automation.main.TC15467CancelTheAdding" /> 
-    	  	  	<class name="com.automation.main.TC15468AddFirstFileVerifyNewTabAdditionalContentCreated" />
+    	  		<class name="com.automation.main.TC15467CancelTheAdding" />   	  	  	
     	  	  	<class name="com.automation.main.TC15470AddFileWithTheSameTitleExistingLink" />
     	  	  	<class name="com.automation.main.TC15489TryToAddFileDuringAnotherUpload" />
-    	  	  	<class name="com.automation.main.TC15489TryToAddFileDuringAnotherUpload" />
+                <class name="com.automation.main.TC15468AddFirstFileVerifyNewTabAdditionalContentCreated" />
 
 			
   
