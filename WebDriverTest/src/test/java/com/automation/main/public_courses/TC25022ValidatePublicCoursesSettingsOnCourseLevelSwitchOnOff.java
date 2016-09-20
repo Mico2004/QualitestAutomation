@@ -213,7 +213,7 @@ public class TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff {
 		tegrity.loginCourses("User1");
 		
 		// 17. Click on "Public Courses".
-		course.clickOnPublicCoursesTabButton();
+		course.clickOnPublicCoursesTab();
 		Thread.sleep(2000);
 		
 		// 18. Click on the same course as before.

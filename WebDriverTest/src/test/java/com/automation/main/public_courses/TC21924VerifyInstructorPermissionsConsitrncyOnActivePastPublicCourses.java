@@ -210,9 +210,9 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		
 		
 		tegrity.loginCourses("SuperUser");// log in courses page
-		initializeCourseObject();
+		initializeCourseObject();		
 		//  Go to PastCourseA (which is past course of User1) and make it public	
-		String past_public_course_name = course.selectCourseThatStartingWith("PastCourseA");		
+		String past_public_course_name = course.selectCourseThatStartingWith("PastCourseA"+course.getFQDN()+course.getPreSetTimeStamp());		
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.checkAllCourseSettingsCheckboxs();
 		course_settings_page.clickOnOkButton();

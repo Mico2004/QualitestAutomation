@@ -174,21 +174,25 @@ public class TestSuitePreSetCopyRecordings_PublicCourses {
 
 		
 		
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 0, record, copy,
-				confirm_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 0, record, copy,confirm_menu);
 		Thread.sleep(2000);		
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 1, record, copy,
-				confirm_menu);
-		Thread.sleep(2000);			
-		// Copy all additional content from Bank Valid Recording to course
-		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 2, record, copy,
-				confirm_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 1, record, copy,confirm_menu);
+		Thread.sleep(2000);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 2, record, copy,confirm_menu);	
+		Thread.sleep(2000);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 3, record, copy,confirm_menu);
+		Thread.sleep(2000);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseA"+course.getFQDN()+course.getPreSetTimeStamp(), 3,record,copy ,  confirm_menu);
+		Thread.sleep(2000);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseA"+course.getFQDN()+course.getPreSetTimeStamp(), 0,record,copy ,  confirm_menu);
+		Thread.sleep(2000);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseA"+course.getFQDN()+course.getPreSetTimeStamp(), 2,record,copy ,  confirm_menu);
+		Thread.sleep(2000);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseA"+course.getFQDN()+course.getPreSetTimeStamp(), 1,record,copy ,  confirm_menu);
 		Thread.sleep(2000);			
 		// Copy all student recordings from Bank Valid Recording to course
 		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 3, record, copy,
-				confirm_menu);		
+
 		
 		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
 		System.out.println("1");		
@@ -197,7 +201,6 @@ public class TestSuitePreSetCopyRecordings_PublicCourses {
 		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
 		System.out.println("4");
 
-		
 		
 
 		
