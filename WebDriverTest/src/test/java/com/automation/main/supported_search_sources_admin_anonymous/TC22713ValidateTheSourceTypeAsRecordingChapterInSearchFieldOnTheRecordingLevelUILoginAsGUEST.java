@@ -178,11 +178,9 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			Thread.sleep(2000);
 			record.convertRecordingsListToNames();
 			record.convertRecordingsListToRecorderName();
-			
-			
 			record.verifyFirstExpandableRecording();
 			
-			String recording_to_search=record.getFirstRecordPlayerName();
+			String recording_to_search=record.getSecondRecordPlayerName();
 			Thread.sleep(2000);
 						
 			record.clickOnTheFirstCaptherWithOutTheExpand();

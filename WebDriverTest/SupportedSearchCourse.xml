@@ -9,17 +9,18 @@
       <!-- Supported search sources(ADMIN,ANONYMOUS) -->
       <!-- Local pretest -->
          <class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_SupportedSearch"/>
-          <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
           <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
+          <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST" /> 
        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST" />
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsADMIN" />
+            <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecordingLevelLoginAsGUEST" />
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsGUEST" />
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST" />
           <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN" />
       <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
-    <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecordingLevelLoginAsGUEST" />
-    
+  
+
       <!-- <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsADMIN" />-->
       <!-- <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsGUEST" /> -->
       <!-- <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsADMIN" />-->
@@ -29,7 +30,7 @@
        <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsADMIN" /> -->
        <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TCase22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST" />-->
        <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST" /> -->
-     
+    
        <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMINN" /> -->
        <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST" /> -->
      <!--  <class name="com.automation.main.supported_search_sources_admin_anonymous.TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldRecordingLevelLoginAsADMIN" />-->

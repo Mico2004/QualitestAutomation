@@ -48,7 +48,7 @@ public class PlayerPage extends Page {
 
 	@FindBy(id = "PlaceHolder_StatusBarAreaTextBox")
 	WebElement time_buffer_status;
-	@FindBy(id = "PauseButton_Img")
+	@FindBy(id = "PauseButton")
 	WebElement pause_button;
 	@FindBy(id = "Add_Img")
 	public WebElement add_bookmark_button;
@@ -1048,6 +1048,7 @@ public class PlayerPage extends Page {
 			time_out++;
 		}
 		try {
+			//driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
 			pause_button.click();
 			System.out.println("clicked on play button to pause");
 			caption_to = driver.findElement(By.id("CC")).getText();
@@ -1056,6 +1057,7 @@ public class PlayerPage extends Page {
 		} catch (Exception e) {
 
 			System.out.println("failed click on play button to pause");
+			e.printStackTrace();
 			ATUReports.add("failed clicking", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
