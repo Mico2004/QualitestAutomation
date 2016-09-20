@@ -807,17 +807,8 @@ public class PreTest {
 		System.out.println("before 3");
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseB, user1Username,
 				mangage_adhoc_courses_membership_window);
-		Thread.sleep(4000);
-		
+		Thread.sleep(4000);		
 
-		System.out.println("before 4");
-		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseB, SuperUsername,
-				mangage_adhoc_courses_membership_window);
-		Thread.sleep(4000);
-		System.out.println("before 5");
-		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseB, SuperUsername,
-				mangage_adhoc_courses_membership_window);
-		Thread.sleep(4000);
 
 		for (String window : driver.getWindowHandles()) {
 			driver.switchTo().window(window);
