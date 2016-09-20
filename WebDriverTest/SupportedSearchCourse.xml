@@ -18,9 +18,8 @@
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsGUEST" />
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST" />
           <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN" />
-          <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
-      
-
+      <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
+  
 
       <!-- <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsADMIN" />-->
       <!-- <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsGUEST" /> -->
@@ -42,7 +41,7 @@
 			
   
     </classes>
-  </test> <!-- Test -->
+  </test> 
   <listeners>
 		<listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
 		<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
