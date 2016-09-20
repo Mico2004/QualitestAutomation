@@ -38,6 +38,7 @@ import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+import junitx.util.PropertyManager;
 
 
 ///@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -1201,6 +1202,18 @@ public class Page {
 			return false;
 		}
 
+	}
+	public String getPreSetTimeStamp(){
+		
+		System.out.println((PropertyManager.getProperty("User1")).substring(5, PropertyManager.getProperty("User1").length()));
+		return (PropertyManager.getProperty("User1")).substring(5, PropertyManager.getProperty("User1").length());
+	}
+	
+	public String getFQDN(){
+		
+		 String login_url = driver.getCurrentUrl();
+		System.out.println(login_url.split("/")[2].substring(0, login_url.split("/")[2].length() - 12));
+		return login_url.split("/")[2].substring(0, login_url.split("/")[2].length() - 12);
 	}
 
 }
