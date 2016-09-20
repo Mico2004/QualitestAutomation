@@ -751,9 +751,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				wait.until(ExpectedConditions.visibilityOf(courses_link));
 				courses_link.click();
 				Thread.sleep(1000);
+				break;
 			} catch (Exception msg) {
 				System.out.println("Catch returnToCourseListPage"+msg.getMessage());				
-				break;
+				
 			}
 		}		
 

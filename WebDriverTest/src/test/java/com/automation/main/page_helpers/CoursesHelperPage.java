@@ -753,7 +753,9 @@ public class CoursesHelperPage extends Page {
 	public void clickOnPublicCoursesTab() {
 		try {
 			waitForVisibility(public_courses_tab);
-			public_courses_tab.click();
+			public_courses_tab.click();			
+			WebElement tabParent=public_courses_tab.findElement(By.xpath(".."));
+			wait.until(ExpectedConditions.attributeContains(tabParent, "class", "active"));
 			System.out.println("Clicked on public courses tab.");
 			ATUReports.add("Clicked on public courses tab.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -990,18 +992,7 @@ public class CoursesHelperPage extends Page {
 		}
 	}
 
-	// This function click on public courses tab button
-	public void clickOnPublicCoursesTabButton() {
-		try {
-			public_courses_tab_button.click();
-			System.out.println("Click on public course tab.");
-			ATUReports.add("Click on public course tab.", LogAs.PASSED, null);
-		} catch (Exception msg) {
-			System.out.println("Fail to click on public course tab.");
-			ATUReports.add("Fail to click on public course tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-		}
-	}
+
 
 	// verify there is no disclaimer link
 	public void verifyNoDisclaimerLink() {

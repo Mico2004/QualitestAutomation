@@ -229,19 +229,11 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 		// Enable RSS feed
 		
 	// Login as super user for course settings and copying recordings
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		tegrity.loginCoursesByParameter("User108092016110914");		
-		
-		
-		
-		
-		
-		
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);		
 		
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-		course.selectCourseThatStartingWith("BAc");
+		course.selectCourseThatStartingWith("BAc"+course.getFQDN()+course.getPreSetTimeStamp());
 		
 		record.clickOnCourseTaskThenCourseSettings();
 		
@@ -281,7 +273,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			Thread.sleep(1000);
 			
 			// 7. Click on a public course.
-			course.selectCourseThatStartingWith("BAc");
+			course.selectCourseThatStartingWith("BAcawsserverautomation-qa-");
 			Thread.sleep(1000);
 			
 			// 8. Click on some recording.
@@ -415,7 +407,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 		// 30. Uncheck make this course public and uneroll SuperUser.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-		course.selectCourseThatStartingWith("BAc");
+		course.selectCourseThatStartingWith("BAc"+course.getFQDN()+course.getPreSetTimeStamp());
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
