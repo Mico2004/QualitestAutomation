@@ -203,9 +203,13 @@ public class TestSuitePreSetCopyRecordings_PrivateCourses {
 		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
 		System.out.println("4");
 
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "User", 0, record, copy,
-				confirm_menu);
+		record.signOut();
+	
+		tegrity.loginCourses("User1");// log in courses page
 		
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "User1", 0, record, copy,
+				confirm_menu);
+//		
 		course.verifyRecordingsStatusIsClear("Ab",0,record);
 		
 		System.out.println("Done.");
