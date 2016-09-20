@@ -114,7 +114,7 @@ public class TC15459AddZipFile {
 	}
 	
 	
-	@Test
+	@Test (description="TC 15459 Add Zip File")
 	public void test17929() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testZip.zip";

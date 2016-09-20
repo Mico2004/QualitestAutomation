@@ -114,7 +114,7 @@ public class TC15471UploadTheFile {
 	}
 	
 	
-	@Test
+	@Test (description="TC 15471 Upload The File")
 	public void test17929() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\NewFile.docx";

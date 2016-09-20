@@ -102,7 +102,7 @@ public class TC15814DeleteALastContentItem {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
+	@Test (description="TC 15814 Delete A Last Content Item")
 	public void loginCourses() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR (User1).

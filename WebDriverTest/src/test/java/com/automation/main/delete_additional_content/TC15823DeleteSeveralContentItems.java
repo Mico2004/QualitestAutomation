@@ -104,7 +104,7 @@ public class TC15823DeleteSeveralContentItems {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
+	@Test (description="TC 15823 Delete Several Content Items")
 	public void loginCourses() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR (User1).
