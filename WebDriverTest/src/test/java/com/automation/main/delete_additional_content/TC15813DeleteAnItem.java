@@ -102,7 +102,7 @@ public class TC15813DeleteAnItem {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
+	@Test (description="TC 15813 Delete An Item")
 	public void loginCourses() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR (User1).

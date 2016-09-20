@@ -98,7 +98,7 @@ public class TC15815CancelTheDelete {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
+	@Test (description="TC 15815 Cancel The Delete")
 	public void loginCourses() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR (User1).

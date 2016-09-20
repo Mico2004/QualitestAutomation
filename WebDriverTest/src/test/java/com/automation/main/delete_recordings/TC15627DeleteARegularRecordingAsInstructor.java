@@ -82,7 +82,8 @@ DesiredCapabilities capability;
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
 		 System.out.println("Starting the test: TC15627DeleteARegularRecordingAsInstructor at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC15627DeleteARegularRecordingAsInstructor at " + DateToStr, "Starting the test: TC15627DeleteARegularRecordingAsInstructor at " + DateToStr, LogAs.PASSED, null);	
+		 ATUReports.add("Message window.", "Starting the test: TC15627DeleteARegularRecordingAsInstructor at " + DateToStr,
+				 "Starting the test: TC15627DeleteARegularRecordingAsInstructor at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	

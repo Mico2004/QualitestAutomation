@@ -115,7 +115,7 @@ public class TC15470AddFileWithTheSameTitleExistingLink {
 
 		}
 
-		@Test
+		@Test (description="TC 15470 Add File With The Same Title Existing Link")
 		public void test15470() throws Exception {                                           
 			String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\SameTitle.doc";
 			String file_name = "SameTitle.doc";

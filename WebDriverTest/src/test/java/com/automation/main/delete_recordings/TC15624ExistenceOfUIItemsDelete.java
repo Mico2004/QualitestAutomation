@@ -89,7 +89,7 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 		}
 
 		// @Parameters({"web","title"}) in the future
-		@Test
+		@Test (description="TC 15813 Delete An Item")
 		public void testUiExistence() throws InterruptedException {
 		//1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

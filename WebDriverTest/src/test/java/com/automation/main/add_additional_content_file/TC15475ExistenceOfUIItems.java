@@ -114,7 +114,7 @@ public class TC15475ExistenceOfUIItems {
 
 		}
 
-		@Test
+		@Test (description="TC 15475 Existence Of UI Items")
 		public void test15475() throws Exception {
 		
 			//////pre-conditions!!!!100 mb is already default

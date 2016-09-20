@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.automation.main.page_helpers.AddAdditionalContentFileWindow;
@@ -43,8 +44,12 @@ import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
+import atu.testng.reports.listeners.ATUReportsListener;
+import atu.testng.reports.listeners.ConfigurationListener;
+import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 
+@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsADMIN {
 	// Set Property for ATU Reporter Configuration
 		{
@@ -150,13 +155,28 @@ public class TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 			tegrity.waitForVisibility(tegrity.passfield);
 			
 			// 2.login as user1
-			tegrity.loginCourses("User1");
-			course.waitForVisibility(course.first_course_button);
 			
-			//2.1 take course being copied to name and then return
+			tegrity.loginCourses("User1");
 			String course_name=course.selectCourseThatStartingWith("Ab");
 			String url =  course.getCurrentUrlCoursePage(); 
-
+			
+			record.signOut();
+			
+			tegrity.loginCourses("SuperUser");
+			
+			course.waitForVisibility(course.first_course_button);					
+			course.selectCourseThatStartingWith("BankValid");
+			
+			String recordforSearch = "Neuroanatomical localization";	
+			String textInRecord = "addEventListener";
+			
+			record.selectTargetRecordingCheckbox(recordforSearch);
+			record.clickOnRecordingTaskThenCopy();
+			copy.selectTargetCourseFromCourseList(course_name);
+			copy.clickOnCopyButton();
+			  
+			course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
+	
 			record.signOut();
 			Thread.sleep(1000);
 			tegrity.waitForVisibility(tegrity.passfield);
@@ -166,6 +186,7 @@ public class TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 			// 3.Click on "View Course List" link
 			Thread.sleep(1500);
+		
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			// 4.verify all courses page
 			admin_view_course_list.verifyAllCoursesPage();
@@ -174,19 +195,16 @@ public class TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 			Thread.sleep(1000);
 			admin_view_course_list.moveToCoursesThroughGet(url);
 			/// 6.Click on one of the Recording link
-				Thread.sleep(1000);
-		     record.waitForVisibility(record.first_recording);
+			Thread.sleep(1000);
+		    record.waitForVisibility(record.first_recording);
 			
 			// 7.Click on one of the Recording link
-			record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
-		     record.verifyFirstExpandableRecording();
-		     record.convertRecordingsListToNames();
-		     record.clickOnTheFirstCaptherWithOutTheExpand();
+		    record.convertRecordingsListToNames();
+		    record.verifyFirstExpandableRecording();	
+		    record.clickOnTheFirstCaptherWithOutTheExpand();
 			// 8.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display
-			String caption_rec_in_time=player_page.getCaptionInTime("0:00:47");
-			System.out.println(caption_rec_in_time);
-
+			
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 			}
@@ -195,26 +213,34 @@ public class TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 			
 			String recording_to_search=record.recording_list_names.get(0);///get first recording name the one we played
 
-			player_page.verifySearchForRecordingExist(recording_to_search);
-			player_page = PageFactory.initElements(driver, PlayerPage.class);
+			player_page.verifySearchForRecordingExist(textInRecord);
+			
+			for (String handler : driver.getWindowHandles()) {
+				driver.switchTo().window(handler);
+			}
 
+			System.out.println(player_page.breadcrumbs_box_elements_list.get(1).getText());
+			System.out.println(player_page.breadcrumbs_box_elements_list.get(0).getText());
+
+			///10.The breadcrumb structure is displayed as follows: "> Courses > course name".
+			player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
+			
+			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
+			Thread.sleep(2000);
+			
 			///10.The next result display below the current result in case there is next result.
-			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
+			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,1);
 
 			///11.search results page in the format as follows: "recording name - Search Results".
-
 			player_page.verifySearchResultPage(recording_to_search);
 			///12.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
-			player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(3);
+			player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(0);
 			////
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				break;
 			}
 		
-			///13.The breadcrumb structure is displayed as follows: "> Courses > course name".
-			player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
-
 			///14.verify return to recordings page
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
 			//15.navigate back to player recording
@@ -226,10 +252,12 @@ public class TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 			player_page.returnToCoursesPageAsAdmin(course);
 			////17.navigate back to player then to recordings page
 			driver.navigate().back();
-			player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(2));
+			Thread.sleep(4000);
+			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
-		
+			
+			
 			driver.quit();System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		}

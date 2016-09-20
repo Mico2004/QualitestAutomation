@@ -111,7 +111,7 @@ public class TC15468AddFirstFileVerifyNewTabAdditionalContentCreated {
 		 ATUReports.add("Message window.", "Starting the test: TC15468AddFirstFileVerifyNewTabAdditionalContentCreated at " + DateToStr, "Starting the test: TC15468AddFirstFileVerifyNewTabAdditionalContentCreated at " + DateToStr, LogAs.PASSED, null);	
 	}
 
-	@Test
+	@Test (description="TC 15468 Add First File Verify New Tab Additional Content Created")
 	public void test15468() throws Exception {
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\additional_file.doc";
 		String file_name = "additional_file.doc";

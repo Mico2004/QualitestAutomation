@@ -114,7 +114,7 @@ public class TC15460AddRarFile {
 	}
 	
 	
-	@Test
+	@Test (description="TC 15460 Add Rar File")
 	public void test17929() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testRar.rar";

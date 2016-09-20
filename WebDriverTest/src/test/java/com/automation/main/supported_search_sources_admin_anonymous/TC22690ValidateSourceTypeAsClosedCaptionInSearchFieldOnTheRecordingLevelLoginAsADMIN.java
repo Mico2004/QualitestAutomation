@@ -1,10 +1,5 @@
 package com.automation.main.supported_search_sources_admin_anonymous;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.sql.Driver;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.automation.main.page_helpers.AddAdditionalContentFileWindow;
@@ -52,8 +48,14 @@ import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
+import atu.testng.reports.listeners.ATUReportsListener;
+import atu.testng.reports.listeners.ConfigurationListener;
+import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 
+
+
+@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecordingLevelLoginAsADMIN 
 {
 	// Set Property for ATU Reporter Configuration
@@ -232,7 +234,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		Thread.sleep(2000);
 		
 		///10.The next result display below the current result in case there is next result.
-		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
+		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,2);
 
 		///11.search results page in the format as follows: "recording name - Search Results".
 		player_page.verifySearchResultPage(recording_to_search);

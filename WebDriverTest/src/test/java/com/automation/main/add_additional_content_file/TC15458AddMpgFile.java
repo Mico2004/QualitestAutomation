@@ -114,7 +114,7 @@ public class TC15458AddMpgFile {
 	}
 	
 	
-	@Test
+	@Test (description="TC 15458 Add Mpg File")
 	public void test17929() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testMpg.mpeg";

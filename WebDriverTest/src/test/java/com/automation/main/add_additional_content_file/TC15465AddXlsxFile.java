@@ -114,7 +114,7 @@ public class TC15465AddXlsxFile {
 	}
 	
 	
-	@Test
+	@Test (description="TC 15465 Add Xlsx File")
 	public void test17929() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testXlsx.xlsx";

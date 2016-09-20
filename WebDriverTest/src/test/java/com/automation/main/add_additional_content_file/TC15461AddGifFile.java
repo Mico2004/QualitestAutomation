@@ -114,7 +114,7 @@ public class TC15461AddGifFile {
 	}
 	
 	
-	@Test
+	@Test (description="TC 15461 Add Gif File")
 	public void test17929() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testGif.gif";

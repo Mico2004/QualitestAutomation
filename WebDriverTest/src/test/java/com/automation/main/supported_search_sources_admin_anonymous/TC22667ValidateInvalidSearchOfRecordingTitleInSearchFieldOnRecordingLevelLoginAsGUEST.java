@@ -9,7 +9,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.automation.main.page_helpers.AddAdditionalContentFileWindow;
@@ -41,10 +43,15 @@ import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.RunDiagnosticsPage;
 import com.automation.main.utilities.DriverSelector;
 
-import org.testng.annotations.AfterClass;
 import atu.testng.reports.ATUReports;
+import atu.testng.reports.listeners.ATUReportsListener;
+import atu.testng.reports.listeners.ConfigurationListener;
+import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 
+
+
+@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST {
 	// Set Property for ATU Reporter Configuration
 	{

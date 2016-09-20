@@ -1,5 +1,6 @@
 package com.automation.main.supported_search_sources_admin_anonymous;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterClass;
 
@@ -41,8 +43,13 @@ import com.automation.main.page_helpers.RunDiagnosticsPage;
 import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
+import atu.testng.reports.listeners.ATUReportsListener;
+import atu.testng.reports.listeners.ConfigurationListener;
+import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 
+
+@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsGUEST {
 	// Set Property for ATU Reporter Configuration
 	{
@@ -97,12 +104,8 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 	@BeforeClass
 	public void setup() {
 
-		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
-
+		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());	
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
-		wait = new WebDriverWait(driver, 30);
 		add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 		publish_window = PageFactory.initElements(driver, PublishWindow.class);
 		email_setting = PageFactory.initElements(driver, EmailAndConnectionSettingsPage.class);
@@ -143,37 +146,30 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 	@Test
 	public void test22693() throws Exception {
 
-		////pre conditions
-
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.waitForVisibility(tegrity.passfield);
-		// 2.login as super-user
-		tegrity.loginAdmin("SuperUser");
-		course.waitForVisibility(course.first_course_button);
-		// 3.Click on "BankValid" link
-		course.selectCourseThatStartingWith("BankValid");
-		record.waitForVisibility(record.recordings_tab);
-		Thread.sleep(3000);
-		// 4.verify all courses page
-		record.clickCheckBoxByName("This Recording Has Bookmark");
-		// 5.copy recording to course
-		record.clickOnRecordingTaskThenCopy();
-		copy.selectTargetCourseFromCourseListThatStartWith("Ab");
-		copy.clickOnCopyButton();
-		confirm_menu.waitForVisibility(confirm_menu.ok_button);
-		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		///5.1 wait for finish copying
-		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
-		/// 6.sign out super user
-		record.signOut();
-		Thread.sleep(1000);
+				
+		////pre conditions
+		tegrity.loginCourses("User1");
+							
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
+		String bookmark_for_search = "NewBookmark" + sdf.format(date);
 		
-		
+		course.selectCourseThatStartingWith("Ab");
+		String bookmarked_recording_title = record.getFirstRecordingTitle();
+		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
+		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.deleteAllBookmark();
+		player_page.addTargetBookmark(bookmark_for_search);
+		player_page.exitInnerFrame();
+		//player_page.moveToElementAndPerform(driver.findElement(By.cssSelector(".BookmarkSelected")),driver);
+				
+		record.signOut();	
 		tegrity.waitForVisibility(tegrity.passfield);
 	
 		// 2.login as guest
-	
 		tegrity.loginAsguest();
 		//3.Select a course
 		course.waitForVisibility(course.first_course_button);
@@ -182,6 +178,7 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 		record.waitForVisibility(record.recordings_tab);
 		Thread.sleep(2000);
 		record.convertRecordingsListToNames();
+		String rec=record.recording_list_names.get(0);
 		record.verifyFirstExpandableRecording();
 		record.clickOnTheFirstCaptherWithOutTheExpand();
 		// 8.Select the Recording by clicking on one of the chapters
@@ -192,37 +189,47 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 		}
 		//9.Search the Recording by entering the "Recording Title" you chose before and press ENTER.
 		//  plus +10.The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
-		String recording_to_search="bookmark";  ///search bookmark
-		player_page.verifySearchForRecordingExist(recording_to_search);
-		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		String recording_to_search=record.recording_list_names.get(0);
+		///get first recording name the one we played
+		player_page.verifySearchForRecordingExist(bookmark_for_search);
 
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+		}
+
+		System.out.println(player_page.breadcrumbs_box_elements_list.get(1).getText());
+		System.out.println(player_page.breadcrumbs_box_elements_list.get(0).getText());
+	
+		///10.The breadcrumb structure is displayed as follows: "> Courses > course name".
+		player_page.verifyBreadcrumbsForSearcRecording(course_name);
+		
+		driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
+		Thread.sleep(2000);
+		
 		///10.The next result display below the current result in case there is next result.
-		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
+		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,1);
 
 		///11.search results page in the format as follows: "recording name - Search Results".
 
-		player_page.verifySearchResultPage(recording_to_search);
+		player_page.verifySearchResultPage(rec);
 		///12.click on a row:The Tegrity Player page is opened and the recording start playing from the chapter start time.
-		player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(5);
+		player_page.veirfySearchRecordingClickedAndGetsNewTimeLocation(0);
 		////
 		for (String handler : driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
 			break;
 		}
-		System.out.println(player_page.breadcrumbs_box_elements_list.get(1).getText());
-		System.out.println(player_page.breadcrumbs_box_elements_list.get(0).getText());
-		///13.The breadcrumb structure is displayed as follows: "> Courses > course name".
-		player_page.verifyBreadcrumbsForSearcRecording(course_name);
 
 		///14.verify return to recordings page
 		player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 		//15.navigate back to player recording
 		driver.navigate().back();
-		Thread.sleep(15000);
+		Thread.sleep(4000);
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 		//16.click on "Courses" and verify course page
 
 		player_page.returnToCoursesPage(course);
+		course.waitForVisibility(course.first_course_button);
 
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
