@@ -222,7 +222,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 
 
 			///13.The next result display below the current result in case there is next result.
-			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
+			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,2);
 
 	
 			//14. The Bookmarks and Notes window is displayed.
@@ -339,7 +339,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			player_page.verifyPlayersButtonsAndTimeBuffer();
 
 			///35.The next result display below the current result in case there is next result.
-			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
+			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,2);
 
 			//36. The Bookmarks and Notes window is displayed.
 			player_page.verifybookmarkTitle();

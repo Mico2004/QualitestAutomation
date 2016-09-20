@@ -193,7 +193,7 @@ public class TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLe
 			Thread.sleep(2000);
 			
 			///10.The next result display below the current result in case there is next result.
-			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result);
+			player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,2);
 
 			///11.search results page in the format as follows: "recording name - Search Results".
 			player_page.verifySearchResultPage(recording_to_search);
