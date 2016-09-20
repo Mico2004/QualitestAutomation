@@ -193,6 +193,9 @@ public class TestSuitePreSetCopyRecordings_PrivateCourses {
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 3, record, copy,
 				confirm_menu);		
 		
+		
+		
+		
 		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
 		System.out.println("1");		
 		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
@@ -200,9 +203,10 @@ public class TestSuitePreSetCopyRecordings_PrivateCourses {
 		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
 		System.out.println("4");
 
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "User", 0, record, copy,
+				confirm_menu);
 		
-		
-
+		course.verifyRecordingsStatusIsClear("Ab",0,record);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

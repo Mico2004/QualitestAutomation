@@ -4578,6 +4578,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		waitForVisibility(firsr_record_player_name);
 		return firsr_record_player_name.getText();
 	}
+	
+	public String getSecondRecordPlayerName() {
+		waitForVisibility(second_record_player);
+		return second_record_player.getText();
+	}
+	
 
 	public void clickOnFirstVisibleChapter() {
 		try {

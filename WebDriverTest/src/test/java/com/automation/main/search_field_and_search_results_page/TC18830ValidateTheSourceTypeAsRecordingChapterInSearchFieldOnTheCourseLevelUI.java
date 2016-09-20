@@ -44,7 +44,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 	{
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
 
-	}
+	} 
 	
 	public EditRecording edit_recording;
 	public BottomFooter bottom_footer;

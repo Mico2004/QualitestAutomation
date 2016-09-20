@@ -164,16 +164,16 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 	    //4. select record and add close caption
 		record.waitForVisibility(record.recordings_tab); 
 		String url =  course.getCurrentUrlCoursePage(); 
-//		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-//		
-//		record.clickOnRecordingTaskThenEditRecording();
-//		
-//		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
-//		edit_recording.addCaptionSrtToFirstChapterRecording(path);
-//		
-//		Thread.sleep(5000);
-//		String text_from_caption_for_test = "QualitestAutomationCaption";	
-//		
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		
+		record.clickOnRecordingTaskThenEditRecording();
+		
+		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
+		edit_recording.addCaptionSrtToFirstChapterRecording(path);
+		
+		Thread.sleep(5000);
+		String text_from_caption_for_test = "QualitestAutomationCaption";	
+		
 		record.signOut();
 		////////////////End of pre confitions
 
@@ -269,13 +269,13 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenEditRecording();
 		
-		String path = "WebDriverTest\\workspace\\QualitestAutomation\\resources\\documents\\sync.srt";
+		path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\sync.srt";
 		edit_recording.addCaptionSrtToFirstChapterRecording(path);
 		
 		Thread.sleep(5000);
 		
 		//return to the course
-	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();	
+		admin_view_course_list.moveToCoursesThroughGet(url);
 	    
 	    // open the player again
 	    record.verifyFirstExpandableRecording();
@@ -291,7 +291,6 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 	
 		//search the old caption 
 		player_page.verifySearchReturnEmptyList(caption_rec_in_time);
-		
 		
 		for (String handler : driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
