@@ -37,7 +37,8 @@
     	  	  <class name="com.automation.main.search_field_and_search_results_page.TC18895ValidateTheFunctionalityOfSearchFieldInDetailedReportsPage" />
     	  	  <class name="com.automation.main.search_field_and_search_results_page.TC18897ValidateTheFunctionalityOfSearchFieldInCustomAnalysisPage" />
 
-		   	
+	
+ 
     </classes>
   </test> <!-- Test -->
   <listeners>
