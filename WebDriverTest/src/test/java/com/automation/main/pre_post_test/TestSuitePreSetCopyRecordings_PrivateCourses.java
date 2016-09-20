@@ -207,6 +207,9 @@ public class TestSuitePreSetCopyRecordings_PrivateCourses {
 	
 		tegrity.loginCourses("User1");// log in courses page
 		
+		
+		course.deleteAllRecordingsInCourseStartWith("User1", 0, record, delete_menu);
+		
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "User1", 0, record, copy,
 				confirm_menu);
 //		
