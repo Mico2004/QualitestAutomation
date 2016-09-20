@@ -61,7 +61,7 @@ public class TC15824TryToDeleteContentAsAStudent {
 
     	driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
     	
-//		
+	
 		ATUReports.setWebDriver(driver);
 	
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -97,7 +97,7 @@ public class TC15824TryToDeleteContentAsAStudent {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
+	@Test (description="TC 15824 Try To Delete Content As A Student")
 	public void loginCourses() throws InterruptedException
 	{
 		// 1. Login as Student.

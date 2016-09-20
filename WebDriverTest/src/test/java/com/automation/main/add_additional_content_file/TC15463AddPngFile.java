@@ -114,7 +114,7 @@ public class TC15463AddPngFile {
 	}
 	
 	
-	@Test
+	@Test (description="TC 15463 Add Png File")
 	public void test17929() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testPng.png";

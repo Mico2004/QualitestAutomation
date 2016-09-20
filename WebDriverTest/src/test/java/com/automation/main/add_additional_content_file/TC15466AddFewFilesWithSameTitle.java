@@ -113,7 +113,7 @@ public class TC15466AddFewFilesWithSameTitle {
 			this.driver.quit();
 		}
 
-		@Test
+		@Test (description="TC 15466 Add Few Files With Same Title")
 		public void test15466() throws Exception {
 			String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\addFewFilesFile.txt";
 			String file_name = "addFewFilesFile.txt";

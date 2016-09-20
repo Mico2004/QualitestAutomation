@@ -112,7 +112,7 @@ public class TC15897ViewTheUploadedFile {
 		driver.quit();
 	}
 
-	@Test
+	@Test (description="TC 15897 View The Uploaded File")
 	public void test15897() throws Exception {
 		String fullPathToFile1 = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testMp4.mp4";
 		String file_name1 = "Moshik_testMp4.mp4";

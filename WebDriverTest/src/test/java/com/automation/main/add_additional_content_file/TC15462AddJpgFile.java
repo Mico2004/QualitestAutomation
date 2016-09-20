@@ -114,7 +114,7 @@ public class TC15462AddJpgFile {
 	}
 	
 	
-	@Test
+	@Test (description="TC 15462 Add Jpg File")
 	public void test17929() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testJpg.jpg";
