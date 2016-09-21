@@ -84,8 +84,9 @@ public class TC15588MoveARecordingWithAPodcast {
 		
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC15538CancelTheCopying at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC15538CancelTheCopying at " + DateToStr, "Starting the test: TC15538CancelTheCopying at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC15588MoveARecordingWithAPodcast at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15588MoveARecordingWithAPodcast at " + DateToStr,
+		 "Starting the test: TC15588MoveARecordingWithAPodcast at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 
@@ -95,12 +96,6 @@ public class TC15588MoveARecordingWithAPodcast {
 	}
 
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -110,10 +105,11 @@ public class TC15588MoveARecordingWithAPodcast {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test (description = "TC 15588 Move A Recording With A Podcast")
+	public void test15588() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR.
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		

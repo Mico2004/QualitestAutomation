@@ -97,26 +97,6 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		this.driver.quit();
 	}
 
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
-	}
-
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Tests Results";
-		
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -125,10 +105,11 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException//
+	@Test(description = "TC 24923 Validate That You Cannot Click On Copy Recordings When You Havent Chose A Course Yet")
+	public void test24923() throws InterruptedException//
 	{
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as User1.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

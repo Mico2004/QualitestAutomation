@@ -103,20 +103,6 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		driver.quit();
 	}
 
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
-	}
-
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Tests Results";
-		
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
 
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -126,10 +112,12 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 	}
 
 	
-	@Test
+
+	@Test(description = "TC 22032 Delete A Regular Recording As ADMIN")
 	public void loginCourses() throws InterruptedException//
 	{
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as SuperUser.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("SuperUser");// log in courses page

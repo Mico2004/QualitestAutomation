@@ -84,8 +84,8 @@ public class TC15582MoveOneRecording {
 	 * @AfterClass public void quit() { driver.quit(); System.out.println(
 	 * "driver quited successfully"); }
 	 */
-	@Test
-	public void moveRecording() throws InterruptedException, ParserConfigurationException, Exception, IOException {
+	@Test (description="TC 15582 Move One Recording")
+	public void test15582() throws InterruptedException, ParserConfigurationException, Exception, IOException {
 		// 1.load main page chrome
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// 2.login as instructor

@@ -130,8 +130,8 @@ public class TC19318VerifyThePrivateCoursesFunctionalityCreateARecordingAndWatch
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws InterruptedException
+	@Test (description="TC 19318 Verify The Private Courses Functionality Create A Recording And Watch It")
+	public void test19318() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

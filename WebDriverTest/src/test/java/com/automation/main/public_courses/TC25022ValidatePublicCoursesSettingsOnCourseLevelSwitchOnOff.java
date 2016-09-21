@@ -139,8 +139,8 @@ public class TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws Exception
+	@Test (description = "TC 25022 Validate Public Courses Settings On Course Level Switch On Off")
+	public void test25022() throws Exception
 	{
 		// 1. Make sure to have two users which are enrolled to the same course (abc), first as INSTRUCTOR (User1) and the other as STUDENT (User4).
 		// 2. Log in as INSTRUCTOR.

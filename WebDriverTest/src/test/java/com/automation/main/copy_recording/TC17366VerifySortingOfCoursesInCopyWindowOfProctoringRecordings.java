@@ -45,15 +45,12 @@ public class TC17366VerifySortingOfCoursesInCopyWindowOfProctoringRecordings {
 
 		@BeforeClass
 		public void setup() {
-			try {
-
-			
+		
 				driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 			
 				// ATUReports.add("selected browser type", LogAs.PASSED, new
 				// CaptureScreen(ScreenshotOf.DESKTOP));
-				
-
+			
 				tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 				record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -65,12 +62,7 @@ public class TC17366VerifySortingOfCoursesInCopyWindowOfProctoringRecordings {
 				 System.out.println("Starting the test: TC17366VerifySortingOfCoursesInCopyWindowOfProctoringRecordings at " + DateToStr);
 				 ATUReports.add("Message window.", "Starting the test: TC17366VerifySortingOfCoursesInCopyWindowOfProctoringRecordings at " + DateToStr,
 				 "Starting the test: TC17366VerifySortingOfCoursesInCopyWindowOfProctoringRecordings at " + DateToStr, LogAs.PASSED, null);
-				 
-			} catch (Exception e) {
-				/// ATUReports.add("Fail Step", LogAs.FAILED, new
-				/// CaptureScreen(ScreenshotOf.DESKTOP));
-			}
-
+				
 		}
 		
 		@AfterClass
@@ -78,8 +70,8 @@ public class TC17366VerifySortingOfCoursesInCopyWindowOfProctoringRecordings {
 			driver.quit();
 		}
 
-		@Test
-		public void VerifySortingOfCoursesInCopyWindow() throws InterruptedException
+		@Test (description="TC 17366 Verify Sorting Of Courses In Copy Window Of Proctoring Recordings")
+		public void test17366() throws InterruptedException
 		{
 			///1.login page 
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

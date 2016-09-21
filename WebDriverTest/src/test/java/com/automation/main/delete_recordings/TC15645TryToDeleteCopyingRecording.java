@@ -90,13 +90,6 @@ public class TC15645TryToDeleteCopyingRecording {
 	 this.driver.quit();
 	 }
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
-
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -104,8 +97,11 @@ public class TC15645TryToDeleteCopyingRecording {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException {
+	@Test(description = "TC 15645 Try To Delete Copying Recording")
+	public void test15645() throws InterruptedException {
+		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

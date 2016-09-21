@@ -97,26 +97,7 @@ public class TC22184ValidateThatYouCannotClickOnMoveRecordingsWhenYouHaventChose
 	}
 	
 	
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
-	}
-
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Tests Results";
-		
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
+	
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -126,10 +107,11 @@ public class TC22184ValidateThatYouCannotClickOnMoveRecordingsWhenYouHaventChose
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException//
+	@Test(description = "TC22184ValidateThatYouCannotClickOnMoveRecordingsWhenYouHaventChoseACourseYet")
+	public void test22184() throws InterruptedException//
 	{
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as User1.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

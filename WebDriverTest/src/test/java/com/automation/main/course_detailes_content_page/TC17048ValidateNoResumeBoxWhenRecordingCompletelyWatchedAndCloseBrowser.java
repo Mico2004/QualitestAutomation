@@ -128,14 +128,6 @@ public class TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBro
 		driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
-	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -144,10 +136,11 @@ public class TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBro
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 17048 Validate No Resume Box When Recording Completely Watched And Close Browser")
+	public void test17048() throws Exception
 	{
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Make sure that the STUDENT and INSTRUCTOR users you are using never watched the recording used in this test case.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

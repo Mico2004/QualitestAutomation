@@ -126,13 +126,6 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 		driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -142,10 +135,11 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 17042 Validate Resume Box When Navigating Back While Recording Playing")
+	public void test17042() throws Exception
 	{
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Make sure that the STUDENT and INSTRUCTOR users you are using never watched the recording used in this test case.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

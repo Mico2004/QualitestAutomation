@@ -105,7 +105,7 @@ public class TC15823DeleteSeveralContentItems {
 	}
 
 	@Test (description="TC 15823 Delete Several Content Items")
-	public void loginCourses() throws InterruptedException
+	public void test15823() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR (User1).
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

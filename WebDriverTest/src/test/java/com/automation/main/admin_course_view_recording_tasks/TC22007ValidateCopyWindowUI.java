@@ -93,24 +93,9 @@ public class TC22007ValidateCopyWindowUI {
 		driver.quit();
 	}
 
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
-	}
 
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Tests Results";
-		
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
-	// @Parameters({"web","title"}) in the future
 	@Test
 	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
 	}
 	
@@ -122,9 +107,11 @@ public class TC22007ValidateCopyWindowUI {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException//
+	@Test(description = "TC22007ValidateCopyWindowUI")
+	public void test22007() throws InterruptedException//
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as User1.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

@@ -143,8 +143,8 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws Exception
+	@Test (description = "TC 21938 Verify Student Permissions Consitrncy On Active Public Courses")
+	public void test21938() throws Exception
 	{
 		// 1. Make sure to have a user is enrolled to a course (Ab) as Student (User4).
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

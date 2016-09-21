@@ -87,26 +87,7 @@ public class TC15594SearchCourseInMoveWindow {
 		this.driver.quit();
 	}
 
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("McGrawHill Automation ", Utils.getCurrentTime(), "1.0");
-	}
 
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Mcgeawhill Verify <br/> <b> UI existence</b>";
-		
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -116,9 +97,11 @@ public class TC15594SearchCourseInMoveWindow {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 15594 Search Course In Move Window")
+	public void test15594() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

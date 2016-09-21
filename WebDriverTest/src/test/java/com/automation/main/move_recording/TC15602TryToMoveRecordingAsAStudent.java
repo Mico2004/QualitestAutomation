@@ -83,13 +83,6 @@ public class TC15602TryToMoveRecordingAsAStudent {
 		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -99,9 +92,11 @@ public class TC15602TryToMoveRecordingAsAStudent {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 15602 Try To Move Recording As AStudent")
+	public void test15602() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User4");
 		initializeCourseObject();

@@ -99,7 +99,7 @@ public class TC15815CancelTheDelete {
 	}
 
 	@Test (description="TC 15815 Cancel The Delete")
-	public void loginCourses() throws InterruptedException
+	public void test15815() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR (User1).
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

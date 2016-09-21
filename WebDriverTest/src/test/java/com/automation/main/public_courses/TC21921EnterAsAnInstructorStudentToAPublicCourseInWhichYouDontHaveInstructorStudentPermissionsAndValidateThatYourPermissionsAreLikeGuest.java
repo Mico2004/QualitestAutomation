@@ -141,8 +141,8 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws Exception
+	@Test (description = "TC 21921 Enter As An Instructor Student To A Public Course In Which You Dont Have Instructor Student Permissions And Validate That Your Permissions Are Like Guest")
+	public void test21921() throws Exception
 	{
 		// 1. Make sure to have a course to which both of the users are not enrolled to neither as Student nor Instructor - Create course and enroll SuperUser.
 

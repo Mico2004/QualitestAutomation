@@ -97,26 +97,7 @@ public class TC22049ValidateCopyWindowFunctionality {
 		driver.quit();
 	}
 
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
-	}
 
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Tests Results";
-		
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -126,10 +107,10 @@ public class TC22049ValidateCopyWindowFunctionality {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException//
+	@Test(description = "TC 22049 Validate Copy Window Functionality")
+	public void test22049() throws InterruptedException//
 	{
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// 1. Login as User1.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

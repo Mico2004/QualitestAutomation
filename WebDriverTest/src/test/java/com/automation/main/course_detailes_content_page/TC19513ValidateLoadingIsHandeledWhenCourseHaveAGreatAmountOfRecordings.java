@@ -126,13 +126,6 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 		driver.quit();
 	} 
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -142,10 +135,11 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 19513 Validate Loading Is Handeled When Course Have A Great Amount Of Recordings")
+	public void test19513() throws Exception
 	{
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Make sure to have a course with at least 200 Regular recordings (Every recording contain at least 5 chapters).
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

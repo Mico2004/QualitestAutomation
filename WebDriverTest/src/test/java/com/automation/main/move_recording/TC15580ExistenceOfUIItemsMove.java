@@ -48,22 +48,20 @@ public class TC15580ExistenceOfUIItemsMove {
 
     @BeforeClass
 	public void setup() {
-		try {
+		
 
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 			
 			wait = new WebDriverWait(driver, 30);
-			Thread.sleep(2000);
+			
 			ATUReports.setWebDriver(driver);
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			 /// delete=PageFactory.initElements(driver,DeleteMenu.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
 		    move_Window= PageFactory.initElements(driver, MoveWindow.class);
-		} catch (Exception e) {
-		///	ATUReports.add("Fail Step", LogAs.FAILED, null);
-		}
+	
 		
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
@@ -87,8 +85,8 @@ public class TC15580ExistenceOfUIItemsMove {
 
 
 	// @Parameters({"web","title"}) in the future
-	@Test
-	public void testUiExistence() throws Exception {
+	@Test (description="TC 15580 Existence Of UI Items Move")
+	public void test15580() throws Exception {
 	//1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		//2.login as instructor

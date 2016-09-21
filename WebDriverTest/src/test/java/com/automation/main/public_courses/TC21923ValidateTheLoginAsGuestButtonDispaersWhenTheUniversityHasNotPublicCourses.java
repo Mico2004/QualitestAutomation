@@ -133,8 +133,8 @@ public class TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNot
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws Exception
+	@Test (description = "TC 21923 Validate The Login As Guest Button Dispaers When The University Has Not Public Courses")
+	public void test21923() throws Exception
 	{
 		// 1. Login as ADMIN.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

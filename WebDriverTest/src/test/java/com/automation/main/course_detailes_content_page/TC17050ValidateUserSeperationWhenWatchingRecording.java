@@ -123,13 +123,6 @@ public class TC17050ValidateUserSeperationWhenWatchingRecording {
 		driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -139,10 +132,11 @@ public class TC17050ValidateUserSeperationWhenWatchingRecording {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 17050 Validate User Seperation When Watching Recording")
+	public void test17050() throws Exception
 	{
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Make sure to preapare two users: INSTRCTOR, and some other user (INSTRUCTOR/STUDENT) that never watched the recording you are using in this test case.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

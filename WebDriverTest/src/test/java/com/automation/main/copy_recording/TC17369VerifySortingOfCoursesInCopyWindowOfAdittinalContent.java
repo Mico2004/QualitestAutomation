@@ -46,7 +46,7 @@ public class TC17369VerifySortingOfCoursesInCopyWindowOfAdittinalContent {
 
 	@BeforeClass
 	public void setup() {
-		try {
+		
 
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
@@ -64,10 +64,7 @@ public class TC17369VerifySortingOfCoursesInCopyWindowOfAdittinalContent {
 			 ATUReports.add("Message window.", "Starting the test: TC17369VerifySortingOfCoursesInCopyWindowOfAdittinalContent at " + DateToStr,
 			 "Starting the test: TC17369VerifySortingOfCoursesInCopyWindowOfAdittinalContent at " + DateToStr, LogAs.PASSED, null);	
 			 
-		} catch (Exception e) {
-			/// ATUReports.add("Fail Step", LogAs.FAILED, new
-			/// CaptureScreen(ScreenshotOf.DESKTOP));
-		}
+	
 
 	}
 	
@@ -76,8 +73,8 @@ public class TC17369VerifySortingOfCoursesInCopyWindowOfAdittinalContent {
 		driver.quit();
 	}
 
-	@Test
-	public void VerifySortingOfCoursesInCopyWindow() throws InterruptedException
+	@Test  (description="TC 17369 Verify Sorting Of Courses In Copy Window Of Adittinal Content")
+	public void test17369() throws InterruptedException
 	{
 		///1.login page 
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

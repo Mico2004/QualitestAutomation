@@ -103,7 +103,7 @@ public class TC15813DeleteAnItem {
 	}
 
 	@Test (description="TC 15813 Delete An Item")
-	public void loginCourses() throws InterruptedException
+	public void test15813() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR (User1).
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
