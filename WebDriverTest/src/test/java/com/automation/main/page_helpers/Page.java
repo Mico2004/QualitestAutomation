@@ -14,6 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -28,8 +30,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.Command;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.LoggingAssert;
@@ -1214,6 +1220,26 @@ public class Page {
 		 String login_url = driver.getCurrentUrl();
 		System.out.println(login_url.split("/")[2].substring(0, login_url.split("/")[2].length() - 12));
 		return login_url.split("/")[2].substring(0, login_url.split("/")[2].length() - 12);
+	}
+
+	public void fluentWaitInvisibility(WebElement element, int timeout, int pooling) {
+		try {
+			Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS)
+					.pollingEvery(pooling, TimeUnit.MILLISECONDS);
+			wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(element)));
+		} catch (Exception e) {
+			ATUReports.add("Error", e.getMessage(), LogAs.FAILED, null);
+		}
+	}
+	
+	public void fluentWaitVisibility(WebElement element, int timeout, int pooling) {
+		try {
+			Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(timeout, TimeUnit.SECONDS)
+					.pollingEvery(pooling, TimeUnit.MILLISECONDS);
+			wait.until(ExpectedConditions.visibilityOf(element));
+		} catch (Exception e) {
+			ATUReports.add("Error", e.getMessage(), LogAs.FAILED, null);
+		}
 	}
 
 }
