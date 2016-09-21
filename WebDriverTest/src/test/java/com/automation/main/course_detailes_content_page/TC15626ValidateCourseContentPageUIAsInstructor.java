@@ -128,13 +128,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 	}
 
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
-	
+		
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -143,9 +137,11 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 15626 Validate Course Content Page UI As Instructor")
+	public void test15626() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		initializeCourseObject();
 		
 		// Preconditions:

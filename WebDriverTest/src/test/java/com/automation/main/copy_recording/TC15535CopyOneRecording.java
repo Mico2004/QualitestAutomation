@@ -88,23 +88,9 @@ public class TC15535CopyOneRecording {
 	 * ATUReports.add("Fail step","" ,"",LogAs.FAILED, new CaptureScreen(
 	 * ScreenshotOf.DESKTOP)); }
 	 */
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("McGrawHill Automation ", Utils.getCurrentTime(), "1.0");
-	}
 
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Mcgeawhill Verify <br/> <b> UI existence</b>";
-
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
-
-	@Test
-	public void copyOneRecording() throws InterruptedException {
+	@Test (description="TC 15535 Copy One Recording")
+	public void test15535() throws InterruptedException {
 		// 1.load main page chrome
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// 2.login as instructor
@@ -285,7 +271,7 @@ public class TC15535CopyOneRecording {
 		course.selectTargetCourse(destination_course_name);
 		
 		//course.course_list.get(1).click();
-		course.selectFirstCourse(record);
+		//course.selectFirstCourse(record);
 		Thread.sleep(1000);
 		
 		record.verifyFirstExpandableRecording();

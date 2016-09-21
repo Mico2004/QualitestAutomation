@@ -122,13 +122,7 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 	}
 
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
-	
+		
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -137,9 +131,11 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 24617 Validate Bookmark Icon Is Displayed For An Help Desk Admin")
+	public void test24617() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. For this test you need course with at least one recording.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

@@ -64,16 +64,10 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 	public void setup() {
 
 		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
-//			
-//		driver=new InternetExplorerDriver(capability);
-//		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		
+	
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -97,12 +91,7 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		this.driver.quit();
 	}
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -111,9 +100,11 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 24764 Copy A Student Recording To ACourse Where Recording With Same Title Exists")
+	public void test24764() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Verify that recordings with same title created both in source and destination courses.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
@@ -198,35 +189,15 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		Thread.sleep(2000);
 		
 		// 11. Message box is closed.
-//		if(confirm_menu.isConfirmationMenuClosed()) {
-//			System.out.println("Message box is closed");
-//			ATUReports.add("Message box.", "Message box is closed.", "Message box is closed.", LogAs.PASSED, null);
-//			Assert.assertTrue(true);
-//		} else {
-//			System.out.println("Message box is not closed");
-//			ATUReports.add("Message box.", "Message box is closed.", "Message box is not closed.", LogAs.FAILED, null);
-//			Assert.assertTrue(false);
-//			
-//		}
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
 		
-		// 12. "Copy" window is closed.
-//		if(copy.isCopyMenuClosed()) {
-//			System.out.println("Copy window is closed");
-//			ATUReports.add("Copy window.", "Copy window is closed.", "Copy window is closed.", LogAs.PASSED, null);
-//			Assert.assertTrue(true);
-//		} else {
-//			System.out.println("Copy window is not closed");
-//			ATUReports.add("Copy window.", "Copy window is closed.", "Copy window is not closed", LogAs.FAILED, null);
-//			Assert.assertTrue(false);
-//		}
-		
+		// 12. "Copy" window is closed.	
 		copy.verifyThatCopyMenuClose();
 		
 		// 13. Source recording has a status "Being copying from".
-//		record.checkRecordingInIndexIStatus(1, "Being copied from");
-		record.verifyTargetRecordingHaveTargetStatus(first_recording_name, "Being copied from");
+		record.checkRecordingInIndexIStatus(1, "Being copied from");
+//		record.verifyTargetRecordingHaveTargetStatus(first_recording_name, "Being copied from");
 		
 		// TODO: improve it by new function that checking target by index recording
 		// 14. After copying is finished, recording's status will disappear.

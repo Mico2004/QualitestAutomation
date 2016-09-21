@@ -124,13 +124,6 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -140,9 +133,11 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 15663 Validate Bookmark Icon Is Displayed When Adding Bookmark Througth The Editor")
+	public void test15663() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Open tegrity "Login page".
 		// 2. Login as an INSTRUCTOR (SuperUser).
 		tegrity.loginCourses("SuperUser");

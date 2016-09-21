@@ -128,12 +128,6 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 	}
 
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -143,9 +137,11 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 15754 Validate Bookmark Icon Is Displayed When Adding Bookmark Througth The Player As Student")
+	public void test15754() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Make sure there is at least one student recording.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

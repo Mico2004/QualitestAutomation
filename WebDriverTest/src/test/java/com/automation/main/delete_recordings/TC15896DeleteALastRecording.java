@@ -56,7 +56,7 @@ public class TC15896DeleteALastRecording {
 
 	@BeforeClass
 	public void setup() {
-		try {
+	
 
 			/// System.setProperty("webdriver.ie.driver",
 			/// "src/test/resources/chromedriver.exe");
@@ -71,9 +71,7 @@ public class TC15896DeleteALastRecording {
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
 			move_Window = PageFactory.initElements(driver, MoveWindow.class);
-		} catch (Exception e) {
-			ATUReports.add("Fail Step", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
-		}
+		
 		
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
@@ -95,8 +93,8 @@ public class TC15896DeleteALastRecording {
 	 * ScreenshotOf.DESKTOP)); }
 	 */
 
-	@Test
-	public void deleteALastRecording() throws InterruptedException {
+	@Test (description= "TC 15896 Delete A Last Recording")
+	public void test15896() throws InterruptedException {
 		
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

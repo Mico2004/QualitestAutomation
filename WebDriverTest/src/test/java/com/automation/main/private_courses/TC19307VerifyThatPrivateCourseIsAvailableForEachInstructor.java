@@ -136,8 +136,8 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws InterruptedException
+	@Test (description="TC 19307 Verify That Private Course Is Available For Each Instructor")
+	public void test19307() throws InterruptedException
 	{
 		// 1. Login as an existing Instructor (User1).
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

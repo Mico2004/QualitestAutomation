@@ -115,7 +115,7 @@ public class TC15452AddTxtFile {
 	
 	
 	@Test (description="TC 15452 Add Txt File")
-	public void test17929() throws Exception {
+	public void test15452() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testTxt.txt";
 		String file_name = "Moshik_testTxt.txt";

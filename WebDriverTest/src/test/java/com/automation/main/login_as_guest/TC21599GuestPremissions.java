@@ -144,7 +144,7 @@ public class TC21599GuestPremissions {
 		
 	}
 
-	@Test
+	@Test (description="TC 21599 Guest Premissions")
 	public void test21599() throws Exception {
 		/// pre conditions
 

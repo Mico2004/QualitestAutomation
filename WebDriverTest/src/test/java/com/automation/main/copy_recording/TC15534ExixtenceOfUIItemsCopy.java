@@ -78,24 +78,11 @@ String os;
 		this.driver.quit();
 	}
 		
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
-	}
 
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "McGraw-Hill Automation</b>";
-
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
 	
 	// @Parameters({"web","title"}) in the future
-	@Test
-	public void testUiExistence() throws InterruptedException {
+	@Test (description="TC 15534 Exixtence Of UI Items Copy")
+	public void test15534() throws InterruptedException {
 		
 		// log in courses page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

@@ -136,12 +136,6 @@ public class TC15647NavigateThrougthALongRecordingsListInRecordingsTab {
 	}
 
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -151,10 +145,11 @@ public class TC15647NavigateThrougthALongRecordingsListInRecordingsTab {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 15647 Navigate Througth A Long Recordings List In Recordings Tab")
+	public void test15647() throws Exception
 	{
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Open "Course details" page as INSTRUCTOR.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

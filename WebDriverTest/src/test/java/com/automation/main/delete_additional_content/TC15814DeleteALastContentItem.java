@@ -94,7 +94,6 @@ public class TC15814DeleteALastContentItem {
 	}
 
 
-	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -103,7 +102,7 @@ public class TC15814DeleteALastContentItem {
 	}
 
 	@Test (description="TC 15814 Delete A Last Content Item")
-	public void loginCourses() throws InterruptedException
+	public void test15814() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR (User1).
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

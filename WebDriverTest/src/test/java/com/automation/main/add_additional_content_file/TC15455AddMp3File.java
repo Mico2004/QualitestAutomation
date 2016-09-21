@@ -115,7 +115,7 @@ public class TC15455AddMp3File {
 	
 	
 	@Test (description="TC 15455 Add Mp3 File")
-	public void test17929() throws Exception {
+	public void test15455() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testMp3.mp3";
 		String file_name = "Moshik_testMp3.mp3";

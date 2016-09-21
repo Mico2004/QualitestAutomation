@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 
 import atu.testng.reports.ATUReports;
@@ -209,7 +210,7 @@ public class EditRecording extends Page {
 			driver.switchTo().window(window_handler);
 			break;
 		}
-		
+		int countOfErrors = 0;
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){		
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
 			String message = getTextFromWebElement(ie);
@@ -222,6 +223,12 @@ public class EditRecording extends Page {
 				System.out.println("Get an error while click on apply.");	
 				driver.findElement(By.id("AddCaptioning")).click();
 				Thread.sleep(2000);
+				countOfErrors++;
+				if(countOfErrors >= 4) {
+					System.out.println("The error message is return more then 3 times.");
+					ATUReports.add("The error message is return more then 3 times.", "True.", "false", LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
 			}
 			else Thread.sleep(3000);
 		}

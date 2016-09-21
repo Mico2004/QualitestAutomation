@@ -115,7 +115,7 @@ public class TC15450AddDocxFile {
 	
 	
 	@Test (description="TC 15450 Add Docx File")
-	public void test17929() throws Exception {
+	public void test15450() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testDocx.docx";
 		String file_name = "Moshik_testDocx.docx";

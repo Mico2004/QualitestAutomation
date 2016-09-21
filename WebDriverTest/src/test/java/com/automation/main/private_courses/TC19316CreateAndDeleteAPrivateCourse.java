@@ -143,8 +143,8 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws InterruptedException
+	@Test (description="TC 19316 Create And Delete A Private Course")
+	public void test19316() throws InterruptedException
 	{
 		// pretest
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

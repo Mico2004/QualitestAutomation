@@ -140,7 +140,7 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 	}
 
 	
-	@Test
+	@Test (description="TC 21598 Access Public Non PublicCourses With DirectLinks")
 	public void test21598() throws Exception {
 		///pre condition
 		

@@ -91,26 +91,9 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 		driver.quit();
 	}
 
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
-	}
 
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Tests Results";
-		
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
 	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -119,9 +102,10 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
+	@Test (description="TC 21988 Validate Recording Tasks UI In Recordings Student Recordings And Tests Tabs As ADMIN")
 	public void loginCourses() throws InterruptedException//
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// Precondition
 		initializeCourseObject();
 		tegrity.loginAdmin("Admin");

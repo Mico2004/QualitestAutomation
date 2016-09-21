@@ -119,13 +119,7 @@ public class TC15660TryToCopyFailedRecording {
 		this.driver.quit();
 	}
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
-	
+		
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -134,9 +128,11 @@ public class TC15660TryToCopyFailedRecording {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 15660 Try To Copy Failed Recording")
+	public void test15660() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

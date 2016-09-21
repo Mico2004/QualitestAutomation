@@ -82,14 +82,6 @@ public class TC15585MoveSeveralRecordings {
 		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
-	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -98,9 +90,11 @@ public class TC15585MoveSeveralRecordings {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 15585 Move Several Recordings")
+	public void test15585() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

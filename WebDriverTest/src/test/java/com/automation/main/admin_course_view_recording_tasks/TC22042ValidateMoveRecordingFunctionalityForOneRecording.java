@@ -97,26 +97,7 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 		driver.quit();
 	}
 
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
-	}
 
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Tests Results";
-		
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -126,9 +107,11 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException//
+	@Test(description = "TC 22042 Validate Move Recording Functionality For One Recording")
+	public void test22042() throws InterruptedException//
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// Loop through login as Admin / Help Disk Admin
 		for(int i_login_as_admin=0; i_login_as_admin<2; i_login_as_admin++) {
 			

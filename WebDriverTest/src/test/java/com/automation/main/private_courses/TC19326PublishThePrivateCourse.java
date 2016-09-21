@@ -118,8 +118,8 @@ public class TC19326PublishThePrivateCourse {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws InterruptedException
+	@Test (description = "TC 19326 Publish The Private Course")
+	public void test19326() throws InterruptedException
 	{
 		// TODO: Replace in the end all Thread sleep with waits (WebdriverWait)
 		

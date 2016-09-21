@@ -1,7 +1,9 @@
     package com.automation.main.delete_recordings;
     
    import java.util.List;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,7 +70,13 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 			} catch (Exception e) {
 				ATUReports.add("Fail Step", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 			}
-
+			
+			 Date curDate = new Date();
+			 String DateToStr = DateFormat.getInstance().format(curDate);
+			 System.out.println("Starting the test: TC15624ExistenceOfUIItemsDelete at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC15624ExistenceOfUIItemsDelete at " + DateToStr,
+					 "Starting the test: TC15624ExistenceOfUIItemsDelete " + DateToStr, LogAs.PASSED, null);
+			
 		}
 
 		/*
@@ -89,8 +97,8 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 		}
 
 		// @Parameters({"web","title"}) in the future
-		@Test (description="TC 15813 Delete An Item")
-		public void testUiExistence() throws InterruptedException {
+		@Test (description="TC 15624 Existence Of UI Items Delete")
+		public void test15624() throws InterruptedException {
 		//1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			//2.login as instructor

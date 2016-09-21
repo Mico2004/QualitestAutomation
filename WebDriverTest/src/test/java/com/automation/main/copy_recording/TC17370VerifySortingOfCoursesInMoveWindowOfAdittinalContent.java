@@ -45,7 +45,7 @@ public class TC17370VerifySortingOfCoursesInMoveWindowOfAdittinalContent {
 
 				@BeforeClass
 				public void setup() {
-					try {
+					
 
 						driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 						
@@ -63,10 +63,7 @@ public class TC17370VerifySortingOfCoursesInMoveWindowOfAdittinalContent {
 						 ATUReports.add("Message window.", "Starting the test: TC17370VerifySortingOfCoursesInMoveWindowOfAdittinalContent at " + DateToStr,
 						 "Starting the test: TC17370VerifySortingOfCoursesInMoveWindowOfAdittinalContent at " + DateToStr, LogAs.PASSED, null);	
 						 
-					} catch (Exception e) {
-						/// ATUReports.add("Fail Step", LogAs.FAILED, new
-						/// CaptureScreen(ScreenshotOf.DESKTOP));
-					}
+				
 
 				}
 				
@@ -75,8 +72,8 @@ public class TC17370VerifySortingOfCoursesInMoveWindowOfAdittinalContent {
 					this.driver.quit();
 				}
 				
-				@Test
-				public void VerifySortingOfCoursesInCopyWindow() throws InterruptedException
+				@Test (description="TC 17370 Verify Sorting Of Courses In Move Window Of Adittinal Content")
+				public void test17370() throws InterruptedException
 				{
 					///1.login page 
 					tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

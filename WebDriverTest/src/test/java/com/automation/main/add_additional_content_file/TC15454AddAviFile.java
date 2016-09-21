@@ -115,7 +115,7 @@ public class TC15454AddAviFile {
 	
 	
 	@Test (description="TC 15454 Add Avi File")
-	public void test17929() throws Exception {
+	public void test15454() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testAvi.avi";
 		String file_name = "Moshik_testAvi.avi";

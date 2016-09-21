@@ -114,7 +114,7 @@ public class TC15448AddPptFile {
 	
 	
 	@Test (description="TC 15448 Add Ppt File")
-	public void test17929() throws Exception {
+	public void test15448() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testPpt.ppt";
 		String file_name = "Moshik_testPpt.ppt";
