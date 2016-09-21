@@ -234,7 +234,7 @@ public class TC21578LoginAsGuestUI {
 		course.verifyNoActiveCoursesTab();
 		
 		/// 11. click on public courses
-		course.clickOnPublicCoursesTabButton();
+		course.clickOnPublicCoursesTab();
 		
 		/// 12. verify sign out
 		course.signOut();
