@@ -754,7 +754,7 @@ public class Page {
 	// Verify that
 	// The next result display below the current result in case there is next
 	// result.
-	public void verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(List<WebElement> list) {
+	public void verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(List<WebElement> list, int number) {
 		if (list.size() > 1) {
 			boolean not_correct = false;
 			int prepoint = list.get(0).getLocation().y;
@@ -784,8 +784,13 @@ public class Page {
 			}
 		} else {
 			System.out.println("There is 1 or 0 results.");
+			if(number == 2)
 			ATUReports.add("There is 1 or 0 results.", "Expect for more then 1 results.", "1 or 0 results.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			else {
+				ATUReports.add("There is 1 or 0 results.", "Expect exactly 1 results.", "1 or 0 results.",
+						LogAs.PASSED, null);
+			}
 		}
 	}
 	
