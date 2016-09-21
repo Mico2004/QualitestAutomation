@@ -61,7 +61,7 @@ public class TC15653DeleteFailedRecording {
 
 	@BeforeClass
 	public void setup() {
-		try {
+		
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 			
@@ -72,17 +72,15 @@ public class TC15653DeleteFailedRecording {
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
 			move_Window = PageFactory.initElements(driver, MoveWindow.class);
-		} catch (Exception e) {
-			ATUReports.add("Fail Step", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
-		}
+		
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
 		 System.out.println("Starting the test: TC15653DeleteFailedRecording at " + DateToStr);
 		 ATUReports.add("Message window.", "Starting the test: TC15653DeleteFailedRecording at " + DateToStr, "Starting the test: TC15653DeleteFailedRecording at " + DateToStr, LogAs.PASSED, null);
 	}
 
-	@Test
-	public void TCDeleteFailedRecording() throws InterruptedException {
+	@Test (description= "TC 15653 Delete Failed Recording")
+	public void test15653() throws InterruptedException {
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// 2.login as instructor

@@ -144,8 +144,8 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws Exception
+	@Test (description = "TC 21856 Validate The Public Courses Tab UI After Changes")
+	public void test21856() throws Exception
 	{
 		// 1. Get Ab course name of User1.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

@@ -95,7 +95,7 @@ public class TC15812ExistenceofUIitems {
 	}
 
 	@Test (description="TC 15812 Existence of UI items")
-	public void loginCourses() throws InterruptedException
+	public void test15812() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR (User1).
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

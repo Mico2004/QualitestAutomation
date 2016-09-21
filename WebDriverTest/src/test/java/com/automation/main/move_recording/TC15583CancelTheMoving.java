@@ -69,8 +69,9 @@ public class TC15583CancelTheMoving {
 		
 	     Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC15538CancelTheCopying at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC15538CancelTheCopying at " + DateToStr, "Starting the test: TC15538CancelTheCopying at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC15583CancelTheMoving at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC15583CancelTheMoving at " + DateToStr,
+		"Starting the test: TC15583CancelTheMoving at " + DateToStr, LogAs.PASSED, null);	
 	}
 	
 	@AfterClass
@@ -78,27 +79,7 @@ public class TC15583CancelTheMoving {
 		this.driver.quit();
 	}
 
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("McGraw-Hill Automation ", Utils.getCurrentTime(), "1.0");
-	}
 
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "McGraw-Hill Verify <br/> <b> UI existence</b>";
-		
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
-	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -107,10 +88,11 @@ public class TC15583CancelTheMoving {
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class); 
 	}
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException//
+	@Test (description="TC 15583 Cancel The Moving")
+	public void test15583() throws InterruptedException//
 	{
 		// 1. Login as INSTRUCTOR.
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 				// 2. Select course.

@@ -81,9 +81,8 @@ public class TC17361VerifySortingOfCoursesInCopyWindowOfRegularRecordings {
 	}
 
 
-	
-	@Test
-	public void VerifySortingOfCoursesInCopyWindow() throws InterruptedException
+	@Test (description="TC 17361 Verify Sorting Of Courses In Copy Window Of Regular Recordings")
+	public void test17361() throws InterruptedException
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 

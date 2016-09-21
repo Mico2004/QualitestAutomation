@@ -115,12 +115,6 @@ public class TC15557CopyRecordingWithPodcast {
 	}
 
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -130,9 +124,11 @@ public class TC15557CopyRecordingWithPodcast {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 15557 Copy Recording With Podcast")
+	public void test15557() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		if(driver instanceof FirefoxDriver) {
 			// 1. Login as INSTRUCTOR.
 			tegrity.loginCourses("User1");// log in courses page

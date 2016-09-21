@@ -144,7 +144,7 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 			this.driver.quit();
 		}
 		
-		@Test
+		@Test (description="TC 21600 Validate Guest Permissons In Player")
 		public void test21600() throws Exception {
 			/// pre conditions
 

@@ -52,7 +52,7 @@ public class TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 
 	@BeforeClass
 	public void setup() {
-		try {
+		
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 			
@@ -70,10 +70,7 @@ public class TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 			 System.out.println("Starting the test: TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording at " + DateToStr);
 			 ATUReports.add("Message window.", "Starting the test: TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording at " + DateToStr,
 			 "Starting the test: TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording at " + DateToStr, LogAs.PASSED, null);
-		} catch (Exception e) {
-			/// ATUReports.add("Fail Step", LogAs.FAILED, new
-			/// CaptureScreen(ScreenshotOf.DESKTOP));
-		}
+	
 
 	}
 
@@ -88,14 +85,7 @@ public class TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 	 * ATUReports.add("Fail step","" ,"",LogAs.FAILED, new CaptureScreen(
 	 * ScreenshotOf.DESKTOP)); }
 	 */
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("McGrawHill Automation ", Utils.getCurrentTime(), "1.0");
-	}
 
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Verify the sorting of courses in Copy window of regular recordings";
-
-	}
 	
 	@AfterClass
 	public void closeBroswer() {
@@ -103,14 +93,9 @@ public class TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 	}
 	
 
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
 	
-	@Test
-	public void VerifySortingOfCoursesInCopyWindow() throws Exception
+	@Test(description="TC 17362 Verify Sorting Of Courses In Move Window Of REgular Recording")
+	public void test17362() throws Exception
 	{
 		//1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -141,10 +126,5 @@ public class TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 		course.size = course.course_list.size();
 	}
 
-   @AfterClass
-   public void quit()
-   {
-	driver.quit();
-   }
-
+  
 }

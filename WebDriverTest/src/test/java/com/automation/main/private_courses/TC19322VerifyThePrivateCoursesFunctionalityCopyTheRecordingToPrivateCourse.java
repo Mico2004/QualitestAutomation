@@ -133,8 +133,8 @@ public class TC19322VerifyThePrivateCoursesFunctionalityCopyTheRecordingToPrivat
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws InterruptedException
+	@Test (description = "TC 19322 Verify The Private Courses Functionality Copy The Recording To Private Course")
+	public void test19322() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

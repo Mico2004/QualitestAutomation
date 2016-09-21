@@ -120,7 +120,7 @@ public class TC21578LoginAsGuestUI {
 		this.driver.quit();
 	}
 
-	@Test
+	@Test (description="TC 21578 Login As GuestUI")
 	public void test21578() throws Exception {
 		//// pre condition
 

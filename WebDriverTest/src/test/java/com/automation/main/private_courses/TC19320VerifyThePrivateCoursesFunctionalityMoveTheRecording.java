@@ -129,8 +129,8 @@ public class TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws InterruptedException
+	@Test (description = "TC 19320 Verify The Private Courses Functionality Move The Recording")
+	public void test19320() throws InterruptedException
 	{
 		// 1. Login as User1 and get the full name of Ab course.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

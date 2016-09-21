@@ -94,13 +94,7 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 	
 
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
-	
+		
 	@AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
@@ -114,9 +108,11 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 15579 Try To Copy Recording While It Is Being Copied")
+	public void test15579() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

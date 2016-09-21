@@ -124,12 +124,6 @@ public class TC15686ValidateTheRecordingNameOfNewRecordingIsDisplayedInBold {
 	}
 
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -139,9 +133,11 @@ public class TC15686ValidateTheRecordingNameOfNewRecordingIsDisplayedInBold {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 15686 Validate The Recording Name Of New Recording Is Displayed In Bold")
+	public void test15686() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Open tegrity "Login page".
 		// 2. Login as an INSTRUCTOR (SuperUser).
 		tegrity.loginCourses("SuperUser");

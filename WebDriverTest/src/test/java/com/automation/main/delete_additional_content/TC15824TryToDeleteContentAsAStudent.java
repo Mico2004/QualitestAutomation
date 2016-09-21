@@ -98,7 +98,7 @@ public class TC15824TryToDeleteContentAsAStudent {
 	}
 
 	@Test (description="TC 15824 Try To Delete Content As A Student")
-	public void loginCourses() throws InterruptedException
+	public void test15824() throws InterruptedException
 	{
 		// 1. Login as Student.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

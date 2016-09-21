@@ -97,12 +97,7 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		this.driver.quit();
 	}
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -111,9 +106,11 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 24764 Copy A Student Recording To ACourse Where Recording With Same Title Exists")
+	public void test24764() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Verify that recordings with same title created both in source and destination courses.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

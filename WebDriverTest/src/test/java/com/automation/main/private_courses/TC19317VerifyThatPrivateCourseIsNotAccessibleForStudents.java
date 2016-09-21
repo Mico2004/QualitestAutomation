@@ -138,8 +138,8 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws InterruptedException
+	@Test (description="TC 19317 Verify That Private Course Is Not Accessible For Students")
+	public void test19317() throws InterruptedException
 	{
 		// 1. Login as User1 and get the full name of Ab course.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

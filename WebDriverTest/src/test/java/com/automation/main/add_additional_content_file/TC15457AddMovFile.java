@@ -115,7 +115,7 @@ public class TC15457AddMovFile {
 	
 	
 	@Test (description="TC 15457 Add Mov File")
-	public void test17929() throws Exception {
+	public void test15457() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testMov.mov";
 		String file_name = "Moshik_testMov.mov";

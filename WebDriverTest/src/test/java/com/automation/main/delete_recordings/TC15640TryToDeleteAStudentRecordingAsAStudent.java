@@ -98,8 +98,8 @@ public class TC15640TryToDeleteAStudentRecordingAsAStudent {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws InterruptedException
+	@Test (description = "TC 15640 Try To Delete A Student Recording As A Student")
+	public void test15640() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

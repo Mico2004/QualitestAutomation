@@ -93,26 +93,6 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 		this.driver.quit();
 	}
 
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("Qualitest Automation ", Utils.getCurrentTime(), "1.0");
-	}
-
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Tests Results";
-		
-	}
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -121,9 +101,10 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException//
+	@Test(description = "TC 22011 Validate Copy Recording Cancel Functionality")
+	public void test22011() throws InterruptedException//
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// 1. Login as User1.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

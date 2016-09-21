@@ -147,8 +147,8 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws Exception
+	@Test (description = "TC 21924 Verify Instructor Permissions Consitrncy On Active Past Public Courses")
+	public void test21924() throws Exception
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
 		wait.until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));

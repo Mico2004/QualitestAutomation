@@ -136,7 +136,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		this.driver.quit();
 	}
 	
-	@Test
+	@Test (description="TC 21597 Validate Menu Bars Functionlity As Guest")
 	public void TC21597() throws Exception {
 		//// pre condition
 

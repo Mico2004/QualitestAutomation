@@ -135,12 +135,6 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 		driver.quit();
 	}
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -150,10 +144,11 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 15446 Validate Expanding Viewing And Collapsing The Chapters")
+	public void test15446() throws Exception
 	{
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as INSTRUCTOR/STUDENT.
 		tegrity.loginCourses("User1");
 		initializeCourseObject();

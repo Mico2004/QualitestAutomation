@@ -129,7 +129,6 @@ public class TC15736ValidateEachTypeOfRecordingIsDisplayedOnTheRightTab {
 	// @Parameters({"web","title"}) in the future
 	@Test
 	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
 	}
 	

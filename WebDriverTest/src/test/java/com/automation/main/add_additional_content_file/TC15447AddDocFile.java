@@ -113,7 +113,7 @@ public class TC15447AddDocFile {
 	
 	
 	@Test (description="TC 15447 Add Doc File")
-	public void test17929() throws Exception {
+	public void test15447() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\additional_file.doc";
 		String file_name = "additional_file.doc";

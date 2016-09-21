@@ -52,7 +52,7 @@ public class TC24762CopyOneStudentRecording {
 		
 		@BeforeClass
 		public void setup() {
-			try {
+		
 
 				System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 				driver = new ChromeDriver();///// MUST FOR TEST TO GET XML
@@ -66,10 +66,7 @@ public class TC24762CopyOneStudentRecording {
 				 "Starting the test: TC24762CopyOneStudentRecording at " + DateToStr, LogAs.PASSED, null);
 			
 			
-			} catch (Exception e) {
-				/// ATUReports.add("Fail Step", LogAs.FAILED, new
-				/// CaptureScreen(ScreenshotOf.DESKTOP));
-			}
+			
 		}
 		/*
 		 * @Test public void testNewLogs() throws AWTException, IOException {
@@ -82,28 +79,15 @@ public class TC24762CopyOneStudentRecording {
 		 * ATUReports.add("Fail step","" ,"",LogAs.FAILED, new CaptureScreen(
 		 * ScreenshotOf.DESKTOP)); }
 		 */
-		private void setAuthorInfoForReports() {
-			ATUReports.setAuthorInfo("McGrawHill Automation ", Utils.getCurrentTime(), "1.0");
-		}
-
-		private void setIndexPageDescription() {
-			ATUReports.indexPageDescription = "Mcgeawhill Verify <br/> <b> UI existence</b>";
-
-		}
-
-		@Test
-		public void testME() {
-			setAuthorInfoForReports();
-			setIndexPageDescription();
-		}
+	
 		
 		@AfterClass
 		public void closeBroswer() {
 			this.driver.quit();
 		}
 
-		@Test
-		public void copyOneRecording() throws InterruptedException {
+		@Test (description="TC 24762 Copy One Student Recording")
+		public void test24762() throws InterruptedException {
 			// 1.load main page chrome
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			// 2.login as instructor

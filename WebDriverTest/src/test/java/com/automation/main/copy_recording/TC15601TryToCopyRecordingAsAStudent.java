@@ -94,12 +94,6 @@ public class TC15601TryToCopyRecordingAsAStudent {
 	}
 
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -109,9 +103,11 @@ public class TC15601TryToCopyRecordingAsAStudent {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException, AWTException
+	@Test(description = "TC 15601 Try To Copy Recording As A Student")
+	public void test15601() throws InterruptedException, AWTException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as Student.
 		tegrity.loginCourses("User4");
 		initializeCourseObject();

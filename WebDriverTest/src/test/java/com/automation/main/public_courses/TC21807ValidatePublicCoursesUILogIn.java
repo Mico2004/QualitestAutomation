@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.text.DateFormat;
 
+import org.apache.xml.dtm.ref.DTMDefaultBaseIterators.DescendantIterator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -134,8 +135,8 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws Exception
+	@Test (description = "TC 21807 Validate Public Courses UI LogIn")
+	public void test21807() throws Exception
 	{
 		// 1. Make sure to two users which are enrolled to the same course, onse as INSTRUCTOR and other as STUDENT (User1 and User4).
 		// 2. Make sure the course is publicly visible (Click on "Manage Course Settings" in the "Course" section).

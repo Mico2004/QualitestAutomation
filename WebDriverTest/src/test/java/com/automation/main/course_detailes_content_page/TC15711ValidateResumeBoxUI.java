@@ -125,13 +125,6 @@ public class TC15711ValidateResumeBoxUI {
 		driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -141,9 +134,11 @@ public class TC15711ValidateResumeBoxUI {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
-	{
+	@Test(description = "TC 15711 Validate Resume Box UI")
+	public void test15711() throws Exception
+	{	
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// Precondition
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

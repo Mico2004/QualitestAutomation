@@ -50,7 +50,7 @@ public class TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings {
 
 	@BeforeClass
 	public void setup() {
-		try {
+	
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 			
@@ -67,10 +67,7 @@ public class TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings {
 			 ATUReports.add("Message window.", "Starting the test: TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings at " + DateToStr,
 			 "Starting the test: TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings at " + DateToStr, LogAs.PASSED, null);
 			
-		} catch (Exception e) {
-			/// ATUReports.add("Fail Step", LogAs.FAILED, new
-			/// CaptureScreen(ScreenshotOf.DESKTOP));
-		}
+		
 
 	}
 	
@@ -80,24 +77,9 @@ public class TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings {
 	}
 
 
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("McGrawHill Automation ", Utils.getCurrentTime(), "1.0");
-	}
-
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "Verify the sorting of courses in Copy window of regular recordings";
-
-	}
 	
-
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
-	
-	@Test
-	public void VerifySortingOfCoursesInCopyWindow() throws Exception
+	@Test (description="TC 17365 Verify Sorting Of Courses In Move Window Of Student Recordings")
+	public void test17365() throws Exception
 	{
 		///1.login page 
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

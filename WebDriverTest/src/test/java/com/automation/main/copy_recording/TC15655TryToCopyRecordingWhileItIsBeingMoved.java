@@ -101,14 +101,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 	public void closeBroswer() {
 		this.driver.quit();
 	}
-
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
+		
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -118,13 +111,11 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
+	@Test(description = "TC 15655 Try To Copy Recording While It Is Being Moved")
 	public void loginCourses() throws InterruptedException
 	{
-		
-	
-		
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

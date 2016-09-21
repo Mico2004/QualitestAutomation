@@ -134,8 +134,8 @@ public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test
-	public void loginCourses() throws InterruptedException
+	@Test (description = "TC 19321 Verify The Private Courses Functionality Delete The Recording")
+	public void test19321() throws InterruptedException
 	{
 		// 1. Login as INSTRUCTOR.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

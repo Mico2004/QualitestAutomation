@@ -108,13 +108,6 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -124,9 +117,11 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test (description="TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists")
+	public void test15593() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
