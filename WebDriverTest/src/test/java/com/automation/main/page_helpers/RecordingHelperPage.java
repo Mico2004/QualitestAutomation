@@ -2537,33 +2537,27 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// This function click on Recorind Task then on Publish in the sub menu
 	public void clickOnRecordingTaskThenPublish() throws InterruptedException {
 
-		waitForVisibility(recording_tasks_button);
-		moveToElementAndClick(recording_tasks_button, driver);
-		for (int i = 0; i < 10; i++) {
-			recording_tasks_button.sendKeys(Keys.TAB);// solution
-			try { // to
-				Thread.sleep(500);
-				publish_button.click(); // solve
-
-				Thread.sleep(1000);
-				if (isElementPresent(By.id("ModalDialogHeader"))) {
-					System.out.println("Publish window displayed");
-					ATUReports.add("Select Recording Tasks -> Publish item.", "Publish window is displayed.",
-							"Publish window is displayed", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				}
-
-				return;
-			} catch (Exception e) {
-
-			}
+		WebElement element=recording_tasks_button;
+		String id="PublishTask";
+		try {
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
+			System.out.println("Delete window displayed");
+			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
 		}
-
-		ATUReports.add("Select Recording Tasks -> Publish item.", "Publish window is displayed.",
-				"Publish window not displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		System.out.println("Publish window not displayed.");
-		Assert.assertTrue(false);
-
 	}
 
 	// This function get target recording name, and target status, and checks if
@@ -2652,7 +2646,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for (int i = 0; i < current_recording_list.size(); i++) {
 			if (current_recording_list.get(i).equals(target_recording)) {
 				clickOnRecordingTitleInIndex(i + 1);
-				clickOnTheFirstCaptherWithOutTheExpand();
+				clickOnTheCaptherWithOutTheExpandOnTheIdnex(i+1);
 				break;
 			}
 		}
@@ -4622,11 +4616,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	}
 	
-	
 	public void clickOnTheFirstCaptherWithOutTheExpand(){
 	
 		try{
-			System.out.println("clickOnFirstVisibleChapter1");
+			System.out.println("clickOnFirstVisibleChapter1");			
 			waitForVisibility(first_video_recording);
 			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
 			System.out.println("clickOnFirstVisibleChapter1");
@@ -4640,7 +4633,28 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				
 		}
 	}
-
+	
+	
+	public void clickOnTheCaptherWithOutTheExpandOnTheIdnex(int index){
+		
+		try{
+			System.out.println("clickOnFirstVisibleChapter1");
+			waitForVisibility(driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[" + Integer.toString(index) + "]/div[2]/div/div[2]/a")));
+			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
+			System.out.println("clickOnFirstVisibleChapter1");
+			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
+		} catch (org.openqa.selenium.TimeoutException e) {
+		
+			System.out.println("clickOnFirstVisibleChapter3");
+			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
+			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
+			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
+				
+		}
+	}
+	
+	
+	
 	public boolean checkIfThereAreRecordingsInTab(){
 		try{
 			Thread.sleep(1500);

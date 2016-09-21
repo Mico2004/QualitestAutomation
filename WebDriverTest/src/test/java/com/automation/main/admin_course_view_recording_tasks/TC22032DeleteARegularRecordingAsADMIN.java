@@ -117,13 +117,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		setAuthorInfoForReports();
 		setIndexPageDescription();
 	}
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
-	}
-	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -132,11 +126,12 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
+	@Test
 	public void loginCourses() throws InterruptedException//
 	{
 		
 		// 1. Login as SuperUser.
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("SuperUser");// log in courses page
 		initializeCourseObject();
 		
