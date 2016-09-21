@@ -285,7 +285,7 @@ public class TC15535CopyOneRecording {
 		course.selectTargetCourse(destination_course_name);
 		
 		//course.course_list.get(1).click();
-		course.selectFirstCourse(record);
+		//course.selectFirstCourse(record);
 		Thread.sleep(1000);
 		
 		record.verifyFirstExpandableRecording();
