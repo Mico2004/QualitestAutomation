@@ -246,8 +246,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 			} else {
 				search_page.verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfoundForAdminDashboard(current_course, target_additional_content_for_the_test);
 			}
-			
-			
+	
 			// 5.3. The file icon is displayed.
 			search_page.verifyLinkIconDisplayedIndexSearchResult(1);
 			

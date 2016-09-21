@@ -732,18 +732,15 @@ public class PlayerPage extends Page {
 
 	// This function delete all bookmarks
 	public void deleteAllBookmark() throws InterruptedException {
-		int index = 1;
-		while (bookmark_list.size() > 0) {
+	
 			for (WebElement we : bookmark_list) {
 				try {     
-				moveToElement(we, driver).perform();
-					Thread.sleep(1000);
-					clickElement(driver.findElement(By.xpath(".//*[@id='BookmarkList']/div[" +Integer.toString(index) + "]/img[3]" )));
+					moveToElementAndPerform(we, driver);
+					clickElementJS(driver.findElement(By.xpath(".//*[@id='BookmarkList']/div/img[3]" )));
 				}catch(Exception Ex) {
 				
 				}
-			}
-		}
+			}	
 	}
 
 	/// The breadcrumb structure is displayed as follows: "> Courses > course
