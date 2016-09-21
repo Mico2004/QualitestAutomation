@@ -292,7 +292,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			////25.navigate back to player then to recordings page
 			driver.navigate().back();
 			player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(0));
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 			driver.navigate().back();
 			Thread.sleep(4000);
@@ -374,20 +374,20 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			Thread.sleep(1000);
 			player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 
-			// Signout
-			player_page.exitInnerFrame();
-			record.signOut();
-			
-			// Unpublic Ab course1. 
-			tegrity.loginCourses("User1");
-							
-			course.selectCourseThatStartingWith("Ab");
-							
-			// Make course public
-			record.clickOnCourseTaskThenCourseSettings();
-			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
-			course_settings.clickOnOkButton();
-				
+//			// Signout
+//			player_page.exitInnerFrame();
+//			record.signOut();
+//			
+//			// Unpublic Ab course1. 
+//			tegrity.loginCourses("User1");
+//							
+//			course.selectCourseThatStartingWith("Ab");
+//							
+//			// Make course public
+//			record.clickOnCourseTaskThenCourseSettings();
+//			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+//			course_settings.clickOnOkButton();
+//				
 			
 			///42.quit
 			System.out.println("Done.");

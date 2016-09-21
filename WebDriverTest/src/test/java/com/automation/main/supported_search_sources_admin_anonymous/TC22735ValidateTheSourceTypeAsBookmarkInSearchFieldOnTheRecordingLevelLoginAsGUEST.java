@@ -230,6 +230,13 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 
 		player_page.returnToCoursesPage(course);
 		course.waitForVisibility(course.first_course_button);
+		
+		//post test delete all the bookmarks
+		course.selectCourseThatStartingWith("Ab");
+		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
+		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.deleteAllBookmark();
+		
 
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
