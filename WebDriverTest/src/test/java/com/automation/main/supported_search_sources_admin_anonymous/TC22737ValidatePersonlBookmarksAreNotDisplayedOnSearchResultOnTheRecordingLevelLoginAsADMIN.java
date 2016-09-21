@@ -106,10 +106,7 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		driver.manage().window().maximize();
-
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		wait = new WebDriverWait(driver, 30);
 		add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 		publish_window = PageFactory.initElements(driver, PublishWindow.class);
@@ -120,7 +117,6 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
-		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
@@ -150,8 +146,6 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 	@Test
 	public void test22693() throws Exception {
 
-		////pre conditions
-
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.waitForVisibility(tegrity.passfield);
@@ -178,6 +172,7 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
         String bookmark_to_add=sdf.format(date);
         Thread.sleep(1000);
+        player_page.deleteAllBookmark();
 		player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
         
         
@@ -220,7 +215,10 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		String to_search=bookmark_to_add;  ///search bookmark
 		player_page.verifySearchReturnEmptyList(to_search);
 		
-///10.quit
+		//post test
+		player_page.deleteAllBookmark();
+		
+		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}

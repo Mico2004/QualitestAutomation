@@ -248,6 +248,12 @@ public class TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevel
 		player_page.returnToAdminPage(admin_dashboard_page);
 		
 		
+		// post test
+		admin_view_course_list.moveToCoursesThroughGet(url);
+		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
+		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.deleteAllBookmark();
+		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}

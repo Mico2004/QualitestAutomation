@@ -104,7 +104,6 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 	}
 
 
-		
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -113,12 +112,14 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 	}
 
 	
+
 	@Test(description = "TC 22032 Delete A Regular Recording As ADMIN")
 	public void loginCourses() throws InterruptedException//
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
 		// 1. Login as SuperUser.
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("SuperUser");// log in courses page
 		initializeCourseObject();
 		

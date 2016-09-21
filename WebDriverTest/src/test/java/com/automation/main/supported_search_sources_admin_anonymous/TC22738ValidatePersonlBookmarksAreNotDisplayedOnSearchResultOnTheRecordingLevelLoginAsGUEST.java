@@ -104,8 +104,6 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		public void setup() {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
-
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 			wait = new WebDriverWait(driver, 30);
@@ -118,7 +116,6 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			course = PageFactory.initElements(driver, CoursesHelperPage.class);
 			confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 			course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
-			wait = new WebDriverWait(driver, 30);
 			move_window = PageFactory.initElements(driver, MoveWindow.class);
 			erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 			admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
@@ -169,8 +166,7 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			// 5.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 
-			///6.add bookmark
-			
+			///6.add bookmark	
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 	        String bookmark_to_add=sdf.format(date);
@@ -214,6 +210,9 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			//  plus +10.The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
 			String to_search=bookmark_to_add;  ///search bookmark
 			player_page.verifySearchReturnEmptyList(to_search);
+			
+			//post test
+			player_page.deleteAllBookmark();
 			
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

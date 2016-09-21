@@ -9,6 +9,8 @@
       <!-- Supported search sources(ADMIN,ANONYMOUS) -->
       <!-- Local pretest -->
         <class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_SupportedSearch"/>
+        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsADMIN" />
+        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsGUEST" />	
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST" /> 
@@ -27,8 +29,7 @@
   
 
  
-      <!-- <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsADMIN" />-->
-     <!--  <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsGUEST" />-->
+
        <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsADMIN" /> -->
        <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TCase22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST" />-->
        <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST" /> -->

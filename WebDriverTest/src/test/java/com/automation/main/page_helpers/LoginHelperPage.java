@@ -54,16 +54,11 @@ public class LoginHelperPage extends Page {
 
 	public LoginHelperPage(WebDriver driver) throws Exception {
 		super(driver);
-		setPageTitle("Tegrity Lecture Capture");
-		/// setPageUrl("https://qualitest4-prod.tegrity.com/#/login");
-		// setPageUrl("https://reg-qabr.tegrity.com/#/login");
-	//	setPageUrl("https://awsserverautomation-perf-1.tegrity.com/#/login");
-	
-		
-		// setPageUrl("https://awsserverautomation-qa-1.tegrity.com/#/login");
-		/// setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University"))););////"https://reg-qabr.tegrity.com/#/login"
-		 setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
-		
+		setPageTitle("Tegrity Lecture Capture");	
+		//setPageUrl("https://awsserverautomation-perf-5.tegrity.com/#/login");
+		// setPageUrl("https://awsserverautomation-qa-1.tegrity.com/#/login");	
+		setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
+
 	}
 
 	public void setUserText(String text) {

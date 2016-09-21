@@ -190,9 +190,14 @@ public class TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 		erp_window.waitForVisibility(erp_window.save_button);
 		erp_window.changeRecordingName(recording_name, confirm_menu);
 
-		// 7.Click on one of the Recording link
-		record.verifyFirstExpandableRecording();
-		record.clickOnTheFirstCaptherWithOutTheExpand();
+		// 7.Click on one of the Recording link that different from the record that we change
+		List<String> recordNames = record.getCourseRecordingList(); 
+		for(String recordName :recordNames ){
+			if(!recordName.equals(recording_name)){
+			record.clickOnTargetRecordingAndOpenItsPlayback(recordName);
+			break;
+			} 
+		}
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 	
