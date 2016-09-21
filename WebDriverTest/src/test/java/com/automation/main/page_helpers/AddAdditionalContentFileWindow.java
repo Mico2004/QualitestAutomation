@@ -4,6 +4,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.sql.Driver;
 
 import org.openqa.selenium.By;
@@ -78,33 +79,19 @@ public class AddAdditionalContentFileWindow extends Page {
 	////// upload additional content
 	public void uploadFile(String path) throws Exception {
 
-		// from here you can use as it wrote
-		path = System.getProperty("user.dir") + path;
+		path = System.getProperty("user.dir") + path;	
+		File dir = new File(path);
+		if(dir.exists()){
+			System.out.println("File is exist.");
+			ATUReports.add("file is exist ", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("File is not exist.");
+			ATUReports.add("File is not exist.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+		// from here you can use as it wrote	
 		select_upload_additional_file.sendKeys(path);
-		//select_upload_additional_file.sendKeys("C:\\Users\\Mickael\\git\\QualitestAutomation\\WebDriverTest\\src\\test\\resources\\additional_file.txt");
-
-//		StringSelection ss = new StringSelection(path);	
-//		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-//		
-//		Robot robot = new Robot();
-//		//focus on the webpage
-//		robot.mouseMove(35,35);
-//
-//		clickElement(driver.findElement(By.id("main")));
-//		//clickElement(driver.findElement(By.id("main")));
-//		Actions builder = new Actions(driver);
-//		builder.moveToElement(driver.findElement(By.id("main"))).build().perform();
-//
-//		builder.click();
-//		// native key strokes for CTRL, V and ENTER keys
-//		robot.keyPress(KeyEvent.VK_CONTROL);
-//		robot.keyPress(KeyEvent.VK_V);
-//		robot.keyRelease(KeyEvent.VK_V);
-//		robot.keyRelease(KeyEvent.VK_CONTROL);
-//		Thread.sleep(5000);
-//		robot.keyPress(KeyEvent.VK_ENTER);
-//		robot.keyRelease(KeyEvent.VK_ENTER);
-
 	}
 
 	/// upload a file by giving its string path
