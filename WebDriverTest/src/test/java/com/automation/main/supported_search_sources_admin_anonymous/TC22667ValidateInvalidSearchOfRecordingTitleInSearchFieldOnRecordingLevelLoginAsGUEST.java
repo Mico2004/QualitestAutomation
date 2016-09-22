@@ -158,6 +158,12 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 			tegrity.loginCourses("User1");
 			course.selectCourseThatStartingWith("Ab");
 			
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsSelected();
+			course_settings.clickOnOkButton();
+			Thread.sleep(1000);
+			
 			record.waitForVisibility(record.checkbox2);
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 			
@@ -168,8 +174,7 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 			record.toEditRecordingPropertiesMenu();
 			erp_window.waitForVisibility(erp_window.save_button);
 			erp_window.changeRecordingName(recording_name, confirm_menu);
-			
-			
+						
 			record.signOut();
 			
 			// 2.login as guest
@@ -207,7 +212,19 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 			}		
 			
 			player_page.verifySearchReturnEmptyList(recording_name);
-				
+			player_page.exitInnerFrame();
+			record.signOut();
+			
+			// Unpublic Ab course1. 
+			tegrity.loginCourses("User1");
+							
+			course.selectCourseThatStartingWith("Ab");
+							
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+			course_settings.clickOnOkButton();
+			
 			
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

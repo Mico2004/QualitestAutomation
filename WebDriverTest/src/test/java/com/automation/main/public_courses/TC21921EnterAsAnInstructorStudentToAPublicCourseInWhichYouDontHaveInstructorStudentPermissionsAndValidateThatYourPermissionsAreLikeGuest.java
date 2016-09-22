@@ -273,7 +273,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			Thread.sleep(1000);
 			
 			// 7. Click on a public course.
-			course.selectCourseThatStartingWith("BAcawsserverautomation-qa-");
+			course.selectCourseThatStartingWith("BAcawsserverautomation");
 			Thread.sleep(1000);
 			
 			// 8. Click on some recording.
