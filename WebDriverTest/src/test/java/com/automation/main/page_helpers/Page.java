@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 
@@ -1236,7 +1237,7 @@ public class Page {
 					.pollingEvery(pooling, TimeUnit.MILLISECONDS);
 			wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(element)));
 		} catch (Exception e) {
-			ATUReports.add("Error", e.getMessage(), LogAs.FAILED, null);
+			ATUReports.add("Error", e.getMessage(), LogAs.WARNING, null);
 		}
 	}
 	
@@ -1246,8 +1247,24 @@ public class Page {
 					.pollingEvery(pooling, TimeUnit.MILLISECONDS);
 			wait.until(ExpectedConditions.visibilityOf(element));
 		} catch (Exception e) {
-			ATUReports.add("Error", e.getMessage(), LogAs.FAILED, null);
+			ATUReports.add("Error", e.getMessage(), LogAs.WARNING, null);
+		}
+	}
+	public void waitForContentOfTabToLoad(String initialCourseText,WebElement element) {
+		try {
+			System.out.println("waitForCoursesFrameToLoad1");
+			String id=element.getAttribute("id");
+			new WebDriverWait(driver, 8).until(
+					ExpectedConditions.not(ExpectedConditions.textToBe(By.id(id), initialCourseText)));
+			System.out.println("waitForCoursesFrameToLoad2");
+		} catch (Exception e) {
+			System.out.println("Catch waitForCoursesFrameToLoad");
+			ATUReports.add("The tab content failed to load: " + e.getMessage(), LogAs.WARNING,
+					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
 		}
 	}
 
+
 }
+
