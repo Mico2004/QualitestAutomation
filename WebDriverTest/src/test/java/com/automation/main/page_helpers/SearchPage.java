@@ -47,7 +47,7 @@ public class SearchPage extends Page {
 	@FindBy(css = ".video-wrap.linkToFocus")public  List<WebElement> video_wrap_link_to_focus_list;
 	@FindBy(css = ".linkToFocus")public  List<WebElement> link_icon_list;
 	@FindBy(css = "#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")public  List<WebElement> breadcrumbs_box_elements_list;
-	
+
 	
 	// This function verify that loading spinner image displayed
 	public void verifyLoadingSpinnerImage() throws InterruptedException {
@@ -310,8 +310,7 @@ public class SearchPage extends Page {
 		System.out.println("Not clicked on target title recording in index: " + index);
 		ATUReports.add("Clicked on target title recording in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	}
-	
-	
+		
 	// This function click on recording title of the chapter of recording in target index
 	public void clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(int index) throws InterruptedException {
 		for(int i=0; i<10; i++) {
@@ -357,9 +356,7 @@ public class SearchPage extends Page {
 		}
 	}
 	
-	
-	// Verify that
-	// The source title in the format as follows: " Source: Link".
+	// Verify that The source title in the format as follows: " Source: Link".
 	public void verifyThatSourceTitleInTheFormatSourceLink() {
 		if(source_titles_list.size()>0) {
 			if(source_titles_list.get(0).getText().equals("Source: Link")) {
@@ -464,7 +461,6 @@ public class SearchPage extends Page {
 		}
 	}
 	
-	
 	//The breadcrumb structure displayed as follows: "> Courses > X results found for: "search_criterion". (X seconds)".
 	public void verfiyBreadcrumbStructureDisplayedAsCoursesXResultsFound(String course_name, String searching_criterion) throws InterruptedException {
 		
@@ -495,9 +491,9 @@ public class SearchPage extends Page {
 		
 	}
 	
-	
 	// Verify that the bookmark icon is displayed in search result in target index
 	public void verifyBookmarkIconDisplayedIndexSearchResult(int index) {
+
 		if(driver.findElements(By.cssSelector(".linkToFocus>.ng-binding")).get(index-1).getCssValue("background-image").contains("icon_assets.png")) {
 			System.out.println("Verifed that bookmark icon displayed in index: " + index);
 			ATUReports.add("Verifed that bookmark icon displayed in index: " + index, "True.", "True.", LogAs.PASSED, null);
@@ -506,4 +502,48 @@ public class SearchPage extends Page {
 			ATUReports.add("Verifed that bookmark icon displayed in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
+	
+	public void verifySearchResultNumberAsWrittenAsAdmin(){
+		
+		// get the number of result from the breadcrumbs
+		String structure_displayed = breadcrumbs_box.getText();	
+		String[] splited_structure_displayed = structure_displayed.split(">");
+		String[] splited_structure_result = splited_structure_displayed[4].trim().split(" ");
+		int resultNumber = Integer.parseInt(splited_structure_result[0]);
+		
+		
+		//get the number of result from list 
+		int list_size =  video_wrap_link_to_focus_list.size();
+		
+		if(resultNumber == list_size){
+			System.out.println("Verifed that the result number is as written at the breadcrumbs.");
+		ATUReports.add("Verifed that the result number is as written at the breadcrumbs.", "True.", "True.", LogAs.PASSED, null);
+		} else {
+		System.out.println("Not Verifed that the result number is as written at the breadcrumbs.");
+		ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}		
+		
+	}
+	
+	public void verifySearchResultNumberAsWrittenAsGust(){
+		
+		// get the number of result from the breadcrumbs
+		String structure_displayed = breadcrumbs_box.getText();	
+		String[] splited_structure_displayed = structure_displayed.split(">");
+		String[] splited_structure_result = splited_structure_displayed[3].trim().split(" ");
+		int resultNumber = Integer.parseInt(splited_structure_result[0]);
+			
+		//get the number of result from list 
+		int list_size =  video_wrap_link_to_focus_list.size();
+		
+		if(resultNumber == list_size){
+			System.out.println("Verifed that the result number is as written at the breadcrumbs.");
+		ATUReports.add("Verifed that the result number is as written at the breadcrumbs.", "True.", "True.", LogAs.PASSED, null);
+		} else {
+		System.out.println("Not Verifed that the result number is as written at the breadcrumbs.");
+		ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}		
+		
+	}
+	
 }
