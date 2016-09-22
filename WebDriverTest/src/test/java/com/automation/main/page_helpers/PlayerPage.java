@@ -135,7 +135,7 @@ public class PlayerPage extends Page {
 	List<WebElement> SearchResultTimes;
 	@FindBy(css= ".SearchResultLocation")
 	List<WebElement> SearchResultlocation;
-	
+
 
 	
 	// This function get as input number of seconds.
@@ -368,12 +368,9 @@ public class PlayerPage extends Page {
 		
 	}
 	
-	
 	public void verifySearchReturnAnyListAsUserOrGuest(String searchString){
 		
 	}
-	
-	
 	
 	public boolean checkThatTheTimeIsValid(String time){
 	
@@ -413,7 +410,6 @@ public class PlayerPage extends Page {
 	
 	}
 	
-
 	public void verifyWebElementIsDisplay(WebElement webelement ){
 		
 		waitForVisibility(webelement);
@@ -439,7 +435,6 @@ public class PlayerPage extends Page {
 		
 	}
 	
-
 	public void verifyPlayersButtonsAndTimeBuffer() {
 		
 		//verify that play button is display
@@ -474,7 +469,6 @@ public class PlayerPage extends Page {
 		
 	}
 	
-
 	// TODO: get video with alert in FireFox and rework on this function.
 	public boolean verifyTimeBufferStatusForXSecAlertVersion(int seconds) throws InterruptedException {
 		try {
@@ -732,15 +726,21 @@ public class PlayerPage extends Page {
 
 	// This function delete all bookmarks
 	public void deleteAllBookmark() throws InterruptedException {
-	
+			
+		if(bookmark_list.size()>0){
 			for (WebElement we : bookmark_list) {
 				try {     
 					moveToElementAndPerform(we, driver);
-					clickElementJS(driver.findElement(By.xpath(".//*[@id='BookmarkList']/div/img[3]" )));
+					WebElement bookmarkDelete = driver.findElement(By.xpath(".//*[@id='BookmarkList']/div/img[3]" ));
+					clickElement(bookmarkDelete);
 				}catch(Exception Ex) {
 				
 				}
-			}	
+			}
+		} else {
+			System.out.println("There no bookmarks here.");
+			ATUReports.add("There no bookmarks here.", "True.", "True.", LogAs.PASSED, null);
+		}
 	}
 
 	/// The breadcrumb structure is displayed as follows: "> Courses > course
@@ -897,7 +897,7 @@ public class PlayerPage extends Page {
 		}
 	}
 	
-	
+	/// return to recordings page
 	public void returnToAdminPage(AdminDashboardPage admin ) {
 		for (String handler : driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
@@ -925,7 +925,6 @@ public class PlayerPage extends Page {
 	}
 	
 	
-
 	/// this function verifies top bar is in top right and under it located the
 	/// search box
 	public void veriySearchBoxLocation() {
@@ -960,9 +959,8 @@ public class PlayerPage extends Page {
 		}
 	}
 
-	/// The breadcrumb structure is displayed as follows: " > Admin Dashboard >
-	/// Courses > course name"
-	public void verifyBreadcrumbsForSearcRecordingAsAdmin(String course_name) { //// checking//// if//// course//// name//// displayed//// and//// the//// word//// "Course"
+	/// The breadcrumb structure is displayed as follows: " > Admin Dashboard > Courses > course name"
+	public void verifyBreadcrumbsForSearcRecordingAsAdmin(String course_name) { // checking if course name displayed and the word "Course"
 		if ((course_name.equals(breadcrumbs_box_elements_list.get(2).getText()))
 				&& (breadcrumbs_box_elements_list.get(1).getText().equals("Courses"))
 				&& (breadcrumbs_box_elements_list.get(0).getText().equals("Admin Dashboard"))) {
@@ -1090,7 +1088,7 @@ public class PlayerPage extends Page {
 		}
 	}
 	
-	
+	/// return to recordings page
 	public void returnToCoursePageByNameAsUserOrGuest(CoursesHelperPage course){
 		
 		for (String handler : driver.getWindowHandles()) {
@@ -1122,7 +1120,6 @@ public class PlayerPage extends Page {
 		
 	}
 	
-
 	//// The search results on a recording level is displayed in the table with
 	//// the columns as follows:"Location", "Time", "Context".
 	public void verifySearchColumns() {
@@ -1216,9 +1213,9 @@ public class PlayerPage extends Page {
 
 	}
 	
-	
 	// This function watch the recording completely
 	public void watchTheRecordingCompletely() throws InterruptedException {
+
 		String pre_time_buffer = time_buffer_status.getText().split("/")[0].trim();
 		boolean looping = true;
 		int seconds = 0;
@@ -1268,4 +1265,30 @@ public class PlayerPage extends Page {
 		System.out.println("Finshed.");
 		
 	}
+	
+	
+	public void verifySearchResultNumberAsWritten(){
+		
+		// get the number of result from the breadcrumbs
+		String structure_displayed  = list_of_results.getText();
+		String[] splited_structure_result = structure_displayed.trim().split(" ");
+		int resultNumber = Integer.parseInt(splited_structure_result[0]);
+			
+		//get the number of result from list 
+		if(SearchResultlocation.size() == SearchResultTimes.size() && SearchResultTimes.size() == SearchResultContext.size() )
+			System.out.println("Verifed that the lists size are equal.");
+		
+		int list_size =  SearchResultlocation.size();
+	
+		if(resultNumber == list_size){
+			System.out.println("Verifed that the result number is as written at the breadcrumbs.");
+		ATUReports.add("Verifed that the result number is as written at the breadcrumbs.", "True.", "True.", LogAs.PASSED, null);
+		} else {
+		System.out.println("Not Verifed that the result number is as written at the breadcrumbs.");
+		ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}		
+		
+	}
+	
+	
 }
