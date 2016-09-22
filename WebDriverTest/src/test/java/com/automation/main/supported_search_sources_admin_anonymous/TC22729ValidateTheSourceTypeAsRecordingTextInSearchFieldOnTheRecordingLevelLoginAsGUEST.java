@@ -157,8 +157,14 @@ public class TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 		//2. pre test - move a recording that have text
 		tegrity.loginCourses("User1");
 		String course_name=course.selectCourseThatStartingWith("Ab");
-		String url =  course.getCurrentUrlCoursePage(); 
+		String url =  course.getCurrentUrlCoursePage();
 		
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings.makeSureThatMakeCoursePublicIsSelected();
+		course_settings.clickOnOkButton();
+		Thread.sleep(1000);
+				
 		record.signOut();
 		
 		tegrity.loginCourses("SuperUser");
@@ -243,7 +249,19 @@ public class TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 		//16.click on "Courses" and verify course page
 		player_page.returnToCoursesPage(course);
 		course.waitForVisibility(course.first_course_button);
-
+		player_page.exitInnerFrame();
+		record.signOut();
+		
+		// Unpublic Ab course1. 
+		tegrity.loginCourses("User1");
+						
+		course.selectCourseThatStartingWith("Ab");
+						
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings.clickOnOkButton();
+		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
