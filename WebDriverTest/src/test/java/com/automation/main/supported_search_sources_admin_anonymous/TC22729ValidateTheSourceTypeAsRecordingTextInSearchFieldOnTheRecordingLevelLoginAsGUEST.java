@@ -146,7 +146,7 @@ public class TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 		
 	}
 
-	@Test
+	@Test (description = "TC 22729 Validate The Source Type As Recording Text In Search Field On The Recording Level Login As GUEST")
 	public void test22729() throws Exception {
 
 	

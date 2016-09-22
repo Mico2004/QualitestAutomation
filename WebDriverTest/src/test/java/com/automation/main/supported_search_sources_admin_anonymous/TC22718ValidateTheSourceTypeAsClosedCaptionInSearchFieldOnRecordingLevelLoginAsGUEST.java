@@ -154,7 +154,7 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		"Starting the test: TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecordingLevelLoginAsGUEST at " + DateToStr, LogAs.PASSED, null);	
 	}
 
-	@Test
+	@Test (description = "TC 22718 Validate The Source Type As Closed Caption In Search Field On Recording Level Login As GUEST")
 	public void test22718() throws Exception {
 
 				// 1.load page

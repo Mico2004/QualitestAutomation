@@ -151,7 +151,7 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			
 		}
 
-		@Test
+		@Test (description = "TC 22656 Validate The Source Type As Recording Title In Search Field On Recording Level Login As ADMIN")
 		public void test22656() throws Exception {
 
 			// 1.load page

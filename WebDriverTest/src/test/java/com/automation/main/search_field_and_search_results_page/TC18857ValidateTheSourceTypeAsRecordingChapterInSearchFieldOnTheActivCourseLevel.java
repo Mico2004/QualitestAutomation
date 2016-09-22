@@ -119,16 +119,9 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -138,11 +131,12 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 18857 Validate TheSource Type As Recording Chapter In Search Field On The Activ Course Level")
+	public void test18857() throws Exception
 	{
 		// 1. Validate there is recording in this course. Search input specified shall be case-insensitive.
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
 		

@@ -127,16 +127,9 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -146,9 +139,11 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 18842 Validate The Source Type As File In Search Field On The Course Level")
+	public void test18842() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Validate there is file in this course. Search input specified shall be case-insensitive.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

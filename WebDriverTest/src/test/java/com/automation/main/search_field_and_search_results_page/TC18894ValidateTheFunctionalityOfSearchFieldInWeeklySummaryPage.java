@@ -101,14 +101,12 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
-
 
 	// @Parameters({"web","title"}) in the future
 	@Test
 	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
 	}
 	
@@ -120,9 +118,11 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 18894 Validate The Functionality Of Search Field In Weekly Summary Page")
+	public void test18894() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Validate there is recording in this course.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

@@ -105,16 +105,9 @@ public class TC18895ValidateTheFunctionalityOfSearchFieldInDetailedReportsPage {
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -124,9 +117,11 @@ public class TC18895ValidateTheFunctionalityOfSearchFieldInDetailedReportsPage {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 18895 Validate The Functionality Of Search Field In Detailed Reports Page")
+	public void test18895() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Validate there is recording in this course.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

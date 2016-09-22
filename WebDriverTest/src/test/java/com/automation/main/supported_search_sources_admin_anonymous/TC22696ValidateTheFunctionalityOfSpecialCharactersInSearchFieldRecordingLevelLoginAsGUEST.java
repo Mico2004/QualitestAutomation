@@ -145,8 +145,8 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 				
 	}
 
-	@Test
-	public void test22662() throws Exception {
+	@Test (description = "TC 22696 Validate The Functionality Of Special Characters In Search Field Recording Level Login As GUEST")
+	public void test22696() throws Exception {
 
 	
         String recording_name="\\/[]:;|=,+*?<>";

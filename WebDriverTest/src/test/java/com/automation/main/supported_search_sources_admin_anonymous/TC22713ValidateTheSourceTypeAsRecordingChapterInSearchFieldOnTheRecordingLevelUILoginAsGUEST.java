@@ -142,8 +142,8 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			driver.quit();
 		}
 		
-		@Test
-		public void test22662() throws Exception {
+		@Test (description = "TC 22713 Validate The Source Type As Recording Chapter In Search Field On The Recording Level UI Login As GUEST")
+		public void test22713() throws Exception {
 
 			////pre conditions
 

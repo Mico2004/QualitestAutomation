@@ -149,8 +149,8 @@ public class TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLe
 			"Starting the test: TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST at " + DateToStr, LogAs.PASSED, null);	
 		}
 
-		@Test
-		public void test22662() throws Exception {
+		@Test (description = "TC 22663 Validate Source Type As Recording Title In Search Field On Recording Level Login As GUEST")
+		public void test22663() throws Exception {
 
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

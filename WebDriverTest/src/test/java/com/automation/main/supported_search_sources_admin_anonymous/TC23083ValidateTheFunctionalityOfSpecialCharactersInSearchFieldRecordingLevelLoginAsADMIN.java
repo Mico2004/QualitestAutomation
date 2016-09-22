@@ -147,8 +147,8 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 			"Starting the test: TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldRecordingLevelLoginAsADMIN at " + DateToStr, LogAs.PASSED, null);
 		}
 
-		@Test
-		public void test22662() throws Exception {
+		@Test (description = "TC 23083 Validate The Functionality Of Special Characters In Search Field Recording Level Login As ADMIN")
+		public void test23083() throws Exception {
 
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
