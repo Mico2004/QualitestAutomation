@@ -167,6 +167,7 @@ public class TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNot
 
 		// 6. Validate the login as guest button is not displayed.
 		// 7. The login as guest button is not displayed.
+		
 		tegrity.verifyThatLoginAsGuestButtonNotDisplayed();
 		
 		// 8. The "Some courses may allow guest access" text is not displayed.

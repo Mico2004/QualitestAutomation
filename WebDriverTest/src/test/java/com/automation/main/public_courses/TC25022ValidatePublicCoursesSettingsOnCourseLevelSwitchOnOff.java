@@ -145,6 +145,8 @@ public class TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff {
 		// 1. Make sure to have two users which are enrolled to the same course (abc), first as INSTRUCTOR (User1) and the other as STUDENT (User4).
 		// 2. Log in as INSTRUCTOR.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+				
+		
 		
 		//pretest make sure that the public is visable
 		tegrity.loginAdmin("Admin");	
