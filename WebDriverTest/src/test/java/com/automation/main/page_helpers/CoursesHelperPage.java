@@ -106,6 +106,8 @@ public class CoursesHelperPage extends Page {
 	public List<WebElement> new_recordings_title_and_number_of_new_recordings;
 	@FindBy(id = "CoursesHeading")
 	WebElement courses_heading;
+	@FindBy(id="CourseFrame1")
+	WebElement courseFrame;
 	public ConfirmationMenu confirm_menu;
 	public LoginHelperPage tegrity;
 	
@@ -383,9 +385,11 @@ public class CoursesHelperPage extends Page {
 	// This function click on past courses tab button
 	public void clickOnPastCoursesTabButton() {
 		try {
-			past_courses_tab_button.click();
-			fluentWaitInvisibility(first_course_button, 10, 150);
-			fluentWaitVisibility(first_course_button, 10, 400);
+			String initialCourseText=courseFrame.getText();
+			past_courses_tab_button.click();			
+			waitForContentOfTabToLoad(initialCourseText,courseFrame);
+			//fluentWaitInvisibility(first_course_button, 10, 150);
+			//fluentWaitVisibility(first_course_button, 10, 400);
 			WebElement tabParent=past_courses_tab_button.findElement(By.xpath(".."));
 			wait.until(ExpectedConditions.attributeContains(tabParent, "class", "active"));	
 			Thread.sleep(2000);
@@ -762,9 +766,11 @@ public class CoursesHelperPage extends Page {
 	public void clickOnPublicCoursesTab() {
 		try {
 			waitForVisibility(public_courses_tab);
-			public_courses_tab.click();			
-			fluentWaitInvisibility(first_course_button, 10, 150);
-			fluentWaitVisibility(first_course_button, 10, 500);
+			String initialCourseText=courseFrame.getText();
+			public_courses_tab.click();						
+			waitForContentOfTabToLoad(initialCourseText,courseFrame);
+		//	fluentWaitInvisibility(first_course_button, 5, 100);
+			//fluentWaitVisibility(first_course_button, 10, 500);
 			WebElement tabParent=public_courses_tab.findElement(By.xpath(".."));			
 			wait.until(ExpectedConditions.attributeContains(tabParent, "class", "active"));
 			System.out.println("Clicked on public courses tab.");
@@ -1707,5 +1713,6 @@ public class CoursesHelperPage extends Page {
 
 		return target_course;
 	}
+
 
 }
