@@ -5,7 +5,7 @@
     <classes>
 
 		
-	    <!-- Some Tests are missing! -->
+	   
       <!-- Supported search sources(ADMIN,ANONYMOUS) -->
       <!-- Local pretest -->
         <class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_SupportedSearch"/>
