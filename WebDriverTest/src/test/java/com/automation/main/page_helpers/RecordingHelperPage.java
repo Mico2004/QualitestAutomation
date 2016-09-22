@@ -474,7 +474,14 @@ public class RecordingHelperPage extends Page {
 
 	// This function return first recording title
 	public String getFirstRecordingTitle() {
-		wait.until(ExpectedConditions.visibilityOf(first_recording_title));
+		try{
+			wait.until(ExpectedConditions.visibilityOf(first_recording_title));
+		}catch (Exception e){
+			ATUReports.add("Timeout for first recording", e.getMessage(),
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
+			Assert.assertTrue(false);
+			return null;
+		}
 		return first_recording_title.getText();
 	}
 	
@@ -568,6 +575,7 @@ public class RecordingHelperPage extends Page {
 		try {
 			System.out.println("clickOnRecordingTaskThen1");
 			waitForVisibility(element);
+			System.out.println("Afterwait");
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("course_settings displayed");
 			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",

@@ -384,6 +384,8 @@ public class CoursesHelperPage extends Page {
 	public void clickOnPastCoursesTabButton() {
 		try {
 			past_courses_tab_button.click();
+			fluentWaitInvisibility(first_course_button, 10, 150);
+			fluentWaitVisibility(first_course_button, 10, 400);
 			WebElement tabParent=past_courses_tab_button.findElement(By.xpath(".."));
 			wait.until(ExpectedConditions.attributeContains(tabParent, "class", "active"));	
 			Thread.sleep(2000);
@@ -412,6 +414,7 @@ public class CoursesHelperPage extends Page {
 	// This function get string that some course starting with, and select that
 	// course.
 	public String selectCourseThatStartingWith(String name_starting_with) throws InterruptedException {	
+	try{	
 		Thread.sleep(1000);
 		System.out.println("select1");
 	    List<String> course_list = getCourseList();
@@ -440,6 +443,12 @@ public class CoursesHelperPage extends Page {
 		}
 
 		return target_course_name;
+	}catch (Exception e){
+		ATUReports.add("Selecting a course failed (screenshot)", e.getMessage(),
+				LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
+		Assert.assertTrue(false);
+		return null;
+	}
 	}
 
 	// This function get two courses (starting with), first the source, second
@@ -754,7 +763,9 @@ public class CoursesHelperPage extends Page {
 		try {
 			waitForVisibility(public_courses_tab);
 			public_courses_tab.click();			
-			WebElement tabParent=public_courses_tab.findElement(By.xpath(".."));
+			fluentWaitInvisibility(first_course_button, 10, 150);
+			fluentWaitVisibility(first_course_button, 10, 500);
+			WebElement tabParent=public_courses_tab.findElement(By.xpath(".."));			
 			wait.until(ExpectedConditions.attributeContains(tabParent, "class", "active"));
 			System.out.println("Clicked on public courses tab.");
 			ATUReports.add("Clicked on public courses tab.", "True.", "True.", LogAs.PASSED, null);
@@ -1569,6 +1580,7 @@ public class CoursesHelperPage extends Page {
 
 	// This function verify that target course is not exist in Public Courses
 	public void verifyThatTargetCourseIsNotExistInPublicCourses(String target_course) throws InterruptedException {
+	try{
 		if (!public_courses_tab.isDisplayed()) {
 			System.out.println("Verified that target course is not exist in Public Courses.");
 			ATUReports.add("Verified that target course is not exist in Public Courses.", "True.", "True.",
@@ -1582,6 +1594,11 @@ public class CoursesHelperPage extends Page {
 			Thread.sleep(3000);
 			verifyCourseNotExist(target_course);
 		}
+	}catch (Exception e){
+		ATUReports.add("Error", e.getMessage(),	LogAs.FAILED, null);
+		
+		
+	}
 	}
 
 	// This function get two courses (starting with), first the source, second
