@@ -23,19 +23,20 @@
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST" />
+        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMINN" /> 
+      	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST" /> 
+         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsADMIN" />
+      <class name="com.automation.main.supported_search_sources_admin_anonymous.TCase22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST" />
+      <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST" />
+        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST" />   
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN" />
     
   
 
  
 
-       <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsADMIN" /> -->
-       <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TCase22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST" />-->
-       <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST" /> -->
  
-       <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMINN" /> -->
-       <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST" /> -->
+   
      <!--  <class name="com.automation.main.supported_search_sources_admin_anonymous.TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldRecordingLevelLoginAsADMIN" />-->
      <!--  <class name="com.automation.main.supported_search_sources_admin_anonymous.TCase22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldRecordingLevelLoginAsGUEST" />-->
        <!-- Compilation error <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTheRecordingLevelAsADMIN" /> -->

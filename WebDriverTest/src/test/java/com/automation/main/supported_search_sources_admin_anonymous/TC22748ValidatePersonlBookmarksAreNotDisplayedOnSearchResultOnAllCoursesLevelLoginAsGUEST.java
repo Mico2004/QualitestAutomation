@@ -11,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.automation.main.page_helpers.AddAdditionalContentFileWindow;
@@ -41,18 +40,14 @@ import com.automation.main.page_helpers.PlayerPage;
 import com.automation.main.page_helpers.PublishWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.RunDiagnosticsPage;
+import com.automation.main.page_helpers.SearchPage;
+import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
-import atu.testng.reports.listeners.ATUReportsListener;
-import atu.testng.reports.listeners.ConfigurationListener;
-import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 
-
-
-@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST {
+public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST {
 	// Set Property for ATU Reporter Configuration
 	{
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
@@ -96,18 +91,15 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 	String instructor1;
 	String instructor2;
 	List<String> for_enroll;
+	public TopBarHelper top_bar_helper;
+	public SearchPage search_page;
 
-	@AfterClass
-	public void closeBroswer() {
-	
-		this.driver.quit();
-	}
-	
 	@BeforeClass
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		
+
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		wait = new WebDriverWait(driver, 30);
@@ -138,96 +130,108 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 		help_page = PageFactory.initElements(driver, HelpPage.class);
 		run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
+		search_page = PageFactory.initElements(driver, SearchPage.class);
 		admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
-		System.out.println("Starting the test: TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST at " + DateToStr);
-		ATUReports.add("Message window.", "Starting the test: TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST at " + DateToStr,
-		"Starting the test: TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST at " + DateToStr, LogAs.PASSED, null);	
+		System.out.println("Starting the test: TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST at " + DateToStr);
+		ATUReports.add("Message window.", "Starting the test: TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST at " + DateToStr,
+		"Starting the test: TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST at " + DateToStr, LogAs.PASSED, null);	
 	}
-
-	@Test
-		public void test22667() throws Exception {
-
-	        // 1.load page
-			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-			tegrity.waitForVisibility(tegrity.passfield);
-			
-			//pre test - edit the second chapter name to be unique
-			tegrity.loginCourses("User1");
-			course.selectCourseThatStartingWith("Ab");
-			
-			// Make course public
-			record.clickOnCourseTaskThenCourseSettings();
-			course_settings.makeSureThatMakeCoursePublicIsSelected();
-			course_settings.clickOnOkButton();
-			Thread.sleep(1000);
-			
-			record.waitForVisibility(record.checkbox2);
-			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
-			
-			Date date = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-	        String recording_name="ChapterNewName" + sdf.format(date);
-			
-			record.toEditRecordingPropertiesMenu();
-			erp_window.waitForVisibility(erp_window.save_button);
-			erp_window.changeRecordingName(recording_name, confirm_menu);
-						
-			record.signOut();
-			
-			// 2.login as guest
-			tegrity.loginAsguest();
-			
-			//3.Select a course
-			course.waitForVisibility(course.first_course_button);
-			String course_name=	course.selectCourseThatStartingWith("Ab");
-			
-			///4.Click on one of the Recording link
-		 
-			record.waitForVisibility(record.recordings_tab);
-			Thread.sleep(2000);
-			record.convertRecordingsListToNames();
-			record.verifyFirstExpandableRecording();
-			record.clickOnTheFirstCaptherWithOutTheExpand();		
-			// 8.Select the Recording by clicking on one of the chapters
-			player_page.verifyTimeBufferStatusForXSec(2);// check source display
-			
-			for (String handler : driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
-				break;		
-			}
-			System.out.println(player_page.breadcrumbs_box_elements_list.get(0));
-			
-		   /// 9.Enter invalid "Recording Title" in the search field and press ENTER
-			player_page.verifySearchReturnEmptyList("asdasfasffafa");
 	
-			/// 10.Enter a "Recording Title" of another Recording from the same
-		    /// course and press ENTER
+	@AfterClass
+	public void closeBroswer() {
+	
+		driver.quit();
+	}
+	
+	@Test
+	public void test22746() throws Exception {
+
+		// 1.load page
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		String url_topass = tegrity.pageUrl;
+		/// 2.login as user1
+		tegrity.loginCourses("User1");
+		course.waitForVisibility(course.active_courses_tab_button);
+
+		// 3.click on course
+		String course_name = course.selectCourseThatStartingWith("Ab");
 		
-			for(String handler: driver.getWindowHandles()){
-				driver.switchTo().window(handler);
-				break;
-			}		
-			
-			player_page.verifySearchReturnEmptyList(recording_name);
-			player_page.exitInnerFrame();
-			record.signOut();
-			
-			// Unpublic Ab course1. 
-			tegrity.loginCourses("User1");
-							
-			course.selectCourseThatStartingWith("Ab");
-							
-			// Make course public
-			record.clickOnCourseTaskThenCourseSettings();
-			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
-			course_settings.clickOnOkButton();
-			
-			
-			System.out.println("Done.");
-			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
-			
-			}
+		 // 4.to course settings
+		 record.waitForVisibility(record.course_tasks_button);
+		 record.toCourseSettingsPage();
+		 
+		
+		 // 5.verify checked visibility of course(make it public)
+		 course_settings.checkCourseVisibility();
+		 Thread.sleep(2000);
+		 course_settings.signOut();
+		
+		
+		tegrity.waitForVisibility(tegrity.passfield);
+		// 6.login as student
+		tegrity.loginCourses("User4");
+		course.waitForVisibility(course.first_course_button);
+
+		//7 take course being copied to name and then return
+		course.selectCourseByName(course_name);
+		record.waitForVisibility(record.first_recording);
+
+		//8.Click on the recording's title.
+		record.verifyFirstExpandableRecording();
+
+		///9.Click on the first chapter
+		record.clickOnTheFirstCaptherWithOutTheExpand();
+		// 10.Select the Recording by clicking on one of the chapters
+		player_page.verifyTimeBufferStatusForXSec(2);// check source display
+
+		///11.add bookmark
+
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+		String bookmark_to_add=sdf.format(date);
+		Thread.sleep(1000);
+		player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
+
+
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+		}
+		/// 12.sign out super user
+		record.signOut();
+		Thread.sleep(1000);
+		tegrity.waitForVisibility(tegrity.passfield);
+
+		// 13.login as guest
+		tegrity.loginAsguest();
+		course.waitForVisibility(course.sign_out);
+		
+		///16.The "Bookmark" is not displayed on the search results 
+		String to_search=bookmark_to_add;  ///search bookmark
+		// 17. Search some "Recording Chapter" and press ENTER.
+		top_bar_helper.searchForTargetText(to_search);		
+		Thread.sleep(1000);
+		// verify that we got bookmark and one result
+		search_page.verifySearchResultIsEmpty();
+
+		record.signOut();
+		
+		tegrity.loginCourses("User4");
+		course.selectCourseThatStartingWith("Ab");
+		//3.Click on the recording's title.
+		record.verifyFirstExpandableRecording();
+
+		///4.Click on the first chapter
+		record.clickOnTheFirstCaptherWithOutTheExpand();
+		// 5.Select the Recording by clicking on one of the chapters
+		player_page.verifyTimeBufferStatusForXSec(2);// check source display
+		// 6. delete bookmarks
+		player_page.deleteAllBookmark();
+
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+	}
 }

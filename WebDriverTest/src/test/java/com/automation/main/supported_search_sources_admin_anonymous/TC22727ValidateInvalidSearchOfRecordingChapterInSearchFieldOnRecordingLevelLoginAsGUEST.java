@@ -17,6 +17,7 @@ import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdvancedServiceSettingsPage;
 import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
+import com.automation.main.page_helpers.CourseSettingsPage;
 import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
@@ -72,6 +73,7 @@ public class TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
 	public AddAdditionalContentFileWindow add_additional_content_window;
 	public AdvancedServiceSettingsPage advanced_services_setting_page;
+	public CourseSettingsPage course_settings;
 	public PlayerPage player_page;
 	String instructor1;
 	String instructor2;
@@ -98,6 +100,7 @@ public class TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);	
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
+		course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
 		System.out.println("Starting the test: TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsGUEST at " + DateToStr);
@@ -122,6 +125,12 @@ public class TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 						
 		//2.1 take course being copied to name and then return
 		String course_name=course.selectCourseThatStartingWith("Ab");
+		
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings.makeSureThatMakeCoursePublicIsSelected();
+		course_settings.clickOnOkButton();
+		Thread.sleep(1000);
 			
 		record.waitForVisibility(record.checkbox2);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
@@ -167,6 +176,19 @@ public class TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		/// 9.Enter a "Recording Title" of another Recording from the same
 		/// course and press ENTER
 		player_page.verifySearchReturnEmptyList(recording_name);
+		player_page.exitInnerFrame();
+		record.signOut();
+		
+		// Unpublic Ab course1. 
+		tegrity.loginCourses("User1");
+						
+		course.selectCourseThatStartingWith("Ab");
+						
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings.clickOnOkButton();
+			
 		//10.quit
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

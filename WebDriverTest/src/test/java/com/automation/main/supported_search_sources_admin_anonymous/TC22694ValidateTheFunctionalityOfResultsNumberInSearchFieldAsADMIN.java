@@ -1,7 +1,6 @@
 package com.automation.main.supported_search_sources_admin_anonymous;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.AddAdditionalContentFileWindow;
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
@@ -41,18 +38,14 @@ import com.automation.main.page_helpers.PlayerPage;
 import com.automation.main.page_helpers.PublishWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.RunDiagnosticsPage;
+import com.automation.main.page_helpers.SearchPage;
+import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
-import atu.testng.reports.listeners.ATUReportsListener;
-import atu.testng.reports.listeners.ConfigurationListener;
-import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 
-
-
-@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST {
+public class TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN {
 	// Set Property for ATU Reporter Configuration
 	{
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
@@ -93,34 +86,27 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 	public PlayerPage player_page;
 	public PublishWindow publish_window;
 	public AdminDashboardViewCourseList admin_view_course_list;
+	public SearchPage search_window;
+	public TopBarHelper top_bar_helper;
+	public SearchPage search_page;
 	String instructor1;
 	String instructor2;
 	List<String> for_enroll;
 
-	@AfterClass
-	public void closeBroswer() {
-	
-		this.driver.quit();
-	}
-	
 	@BeforeClass
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		wait = new WebDriverWait(driver, 30);
 		add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 		publish_window = PageFactory.initElements(driver, PublishWindow.class);
-		email_setting = PageFactory.initElements(driver, EmailAndConnectionSettingsPage.class);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
-		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
@@ -135,99 +121,111 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 		email_inbox = PageFactory.initElements(driver, EmailInboxPage.class);
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
-		help_page = PageFactory.initElements(driver, HelpPage.class);
 		run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
+		search_page = PageFactory.initElements(driver, SearchPage.class);
 		admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
-		
+     	
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
-		System.out.println("Starting the test: TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST at " + DateToStr);
-		ATUReports.add("Message window.", "Starting the test: TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST at " + DateToStr,
-		"Starting the test: TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST at " + DateToStr, LogAs.PASSED, null);	
+		System.out.println("Starting the test: TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN at " + DateToStr);
+		ATUReports.add("Message window.", "Starting the test: TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN at " + DateToStr,
+		"Starting the test: TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN at " + DateToStr, LogAs.PASSED, null);	
+	}
+	
+	@AfterClass
+	public void closeBroswer() {
+	
+		driver.quit();
 	}
 
 	@Test
-		public void test22667() throws Exception {
+	public void test22662() throws Exception {
 
-	        // 1.load page
-			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-			tegrity.waitForVisibility(tegrity.passfield);
-			
-			//pre test - edit the second chapter name to be unique
-			tegrity.loginCourses("User1");
-			course.selectCourseThatStartingWith("Ab");
-			
-			// Make course public
-			record.clickOnCourseTaskThenCourseSettings();
-			course_settings.makeSureThatMakeCoursePublicIsSelected();
-			course_settings.clickOnOkButton();
-			Thread.sleep(1000);
-			
-			record.waitForVisibility(record.checkbox2);
-			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
-			
-			Date date = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-	        String recording_name="ChapterNewName" + sdf.format(date);
-			
-			record.toEditRecordingPropertiesMenu();
-			erp_window.waitForVisibility(erp_window.save_button);
-			erp_window.changeRecordingName(recording_name, confirm_menu);
-						
-			record.signOut();
-			
-			// 2.login as guest
-			tegrity.loginAsguest();
-			
-			//3.Select a course
-			course.waitForVisibility(course.first_course_button);
-			String course_name=	course.selectCourseThatStartingWith("Ab");
-			
-			///4.Click on one of the Recording link
-		 
-			record.waitForVisibility(record.recordings_tab);
-			Thread.sleep(2000);
-			record.convertRecordingsListToNames();
-			record.verifyFirstExpandableRecording();
-			record.clickOnTheFirstCaptherWithOutTheExpand();		
-			// 8.Select the Recording by clicking on one of the chapters
-			player_page.verifyTimeBufferStatusForXSec(2);// check source display
-			
-			for (String handler : driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
-				break;		
-			}
-			System.out.println(player_page.breadcrumbs_box_elements_list.get(0));
-			
-		   /// 9.Enter invalid "Recording Title" in the search field and press ENTER
-			player_page.verifySearchReturnEmptyList("asdasfasffafa");
-	
-			/// 10.Enter a "Recording Title" of another Recording from the same
-		    /// course and press ENTER
+		// 1.load page
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
-			for(String handler: driver.getWindowHandles()){
-				driver.switchTo().window(handler);
-				break;
-			}		
+		// 2.login as user1
+		tegrity.waitForVisibility(tegrity.passfield);
+		tegrity.loginCourses("User1");
+					
+		//2.1 take course being copied to name and then return
+		course.waitForVisibility(course.first_course_button);
+		String course_name=course.selectCourseThatStartingWith("Ab");
+		String url =  course.getCurrentUrlCoursePage(); 
+
+		record.signOut();
+		Thread.sleep(1000);
+		tegrity.waitForVisibility(tegrity.passfield);
+		
+		// 2.login as admin
+		tegrity.loginAdmin("Admin");
+		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
+
+		//3.Validate "Allow students to download recordings" option in "Manage Course Settings" from "Courses" section is enable
+		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
+		course_settings.waitForVisibility(course_settings.getOk_button());
+		course_settings.CheckAllowStudentDownload();
+
+
+		// 3.Click on "View Course List" link
+		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
+		Thread.sleep(1500);
+		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
+
+		// 4.verify all courses page
+		admin_view_course_list.verifyAllCoursesPage();
+		// 5.Select a course
+		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
+		admin_view_course_list.moveToCoursesThroughGet(url);
+
+		// 6.Click on one of the Recording link
+		record.waitForVisibility(record.first_recording);
+		Thread.sleep(2000);
+		record.convertRecordingsListToNames();
+		record.convertRecordingsListToRecorderName();
+		String instructor=record.getIndexRecorderNameOfRecording(1);
+		String recording_to_search=record.recording_list_names.get(0);
+		Thread.sleep(3000);
+		
+	    ///7.Search some "Recording Chapter" and press ENTER.
+		top_bar_helper.searchForTargetText(recording_to_search);
+        
+ 
+		///8.Validate the search field is display at the top right of the UI page below the top navigation bar.
+		top_bar_helper.verifySearchFieldDisplayedAtTopRight();
+		Thread.sleep(2000);
 			
-			player_page.verifySearchReturnEmptyList(recording_name);
-			player_page.exitInnerFrame();
-			record.signOut();
-			
-			// Unpublic Ab course1. 
-			tegrity.loginCourses("User1");
-							
-			course.selectCourseThatStartingWith("Ab");
-							
-			// Make course public
-			record.clickOnCourseTaskThenCourseSettings();
-			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
-			course_settings.clickOnOkButton();
-			
-			
-			System.out.println("Done.");
-			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
-			
-			}
+		///10.Validate the number of results that displayed in the breadcrumb is indeed the actual number of results you received.
+		search_page.verifySearchResultNumberAsWrittenAsAdmin();
+	
+	    /////11.cant verify download so skipping straight forward to player and serach there
+		///Click on the result row.
+		search_page.clickOnChapterIconOfRecordingInTargetIndex(1);
+		//12.The Tegrity Player page is opened and the recording start playing from the chapter start time.
+
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+			break;
+		}
+
+		player_page.verifyTimeBufferStatusForXSec(2);// check source display
+
+		for (String handler : driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+			break;
+		}
+
+		//13.search:
+		Thread.sleep(3000);
+		player_page.verifySearchForRecordingExist(recording_to_search);
+	
+		//14.Validate the number of results that displayed in the breadcrumb is indeed the actual number of results you received.
+		player_page.verifySearchResultNumberAsWritten();
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
+	}
 }

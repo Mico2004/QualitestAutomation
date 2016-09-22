@@ -374,20 +374,20 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			Thread.sleep(1000);
 			player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 
-//			// Signout
-//			player_page.exitInnerFrame();
-//			record.signOut();
-//			
-//			// Unpublic Ab course1. 
-//			tegrity.loginCourses("User1");
-//							
-//			course.selectCourseThatStartingWith("Ab");
-//							
-//			// Make course public
-//			record.clickOnCourseTaskThenCourseSettings();
-//			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
-//			course_settings.clickOnOkButton();
-//				
+			// Signout
+			player_page.exitInnerFrame();
+			record.signOut();
+			
+			// Unpublic Ab course1. 
+			tegrity.loginCourses("User1");
+							
+			course.selectCourseThatStartingWith("Ab");
+							
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+			course_settings.clickOnOkButton();
+				
 			
 			///42.quit
 			System.out.println("Done.");
