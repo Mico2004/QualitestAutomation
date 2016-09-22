@@ -7,14 +7,12 @@ import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.AddAdditionalContentFileWindow;
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
@@ -114,11 +112,7 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 		public void setup() {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
-
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
-			wait = new WebDriverWait(driver, 30);
 			add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 			publish_window = PageFactory.initElements(driver, PublishWindow.class);
 			email_setting = PageFactory.initElements(driver, EmailAndConnectionSettingsPage.class);
@@ -232,29 +226,27 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			record.convertRecordingsListToNames();
 			///16.The "Bookmark" is not displayed on the search results 
 			String to_search=bookmark_to_add;  ///search bookmark
-			top_bar_helper.moveToElement(top_bar_helper.search_box_field, driver).perform();
-			Thread.sleep(1000);
-			
-			if(!(driver instanceof InternetExplorerDriver)) {
-				// 8. Set the focus to the field with a mouse pointer.
-				top_bar_helper.search_box_field.click();
-			}
-			
+
 			// 17. Search some "Recording Chapter" and press ENTER.
-			top_bar_helper.searchForTargetText(to_search);
-			
-			List<String> listOfNames = record.getCourseRecordingList();
-			
-			if(listOfNames.size() == 0) {
-				System.out.println("Their aren't records after the search.");
-				ATUReports.add("Their aren't records after the search.", LogAs.PASSED, null);
-				Assert.assertTrue(true);
-			} else {
-				System.out.println("Their are records after the search.");
-				ATUReports.add("Their are records after the search", LogAs.FAILED, null);
-				Assert.assertTrue(false);
-				
-			}
+			top_bar_helper.searchForTargetText(to_search);		
+			Thread.sleep(1000);
+			// verify that we got bookmark and one result
+			search_page.verifySearchResultIsEmpty();
+	
+			//post test
+			record.signOut();
+		
+			tegrity.loginCourses("User4");
+			course.selectCourseThatStartingWith("Ab");
+			//3.Click on the recording's title.
+			record.verifyFirstExpandableRecording();
+
+			///4.Click on the first chapter
+			record.clickOnTheFirstCaptherWithOutTheExpand();
+			// 5.Select the Recording by clicking on one of the chapters
+			player_page.verifyTimeBufferStatusForXSec(2);// check source display
+			// 6. delete bookmarks
+			player_page.deleteAllBookmark();
 			
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
