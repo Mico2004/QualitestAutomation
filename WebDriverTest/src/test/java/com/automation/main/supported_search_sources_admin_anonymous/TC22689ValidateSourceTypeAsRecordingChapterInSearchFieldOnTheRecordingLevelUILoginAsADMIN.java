@@ -160,8 +160,6 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	@Test
 	public void TC22689() throws Exception {
 
-		////pre conditions
-		
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.waitForVisibility(tegrity.passfield);

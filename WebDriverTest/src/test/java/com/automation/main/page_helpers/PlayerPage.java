@@ -134,7 +134,7 @@ public class PlayerPage extends Page {
 	@FindBy(css= ".SearchResultTime")
 	List<WebElement> SearchResultTimes;
 	@FindBy(css= ".SearchResultLocation")
-	List<WebElement> SearchResultlocation;
+	public List<WebElement> SearchResultlocation;
 
 
 	

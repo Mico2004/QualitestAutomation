@@ -407,7 +407,7 @@ public class RecordingHelperPage extends Page {
 		return false;
 	}
 	
-		public void returnToCourseListPage(CoursesHelperPage course) throws InterruptedException {		
+	public void returnToCourseListPage(CoursesHelperPage course) throws InterruptedException {		
 		
 		try{		
 			System.out.println("returnToCourseListPage1");		
@@ -1430,9 +1430,6 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 		}
 		
-
-	
-
 	// verify move menu
 	public void toMoveMenu() throws InterruptedException {
 
