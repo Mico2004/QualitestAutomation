@@ -141,7 +141,7 @@ public class TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN 
 	}
 
 	@Test
-	public void test22662() throws Exception {
+	public void test22694() throws Exception {
 
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

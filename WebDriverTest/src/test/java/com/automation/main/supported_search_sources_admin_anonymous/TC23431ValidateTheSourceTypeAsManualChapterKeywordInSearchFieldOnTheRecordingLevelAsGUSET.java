@@ -199,8 +199,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		record.returnToRecordingPageByClickingBreadcrumbsName(player_page.breadcrumbs_box_elements_list.get(2));
 
 		Thread.sleep(2000);
-        ///9.make course public
-		
+        ///9.make course public	
 		record.toCourseSettingsPage();
 		course_settings.waitForVisibility(course_settings.sign_out);
 		course_settings.checkCourseVisibility();

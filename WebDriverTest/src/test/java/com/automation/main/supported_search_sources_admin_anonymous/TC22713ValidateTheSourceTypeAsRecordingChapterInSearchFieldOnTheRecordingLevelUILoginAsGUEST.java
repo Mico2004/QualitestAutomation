@@ -145,8 +145,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 		@Test
 		public void test22662() throws Exception {
 
-			////pre conditions
-
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			tegrity.waitForVisibility(tegrity.passfield);
@@ -160,15 +158,18 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			course_settings.waitForVisibility(course_settings.getOk_button());
 			course_settings.CheckAllowStudentDownload();
 	
-			admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
-			Thread.sleep(500);
+			admin_dashboard_page.signOut();
+			
+			// make the course public
+			tegrity.loginCourses("User1");
+			course.selectCourseThatStartingWith("Ab");
+			
+			record.clickOnCourseTaskThenCourseSettings();
 			course_settings.makeSureThatMakeCoursePublicIsSelected();
 			course_settings.clickOnOkButton();
-		
-			// 3.Click on sign out
-			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
-			Thread.sleep(1500);
-			admin_dashboard_page.signOut();
+			Thread.sleep(1000);
+			
+			record.signOut();
 			
 			///4. login as guest
 			tegrity.waitForVisibility(tegrity.passfield);
