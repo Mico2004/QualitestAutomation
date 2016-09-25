@@ -147,18 +147,18 @@ public class PostTest {
 				Thread.sleep(1000);
 			}
 		}
-		String [] Keywords={"course"};
+		String [] Keywords={"Temp","Student"};
 		
 		
+		for (String keyword:Keywords){
+			mange_adhoc_course_enrollments.searchAndFilterCourses(keyword);		
+			while(mange_adhoc_course_enrollments.firstCourseIsDisplayed()){
+				System.out.println("while");
+				mange_adhoc_course_enrollments.clickOnFirstCourseDeleteButton();
+				Thread.sleep(1000);
 		
-		mange_adhoc_course_enrollments.searchAndFilterCourses("course");
-		
-		while(mange_adhoc_course_enrollments.firstCourseIsDisplayed()){
-			mange_adhoc_course_enrollments.clickOnFirstCourseDeleteButton();
-			Thread.sleep(1000);
-		
+			}
 		}
-	
 		for(String window: driver.getWindowHandles()) {
 			driver.switchTo().window(window);
 			break;
