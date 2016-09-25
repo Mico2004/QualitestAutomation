@@ -302,8 +302,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			record.verifyWebElementDisplayed(record.delete_button, "Delete");
 			// "Publish" - PublishTask
 			record.verifyWebElementDisplayed(record.publish_button, "Publish");
-			// "Tag" - TagsListTask2
-			//			record.verifyWebElementDisplayed(record.tag_button, "Tag");
+			
 			// "Upload to YouTube" - uploadToYoutube
 			record.verifyWebElementDisplayed(record.upload_to_youtube_button, "Upload to YouTube");
 			// "Request Captions" - requestCaptions
@@ -498,9 +497,8 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			record.verifyWebElementDisplayed(record.delete_button, "Delete");
 			// "Publish" - PublishTask
 			record.verifyWebElementDisplayed(record.publish_button, "Publish");
-			// "Tag" - TagsListTask2
-			if(type_of_course!=0) // tag isn't displayed in past courses
-			record.verifyWebElementDisplayed(record.tag_button, "Tag");
+			// "Tag" - TagsListTask2		
+			record.verifyWebElementNotDisplayed(record.tag_button, "Tag");
 			// "Upload to YouTube" - uploadToYoutube
 			record.verifyWebElementDisplayed(record.upload_to_youtube_button, "Upload to YouTube");
 			// "Request Captions" - requestCaptions
