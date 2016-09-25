@@ -5,32 +5,32 @@
     <classes>
 
 		
-	   
-      <!-- Supported search sources(ADMIN,ANONYMOUS) -->
-      <!-- Local pretest -->
-        <class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_SupportedSearch"/>
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsGUEST" />	
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST" /> 
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMINN" /> 
-      	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST" /> 
-         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsADMIN" />
-      <class name="com.automation.main.supported_search_sources_admin_anonymous.TCase22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST" />
-      <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST" />   
-        <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN" />
+        	<!-- Supported search sources(ADMIN,ANONYMOUS) -->
+           	<!-- Local pretest -->
+           	<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_SupportedSearch"/>
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsADMIN" />
+       		<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsGUEST" />	
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST" /> 
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsADMIN" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecordingLevelLoginAsGUEST" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsGUEST" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsGUEST" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsGUEST" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN" /> 
+      		<class name="com.automation.main.supported_search_sources_admin_anonymous.TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST" /> 
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsADMIN" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST" />
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST" />   
+        	<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN" />
     
+  
   
 
  
