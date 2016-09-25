@@ -148,7 +148,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		///////pre conditions
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
-		String recording_name=sdf.format(date);
+		String recording_name="newChapter" + sdf.format(date);
 		
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

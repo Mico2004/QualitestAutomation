@@ -153,8 +153,18 @@ public class TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLe
 		public void test22663() throws Exception {
 
 			// 1.load page
-			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
 			tegrity.waitForVisibility(tegrity.passfield);
+			tegrity.loginCourses("User1");
+						
+			course.selectCourseThatStartingWith("Ab");
+			
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsSelected();
+			course_settings.clickOnOkButton();
+			Thread.sleep(1000);
+						
 			// 2.login as guest
 			tegrity.loginAsguest();
 			//3.Select a course
@@ -221,7 +231,20 @@ public class TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLe
 			////17.navigate back to player then to recordings page
 			driver.navigate().back();
 			player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(0));
-
+			player_page.exitInnerFrame();
+						
+			record.signOut();
+			// Unpublic Ab course1. 
+			tegrity.loginCourses("User1");
+							
+			course.selectCourseThatStartingWith("Ab");
+							
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+			course_settings.clickOnOkButton();
+			
+			
 
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

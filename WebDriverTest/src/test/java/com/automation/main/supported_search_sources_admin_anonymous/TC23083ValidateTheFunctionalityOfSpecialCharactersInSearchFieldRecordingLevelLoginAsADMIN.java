@@ -7,12 +7,12 @@ import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.AddAdditionalContentFileWindow;
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
@@ -25,6 +25,7 @@ import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
 import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecording;
 import com.automation.main.page_helpers.EmailAndConnectionSettingsPage;
 import com.automation.main.page_helpers.EmailInboxPage;
 import com.automation.main.page_helpers.EmailLoginPage;
@@ -41,7 +42,6 @@ import com.automation.main.page_helpers.PublishWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.RunDiagnosticsPage;
 import com.automation.main.utilities.DriverSelector;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -94,6 +94,7 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		String instructor1;
 		String instructor2;
 		List<String> for_enroll;
+		public EditRecording edit_recording;
 		
 		@AfterClass
 		public void closeBroswer() {
@@ -106,11 +107,7 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		public void setup() {
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			driver.manage().window().maximize();
-
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
-			wait = new WebDriverWait(driver, 30);
 			add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 			publish_window = PageFactory.initElements(driver, PublishWindow.class);
 			email_setting = PageFactory.initElements(driver, EmailAndConnectionSettingsPage.class);
@@ -139,7 +136,7 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 			run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
 			admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
-			
+			edit_recording = PageFactory.initElements(driver, EditRecording.class);
 			Date curDate = new Date();
 			String DateToStr = DateFormat.getInstance().format(curDate);
 			System.out.println("Starting the test: TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldRecordingLevelLoginAsADMIN at " + DateToStr);
@@ -150,8 +147,6 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		@Test (description = "TC 23083 Validate The Functionality Of Special Characters In Search Field Recording Level Login As ADMIN")
 		public void test23083() throws Exception {
 
-			Date date = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 	        String recording_name="\\/[]:;|=,+*?<>";
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -181,13 +176,23 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 			admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
 			admin_view_course_list.moveToCoursesThroughGet(url);
 			/// 6.Click on one of the Recording link
-			record.waitForVisibility(record.checkbox2);
+			record.waitForVisibility(record.checkbox);
+			int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+			record.selectIndexCheckBox(recordNumber);	
+			record.clickOnRecordingTaskThenEditRecording();
+			edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_name);
 			Thread.sleep(1000);
-			record.checkbox2.click();
-			record.toEditRecordingPropertiesMenu();
-			erp_window.waitForVisibility(erp_window.save_button);
-			erp_window.changeRecordingName(recording_name, confirm_menu);
 
+			// explorer is not moving to the page url , we need to logout and login
+			if(driver instanceof InternetExplorerDriver){
+				
+				record.signOut();
+				tegrity.waitForVisibility(tegrity.passfield);
+				tegrity.loginAdmin("Admin");
+				
+			}
+			
+			admin_view_course_list.moveToCoursesThroughGet(url);
 			// 7.Click on one of the Recording link
 			record.verifyFirstExpandableRecording();
 			record.clickOnTheFirstCaptherWithOutTheExpand();
@@ -196,7 +201,6 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display
 		
 			///// to go back to crecording window handler
-			String curr_win=driver.getWindowHandle();	
 			for (String handler : driver.getWindowHandles()) {
 					driver.switchTo().window(handler);
 			break;		
@@ -207,17 +211,31 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 			player_page.verifySearchReturnEmptyList(recording_name);
 		    recording_name="abc?<>";
 			
+		    for (String handler : driver.getWindowHandles()) {
+				driver.switchTo().window(handler);
+				break;		
+		    }
+		    
 		    ///10.return to recording page
-		    player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(2));
+		    player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(0));
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
 		    
 		   ///11.change recording name
-			record.clickCheckBoxByName("\\/[]:;|=,+*?<>");
-			record.toEditRecordingPropertiesMenu();
-			erp_window.waitForVisibility(erp_window.save_button);
-			erp_window.changeRecordingName(recording_name, confirm_menu);
-
+			record.selectIndexCheckBox(recordNumber);	
+			record.clickOnRecordingTaskThenEditRecording();
+			edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_name);
 			// 12.Click on one of the Recording link
+			
+			if(driver instanceof InternetExplorerDriver){
+				
+				record.signOut();
+				tegrity.waitForVisibility(tegrity.passfield);
+				tegrity.loginAdmin("Admin");
+				
+			}
+					
+			admin_view_course_list.moveToCoursesThroughGet(url);
+			
 			record.verifyFirstExpandableRecording();
 			record.clickOnTheFirstCaptherWithOutTheExpand();
 			// 13.Select the Recording by clicking on one of the chapters
@@ -234,10 +252,7 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 			/// ENTER
 			player_page.verifySearchReturnEmptyList(recording_name);
 		    
-		    /// 10.Enter a "Recording Title" of another Recording from the same
-			/// course and press ENTER
-			player_page.verifySearchReturnEmptyList(recording_name);
-		
+
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		}

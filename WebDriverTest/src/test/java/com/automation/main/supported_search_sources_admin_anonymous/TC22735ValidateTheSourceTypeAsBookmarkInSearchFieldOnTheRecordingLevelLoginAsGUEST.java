@@ -158,6 +158,11 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 		String bookmark_for_search = "NewBookmark" + sdf.format(date);
 		
 		course.selectCourseThatStartingWith("Ab");
+		
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings.makeSureThatMakeCoursePublicIsSelected();
+		course_settings.clickOnOkButton();
+		
 		String bookmarked_recording_title = record.getFirstRecordingTitle();
 		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
 		player_page.verifyTimeBufferStatusForXSec(10);
@@ -230,12 +235,26 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 
 		player_page.returnToCoursesPage(course);
 		course.waitForVisibility(course.first_course_button);
+		// Signout
+		player_page.exitInnerFrame();
+		record.signOut();
 		
+		// Unpublic Ab course1. 
+		tegrity.loginCourses("User1");
+						
+		course.selectCourseThatStartingWith("Ab");
+						
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings.clickOnOkButton();
 		//post test delete all the bookmarks
 		course.selectCourseThatStartingWith("Ab");
 		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
 		player_page.verifyTimeBufferStatusForXSec(10);
 		player_page.deleteAllBookmark();
+		
+		
 		
 
 		System.out.println("Done.");

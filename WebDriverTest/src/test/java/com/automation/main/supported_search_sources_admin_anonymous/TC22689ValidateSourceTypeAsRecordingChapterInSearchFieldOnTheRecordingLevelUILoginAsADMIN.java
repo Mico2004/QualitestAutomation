@@ -160,8 +160,6 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	@Test (description = "TC 22689 Validate Source Type As Recording Chapter In Search Field On The Recording Level UI Login As ADMIN")
 	public void TC22689() throws Exception {
 
-		////pre conditions
-		
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.waitForVisibility(tegrity.passfield);
