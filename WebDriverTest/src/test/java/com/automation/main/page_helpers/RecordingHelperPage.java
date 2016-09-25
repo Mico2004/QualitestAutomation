@@ -253,7 +253,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement visibleFirstChapter;
 	@FindBy(css = ".video-thumbnail")
 	List<WebElement> visibleChapters;
-	
+	@FindBy(id="scrollableArea")
+	WebElement TabContainer;
 	
 	
 	public @FindBy(css = ".resume-button.ng-scope>a") List<WebElement> list_of_resume_buttons;
@@ -990,9 +991,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		WebElement element=student_recordings_tab;
 		String id="StudentRecordingsTab";
 		try {
+			String initialText=TabContainer.getText();
 			System.out.println("StudentRecordingsTab1");
 			waitForVisibility(element);
-			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");		
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");	
+			waitForContentOfTabToLoad(initialText,TabContainer);
 			System.out.println("StudentRecordingsTab3");
 			ATUReports.add("Select StudentRecordingsTab -> "+id, id+" was click",
 					id+" was clicked", LogAs.PASSED, null);
@@ -1546,9 +1549,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		String id="AdditionalContentTab";
 		try {
 			System.out.println("AdditionalContentTab1");
+			String initialText=TabContainer.getText();
 			waitForVisibility(element);
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("AdditionalContentTab2");	
+			waitForContentOfTabToLoad(initialText,TabContainer);
 			ATUReports.add("Select additional_content_tab -> "+id, id+" was click",
 					id+" was clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -1653,8 +1658,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			System.out.println("TestsTab1");
 			waitForVisibility(element);
+			String initialText=TabContainer.getText();
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
-			System.out.println("TestsTab2");			
+			System.out.println("TestsTab2");
+			waitForContentOfTabToLoad(initialText,TabContainer);
 			ATUReports.add("Select TestsTab -> "+id, id+" was click",
 					id+" was clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -2456,8 +2463,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		int i=0;
 		while(i<3 && !clicked){
 		try {
+			String initialText=TabContainer.getText();
 			waitForVisibility(recordings_tab);
 			recordings_tab.click();
+			waitForContentOfTabToLoad(initialText,TabContainer);
 			System.out.println("Clicked on recordings tab");
 			ATUReports.add("Clicked on recordings tab", LogAs.PASSED, null);
 			clicked=true;

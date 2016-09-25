@@ -158,7 +158,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		
 		
 	
-	tegrity.loginAdmin("Admin");	
+/*	tegrity.loginAdmin("Admin");	
 	Thread.sleep(3000);
 	
 	//PreTest enable student test +youtube + capition
@@ -201,7 +201,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			driver.switchTo().window(window);
 			break;
 		}
-		mange_adhoc_course_enrollments.signOut();
+		mange_adhoc_course_enrollments.signOut();*/
 		
 		
 		
