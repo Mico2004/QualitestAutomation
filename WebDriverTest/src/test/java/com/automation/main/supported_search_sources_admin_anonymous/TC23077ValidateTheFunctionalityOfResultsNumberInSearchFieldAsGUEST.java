@@ -156,11 +156,22 @@ public class TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST 
 			admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
 			course_settings.waitForVisibility(course_settings.getOk_button());
 			course_settings.CheckAllowStudentDownload();
-
+			
 			// 3.sign out
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 			Thread.sleep(1500);
 			admin_dashboard_page.signOut();
+			
+			//make the course public
+			tegrity.loginCourses("User1");
+			course.selectCourseThatStartingWith("Ab");
+			
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsSelected();
+			course_settings.clickOnOkButton();
+			
+			record.signOut();
            
 			///4.login as guest
 		    tegrity.waitForVisibility(tegrity.passfield);
@@ -214,6 +225,19 @@ public class TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST 
 		
 			//14.Validate the number of results that displayed in the breadcrumb is indeed the actual number of results you received.
 			player_page.verifySearchResultNumberAsWritten();
+			player_page.exitInnerFrame();
+			
+			record.signOut();
+			
+			// Unpublic Ab course1. 
+			tegrity.loginCourses("User1");
+							
+			course.selectCourseThatStartingWith("Ab");
+							
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+			course_settings.clickOnOkButton();
 
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

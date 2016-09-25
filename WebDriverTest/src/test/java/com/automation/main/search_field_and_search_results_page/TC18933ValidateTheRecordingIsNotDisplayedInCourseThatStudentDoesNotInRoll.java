@@ -110,16 +110,9 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -129,9 +122,11 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 18933 Validate The Recording Is Not Displayed In Course That Student Does Not In Roll")
+	public void test18933() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		//make sure that the course Ba will not be public
 		
 		tegrity.loginCourses("User1");

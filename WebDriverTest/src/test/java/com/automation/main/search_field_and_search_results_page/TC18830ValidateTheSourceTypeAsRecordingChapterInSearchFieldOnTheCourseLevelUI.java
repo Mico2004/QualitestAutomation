@@ -102,7 +102,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
 	

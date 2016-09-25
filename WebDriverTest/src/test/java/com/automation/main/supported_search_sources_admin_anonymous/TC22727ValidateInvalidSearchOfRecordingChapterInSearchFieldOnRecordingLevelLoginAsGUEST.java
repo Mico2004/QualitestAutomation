@@ -108,7 +108,7 @@ public class TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		"Starting the test: TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsGUEST at " + DateToStr, LogAs.PASSED, null);	
 	}
 
-	@Test
+	@Test (description = "TC 22727 Validate Invalid Search Of Recording Chapter In Search Field On Recording Level Login As GUEST")
 	public void test22727() throws Exception {
 
 		

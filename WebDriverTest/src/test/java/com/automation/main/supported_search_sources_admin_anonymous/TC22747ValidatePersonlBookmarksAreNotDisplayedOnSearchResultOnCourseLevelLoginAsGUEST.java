@@ -146,17 +146,15 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			
 			Date curDate = new Date();
 			 String DateToStr = DateFormat.getInstance().format(curDate);
-			 System.out.println("Starting the test: TCase22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST at " + DateToStr);
-			 ATUReports.add("Message window.", "Starting the test: TCase22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST at " + DateToStr, "Starting the test: TCase22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST at " + DateToStr, LogAs.PASSED, null);	
+			 System.out.println("Starting the test: TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST at " + DateToStr);
+			 ATUReports.add("Message window.", "Starting the test: TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST at " + DateToStr,
+					 "Starting the test: TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST at " + DateToStr, LogAs.PASSED, null);	
 			
 		}
 
-		@Test
-		public void test22746() throws Exception {
-
-			////pre conditions
-
-			
+		@Test (description = "TC 22747 Validate Personl Bookmarks Are Not Displayed On Search Result On Course Level Login As GUEST")
+		public void test22747() throws Exception {
+				
 			/// pre conditions
 
 			// 1.load page

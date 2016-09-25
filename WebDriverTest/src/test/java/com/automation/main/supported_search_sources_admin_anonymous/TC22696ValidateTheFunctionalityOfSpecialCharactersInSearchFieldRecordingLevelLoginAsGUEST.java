@@ -25,6 +25,7 @@ import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
 import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecording;
 import com.automation.main.page_helpers.EmailAndConnectionSettingsPage;
 import com.automation.main.page_helpers.EmailInboxPage;
 import com.automation.main.page_helpers.EmailLoginPage;
@@ -93,6 +94,7 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 	String instructor1;
 	String instructor2;
 	List<String> for_enroll;
+	public EditRecording edit_recording;
 	
 	@AfterClass
 	public void closeBroswer() {
@@ -136,7 +138,7 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		run_diagnostics = PageFactory.initElements(driver, RunDiagnosticsPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
-		
+		edit_recording = PageFactory.initElements(driver, EditRecording.class);
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
 		System.out.println("Starting the test: TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldRecordingLevelLoginAsGUEST at " + DateToStr);
@@ -145,13 +147,14 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 				
 	}
 
-	@Test
-	public void test22662() throws Exception {
+	@Test (description = "TC 22696 Validate The Functionality Of Special Characters In Search Field Recording Level Login As GUEST")
+	public void test22696() throws Exception {
 
 	
         String recording_name="\\/[]:;|=,+*?<>";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		initializeCourseObject();
 		tegrity.waitForVisibility(tegrity.passfield);
 	
 		// 2.login as user1
@@ -159,16 +162,19 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		course.waitForVisibility(course.sign_out);
 	
 		// 3.Click on course
-		Thread.sleep(1500);
 		String course_name=course.selectCourseThatStartingWith("Ab");
 
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings.makeSureThatMakeCoursePublicIsSelected();
+		course_settings.clickOnOkButton();
+		
 		/// 4.change Recording name
 		record.waitForVisibility(record.getCheckbox());
-		Thread.sleep(1000);
-		record.getCheckbox().click();
-		record.toEditRecordingPropertiesMenu();
-		erp_window.waitForVisibility(erp_window.save_button);
-		erp_window.changeRecordingName(recording_name, confirm_menu);
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);	
+		record.clickOnRecordingTaskThenEditRecording();
+		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_name);
 
 		///5.sign out and login as guest
 		record.waitForVisibility(record.sign_out);
@@ -177,25 +183,21 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		tegrity.loginAsguest();
 		
 		///6.select course by name
-		
 		course.waitForVisibility(course.first_course_button);
-		Thread.sleep(2000);
-		initializeCourseObject();
 		course.selectCourseByName(course_name);
 		
 		// 7.Click on one of the Recording link
 		record.waitForVisibility(record.first_recording);
-		record.verifyFirstExpandableRecording();
-		record.clickOnTheFirstCaptherWithOutTheExpand();
+		record.clickOnRecordingTitleInIndex(recordNumber);
+		record.clickOnTheCaptherWithOutTheExpandOnTheIdnex(recordNumber);
 	
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 	
-		///// to go back to crecording window handler
-		String curr_win=driver.getWindowHandle();	
+		///// to go back to crecording window handler	
 		for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
-		break;		
+				break;		
 		}
 			
 		/// 9.Enter invalid "Recording Title" in the search field and press
@@ -203,8 +205,13 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		player_page.verifySearchReturnEmptyList(recording_name);
 	    recording_name="abc?<>";
 		
+	    for (String handler : driver.getWindowHandles()) {
+					driver.switchTo().window(handler);
+					break;		
+			    }
+	    
 	    ///10.return to recording page
-	    player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(2));
+	    player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(0));
 		player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 	    record.waitForVisibility(record.first_recording);
 	    record.signOut();
@@ -212,20 +219,17 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 	    //11.login as user1
 	    tegrity.waitForVisibility(tegrity.passfield);
 		tegrity.loginCourses("User1");
-		course.waitForVisibility(course.sign_out);
+		
 	
 		// 12.Click on course
-		Thread.sleep(1500);
-		initializeCourseObject();
+		course.waitForVisibility(course.sign_out);
 		course.selectCourseByName(course_name);
 
 		/// 13.change Recording name
 		record.waitForVisibility(record.getCheckbox());
-		Thread.sleep(1000);
-		record.getCheckbox().click();
-		record.toEditRecordingPropertiesMenu();
-		erp_window.waitForVisibility(erp_window.save_button);
-		erp_window.changeRecordingName(recording_name, confirm_menu);
+		record.selectIndexCheckBox(recordNumber);	
+		record.clickOnRecordingTaskThenEditRecording();
+		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_name);
 
 		///14.sign out and login as guest
 		record.waitForVisibility(record.sign_out);
@@ -236,20 +240,12 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		///6.select course by name
 		
 		course.waitForVisibility(course.first_course_button);
-		Thread.sleep(2000);
-		initializeCourseObject();
 		course.selectCourseByName(course_name);
 	    
-	    
-	   ///11.change recording name
-		record.clickCheckBoxByName("\\/[]:;|=,+*?<>");
-		record.toEditRecordingPropertiesMenu();
-		erp_window.waitForVisibility(erp_window.save_button);
-		erp_window.changeRecordingName(recording_name, confirm_menu);
-
+	 
 		// 12.Click on one of the Recording link
-		record.verifyFirstExpandableRecording();
-		record.clickOnTheFirstCaptherWithOutTheExpand();
+		record.clickOnRecordingTitleInIndex(recordNumber);
+		record.clickOnTheCaptherWithOutTheExpandOnTheIdnex(recordNumber);
 		// 13.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 	
@@ -263,7 +259,21 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		///14.Enter invalid "Recording Title" in the search field and press
 		/// ENTER
 		player_page.verifySearchReturnEmptyList(recording_name);
-	    
+	   
+		//make the course unpublic
+		record.signOut();
+		
+		// Make course public
+		tegrity.waitForVisibility(tegrity.passfield);
+		tegrity.loginCourses("User1");
+		
+		// 12.Click on course
+		course.waitForVisibility(course.sign_out);
+		course.selectCourseByName(course_name);
+		
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings.clickOnOkButton();
 
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);		

@@ -109,7 +109,7 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
 	
@@ -121,8 +121,8 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 	}
 
 	
-	@Test(description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 18892 Validate The Functionality Of Search Field In Course Setting Page As Instructor")
+	public void test18892() throws InterruptedException
 	{
 		// 1. Validate there is recording in this course.
 		// 2. Log in as INSTRUCTOR.

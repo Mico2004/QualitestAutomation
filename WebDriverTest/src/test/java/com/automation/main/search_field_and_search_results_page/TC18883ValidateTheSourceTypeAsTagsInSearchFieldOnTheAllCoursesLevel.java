@@ -111,16 +111,9 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -130,9 +123,11 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 18883 Validate The Source Type As Tags In Search Field On The All Courses Level")
+	public void test18883() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// TODO: 1. Validate there is tags in this course. Search input specified shall be case-insensitive.
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
@@ -167,7 +162,7 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		
 		initTest();
-		loadPage();
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		initializeCourseObject();
 		
 		// Looping for Student and Guest

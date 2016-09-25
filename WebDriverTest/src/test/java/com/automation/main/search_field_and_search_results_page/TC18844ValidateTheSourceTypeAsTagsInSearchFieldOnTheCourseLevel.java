@@ -114,16 +114,9 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -133,9 +126,11 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 18844 Validate The Source Type As Tags In Search Field On The Course Level")
+	public void test18844() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// TODO: 1. Validate there is tags in this course. Search input specified shall be case-insensitive.
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
@@ -176,7 +171,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 		
 		initTest();
 		initializeCourseObject();
-		loadPage();
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
 		
 		// Looping for Student, Guest and ADMIN
@@ -325,7 +320,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 //				
 				initTest();
 				initializeCourseObject();
-				loadPage();
+				tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 				tegrity.loginCourses("User1");
 				
 				course.selectCourseThatStartingWith(current_course);
@@ -363,7 +358,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 				
 				initTest();
 				initializeCourseObject();
-				loadPage();
+				tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 				tegrity.loginCourses("User1");
 				
 				course.selectCourseThatStartingWith(current_course);

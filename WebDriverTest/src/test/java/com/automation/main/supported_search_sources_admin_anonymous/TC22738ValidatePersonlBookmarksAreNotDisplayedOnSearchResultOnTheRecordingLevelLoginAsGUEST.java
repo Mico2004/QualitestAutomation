@@ -142,8 +142,8 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			"Starting the test: TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsGUEST at " + DateToStr, LogAs.PASSED, null);	
 		}
 
-		@Test
-		public void test22693() throws Exception {
+		@Test (description = "TC 22738 Validate Personl Bookmarks Are Not Displayed On Search Result On The Recording Level Login As GUEST")
+		public void test22738() throws Exception {
 
 			////pre conditions
 

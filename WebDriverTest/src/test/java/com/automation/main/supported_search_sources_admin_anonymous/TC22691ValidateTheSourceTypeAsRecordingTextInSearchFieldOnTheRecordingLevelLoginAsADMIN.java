@@ -146,8 +146,8 @@ public class TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 			"Starting the test: TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsADMIN at " + DateToStr, LogAs.PASSED, null);	
 		}
 
-		@Test
-		public void test22690() throws Exception {
+		@Test (description = "TC 22691 Validate The Source Type As Recording Text In Search Field On The Recording Level Login As ADMIN")
+		public void test22691() throws Exception {
 
 		
 			// 1.load page

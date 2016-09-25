@@ -116,7 +116,7 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
 	

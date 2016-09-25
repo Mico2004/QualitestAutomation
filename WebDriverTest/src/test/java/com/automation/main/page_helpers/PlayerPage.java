@@ -134,7 +134,7 @@ public class PlayerPage extends Page {
 	@FindBy(css= ".SearchResultTime")
 	List<WebElement> SearchResultTimes;
 	@FindBy(css= ".SearchResultLocation")
-	List<WebElement> SearchResultlocation;
+	public List<WebElement> SearchResultlocation;
 
 
 	
@@ -326,8 +326,8 @@ public class PlayerPage extends Page {
 		for (WebElement e : driver.findElements(By.cssSelector(".SearchResultLocation"))) {			    		
 				String current_element = getTextFromWebElement(e);						
 				if (!current_element.equals("Recording Chapter") && !current_element.equals("Recording Title") ) {
-					System.out.println("Not Verify that the results of the row of location are fine.");
-					ATUReports.add("Not verify that the results of the row of location are fine.", "True.", "false", LogAs.FAILED, null);
+					System.out.println("Not Verify that the results of the row of location are fine." + current_element);
+					ATUReports.add("Not verify that the results of the row of location are fine." + current_element, "True.", "false", LogAs.FAILED, null);
 					break;
 				}
 				i++;

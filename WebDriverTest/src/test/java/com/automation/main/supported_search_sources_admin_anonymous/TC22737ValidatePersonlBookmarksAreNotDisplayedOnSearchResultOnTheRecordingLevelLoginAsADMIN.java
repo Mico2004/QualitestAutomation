@@ -143,8 +143,8 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		"Starting the test: TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsADMIN at " + DateToStr, LogAs.PASSED, null);	
 	}
 
-	@Test
-	public void test22693() throws Exception {
+	@Test (description = "TC 22737 Validate Personl Bookmarks Are Not Displayed On Search Result On The Recording Level Login As ADMIN")
+	public void test22737() throws Exception {
 
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
