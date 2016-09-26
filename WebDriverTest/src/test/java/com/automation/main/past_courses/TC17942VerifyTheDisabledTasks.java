@@ -108,8 +108,8 @@ public class TC17942VerifyTheDisabledTasks {
 		this.driver.quit();
 	}
 	
-	@Test
-	public void testUiExistence() throws InterruptedException {
+	@Test (description = "TC 17942 Verify The Disabled Tasks")
+	public void test17942() throws InterruptedException {
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// 2.login as instructor

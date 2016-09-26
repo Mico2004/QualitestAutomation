@@ -113,7 +113,7 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 		this.driver.quit();
 	}
 	
-	@Test
+	@Test (description = "TC 17941 Verify Course Displayed In Active Courses Tab After Instructor Re Enrolled")
 	public void test17941() throws InterruptedException {
 
 		// 1.load page

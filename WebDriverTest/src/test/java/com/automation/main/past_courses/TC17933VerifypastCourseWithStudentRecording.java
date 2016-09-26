@@ -113,8 +113,8 @@ public class TC17933VerifypastCourseWithStudentRecording {
 		this.driver.quit();
 	}
 	
-	@Test (description="17933 - Verify the past course with Student recording")
-	public void test17929() throws Exception {
+	@Test (description="17933 Verify the past course with Student recording")
+	public void test17933() throws Exception {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		user = "user" + sdf.format(date);

@@ -45,14 +45,13 @@ import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
-import atu.testng.reports.listeners.ATUReportsListener;
-import atu.testng.reports.listeners.ConfigurationListener;
-import atu.testng.reports.listeners.MethodListener;
+
+
 import atu.testng.reports.logging.LogAs;
 
 
 
-@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
+
 public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN {
 	// Set Property for ATU Reporter Configuration
 		{
