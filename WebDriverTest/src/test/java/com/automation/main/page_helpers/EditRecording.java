@@ -5,11 +5,14 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -23,6 +26,24 @@ import atu.testng.reports.logging.LogAs;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class EditRecording extends Page {
+	
+	@FindBy(xpath = ".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")
+	public WebElement Breadcrumbs;
+	@FindBy(css = ".btn.btn-primary.btnApply")
+	public WebElement ApplyButton;
+	@FindBy(id = "AddCaptioning")
+	public WebElement AddCaptioningButton;
+	@FindBy(id = "UploadFile")
+	public WebElement UploadFile;
+	@FindBy(id = "NewTitle")
+	public WebElement ChapterName;
+	@FindBy(css= ".optionList>li>a")
+	List<WebElement> listButtons;
+	@FindBy(id = "NewKeyword")
+	public WebElement NewKeywordButton;
+
+	
+	
 	public EditRecording(WebDriver browser) {
 		super(browser);
 		// TODO Auto-generated constructor stub
@@ -56,9 +77,11 @@ public class EditRecording extends Page {
 			break;
 		}
 		
-		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(1));
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
+		record.waitForVisibility(listButtons.get(1));
+		clickElement(listButtons.get(1));
+		clickElement(listButtons.get(1));
+		//driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
+		//driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		
 		System.out.println("The element edit chapter was clicked");
 		ATUReports.add("The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
@@ -66,7 +89,7 @@ public class EditRecording extends Page {
 		
 		Thread.sleep(2000);
 		
-		String name = driver.findElement(By.id("NewTitle")).getAttribute("value");
+		String name = ChapterName.getAttribute("value");
 		
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
@@ -74,8 +97,7 @@ public class EditRecording extends Page {
 		}
 		
 		//return to the course
-	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();
-		
+		clickElement(Breadcrumbs);
 		return name;
 		
 	}
@@ -111,9 +133,9 @@ public class EditRecording extends Page {
 			break;
 		}
 		
-		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(1));
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
+		record.waitForVisibility(listButtons.get(1));
+		clickElement(listButtons.get(1));
+		clickElement(listButtons.get(1));
 		
 		System.out.println("The element edit chapter was clicked");
 		ATUReports.add("The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
@@ -121,11 +143,11 @@ public class EditRecording extends Page {
 		
 		//changing the name of the title
 		Thread.sleep(4000);
-		driver.findElement(By.id("NewTitle")).clear();
-		driver.findElement(By.id("NewTitle")).sendKeys(target_name);
+		ChapterName.clear();
+		ChapterName.sendKeys(target_name);
 		
 		// click on the apply
-		driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
+		clickElement(ApplyButton);
 		Thread.sleep(2000);
 		
 		
@@ -150,7 +172,7 @@ public class EditRecording extends Page {
 		}
 		
 		//return to the course
-	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();
+		clickElement(Breadcrumbs);
 	
 		
 	}
@@ -196,11 +218,11 @@ public class EditRecording extends Page {
 		ATUReports.add("The elementadd caption was clicked", "True.", "True.", LogAs.PASSED, null);
 		
 
-		driver.findElement(By.id("UploadFile")).sendKeys(path);
+		UploadFile.sendKeys(path);
 
 		
 		Thread.sleep(2000);
-		driver.findElement(By.id("AddCaptioning")).click();
+		clickElementJS(AddCaptioningButton);
 		Thread.sleep(1000);
 		
 		System.out.println("The file close caption was added.");
@@ -268,20 +290,19 @@ public class EditRecording extends Page {
 			break;
 		}
 		
-		System.out.println(driver.findElements(By.cssSelector(".optionList>li>a")).get(1).getText());
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
+		record.waitForVisibility(listButtons.get(1));
+		clickElement(listButtons.get(1));
+		clickElement(listButtons.get(1));
 		
 		System.out.println("The element edit chapter was clicked");
 		ATUReports.add("The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
 		
 		Thread.sleep(2000);
 		
-		driver.findElement(By.id("NewTitle")).clear();
-		driver.findElement(By.id("NewTitle")).sendKeys(target_name);
+		ChapterName.clear();
+		ChapterName.sendKeys(target_name);
 		
-		driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
+		clickElement(ApplyButton);
 		Thread.sleep(2000);
 		
 		//click on the ok
@@ -303,7 +324,8 @@ public class EditRecording extends Page {
 		}
 		
 		//return to the course
-	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();	
+		clickElement(Breadcrumbs);
+	 	
 	
 	}
 	
@@ -338,18 +360,18 @@ public class EditRecording extends Page {
 			break;
 		}
 		
-		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(1));
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
+		record.waitForVisibility(listButtons.get(1));
+		clickElement(listButtons.get(1));
+		clickElement(listButtons.get(1));
 		Thread.sleep(2000);
 		
 		System.out.println("The element edit chapter was Clicked");
 		ATUReports.add("The element edit chapter was Clicked.", "True.", "True.", LogAs.PASSED, null);
 		
-		driver.findElement(By.id("NewKeyword")).clear();
-		driver.findElement(By.id("NewKeyword")).sendKeys(target_keyword);
+		NewKeywordButton.clear();
+		NewKeywordButton.sendKeys(target_keyword);
 		
-		driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
+		clickElement(ApplyButton);
 		Thread.sleep(2000);
 		
 		//click on the ok
@@ -370,7 +392,7 @@ public class EditRecording extends Page {
 		}
 		
 		//return to the course
-	    driver.findElement(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")).click();	
+		clickElement(Breadcrumbs);	
 		
 	    System.out.println("Wait the the element edit chapter will click from the list.");
 		ATUReports.add("Wait the the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
