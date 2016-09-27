@@ -105,8 +105,7 @@ public class AddAdditionalContentFileWindow extends Page {
 		System.out.println("file selected successfully");
 		Thread.sleep(2000);
 		verifyAdditionalContentFileNamePriorToSelectButton();/// verify its
-																/// location
-		add_additional_file_button.click();/// add
+		clickElementJS(add_additional_file_button);			/// location
 		verifyProgressBar();
 		confirm.waitForVisibility(confirm.ok_button);
 		confirm.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);
@@ -190,7 +189,7 @@ public class AddAdditionalContentFileWindow extends Page {
 		System.out.println("file selected successfully");
 		Thread.sleep(2000);
 		verifyAdditionalContentFileNamePriorToSelectButton();/// verify its
-		add_additional_file_button.click();
+		clickElementJS(add_additional_file_button);
 	
 
 	}
