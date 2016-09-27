@@ -38,7 +38,7 @@ public class AdvancedServiceSettingsPage extends Page {
 	public WebElement ok;
 	@FindBy(xpath = "//*[@id=\"main\"]/div/div[6]/button[2]")
 	public WebElement cancel;
-	@FindBy(xpath="//*[@id='main']/div/div[4]/div[1]/label/input")
+	@FindBy(xpath=".//*[@id='main']//label/input[@ng-change='changeStudentTestingMode()']")
 	public WebElement enable_student_testing_checkbox;
 	
 	@FindBy(xpath=".//*[@id='main']/div/div[1]/div[1]/label/input")
@@ -166,9 +166,8 @@ public class AdvancedServiceSettingsPage extends Page {
 	}
 
 	public void enableStudyTestingCheckboxAndClickOk(ConfirmationMenu confirm){
-		waitForVisibility(enable_student_testing_checkbox);
-		
 		try {
+			waitForVisibility(enable_student_testing_checkbox);	
 			if (!enable_student_testing_checkbox.isSelected()) {
 				enable_student_testing_checkbox.click();
 				ok.click();
@@ -186,7 +185,7 @@ public class AdvancedServiceSettingsPage extends Page {
 			}
 		} catch (Exception e) {
 			System.out.println("failed clicking on student testing checkbox");
-			ATUReports.add("Click student testing checkbox", "student testing checkbox status", "Success select", "failed select",
+			ATUReports.add("Click student testing checkbox", "student testing checkbox status", "Success select", "failed select"+e.getMessage(),
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
