@@ -103,16 +103,9 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -122,9 +115,11 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 18937 Validate The Functionality Of Special Characters In Search Field")
+	public void test18937() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Validate there is recording in this course. 
 		// Login as User1
 		// Copy one recording to Ba

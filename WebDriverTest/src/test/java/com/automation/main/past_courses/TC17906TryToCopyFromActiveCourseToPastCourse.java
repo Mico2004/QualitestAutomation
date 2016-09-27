@@ -2,6 +2,8 @@ package com.automation.main.past_courses;
 
 
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -76,6 +78,13 @@ public class TC17906TryToCopyFromActiveCourseToPastCourse {
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC17906TryToCopyFromActiveCourseToPastCourse at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC17906TryToCopyFromActiveCourseToPastCourse at " + DateToStr,
+		 "Starting the test: TC17906TryToCopyFromActiveCourseToPastCourse at " + DateToStr, LogAs.PASSED, null);
+		 
 	}
 	
 	
@@ -84,13 +93,6 @@ public class TC17906TryToCopyFromActiveCourseToPastCourse {
 		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -100,9 +102,11 @@ public class TC17906TryToCopyFromActiveCourseToPastCourse {
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException
+	@Test(description = "TC 17906 Try To Copy From Active Course To Past Course")
+	public void test17906() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
@@ -183,5 +187,8 @@ public class TC17906TryToCopyFromActiveCourseToPastCourse {
 			ATUReports.add("Verify that past course is not displayed in list of destination courses.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 }

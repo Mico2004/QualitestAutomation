@@ -45,14 +45,13 @@ import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
-import atu.testng.reports.listeners.ATUReportsListener;
-import atu.testng.reports.listeners.ConfigurationListener;
-import atu.testng.reports.listeners.MethodListener;
+
+
 import atu.testng.reports.logging.LogAs;
 
 
 
-@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
+
 public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN {
 	// Set Property for ATU Reporter Configuration
 		{
@@ -151,7 +150,7 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			
 		}
 
-		@Test
+		@Test (description = "TC 22656 Validate The Source Type As Recording Title In Search Field On Recording Level Login As ADMIN")
 		public void test22656() throws Exception {
 
 			// 1.load page

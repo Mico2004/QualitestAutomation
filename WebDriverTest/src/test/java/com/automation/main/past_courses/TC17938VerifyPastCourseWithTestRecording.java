@@ -114,7 +114,7 @@ public class TC17938VerifyPastCourseWithTestRecording {
 			this.driver.quit();
 		}
 		
-		@Test (description="Verify Past Course With Test Recording")
+		@Test (description="TC 17938 Verify Past Course With Test Recording")
 		public void test17938() throws Exception {
 
 			Date date = new Date();

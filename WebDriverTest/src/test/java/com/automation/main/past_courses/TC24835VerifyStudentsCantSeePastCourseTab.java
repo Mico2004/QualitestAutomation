@@ -110,8 +110,8 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		
 	}
 
-	@Test
-	public void TC24835VerifyStudentsCantSeePastCourseTab() throws InterruptedException {
+	@Test (description = "TC 24835 Verify Students Cant See Past Course Tab")
+	public void test24835() throws InterruptedException {
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 

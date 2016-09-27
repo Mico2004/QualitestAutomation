@@ -142,7 +142,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		"Starting the test: TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecordingLevelLoginAsADMIN at " + DateToStr, LogAs.PASSED, null);	
 	}
 
-	@Test
+	@Test (description = "TC 22690 Validate Source Type As Closed Caption In Search Field On The Recording Level Login As ADMIN")
 	public void test22690() throws Exception {
 
 		///////pre conditions

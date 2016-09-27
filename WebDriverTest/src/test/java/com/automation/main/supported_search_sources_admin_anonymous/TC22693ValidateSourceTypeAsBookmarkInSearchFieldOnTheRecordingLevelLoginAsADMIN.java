@@ -143,7 +143,7 @@ public class TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevel
 		"Starting the test: TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsADMIN at " + DateToStr, LogAs.PASSED, null);	
 	}
 
-	@Test
+	@Test (description = "TC 22693 Validate Source Type As Bookmark In Search Field On The Recording Level Login As ADMIN")
 	public void test22693() throws Exception {
 
 		// 1.load page

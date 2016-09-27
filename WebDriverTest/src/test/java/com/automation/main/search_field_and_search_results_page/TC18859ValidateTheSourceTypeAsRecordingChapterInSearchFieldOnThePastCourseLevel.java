@@ -115,16 +115,9 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -134,9 +127,11 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 18859 Validate The Source Type As RecordingChapterInSearchFieldOnThePastCourseLevel")
+	public void test18859() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		//pre test to unroll course from active courses to past courses 
 		
 		

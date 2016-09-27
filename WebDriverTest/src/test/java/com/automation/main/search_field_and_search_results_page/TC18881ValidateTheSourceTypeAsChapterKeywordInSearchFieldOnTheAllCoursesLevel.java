@@ -121,16 +121,9 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -140,9 +133,11 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 18881 Validate The Source Type As Chapter Keyword In Search Field On The All Courses Level")
+	public void test18881() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Validate there is manual chapter keyword in this chapter. Search input specified shall be case-insensitive.
 		
 		tegrity.loginCourses("User1");

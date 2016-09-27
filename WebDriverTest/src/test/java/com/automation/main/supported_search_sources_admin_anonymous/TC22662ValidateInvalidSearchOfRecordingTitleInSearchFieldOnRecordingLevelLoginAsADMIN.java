@@ -147,7 +147,7 @@ public class TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 				
 	}
 
-	@Test
+	@Test (description = "TC 22662 Validate Invalid Search Of Recording Title In Search Field On Recording Level Login As ADMIN")
 	public void test22662() throws Exception {
 
 		

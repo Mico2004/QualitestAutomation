@@ -59,7 +59,7 @@ public class TC17903VerifyTheUI {
 	@BeforeClass
 	public void setup() {
 
-		try {
+	
 
 			/// System.setProperty("webdriver.ie.driver",
 			/// "src/test/resources/chromedriver.exe");
@@ -81,10 +81,6 @@ public class TC17903VerifyTheUI {
 			 ATUReports.add("Message window.", "Starting the test: TC17903VerifyTheUI at " + DateToStr,
 			 "Starting the test: TC17903VerifyTheUI at " + DateToStr, LogAs.PASSED, null);
 			 
-		} catch (Exception e) {
-			ATUReports.add("Fail Step", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
-		}
-
 	}
 
 	@AfterClass
@@ -93,8 +89,8 @@ public class TC17903VerifyTheUI {
 	}
 
 	// @Parameters({"web","title"}) in the future
-	@Test
-	public void testUiExistence() throws InterruptedException {
+	@Test (description = "TC 17903 Verify The UI")
+	public void test17903() throws InterruptedException {
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// 2.login as instructor

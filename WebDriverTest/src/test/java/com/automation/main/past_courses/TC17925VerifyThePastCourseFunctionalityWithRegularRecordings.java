@@ -117,8 +117,8 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 		this.driver.quit();
 	}
 
-	@Test(description = "TC17925VerifyThePastCourseFunctionalityWithRegularRecordings")
-	public void loginCourses() throws InterruptedException {
+	@Test(description = "TC 17925 Verify The Past Course Functionality With Regular Recordings")
+	public void test17925() throws InterruptedException {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		user = "Past17925TempUser" + sdf.format(date);			

@@ -142,8 +142,8 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		
 	}
 
-	@Test
-	public void test22662() throws Exception {
+	@Test (description = "TC 22726 Validate Invalid Search Of Recording Chapter In Search Field On Recording Level Login As ADMIN")
+	public void test22726() throws Exception {
 
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

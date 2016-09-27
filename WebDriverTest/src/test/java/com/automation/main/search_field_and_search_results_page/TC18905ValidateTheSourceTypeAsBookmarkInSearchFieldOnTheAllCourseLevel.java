@@ -119,16 +119,9 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -138,10 +131,12 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 18905 Validate The Source Type As Bookmark In Search Field On The All Course Level")
+	public void test18905() throws Exception
 	{
-		// TOODO: 1. Validate there is bookmark in this course. Search input specified shall be case-insensitive.
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
+		// 1. Validate there is bookmark in this course. Search input specified shall be case-insensitive.
 	
 		tegrity.loginCourses("User1");
 		initializeCourseObject();

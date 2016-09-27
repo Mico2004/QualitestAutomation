@@ -4,7 +4,7 @@
   <test name="Test">
     <classes>
 
-		
+	
 	    <!-- Some Tests are missing! -->
       <!-- Supported search sources(ADMIN,ANONYMOUS) -->
       <!-- Local pretest -->
@@ -35,15 +35,7 @@
   		<class name="com.automation.main.supported_search_sources_admin_anonymous.TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsGUEST" />
         <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
 
- 
 
- 
-   
-
-
-
-			
-  
     </classes>
   </test> 
   <listeners>

@@ -113,16 +113,9 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
 
-
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -132,9 +125,11 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws Exception
+	@Test(description = "TC 18879 Validate The Source Type As Recording Text In Search Field On The All Course Level")
+	public void test18879() throws Exception
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Validate there is recording text in this course. Search input specified shall be case-insensitive - Using preset recording: Wed, Apr 13, 11 12 AM 
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();

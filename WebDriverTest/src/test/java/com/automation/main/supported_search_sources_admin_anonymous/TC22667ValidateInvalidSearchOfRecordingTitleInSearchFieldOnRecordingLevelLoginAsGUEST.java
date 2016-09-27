@@ -147,7 +147,7 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 		"Starting the test: TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST at " + DateToStr, LogAs.PASSED, null);	
 	}
 
-	@Test
+	@Test (description = "TC 22667 Validate Invalid Search Of Recording Title In Search Field On Recording Level Login As GUEST")
 		public void test22667() throws Exception {
 
 	        // 1.load page

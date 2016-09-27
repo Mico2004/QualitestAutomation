@@ -137,14 +137,14 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 		
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
-		System.out.println("Starting the test: TC21807ValidatePublicCoursesUILogIn at " + DateToStr);
-		ATUReports.add("Message window.", "Starting the test: TC21807ValidatePublicCoursesUILogIn at " + DateToStr,
-		"Starting the test: TC21807ValidatePublicCoursesUILogIn at " + DateToStr, LogAs.PASSED, null);	
+		System.out.println("Starting the test: TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsGUEST at " + DateToStr);
+		ATUReports.add("Message window.", "TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsGUEST at " + DateToStr,
+		"Starting the test: TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsGUEST " + DateToStr, LogAs.PASSED, null);	
 				
 	}
 
-	@Test
-	public void test22693() throws Exception {
+	@Test (description = "TC 22735 Validate The Source Type As Bookmark In Search Field On The Recording Level Login As GUEST")
+	public void test22735() throws Exception {
 
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

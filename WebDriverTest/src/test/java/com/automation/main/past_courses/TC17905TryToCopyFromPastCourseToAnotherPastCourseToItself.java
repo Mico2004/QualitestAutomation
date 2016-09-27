@@ -2,6 +2,8 @@ package com.automation.main.past_courses;
 
 
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -55,7 +57,8 @@ public class TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself {
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
-	@BeforeClass
+	
+    @BeforeClass
 	public void setup() {
 
 		
@@ -76,6 +79,13 @@ public class TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself {
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+		
+		 Date curDate = new Date();
+		 String DateToStr = DateFormat.getInstance().format(curDate);
+		 System.out.println("Starting the test: TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself at " + DateToStr,
+		 "Starting the test: TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself at " + DateToStr, LogAs.PASSED, null);
+		 
 	}
 	
 	@AfterClass
@@ -84,13 +94,7 @@ public class TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself {
 	}
 
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
-	
+		
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -99,9 +103,11 @@ public class TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself {
 	}
 
 	
-
-	public void loginCourses() throws InterruptedException
+	@Test (description = "TC 17905 Try To Copy From Past Course To Another Past Course To Itself")
+	public void test17905() throws InterruptedException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
@@ -194,5 +200,7 @@ public class TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself {
 			Assert.assertTrue(false);
 		}
 
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 }

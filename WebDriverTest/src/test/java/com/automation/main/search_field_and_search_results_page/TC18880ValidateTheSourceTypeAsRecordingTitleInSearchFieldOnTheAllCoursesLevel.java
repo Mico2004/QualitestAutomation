@@ -123,10 +123,8 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 	
 	@AfterClass
 	public void closeBroswer() {
-		driver.quit();
+		this.driver.quit();
 	}
-
-
 
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -135,9 +133,9 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	
-	@Test
-	public void loginCourses() throws Exception
+
+	@Test(description = "TC 18880 Validate The Source Type As Recording Title In Search Field On The All Courses Level")
+	public void test18880() throws Exception
 	{
 		// 1. Validate there is recording title in this course. Search input specified shall be case-insensitive.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
