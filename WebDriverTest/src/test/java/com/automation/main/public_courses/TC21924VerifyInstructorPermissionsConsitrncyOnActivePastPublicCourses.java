@@ -667,8 +667,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		course_settings_page.clickOnOkButton();
 		Thread.sleep(1000);
 		record.returnToCourseListPage();
-		Thread.sleep(1000);
-		course.clickOnPastCoursesTabButton();
+		Thread.sleep(1000);		
 		course.selectCourseThatStartingWith(past_public_course_name);
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();

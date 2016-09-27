@@ -170,9 +170,9 @@ public class TC21599GuestPremissions {
 		 record.convertRecordingsListToNames();
 		 String recording_publish=record.recording_list_names.get(0);
 		 record.unpublishFirstRecording(record.recordings_tab,publish_window);
-		 Thread.sleep(3000);
+		 Thread.sleep(1000);
 		 record.unpublishFirstRecording(record.student_recordings_tab,publish_window);
-    	 Thread.sleep(3000);
+    	 Thread.sleep(1000);
 		 record.convertRecordingsListToNames();
 		 String student_publish=record.recording_list_names.get(0);
 		 // 7.Go to the university's 'Course Settings' and enable ' Enable
@@ -184,7 +184,7 @@ public class TC21599GuestPremissions {
 		 record.waitForVisibility(record.course_tasks_button);
 		 record.toCourseSettingsPage();		
 		 //8.verify allow all students to download is checked
-		 course_settings.CheckAllowStudentDownload();
+		 course_settings.checkAllCourseSettingsCheckboxs();
 		 Thread.sleep(1000);
 		 record.toCourseSettingsPage();	
 		 course_settings.forceWebElementToBeSelected(course_settings.checkbox_allow_students_to_download_recordings, "allow students to download recordings");
@@ -290,10 +290,10 @@ public class TC21599GuestPremissions {
 
 		Robot robot = null;
 		try {
-			robot = new Robot();
-			robot.mouseMove(-100, -100);
-			record.moveToElementAndClick(record.course_tasks_button, driver);
-
+		//	robot = new Robot();
+		//	robot.mouseMove(-100, -100);
+			//record.moveToElementAndClick(record.course_tasks_button, driver);
+			record.moveToElement(record.course_task_button, driver).perform();
 			// subscribe not visible
 			record.verifyClickableElementIsNotVisible(record.subscribe_button, "subscribe");
 
@@ -306,7 +306,7 @@ public class TC21599GuestPremissions {
 			/// "Video podcast" is enable.
 			record.verifyElementIsEnabled(record.video_podcast, "Video Podcast");
 
-		} catch (AWTException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
