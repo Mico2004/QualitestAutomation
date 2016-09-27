@@ -164,6 +164,8 @@ public class TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLe
 			course_settings.makeSureThatMakeCoursePublicIsSelected();
 			course_settings.clickOnOkButton();
 			Thread.sleep(1000);
+			
+			record.signOut();
 						
 			// 2.login as guest
 			tegrity.loginAsguest();
