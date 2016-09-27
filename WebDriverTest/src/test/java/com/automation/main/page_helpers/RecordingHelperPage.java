@@ -3131,18 +3131,19 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			tab.click();
 			System.out.println("clicked on tab");
-			ATUReports.add("failed clicking on tab", " click tab", "tab clicked", "tab clicked", LogAs.PASSED, null);
+			ATUReports.add("Click tab - "+tab.getText(),  "tab clicked", "tab clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			
 			try {
 				
 				waitForVisibility(checkbox);
 				checkbox.click();
 				System.out.println("clicked on checkbox");
-				ATUReports.add("clicked on checkbox", " click tab", "tab clicked", "tab clicked", LogAs.PASSED, null);
+				ATUReports.add("clicked on recording's checkbox", " checkbox clicked", LogAs.PASSED, null);
 				
-				toPublishRecording(publish);
+				//toPublishRecording(publispublish_buttonh);
+				clickElementJS(publish_button);
 				publish.never_select_button.click();
 						
 				waitForVisibility(publish.save_button);	
@@ -3150,16 +3151,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				
 					
 				System.out.println("clicked on save_button");
-				ATUReports.add("clicked on save_button", " click tab", "tab clicked", "tab clicked", LogAs.PASSED, null);
+				ATUReports.add("clicked on save_button",  "Save button clicked", LogAs.PASSED, null);
 
 			} catch (Exception t) {
-				System.out.println("failed publishing recording");
-				ATUReports.add("publishing recording", " click tab", "tab clicked", "tab  not clicked", LogAs.FAILED,null);
+				System.out.println("failed unpublishing recording");
+				ATUReports.add("unpublishing recording failed",  "tab  not clicked"+t.getMessage(), LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} catch (Exception e) {
 			System.out.println("failed clicking on tab");
-			ATUReports.add("failed clicking on tab", " click tab", "tab clicked", "tab  not clicked", LogAs.FAILED,null);
+			ATUReports.add("failed clicking on tab: "+tab.getText(),  "tab  not clicked"+e.getMessage(), LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
