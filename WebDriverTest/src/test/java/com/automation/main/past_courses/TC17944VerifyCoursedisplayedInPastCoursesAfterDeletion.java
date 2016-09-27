@@ -113,8 +113,8 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 			this.driver.quit();
 		}
 		
-		@Test
-		public void testUiExistence() throws InterruptedException {
+		@Test (description = "TC 17944 Verify Course displayed In Past Courses After Deletion")
+		public void test17944() throws InterruptedException {
 		
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

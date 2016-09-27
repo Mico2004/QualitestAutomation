@@ -105,16 +105,16 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
-		System.out.println("Starting the test: TCase24766VerifyCopyFromPastCourseToActiveCourse at " + DateToStr);
+		System.out.println("Starting the test: TC24766VerifyCopyFromPastCourseToActiveCourse at " + DateToStr);
 		ATUReports.add("Message window.",
-				"Starting the test: TCase24766VerifyCopyFromPastCourseToActiveCourse at " + DateToStr,
-				"Starting the test: TCase24766VerifyCopyFromPastCourseToActiveCourse at " + DateToStr, LogAs.PASSED,
+				"Starting the test: TC24766VerifyCopyFromPastCourseToActiveCourse at " + DateToStr,
+				"Starting the test: TC24766VerifyCopyFromPastCourseToActiveCourse at " + DateToStr, LogAs.PASSED,
 				null);
 
 	}
 
 	// s
-	@Test
+	@Test (description = "TC 24766 Verify Copy From Past Course To Active Course")
 	public void test24766() throws Exception {
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("User1");		
