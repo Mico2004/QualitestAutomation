@@ -519,8 +519,8 @@ public class SearchPage extends Page {
 			System.out.println("Verifed that the result number is as written at the breadcrumbs.");
 		ATUReports.add("Verifed that the result number is as written at the breadcrumbs.", "True.", "True.", LogAs.PASSED, null);
 		} else {
-		System.out.println("Not Verifed that the result number is as written at the breadcrumbs.");
-		ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		System.out.printf("Not Verifed that the result number is as written at the breadcrumbs. The number that wrote on the website is: %s and the counted number is: %s" ,resultNumber,list_size);
+		ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." + "website: " + resultNumber +"list: " + list_size , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}		
 		
 	}
