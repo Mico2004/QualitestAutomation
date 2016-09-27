@@ -147,8 +147,8 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		driver.quit();
 	}
 	
-	@Test
-	public void test22746() throws Exception {
+	@Test (description = "TC 22748 Validate Personl Bookmarks Are Not Displayed On Search Result On All Courses Level Login As GUEST")
+	public void test22748() throws Exception {
 
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
