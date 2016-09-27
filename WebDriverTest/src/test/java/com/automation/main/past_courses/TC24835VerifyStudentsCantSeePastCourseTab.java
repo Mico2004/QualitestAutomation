@@ -358,7 +358,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 	public void initializeCourseObject() throws InterruptedException {
 
 
-		course = PageFactory.initElements(driver, CoursesHelperPage.class);
+		course = PageFactory.initElements(driver, CoursesHelperPage.class);		
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 	

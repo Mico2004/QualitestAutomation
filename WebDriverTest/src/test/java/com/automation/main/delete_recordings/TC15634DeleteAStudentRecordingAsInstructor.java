@@ -139,12 +139,12 @@ DesiredCapabilities capability;
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Verified that not selected recording displayed in list of recordings.");
-				ATUReports.add("Verified that not selected recording displayed in list of recordings.", LogAs.FAILED, null);
-				Assert.assertTrue(false);
+				ATUReports.add("Verified that not selected recording displayed in list of recordings.",selected_recording_title ,LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				//Assert.assertTrue(false);
 			}
   		} else {
 			System.out.println("Delete recording list not contain just one recording. It contains: " + delete_recording_list.size());
-			ATUReports.add("Delete recording list not contain just one recording. It contains: " + delete_recording_list.size(), LogAs.FAILED, null);
+			ATUReports.add("Delete recording list not contain just one recording. It contains: " + delete_recording_list.size(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
