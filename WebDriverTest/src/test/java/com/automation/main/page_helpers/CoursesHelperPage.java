@@ -417,7 +417,7 @@ public class CoursesHelperPage extends Page {
 
 	// This function get string that some course starting with, and select that
 	// course.
-	public String selectCourseThatStartingWith(String name_starting_with) throws InterruptedException {	
+	public String selectCourseThatStartingWith(String name_starting_with)  {	
 	try{	
 		Thread.sleep(1000);
 		System.out.println("select1");
