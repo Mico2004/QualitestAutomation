@@ -127,13 +127,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 	}
 
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
-	}
-	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -142,10 +136,11 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 	}
 
 	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
+	@Test
 	public void loginCourses() throws Exception
 	{
 		// 1. Validate there is recording title in this course. Search input specified shall be case-insensitive.
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
 		

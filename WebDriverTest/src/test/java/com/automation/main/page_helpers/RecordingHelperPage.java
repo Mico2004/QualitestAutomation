@@ -2834,9 +2834,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if ((el.getText().equals(additional_content_name))) {
 
 						WebElement recording = driver.findElement(By.linkText((additional_content_name)));
-						waitForVisibility(recording);
-						wait.until(ExpectedConditions.elementToBeClickable(recording));
-						recording.click();
+						waitForVisibility(recording);			
+						clickElementJS(recording);
 						System.out.println("additional content file found");
 						ATUReports.add("additional content file found", LogAs.PASSED, null);
 						Assert.assertTrue(true);

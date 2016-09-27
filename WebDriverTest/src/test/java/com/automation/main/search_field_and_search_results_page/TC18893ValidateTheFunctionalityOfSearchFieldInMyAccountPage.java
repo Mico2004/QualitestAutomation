@@ -174,8 +174,7 @@ public class TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage {
 		
 		// 8. Set the focus to the field with a mouse pointer.
 		top_bar_helper.search_box_field.click();
-		
-		
+	
 		
 		// 9. Search some "Recording Chapter" and press ENTER.
 		top_bar_helper.searchForTargetText(first_chapter_title);
