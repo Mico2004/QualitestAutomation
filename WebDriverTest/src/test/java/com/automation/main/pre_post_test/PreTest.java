@@ -818,6 +818,7 @@ public class PreTest {
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
 		Thread.sleep(2000);
 		admin_dashboard_page.signOut();
+		
 		tegrity.loginCourses(SuperUsername);
 		initializeCourseObject();
 		course.verifyRecordingsStatusIsClear("BankValid", 3, record);

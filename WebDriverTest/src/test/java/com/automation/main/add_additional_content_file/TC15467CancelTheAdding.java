@@ -149,7 +149,7 @@ public void test15467() throws Exception {
 		// 7. add file and cancel uploading
 		add_additional_content_window.toUploadFileByPathThenSelectFile(fullPathToFile);
 		//add_additional_content_window.waitForVisibility(add_additional_content_window.upload_progress_bar);
-		add_additional_content_window.cancel_additional_file_button.click();///cancel the uploading
+		add_additional_content_window.clickElementJS(add_additional_content_window.cancel_additional_file_button);///cancel the uploading
 		//confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);
 		
 		record.clickOnAdditionContentTab();
