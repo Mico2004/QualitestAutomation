@@ -189,14 +189,19 @@ public class TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN 
 		String recording_to_search=record.recording_list_names.get(0);
 		Thread.sleep(3000);
 		
-	    ///7.Search some "Recording Chapter" and press ENTER.
-		top_bar_helper.searchForTargetText(recording_to_search);
-        
- 
+		
 		///8.Validate the search field is display at the top right of the UI page below the top navigation bar.
 		top_bar_helper.verifySearchFieldDisplayedAtTopRight();
 		Thread.sleep(2000);
-			
+		
+		///7.Search some "Recording Chapter" and press ENTER.
+		top_bar_helper.searchForTargetText(recording_to_search);
+        
+ 
+		// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+		search_page.verifyLoadingSpinnerImage();
+		search_page.waitUntilSpinnerImageDisappear();
+		
 		///10.Validate the number of results that displayed in the breadcrumb is indeed the actual number of results you received.
 		search_page.verifySearchResultNumberAsWrittenAsAdmin();
 	

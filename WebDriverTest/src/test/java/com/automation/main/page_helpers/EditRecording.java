@@ -208,9 +208,11 @@ public class EditRecording extends Page {
 			driver.switchTo().window(window_handler);
 			break;
 		}
-		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(4));
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
 		
+
+		record.waitForVisibility(listButtons.get(4));
+		clickElement(listButtons.get(4));
+		clickElement(listButtons.get(4));
 		Thread.sleep(2000);
 		
 	

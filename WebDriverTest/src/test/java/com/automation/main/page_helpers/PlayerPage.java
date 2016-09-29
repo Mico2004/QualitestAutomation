@@ -1155,7 +1155,7 @@ public class PlayerPage extends Page {
 		System.out.println("bookmark name written successfully");
 		add_bookmark_button.click();
 		System.out.println("clicked add bookmark button");
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		verifyBookMarkVisibility(time_to_add_bookmark, bookmark);
 
 	}
