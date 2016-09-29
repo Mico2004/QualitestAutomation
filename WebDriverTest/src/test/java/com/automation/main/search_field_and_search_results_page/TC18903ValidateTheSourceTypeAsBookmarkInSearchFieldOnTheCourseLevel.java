@@ -203,7 +203,8 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 			
 			
 			// 4. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
+			
 			
 			// 5. Search the "Bookmark" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(bookmark_for_search);
