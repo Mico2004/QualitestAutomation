@@ -169,8 +169,6 @@ public class TestSuitePreSetCopyRecordings_SupportedSearch {
 		record.signOut();
 		Thread.sleep(2000);
 		
-		
-		
 		// 1. Login with SuperUser.	
 		tegrity.loginCourses("SuperUser");// log in courses page
 		initializeCourseObject();
@@ -216,10 +214,7 @@ public class TestSuitePreSetCopyRecordings_SupportedSearch {
 		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
 		System.out.println("4");
 
-		
-		
 
-		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 //		// 2.copy courses to pastcourses a
