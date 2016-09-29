@@ -4,14 +4,15 @@ import java.io.File;
 import java.util.List;
 
 
-import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.automation.main.page_helpers.AddAdditionalContentFileWindow;
@@ -155,10 +156,10 @@ public class TC15475ExistenceOfUIItems {
 			// 5.verify additional content file title+ info
 			add_additional_content_window.verifyAdditionalContentFileWindowTitle();
 			add_additional_content_window.verifyAdditionalContentFileWindowInfo();
-		///6.upload file,check progressbar location
-			add_additional_content_window.uploadFileByPathNoConfirmation(fullPathToFile);
+			///6+7.upload file,check progressbar location
+			add_additional_content_window.uploadFileByPathNoConfirmationForTheUI(fullPathToFile,file_name);
             //7.verify uploading correctness:elapsed time,estimated time,percentage,speed and
-			add_additional_content_window.verifyUploadInfoCorrectness(file_name);
+			//add_additional_content_window.verifyUploadInfoCorrectness(file_name);
             confirm_menu.waitForVisibility(confirm_menu.add_additional_content_confirm_note);
             confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);
             

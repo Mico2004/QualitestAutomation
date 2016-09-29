@@ -1,24 +1,17 @@
 package com.automation.main.add_additional_content_file;
 
-import java.awt.Robot;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.io.File;
+
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerDriverService;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.AddAdditionalContentFileWindow;
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.ConfirmationMenu;
@@ -35,11 +28,8 @@ import com.automation.main.page_helpers.ManageAdhocUsersPage;
 import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
-
 import java.text.DateFormat;
 import java.util.Date;
-
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 
@@ -81,10 +71,7 @@ public class TC15467CancelTheAdding {
 public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		
-
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		wait = new WebDriverWait(driver, 30);
 		add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -92,20 +79,14 @@ public void setup() {
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
-
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
-
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
-
 		mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
-
 		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
-
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
 		
@@ -149,7 +130,7 @@ public void test15467() throws Exception {
 		// 7. add file and cancel uploading
 		add_additional_content_window.toUploadFileByPathThenSelectFile(fullPathToFile);
 		//add_additional_content_window.waitForVisibility(add_additional_content_window.upload_progress_bar);
-		add_additional_content_window.clickElementJS(add_additional_content_window.cancel_additional_file_button);///cancel the uploading
+		add_additional_content_window.cancel_additional_file_button.click();///cancel the uploading
 		//confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);
 		
 		record.clickOnAdditionContentTab();
@@ -169,18 +150,21 @@ public void test15467() throws Exception {
 		// 7. add file and cancel uploading
 		add_additional_content_window.toUploadFileByPathThenSelectFile(fullPathToFile);
 		 Thread.sleep(500);/// location
-		 Robot robot=new Robot();
-		 robot.mouseMove(100,100);
-		 if(!(driver instanceof InternetExplorerDriver)){
-			 int mask = InputEvent.BUTTON1_DOWN_MASK;
-			 robot.mousePress(mask);
-			 robot.mouseRelease(mask);
-		 } else {
+//		 Robot robot=new Robot();
+//		 robot.mouseMove(100,100);
+//		 if(!(driver instanceof InternetExplorerDriver)){
+//			 int mask = InputEvent.BUTTON1_DOWN_MASK;
+//			 robot.mousePress(mask);
+//			 robot.mouseRelease(mask);
+//		 } else {
+//
+//			 robot.keyPress(KeyEvent.VK_ESCAPE);
+//			 robot.keyRelease(KeyEvent.VK_ESCAPE);
+//		 }
+		 //add_additional_content_window.select_upload_additional_file.sendKeys(Keys.ESCAPE);
+		 Actions action = new Actions(driver);
+		 action.sendKeys(Keys.ESCAPE).build().perform();
 
-			 robot.keyPress(KeyEvent.VK_ESCAPE);
-			 robot.keyRelease(KeyEvent.VK_ESCAPE);
-		 }
-		
 		 record.clickOnAdditionContentTab();
 		 wait.until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]"), "class", "active"));
 		 record.convertAdditionalContantListToNames();

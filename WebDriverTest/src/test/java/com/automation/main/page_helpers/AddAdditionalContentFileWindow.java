@@ -43,10 +43,10 @@ public class AddAdditionalContentFileWindow extends Page {
 	@FindBy(xpath = "//*[@id=\"addFileWindow\"]/form/div[1]/div[4]")
 	public WebElement upload_progress_bar;
 	@FindBy(id ="CancelButton")
-	
 	public WebElement cancel_additional_file_button;
 	@FindBy(id ="ModalDialogHeaderWrap")
-	
+	public WebElement addFileWindow;
+	@FindBy(id ="addFileWindow")	
 	public WebElement background;
 	@FindBy(xpath ="//*[@id=\"addFileWindow\"]/form/div[1]/small[1]")
 	public WebElement uploading_file;
@@ -184,7 +184,6 @@ public class AddAdditionalContentFileWindow extends Page {
 		String file_name = path.substring(51);
 		//select_upload_additional_file.click();
 		Thread.sleep(2000);
-
 		uploadFile(path);
 		System.out.println("file selected successfully");
 		Thread.sleep(2000);
@@ -216,22 +215,35 @@ public class AddAdditionalContentFileWindow extends Page {
 
 			String file_name = path.substring(51);
 			//select_upload_additional_file.click();
-			Thread.sleep(2000);
-
-
 			uploadFile(path);
-			Thread.sleep(2000);
+			Thread.sleep(500);
 			System.out.println("file selected successfully");
-			Thread.sleep(2000);
-			verifyAdditionalContentFileNamePriorToSelectButton();/// verify its
-																	/// location
+			verifyAdditionalContentFileNamePriorToSelectButton();/// verify its																	/// location
 			add_additional_file_button.click();/// add
+			verifyUploadInfoCorrectness("chromedriver_win32.zip");
 			verifyProgressBar();
 			
 		}
+		
+		public void uploadFileByPathNoConfirmationForTheUI(String path,String fileName) throws Exception {
+
+			String file_name = path.substring(51);
+			//select_upload_additional_file.click();
+			uploadFile(path);
+			Thread.sleep(500);
+			System.out.println("file selected successfully");
+			verifyAdditionalContentFileNamePriorToSelectButton();/// verify its																	/// location
+			add_additional_file_button.click();/// add
+			verifyUploadInfoCorrectness(fileName);
+			verifyProgressBar();
+			
+		}
+		
+		
+		
 		// verify selected file name displayed prior to select button
 		public void verifyAdditionalContentButtonsLocation() throws InterruptedException {
-			Thread.sleep(2000);
+			//Thread.sleep(1500);
 			Point file_text = add_additional_file_selected_name.getLocation();
 			Point select_button = select_upload_additional_file.getLocation();
             Point cancel=cancel_additional_file_button.getLocation();
