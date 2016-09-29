@@ -324,7 +324,7 @@ public class PlayerPage extends Page {
 		
 		int i=0;
 		for (WebElement e : driver.findElements(By.cssSelector(".SearchResultLocation"))) {			    		
-				String current_element = getTextFromWebElement(e);						
+				String current_element = getTextFromWebElement(e,5);						
 				if (!current_element.equals("Recording Chapter") && !current_element.equals("Recording Title") ) {
 					System.out.println("Not Verify that the results of the row of location are fine." + current_element);
 					ATUReports.add("Not verify that the results of the row of location are fine." + current_element, "True.", "false", LogAs.FAILED, null);
@@ -338,7 +338,7 @@ public class PlayerPage extends Page {
 		
 		i=0;
 		for (WebElement e : driver.findElements(By.cssSelector(".SearchResultTime"))) {			    		
-				String current_element = getTextFromWebElement(e);						
+				String current_element = getTextFromWebElement(e,5);						
 				
 				if (!checkThatTheTimeIsValid(current_element)) {
 					System.out.println("Not verify that the results of the row of time are fine.");
@@ -353,7 +353,7 @@ public class PlayerPage extends Page {
 		
 		i=0;
 		for (WebElement e : driver.findElements(By.cssSelector(".SearchResultContext"))) {			    		
-				String current_element = getTextFromWebElement(e);						
+				String current_element = getTextFromWebElement(e,5);						
 				
 				if (current_element.isEmpty()) {
 					System.out.println("Not Verify that the results of the row of context are fine.");
@@ -726,22 +726,27 @@ public class PlayerPage extends Page {
 
 	// This function delete all bookmarks
 	public void deleteAllBookmark() throws InterruptedException {
-			
+	
 		if(bookmark_list.size()>0){
-			for (WebElement we : bookmark_list) {
-				try {     
-					moveToElementAndPerform(we, driver);
-					WebElement bookmarkDelete = driver.findElement(By.xpath(".//*[@id='BookmarkList']/div/img[3]" ));
-					clickElement(bookmarkDelete);
-				}catch(Exception Ex) {
-				
-				}
+			for(int i = 1; i < 5 ; i++){
+				for (WebElement we : bookmark_list) {
+					try {     
+						moveToElementAndPerform(we, driver);
+						WebElement bookmarkDelete = driver.findElement(By.xpath(".//*[@id='BookmarkList']/div/img[3]" ));
+						clickElement(bookmarkDelete);
+					}catch(Exception Ex) {
+						System.out.println("bookmark failed deleting");
+					}
+			} if(bookmark_list.size()==0){
+				break;
 			}
+		}
 		} else {
 			System.out.println("There no bookmarks here.");
 			ATUReports.add("There no bookmarks here.", "True.", "True.", LogAs.PASSED, null);
 		}
 	}
+	
 
 	/// The breadcrumb structure is displayed as follows: "> Courses > course
 	/// name".

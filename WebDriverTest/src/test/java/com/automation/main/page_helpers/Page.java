@@ -222,18 +222,26 @@ public class Page {
 		}
 	}
 
-	public String getTextFromWebElement(WebElement element) {
-
-		try {
-			return element.getText();
-		} catch (StaleElementReferenceException e) {
-			System.out.println("Attempting to recover from StaleElementReferenceException ...");
-			return getTextFromWebElement(element);
-		} catch (NoSuchElementException ele) {
-			System.out.println("Attempting to recover from NoSuchElementException ...");
-			return getTextFromWebElement(element);
+	public String getTextFromWebElement(WebElement element,int number) {
+		
+		if(number > 0) {
+			try {
+				return element.getText();
+			} catch (StaleElementReferenceException e) {
+				System.out.println("Attempting to recover from StaleElementReferenceException ...");
+				return getTextFromWebElement(element,number -1);
+			} catch (NoSuchElementException ele) {
+				System.out.println("Attempting to recover from NoSuchElementException ...");
+				return getTextFromWebElement(element,number -1);
+			}
+		} else { 
+			
+			System.out.println("We lost the DOM, WebElement not found.");
+			ATUReports.add("We lost the DOM, WebElement not found.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+			return null;
 		}
-
+		
 	}
 
 	public boolean isElemenetDisplayed(By by) {
@@ -246,15 +254,23 @@ public class Page {
 		}
 	}
 
-	public WebElement getStaleElem(By by, WebDriver driver) {
-		try {
-			return driver.findElement(by);
-		} catch (StaleElementReferenceException e) {
-			System.out.println("Attempting to recover from StaleElementReferenceException ...");
-			return getStaleElem(by, driver);
-		} catch (NoSuchElementException ele) {
-			System.out.println("Attempting to recover from NoSuchElementException ...");
-			return getStaleElem(by, driver);
+	public WebElement getStaleElem(By by, WebDriver driver,int number) {
+		if(number > 0) {
+			try {
+				return driver.findElement(by);
+			} catch (StaleElementReferenceException e) {
+				System.out.println("Attempting to recover from StaleElementReferenceException ...");
+				return getStaleElem(by, driver,number-1);
+			} catch (NoSuchElementException ele) {
+				System.out.println("Attempting to recover from NoSuchElementException ...");
+				return getStaleElem(by, driver,number-1);
+			} 
+		}else { 
+			
+			System.out.println("We lost the DOM, WebElement not found.");
+			ATUReports.add("We lost the DOM, WebElement not found.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+			return null;
 		}
 	}
 

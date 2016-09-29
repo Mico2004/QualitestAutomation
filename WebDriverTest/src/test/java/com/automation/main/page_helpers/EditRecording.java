@@ -156,8 +156,8 @@ public class EditRecording extends Page {
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
 			
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			String message = getTextFromWebElement(ie);
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
+			String message = getTextFromWebElement(ie,5);
 			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
@@ -234,8 +234,8 @@ public class EditRecording extends Page {
 		}
 		int countOfErrors = 0;
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){		
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			String message = getTextFromWebElement(ie);
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
+			String message = getTextFromWebElement(ie,5);
 			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 				break;
@@ -308,8 +308,8 @@ public class EditRecording extends Page {
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
 			
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			String message = getTextFromWebElement(ie);
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
+			String message = getTextFromWebElement(ie,5);
 			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
@@ -376,8 +376,8 @@ public class EditRecording extends Page {
 		
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){	
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			String message = getTextFromWebElement(ie);
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
+			String message = getTextFromWebElement(ie,5);
 			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;

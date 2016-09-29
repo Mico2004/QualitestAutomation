@@ -319,7 +319,7 @@ public class CourseSettingsPage extends Page {
 				"Require authentication by default for direct recording links");
 		// PubliclyVisible - Make this course publicly visible
 		forceWebElementToBeSelected(checkbox_make_course_public_visable, "Make this course publicly visible");
-
+		
 		// AllowToDownload - Allow students to download recordings
 		forceWebElementToBeSelected(checkbox_allow_students_to_download_recordings,
 				"Allow students to download recordings");
@@ -407,6 +407,7 @@ public class CourseSettingsPage extends Page {
 	// This function verifies enable student recording is checked
 	public void CheckEnableStudentTesting() throws InterruptedException {
 		try {
+			waitForVisibility(enable_student_testing_checkbox);
 			if (!enable_student_testing_checkbox.isSelected()) {
 				enable_student_testing_checkbox.click();
 				if (enable_student_testing_checkbox.isSelected()) {
