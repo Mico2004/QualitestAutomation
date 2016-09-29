@@ -135,9 +135,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 	public void test18905() throws Exception
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
 		// 1. Validate there is bookmark in this course. Search input specified shall be case-insensitive.
-	
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
 		

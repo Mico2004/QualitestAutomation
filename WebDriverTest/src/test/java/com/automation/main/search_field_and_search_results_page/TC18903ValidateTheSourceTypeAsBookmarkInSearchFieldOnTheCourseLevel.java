@@ -171,7 +171,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 		
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {
-			
+			type_of_user=3;
 			if(type_of_user == 0) {
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
