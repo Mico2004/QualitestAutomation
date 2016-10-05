@@ -227,11 +227,6 @@ public class AdminDashboardPage extends Page {
 
 	// This function get String with the name of target submenu of Service Settings and Maintenance and clicks on it
 	public void clickOnTargetSubmenuAdvancedServices(String target) {
-		
-		
-
-
-
 
 		try {
 		System.out.println("clickOnTargetSubmenuAdvanceServiceSet1");

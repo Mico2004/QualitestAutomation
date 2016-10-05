@@ -128,7 +128,7 @@ public class TC15468AddFirstFileVerifyNewTabAdditionalContentCreated {
 			record.returnToCourseListPage();
 			course.waitForVisibility(course.course_list.get(1));
 			course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
-			System.out.println("recordings tab is now empty");
+			System.out.println("additional tab is now empty");
 			course.selectCourseThatStartingWith("Ab");
 			record.waitForVisibility(record.recordings_tab);
 			System.out.println("inside courses page");

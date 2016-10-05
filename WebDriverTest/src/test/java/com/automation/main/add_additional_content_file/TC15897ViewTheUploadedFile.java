@@ -114,8 +114,8 @@ public class TC15897ViewTheUploadedFile {
 
 	@Test (description="TC 15897 View The Uploaded File")
 	public void test15897() throws Exception {
-		String fullPathToFile1 = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testMp4.mp4";
-		String file_name1 = "Moshik_testMp4.mp4";
+		String fullPathToFile1 = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testPdf.pdf";
+		String file_name1 = "Moshik_testPdf.pdf";
 		String fullPathToFile2 = "\\workspace\\QualitestAutomation\\resources\\documents\\additional_file.doc";
 		String file_name2 = "additional_file.doc";
 	

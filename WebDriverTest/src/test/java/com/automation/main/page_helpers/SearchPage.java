@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -513,8 +514,8 @@ public class SearchPage extends Page {
 		
 		
 		//get the number of result from list 
-		int list_size =  video_wrap_link_to_focus_list.size();
-		
+		int list_size = video_wrap_link_to_focus_list.size();
+				
 		if(resultNumber == list_size){
 			System.out.println("Verifed that the result number is as written at the breadcrumbs.");
 		ATUReports.add("Verifed that the result number is as written at the breadcrumbs.", "True.", "True.", LogAs.PASSED, null);

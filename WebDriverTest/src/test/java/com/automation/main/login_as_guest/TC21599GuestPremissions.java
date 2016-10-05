@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.nio.file.Files;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -146,11 +147,16 @@ public class TC21599GuestPremissions {
 
 	@Test (description="TC 21599 Guest Premissions")
 	public void test21599() throws Exception {
-		/// pre conditions
 
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		String url_topass = tegrity.pageUrl;
+		//2. login as admin
+		tegrity.loginAdmin("Admin");	
+		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
+		advanced_services_setting_page.enableStudyTestingCheckboxAndClickOk(confirm_menu);		
+		record.signOut();
+		
 		/// 2.login as user1
 		tegrity.loginCourses("User1");
 		course.waitForVisibility(course.active_courses_tab_button);
@@ -175,28 +181,16 @@ public class TC21599GuestPremissions {
     	 Thread.sleep(1000);
 		 record.convertRecordingsListToNames();
 		 String student_publish=record.recording_list_names.get(0);
-		 // 7.Go to the university's 'Course Settings' and enable ' Enable
-		 // student testing'
 		 record.waitForVisibility(record.course_tasks_button);
-		 record.toCourseSettingsPage();
-		 course_settings.waitForVisibility(course_settings.enable_student_testing_checkbox);
-		 course_settings.CheckEnableStudentTesting();
-		 record.waitForVisibility(record.course_tasks_button);
-		 record.toCourseSettingsPage();		
+		 record.clickOnCourseTaskThenCourseSettings();	
 		 //8.verify allow all students to download is checked
 		 course_settings.checkAllCourseSettingsCheckboxs();
 		 Thread.sleep(1000);
-		 record.toCourseSettingsPage();	
-		 course_settings.forceWebElementToBeSelected(course_settings.checkbox_allow_students_to_download_recordings, "allow students to download recordings");
+		 course_settings.clickOnOkButton();
 
-		// 9.sign out
-		for (String handler : driver.getWindowHandles()) {
-			driver.switchTo().window(handler);
-			break;
-		}
-		// 9.1.Click "Courses" link at breadcrumbs
+		// 7.Go to the university's 'Course Settings' and enable ' Enable // student testing'
 		record.signOut();
-
+		
 		////////////////////// End of
 		////////////////////// pre-conditions//////////////////////////////
 
@@ -411,61 +405,37 @@ public class TC21599GuestPremissions {
 	
 		// 38.Click on RSS Feed menu item: 1) The RSS Feed page is displayed.
 		String parentWindow = driver.getWindowHandle();
+		String xml_url =driver.getCurrentUrl();
 		record.verifyRssFeedPage(driver, tegrity);
 		// 38.1 2) The recording <item> is displayed in the course
 		// ctrl+a
-		robot.mouseMove(500, 500);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
-		robot.keyPress(KeyEvent.VK_A);
-		Thread.sleep(200);
-		robot.keyRelease(KeyEvent.VK_A);
-		Thread.sleep(200);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
-		// ctrl+c
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
-		robot.keyPress(KeyEvent.VK_C);
-		Thread.sleep(200);
-		robot.keyRelease(KeyEvent.VK_C);
-		Thread.sleep(200);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Clipboard clipboard = toolkit.getSystemClipboard();
-		String result = (String) clipboard.getData(DataFlavor.stringFlavor);
+
 		String test = "<title>" + course_name + " recordings</title>";
+		String xml_source_code = driver.findElement(By.tagName("body")).getText();	
 		
 		for (String handler: driver.getWindowHandles()) {
 			if (!handler.equals(parentWindow)) {
-				driver.switchTo().window(parentWindow);
 				driver.close();
+				driver.switchTo().window(parentWindow);
+				break;
 			}
 		}
 		
-		driver.navigate().back();
-		record.waitForVisibility(record.course_tasks_button);
-		record.toRssFeedPage(driver);
-        record.waitForVisibility(record.first_recording);
+		record.waitForVisibility(record.first_recording);
 		record.verifyFirstExpandableRecording();
-		record.waitForVisibility(driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")));
 		record.clickOnTheFirstCaptherWithOutTheExpand();
-		Thread.sleep(15000);
-		player_page.verifyTimeBufferStatusForXSec(10);// check source display
-		String rss_feed_course_link = driver.getCurrentUrl();
-
-//		for(String handler: driver.getWindowHandles()) {
-//			driver.switchTo().window(handler);
-//			break;
-//		}
+		player_page.verifyTimeBufferStatusForXSec(2);// check source display
+		
+		for(String handler: driver.getWindowHandles()) {
+			driver.switchTo().window(handler);
+			break;
+		}
 	
 		record.returnToCourseListPage();
 		course.waitForVisibility(course.public_courses_tab_button);
 		course.selectCourseByName(course_name);
-		System.out.println(rss_feed_course_link);
-
-		if ((result.contains(test)) && (result.contains("<link>" +rss_feed_course_link + "</link>"))) {
+		
+		if ((xml_source_code.contains(test)) && (xml_source_code.contains("<link>" +xml_url + "</link>"))) {
 			System.out.println("contain title and correct link");
 			ATUReports.add("contain title and correct link", "xml", " visible", "visible", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -474,43 +444,29 @@ public class TC21599GuestPremissions {
 			ATUReports.add("contain title and link", "xml", " visible", "not visible", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-       
+       				
 		/// 39.Click on Podcast menu item.
+			
 		record.waitForVisibility(record.recordings_tab);
 		record.clickOnRecordingsTab();
 
 		// 38.Click on RSS Feed menu item: 1) The RSS Feed page is displayed.
 
-		record.verifyPodcastPage(driver, tegrity);
+		String result = record.verifyPodcastPage(driver, tegrity);
 		// 38.1 2) The recording <item> is displayed in the course
 		// ctrl+a
-		robot.mouseMove(500, 500);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
-		robot.keyPress(KeyEvent.VK_A);
-		Thread.sleep(200);
-		robot.keyRelease(KeyEvent.VK_A);
-		Thread.sleep(200);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
-		// ctrl+c
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
-		robot.keyPress(KeyEvent.VK_C);
-		Thread.sleep(200);
-		robot.keyRelease(KeyEvent.VK_C);
-		Thread.sleep(200);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
-		toolkit = Toolkit.getDefaultToolkit();
-		clipboard = toolkit.getSystemClipboard();
-		result = (String) clipboard.getData(DataFlavor.stringFlavor);
+
+		for (String handler: driver.getWindowHandles()) {
+			if (!handler.equals(parentWindow)) {
+				driver.close();
+				driver.switchTo().window(parentWindow);
+				break;
+			}
+		}
+				
 		test = "<title>" + course_name + " recordings</title>";
-		driver.navigate().back();
-		record.waitForVisibility(record.course_tasks_button);
-		record.toPodCast(driver);
          //rss_feed_course_link="https"+rss_feed_course_link;
-		String podcast_feed_course_link = rss_feed_course_link;
+		String podcast_feed_course_link = xml_url;
 	
 		
          ////find if xml contains title link and enclosure
@@ -523,10 +479,8 @@ public class TC21599GuestPremissions {
 			ATUReports.add("contain title and link", "xml", " visible", "not visible", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		driver.navigate().back();
+	
 		record.waitForVisibility(record.course_tasks_button);
-	    
-      
        //url attribute +later call function to verify pattern
        record.podcastUrlVerification(result,podcast_feed_course_link,tegrity);
        
@@ -590,7 +544,6 @@ public class TC21599GuestPremissions {
 		// 6.verify downloaded file is valid using md5
 		record.VerifyDownloadedFileIsExist(download_path);
 
-		//driver.quit();
 	    ///41.download file and verify its existence
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

@@ -156,8 +156,8 @@ public class EditRecording extends Page {
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
 			
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			String message = getTextFromWebElement(ie);
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
+			String message = getTextFromWebElement(ie,5);
 			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
@@ -208,9 +208,11 @@ public class EditRecording extends Page {
 			driver.switchTo().window(window_handler);
 			break;
 		}
-		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(4));
-		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
 		
+
+		record.waitForVisibility(listButtons.get(4));
+		clickElement(listButtons.get(4));
+		clickElement(listButtons.get(4));
 		Thread.sleep(2000);
 		
 	
@@ -234,8 +236,8 @@ public class EditRecording extends Page {
 		}
 		int countOfErrors = 0;
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){		
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			String message = getTextFromWebElement(ie);
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
+			String message = getTextFromWebElement(ie,5);
 			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 				break;
@@ -308,8 +310,8 @@ public class EditRecording extends Page {
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
 			
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			String message = getTextFromWebElement(ie);
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
+			String message = getTextFromWebElement(ie,5);
 			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
@@ -376,8 +378,8 @@ public class EditRecording extends Page {
 		
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){	
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver);		
-			String message = getTextFromWebElement(ie);
+			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
+			String message = getTextFromWebElement(ie,5);
 			if(message.contains("Success")){
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;

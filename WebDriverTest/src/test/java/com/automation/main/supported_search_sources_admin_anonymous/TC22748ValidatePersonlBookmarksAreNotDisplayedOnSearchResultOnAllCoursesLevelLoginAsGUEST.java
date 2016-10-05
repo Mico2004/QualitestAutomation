@@ -147,8 +147,8 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		driver.quit();
 	}
 	
-	@Test
-	public void test22746() throws Exception {
+	@Test (description = "TC 22748 Validate Personl Bookmarks Are Not Displayed On Search Result On All Courses Level Login As GUEST")
+	public void test22748() throws Exception {
 
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -160,17 +160,16 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		// 3.click on course
 		String course_name = course.selectCourseThatStartingWith("Ab");
 		
-		 // 4.to course settings
+		 // 4. make course public
 		 record.waitForVisibility(record.course_tasks_button);
-		 record.toCourseSettingsPage();
-		 
-		
-		 // 5.verify checked visibility of course(make it public)
-		 course_settings.checkCourseVisibility();
-		 Thread.sleep(2000);
+		 record.clickOnCourseTaskThenCourseSettings();
+		 course_settings.makeSureThatMakeCoursePublicIsSelected();
+		 course_settings.clickOnOkButton();
+		 Thread.sleep(1000);
+					
 		 course_settings.signOut();
 		
-		
+	
 		tegrity.waitForVisibility(tegrity.passfield);
 		// 6.login as student
 		tegrity.loginCourses("User4");
@@ -230,6 +229,20 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 		// 6. delete bookmarks
 		player_page.deleteAllBookmark();
+		player_page.exitInnerFrame();
+		
+		record.signOut();
+		
+		// Unpublic Ab course1. 
+		tegrity.loginCourses("User1");
+									
+		course.selectCourseThatStartingWith("Ab");
+									
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings.clickOnOkButton();
+					
 
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

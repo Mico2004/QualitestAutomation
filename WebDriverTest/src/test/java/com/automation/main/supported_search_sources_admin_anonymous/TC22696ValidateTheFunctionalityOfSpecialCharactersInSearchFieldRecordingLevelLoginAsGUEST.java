@@ -214,6 +214,7 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 	    player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(0));
 		player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 	    record.waitForVisibility(record.first_recording);
+	    player_page.exitInnerFrame();
 	    record.signOut();
 	    
 	    //11.login as user1
@@ -259,7 +260,7 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		///14.Enter invalid "Recording Title" in the search field and press
 		/// ENTER
 		player_page.verifySearchReturnEmptyList(recording_name);
-	   
+		player_page.exitInnerFrame();
 		//make the course unpublic
 		record.signOut();
 		

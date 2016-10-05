@@ -31,6 +31,7 @@ import org.testng.annotations.Test;
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
+import com.automation.main.page_helpers.CourseSettingsPage;
 import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
@@ -83,7 +84,8 @@ public class TestSuitePreSetCopyRecordings_SupportedSearch {
 	public CreateNewUserWindow create_new_user_window;
 	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
 	public EditRecordinPropertiesWindow erp_window;
-
+	public CourseSettingsPage course_settings_page ;
+	
 	@BeforeClass
 	public void setup() {
 
@@ -113,7 +115,7 @@ public class TestSuitePreSetCopyRecordings_SupportedSearch {
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
 
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
-
+		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 		mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
 
 		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
@@ -154,8 +156,20 @@ public class TestSuitePreSetCopyRecordings_SupportedSearch {
 
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws InterruptedException {
-		// 1. Login with SuperUser.
+			
+		//pre test to search
+		tegrity.loginAdmin("Admin");
+		Thread.sleep(2000);		
+
+		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
+		Thread.sleep(2000);		
+
+		course_settings_page.UnselectedMakeCoursePublic();
 		
+		record.signOut();
+		Thread.sleep(2000);
+		
+		// 1. Login with SuperUser.	
 		tegrity.loginCourses("SuperUser");// log in courses page
 		initializeCourseObject();
 
@@ -200,10 +214,7 @@ public class TestSuitePreSetCopyRecordings_SupportedSearch {
 		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
 		System.out.println("4");
 
-		
-		
 
-		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 //		// 2.copy courses to pastcourses a
