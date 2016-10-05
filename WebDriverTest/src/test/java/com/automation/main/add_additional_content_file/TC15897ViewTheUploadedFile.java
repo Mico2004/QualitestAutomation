@@ -404,7 +404,13 @@ public class TC15897ViewTheUploadedFile {
 				// 6.verify downloaded file is valid using md5
 				record.VerifyDownloadedFileIsValid(file_name2);
 	         	
-
+				record.signOut();
+				Thread.sleep(1000);
+								
+				tegrity.loginCourses("User1");
+				// 3.Select course+delete previous files
+				course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
+			
 				System.out.println("Done.");
 				ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
