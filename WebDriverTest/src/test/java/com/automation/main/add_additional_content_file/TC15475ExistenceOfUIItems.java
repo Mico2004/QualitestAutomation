@@ -140,7 +140,7 @@ public class TC15475ExistenceOfUIItems {
 			record.toUploadAdditionalContentFile();
 			add_additional_content_window.waitForVisibility(add_additional_content_window.add_additional_file_button);
 			//5. Window title background same as the color selected for university
-	    	String additional_content_background=add_additional_content_window.getBackGroundColor(add_additional_content_window.background);
+	    	String additional_content_background=add_additional_content_window.getBackGroundColor(add_additional_content_window.addFileWindow);
 			if(additional_content_background.equals(universit_color))
 			{
 				System.out.println("same additional content background color");
