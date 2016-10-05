@@ -721,8 +721,6 @@ public class Page {
 	// description
 	public void verifyWebElementDisplayed(WebElement web_element, String description) {
 			
-		
-		
 		waitForVisibility(web_element);
 		if (web_element.isDisplayed()) {
 			System.out.println(description + " is displayed.");

@@ -38,12 +38,13 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 		super(browser);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_txtSerach") WebElement search_user_input;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_btnSearch") WebElement search_user_button;
 	@FindBy(css="#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers>option") WebElement first_user_of_user_list;
 	@FindBy(css="#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxInstructors>option") WebElement	first_user_of_instructors_list;
-	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor") WebElement add_selected_as_instructor_button;
+	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")
+	public WebElement add_selected_as_instructor_button;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonDeleteInstructor") WebElement remove_selected_from_instructor_list_button;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddStudent") WebElement add_selected_as_student_button;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonDeleteStudent") WebElement remove_selected_from_student_list_button;
