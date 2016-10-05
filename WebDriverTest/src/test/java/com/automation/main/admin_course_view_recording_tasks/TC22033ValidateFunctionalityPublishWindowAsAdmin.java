@@ -192,7 +192,7 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			
 			// 20. Sign out.
 			top_bar_helper.exitInnerFrame();
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			
 			// 21. Login as a different user who is enrolled as a STUDENT to the same course (User4).
 			tegrity.loginCourses("User4");// log in courses page

@@ -116,7 +116,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_automated_capitioning, "enable automated captioning");
 		advanced_service_settings_page.clickOnOkbutton();
 		Thread.sleep(2000);
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		
 		

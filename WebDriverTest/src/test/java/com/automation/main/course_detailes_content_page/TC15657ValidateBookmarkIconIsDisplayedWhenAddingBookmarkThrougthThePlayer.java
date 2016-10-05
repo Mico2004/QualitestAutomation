@@ -162,7 +162,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		record.checkStatusExistenceForMaxTTime(360);
 		
 		// 4. Logout.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		Thread.sleep(1000);
 		
