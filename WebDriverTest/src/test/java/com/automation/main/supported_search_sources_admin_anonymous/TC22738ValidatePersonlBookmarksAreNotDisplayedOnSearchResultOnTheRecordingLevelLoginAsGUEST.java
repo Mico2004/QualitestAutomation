@@ -150,6 +150,18 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			tegrity.waitForVisibility(tegrity.passfield);
+			
+			//pre test - edit the second chapter name to be unique
+			tegrity.loginCourses("User1");
+			course.selectCourseThatStartingWith("Ab");
+			
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsSelected();
+			course_settings.clickOnOkButton();
+			Thread.sleep(1000);			
+			record.signOut();
+						
 			// 2.login as super-user
 			tegrity.loginCourses("User4");
 			course.waitForVisibility(course.first_course_button);
@@ -213,6 +225,18 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			
 			//post test
 			player_page.deleteAllBookmark();
+			player_page.exitInnerFrame();
+			record.signOut();
+			
+			// Unpublic Ab course1. 
+			tegrity.loginCourses("User1");
+							
+			course.selectCourseThatStartingWith("Ab");
+							
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+			course_settings.clickOnOkButton();
 			
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
