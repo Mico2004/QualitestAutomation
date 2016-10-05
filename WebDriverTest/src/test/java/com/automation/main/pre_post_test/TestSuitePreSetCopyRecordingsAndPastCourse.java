@@ -1,7 +1,10 @@
 package com.automation.main.pre_post_test;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -138,13 +141,7 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		// 1. Login with SuperUser.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		Thread.sleep(2000);
-	
-		
-		
-		
-		
-		
-		
+
 		
 		
 		

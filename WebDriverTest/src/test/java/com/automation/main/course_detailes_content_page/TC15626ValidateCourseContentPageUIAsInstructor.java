@@ -159,7 +159,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		confirm_menu.clickOnOkButton();
 		
 		// 3. Logout.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 4. Login as INSTRUCTOR.

@@ -147,6 +147,8 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			waitForVisibility(first_course_delete_button);
 			first_course_delete_button.click();
 			System.out.println("Clicked on first course delete button");
+			waitForAlert(60);
+			clickOkInAlertIfPresent();
 			Thread.sleep(3000);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on first course delete button. ");
