@@ -165,6 +165,8 @@ public class PreTest {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SelfRegConfig")));
 		
 		
+		
+		
 
 		// 3. Click on create course href link 
 		driver.switchTo().frame(0);
