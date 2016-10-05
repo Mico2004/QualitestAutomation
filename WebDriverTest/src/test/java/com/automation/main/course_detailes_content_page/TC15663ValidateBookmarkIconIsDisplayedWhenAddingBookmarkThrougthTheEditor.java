@@ -150,7 +150,7 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// 4. Logout.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 5. Login as Instructor (User1).

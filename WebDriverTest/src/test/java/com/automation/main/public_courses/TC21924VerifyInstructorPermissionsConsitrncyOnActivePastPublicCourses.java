@@ -658,7 +658,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		// PostTest
 		driver.navigate().back();
 		Thread.sleep(1000);
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		tegrity.loginCourses("SuperUser");
 		course.selectCourseThatStartingWith(active_public_course_name);

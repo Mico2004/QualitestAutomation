@@ -103,7 +103,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 	}
 
 	@Test (description="TC 21988 Validate Recording Tasks UI In Recordings Student Recordings And Tests Tabs As ADMIN")
-	public void loginCourses() throws InterruptedException//
+	public void test21988() throws InterruptedException//
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// Precondition
@@ -116,7 +116,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_automated_capitioning, "enable automated captioning");
 		advanced_service_settings_page.clickOnOkbutton();
 		Thread.sleep(2000);
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		
 		
