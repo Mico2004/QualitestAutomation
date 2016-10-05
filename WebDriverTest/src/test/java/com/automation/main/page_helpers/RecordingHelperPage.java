@@ -163,8 +163,8 @@ public class RecordingHelperPage extends Page {
 	WebElement user_name;
 	@FindBy(id = "CopyTask2")
 	public WebElement copy_button2;
-	// @FindBy (xpath="//*[@class=\"recordingInfoContainer ng-scope\"]/div")
-	// List <WebElement> recordings_list;
+	@FindBy (xpath="//*[@class=\"recordingInfoContainer ng-scope\"]/div")
+	List <WebElement> record_list;
 	@FindBy(id = "TestsTab")
 	public WebElement test_tab;
 	@FindBy(id = "EditRecordingProperties")
@@ -1431,7 +1431,47 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			Assert.assertTrue(false);
 			
 		}
+	}
+	
+	public String selectRecordingThatChangeFromThatName(String original_recorder_name) throws InterruptedException {
+		try{
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recorded by"));
+		}catch(Exception e)
+		{
+			System.out.println("There are not recordings in the course tab");
+			ATUReports.add("Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab",LogAs.FAILED,null);
+			Assert.assertTrue(false);
+		}			
+		WebElement recording=null;		
+		String differentRecordName = null;
+		System.out.println(original_recorder_name);
+		try{
+			for (WebElement el : recordings_list) {		
+			System.out.println(el.getText());
+			if (!(el.getText().equals(original_recorder_name)) && !(el.getText().equals("Recordings")) && !(el.getText().equals("Recording Tasks"))) {
+				differentRecordName = el.getText();
+				System.out.println(" Recording found");
+				ATUReports.add(" Recording found", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+				break;
+			}
+		
 		}
+		
+		}catch(WebDriverException e){
+			handlesClickIsNotVisible(recording);
+			waitForVisibility(visibleFirstChapter);
+			System.out.println(" no such recording found");
+			ATUReports.add("no such recording", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+			
+		}
+		return differentRecordName;
+	}
+
+	
+	
+	
 		
 	// verify move menu
 	public void toMoveMenu() throws InterruptedException {
