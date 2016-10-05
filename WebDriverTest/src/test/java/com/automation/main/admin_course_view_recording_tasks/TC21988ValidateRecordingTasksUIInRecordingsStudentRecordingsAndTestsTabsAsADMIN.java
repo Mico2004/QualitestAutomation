@@ -174,7 +174,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				// 9. Hover over "Recording tasks" menu.
 				record.recording_tasks_button.click();
 				
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 				
 				// 10. The "recording tasks" menu opens.
 				boolean is_shown = record.isRecordingTasksShown();
