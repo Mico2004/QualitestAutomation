@@ -103,7 +103,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 	}
 
 	@Test (description="TC 21988 Validate Recording Tasks UI In Recordings Student Recordings And Tests Tabs As ADMIN")
-	public void loginCourses() throws InterruptedException//
+	public void test21988() throws InterruptedException//
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// Precondition
