@@ -555,6 +555,110 @@ public class CoursesHelperPage extends Page {
 		record_helper_page.returnToCourseListPage(this);
 	}
 
+	
+	// This function copy all recordings from source course to SEVERAL courses at once
+	public void copyRecordingFromCourseStartWithToCourseStartWithOfType(String source_start_with, List<String> des_start_with,
+			int type_of_recordings, RecordingHelperPage record_helper_page, CopyMenu copy_menu,
+			ConfirmationMenu confirmation_menu) throws InterruptedException {
+		String destination_course_name = null;
+		String source_course = null;
+		boolean sourceCourseFound=false;
+		List <String> destinationCourses=new ArrayList<String>();
+		
+		
+		for (int i = 0; i < des_start_with.size(); i++) {
+			for (String course_name : getCourseList()) {
+				if (course_name.startsWith(des_start_with.get(i))) {					
+					destinationCourses.add(course_name);
+				} else if (course_name.startsWith(source_start_with) && !sourceCourseFound) {
+					source_course = course_name;
+					sourceCourseFound=true;
+				}
+			}
+		}
+
+		selectCourseThatStartingWith(source_course);
+
+		if (type_of_recordings == 1) {
+			new WebDriverWait(driver, 5)
+					.until(ExpectedConditions.visibilityOf(record_helper_page.additional_content_tab));
+			record_helper_page.clickOnAdditionContentTab();
+		} else if (type_of_recordings == 2) {
+			new WebDriverWait(driver, 5)
+					.until(ExpectedConditions.visibilityOf(record_helper_page.student_recordings_tab));
+			record_helper_page.clickOnStudentRecordingsTab();
+		} else if (type_of_recordings == 3) {
+			new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(record_helper_page.tests_tab));
+			record_helper_page.clickOnTestsTab();
+		}
+		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
+		wait.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
+		Thread.sleep(2000);
+		while (!record_helper_page.check_all_checkbox.isSelected()) {
+			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
+			new WebDriverWait(driver, 10)
+					.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
+			clickElement(record_helper_page.check_all_checkbox);		 					
+			Thread.sleep(1000);
+		}
+		if ((type_of_recordings == 0) || (type_of_recordings == 2) ||  (type_of_recordings == 3)) {
+			if(!record_helper_page.checkIfThereAreRecordingsInTab()){
+				record_helper_page.returnToCourseListPage(this);
+				return;
+			}			
+			record_helper_page.checkExistenceOfNoncopyableRecordingsStatusInRecordings();			
+		} else if ((type_of_recordings == 1)) {		
+			if(!record_helper_page.checkIfThereAreContentsInAdditionalTab()){
+				record_helper_page.returnToCourseListPage(this);
+				return;
+			}
+				record_helper_page.checkExistenceOfNonDeleteItemsStatusInAdditionalContent();
+		}
+		int i = 0;
+		boolean copySuccess = false;
+		while (i < 3 && !copySuccess) {
+			try {
+				if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
+					record_helper_page.clickOnRecordingTaskThenCopy();
+				} else if (type_of_recordings == 1) {
+					record_helper_page.clickOnContentTaskThenCopy();
+				}
+
+				System.out.println("CopyHandle");
+				copy_menu.selectTargetCourseFromCourseList(destinationCourses);
+				System.out.println("CopyHandle1");
+				copy_menu.clickOnCopyButton();
+				System.out.println("CopyHandle2");
+				confirmation_menu.clickOnOkButton();
+				System.out.println("CopyHandle3");
+				copySuccess = true;
+			} catch (Exception e) {
+				System.out.println("CopyHandleException" + i);
+				i++;
+				driver.navigate().refresh();
+				Thread.sleep(5000);
+				/*	WebElement div = driver.findElement(By.xpath("//*[@id='main']"));
+				Actions builder = new Actions(driver);
+				builder.moveToElement(div, 10, 10).click().build().perform();*/
+				if (i >= 3) {
+					ATUReports.add("Copy failed", "Copy Success", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					System.out.println(e.getMessage());
+					Assert.assertTrue(false);
+
+				}
+			}
+		}
+		for (String window : driver.getWindowHandles()) {
+			driver.switchTo().window(window);
+			break;
+		}
+		record_helper_page.returnToCourseListPage(this);
+	}
+	
+	
+	
+	
+	
 	// This function get course start with name as 1st arg,
 	// as 2nd arg it get type when: 0 - Recordings, 1 - Additional Content, 2 -
 	// Student Recordings, 3 - Test
