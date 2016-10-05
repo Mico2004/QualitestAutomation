@@ -188,7 +188,8 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 			
 			
 			// 4. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
+			
 			
 			// 5. Search the URL of the link that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(text_from_caption_for_test);
