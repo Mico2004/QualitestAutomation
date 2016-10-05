@@ -474,7 +474,8 @@ public class Page {
 	/// sign out from any page except Login page
 	public void signOut() {
 
-		try {	
+		try {
+			Thread.sleep(1000);
 		System.out.println("signOut1");		
 		((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");
 		Thread.sleep(2000);
