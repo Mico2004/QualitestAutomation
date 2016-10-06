@@ -263,7 +263,7 @@ public class SearchPage extends Page {
 	public void waitUntilSpinnerImageDisappear() throws InterruptedException {
 		for(int i=0; i<20; i++) {
 			try {
-				Thread.sleep(900);
+				Thread.sleep(1000);
 				if(loading_spinner_image.isDisplayed()) {
 					Thread.sleep(100);
 				} else {

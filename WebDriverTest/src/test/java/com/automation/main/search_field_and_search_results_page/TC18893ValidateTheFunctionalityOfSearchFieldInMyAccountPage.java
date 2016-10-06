@@ -145,8 +145,7 @@ public class TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage {
 		// Get information about first chapter
 		record.first_recording_title.click();
 		Thread.sleep(1000);
-		String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
-				
+		String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];				
 		String header_default_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
 		
 		
@@ -225,7 +224,7 @@ public class TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage {
 		search_page.verifySourceTitleDisplayInCorrectFormat();
 		
 		// 9.15. The next result display below the current result in case there is next result.
-//		search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
+		search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
 		
 		// 10. Hover over the chapter icon.
 		Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
