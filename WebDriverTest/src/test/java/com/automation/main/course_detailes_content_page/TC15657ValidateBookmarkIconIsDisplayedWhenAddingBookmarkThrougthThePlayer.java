@@ -145,6 +145,8 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		initializeCourseObject();
 		
 		// 3. Upload a recording named "ex1" to a certain course (Copy to course2).
+		String course_name = course.selectCourseThatStartingWith("abc");
+		record.returnToCourseListPage();
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.selectCourseThatStartingWith("BankValid");
 		
@@ -190,7 +192,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		player_page.addTargetBookmark("First recording bookmark");
 		
 		//11. Click on the course name link in the "Breadcrumb" area.
-		player_page.returnToCoursePageByNameAsUserOrGuest(course);
+		player_page.returnToRecordingPageByNameAsUserOrGuest(course_name, record);
 		
 		
 		// 12. Validate the bookmark symbol is displayed in the "ex1" recording information.
