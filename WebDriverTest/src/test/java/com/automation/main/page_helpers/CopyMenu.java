@@ -149,9 +149,7 @@ public class CopyMenu extends Page {
 
 		String selected_course = null;
 		Thread.sleep(1500);
-		wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOf(first_course_on_the_list));
-		
+		waitForVisibility(first_course_on_the_list);
 		
 		for (int i = 0; i < course_list.size(); i++) {
 			selected_course = course_list.get(i).getText();
