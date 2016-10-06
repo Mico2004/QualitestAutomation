@@ -476,7 +476,7 @@ public class RecordingHelperPage extends Page {
 	// This function return first recording title
 	public String getFirstRecordingTitle() {
 		try{
-			wait.until(ExpectedConditions.visibilityOf(first_recording_title));
+			waitForVisibility(first_recording_title);
 		}catch (Exception e){
 			ATUReports.add("Timeout for first recording", e.getMessage(),
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
