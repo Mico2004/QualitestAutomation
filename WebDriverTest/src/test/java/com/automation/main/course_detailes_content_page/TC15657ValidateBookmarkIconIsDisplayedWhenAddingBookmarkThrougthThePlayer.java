@@ -137,16 +137,14 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 	@Test(description = "TC 15657 Validate Bookmark Icon Is Displayed When Adding Bookmark Througth The Player")
 	public void test15657() throws Exception
 	{
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
+	
 		// 1. Open tegrity "Login page".
 		// 2. Login as an INSTRUCTOR (SuperUser)2. Login as an INSTRUCTOR (SuperUser)
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
 		
 		// 3. Upload a recording named "ex1" to a certain course (Copy to course2).
-		String current_course = course.selectCourseThatStartingWith("abc");
-		record.returnToCourseListPage();
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.selectCourseThatStartingWith("BankValid");
 		
@@ -154,7 +152,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 	
 		record.clickOnRecordingTaskThenCopy();
-		copy.selectTargetCourseFromCourseListThatStartWith(current_course);
+		copy.selectTargetCourseFromCourseListThatStartWith("abc");
 		copy.clickOnCopyButton();
 		Thread.sleep(1000);
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecordings();
@@ -171,7 +169,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		Thread.sleep(1000);
 		
 		// 6. Enter to the course page (Course2).
-		course.selectCourseThatStartingWith(current_course);
+		course.selectCourseThatStartingWith("abc");
 		//getting the url for the admin
 		String url =  course.getCurrentUrlCoursePage(); 
 		Thread.sleep(1000);
@@ -191,8 +189,9 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		player_page.verifyTimeBufferStatusForXSec(5);
 		player_page.addTargetBookmark("First recording bookmark");
 		
-		// TODO: 11. Click on the course name link in the "Breadcrumb" area.
-		driver.navigate().back();
+		//11. Click on the course name link in the "Breadcrumb" area.
+		player_page.returnToCoursePageByNameAsUserOrGuest(course);
+		
 		
 		// 12. Validate the bookmark symbol is displayed in the "ex1" recording information.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {
@@ -210,7 +209,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		Thread.sleep(1000);
 		
 		// 15. Open the course that contains "ex1" recording.
-		course.selectCourseThatStartingWith(current_course);
+		course.selectCourseThatStartingWith("abc");
 		
 		// 16. Validate the bookmark symbol is displayed in the "ex1" recording information.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {
@@ -254,7 +253,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		Thread.sleep(1000);
 		
 		// 22. Enter to the course page.
-		course.selectCourseThatStartingWith(current_course);
+		course.selectCourseThatStartingWith("abc");
 		
 		// 23. Click on another recording (Not the one you used before).
 		// 24. Click on the first chapter.
@@ -285,7 +284,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		Thread.sleep(1000);
 		
 		// 27. Enter to the same course page
-		course.selectCourseThatStartingWith(current_course);
+		course.selectCourseThatStartingWith("abc");
 		Thread.sleep(1000);
 		
 		// 28. Make sure the bookmark symbol do no appear for the recording you just add a bookmark.
