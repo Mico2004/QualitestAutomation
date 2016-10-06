@@ -76,6 +76,10 @@ public class SearchPage extends Page {
 			ATUReports.add("the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, null);
 			return;
 		}
+		
+		String ChapterNameWithMoreInfo = splited_structure_displayed[3];
+		String ChapterName = ChapterNameWithMoreInfo.substring(ChapterNameWithMoreInfo.indexOf("\"") + 1, ChapterNameWithMoreInfo.indexOf(".")-1);
+		
 		String[] splited_third_structure_displayed = splited_structure_displayed[3].trim().split(" ");
 		String third_structure = splited_third_structure_displayed[0] + " results found for: \"" + searching_criterion + "\". " + splited_third_structure_displayed[splited_third_structure_displayed.length-2] +" seconds)";
 
@@ -85,11 +89,16 @@ public class SearchPage extends Page {
 				(splited_structure_displayed[3].trim().equals(third_structure))) {
 			System.out.println("Verfid breadcrumb structure displayed as required.");
 			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "True.", LogAs.PASSED, null);
+		} else if((splited_structure_displayed[1].trim().equals("Courses")) &&
+					(splited_structure_displayed[2].trim().equals(course_name)) && 
+					(searching_criterion.contains(ChapterName))){
+			System.out.println("breadcrumb structure displayed is cut but it's ok.");
+			ATUReports.add("breadcrumb structure displayed is cut but it's ok.", "True.", "True.", LogAs.PASSED, null);
+			
 		} else {
 			System.out.println("Not verfid breadcrumb structure displayed as required.");
 			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			ATUReports.add("splited_structure_displayed" +structure_displayed, "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			
 		}
 	
 	}
