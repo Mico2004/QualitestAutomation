@@ -181,7 +181,7 @@ public class CourseSettingsPage extends Page {
 			}
 		} catch (Exception msg) {
 			System.out.println("Fail to select the checkbox of make this course public.");
-			//ATUReports.add("Select make this course public.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Fail to select the checkbox of make this course public.", "True.", "False.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			//Assert.assertTrue(false);
 		}
 	}
