@@ -1893,7 +1893,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		int time_counter = 0;
 		waitForVisibility(first_recording_status);
 		while (isElementPresent(By.id("RecordingStatus1"))){
-			if(first_recording_status.getText().contains("Being moved from")) {
+				String currentStatus = getTextFromWebElement(first_recording_status, 5);
+			if(currentStatus.contains("Being moved from")) {
 				time_counter++;
 				Thread.sleep(1000);
 
