@@ -103,11 +103,11 @@ public class TC15649TryToDeleteMovingRecording {
 		initializeCourseObject();
 		
 		// save destination course name
-		String destination_course_name = course.getCourseInIndex(1);
+		String destination_course_name = course.getCourseInIndex(2);				
 		System.out.println("Destination course: " + destination_course_name);
 		
 		// 2. Select course.
-		current_course = course.selectSecondCourse(record);
+		current_course = course.selectFirstCourse(record);
 		System.out.println("Source course: " + current_course);
 		
 		// 3. Select recording.
@@ -158,7 +158,6 @@ public class TC15649TryToDeleteMovingRecording {
 		
 		// 11. The source recording has status "Being copying from".
 		record.checkRecordingInIndexIStatus(1, "Being moved from");
-		
 		
 		// 12. While recording is being moved, select "Recording Tasks -> Delete" menu item.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
