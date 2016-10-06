@@ -134,48 +134,45 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		current_course = course.selectCourseThatStartingWith("Ab");
 //		current_course = course.selectCourseThatStartingWith("abc");
 		System.out.println("Current course: " + current_course);
-		//course.selectCourse(record);
-		
-		Thread.sleep(2000);
-		
+			
 		// Get information about first chapter
 		//record.first_recording.click();
 		Thread.sleep(2000);
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);
-		
+//		
 		record.clickOnRecordingTaskThenEditRecording();
 		Thread.sleep(2000);
 		String first_chapter_title = edit_recording.getTitleOffirstChapterRecordingName();
 	
-		Thread.sleep(1000);
-//		String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
-				
-		String header_default_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
-		
-		
-		// TODO: 4. Click on the "Course setting" option under the "Course Task" list.
-		record.clickOnCourseTaskThenCourseSettings();
-		Thread.sleep(1000);
-		
-		
-		// 5. Validate the search field is display at the top right of the UI page below the top navigation bar.
-		top_bar_helper.verifySearchFieldDisplayedAtTopRight();
-
-		// 6. Validate the text in the Course Details page: "Search in all your courses...".
-		top_bar_helper.verifyTargetTextInSearchField("Search in this course...");
-		
-		// 7. Hover over the search field with the mouse pointer.
-		// 7.1. The mouse pointer change to text cursor - Not for automation.
-		// 7.2. A hint is displayed to the user: "Search in all your courses...".
-		top_bar_helper.moveToElementAndPerform(top_bar_helper.search_box_field, driver);
-		top_bar_helper.verifyWebElementHaveTargetAttributeTitle(top_bar_helper.search_box_field, "Search in this course...");
-		Thread.sleep(1000);
-		
-		if(!(driver instanceof InternetExplorerDriver)) {
-			// 8. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
-		}
+//		Thread.sleep(1000);
+////		String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
+//				
+//		String header_default_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
+//		
+//		
+//		// TODO: 4. Click on the "Course setting" option under the "Course Task" list.
+//		record.clickOnCourseTaskThenCourseSettings();
+//		Thread.sleep(1000);
+//		
+//		
+//		// 5. Validate the search field is display at the top right of the UI page below the top navigation bar.
+//		top_bar_helper.verifySearchFieldDisplayedAtTopRight();
+//
+//		// 6. Validate the text in the Course Details page: "Search in all your courses...".
+//		top_bar_helper.verifyTargetTextInSearchField("Search in this course...");
+//		
+//		// 7. Hover over the search field with the mouse pointer.
+//		// 7.1. The mouse pointer change to text cursor - Not for automation.
+//		// 7.2. A hint is displayed to the user: "Search in all your courses...".
+//		top_bar_helper.moveToElementAndPerform(top_bar_helper.search_box_field, driver);
+//		top_bar_helper.verifyWebElementHaveTargetAttributeTitle(top_bar_helper.search_box_field, "Search in this course...");
+//		Thread.sleep(1000);
+//		
+//		if(!(driver instanceof InternetExplorerDriver)) {
+//			// 8. Set the focus to the field with a mouse pointer.
+//			top_bar_helper.search_box_field.click();
+//		}
 		
 		// 9. Search some "Recording Chapter" and press ENTER.
 		top_bar_helper.searchForTargetText(first_chapter_title);
@@ -187,20 +184,20 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		search_page.waitUntilSpinnerImageDisappear();
 		
 		// 9.3. The header is displayed with the default color and the logo at the top left cornner of the UI page.
-		String header_search_page_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
-		if(header_default_color.equals(header_search_page_color)) {
-			System.out.println("Verfied header is displayed with the default color.");
-			ATUReports.add("Verfied header is displayed with the default color.", "True.", "True.", LogAs.PASSED, null);
-		} else {
-			System.out.println("Not verfied header is displayed with the default color.");
-			ATUReports.add("Verfied header is displayed with the default color.", "True.", "False.", LogAs.FAILED, null);
-		}
-		
-		top_bar_helper.verfiyThatTheLogoAtTheTopLeft();
-		
-		// 9.4. The tegrity logo is displayed on the bottom footer bar in the left side and the institution logo is displayed on the top left corner of the page.
-		bottom_footer.verifyThatTheTegrityLogoDisplayedOnBottomLeftSide();
-		
+//		String header_search_page_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
+//		if(header_default_color.equals(header_search_page_color)) {
+//			System.out.println("Verfied header is displayed with the default color.");
+//			ATUReports.add("Verfied header is displayed with the default color.", "True.", "True.", LogAs.PASSED, null);
+//		} else {
+//			System.out.println("Not verfied header is displayed with the default color.");
+//			ATUReports.add("Verfied header is displayed with the default color.", "True.", "False.", LogAs.FAILED, null);
+//		}
+//		
+//		top_bar_helper.verfiyThatTheLogoAtTheTopLeft();
+//		
+//		// 9.4. The tegrity logo is displayed on the bottom footer bar in the left side and the institution logo is displayed on the top left corner of the page.
+//		bottom_footer.verifyThatTheTegrityLogoDisplayedOnBottomLeftSide();
+//		
 		
 		// 9.5. The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)"
 		search_page.verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfound(current_course, first_chapter_title);
