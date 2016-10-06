@@ -1,4 +1,4 @@
-package com.automation.main.supported_search_sources_admin_anonymous;
+package com.automation.main.supported_search;
 
 
 import java.text.DateFormat;

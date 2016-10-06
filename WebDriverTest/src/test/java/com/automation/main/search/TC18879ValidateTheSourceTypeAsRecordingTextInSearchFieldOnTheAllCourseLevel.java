@@ -1,4 +1,4 @@
-package com.automation.main.search_field_and_search_results_page;
+package com.automation.main.search;
 
 import java.util.List;
 import java.text.DateFormat;

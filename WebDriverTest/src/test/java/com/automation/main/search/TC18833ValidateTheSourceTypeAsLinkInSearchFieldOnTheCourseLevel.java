@@ -1,4 +1,4 @@
-package com.automation.main.search_field_and_search_results_page;
+package com.automation.main.search;
 
 //precondition student first course must have recordings in recordings tab as well as in student recordings tab
 
