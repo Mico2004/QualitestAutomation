@@ -1,6 +1,7 @@
 package com.automation.main.course_detailes_content_page;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -70,6 +71,9 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
+    String recodingDateNumber;
+	String bookmark ;
+	
 	@BeforeClass
 	public void setup() {
 
@@ -135,11 +139,9 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 	public void test24617() throws Exception
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
+		initializeCourseObject();
 		// 1. For this test you need course with at least one recording.
 		tegrity.loginCourses("SuperUser");
-		initializeCourseObject();
-		
 		
 		String current_course = course.selectCourseThatStartingWith("abc");
 		String url =  course.getCurrentUrlCoursePage(); 
@@ -233,7 +235,7 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
 		Thread.sleep(1000);
 
-		
+	
 		// 19. Validate that bookmark sign is displayed in the recording, left of recording date.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {
 			record.verifyIndexRecordingHaveBookmark(1);
@@ -245,10 +247,17 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 		
 		String recording_date = record.getIndexDateWebElement(1).getText();
 		
+		if(driver instanceof InternetExplorerDriver) {
+			recodingDateNumber = recording_date.split(" ")[1];
+			bookmark = recording_date.split(" ")[0];
+		} else {		
+			recodingDateNumber = recording_date.split("\n")[1];
+			bookmark = recording_date.split("\n")[0];
+		}
 		try {
 			Date date = new Date();
-			date.parse(recording_date.split("\n")[1]);
-			if(recording_date.split("\n")[0].equals("bookmark")) {
+			date.parse(recodingDateNumber);
+			if(bookmark.equals("bookmark")) {
 				System.out.println("Verified that bookmark sign is to the left of recording date.");
 				ATUReports.add("Verified that bookmark sign is to the left of recording date.", "True.", "True.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -258,6 +267,7 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 				Assert.assertTrue(false);
 			}
 		} catch(Exception msg) {
+			msg.printStackTrace();
 			System.out.println("Date is not correct/wrong.");
 			ATUReports.add("Date is correct.", "True.", "False.", LogAs.FAILED, null);
 			Assert.assertTrue(false);

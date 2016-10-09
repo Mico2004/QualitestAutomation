@@ -140,10 +140,7 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 		// 1. For this test you need course with at least one recording.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-		
-		
-		String current_course = course.selectCourseThatStartingWith("abc");
-		record.returnToCourseListPage();
+				
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
@@ -155,7 +152,7 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 		Thread.sleep(1000);
 		
 		// 3. Click on the Precondtional Course.
-		course.selectCourseThatStartingWith(current_course);
+		course.selectCourseThatStartingWith("abc");
 		Thread.sleep(1000);
 		
 		// 4. Select some Recording and click on it.
@@ -180,10 +177,9 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 		
 		
 		// 8. Click on the Preconditional Course.
-		course.selectCourseThatStartingWith(current_course);
+		course.selectCourseThatStartingWith("abc");
 		Thread.sleep(3000);
 
-		
 		// 9. Validate that bookmark sign is not displayed in the recording, left of recording date.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {
 			record.verifyIndexRecordingHaveNoBookmark(1);
@@ -201,7 +197,7 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 		Thread.sleep(1000);
 		
 		// 11. Click on the Precondtional Course.
-		course.selectCourseThatStartingWith(current_course);
+		course.selectCourseThatStartingWith("abc");
 		
 		// 12. Select some Recording and click on it.
 		// 13. Click on the first chapter.
