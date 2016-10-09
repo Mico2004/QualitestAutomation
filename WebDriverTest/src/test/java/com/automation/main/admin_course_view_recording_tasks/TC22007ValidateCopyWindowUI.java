@@ -93,11 +93,6 @@ public class TC22007ValidateCopyWindowUI {
 		driver.quit();
 	}
 
-
-	@Test
-	public void loadPage() throws InterruptedException {
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {

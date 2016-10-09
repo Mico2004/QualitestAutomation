@@ -138,13 +138,6 @@ public class TestSuitePreSetCopyRecordings_PrivateCourses {
 		this.driver.quit();
 	}
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
-
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -152,10 +145,11 @@ public class TestSuitePreSetCopyRecordings_PrivateCourses {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException {
+	@Test(description = "Test Suite Pre Set Copy Recordings_PrivateCourses")
+	public void testSuitePreSetCopyRecordings_PrivateCourses() throws InterruptedException {
 		// 1. Login with SuperUser.
-		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		tegrity.loginCourses("SuperUser");// log in courses page
 		initializeCourseObject();
 

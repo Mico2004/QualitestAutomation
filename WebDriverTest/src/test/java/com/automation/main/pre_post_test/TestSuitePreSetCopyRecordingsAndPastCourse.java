@@ -119,7 +119,7 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		String DateToStr = DateFormat.getInstance().format(curDate);
 		System.out.println("Starting the test: TestSuitePreSetCopyRecordingsAndPastCourse at " + DateToStr);
 		ATUReports.add("Message window.", "Starting the test: TestSuitePreSetCopyRecordingsAndPastCourse at " + DateToStr,
-				"Starting the test: TC15563CopyRecordingToTheSameCourse at " + DateToStr, LogAs.PASSED, null);
+				"Starting the test: TestSuitePreSetCopyRecordingsAndPastCourse at " + DateToStr, LogAs.PASSED, null);
 	}
 
 	@AfterClass
@@ -137,16 +137,11 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 	}
 
 	@Test( description = "Past Courses Pretest")
-	public void loginCourses() throws InterruptedException {
+	public void testSuitePreSetCopyRecordingsAndPastCourse() throws InterruptedException {
 		// 1. Login with SuperUser.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		Thread.sleep(2000);
-
-		
-		
-		
-		
-		
+				
 	String login_url = driver.getCurrentUrl();
 		String university_name  = login_url.split("/")[2].substring(0,  login_url.split("/")[2].length() - 12);
 		String user = PropertyManager.getProperty("User1");

@@ -104,11 +104,6 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 		this.driver.quit();
 	}
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-
-	}
 	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
