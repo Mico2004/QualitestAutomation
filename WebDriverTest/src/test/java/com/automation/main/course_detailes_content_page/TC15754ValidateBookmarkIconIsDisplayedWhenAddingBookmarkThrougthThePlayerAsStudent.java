@@ -188,14 +188,11 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		record.verifyIndexRecordingHaveBookmark(1);
 		
 		// 10. Sign out.
-		top_bar_helper.clickOnSignOut();
-		Thread.sleep(2000);
+		record.clickOnSignOut();
 		
 		// 11. Login as a INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(3000);
-		
-		
+	
 		// 12. Open the course that contains "ex1" recording.
 		course.selectCourseThatStartingWith(current_course);
 		record.clickOnStudentRecordingsTab();

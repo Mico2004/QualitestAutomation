@@ -255,8 +255,7 @@ public class RecordingHelperPage extends Page {
 	List<WebElement> visibleChapters;
 	@FindBy(id="scrollableArea")
 	WebElement TabContainer;
-	
-	
+	public @FindBy(xpath =".//*[@id='scrollableArea']/div[1]/div[1]/div[2]/div/ul/li/ul/li[10]/span") WebElement SubscribeToACourse;
 	public @FindBy(css = ".resume-button.ng-scope>a") List<WebElement> list_of_resume_buttons;
 	public @FindBy(css = ".video-wrap") List<WebElement> video_wraps_of_chapters_of_opened_recording_list;
 	public @FindBy(css = ".thumbnail-image") List<WebElement> images_thumbnail_of_recording_chapters_list;
@@ -4063,17 +4062,18 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyPossibleToScrollTheRecordingList() throws InterruptedException {
 		List<WebElement> recordings_list = driver.findElements(By.cssSelector(".recordingTitle"));
 		for(WebElement webElement: recordings_list) {
-			org.openqa.selenium.interactions.Action move_to_element = moveToElement(webElement, driver);
-			if(move_to_element==null) {
-				System.out.println("It is not possible to scroll the recordings list page.");
-				ATUReports.add("It is possible to scroll the recording list page.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				Assert.assertTrue(false);
-			}
-			move_to_element.perform();
+//			org.openqa.selenium.interactions.Action move_to_element = moveToElement(webElement, driver);
+//			if(move_to_element==null) {
+//				System.out.println("It is not possible to scroll the recordings list page.");
+//				ATUReports.add("It is possible to scroll the recording list page.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//				Assert.assertTrue(false);
+//			}
+//			move_to_element.perform();
+			moveToElement(webElement,driver).perform();
 			Thread.sleep(100);
 		}
 		System.out.println("It is possible to scroll the recordings list page.");
-		ATUReports.add("It is possible to scroll the recording list page.", "True.", "False.", LogAs.PASSED, null);
+		ATUReports.add("It is possible to scroll the recording list page.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -4083,6 +4083,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		verifyPossibleToScrollTheRecordingList();
 		List<WebElement> recordings_list = driver.findElements(By.cssSelector(".recordingTitle"));
 		WebElement menu_bar = driver.findElement(By.cssSelector(".row.menu-wrap"));
+		moveToElementAndPerform(menu_bar,driver);
+	
 		
 		if(recordings_list.get(0).getLocation().y < menu_bar.getLocation().y)
 		{
