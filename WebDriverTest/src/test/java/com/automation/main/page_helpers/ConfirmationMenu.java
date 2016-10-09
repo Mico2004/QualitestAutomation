@@ -52,9 +52,7 @@ public class ConfirmationMenu extends Page {
 	}
 
 	// This function clicks on ok button of copy menu
-	public void clickOnOkButton() throws InterruptedException {		
-		
-		
+	public void clickOnOkButton() throws InterruptedException {			
 		Thread.sleep(1000);
 		try {
 			if(isAlertPresent()){
