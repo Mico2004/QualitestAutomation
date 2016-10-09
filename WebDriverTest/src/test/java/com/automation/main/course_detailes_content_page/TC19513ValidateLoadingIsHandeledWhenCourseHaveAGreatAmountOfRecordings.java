@@ -143,15 +143,18 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 		// 1. Make sure to have a course with at least 200 Regular recordings (Every recording contain at least 5 chapters).
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-		
+					
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 2, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record);
-		course.selectCourseThatStartingWith("BankValid");
+		course.selectCourseThatStartingWith("abc");
 		int number_of_recording = record.getNumberOfRecordings();
-		
+		record.returnToCourseListPage();
+		course.selectCourseThatStartingWith("BankValid");
+		int number_of_recording_of_the_bank = record.getNumberOfRecordings();
+		int numberOfRecordsToMove = 200 - number_of_recording;
 		record.checkAllCheckBox();
 		
-		for(int i=0; i<= (200/number_of_recording); i++) {
+		for(int i=0; i<= (numberOfRecordsToMove/number_of_recording_of_the_bank); i++) {
 			record.clickOnRecordingTaskThenCopy();
 			copy.selectTargetCourseFromCourseListThatStartWith("abc");
 			copy.clickOnCopyButton();
@@ -174,13 +177,10 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 		// 3.1. The loading event is handeled properly (spinning loading symbol for example).
 		wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
 		
-//		System.out.println(record.getBackGroundColor(record.recordings_tab));
-		
 		// 3.2. The recordings are displayed and clickable.
 		record.verifyPossibleToScrollTheRecordingList();
 		
 		// 4. Click on another Tab (Student, Additional Recordings etc).
-		String first_recording_title = record.getFirstRecordingTitle();
 		record.clickOnStudentRecordingsTab();
 		
 //		int counter = 0;
@@ -196,7 +196,7 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 //				break;
 //			}
 //		}
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 		
 //		System.out.println(record.getBackGroundColor(record.recordings_tab));
 		
@@ -216,7 +216,7 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 //				break;
 //			}
 //		}
-		Thread.sleep(10000);
+		Thread.sleep(5000);
 		
 		// 5.1. The loading event is handeled properly (spinning loading symbol for example).
 		wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
