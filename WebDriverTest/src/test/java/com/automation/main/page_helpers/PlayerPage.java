@@ -717,9 +717,8 @@ public class PlayerPage extends Page {
 	public void addTargetBookmark(String target_bookmark) {
 		System.out.println(time_buffer_status.getText());
 		sendStringToWebElement(bookmark_input_text, target_bookmark);
-		clickElement(add_bookmark_button);
+		clickElementJS(add_bookmark_button);
 		System.out.println(time_buffer_status.getText());
-
 		System.out.println("Target bookmark added.");
 		ATUReports.add("Target bookmark added.", "True.", "True.", LogAs.PASSED, null);
 	}
