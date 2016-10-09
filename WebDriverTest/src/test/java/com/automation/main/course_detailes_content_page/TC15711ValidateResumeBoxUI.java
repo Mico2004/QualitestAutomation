@@ -2,6 +2,7 @@ package com.automation.main.course_detailes_content_page;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -179,11 +180,12 @@ public class TC15711ValidateResumeBoxUI {
 		String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));
 		
 		// 7. Click on the recording you just watched.
-		record.clickElement(record.first_recording_title);
+		String firstRecordName = record.first_recording_title.getText();
+		record.verifyFirstExpandableRecording();
 		
 		// 7.1. The "> Resume watching +(slide 2)" box is displayed.
 		Thread.sleep(2000);
-		record.verifyWebElementTargetText(record.list_of_resume_buttons.get(0), "Resume Watching (slide 2)");
+		record.verifyWebElementTargetText(record.list_of_resume_buttons.get(0), "Resume Watching");
 
 		// 7.2. The recording chapters are displayed to the user.
 		// 7.3. The recording chapters are display sequentially.
@@ -217,7 +219,8 @@ public class TC15711ValidateResumeBoxUI {
 		}
 		
 		// 9. Click the slide box link.
-		record.list_of_resume_buttons.get(0).click();
+		//record.list_of_resume_buttons.get(0).click();
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", record.list_of_resume_buttons.get(0));		
 		
 		// 9.1. Redirect to player page.
 		// 9.2. The player start playing the recording from the slide mentioned in the "Resume Watching" text box.
