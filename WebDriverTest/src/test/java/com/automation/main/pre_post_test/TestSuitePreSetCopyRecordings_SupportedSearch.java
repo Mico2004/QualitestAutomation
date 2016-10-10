@@ -140,12 +140,6 @@ public class TestSuitePreSetCopyRecordings_SupportedSearch {
 		this.driver.quit();
 	}
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -154,9 +148,11 @@ public class TestSuitePreSetCopyRecordings_SupportedSearch {
 		course.courses = course.getStringFromElement(course.course_list);
 	}
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException {
-			
+	@Test(description = "Test Suite Pre Set Copy Recordings_SupportedSearch")
+	public void testSuitePreSetCopyRecordings_SupportedSearch() throws InterruptedException {
+		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+	
 		//pre test to search
 		tegrity.loginAdmin("Admin");
 		Thread.sleep(2000);		
