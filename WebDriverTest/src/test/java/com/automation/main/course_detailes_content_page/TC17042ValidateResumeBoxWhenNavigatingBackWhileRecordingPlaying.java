@@ -4,6 +4,7 @@ package com.automation.main.course_detailes_content_page;
 import java.util.Date;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -210,7 +211,7 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 			String before_click_background = record.getBackGroundColor(record.list_of_resume_buttons.get(0));
 			
 			// 10. Hover over the slide box.
-			record.moveToElement(record.list_of_resume_buttons.get(0), driver).perform();
+			record.moveToElementAndPerform(record.list_of_resume_buttons.get(0), driver);
 						
 			// 10.1. The box background changes to grey.
 			if(record.getBackGroundColor(record.list_of_resume_buttons.get(0)).equals(before_click_background)) {
@@ -224,8 +225,9 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 			}
 			
 			// 11. Click the slide box link.
-			record.list_of_resume_buttons.get(0).click();
-						
+			//record.list_of_resume_buttons.get(0).click();
+			record.clickElementWithOutIdJS(record.list_of_resume_buttons.get(0));
+								
 			// 11.1. Redirect to player page.
 			// 11.2. The player start playing the recording from the first slide mentioned in the "Resume Watching" text box.
 			player_page.verifyTimeBufferStatusForXSec(5);
@@ -238,7 +240,7 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 			top_bar_helper.clickOnSignOut();
 			Thread.sleep(2000);
 			
-			// 13. Delete the coockies and validate that the "Resume Watcing" does not display.
+			// 13. Delete the coockies and validate that the "Resume Watching" does not display.
 			driver.manage().deleteAllCookies();
 			
 			if(type_of_user==0) {

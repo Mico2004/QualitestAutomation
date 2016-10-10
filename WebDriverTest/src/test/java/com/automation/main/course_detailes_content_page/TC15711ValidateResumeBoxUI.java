@@ -220,8 +220,8 @@ public class TC15711ValidateResumeBoxUI {
 		
 		// 9. Click the slide box link.
 		//record.list_of_resume_buttons.get(0).click();
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", record.list_of_resume_buttons.get(0));		
-		
+		 record.clickElementWithOutIdJS(record.list_of_resume_buttons.get(0));
+				
 		// 9.1. Redirect to player page.
 		// 9.2. The player start playing the recording from the slide mentioned in the "Resume Watching" text box.
 		player_page.verifyTimeBufferStatusForXSec(5);

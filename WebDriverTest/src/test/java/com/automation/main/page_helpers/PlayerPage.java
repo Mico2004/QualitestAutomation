@@ -1224,9 +1224,11 @@ public class PlayerPage extends Page {
 		boolean looping = true;
 		int seconds = 0;
 		
+		
 		while(looping) {
 			next_button.click();
 			String buffering = time_buffer_status.getText();
+			
 			if(buffering.equals("Buffering")) {
 				Thread.sleep(1000);
 				continue;
@@ -1241,20 +1243,24 @@ public class PlayerPage extends Page {
 		looping = true;
 		
 		while(looping) {
+			
 			String buffering = time_buffer_status.getText();
+				
+			if(buffering.equals("Buffering")) {
+				Thread.sleep(1000);
+				continue;
+			}
+			
 			String CurrentTime = buffering.split("/")[0].trim();
 			String EndTime = buffering.split("/")[1].trim();
-			
+
 			//get the last digit 
 			String AlmostEndTime = EndTime.substring(EndTime.length() - 1,EndTime.length());
 			int lastDigit = Integer.parseInt(AlmostEndTime);
 			lastDigit--;
 			AlmostEndTime = EndTime.substring(0, EndTime.length()-1) + String.valueOf(lastDigit) ;
 					
-			if(buffering.equals("Buffering")) {
-				Thread.sleep(1000);
-				continue;
-			} else if (CurrentTime.equals(EndTime)) {
+			if (CurrentTime.equals(EndTime)) {
 				break;
 			} else if(CurrentTime.equals(AlmostEndTime)){	
 				Thread.sleep(4000);
@@ -1262,8 +1268,7 @@ public class PlayerPage extends Page {
 			} else {
 				Thread.sleep(1000);
 			}
-			
-			
+					
 		}
 		
 		System.out.println("Finshed.");

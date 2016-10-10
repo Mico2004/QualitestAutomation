@@ -210,7 +210,7 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 			String before_click_background = record.getBackGroundColor(record.list_of_resume_buttons.get(0));
 			
 			// 9. Hover over the slide box.
-			record.moveToElement(record.list_of_resume_buttons.get(0), driver).perform();
+			record.moveToElementAndPerform(record.list_of_resume_buttons.get(0), driver);
 						
 			// 9.1. The box background changes to grey.
 			if(record.getBackGroundColor(record.list_of_resume_buttons.get(0)).equals(before_click_background)) {

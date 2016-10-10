@@ -123,6 +123,31 @@ public class Page {
 		}
 
 	}
+	
+	
+	public void clickElementWithOutIdJS(WebElement element) // clicking element
+	{
+		String text = element.getText();
+		try {
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);		
+			System.out.println("Clicked on " + text + " element"); 
+			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);		
+		} catch (Exception msg) {
+			try {
+				System.out.println("Clicked failed trying again with selenium");
+				wait.until(ExpectedConditions.elementToBeClickable(element));
+				element.click();
+				System.out.println("Clicked on " + element.getText() + " element");
+				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+						null);
+			} catch (Exception e1) {
+				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked failed:"+msg.getMessage(), LogAs.WARNING,
+						null);
+				
+			}
+		}
+
+	}
 
 	// clicking element
 	public void clickElementWithDescription(WebElement element, String description) {
