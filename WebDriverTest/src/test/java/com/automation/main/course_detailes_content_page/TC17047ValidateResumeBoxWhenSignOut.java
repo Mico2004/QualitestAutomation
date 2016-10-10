@@ -168,9 +168,10 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 			Thread.sleep(1000);
 			
 			// 5. Click on a certain recording.
+			record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 			String first_recording_name = record.getFirstRecordingTitle();
 			record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_name);
-			
+						
 			// 6. Click on the first chapter and wait the player will start to play.
 			player_page.verifyTimeBufferStatusForXSec(5);
 			
@@ -197,7 +198,7 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 			Thread.sleep(1000);
 			
 			// 10. Click on the recording you just watched.
-			record.clickElement(record.first_recording_title);
+			record.verifyFirstExpandableRecording();
 			Thread.sleep(2000);
 			
 			// 10.1. The "> Resume box is displayed.

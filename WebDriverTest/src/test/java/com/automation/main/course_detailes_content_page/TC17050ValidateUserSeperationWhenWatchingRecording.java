@@ -160,6 +160,7 @@ public class TC17050ValidateUserSeperationWhenWatchingRecording {
 		Thread.sleep(1000);
 			
 		// 4. Click on a certain recording.
+		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 		String first_recording_name = record.getFirstRecordingTitle();
 		record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_name);
 			

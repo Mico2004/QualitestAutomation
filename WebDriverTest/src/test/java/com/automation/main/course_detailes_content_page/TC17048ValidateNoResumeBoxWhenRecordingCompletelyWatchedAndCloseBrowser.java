@@ -95,13 +95,13 @@ public class TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBro
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		
-		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+
 		
 		top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
 		search_page = PageFactory.initElements(driver, SearchPage.class);
 		
 		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);
-		
+		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);		
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
 		
 		add_additional_content_link_window = PageFactory.initElements(driver, AddAdditionalContentLinkWindow.class);
@@ -144,10 +144,7 @@ public class TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBro
 		// 1. Make sure that the STUDENT and INSTRUCTOR users you are using never watched the recording used in this test case.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-		
-		
-		String current_course = course.selectCourseThatStartingWith("abc");
-		record.returnToCourseListPage();
+					
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
@@ -165,10 +162,9 @@ public class TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBro
 				tegrity.loginCourses("User4");
 				Thread.sleep(1000);
 			}
-			
-			
+				
 			// 4. Click on a certain course.
-			course.selectCourseThatStartingWith(current_course);
+			course.selectCourseThatStartingWith("abc");
 			Thread.sleep(1000);
 			
 			// 5. Click on a certain recording.
@@ -182,15 +178,24 @@ public class TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBro
 			Thread.sleep(3000);
 			
 			// 8. Close browser.
-			String current_handler = driver.getWindowHandle();
-			driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
-			
-			driver.switchTo().window(current_handler);
-			driver.close();
-			for(String handler: driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
-				break;
-			}
+//			//String current_handler = driver.getWindowHandle();
+//			driver.findElement(By.tagName("body")).click(); // focus
+//			driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
+//			
+//			//driver.switchTo().window(current_handler);					
+//			for(String handler: driver.getWindowHandles()) {
+//				driver.switchTo().window(handler);
+//				break;
+//			}
+//			
+			//close the browser and open new one
+			driver.quit();	
+			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
+			record = PageFactory.initElements(driver, RecordingHelperPage.class);
+			copy = PageFactory.initElements(driver, CopyMenu.class);
+			player_page = PageFactory.initElements(driver, PlayerPage.class);
+			top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
 			
 			// 9. Login as the same INSTRUCTOR.
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -198,21 +203,19 @@ public class TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBro
 			if(type_of_user==0) {
 				// Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
 			} else {
 				// Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
 			}
 			
 			initializeCourseObject();
 			
 			// 10. Open the recording course you just watch.
-			course.selectCourseThatStartingWith(current_course);
+			course.selectCourseThatStartingWith("abc");
 			Thread.sleep(1000);
 			
 			// 11. Click on the recording you just watched.
-			record.clickElement(record.first_recording_title);
+			record.verifyFirstExpandableRecording();
 			Thread.sleep(2000);
 			
 			// 11.1. The "> Resume box isn't displayed.

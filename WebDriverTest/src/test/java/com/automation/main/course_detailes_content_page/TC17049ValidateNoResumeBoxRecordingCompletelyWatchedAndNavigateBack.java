@@ -142,8 +142,7 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 		// 1. Make sure that the STUDENT and INSTRUCTOR users you are using never watched the recording used in this test case.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-		
-		
+	
 		String current_course = course.selectCourseThatStartingWith("abc");
 		record.returnToCourseListPage();
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
@@ -171,6 +170,7 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 			
 			// 5. Click on a certain recording.
 			// 6. Click on the first chapter and wait the player will start to play.
+			record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 			String first_recording_name = record.getFirstRecordingTitle();
 			record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_name);
 			
@@ -183,7 +183,7 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 			Thread.sleep(1000);
 			
 			// 9. Click on the recording you just watched.
-			record.clickElement(record.first_recording_title);
+			record.verifyFirstExpandableRecording();
 			Thread.sleep(2000);
 			
 			// 9.1. The "> Resume box isn't displayed..
