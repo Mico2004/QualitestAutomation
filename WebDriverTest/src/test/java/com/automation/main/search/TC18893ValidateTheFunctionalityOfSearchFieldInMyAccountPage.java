@@ -125,7 +125,7 @@ public class TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage {
 
 	
 	@Test(description = "TC 18893 Validate The Functionality Of Search Field In My Account Page")
-	public void loginCourses() throws InterruptedException
+	public void test18893() throws InterruptedException
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 

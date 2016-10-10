@@ -112,7 +112,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 
 	
 	@Test(description = "TC 15655 Try To Copy Recording While It Is Being Moved")
-	public void loginCourses() throws InterruptedException
+	public void test15655() throws InterruptedException
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 

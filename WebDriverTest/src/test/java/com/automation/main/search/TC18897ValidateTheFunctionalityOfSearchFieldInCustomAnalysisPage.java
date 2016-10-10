@@ -119,7 +119,7 @@ public class TC18897ValidateTheFunctionalityOfSearchFieldInCustomAnalysisPage {
 
 	
 	@Test(description = "TC 18897 Validate The Functionality Of Search Field In Custom Analysis Page")
-	public void loginCourses() throws InterruptedException
+	public void test18897() throws InterruptedException
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 

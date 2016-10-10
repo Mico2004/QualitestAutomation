@@ -114,7 +114,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 	
 
 	@Test(description = "TC 22032 Delete A Regular Recording As ADMIN")
-	public void loginCourses() throws InterruptedException//
+	public void test22032() throws InterruptedException//
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
