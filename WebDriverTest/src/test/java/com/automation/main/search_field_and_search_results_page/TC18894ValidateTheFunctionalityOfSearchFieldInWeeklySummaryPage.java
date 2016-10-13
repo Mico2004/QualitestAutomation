@@ -141,7 +141,7 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 		Thread.sleep(1000);
 					
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		
 		// NOTE: There is system bug in searching as Admin in Report pages
@@ -290,7 +290,7 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 			search_page.waitUntilSpinnerImageDisappear();
 			
 			// 16. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			Thread.sleep(3000);
 		}
 		

@@ -203,7 +203,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		}
 		
 		// 13. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 14. Login as a STUDENT (User4).
@@ -221,7 +221,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		}
 		
 		// Sign Out
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 17. Login as a Admin.
@@ -247,7 +247,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		}
 		
 		// 20. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 21. Login as student (User4).
@@ -278,7 +278,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		Thread.sleep(1000);
 		
 		// Sign Out
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 26. Login as another student to the same course (User2).

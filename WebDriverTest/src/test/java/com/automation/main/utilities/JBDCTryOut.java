@@ -376,7 +376,7 @@ public class JBDCTryOut {
     confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		System.out.println("after ok ok");
 
-    record.clickOnSignOut();
+    record.signOut();
  // 1. Login with SuperUser.
  		tegrity.loginCourses("User1");// log in courses page
  	   initializeCourseObject();	
@@ -406,7 +406,7 @@ public class JBDCTryOut {
         confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
  		System.out.println("after ok ok");
 
-        record.clickOnSignOut();
+        record.signOut();
  		
     	// 1. Login as ADMIN.
  		tegrity.loginAdmin("Admin");

@@ -148,7 +148,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// Logout.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		
@@ -257,7 +257,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 				driver.switchTo().window(handler);
 				break;
 			}
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			Thread.sleep(1000);
 		}
 		System.out.println("Done.");

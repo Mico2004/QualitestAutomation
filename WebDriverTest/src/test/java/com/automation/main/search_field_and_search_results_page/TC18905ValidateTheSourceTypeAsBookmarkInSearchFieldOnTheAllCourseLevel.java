@@ -167,7 +167,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 		}
 
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(3000);
 		
 		
@@ -252,7 +252,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 			search_page.exitInnerFrame();
 			
 			// 11. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			Thread.sleep(3000);
 		}
 		

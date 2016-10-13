@@ -195,7 +195,7 @@ public class TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff {
 		course.verifyCourseExist(selected_course_name);
 		
 		// 11. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 12. Log in as Student (From Precondition).
 		tegrity.loginCourses("User4");
@@ -209,7 +209,7 @@ public class TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff {
 		course.verifyCourseExist(selected_course_name);
 		
 		// 15. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 16. Log in as Instructor.
 		tegrity.loginCourses("User1");
@@ -240,7 +240,7 @@ public class TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff {
 		course.verifyThatTargetCourseIsNotExistInPublicCourses(selected_course_name);
 		
 		// 25. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 26. Log in as Student (From Precondition).
 		tegrity.loginCourses("User4");

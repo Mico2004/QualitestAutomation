@@ -200,7 +200,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		String recording_chapter = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(3000);
 		
 		// 2. Log in as INSTRUCTOR.

@@ -192,7 +192,7 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		course.verifyThatWhenUserHoverOverFirstCourseNameTheHingWithTheCourseNameDispalyed();
 		
 		// 15. Sign off.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 16. Click on "Login as guest" blue button (at the bottom of the login screen).
 		tegrity.loginAsguest();
@@ -222,7 +222,7 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		course.verifyThatWhenUserHoverOverFirstCourseNameTheHingWithTheCourseNameDispalyed();
 		
 		// 24. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 25. Log in as STUDENT.
 		tegrity.loginCourses("User4");

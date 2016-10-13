@@ -217,7 +217,7 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 			     Thread.sleep(3000);
 			     ///check for free status checkbox for edit properties
 		    	record.changeRecordingOwnership(confirm_menu, erp_window, instructor1,record.getCheckbox());
-		           record.clickOnSignOut();
+		           record.signOut();
 			     
 				 
 			

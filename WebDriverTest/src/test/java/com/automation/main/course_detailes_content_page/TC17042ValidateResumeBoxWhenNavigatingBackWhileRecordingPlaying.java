@@ -151,7 +151,7 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 2. Repeat for INSTRUCTOR and STUDENT.
@@ -237,7 +237,7 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 				driver.switchTo().window(handler);
 				break;
 			}
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			Thread.sleep(2000);
 			
 			// 13. Delete the coockies and validate that the "Resume Watching" does not display.
@@ -260,7 +260,7 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 			record.verifyWebElementNotDisplayed(record.list_of_resume_buttons.get(0), "Resume box");
 						
 			// Sign out
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			Thread.sleep(1000);
 		}
 		

@@ -142,7 +142,7 @@ public class TC18895ValidateTheFunctionalityOfSearchFieldInDetailedReportsPage {
 		Thread.sleep(1000);
 					
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		
 		// NOTE: There is system bug in searching as Admin in Report pages
@@ -291,7 +291,7 @@ public class TC18895ValidateTheFunctionalityOfSearchFieldInDetailedReportsPage {
 			search_page.waitUntilSpinnerImageDisappear();
 			
 			// 16. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			Thread.sleep(3000);
 		}
 		

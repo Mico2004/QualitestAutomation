@@ -216,7 +216,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.checkAllCourseSettingsCheckboxs();
 		course_settings_page.clickOnOkButton();
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 2. Make sure to have a user is enrolled to a course as Instructor (User1).
 		tegrity.loginCourses("User1");
@@ -658,6 +658,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		// PostTest
 		driver.navigate().back();
 		Thread.sleep(1000);
+		top_bar_helper.signOut();
 		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		tegrity.loginCourses("SuperUser");

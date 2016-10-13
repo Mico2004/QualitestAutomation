@@ -156,7 +156,7 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 		tag_menu.clickOnApplyButton();
 		Thread.sleep(1000);
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		driver.quit();
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
@@ -247,7 +247,7 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 			search_page.exitInnerFrame();
 			
 			// 11. Sign Out.
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 		}
 		
 		// Unpublic Ab course1. 

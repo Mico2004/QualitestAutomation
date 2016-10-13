@@ -327,7 +327,7 @@ public class TC15557CopyRecordingWithPodcast {
 		    
 		    Thread.sleep(2000);
 		    
-		    record.clickOnSignOut();
+		    record.signOut();
 		    
 		    // 19. Login as STUDENT.
 		    tegrity.loginCourses("User2");// log in courses page

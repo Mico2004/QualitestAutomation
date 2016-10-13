@@ -155,7 +155,7 @@ public class TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNot
 		admin_course_settings_page.clickOnSaveButton();
 		
 		// 3. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 4. Clear cache.
 		// 5. Refresh the browser.

@@ -292,7 +292,7 @@ public class ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 		search_page.waitUntilSpinnerImageDisappear();
 		
 		// 18. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 	}
 }
