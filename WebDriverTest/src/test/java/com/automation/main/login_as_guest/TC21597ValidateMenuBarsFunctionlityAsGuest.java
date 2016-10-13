@@ -137,7 +137,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 	}
 	
 	@Test (description="TC 21597 Validate Menu Bars Functionlity As Guest")
-	public void TC21597() throws Exception {
+	public void test21597() throws Exception {
 		//// pre condition
 
 		// 1.load page

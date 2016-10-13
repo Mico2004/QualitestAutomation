@@ -115,7 +115,7 @@ public class TC15449AddPptxFile {
 	
 	
 	@Test (description="TC 15449 Add Pptx File")
-	public void TC15449() throws Exception {
+	public void test15449() throws Exception {
 
 		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testPptx.pptx";
 		String file_name = "Moshik_testPptx.pptx";

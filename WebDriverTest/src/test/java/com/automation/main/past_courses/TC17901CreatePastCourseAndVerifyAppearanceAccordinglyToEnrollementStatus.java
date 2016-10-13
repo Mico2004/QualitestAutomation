@@ -115,8 +115,8 @@ public class TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementS
 		this.driver.quit();
 	}
 
-	@Test(description = "17901 - Create a past course and verify it's appearance accordingly to the enrollement status")
-	public void preTestCreateNewUser() throws InterruptedException {
+	//@Test(description = "17901 - Create a past course and verify it's appearance accordingly to the enrollement status")
+	//public void preTestCreateNewUser() throws InterruptedException {
 
 		/////////// pre-test create new user+enrolling to PastCourseA///////////
 		/*
@@ -291,7 +291,7 @@ public class TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementS
 		 * 
 		 * driver.quit();
 		 */
-	}
+	//}
 
 	@Test(dependsOnMethods = "preTestCreateNewUser")
 	public void test17901() throws InterruptedException {
