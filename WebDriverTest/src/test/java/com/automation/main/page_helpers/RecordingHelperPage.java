@@ -3410,20 +3410,31 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		waitForVisibility(course_tasks_button);
 		course_tasks_button.click();
 		waitForVisibility(rssfeed);
-		rssfeed.click();
+		
+//		if(driver instanceof ChromeDriver){
+//			WebElement we =driver.findElement(By.tagName("body")); 
+//			we.sendKeys(Keys.SHIFT);
+//		}
+		Actions builder = new Actions(driver);
+		builder.keyDown(Keys.SHIFT).click(rssfeed).keyUp(Keys.SHIFT).build().perform();		
+		//rssfeed.click();	
 		System.out.println("Return to rss feed page.");
+		
+//		if(driver instanceof ChromeDriver){
+//			WebElement we =driver.findElement(By.tagName("body")); 
+//			we.sendKeys(Keys.SHIFT);
+//		}
 
 	}
 
 	/// verify rss feed page first clicking course_tasks-->rss_feed
 	public String verifyRssFeedPage(WebDriver driver, LoginHelperPage tegrity) {
 		
-	
+		String xml_source_code = null;
 		String current = null;
 		try {
-			toRssFeedPage(driver);	
-			
 			String parentWindow = driver.getWindowHandle();
+			toRssFeedPage(driver);	
 			Set<String> handles = driver.getWindowHandles();
 	
 			for (String windowHandle : handles) {
@@ -3433,11 +3444,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					break;	
 				}
 			}
-
+			current = driver.getCurrentUrl();
 			Thread.sleep(2000);
 			String Rss_url_xml = "view-source:" + current;
 			driver.get(Rss_url_xml);
-			//String xml_source_code = driver.findElement(By.tagName("body")).getText();	
+			xml_source_code = driver.findElement(By.tagName("body")).getText();	
 			System.out.println("clicked to rss feed page");
 			ATUReports.add("verify rss feed page", "Rss_Feed", "clickable", "clickable", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -3457,7 +3468,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add("verify rss feed page", "Rss_Feed", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		return current;
+		return xml_source_code;
 	}
 
 	public void clickOnThePodcast() throws AWTException { 
@@ -3546,14 +3557,15 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("Root element " + document.getDocumentElement().getNodeName());
 			String first = teg.getPageUrl().substring(0, teg.getPageUrl().length() - 8) + "/api/podcast/";
 			String university = teg.getPageUrl().substring(0, teg.getPageUrl().length() - 8);
-			String third = podcast_url.substring(podcast_url.length() - (university.length() -10 ));
+			String third = podcast_url.substring(podcast_url.length() - (university.length() +2 ));
+			String guid = third.substring(0,36);
 			org.w3c.dom.NodeList nodeList = document.getElementsByTagName("enclosure");
 			for (int i = 0; i < nodeList.getLength(); i++) {
 				// Get element
 				String element = ((Element) nodeList.item(i)).getAttribute("url");
-				if ((element.contains(first)) && ((element.contains(third)))) {
+				if ((element.contains(first)) && ((element.contains(guid)))) {
 					// extract only pattern
-					String pattern = element.substring(57, 93);
+					String pattern = element.substring(59, 95);
 					arrayList.add(pattern);
 					/// check pattern
 					podcastPatternVerification(pattern);
@@ -3588,6 +3600,76 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	}
 
+	
+	/// this function verifies podcast url pattern it gets university
+	/// url+recording string of chracters
+	// first convert string of xml to xml file then it get attribute only url
+	/// and chooses if it contains
+	// university url+recording string of chracters if it does 2 conditions are
+	/// matched and then it verifies last condition:pattern with '0'-'f' and '-'
+	public ArrayList<String> RssUrlVerification(String xml, String rss_url) {
+
+		ArrayList<String> arrayList = new ArrayList<String>();
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+		DocumentBuilder builder;
+		try {
+			builder = factory.newDocumentBuilder();
+
+			// Use String reader
+			Document document = builder.parse(new InputSource(new StringReader(xml)));
+
+			TransformerFactory tranFactory = TransformerFactory.newInstance();
+			Transformer aTransformer = tranFactory.newTransformer();
+			Source src = new DOMSource(document);
+			Result dest = new StreamResult(new File("xmlFileName.xml"));
+			aTransformer.transform(src, dest);
+			document.getDocumentElement().normalize();
+			System.out.println("Root element " + document.getDocumentElement().getNodeName());
+			org.w3c.dom.NodeList nodeList = document.getElementsByTagName("link");
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				// Get element		
+				String element = ((Element) nodeList.item(i)).getTextContent();
+				System.out.println(element);
+				if (element.equals(rss_url)) {
+					// extract only pattern
+					String pattern = element.substring(59, 95);
+					arrayList.add(pattern);
+					/// check pattern
+					podcastPatternVerification(pattern);
+					return arrayList;
+				}
+				 
+			}
+			if (!arrayList.isEmpty()) {
+				System.out.println("first part(university url) of rss url and third(recording characters)  verified");
+				ATUReports.add("first part(university url) of rss url and third(recording characters)  verified",
+						"podcast", "clickable", "not clickable", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+
+			} else {
+				System.out
+						.println("first part(university url) of rss url and third(recording characters) not verified");
+				ATUReports.add("first part(university url) of rss url and third(recording characters) not verified",
+						"podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("first part(university url) of rss url and third(recording characters) not verified");
+			ATUReports.add("first part(university url) of rss url and third(recording characters) not verified",
+					"podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+
+		return arrayList;
+
+	}
+	
+	
+	
+	
 	//// verifies pattern for podcast
 	public void podcastPatternVerification(String element) {
 		System.out.println(element);
