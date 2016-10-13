@@ -141,7 +141,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description = "TC 21856 Validate The Public Courses Tab UI After Changes")

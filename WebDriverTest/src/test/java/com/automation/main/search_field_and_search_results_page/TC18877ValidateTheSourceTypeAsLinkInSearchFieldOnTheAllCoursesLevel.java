@@ -125,7 +125,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test(description = "TC 18877 Validate The Source Type As Link In Search Field On The All Courses Level")

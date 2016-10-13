@@ -2,7 +2,12 @@ package com.automation.main.pre_post_test;
 
 
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -38,6 +43,7 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import junitx.util.PropertyManager;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -136,151 +142,22 @@ public class TestSuitePreSetCopyRecordings_DeleteRecordings {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws InterruptedException {
-		// 1. Login with SuperUser.
-		
-		tegrity.loginCourses("SuperUser");// log in courses page
-		initializeCourseObject();
-
-		// Copy all recording from Bank Valid Recording to course starting with
-		// Ab
-		// Copy all tests from Bank Valid Recording to course starting
-		// with Ab
-//		course.waitForVisibility(course.active_courses_tab_button);
-		Thread.sleep(2000);		
-		
-		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record, delete_menu);
-		Thread.sleep(2000);		
-		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
-		Thread.sleep(2000);		
-		course.deleteAllRecordingsInCourseStartWith("Ab", 2, record, delete_menu);
-		Thread.sleep(2000);		
-		course.deleteAllRecordingsInCourseStartWith("Ab", 3, record, delete_menu);
-		Thread.sleep(2000);		
-
-		
-		
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 0, record, copy,
-				confirm_menu);
-		Thread.sleep(2000);		
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 1, record, copy,
-				confirm_menu);
-		Thread.sleep(2000);			
-		// Copy all additional content from Bank Valid Recording to course
-		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 2, record, copy,
-				confirm_menu);
-		Thread.sleep(2000);			
-		// Copy all student recordings from Bank Valid Recording to course
-		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 3, record, copy,
-				confirm_menu);		
-		
-		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
-		System.out.println("1");		
-		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
-		System.out.println("3");
-		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
-		System.out.println("4");
-		
-		
-		System.out.println("Done.");
+		System.out.println("b0");
+		  final List<Integer> CourseAbContent = Arrays.asList(0,1,2,3); //For Ab		
+		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
+			{
+				put(PropertyManager.getProperty("course1"),CourseAbContent);			
+			}
+			};
+		TestSuitePreSetGeneric h=new TestSuitePreSetGeneric(driver);
+		System.out.println("b1");
+		h.GenricPreset(CoursesAndContent);
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
-
-//		// 2.copy courses to pastcourses a
-//
-//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseA", 0, record,
-//				copy, confirm_menu);
-//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseA", 1, record,
-//				copy, confirm_menu);
-//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseA", 2, record,
-//				copy, confirm_menu);
-//		// 3.copy courses to pastcourses b
-//
-//		course.waitForVisibility(course.course_list.get(0));
-//		initializeCourseObject();
-//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseB", 0, record,
-//				copy, confirm_menu);
-//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseB", 1, record,
-//				copy, confirm_menu);
-//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "PastCourseB", 2, record,
-//				copy, confirm_menu);
-
-//		for (String window : driver.getWindowHandles()) {
-//			driver.switchTo().window(window);
-//			break;
-//		}
-//		course.signOut();
-//		Thread.sleep(3000);
-//
-//		////////////////////////// unenrolling user 1 past course A And B
-//		////////////////////////// +changing recording ownership
-//		////////////////////////// ///////////////////
-//		//
-//		// // 1. Login with SuperUser.
-//		tegrity.loginCourses("User1");// log in courses page
-//		initializeCourseObject();
-//		// //ownership change
-//
-//		try {
-//			Robot robot = new Robot();
-//			robot.setAutoDelay(2000);
-//			robot.mouseMove(0, -1000);
-//		} catch (AWTException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//		String past_course_a = course.selectCourseThatStartingWith("PastCourseA");
-//		Thread.sleep(3000);
-//		String user1 = PropertyManager.getProperty("User1");
-//		String user4 = PropertyManager.getProperty("User4");
-//		record.changeRecordingOwnership(confirm_menu, erp_window, user1, null);
-//		Thread.sleep(3000);
-//		for (String window : driver.getWindowHandles()) {
-//			driver.switchTo().window(window);
-//			break;
-//		}
-//		record.returnToCourseListPage();
-//		Thread.sleep(3000);
-//		String past_course_b = course.selectCourseThatStartingWith("PastCourseB");
-//		Thread.sleep(3000);
-//
-//		record.changeRecordingOwnership(confirm_menu, erp_window, user1, null);
-//		Thread.sleep(3000);
-//		record.signOut();
-//		Thread.sleep(3000);
-//		tegrity.loginCourses("User4");// log in courses page to register user in
-//										// database
-//		Thread.sleep(3000);
-//		course.signOut();
-//		tegrity.loginAdmin("Admin");
-//		Thread.sleep(5000);
-//		// 4. Click on course builder href link
-//
-//		// String
-//		// past_course_a="PastCourseAawsserverautomation113032016121315_Name";
-//		// String
-//		// past_course_b="PastCourseBawsserverautomation113032016121315_Name";
-//
-//		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-//		Thread.sleep(10000);
-//		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_a, user1,
-//				mangage_adhoc_courses_membership_window);
-//		Thread.sleep(3000);
-//		for (String window : driver.getWindowHandles()) {
-//			driver.switchTo().window(window);
-//			break;
-//		}
-//		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_b, user1,
-//				mangage_adhoc_courses_membership_window);
-//		Thread.sleep(3000);
-//
-//		driver.quit();
 
 	}
 }

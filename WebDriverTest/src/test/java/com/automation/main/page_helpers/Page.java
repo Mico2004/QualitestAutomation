@@ -362,21 +362,7 @@ public class Page {
 
 	}
 
-	public String[] getStringFromElement(List<WebElement> text)/// text
-																/// extracted
-																/// from
-																/// elements
-	{
-		String[] linkTexts = new String[text.size()];
-		int i = 0;
 
-		// extract the link texts of each link element
-		for (WebElement e : text) {
-			linkTexts[i] = e.getText();
-			i++;
-		}
-		return linkTexts;
-	}
 
 	public void loadPage(String Url, String title) throws InterruptedException {/// load
 																				/// page
@@ -492,7 +478,7 @@ public class Page {
 
 		try {
 			Thread.sleep(1000);
-		System.out.println("signOut1");		
+		System.out.println("signOut1");		 
 		((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");
 		Thread.sleep(2000);
 		new WebDriverWait(driver, 10).until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
@@ -646,7 +632,7 @@ public class Page {
 				}
 
 			} else {
-				System.out.println("file doe not exist");
+				System.out.println("file does not exist");
 				return -1;
 			}
 
@@ -1279,7 +1265,21 @@ public class Page {
 
 		}
 	}
+	public String[] getStringFromElement(List<WebElement> text)/// text
+	/// extracted
+	/// from
+	/// elements
+	{
+		String[] linkTexts = new String[text.size()];
+		int i = 0;
 
+		// extract the link texts of each link element
+		for (WebElement e : text) {
+			linkTexts[i] = e.getText();
+			i++;
+		}	
+		return linkTexts;
+	}
 
 }
 

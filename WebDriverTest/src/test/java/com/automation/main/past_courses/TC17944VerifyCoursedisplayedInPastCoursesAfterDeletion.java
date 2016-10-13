@@ -293,7 +293,7 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 
 
 			course = PageFactory.initElements(driver, CoursesHelperPage.class);
-			course.courses = course.getStringFromElement(course.course_list);
+			course.courses = course.getCoursesListFromElement(course.course_list);
 		}
 
 		

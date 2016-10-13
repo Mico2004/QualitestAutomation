@@ -36,6 +36,7 @@ import com.automation.main.page_helpers.ManageAdHocCoursesMembershipWindow;
 import com.automation.main.page_helpers.ManageAdhocCoursesEnrollmentsPage;
 import com.automation.main.page_helpers.ManageAdhocUsersPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
+import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
@@ -78,13 +79,14 @@ public class PreTest {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 	
 	@BeforeClass
 	public void setup() {
 
-		driver = new FirefoxDriver();
+		//driver = new FirefoxDriver();
+		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
 //		
@@ -194,7 +196,7 @@ public class PreTest {
 				created_course_list.add("BankValidRecording");
 				continue;
 			} else if (i == 6) {
-				created_course_list.add("BankInValidRecording");
+				created_course_list.add("BankInvalidRecording");
 				continue;
 			} else if (i == 7) {
 				course_name = "PastCourseA" + university_name + sdf.format(date);
@@ -297,8 +299,7 @@ public class PreTest {
 		writer.println("Browser=firefox");//for manual testing
 		writer.println("HelpdeskAdmin=hdadmin");
 		writer.println("ExcutiveAdmin=executivead");
-		System.out.println(file_to_write.getPath());
-		writer.close();
+	
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
 		
 		Thread.sleep(2000);
@@ -763,8 +764,19 @@ public class PreTest {
 		for(String window: driver.getWindowHandles()) {
 			driver.switchTo().window(window);
 			break;
+		}		
+		
+			
+		for(int i = 1; i <= created_course_list.size(); i++) {			
+		if(i!=6 || i!=7)
+			writer.println("course"+i+"=" + created_course_list.get(i-1)+"_Name");
+		else
+			writer.println("course"+i+"=" + created_course_list.get(i-1));
 		}
-		mange_adhoc_course_enrollments.waitForVisibility(driver.findElement(By.id("SignOutLink")));
+		System.out.println(file_to_write.getPath());
+		writer.close();
+		
+		
 		mange_adhoc_course_enrollments.signOut();
 		tegrity.loginCoursesByParameter(SuperUsername);
 		initializeCourseObject();
@@ -821,7 +833,7 @@ public class PreTest {
 		Thread.sleep(2000);
 		admin_dashboard_page.signOut();
 		
-		tegrity.loginCourses(SuperUsername);
+		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
 		course.verifyRecordingsStatusIsClear("BankValid", 3, record);
 		

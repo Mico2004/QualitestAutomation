@@ -102,7 +102,7 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test(description = "TC 24923 Validate That You Cannot Click On Copy Recordings When You Havent Chose A Course Yet")

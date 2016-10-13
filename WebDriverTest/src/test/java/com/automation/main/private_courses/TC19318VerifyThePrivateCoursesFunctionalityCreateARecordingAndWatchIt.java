@@ -127,7 +127,7 @@ public class TC19318VerifyThePrivateCoursesFunctionalityCreateARecordingAndWatch
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description="TC 19318 Verify The Private Courses Functionality Create A Recording And Watch It")

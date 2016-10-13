@@ -130,7 +130,7 @@ public class TC19322VerifyThePrivateCoursesFunctionalityCopyTheRecordingToPrivat
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description = "TC 19322 Verify The Private Courses Functionality Copy The Recording To Private Course")
