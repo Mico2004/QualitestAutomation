@@ -124,12 +124,6 @@ public class TestSuitePreRecordingsAdmin {
 		driver.quit();
 	}
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
 
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -138,10 +132,12 @@ public class TestSuitePreRecordingsAdmin {
 		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException {
+	@Test(description = "Test Suite Pre Set Copy Recordings Admin")
+	public void testSuitePreSetCopyRecordingsAdmin() throws InterruptedException {
 		// 1. Login with SuperUser.
 		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
 		tegrity.loginCourses("SuperUser");// log in courses page
 		initializeCourseObject();
 

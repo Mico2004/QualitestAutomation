@@ -1756,7 +1756,7 @@ public class CoursesHelperPage extends Page {
 		copy_menu.clickOnCopyButton();
 		Thread.sleep(1000);
 		confirmation_menu.clickOnOkButton();
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 	/*	if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
 			record_helper_page.checkStatusExistenceForMaxTTime(600);
 		}*/

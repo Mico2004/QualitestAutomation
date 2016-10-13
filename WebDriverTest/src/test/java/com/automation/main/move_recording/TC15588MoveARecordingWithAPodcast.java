@@ -110,6 +110,7 @@ public class TC15588MoveARecordingWithAPodcast {
 	{
 		// 1. Login as INSTRUCTOR.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+			
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
@@ -121,7 +122,12 @@ public class TC15588MoveARecordingWithAPodcast {
 		Thread.sleep(3000);
 		course_settings.enableAudioPodcast();
 		course_settings.clickOnOkButton();
-		Thread.sleep(3000);
+		
+		List<String> records = record.getCourseRecordingList();
+		Boolean isThereRecordIntheRecord = false;
+		if(records.size() > 0){
+			isThereRecordIntheRecord = true;
+		}
 		record.returnToCourseListPage();
 		
 		//3. As a destination course select a course with "Enable MP3 Podcast" option enabled in "Course Settings".
@@ -136,6 +142,31 @@ public class TC15588MoveARecordingWithAPodcast {
 		record.deleteAllRecordings(delete_menu);
 		record.returnToCourseListPage();
 		
+		//if we don't have record we go to get them from the bank
+		if(isThereRecordIntheRecord == false) {
+			
+			//move to the superUser
+			record.signOut();
+			tegrity.loginCourses("SuperUser");
+			
+			//click on the bank course and then select the first record
+			course.selectCourseThatStartingWith("BankValid");
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);			
+			record.clickOnRecordingTaskThenCopy();
+			
+			//copy the first record to the course that start with Ab
+		    copy.selectTargetCourseFromCourseList(currentCourse);
+		    copy.clickOnCopyButton();
+		    confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
+			record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
+			
+			
+			//return to the instructor
+			record.signOut();
+			tegrity.loginCourses("User1");
+		}
+		
+
 		//4. Select source course.
 		currentCourse = course.selectCourseThatStartingWith("Ab");
 		System.out.println("Current course: " + currentCourse);

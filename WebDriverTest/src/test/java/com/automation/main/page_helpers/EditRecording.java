@@ -63,10 +63,10 @@ public class EditRecording extends Page {
 		}
 			
 		int i = 0; 
-		while(!isElementPresent(By.id("PlayButton_Img")) || i < 20) {
+		while(!isElementPresent(By.id("PlayButton_Img")) && i < 20) {
 				i++;
 				System.out.println("element is not visable");
-				Thread.sleep(2000);	
+				Thread.sleep(1500);	
 		}
 		
 		System.out.println("Wait that the element edit chapter will click from the list.");
@@ -118,10 +118,10 @@ public class EditRecording extends Page {
 		}
 		
 			int i = 0; 
-			while(!isElementPresent(By.id("PlayButton_Img")) || i < 20) {
+			while(!isElementPresent(By.id("PlayButton_Img")) && i < 20) {
 					i++;
 					System.out.println("element is not visable");
-					Thread.sleep(2000);	
+					Thread.sleep(1500);	
 			}
 			
 			System.out.println("Wait that the element edit chapter will click from the list.");
@@ -194,10 +194,10 @@ public class EditRecording extends Page {
 		}
 		
 		int i = 0 ; 
-		while(!isElementPresent(By.id("PlayButton_Img")) || i<20) {
+		while(!isElementPresent(By.id("PlayButton_Img")) && i<20) {
 			  i++;
 			System.out.println("element is not visable");
-			Thread.sleep(2000);	
+			Thread.sleep(1500);	
 		}
 		
 		System.out.println("Wait that the element add closed caption will click from the list.");
@@ -278,7 +278,7 @@ public class EditRecording extends Page {
 		
 		
 		int index = 0; 
-		while(!isElementPresent(By.id("PlayButton_Img")) || index< 20) {
+		while(!isElementPresent(By.id("PlayButton_Img")) && index< 20) {
 			index++;
 				System.out.println("element is not visable");
 				Thread.sleep(2000);	
@@ -348,10 +348,10 @@ public class EditRecording extends Page {
 		}
 		
 		int index = 0; 
-		while(!isElementPresent(By.id("PlayButton_Img")) || index< 20) {
+		while(!isElementPresent(By.id("PlayButton_Img")) && index< 20) {
 			index++;
 				System.out.println("element is not visable");
-				Thread.sleep(2000);	
+				Thread.sleep(1500);	
 		}
 		
 		System.out.println("Wait the the element edit chapter will click from the list.");

@@ -76,6 +76,10 @@ public class SearchPage extends Page {
 			ATUReports.add("the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, null);
 			return;
 		}
+		
+		String ChapterNameWithMoreInfo = splited_structure_displayed[3];
+		String ChapterName = ChapterNameWithMoreInfo.substring(ChapterNameWithMoreInfo.indexOf("\"") + 1, ChapterNameWithMoreInfo.indexOf(".")-1);
+		
 		String[] splited_third_structure_displayed = splited_structure_displayed[3].trim().split(" ");
 		String third_structure = splited_third_structure_displayed[0] + " results found for: \"" + searching_criterion + "\". " + splited_third_structure_displayed[splited_third_structure_displayed.length-2] +" seconds)";
 
@@ -85,11 +89,16 @@ public class SearchPage extends Page {
 				(splited_structure_displayed[3].trim().equals(third_structure))) {
 			System.out.println("Verfid breadcrumb structure displayed as required.");
 			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "True.", LogAs.PASSED, null);
+		} else if((splited_structure_displayed[1].trim().equals("Courses")) &&
+					(splited_structure_displayed[2].trim().equals(course_name)) && 
+					(searching_criterion.contains(ChapterName))){
+			System.out.println("breadcrumb structure displayed is cut but it's ok.");
+			ATUReports.add("breadcrumb structure displayed is cut but it's ok.", "True.", "True.", LogAs.PASSED, null);
+			
 		} else {
 			System.out.println("Not verfid breadcrumb structure displayed as required.");
 			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			ATUReports.add("splited_structure_displayed" +structure_displayed, "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			
 		}
 	
 	}
@@ -263,7 +272,7 @@ public class SearchPage extends Page {
 	public void waitUntilSpinnerImageDisappear() throws InterruptedException {
 		for(int i=0; i<20; i++) {
 			try {
-				Thread.sleep(900);
+				Thread.sleep(1000);
 				if(loading_spinner_image.isDisplayed()) {
 					Thread.sleep(100);
 				} else {
@@ -345,7 +354,32 @@ public class SearchPage extends Page {
 	}
 	
 	// This function verify that search result is empty
+	public void ifSearchResultIsEmptyResultPageDisplayed() {
+		if(title_list.size() == 0) {
+				
+			String structure_displayed = breadcrumbs_box.getText();			
+			String[] splited_structure_displayed = structure_displayed.split(">");							
+			String[] splited_third_structure_displayed = splited_structure_displayed[3].trim().split(" ");
+			String resultNumber = splited_third_structure_displayed[0];
+			
+			if(Integer.parseInt(resultNumber) == 0){
+				System.out.println("Verified that search result is empty.");
+				ATUReports.add("Verified that search result is empty.", "True.", "True.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			}
+			else {
+				System.out.println("search result is empty.");
+				ATUReports.add("Verified that search result is empty.", "True.", "false.", LogAs.FAILED, null);
+				Assert.assertTrue(false);
+			}
+		} 
+		
+	}
+	
+	
+	// This function verify that search result is empty
 	public void verifySearchResultIsEmpty() {
+		
 		if(title_list.size() == 0) {
 			System.out.println("Verified that search result is empty.");
 			ATUReports.add("Verified that search result is empty.", "True.", "True.", LogAs.PASSED, null);

@@ -1,7 +1,4 @@
 package com.automation.main.search_field_and_search_results_page;
-
-//precondition student first course must have recordings in recordings tab as well as in student recordings tab
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
@@ -15,7 +12,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.BottomFooter;
 import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;

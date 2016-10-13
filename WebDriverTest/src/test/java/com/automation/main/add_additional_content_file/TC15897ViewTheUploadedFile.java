@@ -4,10 +4,15 @@ import java.io.File;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -34,6 +39,8 @@ import com.automation.main.utilities.DriverSelector;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
+
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 
@@ -216,9 +223,22 @@ public class TC15897ViewTheUploadedFile {
 		////////set up for download file
 
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-		driver = new ChromeDriver();
+		Map<String, Object> prefs = new HashMap<String, Object>();
+		//To Turns off multiple download warning
+		prefs.put("profile.default_content_settings.popups", 0);
+		prefs.put( "profile.content_settings.pattern_pairs.*.multiple-automatic-downloads", 1 );
+		prefs.put("profile.default_content_setting_values.automatic_downloads",1);
+		//Turns off download prompt
+		prefs.put("download.prompt_for_download", false);
+		ChromeOptions options = new ChromeOptions();	
+		options.setExperimentalOption("prefs", prefs);	
+		DesiredCapabilities cap = DesiredCapabilities.chrome();
+		cap.setCapability(ChromeOptions.CAPABILITY, prefs);
+		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+		cap.setCapability(ChromeOptions.CAPABILITY, options);
+		WebDriver driver = new ChromeDriver(cap);
 		driver.manage().window().maximize();
-
+		
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		wait = new WebDriverWait(driver, 30);
@@ -318,7 +338,20 @@ public class TC15897ViewTheUploadedFile {
 		////////set up for download file
 
 				System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-				driver = new ChromeDriver();
+				prefs = new HashMap<String, Object>();
+				//To Turns off multiple download warning
+				prefs.put("profile.default_content_settings.popups", 0);
+				prefs.put( "profile.content_settings.pattern_pairs.*.multiple-automatic-downloads", 1 );
+				prefs.put("profile.default_content_setting_values.automatic_downloads",1);
+				//Turns off download prompt
+				prefs.put("download.prompt_for_download", false);
+				options = new ChromeOptions();	
+				options.setExperimentalOption("prefs", prefs);	
+				cap = DesiredCapabilities.chrome();
+				cap.setCapability(ChromeOptions.CAPABILITY, prefs);
+				cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+				cap.setCapability(ChromeOptions.CAPABILITY, options);
+				driver = new ChromeDriver(cap);
 				driver.manage().window().maximize();
 
 				tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -371,7 +404,13 @@ public class TC15897ViewTheUploadedFile {
 				// 6.verify downloaded file is valid using md5
 				record.VerifyDownloadedFileIsValid(file_name2);
 	         	
-
+				record.signOut();
+				Thread.sleep(1000);
+								
+				tegrity.loginCourses("User1");
+				// 3.Select course+delete previous files
+				course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
+			
 				System.out.println("Done.");
 				ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		

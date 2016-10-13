@@ -128,12 +128,7 @@ public class TestSuitePreSetCopyRecordings_CopyRecordings {
 		this.driver.quit();
 	}
 
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
-	}
 
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
@@ -142,6 +137,7 @@ public class TestSuitePreSetCopyRecordings_CopyRecordings {
 		course.courses = course.getCoursesListFromElement(course.course_list);*/
 		
 	}
+
 
 	@Test(dependsOnMethods = "loadPage", description = "Login course page")
 	public void loginCourses() throws InterruptedException {
@@ -156,6 +152,7 @@ public class TestSuitePreSetCopyRecordings_CopyRecordings {
 		System.out.println("b1");
 		h.GenricPreset(CoursesAndContent);
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);	
+
 
 	}
 }

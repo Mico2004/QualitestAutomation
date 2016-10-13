@@ -1,6 +1,6 @@
 package com.automation.main.search_field_and_search_results_page;
 
-//precondition student first course must have recordings in recordings tab as well as in student recordings tab
+//1precondition student first course must have recordings in recordings tab as well as in student recordings tab
 
 
 import java.text.SimpleDateFormat;

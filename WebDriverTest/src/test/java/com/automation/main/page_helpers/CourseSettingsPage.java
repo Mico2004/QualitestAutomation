@@ -181,7 +181,7 @@ public class CourseSettingsPage extends Page {
 			}
 		} catch (Exception msg) {
 			System.out.println("Fail to select the checkbox of make this course public.");
-			//ATUReports.add("Select make this course public.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Fail to select the checkbox of make this course public.", "True.", "False.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			//Assert.assertTrue(false);
 		}
 	}
@@ -201,8 +201,9 @@ public class CourseSettingsPage extends Page {
 					ATUReports.add("Unselected make course public if selected.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
-			} else {			System.out.println("Already it is unselected make course public.");
-				ATUReports.add("Unselected make course public if selected.", "True.", "True.", LogAs.PASSED, null);
+			} else {			
+				System.out.println("Already it is unselected make course public.");
+				ATUReports.add("Already it is unselected make course public.", "True.", "True.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 	}

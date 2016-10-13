@@ -178,12 +178,14 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 			
 			// 6. Click on the first chapter and wait the player will start to play.
 			player_page.verifyTimeBufferStatusForXSec(3);
-			
+			player_page.exitInnerFrame();
+					
 			// 7. Navigate back with the browser back button.
 			driver.navigate().back();
-			Thread.sleep(1000);
+			Thread.sleep(5000);
 			
-			String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));
+			WebElement we = driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope"));
+			String recording_init_background = record.getBackGroundColor(we);
 			
 			// 8. Click on the recording you just watched.
 			record.clickElement(record.first_recording_title);
@@ -210,7 +212,7 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 			String before_click_background = record.getBackGroundColor(record.list_of_resume_buttons.get(0));
 			
 			// 9. Hover over the slide box.
-			record.moveToElement(record.list_of_resume_buttons.get(0), driver).perform();
+			record.moveToElementAndPerform(record.list_of_resume_buttons.get(0), driver);
 						
 			// 9.1. The box background changes to grey.
 			if(record.getBackGroundColor(record.list_of_resume_buttons.get(0)).equals(before_click_background)) {
@@ -224,8 +226,7 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 			}
 			
 			// 10. Click the slide box link.
-			record.list_of_resume_buttons.get(0).click();
-						
+			record.clickElementWithOutIdJS(record.list_of_resume_buttons.get(0));					
 			// 10.1. Redirect to player page.
 			// 10.2. The player start playing the recording from the last slide mentioned in the "Resume Watching" text box.
 			player_page.verifyTimeBufferStatusForXSec(5);

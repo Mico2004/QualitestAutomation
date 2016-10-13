@@ -155,12 +155,9 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_student_testing_checkbox, "Enable student testing checkbox");
 		advanced_service_settings_page.clickOnOkbutton();
-		Thread.sleep(2000);
-		confirm_menu.clickOnOkButton();
 		
 		// 3. Logout.
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		record.signOut();
 		
 		// 4. Login as INSTRUCTOR.
 		tegrity.loginCourses("SuperUser");
@@ -172,6 +169,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		// 6. Hover over "Course Tasks" drop-down".
 		// 7. Choose "Course settings" option.
 		record.clickOnCourseTaskThenCourseSettings();
+		
 		Thread.sleep(1000);
 		
 		// 8. Enable all settings in "Course settings" page.
@@ -459,7 +457,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		record.verifyWebElementDisplayed(record.rssfeed, "RSS Feed");
 		record.verifyWebElementDisplayed(record.podcast_button, "Podcast");
 		record.verifyWebElementDisplayed(record.video_podcast, "Video Podcast");
-		record.verifyWebElementDisplayed(driver.findElements(By.cssSelector(".dropdown-menu>li>span")).get(2), "Subscribe to Your Course’s...");
+		record.verifyWebElementDisplayed(record.SubscribeToACourse, "Subscribe to Your Course’s...");
 		
 		
 		// 41. Hover over "Recording Tasks" element.

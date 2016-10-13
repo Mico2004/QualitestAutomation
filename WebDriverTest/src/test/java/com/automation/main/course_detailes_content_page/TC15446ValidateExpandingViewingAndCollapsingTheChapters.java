@@ -188,7 +188,7 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 		
 		// 5. Hover a cursor over recording chapter.
 		Point before_hovring = record.video_wraps_of_chapters_of_opened_recording_list.get(0).getLocation();
-		record.moveToElement(record.video_wraps_of_chapters_of_opened_recording_list.get(0), driver).perform();
+		record.moveToElementAndPerform(record.video_wraps_of_chapters_of_opened_recording_list.get(0), driver);
 		Thread.sleep(1000);
 		
 		// 5.1. The hovered over chapter becomes a bit bigger in size.

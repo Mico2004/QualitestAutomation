@@ -79,7 +79,7 @@ public class Page {
 
 			wait.until(ExpectedConditions.elementToBeClickable(element));
 			element.click();
-			System.out.println("Clicked on " + element.getText() + " element");
+			System.out.println("Clicked on" + element.getText() + " element");
 			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
 					null);
 		} catch (Exception msg) {
@@ -108,6 +108,31 @@ public class Page {
 					null);		
 		} catch (Exception msg) {
 
+			try {
+				System.out.println("Clicked failed trying again with selenium");
+				wait.until(ExpectedConditions.elementToBeClickable(element));
+				element.click();
+				System.out.println("Clicked on " + element.getText() + " element");
+				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+						null);
+			} catch (Exception e1) {
+				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked failed:"+msg.getMessage(), LogAs.WARNING,
+						null);
+				
+			}
+		}
+
+	}
+	
+	
+	public void clickElementWithOutIdJS(WebElement element) // clicking element
+	{
+		String text = element.getText();
+		try {
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);		
+			System.out.println("Clicked on " + text + " element"); 
+			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);		
+		} catch (Exception msg) {
 			try {
 				System.out.println("Clicked failed trying again with selenium");
 				wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -298,8 +323,8 @@ public class Page {
 			return move_to;
 
 		} catch (NoSuchElementException e) {
+			e.printStackTrace();
 			return null;
-			/// Log.();
 		}
 	}
 
@@ -316,7 +341,7 @@ public class Page {
 			mouseOver.perform();
 
 		} catch (NoSuchElementException e) {
-		
+			e.printStackTrace();
 			/// Log.();
 		} catch (AWTException e) {
 			// TODO Auto-generated catch block
@@ -894,7 +919,7 @@ public class Page {
 	// This function get WebElement and excpected text, and check if that text
 	// appear in the WebElement
 	public void verifyWebElementTargetText(WebElement web_element, String target_text) {
-		if (web_element.getText().equals(target_text)) {
+		if (web_element.getText().contains(target_text)) {
 			System.out.println("Verified that target web element have target text: " + target_text);
 			ATUReports.add("WebElement have target text.", target_text, target_text, LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -905,6 +930,10 @@ public class Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	
+	
+	
 
 	// This function verify that there is vertical scrolling
 	public void verifyThereVerticalScrolling() {

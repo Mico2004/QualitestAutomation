@@ -103,7 +103,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 	}
 
 	@Test (description="TC 21988 Validate Recording Tasks UI In Recordings Student Recordings And Tests Tabs As ADMIN")
-	public void loginCourses() throws InterruptedException//
+	public void test21988() throws InterruptedException//
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// Precondition
@@ -174,7 +174,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				// 9. Hover over "Recording tasks" menu.
 				record.recording_tasks_button.click();
 				
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 				
 				// 10. The "recording tasks" menu opens.
 				boolean is_shown = record.isRecordingTasksShown();

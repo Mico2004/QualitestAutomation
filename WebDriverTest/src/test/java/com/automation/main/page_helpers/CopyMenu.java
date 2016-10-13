@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -69,13 +70,13 @@ public class CopyMenu extends Page {
 
 	// This function clicks on copy button of copy menu
 	public void clickOnCopyButton()  {
-				
+			
+		String id = "CopyButton";
 			try{
 			System.out.println("Copy1");
-			wait.until(ExpectedConditions.visibilityOf(copy_button));
-			wait.until(ExpectedConditions.elementToBeClickable(copy_button));
+			waitForVisibility(copy_button);			
 			System.out.println("Copy2");
-			copy_button.click();		
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");		
 			System.out.println("Clicked on copy button");
 			ATUReports.add("Clicked on copy button", LogAs.PASSED, null);			
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("CopyButton")));
@@ -149,9 +150,7 @@ public class CopyMenu extends Page {
 
 		String selected_course = null;
 		Thread.sleep(1500);
-		wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOf(first_course_on_the_list));
-		
+		waitForVisibility(first_course_on_the_list);
 		
 		for (int i = 0; i < course_list.size(); i++) {
 			selected_course = course_list.get(i).getText();
