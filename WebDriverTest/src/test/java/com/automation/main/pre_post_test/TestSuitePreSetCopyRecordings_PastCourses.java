@@ -2,8 +2,11 @@ package com.automation.main.pre_post_test;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
@@ -46,7 +49,7 @@ import atu.testng.reports.logging.LogAs;
 import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TestSuitePreSetCopyRecordingsAndPastCourse {
+public class TestSuitePreSetCopyRecordings_PastCourses {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -133,7 +136,7 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test( description = "Past Courses Pretest")
@@ -182,9 +185,24 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 		admin_dashboard_page.signOut();
 		
 		
-		
+		System.out.println("b0");
+		  final List<Integer> CourseAbContent = Arrays.asList(0,1,2,3); //For Ab	
+		  final List<Integer> CoursePastAContent = Arrays.asList(0,1,2,3); //For PAST A
+		  final List<Integer> CoursePastBContent = Arrays.asList(0); //For PAST B
+		  
+		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
+			{
+				put(PropertyManager.getProperty("course1"),CourseAbContent);	
+				put(PropertyManager.getProperty("course8"),CoursePastAContent);
+				put(PropertyManager.getProperty("course9"),CoursePastBContent);
+			}
+			};
+		TestSuitePreSetGeneric h=new TestSuitePreSetGeneric(driver);
+		System.out.println("b1");
+		h.GenricPreset(CoursesAndContent);
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	
-	
+	/*
 		
 		
 		
@@ -291,7 +309,7 @@ public class TestSuitePreSetCopyRecordingsAndPastCourse {
 
 
 		System.out.println("Done.");
-		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);*/
 
 	
 

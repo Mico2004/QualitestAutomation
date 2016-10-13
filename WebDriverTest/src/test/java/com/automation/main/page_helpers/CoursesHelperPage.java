@@ -193,6 +193,7 @@ public class CoursesHelperPage extends Page {
 			
 		}for (WebElement course : course_list) {
 			current_course_list.add(course.getText());
+			System.out.println(course.getText());
 		}
 
 		return current_course_list;
@@ -425,6 +426,7 @@ public class CoursesHelperPage extends Page {
 		System.out.println("select2");
 		String target_course_name = null;				
 		for (String course_name : course_list) {
+			System.out.println(course_name+"Compare to"+name_starting_with);
 			if (course_name.startsWith(name_starting_with)) {
 				System.out.println("select3");
 				target_course_name = course_name;
@@ -557,25 +559,14 @@ public class CoursesHelperPage extends Page {
 
 	
 	// This function copy all recordings from source course to SEVERAL courses at once
-	public void copyRecordingFromCourseStartWithToCourseStartWithOfType(String source_start_with, List<String> des_start_with,
+	public void copyRecordingFromCourseStartWithToCourseStartWithOfType(String source_course, List<String> destinationCourses,
 			int type_of_recordings, RecordingHelperPage record_helper_page, CopyMenu copy_menu,
 			ConfirmationMenu confirmation_menu) throws InterruptedException {
-		String destination_course_name = null;
-		String source_course = null;
-		boolean sourceCourseFound=false;
-		List <String> destinationCourses=new ArrayList<String>();
 		
 		
-		for (int i = 0; i < des_start_with.size(); i++) {
-			for (String course_name : getCourseList()) {
-				if (course_name.startsWith(des_start_with.get(i))) {					
-					destinationCourses.add(course_name);
-				} else if (course_name.startsWith(source_start_with) && !sourceCourseFound) {
-					source_course = course_name;
-					sourceCourseFound=true;
-				}
-			}
-		}
+		
+		
+	
 
 		selectCourseThatStartingWith(source_course);
 
@@ -633,14 +624,17 @@ public class CoursesHelperPage extends Page {
 				System.out.println("CopyHandle3");
 				copySuccess = true;
 			} catch (Exception e) {
-				System.out.println("CopyHandleException" + i);
+				System.out.println("CopyHandleException" + i+" e:"+e.getMessage());
 				i++;
-				driver.navigate().refresh();
-				Thread.sleep(5000);
+				new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
+				new WebDriverWait(driver, 10)
+						.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
+				clickElement(record_helper_page.check_all_checkbox);		 					
+				Thread.sleep(1000);				
 				/*	WebElement div = driver.findElement(By.xpath("//*[@id='main']"));
 				Actions builder = new Actions(driver);
 				builder.moveToElement(div, 10, 10).click().build().perform();*/
-				if (i >= 3) {
+				if (i >= 3) {					
 					ATUReports.add("Copy failed", "Copy Success", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					System.out.println(e.getMessage());
 					Assert.assertTrue(false);
@@ -1817,6 +1811,24 @@ public class CoursesHelperPage extends Page {
 
 		return target_course;
 	}
+	
+	
+	public String[] getCoursesListFromElement(List<WebElement> text)/// text
+	/// extracted
+	/// from
+	/// elements getCoursesListFromElement
+	{
+		String[] linkTexts = new String[text.size()];
+		int i = 0;
 
+		// extract the link texts of each link element
+		for (WebElement e : text) {
+			linkTexts[i] = e.getText();
+			i++;
+		}
+		/*waitForVisibility(active_courses_tab_button);
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));*/
+		return linkTexts;
+	}
 
 }

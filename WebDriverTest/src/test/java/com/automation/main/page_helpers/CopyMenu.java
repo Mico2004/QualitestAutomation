@@ -185,12 +185,17 @@ public class CopyMenu extends Page {
 		String selected_course = null;
 		Thread.sleep(1500);
 		wait = new WebDriverWait(driver, 30);
+		System.out.println("s1");
+		System.out.println(target_courses_name.size());
 		wait.until(ExpectedConditions.visibilityOf(first_course_on_the_list));
-		
-		for(z=0;z<target_courses_name.size();z++)
+		System.out.println("s2");
+		for(z=0;z<target_courses_name.size();z++){
+			System.out.println(target_courses_name.size());
 		for (int i = 0; i < course_list.size(); i++) {
 			selected_course = course_list.get(i).getText();
+			System.out.println(course_list.get(i).getText());
 			if (selected_course.equals(target_courses_name.get(z))) {
+				System.out.println(target_courses_name.get(z));
 				clickElement(course_list.get(i));
 				System.out.println("course is selected from Copy manu course list: " + target_courses_name.get(z));
 				ATUReports.add("course is selected from Copy manu course list: " + target_courses_name.get(z), LogAs.PASSED, null);
@@ -199,7 +204,7 @@ public class CopyMenu extends Page {
 			}
 
 		}
-		
+		}
 		
 		
 		if (selected_course == null) {

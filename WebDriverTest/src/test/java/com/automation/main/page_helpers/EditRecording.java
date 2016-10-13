@@ -63,7 +63,7 @@ public class EditRecording extends Page {
 		}
 			
 		int i = 0; 
-		while(!isElementPresent(By.id("PlayButton_Img")) || i < 20) {
+		while(!isElementPresent(By.id("PlayButton_Img")) && i < 20) {
 				i++;
 				System.out.println("element is not visable");
 				Thread.sleep(1500);	

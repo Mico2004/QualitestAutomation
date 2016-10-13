@@ -272,18 +272,26 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			Thread.sleep(2000);
 			mangage_adhoc_courses_membership_window.ok_button.click();
 			Thread.sleep(2000);
-			driver.switchTo().alert().accept();
+			waitForAlert(60);
+			clickOkInAlertIfPresent();
+			Thread.sleep(3000);
 			System.out.println("clicked on ok");
 		}
         //this function searches for course name and than deletes it
 		public void deleteCourseByNameSearch(String past_course_student2) throws InterruptedException {
-			driver.switchTo().frame(0);
-			Thread.sleep(2000);
-			Thread.sleep(2000);
+			try{
+			driver.switchTo().frame(0);			
+			Thread.sleep(4000);			
 			searchAndFilterCourses(past_course_student2);
 			Thread.sleep(3000);
 			clickOnFirstCourseDeleteButton();
-		    Thread.sleep(3000);	
-		    driver.switchTo().alert().accept();
+			waitForAlert(60);
+			clickOkInAlertIfPresent();
+			Thread.sleep(3000);
+			ATUReports.add("Deleted course '"+past_course_student2+"' successfully",LogAs.PASSED,null);
+			}catch(Exception e){
+			ATUReports.add("Course deletion '"+past_course_student2+"' failed",LogAs.FAILED,null);	
+			Assert.assertTrue(false);
+			}
 		}
 }

@@ -135,7 +135,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description="TC 19317 Verify That Private Course Is Not Accessible For Students")

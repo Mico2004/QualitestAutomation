@@ -132,7 +132,7 @@ public class TC21807ValidatePublicCoursesUILogIn {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description = "TC 21807 Validate Public Courses UI LogIn")

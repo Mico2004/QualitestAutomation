@@ -2,7 +2,12 @@ package com.automation.main.pre_post_test;
 
 
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -130,53 +135,22 @@ public class TestSuitePreSetCopyRecordings_Admin {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
-	@Test(description = "Test Suite Pre Set Copy Recordings_Admin")
-	public void testSuitePreSetCopyRecordings_Admin() throws InterruptedException {
-		// 1. Login with SuperUser.
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
-		tegrity.loginCourses("SuperUser");// log in courses page
-		initializeCourseObject();
-
-		// Copy all recording from Bank Valid Recording to course starting with
-		// Ab
-		// Copy all tests from Bank Valid Recording to course starting
-		// with Ab
-//		course.waitForVisibility(course.active_courses_tab_button);
-		Thread.sleep(2000);
-		
-		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("Ab", 2, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("Ab", 3, record, delete_menu);
-
-		
-		
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 3, record, copy,
-				confirm_menu);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 0, record, copy,
-				confirm_menu);
-		// Copy all additional content from Bank Valid Recording to course
-		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 1, record, copy,
-				confirm_menu);
-		// Copy all student recordings from Bank Valid Recording to course
-		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 2, record, copy,
-				confirm_menu);
-		
-		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
-		System.out.println("1");  
-		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
-		System.out.println("3");
-		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
-		System.out.println("4");
-		
-		
-		System.out.println("Done.");
+	@Test(dependsOnMethods = "loadPage", description = "Login course page")
+	public void loginCourses() throws InterruptedException {
+		System.out.println("b0");
+		  final List<Integer> CourseAbContent = Arrays.asList(0,1,2,3); //For Ab		
+		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
+			{
+				put(PropertyManager.getProperty("course1"),CourseAbContent);			
+			}
+			};
+		TestSuitePreSetGeneric h=new TestSuitePreSetGeneric(driver);
+		System.out.println("b1");
+		h.GenricPreset(CoursesAndContent);
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
 		
