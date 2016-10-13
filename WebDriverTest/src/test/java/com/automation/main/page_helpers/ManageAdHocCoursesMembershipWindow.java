@@ -325,13 +325,20 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	
 	// This function wait x second until student enroll to a course
 	public void waitMaxTimeUntillStudentEnrollToCourse(String student_name) throws InterruptedException {
-		
+		try{
 		for (int i=0; i<60;i++) {
 			if(selectIrUserFromUserList(student_elements_list, student_name)) {
+				ATUReports.add("User was added to course users list",student_name,LogAs.PASSED,null);
 				break;
 			} else {
 				Thread.sleep(1000);
 			}
+		}
+		ATUReports.add("User wasn't added to course users list",student_name,LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}catch(Exception e){
+			ATUReports.add("User wasn't added to course users list",student_name,"Error:"+e.getMessage(),LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			
+			
 		}
 	}
 }

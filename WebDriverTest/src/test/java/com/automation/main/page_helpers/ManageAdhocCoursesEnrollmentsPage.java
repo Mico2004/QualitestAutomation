@@ -99,13 +99,14 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			clickOnFilterButton();
 			try {
 				wait.until(ExpectedConditions.textToBePresentInElement(first_course_name, course_name));
+				ATUReports.add("Search and filter for a course: "+course_name,LogAs.PASSED,null);
 				return true;
 			} catch(Exception msg) {
 				continue;
 			}
 		}
 		
-		
+		ATUReports.add("Search and filter for a course failed: "+course_name,LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		return false;
 	}
 	
@@ -119,9 +120,11 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(first_course_membership_button));
 				first_course_membership_button.click();
+				ATUReports.add("Clicked on first course membership button",LogAs.PASSED,null);
 				System.out.println("Clicked on first course membership button");
 				return true;
 			} catch (Exception msg) {
+				ATUReports.add("Clicked on first course membership button failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Fail to click on first course membership button. ");
 				Thread.sleep(1000);
 			}

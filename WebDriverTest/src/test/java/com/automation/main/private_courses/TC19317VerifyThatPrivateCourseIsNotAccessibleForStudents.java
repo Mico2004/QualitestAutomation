@@ -259,11 +259,10 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		
 			 
 		// Confirm user membership list
-		mange_ad_hoc_courses_membership_window.clickOnOkButton();
-					
+		mange_ad_hoc_courses_membership_window.clickOnOkButton();					
 			
-		mange_ad_hoc_courses_membership_window.waitForVisibility(mange_ad_hoc_courses_membership_window.add_selected_as_instructor_button);
 		
+		mange_ad_hoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
 			 
 		// Sign Out.
 		for(String window: driver.getWindowHandles()) {
