@@ -190,7 +190,7 @@ public class PlayerPage extends Page {
 		} catch (Exception msg) {
 			System.out.println("Player not shows pause button.");
 			ATUReports.add("Player.", "Player shows pause button.", "Player not shows pause button.", LogAs.FAILED,
-					null);
+					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return false;
 		}
