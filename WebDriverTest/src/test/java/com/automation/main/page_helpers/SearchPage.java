@@ -354,7 +354,32 @@ public class SearchPage extends Page {
 	}
 	
 	// This function verify that search result is empty
+	public void ifSearchResultIsEmptyResultPageDisplayed() {
+		if(title_list.size() == 0) {
+				
+			String structure_displayed = breadcrumbs_box.getText();			
+			String[] splited_structure_displayed = structure_displayed.split(">");							
+			String[] splited_third_structure_displayed = splited_structure_displayed[3].trim().split(" ");
+			String resultNumber = splited_third_structure_displayed[0];
+			
+			if(Integer.parseInt(resultNumber) == 0){
+				System.out.println("Verified that search result is empty.");
+				ATUReports.add("Verified that search result is empty.", "True.", "True.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			}
+			else {
+				System.out.println("search result is empty.");
+				ATUReports.add("Verified that search result is empty.", "True.", "false.", LogAs.FAILED, null);
+				Assert.assertTrue(false);
+			}
+		} 
+		
+	}
+	
+	
+	// This function verify that search result is empty
 	public void verifySearchResultIsEmpty() {
+		
 		if(title_list.size() == 0) {
 			System.out.println("Verified that search result is empty.");
 			ATUReports.add("Verified that search result is empty.", "True.", "True.", LogAs.PASSED, null);
