@@ -290,7 +290,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			Thread.sleep(3000);
 			ATUReports.add("Deleted course '"+past_course_student2+"' successfully",LogAs.PASSED,null);
 			}catch(Exception e){
-			ATUReports.add("Course deletion '"+past_course_student2+"' failed",LogAs.FAILED,null);	
+			ATUReports.add("Course deletion '"+past_course_student2+"' failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
 			Assert.assertTrue(false);
 			}
 		}

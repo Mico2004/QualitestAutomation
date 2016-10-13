@@ -239,7 +239,7 @@ public class TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementS
 		 * record.changeRecordingOwnership(confirm_menu, erp_window,
 		 * instructor1,record.getCheckbox());
 		 * 
-		 * record.clickOnSignOut();
+		 * record.signOut();
 		 * 
 		 * // 3. Login as ADMIN. tegrity.loginAdmin("Admin");
 		 * Thread.sleep(2000);

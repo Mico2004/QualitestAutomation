@@ -190,7 +190,7 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 			record.verifyWebElementNotDisplayed(record.list_of_resume_buttons.get(0), "Resume box");
 						
 			// Sign out
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			Thread.sleep(1000);
 		}
 

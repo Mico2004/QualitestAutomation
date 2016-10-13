@@ -183,7 +183,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		search_page.verifyResultContainOneResultWithTargetTitle(new_chapter_name);
 		
 		// 5. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(3000);
 		
 		// 6. Log in as another Student (User2) that does'nt in rolled to the same course that contains the recording that you search earlier.
@@ -197,7 +197,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		search_page.verifySearchResultIsEmpty();
 		
 		// 8. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(3000);
 		
 		tegrity.loginCourses("User1");

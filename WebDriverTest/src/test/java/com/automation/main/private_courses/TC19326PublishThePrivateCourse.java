@@ -132,7 +132,7 @@ public class TC19326PublishThePrivateCourse {
 		String url =  course.getCurrentUrlCoursePage(); 
 		
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 			
 		// 1. Login as ADMIN 
 		tegrity.loginAdmin("Admin");
@@ -189,7 +189,7 @@ public class TC19326PublishThePrivateCourse {
 		}
 		
 		// 10. Login as INSTRUCTOR.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
@@ -205,7 +205,7 @@ public class TC19326PublishThePrivateCourse {
 		course.verifyCourseExist(private_course);
 		
 		// 13. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		
 		// 14. Login as Guest.	
@@ -226,7 +226,7 @@ public class TC19326PublishThePrivateCourse {
 		record.clickOnRecordingTitleInIndex(1);
 		
 		// 18. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 19. Login as Student.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

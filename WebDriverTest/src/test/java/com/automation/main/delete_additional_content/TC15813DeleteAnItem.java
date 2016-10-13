@@ -148,7 +148,7 @@ public class TC15813DeleteAnItem {
 		record.verifyTargetAdditionalContentIncludingTypeNotInAdditionalContentList(target_additional_content, target_additional_content_type);
 		
 		// 12. Click the "Sign Out" link.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(2000);
 		
 		// 13. Login as a STUDENT (User4).

@@ -1,6 +1,7 @@
 package com.automation.main.course_detailes_content_page;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
@@ -142,13 +143,28 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 		// 1. Make sure that the STUDENT and INSTRUCTOR users you are using never watched the recording used in this test case.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
+		
+		String current_handler = driver.getWindowHandle();
+		driver.findElement(By.tagName("body")).click();
+		driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
+		
+		driver.switchTo().window(current_handler);
+		driver.close();
+		for(String handler: driver.getWindowHandles()) {
+			 if(!handler.equals(current_handler)){
+				 driver.switchTo().window(handler);
+				 break;
+			 }
+		}
+		
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 				
 		// Copy one recording to Ba course
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// Logout.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		
@@ -176,15 +192,25 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			player_page.verifyTimeBufferStatusForXSec(3);
 			
 			// 7. Close the browser while recording is playing the first chapter.
-			String current_handler = driver.getWindowHandle();
+			//String current_handler = driver.getWindowHandle();
 			driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
 			
 			driver.switchTo().window(current_handler);
 			driver.close();
 			for(String handler: driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
-				break;
+				 if(!handler.equals(current_handler)){
+					 driver.switchTo().window(handler);
+					 break;
+				 }
 			}
+						
+//			driver.quit();	
+//			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+//			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
+//			record = PageFactory.initElements(driver, RecordingHelperPage.class);
+//			copy = PageFactory.initElements(driver, CopyMenu.class);
+//			player_page = PageFactory.initElements(driver, PlayerPage.class);
+//			top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
 			
 			// 8. Login as the same INSTRUCTOR user.
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -212,7 +238,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			
 			// 10.1. The "> Resume watching +(The first slide)" box is displayed.
 			Thread.sleep(2000);
-			record.verifyWebElementTargetText(record.list_of_resume_buttons.get(0), "Resume Watching (slide 1)");
+			record.verifyWebElementTargetText(record.list_of_resume_buttons.get(0), "Resume Watching");
 
 			// 10.2. The recording chapters are displayed to the user.
 			// 10.3. The recording chapters are display sequentially.
@@ -232,7 +258,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			String before_click_background = record.getBackGroundColor(record.list_of_resume_buttons.get(0));
 			
 			// 11. Hover over the slide box.
-			record.moveToElement(record.list_of_resume_buttons.get(0), driver).perform();
+			record.moveToElementAndPerform(record.list_of_resume_buttons.get(0), driver);
 			
 			// 11.1. The box background changes to grey.
 			if(record.getBackGroundColor(record.list_of_resume_buttons.get(0)).equals(before_click_background)) {
@@ -246,7 +272,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			}
 			
 			// 12. Click the slide box link.
-			record.list_of_resume_buttons.get(0).click();
+			record.clickElementWithOutIdJS(record.list_of_resume_buttons.get(0));
 			
 			// 12.1. Redirect to player page.
 			// 12.2. The player start playing the recording from the first slide mentioned in the "Resume Watching" text box.
@@ -257,7 +283,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 				driver.switchTo().window(handler);
 				break;
 			}
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			Thread.sleep(1000);
 		}
 		System.out.println("Done.");

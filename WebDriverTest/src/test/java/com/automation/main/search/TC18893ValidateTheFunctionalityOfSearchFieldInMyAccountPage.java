@@ -287,7 +287,7 @@ public class TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage {
 		search_page.exitInnerFrame();
 		
 		// 18. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

@@ -210,7 +210,7 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		record.verifyIndexRecordingHaveBookmark(1);
 		
 		// 13. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 14. Login as a STUDENT.

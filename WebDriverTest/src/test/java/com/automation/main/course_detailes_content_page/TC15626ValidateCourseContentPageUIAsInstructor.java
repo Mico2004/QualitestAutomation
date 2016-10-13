@@ -197,7 +197,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record);
 		// 11. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// END of Precondition
 		

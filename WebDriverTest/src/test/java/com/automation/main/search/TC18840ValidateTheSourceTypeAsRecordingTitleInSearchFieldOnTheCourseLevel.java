@@ -158,7 +158,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		//if we have last then 4 records we need to copy record from the bank
 		if(numberOfRecords < 4) {
 		
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			Thread.sleep(1000);
 		
 			tegrity.loginCourses("SuperUser");

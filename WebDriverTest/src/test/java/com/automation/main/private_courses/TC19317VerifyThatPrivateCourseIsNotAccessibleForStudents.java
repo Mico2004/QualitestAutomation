@@ -150,7 +150,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		String instructor_public_course = course.selectCourseThatStartingWith("Ab");
 		
 		// 2. Logout.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
@@ -201,7 +201,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		}
 			
 			
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		
 		// 4. Login as USER.
@@ -215,7 +215,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		course.verifyThatNoCourseIsDisplayed();
 		
 		// 6. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
@@ -261,9 +261,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		// Confirm user membership list
 		mange_ad_hoc_courses_membership_window.clickOnOkButton();
 					
-			
-		mange_ad_hoc_courses_membership_window.waitForVisibility(mange_ad_hoc_courses_membership_window.add_selected_as_instructor_button);
-		
+		mange_ad_hoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
 			 
 		// Sign Out.
 		for(String window: driver.getWindowHandles()) {
@@ -280,7 +278,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		}
 			
 			
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 
 		// 8. Login as STUDENT.
