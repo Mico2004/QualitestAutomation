@@ -452,6 +452,7 @@ public class CoursesHelperPage extends Page {
 	}catch (Exception e){
 		ATUReports.add("Selecting a course failed (screenshot)", e.getMessage(),
 				LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
+		e.printStackTrace();
 		Assert.assertTrue(false);
 		return null;
 	}

@@ -165,7 +165,7 @@ public class TC21599GuestPremissions {
 		String course_name = course.selectCourseThatStartingWith("Ab");
 		
 		 // 4.to course settings
-		 record.waitForVisibility(record.course_tasks_button);
+		 record.waitForVisibility(record.course_tasks_button); 
 		 record.toCourseSettingsPage();
 		
 		 // 5.verify checked visibility of course
@@ -201,6 +201,7 @@ public class TC21599GuestPremissions {
 		// 11.Make sure the 'Active Courses' and the 'Past Courses' tab are not
 		// displayed
 		course.waitForVisibility(course.public_courses_tab_button);
+			
 		course.verifyNoActiveCoursesTab();
 		course.verifyNoPastCoursesTab();
 
@@ -406,13 +407,12 @@ public class TC21599GuestPremissions {
 		// 38.Click on RSS Feed menu item: 1) The RSS Feed page is displayed.
 		String parentWindow = driver.getWindowHandle();
 		String xml_url =driver.getCurrentUrl();
-		record.verifyRssFeedPage(driver, tegrity);
+		String result = record.verifyRssFeedPage(driver, tegrity);
 		// 38.1 2) The recording <item> is displayed in the course
 		// ctrl+a
 
 		String test = "<title>" + course_name + " recordings</title>";
-		String xml_source_code = driver.findElement(By.tagName("body")).getText();	
-		
+			
 		for (String handler: driver.getWindowHandles()) {
 			if (!handler.equals(parentWindow)) {
 				driver.close();
@@ -424,7 +424,10 @@ public class TC21599GuestPremissions {
 		record.waitForVisibility(record.first_recording);
 		record.verifyFirstExpandableRecording();
 		record.clickOnTheFirstCaptherWithOutTheExpand();
+		
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
+		
+		String record_to_check = driver.getCurrentUrl();
 		
 		for(String handler: driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
@@ -435,7 +438,7 @@ public class TC21599GuestPremissions {
 		course.waitForVisibility(course.public_courses_tab_button);
 		course.selectCourseByName(course_name);
 		
-		if ((xml_source_code.contains(test)) && (xml_source_code.contains("<link>" +xml_url + "</link>"))) {
+		if ((result.contains(test)) && (result.contains("<link>" +xml_url + "</link>"))) {
 			System.out.println("contain title and correct link");
 			ATUReports.add("contain title and correct link", "xml", " visible", "visible", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -444,7 +447,11 @@ public class TC21599GuestPremissions {
 			ATUReports.add("contain title and link", "xml", " visible", "not visible", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-       				
+       		
+		record.waitForVisibility(record.course_tasks_button);
+	    //url attribute +later call function to verify pattern
+	    record.RssUrlVerification(result,record_to_check);
+		
 		/// 39.Click on Podcast menu item.
 			
 		record.waitForVisibility(record.recordings_tab);
@@ -452,7 +459,7 @@ public class TC21599GuestPremissions {
 
 		// 38.Click on RSS Feed menu item: 1) The RSS Feed page is displayed.
 
-		String result = record.verifyPodcastPage(driver, tegrity);
+		result = record.verifyPodcastPage(driver, tegrity);
 		// 38.1 2) The recording <item> is displayed in the course
 		// ctrl+a
 
@@ -482,7 +489,7 @@ public class TC21599GuestPremissions {
 	
 		record.waitForVisibility(record.course_tasks_button);
        //url attribute +later call function to verify pattern
-       record.podcastUrlVerification(result,podcast_feed_course_link,tegrity);
+       record.podcastUrlVerification(result,record_to_check,tegrity);
        
       //39.verify sorted by time date title and duration
 
@@ -509,11 +516,8 @@ public class TC21599GuestPremissions {
 	       String download_path= System.getProperty("user.home") + File.separatorChar +"Downloads"+ File.separatorChar+file_name;
 		   record.tryToDeleteOlderFile(download_path);
 		   driver.quit();
-		
-        
-        
-     ////////set up for download file
-
+     
+		 ////////set up for download file
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 		driver = new ChromeDriver();
 		
