@@ -6,6 +6,7 @@ import java.util.List;
 import java.text.DateFormat;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -73,6 +74,10 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
+    String recodingDateNumber;
+	String bookmark ;
+	
+	
 	@BeforeClass
 	public void setup() {
 
@@ -221,7 +226,7 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 
 				
 		// 16. Click on the Preconditional Course.
-		course.selectCourseThatStartingWith(current_course);
+		course.selectCourseThatStartingWith("abc");
 		Thread.sleep(3000);
 		
 		// 17. Validate that bookmark sign is displayed in the recording, left of recording date.
@@ -235,10 +240,17 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 		
 		String recording_date = record.getIndexDateWebElement(1).getText();
 		
+		if(driver instanceof InternetExplorerDriver) {
+			recodingDateNumber = recording_date.split(" ")[1];
+			bookmark = recording_date.split(" ")[0];
+		} else {		
+			recodingDateNumber = recording_date.split("\n")[1];
+			bookmark = recording_date.split("\n")[0];
+		}
 		try {
 			Date date = new Date();
-			date.parse(recording_date.split("\n")[1]);
-			if(recording_date.split("\n")[0].equals("bookmark")) {
+			date.parse(recodingDateNumber);
+			if(bookmark.equals("bookmark")) {
 				System.out.println("Verified that bookmark sign is to the left of recording date.");
 				ATUReports.add("Verified that bookmark sign is to the left of recording date.", "True.", "True.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -248,6 +260,7 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 				Assert.assertTrue(false);
 			}
 		} catch(Exception msg) {
+			msg.printStackTrace();
 			System.out.println("Date is not correct/wrong.");
 			ATUReports.add("Date is correct.", "True.", "False.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
@@ -255,6 +268,7 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+		
 	
 	}
 }

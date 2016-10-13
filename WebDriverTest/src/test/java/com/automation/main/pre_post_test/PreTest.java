@@ -87,9 +87,6 @@ public class PreTest {
 		driver = new FirefoxDriver();
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 		
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
@@ -125,32 +122,13 @@ public class PreTest {
 		this.driver.quit();
 	}
 
-	private void setAuthorInfoForReports() {
-		ATUReports.setAuthorInfo("McGraw-Hill Automation ", Utils.getCurrentTime(), "1.0");
-	}
 
-	private void setIndexPageDescription() {
-		ATUReports.indexPageDescription = "McGraw-Hill Verify <br/> <b> UI existence</b>";
-		
-	}
 
-	@Test
-	public void testME() {
-		setAuthorInfoForReports();
-		setIndexPageDescription();
-	}
-	// @Parameters({"web","title"}) in the future
-	@Test
-	public void loadPage() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
-	}
-
-	
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
-	public void loginCourses() throws InterruptedException//
-, UnsupportedEncodingException, FileNotFoundException
+	@Test(description = "Pre Test")
+	public void preTest() throws InterruptedException, UnsupportedEncodingException, FileNotFoundException
 	{
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginAdmin("Admin");
 		
@@ -163,10 +141,7 @@ public class PreTest {
 		Thread.sleep(3000);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SelfRegConfig")));
-		
-		
-		
-		
+			
 
 		// 3. Click on create course href link 
 		driver.switchTo().frame(0);
@@ -260,11 +235,11 @@ public class PreTest {
 				user_name = "User3" + sdf.format(date);
 			} else if (i == 3) {
 				user_name = "User4" + sdf.format(date);
-			} else {
+			} else if(i == 4) {
 				user_name = "SuperUser" + sdf.format(date);
 				SuperUsername = user_name;
 			}
-			
+				
 			created_new_user.add(user_name);
 			
 			mange_adhoc_users_page.clickOnNewUser();
@@ -303,13 +278,9 @@ public class PreTest {
 		
 		Thread.sleep(2000);
 		
-		
-	
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		
-
-		
+			
 		// 3. Click on create course href link 
 		for(int i=0; i<10; i++) {
 			try {
@@ -387,6 +358,16 @@ public class PreTest {
 
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(4));
 
+				// Search target user name in membership window
+				mangage_adhoc_courses_membership_window.searchForUser("executivead");	
+				
+				// Select first user from user list (the only user it found because of the uniq of the search)
+				mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
+				
+				// Add selected user to instructor list
+				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
+				
+				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse("executivead");
 
 			} else if (i == 1) {
 				// Search target user name in membership window
@@ -399,7 +380,7 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(0));
-
+				
 
 				
 				// Search target user name in membership window
@@ -448,6 +429,18 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(4));
+				
+				
+				// Search target user name in membership window
+				mangage_adhoc_courses_membership_window.searchForUser("executivead");	
+				
+				// Select first user from user list (the only user it found because of the uniq of the search)
+				mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
+				
+				// Add selected user to instructor list
+				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToStudentList();
+				
+				mangage_adhoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse("executivead");
 
 
 			} else if (i == 2) {
@@ -500,11 +493,7 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(0));
-
-				
-				
-
-				
+		
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(3));	
 
@@ -516,9 +505,7 @@ public class PreTest {
 				
 
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse(created_new_user.get(3));
-				
-
-				
+							
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(4));	
 
@@ -529,9 +516,7 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(4));
-
-				
-
+			
 			}  else if (i == 4) {
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(0));	
@@ -543,9 +528,7 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(0));
-
-
-				
+		
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(3));	
 
@@ -554,10 +537,8 @@ public class PreTest {
 
 				// Add selected user to instructor list
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToStudentList();
-				
-				
+							
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse(created_new_user.get(3));
-
 				
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(4));	
@@ -607,7 +588,6 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(1));
-
 
 				
 				// Search target user name in membership window
@@ -670,9 +650,6 @@ public class PreTest {
 				
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(4));
 
-				
-				
-
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(3));	
 
@@ -711,7 +688,6 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(0));
 
 				
-
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(4));	
 
 				// Select first user from user list (the only user it found because of the uniq of the search)
@@ -723,7 +699,6 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(4));
 				
 				
-
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(3));	
 
@@ -746,7 +721,6 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(4));
-
 				
 			}
 			mangage_adhoc_courses_membership_window.waitForVisibility(mangage_adhoc_courses_membership_window.ok_button);
@@ -821,7 +795,7 @@ public class PreTest {
 		Thread.sleep(2000);
 		admin_dashboard_page.signOut();
 		
-		tegrity.loginCourses(SuperUsername);
+		tegrity.loginCoursesByParameter(SuperUsername);
 		initializeCourseObject();
 		course.verifyRecordingsStatusIsClear("BankValid", 3, record);
 		
