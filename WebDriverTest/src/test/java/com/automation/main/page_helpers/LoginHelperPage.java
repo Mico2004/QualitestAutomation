@@ -57,13 +57,8 @@ public class LoginHelperPage extends Page {
 		setPageTitle("Tegrity Lecture Capture");	
 
 		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com/#/login");
-
-		//setPageUrl("https://awsserverautomation-perf-5.tegrity.com/#/login");	
-		setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
-
-
-	
-
+		setPageUrl("https://awsserverautomation-perf-5.tegrity.com/#/login");	
+		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 
 	}
 
