@@ -135,7 +135,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description="TC 19317 Verify That Private Course Is Not Accessible For Students")
@@ -150,7 +150,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		String instructor_public_course = course.selectCourseThatStartingWith("Ab");
 		
 		// 2. Logout.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
@@ -201,7 +201,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		}
 			
 			
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		
 		// 4. Login as USER.
@@ -215,7 +215,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		course.verifyThatNoCourseIsDisplayed();
 		
 		// 6. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
@@ -278,7 +278,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		}
 			
 			
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 
 		// 8. Login as STUDENT.

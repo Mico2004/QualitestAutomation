@@ -133,7 +133,7 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -152,7 +152,7 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 2. Repeat for INSTRUCTOR and STUDENT.
@@ -236,7 +236,7 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 				driver.switchTo().window(handler);
 				break;
 			}
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			Thread.sleep(1000);
 		}
 		

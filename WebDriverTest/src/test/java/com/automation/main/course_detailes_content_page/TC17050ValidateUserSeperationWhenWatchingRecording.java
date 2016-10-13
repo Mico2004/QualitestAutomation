@@ -128,7 +128,7 @@ public class TC17050ValidateUserSeperationWhenWatchingRecording {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -175,7 +175,7 @@ public class TC17050ValidateUserSeperationWhenWatchingRecording {
 		player_page.returnToRecordingPageByNameAsUserOrGuest(current_course, record);
 			
 		// 7. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 			
 		// 8. Login as another STUDENT/INSTRUCTOR user who is enrolled to the same course.

@@ -140,7 +140,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description="TC 19316 Create And Delete A Private Course")
@@ -157,7 +157,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		
 		String Ab_course_name = course.selectCourseThatStartingWith("Ab");
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 1. Create a new user, don't enroll him to any courses.
 		tegrity.loginAdmin("Admin");
@@ -195,7 +195,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 			break;
 		}
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 2. Login as USER.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -206,7 +206,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		course.verifyThatNoCourseIsDisplayed();
 		
 		// 4. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 5. Enroll this USER as INSTRUCTOR to any course.
 		tegrity.loginAdmin("Admin");
@@ -259,7 +259,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 			break;
 		}
 		
-		top_bar_helper.clickOnSignOut(); 
+		top_bar_helper.signOut(); 
 		
 		// 6. Login as INSTRUCTOR.
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);// log in courses page
@@ -278,7 +278,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		record.verifyThatNoRecordingExistInTheCourse();
 		
 		// 10. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 11. Disenroll this USER from his course. 
 		tegrity.loginAdmin("Admin");
@@ -325,7 +325,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 			break;
 		}
 		
-		top_bar_helper.clickOnSignOut(); 
+		top_bar_helper.signOut(); 
 		
 		// 12. Login as USER.
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);// log in courses page
@@ -340,7 +340,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		course.verifyCourseNotExist(private_course_name);
 		
 		// 16. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 17. Login as admin and enroll the user to a new course as Instructor.
 		tegrity.loginAdmin("Admin");
@@ -444,7 +444,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 			break;
 		}
 		
-		top_bar_helper.clickOnSignOut(); 
+		top_bar_helper.signOut(); 
 		
 		// 19. Login as the instructor.
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);
@@ -474,7 +474,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		
 		// 22. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 23. Login as Admin.
 		tegrity.loginAdmin("Admin");
@@ -522,7 +522,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 			break;
 		}
 		
-		top_bar_helper.clickOnSignOut(); 
+		top_bar_helper.signOut(); 
 		
 		// 25. Login as the Instructor.
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);
@@ -550,7 +550,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		
 		// 32. Sign Out.
 		driver.navigate().back();
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 33. Login as admin and enroll the user to a new course as Instructor.
 		tegrity.loginAdmin("Admin");
@@ -629,7 +629,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 			break;
 		}
 		
-		top_bar_helper.clickOnSignOut(); 
+		top_bar_helper.signOut(); 
 		
 		// 35. Login as the instructor.
 		tegrity.loginCoursesByParameter(temp_another_course_name);
@@ -661,7 +661,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		Thread.sleep(2000);
 		
 		// 38. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 39. Login as Admin.
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);
@@ -709,7 +709,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 			break;
 		}
 		
-		top_bar_helper.clickOnSignOut(); 
+		top_bar_helper.signOut(); 
 		
 		// 41. Login as the Instructor
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);

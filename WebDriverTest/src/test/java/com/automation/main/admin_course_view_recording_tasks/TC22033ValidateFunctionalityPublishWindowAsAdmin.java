@@ -104,7 +104,7 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -206,7 +206,7 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			record.verifyThatTargetRecordingNotExistInRecordingList(checked_recording_name);
 			
 			// 24. Sign out.
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			
 			// 25. Login as a different user who is enrolled as a INSTRUCTOR to the same course.
 			tegrity.loginCourses("User1");
@@ -230,7 +230,7 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			
 			// 30. Logout.
 			top_bar_helper.exitInnerFrame();
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			
 		}
 

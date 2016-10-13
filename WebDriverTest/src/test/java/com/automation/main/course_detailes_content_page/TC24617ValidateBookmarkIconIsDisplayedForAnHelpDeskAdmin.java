@@ -131,7 +131,7 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -173,7 +173,7 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 			driver.switchTo().window(handler);
 			break;
 		}
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(3000);
 		
 		// 7. Login as HelpDesk Admin.
@@ -197,7 +197,7 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 			Assert.assertTrue(false);
 		}
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 11. Login as Instructor.
@@ -220,7 +220,7 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 			driver.switchTo().window(handler);
 			break;
 		}
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(3000);
 		
 		// 16. Login as HelpDesk Admin.

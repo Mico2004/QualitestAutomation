@@ -138,7 +138,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description = "TC 21921 Enter As An Instructor Student To A Public Course In Which You Dont Have Instructor Student Permissions And Validate That Your Permissions Are Like Guest")

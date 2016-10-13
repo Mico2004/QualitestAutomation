@@ -181,7 +181,7 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 		course.selectCourseThatStartingWith(past_course_a);
 		Thread.sleep(3000);
         record.changeRecordingOwnership(confirm_menu, erp_window,instructor1,record.getCheckbox());
-		record.clickOnSignOut();
+		record.signOut();
 
 		/////////////////////////////////////////////// end of preset
 
@@ -277,7 +277,7 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 }

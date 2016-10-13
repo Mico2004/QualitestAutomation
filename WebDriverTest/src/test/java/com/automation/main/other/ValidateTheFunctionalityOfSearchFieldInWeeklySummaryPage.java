@@ -129,7 +129,7 @@ public class ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -292,7 +292,7 @@ public class ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 		search_page.waitUntilSpinnerImageDisappear();
 		
 		// 18. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 	}
 }

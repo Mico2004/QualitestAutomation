@@ -133,7 +133,7 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -152,7 +152,7 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 2, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record);
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 2. Login as an STUDENT.
@@ -188,7 +188,7 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		record.verifyIndexRecordingHaveBookmark(1);
 		
 		// 10. Sign out.
-		record.clickOnSignOut();
+		record.signOut();
 		
 		// 11. Login as a INSTRUCTOR.
 		tegrity.loginCourses("User1");

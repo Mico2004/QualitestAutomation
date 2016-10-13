@@ -94,7 +94,7 @@ public class TC15824TryToDeleteContentAsAStudent {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description="TC 15824 Try To Delete Content As A Student")

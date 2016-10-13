@@ -110,7 +110,7 @@ public class TestCaseCopyRecordingWithPodcast {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -256,7 +256,7 @@ public class TestCaseCopyRecordingWithPodcast {
 	    
 	    Thread.sleep(2000);
 	    
-	    record.clickOnSignOut();
+	    record.signOut();
 	    
 	    // 19. Login as STUDENT.
 	    tegrity.loginCourses("Student");// log in courses page

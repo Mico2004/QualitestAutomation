@@ -141,7 +141,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description = "TC 21856 Validate The Public Courses Tab UI After Changes")
@@ -154,7 +154,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		
 		String Ab_course_name = course.selectCourseThatStartingWith("Ab");
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 	
 		
 		// 2. Create 1 instructor and 1 student and enroll them to Ab course.
@@ -292,7 +292,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		course.verifyTabsOrder();
 		
 		// 9. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 10. Login as Student.
 		tegrity.loginCoursesByParameter(temp_student_user_name);
@@ -304,7 +304,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		course.verifyTabsOrder();
 		
 		// 13. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 14. Login as Admin.
 		tegrity.loginAdmin("Admin");
@@ -398,7 +398,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		Thread.sleep(5000);
 		
 		// 22. Sign out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 23. Login as Student.
 		tegrity.loginCoursesByParameter(temp_student_user_name);

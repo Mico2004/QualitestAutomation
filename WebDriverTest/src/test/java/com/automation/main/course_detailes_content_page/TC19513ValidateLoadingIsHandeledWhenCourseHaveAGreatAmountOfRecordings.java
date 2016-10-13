@@ -131,7 +131,7 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -166,7 +166,7 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 		record.checkStatusExistenceForMaxTTime(600);
 		
 		// 2. Login as INSTRUCTOR.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		tegrity.loginCourses("User1");
 		Thread.sleep(1000);

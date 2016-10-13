@@ -130,7 +130,7 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -190,7 +190,7 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 			record.verifyWebElementNotDisplayed(record.list_of_resume_buttons.get(0), "Resume box");
 						
 			// Sign out
-			top_bar_helper.clickOnSignOut();
+			top_bar_helper.signOut();
 			Thread.sleep(1000);
 		}
 

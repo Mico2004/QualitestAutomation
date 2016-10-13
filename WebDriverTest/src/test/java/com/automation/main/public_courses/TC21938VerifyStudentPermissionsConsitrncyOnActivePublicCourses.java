@@ -140,7 +140,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description = "TC 21938 Verify Student Permissions Consitrncy On Active Public Courses")
@@ -161,7 +161,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 		Thread.sleep(2000);	
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicSelected();
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		
 		// 2. On the University Course settings make sure all of the "Make this Course publicy visible" is locked and off.
@@ -177,7 +177,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.checkAllCourseSettingsCheckboxs();
 		course_settings_page.clickOnOkButton();
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		
 		// 4. Login as Student.
@@ -356,7 +356,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			driver.switchTo().window(handler);
 			break;
 		}
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		tegrity.loginAdmin("Admin");

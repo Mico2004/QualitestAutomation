@@ -130,7 +130,7 @@ public class TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNot
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description = "TC 21923 Validate The Login As Guest Button Dispaers When The University Has Not Public Courses")
@@ -155,7 +155,7 @@ public class TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNot
 		admin_course_settings_page.clickOnSaveButton();
 		
 		// 3. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 4. Clear cache.
 		// 5. Refresh the browser.

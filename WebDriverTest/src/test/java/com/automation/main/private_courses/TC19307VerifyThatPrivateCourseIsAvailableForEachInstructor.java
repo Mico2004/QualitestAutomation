@@ -133,7 +133,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description="TC 19307 Verify That Private Course Is Available For Each Instructor")
@@ -197,7 +197,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 record.veriftyThatStartRecordingButtonDisplayed();
 		 
 		 // 8.1. Logout.
-		 top_bar_helper.clickOnSignOut();
+		 top_bar_helper.signOut();
 		 
 		 // 9. Login as admin.
 		 tegrity.loginAdmin("Admin");
@@ -284,7 +284,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		}
 		
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		 
 		// 12. Login as the instructor you created.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -332,7 +332,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 record.veriftyThatStartRecordingButtonDisplayed();
 		 
 		 // 20. Sign Out.
-		 top_bar_helper.clickOnSignOut();
+		 top_bar_helper.signOut();
 		
 		 
 		 // 20.1. Login as User1.
@@ -344,7 +344,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 String Ab_course_name = course.selectCourseThatStartingWith("Ab");
 		 
 		 // 20.3. Logout.
-		 top_bar_helper.clickOnSignOut();
+		 top_bar_helper.signOut();
 		 
 		 // 21. Login as admin.
 		 tegrity.loginAdmin("Admin");
@@ -393,7 +393,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		}
 	
 				
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 24. Login as the instructor you created.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -416,7 +416,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 course.verifyCourseExist(temp_instructor_user_name+" sandbox course");
 		 
 		 // 28. Sign Out.
-		 top_bar_helper.clickOnSignOut();
+		 top_bar_helper.signOut();
 		 
 		 // 29 Login as admin.
 		 tegrity.loginAdmin("Admin");	
@@ -496,7 +496,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		}
 			
 			
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		
 		// 33. Login as the student.
@@ -505,7 +505,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		initializeCourseObject();
 		
 		// 34. Sign Out.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 35. Login as Admin.
 		tegrity.loginAdmin("Admin");	
@@ -555,7 +555,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		}
 	
 				
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		
 		// 38. Login as the Instructor.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

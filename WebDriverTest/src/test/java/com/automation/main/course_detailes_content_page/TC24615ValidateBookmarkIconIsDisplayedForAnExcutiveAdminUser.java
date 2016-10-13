@@ -133,7 +133,7 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -173,7 +173,7 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 			driver.switchTo().window(handler);
 			break;
 		}
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(3000);
 		
 		// 7. Login as Excutive Admin.
@@ -194,7 +194,7 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 			Assert.assertTrue(false);
 		}
 		
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		// 10. Login as Instructor.
@@ -217,7 +217,7 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 			driver.switchTo().window(handler);
 			break;
 		}
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(3000);
 		
 		// 15. Login as HelpDesk Admin.

@@ -99,7 +99,7 @@ public class TC15813DeleteAnItem {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	@Test (description="TC 15813 Delete An Item")
@@ -148,7 +148,7 @@ public class TC15813DeleteAnItem {
 		record.verifyTargetAdditionalContentIncludingTypeNotInAdditionalContentList(target_additional_content, target_additional_content_type);
 		
 		// 12. Click the "Sign Out" link.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(2000);
 		
 		// 13. Login as a STUDENT (User4).

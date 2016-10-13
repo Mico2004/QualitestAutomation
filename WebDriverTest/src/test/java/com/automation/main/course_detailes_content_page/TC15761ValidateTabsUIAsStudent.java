@@ -128,7 +128,7 @@ public class TC15761ValidateTabsUIAsStudent {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -165,7 +165,7 @@ public class TC15761ValidateTabsUIAsStudent {
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record);
 		// 8. Logout.
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		
 		
@@ -190,7 +190,7 @@ public class TC15761ValidateTabsUIAsStudent {
 		record.verifyNoTestsTab();
 		
 		// Post test
-		top_bar_helper.clickOnSignOut();
+		top_bar_helper.signOut();
 		Thread.sleep(1000);
 		tegrity.loginCourses("SuperUser");
 		course.selectCourseThatStartingWith("Ba");
