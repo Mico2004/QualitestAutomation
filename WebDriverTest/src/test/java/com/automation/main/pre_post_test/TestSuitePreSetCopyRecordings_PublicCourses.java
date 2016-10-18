@@ -146,7 +146,7 @@ public class TestSuitePreSetCopyRecordings_PublicCourses {
 	}
 
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
+	@Test(description = "Login course page")
 	public void loginCourses() throws InterruptedException {
 		System.out.println("b0");
 		  final List<Integer> CourseAbContent = Arrays.asList(0,2); //For Ab		
