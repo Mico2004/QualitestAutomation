@@ -1051,10 +1051,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// This function select first recording from recording list
 	public void selectIndexCheckBox(int index) throws InterruptedException {	
 		try{
-		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id("Checkbox"+index)));
-		
-		WebElement target_checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));
-	
+		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id("Checkbox"+index)));	
+		WebElement target_checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));	
 		SelectOneCheckBoxOrVerifyAlreadySelected(target_checkbox);
 		}
 		catch(Exception e){
