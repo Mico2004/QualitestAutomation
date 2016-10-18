@@ -342,7 +342,7 @@ public class PlayerPage extends Page {
 				
 				if (!checkThatTheTimeIsValid(current_element)) {
 					System.out.println("Not verify that the results of the row of time are fine.");
-					ATUReports.add("Not verify that the results of the row of time are fine.", "True.", "false", LogAs.FAILED, null);
+					ATUReports.add("Not verify that the results of the row of time are fine.", "True.", "false", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					break;
 				}
 				i++;
