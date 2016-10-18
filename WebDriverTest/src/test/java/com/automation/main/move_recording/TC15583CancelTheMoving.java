@@ -116,7 +116,7 @@ public class TC15583CancelTheMoving {
 		System.out.println("delete all records in course: " + targetCourse );
 		
 		//return to the selected course 
-		course.goToCoursesPage();
+		record.returnToCourseListPage();
 		course.selectCourseByName(currentCourse);
 		
 		
