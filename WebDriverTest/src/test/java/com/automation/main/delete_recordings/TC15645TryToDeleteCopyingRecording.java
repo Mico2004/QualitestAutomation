@@ -268,7 +268,7 @@ public class TC15645TryToDeleteCopyingRecording {
 			System.out.println(
 					"The following text not appear: The following recording(s) could not be deleted info appears.");
 			ATUReports.add("The following text appear: The following recording(s) could not be deleted info appears.",
-					"True.", "False.", LogAs.FAILED, null);
+					"True.", "False.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -285,7 +285,7 @@ public class TC15645TryToDeleteCopyingRecording {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verfied that recording is not deleted.");
-			ATUReports.add("Verfied that recording is not deleted.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Verfied that recording is not deleted.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
