@@ -315,7 +315,7 @@ public class PlayerPage extends Page {
 		
 		if(SearchResultContext.size() != SearchResultTimes.size() ||  SearchResultContext.size()!= SearchResultlocation.size()) {		
 			System.out.println("The size of the lists aren't equal.");
-			ATUReports.add("The size of the lists aren't equal.", "True.", "False.", LogAs.FAILED, null);				
+			ATUReports.add("The size of the lists aren't equal.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));				
 		} else {
 			System.out.println("The size of the lists are at the same size.");
 			ATUReports.add("The size of the lists are at the same size.", "True.", "True..", LogAs.PASSED, null);
@@ -327,7 +327,7 @@ public class PlayerPage extends Page {
 				String current_element = getTextFromWebElement(e,5);						
 				if (!current_element.equals("Recording Chapter") && !current_element.equals("Recording Title") ) {
 					System.out.println("Not Verify that the results of the row of location are fine." + current_element);
-					ATUReports.add("Not verify that the results of the row of location are fine." + current_element, "True.", "false", LogAs.FAILED, null);
+					ATUReports.add("Not verify that the results of the row of location are fine." + current_element, "True.", "false", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					break;
 				}
 				i++;
