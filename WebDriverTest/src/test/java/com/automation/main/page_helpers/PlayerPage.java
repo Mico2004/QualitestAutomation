@@ -650,8 +650,8 @@ public class PlayerPage extends Page {
 			
 		
 		//WebElement titleResult =(WebElement)((JavascriptExecutor) driver).executeScript("document.getElementById(\"undefined_TXT\");");
-		WebElement titleResult = driver.findElements(By.id("undefined_TXT")).get(2);
-		String text = titleResult.getText(); 
+		WebElement titleResults = driver.findElements(By.id("undefined_TXT")).get(3);		
+		String text = titleResults.getText(); 
 			
 		if ((text.contains(recording)) && (text.contains("- Search Results"))) {
 			System.out.println("result search page verified for recording: " + recording);
