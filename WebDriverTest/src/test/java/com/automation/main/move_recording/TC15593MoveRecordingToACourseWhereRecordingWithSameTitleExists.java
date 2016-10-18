@@ -35,6 +35,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -280,7 +282,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that copied recording has the title with number mark");
-			ATUReports.add("Not verified that copied recording has the title with number mark", LogAs.FAILED, null);
+			ATUReports.add("Not verified that copied recording has the title with number mark", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
