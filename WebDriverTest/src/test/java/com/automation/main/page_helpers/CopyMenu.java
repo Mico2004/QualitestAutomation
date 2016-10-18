@@ -151,8 +151,8 @@ public class CopyMenu extends Page {
 		String selected_course = null;
 		Thread.sleep(1500);
 		wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOf(first_course_on_the_list));
-		
+		wait.until(ExpectedConditions.textToBePresentInElement(first_course_on_the_list, target_course_name));
+	
 		for (int i = 0; i < course_list.size(); i++) {
 			selected_course = course_list.get(i).getText();
 			if (selected_course.equals(target_course_name)) {
