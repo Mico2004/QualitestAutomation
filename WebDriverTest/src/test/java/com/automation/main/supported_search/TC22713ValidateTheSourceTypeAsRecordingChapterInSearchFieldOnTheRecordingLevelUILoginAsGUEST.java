@@ -148,7 +148,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			tegrity.waitForVisibility(tegrity.passfield);
-
 			// 2.login as Admin
 			tegrity.loginAdmin("Admin");
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
@@ -186,7 +185,8 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			record.convertRecordingsListToRecorderName();
 			record.verifyFirstExpandableRecording();
 			
-			String recording_to_search=record.getSecondRecordPlayerName();
+			String recording_to_search=record.getFirstRecordPlayerName();
+			
 			Thread.sleep(2000);
 						
 			record.clickOnTheFirstCaptherWithOutTheExpand();
