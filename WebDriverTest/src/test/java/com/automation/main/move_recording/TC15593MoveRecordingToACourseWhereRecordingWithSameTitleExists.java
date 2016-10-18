@@ -68,24 +68,6 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		
-//		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
-	//	DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
-		
-		
-//		ieCapabilities.setCapability("nativeEvents", false);    
-//		ieCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
-//		ieCapabilities.setCapability("ignoreProtectedModeSettings", true);
-//		ieCapabilities.setCapability("disable-popup-blocking", true);
-		
-		
-		//ieCapabilities.setCapability("enablePersistentHover", false);
-		//driver = new InternetExplorerDriver(ieCapabilities);
-		//driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-		
-//		driver = new FirefoxDriver();
-
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -142,7 +124,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		// 2.4. Select source course.
 		current_course = course.selectCourseThatStartingWith("Ab");
 		
-		wait.until(ExpectedConditions.elementToBeClickable(record.getCheckbox()));
+		wait.until(ExpectedConditions.elementToBeClickable(record.checkbox));
 		
 		// 2.5. Select source recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -259,9 +241,6 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		// 14. Verify that copied recording has a title with number mark ("recordingname (number)").
 		List<String> recording_list = record.getCourseRecordingList();
 		
-		
-		// 15. verify that their is no status of moving/coping
-		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 		
 		int i = 0;
 		boolean is_found = false;
