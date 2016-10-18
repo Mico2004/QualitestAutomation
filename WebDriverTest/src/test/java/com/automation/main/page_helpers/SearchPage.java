@@ -203,10 +203,11 @@ public class SearchPage extends Page {
 	// Verify that 
 	// The next result display below the current result in case there is next result.
 	public void verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult() {
-		if(video_thumbnails_list.size()>1) {
+		int listSize = video_thumbnails_list.size();
+		if(listSize>1) {
 			boolean not_correct = false;
 			int prepoint = video_thumbnails_list.get(0).getLocation().y;
-			for(int i=1; i<video_thumbnails_list.size()-1; i++) {
+			for(int i=1; i<listSize-1; i++) {
 				int currpoint = video_thumbnails_list.get(i).getLocation().y;
 				if(prepoint < currpoint) {
 					prepoint = currpoint;

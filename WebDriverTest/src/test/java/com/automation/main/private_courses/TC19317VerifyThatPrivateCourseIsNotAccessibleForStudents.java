@@ -18,7 +18,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
 import com.automation.main.page_helpers.AdvancedServiceSettingsPage;
@@ -36,7 +35,6 @@ import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -111,10 +109,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 			manage_adhoc_courses_enrollments_page = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
 			mange_ad_hoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
 			advanced_service_settings_page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
-			
-			//DesiredCapabilities capabilities = null;
-			//capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
-			
+				
 			wait = new WebDriverWait(driver, 30);
 		 
 		 Date curDate = new Date();

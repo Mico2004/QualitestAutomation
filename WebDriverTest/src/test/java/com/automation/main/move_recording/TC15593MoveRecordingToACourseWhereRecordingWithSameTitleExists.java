@@ -257,6 +257,10 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		// 14. Verify that copied recording has a title with number mark ("recordingname (number)").
 		List<String> recording_list = record.getCourseRecordingList();
 		
+		
+		// 15. verify that their is no status of moving/coping
+		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
+		
 		int i = 0;
 		boolean is_found = false;
 		for(String recording: recording_list) {

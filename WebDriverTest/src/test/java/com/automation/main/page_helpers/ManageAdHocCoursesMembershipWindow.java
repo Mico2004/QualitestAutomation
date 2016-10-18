@@ -329,7 +329,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 		for (int i=0; i<60;i++) {
 			if(selectIrUserFromUserList(student_elements_list, student_name)) {
 				ATUReports.add("User was added to course users list",student_name,LogAs.PASSED,null);
-				break;
+				return;
 			} else {
 				Thread.sleep(1000);
 			}

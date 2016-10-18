@@ -231,14 +231,13 @@ public class TC15645TryToDeleteCopyingRecording {
 				if(recording_status.equals("Moving/Copying")){
 					if(!record.isIndexRecordingClickable(i + 1)){
 					System.out.println("Recording is grayed out");
-					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is grayed out",
-							LogAs.PASSED, null);
+					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is grayed out",LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					index = i+1;
+					break;
 				} else {
 					System.out.println("Recording is not grayed out");
-					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is not grayed out",
-							LogAs.FAILED, null);
+					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is not grayed out",LogAs.FAILED, null);
 					Assert.assertTrue(false);
 				}
 			}
