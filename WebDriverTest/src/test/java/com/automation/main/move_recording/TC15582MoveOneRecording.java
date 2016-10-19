@@ -66,9 +66,7 @@ public class TC15582MoveOneRecording {
 		try {
 
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-			driver = new ChromeDriver();///// MUST FOR TEST TO GET XML
-
-			
+			driver = new ChromeDriver();///// MUST FOR TEST TO GET XML		
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 		} catch (Exception e) {
 			/// ATUReports.add("Fail Step", LogAs.FAILED, new
