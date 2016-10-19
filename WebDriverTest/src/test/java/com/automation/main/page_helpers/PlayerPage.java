@@ -650,7 +650,7 @@ public class PlayerPage extends Page {
 			
 		
 		//WebElement titleResult =(WebElement)((JavascriptExecutor) driver).executeScript("document.getElementById(\"undefined_TXT\");");
-		WebElement titleResults = driver.findElements(By.id("undefined_TXT")).get(3);		
+		WebElement titleResults = driver.findElements(By.id("undefined_TXT")).get(2);		
 		String text = titleResults.getText(); 
 			
 		if ((text.contains(recording)) && (text.contains("- Search Results"))) {
@@ -714,9 +714,11 @@ public class PlayerPage extends Page {
 	
 
 	// This function add String to bookmark
-	public void addTargetBookmark(String target_bookmark) {
+	public void addTargetBookmark(String target_bookmark) throws InterruptedException {
 		System.out.println(time_buffer_status.getText());
+		Thread.sleep(500);
 		sendStringToWebElement(bookmark_input_text, target_bookmark);
+		Thread.sleep(500);
 		clickElementJS(add_bookmark_button);
 		System.out.println(time_buffer_status.getText());
 		System.out.println("Target bookmark added.");
@@ -1193,9 +1195,8 @@ public class PlayerPage extends Page {
 		while (!player_timer.getText().contains(seconds)) {
 			if (time_out == 120) {
 				System.out.println("time out");
-				Assert.assertTrue(false);
 				ATUReports.add("Time out", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-
+				Assert.assertTrue(false);
 			}
 			Thread.sleep(500);
 			time_out++;
@@ -1204,7 +1205,6 @@ public class PlayerPage extends Page {
 			pause_button.click();
 			System.out.println("clicked on play button to pause");
 			addBookMark(bookmark, seconds);
-
 			play_button.click();
 		} catch (Exception e) {
 

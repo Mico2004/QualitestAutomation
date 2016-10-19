@@ -3,6 +3,7 @@ package com.automation.main.admin_course_view_recording_tasks;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -172,8 +173,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				
 				
 				// 9. Hover over "Recording tasks" menu.
-				record.recording_tasks_button.click();
-				
+				record.moveToElementAndPerform(record.recording_tasks_button, driver);			
 				Thread.sleep(2000);
 				
 				// 10. The "recording tasks" menu opens.

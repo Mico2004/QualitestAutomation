@@ -185,7 +185,7 @@ public class TC15645TryToDeleteCopyingRecording {
 
 		} else {
 			System.out.println(
-					"The following text not appear: The following recording(s) could not be deleted info appears.");
+					"The following t ext not appear: The following recording(s) could not be deleted info appears.");
 			ATUReports.add("The following text appear: The following recording(s) could not be deleted info appears.",
 					"True.", "False.", LogAs.FAILED, null);
 			Assert.assertTrue(false);

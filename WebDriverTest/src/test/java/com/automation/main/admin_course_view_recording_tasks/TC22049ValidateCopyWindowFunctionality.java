@@ -36,6 +36,9 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -194,7 +197,7 @@ public class TC22049ValidateCopyWindowFunctionality {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Dropdown list opened with the text: " + dropdown_result);
-			ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: " + dropdown_result, LogAs.FAILED, null);
+			ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: " + dropdown_result, LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		

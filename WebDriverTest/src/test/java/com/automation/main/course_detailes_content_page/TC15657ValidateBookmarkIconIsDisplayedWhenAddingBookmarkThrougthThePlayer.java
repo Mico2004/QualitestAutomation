@@ -57,7 +57,6 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
 	public AdminDashboardPage admin_dash_board_page;
 	public CourseSettingsPage course_settings_page;
-	public AddAdditionalContentLinkWindow add_additional_content_link_window;
 	public EditRecording edit_recording;
 	public BottomFooter bottom_footer;
 	public SearchPage search_page;
@@ -104,7 +103,6 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
 		
-		add_additional_content_link_window = PageFactory.initElements(driver, AddAdditionalContentLinkWindow.class);
 		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
