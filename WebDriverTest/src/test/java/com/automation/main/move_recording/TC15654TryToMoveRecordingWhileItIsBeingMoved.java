@@ -130,9 +130,11 @@ public class TC15654TryToMoveRecordingWhileItIsBeingMoved {
 		
 		// 4. Select "Recording Tasks -> Move" menu item.
 		record.clickOnRecordingTaskThenMove();
-		
-		// 5. Select destination course.
-		copy.selectTargetCourseFromCourseList(destination_course_name);
+        Thread.sleep(1000);	
+        
+		// Select destination course:mark destination course by clicking on it
+        move_window.course_list.get(0).click();
+		System.out.println("first destination was marked");
 
 		// 6. Click "Move Recording(s)" button.
 		move_window.clickOnMoveRecordings();
