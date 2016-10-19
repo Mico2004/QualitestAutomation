@@ -509,9 +509,9 @@ public class RecordingHelperPage extends Page {
 			time_counter++;
 			Thread.sleep(1000);
 			
-			if (time_counter > 200) {
-				System.out.println("Timeout - Being copied from still appears after 200 seconds");
-				ATUReports.add("Timeout - Being copied from still appears after 200 seconds", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			if (time_counter > 220) {
+				System.out.println("Timeout - Being copied from still appears after 220 seconds");
+				ATUReports.add("Timeout - Being copied from still appears after 220 seconds", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 				return;
 			} else {

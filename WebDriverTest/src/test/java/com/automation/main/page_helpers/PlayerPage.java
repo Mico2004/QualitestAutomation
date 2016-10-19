@@ -1193,9 +1193,8 @@ public class PlayerPage extends Page {
 		while (!player_timer.getText().contains(seconds)) {
 			if (time_out == 120) {
 				System.out.println("time out");
-				Assert.assertTrue(false);
 				ATUReports.add("Time out", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-
+				Assert.assertTrue(false);
 			}
 			Thread.sleep(500);
 			time_out++;
@@ -1204,7 +1203,6 @@ public class PlayerPage extends Page {
 			pause_button.click();
 			System.out.println("clicked on play button to pause");
 			addBookMark(bookmark, seconds);
-
 			play_button.click();
 		} catch (Exception e) {
 

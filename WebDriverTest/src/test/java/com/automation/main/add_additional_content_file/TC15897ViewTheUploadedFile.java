@@ -43,6 +43,8 @@ import java.util.HashMap;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 public class TC15897ViewTheUploadedFile {
 	// Set Property for ATU Reporter Configuration
@@ -313,7 +315,7 @@ public class TC15897ViewTheUploadedFile {
 							Assert.assertTrue(true);
 						} else {
 							System.out.println("file is bigger or smaller for mega representation");
-							ATUReports.add("file is bigger or smaller for mega representation", LogAs.FAILED, null);
+							ATUReports.add("file is bigger or smaller for mega representation", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 							Assert.assertTrue(false);
 						}
 			    Thread.sleep(6000);
@@ -325,7 +327,7 @@ public class TC15897ViewTheUploadedFile {
 							Assert.assertTrue(true);
 						} else {
 							System.out.println("files not represented in additional Content list correctly");
-							ATUReports.add("files not represented in additional Content list correctly", LogAs.FAILED, null);
+							ATUReports.add("files not represented in additional Content list correctly", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 							Assert.assertTrue(false);
 						}
 				System.out.println(driver.findElement(By.id("RecordingDate1")).getText());

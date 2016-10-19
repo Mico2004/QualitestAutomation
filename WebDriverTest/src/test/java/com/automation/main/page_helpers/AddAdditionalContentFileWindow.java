@@ -36,7 +36,6 @@ public class AddAdditionalContentFileWindow extends Page {
 	@FindBy(id = "UploadFile")
 	public WebElement select_upload_additional_file;
 	@FindBy(id = "AddFileButton")
-	
 	public WebElement add_additional_file_button;
 	@FindBy(xpath = "//*[@id=\"addFileWindow\"]/form/div[1]/small[1]/b")
 	public WebElement add_additional_file_selected_name;
