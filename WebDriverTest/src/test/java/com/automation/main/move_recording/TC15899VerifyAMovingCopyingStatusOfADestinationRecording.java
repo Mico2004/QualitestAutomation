@@ -165,9 +165,7 @@ public class TC15899VerifyAMovingCopyingStatusOfADestinationRecording {
 		
 		// 8. While recording is being copied, click the "Courses" link at the breadcrumbs.
 		record.returnToCourseListPage();
-		
-		Thread.sleep(800);
-		
+			
 		// 9. Select destination course.
 		course.selectTargetCourse(target_course);
 		

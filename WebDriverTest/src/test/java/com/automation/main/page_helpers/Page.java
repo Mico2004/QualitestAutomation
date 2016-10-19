@@ -233,7 +233,7 @@ public class Page {
 			wait.until(ExpectedConditions.visibilityOf(element));
 		} catch (Exception e) {
 			System.out.println("Waiting for element visibiliy failed");
-			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,null);
+			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
 		}
 	}
