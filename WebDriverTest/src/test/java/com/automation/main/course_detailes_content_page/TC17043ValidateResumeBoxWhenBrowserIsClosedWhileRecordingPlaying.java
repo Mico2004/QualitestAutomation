@@ -3,11 +3,13 @@ package com.automation.main.course_detailes_content_page;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -131,33 +133,21 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	
 	@Test(description = "TC 17043 Validate Resume Box When Browser Is Closed While Recording Playing")
 	public void test17043() throws Exception
 	{
+			
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
+		
 		// 1. Make sure that the STUDENT and INSTRUCTOR users you are using never watched the recording used in this test case.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
 		
-		String current_handler = driver.getWindowHandle();
-		driver.findElement(By.tagName("body")).click();
-		driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
-		
-		driver.switchTo().window(current_handler);
-		driver.close();
-		for(String handler: driver.getWindowHandles()) {
-			 if(!handler.equals(current_handler)){
-				 driver.switchTo().window(handler);
-				 break;
-			 }
-		}
-		
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+	
 				
 		// Copy one recording to Ba course
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
@@ -191,18 +181,27 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_title);
 			player_page.verifyTimeBufferStatusForXSec(3);
 			
-			// 7. Close the browser while recording is playing the first chapter.
-			//String current_handler = driver.getWindowHandle();
-			driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
 			
+			// 7. Close the browser while recording is playing the first chapter.
+			String current_handler = driver.getWindowHandle();
+			driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
+					
+			Set<String> allHandles = driver.getWindowHandles();
+					
+					
 			driver.switchTo().window(current_handler);
 			driver.close();
-			for(String handler: driver.getWindowHandles()) {
-				 if(!handler.equals(current_handler)){
-					 driver.switchTo().window(handler);
-					 break;
-				 }
-			}
+			if(driver instanceof FirefoxDriver){
+				driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "w");
+				}
+				
+			for(String handler: allHandles) {
+				if(!handler.equals(current_handler)){
+					driver.switchTo().window(handler);
+					break;
+					 }
+				}
+			
 						
 //			driver.quit();	
 //			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
@@ -263,6 +262,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			// 11.1. The box background changes to grey.
 			if(record.getBackGroundColor(record.list_of_resume_buttons.get(0)).equals(before_click_background)) {
 				System.out.println("Not verified that background color changes.");
+
 				ATUReports.add("Background color changes.", "True.", "False.", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			} else {
