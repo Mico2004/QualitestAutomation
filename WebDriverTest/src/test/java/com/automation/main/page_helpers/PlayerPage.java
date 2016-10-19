@@ -650,7 +650,7 @@ public class PlayerPage extends Page {
 			
 		
 		//WebElement titleResult =(WebElement)((JavascriptExecutor) driver).executeScript("document.getElementById(\"undefined_TXT\");");
-		WebElement titleResults = driver.findElements(By.id("undefined_TXT")).get(3);		
+		WebElement titleResults = driver.findElements(By.id("undefined_TXT")).get(2);		
 		String text = titleResults.getText(); 
 			
 		if ((text.contains(recording)) && (text.contains("- Search Results"))) {
@@ -714,9 +714,11 @@ public class PlayerPage extends Page {
 	
 
 	// This function add String to bookmark
-	public void addTargetBookmark(String target_bookmark) {
+	public void addTargetBookmark(String target_bookmark) throws InterruptedException {
 		System.out.println(time_buffer_status.getText());
+		Thread.sleep(500);
 		sendStringToWebElement(bookmark_input_text, target_bookmark);
+		Thread.sleep(500);
 		clickElementJS(add_bookmark_button);
 		System.out.println(time_buffer_status.getText());
 		System.out.println("Target bookmark added.");
