@@ -222,7 +222,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 				record.checkRecordingInIndexIStatus((i + 1), "Being copied from");
 				// 16. Recording's status change after the copying is done
 				//record.checkStatusExistenceForMaxTTime(120);
-				record.checkThatRecordingStatusTargetIndexIsEmpty((i + 1), 440);
+				record.checkThatRecordingStatusTargetIndexIsEmpty((i + 1), 460);
 				break;
 			}
 		}
