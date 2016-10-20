@@ -293,7 +293,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			////25.navigate back to player then to recordings page
 			driver.navigate().back();
 			player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(0));
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 			player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 			driver.navigate().back();
 			Thread.sleep(4000);

@@ -227,6 +227,7 @@ public class TC21599GuestPremissions {
 		 record.isRecordingExist(recording_publish,false);
 		
 		 //18.Click the 'Student Recordings' tab
+		 record.clickOnStudentRecordingsTab();
 		 Thread.sleep(2000);
 		 //19.Make sure the student recording you unpublished is not displayed
 		 record.isRecordingExist(student_publish, false);
