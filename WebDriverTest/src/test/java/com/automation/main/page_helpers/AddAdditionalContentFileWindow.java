@@ -8,6 +8,7 @@ import java.io.File;
 import java.sql.Driver;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -340,5 +341,18 @@ public class AddAdditionalContentFileWindow extends Page {
 			
 		
 		}
+
 		
+		
+		public void clickEscOnKeyBoardToCloseCopyWindow() throws InterruptedException {
+			try {
+				cancel_additional_file_button.sendKeys(Keys.ESCAPE);
+				ATUReports.add("Clicked on ESC button.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			} catch (Exception e) {
+				ATUReports.add("Fail click on ESC button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+			Thread.sleep(3000);
+		}
 }
