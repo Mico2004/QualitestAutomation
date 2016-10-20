@@ -3171,6 +3171,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			clickElementJS(publish.never_select_button);						
 			waitForVisibility(publish.save_button);	
 			clickElementJS(publish.save_button);
+			if (isElementPresent(By.id("ModalDialogHeader"))) {
+				clickElementJS(publish.save_button);
+			}
 			
 		} catch (Exception e) {
 			System.out.println("failed clicking on tab");
