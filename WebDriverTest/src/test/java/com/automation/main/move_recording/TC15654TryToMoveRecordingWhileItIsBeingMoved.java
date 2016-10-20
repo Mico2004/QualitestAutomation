@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -133,6 +134,9 @@ public class TC15654TryToMoveRecordingWhileItIsBeingMoved {
         Thread.sleep(1000);	
         
 		// Select destination course:mark destination course by clicking on it
+        wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOf(move_window.course_list.get(0)));
+        
         move_window.course_list.get(0).click();
 		System.out.println("first destination was marked");
 
