@@ -191,7 +191,7 @@ public class TC15654TryToMoveRecordingWhileItIsBeingMoved {
 		// 15. Message box is closed.
 		confirm_menu.isConfirmationMenuClosed();
 		
-		record.checkStatusExistenceForMaxTTime(360);
+		record.waitUntilFirstRecordingBeingMovedFromStatusDissaper();
 		
 		// 16. Click "Courses" link in the breadcrumbs.
 		record.returnToCourseListPage();
