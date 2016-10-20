@@ -252,10 +252,10 @@ public class TC15645TryToDeleteCopyingRecording {
 
 		// While recording is being copied, select "Recording Tasks -> Delete"
 		// menu item
-		record.toDeleteMenu();
-
-		// Message box "The following recording(s) could not be deleted:" is
-		// displayed
+		record.clickOnRecordingTaskThenDelete();
+		Thread.sleep(1000);
+		
+		// Message box "The following recording(s) could not be deleted:" is displayed
 		if (driver.findElement(By.cssSelector(".emphasis.ng-binding")).getText()
 				.startsWith("The following recording(s) could not be deleted:")) {
 			System.out.println(
