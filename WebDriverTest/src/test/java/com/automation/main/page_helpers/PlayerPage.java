@@ -1152,13 +1152,15 @@ public class PlayerPage extends Page {
 	//// this function adds a bookmark
 	public void addBookMark(String bookmark, String time_to_add_bookmark) throws Exception {
 
+		Thread.sleep(500);
 		bookmark_text_infut_field.sendKeys(bookmark);
 		System.out.println("bookmark name written successfully");
-		add_bookmark_button.click();
+		Thread.sleep(500);
+		clickElementJS(add_bookmark_button);
 		System.out.println("clicked add bookmark button");
 		Thread.sleep(4000);
 		verifyBookMarkVisibility(time_to_add_bookmark, bookmark);
-
+			
 	}
 
 	/// this function verifies added bookmark according to its name and capture
