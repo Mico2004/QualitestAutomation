@@ -1170,7 +1170,13 @@ public class PlayerPage extends Page {
 			if (e.getText().equals(bookmark_name)) {
 				System.out.println("bookmark name found");
 				System.out.println(bookmark_duration_time.get(index).getText());
-				if (bookmark_duration_time.get(index).getText().equals(time_to_add_bookmark)) {
+				
+				String SecondAfter = time_to_add_bookmark.substring(time_to_add_bookmark.length() - 1,time_to_add_bookmark.length());
+				int lastDigit = Integer.parseInt(SecondAfter);
+				lastDigit++;
+				SecondAfter = time_to_add_bookmark.substring(0, time_to_add_bookmark.length()-1) + String.valueOf(lastDigit) ;
+				
+				if (bookmark_duration_time.get(index).getText().equals(time_to_add_bookmark) || bookmark_duration_time.get(index).getText().equals(SecondAfter)) {
 					System.out.println("verified bookmark name and time");
 					ATUReports.add("verify bookmark name and time", "bookmark name and time", "displayed correctly",
 							"displayed correctly", LogAs.PASSED, null);
