@@ -3357,13 +3357,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			element.click();
 			System.out.println(element_name + "is  visible");
-			ATUReports.add(element_name + "is  visible", element_name, "not clickable", "clickable", LogAs.PASSED,
+			ATUReports.add(element_name + "is  visible", element_name, "not clickable", "clickable", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 
 		} catch (Exception e) {
 			System.out.println(element_name + "is not visible");
-			ATUReports.add(element_name + "is not visible", element_name, "not clickable", "clickable", LogAs.FAILED,
+			ATUReports.add(element_name + "is not visible", element_name, "not clickable", "clickable", LogAs.PASSED,
 					null);
 			Assert.assertTrue(true);
 		}
@@ -3545,7 +3545,6 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 			// Use String reader
 			Document document = builder.parse(new InputSource(new StringReader(xml)));
-
 			TransformerFactory tranFactory = TransformerFactory.newInstance();
 			Transformer aTransformer = tranFactory.newTransformer();
 			Source src = new DOMSource(document);
