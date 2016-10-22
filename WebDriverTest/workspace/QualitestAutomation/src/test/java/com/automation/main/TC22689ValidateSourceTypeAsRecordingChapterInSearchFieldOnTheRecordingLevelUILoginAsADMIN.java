@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -164,7 +164,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	    
 		// 3.Click on "View Course List" link
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
-		Thread.sleep(1500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		
 		// 4.verify all courses page
@@ -181,7 +181,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	   String recording_to_search=record.recording_list_names.get(0);
 	    record.verifyFirstExpandableRecording();
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
@@ -211,7 +211,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 							driver.switchTo().window(handler);
 					break;		
 					}
-					Thread.sleep(2000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.verifyLogoVisibilityAndLocation();
 			
 			
@@ -221,7 +221,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 			///14.search results page in the format as follows: "recording name - Search Results".
 			driver.switchTo().frame(0);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.verifySearchResultPage(recording_to_search);
 			
 		    ///15.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
@@ -246,7 +246,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
 			//15.navigate back to player recording
 			driver.navigate().back();
-			Thread.sleep(4000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			//16.click on "Courses" and verify course page
 

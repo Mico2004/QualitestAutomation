@@ -10,7 +10,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -135,7 +135,7 @@ public class TestCase15649TryToDeleteMovingRecording {
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9. Message box is closed.
 		boolean is_closed = confirm_menu.isConfirmationMenuClosed();
@@ -171,7 +171,7 @@ public class TestCase15649TryToDeleteMovingRecording {
 		record.selectFirstCheckbox();
 		record.clickOnRecordingTaskThenDelete();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 13. Message box "Cannot copy in-process or failed recordings" is displayed.
@@ -187,12 +187,12 @@ public class TestCase15649TryToDeleteMovingRecording {
 		// 16. Click "Courses" link in the breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 17. Select destination course.
 		course.clickOnTargetCourseName(destination_course_name);
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 18. Verify that recording is copied successfully.
 		List<String> target_course_recording_list = record.getCourseRecordingList();

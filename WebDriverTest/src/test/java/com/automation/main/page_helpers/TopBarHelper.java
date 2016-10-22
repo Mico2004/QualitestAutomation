@@ -7,7 +7,7 @@ import org.apache.regexp.recompile;
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -51,6 +51,8 @@ public class TopBarHelper extends Page {
 	public WebElement detailed_reports;
 	@FindBy(id = "CustomAnalysis")
 	public WebElement custom_analysis;
+	@FindBy (id="DisclaimerLink")
+	public WebElement disclaimerlink;
 
 	// This function clicks on my account link
 	public void clickOnMyAccountLink() {
@@ -167,7 +169,7 @@ public class TopBarHelper extends Page {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 
 				weekly_summary.click();
@@ -214,7 +216,7 @@ public class TopBarHelper extends Page {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 
 				detailed_reports.click();
@@ -261,7 +263,7 @@ public class TopBarHelper extends Page {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 
 				custom_analysis.click();
@@ -270,5 +272,16 @@ public class TopBarHelper extends Page {
 				ATUReports.add("click failed ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		}
+	}
+	public void clickOnDisclaimer(){
+		try{
+			waitForVisibility(disclaimerlink);
+			clickElementJS(disclaimerlink);
+			ATUReports.add("Clicked on disclaimer link",LogAs.PASSED,null);
+		}catch(Exception e){
+			ATUReports.add("Clicked on disclaimer link",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
+		
 	}
 }

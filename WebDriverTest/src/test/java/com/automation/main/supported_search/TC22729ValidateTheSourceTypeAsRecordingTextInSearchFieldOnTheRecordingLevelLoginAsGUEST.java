@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -163,7 +163,7 @@ public class TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings.makeSureThatMakeCoursePublicIsSelected();
 		course_settings.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 				
 		record.signOut();
 		
@@ -193,7 +193,7 @@ public class TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 
 		///4.Click on one of the Recording link
 		record.waitForVisibility(record.recordings_tab);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.convertRecordingsListToNames();
 		record.verifyFirstExpandableRecording();
 		record.clickOnTheFirstCaptherWithOutTheExpand();
@@ -222,7 +222,7 @@ public class TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 		player_page.verifyBreadcrumbsForSearcRecoding(course_name);
 		
 		driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		///10.The next result display below the current result in case there is next result.
 		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,2);
@@ -243,7 +243,7 @@ public class TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 
 		//15.navigate back to player recording
 		driver.navigate().back();
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 
 		//16.click on "Courses" and verify course page

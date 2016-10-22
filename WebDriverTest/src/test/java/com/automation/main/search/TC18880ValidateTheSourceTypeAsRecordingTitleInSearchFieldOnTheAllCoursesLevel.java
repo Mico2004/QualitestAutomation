@@ -9,7 +9,7 @@ import java.text.DateFormat;
 import org.apache.bcel.generic.DASTORE;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -130,7 +130,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 
@@ -148,7 +148,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Change first recording name
 		Date date = new Date();
@@ -158,7 +158,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.toEditRecordingPropertiesMenu();
 		edit_recording_properties_window.changeRecordingName(recording_title_for_the_test, confirm_menu);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		record.signOut();
 		
@@ -176,7 +176,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			
 			// 4. Set the focus to the field with a mouse pointer.
@@ -184,7 +184,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 			
 			// 5. Search the "Recording Title" that we mentioned in the preconditionsand press ENTER.
 			top_bar_helper.searchForTargetText(recording_title_for_the_test);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
@@ -214,7 +214,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
 			Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
@@ -244,7 +244,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 			// 8. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			search_page.exitInnerFrame();
 			// 9. Click on title of the chapter.
@@ -256,7 +256,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 			// 10. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			search_page.exitInnerFrame();
 			// 11. Click on the recording title of the chapter.
@@ -268,7 +268,7 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 			// 12. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			search_page.exitInnerFrame();
 			// 17. Sign Out.

@@ -1,12 +1,14 @@
 package com.automation.main.page_helpers;
 
+import java.lang.ref.PhantomReference;
 import java.util.List;
 
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 
@@ -84,6 +86,7 @@ public class PublishWindow extends Page {
 			System.out.println("Publish window is open.");
 			ATUReports.add("Publish window.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
+		
 		}
 	}
 	
@@ -120,7 +123,7 @@ public class PublishWindow extends Page {
 		try {
 			while(isPublishWindowClosed() == false) {
 				save_button.click();
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			System.out.println("Clicked on save button.");

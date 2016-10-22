@@ -15,7 +15,7 @@ import javax.swing.ListModel;
 import org.hamcrest.Description;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -160,7 +160,7 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 		record.waitForVisibility(record.first_recording_title);
 		String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 4. Verify that recording chapters are displayed as descripted.
 		// 4.1. The recording chapters are displayed to the USER.
@@ -189,7 +189,7 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 		// 5. Hover a cursor over recording chapter.
 		Point before_hovring = record.video_wraps_of_chapters_of_opened_recording_list.get(0).getLocation();
 		record.moveToElementAndPerform(record.video_wraps_of_chapters_of_opened_recording_list.get(0), driver);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 5.1. The hovered over chapter becomes a bit bigger in size.
 		Point after_hovring = record.video_wraps_of_chapters_of_opened_recording_list.get(0).getLocation();
@@ -207,7 +207,7 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 		
 		// 6. Click on a recording's title.
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 6.1. Recording collapsed.
 		record.verifyThatRecordingCollapsed();
@@ -225,14 +225,14 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 		
 		// 7. Click on a '>' symbol left to recording's title.
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 7.1. Recording expanded.
 		record.verifyThatRecordingExpanded();
 		
 		// 8. Click on a '>' symbol left to recording's title.
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8.1. Recording collapsed.
 		record.verifyThatRecordingCollapsed();

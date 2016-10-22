@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -158,11 +158,11 @@ public class TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLe
 		String course_name=	course.selectCourseThatStartingWith("Ab");
 			///4.Click on one of the Recording link
 			record.waitForVisibility(record.recordings_tab);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.convertRecordingsListToNames();
 			record.verifyFirstExpandableRecording();
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			// 8.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			
@@ -197,7 +197,7 @@ public class TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLe
 	    player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 		//15.navigate back to player recording
 	    driver.navigate().back();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	    player_page.verifyTimeBufferStatusForXSec(2);// check source display
 	//16.click on "Courses" and verify course page
 	    

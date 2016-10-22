@@ -10,7 +10,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -114,14 +114,14 @@ public class TestCaseMoveSeveralRecordings {
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 2. Select first course.
 		targetCourse = course.selectCourseThatStartingWith("Ab");
 		System.out.println("First course clicked: " + targetCourse);
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Get first course recording list.
 		int number_of_recordings_in_target_course = record.getNumberOfRecordings();
@@ -138,9 +138,9 @@ public class TestCaseMoveSeveralRecordings {
 			
 			record.checkAllCheckBox();
 			record.clickOnRecordingTaskThenDelete();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			delete_menu.clickOnDeleteButton();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 		// 4. Go back to courses list.
@@ -165,7 +165,7 @@ public class TestCaseMoveSeveralRecordings {
 		record.clickOnRecordingTaskThenMove();
 		
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. Select destination course.
 		boolean is_target_course_selected = copy.selectTargetCourseFromCourseList(targetCourse);
@@ -175,13 +175,13 @@ public class TestCaseMoveSeveralRecordings {
 			System.out.println("Target course not selected: " + targetCourse);
 		}
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 9. Click "Move Recording(s)" button.
 		move_window.clickOnMoveRecordings();
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 				
 		// 10. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecordings();
@@ -241,13 +241,13 @@ public class TestCaseMoveSeveralRecordings {
 		// 16. Go back to courses list.
 		record.returnToCourseListPage();
 				
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 17. Select first course.
 		targetCourse = course.selectFirstCourse(record);
 		System.out.println("First course clicked: " + targetCourse);
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 18. Get first course recording list after copying.
 		List<String> after_copying_target_course_recordings_list = record.getCourseRecordingList();

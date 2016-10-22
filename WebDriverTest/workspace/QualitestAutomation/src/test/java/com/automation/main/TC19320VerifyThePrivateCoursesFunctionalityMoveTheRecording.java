@@ -4,7 +4,7 @@ package com.automation.main;
 import java.util.Date;
 
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -153,7 +153,7 @@ public class TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording {
 		// 10. Click the "Move Recording" button.
 		move_window.clickOnMoveRecordings();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 11. "Recording has been queued for move" message box is displayed.
 		// 12. Click the "OK" button.
@@ -187,7 +187,7 @@ public class TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording {
 		player_page.returnToCoursesPage(course);
 //		course.goToCoursesPage();
 //		driver.navigate().back();
-//		Thread.sleep(1000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		record.returnToCourseListPage();
 		
 		// 19. Select a non private course (abc).

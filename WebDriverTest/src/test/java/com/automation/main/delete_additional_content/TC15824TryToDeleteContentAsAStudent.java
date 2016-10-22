@@ -2,7 +2,7 @@ package com.automation.main.delete_additional_content;
 
 
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -111,7 +111,7 @@ public class TC15824TryToDeleteContentAsAStudent {
 		
 		// 3. Click on "Student Recordings" tab.
 		record.clickOnAdditionContentTab();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 4. Verify that STUDENT can't delete an additional content.
 		// 4.1. "Content Tasks" button isn't displayed.

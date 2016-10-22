@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -154,16 +154,16 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			tegrity.loginAdmin("Admin");
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 			// 3.Click on "View Course List" link
-			Thread.sleep(1500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			// 4.verify all courses page
 			admin_view_course_list.verifyAllCoursesPage();
 			// 5.Select a course
 			admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		     String	course_name=admin_view_course_list.clickOnCourseLinkStartingWith("Ab");
 			/// 6.Click on one of the Recording link
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 		     record.waitForVisibility(record.first_recording);
 			
 
@@ -172,7 +172,7 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 		     record.verifyFirstExpandableRecording();
 		     record.convertRecordingsListToNames();
 		     driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			// 8.verify recording displaying correctly
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
@@ -210,7 +210,7 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
 			//15.navigate back to player recording
 			driver.navigate().back();
-			Thread.sleep(4000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			//16.click on "Courses" and verify course page
 

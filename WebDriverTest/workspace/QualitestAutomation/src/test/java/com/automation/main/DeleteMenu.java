@@ -7,7 +7,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -63,7 +63,7 @@ public class DeleteMenu extends Page {
 	public void clickOnDeleteButton() throws InterruptedException {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(delete_button));
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			delete_button.click();
 			System.out.println("Clicked on delete button.");
 			ATUReports.add("Click Delete button", "Clicked on delete button", "Clicked on delete button", LogAs.PASSED,null);
@@ -75,7 +75,7 @@ public class DeleteMenu extends Page {
 					LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	public List<String> getRecordingList() {
@@ -112,7 +112,7 @@ public class DeleteMenu extends Page {
 					LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function send ESC keyboard to delete menu.
@@ -128,12 +128,12 @@ public class DeleteMenu extends Page {
 			ATUReports.add("Fail click on ESC button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	/// verify move menu title
 	public void verifyDeleteMenuTitle() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String val = delete_menu_title.getText();
 		if (val.equals("Delete")) {
 			ATUReports.add("delete menu title verified ", LogAs.PASSED, null);
@@ -148,7 +148,7 @@ public class DeleteMenu extends Page {
 
 	// verify move menu background color is same as recording background color
 	public void verifyDeleteColor(RecordingHelperPage rec) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String background_rec = rec.getBackGroundColor(rec.background);
 		String menu_background = getBackGroundColor(delete_menu_background);
 		if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(delete_menu_background))) {

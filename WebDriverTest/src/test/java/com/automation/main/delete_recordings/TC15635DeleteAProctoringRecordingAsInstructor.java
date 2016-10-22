@@ -3,7 +3,7 @@ package com.automation.main.delete_recordings;
 
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -116,7 +116,7 @@ public class TC15635DeleteAProctoringRecordingAsInstructor {
 		// 3. Click on "Tests" tab.
 		record.clickOnTestsTab();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 4. Select recording to delete.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -150,7 +150,7 @@ public class TC15635DeleteAProctoringRecordingAsInstructor {
 		// 7. Click "Delete" button
 		delete_menu.clickOnDeleteButton();
 			
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. "Delete" window is closed.
 		boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();

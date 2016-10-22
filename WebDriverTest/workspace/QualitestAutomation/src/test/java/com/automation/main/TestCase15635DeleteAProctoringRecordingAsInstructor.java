@@ -11,7 +11,7 @@ import org.apache.commons.collections.set.PredicatedSet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -114,16 +114,16 @@ public class TestCase15635DeleteAProctoringRecordingAsInstructor {
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("SuperUser");// log in courses page
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.selectCourseThatStartingWith("BankValidRecordings");
 		// 3. Click on "Tests" tab.
 				record.clickOnTestsTab();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				record.getCheckbox().click();;
 				record.clickOnRecordingTaskThenCopy();
 				copy.selectTargetCourseFromCourseListThatStartWith("Ab");
 				copy.clickOnCopyButton();
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 
 				record.checkStatusExistenceForMaxTTime(180);
@@ -141,7 +141,7 @@ public class TestCase15635DeleteAProctoringRecordingAsInstructor {
 		// 3. Click on "Tests" tab.
 		record.clickOnTestsTab();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 4. Select recording to delete.
 	   record.convertRecordingsListToNames();
@@ -176,7 +176,7 @@ public class TestCase15635DeleteAProctoringRecordingAsInstructor {
 		// 7. Click "Delete" button
 		delete_menu.clickOnDeleteButton();
 			
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. "Delete" window is closed.
 		boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();

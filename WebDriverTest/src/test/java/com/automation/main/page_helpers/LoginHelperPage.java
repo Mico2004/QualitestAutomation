@@ -3,7 +3,7 @@ package com.automation.main.page_helpers;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -51,7 +51,12 @@ public class LoginHelperPage extends Page {
 	private CoursesHelperPage course;
 
 	
-
+/**
+ * Login helper constructor
+ * 
+ * @param driver
+ * @throws Exception
+ */
 	public LoginHelperPage(WebDriver driver) throws Exception {
 		super(driver);
 		setPageTitle("Tegrity Lecture Capture");	
@@ -59,10 +64,10 @@ public class LoginHelperPage extends Page {
 
 		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com/#/login");
 
-		//setPageUrl("https://awsserverautomation-perf-1.tegrity.com/#/login");	
+		setPageUrl("https://awsserverautomation-perf-1.tegrity.com/#/login");	
 
 		//setPageUrl("https://awsserverautomation-perf-5.tegrity.com/#/login");	
-		setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
+		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 
 
 	
@@ -106,6 +111,17 @@ public class LoginHelperPage extends Page {
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 	}
 
+	
+	
+/**
+ * Login to the courses page given a Student\Instructor user from the local.properties file
+ * 
+ * @param user_name the user name key value as it's written in the local.properties file
+ * @throws Exception
+ * @author Mickael Elimelech
+ * @since 10/15/2016
+ */
+	
 	public void loginCourses(String user_name) throws InterruptedException// login
 																			// courses
 	{
@@ -149,12 +165,13 @@ public class LoginHelperPage extends Page {
 					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		try{
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElements(course.course_list));
 		}catch(Exception e){
 			System.out.println("No Courses for the user");
 		}
+		Thread.sleep(Page.TIMEOUT_MEDIUM);
 	
 	}
 
@@ -162,7 +179,7 @@ public class LoginHelperPage extends Page {
 																		// courses
 	{
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			waitForVisibility(usernamefield);
 			waitForVisibility(button_login);
 			waitForVisibility(passfield);

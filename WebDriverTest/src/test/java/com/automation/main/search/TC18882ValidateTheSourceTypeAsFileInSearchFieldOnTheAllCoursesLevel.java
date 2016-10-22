@@ -6,7 +6,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -135,7 +135,7 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -154,16 +154,16 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		record.returnToCourseListPage();
 		
 		course.selectCourseThatStartingWith("Ab");
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnAdditionContentTab();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		List<String> current_additional_content_list = record.getCoursAdditionalContentList();
 		String target_additional_content_for_the_test = null;
@@ -177,20 +177,20 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 		  }	
 		}
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnContentTaskThenCopy();
 		copy.selectTargetCourseFromCourseListThatStartWith("Ab");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		copy.clickOnCopyButton();
-		Thread.sleep(10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		confirm_menu.clickOnOkButton();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		System.out.println("Target additional content for the test is: " + target_additional_content_for_the_test);
 		
 		record.signOut();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// Looping for INSTRUCTOR, Student and Guest
@@ -205,14 +205,14 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(3000);	
+			Thread.sleep(Page.TIMEOUT_TINY);	
 			
 			// 3. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
 			
 			// 4. Search some "File" and press ENTER.
 			top_bar_helper.searchForTargetText(target_additional_content_for_the_test);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 4.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
@@ -231,13 +231,13 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(target_additional_content_for_the_test, "Source: File");
 			
 			// 4.6. The next result display below the current result in case there is next result.
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 5. Click on the file icon.
 			// 5.1. The file download to the local client's machine.
 			search_page.link_icon_list.get(0).click();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			
 			
@@ -247,7 +247,7 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 			
 			// 7. Sign Out.
 			record.signOut();
-			Thread.sleep(3000);	
+			Thread.sleep(Page.TIMEOUT_TINY);	
 		}
 		
 		// Unpublic Ab course1. 

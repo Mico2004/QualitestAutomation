@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import org.junit.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -112,7 +112,7 @@ public class TCCopyOneRecording {
 		// 2.login as instructor
 		tegrity.loginCourses("User1");// log in courses page
 		driver.navigate().to("https://" + driver.getCurrentUrl().split("/")[2] + "/api/courses/Active");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String xml_source_code = driver.findElement(By.tagName("body")).getText();
 		driver.quit();
 
@@ -133,7 +133,7 @@ public class TCCopyOneRecording {
 	    course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		//course.selectFirstCourse(record);
 	    course.selectCourseThatStartingWith("Ab");
-	    Thread.sleep(2000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 	//5.take recorder namme for later 
 		String original_recorder_name = driver.findElement(By.id("RecordedBy1")).getText();/// take recorder namme for later 
@@ -145,19 +145,19 @@ public class TCCopyOneRecording {
 		//7.return to recording page and than to course page
 		copy.CancelButton.click();// return to recording page
         System.out.println("clicked on cancel button");
-        Thread.sleep(2000);
+        Thread.sleep(Page.TIMEOUT_TINY);
         record.returnToCourseListPage();
-        Thread.sleep(2000);
+        Thread.sleep(Page.TIMEOUT_TINY);
         //8. Verify Only courses where this USER signed as INSTRUCTOR are displayed in "Course List"
      	
       
         course.first_course_button.click();
-        Thread.sleep(2000);
+        Thread.sleep(Page.TIMEOUT_TINY);
         
         record.getCheckbox().click();
         copy.verifyCopyMenu(record);// verify copy menu
         copy=PageFactory.initElements(driver,CopyMenu.class);
-        Thread.sleep(3000);
+        Thread.sleep(Page.TIMEOUT_TINY);
        copy.copy_course_list = copy.getStringFromElement(copy.course_list);
         int course_number=copy.course_list.size(); 
          int count_instructors= course.patternAppearenceinString(xml_source_code,"<CurrentUserRole>Instructor</CurrentUserRole>");
@@ -178,7 +178,7 @@ public class TCCopyOneRecording {
         	 System.out.println("number Of count_instructors role equals Number Of courses");
         	 ATUReports.add("all courses assigned as instructors","xml file" ,"num of instructors:"+count_instructors,"num of instructors:"+course_number, LogAs.PASSED, null);        
 	        // driver.navigate().back();
-	         Thread.sleep(2000);
+	         Thread.sleep(Page.TIMEOUT_TINY);
          
          }
          else
@@ -199,7 +199,7 @@ public class TCCopyOneRecording {
 		System.out.println(copy.course_list.get(1).getText());
 		//11.select target course
 		copy.selectTargetCourseFromCourseList(copy.course_list.get(1).getText());
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 //12.verify background color of copy menu
 		System.out.println(
 				copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]"))));
@@ -218,7 +218,7 @@ public class TCCopyOneRecording {
 		
 		//16.retuen to course page
 		record.returnToCourseListPage();/// return to course list page
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 	
 		
@@ -228,7 +228,7 @@ public class TCCopyOneRecording {
 		
 		
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String first_recording = driver.findElement(By.id("Recording1")).getText();
 		
 	
@@ -244,10 +244,10 @@ public class TCCopyOneRecording {
 		System.out.println("working8");
 		
 		//19.verify recording is expandable
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		System.out.println("pre 19");
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		System.out.println("post 1st 19");
 		record.clickOnTheFirstCaptherWithOutTheExpand();
 
@@ -262,14 +262,14 @@ public class TCCopyOneRecording {
 		}
 		//21.Click "Courses" link at breadcrumbs
 		record.returnToCourseListPage();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		System.out.println("21 working");
 		//click on courses
 		//course.course_list.get(1).click();
 		course.selectFirstCourse(record);
 	
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		System.out.println("Pre 22 working");
 		
 	//22.verify date,duration,recorder name as original
@@ -289,12 +289,12 @@ public class TCCopyOneRecording {
 		record.convertRecordingsListToNames();
 	    record.verifyRecordingSortedByTitle(record.recording_list_names);
 		record.pressViewButtonAndSelect("Date");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		record.convertRecordingsListToDate();/// check sort by date
 		record.verifyRecordingSortedByDate(record.recordings_list_date_string);
         record.pressViewButtonAndSelect("Duration");
-        Thread.sleep(1000);
+        Thread.sleep(Page.TIMEOUT_TINY);
 		
         record.convertRecordingsListToDuration();/// check sort by date
 		record.verifyRecordingSortedByDuration(record.recording_list_duration_string);
@@ -306,18 +306,18 @@ public class TCCopyOneRecording {
 		
 		//initialize course object
 		initializeCourseObject();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		//27.Select destination course
 		course.selectCourseByName(destination_course_name);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 //28.select recording by name
 		record.searchbox.click();
 		//record.selectRecordingByName(first_recording);
 	//29."Recording Chapters" are expanded
 		System.out.println("pre 29");
-	Thread.sleep(3000);
+	Thread.sleep(Page.TIMEOUT_TINY);
 	record.verifyFirstExpandableRecording();
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		System.out.println("post 1st 29");
 		record.clickOnTheFirstCaptherWithOutTheExpand();
 	///30.Click any chapter:verify plays correctly 

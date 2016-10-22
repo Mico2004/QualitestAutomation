@@ -19,7 +19,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
@@ -206,7 +206,7 @@ public class Page {
 		try {
 			Actions builder = new Actions(driver);
 			Action move_to = builder.moveToElement(element).build();
-			Thread.sleep(1500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			move_to.perform();
 			return move_to;
 
@@ -288,7 +288,7 @@ public class Page {
 				ATUReports.add(" load page failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 
 	}
@@ -307,7 +307,7 @@ public class Page {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 	}
 
@@ -397,7 +397,7 @@ public class Page {
 				break;
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 	}
@@ -456,7 +456,7 @@ public class Page {
 				return false;
 			}
 			try {
-				Thread.sleep(500);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				moveToElement(element, driver).perform();
 				underline = element.getCssValue("text-decoration");
 
@@ -471,7 +471,7 @@ public class Page {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 	}
 
@@ -809,7 +809,7 @@ public class Page {
 				break;
 			} catch(Exception msg) {
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -933,7 +933,7 @@ public class Page {
                      break;
                } catch (NoAlertPresentException e) {
                      try {
-						Thread.sleep(1000);
+						Thread.sleep(Page.TIMEOUT_TINY);
 					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -967,7 +967,7 @@ public class Page {
                }
                // And acknowledge the alert (equivalent to clicking "OK")
                alert.accept();
-               Thread.sleep(1000);
+               Thread.sleep(Page.TIMEOUT_TINY);
                //makeScreenshot();
         } catch (NoAlertPresentException e) {
         	System.out.println(e.getMessage());

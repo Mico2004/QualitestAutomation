@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -53,10 +53,10 @@ public class ConfirmationMenu extends Page {
 
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {			
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		try {
 			if(isAlertPresent()){
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				clickOkInAlertIfPresent();
 			}
 			waitForVisibility(ok_button);		
@@ -67,7 +67,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}  
-		Thread.sleep(1000);	
+		Thread.sleep(Page.TIMEOUT_TINY);	
 	}
 	
 	// This function clicks on ok button of copy menu
@@ -95,7 +95,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function clicks on ok button of copy menu
@@ -128,7 +128,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function clicks on ok button of copy menu
@@ -159,7 +159,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function clicks on ok button of copy menu
@@ -170,6 +170,7 @@ public class ConfirmationMenu extends Page {
 	// title and description
 	// appears in HTML source code.
 	public void clickOnOkButtonAfterConfirmMoveRecording() throws InterruptedException {
+		waitForVisibility(header_title);
 		try {
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				System.out.println("Error window title is wrong");
@@ -190,7 +191,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function return true if confirmation menu is closed,
@@ -233,7 +234,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	public void verifyCopySourceRecordingStatus(String expected) {
@@ -271,6 +272,7 @@ public class ConfirmationMenu extends Page {
 	public void clickOnOkButtonAfterConfirmMoveRecordings() throws InterruptedException {
 		try {
 			// String souce_page = driver.getPageSource();
+			waitForVisibility(header_title);
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
@@ -286,7 +288,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function clicks on ok button of cannot move in process or fail
@@ -319,7 +321,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function clicks on ok button of The following recording(s) could not
@@ -352,7 +354,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	public void clickOnOkButtonAfterConfirmEditRecordingProperties() throws InterruptedException {
@@ -362,10 +364,10 @@ public class ConfirmationMenu extends Page {
 					break;
 				} else {
 					System.out.println(error_msg_body_list.get(0).getText());
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			} catch (Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 		}
@@ -391,7 +393,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function check that there is message: "Please select an instructor",
@@ -439,6 +441,8 @@ public class ConfirmationMenu extends Page {
 
 	// This function verify that confirm window is close
 	public void verifyConfirmWindowIsClosed() {
+		try{
+		Thread.sleep(Page.TIMEOUT_SMALL);
 		boolean is_closed = isConfirmationMenuClosed();
 
 		if (is_closed) {
@@ -449,6 +453,10 @@ public class ConfirmationMenu extends Page {
 			System.out.println("Confirm window is open.");
 			ATUReports.add("Confirm window.", "Closed.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
+		}
+						
+		}catch(Exception e){
+			ATUReports.add("Confirmation menu invisibilty verification failed",e.getMessage(), LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 
@@ -476,7 +484,7 @@ public class ConfirmationMenu extends Page {
 	// appears in HTML source code.
 	public void clickOnOkButtonAfterConfirmAddAdditionalContentFile(String file_name) throws InterruptedException {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
@@ -493,13 +501,13 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 	
 	
 	public void clickOnOkButtonAfterErrorClickOnTheApply() throws InterruptedException {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			if (!header_title_list.get(0).getText().contains("Error")) {
 				ATUReports.add("Error window title is wrong.", LogAs.PASSED, null);
 				
@@ -515,7 +523,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	public void clickOnOkButtonAfterConfirmAddAdditionalContentLink() throws InterruptedException {
@@ -536,7 +544,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	public void clickOnOkButtonAfterConfirmEmailSetting() throws InterruptedException {
@@ -557,7 +565,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	/// click ok after send support email
@@ -580,7 +588,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	/// confirmation after changing setting
@@ -603,7 +611,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 	
 	
@@ -641,7 +649,7 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
-			Thread.sleep(5000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
 			wait.until(ExpectedConditions.elementToBeClickable(ok_button));
 			ok_buttonCss.click();
@@ -652,7 +660,7 @@ public class ConfirmationMenu extends Page {
 		} catch (Exception e) {
 			ATUReports.add("failed to click on ok button.", LogAs.WARNING, null);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 	
 	
@@ -667,7 +675,7 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
-			Thread.sleep(5000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
 			wait.until(ExpectedConditions.elementToBeClickable(ok_button));
 			ok_buttonCss.click();
@@ -677,7 +685,7 @@ public class ConfirmationMenu extends Page {
 		} catch (Exception e) {
 			ATUReports.add("Clicked on OK button", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 	
 }

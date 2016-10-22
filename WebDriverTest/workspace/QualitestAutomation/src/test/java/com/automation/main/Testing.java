@@ -82,7 +82,7 @@ public class Testing {
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
 		
 		String a1 = "NewKeyword" + sdf.format(date);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		

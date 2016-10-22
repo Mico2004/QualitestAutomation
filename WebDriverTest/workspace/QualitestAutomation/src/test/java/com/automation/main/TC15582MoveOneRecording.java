@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.PrimitiveIterator.OfDouble;
 import javax.xml.parsers.ParserConfigurationException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -84,7 +84,7 @@ public class TC15582MoveOneRecording {
 		String login_url = driver.getCurrentUrl();
 		String university_name  = login_url.split("/")[2].substring(0,  login_url.split("/")[2].length() - 12);
 		driver.navigate().to("https://" + university_name + ".tegrity.com/api/courses/Active");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String xml_source_code = driver.findElement(By.tagName("body")).getText();
 		driver.quit();
 
@@ -113,19 +113,19 @@ public class TC15582MoveOneRecording {
 		// 7.return to recording page and than to course page
 		move_menu.cancel_button.click();
 		System.out.println("clicked on cancel button");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.returnToCourseListPage();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 8. Verify Only courses where this USER signed as INSTRUCTOR are
 		// displayed in "Course List"
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		course.first_course_button.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.getCheckbox().click();
 		record.clickOnRecordingTaskThenMove();
 		move_menu = PageFactory.initElements(driver, MoveWindow.class);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		move_menu.move_course_list = move_menu.getStringFromElement(move_menu.course_list);
 		int course_number = move_menu.course_list.size();
 		int count_instructors = course.patternAppearenceinString(xml_source_code,
@@ -147,7 +147,7 @@ public class TC15582MoveOneRecording {
 			ATUReports.add("all courses assigned as instructors", "xml file", "num of instructors:" + count_instructors,
 					"num of instructors:" + course_number, LogAs.PASSED, null);
 			driver.navigate().back();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 		} else {
 			Assert.assertTrue(false);
@@ -159,7 +159,7 @@ public class TC15582MoveOneRecording {
 
 		// 9.Select destination course:select first course
 		move_menu.cancel_button.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.selectFirstCourse(record);
 		String original_recorder_name = "recorded by: mickaelins1 name";//driver.findElement(By.id("RecordedBy1")).getText();//take recorder name for later
 		// Select destination course:verify check box is selected and then load
@@ -173,7 +173,7 @@ public class TC15582MoveOneRecording {
 		/// 10.Click "Move Recording(s)"
 		move_menu.moveRecording.click();
 		System.out.println("moving recording");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 11.click on ok button in confirmation menu
 		confirm = PageFactory.initElements(driver, ConfirmationMenu.class);
 		confirm.clickOnOkButton();
@@ -212,10 +212,10 @@ public class TC15582MoveOneRecording {
 		record.recordingPageBoldFont();/// verify bold style in recording title
 		// 21."Recording Chapters" are expanded
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 22.player is working
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 		///// to go back to crecording window handler
 		for (String handler : driver.getWindowHandles()) {
@@ -227,20 +227,20 @@ public class TC15582MoveOneRecording {
 		// 24.login as student
 		tegrity.loginCourses("User4");// log in courses page
 		initializeCourseObject();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 25.select destination course
 		course.selectCourseByName(destination_course_name);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 26."Recording Chapters" are expanded
 		record.pressViewButtonAndSelect("Date");/// 2 times sort by date to make
 												/// recording first
 		record.pressViewButtonAndSelect("Date");
 		//record.searchbox.click();// prevent ekement not clickable
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 27.player is working
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
  
 		System.out.println("Done.");

@@ -3,7 +3,7 @@ package com.automation.main;
 
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -120,7 +120,7 @@ public class TC15468AddFirstFileVerifyNewTabAdditionalContentCreated {
 		record.verifyNoAdditionalContentTab();
 		// 4.Select "Course tasks -> Add Additional Content File" menu item
 		record.toUploadAdditionalContentFile();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 5.verify additional content file title info
 		add_additional_content_window.verifyAdditionalContentFileWindowTitle();
 		add_additional_content_window.verifyAdditionalContentFileWindowInfo();
@@ -186,14 +186,14 @@ public class TC15468AddFirstFileVerifyNewTabAdditionalContentCreated {
 		tegrity.loginCourses("User1");
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		/// 4.select additional content tab
 		record.clickOnAdditionContentTab();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		/// 5.select file by its name
 		record.selectAdditionalContentByName(file_name);
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 6.verify downloaded file is valid using md5
 		record.VerifyDownloadedFileIsValid(file_name);
 		

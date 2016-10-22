@@ -3,29 +3,13 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-<<<<<<< HEAD
-      <class name="com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse">
-=======
-      <class name="com.automation.main.TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists">
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+      <class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_CopyRecordings">
         <methods>
-<<<<<<< HEAD
-          <include name="test24766"/>
-=======
           <include name="loginCourses"/>
-          <include name="loadPage"/>
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
-          <include name="setup"/>
-<<<<<<< HEAD
           <include name="closeBroswer"/>
-=======
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+          <include name="setup"/>
         </methods>
-<<<<<<< HEAD
-      </class> <!-- com.automation.main.TC24766VerifyCopyFromPastCourseToActiveCourse -->
-=======
-      </class> <!-- com.automation.main.TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists -->
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+      </class> <!-- com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_CopyRecordings -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

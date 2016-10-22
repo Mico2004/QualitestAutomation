@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -153,12 +153,12 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		course.waitForVisibility(course.sign_out);
 	
 		// 3.Click on course
-		Thread.sleep(1500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String course_name=course.selectCourseThatStartingWith("Ab");
 
 		/// 4.change Recording name
 		record.waitForVisibility(record.getCheckbox());
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.getCheckbox().click();
 		record.toEditRecordingPropertiesMenu();
 		erp_window.waitForVisibility(erp_window.save_button);
@@ -173,7 +173,7 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		///6.select course by name
 		
 		course.waitForVisibility(course.first_course_button);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		initializeCourseObject();
 		course.selectCourseByName(course_name);
 		
@@ -181,7 +181,7 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		record.waitForVisibility(record.first_recording);
 		record.verifyFirstExpandableRecording();
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
@@ -210,13 +210,13 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		course.waitForVisibility(course.sign_out);
 	
 		// 12.Click on course
-		Thread.sleep(1500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		initializeCourseObject();
 		course.selectCourseByName(course_name);
 
 		/// 13.change Recording name
 		record.waitForVisibility(record.getCheckbox());
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.getCheckbox().click();
 		record.toEditRecordingPropertiesMenu();
 		erp_window.waitForVisibility(erp_window.save_button);
@@ -231,7 +231,7 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		///6.select course by name
 		
 		course.waitForVisibility(course.first_course_button);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		initializeCourseObject();
 		course.selectCourseByName(course_name);
 	    
@@ -245,7 +245,7 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		// 12.Click on one of the Recording link
 		record.verifyFirstExpandableRecording();
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 13.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 	

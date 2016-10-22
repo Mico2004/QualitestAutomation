@@ -11,7 +11,7 @@ import org.omg.CORBA.StringHolder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -116,7 +116,7 @@ public class TestCaseTryToCopyFromActiveCourseToPastCourse {
 		// 2. Click on past course tab.
 		course.clickOnPastCoursesTabButton();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Get past course list.
 		List<String> past_course_list = course.getCourseList();
@@ -124,7 +124,7 @@ public class TestCaseTryToCopyFromActiveCourseToPastCourse {
 		// 4. Click on active course tab.
 		course.clickOnActiveCoursesTabButton();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 5. Select the active course.
 		currentCourse = course.selectSecondCourse(record);
@@ -135,7 +135,7 @@ public class TestCaseTryToCopyFromActiveCourseToPastCourse {
 		
 		// 7. Select the "Recording Tasks -> Copy" menu item.
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 8. Verify that past course is not displayed in list of destination courses.
 		List <String> copy_menu_course_list = copy.getCourseList();
 		
@@ -162,7 +162,7 @@ public class TestCaseTryToCopyFromActiveCourseToPastCourse {
 		// 10. Click the "Additional Content" tab.
 		record.clickOnAdditionContentTab();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		// 11. Select the content item.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);

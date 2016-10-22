@@ -6,7 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -137,23 +137,23 @@ public class TC15557CopyRecordingWithPodcast {
 			//2. As a source course select a course with "Enable MP3 Podcast" option enabled in "Course Settings".
 			currentCourse = course.selectCourseThatStartingWith("Ab");
 			System.out.println("Current course: " + currentCourse);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.clickOnCourseTaskThenCourseSettings();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			course_settings.enableAudioPodcast();
 			course_settings.clickOnOkButton();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.returnToCourseListPage();
 			
 			//3. As a destination course select a course with "Enable MP3 Podcast" option enabled in "Course Settings".
 			targetCourse = course.selectCourseThatStartingWith("abc");
 			System.out.println("Target course: " + targetCourse);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.clickOnCourseTaskThenCourseSettings();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			course_settings.enableAudioPodcast();
 			course_settings.clickOnOkButton();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			
 			// If there is any recording delete them from the target course
@@ -286,12 +286,12 @@ public class TC15557CopyRecordingWithPodcast {
 		    System.out.println(driver.getTitle());
 		    System.out.println(driver.getWindowHandle());
 		    
-		    Thread.sleep(2000);
+		    Thread.sleep(Page.TIMEOUT_TINY);
 		    
 		    //String url_of_podcast_instructor = podcast_page.getTargetPodcastHref(first_recording_title);
 		    podcast_page.clickOnTargetPodcastMp3(first_recording_title);
 		    
-		    Thread.sleep(2000);
+		    Thread.sleep(Page.TIMEOUT_TINY);
 		    
 		    WebElement mp3_player = driver.findElement(By.cssSelector("html>body>video"));
 		    
@@ -305,14 +305,14 @@ public class TC15557CopyRecordingWithPodcast {
 		    	Assert.assertTrue(false);
 			}
 		    
-//		    Thread.sleep(5000);
+//		    Thread.sleep(Page.TIMEOUT_TINY);
 //		
 //		    player_page.verifyPartiallyUrl(url_of_podcast_instructor.split("/")[5]);
 //		   
 		    // 18. Click "Sign Out" link.
 		    driver.close();
 		
-		    Thread.sleep(2000);
+		    Thread.sleep(Page.TIMEOUT_TINY);
 		    
 		    for (String handle : driver.getWindowHandles()) {
 			    driver.switchTo().window(handle);
@@ -325,7 +325,7 @@ public class TC15557CopyRecordingWithPodcast {
 //		    System.out.println(driver.getTitle());
 //		    System.out.println(driver.getWindowHandle());
 		    
-		    Thread.sleep(2000);
+		    Thread.sleep(Page.TIMEOUT_TINY);
 		    
 		    record.signOut();
 		    
@@ -357,7 +357,7 @@ public class TC15557CopyRecordingWithPodcast {
 		    
 			podcast_page.clickOnTargetPodcastMp3(first_recording_title);
 			
-		    Thread.sleep(2000);
+		    Thread.sleep(Page.TIMEOUT_TINY);
 		    
 		    mp3_player = driver.findElement(By.cssSelector("html>body>video"));
 		    

@@ -4,7 +4,7 @@ package com.automation.main.course_detailes_content_page;
 
 import java.text.DateFormat;
 import java.util.Date;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -152,7 +152,7 @@ public class TC15686ValidateTheRecordingNameOfNewRecordingIsDisplayedInBold {
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// 5. Open the "Course details" page.
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 6. Validate the regular new recording is displayed in bold.
 		String recording_title = record.getFirstRecordingTitle();

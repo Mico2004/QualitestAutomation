@@ -3,7 +3,7 @@ package com.automation.main.public_courses;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -150,10 +150,10 @@ public class TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff {
 		
 		//pretest make sure that the public is visable
 		tegrity.loginAdmin("Admin");	
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
-		Thread.sleep(2000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
 		admin_course_settings_page.clickOnSaveButton();
@@ -185,7 +185,7 @@ public class TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff {
 		// 8. Click on "Public Courses".
 		course.clickOnPublicCoursesTab();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9. Make sure the course is displayed in the the 'Public Courses' tab.
 		course.verifyCourseExist(selected_course_name);
@@ -205,7 +205,7 @@ public class TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff {
 		
 		// 14. Make sure the course is displayed in the the 'Public Courses' tab.
 		course.clickOnPublicCoursesTab();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.verifyCourseExist(selected_course_name);
 		
 		// 15. Sign Out.
@@ -216,7 +216,7 @@ public class TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff {
 		
 		// 17. Click on "Public Courses".
 		course.clickOnPublicCoursesTab();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 18. Click on the same course as before.
 		course.selectCourseThatStartingWith(selected_course_name);

@@ -3,7 +3,7 @@ package com.automation.main;
 
 import java.text.DateFormat;
 import java.util.Date;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -134,7 +134,7 @@ public class TestSuitePreRecordingsAdmin {
 		// Copy all tests from Bank Valid Recording to course starting
 		// with Ab
 //		course.waitForVisibility(course.active_courses_tab_button);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record, delete_menu);
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
@@ -164,7 +164,7 @@ public class TestSuitePreRecordingsAdmin {
 		System.out.println("4");
 		
 
-		Thread.sleep(60*10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

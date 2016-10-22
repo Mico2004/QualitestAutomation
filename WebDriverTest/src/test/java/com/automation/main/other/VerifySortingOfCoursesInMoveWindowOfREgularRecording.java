@@ -2,7 +2,7 @@ package com.automation.main.other;
 
 import java.awt.List;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -112,7 +112,7 @@ public class VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 	
 		record.getCheckbox().click();
 		record.toMoveMenu();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
         //7.verify courses are displayed in alphabetical order
 		record.verifyRecordingSortedByTitle(copy.getCourseList());///verify sorted by title
 		driver.quit();

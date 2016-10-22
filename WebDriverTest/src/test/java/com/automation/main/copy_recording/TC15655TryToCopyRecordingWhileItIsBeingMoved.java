@@ -5,7 +5,7 @@ package com.automation.main.copy_recording;
 import java.util.List;
 
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -122,7 +122,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		
 		// Preset login and delete all recording in Ba, Then copy one recording from Ab to Ba.
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "Ba", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("Ab", 0,record);
 		
@@ -155,7 +155,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9. Message box is closed.
 		boolean is_closed = confirm_menu.isConfirmationMenuClosed();
@@ -190,7 +190,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		record.selectTargetRecordingCheckbox(selected_recording_name);
 		record.clickOnRecordingTaskThenCopy();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 13. Message box "Cannot copy in-process or failed recordings" is displayed.
 		// 14. Click "OK" button.
@@ -209,7 +209,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		course.clickOnTargetCourseName(destination_course_name);
 		
 		//wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		//wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
 		
 		// 18. Verify that recording is copied successfully.

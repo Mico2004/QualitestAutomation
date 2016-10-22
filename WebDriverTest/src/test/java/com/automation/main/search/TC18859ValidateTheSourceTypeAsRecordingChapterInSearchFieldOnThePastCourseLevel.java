@@ -6,7 +6,7 @@ import java.util.List;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -123,7 +123,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -138,87 +138,87 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		// 1. getting the name of the past course
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		course.clickOnPastCoursesTabButton();
 		
 		String current_course = course.selectCourseThatStartingWith("PastCourseA");
 		System.out.println("The course that selected is: " + current_course);
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		// 2. move course from the bank to the past courses 
 		record.signOut();	
 		
 		tegrity.loginCourses("SuperUser");
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		//2.1 enter to the bank
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(3000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		// 2.2 get to the student tab
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		// 2.3 select the first checkbox and enter to the copy menu
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		copy.selectTargetCourseFromCourseList(current_course);
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		// 2.4 select the copy button and wait for the record to move
 		copy.clickOnCopyButton();
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 	
 		// 2.5 click on the ok button
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		
 		record.checkStatusExistenceForMaxTTime(360);
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		record.signOut();
-		Thread.sleep(1000); 	
+		Thread.sleep(Page.TIMEOUT_TINY); 	
 	 	/// end pre test
 		
 		// 1. Validate there is recording in past courses Tab. Search input specified shall be case-insensitive.
 		tegrity.loginCourses("User1");
 		
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		course.selectCourseThatStartingWith("PastCourseA");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Get Recording Chapter information.
 		record.verifyFirstExpandableRecording();
 		//record.first_recording_title.click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String recording_chapter = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 
 		
 		top_bar_helper.signOut();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 2. Log in as INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 3. Open some course from the past courses Tab.
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 4. Set the focus to the field with a mouse pointer.
 		top_bar_helper.search_box_field.click();
 			
 		// 5. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(recording_chapter);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 		search_page.verifyLoadingSpinnerImage();
@@ -255,7 +255,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		// 7. Click on the back cursor in the browser to navigate to the search results page.
 		driver.navigate().back();
 		search_page.waitUntilSpinnerImageDisappear();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 8. Click on title of the chapter.
 		search_page.exitInnerFrame();
@@ -267,7 +267,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		// 9. Click on the back cursor in the browser to navigate to the search results page.
 		driver.navigate().back();
 		search_page.waitUntilSpinnerImageDisappear();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 10. Click on the recording title of the chapter.
 		search_page.exitInnerFrame();
@@ -279,7 +279,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		// 11. Click on the back cursor in the browser to navigate to the search results page.
 		driver.navigate().back();
 		search_page.waitUntilSpinnerImageDisappear();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 12. Click on the course name in the breadcrumb.
 		search_page.exitInnerFrame();
@@ -287,7 +287,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		
 		// 13. Sign Out.
 		record.signOut();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

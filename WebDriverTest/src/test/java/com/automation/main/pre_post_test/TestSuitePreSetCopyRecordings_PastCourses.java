@@ -10,7 +10,7 @@ import java.util.Map;
 
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -143,7 +143,7 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 	public void testSuitePreSetCopyRecordingsAndPastCourse() throws InterruptedException {
 		// 1. Login with SuperUser.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 				
 	String login_url = driver.getCurrentUrl();
 		String university_name  = login_url.split("/")[2].substring(0,  login_url.split("/")[2].length() - 12);
@@ -154,16 +154,16 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		
 		
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		/// 2.Click the "Course Builder" link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		Thread.sleep(10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		/// 3.Click the "Membership" link related to the course+unenroll
 		/// instructor 1
 		System.out.println("before 3");
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastCourseA, PropertyManager.getProperty("User1"),
 				mangage_adhoc_courses_membership_window);
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		for (String window : driver.getWindowHandles()) {
 			driver.switchTo().window(window);
@@ -173,7 +173,7 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		System.out.println("before 3");
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastCourseB, PropertyManager.getProperty("User1"),
 				mangage_adhoc_courses_membership_window);
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		for (String window : driver.getWindowHandles()) {
 			driver.switchTo().window(window);
@@ -181,7 +181,7 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		}
 
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.signOut();
 		
 		
@@ -241,7 +241,7 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		TestExist=record.tabExists(3);
 		System.out.println("a2"); 
 		record.returnToCourseListPage(course);
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		System.out.println("a3");
 		
 		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 0, record,
@@ -258,31 +258,31 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		if(TestExist)
 		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 3, record,
 		delete_menu);
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		System.out.println("a5");
 		course.deleteAllRecordingsInCourseStartWith("PastCourseB", 0, record,
 		delete_menu); 
 		System.out.println("a5.1");
-		Thread.sleep(4000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 0, record, copy, confirm_menu);
-		Thread.sleep(4000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		System.out.println("a6");
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 1, record, copy, confirm_menu);
-		Thread.sleep(4000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		System.out.println("a7"); 
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "Ab", 2, record, copy, confirm_menu);
-		Thread.sleep(4000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		System.out.println("a7");
 		// Copy all student recordings from Bank Valid Recording to course 
 		//starting with Ab
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "Ab", 3, record, copy, confirm_menu);
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		System.out.println("a8");
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "PastCourseA", 3, record, copy, confirm_menu);
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType( "BankValidRecording", "PastCourseA", 0, record, copy, confirm_menu);
-		Thread.sleep(4000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		// Copy all additional content from Bank Valid Recording to course 
 		// starting with Ab
 	
@@ -290,21 +290,21 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		
 		System.out.println("a9");
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "PastCourseA", 1, record, copy, confirm_menu);
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		System.out.println("a10"); 
 		// Copy all student recordings from Bank Valid Recording to course 
 		// starting with Ab
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "PastCourseA", 2, record, copy, confirm_menu);
-		Thread.sleep(4000); System.out.println("a11");
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "PastCourseB",0, record, copy, confirm_menu);
-		Thread.sleep(4000); System.out.println("a12");
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
-		System.out.println("1"); Thread.sleep(4000);
+		System.out.println("1"); Thread.sleep(Page.TIMEOUT_TINY);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record); 
-		System.out.println("3"); Thread.sleep(4000);
+		System.out.println("3"); Thread.sleep(Page.TIMEOUT_TINY);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record); 
-		System.out.println("4"); Thread.sleep(4000);
+		System.out.println("4"); Thread.sleep(Page.TIMEOUT_TINY);
 		course.signOut();
 
 

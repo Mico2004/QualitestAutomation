@@ -7,10 +7,11 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -67,9 +68,10 @@ public class DeleteMenu extends Page {
 		try {
 			System.out.println("delete1");
 			wait.until(ExpectedConditions.visibilityOf(delete_button));
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			System.out.println("delete2");
 			delete_button.click();
+			wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(delete_button)));
 			System.out.println("Clicked on delete button.");
 			ATUReports.add("Click Delete button", "Clicked on delete button", "Clicked on delete button", LogAs.PASSED,null);
 			Assert.assertTrue(true);			
@@ -81,7 +83,7 @@ public class DeleteMenu extends Page {
 					LogAs.WARNING, null);
 		//	Assert.assertTrue(false);  commented out until we'll resolve the issue
  		}
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	public List<String> getRecordingList() {
@@ -118,7 +120,7 @@ public class DeleteMenu extends Page {
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function send ESC keyboard to delete menu.
@@ -134,12 +136,12 @@ public class DeleteMenu extends Page {
 			ATUReports.add("Fail click on ESC button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	/// verify move menu title
 	public void verifyDeleteMenuTitle() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String val = delete_menu_title.getText();
 		if (val.equals("Delete")) {
 			ATUReports.add("delete menu title verified ", LogAs.PASSED, null);
@@ -154,7 +156,7 @@ public class DeleteMenu extends Page {
 
 	// verify move menu background color is same as recording background color
 	public void verifyDeleteColor(RecordingHelperPage rec) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String background_rec = rec.getBackGroundColor(rec.background);
 		String menu_background = getBackGroundColor(delete_menu_background);
 		if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(delete_menu_background))) {
@@ -192,22 +194,28 @@ public class DeleteMenu extends Page {
 
 	// verify courses in courses page match the one in delete menu
 	public void verifySelectedRecordingsInDeleteMenu(List<String> recordings) throws InterruptedException {
-		delete_recording_string_list = getStringFromElement(recording_list);
+		try{
+			delete_recording_string_list = getStringFromElement(recording_list);		
+		WebDriverWait wait=new WebDriverWait(driver, 5);
+		wait.until(ExpectedConditions.visibilityOfAllElements(recording_list));
 		if (delete_recording_string_list.length != recordings.size()) {
-			Assert.assertTrue(false);
 			ATUReports.add("different numbers of  recordings in delete menu and recording page ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);			
 		} else {
 			for (String e : delete_recording_string_list) {
 
-				if (!recordings.contains(e)) {
-					Assert.assertTrue(false);
+				if (!recordings.contains(e)) {					
 					ATUReports.add("recording in delete menu and recording page are not matched ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					System.out.println("recording in delete menu and recording page are not matched ");
+					Assert.assertTrue(false);
 				}
-			}
-			Assert.assertTrue(true);
+			}			
 			ATUReports.add("recording in delete menu and recording page are matched ", LogAs.PASSED, null);
 			System.out.println("recording in delete menu and recording page are matched ");
+			Assert.assertTrue(true);
+		}}catch(Exception e){
+			ATUReports.add("Delete item verifications failed",e.getMessage(),LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			
 		}
 
 	}

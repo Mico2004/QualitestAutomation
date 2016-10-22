@@ -4,7 +4,7 @@ package com.automation.main;
 import java.util.Date;
 import java.util.List;
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -135,16 +135,16 @@ public class TC17050ValidateUserSeperationWhenWatchingRecording {
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 
 		// 2. Login as an INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Click on a certain course.
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 4. Click on a certain recording.
 		String first_recording_name = record.getFirstRecordingTitle();
@@ -162,20 +162,20 @@ public class TC17050ValidateUserSeperationWhenWatchingRecording {
 			
 		// 7. Sign out.
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 8. Login as another STUDENT/INSTRUCTOR user who is enrolled to the same course.
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 			
 		// 9. Open the recording course you just watch.
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 10. Click on the recording you just watched.
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 10.1. The "> Resume watching box isn't displayed.
 		record.verifyWebElementNotDisplayed(record.list_of_resume_buttons.get(0), "Resume box");

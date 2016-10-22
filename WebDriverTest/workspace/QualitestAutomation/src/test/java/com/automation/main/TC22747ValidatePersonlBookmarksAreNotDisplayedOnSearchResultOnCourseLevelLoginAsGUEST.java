@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -175,7 +175,7 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			
 			 // 5.verify checked visibility of course(make it public)
 			 course_settings.checkCourseVisibility();
-			 Thread.sleep(2000);
+			 Thread.sleep(Page.TIMEOUT_TINY);
 			 course_settings.signOut();
 			
 			
@@ -193,7 +193,7 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 
 			///9.Click on the first chapter
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			// 10.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 
@@ -201,7 +201,7 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 			String bookmark_to_add=sdf.format(date);
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
 
 
@@ -210,25 +210,25 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			}
 			/// 12.sign out super user
 			record.signOut();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			tegrity.waitForVisibility(tegrity.passfield);
 
 			// 13.login as guest
 			tegrity.loginAsguest();
 			course.waitForVisibility(course.sign_out);
 			// 14.Select a course
-			Thread.sleep(1500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			course.selectCourseByName(course_name);
 
 			/// 15.Search the "Bookmark" that we mentioned in the preconditions and press ENTER.
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.waitForVisibility(record.first_recording);
 
 			record.convertRecordingsListToNames();
 			///16.The "Bookmark" is not displayed on the search results 
 			String to_search=bookmark_to_add;  ///search bookmark
 			top_bar_helper.moveToElement(top_bar_helper.search_box_field, driver).perform();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			if(!(driver instanceof InternetExplorerDriver)) {
 				// 8. Set the focus to the field with a mouse pointer.

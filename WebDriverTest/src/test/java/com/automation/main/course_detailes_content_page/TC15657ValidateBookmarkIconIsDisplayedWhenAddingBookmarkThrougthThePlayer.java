@@ -4,7 +4,7 @@ package com.automation.main.course_detailes_content_page;
 import java.util.Date;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -156,25 +156,26 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		record.clickOnRecordingTaskThenCopy();
 		copy.selectTargetCourseFromCourseListThatStartWith("abc");
 		copy.clickOnCopyButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecordings();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.checkStatusExistenceForMaxTTime(360);
 		
 		// 4. Logout.
 		top_bar_helper.signOut();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 5. Login as an INSTRUCTOR (User1)
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
+		initializeCourseObject();
 		
 		// 6. Enter to the course page (Course2).
 		course.selectCourseThatStartingWith("abc");
 		//getting the url for the admin
 		String url =  course.getCurrentUrlCoursePage(); 
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		
 		// 7.1. The uploaded recording is displayed with no "bookmark" symbol displayed.
@@ -204,11 +205,11 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		
 		// 13. Sign out.
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 14. Login as a STUDENT (User4).
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 15. Open the course that contains "ex1" recording.
 		course.selectCourseThatStartingWith("abc");
@@ -222,19 +223,19 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		
 		// Sign Out
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 17. Login as a Admin.
 		tegrity.loginAdmin("Admin");
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on "view course list" under "courses" section.
 		admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 		
 		
 		// 18. Open the course that contains "ex1" recording.
 		// In "All courses" page, search for abc course.
-		Thread.sleep(8000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
 		
@@ -248,11 +249,11 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		
 		// 20. Sign Out.
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 21. Login as student (User4).
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 22. Enter to the course page.
 		course.selectCourseThatStartingWith("abc");
@@ -268,26 +269,26 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		// 25. Add a bookmark througth the "bookmarks and links" control.
 		player_page.verifyTimeBufferStatusForXSec(5);
 		player_page.addTargetBookmark("Second recording bookmark");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		for(String handler: driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
 			break;
 		}
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Sign Out
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 26. Login as another student to the same course (User2).
 		tegrity.loginCourses("User2");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 27. Enter to the same course page
 		course.selectCourseThatStartingWith("abc");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 28. Make sure the bookmark symbol do no appear for the recording you just add a bookmark.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {

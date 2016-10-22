@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -40,7 +40,8 @@ public class CopyMenu extends Page {
 		super(browser);
 		// TODO Auto-generated constructor stub
 	}
-
+	@FindBy(id="members_dropdown")
+	public WebElement membersdropdown;
 	@FindBy(xpath = "//*[@id=\"courseListSelect\"]/option")
 	public List<WebElement> course_list;
 	@FindBy(xpath = "//*[@id=\"ModalDialogHeaderWrap\"]")
@@ -116,7 +117,7 @@ public class CopyMenu extends Page {
 	// This function clicks on cancel button of copy menu
 	public void clickOnCancelButton(RecordingHelperPage rec) throws InterruptedException {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			waitForVisibility(cancel_button);			
 			cancel_button.click();
 			System.out.println("Clicked on cancel button");
@@ -127,7 +128,7 @@ public class CopyMenu extends Page {
 			ATUReports.add("Fail click on cancel button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function send ESC keyboard to copy menu.
@@ -141,7 +142,7 @@ public class CopyMenu extends Page {
 			ATUReports.add("Fail click on ESC button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function get course name, and select it course from course list,
@@ -149,14 +150,14 @@ public class CopyMenu extends Page {
 	public boolean selectTargetCourseFromCourseList(String target_course_name) throws InterruptedException {
 
 		String selected_course = null;
-		Thread.sleep(1500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOf(first_course_on_the_list));
 		
 		for (int i = 0; i < course_list.size(); i++) {
 			selected_course = course_list.get(i).getText();
 			if (selected_course.equals(target_course_name)) {
-				clickElement(course_list.get(i));
+				clickElement(course_list.get(i));				
 				System.out.println("course is selected from Copy manu course list: " + target_course_name);
 				ATUReports.add("course is selected from Copy manu course list: " + target_course_name, LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -174,7 +175,7 @@ public class CopyMenu extends Page {
 			return false;
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		return true;
 	}
 	
@@ -184,7 +185,7 @@ public class CopyMenu extends Page {
 	public boolean selectTargetCourseFromCourseList(List <String> target_courses_name) throws InterruptedException {
 		int z=0;
 		String selected_course = null;
-		Thread.sleep(1500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		wait = new WebDriverWait(driver, 30);
 		System.out.println("s1");
 		System.out.println(target_courses_name.size());
@@ -215,7 +216,7 @@ public class CopyMenu extends Page {
 			return false;
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		return true;
 	}
 
@@ -243,13 +244,13 @@ public class CopyMenu extends Page {
 			Assert.assertTrue(false);
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		return selectedCourse;
 	}
 
 	/// verify copy menu title
 	public void verifyCopyMenuTitle() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String val = copy_title.getText();
 		if (val.equals("Copy")) {
 			System.out.println("copy menu title verified ");
@@ -335,7 +336,7 @@ public class CopyMenu extends Page {
 
 	// verify copy menu background color is same as recording background color
 	public void verifyMenuColor(RecordingHelperPage rec) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(copy_title))) {
 			System.out.println("copy menu background color is same as recording background color");
 			ATUReports.add("copy menu background color is same as recording background color", LogAs.PASSED, null);
@@ -381,7 +382,7 @@ public class CopyMenu extends Page {
 			ATUReports.add("Click the Search button", "Clicked on search button", "Fail click on search button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function return course list
@@ -521,7 +522,7 @@ public class CopyMenu extends Page {
 //		// hover
 //		// and
 //		// click
-//		Thread.sleep(500);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		try {
 //
 //			if (isElementPresent(By.id("copyCourseWindow")))
@@ -553,7 +554,7 @@ public class CopyMenu extends Page {
 			// hover
 			// and
 			// click
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 
 				if (isElementPresent(By.id("copyCourseWindow")))
@@ -620,7 +621,7 @@ public class CopyMenu extends Page {
 				ATUReports.add("Fail click on copy button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 		
@@ -636,7 +637,7 @@ public class CopyMenu extends Page {
 				System.out.println("Failed To get the Error Dailog menu.");
 				Assert.assertTrue(false);
 			}
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 		// This function get course name, and select it course from course list,
@@ -665,7 +666,7 @@ public class CopyMenu extends Page {
 						return false;
 					}
 
-					Thread.sleep(3000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 					return true;
 				}
 	
@@ -823,5 +824,43 @@ public class CopyMenu extends Page {
 				Assert.assertTrue(true);
 			}
 		}
-
+		public void chooseInstructorAndClickAutoComplete(String username){
+			
+			try{
+				WebDriverWait wait=new WebDriverWait(driver, 10);
+				driver.findElement(By.id("members_value")).clear();
+				driver.findElement(By.id("members_value")).sendKeys(username);
+				wait.until(ExpectedConditions.textToBePresentInElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding"), username));
+				driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();			
+				Thread.sleep(Page.TIMEOUT_TINY);
+				driver.findElement(By.id("SearchButton")).click();
+			}catch(Exception e){
+				ATUReports.add("Choosing an instructor from admin's copy Dialog window failed", e.getMessage(),LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+			
+		}
+		public String chooseInstructorAndVerifyAutoCompleteIsAsExpected(String username,String expectedResult){
+			driver.findElement(By.id("members_value")).clear();
+			driver.findElement(By.id("members_value")).sendKeys(username);	
+			ATUReports.add("Set an Instructor in the textbox", username,LogAs.PASSED, null);
+			try {
+				Thread.sleep(Page.TIMEOUT_TINY);
+				wait.until(ExpectedConditions.textToBePresentInElement(membersdropdown,
+						expectedResult));
+			} catch (Exception e) {
+				System.out.println("Dropdown list opened with wrong text");
+				ATUReports.add("Dropdown list opened with wrong text", expectedResult,membersdropdown.getText(), LogAs.FAILED,
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				if(membersdropdown.isDisplayed())
+					return membersdropdown.getText();
+				else return "";
+			}
+			System.out.println("Dropdown list opened with the text:"+membersdropdown.getText());
+			ATUReports.add("Dropdown list opened with the text.", expectedResult,membersdropdown.getText(),
+					LogAs.PASSED, null);
+			if(membersdropdown.isDisplayed())
+				return membersdropdown.getText();
+			else return "";
+		}
 }

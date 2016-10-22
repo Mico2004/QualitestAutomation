@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -128,7 +128,7 @@ public class PreTest {
 		System.out.println("Current unviersity name: " + university_name);
 
 		// 2. Click on course builder href link
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SelfRegConfig")));
 		
@@ -181,7 +181,7 @@ public class PreTest {
 					driver.switchTo().alert().accept();
 					break;
 				} catch (Exception msg) {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			}
 			
@@ -195,7 +195,7 @@ public class PreTest {
 		
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 	
 		// 2. Click on user builder href link
@@ -207,7 +207,7 @@ public class PreTest {
 				driver.switchTo().frame(0);
 				break;
 			} catch(Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -265,7 +265,7 @@ public class PreTest {
 		writer.close();
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 	
@@ -280,7 +280,7 @@ public class PreTest {
 				driver.switchTo().frame(0);
 				break;
 			} catch(Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -289,10 +289,10 @@ public class PreTest {
 			// Search target course name
 			mange_adhoc_course_enrollments.searchAndFilterCourses(created_course_list.get(i));
 			
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			// Click on result first course (the only one) membership button
 			mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
-			Thread.sleep(10000);		
+			Thread.sleep(Page.TIMEOUT_TINY);		
 			
 			if(i == 0) {
 				// Search target user name in membership window

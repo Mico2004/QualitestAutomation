@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -181,7 +181,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 			// 3.Click on "View Course List" link
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
-			Thread.sleep(1500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 
 			// 4.verify all courses page
@@ -192,7 +192,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 			// 6.Click on one of the Recording link
 			record.waitForVisibility(record.first_recording);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.convertRecordingsListToNames();
 			record.convertRecordingsListToRecorderName();
 			String instructor=record.getIndexRecorderNameOfRecording(1);
@@ -211,7 +211,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 			
 			///8.back to recording page
 			record.returnToRecordingPageByClickingBreadcrumbsName(player_page.breadcrumbs_box_elements_list.get(0));
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.verifyFirstExpandableRecording();
 			record.clickOnTheFirstCaptherWithOutTheExpand();
 			
@@ -230,7 +230,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 			///9.Validate the text in the Tegrity Player page: "Search in this recording..."
 			player_page.verifySearchBoxHint();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			//10.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
 			player_page.verifySearchForRecordingExist(keyword_to_search);
@@ -250,7 +250,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 			
 			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
 			player_page.verifySearchResultPage(recording_name);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 				
 			//14. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
 			player_page.verifyResultsStatisticsInFormat(keyword_to_search);
@@ -290,7 +290,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 			///19.Hover over the chapter icon:The background color change to deep gray.
 			player_page.moveToElement(player_page.search_result.get(0), driver).perform();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 
 			///20.Click on the result row.
@@ -314,7 +314,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
 			//23.navigate back to player recording
 			driver.navigate().back();
-			Thread.sleep(4000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			//24.click on "Courses" and verify course page
 
@@ -322,7 +322,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 			////25.navigate back to player then to recordings page
 			driver.navigate().back();
 			player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(0));
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
 
 			///26.Change the keyword name chapter by using "Edit recording".
@@ -343,7 +343,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 			
 			//27.Search the "Recording keyword Chapter" from the recording that we mentioned in the preconditions with the new name.
 			top_bar_helper.searchForTargetText(new_keyword_to_search);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
             search_page.verifySearchResultIsEmpty();
 			///!!!!!!!!!!!!!!!!29.download recording with player controllers(Not Possible)
 			///return to player
@@ -364,7 +364,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 			///31.Validate the text in the Tegrity Player page: "Search in this recording..."
 			player_page.verifySearchBoxHint();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			//32.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
 
 
@@ -372,7 +372,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
 
 
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			//33.The tegrity logo is displayed on the bottom footer bar right side.
 
 			player_page.verifyTegrityLogoVisibilityAndLocation();
@@ -402,7 +402,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 			///38.search results page in the format as follows: "recording name - Search Results".
 			driver.switchTo().frame(0);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.verifySearchResultPage(keyword_to_search);
 
 			///39.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
@@ -415,7 +415,7 @@ public class TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 			///41.Hover over the chapter icon:The background color change to deep gray.
 
 			player_page.moveToElement(player_page.search_result.get(0), driver).perform();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 
 

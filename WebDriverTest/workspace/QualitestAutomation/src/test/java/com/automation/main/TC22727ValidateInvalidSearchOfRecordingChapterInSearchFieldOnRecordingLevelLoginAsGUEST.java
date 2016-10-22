@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -160,13 +160,13 @@ public class TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		///4.Click on one of the Recording link
 	 
 		record.waitForVisibility(record.recordings_tab);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.convertRecordingsListToNames();////////random number from second recording to last recording (because we choose automatically the first recording)
 		recording_name=record.recording_list_names.get((int) (Math.random()%(record.recording_list_names.size()-2)+1));
 		record.verifyFirstExpandableRecording();
 		///5.Click on the first chapter.
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		// 6.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display

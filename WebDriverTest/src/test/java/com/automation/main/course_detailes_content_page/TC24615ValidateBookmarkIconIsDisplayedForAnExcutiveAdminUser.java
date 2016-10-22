@@ -4,7 +4,7 @@ package com.automation.main.course_detailes_content_page;
 import java.util.Date;
 import java.util.List;
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -150,15 +150,15 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 2. Login as Student.
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Click on the Precondtional Course.
 		course.selectCourseThatStartingWith("abc");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 4. Select some Recording and click on it.
 		// 5. Click on the first chapter.
@@ -174,16 +174,16 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 			break;
 		}
 		top_bar_helper.signOut();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 7. Login as Excutive Admin.
 		tegrity.loginCourses("ExcutiveAdmin");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 8. Click on the Preconditional Course.
 		course.selectCourseThatStartingWith("abc");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		// 9. Validate that bookmark sign is not displayed in the recording, left of recording date.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {
@@ -195,11 +195,11 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 		}
 		
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 10. Login as Instructor.
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 11. Click on the Precondtional Course.
 		course.selectCourseThatStartingWith("abc");
@@ -218,16 +218,16 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 			break;
 		}
 		top_bar_helper.signOut();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 15. Login as HelpDesk Admin.
 		tegrity.loginCourses("ExcutiveAdmin");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 				
 		// 16. Click on the Preconditional Course.
 		course.selectCourseThatStartingWith("abc");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 17. Validate that bookmark sign is displayed in the recording, left of recording date.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {

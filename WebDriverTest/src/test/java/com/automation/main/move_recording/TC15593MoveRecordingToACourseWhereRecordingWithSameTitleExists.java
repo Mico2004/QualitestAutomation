@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -154,11 +154,11 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		// 2.8 Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 2.9. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// Wait until the copy status will disspear, becuase if we will move + copy it will fail to move
@@ -200,11 +200,11 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		// 7. Click "Move Recording(s)" button.
 		move_window.clickOnMoveRecordings();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8.1. Message box is closed
 		if(confirm_menu.isConfirmationMenuClosed()) {
@@ -284,7 +284,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		record.clickOnRecordingTitleInIndex(2);
 		
 		// 16. Click on any chapter. 
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 		
@@ -293,11 +293,11 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		//17. "Tegrity Player" is displayed and Recording is playing correctly.
 		//TODO: add WebDriverWait
-		//Thread.sleep(10000);
+		//Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//WebDriverWait w = new WebDriverWait(driver, 10);
 		
-		//Thread.sleep(10000);
+		//Thread.sleep(Page.TIMEOUT_TINY);
 
 		player_page.verifyTimeBufferStatusForXSec(10);
 		

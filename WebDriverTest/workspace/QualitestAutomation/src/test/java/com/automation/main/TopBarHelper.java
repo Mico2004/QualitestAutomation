@@ -7,7 +7,7 @@ import org.apache.regexp.recompile;
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -200,7 +200,7 @@ public class TopBarHelper extends Page {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 
 				weekly_summary.click();
@@ -247,7 +247,7 @@ public class TopBarHelper extends Page {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 
 				detailed_reports.click();
@@ -294,7 +294,7 @@ public class TopBarHelper extends Page {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 
 				custom_analysis.click();

@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -165,7 +165,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// Logout.
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 2. Repeat the test for STUDENT and INSTRUCTOR.
@@ -173,11 +173,11 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR.
 				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			} else {
 				// 3. Login as an STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			
@@ -218,18 +218,18 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			if(type_of_user==0) {
 				// Login as an INSTRUCTOR.
 				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			} else {
 				// Login as an STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		
 			initializeCourseObject();
 			
 			// 9. Open the recording course you just watch.
 			course.selectCourseThatStartingWith("Ba");
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));
 			
@@ -237,7 +237,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			record.clickElement(record.first_recording_title);
 			
 			// 10.1. The "> Resume watching +(The first slide)" box is displayed.
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.verifyWebElementTargetText(record.list_of_resume_buttons.get(0), "Resume Watching");
 
 			// 10.2. The recording chapters are displayed to the user.
@@ -284,7 +284,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 				break;
 			}
 			top_bar_helper.signOut();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

@@ -4,7 +4,7 @@ package com.automation.main.copy_recording;
 
 
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -148,7 +148,7 @@ public class TC15601TryToCopyRecordingAsAStudent {
 			ATUReports.add("Copy button.", "Copy button is not displayed in recording tasks menu.", "Copy button is displayed in recording tasks menu.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Verify that Student recordings tab exist
 		if(record.isElementPresent(record.student_recordings_tab)) {
 			System.out.println("Student recordings tab is exist.");
@@ -161,7 +161,7 @@ public class TC15601TryToCopyRecordingAsAStudent {
 		// 6. Click "Student Recordings" tab.
 		record.clickOnStudentRecordingsTab();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// after clicking on the record task we should move the mouse that we can see the checkbox
 		Robot robot = new Robot();

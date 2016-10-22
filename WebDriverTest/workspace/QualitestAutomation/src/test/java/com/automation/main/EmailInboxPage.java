@@ -2,7 +2,7 @@ package com.automation.main;
 
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByXPath;
@@ -48,7 +48,7 @@ public class EmailInboxPage extends Page{
 	public void verifyEmailMessage(WebDriver driver,String subject,String sender,String comment_message,String comment_message_need_to_be) throws InterruptedException
  {
 	 int i=clickMessageBySubject(subject);
-	 Thread.sleep(2000);
+	 Thread.sleep(Page.TIMEOUT_TINY);
 
 	 String from= driver.findElement(By.xpath("//*[@id=\"email-list\"]/li["+String.valueOf(i)+"]/div/dl/dd[2]")).getText();
     driver.switchTo().frame(1);

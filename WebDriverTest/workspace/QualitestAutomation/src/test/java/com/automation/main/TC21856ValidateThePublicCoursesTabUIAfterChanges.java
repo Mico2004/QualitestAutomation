@@ -8,7 +8,7 @@ import java.util.function.IntToDoubleFunction;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -138,29 +138,29 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		
 		// 2. Create 1 instructor and 1 student and enroll them to Ab course.
 		tegrity.loginAdmin("Admin");	
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//make sure that we have public tabs
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
-		Thread.sleep(2000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
 		admin_course_settings_page.clickOnSaveButton();
 		 
 		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 		 
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		  
 		for(int i=0; i<10; i++ ) {
 			try {
 				driver.switchTo().frame(0);
 				break;
 			} catch(Exception msg) {
-				Thread.sleep(500);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
-//		Thread.sleep(100);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
@@ -170,7 +170,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		mange_adhoc_users_page.clickOnNewUser();
 		create_new_user_window.createNewUser(temp_instructor_user_name, temp_instructor_user_name, "abc@com.com", "111", "111");
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		mange_adhoc_users_page.clickOnNewUser();
 		create_new_user_window.createNewUser(temp_student_user_name, temp_student_user_name, "abc@com.com", "111", "111");
@@ -182,7 +182,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		 
 		manage_adhoc_courses_enrollments_page.clickOnAdminDashboard();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Make sure to have two users which are enroll to the same course, first as Instructor and Second as Student both of the users don't have past courses.
 		// Click on course builder href link
@@ -194,16 +194,16 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 				driver.switchTo().frame(0);
 				break;
 			} catch(Exception msg) {
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ab_course_name);
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton();
-		Thread.sleep(1000);	
+		Thread.sleep(Page.TIMEOUT_TINY);	
 		
 		// Search target user name in membership window
 		mange_ad_hoc_courses_membership_window.searchForUser(temp_instructor_user_name);	
@@ -216,7 +216,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		
 		mange_ad_hoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(temp_instructor_user_name);
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Search target user name in membership window
 		mange_ad_hoc_courses_membership_window.searchForUser(temp_student_user_name);	
@@ -258,7 +258,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		record.clickOnCourseTaskThenCourseSettings();
 		
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course_settings_page.clickOnOkButton();
 		
 		// 6. Login as Instructor.
@@ -289,7 +289,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		tegrity.loginAdmin("Admin");
 		
 		// 15. Unenroll both Instructor and Student from some course.
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 3. Make sure to have two users which are enroll to the same course, first as Instructor and Second as Student both of the users don't have past courses.
@@ -302,7 +302,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 				driver.switchTo().frame(0);
 				break;
 			} catch(Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -310,10 +310,10 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ab_course_name);
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton();
-		Thread.sleep(1000);	
+		Thread.sleep(Page.TIMEOUT_TINY);	
 		
 		// Search target user name in membership window
 		mange_ad_hoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(temp_instructor_user_name);
@@ -321,7 +321,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		// Add selected user to instructor list
 		mange_ad_hoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Search target user name in membership window
 		mange_ad_hoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse(temp_student_user_name);
@@ -329,7 +329,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		// Add selected user to instructor list
 		mange_ad_hoc_courses_membership_window.clickOnRemoveSelectedUserToStudentsList();
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		mange_ad_hoc_courses_membership_window.waitForVisibility(mange_ad_hoc_courses_membership_window.ok_button);
 		
@@ -357,14 +357,14 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		course.verifyPublicCoursesTabDisplayed();
 		course.verifyTabsOrder();
 		
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 20. Hover over 'Past courses' tab.
 		// 20.1. The font color changes to black.
 		// 20.2. The tab background change to white.
 		// 20.3. A hint appears with 'Past Courses' text.
 		course.verifyUIHoveringPastCoursesTab();
 		
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 //		driver.findElement(By.id("tegritySearchBox")).click();
 		
@@ -374,7 +374,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		// 21.3. A hint appears with 'Public Courses' text.
 		course.verifyUIHoveringPublicCoursesTab();
 		
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 22. Sign out.
 		top_bar_helper.clickOnSignOut();

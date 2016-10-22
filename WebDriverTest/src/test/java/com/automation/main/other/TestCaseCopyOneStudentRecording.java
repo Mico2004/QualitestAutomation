@@ -12,7 +12,7 @@ import javax.swing.text.StyledEditorKit.StyledTextAction;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -131,7 +131,7 @@ public class TestCaseCopyOneStudentRecording {
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String selected_recording_name = record.getFirstRecordingTitle();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 5. Selected checkbox is checked.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);

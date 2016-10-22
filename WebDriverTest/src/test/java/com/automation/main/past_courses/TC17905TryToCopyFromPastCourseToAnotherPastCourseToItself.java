@@ -5,7 +5,7 @@ package com.automation.main.past_courses;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -124,7 +124,7 @@ public class TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself {
 		// 3. Click the "Past Courses" tab.
 		course.clickOnPastCoursesTabButton();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 4. Get past course list.
 		List<String> past_course_list = course.getCourseList();
@@ -144,11 +144,11 @@ public class TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself {
 		// 7. Select the "Recording Tasks -> Copy" menu item.
 		record.clickOnRecordingTaskThenCopy();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. Verify that no past course is not displayed in list of destination courses.
 		List<String> copy_menu_course_list = copy.getCourseList();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		if(copy_menu_course_list.containsAll(active_course_list)) {
 			if (!copy_menu_course_list.contains(past_course_list)) {
 				System.out.println("Contain only active course.");
@@ -171,7 +171,7 @@ public class TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself {
 		// 10. Click the "Additional Content" tab.
 		record.clickOnAdditionContentTab();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 11. Select the content item.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -179,7 +179,7 @@ public class TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself {
 		// 12. Select the "Content tasks -> Copy" menu item.
 		record.clickOnContentTaskThenCopy();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 13. Verify that no past course is not displayed in list of destination courses.	
 		copy_menu_course_list = copy.getCourseList();

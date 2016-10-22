@@ -9,7 +9,7 @@ import java.util.Map;
 
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -173,31 +173,31 @@ public class TestSuitePreSetGeneric {
 			System.out.println("gen1");
 			if(CoursesForRegularRecordings.size()!=0)
 				course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", CoursesForRegularRecordings, 0, record,copy, confirm_menu);
-			Thread.sleep(4000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			System.out.println("a6");
 			if(CoursesForAdditionalContent.size()!=0)
 			course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", CoursesForAdditionalContent, 1, record,copy, confirm_menu);
-			Thread.sleep(4000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			System.out.println("a7");
 			if(CoursesForStudentRecordings.size()!=0)
 			course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", CoursesForStudentRecordings, 2, record,copy, confirm_menu);
-			Thread.sleep(4000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			System.out.println("a7");
 			if(CoursesForProcRecordings.size()!=0)
 			course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", CoursesForProcRecordings, 3, record,copy, confirm_menu);
-			Thread.sleep(4000);	
+			Thread.sleep(Page.TIMEOUT_TINY);	
 			
 			// verify recordings status is clear from the bank
 			System.out.println("0");
 			if(CoursesForRegularRecordings!=null)
 			course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
-			System.out.println("1"); Thread.sleep(4000);
+			System.out.println("1"); Thread.sleep(Page.TIMEOUT_TINY);
 			if(CoursesForStudentRecordings!=null)
 			course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record); 
-			System.out.println("3"); Thread.sleep(4000);
+			System.out.println("3"); Thread.sleep(Page.TIMEOUT_TINY);
 			if(CoursesForProcRecordings!=null)
 			course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record); 
-			System.out.println("4"); Thread.sleep(4000);			
+			System.out.println("4"); Thread.sleep(Page.TIMEOUT_TINY);			
 			    
 	
 

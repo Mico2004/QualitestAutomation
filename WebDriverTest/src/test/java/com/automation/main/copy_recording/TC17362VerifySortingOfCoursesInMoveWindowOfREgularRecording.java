@@ -2,7 +2,7 @@ package com.automation.main.copy_recording;
 
 import java.awt.List;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -109,7 +109,7 @@ public class TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 		wait.until(ExpectedConditions.elementToBeClickable(record.getCheckbox()));
 		record.getCheckbox().click();
 		record.clickOnRecordingTaskThenMove();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
         //7.verify courses are displayed in alphabetical order
 		record.verifyRecordingSortedByTitle(copy.getCourseList());///verify sorted by title
 		

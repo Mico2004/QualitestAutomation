@@ -5,7 +5,7 @@ import java.util.Set;
 
 import org.eclipse.jetty.io.ClientConnectionFactory.Helper;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -108,15 +108,15 @@ public class TC21578LoginAsGuestUI {
 		
 		/// 2.login as admin
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//pretest enable public visibility  
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
-		Thread.sleep(2000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
 		admin_course_settings_page.clickOnSaveButton();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		/// 3.verify select 'Require first time users to accept a EULA'
 		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
@@ -128,7 +128,7 @@ public class TC21578LoginAsGuestUI {
 			driver.switchTo().window(window);
 			break;
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		admin_dashboard_page.signOut();
@@ -167,7 +167,7 @@ public class TC21578LoginAsGuestUI {
 		/// 7. verify "Disclaimer" leads [Guest] User to the EULA accepting page.
 		try {
 			course.disclaimer.click();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			course.waitForVisibility(driver.findElement(By.xpath("//*[@id=\"main\"]/div/div[2]/form/input[1]")));
 			if (driver.findElement(By.xpath("//*[@id=\"main\"]/div/div[2]/form/input[1]")).isDisplayed()) {
 				driver.findElement(By.xpath("//*[@id=\"main\"]/div/div[2]/form/input[1]")).click();
@@ -187,7 +187,7 @@ public class TC21578LoginAsGuestUI {
 		// 8.3. "Help" leads to Tergity help page
 		// Store the current window handle
 		course.help.click();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 
 		// 9. verify help page

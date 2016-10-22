@@ -6,7 +6,7 @@ package com.automation.main.search;
 import java.util.Date;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -111,7 +111,7 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -132,32 +132,32 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 2. Log in as INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Open some course.
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 3.1 wait until the status will disappear
 		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 		// 4. Set the focus to the field with a mouse pointer.
 		top_bar_helper.search_box_field.click();
 	
 		// 5. Change the name of the chapter that we mentioned in the preconditions to "/\[]:;|=,+*?<>".
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnRecordingTaskThenEditRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 
 		String new_chapter_name = "/\\[]:;|=,+*?<>";
 		
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(new_chapter_name);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		// 6. Search the "/\[]:;|=,+*?<>" chapter in the search field.
 		// 6.1. The chapter is'nt displayed.
@@ -169,19 +169,19 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		
 		// 7. Change the name of the chapter that we mentioned in the preconditions to "abc?<>".
 		driver.navigate().to(course_url);
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		record.selectIndexCheckBox(1);
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		record.clickOnRecordingTaskThenEditRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 
 		new_chapter_name = "abc?<>";
 		
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(new_chapter_name);
-		Thread.sleep(2500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. Search the "abc?<>" chapter in the search field.
 		// 8.1. The chapter is'nt displayed.

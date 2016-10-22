@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.ListModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -139,24 +139,24 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 2. Repeat for INSTRUCTOR and STUDENT.
 		for(int type_of_user=0; type_of_user<2; type_of_user++) {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			
 			// 4. Click on a certain course.
 			course.selectCourseThatStartingWith(current_course);
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 5. Click on the first chapter and wait the player will start play the recording
 			String first_recording_name = record.getFirstRecordingTitle();
@@ -167,13 +167,13 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 			
 			// 7. Navigate back with the browser back button.
 			driver.navigate().back();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));
 			
 			// 8. Click on the recording you just watched.
 			record.clickElement(record.first_recording_title);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 8.1. The "> Resume watching + (slide #)" box is displayed.
 			record.verifyWebElementDisplayed(record.list_of_resume_buttons.get(0), "Resume box");
@@ -222,7 +222,7 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 				break;
 			}
 			top_bar_helper.clickOnSignOut();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 

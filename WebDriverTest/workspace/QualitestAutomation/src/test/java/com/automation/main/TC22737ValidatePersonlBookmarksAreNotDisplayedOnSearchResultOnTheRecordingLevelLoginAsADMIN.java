@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -161,7 +161,7 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		
 		///4.Click on the first chapter
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 5.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 
@@ -170,7 +170,7 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
         String bookmark_to_add=sdf.format(date);
-        Thread.sleep(1000);
+        Thread.sleep(Page.TIMEOUT_TINY);
 		player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
         
         
@@ -179,33 +179,33 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		}
 		/// 6.sign out super user
 		record.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		tegrity.waitForVisibility(tegrity.passfield);
 
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		// 3.Click on "View Course List" link
-		Thread.sleep(1500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		// 4.verify all courses page
 		admin_view_course_list.verifyAllCoursesPage();
 		// 5.Select a course
 		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_view_course_list.searchForTargetCourseName(course_name);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_view_course_list.clickOnFirstCourseLink();
 		
 		/// 6.Click on one of the Recording link
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.waitForVisibility(record.first_recording);
 
 		record.convertRecordingsListToNames();
 		String rec=record.recording_list_names.get(0);
 		record.verifyFirstExpandableRecording();
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 

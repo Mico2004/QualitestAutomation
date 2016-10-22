@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -118,7 +118,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -152,27 +152,27 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnRecordingTaskThenEditRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String new_chapter_name = "newname" + sdf.format(date);
 		
 		edit_recording.changeFirstChapterRecordingNameToTargetName(new_chapter_name);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		record.signOut();
 		
 		// 2. Log in as STUDENT (User4).
 		tegrity.loginCourses("User4");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Set the focus to the field with a mouse pointer.
 		top_bar_helper.search_box_field.click();
@@ -184,11 +184,11 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		
 		// 5. Sign Out.
 		top_bar_helper.signOut();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 6. Log in as another Student (User2) that does'nt in rolled to the same course that contains the recording that you search earlier.
 		tegrity.loginCourses("User2");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 7. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(new_chapter_name);
@@ -198,7 +198,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		
 		// 8. Sign Out.
 		top_bar_helper.signOut();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		tegrity.loginCourses("User1");
 		

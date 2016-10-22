@@ -12,7 +12,7 @@ import java.util.List;
 import org.testng.annotations.AfterClass;
 import javax.xml.soap.SAAJMetaFactory;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -167,7 +167,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		// 3.Click on "BankValid" link
 	    course.selectCourseThatStartingWith("BankValid");
 		record.waitForVisibility(record.recordings_tab);
-	    Thread.sleep(3000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 		// 4.verify all courses page
 		record.clickCheckBoxByName("This Recording Has Closed Captions");
 		// 5.copy recording to course
@@ -180,7 +180,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
         record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
 		/// 6.sign out super user
 		record.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		
 
@@ -192,16 +192,16 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		// 3.Click on "View Course List" link
-		Thread.sleep(1500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		// 4.verify all courses page
 		admin_view_course_list.verifyAllCoursesPage();
 		// 5.Select a course
 		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	     String	course_name=admin_view_course_list.clickOnCourseLinkStartingWith("Ab");
 		/// 6.Click on one of the Recording link
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 	     record.waitForVisibility(record.first_recording);
 		
 
@@ -216,7 +216,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 	     record.verifyFirstExpandableRecording();
 	     record.convertRecordingsListToNames();
 	     driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 		String caption_rec_in_time=player_page.getCaptionInTime("0:00:47");
@@ -255,7 +255,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
 		//15.navigate back to player recording
 		driver.navigate().back();
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 		//16.click on "Courses" and verify course page
 
@@ -268,7 +268,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		System.out.println("11111111111111111111111111111111111111111111111111111111111111111");
 		///18.upload a caption
 		// Upload for first recording target close catpion
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.selectIndexCheckBox(1);
 		record.clickOnRecordingTaskThenEditRecording();
 
@@ -277,7 +277,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 
@@ -287,10 +287,10 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 					System.out.println("2222");
 					break;
 				} else {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 
 		}
@@ -302,7 +302,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
 
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		Robot robot = new Robot();
 		robot.mouseMove(-100, 100);
@@ -314,7 +314,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		//  driver.findElement(By.cssSelector(".jcf-button-content")).click();
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		String path = "WebDriverTest\\workspace\\QualitestAutomation\\resources\\documents\\sync.srt";
 
@@ -328,13 +328,13 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		driver.findElement(By.id("AddCaptioning")).click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		for(int i=0; i<60; i++) {
 			try {
@@ -342,10 +342,10 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 					System.out.println("2222");
 					break;
 				} else {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 
 		}
@@ -357,7 +357,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 
 
 		driver.findElement(By.cssSelector(".btn.btn-default")).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
     //19.play recording again
      	driver.switchTo().frame(0);
 	    player_page.play_button.click();

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -140,7 +140,7 @@ public class PreTest {
 		System.out.println("Current unviersity name: " + university_name);
 
 		// 2. Click on course builder href link
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SelfRegConfig")));
 			
@@ -192,7 +192,7 @@ public class PreTest {
 					driver.switchTo().alert().accept();
 					break;
 				} catch (Exception msg) {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			}
 			
@@ -206,7 +206,7 @@ public class PreTest {
 		
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 	
 		// 2. Click on user builder href link
@@ -218,7 +218,7 @@ public class PreTest {
 				driver.switchTo().frame(0);
 				break;
 			} catch(Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -277,7 +277,7 @@ public class PreTest {
 	
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
@@ -288,7 +288,7 @@ public class PreTest {
 				driver.switchTo().frame(0);
 				break;
 			} catch(Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -297,10 +297,10 @@ public class PreTest {
 			// Search target course name
 			mange_adhoc_course_enrollments.searchAndFilterCourses(created_course_list.get(i));
 			
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			// Click on result first course (the only one) membership button
 			mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
-			Thread.sleep(10000);		
+			Thread.sleep(Page.TIMEOUT_TINY);		
 			
 			if(i == 0) {
 				// Search target user name in membership window
@@ -760,15 +760,15 @@ public class PreTest {
 		System.out.println("6"); 
 		tegrity.loginCoursesByParameter(user1Username);		
 		initializeCourseObject();	
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.selectCourseThatStartingWith("PastCourseA");	
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		wait.until(ExpectedConditions.visibilityOf(record.course_title));
 		String past_courseA = record.course_title.getText().toString();		
 		record.returnToCourseListPage();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.selectCourseThatStartingWith("PastCourseB");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		wait.until(ExpectedConditions.visibilityOf(record.course_title));
 		String past_courseB = record.course_title.getText().toString();		
 		record.returnToCourseListPage();
@@ -776,16 +776,16 @@ public class PreTest {
 		wait.until(ExpectedConditions.visibilityOf(tegrity.usernamefield));
 
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		/// 2.Click the "Course Builder" link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		Thread.sleep(10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		/// 3.Click the "Membership" link related to the course+unenroll
 		/// instructor 1
 		System.out.println("before 3");
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseA, user1Username,
 				mangage_adhoc_courses_membership_window);
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		for (String window : driver.getWindowHandles()) {
 			driver.switchTo().window(window);
@@ -795,7 +795,7 @@ public class PreTest {
 		System.out.println("before 3");
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_courseB, user1Username,
 				mangage_adhoc_courses_membership_window);
-		Thread.sleep(4000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 
 
 		for (String window : driver.getWindowHandles()) {
@@ -804,7 +804,7 @@ public class PreTest {
 		}
 
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.signOut();		
 
 		tegrity.loginCoursesByParameter(SuperUsername);

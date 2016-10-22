@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -79,7 +79,7 @@ public class EditRecordinPropertiesWindow extends Page {
 		try {
 			recording_name.clear();
 			recording_name.sendKeys(target_name);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			// if(recording_name.getText().equals(target_name)) {
 			System.out.println("Recording name changed to: " + target_name);
 			ATUReports.add("Recording name changed.", "Change to: " + target_name,
@@ -119,11 +119,11 @@ public class EditRecordinPropertiesWindow extends Page {
 		try {
 			recording_title.click();
 			System.out.println("clicked on recording title input");
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			recording_title.clear();
 			recording_title.sendKeys(name);
 			System.out.println("enetered new name");
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			save_button.click();
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
 			System.out.println("save succeded");

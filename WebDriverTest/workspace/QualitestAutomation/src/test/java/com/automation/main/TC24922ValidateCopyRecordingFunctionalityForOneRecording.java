@@ -8,7 +8,7 @@ import java.util.Date;
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -165,10 +165,10 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 			// 4. Login as Full Admin
 			if(i_login_as_admin==0) {
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(5000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			} else {
 				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(5000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			
@@ -178,13 +178,13 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 			// Repeat TC for Recordings, Stduent Recording and Tests Tabs
 			for(int recording_type=0; recording_type<3; recording_type++) {
 				// 6. In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dashboard_view_course_list.searchForTargetCourseName(source_course_name);
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 7. Click on that course name
 				admin_dashboard_view_course_list.clickOnFirstCourseLink();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				
 				if(recording_type==1) {
@@ -192,7 +192,7 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				} else if (recording_type==2) {
 					record.clickOnTestsTab();
 				}
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 8. Click on a checkbox of one recording.
 				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -209,7 +209,7 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				// 10. The menu items are displayed.
 				// 11. Click on the menu item "Copy".
 				record.clickOnRecordingTaskThenCopy();
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 12. The copy window displays.
 				boolean is_copy_window_closed = copy.isCopyMenuClosed();
@@ -226,12 +226,12 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				
 				// 13. Click on the text field, and write the name of the (existing) instuctor which belong to the course you are moving the chosen record from.
 				driver.findElement(By.id("members_value")).sendKeys(username);
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 14. The text is written on the field. There is also a dropdown list opened which contains several existing instructor which may match the search.
 				// 15. Click ,on the dropdown list, on the name of the instructor who belongs to this course when it is displayed on the list.
 				driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 16. The chosen name displays on the text field for search (near "list courses" button).
 				if(driver.findElement(By.id("members_value")).getAttribute("value").equals(username)) {
@@ -246,7 +246,7 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				
 				// 17. Click on the button "List Courses".
 				driver.findElement(By.id("SearchButton")).click();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 18. There shall be an informative text displayed below the input field: "Choose a course that you would like to move your selected recording(s) to."
 				copy.verifyChooseACourseThatCopyAndItsPlaceBelowTheInstructorSearchField();
@@ -297,7 +297,7 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				// 24. Click on "Move recording(s)" button.
 				copy.clickOnCopyButton();
 				
-				Thread.sleep(800);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				
 				// 25. The informative message "Recording(s) have been queued for move" shall be displayed.
@@ -322,7 +322,7 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 //				} else if (recording_type==2) {
 //					record.clickOnTestsTab();
 //				}
-//				Thread.sleep(1000);
+//				Thread.sleep(Page.TIMEOUT_TINY);
 				
 					
 				
@@ -363,7 +363,7 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				
 				// 30. The record status ("being copying from") disappeared after a while (the record stays where its at).
 				record.checkStatusExistenceForMaxTTime(360);
-//				Thread.sleep(2000);
+//				Thread.sleep(Page.TIMEOUT_TINY);
 //				List<String> after_moving_complete_recording_list = record.getCourseRecordingList();
 //				
 //				
@@ -393,16 +393,16 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 //				record.courses_link.click();
 //				
 //				// 32. In "All courses" page, search for the course name you moved to.
-//				Thread.sleep(5000);
+//				Thread.sleep(Page.TIMEOUT_TINY);
 //				admin_dashboard_view_course_list.searchForTargetCourseName(destination_course_name);
-//				Thread.sleep(3000);
+//				Thread.sleep(Page.TIMEOUT_TINY);
 //				
 //				// 33. Click on that course name.
 //				admin_dashboard_view_course_list.clickOnFirstCourseLink();
-//				Thread.sleep(3000);	
+//				Thread.sleep(Page.TIMEOUT_TINY);	
 				
 //				driver.navigate().to(destination_course_url);
-//				Thread.sleep(3000);
+//				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 31. On the breadcrumb, click on "courses".
 				
@@ -425,11 +425,11 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				
 				// In "All courses" page, search for Ab course.
 				admin_dashboard_view_course_list.searchForTargetCourseName(destination_course_name);
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 						
 				// Click on that course name.
 				admin_dashboard_view_course_list.clickOnFirstCourseLink();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				
 				
@@ -438,7 +438,7 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				} else if (recording_type==2) {
 					record.clickOnTestsTab();
 				}
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 34. Validate that the recording which you have moved is displayed on the list.
 				// 35. The recording is displayed on the list.
@@ -486,7 +486,7 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				}
 			}
 			
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 40. Logout.
 			record.signOut();

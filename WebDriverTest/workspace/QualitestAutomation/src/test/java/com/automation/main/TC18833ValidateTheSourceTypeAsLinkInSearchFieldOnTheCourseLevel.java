@@ -6,7 +6,7 @@ package com.automation.main;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -132,7 +132,7 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// Upload additional content link
@@ -164,7 +164,7 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			if(type_of_user < 3) {
 				// 3. Open some course.
@@ -174,13 +174,13 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dashboard_view_course_list.searchForTargetCourseName(current_course);
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// Click on that course name.
 				admin_dashboard_view_course_list.clickOnFirstCourseLink();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			
@@ -253,7 +253,7 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 			// 8. Click on title of the link.
 			current_url = driver.getCurrentUrl();
 			search_page.title_urls_list.get(0).click();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 8.1. The website open in new Tab/window.
 			is_website_opened_in_new_tab = false;

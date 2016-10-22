@@ -5,7 +5,7 @@ package com.automation.main.copy_recording;
 import java.util.List;
 import java.text.DateFormat;
 import java.util.Date;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -121,7 +121,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 3. Click the 'Student Recording' tab.
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 4. Select source recording.
 		// 5. Select "Recording Tasks -> Copy" menu item.
@@ -135,9 +135,9 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		System.out.println("Target course: " + targetCourse);
 		
 		// 7. Click "Cancel" button.
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		copy.clickOnCancelButton(record);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		// 8. Verify that recording is not removed current course.
 		record.verifyThatTargetRecordingExistInRecordingList(clickedRecording);
@@ -161,7 +161,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		// 9. Click "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 10. Select the destination course.
 		boolean isTargetCourseClicked = course.clickOnTargetCourseName(targetCourse);
@@ -171,7 +171,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 			System.out.println("Target course name is not clicked: " + targetCourse);
 		}
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 11. Verify that recording wasn't copied.
 		if(record.student_recordings_tab.isDisplayed()) {
@@ -189,7 +189,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 				Assert.assertTrue(true);
 			}
 			
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		} else {
 			record.verifyNoStudentTab();
 		}
@@ -198,7 +198,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 12. Click "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 13. Select the source course.
 		isTargetCourseClicked = course.clickOnTargetCourseName(currentCourse);
@@ -210,7 +210,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 14. Click the 'Student Recording' tab.
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 15. Select source recording.
 		// 16. Select "Recording Tasks -> Copy" menu item.
@@ -271,7 +271,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 				Assert.assertTrue(true);
 			}
 			
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		} else {
 			record.verifyNoStudentTab();
 		}

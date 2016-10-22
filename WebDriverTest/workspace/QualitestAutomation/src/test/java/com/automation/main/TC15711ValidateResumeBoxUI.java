@@ -3,7 +3,7 @@ package com.automation.main;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -135,12 +135,12 @@ public class TC15711ValidateResumeBoxUI {
 		
 		// Logout.
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 2. Login as an INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Click on a certain course.
 		String current_course = course.selectCourseThatStartingWith("Ba");
@@ -168,7 +168,7 @@ public class TC15711ValidateResumeBoxUI {
 		record.clickElement(record.first_recording_title);
 		
 		// 7.1. The "> Resume watching +(slide 2)" box is displayed.
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.verifyWebElementTargetText(record.list_of_resume_buttons.get(0), "Resume Watching (slide 2)");
 
 		// 7.2. The recording chapters are displayed to the user.

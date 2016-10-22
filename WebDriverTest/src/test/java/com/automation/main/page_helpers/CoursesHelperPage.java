@@ -21,7 +21,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -43,6 +43,7 @@ import org.w3c.dom.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.google.common.base.Predicate;
 import com.thoughtworks.selenium.Selenium;
+import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
@@ -110,6 +111,7 @@ public class CoursesHelperPage extends Page {
 	WebElement courseFrame;
 	public ConfirmationMenu confirm_menu;
 	public LoginHelperPage tegrity;
+	public RecordingHelperPage record;
 	
 
 	// Set Property for ATU Reporter Configuration
@@ -123,6 +125,7 @@ public class CoursesHelperPage extends Page {
 		//setPageTitle("Tegrity - Courses");
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
+		record=PageFactory.initElements(driver, RecordingHelperPage.class);
 
 	}
 
@@ -154,7 +157,7 @@ public class CoursesHelperPage extends Page {
 			waitForVisibility(second_course_button);
 			course_name = second_course_button.getText();
 			clickElement(second_course_button);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			System.out.println("Clicked on second course");
 			ATUReports.add("Select course", "Clicked on second course", "Clicked on second course", LogAs.PASSED, null);
 		} catch (Exception e) {
@@ -170,7 +173,7 @@ public class CoursesHelperPage extends Page {
 			waitForVisibility(first_course_button);
 			course_name = first_course_button.getText();
 			clickElement(first_course_button);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			ATUReports.add("Select course", "Clicked on first course", "Course Details page is displayed", LogAs.PASSED,
 					null);
 			Assert.assertTrue(true);
@@ -188,6 +191,7 @@ public class CoursesHelperPage extends Page {
 		List<String> current_course_list = new ArrayList<String>();
 		try{	
 		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElements(course_list));
+		Thread.sleep(Page.TIMEOUT_MEDIUM);
 		}catch(Exception e){
 			
 			
@@ -246,7 +250,7 @@ public class CoursesHelperPage extends Page {
 			waitForVisibility(course_button);
 			course_name = course_button.getText();
 			clickElement(course_button);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			ATUReports.add(" clicked course", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 		} catch (Exception e) {
 			ATUReports.add(" clicked course failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -271,7 +275,7 @@ public class CoursesHelperPage extends Page {
 		
 		for(int index=0; index<5 ; index ++){
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+CourseId+"\").click();");
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			if(isElementPresent(By.id("CourseTitle"))) {
 				System.out.println("successflly select the course.");
 				ATUReports.add("successflly select the course.", LogAs.PASSED, null);
@@ -301,7 +305,7 @@ public class CoursesHelperPage extends Page {
 			} catch (Exception ex) {
 				clicked = handlesClickIsNotVisible(sCourse2);
 				try {
-					Thread.sleep(5000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 					System.out.println("s3.1");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -366,18 +370,18 @@ public class CoursesHelperPage extends Page {
 		for (String course_name : current_course_list) {
 			clickOnTargetCourseName(course_name);
 
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			rec.moveToElementAndClick(rec.course_task_button, driver);
 			if ((rec.verifyElement(rec.course_settings_button))) {
 				course_list_for_which_user_is_instructor.add(course_name);
 			}
 
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			rec.returnToCourseListPage();
 
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 
 		return course_list_for_which_user_is_instructor;
@@ -393,7 +397,7 @@ public class CoursesHelperPage extends Page {
 			//fluentWaitVisibility(first_course_button, 10, 400);
 			WebElement tabParent=past_courses_tab_button.findElement(By.xpath(".."));
 			wait.until(ExpectedConditions.attributeContains(tabParent, "class", "active"));	
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			System.out.println("Click on past course tab.");
 			ATUReports.add("Click on past course tab.", LogAs.PASSED, null);
 		} catch (Exception msg) {
@@ -418,44 +422,37 @@ public class CoursesHelperPage extends Page {
 
 	// This function get string that some course starting with, and select that
 	// course.
-	public String selectCourseThatStartingWith(String name_starting_with)  {	
-	try{	
-		Thread.sleep(1000);
-		System.out.println("select1");
-	    List<String> course_list = getCourseList();
-		System.out.println("select2");
-		String target_course_name = null;				
-		for (String course_name : course_list) {
-			System.out.println(course_name+"Compare to"+name_starting_with);
-			if (course_name.startsWith(name_starting_with)) {
-				System.out.println("select3");
-				target_course_name = course_name;
-				selectCourseByName(target_course_name);
-				// wait.until(ExpectedConditions.textToBePresentInElement(By.id("target_course_name"),
-				// target_course_name));
-				System.out.println("select4");
-				try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+	public String selectCourseThatStartingWith(String name_starting_with) {
+		try {
+			Thread.sleep(Page.TIMEOUT_TINY);
+			System.out.println("select1");
+			List<String> course_list = getCourseList();
+			System.out.println("select2");
+			String target_course_name = null;
+			for (String course_name : course_list) {
+				System.out.println(course_name + "Compare to" + name_starting_with);
+				if (course_name.startsWith(name_starting_with)) {
+					System.out.println("select3");
+					target_course_name = course_name;
+					selectCourseByName(target_course_name);					
+					System.out.println("select4");
+					record.waitForPageToLoad();
+					System.out.println("selected the course: " + target_course_name);
+					ATUReports.add("select the course: " + target_course_name, LogAs.PASSED, null);
+					// wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("CourseTitle"),
+					// target_course_name));
+					return target_course_name;
 				}
-				System.out.println("selected the course: " + target_course_name);
-				ATUReports.add("select the course: " + target_course_name, LogAs.PASSED, null);
-				// wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("CourseTitle"),
-				// target_course_name));
-				return target_course_name;
 			}
-		}
 
-		return target_course_name;
-	}catch (Exception e){
-		ATUReports.add("Selecting a course failed (screenshot)", e.getMessage(),
-				LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
-		e.printStackTrace();
-		Assert.assertTrue(false);
-		return null;
-	}
+			return target_course_name;
+		} catch (Exception e) {
+			ATUReports.add("Selecting a course failed (screenshot)", e.getMessage(), LogAs.FAILED,
+					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
+			Assert.assertTrue(false);
+			return null;
+		}
 	}
 
 	// This function get two courses (starting with), first the source, second
@@ -496,13 +493,13 @@ public class CoursesHelperPage extends Page {
 		}
 		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 		wait.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		while (!record_helper_page.check_all_checkbox.isSelected()) {
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 			new WebDriverWait(driver, 10)
 					.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
 			clickElement(record_helper_page.check_all_checkbox);		 					
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		if ((type_of_recordings == 0) || (type_of_recordings == 2) ||  (type_of_recordings == 3)) {
 			if(!record_helper_page.checkIfThereAreRecordingsInTab()){
@@ -539,7 +536,7 @@ public class CoursesHelperPage extends Page {
 				System.out.println("CopyHandleException" + i);
 				i++;
 				driver.navigate().refresh();
-				Thread.sleep(5000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				/*	WebElement div = driver.findElement(By.xpath("//*[@id='main']"));
 				Actions builder = new Actions(driver);
 				builder.moveToElement(div, 10, 10).click().build().perform();*/
@@ -585,13 +582,13 @@ public class CoursesHelperPage extends Page {
 		}
 		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 		wait.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		while (!record_helper_page.check_all_checkbox.isSelected()) {
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 			new WebDriverWait(driver, 10)
 					.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
 			clickElement(record_helper_page.check_all_checkbox);		 					
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		if ((type_of_recordings == 0) || (type_of_recordings == 2) ||  (type_of_recordings == 3)) {
 			if(!record_helper_page.checkIfThereAreRecordingsInTab()){
@@ -623,6 +620,7 @@ public class CoursesHelperPage extends Page {
 				System.out.println("CopyHandle2");
 				confirmation_menu.clickOnOkButton();
 				System.out.println("CopyHandle3");
+				
 				copySuccess = true;
 			} catch (Exception e) {
 				System.out.println("CopyHandleException" + i+" e:"+e.getMessage());
@@ -631,7 +629,7 @@ public class CoursesHelperPage extends Page {
 				new WebDriverWait(driver, 10)
 						.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
 				clickElement(record_helper_page.check_all_checkbox);		 					
-				Thread.sleep(1000);				
+				Thread.sleep(Page.TIMEOUT_TINY);				
 				/*	WebElement div = driver.findElement(By.xpath("//*[@id='main']"));
 				Actions builder = new Actions(driver);
 				builder.moveToElement(div, 10, 10).click().build().perform();*/
@@ -759,19 +757,21 @@ public class CoursesHelperPage extends Page {
 		}
 
 		if ((type_of_recordings == 0) || (type_of_recordings == 2)) {
+			recording_helper_page.checkTempLockStatusExistenceForMaxTTime(450);
 			recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordingsAndUncheckUndeleteableRecordings();
 			recording_helper_page.deleteAllRecordings(delete_menu);
 		} else if ((type_of_recordings == 1) || (type_of_recordings == 3)) {
 			if (type_of_recordings == 3) {
+				recording_helper_page.checkTempLockStatusExistenceForMaxTTime(450);
 				recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordingsAndUncheckUndeleteableRecordings();
 			} 
-
+			if(recording_helper_page.getCoursAdditionalContentList().size()>0){
 			new WebDriverWait(driver, 5)
 					.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			recording_helper_page.SelectOneCheckBoxOrVerifyAlreadySelected(recording_helper_page.check_all_checkbox);
-			Thread.sleep(500);
-			// Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
+			// Thread.sleep(Page.TIMEOUT_TINY);
 			// wait.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
 			// recording_helper_page.check_all_checkbox.click();
 			try {
@@ -781,14 +781,14 @@ public class CoursesHelperPage extends Page {
 				} else if (type_of_recordings == 3) {
 					recording_helper_page.clickOnRecordingTaskThenDelete();
 				}
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				delete_menu.clickOnDeleteButton();
 			} catch (Exception msg) {
 				System.out.println("There is no recordings in target course.");
 			}
 		}
-
-		recording_helper_page.returnToCourseListPage(this);
+		}
+		recording_helper_page.returnToCourseListPage();
 
 		waitForVisibility(course_list.get(0));
 	}catch(Exception e){
@@ -1365,7 +1365,7 @@ public class CoursesHelperPage extends Page {
 			if (number_of_courses > 0) {
 				String x_recordings_y_new = driver.findElement(By.id("RecordingsCounter1")).getText();
 				if (x_recordings_y_new.split(" ").length == 3) {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				} else {
 					to_wait_until_data_loads = false;
 				}
@@ -1598,6 +1598,7 @@ public class CoursesHelperPage extends Page {
 
 	// Verify that the 'Past Courses' tab is not displayed
 	public void verifyPastCoursesTabNotDisplayed() {
+		waitForVisibility(past_courses_tab_button);
 		if (past_courses_tab_button.isDisplayed()) {
 			System.out.println("Not verified that the Past Courses tab is not displayed.");
 			ATUReports.add("Verified that the Past Courses tab is not displayed.", "True.", "False.", LogAs.FAILED,
@@ -1692,11 +1693,11 @@ public class CoursesHelperPage extends Page {
 					LogAs.PASSED, null);
 		} else {
 			clickOnPublicCoursesTab();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			List<String> CoursesList = getCourseList();
 			courses = new String[CoursesList.size()];
 			courses = CoursesList.toArray(courses);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			verifyCourseNotExist(target_course);
 		}
 	}catch (Exception e){
@@ -1739,7 +1740,7 @@ public class CoursesHelperPage extends Page {
 			record_helper_page.clickOnTestsTab();
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		// wait.until(ExpectedConditions.visibilityOf(record_helper_page.first_recording_title));
 
@@ -1753,11 +1754,11 @@ public class CoursesHelperPage extends Page {
 
 		// copy_menu.selectTargetCourseFromCourseList(destination_course_name);
 		copy_menu.selectTargetCourseFromCourseListThatStartWith(des_start_with);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		copy_menu.clickOnCopyButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		confirmation_menu.clickOnOkButton();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	/*	if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
 			record_helper_page.checkStatusExistenceForMaxTTime(600);
 		}*/
@@ -1799,13 +1800,13 @@ public class CoursesHelperPage extends Page {
 			CopyMenu copy, ConfirmationMenu confirm) throws InterruptedException {
 		String target_course = selectCourseThatStartingWith(target_course_start_with);
 
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		if (record.getNumberOfRecordings() > 0) {
 			return target_course;
 		} else {
 			record.returnToCourseListPage();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			copyOneRecordingFromCourseStartWithToCourseStartWithOfType(recording_bank_start_with,
 					target_course_start_with, 0, record, copy, confirm);
 		}
@@ -1827,8 +1828,8 @@ public class CoursesHelperPage extends Page {
 			linkTexts[i] = e.getText();
 			i++;
 		}
-		/*waitForVisibility(active_courses_tab_button);
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));*/
+		waitForVisibility(active_courses_tab_button);
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));
 		return linkTexts;
 	}
 

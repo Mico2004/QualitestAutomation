@@ -3,7 +3,7 @@ package com.automation.main.public_courses;
 
 import java.util.Date;
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -142,11 +142,11 @@ public class TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNot
 		initializeCourseObject();
 		
 		// 2. On the University Course settings make sure all of the "Make this Course publicy visible" is locked and off.
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicSelected();
 		admin_course_settings_page.makeSureThatOnOffMakeThisCoursePublicUnSelected();
@@ -177,11 +177,11 @@ public class TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNot
 		tegrity.loginAdmin("Admin");
 		
 		// 10. On the University Course settings make sure all of the "Make this Course publicy visible" is unlocked and off.
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
 		admin_course_settings_page.makeSureThatOnOffMakeThisCoursePublicUnSelected();

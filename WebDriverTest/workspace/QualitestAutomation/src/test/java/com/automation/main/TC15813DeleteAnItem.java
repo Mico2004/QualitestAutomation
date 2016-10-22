@@ -2,7 +2,7 @@ package com.automation.main;
 
 
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -105,7 +105,7 @@ public class TC15813DeleteAnItem {
 		
 		// 3. Click the "Additional Content" tab.
 		record.clickOnAdditionContentTab();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 4. Select content item.
 		record.selectIndexCheckBox(1);
@@ -131,14 +131,14 @@ public class TC15813DeleteAnItem {
 		
 		// 10. Delete window is closed.
 		delete_menu.verifyDeleteWindowNotDisplayed();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 11. Verify that selected content item is deleted.
 		record.verifyTargetAdditionalContentIncludingTypeNotInAdditionalContentList(target_additional_content, target_additional_content_type);
 		
 		// 12. Click the "Sign Out" link.
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 13. Login as a STUDENT (User4).
 		tegrity.loginCourses("User4");// log in courses page
@@ -149,7 +149,7 @@ public class TC15813DeleteAnItem {
 		
 		// 15. Click the "Additional Content" tab.
 		record.clickOnAdditionContentTab();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 16. Verify that deleted content item is not displayed.
 		record.verifyTargetAdditionalContentIncludingTypeNotInAdditionalContentList(target_additional_content, target_additional_content_type);

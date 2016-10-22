@@ -28,7 +28,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -275,7 +275,7 @@ public class RecordingHelperPage extends Page {
 
 	public void deleteAllRecordings(DeleteMenu delete_menu) throws InterruptedException {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
 
 			int number_of_recordings_in_target_course = getNumberOfRecordings();
@@ -295,9 +295,9 @@ public class RecordingHelperPage extends Page {
 				clickOnRecordingTaskThenDelete();				
 				delete_menu.clickOnDeleteButton();
 				wait.until(ExpectedConditions.visibilityOf(confirm_menu.ok_button));						
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				confirm_menu.ok_button.click();		
-				Thread.sleep(1000);;
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		} catch (Exception msg) {
 			System.out.println("Failed to check the checkbox and delete all recordings");
@@ -345,7 +345,7 @@ public class RecordingHelperPage extends Page {
 				return;
 			}
 			System.out.println("Status Check iteration"+i);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 
 		System.out.println("There is still status for some recording.");
@@ -385,7 +385,7 @@ public class RecordingHelperPage extends Page {
 	public boolean checkExistenceOfStatusInRecordings() throws InterruptedException {
 		int i = 1;
 		System.out.println("Begin checkExistenceOfStatusInRecordings");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {			    
 				WebElement recordStatus =getStaleElem(By.id("RecordingStatus"+ Integer.toString(i)), driver);
 				//wait.until(ExpectedConditions.visibilityOf(recordStatus));
@@ -405,7 +405,7 @@ public class RecordingHelperPage extends Page {
 					
 			wait.until(ExpectedConditions.visibilityOf(courses_link));		
 			courses_link.click();			
-			Thread.sleep(2000);		
+			Thread.sleep(Page.TIMEOUT_TINY);		
 			ATUReports.add("Clicked on Courses link.", "Go back to courses page",		
 					"Go back to courses page", LogAs.PASSED, null);		
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ActiveCourses"))));
@@ -445,7 +445,7 @@ public class RecordingHelperPage extends Page {
 		// "First checkbox is not selected",
 		// LogAs.FAILED, null);
 		// Assert.assertTrue(false);
-		// Thread.sleep(1000);
+		// Thread.sleep(Page.TIMEOUT_TINY);
 		// }
 		// }
 		
@@ -458,11 +458,11 @@ public class RecordingHelperPage extends Page {
 		System.out.println("Click on title in index: " + index);
 	      waitForVisibility(driver.findElement(By.xpath("//*[@id='Recording" + Integer.toString(index) + "']/strong")));
 	       driver.findElement(By.xpath("//*[@id='Recording" + Integer.toString(index) + "']/strong")).click();
-	        Thread.sleep(1000);
+	        Thread.sleep(Page.TIMEOUT_TINY);
 	        if(driver instanceof InternetExplorerDriver) {
 	        	if(!isElementPresent(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap"))){
 	               wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='Recording" + Integer.toString(1) + "']/strong")));
-	               Thread.sleep(1000);
+	               Thread.sleep(Page.TIMEOUT_TINY);
 	               //driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
 	             driver.findElement(By.xpath("html/body/google-analytics/google-analytics/div[1]/div[2]/div[3]/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
 	           }    
@@ -507,7 +507,7 @@ public String getSecondRecordingTitleTest() {
 		int time_counter = 0;
 		while (first_recording_status.getText().contains("Being copied from")) {
 			time_counter++;
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			if (time_counter > 60) {
 				System.out.println("Timeout - Being copied from still appears after 60 seconds");
@@ -552,7 +552,7 @@ public String getSecondRecordingTitleTest() {
 			}
 			moveToElementAndClick(course_tasks_button, driver);// solution to solve hover and click
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 
 				podcast_button.click();
@@ -579,7 +579,7 @@ public String getSecondRecordingTitleTest() {
 			try { // to
 				course_settings_button.click();
 
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				if (isElementPresent(By.id("CourseSettings"))) {
 					ATUReports.add("Clicked on course settings.", LogAs.PASSED, null);
 					System.out.println("Clicked on course settings.");
@@ -592,7 +592,7 @@ public String getSecondRecordingTitleTest() {
 
 			}
 		}
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		try {
 
 			course_settings_button.click();
@@ -613,10 +613,10 @@ public String getSecondRecordingTitleTest() {
 		for (int i = 0; i < 10; i++) {
 			recording_tasks_button.sendKeys(Keys.TAB);// solution
 			try { // to
-				Thread.sleep(500);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				delete_button.click(); // solve
 
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				if (isElementPresent(By.id("ModalDialogHeader"))) {
 					System.out.println("Delete window displayed");
 					ATUReports.add("Select Recording Tasks -> Delete menu items", "Delete window is displayed",
@@ -656,10 +656,10 @@ public String getSecondRecordingTitleTest() {
 			System.out.println("recording_tasks_button.sendKeys(Keys.TAB)");
 			
 		try {
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			copy_button.click(); // solve
 			System.out.println("copy_button.click()");
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			waitForVisibility(driver.findElement(By.id("ModalDialogHeader")));
 			if (driver.findElement(By.id("ModalDialogHeader")).getText().equals("Copy")) {
 				System.out.println("Copy menu is displayed.");
@@ -786,7 +786,7 @@ public String getSecondRecordingTitleTest() {
 				builder.click();					
 				wait.until(ExpectedConditions.visibilityOf(courses_link));
 				courses_link.click();		
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				break;
 			} catch (Exception msg) {
 		
@@ -803,7 +803,7 @@ public String getSecondRecordingTitleTest() {
 					courses_title = driver.findElement(By.id("CoursesHeading"));
 				} catch(Exception msg) {
 					System.out.println("b8");
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			}
 
@@ -841,7 +841,7 @@ public String getSecondRecordingTitleTest() {
 			Assert.assertTrue(false);
 		}
 
-		Thread.sleep(8000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function get recording name.
@@ -890,7 +890,7 @@ public String getSecondRecordingTitleTest() {
 		// ATUReports.add("one checkboxe is not selected", LogAs.FAILED, new
 		// CaptureScreen(ScreenshotOf.DESKTOP));
 		// }
-		// Thread.sleep(1000);
+		// Thread.sleep(Page.TIMEOUT_TINY);
 		// Assert.assertTrue(check.isSelected());
 
 	}
@@ -901,12 +901,12 @@ public String getSecondRecordingTitleTest() {
 		// try {
 		// waitForVisibility(check);
 		// check.click();
-		// Thread.sleep(1000);
+		// Thread.sleep(Page.TIMEOUT_TINY);
 		// System.out.println("one checkboxe is not selected");
 		// ATUReports.add("one checkboxe is not selected", LogAs.PASSED, new
 		// CaptureScreen(ScreenshotOf.DESKTOP));
 		// } catch (Exception e) {
-		// Thread.sleep(1000);
+		// Thread.sleep(Page.TIMEOUT_TINY);
 		// System.out.println("one checkboxe is selected");
 		// ATUReports.add("one checkboxe is selected", LogAs.FAILED, new
 		// CaptureScreen(ScreenshotOf.DESKTOP));
@@ -966,7 +966,7 @@ public String getSecondRecordingTitleTest() {
 			copy_button.click();// try to click button if clickable assert false
 								// if not clickable
 			Assert.assertTrue(false);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			System.out.println("copy button is enabled");
 			ATUReports.add("copy button is enabled", LogAs.FAILED, null);
 		} catch (Exception e) {
@@ -992,7 +992,7 @@ public String getSecondRecordingTitleTest() {
 		Assert.assertTrue(assertion);// compare
 										// 2
 										// colors
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 	}
 
@@ -1009,7 +1009,7 @@ public String getSecondRecordingTitleTest() {
 				Assert.assertTrue(true);
 				return true;
 			}
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 		}
 
@@ -1033,7 +1033,7 @@ public String getSecondRecordingTitleTest() {
 				return true;
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		System.out.println("Recordings in index: " + index + " status is: " + is_not);
 		ATUReports.add("Recordings in index: " + index + " status is: " + is_not, LogAs.FAILED, null);
@@ -1082,10 +1082,10 @@ public String getSecondRecordingTitleTest() {
 			recording_tasks_button.sendKeys(Keys.TAB);// solution // to
 
 			try {
-				Thread.sleep(500);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				move_button_on_recording_tasks_menu.click();
 				// check if list of courses are present
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				waitForVisibility(driver.findElement(By.id("ModalDialogHeader")));
 				if (driver.findElement(By.id("ModalDialogHeader")).getText().equals("Move")) {
 					System.out.println("Move menu is displayed.");
@@ -1095,7 +1095,7 @@ public String getSecondRecordingTitleTest() {
 					return;
 				}
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 
 		}
@@ -1146,7 +1146,7 @@ public String getSecondRecordingTitleTest() {
 					break;
 				}
 			} catch (Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -1267,12 +1267,12 @@ public String getSecondRecordingTitleTest() {
 		       if(driver instanceof InternetExplorerDriver) {
 		           if(!isElementPresent(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap"))){
 		               wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='Recording" + Integer.toString(1) + "']/strong")));
-		               Thread.sleep(1000);
+		               Thread.sleep(Page.TIMEOUT_TINY);
 		               //driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
 		             driver.findElement(By.xpath("html/body/google-analytics/google-analytics/div[1]/div[2]/div[3]/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")).click();
 		           }
 		       }
-		       Thread.sleep(1000);
+		       Thread.sleep(Page.TIMEOUT_TINY);
 		       if (first_video_recording.isDisplayed()) {
 		           ATUReports.add("video recording was displayed", LogAs.PASSED, null);
 		           System.out.println("video recording was displayed");
@@ -1288,7 +1288,7 @@ public String getSecondRecordingTitleTest() {
 	public void pressViewButtonAndSelect(String choice) throws InterruptedException {
 
 		moveToElementAndClick(view_buttonTest, driver);
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		if(driver instanceof InternetExplorerDriver) {
 		// rec.copy_button.click();
@@ -1501,7 +1501,7 @@ public String getSecondRecordingTitleTest() {
 		// try { // to
 		// move_button.click(); // solve
 		//
-		// Thread.sleep(1000);
+		// Thread.sleep(Page.TIMEOUT_TINY);
 		// if (isElementPresent(By.id("ModalDialogHeader"))) {
 		// System.out.println("Move menu confirmed");
 		// ATUReports.add("click succeeded", LogAs.PASSED, null);
@@ -1531,7 +1531,7 @@ public String getSecondRecordingTitleTest() {
 		// try { // to
 		// move_button.click(); // solve
 		//
-		// Thread.sleep(1000);
+		// Thread.sleep(Page.TIMEOUT_TINY);
 		// if (isElementPresent(By.id("ModalDialogHeader"))) {
 		// System.out.println("Move menu confirmed");
 		// ATUReports.add("click succeeded", LogAs.PASSED, null);
@@ -1644,7 +1644,7 @@ public String getSecondRecordingTitleTest() {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 
 				copy_button.click();
@@ -1688,7 +1688,7 @@ public String getSecondRecordingTitleTest() {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 
 				move_button.click();
@@ -1845,7 +1845,7 @@ public String getSecondRecordingTitleTest() {
 		Assert.assertTrue(assertion);// compare
 										// 2
 										// colors
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 	}
 
@@ -1892,7 +1892,7 @@ public String getSecondRecordingTitleTest() {
 		while (isElementPresent(By.id("RecordingStatus1"))){
 			if(first_recording_status.getText().contains("Being moved from")) {
 				time_counter++;
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 
 			if (time_counter > 240) {
 				System.out.println("Timeout - Being moved from still appears after 60 seconds");
@@ -1918,7 +1918,7 @@ public String getSecondRecordingTitleTest() {
 //			try {
 //				delete_button.click();
 //
-//				Thread.sleep(1000);
+//				Thread.sleep(Page.TIMEOUT_TINY);
 //				if (isElementPresent(By.id("ModalDialogHeader"))) {
 //					System.out.println("Delete menu confirmed");
 //					ATUReports.add("click succeeded", LogAs.PASSED, null);
@@ -1980,7 +1980,7 @@ public String getSecondRecordingTitleTest() {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 				content_tasks_delete_button.click();
 				ATUReports.add("Click on Content Tasks then Delete.", "Click succeeded.", "Click succeeded.",
@@ -2000,9 +2000,9 @@ public String getSecondRecordingTitleTest() {
 			recording_tasks_button.sendKeys(Keys.TAB);
 			// solution to solve
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				edit_rec_properties_button.click();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				if (isElementPresent(By.id("ModalDialogHeaderWrap"))) {
 					System.out.println("Edit recording properties menu confirmed");
 					ATUReports.add("click succeeded", LogAs.PASSED, null);
@@ -2149,9 +2149,9 @@ public String getSecondRecordingTitleTest() {
 			Robot robot = new Robot();
 			robot.delay(1000);
 			robot.mouseMove(-1000, 0);
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			moveToElementAndClick(course_tasks_button, driver);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			if ((upload_recording.isDisplayed()) && (Add_Additional_Content_File.isDisplayed())
 					&& (upload_audio_file.isDisplayed()) && (upload_video_file.isDisplayed())
 					&& (get_live_webcast.isDisplayed()) && (Add_Additional_Content_Link.isDisplayed())) {
@@ -2187,12 +2187,12 @@ public String getSecondRecordingTitleTest() {
 			checkbox_element.click();
 		}
 		toEditRecordingPropertiesMenu();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		erp_window.changeOwner(new_owner);
 
 		erp_window.save_button.click();
 
-		Thread.sleep(11000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		System.out.println("before ok");
 		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
@@ -2358,20 +2358,20 @@ public String getSecondRecordingTitleTest() {
 		robot.delay(3000);
 		robot.mouseMove(0, -100);
 		/// clickOnAdditionContentTab();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course_tasks_button.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		Add_Additional_Content_File.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		select_upload_additional_file.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String fullPathToFile = "src\\test\\resources\\additional_file.txt"; // System.getProperty("user.dir")																										//// +
 																												//// "\\src\\main\\resources\\ImsImportDataCreation.xml";
 
 		uploadFile(fullPathToFile);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		add_additional_file_button.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		confirm.clickOnOkButton();
 	}
 
@@ -2380,11 +2380,11 @@ public String getSecondRecordingTitleTest() {
 		Robot robot = new Robot();
 		robot.delay(3000);
 		robot.mouseMove(0, -100);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course_tasks_button.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		add_additional_content_file.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 	}
 	
@@ -2424,7 +2424,7 @@ public String getSecondRecordingTitleTest() {
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 
@@ -2536,7 +2536,7 @@ public String getSecondRecordingTitleTest() {
 				return true;
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		System.out.println("additional content file in index: " + index + " status is: " + is_not);
 		ATUReports.add("additional content file in index: " + index + " status is: " + is_not, LogAs.FAILED, null);
@@ -2558,10 +2558,10 @@ public String getSecondRecordingTitleTest() {
 		for (int i = 0; i < 10; i++) {
 			recording_tasks_button.sendKeys(Keys.TAB);// solution
 			try { // to
-				Thread.sleep(500);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				publish_button.click(); // solve
 
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				if (isElementPresent(By.id("ModalDialogHeader"))) {
 					System.out.println("Publish window displayed");
 					ATUReports.add("Select Recording Tasks -> Publish item.", "Publish window is displayed.",
@@ -2668,7 +2668,7 @@ public String getSecondRecordingTitleTest() {
 		for (int i = 0; i < current_recording_list.size(); i++) {
 			if (current_recording_list.get(i).equals(target_recording)) {
 				clickOnRecordingTitleInIndex(i + 1);
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 				break;
 			}
@@ -2849,7 +2849,7 @@ public String getSecondRecordingTitleTest() {
 						System.out.println("additional content file found");
 						ATUReports.add("additional content file found", LogAs.PASSED, null);
 						Assert.assertTrue(true);
-						Thread.sleep(3000);
+						Thread.sleep(Page.TIMEOUT_TINY);
 						return;											
 				}			
 			}
@@ -2946,7 +2946,7 @@ public String getSecondRecordingTitleTest() {
 	// verify additional content file name is not displayed in additional
 	// content tab list
 	public void verifyNoAdditionalContentFileName(String name) throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		convertAdditionalContantListToNames();
 		for (String file_name : additional_content_list_names) {
 
@@ -2987,11 +2987,11 @@ public String getSecondRecordingTitleTest() {
 		Robot robot = new Robot();
 		robot.delay(3000);
 		robot.mouseMove(0, -100);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course_tasks_button.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		add_additional_content_link.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 	}
 
@@ -3000,11 +3000,11 @@ public String getSecondRecordingTitleTest() {
 		Robot robot = new Robot();
 		robot.delay(3000);
 		robot.mouseMove(0, -100);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course_tasks_button.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course_settings_button.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 	}
 
@@ -3105,7 +3105,7 @@ public String getSecondRecordingTitleTest() {
 			recording_tasks_button.sendKeys(Keys.TAB);
 			try {			
 				edit_rec_button.click();
-				Thread.sleep(3000);	
+				Thread.sleep(Page.TIMEOUT_TINY);	
 				//check if we can see the cut element if we can we moved to the edit record page
 				if (isElementPresent(By.xpath(".//*[@id='main']/div/div[1]/ul/li[1]/a"))) {
 					ATUReports.add("Clicked on Recording then Edit Recording.", "True.", "True.", LogAs.PASSED, null);
@@ -3113,13 +3113,13 @@ public String getSecondRecordingTitleTest() {
 					break;
 				}else {
 					moveToElementAndClick(recording_tasks_button, driver);
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			} catch (Exception e) {
 				}
 		}
 
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 	}
 
@@ -3129,7 +3129,7 @@ public String getSecondRecordingTitleTest() {
 			if (getCourseRecordingList().size() == 0) {
 				break;
 			} else {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 	}
@@ -3142,7 +3142,7 @@ public String getSecondRecordingTitleTest() {
 			System.out.println("clicked on tab");
 			ATUReports.add("failed clicking on tab", " click tab", "tab clicked", "tab clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			try {
 				
@@ -3393,7 +3393,7 @@ public String getSecondRecordingTitleTest() {
 			}
 		}
 
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String rss_url_xml = "view-source:" + current;
 		if(driver instanceof InternetExplorerDriver) {
 			driver = new ChromeDriver();
@@ -3468,7 +3468,7 @@ public String getSecondRecordingTitleTest() {
 			}
 		}
 
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String podcast_url_xml = "view-source:" + current;
 		if(driver instanceof InternetExplorerDriver){
 			driver = new ChromeDriver();
@@ -3668,7 +3668,7 @@ public String getSecondRecordingTitleTest() {
 		copyMenu.clickOnCopyButton();
 
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			waitForVisibility(driver.findElement(By.id("ModalDialogHeader")));
 			if (driver.findElement(By.id("ModalDialogHeader")).getText().equals("Copy"))// check if
 			{
@@ -3757,7 +3757,7 @@ public String getSecondRecordingTitleTest() {
 		waitForVisibility(recording_tasks_button);
 		moveToElementAndClick(recording_tasks_button, driver);
 		tag_button.click(); // solve
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		try {
 
 			waitForVisibility(driver.findElement(By.id("ModalDialogHeader")));
@@ -3809,7 +3809,7 @@ public String getSecondRecordingTitleTest() {
 							break;
 						}
 			} catch (Exception msg) {
-				Thread.sleep(500);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		return additional_content_type;
@@ -3869,7 +3869,7 @@ public String getSecondRecordingTitleTest() {
 	public void verifyTargetListOfOptionIsTheOnlyOptionsWhichEnabledInRecordingTaskMenu(List<String> target_option_list)
 			throws InterruptedException {
 		moveToElement(recording_tasks_button, driver).perform();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		String[] all_options = driver.findElements(By.cssSelector(".menu-container>.dropdown-menu")).get(3).getText()
 				.split("\n");
@@ -3945,7 +3945,7 @@ public String getSecondRecordingTitleTest() {
 		int time_counter = 0;
 		while (first_recording_status.getText().contains("Moving/Copying")) {
 			time_counter++;
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			if (time_counter > 120) {
 				System.out.println("Timeout - Moving/Copying still appears after 120 seconds");
@@ -4040,7 +4040,7 @@ public String getSecondRecordingTitleTest() {
 				Assert.assertTrue(false);
 			}
 			move_to_element.perform();
-			Thread.sleep(100);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		System.out.println("It is possible to scroll the recordings list page.");
 		ATUReports.add("It is possible to scroll the recording list page.", "True.", "False.", LogAs.PASSED, null);
@@ -4407,7 +4407,7 @@ public String getSecondRecordingTitleTest() {
 		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {
 			i++;
 			if(isElemenetDisplayed(By.id(("ItemStatus")+ Integer.toString(i)))){		
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				WebElement el = getStaleElem(By.id("ItemStatus" + Integer.toString(i)),driver);
 				String current_element = el.getText();	
 			if ((!current_element.equals("Available"))) {

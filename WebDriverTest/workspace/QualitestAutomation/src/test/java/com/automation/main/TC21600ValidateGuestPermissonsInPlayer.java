@@ -4,7 +4,7 @@ import java.util.List;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -124,10 +124,10 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 		    
 		    //make sure that we have public tab
 		    tegrity.loginAdmin("Admin");
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 		    admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
-			Thread.sleep(2000);		
+			Thread.sleep(Page.TIMEOUT_TINY);		
 			
 			admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
 			admin_course_settings_page.clickOnSaveButton();
@@ -148,11 +148,11 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 			if(!(driver instanceof InternetExplorerDriver)) {
 				record.clickOnRecordingsTab();
 			}
-			 Thread.sleep(2000);	 
+			 Thread.sleep(Page.TIMEOUT_TINY);	 
 			 //6.Click on some recording
 			 record.verifyFirstExpandableRecording();
 			 driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			 Thread.sleep(15000);
+			 Thread.sleep(Page.TIMEOUT_TINY);
 		//	 player_page.verifyTimeBufferStatusForXSec(10);// check source display
 			 ///// to go back to crecording window handler
 		
@@ -163,7 +163,7 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 				 driver.switchTo().window(handler);
 				
 				 }
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.verifyTimeBufferStatusForXSec(5);
 			 for (String handler : driver.getWindowHandles()) {
 				 driver.switchTo().window(handler);

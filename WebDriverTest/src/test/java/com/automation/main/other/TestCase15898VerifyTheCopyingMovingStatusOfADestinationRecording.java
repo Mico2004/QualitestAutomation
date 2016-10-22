@@ -11,7 +11,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -118,7 +118,7 @@ DesiredCapabilities capability;
 		String selected_recording_name = record.getFirstRecordingTitle();
 		System.out.println("Record to select: " + selected_recording_name);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
 		
@@ -163,7 +163,7 @@ DesiredCapabilities capability;
 		// 8. While recording is being copied, click the "Courses" link at the breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(800);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9. Select destination course.
 		course.selectTargetCourse(target_course);

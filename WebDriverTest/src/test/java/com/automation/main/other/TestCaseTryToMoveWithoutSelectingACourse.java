@@ -10,7 +10,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -130,7 +130,7 @@ public class TestCaseTryToMoveWithoutSelectingACourse {
 		// 5. Click "Move Recording(s)" button without selecting a course.
 		move_window.clickOnMoveRecordings();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 6. Click "OK" button + Message box "A course must be selected." is displayed

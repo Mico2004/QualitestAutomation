@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -138,12 +138,12 @@ public class TCase22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldR
 		course.waitForVisibility(course.sign_out);
 	
 		// 3.Click on course
-		Thread.sleep(1500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String course_name=course.selectCourseThatStartingWith("Ab");
 
 		/// 4.change Recording name
 		record.waitForVisibility(record.getCheckbox());
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.getCheckbox().click();
 		record.toEditRecordingPropertiesMenu();
 		erp_window.waitForVisibility(erp_window.save_button);
@@ -158,7 +158,7 @@ public class TCase22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldR
 		///6.select course by name
 		
 		course.waitForVisibility(course.first_course_button);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		initializeCourseObject();
 		course.selectCourseByName(course_name);
 		
@@ -194,13 +194,13 @@ public class TCase22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldR
 		course.waitForVisibility(course.sign_out);
 	
 		// 12.Click on course
-		Thread.sleep(1500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		initializeCourseObject();
 		course.selectCourseByName(course_name);
 
 		/// 13.change Recording name
 		record.waitForVisibility(record.getCheckbox());
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.getCheckbox().click();
 		record.toEditRecordingPropertiesMenu();
 		erp_window.waitForVisibility(erp_window.save_button);
@@ -215,7 +215,7 @@ public class TCase22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldR
 		///6.select course by name
 		
 		course.waitForVisibility(course.first_course_button);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		initializeCourseObject();
 		course.selectCourseByName(course_name);
 	    

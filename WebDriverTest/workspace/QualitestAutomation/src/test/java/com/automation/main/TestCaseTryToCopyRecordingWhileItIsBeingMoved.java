@@ -10,7 +10,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -136,7 +136,7 @@ public class TestCaseTryToCopyRecordingWhileItIsBeingMoved {
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9. Message box is closed.
 		boolean is_closed = confirm_menu.isConfirmationMenuClosed();
@@ -171,7 +171,7 @@ public class TestCaseTryToCopyRecordingWhileItIsBeingMoved {
 		record.selectFirstCheckbox();
 		record.clickOnRecordingTaskThenCopy();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 13. Message box "Cannot copy in-process or failed recordings" is displayed.
 		// 14. Click "OK" button.

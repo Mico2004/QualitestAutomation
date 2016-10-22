@@ -8,7 +8,7 @@ import javax.xml.xpath.XPath;
 import org.apache.xalan.xsltc.compiler.sym;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -107,7 +107,7 @@ public class AdvancedServiceSettingsPage extends Page {
 				eula_checkbox.click();
 				eula_checkbox.sendKeys(Keys.TAB);
 				driver.switchTo().frame(1);
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				element = driver.findElement(By.xpath("/html/body"));
 				element.clear();
 				element.sendKeys("hello");
@@ -275,9 +275,9 @@ public class AdvancedServiceSettingsPage extends Page {
 	public void clickOnOkbutton() {
 		clickElement(ok);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		} catch(Exception msg) {
-			System.out.println("Fail to Thread.sleep(1000).");
+			System.out.println("Fail to Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		clickElement(driver.findElement(By.cssSelector(".btn.btn-default")));
 		

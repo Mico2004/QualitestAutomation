@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -160,7 +160,7 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			
 			///4.Click on the first chapter
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			// 5.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 
@@ -169,7 +169,7 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 	        String bookmark_to_add=sdf.format(date);
-	        Thread.sleep(1000);
+	        Thread.sleep(Page.TIMEOUT_TINY);
 			player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
 	        
 	        
@@ -178,18 +178,18 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			}
 			/// 6.sign out super user
 			record.signOut();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			tegrity.waitForVisibility(tegrity.passfield);
 
 			// 2.login as guest
 			tegrity.loginAsguest();
 			course.waitForVisibility(course.sign_out);
 			// 3.Click on course link
-			Thread.sleep(1500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			course.selectCourseByName(course_name);
 			
 			/// 4.Click on one of the Recording link
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.waitForVisibility(record.first_recording);
 			record.convertRecordingsListToNames();
 			String rec=record.recording_list_names.get(0);
@@ -197,7 +197,7 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			// 5.Select the Recording by clicking on one of the chapters
 			record.verifyFirstExpandableRecording();
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		
 			
 			///6.verify recording plays is correctly

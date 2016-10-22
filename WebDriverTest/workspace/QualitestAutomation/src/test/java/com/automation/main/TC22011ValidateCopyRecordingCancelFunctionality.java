@@ -6,7 +6,7 @@ import java.util.List;
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -128,7 +128,7 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 			
 		// 4. Login as Full Admin
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 			
 		// 5. Click on "view course list" under "courses" section.
@@ -136,16 +136,16 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 		
 			
 		// 6. In "All courses" page search for the full name of the Ab course.
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		admin_dashboard_view_course_list.searchForTargetCourseName(target_course_name);
 			
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 7. Click on that course.
 		admin_dashboard_view_course_list.clickOnFirstCourseLink();
 			
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. Click on a checkbox of one recording.
 		record.getCheckbox().click();
@@ -155,7 +155,7 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 		// 10. The menu items are displayed.
 		// 11. Click on the menu item "Copy".
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// The copy window displays.
 		boolean is_copy_window_closed = copy.isCopyMenuClosed();
@@ -212,7 +212,7 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 		// 16. Hover over "Recording tasks" menu.
 		// 17. Click on the menu item "Move".
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 18. The move window displays.
@@ -231,7 +231,7 @@ public class TC22011ValidateCopyRecordingCancelFunctionality {
 		// 19. When the move window displays, click on any ESC.
 		driver.findElement(By.id("members_value")).sendKeys(Keys.ESCAPE);
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 20. The move window is closed.
 		is_copy_window_closed = copy.isCopyMenuClosed();

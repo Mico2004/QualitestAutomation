@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -139,13 +139,16 @@ public class TestSuitePreSetCopyRecordings_Admin {
 	}
 
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
+	@Test( description = "Login course page")
 	public void loginCourses() throws InterruptedException {
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		System.out.println("b0");
-		  final List<Integer> CourseAbContent = Arrays.asList(0,1,2,3); //For Ab		
+		  final List<Integer> AbContent = Arrays.asList(0,1,2,3); //For Ab	
+		  final List<Integer> abcContent = Arrays.asList(0); //For abc
 		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
 			{
-				put(PropertyManager.getProperty("course1"),CourseAbContent);			
+				put(PropertyManager.getProperty("course1"),AbContent);
+				put(PropertyManager.getProperty("course2"),abcContent);
 			}
 			};
 		TestSuitePreSetGeneric h=new TestSuitePreSetGeneric(driver);

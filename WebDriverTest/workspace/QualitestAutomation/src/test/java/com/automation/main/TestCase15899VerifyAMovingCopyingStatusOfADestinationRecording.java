@@ -12,7 +12,7 @@ import org.apache.bcel.generic.MethodObserver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -122,7 +122,7 @@ public class TestCase15899VerifyAMovingCopyingStatusOfADestinationRecording {
 		// 4. Select "Recording Tasks -> Move"
 		record.clickOnRecordingTaskThenMove();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 5. Select destination course.
 		copy.selectTargetCourseFromCourseList(target_course);
@@ -165,7 +165,7 @@ public class TestCase15899VerifyAMovingCopyingStatusOfADestinationRecording {
 		// 8. While recording is being copied, click the "Courses" link at the breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(800);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9. Select destination course.
 		course.selectTargetCourse(target_course);

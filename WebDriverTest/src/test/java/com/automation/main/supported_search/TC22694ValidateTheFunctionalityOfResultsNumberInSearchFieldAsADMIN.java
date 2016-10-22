@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -156,7 +156,7 @@ public class TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN 
 		String url =  course.getCurrentUrlCoursePage(); 
 
 		record.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		tegrity.waitForVisibility(tegrity.passfield);
 		
 		// 2.login as admin
@@ -171,7 +171,7 @@ public class TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN 
 
 		// 3.Click on "View Course List" link
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
-		Thread.sleep(1500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 
 		// 4.verify all courses page
@@ -182,17 +182,17 @@ public class TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN 
 
 		// 6.Click on one of the Recording link
 		record.waitForVisibility(record.first_recording);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.convertRecordingsListToNames();
 		record.convertRecordingsListToRecorderName();
 		String instructor=record.getIndexRecorderNameOfRecording(1);
 		String recording_to_search=record.recording_list_names.get(0);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		///8.Validate the search field is display at the top right of the UI page below the top navigation bar.
 		top_bar_helper.verifySearchFieldDisplayedAtTopRight();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		///7.Search some "Recording Chapter" and press ENTER.
 		top_bar_helper.searchForTargetText(recording_to_search);
@@ -223,7 +223,7 @@ public class TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN 
 		}
 
 		//13.search:
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		player_page.verifySearchForRecordingExist(recording_to_search);
 	
 		//14.Validate the number of results that displayed in the breadcrumb is indeed the actual number of results you received.

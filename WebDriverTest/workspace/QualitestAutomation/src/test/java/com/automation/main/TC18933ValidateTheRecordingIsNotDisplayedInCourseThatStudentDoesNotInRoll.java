@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -130,11 +130,11 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		
 		course.selectCourseThatStartingWith("Ba");
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.selectIndexCheckBox(1);
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnRecordingTaskThenEditRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
@@ -143,13 +143,13 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		edit_recording.changeFirstChapterRecordingNameToTargetName(new_chapter_name);
 		
 		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		top_bar_helper.clickOnSignOut();
 		
 		// 2. Log in as STUDENT (User4).
 		tegrity.loginCourses("User4");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Set the focus to the field with a mouse pointer.
 		top_bar_helper.search_box_field.click();
@@ -161,11 +161,11 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		
 		// 5. Sign Out.
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 6. Log in as another Student (User2) that does'nt in rolled to the same course that contains the recording that you search earlier.
 		tegrity.loginCourses("User2");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 7. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(new_chapter_name);
@@ -174,7 +174,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		
 		// 8. Sign Out.
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

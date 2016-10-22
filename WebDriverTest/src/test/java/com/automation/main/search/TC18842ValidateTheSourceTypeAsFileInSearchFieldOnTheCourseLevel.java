@@ -6,7 +6,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -32,6 +32,7 @@ import com.automation.main.page_helpers.PlayerPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.SearchPage;
 import com.automation.main.page_helpers.TopBarHelper;
+import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
@@ -40,6 +41,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
@@ -85,9 +87,9 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 		/*
 		 * This test is Chrome only test!
 		 */
-		driver=new ChromeDriver();
-		driver.manage().window().maximize();
-//		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		//driver=new ChromeDriver();
+		//driver.manage().window().maximize();
+		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
 //		
@@ -135,7 +137,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -155,15 +157,15 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		record.returnToCourseListPage();
 
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnAdditionContentTab();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		List<String> current_additional_content_list = record.getCoursAdditionalContentList();
 		String target_additional_content_for_the_test = null;
@@ -176,19 +178,19 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 				}
 			}
 		}
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnContentTaskThenCopy();
 		copy.selectTargetCourseFromCourseListThatStartWith("Ab");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		copy.clickOnCopyButton();
-		Thread.sleep(8000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		confirm_menu.clickOnOkButton();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		System.out.println("Target additional content for the test is: " + target_additional_content_for_the_test);
 		
 		record.signOut();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		
@@ -207,19 +209,19 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(5000);	
+			Thread.sleep(Page.TIMEOUT_TINY);	
 			
 			if(type_of_user != 3) {
 				// 3. Open some course.
-				current_course = course.selectCourseThatStartingWith("Ab");
+				current_course = course.selectCourseThatStartingWith(PropertyManager.getProperty("course1"));
 			} else {
 				// Click on "view course list" under "courses" section.
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			
@@ -228,7 +230,8 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 			
 			// 5. Search the "File" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(target_additional_content_for_the_test);
-			Thread.sleep(2000);
+			search_page.waitResultToLoad();
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
@@ -252,7 +255,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(target_additional_content_for_the_test, "Source: File");
 			
 			// 5.6. The next result display below the current result in case there is next result.
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 6. Hover over the chapter icon.
@@ -265,7 +268,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 			// 7.1. The file download to the local client's machine.
 			search_page.link_icon_list.get(0).click();
 			
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 8. Click on title of the file.
 			// 8.1. The file download to the local client's machine.
@@ -274,7 +277,7 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 			
 			// 7. Sign Out.
 			record.signOut();
-			Thread.sleep(3000);	
+			Thread.sleep(Page.TIMEOUT_TINY);	
 		}
 		
 		// Unpublic Ab course1. 

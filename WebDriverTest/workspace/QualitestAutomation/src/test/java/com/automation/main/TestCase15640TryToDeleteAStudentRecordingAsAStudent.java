@@ -11,7 +11,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -121,7 +121,7 @@ public class TestCase15640TryToDeleteAStudentRecordingAsAStudent {
 		// 4. Select recording made by this STUDENT.
 		String user_name_of_student = record.getUserNmae();
 		int recording_by_user_index = record.getTargetUserNameRecordingIndex(user_name_of_student);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		System.out.println(recording_by_user_index);
 		record.selectIndexCheckBox(recording_by_user_index + 1);
 	

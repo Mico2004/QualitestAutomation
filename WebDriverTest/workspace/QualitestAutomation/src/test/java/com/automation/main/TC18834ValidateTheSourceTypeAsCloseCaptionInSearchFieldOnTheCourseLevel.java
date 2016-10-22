@@ -11,7 +11,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByClassName;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -139,10 +139,10 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Upload for first recording target close catpion
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		List<String> listOfNames = record.getCourseRecordingList();
 		
 		record.selectIndexCheckBox(listOfNames.size());		
@@ -153,7 +153,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -162,10 +162,10 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 				if(driver.findElement(By.id("PlayButton_Img")).isDisplayed()) {
 					break;
 				} else {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 				
 		}
@@ -175,7 +175,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(4));
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// click on the upload link
 		WebElement element = driver.findElement(By.xpath(".//*[@id='AddCaptioningForm']/div[3]/span"));
@@ -187,7 +187,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		robot.mouseMove(-100, 100);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		String path = "C:\\WebDriverTest\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
 		
@@ -201,13 +201,13 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		driver.findElement(By.id("AddCaptioning")).click();
-		//Thread.sleep(15000);
+		//Thread.sleep(Page.TIMEOUT_TINY);
 			
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
@@ -221,7 +221,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 				break;
 			   }			
-			else Thread.sleep(2000);
+			else Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 			
@@ -231,16 +231,16 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 //					System.out.println("2222");
 //					break;
 //				} else {
-//					Thread.sleep(1000);
+//					Thread.sleep(Page.TIMEOUT_TINY);
 //				}
 //			} catch (Exception e) {
-//				Thread.sleep(1000);
+//				Thread.sleep(Page.TIMEOUT_TINY);
 //			}
 //				
 //		}
 		
 
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String text_from_caption_for_test = "QualitestAutomationCaption";	
 		record.signOut();
 		
@@ -259,7 +259,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			if(type_of_user < 3) {
 				// 3. Open some course.
@@ -269,13 +269,13 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dashboard_view_course_list.searchForTargetCourseName(current_course);
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// Click on that course name.
 				admin_dashboard_view_course_list.clickOnFirstCourseLink();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			
@@ -318,7 +318,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
 			Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();

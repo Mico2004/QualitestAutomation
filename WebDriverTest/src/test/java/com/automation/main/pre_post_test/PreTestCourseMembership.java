@@ -14,7 +14,7 @@ import org.omg.PortableInterceptor.AdapterManagerIdHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -114,7 +114,7 @@ public class PreTestCourseMembership {
 	{
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		String login_url = driver.getCurrentUrl();
 		String university_name  = login_url.split("/")[2].substring(0,  login_url.split("/")[2].length() - 12);
@@ -122,27 +122,27 @@ public class PreTestCourseMembership {
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		
-		Thread.sleep(10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Click on create course href link 
 		driver.switchTo().frame(0);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// Search target course name
 		mange_adhoc_course_enrollments.searchAndFilterCourses("abcreg-qabr03432016");
 		
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Click on result first course (the only one) membership button
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Search target user name in membership window
 		mangage_adhoc_courses_membership_window.searchForUser("User2040220161025");
 		
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Select first user from user list (the only user it found because of the uniq of the search)
 		mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
@@ -150,7 +150,7 @@ public class PreTestCourseMembership {
 		// Add selected user to instructor list
 		mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 		
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Confirm user membership list
 		mangage_adhoc_courses_membership_window.clickOnOkButton();

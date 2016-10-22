@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -153,7 +153,7 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 			tegrity.loginAdmin("Admin");
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 			// 3.Click on "View Course List" link
-			Thread.sleep(1500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			// 4.verify all courses page
 			admin_view_course_list.verifyAllCoursesPage();
@@ -162,7 +162,7 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 			String course_name=admin_view_course_list.clickOnCourseLinkStartingWith("Ab");
 			/// 6.Click on one of the Recording link
 			record.waitForVisibility(record.checkbox2);
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.checkbox2.click();
 			record.toEditRecordingPropertiesMenu();
 			erp_window.waitForVisibility(erp_window.save_button);
@@ -171,7 +171,7 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 			// 7.Click on one of the Recording link
 			record.verifyFirstExpandableRecording();
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		
 			// 8.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display
@@ -201,7 +201,7 @@ public class TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 			// 12.Click on one of the Recording link
 			record.verifyFirstExpandableRecording();
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			// 13.Select the Recording by clicking on one of the chapters
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display
 		

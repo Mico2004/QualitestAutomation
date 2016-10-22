@@ -7,7 +7,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -164,11 +164,11 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		 
 		// Go to user builder page on admin dashboard.
 
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 		 
-		Thread.sleep(6000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		// 10. Create a new user and assign him to a course as Instructor (User1 sandbox course).
 		Date date = new Date();
@@ -180,7 +180,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 				driver.switchTo().frame(0);
 				break;
 			} catch(Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		 
@@ -211,28 +211,28 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// 5. Enroll this USER as INSTRUCTOR to any course.
 		tegrity.loginAdmin("Admin");
 		
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		wait.until(ExpectedConditions.visibilityOf(admin_dashboard_page.courses_submenu.get(1)));
 		 
 		// Enroll the user to one course
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
 				break;
 		} catch(Exception msg) {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(abc_course_name);
 					
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton(); 
 		 
@@ -283,28 +283,28 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// 11. Disenroll this USER from his course. 
 		tegrity.loginAdmin("Admin");
 		
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		wait.until(ExpectedConditions.visibilityOf(admin_dashboard_page.courses_submenu.get(1)));
 		 
 		// 10.1. Enroll the user to one course
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
 				break;
 		} catch(Exception msg) {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(abc_course_name);
 					
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton(); 
 		
@@ -345,7 +345,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// 17. Login as admin and enroll the user to a new course as Instructor.
 		tegrity.loginAdmin("Admin");
 		
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
@@ -370,21 +370,21 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		
 		manage_adhoc_courses_enrollments_page.clickOnAdminDashboard();
 		
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		wait.until(ExpectedConditions.visibilityOf(admin_dashboard_page.courses_submenu.get(1)));
 		 
 		// Enroll the user to one course
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
 				break;
 		} catch(Exception msg) {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -392,7 +392,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(temp_course_name);
 					
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton(); 
 		 
@@ -417,7 +417,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ab_course_name);
 							
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton(); 
 				 
@@ -453,7 +453,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// 21. Upload a Recording to the Course.
 		course.selectCourseThatStartingWith("Ab");
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Select first recording
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -468,7 +468,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// Click on copy recording
 		copy.clickOnCopyButton();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Confirm menu click ok
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -480,28 +480,28 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		tegrity.loginAdmin("Admin");
 		
 		// 24. Disenroll the user from the course.
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		wait.until(ExpectedConditions.visibilityOf(admin_dashboard_page.courses_submenu.get(1)));
 		 
 		// 10.1. Enroll the user to one course
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
 				break;
 		} catch(Exception msg) {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(temp_course_name);
 					
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton(); 
 		
@@ -537,7 +537,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// 28. Open the past course.
 		course.selectCourseThatStartingWith(temp_course_name);
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 29. The recording you uploaded earlier is displayed.
 		record.verifyThatTargetRecordingExistInRecordingList(selected_recording);
@@ -555,7 +555,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// 33. Login as admin and enroll the user to a new course as Instructor.
 		tegrity.loginAdmin("Admin");
 		
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
@@ -580,21 +580,21 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		
 		manage_adhoc_courses_enrollments_page.clickOnAdminDashboard();
 		
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		wait.until(ExpectedConditions.visibilityOf(admin_dashboard_page.courses_submenu.get(1)));
 		 
 		// Enroll the user to one course
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
 				break;
 		} catch(Exception msg) {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -602,7 +602,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(temp_another_course_name);
 					
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton(); 
 		 
@@ -634,7 +634,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// 35. Login as the instructor.
 		tegrity.loginCoursesByParameter(temp_another_course_name);
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 36. Open the private course.
 		// 37. Upload an additional content file to the course.
@@ -654,11 +654,11 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		
 		// Click copy content
 		copy.clickOnCopyButton();
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Confirm menu
 		confirm_menu.clickOnOkButton();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 38. Sign Out.
 		top_bar_helper.signOut();
@@ -667,28 +667,28 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);
 		
 		// 40. Disenroll the user from the course.
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		wait.until(ExpectedConditions.visibilityOf(admin_dashboard_page.courses_submenu.get(1)));
 		 
 		// 10.1. Enroll the user to one course
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
 				break;
 		} catch(Exception msg) {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(temp_another_course_name);
 					
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton(); 
 		
@@ -714,14 +714,14 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// 41. Login as the Instructor
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 42. Make sure the course isn't displayed in the 'Active Courses' tab.
 		course.verifyCourseNotExist(temp_another_course_name);
 		
 		// 43. Make sure the course is displayed in the 'Past Courses' tab.
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.verifyCourseExist(temp_another_course_name);
 		
 		System.out.println("Done.");

@@ -4,7 +4,7 @@ package com.automation.main.copy_recording;
 
 
 import java.util.List;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -138,7 +138,7 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// save course list, we will copy in first time to course in 3rd index
 		// and in second time to course in 4th index
@@ -167,7 +167,7 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 		// 7. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -211,7 +211,7 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 		// 13. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 14. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -302,7 +302,7 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 		course.clickOnTargetCourseName(second_target_course);
 		
 		wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
-		//Thread.sleep(3000);
+		//Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 22. Verify that recording is copied successfully
 		// 23.1. Recording is displayed in "Recordings" tab

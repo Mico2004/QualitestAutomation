@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.IntToDoubleFunction;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -128,16 +128,16 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 		// 1. Make sure to have a user is enrolled to a course (Ab) as Student (User4).
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//PreTest add the open enable student test in the Admin and public 
 		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
 		advanced_service_settings_Page.enableStudyTestingCheckboxAndClickOk(confirm_menu);
 		//advanced_service_settings_Page.clickElement(advanced_service_settings_Page.adminDashboard);
-		Thread.sleep(1000);	
+		Thread.sleep(Page.TIMEOUT_TINY);	
 		
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
-		Thread.sleep(2000);	
+		Thread.sleep(Page.TIMEOUT_TINY);	
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicSelected();
 		top_bar_helper.clickOnSignOut();
@@ -177,7 +177,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			if(type_of_course==1) {
 				// 5. Click on the "public courses" tab.
 				course.clickOnPublicCoursesTab();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			// 6. Click on a public course that: 1. appear on your active courses list  2. have a recordings and additional contents (uploaded files) in it. simultaneously Open the same course on the Active course tab in a different browser.
@@ -185,7 +185,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			
 			// 7. Hover over on "Course tasks" menu.
 			record.moveToElementAndClick(record.course_task_button,driver);
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 8. Validate that on both browsers the options are: "Upload a recording", "Upload video file", "Upload Audio File" , separated grey line, "Subscribe to your course's" (text), "RSS feed", "Podcast", "Video podcast".
 			// "Upload a recording" - UploadRecording
@@ -219,7 +219,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			
 			// 10. Hover over on "Recording tasks" menu.
 			record.moveToElementAndClick(record.recording_tasks_button, driver);
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			// 11. Validate that the option on both browsers are ONLY: "Download recording", "tag".
 			// "Tag" - TagsListTask2
 			record.verifyWebElementDisplayed(record.tag_button, "Tag");
@@ -238,7 +238,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			
 			// 14. Click on "Additional Contents" on both browsers.
 			record.clickOnAdditionContentTab();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 15. Validate that the files list on both browsers containts the same recordings.
 			if(type_of_course==0) {
@@ -249,7 +249,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			
 			// 16. Click on "Student Recordings" on both browsers.
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 17. Validate that the recordings list on both browsers containts the same recordings.
 			if(type_of_course==0) {
@@ -264,7 +264,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			// 19. Open one of the public course playback.
 			if(type_of_course==1) {
 				record.clickOnRecordingsTab();
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				String first_recording_title = record.getFirstRecordingTitle();
 				record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_title);
 				player_page.verifyTimeBufferStatusForXSec(10);
@@ -330,19 +330,19 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 		
 		// PostTest
 //		driver.navigate().back();
-//		Thread.sleep(1000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 		for(String handler: driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
 			break;
 		}
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
-		Thread.sleep(2000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
 		

@@ -4,7 +4,7 @@ package com.automation.main.add_additional_content_file;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -149,7 +149,7 @@ public void test15467() throws Exception {
 		add_additional_content_window.verifyAdditionalContentFileWindowInfo();
 		// 7. add file and cancel uploading
 		add_additional_content_window.toUploadFileByPathThenSelectFile(fullPathToFile);
-		 Thread.sleep(500);/// location
+		 Thread.sleep(Page.TIMEOUT_TINY);/// location
 //		 Robot robot=new Robot();
 //		 robot.mouseMove(100,100);
 //		 if(!(driver instanceof InternetExplorerDriver)){

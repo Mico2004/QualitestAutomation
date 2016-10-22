@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.testng.annotations.AfterClass;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -135,8 +135,9 @@ public class TestSuitePreSetCopyRecordings_DeleteAdditional {
 	}
 
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
+	@Test( description = "Login course page")
 	public void loginCourses() throws InterruptedException {
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		System.out.println("b0");
 		  final List<Integer> CourseAbContent = Arrays.asList(1); //For Ab		
 		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {

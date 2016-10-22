@@ -4,7 +4,7 @@ import java.util.List;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -128,7 +128,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		course.selectCourseThatStartingWith("Ab");
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -138,7 +138,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String recording_text = "reocrd" + sdf.format(date); 
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
-		Thread.sleep(8000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		
 		top_bar_helper.clickOnSignOut();
@@ -159,23 +159,23 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			} 
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		
 			// 3. Open some course.
 			if(type_of_user == 3) {
 		
 				// Click on "view course list" under "courses" section.
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dashboard_view_course_list.searchForTargetCourseName(current_course);
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// Click on that course name.
 				admin_dashboard_view_course_list.clickOnFirstCourseLink();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 			}
 				

@@ -4,7 +4,7 @@ package com.automation.main;
 
 import javax.swing.ListModel;
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -137,15 +137,15 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 2, record, copy, confirm_menu);
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 2. Login as an STUDENT.
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Enter to the course page.
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 4. Click on "Student recordings" tab.
 		record.clickOnStudentRecordingsTab();
@@ -168,22 +168,22 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		
 		// 9. Validate the bookmark symbol is displayed in the "ex1" recording information.
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.verifyIndexRecordingHaveBookmark(1);
 		
 		// 10. Sign out.
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 11. Login as a INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 12. Open the course that contains "ex1" recording.
 		course.selectCourseThatStartingWith(current_course);
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 13. Validate the bookmark symbol is not displayed in the "ex1" recording information.
 		record.verifyIndexRecordingHaveNoBookmark(1);

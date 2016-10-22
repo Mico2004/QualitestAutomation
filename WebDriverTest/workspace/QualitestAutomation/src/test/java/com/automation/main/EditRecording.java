@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -33,7 +33,7 @@ public class EditRecording extends Page {
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -44,10 +44,10 @@ public class EditRecording extends Page {
 					System.out.println("2222");
 					break;
 				} else {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 				
 		}
@@ -65,7 +65,7 @@ public class EditRecording extends Page {
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		
 //		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		String name = driver.findElement(By.id("NewTitle")).getAttribute("value");
 		
@@ -76,7 +76,7 @@ public class EditRecording extends Page {
 		
 
 		driver.findElements(By.cssSelector(".ng-scope.ng-binding")).get(1).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		return name;
 		
@@ -93,14 +93,14 @@ public class EditRecording extends Page {
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
 		
 			while(!isElementPresent(By.id("PlayButton_Img"))) {
 					System.out.println("element is not visable");
-					Thread.sleep(1000);	
+					Thread.sleep(Page.TIMEOUT_TINY);	
 			}
 		
 		for(String window_handler: driver.getWindowHandles()) {
@@ -114,13 +114,13 @@ public class EditRecording extends Page {
 		
 		
 		//changing the name of the title
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		driver.findElement(By.id("NewTitle")).clear();
 		driver.findElement(By.id("NewTitle")).sendKeys(target_name);
 		
 		// click on the apply
 		driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		//click on the ok
@@ -131,7 +131,7 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
 			   }			
-			else Thread.sleep(2000);
+			else Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 		//return to the course
@@ -148,7 +148,7 @@ public class EditRecording extends Page {
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -159,10 +159,10 @@ public class EditRecording extends Page {
 					System.out.println("2222");
 					break;
 				} else {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 				
 		}
@@ -181,13 +181,13 @@ public class EditRecording extends Page {
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		
 //		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		driver.findElement(By.id("NewTitle")).clear();
 		driver.findElement(By.id("NewTitle")).sendKeys(target_name);
 		
 		driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		for(int i=0; i<60; i++) {
 			try {
@@ -195,10 +195,10 @@ public class EditRecording extends Page {
 //					System.out.println("2222");
 					break;
 				} else {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 				
 		}
@@ -210,7 +210,7 @@ public class EditRecording extends Page {
 		
 
 		driver.findElement(By.cssSelector(".btn.btn-default")).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 	}
 	
@@ -226,13 +226,13 @@ public class EditRecording extends Page {
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
 		while(!isElementPresent(By.id("PlayButton_Img"))) {
 			System.out.println("element is not visable");
-			Thread.sleep(1000);	
+			Thread.sleep(Page.TIMEOUT_TINY);	
 	}
 
 		for(String window_handler: driver.getWindowHandles()) {
@@ -243,13 +243,13 @@ public class EditRecording extends Page {
 		record.waitForVisibility(driver.findElements(By.cssSelector(".optionList>li>a")).get(1));
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		driver.findElement(By.id("NewKeyword")).clear();
 		driver.findElement(By.id("NewKeyword")).sendKeys(target_keyword);
 		
 		driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
@@ -259,7 +259,7 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
 			   }			
-			else Thread.sleep(2000);
+			else Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 		//return to the course

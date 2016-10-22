@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -142,7 +142,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 course.goToCoursesPage();
 		 
 //		 wait.until(ExpectedConditions.visibilityOf(course.course_list.get(1)));
-		 Thread.sleep(5000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		
 		 course.verifyCourseExist(parsed_private_course_name);
 		 
@@ -182,11 +182,11 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 
 		 // 9.1. Go to user builder page on admin dashboard.
 
-		 Thread.sleep(4000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		 admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 		 
-		 Thread.sleep(10000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 	
 		 // 10. Create a new user and assign him to a course as Instructor (User1 sandbox course).
 		 Date date = new Date();
@@ -198,7 +198,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 					driver.switchTo().frame(0);
 					break;
 				} catch(Exception msg) {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 		}
 		 
@@ -220,21 +220,21 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 // 10.1. Enroll the user to one course
 		 admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		
-		 Thread.sleep(5000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		 for(int i=0; i<10; i++) {
 			 try {
 				 driver.switchTo().frame(0);
 				 break;
 			 } catch(Exception msg) {
-				 Thread.sleep(1000);
+				 Thread.sleep(Page.TIMEOUT_TINY);
 			 }
 		 }
 		
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(instructor_public_course);
 					
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton(); 
 		 
@@ -281,7 +281,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 // 17. Open the private course.
 		 course.goToCoursesPage();
 		 
-		 Thread.sleep(5000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		
 		 course.verifyCourseExist(parsed_private_course_name);
 		 
@@ -328,7 +328,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 tegrity.loginAdmin("Admin");
 		 
 		 // 22. Enroll the instructor you created earlier to Ab course as instructor.
-		 Thread.sleep(3000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 	
 		 for(int i=0; i<10; i++) {
@@ -336,7 +336,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 			 	driver.switchTo().frame(0);
 		 		break;
 		 	} catch(Exception msg) {
-		 		Thread.sleep(1000);
+		 		Thread.sleep(Page.TIMEOUT_TINY);
 	 		}
 		 }
 		 
@@ -387,7 +387,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 // 27. Make sure the private course is displayed in the course list page.
 		 course.goToCoursesPage();
 		 
-		 Thread.sleep(5000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		 wait.until(ExpectedConditions.visibilityOf(course.course_list.get(0)));
 		
@@ -400,7 +400,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 tegrity.loginAdmin("Admin");	
 		 
 		 // 30. Create a user. 
-		 Thread.sleep(4000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 		 
 		 date = new Date();
@@ -412,7 +412,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 					driver.switchTo().frame(0);
 					break;
 				} catch(Exception msg) {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 		}
 		 
@@ -439,14 +439,14 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 				 driver.switchTo().frame(0);
 				 break;
 			 } catch(Exception msg) {
-				 Thread.sleep(1000);
+				 Thread.sleep(Page.TIMEOUT_TINY);
 			 }
 		 }
 		 
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(instructor_public_course);
 						
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton(); 
 		
@@ -488,7 +488,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		// 35. Login as Admin.
 		tegrity.loginAdmin("Admin");	
 		
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 36. Enroll the student user to a course as instructor.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
@@ -498,7 +498,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 				driver.switchTo().frame(0);
 				break;
 			} catch(Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		 
@@ -552,7 +552,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		// 43. Open the private course.
 		course.goToCoursesPage();
 				 
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 				
 		course.verifyCourseExist(parsed_private_course_name);
 				 
@@ -572,7 +572,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		course_name_of_recordings_page  = record.getCourseTitle();
 		record.verifyThatStringExistsInCourseName(course_name_of_recordings_page.substring(0, username.length()));
 		record.verifyThatStringExistsInCourseName(course_name_of_recordings_page.substring(username.length()+1, course_name_of_recordings_page.length()-1));
-		Thread.sleep(1000);	
+		Thread.sleep(Page.TIMEOUT_TINY);	
 				 
 		// 44. The course details page is disaplyed.
 		record.verifyThatItIsRecordingsPage();

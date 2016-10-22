@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -47,6 +47,7 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import junitx.util.PropertyManager;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -178,10 +179,10 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 		tegrity.loginAsguest();
 		//3.Select a course
 		course.waitForVisibility(course.first_course_button);
-		String course_name=	course.selectCourseThatStartingWith("Ab");
+		String course_name=	course.selectCourseThatStartingWith(PropertyManager.getProperty("course1"));
 		///4.Click on one of the Recording link
 		record.waitForVisibility(record.recordings_tab);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.convertRecordingsListToNames();
 		String rec=record.recording_list_names.get(0);
 		record.verifyFirstExpandableRecording();
@@ -209,7 +210,7 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 		player_page.verifyBreadcrumbsForSearcRecording(course_name);
 		
 		driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		///10.The next result display below the current result in case there is next result.
 		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,1);
@@ -229,7 +230,7 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 		player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 		//15.navigate back to player recording
 		driver.navigate().back();
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 		//16.click on "Courses" and verify course page
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -160,7 +160,7 @@ public class TC15475ExistenceOfUIItems {
             //9.signout
 			record.waitForVisibility(record.sign_out);
 			record.signOut();
-			Thread.sleep(4000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			//tegrity.waitForVisibility(tegrity.usernamefield);
 			//10.login as student
 			tegrity.loginCourses("User4");
@@ -172,7 +172,7 @@ public class TC15475ExistenceOfUIItems {
 			record.clickOnAdditionContentTab();
 			
 		//13.select uploaded additional content
-			Thread.sleep(6000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.convertAdditionalContantListToNames();
 			record.selectAdditionalContentByName(file_name);
 			

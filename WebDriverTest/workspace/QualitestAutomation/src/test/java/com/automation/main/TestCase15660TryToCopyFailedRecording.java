@@ -39,7 +39,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -145,7 +145,7 @@ public class TestCase15660TryToCopyFailedRecording {
 		// 4. Select "Recording Tasks -> Copy" menu item
 		record.clickOnRecordingTaskThenCopy();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 5. Message box "Cannot copy in-process or failed recording" is displayed.
 		// 6. Click "OK" button.

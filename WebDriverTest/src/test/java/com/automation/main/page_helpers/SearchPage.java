@@ -7,10 +7,11 @@ import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 
@@ -53,7 +54,7 @@ public class SearchPage extends Page {
 	// This function verify that loading spinner image displayed
 	public void verifyLoadingSpinnerImage() throws InterruptedException {
 
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			if(isElemenetDisplayed(By.cssSelector(".loading-spinner-img"))){	
 				System.out.println("Verfied loading spinner image displayed.");
 				ATUReports.add("Verfied loading spinner image displayed.", "True.", "True.", LogAs.PASSED, null);
@@ -272,9 +273,9 @@ public class SearchPage extends Page {
 	public void waitUntilSpinnerImageDisappear() throws InterruptedException {
 		for(int i=0; i<20; i++) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				if(loading_spinner_image.isDisplayed()) {
-					Thread.sleep(100);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				} else {
 					break;
 				}
@@ -289,12 +290,12 @@ public class SearchPage extends Page {
 		for(int i=0; i<10; i++) {
 			try {
 				video_thumbnails_list.get(index-1).click();
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				System.out.println("Clicked on target icon of recording in index: " + index);
 				ATUReports.add("Clicked on target icon of recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
 				return;
 			} catch(Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -308,12 +309,12 @@ public class SearchPage extends Page {
 			try {
 				//title_urls_list.get(index-1).click();
 				title_first_chapter.click();
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				System.out.println("Clicked on target title recording in index: " + index);
 				ATUReports.add("Clicked on target title recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
 				return;
 			} catch(Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -327,12 +328,12 @@ public class SearchPage extends Page {
 			try {
 
 				recording_link_titles_list.get(index-1).click();
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				System.out.println("Clicked on target recording title of recording in index: " + index);
 				ATUReports.add("Clicked on target recording title of recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
 				return;
 			} catch(Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -420,7 +421,7 @@ public class SearchPage extends Page {
 	//The breadcrumb structure displayed as follows: "> Admin Dashboard > Courses > Course name > X results found for: "search_criterion". (X seconds)".
 	public void verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfoundForAdminDashboard(String course_name, String searching_criterion) throws InterruptedException {
 		waitForVisibility(breadcrumbs_box);
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String structure_displayed = breadcrumbs_box.getText();
 			
 		String[] splited_structure_displayed = structure_displayed.split(">");
@@ -578,6 +579,18 @@ public class SearchPage extends Page {
 		System.out.println("Not Verifed that the result number is as written at the breadcrumbs.");
 		ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}		
+		
+	}
+	
+	public void waitResultToLoad(){
+		try{
+		WebDriverWait wait=new WebDriverWait(driver, 15);
+		wait.until(ExpectedConditions.textToBePresentInElement(breadcrumbs_box, "results found for:"));
+		Thread.sleep(Page.TIMEOUT_MEDIUM);
+		}catch(Exception e){
+			ATUReports.add("Search Page wasn't load properly", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
 		
 	}
 	

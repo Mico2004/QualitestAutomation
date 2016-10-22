@@ -4,7 +4,7 @@ import java.util.List;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -121,7 +121,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getStringFromElement(course.course_list);
+		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
 	
@@ -141,7 +141,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		course.selectCourseThatStartingWith("Ab");
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -151,7 +151,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String recording_text = "reocrd" + sdf.format(date); 
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
-		Thread.sleep(8000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		
 		record.signOut();
@@ -172,19 +172,19 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			} 
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		
 			// 3. Open some course.
 			if(type_of_user == 3) {
 		
 				// Click on "view course list" under "courses" section.
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 			}
 				
@@ -193,7 +193,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 			
 			// 4. Search the "Recording Text" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(recording_text);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 4.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();

@@ -7,7 +7,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -51,7 +51,7 @@ public class ManageAdhocUsersPage extends Page {
 				break;
 			} catch (Exception msg) {
 				System.out.println("Not clicked on new user button.");
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 
@@ -60,7 +60,7 @@ public class ManageAdhocUsersPage extends Page {
 	// back to admin dash board
 	public void toAdminDashBoard() throws InterruptedException {
 		to_admin_dashboard.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	/// create new user
@@ -68,12 +68,12 @@ public class ManageAdhocUsersPage extends Page {
 
 		// 3. Click on create course href link
 		driver.switchTo().frame(0);
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		clickOnNewUser();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		create_new_user_window.createNewUser(name, name, "abc@com.com", "111", "111");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		try {
 

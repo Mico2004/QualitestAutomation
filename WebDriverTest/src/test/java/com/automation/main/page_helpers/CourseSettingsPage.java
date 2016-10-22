@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -101,7 +101,7 @@ public class CourseSettingsPage extends Page {
 			ATUReports.add("Clickedon ok button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 	
 
@@ -124,7 +124,7 @@ public class CourseSettingsPage extends Page {
 
 		// enable_mp3_podcast_button.click();
 
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function force select enable audio checkbox
@@ -146,7 +146,7 @@ public class CourseSettingsPage extends Page {
 
 		// enable_mp3_podcast_button.click();
 
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function verify that course setting page dispaly
@@ -166,8 +166,8 @@ public class CourseSettingsPage extends Page {
 	// it checks
 	public void selectMakeCoursePublicAndVerifyThatItSelected() {
 		try {
-			waitForVisibility(checkbox_make_course_public_visable);
-			checkbox_make_course_public_visable.click();
+			waitForVisibility(checkbox_make_course_public_visable);			
+			this.clickElementJS(checkbox_make_course_public_visable);
 			if (checkbox_make_course_public_visable.isSelected()) {
 				System.out.println("Selected make this course public and verified that it selected.");
 				ATUReports.add("Select this course public and verify that it selected.", "True.", "True.", LogAs.PASSED,
@@ -370,7 +370,7 @@ public class CourseSettingsPage extends Page {
 			ATUReports.add("Fail click on  visibility checkbox.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		clickOnOkButton();
 	}
 
@@ -401,7 +401,7 @@ public class CourseSettingsPage extends Page {
 			ATUReports.add("Fail click on  visibility checkbox.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		clickOnOkButton();
 	}
 
@@ -433,7 +433,7 @@ public class CourseSettingsPage extends Page {
 			ATUReports.add("Fail click on enable student testing checkbox", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		clickOnOkButton();
 	}
 
@@ -464,7 +464,7 @@ public class CourseSettingsPage extends Page {
 			ATUReports.add("Fail click on allow student downloading checkbox", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		clickOnOkButton();
 	}
 

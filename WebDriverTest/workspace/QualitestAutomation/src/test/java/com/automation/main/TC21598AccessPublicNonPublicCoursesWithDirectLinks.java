@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -132,7 +132,7 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 		record.returnToCourseListPage();
 		course.waitForVisibility(course.sign_out);
        //7.Copy the URL
-	   Thread.sleep(3000);
+	   Thread.sleep(Page.TIMEOUT_TINY);
        String current_url=driver.getCurrentUrl();   
        //8.sign out
        course.signOut();
@@ -176,11 +176,11 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 		course.selectCourseByName(course_name2);
 		record.waitForVisibility(record.getCheckbox());
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 				
 		// 19.player is working
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 				
 		System.out.println("Done.");

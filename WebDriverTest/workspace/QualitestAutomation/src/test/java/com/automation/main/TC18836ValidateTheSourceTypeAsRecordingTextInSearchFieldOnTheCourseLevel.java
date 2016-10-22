@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -130,32 +130,32 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 
 			record.returnToCourseListPage();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			course.selectCourseThatStartingWith("BankValid");
-		    Thread.sleep(1000);
+		    Thread.sleep(Page.TIMEOUT_TINY);
 			
 			//String recording_name = record.getFirstRecordingTitle();
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 
 			record.clickOnRecordingTaskThenCopy();
 			copy.selectTargetCourseFromCourseList(current_course);
 			copy.clickOnCopyButton();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			record.checkStatusExistenceForMaxTTime(450);
 			
 			record.returnToCourseListPage();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			course.selectCourseThatStartingWith("Ab");
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -165,7 +165,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 			String recording_text = "reocrd" + sdf.format(date); 
 			edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
-			Thread.sleep(8000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			
 			top_bar_helper.clickOnSignOut();
@@ -186,24 +186,24 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		
 			// 3. Open some course.
 			if(type_of_user < 3) {
 				course.selectCourseThatStartingWith(current_course);
 			} else {
 				// Click on "view course list" under "courses" section.
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dashboard_view_course_list.searchForTargetCourseName(current_course);
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// Click on that course name.
 				admin_dashboard_view_course_list.clickOnFirstCourseLink();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		
 			
@@ -248,7 +248,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
 			Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();

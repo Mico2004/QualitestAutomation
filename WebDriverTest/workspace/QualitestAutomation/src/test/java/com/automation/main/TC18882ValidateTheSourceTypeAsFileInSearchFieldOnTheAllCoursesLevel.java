@@ -6,7 +6,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -142,16 +142,16 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		record.returnToCourseListPage();
 		
 		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnAdditionContentTab();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		List<String> current_additional_content_list = record.getCoursAdditionalContentList();
 		String target_additional_content_for_the_test = null;
@@ -162,19 +162,19 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 				break;
 			}
 		}
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnContentTaskThenCopy();
 		copy.selectTargetCourseFromCourseListThatStartWith("Ab");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		copy.clickOnCopyButton();
-		Thread.sleep(10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		confirm_menu.clickOnOkButton();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		System.out.println("Target additional content for the test is: " + target_additional_content_for_the_test);
 		
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		
@@ -190,7 +190,7 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(3000);	
+			Thread.sleep(Page.TIMEOUT_TINY);	
 			
 			// 3. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
@@ -215,13 +215,13 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 			search_page.verifyThatSourceTitleForTargetRecordingInTargetFormat(target_additional_content_for_the_test, "Source: File");
 			
 			// 4.6. The next result display below the current result in case there is next result.
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult();
 			
 			// 5. Click on the file icon.
 			// 5.1. The file download to the local client's machine.
 			search_page.link_icon_list.get(0).click();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			
 			
@@ -233,7 +233,7 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 			
 			// 7. Sign Out.
 			top_bar_helper.clickOnSignOut();
-			Thread.sleep(3000);	
+			Thread.sleep(Page.TIMEOUT_TINY);	
 		}
 		
 		// Unpublic Ab course1. 

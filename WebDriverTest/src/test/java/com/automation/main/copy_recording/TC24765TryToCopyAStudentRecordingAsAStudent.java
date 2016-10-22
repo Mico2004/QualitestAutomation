@@ -6,7 +6,7 @@ package com.automation.main.copy_recording;
 import java.text.DateFormat;
 import java.util.Date;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -159,7 +159,7 @@ public class TC24765TryToCopyAStudentRecordingAsAStudent {
 		// 6. Click "Student Recordings" tab.
 		record.clickOnStudentRecordingsTab();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 7. Select any recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);

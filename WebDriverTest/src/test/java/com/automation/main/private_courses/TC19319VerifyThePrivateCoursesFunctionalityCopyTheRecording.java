@@ -1,12 +1,7 @@
 package com.automation.main.private_courses;
 
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -33,10 +28,10 @@ import com.automation.main.page_helpers.ManageAdHocCoursesMembershipWindow;
 import com.automation.main.page_helpers.ManageAdhocCoursesEnrollmentsPage;
 import com.automation.main.page_helpers.ManageAdhocUsersPage;
 import com.automation.main.page_helpers.MoveWindow;
+import com.automation.main.page_helpers.Page;
 import com.automation.main.page_helpers.PlayerPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.TopBarHelper;
-import com.automation.main.pre_post_test.TestSuitePreSetGeneric;
 import com.automation.main.utilities.DriverSelector;
 import com.sun.jna.win32.W32APITypeMapper;
 import java.text.DateFormat;
@@ -136,22 +131,208 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	@Test (description = "TC 19319 Verify The Private Courses Functionality Copy The Recording") 
 	public void test19319() throws InterruptedException
 	{
-		System.out.println("b0");
-		  final List<Integer> CourseAbContent = Arrays.asList(0); //		
-		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
-			{
-				put(PropertyManager.getProperty("course1"),CourseAbContent);			
-			}
-			};
-		TestSuitePreSetGeneric h=new TestSuitePreSetGeneric(driver);
-		System.out.println("b1");
-		h.GenricPreset(CoursesAndContent);
+		// 1. Login as INSTRUCTOR.
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		tegrity.loginCourses("User1");// log in courses page
+		initializeCourseObject();
+		
+		
+		// 1.1. Delete all recordings from private course.
+		course.deleteAllRecordingsInCourseStartWith(PropertyManager.getProperty("User1"), 0, record, delete_menu);
+		
+		// 1.2. Delete all recording from abc.
+		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
+		
+		// 1.3. Delete all recording from ad.
+		course.deleteAllRecordingsInCourseStartWith("ad", 0, record, delete_menu);
+		
+		// 1.5. Copy first recording to private course.
+		// 1.6. Copy second recording to ad.
+		// 1.7. Return to courses page.
+		course.selectCourseThatStartingWith("Ab");
+		
+		// Select the recording.
+		record.getFirstRecordingTitle();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		
+		// Select the "Recording Tasks -> Copy" menu item.
+		record.clickOnRecordingTaskThenCopy();
+		
+		// "Copy" window is displayed.
+		copy.verifyThatCopyMenuOpen();
+		
+		// Select the private course as destination.
+		copy.selectTargetCourseFromCourseListThatStartWith(PropertyManager.getProperty("User1"));
+		
+		// Click the "Copy Recording" button.
+		copy.clickOnCopyButton();
+		
+		Thread.sleep(Page.TIMEOUT_TINY);
+		
+		// "Recording has been queued for copy" message box is displayed.
+		// Click the "OK" button.
+		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
+		
+		// Message box is closed.
+		confirm_menu.verifyConfirmWindowIsClosed();
+		
+		
+		// Unselect first checkbox, and select second checkbox
+		Thread.sleep(Page.TIMEOUT_TINY);
+		record.unselectIndexCheckBox(1);
+		Thread.sleep(Page.TIMEOUT_TINY);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+		
+		// Select the "Recording Tasks -> Copy" menu item.
+		record.clickOnRecordingTaskThenCopy();
+				
+		// "Copy" window is displayed.
+		copy.verifyThatCopyMenuOpen();
+				
+		// Select the private course as destination.
+		copy.selectTargetCourseFromCourseListThatStartWith("ad");
+				
+		// Click the "Copy Recording" button.
+		copy.clickOnCopyButton();
+				
+		Thread.sleep(Page.TIMEOUT_TINY);
+				
+		// "Recording has been queued for copy" message box is displayed.
+		// Click the "OK" button.
+		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
+				
+		// Message box is closed.
+		confirm_menu.verifyConfirmWindowIsClosed();
+		
+		// When the "Copy" process is finished, verify that recording is displayed in source course.
+//		record.checkThatRecordingStatusTargetIndexIsEmpty(1, 360);
+		record.checkStatusExistenceForMaxTTime(600);
+		
+		// Click the "Courses" breadcrumb.
+		record.returnToCourseListPage();
+		
+		Thread.sleep(Page.TIMEOUT_TINY);
+		
+		// 2. Select the private course.
+		course.selectCourseThatStartingWith(PropertyManager.getProperty("User1"));
+		
+		Thread.sleep(Page.TIMEOUT_TINY);
+		
+		// 3. Select the recording.
+		record.selectIndexCheckBox(1);
+		String selected_recording = record.getFirstRecordingTitle();
+		
+		// 4. Select the "Recording Tasks -> Copy" menu item.
+		record.clickOnRecordingTaskThenCopy();
+		
+		// 5. "Copy" window is displayed.
+		copy.verifyThatCopyMenuOpen();
+		
+		// 6. Select the destination course (abc).
+		copy.selectTargetCourseFromCourseListThatStartWith("abc");
+		
+		// 7. Click the "Copy Recording" button.
+		copy.clickOnCopyButton();
+		
+		// 8. "Recording has been queued for copy" message box is displayed.
+		// 9. Click the "OK" button.
+		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
+		
+		// 10. Message box is closed.
+		confirm_menu.verifyConfirmWindowIsClosed();
+		
+		// 11. When the "Copy" process is finished, verify that recording is displayed in private course.
+		record.checkStatusExistenceForMaxTTime(360);
+		record.verifyThatTargetRecordingExistInRecordingList(selected_recording);
+		
+		// 12. Click the "Courses" breadcrumb.
+		record.returnToCourseListPage();
+		
+		Thread.sleep(Page.TIMEOUT_TINY);
+		
+		// 13. Select the destination course (abc).
+		course.selectCourseThatStartingWith("abc");
+		
+		Thread.sleep(Page.TIMEOUT_TINY);
+		
+		// 14. Verify that copied recording is displayed.
+		record.verifyThatTargetRecordingExistInRecordingList(selected_recording);
+		
+		// 15. Click on the recording.
+		// 16. Click on one of it's chapters.
+		record.clickOnTargetRecordingAndOpenItsPlayback(selected_recording);
+		
+		
+		// 17. The recording playback page is displayed.
+		// 18. The recording is being played.
+		player_page.verifyTimeBufferStatusForXSec(10);
+		
+		//19. Click on the 'Courses' breadcrumb
+		player_page.returnToCoursesPage(course);
+//		driver.navigate().back();
+//		Thread.sleep(1000);
+//		record.returnToCourseListPage();
+//		Thread.sleep(1000);
+		
+		// 20. Select a non private course (ad).
+		course.selectCourseThatStartingWith("ad");
+		Thread.sleep(Page.TIMEOUT_TINY);
+		
+		// 21. Select a recording.
+		record.selectIndexCheckBox(1);
+		selected_recording = record.getFirstRecordingTitle();
+		
+		// 22. Select the "Recording Tasks -> Copy" menu item.
+		record.clickOnRecordingTaskThenCopy();
+		
+		// 23. "Copy" window is displayed.
+		copy.verifyThatCopyMenuOpen();
+		
+		// 24. Select a private course as the destination course.
+		copy.selectTargetCourseFromCourseListThatStartWith(PropertyManager.getProperty("User1"));
+		
+		// 25. Click the "Copy Recording" button.
+		copy.clickOnCopyButton();
+		Thread.sleep(Page.TIMEOUT_TINY);
+		
+		// 26. "Recording has been queued for copy" message box is displayed.
+		// 27. Click the "OK" button.
+		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
+		
+		// 28. Message box is closed.
+		confirm_menu.verifyConfirmWindowIsClosed();
+		
+		// 29. When the "Copy" process is finished, verify that recording is displayed in the course.
+		record.checkStatusExistenceForMaxTTime(360);
+		record.verifyThatTargetRecordingExistInRecordingList(selected_recording);
+		
+		// 30. Click the "Courses" breadcrumb.
+		record.returnToCourseListPage();
+		Thread.sleep(Page.TIMEOUT_TINY);
+		
+		// 31. Select the destination private course.
+		course.selectCourseThatStartingWith(PropertyManager.getProperty("User1"));
+		
+		Thread.sleep(Page.TIMEOUT_TINY);
+		
+		// 32. Verify that copied recording is displayed.
+		record.verifyThatTargetRecordingExistInRecordingList(selected_recording);
+		
+		// 33. Click on the recording.
+		// 34. Click on one of it's chapters.
+		record.clickOnTargetRecordingAndOpenItsPlayback(selected_recording);
+		
+		// 35. The recording playback page is displayed.
+		// 36. The recording is being played.
+		player_page.verifyTimeBufferStatusForXSec(10);
+		
+		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
 }}

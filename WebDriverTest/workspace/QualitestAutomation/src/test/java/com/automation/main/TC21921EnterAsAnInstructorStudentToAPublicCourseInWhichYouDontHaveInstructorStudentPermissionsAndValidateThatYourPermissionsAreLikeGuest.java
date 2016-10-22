@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.IntToDoubleFunction;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -131,7 +131,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 		
 		
 		// Click on course builder href link
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SelfRegConfig")));
 				
@@ -159,17 +159,17 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 				driver.switchTo().alert().accept();
 				break;
 			} catch (Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(temp_course_name);
 					
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton();
-		Thread.sleep(1000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 		
 		
 		// Search target user name in membership window
@@ -242,11 +242,11 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			
 			// 6. Click on "public courses" tab.
 			course.clickOnPublicCoursesTab();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 7. Click on a public course.
 			course.selectCourseThatStartingWith(temp_course_name);
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 8. Click on some recording.
 			String first_recording_name = record.getFirstRecordingTitle();
@@ -261,7 +261,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			// 11. In the breadcrumbs, click on the course name.
 			driver.navigate().back();
 			
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 12. Validate there is no "Start a test" nor "Start a recording" (big blue) buttons at the top right of the screen.
 			record.verifyNoStartRecording();
@@ -271,7 +271,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			wait.until(ExpectedConditions.visibilityOf(record.course_task_button));
 			Actions builder = new Actions(driver);
 			builder.moveToElement(record.course_task_button).build().perform();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 14. Validate that the options: "RSS feed", "Podcast" and "Video podcast" are the ONLY menu options and they are all enabled (clickable).
 //			record.verifyElementIsEnabled(record.rssfeed, "RSS feed");
@@ -289,7 +289,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			
 			// 16. Hover over "Recording tasks" menu.
 			record.moveToElement(record.recording_tasks_button, driver).perform();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 17. Validate that the option "Download recording" is the ONLY displayed menu option and it is enabled (clickable).
 //			record.verifyElementIsEnabled(record.download_button, "Download recording");
@@ -299,11 +299,11 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			
 			// 18. Click on the "Additional Content" tab.
 			record.clickOnAdditionContentTab();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 19. Hover over "Course tasks" menu.
 			record.moveToElement(record.course_task_button, driver).perform();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 20. Validate that the options: "RSS feed", "Podcast" and "Video podcast" are the ONLY menu options and they are all enabled (clickable)
 //			record.verifyElementIsEnabled(record.rssfeed, "RSS feed");
@@ -316,11 +316,11 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			
 			// 22. Click on the 'Student Recordings' tab.
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 23. Hover over "Course tasks" menu.
 			record.moveToElement(record.course_task_button, driver).perform();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 24. Validate that the options: "RSS feed", "Podcast" and "Video podcast" are the ONLY menu options and they are all enabled (clickable).
 //			record.verifyElementIsEnabled(record.rssfeed, "RSS feed");
@@ -333,7 +333,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			
 			// 26. Hover over "Recording tasks" menu.
 			record.moveToElement(record.recording_tasks_button, driver).perform();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 27. Validate that the option "Download recording" is the ONLY displayed menu option and it is enabled (clickable).
 //			record.verifyElementIsEnabled(record.download_button, "Download recording");
@@ -346,7 +346,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 			// Sign out
 			top_bar_helper.clickOnSignOut();
 			
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 		// 30. Uncheck make this course public and uneroll SuperUser.
@@ -355,15 +355,15 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		top_bar_helper.clickOnSignOut();
 					
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		tegrity.loginAdmin("Admin");
 			
 		// Click on course builder href link
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SelfRegConfig")));
 					
@@ -378,17 +378,17 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 				driver.switchTo().alert().accept();
 				break;
 			} catch (Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 			
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(temp_course_name);
 						
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton();
-		Thread.sleep(1000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 			
 			
 		// Search target user name in membership window

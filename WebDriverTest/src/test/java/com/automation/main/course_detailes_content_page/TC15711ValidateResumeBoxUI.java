@@ -4,7 +4,7 @@ package com.automation.main.course_detailes_content_page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -150,12 +150,12 @@ public class TC15711ValidateResumeBoxUI {
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// Logout.
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 2. Login as an INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Click on a certain course.
 		String current_course = course.selectCourseThatStartingWith("Ba");
@@ -165,7 +165,7 @@ public class TC15711ValidateResumeBoxUI {
 		
 		// 5. Click on one of the chapter and wait the player will start play the recording until you get to the second slide. 
 		record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_title);
-		player_page.verifyTimeBufferStatusForXSec(3);
+		player_page.verifyTimeBufferStatusForXSec(20);
 		player_page.clickElement(player_page.next_button);
 		
 		for(String handle: driver.getWindowHandles()) {
@@ -184,7 +184,7 @@ public class TC15711ValidateResumeBoxUI {
 		record.verifyFirstExpandableRecording();
 		
 		// 7.1. The "> Resume watching +(slide 2)" box is displayed.
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.verifyWebElementTargetText(record.list_of_resume_buttons.get(0), "Resume Watching");
 
 		// 7.2. The recording chapters are displayed to the user.
@@ -224,7 +224,7 @@ public class TC15711ValidateResumeBoxUI {
 				
 		// 9.1. Redirect to player page.
 		// 9.2. The player start playing the recording from the slide mentioned in the "Resume Watching" text box.
-		player_page.verifyTimeBufferStatusForXSec(5);
+		player_page.verifyTimeBufferStatusForXSec(20);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

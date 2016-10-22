@@ -4,7 +4,7 @@ package com.automation.main.delete_recordings;
 
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -118,7 +118,7 @@ DesiredCapabilities capability;
 		// 3. Click on "Student Recordings" tab.
 		record.clickOnStudentRecordingsTab();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 4. Select recording to delete.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -131,27 +131,13 @@ DesiredCapabilities capability;
 	
 		// 6. Verify that only selected recording displayed in "List of Recordings".
 		List<String> delete_recording_list = delete_menu.getRecordingList();
-		
-		if(delete_recording_list.size() == 1) {
-			if(delete_recording_list.contains(selected_recording_title)) {
-				System.out.println("Verified that only selected recording displayed in list of recordings.");
-				ATUReports.add("Verified that only selected recording displayed in list of recordings.", LogAs.PASSED, null);
-				Assert.assertTrue(true);
-			} else {
-				System.out.println("Verified that not selected recording displayed in list of recordings.");
-				ATUReports.add("Verified that not selected recording displayed in list of recordings.",selected_recording_title ,LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				//Assert.assertTrue(false);
-			}
-  		} else {
-			System.out.println("Delete recording list not contain just one recording. It contains: " + delete_recording_list.size());
-			ATUReports.add("Delete recording list not contain just one recording. It contains: " + delete_recording_list.size(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-		}
+		delete_menu.verifySelectedRecordingsInDeleteMenu(delete_recording_list);
+	
 		
 		// 7. Click "Delete" button
 		delete_menu.clickOnDeleteButton();
 			
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. "Delete" window is closed.
 		boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();

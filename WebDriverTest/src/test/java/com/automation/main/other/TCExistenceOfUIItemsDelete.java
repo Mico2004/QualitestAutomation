@@ -3,7 +3,7 @@
 import java.util.ArrayList;
 import java.text.DateFormat;
 import java.util.Date;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -118,7 +118,7 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 		
 			//7.click all check box
 			record.checkall.click();// make all checkboxes marked
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			record.verifyAllCheckedboxSelected();
 			
@@ -143,11 +143,11 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 			
 			
 			record.toDeleteMenu();
-	        Thread.sleep(2000);
+	        Thread.sleep(Page.TIMEOUT_TINY);
 			//10.verify Delete title
           
             delete.verifyDeleteMenuTitle();
-		    Thread.sleep(2000);
+		    Thread.sleep(Page.TIMEOUT_TINY);
 			//11.verify menu color
 		    delete.verifyDeleteColor(record);
 			///12.verify text

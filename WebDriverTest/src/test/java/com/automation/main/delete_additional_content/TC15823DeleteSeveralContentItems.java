@@ -5,6 +5,9 @@ package com.automation.main.delete_additional_content;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -112,16 +115,24 @@ public class TC15823DeleteSeveralContentItems {
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
-		// 2. Select course (Ab).
+		// 2. Select course (Ab).	
 		currentCourse = course.selectCourseThatStartingWith("Ab");
 		System.out.println("Current course: " + currentCourse);
 		
 		// 3. Click the "Additional Content" tab.
 		record.clickOnAdditionContentTab();
-		Thread.sleep(1000);
-		
+		Thread.sleep(Page.TIMEOUT_TINY);
+		if(record.getCoursAdditionalContentList().size()<2){ // in case there isn't enough content in the course - activate preset 
+			record.signOut();
+			tegrity.loginCourses("SuperUser");
+			course.copyRecordingFromCourseStartWithToCourseStartWithOfType("Bank", "Ab", 1, record, copy, confirm_menu);
+			course.signOut();
+			tegrity.loginCourses("User1");
+			currentCourse = course.selectCourseThatStartingWith("Ab");
+			record.clickOnAdditionContentTab();		
+		}
 		// 4. Select content item.
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);		
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 		String first_target_additional_content = record.getNameTargetIndexAdditionalContent(1);
 		String first_target_additional_content_type = record.getTypeTargetIndexAdditionalContent(1);

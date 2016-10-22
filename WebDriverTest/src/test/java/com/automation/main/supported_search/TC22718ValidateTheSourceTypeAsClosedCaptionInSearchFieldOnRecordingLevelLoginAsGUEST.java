@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -169,7 +169,7 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings.makeSureThatMakeCoursePublicIsSelected();
 		course_settings.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//4. select record and add close caption
 		record.waitForVisibility(record.recordings_tab); 
@@ -180,7 +180,7 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
 		edit_recording.addCaptionSrtToFirstChapterRecording(path);
 				
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String text_from_caption_for_test = "QualitestAutomationCaption";	
 //				
 		record.signOut();
@@ -193,10 +193,10 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		tegrity.loginAsguest();
 		course.waitForVisibility(course.first_course_button);
 		// 3.Click on course
-		Thread.sleep(1500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.selectCourseThatStartingWith("Ab");
 		/// 4.Click on one of the Recording link
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 	     record.waitForVisibility(record.first_recording);
 
 	     ///5.Click on one of the Recording link ,wait first if recording is still being copied from recording bank
@@ -229,7 +229,7 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		player_page.verifyBreadcrumbsForSearcRecoding(course_name);
 			
 		driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		///10.The next result display below the current result in case there is next result.
 		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,2);
@@ -250,7 +250,7 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		
 		//14.navigate back to player recording
 		driver.navigate().back();
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 		
 		//15.click on "Courses" and verify course page

@@ -10,7 +10,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -132,7 +132,7 @@ public class TestCase15642DeleteSeveralRecordings {
 		
 		// 4. Select "Recording Tasks -> Delete".
 		record.toDeleteMenu();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		// 5. Verify that only selected recording displayed in "List of Recordings".
 		List<String> delete_recording_list = delete_menu.getRecordingList();
@@ -156,7 +156,7 @@ public class TestCase15642DeleteSeveralRecordings {
 		// 6. Click "Delete" button
 		delete_menu.clickOnDeleteButton();
 			
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 7. "Delete" window is closed.
 		boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();

@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -135,6 +135,8 @@ public class PlayerPage extends Page {
 	List<WebElement> SearchResultTimes;
 	@FindBy(css= ".SearchResultLocation")
 	public List<WebElement> SearchResultlocation;
+	@FindBy(id="tegrityBreadcrumbsBox")
+	public WebElement breadcrumb;
 
 
 	
@@ -149,6 +151,12 @@ public class PlayerPage extends Page {
 			return false;
 		}
 
+	if(isAlertPresent()){
+		ATUReports.add("Player page wasn't load properly - alert is dispalyed(screenshot)",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		Assert.assertTrue(false);
+		}
+		
+		
 		// Wait for switching frame
 		for (int i = 0; i < 25; i++) {
 			try {
@@ -166,18 +174,18 @@ public class PlayerPage extends Page {
 					Assert.assertTrue(false);
 					return false;
 				} else {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_SMALL);
 				}
 			}
 		}
-
-		// Thread.sleep(10000);
+	
+		// Thread.sleep(Page.TIMEOUT_TINY);
 
 		// Wait max 45sec to load the player
 //		if((driver instanceof InternetExplorerDriver) || (driver instanceof ChromeDriver)){
-			Thread.sleep(5000);
+			Thread.sleep(Page.TIMEOUT_XTRA_LARGE);
 			exitInnerFrame();
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			getIntoFrame(0);
 //		}
 		
@@ -196,9 +204,9 @@ public class PlayerPage extends Page {
 		}
 		
 //		if((driver instanceof InternetExplorerDriver) || (driver instanceof ChromeDriver)){
-			Thread.sleep(5000);
+			Thread.sleep(Page.TIMEOUT_XTRA_LARGE);
 			exitInnerFrame();
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			getIntoFrame(0);
 //		}
 
@@ -213,7 +221,7 @@ public class PlayerPage extends Page {
 		int k_same_buffering_time = 0;
 		while (i < seconds) {
 			i++;
-			Thread.sleep(2500);
+			Thread.sleep(Page.TIMEOUT_SMALL);
 
 			try {
 				String current_second = time_buffer_status.getText().split("/")[0].split(":")[2];
@@ -268,7 +276,7 @@ public class PlayerPage extends Page {
 			ATUReports.add("The tegrity University logo is not displayed.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);	
 		}
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		Point logo_location = tegrity_universty_logo.getLocation();
 		Point serach_box= search_box.getLocation();
 		
@@ -353,7 +361,7 @@ public class PlayerPage extends Page {
 		
 		i=0;
 		for (WebElement e : driver.findElements(By.cssSelector(".SearchResultContext"))) {			    		
-				String current_element = getTextFromWebElement(e,5);						
+				String current_element = getTextFromWebElement(e,5);					
 				
 				if (current_element.isEmpty()) {
 					System.out.println("Not Verify that the results of the row of context are fine.");
@@ -487,7 +495,7 @@ public class PlayerPage extends Page {
 			String initial_seconds = "00";
 			waitForVisibility(pause_button);
 			while (pause_button.isDisplayed()) {
-				Thread.sleep(1200);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				String current_seconds = time_buffer_status.getText().split("/")[0].split(":")[2];
 				if (initial_seconds.equals(current_seconds)) {
 					System.out.println("The time buffer status is not moving in seconds.");
@@ -544,17 +552,17 @@ public class PlayerPage extends Page {
 
 			robot.mouseMove(500, 500);
 			robot.keyPress(KeyEvent.VK_CONTROL);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyPress(KeyEvent.VK_ALT);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyPress(KeyEvent.VK_L);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyRelease(KeyEvent.VK_ALT);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyRelease(KeyEvent.VK_CONTROL);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyRelease(KeyEvent.VK_L);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			System.out.println("reached players dialog");
 		} catch (AWTException e) {
 			// TODO Auto-generated catch block
@@ -567,10 +575,10 @@ public class PlayerPage extends Page {
 	public void verifySearchReturnEmptyList(String to_search) {
 		try {
 
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			search_box.clear();
 			search_box.sendKeys(to_search + Keys.ENTER);	
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			search_box.clear();
 			
 			System.out.println("search the record: " + to_search);
@@ -601,10 +609,10 @@ public class PlayerPage extends Page {
 
 	public void searchRecord(String to_search) throws InterruptedException{
 
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		search_box.clear();
 		search_box.sendKeys(to_search + Keys.ENTER);	
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		search_box.clear();
 		
 		System.out.println("search the record: " + to_search);
@@ -617,10 +625,10 @@ public class PlayerPage extends Page {
 	public void verifySearchForRecordingExist(String to_search) {
 		try {
 
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			search_box.clear();
 			search_box.sendKeys(to_search + Keys.ENTER);	
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			search_box.clear();
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
@@ -1043,7 +1051,7 @@ public class PlayerPage extends Page {
 				ATUReports.add("Time out", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				return caption_to;
 			}
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			time_out++;
 		}
 		try {
@@ -1067,10 +1075,13 @@ public class PlayerPage extends Page {
 
 	/// return to recordings page
 	public void returnToRecordingPageByNameAsUserOrGuest(String course_name, RecordingHelperPage rec) {
+	try{
 		for (String handler : driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
 			break;
 		}
+		waitForVisibility(breadcrumb);
+		Thread.sleep(Page.TIMEOUT_MEDIUM);
 		if ((breadcrumbs_box_elements_list.get(1).getText()).equals(course_name)) {
 			System.out.println("correct course name");
 			ATUReports.add("correct course name", "contains", "contains", "contains", LogAs.PASSED, null);
@@ -1089,6 +1100,9 @@ public class PlayerPage extends Page {
 			System.out.println("course name unknown");
 			ATUReports.add("course name unknown", "breadcrumbs", "contains", "not contains", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
+		}
+		}catch(Exception e){
+			ATUReports.add("Clicking on breadcrumb failed(Screenshot) ",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
@@ -1154,7 +1168,7 @@ public class PlayerPage extends Page {
 		System.out.println("bookmark name written successfully");
 		add_bookmark_button.click();
 		System.out.println("clicked add bookmark button");
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		verifyBookMarkVisibility(time_to_add_bookmark, bookmark);
 
 	}
@@ -1162,7 +1176,10 @@ public class PlayerPage extends Page {
 	/// this function verifies added bookmark according to its name and capture
 	/// time
 	public void verifyBookMarkVisibility(String time_to_add_bookmark, String bookmark_name) {
-		int index = 0;
+	try{	int index = 0;
+		WebDriverWait wait=new WebDriverWait(driver, 15);
+		wait.until(ExpectedConditions.visibilityOfAllElements(bookmark_names));
+		Thread.sleep(Page.TIMEOUT_TINY);
 		for (WebElement e : bookmark_names) {
 
 			if (e.getText().equals(bookmark_name)) {
@@ -1180,9 +1197,13 @@ public class PlayerPage extends Page {
 			index++;
 		}
 		System.out.println("not verified bookmark name and time");
-		ATUReports.add("verify bookmark name and time", "bookmark name and time", "displayed correctly",
-				"not displayed or displayed not correctly", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add("verify bookmark name and time (Screenshot)", "bookmark name and time: "+bookmark_name+", "+time_to_add_bookmark, 
+				"Wrong bookmark name and time (Screenshot)", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
+	}catch(Exception e){
+		ATUReports.add("Bookmark verification failed", e.getMessage(),LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		
+	}
 
 	}
 
@@ -1193,11 +1214,12 @@ public class PlayerPage extends Page {
 		while (!player_timer.getText().contains(seconds)) {
 			if (time_out == 120) {
 				System.out.println("time out");
-				Assert.assertTrue(false);
 				ATUReports.add("Time out", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+				
 
 			}
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_SMALL);
 			time_out++;
 		}
 		try {
@@ -1230,7 +1252,7 @@ public class PlayerPage extends Page {
 			String buffering = time_buffer_status.getText();
 			
 			if(buffering.equals("Buffering")) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_SMALL);
 				continue;
 			} else if (buffering.split("/")[0].trim().equals(pre_time_buffer)) {
 				break;
@@ -1247,7 +1269,7 @@ public class PlayerPage extends Page {
 			String buffering = time_buffer_status.getText();
 				
 			if(buffering.equals("Buffering")) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_SMALL);
 				continue;
 			}
 			
@@ -1263,10 +1285,10 @@ public class PlayerPage extends Page {
 			if (CurrentTime.equals(EndTime)) {
 				break;
 			} else if(CurrentTime.equals(AlmostEndTime)){	
-				Thread.sleep(4000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				break;
 			} else {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 					
 		}

@@ -6,7 +6,7 @@ package com.automation.main;
 
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -118,13 +118,13 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 		// Precondition
 		initializeCourseObject();
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_youtube_integration, "enable youtube integration");
 		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_automated_capitioning, "enable automated captioning");
 		advanced_service_settings_page.clickOnOkbutton();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		top_bar_helper.clickOnSignOut();
 		
 		
@@ -147,10 +147,10 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 			// 4. Login as Full Admin / Help Desk Admin
 			if (i_login == 0) {
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			} else {
 				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			// 5. Click on "view course list" under "courses" section.
@@ -158,26 +158,26 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 		
 			
 			// 6. In "All courses" page search for the full name of the Ab course.
-			Thread.sleep(5000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			admin_dashboard_view_course_list.searchForTargetCourseName(target_course_name);
 			
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 7. Click on that course.
 			admin_dashboard_view_course_list.clickOnFirstCourseLink();
 			
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			
 			// Loop throuh Recordings, Student Recordings and Tests Tab
 			for (int i_tabs = 0; i_tabs<3; i_tabs++) {
 				if (i_tabs == 1) {
 					record.clickOnStudentRecordingsTab();
-					Thread.sleep(2000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				} else if (i_tabs == 2) {
 					record.clickOnTestsTab();
-					Thread.sleep(2000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 				
 				
@@ -189,7 +189,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				// 9. Hover over "Recording tasks" menu.
 				record.recording_tasks_button.click();
 				
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 10. The "recording tasks" menu opens.
 				boolean is_shown = record.isRecordingTasksShown();
@@ -249,7 +249,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				record.searchbox.click();
 				record.getCheckbox().click();
 				
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 14. The checkbox is checked.
 				boolean is_first_checkbox_selected = record.getCheckbox().isSelected();
@@ -267,7 +267,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				
 				// 15. Hover over "Recording tasks" menu.
 				record.recording_tasks_button.click();
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 16. The "recording tasks" menu opens.
 				is_shown = record.isRecordingTasksShown();
@@ -315,7 +315,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				
 				// 20. Hover over "Recording tasks" menu.
 				record.recording_tasks_button.click();
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 21. The "recording tasks" menu opens.
 				is_shown = record.isRecordingTasksShown();

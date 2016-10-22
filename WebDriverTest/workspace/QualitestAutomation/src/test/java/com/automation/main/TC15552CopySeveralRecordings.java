@@ -3,7 +3,7 @@ package com.automation.main;
 
 
 import java.util.List;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -95,14 +95,14 @@ public class TC15552CopySeveralRecordings {
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 2. Select abc course.
 		targetCourse = course.selectCourseThatStartingWith("abc");
 		System.out.println("First course clicked: " + targetCourse);
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Get abc course recording list.
 		int number_of_recordings_in_target_course = record.getNumberOfRecordings();
@@ -119,9 +119,9 @@ public class TC15552CopySeveralRecordings {
 			
 			record.checkAllCheckBox();
 			record.clickOnRecordingTaskThenDelete();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			delete_menu.clickOnDeleteButton();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 		// 4. Go back to courses list.
@@ -149,7 +149,7 @@ public class TC15552CopySeveralRecordings {
 		record.clickOnRecordingTaskThenCopy();
 		
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. Select destination course.
 		boolean is_target_course_selected = copy.selectTargetCourseFromCourseList(targetCourse);
@@ -159,12 +159,12 @@ public class TC15552CopySeveralRecordings {
 			System.out.println("Target course not selected: " + targetCourse);
 		}
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 				
 		// 9. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 				
 		// 10. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecordings();
@@ -228,13 +228,13 @@ public class TC15552CopySeveralRecordings {
 		// 16. Go back to courses list.
 		record.returnToCourseListPage();
 				
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 17. Select abc course.
 		targetCourse = course.selectCourseThatStartingWith("abc");
 		System.out.println("target course clicked: " + targetCourse);
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 18. Get first course recording list after copying.
 		List<String> after_copying_target_course_recordings_list = record.getCourseRecordingList();

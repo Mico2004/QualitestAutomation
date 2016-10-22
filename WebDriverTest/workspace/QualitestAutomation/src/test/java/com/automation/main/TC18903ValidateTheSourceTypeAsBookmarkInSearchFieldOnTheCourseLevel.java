@@ -8,7 +8,7 @@ import java.util.List;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -136,7 +136,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// TODO: Delete all bookmarks and create new bookmark
 		Date date = new Date();
@@ -152,7 +152,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 		//player_page.moveToElementAndPerform(driver.findElement(By.cssSelector(".BookmarkSelected")),driver);
 		
 		record.signOut();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// Looping for Student, Guest and ADMIN
@@ -171,24 +171,24 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 				// 2. Login as INSTRUCTOR.
 			tegrity.loginCourses("User1");
 			}
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 	
 			if(type_of_user != 0) {
 				// 3. Open some course.
 				course.selectCourseThatStartingWith(current_course);
 			} else {
 				// Click on "view course list" under "courses" section.
-				Thread.sleep(500);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dashboard_view_course_list.searchForTargetCourseName(current_course);
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// Click on that course name.
 				admin_dashboard_view_course_list.clickOnFirstCourseLink();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			
@@ -227,7 +227,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 			
 			// 6. Hover over the chapter icon.
 			search_page.moveToElement(search_page.link_icon_list.get(0), driver).perform();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 6.1. The source displayed as a hint.
 			search_page.verifyWebElementHaveTargetAttributeTitle(search_page.link_icon_list.get(0), "Bookmark");
@@ -242,7 +242,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 9. Click on title of the bookmark.
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
@@ -254,12 +254,12 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			if(type_of_user==3) {
 				// 10. Click on the course name in the breadcrumb.
 				search_page.clickBackToCourseInBreadcrumbs();
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 11. Delete the bookmark from the recording that we mentioned in the preconditions.
 				record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
@@ -267,7 +267,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 				player_page.deleteAllBookmark();
 				search_page.exitInnerFrame();
 				driver.navigate().back();
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// 12. Search the bookmark from the recording that we mentioned in the preconditions.
 				top_bar_helper.search_box_field.click();
@@ -280,11 +280,11 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 				search_page.verifySearchResultIsEmpty();
 				
 			}
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 14. Sign Out.
 			record.signOut();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 		// Unpublic Ab course1. 

@@ -7,7 +7,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -52,7 +52,7 @@ public class AdminDashboardPage extends Page {
 		for (int i = 0; i < courses_submenu.size(); i++) {
 			if (courses_submenu.get(i).getText().equals(target)) {
 				try {
-					Thread.sleep(1500);
+					Thread.sleep(Page.TIMEOUT_TINY);
 					waitForVisibility(courses_submenu.get(i));
 					courses_submenu.get(i).click();					
 					System.out.println("Click on target submenu of Courses: " + target);
@@ -86,9 +86,9 @@ public class AdminDashboardPage extends Page {
 				if(users_submenu.size()>0) {
 					break;
 				}
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			} catch (Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 

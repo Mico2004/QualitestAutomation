@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -58,7 +58,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function clicks on ok button of copy menu
@@ -86,7 +86,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function clicks on ok button of copy menu
@@ -120,7 +120,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function clicks on ok button of copy menu
@@ -151,7 +151,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function clicks on ok button of copy menu
@@ -182,7 +182,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function return true if confirmation menu is closed,
@@ -225,7 +225,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	public void verifyCopySourceRecordingStatus(String expected) {
@@ -278,7 +278,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function clicks on ok button of cannot move in process or fail
@@ -311,7 +311,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function clicks on ok button of The following recording(s) could not
@@ -344,7 +344,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	public void clickOnOkButtonAfterConfirmEditRecordingProperties() throws InterruptedException {
@@ -354,10 +354,10 @@ public class ConfirmationMenu extends Page {
 					break;
 				} else {
 					System.out.println(error_msg_body_list.get(0).getText());
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			} catch (Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 		}
@@ -383,7 +383,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function check that there is message: "Please select an instructor",
@@ -468,7 +468,7 @@ public class ConfirmationMenu extends Page {
 	// appears in HTML source code.
 	public void clickOnOkButtonAfterConfirmAddAdditionalContentFile(String file_name) throws InterruptedException {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
@@ -485,7 +485,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	public void clickOnOkButtonAfterConfirmAddAdditionalContentLink() throws InterruptedException {
@@ -506,7 +506,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	public void clickOnOkButtonAfterConfirmEmailSetting() throws InterruptedException {
@@ -527,7 +527,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	/// click ok after send support email
@@ -550,7 +550,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	/// confirmation after changing setting
@@ -573,7 +573,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 	
 	
@@ -611,7 +611,7 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
-			Thread.sleep(4000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
 			ok_buttonCss.click();
 			ok_button.click();
@@ -620,7 +620,7 @@ public class ConfirmationMenu extends Page {
 		} catch (Exception e) {
 			
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 	
 	
@@ -635,7 +635,7 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, null);
 				Assert.assertEquals(false, true);
 			}
-			Thread.sleep(4000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
 			ok_buttonCss.click();
 			ok_button.click();
@@ -644,7 +644,7 @@ public class ConfirmationMenu extends Page {
 		} catch (Exception e) {
 			
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 	
 }

@@ -2,7 +2,7 @@ package com.automation.main.delete_recordings;
 
 
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -116,7 +116,7 @@ public class TC15640TryToDeleteAStudentRecordingAsAStudent {
 		// 4. Select recording made by this STUDENT.
 //		String user_name_of_student = record.getUserNmae();
 //		int recording_by_user_index = record.getTargetUserNameRecordingIndex(user_name_of_student);
-//		Thread.sleep(2000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 	
 		// 5. Click the "Recording Tasks" button.

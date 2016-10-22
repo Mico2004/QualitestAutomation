@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -139,8 +139,9 @@ public class TestSuitePreSetCopyRecordings_CopyRecordings {
 	}
 
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
+	@Test(description = "Login course page")
 	public void loginCourses() throws InterruptedException {
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		System.out.println("b0");
 		  final List<Integer> CourseAbContent = Arrays.asList(0,2); //For Ab		
 		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {

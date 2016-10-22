@@ -12,7 +12,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -148,7 +148,7 @@ public class TestCaseCopyOneRecordingToSeveralCoureses {
 		// 6. Go through destination courses and check that target recording not appear, is so delete it
 		for (String course_name : target_course_list) {
 			
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			course.clickOnTargetCourseName(course_name);
 			
@@ -158,7 +158,7 @@ public class TestCaseCopyOneRecordingToSeveralCoureses {
 			
 		}
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 7. Select course.
 		course.clickOnTargetCourseName(currentCourse);

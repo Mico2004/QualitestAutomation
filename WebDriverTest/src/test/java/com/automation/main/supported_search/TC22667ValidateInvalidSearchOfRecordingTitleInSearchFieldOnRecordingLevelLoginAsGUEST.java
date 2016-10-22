@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -48,6 +48,7 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import junitx.util.PropertyManager;
 
 
 
@@ -162,7 +163,7 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 			record.clickOnCourseTaskThenCourseSettings();
 			course_settings.makeSureThatMakeCoursePublicIsSelected();
 			course_settings.clickOnOkButton();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			record.waitForVisibility(record.checkbox2);
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
@@ -182,12 +183,12 @@ public class TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 			
 			//3.Select a course
 			course.waitForVisibility(course.first_course_button);
-			String course_name=	course.selectCourseThatStartingWith("Ab");
+			String course_name=	course.selectCourseThatStartingWith(PropertyManager.getProperty("course1"));
 			
 			///4.Click on one of the Recording link
 		 
 			record.waitForVisibility(record.recordings_tab);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.convertRecordingsListToNames();
 			String OtherRecordName = record.selectRecordingThatChangeFromThatName(recording_name);
 			record.clickOnTargetRecordingAndOpenItsPlayback(OtherRecordName);

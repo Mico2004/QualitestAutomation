@@ -4,7 +4,7 @@ package com.automation.main.move_recording;
 
 
 import java.util.List;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -123,7 +123,7 @@ public class TC15899VerifyAMovingCopyingStatusOfADestinationRecording {
 		// 4. Select "Recording Tasks -> Move"
 		record.clickOnRecordingTaskThenMove();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 5. Select destination course.
 		copy.selectTargetCourseFromCourseList(target_course);
@@ -166,7 +166,7 @@ public class TC15899VerifyAMovingCopyingStatusOfADestinationRecording {
 		// 8. While recording is being copied, click the "Courses" link at the breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(800);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9. Select destination course.
 		course.selectTargetCourse(target_course);

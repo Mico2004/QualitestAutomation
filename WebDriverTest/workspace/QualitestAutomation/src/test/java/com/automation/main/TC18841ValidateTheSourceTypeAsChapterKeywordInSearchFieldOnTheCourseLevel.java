@@ -8,7 +8,7 @@ import java.util.List;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -136,7 +136,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// set Chapter Keyword for recording
 		Date date = new Date();
@@ -150,7 +150,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		//edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_chapter_keyword);
 		
 		//record.signOut();
-		//Thread.sleep(3000);
+		//Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// Looping for Student, Guest and ADMIN
@@ -169,7 +169,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			if(type_of_user < 3) {
 				// 3. Open some course.
@@ -179,13 +179,13 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				admin_dashboard_view_course_list.searchForTargetCourseName(current_course);
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				// Click on that course name.
 				admin_dashboard_view_course_list.clickOnFirstCourseLink();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			
@@ -228,7 +228,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
 			Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
@@ -258,7 +258,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			// 8. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 9. Click on title of the manual chapter keyword.
 			search_page.exitInnerFrame();
@@ -270,7 +270,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			// 10. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 11. Click on the recording title of the chapter.
 			search_page.exitInnerFrame();
@@ -283,7 +283,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			if((type_of_user!=2) && (type_of_user == 1)) {
 				// 13. Click on the course name in the breadcrumb.
@@ -292,7 +292,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 				} else {
 					search_page.clickBackToCourseInBreadcrumbsForAdminDashBoard();
 				}
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				
 				if(type_of_user ==0 || type_of_user==3) {
 					
@@ -312,7 +312,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 						search_page.clickBackToCourseInBreadcrumbsForAdminDashBoard();
 					}
 				
-					Thread.sleep(2000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				
 					// 15. Search the new manual chapter keyword.
 					top_bar_helper.searchForTargetText(new_recording_chapter_keyword);
@@ -335,11 +335,11 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 					recording_chapter_keyword = new_recording_chapter_keyword;
 				}
 			}
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 17. Sign Out.
 			record.signOut();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 		// Unpublic Ab course1. 

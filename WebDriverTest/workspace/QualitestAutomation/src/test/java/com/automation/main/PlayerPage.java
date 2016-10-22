@@ -8,7 +8,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -43,7 +43,7 @@ import javax.print.DocFlavor.STRING;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -159,18 +159,18 @@ public class PlayerPage extends Page {
 					Assert.assertTrue(false);
 					return false;
 				} else {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			}
 		}
 
-		// Thread.sleep(10000);
+		// Thread.sleep(Page.TIMEOUT_TINY);
 
 		// Wait max 45sec to load the player
 //		if((driver instanceof InternetExplorerDriver) || (driver instanceof ChromeDriver)){
-			Thread.sleep(5000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			exitInnerFrame();
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			getIntoFrame(0);
 //		}
 		
@@ -189,9 +189,9 @@ public class PlayerPage extends Page {
 		}
 		
 //		if((driver instanceof InternetExplorerDriver) || (driver instanceof ChromeDriver)){
-			Thread.sleep(5000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			exitInnerFrame();
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			getIntoFrame(0);
 //		}
 
@@ -206,7 +206,7 @@ public class PlayerPage extends Page {
 		int k_same_buffering_time = 0;
 		while (i < seconds) {
 			i++;
-			Thread.sleep(2500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			try {
 				String current_second = time_buffer_status.getText().split("/")[0].split(":")[2];
@@ -266,7 +266,7 @@ public class PlayerPage extends Page {
 			String initial_seconds = "00";
 			waitForVisibility(pause_button);
 			while (pause_button.isDisplayed()) {
-				Thread.sleep(1200);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				String current_seconds = time_buffer_status.getText().split("/")[0].split(":")[2];
 				if (initial_seconds.equals(current_seconds)) {
 					System.out.println("The time buffer status is not moving in seconds.");
@@ -323,17 +323,17 @@ public class PlayerPage extends Page {
 
 			robot.mouseMove(500, 500);
 			robot.keyPress(KeyEvent.VK_CONTROL);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyPress(KeyEvent.VK_ALT);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyPress(KeyEvent.VK_L);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyRelease(KeyEvent.VK_ALT);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyRelease(KeyEvent.VK_CONTROL);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyRelease(KeyEvent.VK_L);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			System.out.println("reached players dialog");
 		} catch (AWTException e) {
 			// TODO Auto-generated catch block
@@ -346,16 +346,16 @@ public class PlayerPage extends Page {
 	public void verifySearchReturnEmptyList(String to_search) {
 		try {
 
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			search_box.clear();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			search_box.sendKeys(to_search);
 			Robot robot = new Robot();
 			robot.mouseMove(-1000, 100);
 			robot.keyPress(KeyEvent.VK_ENTER);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyRelease(KeyEvent.VK_ENTER);
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				break;
@@ -383,16 +383,16 @@ public class PlayerPage extends Page {
 	public void verifySearchForRecordingExist(String to_search) {
 		try {
 
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			search_box.clear();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			search_box.sendKeys(to_search);
 			Robot robot = new Robot();
 			robot.mouseMove(-1000, 100);
 			robot.keyPress(KeyEvent.VK_ENTER);
-			Thread.sleep(200);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			robot.keyRelease(KeyEvent.VK_ENTER);
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			for (String handler : driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
 				break;
@@ -467,7 +467,7 @@ public class PlayerPage extends Page {
 			for (WebElement we : bookmark_list) {
 				try {     
 				moveToElement(we, driver).perform();
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 					clickElement(driver.findElement(By.xpath(".//*[@id='BookmarkList']/div[" +Integer.toString(index) + "]/img[3]" )));
 				}catch(Exception Ex) {
 				
@@ -749,7 +749,7 @@ public class PlayerPage extends Page {
 				ATUReports.add("Time out", LogAs.FAILED, null);
 				return caption_to;
 			}
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			time_out++;
 		}
 		try {
@@ -826,7 +826,7 @@ public class PlayerPage extends Page {
 		System.out.println("bookmark name written successfully");
 		add_bookmark_button.click();
 		System.out.println("clicked add bookmark button");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		verifyBookMarkVisibility(time_to_add_bookmark, bookmark);
 
 	}
@@ -869,7 +869,7 @@ public class PlayerPage extends Page {
 				ATUReports.add("Time out", LogAs.FAILED, null);
 
 			}
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			time_out++;
 		}
 		try {
@@ -900,7 +900,7 @@ public class PlayerPage extends Page {
 			next_button.click();
 			String buffering = time_buffer_status.getText();
 			if(buffering.equals("Buffering")) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				continue;
 			} else if (buffering.split("/")[0].trim().equals(pre_time_buffer)) {
 				break;
@@ -924,15 +924,15 @@ public class PlayerPage extends Page {
 			AlmostEndTime = EndTime.substring(0, EndTime.length()-1) + String.valueOf(lastDigit) ;
 					
 			if(buffering.equals("Buffering")) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				continue;
 			} else if (CurrentTime.equals(EndTime)) {
 				break;
 			} else if(CurrentTime.equals(AlmostEndTime)){	
-				Thread.sleep(4000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				break;
 			} else {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			

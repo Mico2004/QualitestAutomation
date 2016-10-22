@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -133,7 +133,7 @@ public class TC15897ViewTheUploadedFile {
 		// 3.Select course+delete previous files
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		//3.1 try to delete older file if exists
 		String download_path1= System.getProperty("user.home") + File.separatorChar +"Downloads"+ File.separatorChar+file_name1;
 		String download_path2= System.getProperty("user.home") + File.separatorChar +"Downloads"+ File.separatorChar+file_name2;
@@ -142,14 +142,14 @@ public class TC15897ViewTheUploadedFile {
 		record.tryToDeleteOlderFile(download_path2);
 		// 4.Select "Course tasks -> Add Additional Content File" menu item
 		record.toUploadAdditionalContentFile();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 5.add file
 		
 		add_additional_content_window.uploadFileByPath(fullPathToFile1, confirm_menu);
         record.waitForVisibility(record.content_tasks_button);
     	// 4.Select "Course tasks -> Add Additional Content File" menu item
         record.toUploadAdditionalContentFile();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 5.add file
 		add_additional_content_window.uploadFileByPath(fullPathToFile2, confirm_menu);
         record.waitForVisibility(record.content_tasks_button);
@@ -198,7 +198,7 @@ public class TC15897ViewTheUploadedFile {
 					ATUReports.add("file is bigger or smaller for mega representation", LogAs.FAILED, null);
 					Assert.assertTrue(false);
 				}
-	    Thread.sleep(5000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 	///record.waitForVisibility(driver.findElement(By.xpath("//*[@id=\"ItemSize2\"]/span")));
 	    if((driver.findElement(By.xpath("//*[@id=\"ItemSize2\"]/span")).getText().contains("Mb"))&&(driver.findElement(By.xpath("//*[@id=\"ItemSize1\"]/span")).getText().contains("Kb")))
 	    {
@@ -273,19 +273,19 @@ public class TC15897ViewTheUploadedFile {
 		tegrity.loginCourses("User1");
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		/// 4.select additional content tab
 		record.clickOnAdditionContentTab();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		/// 5.select file by its name
 		record.selectAdditionalContentByName(file_name1);
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 6.verify downloaded file is valid using md5
 		record.VerifyDownloadedFileIsValid(file_name1);
 		/// 5.select file by its name
 		record.selectAdditionalContentByName(file_name2);
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 6.verify downloaded file is valid using md5
 		record.VerifyDownloadedFileIsValid(file_name2);
 	    //7.sign out and login as student 
@@ -300,7 +300,7 @@ public class TC15897ViewTheUploadedFile {
 				record.waitForVisibility(record.additional_content_tab);
 				/// 4.select additional content tab
 				record.clickOnAdditionContentTab();
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			    record.convertAdditionalContantListToNames();
 				///5.verify size is correct :file 1 should be with mb file 2 should be in kb
 			  ///path to 2 files
@@ -316,7 +316,7 @@ public class TC15897ViewTheUploadedFile {
 							ATUReports.add("file is bigger or smaller for mega representation", LogAs.FAILED, null);
 							Assert.assertTrue(false);
 						}
-			    Thread.sleep(6000);
+			    Thread.sleep(Page.TIMEOUT_TINY);
 			///record.waitForVisibility(driver.findElement(By.xpath("//*[@id=\"ItemSize2\"]/span")));
 			    if((driver.findElement(By.xpath("//*[@id=\"ItemSize2\"]/span")).getText().contains("Mb"))&&(driver.findElement(By.xpath("//*[@id=\"ItemSize1\"]/span")).getText().contains("Kb")))
 			    {
@@ -388,24 +388,24 @@ public class TC15897ViewTheUploadedFile {
 				tegrity.loginCourses("User4");
 				// 3.Select course
 				course.selectCourseThatStartingWith("Ab");
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				/// 4.select additional content tab
 				record.clickOnAdditionContentTab();
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			
 				/// 5.select file by its name
 				record.selectAdditionalContentByName(file_name1);
-				Thread.sleep(5000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				// 6.verify downloaded file is valid using md5
 				record.VerifyDownloadedFileIsValid(file_name1);
 				/// 5.select file by its name
 				record.selectAdditionalContentByName(file_name2);
-				Thread.sleep(5000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				// 6.verify downloaded file is valid using md5
 				record.VerifyDownloadedFileIsValid(file_name2);
 	         	
 				record.signOut();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 								
 				tegrity.loginCourses("User1");
 				// 3.Select course+delete previous files

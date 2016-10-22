@@ -6,7 +6,7 @@ package com.automation.main;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -128,16 +128,16 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		System.out.println("Current course: " + current_course);
 		//course.selectCourse(record);
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Get information about first chapter
 		//record.first_recording.click();
 		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnRecordingTaskThenEditRecording();
 		String first_chapter_title = edit_recording.getTitleOffirstChapterRecordingName();
 	
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 //		String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 				
 		String header_default_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
@@ -145,7 +145,7 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		
 		// TODO: 4. Click on the "Course setting" option under the "Course Task" list.
 		record.clickOnCourseTaskThenCourseSettings();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 5. Validate the search field is display at the top right of the UI page below the top navigation bar.
@@ -159,7 +159,7 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		// 7.2. A hint is displayed to the user: "Search in all your courses...".
 		top_bar_helper.moveToElementAndPerform(top_bar_helper.search_box_field, driver);
 		top_bar_helper.verifyWebElementHaveTargetAttributeTitle(top_bar_helper.search_box_field, "Search in this course...");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		if(!(driver instanceof InternetExplorerDriver)) {
 			// 8. Set the focus to the field with a mouse pointer.
@@ -223,7 +223,7 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		// 10. Hover over the chapter icon.
 		Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 		search_page.moveToElement(search_page.video_wrap_link_to_focus_list.get(0), driver).perform();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 10.1. The chapter icon become a bit bigger in size.
 		Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();

@@ -6,7 +6,7 @@ import java.util.List;
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -163,18 +163,18 @@ public class TC22049ValidateCopyWindowFunctionality {
 		
 		// 6. Login as Admin.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		// 7. Click on "view course list" under "courses" section.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		
 		// 8. In "All courses" page, search for Ab course.
 		admin_dashboard_view_course_list.searchForTargetCourseName(source_course_name);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9. Click on that course name.
 		admin_dashboard_view_course_list.clickOnFirstCourseLink();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 10. Click on a checkbox of one recording.
 		record.selectFirstCheckbox();
@@ -184,7 +184,7 @@ public class TC22049ValidateCopyWindowFunctionality {
 		// 11. Hover over "Recording tasks" menu.
 		// 12. Click on the menu item "Copy".
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 13. The copy window displays.
 		boolean is_copy_window_closed = copy.isCopyMenuClosed();
@@ -202,7 +202,7 @@ public class TC22049ValidateCopyWindowFunctionality {
 
 		// 14. Click on the text field, and write an instuctor name which does not exist (like "aaaaaadssdfafaasa").
 		driver.findElement(By.id("members_value")).sendKeys("aaaaaadssdfafaasa");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 15. The text is written on the field. There is also a dropdown list opened with the text "No results".
 		String dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
@@ -219,23 +219,23 @@ public class TC22049ValidateCopyWindowFunctionality {
 		
 		// 16. Click on the button "List Courses".
 		driver.findElement(By.id("SearchButton")).click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 17. The system notifies with the message: "Please select an instructor".
 		// 18. Click on "OK" button on the Error window.
 		//confirmation_menu.clickOnOkButtonAfterCannotCopyInProcessOrFailRecordings();
 		confirmation_menu.clickOnOkButtonAfterErrorNoInstructorSelected();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 19. Click on the text field, and write the name of an instructor.
 		driver.findElement(By.id("members_value")).clear();
 		driver.findElement(By.id("members_value")).sendKeys(username);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 20. Click ,on the dropdown list, on the name of one instructor.
 		driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		if(driver.findElement(By.id("members_value")).getAttribute("value").equals(username)) {
 			System.out.println("The chosen name displays on the text field for search.");
@@ -249,7 +249,7 @@ public class TC22049ValidateCopyWindowFunctionality {
 		
 		// 21. Click on the button "List Courses".
 		driver.findElement(By.id("SearchButton")).click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 22. There shall be an informative text displayed below the input field: "Choose a course that you would like to copy your selected recording(s) to."
 		copy.verifyChooseACourseThatCopyAndItsPlaceBelowTheInstructorSearchField();
@@ -286,7 +286,7 @@ public class TC22049ValidateCopyWindowFunctionality {
 		
 		// 27. Click on "Copy recording(s)" button.
 		copy.clickOnCopyButton();		
-		Thread.sleep(800);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 28. The informative message "Recording(s) have been queued for copy" shall be displayed.
 		// 29. Click on "ok" button.
@@ -347,11 +347,11 @@ public class TC22049ValidateCopyWindowFunctionality {
 		
 		// In "All courses" page, search for Ab course.
 		admin_dashboard_view_course_list.searchForTargetCourseName(destination_course_name);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 				
 		// Click on that course name.
 		admin_dashboard_view_course_list.clickOnFirstCourseLink();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 35. Validate that the recording which you have copied is displayed on the list.
