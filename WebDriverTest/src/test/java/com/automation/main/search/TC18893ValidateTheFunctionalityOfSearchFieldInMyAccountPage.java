@@ -198,6 +198,7 @@ public class TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage {
 		
 		// 9.5. The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)"
 		search_page.verfiyBreadcrumbStructureDisplayedAsCoursesXResultsFound(current_course, first_chapter_title);
+		//verfiyBreadcrumbStructureDisplayedAsCoursesXResultsFound(current_course, first_chapter_title);
 		
 //		// 9.6. The recording chapter icon is displayed. (the play icon appears with hover over the recording). - Checking the same in step 10
 

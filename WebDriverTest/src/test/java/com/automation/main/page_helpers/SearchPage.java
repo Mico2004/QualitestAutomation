@@ -504,14 +504,16 @@ public class SearchPage extends Page {
 		String structure_displayed = breadcrumbs_box.getText();
 			
 		String[] splited_structure_displayed = structure_displayed.split(">");
+	
+		String[] splited_third_structure_displayed = splited_structure_displayed[2].trim().split(" ");
 		
-		if(splited_structure_displayed.length <3) {
+		if(splited_third_structure_displayed.length <3) {
 			String array = splited_structure_displayed.toString();
 			System.out.println("the error breadcrmbs is:" + array);
-			ATUReports.add("the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, null);
+			ATUReports.add("the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return;
 		}
-		String[] splited_third_structure_displayed = splited_structure_displayed[2].trim().split(" ");
+		
 		String third_structure = splited_third_structure_displayed[0] + " results found for: \"" + searching_criterion + "\". " + splited_third_structure_displayed[splited_third_structure_displayed.length-2] +" seconds)";
 
 			
