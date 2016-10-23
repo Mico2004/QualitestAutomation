@@ -152,20 +152,12 @@ public void test15467() throws Exception {
 		add_additional_content_window.verifyAdditionalContentFileWindowInfo();
 		// 7. add file and cancel uploading
 		add_additional_content_window.toUploadFileByPathThenSelectFile(fullPathToFile);
-		 Robot robot=new Robot();
-		 robot.mouseMove(100,100);
 		 if(driver instanceof FirefoxDriver){
-			 int mask = InputEvent.BUTTON1_DOWN_MASK;
-			 robot.mousePress(mask);
-			 robot.mouseRelease(mask);	 
-		 } else {
-			 robot.keyPress(KeyEvent.VK_ESCAPE);
-			 robot.keyRelease(KeyEvent.VK_ESCAPE);
-			// Actions action = new Actions(driver);
-			// action.sendKeys(Keys.ESCAPE).perform();
+			 add_additional_content_window.clickEscOnKeyBoardToCloseCopyWindow();		 
+		 } else  {
+			 Actions action = new Actions(driver);
+			 action.sendKeys(Keys.ESCAPE).build().perform();
 		 }
-
-		 //add_additional_content_window.select_upload_additional_file.sendKeys(Keys.ESCAPE);	 	
 		 record.clickOnAdditionContentTab();
 		 wait.until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]"), "class", "active"));
 		 record.convertAdditionalContantListToNames();
