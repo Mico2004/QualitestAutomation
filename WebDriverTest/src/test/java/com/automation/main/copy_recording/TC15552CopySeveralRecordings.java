@@ -204,7 +204,7 @@ public class TC15552CopySeveralRecordings {
 		// 13. Recording's status change when the copying started
 		List<String> source_recording_list = record.getCourseRecordingList(); 
 		
-		for(int i = 0; i < source_recording_list.size(); i++) {
+		for(int i = 0; i < source_recording_list.size() - 3; i++) {
 			record.checkRecordingInIndexIStatus((i + 1), "Being copied from");
 		}
 		
