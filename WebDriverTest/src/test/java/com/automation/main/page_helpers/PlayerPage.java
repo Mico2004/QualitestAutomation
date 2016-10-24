@@ -719,7 +719,10 @@ public class PlayerPage extends Page {
 		Thread.sleep(500);
 		sendStringToWebElement(bookmark_input_text, target_bookmark);
 		Thread.sleep(500);
-		clickElementJS(add_bookmark_button);
+		clickElement(add_bookmark_button);
+		if(!bookmark_input_text.getText().isEmpty()){
+			clickElementJS(add_bookmark_button);
+		}
 		System.out.println(time_buffer_status.getText());
 		System.out.println("Target bookmark added.");
 		ATUReports.add("Target bookmark added.", "True.", "True.", LogAs.PASSED, null);
@@ -1156,7 +1159,10 @@ public class PlayerPage extends Page {
 		bookmark_text_infut_field.sendKeys(bookmark);
 		System.out.println("bookmark name written successfully");
 		Thread.sleep(500);
-		clickElementJS(add_bookmark_button);
+		clickElement(add_bookmark_button);
+		if(!bookmark_text_infut_field.getText().isEmpty()){
+			clickElementJS(add_bookmark_button);
+		}
 		System.out.println("clicked add bookmark button");
 		Thread.sleep(4000);
 		verifyBookMarkVisibility(time_to_add_bookmark, bookmark);
