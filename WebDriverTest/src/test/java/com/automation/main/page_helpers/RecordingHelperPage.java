@@ -3524,7 +3524,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				Assert.assertTrue(false);
 			} else {
 				System.out.println(" not verified podcast page");
-				ATUReports.add("not verified podcast page", podcast_title, " contained", "not contained", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add("not verified podcast page" + podcast_title, current, " contained", "not contained", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(true);
 			}
 
