@@ -3521,11 +3521,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if (current.contains(podcast_title)) {
 				System.out.println("verified podcast page");
 				ATUReports.add("verified podcast page", podcast_title, "contained", "contained", LogAs.PASSED, null);
-				Assert.assertTrue(false);
+				Assert.assertTrue(true);
 			} else {
 				System.out.println(" not verified podcast page");
 				ATUReports.add("not verified podcast page" + podcast_title, current, " contained", "not contained", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				Assert.assertTrue(true);
+				Assert.assertTrue(false);
 			}
 
 		} catch (Exception e) {
