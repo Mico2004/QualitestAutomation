@@ -3515,16 +3515,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clicked to podcast page");
 			ATUReports.add("verify podcast page", "Rss_Feed", "clickable", "clickable", LogAs.PASSED, null);
 			Assert.assertTrue(true);
-			String podcast_title = tegrity.getPageUrl().substring(0, tegrity.getPageUrl().length() - 8) + "/api/rss";
+			String podcast_title = tegrity.getPageUrl() + "/api/rss";
+		   //.substring(0, tegrity.getPageUrl().length() - 8) 
 
 			if (current.contains(podcast_title)) {
 				System.out.println("verified podcast page");
-				ATUReports.add("verified podcast page", podcast_title, " contained", " contained", LogAs.PASSED, null);
-				Assert.assertTrue(true);
+				ATUReports.add("verified podcast page", podcast_title, "contained", "contained", LogAs.PASSED, null);
+				Assert.assertTrue(false);
 			} else {
 				System.out.println(" not verified podcast page");
-				ATUReports.add("not verified podcast page", podcast_title, " contained", "not contained", LogAs.PASSED,
-						null);
+				ATUReports.add("not verified podcast page", podcast_title, " contained", "not contained", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(true);
 			}
 
