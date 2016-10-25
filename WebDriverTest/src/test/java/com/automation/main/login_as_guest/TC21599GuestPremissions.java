@@ -512,7 +512,8 @@ public class TC21599GuestPremissions {
            record.clickOnAdditionContentTab();
 	       Thread.sleep(2000);
 	       record.convertAdditionalContantListToNames();
-	       String file_name=record.additional_content_list_names.get(0);
+	       int indexOfFirstFile = record.getIndexOfFirstFileAdditionalContent();
+	       String file_name=record.additional_content_list_names.get(indexOfFirstFile-1);	       
 	       String download_path= System.getProperty("user.home") + File.separatorChar +"Downloads"+ File.separatorChar+file_name;
 		   record.tryToDeleteOlderFile(download_path);
 		   driver.quit();

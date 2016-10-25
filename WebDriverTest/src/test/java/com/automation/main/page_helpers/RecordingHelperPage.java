@@ -3561,9 +3561,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			aTransformer.transform(src, dest);
 			document.getDocumentElement().normalize();
 			System.out.println("Root element " + document.getDocumentElement().getNodeName());
-			String first = teg.getPageUrl().substring(0, teg.getPageUrl().length() - 8) + "/api/podcast/";
-			String university = teg.getPageUrl().substring(0, teg.getPageUrl().length() - 8);
-			String third = podcast_url.substring(podcast_url.length() - (university.length() +2 ));
+			String first = teg.getPageUrl() + "/api/podcast/";;
+			//substring(0, teg.getPageUrl().length() - 8) 
+			//String university = teg.getPageUrl().substring(0, teg.getPageUrl().length() - 8);
+			String third = podcast_url.substring(podcast_url.length() - (teg.getPageUrl().length() +2 ));
 			String guid = third.substring(0,36);
 			org.w3c.dom.NodeList nodeList = document.getElementsByTagName("enclosure");
 			for (int i = 0; i < nodeList.getLength(); i++) {
