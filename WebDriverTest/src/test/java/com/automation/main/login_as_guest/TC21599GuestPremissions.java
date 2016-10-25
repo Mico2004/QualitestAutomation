@@ -150,7 +150,6 @@ public class TC21599GuestPremissions {
 
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		String url_topass = tegrity.pageUrl;
 		//2. login as admin
 		tegrity.loginAdmin("Admin");	
 		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
@@ -163,7 +162,7 @@ public class TC21599GuestPremissions {
 
 		// 3.click on course
 		String course_name = course.selectCourseThatStartingWith("Ab");
-		
+			
 		 // 4.to course settings
 		 record.waitForVisibility(record.course_tasks_button); 
 		 record.toCourseSettingsPage();

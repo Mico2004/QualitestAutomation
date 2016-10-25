@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.By;
@@ -3433,35 +3434,37 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		String xml_source_code = null;
 		String current = null;
+		String ChildWindow = null;
 		try {
+
 			String parentWindow = driver.getWindowHandle();
+			System.out.println(parentWindow);
 			toRssFeedPage(driver);	
 			Set<String> handles = driver.getWindowHandles();
-	
+
 			for (String windowHandle : handles) {
 				if (!windowHandle.equals(parentWindow)) {
-					driver.switchTo().window(windowHandle);
-					current = driver.getCurrentUrl();
+					System.out.println(windowHandle);
+		            driver.switchTo().window(windowHandle);
+//					//current = driver.getCurrentUrl();
 					break;	
 				}
 			}
+			//current =((JavascriptExecutor) driver).executeScript("return window.document.location.href").toString();
 			current = driver.getCurrentUrl();
 			Thread.sleep(2000);
 			String Rss_url_xml = "view-source:" + current;
 			driver.get(Rss_url_xml);
 			xml_source_code = driver.findElement(By.tagName("body")).getText();	
-			System.out.println("clicked to rss feed page");
-			ATUReports.add("verify rss feed page", "Rss_Feed", "clickable", "clickable", LogAs.PASSED, null);
-			Assert.assertTrue(true);
 			String rss_title = tegrity.getPageUrl().substring(0, tegrity.getPageUrl().length() - 8) + "/api/rss";
 			if (current.contains(rss_title)) {
 				System.out.println("verified rss page");
 				ATUReports.add("verified rss page", rss_title, " contained", " contained", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
-				System.out.println(" not verified rss page");
-				ATUReports.add("not verified rss page", rss_title, " contained", "not contained", LogAs.PASSED, null);
-				Assert.assertTrue(true);
+				System.out.println("not verified rss page");
+				ATUReports.add("not verified rss page", rss_title, " contained", "not contained", LogAs.FAILED, null);
+				Assert.assertTrue(false);
 			}
 
 		} catch (Exception e) {
