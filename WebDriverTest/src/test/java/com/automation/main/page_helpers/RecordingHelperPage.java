@@ -3905,6 +3905,26 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		return additional_content_type;
 
 	}
+	
+	
+	public int getIndexOfFirstFileAdditionalContent() throws InterruptedException {
+		int index = 1;
+		
+		for (int i = 0; i < additional_content_list_names.size(); i++) {
+			try {
+						if(!isElementPresent(By.cssSelector("#ItemSize" + Integer.toString(index)))) {
+								break;
+						} else {
+							index++;
+						}
+			} catch (Exception msg) {
+				Thread.sleep(500);
+			}
+		}
+		return index;
+
+	}
+	
 
 	// This function get additional content (as string) and type (as string),
 	// and checks if it is
