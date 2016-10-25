@@ -3457,7 +3457,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			driver.get(Rss_url_xml);
 			xml_source_code = driver.findElement(By.tagName("body")).getText();	
 			Thread.sleep(2000);
-			String rss_title = tegrity.getPageUrl().substring(0, tegrity.getPageUrl().length() - 8) + "/api/rss";
+			String rss_title = tegrity.getPageUrl() + "/api/rss";
+			//.substring(0, tegrity.getPageUrl().length() - 8)
 			if (current.contains(rss_title)) {
 				System.out.println("verified rss page");
 				ATUReports.add("verified rss page", rss_title, "contained", "contained", LogAs.PASSED, null);
