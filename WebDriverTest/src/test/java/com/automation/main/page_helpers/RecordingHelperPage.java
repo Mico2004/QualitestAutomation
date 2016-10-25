@@ -3460,12 +3460,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String rss_title = tegrity.getPageUrl().substring(0, tegrity.getPageUrl().length() - 8) + "/api/rss";
 			if (current.contains(rss_title)) {
 				System.out.println("verified rss page");
-				ATUReports.add("verified rss page", rss_title, " contained", " contained", LogAs.PASSED, null);
+				ATUReports.add("verified rss page", rss_title, "contained", "contained", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("not verified rss page");
 				System.out.println(current);
-				ATUReports.add("not verified rss page", current, " contained", "not contained", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add("not verified rss page" + rss_title, current, "contained", "not contained", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 
