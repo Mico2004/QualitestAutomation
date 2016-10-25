@@ -112,6 +112,7 @@ public class TestSuitePreSetGeneric {
 
 	
 	public void GenricPreset(Map<String,List<Integer>> destinationCoursesAndTypeOfRecording ) throws InterruptedException {
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		System.out.println("Start1");
 			String currentCourse="";
 			List <Integer> contentTypes=new ArrayList<Integer>();

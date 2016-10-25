@@ -139,7 +139,7 @@ public class TestSuitePreSetCopyRecordings_Admin {
 	}
 
 
-	@Test(dependsOnMethods = "loadPage", description = "Login course page")
+	@Test(description = "Login course page")
 	public void loginCourses() throws InterruptedException {
 		System.out.println("b0");
 		  final List<Integer> CourseAbContent = Arrays.asList(0,1,2,3); //For Ab		
