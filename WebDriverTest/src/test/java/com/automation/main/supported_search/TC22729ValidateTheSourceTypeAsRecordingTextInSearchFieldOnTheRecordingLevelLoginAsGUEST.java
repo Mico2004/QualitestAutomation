@@ -189,7 +189,7 @@ public class TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecord
 	
 		//3.Select a course
 		course.waitForVisibility(course.first_course_button);
-		course.selectCourseThatStartingWith("Ab");
+		course.selectCourseByName(course_name);
 
 		///4.Click on one of the Recording link
 		record.waitForVisibility(record.recordings_tab);
