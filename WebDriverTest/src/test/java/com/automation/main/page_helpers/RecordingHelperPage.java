@@ -3906,7 +3906,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	}
 	
-	
+	//This Function return the index of the first file in the additional content tab
 	public int getIndexOfFirstFileAdditionalContent() throws InterruptedException {
 		int index = 1;
 		

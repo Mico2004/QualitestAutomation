@@ -79,7 +79,6 @@ public class TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
 		
 		ATUReports.setWebDriver(driver);
 

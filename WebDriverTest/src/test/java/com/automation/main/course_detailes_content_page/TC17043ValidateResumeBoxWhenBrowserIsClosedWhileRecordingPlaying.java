@@ -185,24 +185,24 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			// 7. Close the browser while recording is playing the first chapter.
 			String current_handler = driver.getWindowHandle();
 			driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
-					
+								
 			Set<String> allHandles = driver.getWindowHandles();
-					
-					
+								
+								
 			driver.switchTo().window(current_handler);
 			driver.close();
 			if(driver instanceof FirefoxDriver){
 				driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "w");
-				}
-				
+			}
+							
 			for(String handler: allHandles) {
-				if(!handler.equals(current_handler)){
+			    if(!handler.equals(current_handler)){
 					driver.switchTo().window(handler);
 					break;
 					 }
-				}
+		  	}
 			
-						
+			
 //			driver.quit();	
 //			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 //			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);

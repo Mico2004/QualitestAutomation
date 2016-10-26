@@ -78,10 +78,7 @@ public class TC15582MoveOneRecording {
 		 ATUReports.add("Message window.", "Starting the test: TC15582MoveOneRecording at " + DateToStr, "Starting the test: TC15582MoveOneRecording at " + DateToStr, LogAs.PASSED, null);	
 	}
 
-	/*
-	 * @AfterClass public void quit() { driver.quit(); System.out.println(
-	 * "driver quited successfully"); }
-	 */
+
 	@Test (description="TC 15582 Move One Recording")
 	public void test15582() throws InterruptedException, ParserConfigurationException, Exception, IOException {
 		// 1.load main page chrome
