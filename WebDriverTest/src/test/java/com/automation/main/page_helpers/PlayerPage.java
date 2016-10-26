@@ -143,8 +143,7 @@ public class PlayerPage extends Page {
 	public boolean verifyTimeBufferStatusForXSec(int seconds) throws InterruptedException {
 		if (seconds <= 0) {
 			System.out.println("Please give positive number of seconds as input for verifing buffer status.");
-			ATUReports.add("Please give positive number of seconds as input for verifing buffer status.", LogAs.FAILED,
-					null);
+			ATUReports.add("Please give positive number of seconds as input for verifing buffer status.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return false;
 		}
