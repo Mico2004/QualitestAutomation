@@ -3912,7 +3912,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		for (int i = 0; i < additional_content_list_names.size(); i++) {
 			try {
-						if(!isElementPresent(By.cssSelector("#ItemSize" + Integer.toString(index)))) {
+						if(isElementPresent(By.cssSelector("#ItemSize" + Integer.toString(index)))) {
 								break;
 						} else {
 							index++;
