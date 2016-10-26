@@ -1957,6 +1957,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		String id="DeleteTask";
 		try {			
 			new WebDriverWait(driver, 120).until((ExpectedConditions.invisibilityOfElementWithText(By.id("scrollableArea"), "Uploading")));
+			new WebDriverWait(driver, 120).until((ExpectedConditions.invisibilityOfElementWithText(By.id("scrollableArea"), "Being copied from")));
 			System.out.println("clickOnRecordingTaskThen1");
 			waitForVisibility(element);
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
@@ -4622,7 +4623,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		while(i<=size) {
 			System.out.println("loop"+i);
 				
-				Thread.sleep(1000);
+				Thread.sleep(500);
 				System.out.println("in if");
 				WebElement el = driver.findElement(By.id("ItemStatus" + Integer.toString(i)));
 				String current_element = el.getText();	
@@ -4658,7 +4659,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				System.out.println(current_element);
 			if ((!current_element.equals("Available"))) {
 				try{
-				new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(el, "Available"));
+					new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(el, "Available"));
 				}catch(org.openqa.selenium.TimeoutException msg){}
 				String uncheckId = "Checkbox" + Integer.toString(i);                              
 				((JavascriptExecutor) driver).executeScript("document.getElementById(\""+uncheckId+"\").click();");				

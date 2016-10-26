@@ -810,6 +810,7 @@ public class PlayerPage extends Page {
 			Assert.assertTrue(false);
 		}
 		int NumOfresult = Integer.parseInt(res_num);
+		
 		if(NumOfresult <= 1){
 			sentence = res_num + " result found for: " + record_name + ". (" + seconds + " sec)";
 		}
@@ -819,7 +820,7 @@ public class PlayerPage extends Page {
 			System.out.println("The search results statistics in the format as follows: "+ "X results found for: search criterion. (XX sec)");
 			ATUReports.add("The search results statistics in the format as follows: "
 							+ "X results found for: search criterion. (XX sec)","parameters", "contains", "contains", LogAs.PASSED, null);
-			Assert.assertTrue(true);
+			Assert.assertTrue(true);	
 		} else {
 			System.out.println("The search results statistics Not in the format as followsed ");
 			ATUReports.add(

@@ -8,6 +8,7 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.MarionetteDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -54,9 +55,11 @@ public class DriverSelector {
 		DesiredCapabilities capability = null;
 		switch (type) {
 		case Firefox:
-			System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");
-		
+			System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");	
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+			FirefoxOptions options = new FirefoxOptions();
+			options.addPreference("log", "{level: info}");
+			capabilities.setCapability("moz:firefoxOptions", options);
 			capabilities.setCapability("marionette", true);
 			FirefoxProfile prfl = new FirefoxProfile();
 		    prfl.setPreference("browser.startup.homepage", "about:blank");

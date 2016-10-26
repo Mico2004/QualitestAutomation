@@ -763,7 +763,6 @@ public class CoursesHelperPage extends Page {
 			if (type_of_recordings == 3) {
 				recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordingsAndUncheckUndeleteableRecordings();
 			} 
-
 			new WebDriverWait(driver, 5)
 					.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
 			Thread.sleep(2000);

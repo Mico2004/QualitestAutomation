@@ -104,10 +104,8 @@ public class TC21599GuestPremissions {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		
-
+	
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		wait = new WebDriverWait(driver, 30);
 		add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 		publish_window = PageFactory.initElements(driver, PublishWindow.class);
