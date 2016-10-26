@@ -33,6 +33,7 @@ public class SearchPage extends Page {
 	}
 	
 	@FindBy(css = ".loading-spinner-img")public WebElement loading_spinner_image;
+	@FindBy(css =".loading-spiner")public WebElement loading_spinner;
 	@FindBy(xpath = ".//*[@id='main']/div[2]/div[1]/div[2]/span/a")public WebElement title_first_chapter;
 	@FindBy(id = "tegrityBreadcrumbsBox")public  WebElement breadcrumbs_box;
 	@FindBy(css = ".video-thumbnail")public  List<WebElement> video_thumbnails_list;
@@ -274,7 +275,7 @@ public class SearchPage extends Page {
 		for(int i=0; i<30; i++) {
 			try {
 				Thread.sleep(1000);
-				if(loading_spinner_image.isDisplayed()) {
+				if(loading_spinner.isDisplayed()) {
 					Thread.sleep(100);
 				} else {
 					break;
@@ -510,7 +511,7 @@ public class SearchPage extends Page {
 		if(splited_third_structure_displayed.length <3) {
 			String array = splited_structure_displayed.toString();
 			System.out.println("the error breadcrmbs is:" + array);
-			ATUReports.add("the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("the error breadcrmbs is:" + array, "True.", "False.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return;
 		}
 		
