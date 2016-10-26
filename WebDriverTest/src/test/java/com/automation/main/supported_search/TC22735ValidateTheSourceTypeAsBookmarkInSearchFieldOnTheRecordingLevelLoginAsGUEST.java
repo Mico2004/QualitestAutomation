@@ -157,7 +157,7 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
 		String bookmark_for_search = "NewBookmark" + sdf.format(date);
 		
-		course.selectCourseThatStartingWith("Ab");
+		String course_name = course.selectCourseThatStartingWith("Ab");
 		
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings.makeSureThatMakeCoursePublicIsSelected();
@@ -178,7 +178,7 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 		tegrity.loginAsguest();
 		//3.Select a course
 		course.waitForVisibility(course.first_course_button);
-		String course_name=	course.selectCourseThatStartingWith("Ab");
+		course.selectCourseThatStartingWith(course_name);
 		///4.Click on one of the Recording link
 		record.waitForVisibility(record.recordings_tab);
 		Thread.sleep(2000);
@@ -242,14 +242,14 @@ public class TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLe
 		// Unpublic Ab course1. 
 		tegrity.loginCourses("User1");
 						
-		course.selectCourseThatStartingWith("Ab");
+		course.selectCourseThatStartingWith(course_name);
 						
 		// Make course public
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings.clickOnOkButton();
 		//post test delete all the bookmarks
-		course.selectCourseThatStartingWith("Ab");
+		course.selectCourseThatStartingWith(course_name);
 		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
 		player_page.verifyTimeBufferStatusForXSec(10);
 		player_page.deleteAllBookmark();
