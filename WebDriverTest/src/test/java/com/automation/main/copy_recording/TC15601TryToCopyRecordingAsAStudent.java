@@ -21,8 +21,6 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
-import com.thoughtworks.selenium.webdriven.commands.IsElementPresent;
-
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.text.DateFormat;

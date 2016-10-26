@@ -32,7 +32,6 @@ import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.SearchPage;
 import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
-import com.thoughtworks.selenium.webdriven.commands.IsElementPresent;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;

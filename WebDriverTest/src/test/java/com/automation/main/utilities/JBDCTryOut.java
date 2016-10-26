@@ -18,7 +18,7 @@ import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.PlayerPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.sun.jna.win32.W32APITypeMapper;
-import com.thoughtworks.selenium.webdriven.commands.IsAlertPresent;
+
 
 import org.testng.annotations.BeforeClass;
 

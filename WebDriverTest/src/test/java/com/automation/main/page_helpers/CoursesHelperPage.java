@@ -42,8 +42,6 @@ import org.w3c.dom.Element;
 
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.google.common.base.Predicate;
-import com.thoughtworks.selenium.Selenium;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
