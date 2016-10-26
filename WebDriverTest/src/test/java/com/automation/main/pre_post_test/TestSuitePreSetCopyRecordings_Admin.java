@@ -151,6 +151,7 @@ public class TestSuitePreSetCopyRecordings_Admin {
 		TestSuitePreSetGeneric h=new TestSuitePreSetGeneric(driver);
 		System.out.println("b1");
 		h.GenricPreset(CoursesAndContent);
+		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
 		
