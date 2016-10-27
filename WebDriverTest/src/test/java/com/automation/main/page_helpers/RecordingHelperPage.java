@@ -2700,7 +2700,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for (int i = 0; i < current_recording_list.size(); i++) {
 			if (current_recording_list.get(i).equals(target_recording)) {
 				clickOnRecordingTitleInIndex(i + 1);
-				clickOnTheCaptherWithOutTheExpandOnTheIdnex(i+1);
+				clickOnTheCaptherWithOutTheExpandOnTheIndex(i+1);
 				break;
 			}
 		}
@@ -4760,11 +4760,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
 			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
 				
+	} catch (Exception e) {
+		
+		System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
+		ATUReports.add("Not find the element: "+e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			
 		}
 	}
 	
 	
-	public void clickOnTheCaptherWithOutTheExpandOnTheIdnex(int index){
+	public void clickOnTheCaptherWithOutTheExpandOnTheIndex(int index){
 		
 		try{
 			System.out.println("clickOnFirstVisibleChapter1");
@@ -4779,7 +4784,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
 			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
 				
+		} catch (Exception e) {	
+			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
+			ATUReports.add("Not find the element: "+e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));			
 		}
+	
 	}
 	
 	
