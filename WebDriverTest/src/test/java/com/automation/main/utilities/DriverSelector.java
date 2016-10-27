@@ -56,15 +56,16 @@ public class DriverSelector {
 		case Firefox:
 			System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");	
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-			capabilities.setCapability("marionette", true);
-//			FirefoxProfile prfl = new FirefoxProfile();
-//		    prfl.setPreference("browser.startup.homepage", "about:blank");
-//		    prfl.setPreference("browser.startup.homepage_override.mstone", "ignore");
-//		    prfl.setPreference("startup.homepage_welcome_url", "about:blank");
-//		    prfl.setPreference("startup.homepage_welcome_url.additional", "about:blank");
-//		    capabilities.setCapability(FirefoxDriver.PROFILE, prfl);
+			//capabilities.setCapability("marionette", true);
+			FirefoxProfile prfl = new FirefoxProfile();
+		    prfl.setPreference("browser.startup.homepage", "about:blank");
+		    prfl.setPreference("browser.startup.homepage_override.mstone", "ignore");
+		    prfl.setPreference("startup.homepage_welcome_url", "about:blank");
+		    prfl.setPreference("startup.homepage_welcome_url.additional", "about:blank");    
+		    capabilities.setCapability(FirefoxDriver.PROFILE, prfl);
 			driver = new FirefoxDriver(capabilities);	
 			//driver = new FirefoxDriver();
+			//driver = new MarionetteDriver(capabilities);
 			break;
 		case Chrome:
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
