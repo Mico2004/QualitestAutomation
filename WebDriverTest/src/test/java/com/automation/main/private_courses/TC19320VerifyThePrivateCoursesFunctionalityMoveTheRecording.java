@@ -181,7 +181,7 @@ public class TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording {
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
 		// 13. When the "Move" process is finished, verify that recording is not displayed ;private course.
-		record.checkStatusExistenceForMaxTTime(360);
+		record.waitUntilFirstRecordingBeingMovedFromStatusDissaper();
 		
 		record.verifyThatTargetRecordingNotExistInRecordingList(selected_recording_name);
 		
