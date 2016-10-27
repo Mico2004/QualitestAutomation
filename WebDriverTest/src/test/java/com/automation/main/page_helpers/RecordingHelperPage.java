@@ -256,7 +256,8 @@ public class RecordingHelperPage extends Page {
 	List<WebElement> visibleChapters;
 	@FindBy(id="scrollableArea")
 	WebElement TabContainer;
-	public @FindBy(xpath =".//*[@id='scrollableArea']/div[1]/div[1]/div[2]/div/ul/li/ul/li[12]/span") WebElement SubscribeToACourse;
+	//public @FindBy(xpath =".//*[@id='scrollableArea']/div[1]/div[1]/div[2]/div/ul/li/ul/li[12]/span") WebElement SubscribeToACourse;
+	public @FindBy(linkText="Subscribe to Your Course's...")WebElement SubscribeToACourse;
 	public @FindBy(css = ".resume-button.ng-scope>a") List<WebElement> list_of_resume_buttons;
 	public @FindBy(css = ".video-wrap") List<WebElement> video_wraps_of_chapters_of_opened_recording_list;
 	public @FindBy(css = ".thumbnail-image") List<WebElement> images_thumbnail_of_recording_chapters_list;
