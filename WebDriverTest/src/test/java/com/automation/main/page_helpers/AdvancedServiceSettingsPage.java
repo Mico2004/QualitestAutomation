@@ -4,8 +4,6 @@ import java.awt.Robot;
 import java.util.List;
 
 import javax.xml.xpath.XPath;
-
-import org.apache.xalan.xsltc.compiler.sym;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;

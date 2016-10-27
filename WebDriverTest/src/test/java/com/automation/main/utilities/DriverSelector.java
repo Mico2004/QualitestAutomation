@@ -8,7 +8,6 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.MarionetteDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -57,19 +56,15 @@ public class DriverSelector {
 		case Firefox:
 			System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");	
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-			FirefoxOptions options = new FirefoxOptions();
-			options.addPreference("log", "{level: info}");
-			capabilities.setCapability("moz:firefoxOptions", options);
 			capabilities.setCapability("marionette", true);
-			FirefoxProfile prfl = new FirefoxProfile();
-		    prfl.setPreference("browser.startup.homepage", "about:blank");
-		    prfl.setPreference("browser.startup.homepage_override.mstone", "ignore");
-		    prfl.setPreference("startup.homepage_welcome_url", "about:blank");
-		    prfl.setPreference("startup.homepage_welcome_url.additional", "about:blank");
-		    capabilities.setCapability(FirefoxDriver.PROFILE, prfl);
-			driver = new FirefoxDriver(capabilities);
-			
-			// capability.setPlatform(Platform.WIN8_1);
+//			FirefoxProfile prfl = new FirefoxProfile();
+//		    prfl.setPreference("browser.startup.homepage", "about:blank");
+//		    prfl.setPreference("browser.startup.homepage_override.mstone", "ignore");
+//		    prfl.setPreference("startup.homepage_welcome_url", "about:blank");
+//		    prfl.setPreference("startup.homepage_welcome_url.additional", "about:blank");
+//		    capabilities.setCapability(FirefoxDriver.PROFILE, prfl);
+			driver = new FirefoxDriver(capabilities);	
+			//driver = new FirefoxDriver();
 			break;
 		case Chrome:
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
@@ -123,6 +118,7 @@ public class DriverSelector {
 		for (BrowserType btype : BrowserType.values()) {
 			if (btype.getBrowserName().equalsIgnoreCase(browser)) {
 				type = btype;
+				break;
 			}
 
 		}

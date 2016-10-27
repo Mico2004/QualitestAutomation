@@ -35,8 +35,6 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import net.sourceforge.htmlunit.corejs.javascript.ast.AstNode;
-
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class CustomAnalysis extends Page {
 	public CustomAnalysis(WebDriver browser) {

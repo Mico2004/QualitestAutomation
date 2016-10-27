@@ -79,18 +79,9 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 	@BeforeClass
 	public void setup() {
 
-		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -209,7 +200,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		Thread.sleep(1000);
 		
 		// 14. Hover over an available recording.
-		record.moveToElement(record.first_recording_title, driver).perform();
+		record.moveToElementAndPerform(record.first_recording_title, driver);
 		
 		// 15. Click on a recording name.
 		String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));

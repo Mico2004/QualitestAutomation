@@ -1,11 +1,9 @@
 package com.automation.main.public_courses;
 
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-import java.text.DateFormat;
-
-import org.apache.xml.dtm.ref.DTMDefaultBaseIterators.DescendantIterator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;

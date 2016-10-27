@@ -166,8 +166,8 @@ public class Page {
 																// element text
 	{
 		element.clear();
-		element.sendKeys(text);
-		Assert.assertEquals(text, element.getAttribute("value"));
+		element.sendKeys(text);		
+	//	Assert.assertEquals(text, element.getAttribute("value"));
 
 	}
 	
@@ -393,8 +393,7 @@ public class Page {
 																				/// page
 																				/// withe
 																				/// webdriver
-
-		driver.get(Url);// "https://mta-qabr.tegrity.com/#/login"
+      	driver.get(Url);// "https://mta-qabr.tegrity.com/#/login"
 		for (int second = 0;; second++) {
 			if (second >= 60)
 				Assert.fail("timeout");
