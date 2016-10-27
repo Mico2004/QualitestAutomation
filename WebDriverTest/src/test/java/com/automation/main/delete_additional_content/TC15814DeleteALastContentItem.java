@@ -125,7 +125,7 @@ public class TC15814DeleteALastContentItem {
 		
 		
 		// 4. Select content item.
-		record.check_all_checkbox.click();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.check_all_checkbox);
 //		String target_additional_content = record.getNameTargetIndexAdditionalContent(1);
 		
 		// 5. Select "Content Tasks -> Delete" menu item.
