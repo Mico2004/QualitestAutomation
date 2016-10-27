@@ -261,7 +261,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 
 		// 18. Hover a cursor over recording chapter.
 		Point before_hovring = record.video_wraps_of_chapters_of_opened_recording_list.get(0).getLocation();
-		record.moveToElement(record.video_wraps_of_chapters_of_opened_recording_list.get(0), driver).perform();
+		record.moveToElementAndPerform(record.video_wraps_of_chapters_of_opened_recording_list.get(0), driver);
 		Thread.sleep(1000);
 		
 		// 18.1. The hovered over chapter becomes a bit bigger in size.
@@ -316,7 +316,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		record.verifyThatBreadcrumbDisplayedCorrectly();
 
 		// 23. Hover over the breadcrumbs link.
-		record.moveToElement(record.breadcrumbs_courses_link, driver).perform();
+		record.moveToElementAndPerform(record.breadcrumbs_courses_link, driver);
 		Thread.sleep(1000);
 		
 		// 23.1. The exact link the user has hovered over becomes underlined.
@@ -355,7 +355,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 29. Hover over the "Start a Recording" button.
 		String init_start_recording_button_background = record.getBackGroundColor(record.start_recording_button);
-		record.moveToElement(record.start_recording_button, driver).perform();
+		record.moveToElementAndPerform(record.start_recording_button, driver);
 		Thread.sleep(1000);
 		
 		// 29.1. The hint with the link caption appears.
@@ -379,7 +379,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 31. Hover over the "Start a Test" button.
 		String init_start_test_background = record.getBackGroundColor(record.start_test_button);
-		record.moveToElement(record.start_test_button, driver).perform();
+		record.moveToElementAndPerform(record.start_test_button, driver);
 		Thread.sleep(1000);
 		
 		// 31.1. The hint with the link caption appears.
