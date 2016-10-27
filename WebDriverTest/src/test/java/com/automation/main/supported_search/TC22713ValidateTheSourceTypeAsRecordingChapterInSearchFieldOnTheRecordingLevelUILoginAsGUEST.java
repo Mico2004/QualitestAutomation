@@ -161,7 +161,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			
 			// make the course public
 			tegrity.loginCourses("User1");
-			course.selectCourseThatStartingWith("Ab");
+			String course_name=course.selectCourseThatStartingWith("Ab");
 			
 			record.clickOnCourseTaskThenCourseSettings();
 			course_settings.makeSureThatMakeCoursePublicIsSelected();
@@ -176,7 +176,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 
 			// 5.Select a course
 			course.waitForVisibility(course.first_course_button);
-			String course_name=course.selectCourseThatStartingWith("Ab");
+			course.selectCourseByName(course_name);
 			String recordname = record.getFirstRecordingTitle();
 			// 6.Click on one of the Recording link
 			record.waitForVisibility(record.first_recording);
