@@ -528,13 +528,19 @@ public class SearchPage extends Page {
 	
 	// Verify that the bookmark icon is displayed in search result in target index
 	public void verifyBookmarkIconDisplayedIndexSearchResult(int index) {
-
+		
+		try{
 		if(driver.findElements(By.cssSelector(".linkToFocus>.ng-binding")).get(index-1).getCssValue("background-image").contains("icon_assets.png")) {
 			System.out.println("Verifed that bookmark icon displayed in index: " + index);
 			ATUReports.add("Verifed that bookmark icon displayed in index: " + index, "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verifed that bookmark icon displayed in index: " + index);
 			ATUReports.add("Verifed that bookmark icon displayed in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			ATUReports.add("Not verifed that bookmark icon displayed in index: " +e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
 		}
 	}
 	
