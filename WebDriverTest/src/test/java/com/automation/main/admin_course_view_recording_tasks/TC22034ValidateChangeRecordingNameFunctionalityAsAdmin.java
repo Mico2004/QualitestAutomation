@@ -180,7 +180,7 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 		Thread.sleep(15000);
 		
 		// 15. Click the "Ok" button.
-		confirmation_menu.clickOnOkButton();
+		confirmation_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		Thread.sleep(3000);
 		
 		// 16. The modal window is closed.
