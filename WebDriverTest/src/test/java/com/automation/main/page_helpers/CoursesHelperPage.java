@@ -39,8 +39,8 @@ import org.testng.annotations.Listeners;
 import org.testng.internal.Nullable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
-import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.google.common.base.Predicate;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;

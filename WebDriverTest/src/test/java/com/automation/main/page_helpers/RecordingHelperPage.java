@@ -256,7 +256,7 @@ public class RecordingHelperPage extends Page {
 	List<WebElement> visibleChapters;
 	@FindBy(id="scrollableArea")
 	WebElement TabContainer;
-	public @FindBy(xpath =".//*[@id='scrollableArea']/div[1]/div[1]/div[2]/div/ul/li/ul/li[10]/span") WebElement SubscribeToACourse;
+	public @FindBy(xpath="//span[text()=\"Subscribe to Your Course's...\"]")WebElement SubscribeToACourse;
 	public @FindBy(css = ".resume-button.ng-scope>a") List<WebElement> list_of_resume_buttons;
 	public @FindBy(css = ".video-wrap") List<WebElement> video_wraps_of_chapters_of_opened_recording_list;
 	public @FindBy(css = ".thumbnail-image") List<WebElement> images_thumbnail_of_recording_chapters_list;
@@ -2700,7 +2700,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for (int i = 0; i < current_recording_list.size(); i++) {
 			if (current_recording_list.get(i).equals(target_recording)) {
 				clickOnRecordingTitleInIndex(i + 1);
-				clickOnTheCaptherWithOutTheExpandOnTheIdnex(i+1);
+				clickOnTheCaptherWithOutTheExpandOnTheIndex(i+1);
 				break;
 			}
 		}
@@ -4760,11 +4760,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
 			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
 				
+	} catch (Exception e) {
+		
+		System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
+		ATUReports.add("Not find the element: "+e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			
 		}
 	}
 	
 	
-	public void clickOnTheCaptherWithOutTheExpandOnTheIdnex(int index){
+	public void clickOnTheCaptherWithOutTheExpandOnTheIndex(int index){
 		
 		try{
 			System.out.println("clickOnFirstVisibleChapter1");
@@ -4779,7 +4784,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
 			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
 				
+		} catch (Exception e) {	
+			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
+			ATUReports.add("Not find the element: "+e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));			
 		}
+	
 	}
 	
 	

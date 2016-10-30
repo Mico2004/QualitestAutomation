@@ -200,7 +200,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		confirm_menu.isConfirmationMenuClosed();
 		
 //		record.checkStatusExistenceForMaxTTime(360);
-		record.waitUntilRecordingListIsEmptyWithMaxTimeOut(360);
+		record.waitUntilFirstRecordingBeingMovedFromStatusDissaper();
 		
 		// 16. Click "Courses" link in the breadcrumbs.
 		record.returnToCourseListPage();
@@ -237,7 +237,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 			ATUReports.add("Recording is not displayed in recordings tab", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		
+	
 		// 18.2. The recording finished moving - has this status "IE, FF, Safari Ready" or none at all
 		String recording_status = record.getIndexRecordingStatus(i);
 		
@@ -247,7 +247,8 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("The recording has not this status IE, FF, Safari Ready or none at all.");
-			ATUReports.add("The recording has this status IE, FF, Safari Ready or none at all.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Verfied that all recordings have delete available status.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("the status is: " + recording_status, "True.", "False.", LogAs.WARNING, null);
 			Assert.assertTrue(false);
 		}
 		

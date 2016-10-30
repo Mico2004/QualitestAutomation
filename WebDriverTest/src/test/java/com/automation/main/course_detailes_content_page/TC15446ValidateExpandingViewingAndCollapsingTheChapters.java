@@ -44,7 +44,6 @@ import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.SearchPage;
 import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
-import com.gargoylesoftware.htmlunit.javascript.host.media.rtc.mozRTCIceCandidate;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;

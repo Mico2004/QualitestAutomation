@@ -647,17 +647,25 @@ public class PlayerPage extends Page {
 	/// verify search result page by recording name that was searched
 	public void verifySearchResultPage(String recording) throws InterruptedException {
 			
+
+		WebElement titleResults = driver.findElements(By.id("undefined_TXT")).get(2);
+		WebElement titleResults2 = driver.findElements(By.id("undefined_TXT")).get(3);
 		
-		//WebElement titleResult =(WebElement)((JavascriptExecutor) driver).executeScript("document.getElementById(\"undefined_TXT\");");
-		WebElement titleResults = driver.findElements(By.id("undefined_TXT")).get(2);		
 		String text = titleResults.getText(); 
-			
+		String text2 = titleResults2.getText(); 
+		
 		if ((text.contains(recording)) && (text.contains("- Search Results"))) {
 			System.out.println("result search page verified for recording: " + recording);
 			ATUReports.add("result search page verified for recording: ", recording, "contains", "contains",
 					LogAs.PASSED, null);
 			Assert.assertTrue(true);
-		} else {
+		} else if((text2.contains(recording)) && (text2.contains("- Search Results"))){
+			System.out.println("result search page verified for recording: " + recording);
+			ATUReports.add("result search page verified for recording: ", recording, "contains", "contains",
+					LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		}
+		else{
 			System.out.println("result search page not verified for recording: " + recording);
 			ATUReports.add("result search page  verified for recording: ", recording, "contains", "not contains",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -1158,6 +1166,7 @@ public class PlayerPage extends Page {
 		Thread.sleep(500);
 		bookmark_text_infut_field.sendKeys(bookmark);
 		System.out.println("bookmark name written successfully");
+		
 		Thread.sleep(500);
 		clickElement(add_bookmark_button);
 		if(!bookmark_text_infut_field.getText().isEmpty()){
@@ -1218,6 +1227,7 @@ public class PlayerPage extends Page {
 		try {
 			pause_button.click();
 			System.out.println("clicked on play button to pause");
+			ATUReports.add("clicked on play button to pause", LogAs.PASSED, null);
 			addBookMark(bookmark, seconds);
 			play_button.click();
 		} catch (Exception e) {

@@ -25,7 +25,6 @@ import com.automation.main.page_helpers.DeleteMenu;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
-import com.gargoylesoftware.htmlunit.WebWindowAdapter;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
