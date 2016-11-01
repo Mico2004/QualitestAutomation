@@ -45,8 +45,10 @@ public class AdminDashboardViewCourseList extends Page {
 	public
 	WebElement first_course_link;
 	@FindBy(xpath = "//*[@id=\"2\"]/td[5]/a") WebElement second_course_link;
+	@FindBy(xpath = ".//*[@id='1']/td[6]") WebElement first_instructor_ids;
 	@FindBy(xpath = "//*[@id=\"main\"]/div[1]/h2") WebElement all_courses_title;
 	@FindBy(className = "linksStyle") List<WebElement> courses_link;
+	
 	// @FindBy(id = "ctl00_ContentPlaceHolder1_txtSearch") WebElement
 	// filter_search_input;
 	// @FindBy(id = "ctl00_ContentPlaceHolder1_btnSearch") WebElement
@@ -148,4 +150,11 @@ public class AdminDashboardViewCourseList extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	public String getTheFirstInstructorIDS(){
+		waitForVisibility(first_instructor_ids);
+		return first_instructor_ids.getText();
+	}
+	
+	
 }
