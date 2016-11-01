@@ -108,7 +108,7 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 			course.selectCourseThatStartingWith("Ab");
 			
 			//4.a.verify move button is grey
-			record.verifyRecordingMenuColor(record.move_button);
+			record.verifyRecordingMenuColor(record.delete_button);
 			//4.b.verify move button is disabled
 			record.verifyDisabledMenu();
 			

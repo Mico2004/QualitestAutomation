@@ -293,7 +293,7 @@ public class CopyMenu extends Page {
 			ATUReports.add("search course box is verified", LogAs.PASSED, null);
 		} else {
 			System.out.println("search course box is not verified");
-			ATUReports.add("search course box is not verified", LogAs.PASSED, null);
+			ATUReports.add("search course box is not verified", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.DESKTOP));
 		}
 		Assert.assertTrue(verifyElement(search_box));
 	}
@@ -483,8 +483,9 @@ public class CopyMenu extends Page {
 	public void verifyBlueColor(String expected) {
 		String blue3 = "#3399ff";
 		String blue = "#1e90ff";
-		String blue2 = "#26a0da";/// blue in ie chrome and firefox
-		if ((expected.equals(blue)) || (expected.equals(blue2)) || (expected.equals(blue3))) {
+		String blue2 = "#26a0da";
+		String blue4 = "#0e76bf";/// blue in ie chrome and firefox
+		if ((expected.equals(blue)) || (expected.equals(blue2)) || (expected.equals(blue3)) || expected.equals(blue4)) {
 			System.out.println("color of course selected is blue");
 			ATUReports.add("color of course selected is blue", LogAs.PASSED, null);
 			Assert.assertTrue(true);
