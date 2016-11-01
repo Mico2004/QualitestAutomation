@@ -39,7 +39,7 @@ import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
+public class TC1700ValidateChangeRecordingNameFunctionality {
 
 
 	// Set Property for ATU Reporter Configuration
@@ -97,8 +97,8 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 
 	
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC17001 Validate Change recording name with different type of input")
-	public void test17001() throws InterruptedException, ParseException {
+	@Test (description="TC17000 Validate Change recording name functionality")
+	public void test17000() throws InterruptedException, ParseException {
 		
 		
 		
@@ -114,6 +114,12 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);
 		
+		//get the recording length creator and date are the same as before the edit
+		String recordLen = record.getTheRecordLengthByRecordIndex(recordNumber);
+		String recordBy = record.getTheRecordedByRecordIndex(recordNumber);
+		String recordeDate = record.getTheRecordingDateIndex(recordNumber);
+		
+		
 		//4.click on the recording tasks->edit recording properties option
 		record.toEditRecordingPropertiesMenu();
 			
@@ -121,8 +127,7 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		edit_recording_properties_window.waitForPageToLoad();
 		
 		//6.Click inside of the "Name" editbox type the text "<10 spaces>Change<10 spaces>recording name<10 spaces>"
-		String newName = "          Change          recording name          ";
-		String newNameWithOutGaps = "Change recording name";
+		String newName = "Change recording name";
 		edit_recording_properties_window.changeRecordingNameToTargetName(newName);
 		
 		//7.Click the "Save" button
@@ -143,60 +148,15 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
 		//14.Validate the recording name has changed to "Change recording name" without any white spaces gaps.
-		record.verifyThatTheRecordNameEqualsFromTheString(newNameWithOutGaps,recordNumber,"Record name");
+		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber,"Record name");
 		
-		//15.Check another recording respective checkbox
-		record.unselectIndexCheckBox(recordNumber);
-		record.selectIndexCheckBox(recordNumber+1);
+		//15.Validate the recording length, creator and date are the same as before the edit
+		record.verifyThatTheRecordNameEqualsFromTheString(recordLen,recordNumber,"Record length");
+		record.verifyThatTheRecordNameEqualsFromTheString(recordBy,recordNumber,"Record creator");
+		record.verifyThatTheRecordNameEqualsFromTheString(recordeDate,recordNumber,"Record date");
 		
-		//16.Click on 'Recording Tasks - Edit Recording Properties' option
-		record.toEditRecordingPropertiesMenu();
-		
-		//17.wait for edit reocrding properties window to open
-		edit_recording_properties_window.waitForPageToLoad();
-		
-		//18.Copy  the  !@#$%^&*(){}|"?><*/-– funny characters string to name text box
-		newName = "!@#$%^&*(){}|\"?><*/-–";	
-		edit_recording_properties_window.changeRecordingNameToTargetName(newName);
-		
-		//19.Click The save button
-		edit_recording_properties_window.clickOnSaveButton();
-		
-		//20.The model window is closed.
-		edit_recording_properties_window.verifyConfirmWindowIsClosed();
-		
-		//21.Click "OK" button in the confirmation model window
-		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
-		
-		//22.Validate the recording name change to !@#$%^&*(){}|"?><*/-–
-		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber+1,"Record name");
-		
-		//23.Check another recording respective checkbox
-		record.unselectIndexCheckBox(recordNumber+1);
-		record.selectIndexCheckBox(recordNumber+2);
-		
-		//24.Click on 'Recording Tasks - Edit Recording Properties' option
-		record.toEditRecordingPropertiesMenu();
-				
-		//25.wait for edit reocrding properties window to open
-		edit_recording_properties_window.waitForPageToLoad();
-		
-		//26.Copy the ¶©®ù◊ non ascii string to the Name textbox
-		newName = "¶©®ù◊";
-		edit_recording_properties_window.changeRecordingNameToTargetName(newName);
-		
-		//27.Click The save button
-		edit_recording_properties_window.clickOnSaveButton();
-		
-		//28.The model window is closed.
-		edit_recording_properties_window.verifyConfirmWindowIsClosed();
-		
-		//29.Click "OK" button in the confirmation model window
-		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
-		
-		//30.Validate the recording name change to !@#$%^&*(){}|"?><*/-–
-		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber+2,"Record name");
-		
+		//16.Validate the 'Recording is being' edited status disappears within maximum of 2 minutes
+		//record.check
 	
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

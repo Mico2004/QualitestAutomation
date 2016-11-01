@@ -4597,6 +4597,27 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 	
+	public void checkExistenceOfNonEditRecordingsStatusInTheIndex(int index) throws InterruptedException {
+		
+		Thread.sleep(1000);
+		WebElement recordStatus = driver.findElement(By.xpath("RecordingStatus" +Integer.toString(index)+"']"));		
+		for(int i= 0; i< 120 ; i++ ){
+			String current_element = getTextFromWebElement(recordStatus,5);
+			System.out.println(current_element);
+			if ((!current_element.equals(""))) {
+				Thread.sleep(1000);
+			  }
+			 else {
+				System.out.println("Not verfired that all additional Content have non delete status.");
+			    ATUReports.add("Verfied that all additional Content have delete available status.", "True.", "Status of "+i+" content is: "+current_element, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	 
+				break;
+			}
+		}
+	
+	}
+	
+	
+	
 	// This function go over all recording status and checks that recording status of type which available for delete that recordings
 	public void checkExistenceOfNonDeleteItemsStatusInAdditionalContent() throws InterruptedException {
 		int i = 1;
@@ -4810,23 +4831,66 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}	
 	}
 	
-	public void verifyThatTheRecordNameEqualsFromTheString(String recordName,int index){
+	public void verifyThatTheRecordNameEqualsFromTheString(String recordOperation,int index,String operation){
 		
-		String recordNameToCompare =getTheRecordNameByRecordIndex(index);
-		if(recordNameToCompare.equals(recordName)){
-			System.out.println("The Record name: " + recordNameToCompare + " is equals from the String: " + recordName );
-			ATUReports.add("The Record name: " + recordNameToCompare + " is equals from the String: " + recordName ,LogAs.PASSED, null);		
+	try{
+		String recordNameToCompare = null;
+		switch(operation){
+		case "Record name":
+			 recordNameToCompare =getTheRecordNameByRecordIndex(index);
+			 break;
+		case "Record length":
+			recordNameToCompare =getTheRecordLengthByRecordIndex(index);
+			break;
+		case "Record creator":	
+			recordNameToCompare =getTheRecordedByRecordIndex(index);
+			break;
+		case "Record date":	
+			recordNameToCompare =getTheRecordingDateIndex(index);
+			break;
+		}
+		
+
+		if(recordNameToCompare.equals(recordOperation)){
+			System.out.println("The " + operation + recordNameToCompare + " is equals from the String: " + recordOperation );
+			ATUReports.add("The Record name: " + recordNameToCompare + " is equals from the String: " + recordOperation ,LogAs.PASSED, null);		
 		}else{
-			System.out.println("The Record name: " + recordNameToCompare + " is different from the String: " + recordName );
-			ATUReports.add("The Record name: " + recordNameToCompare + " is different from the String: " + recordName ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			System.out.println("The Record name: " + recordNameToCompare + " is different from the String: " + recordOperation );
+			ATUReports.add("The Record name: " + recordNameToCompare + " is different from the String: " + recordOperation ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
 			
 		}
+		
+	}catch(Exception e){
+		e.getMessage();
+		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	}
 	}
 	
 	public String getTheRecordNameByRecordIndex(int index){
 		
 		waitForVisibility(first_recording_title);
 		WebElement record = driver.findElement(By.xpath("//*[@id='Recording"+Integer.toString(index)+"']/strong"));
+		return record.getText();
+	}
+	
+	public String getTheRecordLengthByRecordIndex(int index){
+		
+		waitForVisibility(first_recording_title);
+		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingLength"+Integer.toString(index)+"']"));
+		return record.getText();
+	}
+	
+	public String getTheRecordedByRecordIndex(int index){
+		
+		waitForVisibility(first_recording_title);
+		WebElement record = driver.findElement(By.xpath("//*[@id='RecordedBy"+Integer.toString(index)+"']"));
+		return record.getText();
+	}
+	
+public String getTheRecordingDateIndex(int index){
+		
+		waitForVisibility(first_recording_title);
+		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingDate"+Integer.toString(index)+"']"));
 		return record.getText();
 	}
 
