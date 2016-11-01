@@ -141,10 +141,6 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 	{
 		// 1. Login as an existing Instructor (User1).
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-	/*	tegrity.loginCoursesByParameter("InstructorTemp14092016082749");
-		initializeCourseObject();
-		course.verifyCourseExist("User113092016032614 sandbox course");
-		Thread.sleep(5000);*/
 		
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();

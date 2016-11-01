@@ -155,7 +155,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		
 		record.returnToCourseListPage();
 		
-		String Ab_course_name = course.selectCourseThatStartingWith("Ab");
+		String Ad_course_name = course.selectCourseThatStartingWith("Ad");
 		
 		top_bar_helper.signOut();
 		
@@ -413,9 +413,9 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 				
 		mange_ad_hoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));	
 		
-		// Enroll to Ab course
+		// Enroll to Ad course
 		// Search target course name
-		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ab_course_name);
+		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ad_course_name);
 							
 		Thread.sleep(1000);
 		// Click on result first course (the only one) membership button
