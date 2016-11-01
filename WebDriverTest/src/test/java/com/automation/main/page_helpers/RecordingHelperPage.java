@@ -82,6 +82,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement FirstRecordByName;
 	@FindBy(id = "Checkbox1")
 	public WebElement checkbox;
+	@FindBy(id = "Checkbox3")
+	public WebElement checkbox3;
 	@FindBy(xpath = "//*[@id=\"CopyButton\"]")
 	public WebElement copy_menu_recbtn;
 	@FindBy(id = "tegritySearchBox")
@@ -4806,6 +4808,26 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					return false;					
 				}				
 			}	
+	}
+	
+	public void verifyThatTheRecordNameEqualsFromTheString(String recordName,int index){
+		
+		String recordNameToCompare =getTheRecordNameByRecordIndex(index);
+		if(recordNameToCompare.equals(recordName)){
+			System.out.println("The Record name: " + recordNameToCompare + " is equals from the String: " + recordName );
+			ATUReports.add("The Record name: " + recordNameToCompare + " is equals from the String: " + recordName ,LogAs.PASSED, null);		
+		}else{
+			System.out.println("The Record name: " + recordNameToCompare + " is different from the String: " + recordName );
+			ATUReports.add("The Record name: " + recordNameToCompare + " is different from the String: " + recordName ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			
+		}
+	}
+	
+	public String getTheRecordNameByRecordIndex(int index){
+		
+		waitForVisibility(first_recording_title);
+		WebElement record = driver.findElement(By.xpath("//*[@id='Recording"+Integer.toString(index)+"']/strong"));
+		return record.getText();
 	}
 
 }
