@@ -438,7 +438,7 @@ public class Page {
 
 	}
 	
-	
+
 	public  boolean isElementPresent(WebElement element) {
 		boolean flag = false;
 		try {
@@ -678,6 +678,20 @@ public class Page {
 		int number3 = Integer.parseInt(numbers[2]);
 		return String.format("#%02x%02x%02x", number1, number2, number3);
 	}
+	
+	// get font color by an element
+	public String getColorFromCssElement(WebElement element,String cssVal) {
+		String text = element.getCssValue(cssVal).toString();
+		// Split css value of rgb
+		String[] numbers = text.replace("rgba(", "").replace(")", "").split(",");
+		int number1 = Integer.parseInt(numbers[0]);
+		numbers[1] = numbers[1].trim();
+		int number2 = Integer.parseInt(numbers[1]);
+		numbers[2] = numbers[2].trim();
+		int number3 = Integer.parseInt(numbers[2]);
+		return String.format("#%02x%02x%02x", number1, number2, number3);
+	}
+	
 
 	// This function get WebElement and String, and force that WebElement to be
 	// selected

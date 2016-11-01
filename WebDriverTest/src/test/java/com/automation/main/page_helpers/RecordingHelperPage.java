@@ -1501,35 +1501,6 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		clickOnRecordingTaskThenMove();
 	}
 
-	// verify move menu
-	public void toMoveMenuByContentTask() throws InterruptedException {
-
-		// waitForVisibility(content_tasks_button);
-		// moveToElementAndClick(content_tasks_button, driver);
-		// for (int i = 0; i < 10; i++) {
-		// content_tasks_button.sendKeys(Keys.TAB);// solution
-		// try { // to
-		// move_button.click(); // solve
-		//
-		// Thread.sleep(1000);
-		// if (isElementPresent(By.id("ModalDialogHeader"))) {
-		// System.out.println("Move menu confirmed");
-		// ATUReports.add("click succeeded", LogAs.PASSED, null);
-		// }
-		//
-		// return;
-		// } catch (Exception e) {
-		//
-		// }
-		// }
-		// // hover
-		// // and
-		// // click
-		//
-		// ATUReports.add("click failed ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		// System.out.println("Move to move menu failed");
-		clickOnContentTaskThenMove();
-	}
 
 	// this function check if index recording is clickable
 	public boolean isIndexRecordingClickable(int index) {
@@ -1857,13 +1828,26 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("Menu color is not grey");
 			ATUReports.add("Menu color is not grey", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
-		Assert.assertTrue(assertion);// compare
-										// 2
-										// colors
+		Assert.assertTrue(assertion);// compare// 2// colors
 		Thread.sleep(2000);
-
 	}
 
+	// verify recording menu color
+	public void verifyColorButton(String color) throws InterruptedException {
+
+			String white = "#0e76bf";/// blue in ie chrome and firefox
+			String white2 = "#e6e617";
+			if (color.equals(white) || color.equals(white2)) {
+			
+				System.out.println("Button background color is White");
+				ATUReports.add("Button background color is White", LogAs.PASSED, null);
+			} else {
+				System.out.println("Button background color is not White");
+				ATUReports.add("Button background color is not White", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		
+		}
+	
 
 
 	// thic function clicks on student recordings tab (in type of recordings
