@@ -270,14 +270,14 @@ public class EditRecordinPropertiesWindow extends Page {
 		 ATUReports.add("The Save button is displayed on the bottom right corner of the model window.", LogAs.PASSED, null);
 		}else {
 		 System.out.println("The Save button isn't displayed on the bottom right corner of the model window.");
-		 ATUReports.add("The Save button isn't displayed on the bottom right corner of the model window.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+		 ATUReports.add("The Save button isn't displayed on the bottom right corner of the model window.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
-		if((title.getY() > cancel.getY()) && (cancel.getX() < save.getX())) {
+		if((cancel.getY() > title.getY()) && (cancel.getX() < save.getX())) {
 			 System.out.println("The Cancel button is displayed on the left of the Save button.");
 			 ATUReports.add("The Cancel button is displayed on the left of the Save button.", LogAs.PASSED, null);
 			}else {
-			 System.out.println("The Cancel button is displayed on the left of the Save button.");
-			 ATUReports.add("The Cancel button is displayed on the left of the Save button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			 System.out.println("The Cancel button is not displayed on the left of the Save button.");
+			 ATUReports.add("The Cancel button is not displayed on the left of the Save button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		}
 		
@@ -290,7 +290,7 @@ public class EditRecordinPropertiesWindow extends Page {
 			 ATUReports.add("Verify the font color of: " + element.getText(), LogAs.PASSED, null);
 			}else {
 			 System.out.println("Not Verify the font color of: " + element.getText());
-			 ATUReports.add("Not Verify the font color of: " + element.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			 ATUReports.add("Not Verify the font color of: " + element.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}	
 	}
 	
@@ -310,7 +310,7 @@ public class EditRecordinPropertiesWindow extends Page {
 		 ATUReports.add("The location of the edit recording properties is aligned left.", LogAs.PASSED, null);
 		}else {
 		 System.out.println("The location of the edit recording properties is not aligned left.");
-		 ATUReports.add("The location of the edit recording properties is not aligned left.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+		 ATUReports.add("The location of the edit recording properties is not aligned left.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	}
  }
 	
@@ -326,7 +326,7 @@ public class EditRecordinPropertiesWindow extends Page {
 			ATUReports.add("The location of the label " + label.getText() + " recording properties is aligned left.", LogAs.PASSED, null);
 		}else {
 		 System.out.println("The location of the label " + label.getText() + " recording properties is not aligned left.");
-			ATUReports.add("The location of the label " + label.getText() + " recording properties is not aligned left.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add("The location of the label " + label.getText() + " recording properties is not aligned left.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
     }
     
@@ -336,11 +336,18 @@ public class EditRecordinPropertiesWindow extends Page {
     	String inputElement = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
       
     	if(OutSideString.equals(inputElement)){
-		 System.out.println("The input Element: " +inputElement + "is equals to the out Side String " + OutSideString);
-			ATUReports.add("The input Element: " +inputElement + "is equals to the out Side String " + OutSideString, LogAs.PASSED, null);
-		}else {
-		 System.out.println("The input Element: " +inputElement + "is not equals to the out Side String " + OutSideString);
-			ATUReports.add("The input Element: " +inputElement + "is not equals to the out Side String " + OutSideString,LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+		 System.out.println("The input Element: " +inputElement + " is equals to the out Side String " + OutSideString);
+			ATUReports.add("The input Element: " +inputElement + " is equals to the out Side String " + OutSideString, LogAs.PASSED, null);
+		}else if(OutSideString.length()!=inputElement.length()) {
+			StringBuilder sb= new StringBuilder(inputElement);
+			sb.insert(3, "0");
+			if(sb.toString().equals(OutSideString)){
+				 System.out.println("The input Element: " +inputElement + " is equals to the out Side String " + OutSideString);
+				 ATUReports.add("The input Element: " +inputElement + " is equals to the out Side String " + OutSideString, LogAs.PASSED, null);
+			}
+		}else{
+		 System.out.println("The input Element: " +inputElement + " is not equals to the out Side String " + OutSideString);
+			ATUReports.add("The input Element: " +inputElement + " is not equals to the out Side String " + OutSideString,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
     }
  
@@ -361,7 +368,7 @@ public class EditRecordinPropertiesWindow extends Page {
    			ATUReports.add("The user: " + user + " is appread on the list", LogAs.PASSED, null);
    		}else {
    		    System.out.println("The user: " + user + " is not appread on the list");
-   			ATUReports.add("The user: " + user + " is not appread on the list",LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+   			ATUReports.add("The user: " + user + " is not appread on the list",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
    		}
     		
     }
@@ -574,6 +581,41 @@ public class EditRecordinPropertiesWindow extends Page {
 		
 	}
 
+	
+	// that title open or closed
+	public boolean isConfirmationMenuClosed() throws InterruptedException {
+		try {
+			for(int i = 0; i < 20 ; i++){
+				if(!save_button.isDisplayed()){
+					return true;
+				}else{
+					Thread.sleep(1000);
+				}
+				
+			}
+			return false;
+		} catch (org.openqa.selenium.NoSuchElementException msg) {
+			return true;
+		}
+	}
+
+		// This function verify that confirm window is close
+		public void verifyConfirmWindowIsClosed() throws InterruptedException {
+			boolean is_closed = isConfirmationMenuClosed();
+
+			if (is_closed) {
+				System.out.println("Confirm window is closed.");
+				ATUReports.add("Confirm window.", "Closed.", "Closed.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("Confirm window is open.");
+				ATUReports.add("Confirm window.", "Closed.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+		}
+	
+	
+	
 
 	public void verifyThatHoverOnButtonAndSeeShadow(WebElement button,String text) throws NoSuchElementException, InterruptedException {
 
