@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.testng.annotations.AfterClass;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,6 +18,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -137,9 +139,21 @@ public class TestSuitePreSetCopyRecordings_DeleteAdditional {
 
 	@Test( description = "Login course page")
 	public void loginCourses() throws InterruptedException {
-		System.out.println("b0");
+		 
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		tegrity.loginAdmin("Admin");;// log in courses page
+		
+		WebElement bottom_line = driver.findElement(By.xpath(".//*[@id='copyright']/div"));
+		wait.until(ExpectedConditions.visibilityOf(bottom_line));
+		String[]parts= bottom_line.getText().split(" ");
+		String build = parts[parts.length - 1];
+		System.out.println("the build is: " +build);
+		 
+		 record.signOut();
+		  
+  	  System.out.println("b0");
 		  final List<Integer> CourseAbContent = Arrays.asList(1); //For Ab		
-		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
+		    Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
 			{
 				put(PropertyManager.getProperty("course1"),CourseAbContent);			
 			}

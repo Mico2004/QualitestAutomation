@@ -141,8 +141,8 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
-		// 1.1. Get the of Ab course.
-		String instructor_public_course = course.selectCourseThatStartingWith("Ab");
+		// 1.1. Get the of abc course.
+		String instructor_public_course = course.selectCourseThatStartingWith("abc");
 		
 		// 2. Logout.
 		top_bar_helper.signOut();

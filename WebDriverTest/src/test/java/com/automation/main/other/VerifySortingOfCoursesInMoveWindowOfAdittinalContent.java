@@ -80,7 +80,7 @@ public class VerifySortingOfCoursesInMoveWindowOfAdittinalContent {
 	
 			        record.getCheckbox().click();
 					///6.select move menu
-			        record.toMoveMenuByContentTask();
+			        record.clickOnContentTaskThenMove();
 				    //7.verify courses are displayed in alphabetical order
 					record.verifyRecordingSortedByTitle(copy.getCourseList());///verify sorted by title
 					driver.quit();

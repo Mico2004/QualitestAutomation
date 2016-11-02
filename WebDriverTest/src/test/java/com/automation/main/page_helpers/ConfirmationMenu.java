@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,6 +34,8 @@ public class ConfirmationMenu extends Page {
 	public WebElement ok_buttonCss;
 	@FindBy(id = "ModalDialogHeader")
 	WebElement header_title;
+	@FindBy(id = "ModalDialogHeaderWrap")
+	WebElement background_header_title;
 	@FindBy(id = "ModalDialogHeader")
 	List<WebElement> header_title_list;
 	@FindBy(css = ".emphasis.ng-binding")
@@ -371,13 +374,13 @@ public class ConfirmationMenu extends Page {
 		}
 		
 		try {
-			String souce_page = driver.getPageSource();
-			if (!souce_page.contains("Edit Recording Properties")) {
+			String source_page = driver.getPageSource();
+			if (!source_page.contains("Edit Recording Properties")) {
 				System.out.println("Error window title is wrong.");
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
-			if (!souce_page.contains("Recording properties have been queued for edit")) {
+			if (!source_page.contains("Recording properties have been queued for edit")) {
 				System.out.println("Error window description is wrong.");
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
@@ -680,4 +683,36 @@ public class ConfirmationMenu extends Page {
 		Thread.sleep(3000);
 	}
 	
+	public void verifyConfirmBackgroundColor(RecordingHelperPage rec) throws InterruptedException {
+		Thread.sleep(2000);
+		String background_rec = rec.getBackGroundColor(rec.background);
+		String menu_background = getBackGroundColor(background_header_title);
+		if (background_rec.equals(menu_background)) {
+			ATUReports.add("Confirm menu background color is same as recording background color.", LogAs.PASSED, null);
+			System.out.println("Confirm menu background color is same as recording background color.");
+			Assert.assertTrue(true);
+		} else {
+			ATUReports.add("Confirm menu background color is not same as recording background color.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println("Confirm menu background color is not same as recording background color.");
+			Assert.assertTrue(false);
+		}
+
+	}
+	
+	public void verifyTheLocationOfTheOkButtonIsInTheButtomRight() throws InterruptedException {
+	
+		
+		Point headerTitle = header_title.getLocation();
+		Point okButton = ok_button.getLocation();
+		
+		if (headerTitle.getX() < okButton.getX() && headerTitle.getY() < okButton.getY() ) {
+			ATUReports.add("The location of the ok button is on the right bottom.", LogAs.PASSED, null);
+			System.out.println("The location of the ok button is on the right bottom.");			
+		} else {
+			ATUReports.add("The location of the ok button is not on the right bottom.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println("The location of the ok button is not on the right bottom.");
+		
+		}
+
+	}
 }

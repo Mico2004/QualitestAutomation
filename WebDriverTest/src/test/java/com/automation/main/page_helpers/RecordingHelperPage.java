@@ -84,6 +84,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement FirstRecordByName;
 	@FindBy(id = "Checkbox1")
 	public WebElement checkbox;
+	@FindBy(id = "Checkbox3")
+	public WebElement checkbox3;
 	@FindBy(xpath = "//*[@id=\"CopyButton\"]")
 	public WebElement copy_menu_recbtn;
 	@FindBy(id = "tegritySearchBox")
@@ -1505,35 +1507,6 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		clickOnRecordingTaskThenMove();
 	}
 
-	// verify move menu
-	public void toMoveMenuByContentTask() throws InterruptedException {
-
-		// waitForVisibility(content_tasks_button);
-		// moveToElementAndClick(content_tasks_button, driver);
-		// for (int i = 0; i < 10; i++) {
-		// content_tasks_button.sendKeys(Keys.TAB);// solution
-		// try { // to
-		// move_button.click(); // solve
-		//
-		// Thread.sleep(1000);
-		// if (isElementPresent(By.id("ModalDialogHeader"))) {
-		// System.out.println("Move menu confirmed");
-		// ATUReports.add("click succeeded", LogAs.PASSED, null);
-		// }
-		//
-		// return;
-		// } catch (Exception e) {
-		//
-		// }
-		// }
-		// // hover
-		// // and
-		// // click
-		//
-		// ATUReports.add("click failed ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		// System.out.println("Move to move menu failed");
-		clickOnContentTaskThenMove();
-	}
 
 	// this function check if index recording is clickable
 	public boolean isIndexRecordingClickable(int index) {
@@ -1866,20 +1839,21 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 
 	// verify recording menu color
-	public void verifyColorButton(WebElement el) throws InterruptedException {
 
-			String white_color = "rgba(128, 128, 128, 1)";
-				
-			boolean assertion = verifyColor(white_color, el);
-			if (assertion == true) {
+	public void verifyColorButton(String color) throws InterruptedException {
+
+			String white = "#0e76bf";/// blue in ie chrome and firefox
+			String white2 = "#e6e617";
+			if (color.equals(white) || color.equals(white2)) {
+			
 				System.out.println("Button background color is White");
 				ATUReports.add("Button background color is White", LogAs.PASSED, null);
 			} else {
 				System.out.println("Button background color is not White");
 				ATUReports.add("Button background color is not White", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
-			Assert.assertTrue(assertion);// compare// 2// colors
-			Thread.sleep(2000);
+		
+
 		}
 	
 
@@ -4637,6 +4611,25 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 	
+	public void checkExistenceOfNonEditRecordingsStatusInTheIndex(int index) throws InterruptedException {
+		
+		try {
+		  Boolean isTheStatusDisapper =  new WebDriverWait(driver, 120).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("RecordingStatus" +Integer.toString(index)+"']"), "Recording is being edited."));
+		  if(isTheStatusDisapper) {
+			  System.out.println("The status has change in less then 120 seconds");
+			  ATUReports.add("The status has change in less then 120 seconds.", "True.", "True.", LogAs.PASSED, null);
+		  } else {
+			  System.out.println("The status has change in less then 120 seconds");
+			  ATUReports.add("The status has not change in less then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		  }
+		}catch(org.openqa.selenium.TimeoutException msg){
+			 System.out.println("The status has change in less then 120 seconds");
+			  ATUReports.add("The status has not change in less then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+	
+	
+	
 	// This function go over all recording status and checks that recording status of type which available for delete that recordings
 	public void checkExistenceOfNonDeleteItemsStatusInAdditionalContent() throws InterruptedException {
 		int i = 1;
@@ -4851,6 +4844,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 
+
 	
 	
 	
@@ -4887,4 +4881,81 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	
 	
 
+	public void verifyThatTheRecordNameEqualsFromTheString(String recordOperation,int index,String operation){
+		
+	try{
+		String recordNameToCompare = null;
+		switch(operation){
+		case "Record name":
+			 recordNameToCompare =getTheRecordNameByRecordIndex(index);
+			 break;
+		case "Record length":
+			recordNameToCompare =getTheRecordLengthByRecordIndex(index);
+			break;
+		case "Record creator":	
+			recordNameToCompare =getTheRecordedByRecordIndex(index);
+			break;
+		case "Record date":	
+			recordNameToCompare =getTheRecordingDateIndex(index);
+			break;
+		}
+		
+
+
+		if(recordNameToCompare.equals(recordOperation)){
+			System.out.println("The " + operation+ ":" + recordNameToCompare + " is equals from the String: " + recordOperation );
+			ATUReports.add("The " + operation+ ":"+ recordNameToCompare + " is equals from the String: " + recordOperation ,LogAs.PASSED, null);		
+		}else{
+			System.out.println("The " + operation+ ":"+ recordNameToCompare + " is different from the String: " + recordOperation );
+			ATUReports.add("The " + operation+ ":"+ recordNameToCompare + " is different from the String: " + recordOperation ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			
+		}
+		
+	}catch(Exception e){
+		e.getMessage();
+		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	}
+	}
+	
+	public String getTheRecordNameByRecordIndex(int index){
+		
+		waitForVisibility(first_recording_title);
+		WebElement record = driver.findElement(By.xpath("//*[@id='Recording"+Integer.toString(index)+"']/strong"));
+		return record.getText();
+	}
+	
+	public String getTheRecordLengthByRecordIndex(int index){
+		
+		waitForVisibility(first_recording_title);
+		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingLength"+Integer.toString(index)+"']"));
+		return record.getText();
+	}
+	
+	public String getTheRecordedByRecordIndex(int index){
+		
+		waitForVisibility(first_recording_title);
+		WebElement record = driver.findElement(By.xpath("//*[@id='RecordedBy"+Integer.toString(index)+"']"));
+		return record.getText();
+	}
+	
+	public String getTheRecordingDateIndex(int index){
+		
+		waitForVisibility(first_recording_title);
+		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingDate"+Integer.toString(index)+"']"));
+		return record.getText();
+	}
+	
+	public String getTheRecordingNameIndex(int index){
+		
+		waitForVisibility(first_recording_title);
+		WebElement record = driver.findElement(By.xpath("//*[@id='Recording"+Integer.toString(index)+"']/strong"));
+		return record.getText();
+	}
+	
+	public int getIndexOfRecordFromRecordName(String record){
+		convertRecordingsListToNames();
+		return recording_list_names.indexOf(record) + 1;
+	}
+	
+	
 }
