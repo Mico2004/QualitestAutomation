@@ -4,7 +4,7 @@ package com.automation.main.course_detailes_content_page;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -151,11 +151,11 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// 4. Logout.
 		top_bar_helper.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 5. Login as Instructor (User1).
 		tegrity.loginCourses("User1");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 6. Enter to the course page.
 		course.selectCourseThatStartingWith(current_course);
@@ -176,7 +176,7 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
 		
@@ -186,14 +186,14 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 					System.out.println("2222");
 					break;
 				} else {
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(1000);
 				}
 			} catch (Exception e) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 				
 		}
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		player_page.addTargetBookmark("First recording bookmark");
 		
 		// TODO: 11. Click on the course name link in the "Breadcrumb" area.
@@ -201,9 +201,9 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 			driver.switchTo().window(handler);
 			break;
 		}
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		
 		// 12. Validate the bookmark symbol is displayed in the "ex3" recording information.
@@ -211,11 +211,11 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		
 		// 13. Sign out.
 		top_bar_helper.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 14. Login as a STUDENT.
 		tegrity.loginCourses("User4");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 15. Open the course that contains "ex3" recording.
 		course.selectCourseThatStartingWith(current_course); 

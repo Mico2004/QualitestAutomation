@@ -2,7 +2,7 @@ package com.automation.main.course_detailes_content_page;
 
 
 import java.util.Date;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -158,18 +158,18 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 			record.clickOnRecordingTaskThenCopy();
 			copy.selectTargetCourseFromCourseListThatStartWith("abc");
 			copy.clickOnCopyButton();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			confirm_menu.clickOnOkButtonAfterConfirmCopyRecordings();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 		}
 		
 		record.checkStatusExistenceForMaxTTime(600);
 		
 		// 2. Login as INSTRUCTOR.
 		top_bar_helper.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		tegrity.loginCourses("User1");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 3. Enter to the predefined course.
 		course.selectCourseThatStartingWith("abc");
@@ -190,13 +190,13 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 //			if (counter == 60) {
 //				break;
 //			} else if(student_tab_color.equals("#ffffff")) {
-//				Thread.sleep(Page.TIMEOUT_TINY);
+//				Thread.sleep(1000);
 //				continue;
 //			} else {
 //				break;
 //			}
 //		}
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		
 //		System.out.println(record.getBackGroundColor(record.recordings_tab));
 		
@@ -210,13 +210,13 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 //			if (counter == 60) {
 //				break;
 //			} else if(recording_tab.equals("#ffffff")) {
-//				Thread.sleep(Page.TIMEOUT_TINY);
+//				Thread.sleep(1000);
 //				continue;
 //			} else {
 //				break;
 //			}
 //		}
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		
 		// 5.1. The loading event is handeled properly (spinning loading symbol for example).
 		wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));

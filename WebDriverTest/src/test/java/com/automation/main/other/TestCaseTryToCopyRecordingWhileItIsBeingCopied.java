@@ -11,7 +11,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -125,7 +125,7 @@ public class TestCaseTryToCopyRecordingWhileItIsBeingCopied {
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// save course list, we will copy in first time to course in 3rd index
 		// and in second time to course in 4th index
@@ -154,7 +154,7 @@ public class TestCaseTryToCopyRecordingWhileItIsBeingCopied {
 		// 7. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();

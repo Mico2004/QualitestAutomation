@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -35,6 +35,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -66,24 +68,6 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		
-//		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
-	//	DesiredCapabilities ieCapabilities = DesiredCapabilities.internetExplorer();
-		
-		
-//		ieCapabilities.setCapability("nativeEvents", false);    
-//		ieCapabilities.setCapability("unexpectedAlertBehaviour", "accept");
-//		ieCapabilities.setCapability("ignoreProtectedModeSettings", true);
-//		ieCapabilities.setCapability("disable-popup-blocking", true);
-		
-		
-		//ieCapabilities.setCapability("enablePersistentHover", false);
-		//driver = new InternetExplorerDriver(ieCapabilities);
-		//driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-		
-//		driver = new FirefoxDriver();
-
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -140,7 +124,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		// 2.4. Select source course.
 		current_course = course.selectCourseThatStartingWith("Ab");
 		
-		wait.until(ExpectedConditions.elementToBeClickable(record.getCheckbox()));
+		wait.until(ExpectedConditions.elementToBeClickable(record.checkbox));
 		
 		// 2.5. Select source recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -154,11 +138,11 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		// 2.8 Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 2.9. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		
 		// Wait until the copy status will disspear, becuase if we will move + copy it will fail to move
@@ -200,11 +184,11 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		// 7. Click "Move Recording(s)" button.
 		move_window.clickOnMoveRecordings();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 8.1. Message box is closed
 		if(confirm_menu.isConfirmationMenuClosed()) {
@@ -257,6 +241,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		// 14. Verify that copied recording has a title with number mark ("recordingname (number)").
 		List<String> recording_list = record.getCourseRecordingList();
 		
+		
 		int i = 0;
 		boolean is_found = false;
 		for(String recording: recording_list) {
@@ -276,7 +261,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that copied recording has the title with number mark");
-			ATUReports.add("Not verified that copied recording has the title with number mark", LogAs.FAILED, null);
+			ATUReports.add("Not verified that copied recording has the title with number mark", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -284,7 +269,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		record.clickOnRecordingTitleInIndex(2);
 		
 		// 16. Click on any chapter. 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 		
@@ -293,11 +278,11 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		//17. "Tegrity Player" is displayed and Recording is playing correctly.
 		//TODO: add WebDriverWait
-		//Thread.sleep(Page.TIMEOUT_TINY);
+		//Thread.sleep(10000);
 		
 		//WebDriverWait w = new WebDriverWait(driver, 10);
 		
-		//Thread.sleep(Page.TIMEOUT_TINY);
+		//Thread.sleep(10000);
 
 		player_page.verifyTimeBufferStatusForXSec(10);
 		

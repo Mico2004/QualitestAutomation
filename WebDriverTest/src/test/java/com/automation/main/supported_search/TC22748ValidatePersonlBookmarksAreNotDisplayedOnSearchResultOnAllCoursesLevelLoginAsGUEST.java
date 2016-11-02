@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -165,7 +165,7 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		 record.clickOnCourseTaskThenCourseSettings();
 		 course_settings.makeSureThatMakeCoursePublicIsSelected();
 		 course_settings.clickOnOkButton();
-		 Thread.sleep(Page.TIMEOUT_TINY);
+		 Thread.sleep(1000);
 					
 		 course_settings.signOut();
 		
@@ -192,7 +192,7 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String bookmark_to_add=sdf.format(date);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
 
 
@@ -201,7 +201,7 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		}
 		/// 12.sign out super user
 		record.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		tegrity.waitForVisibility(tegrity.passfield);
 
 		// 13.login as guest
@@ -212,7 +212,7 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		String to_search=bookmark_to_add;  ///search bookmark
 		// 17. Search some "Recording Chapter" and press ENTER.
 		top_bar_helper.searchForTargetText(to_search);		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		// verify that we got bookmark and one result
 		search_page.verifySearchResultIsEmpty();
 

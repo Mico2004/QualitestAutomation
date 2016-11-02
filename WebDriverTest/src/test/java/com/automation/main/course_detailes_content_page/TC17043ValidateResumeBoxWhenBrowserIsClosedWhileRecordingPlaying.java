@@ -3,11 +3,15 @@ package com.automation.main.course_detailes_content_page;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -131,41 +135,27 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	
 	@Test(description = "TC 17043 Validate Resume Box When Browser Is Closed While Recording Playing")
 	public void test17043() throws Exception
 	{
+			
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
+		
 		// 1. Make sure that the STUDENT and INSTRUCTOR users you are using never watched the recording used in this test case.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-		
-		String current_handler = driver.getWindowHandle();
-		driver.findElement(By.tagName("body")).click();
-		driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
-		
-		driver.switchTo().window(current_handler);
-		driver.close();
-		for(String handler: driver.getWindowHandles()) {
-			 if(!handler.equals(current_handler)){
-				 driver.switchTo().window(handler);
-				 break;
-			 }
-		}
-		
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-				
+	
 		// Copy one recording to Ba course
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// Logout.
 		top_bar_helper.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		
 		// 2. Repeat the test for STUDENT and INSTRUCTOR.
@@ -173,11 +163,11 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR.
 				tegrity.loginCourses("User1");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			} else {
 				// 3. Login as an STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 			
 			
@@ -191,19 +181,28 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_title);
 			player_page.verifyTimeBufferStatusForXSec(3);
 			
-			// 7. Close the browser while recording is playing the first chapter.
-			//String current_handler = driver.getWindowHandle();
-			driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
 			
+			// 7. Close the browser while recording is playing the first chapter.
+			String current_handler = driver.getWindowHandle();
+			driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
+								
+			Set<String> allHandles = driver.getWindowHandles();
+								
+								
 			driver.switchTo().window(current_handler);
 			driver.close();
-			for(String handler: driver.getWindowHandles()) {
-				 if(!handler.equals(current_handler)){
-					 driver.switchTo().window(handler);
-					 break;
-				 }
+			if(driver instanceof FirefoxDriver){
+				driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "w");
 			}
-						
+							
+			for(String handler: allHandles) {
+			    if(!handler.equals(current_handler)){
+					driver.switchTo().window(handler);
+					break;
+					 }
+		  	}
+			
+			
 //			driver.quit();	
 //			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 //			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -218,18 +217,18 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			if(type_of_user==0) {
 				// Login as an INSTRUCTOR.
 				tegrity.loginCourses("User1");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			} else {
 				// Login as an STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		
 			initializeCourseObject();
 			
 			// 9. Open the recording course you just watch.
 			course.selectCourseThatStartingWith("Ba");
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 			String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));
 			
@@ -237,7 +236,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			record.clickElement(record.first_recording_title);
 			
 			// 10.1. The "> Resume watching +(The first slide)" box is displayed.
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			record.verifyWebElementTargetText(record.list_of_resume_buttons.get(0), "Resume Watching");
 
 			// 10.2. The recording chapters are displayed to the user.
@@ -263,6 +262,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			// 11.1. The box background changes to grey.
 			if(record.getBackGroundColor(record.list_of_resume_buttons.get(0)).equals(before_click_background)) {
 				System.out.println("Not verified that background color changes.");
+
 				ATUReports.add("Background color changes.", "True.", "False.", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			} else {
@@ -284,7 +284,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 				break;
 			}
 			top_bar_helper.signOut();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 		}
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

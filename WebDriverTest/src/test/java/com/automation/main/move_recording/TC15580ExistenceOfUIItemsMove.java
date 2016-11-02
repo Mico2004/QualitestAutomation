@@ -2,7 +2,7 @@ package com.automation.main.move_recording;
 
 
 import org.testng.annotations.AfterClass;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -108,7 +108,7 @@ public class TC15580ExistenceOfUIItemsMove {
 	
 		//7.click all check box
 		record.checkall.click();// make all checkboxes marked
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		record.verifyAllCheckedboxSelected();
 		
@@ -119,10 +119,10 @@ public class TC15580ExistenceOfUIItemsMove {
 		//9.to move menu
 		record.getCheckbox().click();
 		record.clickOnRecordingTaskThenMove();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		//10.verify move title
 		move_Window.verifyMoveMenuTitle();
-	    Thread.sleep(Page.TIMEOUT_TINY);
+	    Thread.sleep(2000);
 		//11.verify menu color
 	    move_Window.verifyMenuColor(record);
 		///12.verify text

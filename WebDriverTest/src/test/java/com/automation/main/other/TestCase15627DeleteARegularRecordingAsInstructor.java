@@ -10,7 +10,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -154,7 +154,7 @@ DesiredCapabilities capability;
 		// 6. Click "Delete" button
 		delete_menu.clickOnDeleteButton();
 			
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 7. "Delete" window is closed.
 		boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();

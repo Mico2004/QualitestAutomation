@@ -4,10 +4,9 @@ package com.automation.main.admin_course_view_recording_tasks;
 
 import java.text.DateFormat;
 import java.util.Date;
-import org.eclipse.jetty.io.ClientConnectionFactory.Helper;
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -127,7 +126,7 @@ public class TC22007ValidateCopyWindowUI {
 			
 		// 4. Login as Full Admin
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 			
 			
 		// 5. Click on "view course list" under "courses" section.
@@ -135,9 +134,9 @@ public class TC22007ValidateCopyWindowUI {
 		
 			
 		// 6. move to the course through url
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 8. Click on a checkbox of one recording.
 		record.getCheckbox().click();
@@ -146,7 +145,7 @@ public class TC22007ValidateCopyWindowUI {
 		// 10. The menu items are displayed.
 		// 11. Click on the menu item "copy".
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 12. The copy window displays.
 		boolean is_copy_window_closed = copy.isCopyMenuClosed();
@@ -180,7 +179,12 @@ public class TC22007ValidateCopyWindowUI {
 		copy.verifyThatCancelButtonDisplayedLeftToMoveRecordingsButtonInAdminMoveRecordingWindow();
 		
 		// Fill in a name of an Instructor into the text field, pick that Instructor from the autocomplete dropdown & click on "List Courses"
-		copy.chooseInstructorAndClickAutoComplete(username);
+		driver.findElement(By.id("members_value")).sendKeys(username);
+		Thread.sleep(1000);
+		driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.id("SearchButton")).click();
+		Thread.sleep(1000);
 		
 		// A "Choose a course that you would like to move your selected recording(s) to" text below the Instructor's search field
 		copy.verifyChooseACourseThatCopyAndItsPlaceBelowTheInstructorSearchField();

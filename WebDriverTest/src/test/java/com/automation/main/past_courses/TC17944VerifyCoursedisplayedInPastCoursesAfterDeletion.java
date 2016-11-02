@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -129,67 +129,67 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 			 tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
 			 tegrity.loginAdmin("Admin");
-			 Thread.sleep(Page.TIMEOUT_TINY);
+			 Thread.sleep(5000);
 		
 			 // 2. Click on user builder href link
 			 admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
-			 Thread.sleep(Page.TIMEOUT_TINY);
+			 Thread.sleep(10000);
 			 //create new user
 			 mange_adhoc_users_page.createNewUser(instructor1, create_new_user_window);
-			 Thread.sleep(Page.TIMEOUT_TINY);
+			 Thread.sleep(2000);
 			 for (String window : driver.getWindowHandles()) {
 			 driver.switchTo().window(window);
 			 break;
 			 }
 			 mange_adhoc_users_page.toAdminDashBoard();
 			 
-			 Thread.sleep(Page.TIMEOUT_TINY);
+			 Thread.sleep(5000);
 		
 			 for (String window : driver.getWindowHandles()) {
 			 driver.switchTo().window(window);
 			 break;
 			 }
-			 Thread.sleep(Page.TIMEOUT_TINY);	
+			 Thread.sleep(4000);	
 			 // 4. Click on course builder href link
 			  admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");			
-			  Thread.sleep(Page.TIMEOUT_TINY);
+			  Thread.sleep(10000);
 			 ///5.build new course
 			  driver.switchTo().frame(0);
-				 Thread.sleep(Page.TIMEOUT_TINY);
+				 Thread.sleep(4000);
 			  mange_adhoc_course_enrollments.clickOnNewCourse();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			
 			create_new_course_window.createNewCourse(course_for_delete , course_for_delete);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			try {
 				driver.switchTo().alert().accept();
 				
 			} catch (Exception msg) {
 				
 			}
- 			Thread.sleep(Page.TIMEOUT_TINY);
+ 			Thread.sleep(1000);
 		
 			 for (String window : driver.getWindowHandles()) {
 			 driver.switchTo().window(window);
 			 break;
 			 }
-			    Thread.sleep(Page.TIMEOUT_TINY);
+			    Thread.sleep(3000);
 		       
 		 		//enroll first user
 			    mange_adhoc_course_enrollments.enrollInstructorToCourse(course_for_delete , for_enroll, mangage_adhoc_courses_membership_window);
-				Thread.sleep(Page.TIMEOUT_TINY); 
+				Thread.sleep(5000); 
 		 		mangage_adhoc_courses_membership_window.searchForUser(PropertyManager.getProperty("SuperUser"));
-		 		Thread.sleep(Page.TIMEOUT_TINY);
+		 		Thread.sleep(5000);
 				// Select first user from user list (the only user it found because of the uniq of the search)
 				mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 				// Add selected user to instructor list
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
-				Thread.sleep(Page.TIMEOUT_TINY); 
+				Thread.sleep(5000); 
 		 		mangage_adhoc_courses_membership_window.ok_button.click();
-		 		Thread.sleep(Page.TIMEOUT_TINY);
+		 		Thread.sleep(1000);
 		 	    driver.switchTo().alert().accept();
-		 	    Thread.sleep(Page.TIMEOUT_TINY);
+		 	    Thread.sleep(2000);
 		 	    
 				 for (String window : driver.getWindowHandles()) {
 				 driver.switchTo().window(window);
@@ -197,13 +197,13 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 				 }
 				
 			     mange_adhoc_course_enrollments.clickOnAdminDashboard();
-			     Thread.sleep(Page.TIMEOUT_TINY);
+			     Thread.sleep(2000);
 			     admin_dashboard_page.signOut();
-			     Thread.sleep(Page.TIMEOUT_TINY);
+			     Thread.sleep(3000);
 			     tegrity.loginCourses("SuperUser");
-			     Thread.sleep(Page.TIMEOUT_TINY);
+			     Thread.sleep(3000);
 			     course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings",course_for_delete ,0, record, copy, confirm_menu);
-			     Thread.sleep(Page.TIMEOUT_TINY);
+			     Thread.sleep(2000);
 			     for (String window : driver.getWindowHandles()) {
 					 driver.switchTo().window(window);
 					 break;
@@ -212,9 +212,9 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 			     
 			     //////ownership change
 			     tegrity.loginCoursesByParameter(instructor1);
-			     Thread.sleep(Page.TIMEOUT_TINY);
+			     Thread.sleep(3000);
 			     course.selectCourseThatStartingWith(course_for_delete);
-			     Thread.sleep(Page.TIMEOUT_TINY);
+			     Thread.sleep(3000);
 			     ///check for free status checkbox for edit properties
 		    	record.changeRecordingOwnership(confirm_menu, erp_window, instructor1,record.getCheckbox());
 		           record.signOut();
@@ -225,32 +225,32 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 		          			
 			// 2.login as admin
 	        tegrity.loginAdmin("Admin");// log in courses page
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(5000);
 		//3.click on course builder
 	       admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 	       ///4.Click the "Delete" link relevant to the course	
 
- 		Thread.sleep(Page.TIMEOUT_TINY);
+ 		Thread.sleep(10000);
  		
  		// 3. Click on create course href link 
  		driver.switchTo().frame(0);
  		//mange_adhoc_course_enrollments.clickOnNewCourse();
- 		Thread.sleep(Page.TIMEOUT_TINY);
+ 		Thread.sleep(2000);
  		
  		// Search target course name
  		mange_adhoc_course_enrollments.searchAndFilterCourses(course_for_delete);
  		
- 		Thread.sleep(Page.TIMEOUT_TINY);
+ 		Thread.sleep(7000);
 			mange_adhoc_course_enrollments.clickOnFirstCourseDeleteButton();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			///5.click on ok to delete
 			
 			
-			Thread.sleep(Page.TIMEOUT_TINY);	
+			Thread.sleep(2000);	
 			 driver.switchTo().alert().accept();
 			System.out.println("clicked on ok");
-			   Thread.sleep(Page.TIMEOUT_TINY);
+			   Thread.sleep(2000);
 		 	  ///6. sign out  
 				 for (String window : driver.getWindowHandles()) {
 				 driver.switchTo().window(window);
@@ -258,16 +258,16 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 				 }
 				
 			     mange_adhoc_course_enrollments.clickOnAdminDashboard();
-			     Thread.sleep(Page.TIMEOUT_TINY);
+			     Thread.sleep(3000);
 			      admin_dashboard_page.sign_out.click();
-			     Thread.sleep(Page.TIMEOUT_TINY);
+			     Thread.sleep(2000);
 			      ///7.login as instructor
 			     tegrity.loginCoursesByParameter(instructor1);
 			     initializeCourseObject();
-			     Thread.sleep(Page.TIMEOUT_TINY);
+			     Thread.sleep(2000);
 			     //8.click on past couses tab
 			     course.clickOnPastCoursesTabButton();
-			     Thread.sleep(Page.TIMEOUT_TINY);
+			     Thread.sleep(2000);
 			//9.Verify that the deleted course is displayed in "Past Courses" tab
 			try {
 			     course.selectCourseByName(course_for_delete);

@@ -5,10 +5,12 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -20,6 +22,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class EditRecordinPropertiesWindow extends Page {
@@ -30,6 +33,8 @@ public class EditRecordinPropertiesWindow extends Page {
 
 	@FindBy(id = "EditButton")
 	public WebElement save_button;
+	@FindBy(id = "CancelButton")
+	public WebElement cancel_button;
 	@FindBy(id = "recordingPropertiesRecordedBy")
 	WebElement owner_button;
 	@FindBy(xpath = "//*[@id=\"recordingPropertiesRecordedBy\"]/option")
@@ -38,8 +43,37 @@ public class EditRecordinPropertiesWindow extends Page {
 	WebElement edit_recording_properties_title;
 	@FindBy(id = "recordingTItle")
 	WebElement recording_name;
-	public @FindBy(id="recordingTItle") WebElement recording_title;
-
+	public @FindBy(id="recordingTItle")
+	WebElement recording_title;
+	public @FindBy(id="dateField")
+	WebElement date_Field;
+	@FindBy(id = "ModalDialogHeaderWrap")
+	public WebElement edit_recordings_properties_background;
+	@FindBy (xpath =".//*[@id='editRecordingWindow']/form/div[1]/div[1]/label" )
+	public WebElement name_label;
+	@FindBy(xpath =".//*[@id='editRecordingWindow']/form/div[1]/div[2]/label" )
+	public WebElement date_label;
+	@FindBy(xpath =".//*[@id='editRecordingWindow']/form/div[1]/div[3]/label" )
+	public WebElement owner_label;
+	@FindBy(xpath =".//*[@id='editRecordingWindow']/form/div[1]/div[4]/label" )
+	public WebElement type_label;
+	@FindBy(id = "//*[@id=\"RecordingProperties\"]/option")
+	List<WebElement> type_button_select;
+	@FindBy(xpath =".//*[@id='editRecordingWindow']/form/div[1]/div[2]/p" )
+	public WebElement info_label;
+	@FindBy(id = "recordingPropertiesRecordedBy")
+	public Select owner_select;
+	@FindBy(id = "RecordingProperties")
+	public Select type_select;
+	@FindBy(id = "WarningText")
+	public WebElement warningText;
+	
+	public static final String REGULAR_RECORDING = "Regular recording";
+	public static final String TEST_RECORDING = "Proctoring recording";
+	public static final String STUDENT_RECORDING = "Student recording";
+	
+	
+	
 	// change ownership of recording
 	public void changeOwner(String name) {
 		String val="";
@@ -64,7 +98,257 @@ public class EditRecordinPropertiesWindow extends Page {
 			ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
+	
+	
+	public void verifyLabelExist(WebElement label,String LabelName) {
+	
+		String nameToCompare = label.getText();
+		if (nameToCompare.equals(LabelName)) {
+			System.out.println("the label: " + LabelName + " equals to " + nameToCompare );
+			ATUReports.add("the label: " + LabelName + " equals to " + nameToCompare, LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("the label: " + LabelName + " not equals to " + nameToCompare);
+			ATUReports.add("the label: " + LabelName + " not equals to " + nameToCompare, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+			}	
+	}
+	
+	public void checkTheFirstTypeThatAprearsOnLabelIsCorrect(WebElement Tab){
+		
+		String TabName = Tab.getText();
+		String FirstSelctor = type_select.getFirstSelectedOption().getText();
+		boolean IsWeInTheCorrectTypeOption = false;
+		
+		switch(TabName){
+			case "Recordings":
+			if(FirstSelctor.equals(REGULAR_RECORDING))	{
+				IsWeInTheCorrectTypeOption = true;
+			}
+			break;
+			case "Student Recordings":
+				if(FirstSelctor.equals(STUDENT_RECORDING))	{
+					IsWeInTheCorrectTypeOption = true;
+				}
+				break;
+			case "Tests":
+				if(FirstSelctor.equals(TEST_RECORDING))	{
+					IsWeInTheCorrectTypeOption = true;				
+				}
+			break;
+		}
+		
+		if(IsWeInTheCorrectTypeOption){
+			System.out.println("the type: " + FirstSelctor + "is correct to " + TabName);
+			ATUReports.add("the type: " + FirstSelctor + "is correct to " + TabName, LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("the type: " + FirstSelctor + "is not correct to " + TabName);
+			ATUReports.add("the type: " + FirstSelctor + "is not correct to " + TabName, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+			}		
+	}
+	
+	
+	// verify edit properties background color is same as recording background color
+	public void verifyEditPropertiesColor(RecordingHelperPage rec) throws InterruptedException {
+		Thread.sleep(2000);
+		String background_rec = rec.getBackGroundColor(rec.background);
+		String menu_background = getBackGroundColor(edit_recordings_properties_background);
+		if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(edit_recordings_properties_background))) {
+			ATUReports.add("edit Properties menu background color is same as recording background color", LogAs.PASSED, null);
+			System.out.println("edit Properties menu background color is same as recording background color");
+			Assert.assertTrue(true);
+		} else {
+			ATUReports.add("edit Properties menu background color is not  same as recording background color", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println("edit Propertiese menu background color is  not same as recording background color");
+			Assert.assertTrue(false);
+		}
 
+	}
+	
+	/**
+	 * this function verify edit recording properties Title
+	 */
+	public void verifyEditRecordingPropertiesTitle() throws InterruptedException {
+		Thread.sleep(1000);
+		String val = edit_recording_properties_title.getText();
+		if (val.equals("Edit Recording Properties")) {
+			System.out.println("Edit Recording Properties menu title verified.");
+			ATUReports.add("Edit Recording Properties menu title verified.", LogAs.PASSED, null);
+		} else {
+			System.out.println("Edit Recording Properties menu title not verified.");
+			ATUReports.add("Edit Recording Properties menu title not verified.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		Assert.assertEquals("Edit Recording Properties", val);
+
+	}
+	
+	
+	public void verifyWarningDisplay() throws InterruptedException {
+		Thread.sleep(1000);
+		edit_recording_properties_title.clear();	
+		if (warningText.isDisplayed()) {
+			
+			String warning = warningText.getText();		
+			if(warning.equals("Please specify the recording Name")){
+				System.out.println("Verify Warning is Display.");
+				ATUReports.add("Verify Warning is Display.", LogAs.PASSED, null);
+			}else {
+				System.out.println("Verify Warning is Display but the message is diffrenet from Please specify the recording Name.");
+				ATUReports.add("Verify Warning is Display.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}		
+		} else {
+			System.out.println("Verify Warning is not Display.");
+			ATUReports.add("Verify Warning is not Display.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
+	}
+	
+	public void verifySaveButtonDisable() throws InterruptedException{
+				
+		if (!save_button.isEnabled()) {
+			System.out.println("Verify that the save button is disable.");
+			ATUReports.add("Verify that the save button is disable.", LogAs.PASSED, null);
+		} else {
+			System.out.println("Verify that the save button is disable.");
+			ATUReports.add("Verify that the save button is disable.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+		
+		String grey_color = "rgb(128,66 139, 202)";	
+		boolean assertion = verifyColor(grey_color, save_button);
+		if (assertion ) {
+			System.out.println("Save button background color is grey.");
+			ATUReports.add("save button background color is grey.", LogAs.PASSED, null);
+		} else {
+			ATUReports.add("Save button background color is not grey.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println("Save button background color is not grey.");
+		}
+		Assert.assertTrue(assertion);// compare// 2// colors
+		
+	}
+	
+
+	public void verfiyInfomativeText() {
+		
+		String infoText  = info_label.getText();
+		
+		if (infoText.equals("Note: The creation date is used by the reports. This recording will only appear in reports that include the new date and will no longer appear in reports for the old date.")) {
+			System.out.println("Valid Infomative Text.");
+			ATUReports.add("Valid Infomative Text.", LogAs.PASSED, null);
+		} else {
+			System.out.println("Not Valid Infomative Text.");
+			ATUReports.add("Not Valid Infomative Text.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
+	}
+	
+	public void VerifyTheLocationOfTheSaveAndCancel() {
+		
+		Point cancel=cancel_button.getLocation();
+		Point save= save_button.getLocation();
+		Point title = edit_recording_properties_title.getLocation();
+		
+		if((title.getY() > save.getY()) && (save.getX() > cancel.getX()))
+		{
+		 System.out.println("The Save button is displayed on the bottom right corner of the model window.");
+		 ATUReports.add("The Save button is displayed on the bottom right corner of the model window.", LogAs.PASSED, null);
+		}else {
+		 System.out.println("The Save button isn't displayed on the bottom right corner of the model window.");
+		 ATUReports.add("The Save button isn't displayed on the bottom right corner of the model window.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+		}
+		if((title.getY() > cancel.getY()) && (cancel.getX() < save.getX())) {
+			 System.out.println("The Cancel button is displayed on the left of the Save button.");
+			 ATUReports.add("The Cancel button is displayed on the left of the Save button.", LogAs.PASSED, null);
+			}else {
+			 System.out.println("The Cancel button is displayed on the left of the Save button.");
+			 ATUReports.add("The Cancel button is displayed on the left of the Save button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			}
+		}
+		
+	
+	public void VerifyFontColor(WebElement element,String Color) {
+		
+		String ColorName  = getFontColor(element);
+		if(Color.equals(ColorName)){
+			 System.out.println("Verify the font color of: " + element.getText());
+			 ATUReports.add("Verify the font color of: " + element.getText(), LogAs.PASSED, null);
+			}else {
+			 System.out.println("Not Verify the font color of: " + element.getText());
+			 ATUReports.add("Not Verify the font color of: " + element.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			}	
+	}
+	
+
+	/**
+	 * this function verify that the title location is aligned left
+	 */
+    public void verifyEditRedordingPropertiesTitleIsAlignrdLeft()
+ {
+    	Point cancel=cancel_button.getLocation();
+		Point title=edit_recording_properties_title.getLocation();
+		
+		
+		if((title.getX() < cancel.getX()))
+		{
+		 System.out.println("The location of the edit recording properties is aligned left.");
+		 ATUReports.add("The location of the edit recording properties is aligned left.", LogAs.PASSED, null);
+		}else {
+		 System.out.println("The location of the edit recording properties is not aligned left.");
+		 ATUReports.add("The location of the edit recording properties is not aligned left.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+	}
+ }
+	
+    public void verifyLabelIsAlignrdLeftTOtheEditBoxOrSelector(WebElement label,WebElement editText){
+    	
+    	Point labelLoc= label.getLocation();
+		Point editTextLoc= editText.getLocation();
+		
+		
+		if((labelLoc.getX() < editTextLoc.getX()))
+		{
+		 System.out.println("The location of the label " + label.getText() + " recording properties is aligned left.");
+			ATUReports.add("The location of the label " + label.getText() + " recording properties is aligned left.", LogAs.PASSED, null);
+		}else {
+		 System.out.println("The location of the label " + label.getText() + " recording properties is not aligned left.");
+			ATUReports.add("The location of the label " + label.getText() + " recording properties is not aligned left.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+		}
+    }
+    
+    public void verifyInputEqualsOutSideString(WebElement element ,String OutSideString){
+    	
+    	String inputElement = element.getText();
+    	if(OutSideString.equals(inputElement)){
+		 System.out.println("The input Element: " +inputElement + "is equals to the out Side String " + OutSideString);
+			ATUReports.add("The input Element: " +inputElement + "is equals to the out Side String " + OutSideString, LogAs.PASSED, null);
+		}else {
+		 System.out.println("The input Element: " +inputElement + "is not equals to the out Side String " + OutSideString);
+			ATUReports.add("The input Element: " +inputElement + "is not equals to the out Side String " + OutSideString,LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+		}
+    }
+ 
+    public void verifyThatTheCreatorOwnerIsOnTheOwnerList(String user_name){
+    	
+    	String user = PropertyManager.getProperty(user_name);
+    	boolean isCreationUserAppreadOnTheList = false;
+    	for(WebElement e:owner_button_select) {
+    		String instractorName = e.getText();
+    		if(instractorName.contains(user)){
+    			isCreationUserAppreadOnTheList = true;
+    			break;
+    		}
+    	}
+    	
+      	if(isCreationUserAppreadOnTheList){
+   		    System.out.println("The user: " + user + " is appread on the list");
+   			ATUReports.add("The user: " + user + " is appread on the list", LogAs.PASSED, null);
+   		}else {
+   		    System.out.println("The user: " + user + " is not appread on the list");
+   			ATUReports.add("The user: " + user + " is not appread on the list",LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+   		}
+    		
+    }
+	
 	// This function return true if edit recording properties menu is closed,
 	// and false if it is open
 	public boolean isEditRecordingProperiesClosed() {
@@ -92,7 +376,7 @@ public class EditRecordinPropertiesWindow extends Page {
 		try {
 			recording_name.clear();
 			recording_name.sendKeys(target_name);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			// if(recording_name.getText().equals(target_name)) {
 			System.out.println("Recording name changed to: " + target_name);
 			ATUReports.add("Recording name changed.", "Change to: " + target_name,
@@ -133,14 +417,14 @@ public class EditRecordinPropertiesWindow extends Page {
 		try {
 			recording_title.click();
 			System.out.println("clicked on recording title input");
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			recording_title.clear();
 			recording_title.sendKeys(name);
 			System.out.println("enetered new name");
 			save_button.click();
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
 			System.out.println("save succeded");
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			confirm.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		} catch (Exception e) {
 			System.out.println("clicked on recording title input failed");
@@ -152,11 +436,10 @@ public class EditRecordinPropertiesWindow extends Page {
 		String recordName = null;
 	try {
 		recordName = recording_title.getText();
-		save_button.click();
+		cancel_button.click();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
 		System.out.println("save succeded");
-		Thread.sleep(Page.TIMEOUT_TINY);
-		confirm.clickOnOkButtonAfterConfirmEditRecordingProperties();
+		
 	} catch (Exception e) {
 		System.out.println("clicked on recording title input failed");
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -18,7 +18,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
 import com.automation.main.page_helpers.AdvancedServiceSettingsPage;
@@ -36,7 +35,6 @@ import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -111,10 +109,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 			manage_adhoc_courses_enrollments_page = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
 			mange_ad_hoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
 			advanced_service_settings_page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
-			
-			//DesiredCapabilities capabilities = null;
-			//capabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
-			
+				
 			wait = new WebDriverWait(driver, 30);
 		 
 		 Date curDate = new Date();
@@ -157,7 +152,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		// 3. Create a new user, don't enroll him to any courses.
 		tegrity.loginAdmin("Admin");	
 		 
-		 Thread.sleep(Page.TIMEOUT_TINY);
+		 Thread.sleep(2000);
 		 
 //		 admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
 //		 
@@ -176,7 +171,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 					driver.switchTo().frame(0);
 					break;
 				} catch(Exception msg) {
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(1000);
 				}
 		}
 		 
@@ -209,7 +204,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		tegrity.loginCoursesByParameter(temp_student_user_name);// log in courses page
 		initializeCourseObject();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 5. Verify that USER's private course is not displayed.
 		course.verifyThatNoCourseIsDisplayed();
@@ -222,7 +217,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		// 7. Enroll this USER as STUDENT to any course.
 		tegrity.loginAdmin("Admin");	
 		 
-		 Thread.sleep(Page.TIMEOUT_TINY);
+		 Thread.sleep(1000);
 		
 		
 		 
@@ -234,7 +229,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 				 driver.switchTo().frame(0);
 				 break;
 			 } catch(Exception msg) {
-				 Thread.sleep(Page.TIMEOUT_TINY);
+				 Thread.sleep(1000);
 			 }
 		 }
 		 
@@ -242,7 +237,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(instructor_public_course);
 						
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton(); 
 		
@@ -291,7 +286,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		// 10. Open the following URL - https://<UNIVERSITYURL/api/courses/active.
 		// 11. Make sure there is NO course with true in the <IsPrivate> tag.
 		course.goToAPICoursesActive(temp_student_user_name,1);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		course.veriftyThatNoCourseSetIsPrivateAsTrueInAPICourseActive();
 		
 		System.out.println("Done.");

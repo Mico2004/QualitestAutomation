@@ -2,7 +2,7 @@ package com.automation.main.other;
 
 import java.util.ArrayList;
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -116,7 +116,7 @@ String os;
 	
 		//7.click all check box
 		record.checkall.click();// make all checkboxes marked
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		record.verifyAllCheckedboxSelected();
 		
@@ -127,10 +127,10 @@ String os;
 		//9.to move menu
 		record.getCheckbox().click();
 		record.toMoveMenu();
-        Thread.sleep(Page.TIMEOUT_TINY);
+        Thread.sleep(2000);
 		//10.verify move title
 		move_Window.verifyMoveMenuTitle();
-	    Thread.sleep(Page.TIMEOUT_TINY);
+	    Thread.sleep(2000);
 		//11.verify menu color
 	    move_Window.verifyMenuColor(record);
 		///12.verify text

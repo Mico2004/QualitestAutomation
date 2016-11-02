@@ -8,7 +8,7 @@ import java.util.List;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -129,7 +129,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	
@@ -149,7 +149,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// Get 4 recording titles
 		List<String> recording_list = record.getCourseRecordingList();
@@ -159,10 +159,10 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		if(numberOfRecords < 4) {
 		
 			top_bar_helper.signOut();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 		
 			tegrity.loginCourses("SuperUser");
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 			course.selectCourseThatStartingWith("BankValid");
 			
@@ -177,14 +177,14 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 				record.selectIndexCheckBox(4);
 			}
 			  record.clickOnRecordingTaskThenCopy();
-			  Thread.sleep(Page.TIMEOUT_TINY);
+			  Thread.sleep(1000);
 			  
 			  copy.selectTargetCourseFromCourseList(current_course);
 			  copy.clickOnCopyButton();
 			  
 			  course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
 			  record.returnToCourseListPage();
-			  Thread.sleep(Page.TIMEOUT_TINY);
+			  Thread.sleep(1000);
 		  
 			  course.selectCourseThatStartingWith("Ab");
 			
@@ -201,7 +201,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			
 			record.toEditRecordingPropertiesMenu();
 			edit_recording_properties_window.changeRecordingName(new_recording_name, confirm_menu);	
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			record.unselectallCheckbox();
 			
 		}
@@ -237,20 +237,20 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 				recording_title_for_the_test = recording_for_admin;
 			}
 		
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			
 			if(type_of_user < 3) {
 				// 3. Open some course.
 				course.selectCourseThatStartingWith(current_course);
 			} else {
 				// Click on "view course list" under "courses" section.
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(8000);
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 			
 			
@@ -259,7 +259,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			
 			// 5. Search the "Recording Title" that we mentioned in the preconditionsand press ENTER.
 			top_bar_helper.searchForTargetText(recording_title_for_the_test);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
@@ -294,7 +294,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
 			Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
@@ -325,7 +325,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 9. Click on title of the chapter.
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
@@ -337,7 +337,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 11. Click on the recording title of the chapter.
 			search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
@@ -349,7 +349,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			if((type_of_user!=2) && (type_of_user!=1)) {
 				// 13. Click on the course name in the breadcrumb.
@@ -358,7 +358,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 				} else {
 					search_page.clickBackToCourseInBreadcrumbsForAdminDashBoard();
 				}
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				
 				// 14. Change the name of the recording title that we mentioned in the preconditions.
 				 Date date = new Date();

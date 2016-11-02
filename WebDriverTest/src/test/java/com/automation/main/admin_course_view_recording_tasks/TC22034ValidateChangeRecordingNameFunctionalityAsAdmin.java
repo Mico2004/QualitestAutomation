@@ -6,7 +6,7 @@ import java.util.List;
 import java.text.DateFormat;
 import java.util.Date;
 import org.testng.annotations.AfterClass;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -125,15 +125,15 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 		
 		// 4. Login as Admin.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 	
 		// 5. Click on "view course list" under "courses" section.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		
 		// 6. move to the course through url
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 8. Click on a checkbox of one recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -149,12 +149,12 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 			ATUReports.add("Edit recording properies option.", "Enabled.", "Disabled.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 9. Click on the "Recording Tasks" drop-down button.
 		// 11. Click on the "Edit Recording properties".
 		record.toEditRecordingPropertiesMenu();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 12. The "Edit recording properties" modal window is displayed.
 		boolean is_closed = edit_recording_properties_window.isEditRecordingProperiesClosed();
@@ -168,20 +168,20 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 			ATUReports.add("Edit recording properties modal window.", "Open.", "Close.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 13. Click inside of the "Name" text box & type the text "Change recording name"
 		String change_to_name = "Change recording name";
 		edit_recording_properties_window.changeRecordingNameToTargetName(change_to_name);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 14. Click the "Save" button.
 		edit_recording_properties_window.clickOnSaveButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(15000);
 		
 		// 15. Click the "Ok" button.
-		confirmation_menu.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		confirmation_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
+		Thread.sleep(3000);
 		
 		// 16. The modal window is closed.
 		is_closed = edit_recording_properties_window.isEditRecordingProperiesClosed();
@@ -195,7 +195,7 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 			ATUReports.add("Edit recording properties modal window.", "Open.", "Open.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 17. The confirmation window disappears.
 		is_closed = confirmation_menu.isConfirmationMenuClosed();
@@ -209,7 +209,7 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 			ATUReports.add("The confirmation window.", "Open.", "Open.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 18. Validate the recording name has changed to "Change recording name".
 		List<String> recording_list = record.getCourseRecordingList(); 

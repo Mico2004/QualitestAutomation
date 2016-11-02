@@ -8,16 +8,13 @@ import org.apache.tools.ant.taskdefs.Javadoc;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
-import com.gargoylesoftware.htmlunit.javascript.host.event.RTCDataChannelEvent;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -77,17 +74,17 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	public void setFilterSearchBox(String set_to) throws InterruptedException {
 		for(int i=0; i<30; i++) {
 			try {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 				wait.until(ExpectedConditions.visibilityOf(filter_search_input));				
 				filter_search_input.clear();				
 				filter_search_input.sendKeys(set_to);
 				if (filter_search_input.getAttribute("value").equals(set_to)) {
 					break;
 				}
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				System.out.println("Filter search box setted to: " + set_to);
 			} catch (Exception msg) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				System.out.println("Filter search box fail set to: " + set_to);
 			}
 		}
@@ -126,7 +123,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			} catch (Exception msg) {
 				ATUReports.add("Clicked on first course membership button failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Fail to click on first course membership button. ");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
 		return false;
@@ -152,7 +149,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			System.out.println("Clicked on first course delete button");
 			waitForAlert(60);
 			clickOkInAlertIfPresent();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on first course delete button. ");
 			Assert.assertTrue(false);
@@ -165,27 +162,27 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	public void enrollInstructorToCourse(String course,List<String>  users,
 			ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window) throws InterruptedException {
 		driver.switchTo().frame(0);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		// Search target course name
 		searchAndFilterCourses(course);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(7000);
 		// Click on result first course (the only one) membership button
 		clickOnFirstCourseMembershipButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 	    for(String user:users)
 	    {
 	    mangage_adhoc_courses_membership_window.searchForUser(user);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		// Select first user from user list (the only user it found because of
 		// the uniq of the search)
 		mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		// Add selected user to instructor list
 		mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 	    }
 		mangage_adhoc_courses_membership_window.ok_button.click();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		driver.switchTo().alert().accept();
 	}
 	/// enrolls student or students list to course
@@ -193,29 +190,29 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			String u="";
 			try{
 			driver.switchTo().frame(0);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			// Search target course name
 			searchAndFilterCourses(course);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(7000);
 			// Click on result first course (the only one) membership button
 			clickOnFirstCourseMembershipButton();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 		    for(String user:users)
 		    {
 		    mangage_adhoc_courses_membership_window.searchForUser(user);
 		    u=user;
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(5000);
 			// Select first user from user list (the only user it found because of
 			// the uniq of the search)
 			mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(5000);
 			// Add selected user to instructor list
 			mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToStudentList();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(5000);
 		    }
 			mangage_adhoc_courses_membership_window.ok_button.click();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			driver.switchTo().alert().accept();
 			ATUReports.add("Enrolled "+u+"to course "+course+" as student ","user enrolled to course","user enrolled to course", LogAs.PASSED, null);
 			}catch(Exception e){
@@ -228,27 +225,26 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	public void unEnrollInstructorToCourse(String course, String user,ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window) throws InterruptedException {
 		// Click on create course href link
 	try{driver.switchTo().frame(0);
-        Thread.sleep(Page.TIMEOUT_TINY);
+        Thread.sleep(2000);
         // Search target course name
 		searchAndFilterCourses(course);
-        Thread.sleep(Page.TIMEOUT_TINY);
+        Thread.sleep(7000);
 		/// click on membership button
 		clickOnFirstCourseMembershipButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		/// 5.unroll instructor
 		System.out.println("d1");
 		mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list, user);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		System.out.println("d2");
 		mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		System.out.println("d3");
 		waitForVisibility(mangage_adhoc_courses_membership_window.ok_button);
 		mangage_adhoc_courses_membership_window.ok_button.click();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		System.out.println("d4");
-	    waitForAlert(30);
-	    clickOkInAlertIfPresent();
+		driver.switchTo().alert().accept();
 		System.out.println("clicked on ok");
 		System.out.println("d5");
 		ATUReports.add("unEnrolled "+user+" from course "+course,"user unenrolled from course","user unenrolled from course", LogAs.PASSED, null);
@@ -262,36 +258,36 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		public void unEnrollStusentsFromCourse(String course, String user,ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window) throws InterruptedException {
 			// Click on create course href link
 			driver.switchTo().frame(0);
-	        Thread.sleep(Page.TIMEOUT_TINY);
+	        Thread.sleep(2000);
 	        // Search target course name
 			searchAndFilterCourses(course);
-	        Thread.sleep(Page.TIMEOUT_TINY);
+	        Thread.sleep(7000);
 			/// click on membership button
 			clickOnFirstCourseMembershipButton();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			/// 5.unroll instructor
 			mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.student_elements_list, user);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToStudentsList();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			mangage_adhoc_courses_membership_window.ok_button.click();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			waitForAlert(60);
 			clickOkInAlertIfPresent();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			System.out.println("clicked on ok");
 		}
         //this function searches for course name and than deletes it
 		public void deleteCourseByNameSearch(String past_course_student2) throws InterruptedException {
 			try{
 			driver.switchTo().frame(0);			
-			Thread.sleep(Page.TIMEOUT_TINY);			
+			Thread.sleep(4000);			
 			searchAndFilterCourses(past_course_student2);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			clickOnFirstCourseDeleteButton();
 			waitForAlert(60);
 			clickOkInAlertIfPresent();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			ATUReports.add("Deleted course '"+past_course_student2+"' successfully",LogAs.PASSED,null);
 			}catch(Exception e){
 			ATUReports.add("Course deletion '"+past_course_student2+"' failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	

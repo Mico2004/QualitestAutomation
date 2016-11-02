@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -166,23 +166,23 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			String url =  course.getCurrentUrlCoursePage(); 
 
 			record.signOut();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			tegrity.waitForVisibility(tegrity.passfield);
 		
 			// 2.login as admin
 			tegrity.loginAdmin("Admin");
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 			// 3.Click on "View Course List" link
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1500);
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			// 4.verify all courses page
 			admin_view_course_list.verifyAllCoursesPage();
 			// 5.Select a course
 			admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			admin_view_course_list.moveToCoursesThroughGet(url);
 			/// 6.Click on one of the Recording link
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 		    record.waitForVisibility(record.first_recording);
 			
 		     record.convertRecordingsListToNames();
@@ -215,7 +215,7 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
 			
 			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			
 			///10.The next result display below the current result in case there is next result.
@@ -240,14 +240,14 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
 			//15.navigate back to player recording
 			driver.navigate().back();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(4000);
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			//16.click on "Courses" and verify course page
 
 			player_page.returnToCoursesPageAsAdmin(course);
 			////17.navigate back to player then to recordings page
 			driver.navigate().back();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(4000);
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			
 			player_page.returnToAdminPage(admin_dashboard_page);

@@ -1,7 +1,7 @@
 package com.automation.main.page_helpers;
 
 import org.apache.http.util.Asserts;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -18,24 +18,11 @@ public class EulaPage extends Page {
 	}
 	@FindBy(xpath="//*[@id=\"main\"]/div/div[1]/p")
 	public WebElement eula_message;
-	@FindBy(xpath="//*[@id='main']//input[1]")
+	@FindBy(xpath="//*[@id=\"main\"]/div/div[2]/form/input[1]")
 	public WebElement accept_button;
-	@FindBy(xpath="//*[@id='main']//input[2]")
+	@FindBy(xpath="//*[@id=\"main\"]/div/div[2]/form/input[2]")
 	public WebElement decline_button;
 	
-	
-	
-	public void waitForPageToLoad(){
-		try{
-			waitForVisibility(accept_button);
-			waitForVisibility(decline_button);
-			Thread.sleep(Page.TIMEOUT_SMALL);			
-		}catch(Exception e){
-			ATUReports.add("Eula page wasn't loaded properly",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-		}
-		
-	}
 	
 	//this function verifies visibility of accept decline and eula message later compares eula message equals message was configured
 	public void verifyElementsOfEula(String message)
@@ -93,10 +80,9 @@ public class EulaPage extends Page {
 	}
 	//click on accept
 		public void clickOnAccept()
-		{
-			try {
+		{try {
 			
-			waitForVisibility(accept_button);
+		
 			if (accept_button.isDisplayed()) {
 				accept_button.click();
 				System.out.println("click on accept");

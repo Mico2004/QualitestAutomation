@@ -3,7 +3,7 @@ package com.automation.main.delete_recordings;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -106,7 +106,7 @@ public class TC15896DeleteALastRecording {
 		
 		// 3.Click "Recording Tasks" button (without selecting a recording)
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		if(record.getNumberOfRecordings() > 1) {
 			// Preset

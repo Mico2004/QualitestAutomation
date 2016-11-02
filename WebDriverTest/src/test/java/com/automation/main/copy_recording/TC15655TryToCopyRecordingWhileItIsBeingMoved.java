@@ -5,7 +5,7 @@ package com.automation.main.copy_recording;
 import java.util.List;
 
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -122,7 +122,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		
 		// Preset login and delete all recording in Ba, Then copy one recording from Ab to Ba.
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "Ba", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("Ab", 0,record);
 		
@@ -155,7 +155,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 9. Message box is closed.
 		boolean is_closed = confirm_menu.isConfirmationMenuClosed();
@@ -190,7 +190,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		record.selectTargetRecordingCheckbox(selected_recording_name);
 		record.clickOnRecordingTaskThenCopy();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 13. Message box "Cannot copy in-process or failed recordings" is displayed.
 		// 14. Click "OK" button.
@@ -200,7 +200,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		confirm_menu.isConfirmationMenuClosed();
 		
 //		record.checkStatusExistenceForMaxTTime(360);
-		record.waitUntilRecordingListIsEmptyWithMaxTimeOut(360);
+		record.waitUntilFirstRecordingBeingMovedFromStatusDissaper();
 		
 		// 16. Click "Courses" link in the breadcrumbs.
 		record.returnToCourseListPage();
@@ -209,7 +209,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		course.clickOnTargetCourseName(destination_course_name);
 		
 		//wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		//wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
 		
 		// 18. Verify that recording is copied successfully.
@@ -237,7 +237,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 			ATUReports.add("Recording is not displayed in recordings tab", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		
+	
 		// 18.2. The recording finished moving - has this status "IE, FF, Safari Ready" or none at all
 		String recording_status = record.getIndexRecordingStatus(i);
 		
@@ -247,7 +247,8 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("The recording has not this status IE, FF, Safari Ready or none at all.");
-			ATUReports.add("The recording has this status IE, FF, Safari Ready or none at all.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Verfied that all recordings have delete available status.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("the status is: " + recording_status, "True.", "False.", LogAs.WARNING, null);
 			Assert.assertTrue(false);
 		}
 		

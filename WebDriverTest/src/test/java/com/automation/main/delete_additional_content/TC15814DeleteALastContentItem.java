@@ -2,7 +2,7 @@ package com.automation.main.delete_additional_content;
 
 
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -115,7 +115,7 @@ public class TC15814DeleteALastContentItem {
 		
 		// 3. Click the "Additional Content" tab.
 		record.clickOnAdditionContentTab();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 //		// Precondition
 //		record.check_all_checkbox.click();
@@ -125,7 +125,7 @@ public class TC15814DeleteALastContentItem {
 		
 		
 		// 4. Select content item.
-		record.check_all_checkbox.click();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.check_all_checkbox);
 //		String target_additional_content = record.getNameTargetIndexAdditionalContent(1);
 		
 		// 5. Select "Content Tasks -> Delete" menu item.

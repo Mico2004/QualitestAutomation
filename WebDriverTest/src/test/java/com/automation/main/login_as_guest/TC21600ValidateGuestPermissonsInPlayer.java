@@ -4,7 +4,7 @@ import java.util.List;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -45,7 +45,6 @@ import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
-import junitx.util.PropertyManager;
 
 public class TC21600ValidateGuestPermissonsInPlayer {
 	// Set Property for ATU Reporter Configuration
@@ -154,10 +153,10 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 		    
 		    //make sure that we have public tab
 		    tegrity.loginAdmin("Admin");
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 		    admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
-			Thread.sleep(Page.TIMEOUT_TINY);		
+			Thread.sleep(2000);		
 			
 			admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
 			admin_course_settings_page.clickOnSaveButton();
@@ -170,7 +169,7 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 			tegrity.loginAsguest();
 			//3.select course
 			course.waitForVisibility(course.public_courses_tab_button);
-			String course_name=course.selectCourseThatStartingWith(PropertyManager.getProperty("course1"));
+			String course_name=course.selectCourseThatStartingWith("Ab");
 			//4.Validate the "Start a recording" button not displayed.
 			record.waitForVisibility(record.sign_out);
 			record.verifyNoStartRecording();
@@ -178,11 +177,11 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 			if(!(driver instanceof InternetExplorerDriver)) {
 				record.clickOnRecordingsTab();
 			}
-			 Thread.sleep(Page.TIMEOUT_TINY);	 
+			 Thread.sleep(2000);	 
 			 //6.Click on some recording
 			 record.verifyFirstExpandableRecording();
 			 record.clickOnTheFirstCaptherWithOutTheExpand();
-			 Thread.sleep(Page.TIMEOUT_TINY);
+			 Thread.sleep(15000);
 		//	 player_page.verifyTimeBufferStatusForXSec(10);// check source display
 			 ///// to go back to crecording window handler
 		
@@ -193,7 +192,7 @@ public class TC21600ValidateGuestPermissonsInPlayer {
 				 driver.switchTo().window(handler);
 				
 				 }
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			player_page.verifyTimeBufferStatusForXSec(5);
 			 for (String handler : driver.getWindowHandles()) {
 				 driver.switchTo().window(handler);

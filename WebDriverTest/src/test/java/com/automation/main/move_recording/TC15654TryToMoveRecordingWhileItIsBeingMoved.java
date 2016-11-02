@@ -3,10 +3,11 @@ package com.automation.main.move_recording;
 
 
 import java.util.List;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -130,9 +131,14 @@ public class TC15654TryToMoveRecordingWhileItIsBeingMoved {
 		
 		// 4. Select "Recording Tasks -> Move" menu item.
 		record.clickOnRecordingTaskThenMove();
-		
-		// 5. Select destination course.
-		copy.selectTargetCourseFromCourseList(destination_course_name);
+        Thread.sleep(1000);	
+        
+		// Select destination course:mark destination course by clicking on it
+        wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOf(move_window.course_list.get(0)));
+        
+        move_window.course_list.get(0).click();
+		System.out.println("first destination was marked");
 
 		// 6. Click "Move Recording(s)" button.
 		move_window.clickOnMoveRecordings();
@@ -141,7 +147,7 @@ public class TC15654TryToMoveRecordingWhileItIsBeingMoved {
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 9. Message box is closed.
 		boolean is_closed = confirm_menu.isConfirmationMenuClosed();
@@ -176,7 +182,7 @@ public class TC15654TryToMoveRecordingWhileItIsBeingMoved {
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 13. Message box "Cannot copy in-process or failed recordings" is displayed.
 		// 14. Click "OK" button.
@@ -185,12 +191,12 @@ public class TC15654TryToMoveRecordingWhileItIsBeingMoved {
 		// 15. Message box is closed.
 		confirm_menu.isConfirmationMenuClosed();
 		
-		record.checkStatusExistenceForMaxTTime(360);
+		record.waitUntilFirstRecordingBeingMovedFromStatusDissaper();
 		
 		// 16. Click "Courses" link in the breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 17. Select destination course.
 		course.clickOnTargetCourseName(destination_course_name);

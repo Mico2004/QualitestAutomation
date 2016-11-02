@@ -8,7 +8,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByClassName;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,7 +32,6 @@ import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.SearchPage;
 import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
-import com.thoughtworks.selenium.webdriven.commands.IsElementPresent;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -119,7 +118,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	
@@ -139,10 +138,10 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// Upload for first recording target close catpion
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);	
@@ -153,7 +152,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		
 		edit_recording.addCaptionSrtToFirstChapterRecording(path);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		String text_from_caption_for_test = "QualitestAutomationCaption";	
 		
 		player_page.returnToCoursesPage(course);
@@ -171,7 +170,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			
 			if(type_of_user < 3) {
 				// 3. Open some course.
@@ -181,7 +180,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(8000);
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
 				
 			}
@@ -193,7 +192,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 			
 			// 5. Search the URL of the link that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(text_from_caption_for_test);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
@@ -228,7 +227,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
 			Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();

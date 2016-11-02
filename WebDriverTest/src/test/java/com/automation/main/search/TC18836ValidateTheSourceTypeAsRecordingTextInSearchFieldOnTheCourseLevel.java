@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -123,7 +123,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	
@@ -143,33 +143,33 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 
 		record.returnToCourseListPage();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 			
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 			
 		//String recording_name = record.getFirstRecordingTitle();
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);	
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 			
 
 		record.clickOnRecordingTaskThenCopy();
 		copy.selectTargetCourseFromCourseList(current_course);
 		copy.clickOnCopyButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 			
 	    confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 			
 		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
 			
 		record.returnToCourseListPage();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 			
 		course.selectCourseThatStartingWith("Ab");
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -179,7 +179,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String recording_text = "reocrd" + sdf.format(date); 
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(8000);
 
 			
 		record.signOut();
@@ -200,21 +200,21 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 		
 			// 3. Open some course.
 			if(type_of_user < 3) {
 				course.selectCourseThatStartingWith(current_course);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			} else {
 				// Click on "view course list" under "courses" section.
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(8000);
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		
 			
@@ -223,7 +223,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			
 			// 5. Search the "Recording Text" recording that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(recording_text);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
@@ -261,7 +261,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
 			//record.mouseHoverJScript(search_page.video_wrap_link_to_focus_list.get(0));
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
 			Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();

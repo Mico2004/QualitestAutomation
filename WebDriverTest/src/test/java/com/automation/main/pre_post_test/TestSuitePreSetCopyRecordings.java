@@ -4,7 +4,7 @@ package com.automation.main.pre_post_test;
 import java.text.DateFormat;
 import java.util.Date;
 import org.testng.annotations.AfterClass;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -146,7 +146,7 @@ public class TestSuitePreSetCopyRecordings {
 		// Copy all tests from Bank Valid Recording to course starting
 		// with Ab
 //		course.waitForVisibility(course.active_courses_tab_button);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record, delete_menu);
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
@@ -202,7 +202,7 @@ public class TestSuitePreSetCopyRecordings {
 //			break;
 //		}
 //		course.signOut();
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(3000);
 //
 //		////////////////////////// unenrolling user 1 past course A And B
 //		////////////////////////// +changing recording ownership
@@ -223,30 +223,30 @@ public class TestSuitePreSetCopyRecordings {
 //		}
 //
 //		String past_course_a = course.selectCourseThatStartingWith("PastCourseA");
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(3000);
 //		String user1 = PropertyManager.getProperty("User1");
 //		String user4 = PropertyManager.getProperty("User4");
 //		record.changeRecordingOwnership(confirm_menu, erp_window, user1, null);
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(3000);
 //		for (String window : driver.getWindowHandles()) {
 //			driver.switchTo().window(window);
 //			break;
 //		}
 //		record.returnToCourseListPage();
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(3000);
 //		String past_course_b = course.selectCourseThatStartingWith("PastCourseB");
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(3000);
 //
 //		record.changeRecordingOwnership(confirm_menu, erp_window, user1, null);
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(3000);
 //		record.signOut();
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(3000);
 //		tegrity.loginCourses("User4");// log in courses page to register user in
 //										// database
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(3000);
 //		course.signOut();
 //		tegrity.loginAdmin("Admin");
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(5000);
 //		// 4. Click on course builder href link
 //
 //		// String
@@ -255,17 +255,17 @@ public class TestSuitePreSetCopyRecordings {
 //		// past_course_b="PastCourseBawsserverautomation113032016121315_Name";
 //
 //		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(10000);
 //		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_a, user1,
 //				mangage_adhoc_courses_membership_window);
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(3000);
 //		for (String window : driver.getWindowHandles()) {
 //			driver.switchTo().window(window);
 //			break;
 //		}
 //		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_b, user1,
 //				mangage_adhoc_courses_membership_window);
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(3000);
 //
 //		driver.quit();
 

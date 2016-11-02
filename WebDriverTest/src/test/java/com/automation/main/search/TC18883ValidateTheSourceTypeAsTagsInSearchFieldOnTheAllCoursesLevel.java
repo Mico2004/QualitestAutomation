@@ -7,7 +7,7 @@ import java.util.List;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -74,7 +74,12 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
     DesiredCapabilities capability;
 	@BeforeClass
 	public void setup() {
-		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		driver = new FirefoxDriver();
+
+		initTest();
+	}
+	
+	public void initTest() {
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -104,8 +109,6 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 		 "Starting the test: TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel at " + DateToStr, LogAs.PASSED, null);
 	}
 	
-	
-	
 	@AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
@@ -116,7 +119,7 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	
@@ -135,7 +138,7 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// Create tags for first recording
 		Date date = new Date();
@@ -149,12 +152,18 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 		
 		tag_menu.deleteAllExistingTags();
 		tag_menu.createNewTag(tags_for_search);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		tag_menu.clickOnApplyButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
-		top_bar_helper.signOut();		
-
+		top_bar_helper.signOut();
+		
+		driver.quit();
+		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+		
+		initTest();
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		initializeCourseObject();
 		
 		// Looping for Student and Guest
 		for(int type_of_user = 0; type_of_user < 3; type_of_user++) {
@@ -168,19 +177,19 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			
 			// 3. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
 			
 			// 4. Search the "Tags" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(tags_for_search);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 4.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
 			search_page.waitUntilSpinnerImageDisappear();
-			search_page.waitResultToLoad();
+			
 			// 4.2. The breadcrumb structure displayed as follows: "> Courses > Course name >X results found for: "search_criterion". (X seconds)".
 			search_page.verfiyBreadcrumbStructureDisplayedAsCoursesXResultsFound(current_course, tags_for_search);
 			
@@ -234,7 +243,7 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 			// 10. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			search_page.exitInnerFrame();
 			
 			// 11. Sign Out.

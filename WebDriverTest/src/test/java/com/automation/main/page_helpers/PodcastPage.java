@@ -8,7 +8,7 @@ import org.apache.commons.collections.iterators.ListIteratorWrapper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -65,7 +65,7 @@ public class PodcastPage extends Page {
 					ATUReports.add("Fail click on podcast title: " + podcast_title, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 			}
 		}
 	}
@@ -85,7 +85,7 @@ public class PodcastPage extends Page {
 					ATUReports.add("Fail click on podcast title: " + podcast_title, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 			}
 		}
 	}
@@ -96,10 +96,10 @@ public class PodcastPage extends Page {
 		for(int i=0; i<podcast_titles.size(); i++) {
 			try {
 				driver.findElements(By.cssSelector(".enclosure>a")).get(i).click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 				driver.navigate().back();
 				waitForVisibility(podcast_titles.get(0));
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			} catch(Exception msg) {
 				System.out.println("Fail to watch all podcasts.");
 				ATUReports.add("Watch all podcasts.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));

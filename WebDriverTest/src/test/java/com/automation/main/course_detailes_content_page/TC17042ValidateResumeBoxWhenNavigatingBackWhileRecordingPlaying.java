@@ -6,7 +6,7 @@ import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -152,24 +152,24 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		top_bar_helper.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 2. Repeat for INSTRUCTOR and STUDENT.
 		for(int type_of_user=0; type_of_user<2; type_of_user++) {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User1");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 			
 			
 			// 4. Click on a certain course.
 			course.selectCourseThatStartingWith(current_course);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 			// 5. Click on a certain recording.
 			// 6. Click on the first chapter and wait the player will start to play.
@@ -182,13 +182,13 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 			
 			// 8. Open the recording course you just watch.
 			course.selectCourseThatStartingWith(current_course);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 			String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));
 			
 			// 9. Click on the recording you just watched.
 			record.clickElement(record.first_recording_title);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 9.1. The "> Resume watching +(The first slide)" box is displayed.
 			record.verifyWebElementDisplayed(record.list_of_resume_buttons.get(0), "Resume box");
@@ -238,7 +238,7 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 				break;
 			}
 			top_bar_helper.signOut();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 13. Delete the coockies and validate that the "Resume Watching" does not display.
 			driver.manage().deleteAllCookies();
@@ -246,22 +246,22 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User1");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 			
 			course.selectCourseThatStartingWith(current_course);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			record.clickElement(record.first_recording_title);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			record.verifyWebElementNotDisplayed(record.list_of_resume_buttons.get(0), "Resume box");
 						
 			// Sign out
 			top_bar_helper.signOut();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 		}
 		
 		System.out.println("Done.");

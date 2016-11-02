@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -34,7 +34,6 @@ import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
-import junitx.util.PropertyManager;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
@@ -131,7 +130,7 @@ public class TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings.makeSureThatMakeCoursePublicIsSelected();
 		course_settings.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 			
 		record.waitForVisibility(record.checkbox2);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
@@ -150,11 +149,11 @@ public class TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		
 		//3.Select a course
 		course.waitForVisibility(course.first_course_button);
-		course.selectCourseThatStartingWith(PropertyManager.getProperty("course1"));
+		course.selectCourseThatStartingWith("Ab");
 		
 		///4.Click on one of the Recording link 
 		record.waitForVisibility(record.recordings_tab);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		record.convertRecordingsListToNames();
 		record.verifyFirstExpandableRecording();
 		///5.Click on the first chapter.

@@ -10,7 +10,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -123,7 +123,7 @@ public class TestCaseTryToCopyFromPastCourseToAnotherPastCourseToItself {
 		// 3. Click the "Past Courses" tab.
 		course.clickOnPastCoursesTabButton();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 4. Get past course list.
 		List<String> past_course_list = course.getCourseList();
@@ -143,11 +143,11 @@ public class TestCaseTryToCopyFromPastCourseToAnotherPastCourseToItself {
 		// 7. Select the "Recording Tasks -> Copy" menu item.
 		record.clickOnRecordingTaskThenCopy();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 8. Verify that no past course is not displayed in list of destination courses.
 		List<String> copy_menu_course_list = copy.getCourseList();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		if(copy_menu_course_list.containsAll(active_course_list)) {
 			if (!copy_menu_course_list.contains(past_course_list)) {
 				System.out.println("Contain only active course.");
@@ -170,7 +170,7 @@ public class TestCaseTryToCopyFromPastCourseToAnotherPastCourseToItself {
 		// 10. Click the "Additional Content" tab.
 		record.clickOnAdditionContentTab();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 11. Select the content item.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -178,7 +178,7 @@ public class TestCaseTryToCopyFromPastCourseToAnotherPastCourseToItself {
 		// 12. Select the "Content tasks -> Copy" menu item.
 		record.clickOnContentTaskThenCopy();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 13. Verify that no past course is not displayed in list of destination courses.	
 		copy_menu_course_list = copy.getCourseList();

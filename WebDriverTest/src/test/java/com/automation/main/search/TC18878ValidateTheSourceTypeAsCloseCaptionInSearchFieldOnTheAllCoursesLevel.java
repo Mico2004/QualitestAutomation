@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -122,7 +122,7 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	
@@ -141,17 +141,17 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// Upload for first recording target close catpion
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);	
 		record.clickOnRecordingTaskThenEditRecording();
 		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
 		
 		edit_recording.addCaptionSrtToFirstChapterRecording(path);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		record.exitInnerFrame();
 		String text_from_caption_for_test = "QualitestAutomationCaption";
 		
@@ -168,14 +168,14 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);	
+			Thread.sleep(3000);	
 			
 			// 3. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
 			
 			// 4. Search some "Closed Caption" and press ENTER.
 			top_bar_helper.searchForTargetText(text_from_caption_for_test);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 4.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -118,12 +118,12 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 	public void test24766() throws Exception {
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("User1");		
-		Thread.sleep(Page.TIMEOUT_TINY); 
+		Thread.sleep(4000); 
 		System.out.println("a3");
 		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record,delete_menu);		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record,delete_menu);		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 2, record,delete_menu); 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		String des_start_with = "Ab";
 		String destination_course_name = null;
 		for (String course_name : course.getCourseList()) {
@@ -134,30 +134,30 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		}
 		/// 2.click past courses tab
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		/// 3.select past course
 		course.selectCourseByName("PastCourseA");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		/// 4.Select the recording
 		record.recordings_tab.click();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		record.convertRecordingsListToNames();
 		String recordings = record.getFirstRecordingTitle();
 		wait.until(ExpectedConditions.elementToBeClickable(record.getCheckbox()));
 		record.getCheckbox().click();
 		// 5.Select the "Recording Tasks -> Copy" menu item
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		// 6.Select an active course and click the 'Copy' button
 		copy.selectTargetCourseFromCourseList(destination_course_name);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		copy.clickOnCopyButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		confirm_menu.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		// 7.Click the "Additional Content" tab
 		record.clickOnAdditionContentTab();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(4000);
 		wait.until(ExpectedConditions.visibilityOf(record.first_additional_content_title));
 		String additional_content = record.first_additional_content_title.getText();
 		
@@ -165,34 +165,34 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		/// 8.Select the "Content tasks -> Copy" menu item
 
 		record.clickOnContentTaskThenCopy();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		copy.selectTargetCourseFromCourseList(destination_course_name);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		copy.clickOnCopyButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		confirm_menu.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		// 9.Click the "student recordings" tab
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		String student_recording = record.getFirstRecordingTitle();
 		wait.until(ExpectedConditions.elementToBeClickable(record.getCheckbox()));
 		record.getCheckbox().click();
 		/// 10.Select the "Content tasks -> Copy" menu item
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		copy.selectTargetCourseFromCourseList(destination_course_name);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		copy.clickOnCopyButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		confirm_menu.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		/// 11.Click on the 'Courses' breadcrumb
 		record.returnToCourseListPage();
 		/// 12.Select the destination course
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		course.clickOnActiveCoursesTabButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		course.selectCourseThatStartingWith("Ab");
 		/// 13.Verfiy the copied recording was moved correctly
 		record.clickOnRecordingsTab();
@@ -212,10 +212,10 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		}
 		// 14.dispaly recording
 		record.selectRecordingByName(recordings);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		record.clickOnFirstVisibleChapter();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(15000);
 
 		player_page.verifyTimeBufferStatusForXSec(25);// check source display
 
@@ -226,12 +226,12 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		}
 
 		player_page.returnToCoursesPage(course);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		/// 15.select couese and press additional content tab
 		record.clickOnAdditionContentTab();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		// 16.Verfiy the copied aditional content was moved correctly
 		record.convertAdditionalContantListToNames();
 		index = record.additional_content_list_names.indexOf(additional_content) + 1;
@@ -248,10 +248,10 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 			Assert.assertTrue(false);
 		}
 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		/// 17.Verfiy the copied student recording was moved correctly
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		record.convertRecordingsListToNames();
 		index = record.recording_list_names.indexOf(student_recording) + 1;
 		if ((record.recording_list_names.contains(student_recording))
@@ -267,11 +267,11 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 			Assert.assertTrue(false);
 		}
 		record.selectRecordingByName(student_recording);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		wait.until(ExpectedConditions
 				.visibilityOfAllElementsLocatedBy(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")));
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(15000);
 		// 18.1 dispaly recording
 		player_page.verifyTimeBufferStatusForXSec(15);// check source display
 

@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -169,7 +169,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
 		edit_recording.addCaptionSrtToFirstChapterRecording(path);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		String text_from_caption_for_test = "QualitestAutomationCaption";	
 		
 		record.signOut();
@@ -181,16 +181,16 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		// 3.Click on "View Course List" link
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1500);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		// 4.verify all courses page
 		admin_view_course_list.verifyAllCoursesPage();
 		// 5.Select a course
 		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		admin_view_course_list.moveToCoursesThroughGet(url);
 		/// 6.Click on one of the Recording link
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 	     record.waitForVisibility(record.first_recording);
 		
 		// 7.Click on one of the Recording link
@@ -227,7 +227,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
 		
 		driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		///10.The next result display below the current result in case there is next result.
 		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,2);
@@ -251,7 +251,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
 		//15.navigate back to player recording
 		driver.navigate().back();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(4000);
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 		//16.click on "Courses" and verify course page
 
@@ -263,14 +263,14 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		player_page.returnToRecordingPageByNameAsAdmin(course_name,record);
 		///18.upload a caption
 		// Upload for first recording target close catpion
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenEditRecording();
 		
 		path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\sync.srt";
 		edit_recording.addCaptionSrtToFirstChapterRecording(path);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		
 		//return to the course
 		admin_view_course_list.moveToCoursesThroughGet(url);

@@ -7,7 +7,7 @@ import java.util.List;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -35,9 +35,6 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-
 import java.text.DateFormat;
 import java.util.Date;
 import junitx.util.PropertyManager;
@@ -141,19 +138,19 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 			// 4. Login as Admin.
 			if (login_as==0) {
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 			} else {
 				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 			}
 			
 			// 5. Click on "view course list" under "courses" section.
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			
 			// 6. move to the course through url
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(5000);
 			admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 
 			
 			// Repeat TC for "Student recording" and "Tests" tabs
@@ -164,7 +161,7 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				} else if (selected_tab==2) {
 					record.clickOnTestsTab();
 				}
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				
 				wait.until(ExpectedConditions.visibilityOf(record.getCheckbox()));
 				
@@ -174,32 +171,91 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				// 9. Hover over "Recording tasks" menu.
 				// 10. Click on the menu item "Copy".
 				record.clickOnRecordingTaskThenCopy();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				
 				// 11. Click on the text field, and write an instuctor name which does not exist (like "aaaaaadfasdasdaa").
-				copy.chooseInstructorAndVerifyAutoCompleteIsAsExpected("aaaaaadssdfafaasa","No results found");			
+				driver.findElement(By.id("members_value")).sendKeys("aaaaaadssdfafaasa");
+				Thread.sleep(3000);
+				
+				// 12. The dropdown is displaying an informative text "No Results"
+				String dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
+				
+				if(dropdown_result.equals("No results found")) {
+					System.out.println("Dropdown list opened with the text: No results found");
+					ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: No results found", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} else {
+					System.out.println("Dropdown list opened with the text: " + dropdown_result);
+					ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: " + dropdown_result, LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
 				
 				// 13. Click on the button "List Courses".
 				driver.findElement(By.id("SearchButton")).click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				
 				// 14. An alert is displaying the informative text: "Please select an instructor"
 				confirmation_menu.clickOnOkButtonAfterErrorNoInstructorSelected();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				
 				// 15. Click on the text field, and write the name of the (existing) student.
-				copy.chooseInstructorAndVerifyAutoCompleteIsAsExpected(PropertyManager.getProperty("User4"),"No results found");			
+				driver.findElement(By.id("members_value")).clear();
+				driver.findElement(By.id("members_value")).sendKeys(PropertyManager.getProperty("User4"));
+				Thread.sleep(3000);
+				
+				// 16. The dropdown is displaying an informative text "No Results"
+				dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
+				
+				if(dropdown_result.equals("No results found")) {
+					System.out.println("Dropdown list opened with the text: No results found");
+					ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: No results found", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} else {
+					System.out.println("Dropdown list opened with the text: " + dropdown_result);
+					ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: " + dropdown_result, LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
 				
 				// 17. Click on the text field, and write the name of the (existing) instuctor which exists only in another university.
-				copy.chooseInstructorAndVerifyAutoCompleteIsAsExpected("kosins1","No results found");			
+				driver.findElement(By.id("members_value")).clear();
+				driver.findElement(By.id("members_value")).sendKeys("kosins1");
+				Thread.sleep(3000);
+				
+				// 18. The dropdown is displaying an informative text "No Results".
+				dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
+				
+				if(dropdown_result.equals("No results found")) {
+					System.out.println("Dropdown list opened with the text: No results found");
+					ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: No results found", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} else {
+					System.out.println("Dropdown list opened with the text: " + dropdown_result);
+					ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: " + dropdown_result, LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
 				
 				// 19. Click on the text field, and write a sub string of the name of the (existing) instructor.
-				copy.chooseInstructorAndVerifyAutoCompleteIsAsExpected(PropertyManager.getProperty("User1").substring(0, PropertyManager.getProperty("User1").length()-3),PropertyManager.getProperty("User1"));
-				String username = PropertyManager.getProperty("User1");			
+				String username = PropertyManager.getProperty("User1");
+				driver.findElement(By.id("members_value")).clear();
+				driver.findElement(By.id("members_value")).sendKeys(PropertyManager.getProperty("User1").substring(0, PropertyManager.getProperty("User1").length()-3));
+				Thread.sleep(3000);
+				
+				// 20. The user is displayed in the drop down list.
+				dropdown_result = driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).getText();
+				Thread.sleep(1000);
+				if(dropdown_result.equals(username)) {
+					System.out.println("Dropdown list opened with the text: " + username);
+					ATUReports.add("Dropdown list opened with the text.", username, username, LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} else {
+					System.out.println("Dropdown list opened with the text: " + dropdown_result);
+					ATUReports.add("Dropdown list opened with the text.", username, dropdown_result, LogAs.FAILED, null);
+					Assert.assertTrue(false);
+				}
 				
 				// 21. Click ,on the dropdown list, on the name of the instructor who belongs to this course when it is displayed on the list.
 				driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				
 				// 22. The chosen name displays on the text field for search (near "list courses" button).
 				String chosen_name = driver.findElement(By.id("members_value")).getAttribute("value");
@@ -216,7 +272,7 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				
 				// 23. Click on the button "List Courses".
 				driver.findElement(By.id("SearchButton")).click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				
 				// 24. There shall be an informative text displayed below the input field: "Choose a course that you would like to copy your selected recording(s) to.".
 				copy.verifyChooseACourseThatCopyAndItsPlaceBelowTheInstructorSearchField();
@@ -257,7 +313,7 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				// 28. Inside of the 'Search' text box, search for a past course of the instructor you chose earlier.
 				copy.sendKeysToSearchInputBox("PastCourse");
 				copy.clickOnSearchButton();	
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				
 				// 29. The past course shouldn't be displayed inside the course list textbox.
 				List<String> searched_course_list = copy.getCourseList();
@@ -275,7 +331,7 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				// 30. Inside of the 'Search' text box, search for an existing university course which the chosen user isn't enrolled to.
 				copy.sendKeysToSearchInputBox("NoneEnroollCourse");
 				copy.clickOnSearchButton();	
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				
 				// 31. The course shouldn't be displayed inside the course list textbox.
 				searched_course_list = copy.getCourseList();
@@ -293,7 +349,7 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				// 32. Inside of the 'Search' text box, search for a substring of one of the Active courses.
 				copy.sendKeysToSearchInputBox(target_course_name.substring(0, target_course_name.length()-3));
 				copy.clickOnSearchButton();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				
 				// 33. The course should be displayed inside the course list textbox.
 				searched_course_list = copy.getCourseList();
@@ -311,7 +367,7 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				// 34. Inside of the 'Search' text box, search for a the whole string of one of the Active courses.
 				copy.sendKeysToSearchInputBox(target_course_name);
 				copy.clickOnSearchButton();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				
 				// 35. The course should be displayed inside the course list textbox.
 				searched_course_list = copy.getCourseList();
@@ -331,8 +387,8 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 			}
 			
 			// 37. Logout.
-			course.signOut();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			driver.findElement(By.id("SignOutLink")).click();
+			Thread.sleep(2000);
 		}
 		
 
@@ -356,7 +412,7 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 //		
 //		// 13. On the window, click on "Copy Recording(s)" button.
 //		copy.clickOnCopyButton();
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(1000);
 //		
 //		
 //		// 14. There is a error window displays with the text "a course must be selected".
@@ -379,7 +435,7 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 //		
 //		// 17. Click on the text field, and write the name an instructor.
 //		driver.findElement(By.id("members_value")).sendKeys(username);
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(3000);
 //		
 //		// 18. The text is written on the field. There is also a dropdown list opened which contains several existing instructor which may match the search.
 //		String dropdown_result = driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).getText();
@@ -396,7 +452,7 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 //		
 //		// 19. Click ,on the dropdown list, on the name of one instructor.
 //		driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(1000);
 //		
 //		// 20. The chosen name displays on the text field for search (near "list courses" button).
 //		String chosen_name = driver.findElement(By.id("members_value")).getAttribute("value");
@@ -414,13 +470,13 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 //		// 21. Click on "Copy Recording(s)" button.
 //		copy.clickOnCopyButton();
 //		
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(1000);
 //		
 //		// 22. There is a error window displays with the text "a course must be selected".
 //		// 23. On the error window, click on "ok" button.
 //		confirmation_menu.clickOnOkButtonOnErrorWindow();
 //		
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(1000);
 //		
 //		// 24. Error window is closed.
 //		is_closed = confirmation_menu.checkIfWindowModalWithTargetNameIsClosed("Error");
@@ -437,7 +493,7 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 //		
 //		// 25. Click on "List courses" button.
 //		driver.findElement(By.id("SearchButton")).click();
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(1000);
 //
 //		// 26. The list of available courses to copy the recording to is displayed.
 //		List<String> courses_to_move = copy.getCourseList();
@@ -454,12 +510,12 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 //		
 //		// 27. Click on "Copy Recording(s)" button.
 //		copy.clickOnCopyButton();
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(1000);
 //		
 //		// 28. There is a error window displays with the text "a course must be selected".
 //		// 29. On the error window, click on "ok" button.
 //		confirmation_menu.clickOnOkButtonOnErrorWindow();
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(1000);
 //		
 //		// 30. Error window is closed.
 //		is_closed = confirmation_menu.checkIfWindowModalWithTargetNameIsClosed("Error");

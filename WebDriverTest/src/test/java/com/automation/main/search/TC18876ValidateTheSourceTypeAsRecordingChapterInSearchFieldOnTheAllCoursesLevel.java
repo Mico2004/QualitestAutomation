@@ -8,7 +8,7 @@ import java.util.List;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -129,7 +129,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	
@@ -143,7 +143,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 		initializeCourseObject();
 		
 		String current_course = course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// Change first chapter name
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
@@ -162,16 +162,16 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		
 		// Get Recording Chapter information.
 		record.first_recording_title.click();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		String recording_chapter = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 		
 		record.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		for(int type_of_user=0; type_of_user<3; type_of_user++) {
 			if(type_of_user==0) {
@@ -184,14 +184,14 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 				// 2. Log in as anonymous.
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 				
 			// 3. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
 				
 			// 4. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(recording_chapter);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 4.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
@@ -228,7 +228,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 			// 6. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			search_page.exitInnerFrame();
 			
 			// 7. Click on title of the chapter.
@@ -240,7 +240,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 			// 8. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			search_page.exitInnerFrame();
 				
 			// 9. Click on the recording title of the chapter.
@@ -252,7 +252,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 			// 10. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			search_page.exitInnerFrame();
 				
 			// 11. Click on the course name in the breadcrumb.
@@ -260,7 +260,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 			
 			// 12. Sign Out.
 			record.signOut();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 		}
 		
 		

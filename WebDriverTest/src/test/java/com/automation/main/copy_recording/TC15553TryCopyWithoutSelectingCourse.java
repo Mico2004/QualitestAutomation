@@ -2,7 +2,7 @@ package com.automation.main.copy_recording;
 
 
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -119,7 +119,7 @@ public class TC15553TryCopyWithoutSelectingCourse {
 		// 5. Click "Copy Recording(s)" button without selecting a course
 		copy.ClickOnCopyButtonWithoutChoosingCourse();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 6. Click "OK" button + Message box "A course must be selected." is displayed
 		confirm_menu.clickOnOkButtonOnErrorWindow();
@@ -128,7 +128,7 @@ public class TC15553TryCopyWithoutSelectingCourse {
 		confirm_menu.verifyConfirmationMenuWithTargetHeaderClosed("Error");
 		
 		// 8. Click "Cancel" button.
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		copy.clickOnCancelButton(record);
 		
 		// 9. "Copy" window is closed

@@ -1,13 +1,11 @@
 package com.automation.main.public_courses;
 
 
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-import java.text.DateFormat;
-
-import org.apache.xml.dtm.ref.DTMDefaultBaseIterators.DescendantIterator;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -143,10 +141,10 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginAdmin("Admin");	
 		initializeCourseObject();	
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
-		Thread.sleep(Page.TIMEOUT_TINY);		
+		Thread.sleep(2000);		
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
 		admin_course_settings_page.clickOnSaveButton();
@@ -182,7 +180,7 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		course.verifyThatListOfCoursesIsSortedByTheirNames();
 		
 		// 12. Validate every course record contains information as follows: course name: ‘X recording(s) – Y new | last updated: mm/dd/yyyy’.	
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		course.verifyEveryCourseRecordContainsCorrectInformation();
 		
 		// 13. Validate total quantity of new recordings in the course is displayed on the right side of the course line.
@@ -196,7 +194,7 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		
 		// 16. Click on "Login as guest" blue button (at the bottom of the login screen).
 		tegrity.loginAsguest();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 17. The courses list page is displayed (under the tab "Public Courses" which is the only one available).
 		course.verifyThatCoursesListDisplayedUnderPublicCoursesWhichIsTheOnlyOneAvaiable();
@@ -212,7 +210,7 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		
 		
 		// 21. Validate every course record contains information as follows: course name: ‘X recording(s) – Y new | last updated: mm/dd/yyyy’.
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		course.verifyEveryCourseRecordContainsCorrectInformation();
 		
 		// 22. Validate total quantity of new recordings in the course isn't displayed on the right side of the course line.
@@ -253,7 +251,7 @@ public class TC21807ValidatePublicCoursesUILogIn {
 		
 		
 		// 34. Validate every course record contains information as follows: course name: ‘X recording(s) – Y new | last updated: mm/dd/yyyy’.
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		course.verifyEveryCourseRecordContainsCorrectInformation();
 		
 		// 35. Validate total quantity of new recordings in the course is displayed on the right side of the course line.

@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -171,7 +171,7 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
         String bookmark_to_add=sdf.format(date);
-        Thread.sleep(Page.TIMEOUT_TINY);
+        Thread.sleep(1000);
         player_page.deleteAllBookmark();
 		player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
         
@@ -181,23 +181,23 @@ public class TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 		}
 		/// 6.sign out super user
 		record.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		tegrity.waitForVisibility(tegrity.passfield);
 
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		// 3.Click on "View Course List" link
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1500);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		// 4.verify all courses page
 		admin_view_course_list.verifyAllCoursesPage();
 		// 5.Select a course
 		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		admin_view_course_list.moveToCoursesThroughGet(url);			
 		/// 6.Click on one of the Recording link
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		record.waitForVisibility(record.first_recording);
 
 		record.convertRecordingsListToNames();

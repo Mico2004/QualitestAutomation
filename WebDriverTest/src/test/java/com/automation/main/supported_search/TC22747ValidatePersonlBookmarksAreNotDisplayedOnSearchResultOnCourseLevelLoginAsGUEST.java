@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -173,7 +173,7 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			
 			 // 5.verify checked visibility of course(make it public)
 			 course_settings.checkCourseVisibility();
-			 Thread.sleep(Page.TIMEOUT_TINY);
+			 Thread.sleep(2000);
 			 course_settings.signOut();
 			
 			
@@ -198,7 +198,7 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 			String bookmark_to_add=sdf.format(date);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
 
 
@@ -207,18 +207,18 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			}
 			/// 12.sign out super user
 			record.signOut();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			tegrity.waitForVisibility(tegrity.passfield);
 
 			// 13.login as guest
 			tegrity.loginAsguest();
 			course.waitForVisibility(course.sign_out);
 			// 14.Select a course
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1500);
 			course.selectCourseByName(course_name);
 
 			/// 15.Search the "Bookmark" that we mentioned in the preconditions and press ENTER.
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			record.waitForVisibility(record.first_recording);
 
 			record.convertRecordingsListToNames();
@@ -227,7 +227,7 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 
 			// 17. Search some "Recording Chapter" and press ENTER.
 			top_bar_helper.searchForTargetText(to_search);		
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			// verify that we got bookmark and one result
 			search_page.verifySearchResultIsEmpty();
 	

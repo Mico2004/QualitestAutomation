@@ -2,7 +2,8 @@
 package com.automation.main.admin_course_view_recording_tasks;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -107,15 +108,15 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// Precondition
-		
+		initializeCourseObject();
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(4000);
 		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_youtube_integration, "enable youtube integration");
 		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_automated_capitioning, "enable automated captioning");
 		advanced_service_settings_page.clickOnOkbutton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		top_bar_helper.signOut();
 		
 		
@@ -123,7 +124,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 		// 1. Login as User1.
 		tegrity.loginCourses("User1");// log in courses page
 		
-		initializeCourseObject();
+		
 		// 2. Get the full name of the Ab course.
 		String target_course_name = course.selectCourseThatStartingWith("Ab");
 		String url =  course.getCurrentUrlCoursePage(); 
@@ -139,10 +140,10 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 			// 4. Login as Full Admin / Help Desk Admin
 			if (i_login == 0) {
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 			} else {
 				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 			}
 			
 			// 5. Click on "view course list" under "courses" section.
@@ -150,19 +151,19 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 		
 			
 			// 6. move to the course through 
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(5000);
 			admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 			
 			// Loop through Recordings, Student Recordings and Tests Tab
 			for (int i_tabs = 0; i_tabs<3; i_tabs++) {
 				if (i_tabs == 1) {
 					record.clickOnStudentRecordingsTab();
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(2000);
 				} else if (i_tabs == 2) {
 					record.clickOnTestsTab();
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(2000);
 				}
 				
 				
@@ -172,9 +173,8 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				
 				
 				// 9. Hover over "Recording tasks" menu.
-				record.recording_tasks_button.click();
-				
-				Thread.sleep(Page.TIMEOUT_TINY);
+				record.moveToElementAndPerform(record.recording_tasks_button, driver);			
+				Thread.sleep(2000);
 				
 				// 10. The "recording tasks" menu opens.
 				boolean is_shown = record.isRecordingTasksShown();
@@ -234,7 +234,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				record.searchbox.click();
 				record.getCheckbox().click();
 				
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				
 				// 14. The checkbox is checked.
 				boolean is_first_checkbox_selected = record.getCheckbox().isSelected();
@@ -252,7 +252,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				
 				// 15. Hover over "Recording tasks" menu.
 				record.recording_tasks_button.click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 				
 				// 16. The "recording tasks" menu opens.
 				is_shown = record.isRecordingTasksShown();
@@ -300,7 +300,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				
 				// 20. Hover over "Recording tasks" menu.
 				record.recording_tasks_button.click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 				
 				// 21. The "recording tasks" menu opens.
 				is_shown = record.isRecordingTasksShown();

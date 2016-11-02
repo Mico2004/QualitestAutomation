@@ -22,7 +22,7 @@ import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.Architecture;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
@@ -35,8 +35,6 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import net.sourceforge.htmlunit.corejs.javascript.ast.AstNode;
-
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class CustomAnalysis extends Page {
 	public CustomAnalysis(WebDriver browser) {
@@ -95,7 +93,7 @@ public class CustomAnalysis extends Page {
 				for(int i=1; i<target_type; i++) {
 					report_type_select.sendKeys(Keys.DOWN);
 				}
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(100);
 				report_type_select.sendKeys(Keys.ENTER);
 				
 				if(report_type_options.get(target_type-1).getAttribute("selected").equals("true")) {
@@ -119,7 +117,7 @@ public class CustomAnalysis extends Page {
 	public void clickOnRunReportButton() throws InterruptedException {
 		clickElementWithDescription(run_report_button, "run report button");
 		
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			try {
 			getIntoFrame(0);
 			waitForVisibility(driver.findElement(By.id("reportForm")));
@@ -692,7 +690,7 @@ public class CustomAnalysis extends Page {
 		try {
 			grouping_textbox_inputs.get(index).clear();
 			grouping_textbox_inputs.get(index).sendKeys(target_input);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			grouping_textbox_inputs.get(index).sendKeys(Keys.ENTER);
 			
 			System.out.println("Sent keys: " + target_input + ", to target grouping: " + target_grouping + " input.");
@@ -1140,7 +1138,7 @@ public class CustomAnalysis extends Page {
 		
 		moveToElement(grouping_textbox_inputs.get(1), driver).perform();
 		try {
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 		} catch (Exception msg) {
 			
 		}

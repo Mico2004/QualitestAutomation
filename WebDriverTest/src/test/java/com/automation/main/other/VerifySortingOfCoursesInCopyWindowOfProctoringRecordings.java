@@ -2,7 +2,7 @@ package com.automation.main.other;
 
 import java.awt.List;
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -79,7 +79,7 @@ public class VerifySortingOfCoursesInCopyWindowOfProctoringRecordings {
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			//4.click on  student tab
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			//5.select check box
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 	        record.getCheckbox().click();

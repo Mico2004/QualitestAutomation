@@ -5,7 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -54,19 +54,18 @@ public class DriverSelector {
 		DesiredCapabilities capability = null;
 		switch (type) {
 		case Firefox:
-			System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");
-		
+			System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");	
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			capabilities.setCapability("marionette", true);
 			FirefoxProfile prfl = new FirefoxProfile();
 		    prfl.setPreference("browser.startup.homepage", "about:blank");
 		    prfl.setPreference("browser.startup.homepage_override.mstone", "ignore");
 		    prfl.setPreference("startup.homepage_welcome_url", "about:blank");
-		    prfl.setPreference("startup.homepage_welcome_url.additional", "about:blank");
+		    prfl.setPreference("startup.homepage_welcome_url.additional", "about:blank");    
 		    capabilities.setCapability(FirefoxDriver.PROFILE, prfl);
-			driver = new FirefoxDriver(capabilities);
-			
-			// capability.setPlatform(Platform.WIN8_1);
+			driver = new FirefoxDriver(capabilities);	
+			//driver = new FirefoxDriver();
+			//driver = new MarionetteDriver(capabilities);
 			break;
 		case Chrome:
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
@@ -120,6 +119,7 @@ public class DriverSelector {
 		for (BrowserType btype : BrowserType.values()) {
 			if (btype.getBrowserName().equalsIgnoreCase(browser)) {
 				type = btype;
+				break;
 			}
 
 		}

@@ -3,7 +3,7 @@ package com.automation.main.copy_recording;
 
 
 import java.util.List;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -109,19 +109,19 @@ public class TC15567SearchCoursesInCopyWindow {
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 2. Select course.
 		currentCourse = course.selectCourseThatStartingWith("Ab");
 		System.out.println("Current course: " + currentCourse);
 		//course.selectCourse(record);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 3. Select recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
@@ -132,12 +132,12 @@ public class TC15567SearchCoursesInCopyWindow {
 		// get course list to compare with course list from point #6
 		List<String> course_list_preclick_on_search_button = copy.getCourseList(); 
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 5. Click the "Search" button.
 		copy.clickOnSearchButton();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 6. "Courses List" is not changed.
 		List<String> course_list_after_clicking_on_search_button = copy.getCourseList();
@@ -154,23 +154,23 @@ public class TC15567SearchCoursesInCopyWindow {
 			Assert.assertTrue(false);
 		}
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 7. Enter text which isn't a part of any course's title in "Search" field.
 		String no_course_match_text = "sd5fg878f76fg8sd6f7sd68f7sd68f6sd87";
 		copy.sendKeysToSearchInputBox(no_course_match_text);
 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 8. Text is displayed in a "Search" textbox.
 		copy.isTextDisplayedInSearchBox(no_course_match_text);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 9. Click the "Search" button.
 		copy.clickOnSearchButton();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 10. "Courses List" is empty.
 		List<String> current_course_list = copy.getCourseList();
@@ -185,24 +185,24 @@ public class TC15567SearchCoursesInCopyWindow {
 			Assert.assertTrue(false);
 		}
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 11. Enter course name which you do not have premissions to work with.
 		String course_name_not_have_premissions = "BankValidRecordings";
 		copy.deleteValueInSearchInputBox();
 		copy.sendKeysToSearchInputBox(course_name_not_have_premissions);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 12. Text is displayed in a "Search" textbox.
 		copy.isTextDisplayedInSearchBox(course_name_not_have_premissions);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 13. Click the "Search" button.
 		copy.clickOnSearchButton();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 14. "Courses List" is empty.
 		current_course_list = copy.getCourseList();
@@ -217,24 +217,24 @@ public class TC15567SearchCoursesInCopyWindow {
 			Assert.assertTrue(false);
 		}
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 15. Enter specific course's title in "Search" field.
 		String specific_course_title = course_list_preclick_on_search_button.get(1);
 		copy.deleteValueInSearchInputBox();
 		copy.sendKeysToSearchInputBox(specific_course_title);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 16. Text is displayed in a "Search" textbox.
 		copy.isTextDisplayedInSearchBox(specific_course_title);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 17. Click the "Search" button.
 		copy.clickOnSearchButton();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 18. Only specific course's title is displayed in "Courses List".
 		current_course_list = copy.getCourseList();
@@ -249,24 +249,24 @@ public class TC15567SearchCoursesInCopyWindow {
 			Assert.assertTrue(false);
 		}
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 19. Enter text which is part of several courses titles in "Search" field.
 		String course_name_that_part_of_serveral_courses = "Name";
 		copy.deleteValueInSearchInputBox();
 		copy.sendKeysToSearchInputBox(course_name_that_part_of_serveral_courses);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 20. Text is displayed in a "Search" textbox.
 		copy.isTextDisplayedInSearchBox(course_name_that_part_of_serveral_courses);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 21. Click the "Search" button.
 		copy.clickOnSearchButton();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 22. Only courses with common text in titles are displayed in "Courses List".
 		current_course_list = copy.getCourseList();

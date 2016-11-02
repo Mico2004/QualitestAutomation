@@ -8,7 +8,7 @@ import java.util.Date;
 
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -160,10 +160,10 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 			// 6. Login as Admin.
 			if(i_login_as_admin==0) {
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 			} else {
 				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 			}
 			
 			
@@ -171,9 +171,9 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			
 			// 6. move to the course through url
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(5000);
 			admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 		
 			// Repeat TC for Recordings, Stduent Recording and Tests Tabs
@@ -184,7 +184,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				} else if (recording_type==2) {
 					record.clickOnTestsTab();
 				}
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				
 				// recording list before delete the recording
 				List<String> recording_list_before_delete_recording = record.getCourseRecordingList(); 
@@ -204,7 +204,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				
 				// 12. Select "Recording Tasks -> Delete".
 				record.clickOnRecordingTaskThenDelete();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 				
 				// 13. "Delete" window is displayed.
 				boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();
@@ -251,7 +251,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				// 15. Click "Delete" button.
 				delete_menu.clickOnDeleteButton();
 				
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				
 				// 16. Delete window is closed.
 				is_delete_window_closed = delete_menu.isDeleteMenuClose();
@@ -298,7 +298,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		
 			}
 			
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			// 18. Logout.
 			record.signOut();
 			

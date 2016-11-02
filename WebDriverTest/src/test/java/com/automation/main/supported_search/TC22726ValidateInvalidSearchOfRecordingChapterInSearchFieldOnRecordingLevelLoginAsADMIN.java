@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -158,14 +158,14 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		String url =  course.getCurrentUrlCoursePage(); 
 
 		record.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		tegrity.waitForVisibility(tegrity.passfield);
 		
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		// 3.Click on "View Course List" link
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1500);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		// 4.verify all courses page
 		admin_view_course_list.verifyAllCoursesPage();
@@ -174,7 +174,7 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		admin_view_course_list.moveToCoursesThroughGet(url);
 		/// 6.Click on one of the Recording link
 		record.waitForVisibility(record.checkbox2);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 		
 		Date date = new Date();
@@ -190,7 +190,7 @@ public class TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecord
 		
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1500);
 		
 		
 		// return to courses 

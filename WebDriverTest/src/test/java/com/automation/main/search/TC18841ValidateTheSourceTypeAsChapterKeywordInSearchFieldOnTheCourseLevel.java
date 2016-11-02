@@ -8,7 +8,7 @@ import java.util.List;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -125,7 +125,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	
@@ -145,7 +145,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// set Chapter Keyword for recording
 		Date date = new Date();
@@ -159,7 +159,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_chapter_keyword);
 		
 		record.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		
 		// Looping for Student, Guest and ADMIN
@@ -178,7 +178,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			
 			if(type_of_user < 3) {
 				// 3. Open some course.
@@ -188,9 +188,9 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(8000);
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 			
 			
@@ -199,7 +199,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			
 			// 5. Search the "Chapter Keyword" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(recording_chapter_keyword);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
@@ -234,7 +234,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
 			Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
@@ -264,7 +264,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			// 8. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 9. Click on title of the manual chapter keyword.
 			search_page.exitInnerFrame();
@@ -276,7 +276,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			// 10. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 11. Click on the recording title of the chapter.
 			search_page.exitInnerFrame();
@@ -289,7 +289,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			if((type_of_user!=2) && (type_of_user == 1)) {
 				// 13. Click on the course name in the breadcrumb.
@@ -298,7 +298,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 				} else {
 					search_page.clickBackToCourseInBreadcrumbsForAdminDashBoard();
 				}
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				
 				if(type_of_user ==0 || type_of_user==3) {
 					
@@ -317,7 +317,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 						search_page.clickBackToCourseInBreadcrumbsForAdminDashBoard();
 					}
 				
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(2000);
 				
 					// 15. Search the new manual chapter keyword.
 					top_bar_helper.searchForTargetText(new_recording_chapter_keyword);
@@ -340,11 +340,11 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 					recording_chapter_keyword = new_recording_chapter_keyword;
 				}
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 			// 17. Sign Out.
 			record.signOut();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 		}
 		
 		// Unpublic Ab course1. 

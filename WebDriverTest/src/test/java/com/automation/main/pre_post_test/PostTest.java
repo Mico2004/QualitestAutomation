@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -136,7 +136,7 @@ public class PostTest {
 	public void loginCourses() throws InterruptedException {
 		// 1. Login with SuperUser.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		Thread.sleep(Page.TIMEOUT_TINY);		
+		Thread.sleep(2000);		
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		for(int i=0; i<10; i++) {
@@ -144,7 +144,7 @@ public class PostTest {
 				driver.switchTo().frame(0);
 				break;
 			} catch(Exception msg) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
 		String [] Keywords={"Temp","Student"};
@@ -155,7 +155,7 @@ public class PostTest {
 			while(mange_adhoc_course_enrollments.firstCourseIsDisplayed()){
 				System.out.println("while");
 				mange_adhoc_course_enrollments.clickOnFirstCourseDeleteButton();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 		
 			}
 		}

@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -48,7 +48,6 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST {
@@ -149,7 +148,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			tegrity.waitForVisibility(tegrity.passfield);
-
 			// 2.login as Admin
 			tegrity.loginAdmin("Admin");
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
@@ -163,12 +161,12 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			
 			// make the course public
 			tegrity.loginCourses("User1");
-			course.selectCourseThatStartingWith("Ab");
+			String course_name=course.selectCourseThatStartingWith("Ab");
 			
 			record.clickOnCourseTaskThenCourseSettings();
 			course_settings.makeSureThatMakeCoursePublicIsSelected();
 			course_settings.clickOnOkButton();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 			record.signOut();
 			
@@ -178,17 +176,18 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 
 			// 5.Select a course
 			course.waitForVisibility(course.first_course_button);
-			String course_name=course.selectCourseThatStartingWith(PropertyManager.getProperty("course1"));
+			course.selectCourseByName(course_name);
 			String recordname = record.getFirstRecordingTitle();
 			// 6.Click on one of the Recording link
 			record.waitForVisibility(record.first_recording);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			record.convertRecordingsListToNames();
 			record.convertRecordingsListToRecorderName();
 			record.verifyFirstExpandableRecording();
 			
-			String recording_to_search=record.getSecondRecordPlayerName();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			String recording_to_search=record.getFirstRecordPlayerName();
+			
+			Thread.sleep(2000);
 						
 			record.clickOnTheFirstCaptherWithOutTheExpand();
 
@@ -207,14 +206,14 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 
 			///9.Validate the text in the Tegrity Player page: "Search in this recording..."
 			player_page.verifySearchBoxHint();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			//10.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
 			player_page.verifySearchForRecordingExist(recording_to_search);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
 
 
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			//11.The tegrity logo is displayed on the bottom footer bar right side.
 			player_page.verifyTegrityLogoVisibilityAndLocation();
 
@@ -239,7 +238,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			player_page.verifyUniversityLogoVisibilityAndLocation();
 
 			///16.search results page in the format as follows: "recording name - Search Results".
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
 			player_page.verifySearchResultPage(recordname);
 			
@@ -255,7 +254,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 
 			///19.Hover over the chapter icon:The background color change to deep gray.
 			player_page.moveToElementAndPerform(player_page.search_result.get(0), driver);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 
 			///20.Click on the result row.
@@ -268,7 +267,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 				break;
 			}
 
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(10000);
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
 			for (String handler : driver.getWindowHandles()) {
@@ -286,7 +285,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 			//23.navigate back to player recording
 			driver.navigate().back();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(4000);
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			//24.click on "Courses" and verify course page
 
@@ -294,24 +293,24 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			////25.navigate back to player then to recordings page
 			driver.navigate().back();
 			player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(0));
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 			driver.navigate().back();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(4000);
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			//27.Search the "Recording Chapter" from the recording that we mentioned in the preconditions .
 //			record.verifySearchReturnAnyListAsUserOrGuest(recording_to_search);
-//			Thread.sleep(Page.TIMEOUT_TINY);
+//			Thread.sleep(2000);
 //		
 //			///!!!!!!!!!!!!!!!!29.download recording with player controllers(Not Possible)
 //			///return to player
 //			record.breadcrumbs_box_elements_list.get(2).click();
 //			record.waitForVisibility(record.first_recording);
 //
-//			Thread.sleep(Page.TIMEOUT_TINY);
+//			Thread.sleep(2000);
 //			record.verifyFirstExpandableRecording();
 //			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-//			Thread.sleep(Page.TIMEOUT_TINY);
+//			Thread.sleep(15000);
 //
 //
 //			// to go back to crecording window handler
@@ -326,13 +325,13 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 
 			///31.Validate the text in the Tegrity Player page: "Search in this recording..."
 			player_page.verifySearchBoxHint();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			//32.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
 			player_page.verifySearchForRecordingExist(recording_to_search);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
 
 
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			//33.The tegrity logo is displayed on the bottom footer bar right side.
 
 			player_page.verifyTegrityLogoVisibilityAndLocation();
@@ -356,7 +355,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 
 			///38.search results page in the format as follows: "recording name - Search Results".
 			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 		
 			player_page.verifySearchResultPage(recordname);
 			
@@ -373,7 +372,7 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			///41.Hover over the chapter icon:The background color change to deep gray.
 
 			player_page.moveToElementAndPerform(player_page.search_result.get(0), driver);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 
 			// Signout

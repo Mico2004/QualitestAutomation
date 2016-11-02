@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -159,7 +159,7 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			record.clickOnCourseTaskThenCourseSettings();
 			course_settings.makeSureThatMakeCoursePublicIsSelected();
 			course_settings.clickOnOkButton();
-			Thread.sleep(Page.TIMEOUT_TINY);			
+			Thread.sleep(1000);			
 			record.signOut();
 						
 			// 2.login as super-user
@@ -182,7 +182,7 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 	        String bookmark_to_add=sdf.format(date);
-	        Thread.sleep(Page.TIMEOUT_TINY);
+	        Thread.sleep(1000);
 			player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
 	        
 	        
@@ -191,18 +191,18 @@ public class TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRe
 			}
 			/// 6.sign out super user
 			record.signOut();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			tegrity.waitForVisibility(tegrity.passfield);
 
 			// 2.login as guest
 			tegrity.loginAsguest();
 			course.waitForVisibility(course.sign_out);
 			// 3.Click on course link
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1500);
 			course.selectCourseByName(course_name);
 			
 			/// 4.Click on one of the Recording link
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			record.waitForVisibility(record.first_recording);
 			record.convertRecordingsListToNames();
 			String rec=record.recording_list_names.get(0);

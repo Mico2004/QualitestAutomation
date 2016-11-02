@@ -7,7 +7,7 @@ import java.util.List;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -152,7 +152,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 		// 6. Go through destination courses and check that target recording not appear, is so delete it
 		for (String course_name : target_course_list) {
 			
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 			course.clickOnTargetCourseName(course_name);
 			
@@ -162,7 +162,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 			
 		}
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 7. Select course.
 		course.clickOnTargetCourseName(currentCourse);
@@ -183,7 +183,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 		// 11. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1500);
 		
 		// 12. Click "OK".
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -222,7 +222,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 				record.checkRecordingInIndexIStatus((i + 1), "Being copied from");
 				// 16. Recording's status change after the copying is done
 				//record.checkStatusExistenceForMaxTTime(120);
-				record.checkThatRecordingStatusTargetIndexIsEmpty((i + 1), 440);
+				record.checkThatRecordingStatusTargetIndexIsEmpty((i + 1), 460);
 				break;
 			}
 		}
@@ -250,7 +250,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 			} else {
 				System.out.println("Target course name is not clicked: " + target_course_list.get(i));
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(500);
 			// 20. Verify that recording is copied to course.
 			isRecordingExist = record.isRecordingExist(source_recording, true);
 			

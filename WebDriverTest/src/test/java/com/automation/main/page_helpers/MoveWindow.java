@@ -8,11 +8,10 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -37,17 +36,13 @@ public class MoveWindow extends Page {
 		super(browser);
 		// TODO Auto-generated constructor stub
 	}
-	@FindBy(id="members_value")
-	public WebElement members_value;
-	@FindBy(xpath=".//*[@id='members_dropdown']/div[2]")
-	public WebElement instructorAutocomplete;
-	@FindBy(id="members_dropdown")
-	public WebElement membersdropdown;
+
 	@FindBy(id = "MoveButton")
 	public WebElement move_button;
 	@FindBy(id = "ModalDialogHeader")
 	public WebElement move_menu_title;
-	
+	@FindBy(id="members_value")
+	public WebElement instructorTextBox;
 	@FindBy(xpath = "//*[@id=\"courseListSelect\"]/option")
 	public  List<WebElement> course_list;
 	@FindBy(id = "CancelButton")
@@ -80,7 +75,7 @@ public class MoveWindow extends Page {
 			ATUReports.add("Fail click on move recordings button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 	}
 
 	// This function return true if move menu is closed,
@@ -118,12 +113,12 @@ public class MoveWindow extends Page {
 			ATUReports.add("Fail click on cancel button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 	}
 
 	/// verify move menu title
 	public void verifyMoveMenuTitle() throws InterruptedException {
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		String val = move_menu_title.getText();
 		if (val.equals("Move")) {
 			ATUReports.add("move menu title verified ", LogAs.PASSED, null);
@@ -138,7 +133,7 @@ public class MoveWindow extends Page {
 
 	// verify move menu background color is same as recording background color
 	public void verifyMenuColor(RecordingHelperPage rec) throws InterruptedException {
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 	String background_rec=rec.getBackGroundColor(rec.background);
 	String menu_background=getBackGroundColor(move_menu_background);
 		if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(move_menu_background))) {
@@ -378,49 +373,17 @@ public class MoveWindow extends Page {
 			Assert.assertTrue(true);
 		}
 	}
-	/**
-	 * On the ADMIN move window - type a full instructor name and choose the first option in autocomplete (Only one option should pop up)
-	 * 
-	 * @param username full instructor name
-	 * @author Mickael Elimelech
-	 */
-	public void chooseInstructorAndClickAutoComplete(String username){
-		
-		try{
-			WebDriverWait wait=new WebDriverWait(driver, 10);
-			driver.findElement(By.id("members_value")).sendKeys(username);
-			ATUReports.add("Set an Instructor in the textbox", username,LogAs.PASSED, null);
-			wait.until(ExpectedConditions.textToBePresentInElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding"), username));
-			driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();			
-			Thread.sleep(Page.TIMEOUT_TINY);
-			driver.findElement(By.id("SearchButton")).click();
-		}catch(Exception e){
-			ATUReports.add("Choosing an instructor from admin's Move Dialog window failed", e.getMessage(),LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-		}
-		
-	}
-	public String chooseInstructorAndVerifyAutoCompleteIsAsExpected(String username,String expectedResult){
-		driver.findElement(By.id("members_value")).clear();
-		driver.findElement(By.id("members_value")).sendKeys(username);	
-		ATUReports.add("Set an Instructor in the textbox", username,LogAs.PASSED, null);
-		try {
-			Thread.sleep(Page.TIMEOUT_TINY);
-			wait.until(ExpectedConditions.textToBePresentInElement(membersdropdown,
-					expectedResult));
-		} catch (Exception e) {
-			System.out.println("Dropdown list opened with wrong text");
-			ATUReports.add("Dropdown list opened with wrong text", expectedResult,membersdropdown.getText(), LogAs.FAILED,
-					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			if(membersdropdown.isDisplayed())
-				return membersdropdown.getText();
-			else return "";
-		}
-		System.out.println("Dropdown list opened with the text:"+membersdropdown.getText());
-		ATUReports.add("Dropdown list opened with the text.", expectedResult,membersdropdown.getText(),
-				LogAs.PASSED, null);
-		if(membersdropdown.isDisplayed())
-			return membersdropdown.getText();
-		else return "";
-	}
+	
+   public void setInstructorName(String instructorName){
+	   try{
+		   
+		   
+	   }catch(Exception e){
+		   ATUReports.add("Failed to Set Instructor name", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	   }
+	   
+	   
+	   
+	   
+   }
 }

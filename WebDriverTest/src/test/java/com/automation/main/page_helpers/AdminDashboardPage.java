@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -108,15 +108,6 @@ public class AdminDashboardPage extends Page {
 	List <WebElement> dashboardSections;
 	String linkText="";
 	
-	
-	
-	
-	/**
-	 * This function get String with the name of target submenu of Courses and clicks on it
-	 * ,the parameter should match exactly with the link text in the courses section on the admin dashboard page
-	 * 
-	 * @param target String the matched the desired link text in the course section
-	 */
 	// This function get String with the name of target submenu of Courses and clicks on it
 	public void clickOnTargetSubmenuCourses(String target) 
 	{
@@ -128,7 +119,7 @@ public class AdminDashboardPage extends Page {
 		System.out.println("clickOnTargetSubmenuCourses2");
 	//	wait.until(ExpectedConditions.visibilityOfAllElements(dashboardSections));
 		System.out.println("clickOnTargetSubmenuCourses3");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		System.out.println("clickOnTargetSubmenuCourses4");
 		
 		switch(target){
@@ -174,17 +165,13 @@ public class AdminDashboardPage extends Page {
 		
 	{
 //		wait.until(ExpectedConditions.visibilityOf(courses_submenu.get(0)));
-
-
-
-
 		try {
 		System.out.println("clickOnTargetSubmenuUsers1");
 		waitForVisibility(CoursesBox);
 		System.out.println("clickOnTargetSubmenuUsers2");
 	//	wait.until(ExpectedConditions.visibilityOfAllElements(dashboardSections));
 		System.out.println("clickOnTargetSubmenuUsers3");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		System.out.println("clickOnTargetSubmenuUsers4");
 		
 		switch(target){
@@ -242,7 +229,7 @@ public class AdminDashboardPage extends Page {
 		waitForVisibility(ServiceSettingsBox);
 		System.out.println("clickOnTargetSubmenuAdvanceServiceSet2");
 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		System.out.println("clickOnTargetSubmenuAdvanceServiceSet4");
 		
 		switch(target){

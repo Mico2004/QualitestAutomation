@@ -12,7 +12,7 @@ import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -144,7 +144,7 @@ public class TestCaseCancelTheCopying {
 		//6. Click "Cancel" button.
 		copy.clickOnCancelButton(record);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 
 		//7. Verify that recording is not removed current course.
@@ -158,7 +158,7 @@ public class TestCaseCancelTheCopying {
 		//8. Click "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		//9. Select the destination course.
 		boolean isTargetCourseClicked = course.clickOnTargetCourseName(targetCourse);
@@ -168,7 +168,7 @@ public class TestCaseCancelTheCopying {
 			System.out.println("Target course name is not clicked: " + targetCourse);
 		}
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		//10. Verify that recording wasn't copied.
 		List<String> current_recording_list = record.getCourseRecordingList();
@@ -183,12 +183,12 @@ public class TestCaseCancelTheCopying {
 			Assert.assertTrue(true);
 		}
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		//11. Click "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		//12. Select the source course.
 		isTargetCourseClicked = course.clickOnTargetCourseName(currentCourse);

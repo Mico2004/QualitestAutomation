@@ -5,7 +5,7 @@ package com.automation.main.delete_recordings;
 
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -121,7 +121,7 @@ public class TC15645TryToDeleteCopyingRecording {
 		String selected_recording_name = record.getFirstRecordingTitle();
 		System.out.println("Record to select: " + selected_recording_name);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.check_all_checkbox);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
 
@@ -130,7 +130,7 @@ public class TC15645TryToDeleteCopyingRecording {
 
 		// 6. Click "Copy Recording(s)".
 		copy.clickOnCopyButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 
 		// 7. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecordings();
@@ -185,7 +185,7 @@ public class TC15645TryToDeleteCopyingRecording {
 
 		} else {
 			System.out.println(
-					"The following text not appear: The following recording(s) could not be deleted info appears.");
+					"The following t ext not appear: The following recording(s) could not be deleted info appears.");
 			ATUReports.add("The following text appear: The following recording(s) could not be deleted info appears.",
 					"True.", "False.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
@@ -212,14 +212,14 @@ public class TC15645TryToDeleteCopyingRecording {
 		// breadcrumbs.
 		record.returnToCourseListPage();
 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 
 		// 9. Select destination course.
 		course.selectTargetCourse(target_course);
 
 		// // 8-9. Go to target course url.
 		// driver.navigate().to(target_course_url);
-		// Thread.sleep(Page.TIMEOUT_TINY);
+		// Thread.sleep(3000);
 
 		// 10. Verify that destination recording has a "Moving/Copying" status.
 		// 10.1. Recr`row is grayed out.
@@ -231,14 +231,13 @@ public class TC15645TryToDeleteCopyingRecording {
 				if(recording_status.equals("Moving/Copying")){
 					if(!record.isIndexRecordingClickable(i + 1)){
 					System.out.println("Recording is grayed out");
-					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is grayed out",
-							LogAs.PASSED, null);
+					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is grayed out",LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					index = i+1;
+					break;
 				} else {
 					System.out.println("Recording is not grayed out");
-					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is not grayed out",
-							LogAs.FAILED, null);
+					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is not grayed out",LogAs.FAILED, null);
 					Assert.assertTrue(false);
 				}
 			}
@@ -253,10 +252,10 @@ public class TC15645TryToDeleteCopyingRecording {
 
 		// While recording is being copied, select "Recording Tasks -> Delete"
 		// menu item
-		record.toDeleteMenu();
-
-		// Message box "The following recording(s) could not be deleted:" is
-		// displayed
+		record.clickOnRecordingTaskThenDelete();
+		Thread.sleep(1000);
+		
+		// Message box "The following recording(s) could not be deleted:" is displayed
 		if (driver.findElement(By.cssSelector(".emphasis.ng-binding")).getText()
 				.startsWith("The following recording(s) could not be deleted:")) {
 			System.out.println(
@@ -269,7 +268,7 @@ public class TC15645TryToDeleteCopyingRecording {
 			System.out.println(
 					"The following text not appear: The following recording(s) could not be deleted info appears.");
 			ATUReports.add("The following text appear: The following recording(s) could not be deleted info appears.",
-					"True.", "False.", LogAs.FAILED, null);
+					"True.", "False.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -286,7 +285,7 @@ public class TC15645TryToDeleteCopyingRecording {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verfied that recording is not deleted.");
-			ATUReports.add("Verfied that recording is not deleted.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Verfied that recording is not deleted.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		

@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -159,7 +159,7 @@ public class TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST 
 			
 			// 3.sign out
 			admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1500);
 			admin_dashboard_page.signOut();
 			
 			//make the course public
@@ -186,18 +186,18 @@ public class TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST 
 			record.convertRecordingsListToRecorderName();
 			String instructor=record.getIndexRecorderNameOfRecording(1);
 			String recording_to_search=record.recording_list_names.get(0);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			
 		    ///7.Search some "Recording Chapter" and press ENTER.
 			top_bar_helper.searchForTargetText(recording_to_search);
 	         
 			///8.Validate the search field is display at the top right of the UI page below the top navigation bar.
 			player_page.veriySearchBoxLocation();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			///8.Validate the search field is display at the top right of the UI page below the top navigation bar.
 			top_bar_helper.verifySearchFieldDisplayedAtTopRight();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 				
 			///10.Validate the number of results that displayed in the breadcrumb is indeed the actual number of results you received.
 			search_window.verifySearchResultNumberAsWrittenAsGust();
@@ -220,7 +220,7 @@ public class TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST 
 			}
 	
 			//13.search:
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			player_page.verifySearchForRecordingExist(recording_to_search);
 		
 			//14.Validate the number of results that displayed in the breadcrumb is indeed the actual number of results you received.

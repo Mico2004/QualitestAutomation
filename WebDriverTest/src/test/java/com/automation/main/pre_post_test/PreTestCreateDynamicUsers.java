@@ -16,7 +16,7 @@ import org.omg.PortableInterceptor.AdapterManagerIdHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -112,7 +112,7 @@ public class PreTestCreateDynamicUsers {
 	{
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		String login_url = driver.getCurrentUrl();
 		String university_name  = login_url.split("/")[2].substring(0,  login_url.split("/")[2].length() - 12);
@@ -120,11 +120,11 @@ public class PreTestCreateDynamicUsers {
 		// 2. Click on user builder href link
 		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(10000);
 		
 		// 3. Click on create course href link 
 		driver.switchTo().frame(0);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 4. Create four dynamic users
 		
@@ -147,12 +147,12 @@ public class PreTestCreateDynamicUsers {
 			}
 			
 			mange_adhoc_users_page.clickOnNewUser();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			create_new_user_window.createNewUser(user_name, user_name, "abc@com.com", "111", "111");
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			driver.switchTo().alert().accept();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 		}
 		

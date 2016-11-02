@@ -3,7 +3,7 @@ package com.automation.main.copy_recording;
 
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -96,7 +96,7 @@ public class TC15535CopyOneRecording {
 		// 2.login as instructor
 		tegrity.loginCourses("User1");// log in courses page
 		driver.navigate().to("https://" + driver.getCurrentUrl().split("/")[2] + "/api/courses/Active");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		String xml_source_code = driver.findElement(By.tagName("body")).getText();
 		driver.quit();
 
@@ -124,7 +124,7 @@ public class TC15535CopyOneRecording {
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		//course.selectFirstCourse(record);
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		//5.take recorder name for later 
 		String original_recorder_name = record.getFirstRecordingByName();/// take recorder name for later 
@@ -134,17 +134,17 @@ public class TC15535CopyOneRecording {
 //
 //		//7.return to recording page and than to course page	
 //		copy.clickOnCancelButton(record);
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(2000);
 //		
 //		record.returnToCourseListPage();
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(2000);
 //		//8. Verify Only courses where this USER signed as INSTRUCTOR are displayed in "Course List"
 //		course.selectFirstCourse(record);
 
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenCopy();// verify copy menu
 		copy=PageFactory.initElements(driver,CopyMenu.class);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		List<String> course_list  = copy.getCourseList();
 		int course_number= course_list.size(); 
 		int count_instructors= course.patternAppearenceinString(xml_source_code,"<CurrentUserRole>Instructor</CurrentUserRole>");
@@ -165,7 +165,7 @@ public class TC15535CopyOneRecording {
 			System.out.println("number Of count_instructors role equals Number Of courses");
 			ATUReports.add("all courses assigned as instructors","xml file" ,"num of instructors:"+count_instructors,"num of instructors:"+course_number, LogAs.PASSED, null);        
 			// driver.navigate().back();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 
 		}
 		else
@@ -184,7 +184,7 @@ public class TC15535CopyOneRecording {
 		System.out.println(destination_course_name);
 		//11.select target course
 		copy.selectTargetCourseFromCourseList(destination_course_name);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		//12.verify background color of copy menu
 		System.out.println(
 				copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]"))));
@@ -203,10 +203,10 @@ public class TC15535CopyOneRecording {
 		record.returnToCourseListPage();
 		//course.course_list.get(1).click();
 		course.selectFirstCourse(record);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 
 		//driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 		record.clickOnTheFirstCaptherWithOutTheExpand();
@@ -215,12 +215,12 @@ public class TC15535CopyOneRecording {
 
 		//16.return to course page
 		player_page.returnToCoursesPage(course);/// return to course list page
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 
 		//17.click on course and go to recording page
 		course.selectCourseByName(destination_course_name);
 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		String first_recording = driver.findElement(By.id("Recording1")).getText();
 
 		//fill recording list with data :duration,date,names,recorder names
@@ -233,7 +233,7 @@ public class TC15535CopyOneRecording {
 		record.verifyRecordingDisplayedCorrectly(first_recording);
 		
 		//19.verify recording is expandable
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		//20.verify date,duration,recorder name as original
 		record.verifyDate(driver.findElement(By.id("RecordingDate1")).getText());
@@ -252,19 +252,19 @@ public class TC15535CopyOneRecording {
 		record.convertRecordingsListToNames();
 		record.verifyRecordingSortedByTitle(record.recording_list_names);
 		record.pressViewButtonAndSelect("Date");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 
 		record.convertRecordingsListToDate();/// check sort by date
 		record.verifyRecordingSortedByDate(record.recordings_list_date_string);
 		record.pressViewButtonAndSelect("Duration");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 
 		record.convertRecordingsListToDuration();/// check sort by date
 		record.verifyRecordingSortedByDuration(record.recording_list_duration_string);
 			
 		//click on courses
 		record.returnToCourseListPage();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		//select the target course
 		
@@ -272,20 +272,20 @@ public class TC15535CopyOneRecording {
 		
 		//course.course_list.get(1).click();
 		//course.selectFirstCourse(record);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 
 		record.clickOnTheFirstCaptherWithOutTheExpand();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		//23.dispaly recording
 		player_page.verifyTimeBufferStatusForXSec(5);// check source display
 
 
 		//24.Click "Courses" link at breadcrumbs
 		player_page.returnToCoursesPage(course);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 
 		//25.sign-out
 		record.signOut();// sign out
@@ -294,15 +294,15 @@ public class TC15535CopyOneRecording {
 
 		//initialize course object
 		initializeCourseObject();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		//27.Select destination course
 		course.selectCourseByName(destination_course_name);
 		//29."Recording Chapters" are expanded
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		///30.Click any chapter:verify plays correctly 
 		player_page.verifyTimeBufferStatusForXSec(5);// check source display
 		

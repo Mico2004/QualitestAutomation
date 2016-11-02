@@ -2,7 +2,7 @@ package com.automation.main.copy_recording;
 
 import java.awt.List;
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -83,18 +83,18 @@ public class TC17370VerifySortingOfCoursesInMoveWindowOfAdittinalContent {
 					initializeCourseObject();
 				    //3.select course
 					course.selectCourseThatStartingWith("Ab");
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(1000);
 					record = PageFactory.initElements(driver, RecordingHelperPage.class);
 					//4.click on  test tab
 					record.clickOnAdditionContentTab();
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(2000);
 					//5.select check box
 	
 			        record.getCheckbox().click();
 					///6.select move menu
 			   
 			        record.clickOnContentTaskThenMove();
-			        Thread.sleep(Page.TIMEOUT_TINY);
+			        Thread.sleep(2000);
 			        
 				    //7.verify courses are displayed in alphabetical order
 					record.verifyRecordingSortedByTitle(copy.getCourseList());///verify sorted by title

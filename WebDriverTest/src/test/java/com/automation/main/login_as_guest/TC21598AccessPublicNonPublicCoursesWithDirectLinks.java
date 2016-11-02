@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -45,7 +45,6 @@ import java.text.DateFormat;
 import java.util.Date;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
-import junitx.util.PropertyManager;
 
 public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 	// Set Property for ATU Reporter Configuration
@@ -152,7 +151,7 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 		tegrity.loginCourses("User1");
 		course.waitForVisibility(course.active_courses_tab_button);
 		// 3.click on course
-		String course_name=course.selectCourseThatStartingWith(PropertyManager.getProperty("course1"));
+		String course_name=course.selectCourseThatStartingWith("Ab");
 		// 4.to course settings
 		record.waitForVisibility(record.course_tasks_button);
 		record.toCourseSettingsPage();
@@ -162,7 +161,7 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 		record.returnToCourseListPage();
 		course.waitForVisibility(course.sign_out);
        //7.Copy the URL
-	   Thread.sleep(Page.TIMEOUT_TINY);
+	   Thread.sleep(3000);
        String current_url=driver.getCurrentUrl();   
        //8.sign out
        course.signOut();
@@ -186,7 +185,7 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 		tegrity.loginCourses("User1");
 		course.waitForVisibility(course.active_courses_tab_button);
 		// 13.click on course
-		String course_name2=course.selectCourseThatStartingWith(PropertyManager.getProperty("course1"));
+		String course_name2=course.selectCourseThatStartingWith("Ab");
 		// 14.to course settings
 		record.waitForVisibility(record.course_tasks_button);
 		record.toCourseSettingsPage();
@@ -206,7 +205,7 @@ public class TC21598AccessPublicNonPublicCoursesWithDirectLinks {
 		course.selectCourseByName(course_name2);
 		record.waitForVisibility(record.getCheckbox());
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 				
 		// 19.player is working
 		record.clickOnTheFirstCaptherWithOutTheExpand();

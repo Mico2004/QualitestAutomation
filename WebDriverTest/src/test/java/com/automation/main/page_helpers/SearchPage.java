@@ -7,17 +7,12 @@ import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
-
-import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
-import com.thoughtworks.selenium.condition.Not;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -34,6 +29,7 @@ public class SearchPage extends Page {
 	}
 	
 	@FindBy(css = ".loading-spinner-img")public WebElement loading_spinner_image;
+	@FindBy(css =".loading-spiner")public WebElement loading_spinner;
 	@FindBy(xpath = ".//*[@id='main']/div[2]/div[1]/div[2]/span/a")public WebElement title_first_chapter;
 	@FindBy(id = "tegrityBreadcrumbsBox")public  WebElement breadcrumbs_box;
 	@FindBy(css = ".video-thumbnail")public  List<WebElement> video_thumbnails_list;
@@ -54,7 +50,7 @@ public class SearchPage extends Page {
 	// This function verify that loading spinner image displayed
 	public void verifyLoadingSpinnerImage() throws InterruptedException {
 
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(500);
 			if(isElemenetDisplayed(By.cssSelector(".loading-spinner-img"))){	
 				System.out.println("Verfied loading spinner image displayed.");
 				ATUReports.add("Verfied loading spinner image displayed.", "True.", "True.", LogAs.PASSED, null);
@@ -204,10 +200,11 @@ public class SearchPage extends Page {
 	// Verify that 
 	// The next result display below the current result in case there is next result.
 	public void verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult() {
-		if(video_thumbnails_list.size()>1) {
+		int listSize = video_thumbnails_list.size();
+		if(listSize>1) {
 			boolean not_correct = false;
 			int prepoint = video_thumbnails_list.get(0).getLocation().y;
-			for(int i=1; i<video_thumbnails_list.size()-1; i++) {
+			for(int i=1; i<listSize-1; i++) {
 				int currpoint = video_thumbnails_list.get(i).getLocation().y;
 				if(prepoint < currpoint) {
 					prepoint = currpoint;
@@ -271,11 +268,11 @@ public class SearchPage extends Page {
 	
 	// This function waits until spinner image disappear
 	public void waitUntilSpinnerImageDisappear() throws InterruptedException {
-		for(int i=0; i<20; i++) {
+		for(int i=0; i<30; i++) {
 			try {
-				Thread.sleep(Page.TIMEOUT_TINY);
-				if(loading_spinner_image.isDisplayed()) {
-					Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
+				if(loading_spinner.isDisplayed()) {
+					Thread.sleep(100);
 				} else {
 					break;
 				}
@@ -290,12 +287,12 @@ public class SearchPage extends Page {
 		for(int i=0; i<10; i++) {
 			try {
 				video_thumbnails_list.get(index-1).click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				System.out.println("Clicked on target icon of recording in index: " + index);
 				ATUReports.add("Clicked on target icon of recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
 				return;
 			} catch(Exception msg) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
 		
@@ -309,12 +306,12 @@ public class SearchPage extends Page {
 			try {
 				//title_urls_list.get(index-1).click();
 				title_first_chapter.click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				System.out.println("Clicked on target title recording in index: " + index);
 				ATUReports.add("Clicked on target title recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
 				return;
 			} catch(Exception msg) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
 		
@@ -328,12 +325,12 @@ public class SearchPage extends Page {
 			try {
 
 				recording_link_titles_list.get(index-1).click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				System.out.println("Clicked on target recording title of recording in index: " + index);
 				ATUReports.add("Clicked on target recording title of recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
 				return;
 			} catch(Exception msg) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
 		
@@ -421,7 +418,7 @@ public class SearchPage extends Page {
 	//The breadcrumb structure displayed as follows: "> Admin Dashboard > Courses > Course name > X results found for: "search_criterion". (X seconds)".
 	public void verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfoundForAdminDashboard(String course_name, String searching_criterion) throws InterruptedException {
 		waitForVisibility(breadcrumbs_box);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		String structure_displayed = breadcrumbs_box.getText();
 			
 		String[] splited_structure_displayed = structure_displayed.split(">");
@@ -504,14 +501,16 @@ public class SearchPage extends Page {
 		String structure_displayed = breadcrumbs_box.getText();
 			
 		String[] splited_structure_displayed = structure_displayed.split(">");
+	
+		String[] splited_third_structure_displayed = splited_structure_displayed[2].trim().split(" ");
 		
-		if(splited_structure_displayed.length <3) {
+		if(splited_third_structure_displayed.length <3) {
 			String array = splited_structure_displayed.toString();
 			System.out.println("the error breadcrmbs is:" + array);
-			ATUReports.add("the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, null);
+			ATUReports.add("the error breadcrmbs is:" + array, "True.", "False.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return;
 		}
-		String[] splited_third_structure_displayed = splited_structure_displayed[2].trim().split(" ");
+		
 		String third_structure = splited_third_structure_displayed[0] + " results found for: \"" + searching_criterion + "\". " + splited_third_structure_displayed[splited_third_structure_displayed.length-2] +" seconds)";
 
 			
@@ -529,13 +528,19 @@ public class SearchPage extends Page {
 	
 	// Verify that the bookmark icon is displayed in search result in target index
 	public void verifyBookmarkIconDisplayedIndexSearchResult(int index) {
-
+		
+		try{
 		if(driver.findElements(By.cssSelector(".linkToFocus>.ng-binding")).get(index-1).getCssValue("background-image").contains("icon_assets.png")) {
 			System.out.println("Verifed that bookmark icon displayed in index: " + index);
 			ATUReports.add("Verifed that bookmark icon displayed in index: " + index, "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verifed that bookmark icon displayed in index: " + index);
 			ATUReports.add("Verifed that bookmark icon displayed in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			ATUReports.add("Not verifed that bookmark icon displayed in index: " +e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
 		}
 	}
 	
@@ -579,18 +584,6 @@ public class SearchPage extends Page {
 		System.out.println("Not Verifed that the result number is as written at the breadcrumbs.");
 		ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}		
-		
-	}
-	
-	public void waitResultToLoad(){
-		try{
-		WebDriverWait wait=new WebDriverWait(driver, 15);
-		wait.until(ExpectedConditions.textToBePresentInElement(breadcrumbs_box, "results found for:"));
-		Thread.sleep(Page.TIMEOUT_MEDIUM);
-		}catch(Exception e){
-			ATUReports.add("Search Page wasn't load properly", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-		}
 		
 	}
 	

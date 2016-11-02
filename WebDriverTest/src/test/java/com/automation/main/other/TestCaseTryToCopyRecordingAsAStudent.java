@@ -11,7 +11,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -140,7 +140,7 @@ public class TestCaseTryToCopyRecordingAsAStudent {
 		// 6. Click "Student Recordings" tab.
 		record.clickOnStudentRecordingsTab();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 7. Select any recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);

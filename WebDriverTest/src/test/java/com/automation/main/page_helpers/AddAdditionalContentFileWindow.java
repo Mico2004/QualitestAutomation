@@ -8,9 +8,10 @@ import java.io.File;
 import java.sql.Driver;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -36,7 +37,6 @@ public class AddAdditionalContentFileWindow extends Page {
 	@FindBy(id = "UploadFile")
 	public WebElement select_upload_additional_file;
 	@FindBy(id = "AddFileButton")
-	
 	public WebElement add_additional_file_button;
 	@FindBy(xpath = "//*[@id=\"addFileWindow\"]/form/div[1]/small[1]/b")
 	public WebElement add_additional_file_selected_name;
@@ -63,7 +63,7 @@ public class AddAdditionalContentFileWindow extends Page {
 	
 	/// verify Add Additional Content File title
 	public void verifyAdditionalContentFileWindowTitle() throws InterruptedException {
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		String val = additional_content_file_title.getText();
 		if (val.equals("Add Additional Content File")) {
 			System.out.println("Add Additional Content File window title verified ");
@@ -99,11 +99,11 @@ public class AddAdditionalContentFileWindow extends Page {
 
 		String file_name = path.substring(51);
 		//select_upload_additional_file.click();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 
 		uploadFile(path);
 		System.out.println("file selected successfully");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		verifyAdditionalContentFileNamePriorToSelectButton();/// verify its
 		clickElementJS(add_additional_file_button);			/// location
 		verifyProgressBar();
@@ -114,7 +114,7 @@ public class AddAdditionalContentFileWindow extends Page {
 
 	/// verify Add Additional Content File info
 	public void verifyAdditionalContentFileWindowInfo() throws InterruptedException {
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		String val = additional_content_file_info.getText();
 		if (val.equals("Select a file to upload as additional content to this course.")) {
 			System.out.println("Add Additional Content File window info verified ");
@@ -129,7 +129,7 @@ public class AddAdditionalContentFileWindow extends Page {
 
 	// verify selected file displayed in search box
 	public void verifyAdditionalContentFileName(String name) throws InterruptedException {
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		String val = add_additional_file_selected_name.getText();
 		if (val.equals("name of selected file is correctly displayed in inputbox.")) {
 			System.out.println("name of selected file is correctly displayed in inputbox.");
@@ -143,7 +143,7 @@ public class AddAdditionalContentFileWindow extends Page {
 
 	// verify selected file name displayed prior to select button
 	public void verifyAdditionalContentFileNamePriorToSelectButton() throws InterruptedException {
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		Point file_text = add_additional_file_selected_name.getLocation();
 		Point select_button = select_upload_additional_file.getLocation();
 
@@ -161,7 +161,7 @@ public class AddAdditionalContentFileWindow extends Page {
 
 	// verify location of progressbar
 	public void verifyProgressBar() throws InterruptedException {
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(500);
 		if(isElemenetDisplayed(By.xpath("//*[@id=\"addFileWindow\"]/form/div[1]/div[4]"))){
 			Point bar=upload_progress_bar.getLocation();
 			Point Upload = select_upload_additional_file.getLocation();
@@ -183,10 +183,10 @@ public class AddAdditionalContentFileWindow extends Page {
 
 		String file_name = path.substring(51);
 		//select_upload_additional_file.click();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		uploadFile(path);
 		System.out.println("file selected successfully");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		verifyAdditionalContentFileNamePriorToSelectButton();/// verify its
 		clickElementJS(add_additional_file_button);
 	
@@ -216,7 +216,7 @@ public class AddAdditionalContentFileWindow extends Page {
 			String file_name = path.substring(51);
 			//select_upload_additional_file.click();
 			uploadFile(path);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(500);
 			System.out.println("file selected successfully");
 			verifyAdditionalContentFileNamePriorToSelectButton();/// verify its																	/// location
 			add_additional_file_button.click();/// add
@@ -230,7 +230,7 @@ public class AddAdditionalContentFileWindow extends Page {
 			String file_name = path.substring(51);
 			//select_upload_additional_file.click();
 			uploadFile(path);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(500);
 			System.out.println("file selected successfully");
 			verifyAdditionalContentFileNamePriorToSelectButton();/// verify its																	/// location
 			add_additional_file_button.click();/// add
@@ -243,7 +243,7 @@ public class AddAdditionalContentFileWindow extends Page {
 		
 		// verify selected file name displayed prior to select button
 		public void verifyAdditionalContentButtonsLocation() throws InterruptedException {
-			//Thread.sleep(Page.TIMEOUT_TINY);
+			//Thread.sleep(1500);
 			Point file_text = add_additional_file_selected_name.getLocation();
 			Point select_button = select_upload_additional_file.getLocation();
             Point cancel=cancel_additional_file_button.getLocation();
@@ -341,5 +341,18 @@ public class AddAdditionalContentFileWindow extends Page {
 			
 		
 		}
+
 		
+		
+		public void clickEscOnKeyBoardToCloseCopyWindow() throws InterruptedException {
+			try {
+				cancel_additional_file_button.sendKeys(Keys.ESCAPE);
+				ATUReports.add("Clicked on ESC button.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			} catch (Exception e) {
+				ATUReports.add("Fail click on ESC button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+			Thread.sleep(3000);
+		}
 }

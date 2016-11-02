@@ -4,7 +4,7 @@ package com.automation.main.private_courses;
 import java.util.Date;
 
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -79,7 +79,6 @@ public class TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
 		
 		ATUReports.setWebDriver(driver);
 
@@ -172,7 +171,7 @@ public class TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording {
 		// 10. Click the "Move Recording" button.
 		move_window.clickOnMoveRecordings();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 11. "Recording has been queued for move" message box is displayed.
 		// 12. Click the "OK" button.
@@ -182,7 +181,7 @@ public class TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording {
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
 		// 13. When the "Move" process is finished, verify that recording is not displayed ;private course.
-		record.checkStatusExistenceForMaxTTime(360);
+		record.waitUntilFirstRecordingBeingMovedFromStatusDissaper();
 		
 		record.verifyThatTargetRecordingNotExistInRecordingList(selected_recording_name);
 		
@@ -206,7 +205,7 @@ public class TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording {
 		player_page.returnToCoursesPage(course);
 //		course.goToCoursesPage();
 //		driver.navigate().back();
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(1000);
 //		record.returnToCourseListPage();
 		
 		// 19. Select a non private course (abc).

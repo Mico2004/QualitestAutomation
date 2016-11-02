@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -58,7 +58,7 @@ public class EditRecording extends Page {
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
 			
@@ -66,7 +66,7 @@ public class EditRecording extends Page {
 		while(!isElementPresent(By.id("PlayButton_Img")) && i < 20) {
 				i++;
 				System.out.println("element is not visable");
-				Thread.sleep(Page.TIMEOUT_TINY);	
+				Thread.sleep(1500);	
 		}
 		
 		System.out.println("Wait that the element edit chapter will click from the list.");
@@ -87,7 +87,7 @@ public class EditRecording extends Page {
 		ATUReports.add("The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
 		
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		String name = ChapterName.getAttribute("value");
 		
@@ -113,7 +113,7 @@ public class EditRecording extends Page {
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
 		
@@ -121,7 +121,7 @@ public class EditRecording extends Page {
 			while(!isElementPresent(By.id("PlayButton_Img")) && i < 20) {
 					i++;
 					System.out.println("element is not visable");
-					Thread.sleep(Page.TIMEOUT_TINY);	
+					Thread.sleep(1500);	
 			}
 			
 			System.out.println("Wait that the element edit chapter will click from the list.");
@@ -142,13 +142,13 @@ public class EditRecording extends Page {
 		
 		
 		//changing the name of the title
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(4000);
 		ChapterName.clear();
 		ChapterName.sendKeys(target_name);
 		
 		// click on the apply
 		clickElement(ApplyButton);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		
 		System.out.println("Click on the apply.");
@@ -166,9 +166,9 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
 				driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 			}
-			else Thread.sleep(Page.TIMEOUT_TINY);
+			else Thread.sleep(3000);
 		}
 		
 		//return to the course
@@ -189,7 +189,7 @@ public class EditRecording extends Page {
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
 		
@@ -197,13 +197,13 @@ public class EditRecording extends Page {
 		while(!isElementPresent(By.id("PlayButton_Img")) && i<20) {
 			  i++;
 			System.out.println("element is not visable");
-			Thread.sleep(Page.TIMEOUT_TINY);	
+			Thread.sleep(1500);	
 		}
 		
 		System.out.println("Wait that the element add closed caption will click from the list.");
 		ATUReports.add("Wait that the element add closed caption will click from the list.", "True.", "True.", LogAs.PASSED, null);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
 			break;
@@ -213,7 +213,7 @@ public class EditRecording extends Page {
 		record.waitForVisibility(listButtons.get(4));
 		clickElement(listButtons.get(4));
 		clickElement(listButtons.get(4));
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 	
 		System.out.println("The element add caption was clicked");
@@ -223,9 +223,9 @@ public class EditRecording extends Page {
 		UploadFile.sendKeys(path);
 
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		clickElementJS(AddCaptioningButton);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		System.out.println("The file close caption was added.");
 		ATUReports.add("The file close caption was added.", "True.", "True.", LogAs.PASSED, null);
@@ -246,7 +246,7 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
 				driver.findElement(By.id("AddCaptioning")).click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				countOfErrors++;
 				if(countOfErrors >= 4) {
 					System.out.println("The error message is return more then 3 times.");
@@ -254,7 +254,7 @@ public class EditRecording extends Page {
 					Assert.assertTrue(false);
 				}
 			}
-			else Thread.sleep(Page.TIMEOUT_TINY);
+			else Thread.sleep(3000);
 		}
 	
 	}
@@ -272,7 +272,7 @@ public class EditRecording extends Page {
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
 		
@@ -281,7 +281,7 @@ public class EditRecording extends Page {
 		while(!isElementPresent(By.id("PlayButton_Img")) && index< 20) {
 			index++;
 				System.out.println("element is not visable");
-				Thread.sleep(Page.TIMEOUT_TINY);	
+				Thread.sleep(2000);	
 		}
 			
 		System.out.println("Wait that the element edit chapter will click from the list.");
@@ -299,13 +299,13 @@ public class EditRecording extends Page {
 		System.out.println("The element edit chapter was clicked");
 		ATUReports.add("The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		ChapterName.clear();
 		ChapterName.sendKeys(target_name);
 		
 		clickElement(ApplyButton);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
@@ -320,9 +320,9 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
 				driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 			}
-			else Thread.sleep(Page.TIMEOUT_TINY);
+			else Thread.sleep(3000);
 		}
 		
 		//return to the course
@@ -343,7 +343,7 @@ public class EditRecording extends Page {
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
 		
@@ -351,7 +351,7 @@ public class EditRecording extends Page {
 		while(!isElementPresent(By.id("PlayButton_Img")) && index< 20) {
 			index++;
 				System.out.println("element is not visable");
-				Thread.sleep(Page.TIMEOUT_TINY);	
+				Thread.sleep(1500);	
 		}
 		
 		System.out.println("Wait the the element edit chapter will click from the list.");
@@ -365,7 +365,7 @@ public class EditRecording extends Page {
 		record.waitForVisibility(listButtons.get(1));
 		clickElement(listButtons.get(1));
 		clickElement(listButtons.get(1));
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		System.out.println("The element edit chapter was Clicked");
 		ATUReports.add("The element edit chapter was Clicked.", "True.", "True.", LogAs.PASSED, null);
@@ -374,7 +374,7 @@ public class EditRecording extends Page {
 		NewKeywordButton.sendKeys(target_keyword);
 		
 		clickElement(ApplyButton);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){	
@@ -388,9 +388,9 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
 				driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 			}
-			else Thread.sleep(Page.TIMEOUT_TINY);
+			else Thread.sleep(3000);
 		}
 		
 		//return to the course

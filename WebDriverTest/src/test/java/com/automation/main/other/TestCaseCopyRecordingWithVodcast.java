@@ -10,7 +10,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -143,9 +143,9 @@ public class TestCaseCopyRecordingWithVodcast {
 //		//driver.navigate().to("https://reg-qabr.tegrity.com/#/recording/ebad7e97-fc99-4c94-ae42-afb528790d77?startTime=0");
 //		driver.navigate().to("http://reg-qabr.tegrity.com/#/recording/831010e2-4f22-4e45-9e2f-a8d344985152?startTime=0&loadUser=1");
 //	
-//		//Thread.sleep(Page.TIMEOUT_TINY);
+//		//Thread.sleep(10000);
 //		//wait.until(ExpectedConditions.alertIsPresent());
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(10000);
 //		//player_page.verifyTimeBufferStatusForXSec(10);
 //		driver.switchTo().alert().accept();
 //		
@@ -160,11 +160,11 @@ public class TestCaseCopyRecordingWithVodcast {
 //	        System.out.println(alertMessage);
 		
 		
-		//Thread.sleep(Page.TIMEOUT_TINY);
+		//Thread.sleep(10000);
 //		for (String handle : driver.getWindowHandles()) {
 //		    driver.switchTo().window(handle);
 //		    driver.switchTo().f
-//		    Thread.sleep(Page.TIMEOUT_TINY);
+//		    Thread.sleep(2000);
 //		    System.out.println(driver.getCurrentUrl());
 //		    System.out.println(driver.getTitle());
 //		    System.out.println(driver.getWindowHandle());
@@ -178,7 +178,7 @@ public class TestCaseCopyRecordingWithVodcast {
 		
 		//for(int i = 0; i < 60; i++) {
 			
-			//Thread.sleep(Page.TIMEOUT_TINY);
+			//Thread.sleep(1000);
 //			System.out.println(driver.getCurrentUrl());
 //		    System.out.println(driver.getTitle());
 //		    System.out.println(driver.getWindowHandle());
@@ -188,7 +188,7 @@ public class TestCaseCopyRecordingWithVodcast {
 //	    //14. Click "Sign Out" link.
 //	    driver.close();
 //	
-//	    Thread.sleep(Page.TIMEOUT_TINY);
+//	    Thread.sleep(2000);
 //	    
 //	    for (String handle : driver.getWindowHandles()) {
 //		    driver.switchTo().window(handle);
@@ -201,7 +201,7 @@ public class TestCaseCopyRecordingWithVodcast {
 ////	    System.out.println(driver.getTitle());
 ////	    System.out.println(driver.getWindowHandle());
 //	    
-//	    Thread.sleep(Page.TIMEOUT_TINY);
+//	    Thread.sleep(2000);
 //	    
 //	    record.signOut();
 //	    
@@ -231,12 +231,12 @@ public class TestCaseCopyRecordingWithVodcast {
 ////	    System.out.println(driver.getTitle());
 ////	    System.out.println(driver.getWindowHandle());
 //	    
-//	    Thread.sleep(Page.TIMEOUT_TINY);
+//	    Thread.sleep(2000);
 //	    
 //	    String url_of_podcast_student = podcast_page.getTargetPodcastHref(first_recording_title);
 //	    podcast_page.clickOnTargetPodcast(first_recording_title);
 //	    
-//	    Thread.sleep(Page.TIMEOUT_TINY);
+//	    Thread.sleep(5000);
 //	
 //	    player_page.verifyPartiallyUrl(url_of_podcast_student.split("/")[5]);
 

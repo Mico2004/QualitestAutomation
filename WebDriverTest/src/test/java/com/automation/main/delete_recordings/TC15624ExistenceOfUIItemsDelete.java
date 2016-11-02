@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -25,16 +25,11 @@ import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
 import com.beust.jcommander.Strings;
 import atu.testng.reports.ATUReports;
-import atu.testng.reports.listeners.ATUReportsListener;
-import atu.testng.reports.listeners.ConfigurationListener;
-import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
-
-@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 	public class TC15624ExistenceOfUIItemsDelete {
 
 		// Set Property for ATU Reporter Configuration
@@ -113,7 +108,7 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 			course.selectCourseThatStartingWith("Ab");
 			
 			//4.a.verify move button is grey
-			record.verifyRecordingMenuColor(record.move_button);
+			record.verifyRecordingMenuColor(record.delete_button);
 			//4.b.verify move button is disabled
 			record.verifyDisabledMenu();
 			
@@ -125,7 +120,7 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 		
 			//7.click all check box
 			record.checkall.click();// make all checkboxes marked
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			record.verifyAllCheckedboxSelected();
 			
@@ -150,11 +145,11 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 			
 			
 			record.toDeleteMenu();
-	        Thread.sleep(Page.TIMEOUT_TINY);
+	        Thread.sleep(2000);
 			//10.verify Delete title
           
             delete.verifyDeleteMenuTitle();
-		    Thread.sleep(Page.TIMEOUT_TINY);
+		    Thread.sleep(2000);
 			//11.verify menu color
 		    delete.verifyDeleteColor(record);
 			///12.verify text

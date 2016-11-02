@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -125,7 +125,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	@Test(description = "TC 18877 Validate The Source Type As Link In Search Field On The All Courses Level")
@@ -143,7 +143,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		
 		// Upload additional content link
@@ -172,14 +172,14 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);	
+			Thread.sleep(3000);	
 			
 			// 3. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
 			
 			// 4. Search the "Link" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(new_additional_link_url);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 4.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
@@ -235,7 +235,7 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 			
 			// 6. Click on title of the link. 
 			search_page.title_urls_list.get(0).click();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 			// 6.1. The website open in new Tab/window.
 			is_website_opened_in_new_tab = false;

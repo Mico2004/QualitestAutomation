@@ -4,7 +4,7 @@ package com.automation.main.course_detailes_content_page;
 import java.util.Date;
 import java.util.List;
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -148,16 +148,16 @@ public class TC17050ValidateUserSeperationWhenWatchingRecording {
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		top_bar_helper.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 
 		// 2. Login as an INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 3. Click on a certain course.
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 			
 		// 4. Click on a certain recording.
 		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
@@ -176,20 +176,20 @@ public class TC17050ValidateUserSeperationWhenWatchingRecording {
 			
 		// 7. Sign out.
 		top_bar_helper.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 			
 		// 8. Login as another STUDENT/INSTRUCTOR user who is enrolled to the same course.
 		tegrity.loginCourses("User4");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 			
 		// 9. Open the recording course you just watch.
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 			
 		// 10. Click on the recording you just watched.
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 			
 		// 10.1. The "> Resume watching box isn't displayed.
 		record.verifyWebElementNotDisplayed(record.list_of_resume_buttons.get(0), "Resume box");

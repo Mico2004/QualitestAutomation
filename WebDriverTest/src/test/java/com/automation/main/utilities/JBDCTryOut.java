@@ -18,14 +18,14 @@ import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.PlayerPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.sun.jna.win32.W32APITypeMapper;
-import com.thoughtworks.selenium.webdriven.commands.IsAlertPresent;
+
 
 import org.testng.annotations.BeforeClass;
 
 import java.sql.*;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -170,9 +170,9 @@ public class JBDCTryOut {
 		
 // 3.Create 600 Pairs of instructors and students
 //  Click on create course href link 
-		Thread.sleep(Page.TIMEOUT_TINY);		
+		Thread.sleep(6000);		
 		driver.switchTo().frame(0);		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 				
 // 4. Create 2 dynamic users
 		/*
@@ -186,16 +186,16 @@ public class JBDCTryOut {
 			} 
 			
 			mange_adhoc_users_page.clickOnNewUser();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(4000);
 			
 			create_new_user_window.createNewUser(user_name, user_name, "abc@com.com", "111", "111");
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			try{
 			driver.switchTo().alert().accept();
 			}catch(Exception e){
 				
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2500);
 			
 		}
 	}
@@ -207,13 +207,13 @@ public class JBDCTryOut {
 	
 	// 6. go to Manage course builder
 
-	Thread.sleep(Page.TIMEOUT_TINY);
+	Thread.sleep(7000);
 	
 	
 	
 	// 2. Click on course builder href link
 	admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-	Thread.sleep(Page.TIMEOUT_TINY);
+	Thread.sleep(4000);
 	driver.switchTo().frame(0);	
 
 	
@@ -225,12 +225,12 @@ public class JBDCTryOut {
 		mange_adhoc_course_enrollments.clickOnNewCourse();
 		create_new_course_window.createNewCourse("nameReportCourse"+z, "idReportCourse"+z);
 		mange_adhoc_course_enrollments.setFilterSearchBox("idReportCourse"+z);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		mange_adhoc_course_enrollments.clickOnFilterButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(4000);
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 		mangage_adhoc_courses_membership_window.searchForUser("test2ReportIns"+z);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
 		mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 		mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse("test2ReportIns"+z);
@@ -241,24 +241,24 @@ public class JBDCTryOut {
 	
 		// enroll general instructor to course		
 		mangage_adhoc_courses_membership_window.searchForUser("mickaelins");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
 		mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 		mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse("test2ReportIns"+z);
 		mangage_adhoc_courses_membership_window.clickOnOkButton();
 		// enroll instructor to bank course
 		mange_adhoc_course_enrollments.setFilterSearchBox("BankValidRecordingawsserverautomation1");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		mange_adhoc_course_enrollments.clickOnFilterButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(4000);
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 		mangage_adhoc_courses_membership_window.searchForUser("test2ReportIns"+z);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(10000);
 		mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
 		mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 		mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse("test2ReportIns"+z);
 		mangage_adhoc_courses_membership_window.clickOnOkButton();	
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		
 	}
 	
@@ -353,7 +353,7 @@ public class JBDCTryOut {
 	//ownership change	
 		int i=1;
      String past_course_a=course.selectCourseThatStartingWith("PastCourseA");
-	    Thread.sleep(Page.TIMEOUT_TINY);
+	    Thread.sleep(3000);
 
 	    ///check for free status checkbox for edit properties
 	    while(record.recordingBeingEditedStatus(driver.findElement(By.id("RecordingStatus"+Integer.toString(i))))==true)
@@ -364,13 +364,13 @@ public class JBDCTryOut {
 	
 
 		record.toEditRecordingPropertiesMenu();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		erp_window.changeOwner("User1");
 		
 		erp_window.save_button.click();
 		
 
-	  Thread.sleep(Page.TIMEOUT_TINY);
+	  Thread.sleep(11000);
 	
 		System.out.println("before ok");
     confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
@@ -394,13 +394,13 @@ public class JBDCTryOut {
  	
 
  		record.toEditRecordingPropertiesMenu();
- 		Thread.sleep(Page.TIMEOUT_TINY);
+ 		Thread.sleep(2000);
  		erp_window.changeOwner("User1");
  		
  		erp_window.save_button.click();
  		
 
- 	  Thread.sleep(Page.TIMEOUT_TINY);
+ 	  Thread.sleep(11000);
  	
  		System.out.println("before ok");
         confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
@@ -410,45 +410,45 @@ public class JBDCTryOut {
  		
     	// 1. Login as ADMIN.
  		tegrity.loginAdmin("Admin");
- 		Thread.sleep(Page.TIMEOUT_TINY);
+ 		Thread.sleep(2000);
  		
  		
  		
  		// 2. Click on course builder href link
  		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
  		
- 		Thread.sleep(Page.TIMEOUT_TINY);
+ 		Thread.sleep(10000);
  		
  		// 3. Click on create course href link 
  		driver.switchTo().frame(0);
  		//mange_adhoc_course_enrollments.clickOnNewCourse();
- 		Thread.sleep(Page.TIMEOUT_TINY);
+ 		Thread.sleep(2000);
  		
  		// Search target course name
  		mange_adhoc_course_enrollments.searchAndFilterCourses(past_course_a);
  		
- 		Thread.sleep(Page.TIMEOUT_TINY);
+ 		Thread.sleep(7000);
  	
  		
  		// Click on result first course (the only one) membership button
  		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
  		
  		
- 		Thread.sleep(Page.TIMEOUT_TINY);
+ 		Thread.sleep(2000);
  		mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list,"User1");
  	    System.out.println("removed instructor 1");
- 		Thread.sleep(Page.TIMEOUT_TINY);
+ 		Thread.sleep(1000);
  		// Add selected user to instructor list
  		mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
- 		Thread.sleep(Page.TIMEOUT_TINY);   		
+ 		Thread.sleep(3000);   		
  		mangage_adhoc_courses_membership_window.ok_button.click();
- 		Thread.sleep(Page.TIMEOUT_TINY);
+ 		Thread.sleep(1000);
  	    driver.switchTo().alert().accept();
- 	    Thread.sleep(Page.TIMEOUT_TINY);
+ 	    Thread.sleep(2000);
  	    
  		// Quit browser
 
- 	  Thread.sleep(Page.TIMEOUT_TINY);
+ 	  Thread.sleep(2000);
  	    driver.quit();
    	
 	    */

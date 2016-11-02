@@ -5,7 +5,7 @@ import java.util.Date;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -79,18 +79,9 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 	@BeforeClass
 	public void setup() {
 
-		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-//		
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -142,16 +133,16 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
-		
+		initializeCourseObject();
 		
 		// Preconditions:
 		// 1. Login as Admin.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 2. Validate that "Enable student testing" is checked in "Advance service setting".
 		admin_dash_board_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_student_testing_checkbox, "Enable student testing checkbox");
 		advanced_service_settings_page.clickOnOkbutton();
@@ -161,27 +152,27 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 4. Login as INSTRUCTOR.
 		tegrity.loginCourses("SuperUser");
-		initializeCourseObject();
+		
 		// 5. Click on the course link your about to test.
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 6. Hover over "Course Tasks" drop-down".
 		// 7. Choose "Course settings" option.
 		record.clickOnCourseTaskThenCourseSettings();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 8. Enable all settings in "Course settings" page.
 		course_settings_page.checkAllCourseSettingsCheckboxs();
 		
 		// 9. Click "Ok" button.
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 10. Add Student recordings, Test recordings, Additional content to the course you are about to test.
 		record.returnToCourseListPage();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
 		course.deleteAllRecordingsInCourseStartWith("Ba", 1, record, delete_menu);
@@ -206,15 +197,15 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 13. Click on Course from the 'Active Courses' tab.
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 14. Hover over an available recording.
-		record.moveToElement(record.first_recording_title, driver).perform();
+		record.moveToElementAndPerform(record.first_recording_title, driver);
 		
 		// 15. Click on a recording name.
 		String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// TODO: 15.1. The '>' symbol turns to 'v'.
 	
@@ -261,8 +252,8 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 
 		// 18. Hover a cursor over recording chapter.
 		Point before_hovring = record.video_wraps_of_chapters_of_opened_recording_list.get(0).getLocation();
-		record.moveToElement(record.video_wraps_of_chapters_of_opened_recording_list.get(0), driver).perform();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		record.moveToElementAndPerform(record.video_wraps_of_chapters_of_opened_recording_list.get(0), driver);
+		Thread.sleep(1000);
 		
 		// 18.1. The hovered over chapter becomes a bit bigger in size.
 		Point after_hovring = record.video_wraps_of_chapters_of_opened_recording_list.get(0).getLocation();
@@ -280,7 +271,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 
 		// 19. Click on a recording's title.
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 19.1. Recording collapsed.
 		record.verifyThatRecordingCollapsed();
@@ -298,14 +289,14 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 
 		// 20. Click on a '>' symbol left to recording's title.
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 20.1. Recording expanded.
 		record.verifyThatRecordingExpanded();
 		
 		// 21. Click on a '>' symbol left to recording's title.
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 21.1. Recording collapsed.
 		record.verifyThatRecordingCollapsed();
@@ -316,8 +307,8 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		record.verifyThatBreadcrumbDisplayedCorrectly();
 
 		// 23. Hover over the breadcrumbs link.
-		record.moveToElement(record.breadcrumbs_courses_link, driver).perform();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		record.moveToElementAndPerform(record.breadcrumbs_courses_link, driver);
+		Thread.sleep(1000);
 		
 		// 23.1. The exact link the user has hovered over becomes underlined.
 		if((record.breadcrumbs_courses_link.getCssValue("text-decoration")).equals("underline")) {
@@ -336,18 +327,18 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		// 24. Click on Courses "breadcrumb" link.
 		record.clickElement(record.breadcrumbs_courses_link);
 //		record.returnToCourseListPage();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 25. Click on the course name that you about to test.
 		current_course = course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 26. Validate the course name caption is displayed at the top left corner (Under the "Breadcrumb").
 		record.verifyThatStringIsCourseName(current_course);
 		
 		// 27. Click on "Course Tasks" -> "Course Settings" and check the "Enable student testing (Remote Proctoring mode) checkbox, and click ok.
 		record.clickOnCourseTaskThenCourseSettings();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		course_settings_page.CheckEnableStudentTesting();
 		
 		// 28. Validate the "Start a Recording" button is displayed at the top right of the page.
@@ -355,8 +346,8 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 29. Hover over the "Start a Recording" button.
 		String init_start_recording_button_background = record.getBackGroundColor(record.start_recording_button);
-		record.moveToElement(record.start_recording_button, driver).perform();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		record.moveToElementAndPerform(record.start_recording_button, driver);
+		Thread.sleep(1000);
 		
 		// 29.1. The hint with the link caption appears.
 		record.verifyWebElementHaveTargetAttributeTitle(record.start_recording_button, "Start a Recording");
@@ -379,8 +370,8 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 31. Hover over the "Start a Test" button.
 		String init_start_test_background = record.getBackGroundColor(record.start_test_button);
-		record.moveToElement(record.start_test_button, driver).perform();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		record.moveToElementAndPerform(record.start_test_button, driver);
+		Thread.sleep(1000);
 		
 		// 31.1. The hint with the link caption appears.
 		record.verifyWebElementHaveTargetAttributeTitle(record.start_test_button, "Start a Test");
@@ -410,7 +401,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		//34. Open chosen course.
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 35. Validate that the "Recordings" tab is chosen by defualt.
 		record.verifyThatTargetTypeOfTabIsChosen(0);
@@ -428,7 +419,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 
 		// 39. Hover over "View" element.
 		record.moveToElement(record.view_button, driver).perform();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 39.1. The hint with the name of the menu item is displayed to the user. 
 		record.verifyWebElementHaveTargetAttributeTitle(record.view_button, "View");
@@ -442,7 +433,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 40. Hover over "Course Tasks" element.
 		record.moveToElement(record.course_task_button, driver).perform();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 40.1. The hint with the name of the menu item is displayed to the user. 
 		record.verifyWebElementHaveTargetAttributeTitle(record.course_task_button, "Course Tasks");
@@ -462,7 +453,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 41. Hover over "Recording Tasks" element.
 		record.moveToElement(record.recording_tasks_button, driver).perform();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 41.1. The hint with the name of the menu item is displayed to the user. 
 		record.verifyWebElementHaveTargetAttributeTitle(record.recording_tasks_button, "Recording Tasks");
@@ -484,7 +475,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		// 42.2. All of the recordings checkboxes are checked.
 		record.checkAllCheckBox();
 		record.verifyWebElementSelected(record.check_all_checkbox);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 43. Uncheck the course "select/deselect" checkbox.
 		record.clickElement(record.check_all_checkbox);
@@ -498,11 +489,11 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		// 44. Validate the recordings are sorted from new to old - The recordings are sorted by default date. asc. (after click on view->date. is old to new).
 		record.pressViewButtonAndSelect("Date");
 		record.clickElement(record.searchbox);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		record.verifyRecordingSortedByDate(record.convertRecordingsListToDate());
 		
 		// TODO: 45. Validate the recordings are separated with gray line - Not for automation, recheck it.
-//		Thread.sleep(Page.TIMEOUT_TINY);
+//		Thread.sleep(2000);
 //		
 //		System.out.println(driver.findElement(By.cssSelector(".recordingInfoContainer")));
 //

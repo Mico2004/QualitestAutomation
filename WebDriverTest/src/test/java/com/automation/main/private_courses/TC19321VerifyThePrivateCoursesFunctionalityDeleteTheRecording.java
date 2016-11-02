@@ -4,7 +4,7 @@ package com.automation.main.private_courses;
 import java.util.Date;
 
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -141,7 +141,7 @@ public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
-		course.verifyRecordingsStatusIsClear(PropertyManager.getProperty("User1"), 0,record);
+		
 		// 2. Select the private course.
 		course.selectCourseThatStartingWith(PropertyManager.getProperty("User1"));
 		
@@ -151,7 +151,6 @@ public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
 			course.verifyRecordingsStatusIsClear("Ab", 0,record);
 			course.selectCourseThatStartingWith(PropertyManager.getProperty("User1"));
 		}
-		// Make sure there aren't undeletable recordings in course
 		
 		// 3. Select the recording.
 		String selected_recording_name = record.getFirstRecordingTitle();
@@ -167,7 +166,7 @@ public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
 		delete_menu.clickOnDeleteButton();
 		
 		// 7. Verify that recording is deleted
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		record.verifyThatTargetRecordingNotExistInRecordingList(selected_recording_name);
 		
 		System.out.println("Done.");

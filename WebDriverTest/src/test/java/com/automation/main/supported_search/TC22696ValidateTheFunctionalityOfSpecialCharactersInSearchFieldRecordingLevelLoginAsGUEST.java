@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -189,7 +189,7 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 		// 7.Click on one of the Recording link
 		record.waitForVisibility(record.first_recording);
 		record.clickOnRecordingTitleInIndex(recordNumber);
-		record.clickOnTheCaptherWithOutTheExpandOnTheIdnex(recordNumber);
+		record.clickOnTheCaptherWithOutTheExpandOnTheIndex(recordNumber);
 	
 		// 8.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
@@ -246,7 +246,7 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 	 
 		// 12.Click on one of the Recording link
 		record.clickOnRecordingTitleInIndex(recordNumber);
-		record.clickOnTheCaptherWithOutTheExpandOnTheIdnex(recordNumber);
+		record.clickOnTheCaptherWithOutTheExpandOnTheIndex(recordNumber);
 		// 13.Select the Recording by clicking on one of the chapters
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 	
@@ -285,7 +285,7 @@ public class TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldReco
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 		course.size = course.course_list.size();
 	}
 }

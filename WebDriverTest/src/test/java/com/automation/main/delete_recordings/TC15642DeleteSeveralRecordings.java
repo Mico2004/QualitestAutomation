@@ -5,7 +5,7 @@ package com.automation.main.delete_recordings;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -170,7 +170,7 @@ public class TC15642DeleteSeveralRecordings {
 				compare_recording_list.remove(recording.replaceAll(" ", ""));
 			} catch (Exception msg) {
 				System.out.println("Verified that not selected same recordings displayed in list of recordings.");
-				ATUReports.add("Verify that all selected recordings are displayed in List of Recordings", "All of selected recordings are dipslayed in List of Recordings", "Not all of selected recordings are dipslayed in List of Recordings", LogAs.FAILED, null);
+				ATUReports.add("Verify that all selected recordings are displayed in List of Recordings", "All of selected recordings are dipslayed in List of Recordings", "Not all of selected recordings are dipslayed in List of Recordings", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 			
@@ -182,7 +182,7 @@ public class TC15642DeleteSeveralRecordings {
 			Assert.assertTrue(true);
   		} else {
 			System.out.println("Delete recordings list not same number of recordings as in course recording list.");
-			ATUReports.add("Verify that all selected recordings are displayed in List of Recordings", "All of selected recordings are dipslayed in List of Recordings", "Delete recordings list not same number of recordings as in course recording list.", LogAs.FAILED, null);
+			ATUReports.add("Verify that all selected recordings are displayed in List of Recordings", "All of selected recordings are dipslayed in List of Recordings", "Delete recordings list not same number of recordings as in course recording list.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -190,7 +190,7 @@ public class TC15642DeleteSeveralRecordings {
 		delete_menu.clickOnDeleteButton();
 		
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		// 7. "Delete" window is closed.
 		boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();
@@ -201,7 +201,7 @@ public class TC15642DeleteSeveralRecordings {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Delete window not closed.");
-			ATUReports.add("Delete window is closed", "Success", "Fail", LogAs.FAILED, null);
+			ATUReports.add("Delete window is closed", "Success", "Fail", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -210,7 +210,7 @@ public class TC15642DeleteSeveralRecordings {
 		
 		if(current_recording_list.size() != 0) {
 			System.out.println("Verified that selected recordings is not deleted.");
-			ATUReports.add("Verified that selected recordings is deleted", "Success", "Fail", LogAs.FAILED, null);
+			ATUReports.add("Verified that selected recordings is deleted", "Success", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} else {
 			System.out.println("Verified that selected recordings is deleted.");

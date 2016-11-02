@@ -4,14 +4,12 @@ import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
-import org.apache.bcel.generic.FieldGenOrMethodGen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.CapabilityType;
@@ -122,9 +120,7 @@ public class CreateNewUserWindow extends Page {
 		setConfirmPassword(confirm_password);
 		clickOnOkButton();		
 		waitForAlert(60);
-		driver.switchTo().alert().accept();			
-
-		
+		driver.switchTo().alert().accept();					
 		System.out.println("New user created. Username: " + user_name + ". User id: " + user_id + ". Password: " + password);
 		ATUReports.add("User Creation",user_name,"New User was created","New User was created",LogAs.PASSED,null);
 	}

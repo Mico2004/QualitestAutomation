@@ -11,7 +11,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -126,7 +126,7 @@ public class TestCaseTryToMoveRecordingWhileItIsBeingCopied {
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// save course list, we will copy in first time to course in 3rd index
 		// and in second time to course in 4th index
@@ -155,7 +155,7 @@ public class TestCaseTryToMoveRecordingWhileItIsBeingCopied {
 		// 7. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -202,7 +202,7 @@ public class TestCaseTryToMoveRecordingWhileItIsBeingCopied {
 		// 17. Click "Courses" link in the breadcrumbs
 		record.returnToCourseListPage();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		
 		// 18. Select first destination course
@@ -240,7 +240,7 @@ public class TestCaseTryToMoveRecordingWhileItIsBeingCopied {
 		// 20. Click "Courses" link in the breadcrumbs
 		record.returnToCourseListPage();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 21. Select second destination course
 		course.clickOnTargetCourseName(second_target_course);

@@ -16,7 +16,7 @@ import java.util.Date;
 import java.nio.file.Files;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -55,7 +55,6 @@ import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
-import junitx.util.PropertyManager;
 
 public class TC21599GuestPremissions {
 	// Set Property for ATU Reporter Configuration
@@ -105,10 +104,8 @@ public class TC21599GuestPremissions {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		
-
+	
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		wait = new WebDriverWait(driver, 30);
 		add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 		publish_window = PageFactory.initElements(driver, PublishWindow.class);
@@ -151,7 +148,6 @@ public class TC21599GuestPremissions {
 
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		String url_topass = tegrity.pageUrl;
 		//2. login as admin
 		tegrity.loginAdmin("Admin");	
 		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
@@ -163,8 +159,8 @@ public class TC21599GuestPremissions {
 		course.waitForVisibility(course.active_courses_tab_button);
 
 		// 3.click on course
-		String course_name = course.selectCourseThatStartingWith(PropertyManager.getProperty("course1"));
-		
+		String course_name = course.selectCourseThatStartingWith("Ab");
+			
 		 // 4.to course settings
 		 record.waitForVisibility(record.course_tasks_button); 
 		 record.toCourseSettingsPage();
@@ -177,16 +173,16 @@ public class TC21599GuestPremissions {
 		 record.convertRecordingsListToNames();
 		 String recording_publish=record.recording_list_names.get(0);
 		 record.unpublishFirstRecording(record.recordings_tab,publish_window);
-		 Thread.sleep(Page.TIMEOUT_TINY);
+		 Thread.sleep(1000);
 		 record.unpublishFirstRecording(record.student_recordings_tab,publish_window);
-    	 Thread.sleep(Page.TIMEOUT_TINY);
+    	 Thread.sleep(1000);
 		 record.convertRecordingsListToNames();
 		 String student_publish=record.recording_list_names.get(0);
 		 record.waitForVisibility(record.course_tasks_button);
 		 record.clickOnCourseTaskThenCourseSettings();	
 		 //8.verify allow all students to download is checked
 		 course_settings.checkAllCourseSettingsCheckboxs();
-		 Thread.sleep(Page.TIMEOUT_TINY);
+		 Thread.sleep(1000);
 		 course_settings.clickOnOkButton();
 
 		// 7.Go to the university's 'Course Settings' and enable ' Enable // student testing'
@@ -224,17 +220,18 @@ public class TC21599GuestPremissions {
 		
 		 //17.Make sure the regular recording you unpublished is not displayed
 		 record.clickOnRecordingsTab();
-		 Thread.sleep(Page.TIMEOUT_TINY);
+		 Thread.sleep(2000);
 		 record.isRecordingExist(recording_publish,false);
 		
 		 //18.Click the 'Student Recordings' tab
-		 Thread.sleep(Page.TIMEOUT_TINY);
+		 record.clickOnStudentRecordingsTab();
+		 Thread.sleep(2000);
 		 //19.Make sure the student recording you unpublished is not displayed
 		 record.isRecordingExist(student_publish, false);
 		
 		 //20.Click the 'Recordings' tab
 		 record.clickOnRecordingsTab();
-		 Thread.sleep(Page.TIMEOUT_TINY);
+		 Thread.sleep(3000);
 		 //21.Click on some recording
 		 record.verifyFirstExpandableRecording();
 		 record.clickOnTheFirstCaptherWithOutTheExpand();
@@ -312,7 +309,7 @@ public class TC21599GuestPremissions {
 
 		/// 30.Hover over the "Recording tasks" drop down list.
 		record.moveToElementAndClick(record.recording_tasks_button, driver);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		record.verifyDisableDownloadAndMessageAppears();
 
 		// 31.Check recording checkbox.
@@ -499,21 +496,22 @@ public class TC21599GuestPremissions {
 		record.convertRecordingsListToNames();
 	    record.verifyRecordingSortedByTitle(record.recording_list_names);
 	    record.pressViewButtonAndSelect("Date");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		record.convertRecordingsListToDate();/// check sort by date
 		record.verifyRecordingSortedByDate(record.recordings_list_date_string);
        record.pressViewButtonAndSelect("Duration");
-       Thread.sleep(Page.TIMEOUT_TINY);
+       Thread.sleep(1000);
 		
        record.convertRecordingsListToDuration();/// check sort by date
 		record.verifyRecordingSortedByDuration(record.recording_list_duration_string);
       
-//		  ///40.click on additional content tab
+		  ///40.click on additional content tab
            record.clickOnAdditionContentTab();
-	       Thread.sleep(Page.TIMEOUT_TINY);
+	       Thread.sleep(2000);
 	       record.convertAdditionalContantListToNames();
-	       String file_name=record.additional_content_list_names.get(0);
+	       int indexOfFirstFile = record.getIndexOfFirstFileAdditionalContent();
+	       String file_name=record.additional_content_list_names.get(indexOfFirstFile-1);	       
 	       String download_path= System.getProperty("user.home") + File.separatorChar +"Downloads"+ File.separatorChar+file_name;
 		   record.tryToDeleteOlderFile(download_path);
 		   driver.quit();
@@ -542,10 +540,10 @@ public class TC21599GuestPremissions {
 		/// 4.select additional content tab
 		record.waitForVisibility(record.additional_content_tab);
 		record.clickOnAdditionContentTab();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		/// 5.select file by its name
 		record.selectAdditionalContentByName(file_name);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(5000);
 		// 6.verify downloaded file is valid using md5
 		record.VerifyDownloadedFileIsExist(download_path);
 

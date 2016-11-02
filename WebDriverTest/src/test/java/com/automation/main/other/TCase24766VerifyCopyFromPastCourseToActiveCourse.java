@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -136,7 +136,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				String course_with_one_test_recording = "CourseOneTestRecording" + sdf.format(date);
 				tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
                 tegrity.loginCourses("User1");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 				initializeCourseObject();
 				
 				///taking courses names and deliver them to relevant  courses  variables
@@ -157,14 +157,14 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				}
 				course.signOut();
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 
 				// 2. Click on user builder href link
 				admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(10000);
 				// create new user instructor 1
 				mange_adhoc_users_page.createNewUser(instructor1, create_new_user_window);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				for (String window : driver.getWindowHandles()) {
 					driver.switchTo().window(window);
 					break;
@@ -173,16 +173,16 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				
 				mange_adhoc_users_page.toAdminDashBoard();
 
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 
 				for (String window : driver.getWindowHandles()) {
 					driver.switchTo().window(window);
 					break;
 				}
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(4000);
 				// 4. Click on course builder href link
 				admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(10000);
 				/// 5.build new course
 				
 				for (String window : driver.getWindowHandles()) {
@@ -192,58 +192,58 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 
 				// enroll instructors
 				mange_adhoc_course_enrollments.enrollInstructorToCourse(past_course_a, for_enroll,mangage_adhoc_courses_membership_window);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 				for (String window : driver.getWindowHandles()) {
 					driver.switchTo().window(window);
 					break;
 				}
 				// enroll instructors
 				mange_adhoc_course_enrollments.enrollInstructorToCourse(past_course_b, for_enroll,mangage_adhoc_courses_membership_window);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 				// enroll instructors
 				for (String window : driver.getWindowHandles()) {
 					driver.switchTo().window(window);
 					break;
 				}
 				mange_adhoc_course_enrollments.enrollInstructorToCourse(active_course, for_enroll,mangage_adhoc_courses_membership_window);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(5000);
 				for (String window : driver.getWindowHandles()) {
 					driver.switchTo().window(window);
 					break;
 				}
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 		
 				mange_adhoc_course_enrollments.clickOnAdminDashboard();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 
 				admin_dashboard_page.signOut();
-				Thread.sleep(Page.TIMEOUT_TINY);	
+				Thread.sleep(3000);	
 				
 				tegrity.loginCoursesByParameter(instructor1);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 				course.selectCourseThatStartingWith("PastCourseA");
 				initializeCourseObject();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 				//record.checkbox2.click();/// only one recording
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 		    	record.changeRecordingOwnership(confirm_menu, erp_window, instructor1,record.checkbox2);
-			    Thread.sleep(Page.TIMEOUT_TINY);
+			    Thread.sleep(3000);
 		    	
 			    for (String window : driver.getWindowHandles()) {
 					driver.switchTo().window(window);
 					break;
 				}
 			    record.returnToCourseListPage();
-			    Thread.sleep(Page.TIMEOUT_TINY);
+			    Thread.sleep(3000);
 			    
 			    course.selectCourseThatStartingWith("PastCourseB");
 				initializeCourseObject();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 			
 				//record.checkbox2.click();/// only one recording
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 		    	record.changeRecordingOwnership(confirm_menu, erp_window, instructor1,null);
-			    Thread.sleep(Page.TIMEOUT_TINY);
+			    Thread.sleep(3000);
 		    	
 			    for (String window : driver.getWindowHandles()) {
 					driver.switchTo().window(window);
@@ -253,24 +253,24 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 		    	
 		    	
 		    	record.sign_out.click();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 
 	             ///1.Login as ADMIN
 	             tegrity.loginAdmin("Admin");
-	             Thread.sleep(Page.TIMEOUT_TINY);
+	             Thread.sleep(2000);
 	             ///2.Click the "Course Builder" link
 	             admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");			
-		 		  Thread.sleep(Page.TIMEOUT_TINY);
+		 		  Thread.sleep(10000);
 	             ///3.Click the "Membership" link related to the course+unenroll instructor 1
 	             mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_a, instructor1, mangage_adhoc_courses_membership_window);
-	             Thread.sleep(Page.TIMEOUT_TINY);
+	             Thread.sleep(4000);
 
 				 for (String window : driver.getWindowHandles()) {
 				 driver.switchTo().window(window);
 				 break;
 				 }
 				 mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_b, instructor1, mangage_adhoc_courses_membership_window);
-	             Thread.sleep(Page.TIMEOUT_TINY);
+	             Thread.sleep(4000);
 
 				 for (String window : driver.getWindowHandles()) {
 				 driver.switchTo().window(window);
@@ -292,7 +292,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				 		System.out.println("1.1");
 						tegrity.loginCourses("User1");
 						System.out.println("2");
-						Thread.sleep(Page.TIMEOUT_TINY);						 
+						Thread.sleep(3000);						 
 						System.out.println("a3");
 						course.deleteAllRecordingsInCourseStartWith("Ab", 0, record,delete_menu); 
 						
@@ -302,66 +302,66 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 			///2.click past courses tab
 						course.clickOnPastCoursesTabButton();
 						System.out.println("3: "+past_course_a);
-						Thread.sleep(Page.TIMEOUT_TINY);
+						Thread.sleep(3000);
 			///3.select past course
 												
 						course.selectCourseThatStartingWith(past_course_a);
-						Thread.sleep(Page.TIMEOUT_TINY);
+						Thread.sleep(3000);
 						System.out.println("4");
                         ///4.Select the recording
 					     record.clickOnRecordingsTab();
-					     Thread.sleep(Page.TIMEOUT_TINY);
+					     Thread.sleep(3000);
 					     System.out.println("5");
 					     record.convertRecordingsListToNames();
 					     String recordings=record.getFirstRecordingTitle();
 					record.getCheckbox().click();
 					//5.Select the "Recording Tasks -> Copy" menu item
 					record.clickOnRecordingTaskThenCopy();
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(3000);
 					//6.Select an active course and click the 'Copy' button
 					copy.selectTargetCourseFromCourseList(courseA);
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(2000);
 						copy.clickOnCopyButton();
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(3000);
 					confirm_menu.clickOnOkButton();
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(3000);
 					//7.Click the "Additional Content" tab
 						record.clickOnAdditionContentTab();
-						Thread.sleep(Page.TIMEOUT_TINY);
+						Thread.sleep(4000);
 						String additional_content=record.first_additional_content_title.getText();
 						record.getCheckbox().click();	
 			///8.Select the "Content tasks -> Copy" menu item
 				
 						record.clickOnContentTaskThenCopy();
-					  Thread.sleep(Page.TIMEOUT_TINY);
+					  Thread.sleep(3000);
 						copy.selectTargetCourseFromCourseList(courseA);
-						Thread.sleep(Page.TIMEOUT_TINY);
+						Thread.sleep(2000);
 							copy.clickOnCopyButton();
-						Thread.sleep(Page.TIMEOUT_TINY);	    
+						Thread.sleep(3000);	    
 						confirm_menu.clickOnOkButton();
-						Thread.sleep(Page.TIMEOUT_TINY);
+						Thread.sleep(2000);
 						//9.Click the "student recordings" tab
 						record.clickOnStudentRecordingsTab();
-						Thread.sleep(Page.TIMEOUT_TINY);
+						Thread.sleep(2000);
 						String student_recording=record.getFirstRecordingTitle();
 						record.getCheckbox().click();	
 			///10.Select the "Content tasks -> Copy" menu item
 						record.clickOnRecordingTaskThenCopy();
-						Thread.sleep(Page.TIMEOUT_TINY);
+						Thread.sleep(3000);
 						copy.selectTargetCourseFromCourseList(courseA);
-						Thread.sleep(Page.TIMEOUT_TINY);
+						Thread.sleep(2000);
 							copy.clickOnCopyButton();
-						Thread.sleep(Page.TIMEOUT_TINY);	  
+						Thread.sleep(3000);	  
 						confirm_menu.clickOnOkButton();
-						Thread.sleep(Page.TIMEOUT_TINY);
+						Thread.sleep(2000);
 					///11.Click on the 'Courses' breadcrumb	
 						record.returnToCourseListPage();
 				///12.Select the destination course
-                      Thread.sleep(Page.TIMEOUT_TINY);
+                      Thread.sleep(3000);
 				course.clickOnActiveCoursesTabButton();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(2000);
 				course.selectCourseByName(courseA);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(3000);
 				///13.Verfiy the copied recording was moved correctly
 			  record.clickOnRecordingsTab();
 				record.convertRecordingsListToNames();
@@ -380,9 +380,9 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 			}
 			//14.dispaly recording
 			record.selectRecordingByName(recordings);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(15000);
 		
 			player_page.verifyTimeBufferStatusForXSec(25);// check source display
 
@@ -393,12 +393,12 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 			}
 			
 			record.returnToCourseListPage();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			course.selectCourseByName(courseA);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			///15.select couese and press additional content tab
 			record.clickOnAdditionContentTab();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 		//16.Verfiy the copied aditional content was moved correctly
 			record.convertAdditionalContantListToNames();
 			 index=record.additional_content_list_names.indexOf(additional_content);
@@ -415,10 +415,10 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				Assert.assertTrue(false);
 			}
 
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			///17.Verfiy the copied student recording was moved correctly
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			record.convertRecordingsListToNames();
 			 index=record.recording_list_names.indexOf(student_recording);
 			if((record.recording_list_names.contains(student_recording))&&(record.checkThatRecordingStatusTargetIndexIsNotXWithTimeout(index, "Error", 1)))	
@@ -434,9 +434,9 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				Assert.assertTrue(false);
 			}
 			record.selectRecordingByName(student_recording);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(15000);
 		//18.1 dispaly recording
 			player_page.verifyTimeBufferStatusForXSec(15);// check source display
 

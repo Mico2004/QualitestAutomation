@@ -4,7 +4,10 @@ package com.automation.main.add_additional_content_file;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,6 +31,10 @@ import com.automation.main.page_helpers.ManageAdhocUsersPage;
 import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
+
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.util.Date;
 import atu.testng.reports.ATUReports;
@@ -112,9 +119,7 @@ public void test15467() throws Exception {
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
 		record.waitForVisibility(record.getCheckbox());
-		
-		
-		record.clickOnAdditionContentTab();
+			
 		record.waitForVisibility(record.getCheckbox());
 		// 3.1 click on additional content tab
 
@@ -130,18 +135,16 @@ public void test15467() throws Exception {
 		// 7. add file and cancel uploading
 		add_additional_content_window.toUploadFileByPathThenSelectFile(fullPathToFile);
 		//add_additional_content_window.waitForVisibility(add_additional_content_window.upload_progress_bar);
-		add_additional_content_window.cancel_additional_file_button.click();///cancel the uploading
+		add_additional_content_window.clickElementJS(add_additional_content_window.cancel_additional_file_button);
 		//confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);
 		
 		record.clickOnAdditionContentTab();
 		wait.until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]"), "class", "active"));
 		record.convertAdditionalContantListToNames();
-		boolean isFileNotdisplayed = record.verifyNoAdditionalContentFileName(file_name);
-		 if(isFileNotdisplayed == false) {
-			 confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);	 
-		 }
+	    record.verifyNoAdditionalContentFileName(file_name);
 
 		// 4.Select "Course tasks -> Add Additional Content File" menu item
+		record.clickOnRecordingsTab();
 		record.toUploadAdditionalContentFile();
 		add_additional_content_window.waitForVisibility(add_additional_content_window.add_additional_file_button);
 		// 5.verify additional content file title info
@@ -149,30 +152,16 @@ public void test15467() throws Exception {
 		add_additional_content_window.verifyAdditionalContentFileWindowInfo();
 		// 7. add file and cancel uploading
 		add_additional_content_window.toUploadFileByPathThenSelectFile(fullPathToFile);
-		 Thread.sleep(Page.TIMEOUT_TINY);/// location
-//		 Robot robot=new Robot();
-//		 robot.mouseMove(100,100);
-//		 if(!(driver instanceof InternetExplorerDriver)){
-//			 int mask = InputEvent.BUTTON1_DOWN_MASK;
-//			 robot.mousePress(mask);
-//			 robot.mouseRelease(mask);
-//		 } else {
-//
-//			 robot.keyPress(KeyEvent.VK_ESCAPE);
-//			 robot.keyRelease(KeyEvent.VK_ESCAPE);
-//		 }
-		 //add_additional_content_window.select_upload_additional_file.sendKeys(Keys.ESCAPE);
-		 Actions action = new Actions(driver);
-		 action.sendKeys(Keys.ESCAPE).build().perform();
-
+		 if(driver instanceof FirefoxDriver){
+			 add_additional_content_window.clickEscOnKeyBoardToCloseCopyWindow();		 
+		 } else  {
+			 Actions action = new Actions(driver);
+			 action.sendKeys(Keys.ESCAPE).build().perform();
+		 }
 		 record.clickOnAdditionContentTab();
 		 wait.until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]"), "class", "active"));
 		 record.convertAdditionalContantListToNames();
-		 isFileNotdisplayed = record.verifyNoAdditionalContentFileName(file_name);
-		 if(isFileNotdisplayed == false) {
-			 confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);	 
-		 }
-		
+		 record.verifyNoAdditionalContentFileName(file_name);	
 		 System.out.println("Done.");
 		 ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}

@@ -15,7 +15,7 @@ import org.apache.commons.lang3.ObjectUtils.Null;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.touch.ScrollAction;
 import org.openqa.selenium.interactions.touch.TouchActions;
@@ -56,9 +56,6 @@ import com.automation.main.page_helpers.PublishWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.RunDiagnosticsPage;
 import com.automation.main.utilities.DriverSelector;
-import com.gargoylesoftware.htmlunit.html.Keyboard;
-import com.thoughtworks.selenium.condition.ConditionRunner.Context;
-
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
@@ -239,7 +236,7 @@ public class TegrityAppiumPoc {
 			initializeCourseObject();
 			course.selectCourseByName(list_courses_names.get(i));
 			record.waitForVisibility(record.recordings_tab);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(4000);
 			record.convertRecordingsListToNames();
 			///	for(String add:record.recording_list_names)
 			HashSet<String> list=new 	HashSet<String>();
@@ -253,7 +250,7 @@ public class TegrityAppiumPoc {
 			else{
 				System.out.println("no recordings in student tab");
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 		    record.convertRecordingsListToNames(); 
 			///		    
 			list.addAll(record.recording_list_names);																											
@@ -274,11 +271,11 @@ public class TegrityAppiumPoc {
 		// 3.click on my account
 		driver.findElement(By.id("MyAccountLink")).click();
 		// 4.generate code
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		course.waitForVisibility(driver.findElement(By.id("GenerateCodeButton")));
 		driver.findElement(By.id("GenerateCodeButton")).click();
 		// 5.get string code
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		String code =
 				driver.findElement(By.id("ConnectionCodeContainer")).getAttribute("value").toLowerCase();
 		System.out.println(code);
@@ -293,10 +290,10 @@ public class TegrityAppiumPoc {
 
 		driver2 = new AndroidDriver<WebElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		wait = new WebDriverWait(driver2, 30);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		Robot robot = new Robot();
 		robot.mouseMove(500, 500);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		/// MobileElement e = (MobileElement)
 		driver2.findElement(By.id("decor_content_parent"));
 		// e.swipe(SwipeElementDirection.LEFT, 2000);
@@ -305,10 +302,10 @@ public class TegrityAppiumPoc {
 
 			try {
 				//		 robot.keyPress(KeyEvent.VK_RIGHT);
-				//		 Thread.sleep(Page.TIMEOUT_TINY);
+				//		 Thread.sleep(200);
 				//		 robot.keyRelease(KeyEvent.VK_RIGHT);
 				driver2.pressKeyCode(22);
-				Thread.sleep(Page.TIMEOUT_TINY);// solution
+				Thread.sleep(200);// solution
 				if (driver2.findElement(By.id("connect_edit_text")).isDisplayed())// check if visible
 				{
 
@@ -319,17 +316,17 @@ public class TegrityAppiumPoc {
 			} catch (Exception e) {
 			}
 
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 		}
 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		/// 7.click on edit text and enter code to login
 		driver2.findElement(By.id("connect_edit_text")).sendKeys(code);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		///
 		/// driver2.findElement(By.id("connect_edit_text")).sendKeys(Keys.ENTER);
 		driver2.pressKeyCode(66);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		// 8.verify "loading" appears and later dissappears
 		WebElement message = driver2.findElement(By.id("message"));
 		wait.until(ExpectedConditions.visibilityOf(message));
@@ -465,7 +462,7 @@ public class TegrityAppiumPoc {
 		for(int i=0;i<course_list.size();i++)
 		{
 			System.out.println("Checking recording in course : "+courses[i]);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
         ///select course from menu
 		clickAppiumCourseByName(courses[i],driver2);
 		
@@ -498,7 +495,7 @@ public class TegrityAppiumPoc {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("button1")));
 		driver2.findElementById("button1").click();
 	    System.out.println("clicked on ok");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		///quit
 		driver2.quit();
@@ -607,7 +604,7 @@ public class TegrityAppiumPoc {
 				}
 			}
 			driver2.pressKeyCode(20);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(500);
 			driver2.pressKeyCode(20);
 
 
@@ -762,7 +759,7 @@ public class TegrityAppiumPoc {
 					}
 				}
 				driver2.pressKeyCode(20);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			//	driver2.pressKeyCode(20);
 
 

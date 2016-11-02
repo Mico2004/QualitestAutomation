@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -149,9 +149,8 @@ public class TestSuitePreSetCopyRecordings_PrivateCourses {
 	}
 
 
-	@Test( description = "Login course page")
+	@Test(description = "Login course page")
 	public void loginCourses() throws InterruptedException {
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		System.out.println("b0");
 		  final List<Integer> CourseAbContent = Arrays.asList(0); //For Ab		
 		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
@@ -162,6 +161,7 @@ public class TestSuitePreSetCopyRecordings_PrivateCourses {
 		TestSuitePreSetGeneric h=new TestSuitePreSetGeneric(driver);
 		System.out.println("b1");
 		h.GenricPreset(CoursesAndContent);
+		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
 	}

@@ -5,7 +5,7 @@ package com.automation.main.copy_recording;
 import java.util.List;
 import java.text.DateFormat;
 import java.util.Date;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -121,11 +121,13 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 3. Click the 'Student Recording' tab.
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 4. Select source recording.
 		// 5. Select "Recording Tasks -> Copy" menu item.
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		
+		
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.getCheckboxAccordingToIndex(record.getRecordingIndexWithoutAnyStatus()));
 		clickedRecording = copy.verifyCopyMenu(record);
 		System.out.println("Clicked on recording: " + clickedRecording);
 		
@@ -135,9 +137,9 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		System.out.println("Target course: " + targetCourse);
 		
 		// 7. Click "Cancel" button.
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		copy.clickOnCancelButton(record);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 
 		// 8. Verify that recording is not removed current course.
 		record.verifyThatTargetRecordingExistInRecordingList(clickedRecording);
@@ -153,7 +155,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("The recording has not this status IE, FF, Safari Ready or none at all.");
-			ATUReports.add("The recording has this status IE, FF, Safari Ready or none at all.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("The recording has this status IE, FF, Safari Ready or none at all.", "Clean status", recording_status, LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 		
@@ -161,7 +163,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		// 9. Click "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 10. Select the destination course.
 		boolean isTargetCourseClicked = course.clickOnTargetCourseName(targetCourse);
@@ -171,7 +173,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 			System.out.println("Target course name is not clicked: " + targetCourse);
 		}
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 11. Verify that recording wasn't copied.
 		if(record.student_recordings_tab.isDisplayed()) {
@@ -189,7 +191,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 				Assert.assertTrue(true);
 			}
 			
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 		} else {
 			record.verifyNoStudentTab();
 		}
@@ -198,7 +200,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 12. Click "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 13. Select the source course.
 		isTargetCourseClicked = course.clickOnTargetCourseName(currentCourse);
@@ -210,11 +212,11 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 14. Click the 'Student Recording' tab.
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 15. Select source recording.
 		// 16. Select "Recording Tasks -> Copy" menu item.
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.getCheckboxAccordingToIndex(record.getRecordingIndexWithoutAnyStatus()));
 		clickedRecording = copy.verifyCopyMenu(record);
 		System.out.println("Clicked on recording: " + clickedRecording);
 		
@@ -271,7 +273,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 				Assert.assertTrue(true);
 			}
 			
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 		} else {
 			record.verifyNoStudentTab();
 		}

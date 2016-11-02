@@ -8,7 +8,7 @@ import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -134,11 +134,11 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		
 		// 2.8 Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 2.9. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 2.10. Click on "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
@@ -174,11 +174,11 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		
 		// 7. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 8.1. Message box is closed
 		if(confirm_menu.isConfirmationMenuClosed()) {
@@ -250,7 +250,7 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		record.clickOnRecordingTitleInIndex(i);
 		
 		// 16. Click on any chapter. 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 		
@@ -259,7 +259,7 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		
 		//16. "Tegrity Player" is displayed and Recording is playing correctly.
 		//TODO: add WebDriverWait
-		//Thread.sleep(Page.TIMEOUT_TINY);
+		//Thread.sleep(10000);
 		
 		//WebDriverWait w = new WebDriverWait(driver, 10);
 		

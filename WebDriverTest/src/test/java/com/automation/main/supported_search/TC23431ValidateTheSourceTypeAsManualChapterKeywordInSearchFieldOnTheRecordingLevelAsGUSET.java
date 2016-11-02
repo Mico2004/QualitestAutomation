@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -151,7 +151,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		String url =  course.getCurrentUrlCoursePage(); 
 
 		record.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		tegrity.waitForVisibility(tegrity.passfield);
 
 		// 2.login as admin
@@ -166,7 +166,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 		// 3.Click on "View Course List" link
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1500);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 
 		// 4.verify all courses page
@@ -177,7 +177,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 		// 6.Click on one of the Recording link
 		record.waitForVisibility(record.first_recording);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		record.convertRecordingsListToNames();
 		record.convertRecordingsListToRecorderName();
 		String instructor=record.getIndexRecorderNameOfRecording(1);
@@ -198,7 +198,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		///8.back to recording page
 		record.returnToRecordingPageByClickingBreadcrumbsName(player_page.breadcrumbs_box_elements_list.get(2));
 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
         ///9.make course public	
 		record.toCourseSettingsPage();
 		course_settings.waitForVisibility(course_settings.sign_out);
@@ -215,7 +215,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		 
 		course.selectCourseByName(course_name);
 		record.waitForVisibility(record.first_recording);
-	    Thread.sleep(Page.TIMEOUT_TINY);
+	    Thread.sleep(2000);
 		record.verifyFirstExpandableRecording();
 		record.clickOnTheFirstCaptherWithOutTheExpand();
 
@@ -235,7 +235,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 		///9.Validate the text in the Tegrity Player page: "Search in this recording..."
 		player_page.verifySearchBoxHint();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		//10.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
 
 
@@ -258,7 +258,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		
 		driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
 		player_page.verifySearchResultPage(recording_name);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 			
 		
 		//14. The search results statistics in the format as follows: "X results found for: search criterion. (XX sec)"
@@ -299,7 +299,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 		///19.Hover over the chapter icon:The background color change to deep gray.
 		player_page.moveToElement(player_page.search_result.get(0), driver).perform();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 
 		///20.Click on the result row.
@@ -323,7 +323,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 		//23.navigate back to player recording
 		driver.navigate().back();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(4000);
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 		//24.click on "Courses" and verify course page
 
@@ -331,7 +331,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		////25.navigate back to player then to recordings page
 		driver.navigate().back();
 		player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(0));
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(500);
 		player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 
 		///26.Change the keyword name chapter by using "Edit recording".
@@ -351,10 +351,10 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 		//27.Search the "Recording keyword Chapter" from the recording that we mentioned in the preconditions with the new name.
 		top_bar_helper.searchForTargetText(new_keyword_to_search);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		search_page.verifySearchResultIsEmpty();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		search_page.verifySearchResultIsEmpty();
 
@@ -363,7 +363,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		record.returnToRecordingPageByClickingBreadcrumbsName(player_page.breadcrumbs_box_elements_list.get(2));
 		record.waitForVisibility(record.first_recording);
 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		record.verifyFirstExpandableRecording();
 		record.clickOnTheFirstCaptherWithOutTheExpand();
 		
@@ -380,7 +380,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 
 		///31.Validate the text in the Tegrity Player page: "Search in this recording..."
 		player_page.verifySearchBoxHint();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		//32.Search the "Recording Chapter" from the recording that we mentioned in the preconditions and press ENTER.
 
 
@@ -388,7 +388,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 
 
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		//33.The tegrity logo is displayed on the bottom footer bar right side.
 
 		player_page.verifyTegrityLogoVisibilityAndLocation();
@@ -414,7 +414,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		///38.search results page in the format as follows: "recording name - Search Results".
 		driver.switchTo().frame(0);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		player_page.verifySearchResultPage(keyword_to_search);
 
 		///39.The search results on a recording level is displayed in the table with the columns as follows: "Location", "Time", "Context"
@@ -427,7 +427,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		///41.Hover over the chapter icon:The background color change to deep gray.
 
 		player_page.moveToElement(player_page.search_result.get(0), driver).perform();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		player_page.verifyBackgroundColor("#f1f1f1",player_page.search_result.get(0));
 
 		///42.quit

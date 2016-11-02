@@ -12,7 +12,7 @@ import org.omg.PortableInterceptor.AdapterManagerIdHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -108,7 +108,7 @@ public class PreTestCreateDynamicCourse {
 	{
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		String login_url = driver.getCurrentUrl();
 		String university_name  = login_url.split("/")[2].substring(0,  login_url.split("/")[2].length() - 12);
@@ -116,12 +116,12 @@ public class PreTestCreateDynamicCourse {
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(10000);
 		
 		// 3. Click on create course href link 
 		driver.switchTo().frame(0);
 		mange_adhoc_course_enrollments.clickOnNewCourse();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 4. Create four dynamic courses
 		Date date = new Date();
@@ -146,12 +146,12 @@ public class PreTestCreateDynamicCourse {
 			}
 			
 			mange_adhoc_course_enrollments.clickOnNewCourse();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			create_new_course_window.createNewCourse(course_name + "_Name", course_name);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			driver.switchTo().alert().accept();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 		}
 		

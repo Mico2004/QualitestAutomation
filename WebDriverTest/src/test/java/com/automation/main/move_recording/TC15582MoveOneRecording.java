@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.PrimitiveIterator.OfDouble;
 import javax.xml.parsers.ParserConfigurationException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -66,9 +66,7 @@ public class TC15582MoveOneRecording {
 		try {
 
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-			driver = new ChromeDriver();///// MUST FOR TEST TO GET XML
-
-			
+			driver = new ChromeDriver();///// MUST FOR TEST TO GET XML		
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 		} catch (Exception e) {
 			/// ATUReports.add("Fail Step", LogAs.FAILED, new
@@ -80,10 +78,7 @@ public class TC15582MoveOneRecording {
 		 ATUReports.add("Message window.", "Starting the test: TC15582MoveOneRecording at " + DateToStr, "Starting the test: TC15582MoveOneRecording at " + DateToStr, LogAs.PASSED, null);	
 	}
 
-	/*
-	 * @AfterClass public void quit() { driver.quit(); System.out.println(
-	 * "driver quited successfully"); }
-	 */
+
 	@Test (description="TC 15582 Move One Recording")
 	public void test15582() throws InterruptedException, ParserConfigurationException, Exception, IOException {
 		// 1.load main page chrome
@@ -94,7 +89,7 @@ public class TC15582MoveOneRecording {
 		String login_url = driver.getCurrentUrl();
 		String university_name  = login_url.split("/")[2].substring(0,  login_url.split("/")[2].length() - 12);
 		driver.navigate().to("https://" + university_name + ".tegrity.com/api/courses/Active");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		String xml_source_code = driver.findElement(By.tagName("body")).getText();
 		driver.quit();
 
@@ -126,21 +121,21 @@ public class TC15582MoveOneRecording {
 		
 		// 7.return to recording page and than to course page
 		move_menu.clickOnCancelButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		record.returnToCourseListPage();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 8. Verify Only courses where this USER signed as INSTRUCTOR are
 		// displayed in "Course List"
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		course.first_course_button.click();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
 		move_menu = PageFactory.initElements(driver, MoveWindow.class);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		move_menu.move_course_list = move_menu.getStringFromElement(move_menu.course_list);
 		int course_number = move_menu.course_list.size();
@@ -163,7 +158,7 @@ public class TC15582MoveOneRecording {
 			ATUReports.add("all courses assigned as instructors", "xml file", "num of instructors:" + count_instructors,
 					"num of instructors:" + course_number, LogAs.PASSED, null);
 			driver.navigate().back();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 
 		} else {
 			Assert.assertTrue(false);
@@ -175,7 +170,7 @@ public class TC15582MoveOneRecording {
 
 		// 9.Select destination course:select first course
 		move_menu.clickOnCancelButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		course.selectFirstCourse(record);
 		String original_recorder_name =driver.findElement(By.id("RecordedBy1")).getText();//take recorder name for later
 		
@@ -183,7 +178,7 @@ public class TC15582MoveOneRecording {
 		// move menu
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// Select destination course:mark destination course by clicking on it
 		String destination_course_name = move_menu.course_list.get(0).getText();
@@ -193,7 +188,7 @@ public class TC15582MoveOneRecording {
 		/// 10.Click "Move Recording(s)"
 		move_menu.moveRecording.click();
 		System.out.println("moving recording");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		// 11.click on ok button in confirmation menu
 		confirm = PageFactory.initElements(driver, ConfirmationMenu.class);
@@ -234,7 +229,7 @@ public class TC15582MoveOneRecording {
 		record.recordingPageBoldFont();/// verify bold style in recording title
 		// 21."Recording Chapters" are expanded
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		// 22.player is working
 		record.clickOnTheFirstCaptherWithOutTheExpand();
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
@@ -248,18 +243,18 @@ public class TC15582MoveOneRecording {
 		// 24.login as student
 		tegrity.loginCourses("User4");// log in courses page
 		initializeCourseObject();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		// 25.select destination course
 		course.selectCourseByName(destination_course_name);
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		// 26."Recording Chapters" are expanded
 		record.pressViewButtonAndSelect("Date");/// 2 times sort by date to make
 												/// recording first
 		record.pressViewButtonAndSelect("Date");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		record.searchbox.click();// prevent ekement not clickable
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		// 27.player is working
 		record.clickOnTheFirstCaptherWithOutTheExpand();
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display

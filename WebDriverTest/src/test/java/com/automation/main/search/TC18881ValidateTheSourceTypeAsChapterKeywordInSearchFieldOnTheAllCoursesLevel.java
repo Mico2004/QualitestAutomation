@@ -8,7 +8,7 @@ import java.util.List;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -129,7 +129,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	
@@ -149,7 +149,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(2000);
 		
 		
 		// set Chapter Keyword for recording
@@ -164,7 +164,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 		edit_recording.setTargetKeywordForFirstChapter(recording_chapter_keyword);
 		
 		record.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(3000);
 		
 		
 		// Looping for Student, Guest and ADMIN
@@ -180,7 +180,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			} 
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			
 			// 3. Open some course.
 			course.selectCourseThatStartingWith(current_course);
@@ -191,14 +191,13 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 			
 			// 5. Search the "Chapter Keyword" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(recording_chapter_keyword);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
 			search_page.waitUntilSpinnerImageDisappear();
-			search_page.waitResultToLoad();
 			search_page.exitInnerFrame();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 5.2. The breadcrumb structure displayed as follows: "> Courses > Course name >X results found for: "search_criterion". (X seconds)".
 			search_page.verfiyBreadcrumbStructureDisplayedAsCoursesXResultsFound(current_course, recording_chapter_keyword);
@@ -225,7 +224,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
 			Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
@@ -256,7 +255,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 9. Click on title of the manual chapter keyword.
 			search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
@@ -268,7 +267,7 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 11. Click on the recording title of the chapter.
 			search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
@@ -280,11 +279,11 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 						
 			// 17. Sign Out.
 			record.signOut();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 		}
 		
 		// Unpublic Ab course1. 

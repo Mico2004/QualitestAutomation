@@ -5,7 +5,7 @@ package com.automation.main.delete_additional_content;
 import java.text.DateFormat;
 import java.util.Date;
 
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -108,7 +108,7 @@ public class TC15812ExistenceofUIitems {
 		
 		// 3. Click the "Additional Content" tab.
 		record.clickOnAdditionContentTab();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 4. Select content item.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);

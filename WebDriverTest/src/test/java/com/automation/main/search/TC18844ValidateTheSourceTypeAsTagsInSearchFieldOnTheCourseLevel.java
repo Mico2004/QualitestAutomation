@@ -8,7 +8,7 @@ import java.text.DateFormat;
 import javax.naming.InitialContext;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -75,8 +75,15 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 	@BeforeClass
 	public void setup() {
 
-		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());	
+		driver = new FirefoxDriver();
+//		
 	
+		initTest();
+		
+		
+	}
+	
+	public void initTest() {
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -103,11 +110,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 		 System.out.println("Starting the test: TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel at " + DateToStr);
 		 ATUReports.add("Message window.", "Starting the test: TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel at " + DateToStr,
 		 "Starting the test: TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel at " + DateToStr, LogAs.PASSED, null);	
-		
-		
 	}
-	
-
 	
 	@AfterClass
 	public void closeBroswer() {
@@ -119,7 +122,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
+		course.courses = course.getStringFromElement(course.course_list);
 	}
 
 	
@@ -138,7 +141,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// Create tags for first recording
 		Date date = new Date();
@@ -155,9 +158,9 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 		tag_menu.createNewTag(tags_for_search);
 		
 		
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		tag_menu.clickOnApplyButton();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		record.signOut();
 		
@@ -166,7 +169,8 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 		
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		
-
+		initTest();
+		initializeCourseObject();
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
 		
@@ -185,7 +189,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(3000);
 			
 			// 3. Open some course.
 			if(type_of_user < 3) {
@@ -195,9 +199,9 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(8000);
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 			
 			
@@ -206,7 +210,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 			
 			// 5. Search the "Tags" and that we mentioned in the preconditions press ENTER.
 			top_bar_helper.searchForTargetText(tags_for_search);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
@@ -241,7 +245,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 			// 6. Hover over the chapter icon.
 			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(2000);
 			
 			// 6.1. The chapter icon become a bit bigger in size.
 			Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
@@ -301,7 +305,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 			// 12. Click on the back cursor in the browser to navigate to the search results page.
 			driver.navigate().back();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			
 			for(String handler: driver.getWindowHandles()) {
 				driver.switchTo().window(handler);
@@ -312,9 +316,9 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 				driver.quit();
 				
 				
-				driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+				driver = new FirefoxDriver();
 //				
-			
+				initTest();
 				initializeCourseObject();
 				tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 				tegrity.loginCourses("User1");
@@ -342,9 +346,9 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 				record.clickOnRecordingTaskThenTag();
 				
 				tag_menu.changeSelectedTagToTargetTag(new_tags_for_search);
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				tag_menu.clickOnApplyButton();
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 				
 				
 				driver.quit();
@@ -352,7 +356,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 				
 				driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 				
-			
+				initTest();
 				initializeCourseObject();
 				tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 				tegrity.loginCourses("User1");

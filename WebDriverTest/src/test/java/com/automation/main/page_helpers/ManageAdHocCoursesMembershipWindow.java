@@ -10,7 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -70,7 +70,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	public boolean setSearchUserInput(String set_to) {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(search_user_input));
-			Thread.sleep(Page.TIMEOUT_TINY);
+			Thread.sleep(1000);
 			search_user_input.clear();
 			search_user_input.sendKeys(set_to);
 			System.out.println("Setting user input search to: " + set_to);
@@ -103,7 +103,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	
 	public boolean clickOnOkButton() throws InterruptedException {
 		
-		Thread.sleep(Page.TIMEOUT_TINY);	
+		Thread.sleep(2000);	
 		try {
 			waitForVisibility(ok_button);
 			ok_button.click();		
@@ -194,7 +194,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 				String val=el.getText();
 				
 				if(el.getText().contains(name)) {
-					Thread.sleep(Page.TIMEOUT_TINY);
+					Thread.sleep(2000);
 					el.click();
 					System.out.println("User selected from user list.");
 					return true;
@@ -308,7 +308,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			if(selectIrUserFromUserList(instructor_elements_list, instructor_name)) {
 				break;
 			} else {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}	
 		}catch(UnhandledAlertException ex){
@@ -328,12 +328,13 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 		try{
 		for (int i=0; i<60;i++) {
 			if(selectIrUserFromUserList(student_elements_list, student_name)) {
-				break;
+				ATUReports.add("User was added to course users list",student_name,LogAs.PASSED,null);
+				return;
 			} else {
-				Thread.sleep(Page.TIMEOUT_TINY);
+				Thread.sleep(1000);
 			}
 		}
-		ATUReports.add("User was added to course users list",student_name,LogAs.PASSED,null);
+		ATUReports.add("User wasn't added to course users list",student_name,LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}catch(Exception e){
 			ATUReports.add("User wasn't added to course users list",student_name,"Error:"+e.getMessage(),LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			

@@ -3,7 +3,7 @@ package com.automation.main.course_detailes_content_page;
 
 import java.util.Date;
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -166,12 +166,12 @@ public class TC15761ValidateTabsUIAsStudent {
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record);
 		// 8. Logout.
 		top_bar_helper.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		
 		// 9. Login as a STUDENT.
 		tegrity.loginCourses("User4");
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		
 		// 10. Open "Course details" page as an STUDENT.
 		course.selectCourseThatStartingWith("Ba");
@@ -191,7 +191,7 @@ public class TC15761ValidateTabsUIAsStudent {
 		
 		// Post test
 		top_bar_helper.signOut();
-		Thread.sleep(Page.TIMEOUT_TINY);
+		Thread.sleep(1000);
 		tegrity.loginCourses("SuperUser");
 		course.selectCourseThatStartingWith("Ba");
 		record.clickOnCourseTaskThenCourseSettings();
