@@ -2,6 +2,7 @@ package com.automation.main.page_helpers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
@@ -29,10 +31,15 @@ public class CalendarPage extends Page {
 
 	public @FindBy(id="dateField")
 	WebElement date_Field;
-	public @FindBy(xpath =".//*[@id='editRecordingWindow']/form/div[1]/div[2]/div/div[2]/div/table")
-	WebElement calenderTable;
-	public @FindBy(css = ".switch.ng-binding")//(xpath ="/*[@id='editRecordingWindow']/form/div[1]/div[2]/div/div[2]/div/table/thead/tr[1]/th[3]")
+	public @FindBy(css = ".switch.ng-binding")
 	WebElement monthAndYear;
+	public @FindBy(css = ".glyphicon.glyphicon-arrow-left")
+	WebElement arrowLeft;
+	public @FindBy(css =".week.ng-binding.firstDisplayWeek")
+	WebElement firstWeek;
+	public @FindBy(xpath= ".//*[@id='editRecordingWindow']/form/div[1]/div[2]/div/div[2]/div/table/tbody")
+	WebElement calenderTable;
+	String day,month,year;
 	
 
 	public void verifyTest(){
@@ -56,21 +63,46 @@ public class CalendarPage extends Page {
 	        } 
 	    }
 	
+	
+	public void getMonthAndYearFromCalendar() throws ParseException {
+		
+		String monthAndYearString = monthAndYear.getText();
+		String[] splited_structure_displayed_yearAndMonth = monthAndYearString.split("-");
+		year = splited_structure_displayed_yearAndMonth[0];
+		
+		Date date = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(splited_structure_displayed_yearAndMonth[1]);
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    int monthNumer = cal.get(Calendar.MONTH) + 1 ;
+	    month = Integer.toString(monthNumer);
+		
+	}
+	
+	
+	public void getDayFromCalender() {
+		String id = "day ng-scope ng-binding active";
+	    List<WebElement> dayPicker = (List<WebElement>) ((JavascriptExecutor) driver).executeScript("return document.getElementsByClassName(\""+id+"\");");
+	    day = dayPicker.get(0).getText();	
+	}
 
-	public void verifyTheCurrentCreationDateIsDisplayedWithinTheEditBox() throws ParseException{
+
+	public void verifyTheCurrentCreationDateIsDisplayedWithinTheEditBox() throws ParseException, InterruptedException{
 	 
 	String id = date_Field.getAttribute("id");
 	String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
 	clickElement(date_Field);
-	String monthAndYearString = monthAndYear.getText();
+	Thread.sleep(500);
+	
 	String[] splited_structure_displayed = correctDate.split("/");	
-	String[] splited_structure_displayed_yearAndMonth = monthAndYearString.split("-");	
 	
-	String day = splited_structure_displayed[1];
-	String month = splited_structure_displayed[0];
-	String year = splited_structure_displayed[2];
+	String dayToCompare = splited_structure_displayed[1];
+	String monthToCompare = splited_structure_displayed[0];
+	String yearToCompare = splited_structure_displayed[2];
 	
-	if(year.equals(splited_structure_displayed_yearAndMonth[0])){
+	getMonthAndYearFromCalendar();
+	getDayFromCalender();
+	
+	if(year.equals(yearToCompare)){
 		ATUReports.add("Verify the year from the calendar.", LogAs.PASSED, null);
 		System.out.println("Verify the year from the calendar.");
 	} else {
@@ -78,25 +110,15 @@ public class CalendarPage extends Page {
 		System.out.println("Not Verify the year from the calendar.");
 	}
 	
-	Date date = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(splited_structure_displayed_yearAndMonth[1]);
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(date);
-    int monthNumer = cal.get(Calendar.MONTH) + 1 ;
-	
-    if(month.equals(Integer.toString(monthNumer))){
+    if(month.equals(monthToCompare)){
 		ATUReports.add("Verify the month from the calendar.", LogAs.PASSED, null);
 		System.out.println("Verify the month from the calendar.");
 	} else {
 		ATUReports.add("Not Verify the month from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		System.out.println("Not Verify the month from the calendar.");
 	}
-	
-    
-    id = "day ng-scope ng-binding active";
-    List<WebElement> dayPicker = (List<WebElement>) ((JavascriptExecutor) driver).executeScript("return document.getElementsByClassName(\""+id+"\");");
-    String dayP = dayPicker.get(0).getText();
-	
-    if(day.equals(dayP)){
+
+    if(day.equals(dayToCompare)){
 		ATUReports.add("Verify the day from the calendar.", LogAs.PASSED, null);
 		System.out.println("Verify the day from the calendar.");
 	} else {
@@ -104,5 +126,80 @@ public class CalendarPage extends Page {
 		System.out.println("Not Verify the day from the calendar.");
 	}
 	
-	}		
+	}	
+	
+	public void pickDateTwoDaysFromToday() throws ParseException, InterruptedException {
+		
+		String id = date_Field.getAttribute("id");
+		String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
+		clickElementJS(date_Field);
+		
+		Thread.sleep(500);
+		getMonthAndYearFromCalendar();
+		getDayFromCalender();
+			
+	    int dayInt = Integer.parseInt(day);
+	    int monthInt = Integer.parseInt(month);
+	    int yearInt = Integer.parseInt(year);
+	    int pickTwoDayBefore = 0;
+		
+	    if(dayInt == 1 || dayInt == 2){
+	    	
+	    	if( monthInt == 1 ) {
+	    		if(dayInt  == 1) {
+	    			pickTwoDayBefore = 30;
+	    		} else pickTwoDayBefore = 31;
+	    		yearInt -=1;
+	    	} else if(monthInt == 3 ) {
+	    		if(dayInt  == 1) {
+	    			pickTwoDayBefore = 27;
+	    		} else pickTwoDayBefore = 28;
+	    		
+	    	} else if(monthInt == 11 || monthInt == 9 || monthInt == 8 || monthInt == 11 || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
+	    		if(dayInt  == 1) {
+	    			pickTwoDayBefore = 30;
+	    		} else pickTwoDayBefore = 31;
+	    	} else if(monthInt == 12 || monthInt == 10 || monthInt == 7 || monthInt == 5) {
+	    		if(dayInt  == 1) {
+	    			pickTwoDayBefore = 29;
+	    		} else pickTwoDayBefore = 30;
+	    	}
+	    	clickElement(arrowLeft);
+	    	monthInt -=1; 
+	    } else {  	
+	    	 pickTwoDayBefore = dayInt -2;
+	    }
+	    String dayNewNumber = Integer.toString(pickTwoDayBefore);
+	    WebElement table = driver.findElement(By.className("table-condensed"));
+	    List<WebElement> rows = table.findElements(By.tagName("tr"));
+	    List<WebElement> Numbers = new ArrayList<WebElement>() ;
+	    int rowNumber = rows.size();
+	    for(int i = 0 ; i< rowNumber ; i++) {
+	    	List<WebElement> cols = table.findElements(By.tagName("td"));
+	    	int colsNum = cols.size();
+	    	for(int j = 0; j< colsNum ; j++) {
+	    		if(cols.get(j).getText().equals(dayNewNumber)){
+	    			Numbers.add(cols.get(j));    			
+	    		}
+	    	}
+	    }
+	    
+    	for(WebElement e :Numbers ){
+    		String color = e.getCssValue("color").toString();
+    		String grey = "rgb(153, 153, 153)";
+    		if(!color.equals(grey)){
+    			clickElement(e);
+    			ATUReports.add("Verify the day from the calendar.", LogAs.PASSED, null);
+    			System.out.println("Verify the day from the calendar.");
+    			Assert.assertTrue(true);	
+    			return;
+    		}
+    	}
+    	ATUReports.add("Not Verify the day from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		System.out.println("Not Verify the day from the calendar.");
+		//Assert.assertTrue(false);	
+	}
+	
+	
+	
 }

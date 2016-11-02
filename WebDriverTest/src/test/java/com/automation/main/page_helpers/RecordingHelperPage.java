@@ -4885,11 +4885,24 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		return record.getText();
 	}
 	
-public String getTheRecordingDateIndex(int index){
+	public String getTheRecordingDateIndex(int index){
 		
 		waitForVisibility(first_recording_title);
 		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingDate"+Integer.toString(index)+"']"));
 		return record.getText();
 	}
-
+	
+	public String getTheRecordingNameIndex(int index){
+		
+		waitForVisibility(first_recording_title);
+		WebElement record = driver.findElement(By.xpath("//*[@id='Recording"+Integer.toString(index)+"']/strong"));
+		return record.getText();
+	}
+	
+	public int getIndexOfRecordFromRecordName(String record){
+		convertRecordingsListToNames();
+		return recording_list_names.indexOf(record) + 1;
+	}
+	
+	
 }

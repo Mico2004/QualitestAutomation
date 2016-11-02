@@ -1,8 +1,12 @@
 package com.automation.main.page_helpers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -718,4 +722,31 @@ public class EditRecordinPropertiesWindow extends Page {
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
+	
+	// The date is in the following format: 'XX/XX/XXXX'.
+	public String verifyThatTheCalendarInTheRightFormat(){
+		
+		String id = date_Field.getAttribute("id");
+		String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		sdf.setLenient(false);
+		try {
+
+			//if not valid, it will throw ParseException
+			Date date = sdf.parse(correctDate);
+			System.out.println(date);
+			System.out.println("The date is in the following format: 'XX/XX/XXXX'");
+			ATUReports.add("The date is in the following format: 'XX/XX/XXXX'", "Success.", "Success.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+		} catch (ParseException e) {
+			System.out.println("The date is not in the following format: 'XX/XX/XXXX'" );				
+			ATUReports.add("The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		
+		return correctDate;
+	}
+	
 }
