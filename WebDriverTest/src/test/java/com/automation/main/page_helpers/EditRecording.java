@@ -22,6 +22,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -162,7 +164,7 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
 			} else if(message.contains("Error")) {
-				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, null);
+				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
 				driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -698,4 +699,20 @@ public class ConfirmationMenu extends Page {
 
 	}
 	
+	public void verifyTheLocationOfTheOkButtonIsInTheButtomRight() throws InterruptedException {
+	
+		
+		Point headerTitle = header_title.getLocation();
+		Point okButton = ok_button.getLocation();
+		
+		if (headerTitle.getX() < okButton.getX() && headerTitle.getY() < okButton.getY() ) {
+			ATUReports.add("The location of the ok button is on the right bottom.", LogAs.PASSED, null);
+			System.out.println("The location of the ok button is on the right bottom.");			
+		} else {
+			ATUReports.add("The location of the ok button is not on the right bottom.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println("The location of the ok button is not on the right bottom.");
+		
+		}
+
+	}
 }

@@ -134,9 +134,11 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		//9. The header background color is as the customize or defualt university background color.
 		confirm_menu.verifyConfirmBackgroundColor(record);
 		
-		//10.The "Edit Recording Properties" caption is displayed inside the header.
-		//11.The informative text "Recording properties have been queued for edit" is displayed below the header.
-		//12.The "Ok" Button is displayed on the bottom right corner of the model window.
+		//10.The "Ok" Button is displayed on the bottom right corner of the model window.
+		confirm_menu.verifyTheLocationOfTheOkButtonIsInTheButtomRight();
+		
+		//11.The "Edit Recording Properties" caption is displayed inside the header.
+		//12.The informative text "Recording properties have been queued for edit" is displayed below the header.	
 		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		
 		//13.The second model window disappears.

@@ -4599,21 +4599,19 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	
 	public void checkExistenceOfNonEditRecordingsStatusInTheIndex(int index) throws InterruptedException {
 		
-		Thread.sleep(1000);
-		WebElement recordStatus = driver.findElement(By.xpath("RecordingStatus" +Integer.toString(index)+"']"));		
-		for(int i= 0; i< 120 ; i++ ){
-			String current_element = getTextFromWebElement(recordStatus,5);
-			System.out.println(current_element);
-			if ((!current_element.equals(""))) {
-				Thread.sleep(1000);
-			  }
-			 else {
-				System.out.println("Not verfired that all additional Content have non delete status.");
-			    ATUReports.add("Verfied that all additional Content have delete available status.", "True.", "Status of "+i+" content is: "+current_element, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	 
-				break;
-			}
+		try {
+		  Boolean isTheStatusDisapper =  new WebDriverWait(driver, 120).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("RecordingStatus" +Integer.toString(index)+"']"), "Recording is being edited."));
+		  if(isTheStatusDisapper) {
+			  System.out.println("The status has change in less then 120 seconds");
+			  ATUReports.add("The status has change in less then 120 seconds.", "True.", "True.", LogAs.PASSED, null);
+		  } else {
+			  System.out.println("The status has change in less then 120 seconds");
+			  ATUReports.add("The status has not change in less then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		  }
+		}catch(org.openqa.selenium.TimeoutException msg){
+			 System.out.println("The status has change in less then 120 seconds");
+			  ATUReports.add("The status has not change in less then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
-	
 	}
 	
 	
@@ -4852,11 +4850,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 
 		if(recordNameToCompare.equals(recordOperation)){
-			System.out.println("The " + operation + recordNameToCompare + " is equals from the String: " + recordOperation );
-			ATUReports.add("The Record name: " + recordNameToCompare + " is equals from the String: " + recordOperation ,LogAs.PASSED, null);		
+			System.out.println("The " + operation+ ":" + recordNameToCompare + " is equals from the String: " + recordOperation );
+			ATUReports.add("The " + operation+ ":"+ recordNameToCompare + " is equals from the String: " + recordOperation ,LogAs.PASSED, null);		
 		}else{
-			System.out.println("The Record name: " + recordNameToCompare + " is different from the String: " + recordOperation );
-			ATUReports.add("The Record name: " + recordNameToCompare + " is different from the String: " + recordOperation ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			System.out.println("The " + operation+ ":"+ recordNameToCompare + " is different from the String: " + recordOperation );
+			ATUReports.add("The " + operation+ ":"+ recordNameToCompare + " is different from the String: " + recordOperation ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
 			
 		}
 		

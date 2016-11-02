@@ -39,7 +39,7 @@ import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC1700ValidateChangeRecordingNameFunctionality {
+public class TC17000ValidateChangeRecordingNameFunctionality {
 
 
 	// Set Property for ATU Reporter Configuration
@@ -85,8 +85,8 @@ public class TC1700ValidateChangeRecordingNameFunctionality {
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput at " + DateToStr, "Starting the test: TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC17000ValidateChangeRecordingNameFunctionality at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC17000ValidateChangeRecordingNameFunctionality at " + DateToStr, "Starting the test: TC17000ValidateChangeRecordingNameFunctionality at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -109,6 +109,13 @@ public class TC1700ValidateChangeRecordingNameFunctionality {
 		
 		//2.open some course whom listed you as instructor
 		course.selectCourseThatStartingWith("Ab");
+		
+		
+		for(int type_of_user = 0; type_of_user < 2; type_of_user++) {
+			
+		if(type_of_user == 1){
+			record.clickOnStudentRecordingsTab();
+		}
 		
 		//3.Check some recording respective checkbox 
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
@@ -138,10 +145,12 @@ public class TC1700ValidateChangeRecordingNameFunctionality {
 		
 		//9. The header background color is as the customize or defualt university background color.
 		confirm_menu.verifyConfirmBackgroundColor(record);
+			
+		//10.The "Ok" Button is displayed on the bottom right corner of the model window.
+		confirm_menu.verifyTheLocationOfTheOkButtonIsInTheButtomRight();
 		
-		//10.The "Edit Recording Properties" caption is displayed inside the header.
-		//11.The informative text "Recording properties have been queued for edit" is displayed below the header.
-		//12.The "Ok" Button is displayed on the bottom right corner of the model window.
+		//11.The "Edit Recording Properties" caption is displayed inside the header.
+		//12.The informative text "Recording properties have been queued for edit" is displayed below the header.
 		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		
 		//13.The second model window disappears.
@@ -156,8 +165,10 @@ public class TC1700ValidateChangeRecordingNameFunctionality {
 		record.verifyThatTheRecordNameEqualsFromTheString(recordeDate,recordNumber,"Record date");
 		
 		//16.Validate the 'Recording is being' edited status disappears within maximum of 2 minutes
-		//record.check
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber);
 	
+		}
+		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
