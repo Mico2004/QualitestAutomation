@@ -152,12 +152,11 @@ public class EditRecording extends Page {
 		clickElement(ApplyButton);
 		Thread.sleep(2000);
 		
-		
 		System.out.println("Click on the apply.");
 		ATUReports.add("Click on the apply.", "True.", "True.", LogAs.PASSED, null);
+		int numberOfAttempts = 0;
 		//click on the ok
-		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
-			
+		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){		
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
 			String message = getTextFromWebElement(ie,5);
 			if(message.contains("Success")){
@@ -167,8 +166,12 @@ public class EditRecording extends Page {
 				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
-				driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
-				Thread.sleep(2000);
+				clickElement(ApplyButton);
+				numberOfAttempts++;
+				if(numberOfAttempts == 5) {
+					ATUReports.add("Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				}
 			}
 			else Thread.sleep(3000);
 		}
@@ -247,7 +250,7 @@ public class EditRecording extends Page {
 				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, null);
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
-				driver.findElement(By.id("AddCaptioning")).click();
+				clickElementJS(AddCaptioningButton);
 				Thread.sleep(2000);
 				countOfErrors++;
 				if(countOfErrors >= 4) {
@@ -308,7 +311,7 @@ public class EditRecording extends Page {
 		
 		clickElement(ApplyButton);
 		Thread.sleep(2000);
-		
+		int numberOfAttempts = 0;
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){
 			
@@ -321,8 +324,12 @@ public class EditRecording extends Page {
 				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, null);
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
-				driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
-				Thread.sleep(2000);
+				clickElement(ApplyButton);
+				numberOfAttempts++;
+				if(numberOfAttempts == 5) {
+					ATUReports.add("Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				}
 			}
 			else Thread.sleep(3000);
 		}
@@ -377,7 +384,7 @@ public class EditRecording extends Page {
 		
 		clickElement(ApplyButton);
 		Thread.sleep(2000);
-		
+		int numberOfAttempts = 0;
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){	
 			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
@@ -389,8 +396,11 @@ public class EditRecording extends Page {
 				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, null);
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
-				driver.findElement(By.cssSelector(".btn.btn-primary.btnApply")).click();
-				Thread.sleep(2000);
+				clickElement(ApplyButton);
+				if(numberOfAttempts == 5) {
+					ATUReports.add("Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				}
 			}
 			else Thread.sleep(3000);
 		}

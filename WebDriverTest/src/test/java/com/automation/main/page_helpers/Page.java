@@ -1149,21 +1149,15 @@ public class Page {
 		return target_string.replaceAll(" ", "");
 	}
 
-	public void waitForAlert(long timeOutInSeconds) {
+	public void waitForAlert(long timeOutInSeconds) throws InterruptedException {
 		int i = 0;
 		while (i < timeOutInSeconds) {
 			try {
 				driver.switchTo().alert();
 				break;
 			} catch (NoAlertPresentException e) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				Thread.sleep(1000);
 				i++;
-				continue;
 			}
 		}
 	}
