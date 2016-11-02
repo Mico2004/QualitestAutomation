@@ -118,7 +118,7 @@ public class TC17011ValidateRecordingDateChangeFunctionality {
 		
 		//get the recording length creator and date are the same as before the edit
 		String recordLen = record.getTheRecordLengthByRecordIndex(recordNumber);
-		String recordBy = record.getTheRecordedByRecordIndex(recordNumber);
+		//String recordBy = record.getTheRecordedByRecordIndex(recordNumber);
 		String recordName = record.getTheRecordingNameIndex(recordNumber);
 		
 		//4.click on the recording tasks->edit recording properties option
@@ -160,7 +160,7 @@ public class TC17011ValidateRecordingDateChangeFunctionality {
 		//17.Validate the recording name, creator and duration are the same as before the edit
 		record.verifyThatTheRecordNameEqualsFromTheString(recordName,recordNumber,"Record name");
 		record.verifyThatTheRecordNameEqualsFromTheString(recordLen,recordNumber,"Record length");
-		record.verifyThatTheRecordNameEqualsFromTheString(recordBy,recordNumber,"Record creator");
+		//record.verifyThatTheRecordNameEqualsFromTheString(recordBy,recordNumber,"Record creator");
 		
 	}
 		

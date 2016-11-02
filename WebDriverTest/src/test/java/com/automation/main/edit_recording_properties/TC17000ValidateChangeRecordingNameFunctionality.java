@@ -126,7 +126,6 @@ public class TC17000ValidateChangeRecordingNameFunctionality {
 		String recordBy = record.getTheRecordedByRecordIndex(recordNumber);
 		String recordeDate = record.getTheRecordingDateIndex(recordNumber);
 		
-		
 		//4.click on the recording tasks->edit recording properties option
 		record.toEditRecordingPropertiesMenu();
 			
@@ -161,7 +160,7 @@ public class TC17000ValidateChangeRecordingNameFunctionality {
 		
 		//15.Validate the recording length, creator and date are the same as before the edit
 		record.verifyThatTheRecordNameEqualsFromTheString(recordLen,recordNumber,"Record length");
-		record.verifyThatTheRecordNameEqualsFromTheString(recordBy,recordNumber,"Record creator");
+		//record.verifyThatTheRecordNameEqualsFromTheString(recordBy,recordNumber,"Record creator");
 		record.verifyThatTheRecordNameEqualsFromTheString(recordeDate,recordNumber,"Record date");
 		
 		//16.Validate the 'Recording is being' edited status disappears within maximum of 2 minutes
