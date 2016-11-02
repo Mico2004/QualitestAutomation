@@ -148,8 +148,10 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		record.verifyThatTheRecordNameEqualsFromTheString(newNameWithOutGaps,recordNumber,"Record name");
 		
 		//15.Check another recording respective checkbox
-		record.unselectIndexCheckBox(recordNumber);
-		record.selectIndexCheckBox(recordNumber+1);
+		record.unselectallCheckbox();
+		String newRecordToChange = record.selectRecordingThatChangeFromThatName(newNameWithOutGaps);
+		recordNumber = record.getIndexOfRecordFromRecordName(newRecordToChange);
+		record.selectIndexCheckBox(recordNumber);
 		
 		//16.Click on 'Recording Tasks - Edit Recording Properties' option
 		record.toEditRecordingPropertiesMenu();
@@ -174,8 +176,10 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber+1,"Record name");
 		
 		//23.Check another recording respective checkbox
-		record.unselectIndexCheckBox(recordNumber+1);
-		record.selectIndexCheckBox(recordNumber+2);
+		record.unselectallCheckbox();
+		String newRecord = record.selectRecordingThatChangeFromThatName(newName);
+		recordNumber = record.getIndexOfRecordFromRecordName(newRecord);
+		record.selectIndexCheckBox(recordNumber);
 		
 		//24.Click on 'Recording Tasks - Edit Recording Properties' option
 		record.toEditRecordingPropertiesMenu();
