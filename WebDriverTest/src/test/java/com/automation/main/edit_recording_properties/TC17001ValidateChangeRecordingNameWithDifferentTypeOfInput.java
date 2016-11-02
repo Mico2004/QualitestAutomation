@@ -173,7 +173,7 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		
 		//22.Validate the recording name change to !@#$%^&*(){}|"?><*/-–
-		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber+1,"Record name");
+		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber,"Record name");
 		
 		//23.Check another recording respective checkbox
 		record.unselectallCheckbox();
@@ -201,7 +201,7 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		
 		//30.Validate the recording name change to !@#$%^&*(){}|"?><*/-–
-		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber+2,"Record name");
+		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber,"Record name");
 		
 	
 		System.out.println("Done.");
