@@ -128,6 +128,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement course_being_copied_status;
 	@FindBy(id = "RecordingLength1")
 	WebElement duration_first_rec;
+	@FindBy(id ="RecordingDate1")
+	WebElement date_first_rec;
 	@FindBy(xpath = "//*[starts-with(@id,'RecordingLength')]")
 	List<WebElement> recordings_list_duratuon;
 	@FindBy(xpath = "//*[starts-with(@id,'RecordingDate')]")
@@ -2656,12 +2658,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		boolean is_exist = isTargetRecordingExist(target_recording);
 		
 		if (is_exist) {
-			System.out.println("Target recording exist in recording list?");
+			System.out.println("Target recording exist in recording list.");
 			ATUReports.add("Recording list.", "Target recording exist.", "Target recording exist.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
-			System.out.println("Target recording not exist in recording list?");
-			ATUReports.add("Target recording not exist in recording list?", "Target recording exist.", "Target recording not exist.", LogAs.FAILED,
+			System.out.println("Target recording not exist in recording list.");
+			ATUReports.add("Target recording not exist in recording list.", "Target recording exist.", "Target recording not exist.", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 		}
@@ -4882,9 +4884,15 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		case "Record date":	
 			recordNameToCompare =getTheRecordingDateIndex(index);
 			break;
+		case "Recording title":	
+			recordNameToCompare =getTheRecordTitleByRecordIndex(index);
+			break;		
+		case "Recording duration":	
+			recordNameToCompare =getTheRecordingDurationByRecordIndex(index);
+			break;
+									
 		}
 		
-
 
 		if(recordNameToCompare.equals(recordOperation)){
 			System.out.println("The " + operation+ ":" + recordNameToCompare + " is equals from the String: " + recordOperation );
@@ -4924,7 +4932,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	
 	public String getTheRecordingDateIndex(int index){
 		
-		waitForVisibility(first_recording_title);
+		waitForVisibility(date_first_rec);
 		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingDate"+Integer.toString(index)+"']"));
 		return record.getText();
 	}
@@ -4941,5 +4949,18 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		return recording_list_names.indexOf(record) + 1;
 	}
 	
+	public String getTheRecordTitleByRecordIndex(int index){
+		
+		waitForVisibility(first_course_title_tests);
+		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingTitle"+Integer.toString(index)+"']"));
+		return record.getText();
+	}
+	
+	public String getTheRecordingDurationByRecordIndex(int index){
+		
+		waitForVisibility(first_course_title_tests);
+		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingDuration"+Integer.toString(index)+"']"));
+		return record.getText();
+	}
 	
 }

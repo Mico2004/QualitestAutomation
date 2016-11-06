@@ -828,7 +828,7 @@ public class EditRecordinPropertiesWindow extends Page {
 	public void verifyThatTheTypeWasChoosen(String type){
 		
 		try {
-			String currentType = type_select.getText();
+			String currentType = new Select(type_select).getFirstSelectedOption().getText();
 				if(currentType.equals(type)){
 					System.out.println("Verify that the type was choosen.");				
 					ATUReports.add("Verify that the type was choosen.", "Success.", "Success", LogAs.PASSED, null);
@@ -845,6 +845,26 @@ public class EditRecordinPropertiesWindow extends Page {
 			e.getMessage();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
+	}
+
+
+	public String getRecordBy(String recordByName) {
+		
+		String[]splitOwner= recordByName.split(" ");
+		String OwnerToCheck = splitOwner[1].substring(1, splitOwner[1].length()-1);
+			
+		return  "recorded by: "+OwnerToCheck;
+		
+	}
+
+
+	public String getNewRecordNameForTest(String recordByName) {
+		
+		String[]splitOwner= recordByName.split(" ");
+		String OwnerToCheck = splitOwner[1].substring(1, splitOwner[1].length()-1);
+		
+		return  OwnerToCheck +" (" + splitOwner[0] +")";
+		
 	}
 	
 }
