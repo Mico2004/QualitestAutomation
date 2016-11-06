@@ -581,6 +581,7 @@ public class EditRecordinPropertiesWindow extends Page {
 	
 	public void addOwnersToList(String OwnerType){
 		
+		try{
 		owners.clear();
 		if(OwnerType.equals("Instractor")){
 			owners.add(PropertyManager.getProperty("ExcutiveAdmin"));
@@ -588,15 +589,20 @@ public class EditRecordinPropertiesWindow extends Page {
 			owners.add(PropertyManager.getProperty("User1"));
 			owners.add(PropertyManager.getProperty("User2"));
 		} else if( OwnerType.equals("Student")) {
-			owners.add(PropertyManager.getProperty("User2"));
+			owners.add(PropertyManager.getProperty("User3"));
 			owners.add(PropertyManager.getProperty("User4"));
 		} else {
 			owners.add(PropertyManager.getProperty("ExcutiveAdmin"));
 			owners.add(PropertyManager.getProperty("SuperUser"));
 			owners.add(PropertyManager.getProperty("User1"));
 			owners.add(PropertyManager.getProperty("User2"));
-
+			owners.add(PropertyManager.getProperty("User3"));
+			owners.add(PropertyManager.getProperty("User4"));
 		}
+	}catch(Exception e){
+		e.getMessage();
+		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	}
 	}
 	
 	public void verifyThatBoardersOfTheDropDownAreInBlack(WebElement element) {
@@ -674,10 +680,15 @@ public class EditRecordinPropertiesWindow extends Page {
 
 	public void insertChapterName(String target_name) {
 		
-		recording_name.sendKeys(target_name);
-		System.out.println("Recording name changed to: " + target_name);
-		ATUReports.add("Recording name changed.", "Change to: " + target_name,"Changed to " + recording_name + target_name, LogAs.PASSED, null);
-		Assert.assertTrue(true);
+		try {
+			recording_name.sendKeys(target_name);
+			System.out.println("Recording name changed to: " + target_name);
+			ATUReports.add("Recording name changed.", "Change to: " + target_name,"Changed to " + recording_name + target_name, LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception e) {
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 		
 	}
 
