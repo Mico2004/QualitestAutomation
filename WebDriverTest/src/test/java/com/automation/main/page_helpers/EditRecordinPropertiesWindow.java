@@ -696,7 +696,7 @@ public class EditRecordinPropertiesWindow extends Page {
 	// that title open or closed
 	public boolean isConfirmationMenuClosed() throws InterruptedException {
 		try {
-			for(int i = 0; i < 30 ; i++){
+			for(int i = 0; i < 60 ; i++){
 				if(!save_button.isDisplayed()){
 					return true;
 				}else{
