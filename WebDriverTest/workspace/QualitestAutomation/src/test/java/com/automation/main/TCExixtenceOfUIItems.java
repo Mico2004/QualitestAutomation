@@ -5,7 +5,7 @@ package com.automation.main;
 import java.text.DateFormat;
 import java.util.Date;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -120,7 +120,7 @@ public void closeBroswer() {
 		record.ClickOneCheckedboxSelected(record.getCheckbox());
 		record.ClickOneCheckedboxNotSelected(record.getCheckbox());
 		record.checkall.click();// make all checkboxes marked
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		record.verifyAllCheckedboxSelected();
 		/// driver.navigate().refresh();
@@ -129,7 +129,7 @@ public void closeBroswer() {
 		record.verifyAllCheckedboxNotSelected();
 		copy.verifyCopyMenu(record);
 		copy.verifyCopyMenuTitle();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		copy.verifyMenuColor(record);
 		copy.verifyInfoText();
 		copy.verifyCoursesInCopyMenu(course);

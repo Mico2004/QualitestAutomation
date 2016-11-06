@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -144,10 +144,10 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 			driver.switchTo().window(window);
 			break;
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String sender = "no-reply@tegrity.com";
 		String comment = "dsfasfagagagsgsgg";
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String subject = sdf.format(date);
@@ -162,7 +162,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 			driver.switchTo().window(window);
 			break;
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.signOut();
 		//////////////////////////////////////////////////////////////////// End
 		//////////////////////////////////////////////////////////////////// of
@@ -179,7 +179,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		/// 4.verify "Disclaimer" leads [Guest] User to the EULA accepting page.
 		try {
 			course.disclaimer.click();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			eula_page.verifyElementsOfEula(eula);/// configure manually
 			eula_page.waitForVisibility(eula_page.accept_button);
 			/// 5.click on accept
@@ -205,7 +205,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		/// 7.verify "Disclaimer" leads [Guest] User to the EULA accepting page.
 		try {
 			course.disclaimer.click();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			eula_page.verifyElementsOfEula(eula);/// configure manually
 			course.waitForVisibility(driver.findElement(By.xpath("//*[@id=\"main\"]/div/div[2]/form/input[1]")));
 			/// 8.click on decline
@@ -243,7 +243,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 			driver.switchTo().window(window);
 			break;
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_page.signOut();
 		// 14.login as guest
 		tegrity.waitForVisibility(tegrity.Login_as_guest_button);
@@ -270,7 +270,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		//// Click on "Online help" menu item.
 
 		course.toHelpMenu(course.online_help);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		// 18.verify help page
 		String parentWindow = driver.getWindowHandle();
@@ -291,9 +291,9 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		course.verifyGetStartedBlock();
 		/// 20.Click on the 'X' on the top right corner of the 'Get started
 		/// block
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.close_get_started_block.click();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.verifyNoGetStartedBlock();
 		/// 21.Click on "Get started" menu item.
 		course.toHelpMenu(course.get_started);
@@ -309,20 +309,20 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		driver.get("http://www.fakemailgenerator.com/#/armyspy.com/Snothe/");
 		email_login.LoginEmailPage("qualitestmcgrawhill");
 		/// 25.Make sure you recived the email
-        Thread.sleep(3000);
+        Thread.sleep(Page.TIMEOUT_TINY);
        
 		email_inbox.verifyEmailMessage(driver, subject, sender, comment,"Guest (rndsupport@tegrity.com)");
 		/// 26.Click on "Run diagnostic" menu item.
 		// 1.load page
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		/// 2.LoginHelperPage as guest
 	//	tegrity.loginAsguest();
 		/// 26.1 Click on "run diagnostics" menu item
 		course.waitForVisibility(course.sign_out);
 		course.toHelpMenu(course.run_diagnostics);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 27.verify run diagnostics page
 		parentWindow = driver.getWindowHandle();
 		handles = driver.getWindowHandles();
@@ -348,12 +348,12 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		// 31.click recording and play it
 		record.clickOnRecordingsTab();
 		record.waitForVisibility(record.getCheckbox());
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 27.player is working
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 	///// to go back to crecording window handler
 			for (String handler : driver.getWindowHandles()) {

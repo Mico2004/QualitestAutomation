@@ -60,6 +60,8 @@ import org.xml.sax.InputSource;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class RecordingHelperPage extends Page {
+	@FindBy(id="wrapper")
+	public WebElement wrapper;
 	@FindBy(xpath = "//*[@id=\"wrapper\"]/div[1]")
 	public WebElement background;
 	@FindBy(id = "StartRecordingButton")
@@ -285,6 +287,7 @@ public class RecordingHelperPage extends Page {
 		try {
 			Thread.sleep(1000);
 			System.out.println("deleteAllRecordings1");
+			checkStatusExistenceForMaxTTime(300);
 			wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
 			System.out.println("deleteAllRecordings2");
 			int number_of_recordings_in_target_course = getNumberOfRecordings();
@@ -342,26 +345,27 @@ public class RecordingHelperPage extends Page {
 	public void checkStatusExistenceForMaxTTime(int time_in_sec) throws InterruptedException {
 		System.out.println("Begin Status Check");	
 		try{
-		new WebDriverWait(driver, 7).until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.id("wrapper")), "length: "));
-		}catch(org.openqa.selenium.TimeoutException msg){
-			ATUReports.add("There are no recordings in this course tab ",LogAs.PASSED, null);
-			return;
-		}		
-		for (int i = 0; i < (time_in_sec / 3 + 1); i++) {
-			if (!checkExistenceOfStatusInRecordings()) {
-				System.out.println("There is no more status for any recording.");
-				ATUReports.add("There is no more status for any recording.", LogAs.PASSED, null);
-				System.out.println("after There is no more status for any recording.");
-				Assert.assertTrue(true);	
-				return;
-			}
-			System.out.println("Status Check iteration"+i);
-			Thread.sleep(3000);
+		new WebDriverWait(driver, 7).until(ExpectedConditions.textToBePresentInElement(wrapper, "length: "));		
 		}
-
-		System.out.println("There is still status for some recording.");
-		ATUReports.add("There is still status for some recording.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		Assert.assertFalse(true);
+		catch(org.openqa.selenium.TimeoutException msg){
+			
+			ATUReports.add("There are no recordings in this course tab ",LogAs.WARNING, null);
+		}
+		try{
+		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Moving/Copying")));
+		
+		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Being copied from")));
+	
+		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Being moved from")));	
+		
+		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Recording is being edited.")));
+	
+		}catch(org.openqa.selenium.TimeoutException msg){
+			
+			ATUReports.add("Timeout for status disappearing is over but status is still displayed",LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+		}		
+		
+		ATUReports.add("There is not more status for any recording", LogAs.PASSED,null);		
 	}
 
 
@@ -1835,6 +1839,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 
 	// verify recording menu color
+
 	public void verifyColorButton(String color) throws InterruptedException {
 
 			String white = "#0e76bf";/// blue in ie chrome and firefox
@@ -1848,6 +1853,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				ATUReports.add("Button background color is not White", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		
+
 		}
 	
 
@@ -2648,14 +2654,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// This function verify that target recording exist in recording list
 	public void verifyThatTargetRecordingExistInRecordingList(String target_recording) {
 		boolean is_exist = isTargetRecordingExist(target_recording);
-
+		
 		if (is_exist) {
-			System.out.println("Target recording exist in recording list.");
+			System.out.println("Target recording exist in recording list?");
 			ATUReports.add("Recording list.", "Target recording exist.", "Target recording exist.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
-			System.out.println("Target recording not exist in recording list.");
-			ATUReports.add("Recording list.", "Target recording exist.", "Target recording not exist.", LogAs.FAILED,
+			System.out.println("Target recording not exist in recording list?");
+			ATUReports.add("Target recording not exist in recording list?", "Target recording exist.", "Target recording not exist.", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 		}
@@ -4088,6 +4094,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		return checkbox;
 	}
+	public WebElement getCheckboxAccordingToIndex(int i) {
+
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("Checkbox"+i)));
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("Checkbox"+i)));	
+		
+	
+	return driver.findElement(By.id("Checkbox"+i));
+}
 
 	public void setCheckbox(WebElement checkbox) {
 		this.checkbox = checkbox;
@@ -4829,6 +4843,29 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}	
 	}
 	
+	public int getRecordingIndexWithoutAnyStatus(){
+	try{
+		int i = 1;
+		for (WebElement e : driver.findElements(By.cssSelector(".recordingData"))) {			    		
+			if(isElementPresent(By.id(("RecordingStatus")+ Integer.toString(i)))){
+				WebElement recordStatus =getStaleElem(By.id("RecordingStatus"+ Integer.toString(i)), driver,5);
+				String current_element = getTextFromWebElement(recordStatus,5);						
+				if (current_element.equals("") || current_element.equals("IE, FF, Safari Ready")) 
+					return i;
+				
+				i++;
+			   } 		
+			}
+		return 0;
+			
+		}catch(Exception e){
+			ATUReports.add("Retrieving clear status recording failed",e.getMessage(),  LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			return 0;
+		}
+		
+		
+	}
+	
 	public void verifyThatTheRecordNameEqualsFromTheString(String recordOperation,int index,String operation){
 		
 	try{
@@ -4848,6 +4885,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			break;
 		}
 		
+
 
 		if(recordNameToCompare.equals(recordOperation)){
 			System.out.println("The " + operation+ ":" + recordNameToCompare + " is equals from the String: " + recordOperation );

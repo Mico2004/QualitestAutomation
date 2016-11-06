@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -109,7 +109,7 @@ public class PostTestDeleteUsers {
 			// 1. Login as INSTRUCTOR.
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
         	tegrity.loginAdmin("Admin");
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			String login_url = driver.getCurrentUrl();
 			String university_name  = login_url.split("/")[2].substring(0,  login_url.split("/")[2].length() - 12);
@@ -123,17 +123,17 @@ public class PostTestDeleteUsers {
 			
 			mange_adhoc_course_enrollments.clickOnAdminDashboard();
 			
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 		
 			// 2. Click on user builder href link
 			admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 			
-			Thread.sleep(10000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 					
 			// 3. Click on create course href link 
 			driver.switchTo().frame(0);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 4. delete users-                          delete button id
 	WebElement delete_user_button=driver.findElement(By.id("ctl00_ContentPlaceHolder1_rptUserBuilder_ctl02_lbDelUser"));
@@ -144,10 +144,10 @@ public class PostTestDeleteUsers {
 				try {
 				delete_user_button.click();
 				System.out.println("clicked on delete");
-				Thread.sleep(500);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				driver.switchTo().alert().accept();
 			    System.out.println("user deleted");
-				Thread.sleep(1500);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				try {
 				delete_user_button=driver.findElement(By.id("ctl00_ContentPlaceHolder1_rptUserBuilder_ctl02_lbDelUser"));
 				}

@@ -6,7 +6,7 @@ package com.automation.main;
 import java.util.Date;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -129,11 +129,11 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
 		
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 2. Log in as INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Open some course.
 		course.selectCourseThatStartingWith("Ba");
@@ -142,11 +142,11 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		top_bar_helper.search_box_field.click();
 	
 		// 5. Change the name of the chapter that we mentioned in the preconditions to "/\[]:;|=,+*?<>".
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.selectIndexCheckBox(1);
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnRecordingTaskThenEditRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 
 		String new_chapter_name = "/\\[]:;|=,+*?<>";
@@ -154,7 +154,7 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		edit_recording.changeFirstChapterRecordingNameToTargetName(new_chapter_name);
 		
 		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 6. Search the "/\[]:;|=,+*?<>" chapter in the search field.
 		// 6.1. The chapter is'nt displayed.
@@ -166,11 +166,11 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		
 		// 7. Change the name of the chapter that we mentioned in the preconditions to "abc?<>".
 		driver.navigate().to(course_url);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.selectIndexCheckBox(1);
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnRecordingTaskThenEditRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 
 		new_chapter_name = "abc?<>";
@@ -178,7 +178,7 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		edit_recording.changeFirstChapterRecordingNameToTargetName(new_chapter_name);
 		
 		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. Search the "abc?<>" chapter in the search field.
 		// 8.1. The chapter is'nt displayed.

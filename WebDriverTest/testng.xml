@@ -3,7 +3,7 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
-    		  <class name="com.automation.main.edit_recording_properties.TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput" />
+    		  <class name="com.automation.main.private_courses.TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor" />
     	  	  
     	  	 
     </classes>

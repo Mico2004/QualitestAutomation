@@ -4,7 +4,7 @@ package com.automation.main;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -129,12 +129,12 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		//PreTest enter as Admin and checkboxs all
 		tegrity.loginAdmin("Admin");
 		initializeCourseObject();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//PreTest enable student test +youtube + capition
 		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
 		advanced_service_settings_Page.enableYoutbeCapitionStudent(confirm_menu);	
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		top_bar_helper.clickOnSignOut();
 		
 		tegrity.loginCourses("SuperUser");// log in courses page
@@ -178,7 +178,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			if(type_of_course==1) {
 				// 6. Click on the "public courses" tab.
 				course.clickOnPublicCoursesTab();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			// 7. Click on a public course that: appear on your active courses list as well.
@@ -257,7 +257,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			
 			// 16. Click on "Additional Contents" on both browsers.
 			record.clickOnAdditionContentTab();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 17. Validate that the files list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -268,7 +268,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			
 			// 18. Click the 'Student Recordings' tab.
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 19. Validate that the recordings list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -279,7 +279,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			
 			// 20 Click the 'Tests' tab.
 			record.clickOnTestsTab();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 21. Validate that the recordings list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -386,7 +386,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 				
 				course.clickOnPastCoursesTabButton();
 			}
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 					
 			// 24. Click on a public course that: 1. appear on your past courses list. 2. have a recordings and additional contents (uploaded files) in it.
 			// 25. Open the same course on the Past course tab in a different browser (the same browser in which you have checked the previous course under "active courses" tab) (By looping).
@@ -450,7 +450,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 					
 			// 33. Click on "Additional Contents" on both browsers.
 			record.clickOnAdditionContentTab();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 					
 			// 34. Validate that the files list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -461,7 +461,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 					
 			// 35. Click the 'Student Recordings' tab.
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 					
 			// 36. Validate that the recordings list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -472,7 +472,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 					
 			// 37. Click the 'Tests' tab.
 			record.clickOnTestsTab();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 					
 			// 38. Validate that the recordings list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -484,7 +484,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			// 39. Open one of the public course playback - The recording is playable.
 			if(type_of_course==1) {
 				record.clickOnRecordingsTab();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				String first_recording_title = record.getFirstRecordingTitle();
 				record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_title);
 				player_page.verifyTimeBufferStatusForXSec(10);
@@ -570,17 +570,17 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		
 		// PostTest
 		driver.navigate().back();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		tegrity.loginCourses("SuperUser");
 		course.selectCourseThatStartingWith(active_public_course_name);
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.returnToCourseListPage();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.selectCourseThatStartingWith(past_public_course_name);
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();

@@ -4,7 +4,7 @@ package com.automation.main;
 
 
 import java.util.List;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -121,7 +121,7 @@ DesiredCapabilities capability;
 		String selected_recording_name = record.getFirstRecordingTitle();
 		System.out.println("Record to select: " + selected_recording_name);
 		record.selectFirstCheckbox();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
 		
@@ -130,7 +130,7 @@ DesiredCapabilities capability;
 		
 		// 6. Click "Copy Recording(s)".
 		copy.clickOnCopyButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 7. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -167,14 +167,14 @@ DesiredCapabilities capability;
 		// 8. While recording is being copied, click the "Courses" link at the breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9. Select destination course.
 		course.selectTargetCourse(target_course);
 		
 //		// 8-9. Go to target course url.
 //		driver.navigate().to(target_course_url);
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 10. Verify that destination recording has a "Moving/Copying" status.
 		// 10.1. Recr`row is grayed out.

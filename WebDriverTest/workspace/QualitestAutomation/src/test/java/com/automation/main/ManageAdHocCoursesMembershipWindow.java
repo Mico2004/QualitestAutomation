@@ -9,7 +9,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -87,7 +87,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			if(first_user_of_user_list.getText().contains(user_name)) {
 				break;
 			}
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 	}
@@ -106,7 +106,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	
 	public boolean clickOnOkButton() throws InterruptedException {
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		waitForVisibility(ok_button);
 		ok_button.click();		
 		waitForAlert(60);
@@ -195,7 +195,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 				String val=el.getText();
 				
 				if(el.getText().contains(name)) {
-					Thread.sleep(2000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 					el.click();
 					System.out.println("User selected from user list.");
 					return true;
@@ -302,7 +302,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			if(selectIrUserFromUserList(instructor_elements_list, instructor_name)) {
 				break;
 			} else {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 	}
@@ -314,7 +314,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			if(selectIrUserFromUserList(student_elements_list, student_name)) {
 				break;
 			} else {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 	}

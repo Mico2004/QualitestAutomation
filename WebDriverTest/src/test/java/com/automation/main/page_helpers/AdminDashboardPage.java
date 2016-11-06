@@ -165,10 +165,6 @@ public class AdminDashboardPage extends Page {
 		
 	{
 //		wait.until(ExpectedConditions.visibilityOf(courses_submenu.get(0)));
-
-
-
-
 		try {
 		System.out.println("clickOnTargetSubmenuUsers1");
 		waitForVisibility(CoursesBox);

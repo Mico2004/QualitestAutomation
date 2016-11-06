@@ -5,7 +5,7 @@ package com.automation.main;
 
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -124,7 +124,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		record.clickOnRecordingTaskThenCopy();
 		copy.selectTargetCourseFromCourseList(copy_to);
 		copy.clickOnCopyButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		record.checkStatusExistenceForMaxTTime(360);
 		record.returnToCourseListPage();
@@ -150,7 +150,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		//6. Click "Copy Recording(s)" button without selecting a course
 		copy.clickOnCopyButton();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//7. Click "OK" button
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -296,7 +296,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		
 		
 		//17. Click on any chapter.
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 		
@@ -305,7 +305,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		//panels.get(new_recording_index).click();
 		
 		//TODO: add WebDriverWait
-		//Thread.sleep(10000);
+		//Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//18. Recording is displayed and playing correctly.
 		player_page.verifyTimeBufferStatusForXSec(10);

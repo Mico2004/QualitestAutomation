@@ -237,6 +237,18 @@ public class Page {
 			e.printStackTrace();
 		}
 	}
+	
+	public void waitForVisibility(WebElement element, int seconds)// visibility of an element
+	{
+		try {
+			Thread.sleep(500);	
+			new WebDriverWait(driver, seconds).until(ExpectedConditions.visibilityOf(element));			
+		} catch (Exception e) {
+			System.out.println("Waiting for element visibiliy failed");
+			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
+		}
+	}
 
 	public boolean isElementPresent(By by) {
 		try {
@@ -499,22 +511,18 @@ public class Page {
 
 	/// sign out from any page except Login page
 	public void signOut() {
-
 		try {
 			Thread.sleep(1000);
-		System.out.println("signOut1");		 
-		((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");
-		Thread.sleep(2000);
-		new WebDriverWait(driver, 10).until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
-		System.out.println("signOut3");
-		for (int second = 0;second<=60; second++) {
-		
-			if (second >= 60) {
+			System.out.println("signOut1");		 
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");			
+			new WebDriverWait(driver, 25).until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
+			System.out.println("signOut3");
+			for (int second = 0;second<=60; second++) {		
+				if (second >= 60) {
 				System.out.println("LogOut from user not succeeded.");
 				ATUReports.add(" Login page timeout", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
-			}
-		
+			}		
 				if (driver.getTitle().equals("Tegrity Lecture Capture"))// check// if// element// is// present
 				{
 					System.out.println("Signout from user succeeded");
@@ -1015,19 +1023,14 @@ public class Page {
 	// This function get into index frame
 	public void getIntoFrame(int frame_index) {
 		// driver.switchTo().frame(frame_index);
-		for (int i = 0; i < 10; i++) {
+		
 			try {
-				driver.switchTo().frame(frame_index);
-				break;
+				new WebDriverWait(driver, 60).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frame_index));				
 			} catch (Exception msg) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				ATUReports.add("Switch to frame failed", msg.getMessage(),"True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);				
 			}
-		}
+		
 
 	}
 
@@ -1071,6 +1074,7 @@ public class Page {
 	// input
 	public void sendKeysToWebElementInput(WebElement web_element, String target_input) {
 		try {
+			waitForVisibility(web_element);
 			web_element.clear();
 			web_element.sendKeys(target_input);
 

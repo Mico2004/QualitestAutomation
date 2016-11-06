@@ -3,7 +3,7 @@ package com.automation.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -81,7 +81,7 @@ public class TC15653DeleteFailedRecording {
 		// 3.select invalid courses
 		course.selectCourseThatStartingWith("BankInvalid");
 		// 4.select first recording
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		record.getCheckbox().click();// first recording
 		// 5.check its status

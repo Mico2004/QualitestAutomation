@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -162,11 +162,11 @@ public class TegrityAppiumPoc {
 		// 3.click on mu account
 		driver.findElement(By.id("MyAccountLink")).click();
 		// 4.generate code
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.waitForVisibility(driver.findElement(By.id("GenerateCodeButton")));
 		driver.findElement(By.id("GenerateCodeButton")).click();
 		// 5.get string code
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String code = driver.findElement(By.id("ConnectionCodeContainer")).getAttribute("value").toLowerCase();
 		System.out.println(code);
 		driver.quit();
@@ -178,10 +178,10 @@ public class TegrityAppiumPoc {
 		// configurations specified in Desired Capabilities
 		driver = new RemoteWebDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		wait = new WebDriverWait(driver, 30);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		Robot robot = new Robot();
 		robot.mouseMove(500, 500);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	///	  MobileElement e = (MobileElement) driver.findElement(By.id("decor_content_parent"));
 		//  e.swipe(SwipeElementDirection.LEFT, 2000);
 	///	driver.findElement(By.id("connect_pager"));
@@ -189,9 +189,9 @@ public class TegrityAppiumPoc {
 		
 			try {
 				robot.keyPress(KeyEvent.VK_RIGHT);
-				Thread.sleep(200);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				robot.keyRelease(KeyEvent.VK_RIGHT);
-				Thread.sleep(200);// solution
+				Thread.sleep(Page.TIMEOUT_TINY);// solution
 				if (driver.findElement(By.id("connect_edit_text")).isDisplayed())// check if visible
 				{
 				
@@ -202,18 +202,18 @@ public class TegrityAppiumPoc {
 			} catch (Exception e) {
 			}
 		
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 	
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		/// 7.click on edit text and enter code to login
 		driver.findElement(By.id("connect_edit_text")).sendKeys(code);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		/// driver.findElement(By.id("connect_edit_text")).sendKeys(Keys.ENTER);
 		robot.keyPress(KeyEvent.VK_ENTER);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyRelease(KeyEvent.VK_ENTER);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 8.verify "loading" appears and later dissappears
 		WebElement message = driver.findElement(By.id("message"));
 		wait.until(ExpectedConditions.visibilityOf(message));

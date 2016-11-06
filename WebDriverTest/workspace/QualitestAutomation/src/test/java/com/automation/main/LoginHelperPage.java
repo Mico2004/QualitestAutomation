@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -119,7 +119,7 @@ public class LoginHelperPage extends Page {
 			ATUReports.add("Login as", user_name, "Success login", "Success fail", LogAs.FAILED, null);
 		}
 
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		if (driver.getCurrentUrl().contains("eula")) {
 			try {
 				eula_accept_button.click();
@@ -146,9 +146,9 @@ public class LoginHelperPage extends Page {
 				System.out.println("Tegrity courses home page didn't load");
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		Assert.assertEquals(driver.getTitle(), "Tegrity - Courses");
 	}
@@ -156,7 +156,7 @@ public class LoginHelperPage extends Page {
 	public void loginAdmin(String user_name) throws InterruptedException// login
 																		// courses
 	{
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		waitForVisibility(button_login);
 		fillUser(user_name);
 
@@ -190,9 +190,9 @@ public class LoginHelperPage extends Page {
 		// LogAs.FAILED, null);
 		// }
 		//
-		// Thread.sleep(1000);
+		// Thread.sleep(Page.TIMEOUT_TINY);
 		// }
-		// Thread.sleep(1000);
+		// Thread.sleep(Page.TIMEOUT_TINY);
 		//
 		// Assert.assertEquals(driver.getTitle(),"Tegrity - Courses");
 	}
@@ -201,7 +201,7 @@ public class LoginHelperPage extends Page {
 	public void loginCoursesByParameter(String user_name) throws InterruptedException// login
 	// courses
 	{
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		waitForVisibility(usernamefield);
 		setUserText(user_name);
 		fillPass();
@@ -215,7 +215,7 @@ public class LoginHelperPage extends Page {
 			ATUReports.add("Login as", user_name, "Success login", "Success fail", LogAs.FAILED, null);
 		}
 
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		if(!(driver instanceof ChromeDriver)) {
 			if(!isElementPresent(By.id("CoursesHeading"))) {		
@@ -259,9 +259,9 @@ public class LoginHelperPage extends Page {
 						"Course List page is not displayed", LogAs.FAILED, null);
 			}
 
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		Assert.assertEquals(driver.getTitle(), "Tegrity - Courses");
 	}

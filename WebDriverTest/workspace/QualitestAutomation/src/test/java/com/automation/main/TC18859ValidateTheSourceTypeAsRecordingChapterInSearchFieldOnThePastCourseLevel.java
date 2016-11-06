@@ -6,7 +6,7 @@ import java.util.List;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -132,36 +132,36 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		initializeCourseObject();
 			
 		String current_course = course.selectCourseThatStartingWith("PastCourseA");
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		record.signOut();
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 			
 		
 		// 2. move course from the bank to the past courses 
 		tegrity.loginCourses("SuperUser");
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		//2.1 enter to the bank
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		// 2.2 get to the student tab
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		// 2.3 select the first checkbox and enter to the copy menu
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		// 2.4 select the copy button and wait for the record to move
 		copy.clickOnCopyButton();	
 		record.checkStatusExistenceForMaxTTime(360);
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		record.signOut();
-		Thread.sleep(1000); 
+		Thread.sleep(Page.TIMEOUT_TINY); 
 		
 		// 3. enter as admin and unroll the course 
 		tegrity.loginAdmin("Admin");
@@ -169,36 +169,36 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		 
 		// 3.1 Click on course builder href link
 		admin_dash_board_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-	 	Thread.sleep(10000);
+	 	Thread.sleep(Page.TIMEOUT_TINY);
 	 		
 	 	// 3.2 Click on create course href link 
 	 	driver.switchTo().frame(0);
 	 		
 	 	// 3.3 Search target course name
 	 	mange_adhoc_course_enrollments.searchAndFilterCourses(current_course);
-	 	Thread.sleep(7000);
+	 	Thread.sleep(Page.TIMEOUT_TINY);
 	 	
 	 		
 	 	// 3.4 Click on result first course (the only one) membership button
 	 	mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
-	 	Thread.sleep(2000);
+	 	Thread.sleep(Page.TIMEOUT_TINY);
 	 	
 	 	// 3.5 remove the instractour from the course 
 	 	mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list,"User1");
 	 	System.out.println("removed instructor 1");
-	 	Thread.sleep(1000);
+	 	Thread.sleep(Page.TIMEOUT_TINY);
 	 		
 	 	// 3.6 Add selected user to instructor list
 	 	mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
-	 	Thread.sleep(3000);   	
+	 	Thread.sleep(Page.TIMEOUT_TINY);   	
 	 
 	 	// 3.7 click on the ok button
 	 	mangage_adhoc_courses_membership_window.ok_button.click();
-	 	Thread.sleep(1000);
+	 	Thread.sleep(Page.TIMEOUT_TINY);
 	 	    
 	 	// 3.8 click on the alert
 	 	driver.switchTo().alert().accept();
-	 	Thread.sleep(2000);
+	 	Thread.sleep(Page.TIMEOUT_TINY);
 	 	record.signOut();
 		
 	 	/// end pre test
@@ -207,30 +207,30 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		tegrity.loginCourses("User1");
 		
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		course.selectCourseThatStartingWith("PastCourseA");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Get Recording Chapter information.
 		record.verifyFirstExpandableRecording();
 		//record.first_recording_title.click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String recording_chapter = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 
 		
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 2. Log in as INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 3. Open some course from the past courses Tab.
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 4. Set the focus to the field with a mouse pointer.
 		top_bar_helper.search_box_field.click();
@@ -273,7 +273,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		// 7. Click on the back cursor in the browser to navigate to the search results page.
 		driver.navigate().back();
 		search_page.waitUntilSpinnerImageDisappear();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 8. Click on title of the chapter.
 		search_page.exitInnerFrame();
@@ -285,7 +285,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		// 9. Click on the back cursor in the browser to navigate to the search results page.
 		driver.navigate().back();
 		search_page.waitUntilSpinnerImageDisappear();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 10. Click on the recording title of the chapter.
 		search_page.exitInnerFrame();
@@ -297,7 +297,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		// 11. Click on the back cursor in the browser to navigate to the search results page.
 		driver.navigate().back();
 		search_page.waitUntilSpinnerImageDisappear();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 12. Click on the course name in the breadcrumb.
 		search_page.exitInnerFrame();
@@ -305,7 +305,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		
 		// 13. Sign Out.
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

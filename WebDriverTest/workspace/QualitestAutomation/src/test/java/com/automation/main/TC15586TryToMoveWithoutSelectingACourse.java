@@ -2,7 +2,7 @@ package com.automation.main;
 
 
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -118,7 +118,7 @@ public class TC15586TryToMoveWithoutSelectingACourse {
 		// 5. Click "Move Recording(s)" button without selecting a course.
 		move_window.clickOnMoveRecordings();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 6. Click "OK" button + Message box "A course must be selected." is displayed

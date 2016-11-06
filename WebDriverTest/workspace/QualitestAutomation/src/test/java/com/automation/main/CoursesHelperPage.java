@@ -20,7 +20,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -150,7 +150,7 @@ public class CoursesHelperPage extends Page {
 			waitForVisibility(second_course_button);
 			course_name = second_course_button.getText();
 			clickElement(second_course_button);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			System.out.println("Clicked on second course");
 			ATUReports.add("Select course", "Clicked on second course", "Clicked on second course", LogAs.PASSED, null);
 		} catch (Exception e) {
@@ -166,7 +166,7 @@ public class CoursesHelperPage extends Page {
 			waitForVisibility(first_course_button);
 			course_name = first_course_button.getText();
 			clickElement(first_course_button);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			ATUReports.add("Select course", "Clicked on first course", "Course Details page is displayed", LogAs.PASSED,null);
 		} catch (Exception e) {
 			
@@ -233,7 +233,7 @@ public class CoursesHelperPage extends Page {
 			waitForVisibility(course_button);
 			course_name = course_button.getText();
 			clickElement(course_button);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			ATUReports.add(" clicked course", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 		} catch (Exception e) {
 			ATUReports.add(" clicked course failed", LogAs.FAILED, null);
@@ -272,7 +272,7 @@ public class CoursesHelperPage extends Page {
 				builder.moveToElement(wi).build().perform();
 				courses_heading.click();
 				builder.click();
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -335,18 +335,18 @@ public class CoursesHelperPage extends Page {
 		for (String course_name : current_course_list) {
 			clickOnTargetCourseName(course_name);
 
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			rec.moveToElementAndClick(rec.course_task_button, driver);
 			if ((rec.verifyElement(rec.course_settings_button))) {
 				course_list_for_which_user_is_instructor.add(course_name);
 			}
 
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			rec.returnToCourseListPage();
 
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 
 		return course_list_for_which_user_is_instructor;
@@ -441,12 +441,12 @@ public class CoursesHelperPage extends Page {
 		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 		wait.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
 		//record_helper_page.checkAllCheckBox();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		while (!record_helper_page.check_all_checkbox.isSelected()) {
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 			new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
 			clickElement(record_helper_page.check_all_checkbox);
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 
@@ -595,8 +595,8 @@ public class CoursesHelperPage extends Page {
 			
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
 			clickElement(recording_helper_page.check_all_checkbox);
-			Thread.sleep(500);
-			//Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
+			//Thread.sleep(Page.TIMEOUT_TINY);
 			//wait.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
 			//recording_helper_page.check_all_checkbox.click();
 			try {
@@ -605,7 +605,7 @@ public class CoursesHelperPage extends Page {
 				} else if (type_of_recordings == 3) {
 					recording_helper_page.clickOnRecordingTaskThenDelete();
 				}
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 				delete_menu.clickOnDeleteButton();
 			} catch (Exception msg) {
 				System.out.println("There is no recordings in target course.");
@@ -1183,7 +1183,7 @@ public class CoursesHelperPage extends Page {
 			if (number_of_courses > 0) {
 				String x_recordings_y_new = driver.findElement(By.id("RecordingsCounter1")).getText();
 				if (x_recordings_y_new.split(" ").length == 3) {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				} else {
 					to_wait_until_data_loads = false;
 				}
@@ -1509,11 +1509,11 @@ public class CoursesHelperPage extends Page {
 					LogAs.PASSED, null);
 		} else {
 			clickOnPublicCoursesTab();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			List<String> CoursesList = getCourseList();
 			courses = new String[CoursesList.size()];
 			courses = CoursesList.toArray(courses);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			verifyCourseNotExist(target_course);
 		}
 	}
@@ -1551,7 +1551,7 @@ public class CoursesHelperPage extends Page {
 			record_helper_page.clickOnTestsTab();
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		// wait.until(ExpectedConditions.visibilityOf(record_helper_page.first_recording_title));
 
@@ -1565,11 +1565,11 @@ public class CoursesHelperPage extends Page {
 
 		// copy_menu.selectTargetCourseFromCourseList(destination_course_name);
 		copy_menu.selectTargetCourseFromCourseListThatStartWith(des_start_with);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		copy_menu.clickOnCopyButton();
-		Thread.sleep(10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		confirmation_menu.clickOnOkButton();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
 			record_helper_page.checkStatusExistenceForMaxTTime(600);
 		}
@@ -1611,13 +1611,13 @@ public class CoursesHelperPage extends Page {
 			CopyMenu copy, ConfirmationMenu confirm) throws InterruptedException {
 		String target_course = selectCourseThatStartingWith(target_course_start_with);
 
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		if (record.getNumberOfRecordings() > 0) {
 			return target_course;
 		} else {
 			record.returnToCourseListPage();
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			copyOneRecordingFromCourseStartWithToCourseStartWithOfType(recording_bank_start_with,
 					target_course_start_with, 0, record, copy, confirm);
 		}

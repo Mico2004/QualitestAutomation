@@ -8,7 +8,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -110,7 +110,7 @@ public class CopyMenu extends Page {
 	// This function clicks on cancel button of copy menu
 	public void clickOnCancelButton(RecordingHelperPage rec) throws InterruptedException {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			rec.clickElement(this.cancel_button);
 			System.out.println("Clicked on cancel button");
 			ATUReports.add("Clicked on cancel button.", LogAs.PASSED, null);
@@ -120,7 +120,7 @@ public class CopyMenu extends Page {
 			ATUReports.add("Fail click on cancel button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function send ESC keyboard to copy menu.
@@ -134,7 +134,7 @@ public class CopyMenu extends Page {
 			ATUReports.add("Fail click on ESC button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function get course name, and select it course from course list,
@@ -163,7 +163,7 @@ public class CopyMenu extends Page {
 			return false;
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		return true;
 	}
 
@@ -191,13 +191,13 @@ public class CopyMenu extends Page {
 			Assert.assertTrue(false);
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		return selectedCourse;
 	}
 
 	/// verify copy menu title
 	public void verifyCopyMenuTitle() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String val = copy_title.getText();
 		if (val.equals("Copy")) {
 			System.out.println("copy menu title verified ");
@@ -283,7 +283,7 @@ public class CopyMenu extends Page {
 
 	// verify copy menu background color is same as recording background color
 	public void verifyMenuColor(RecordingHelperPage rec) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(copy_title))) {
 			System.out.println("copy menu background color is same as recording background color");
 			ATUReports.add("copy menu background color is same as recording background color", LogAs.PASSED, null);
@@ -329,7 +329,7 @@ public class CopyMenu extends Page {
 			ATUReports.add("Click the Search button", "Clicked on search button", "Fail click on search button", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function return course list
@@ -469,7 +469,7 @@ public class CopyMenu extends Page {
 //		// hover
 //		// and
 //		// click
-//		Thread.sleep(500);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		try {
 //
 //			if (isElementPresent(By.id("copyCourseWindow")))
@@ -501,7 +501,7 @@ public class CopyMenu extends Page {
 			// hover
 			// and
 			// click
-			Thread.sleep(500);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			try {
 
 				if (isElementPresent(By.id("copyCourseWindow")))
@@ -568,7 +568,7 @@ public class CopyMenu extends Page {
 				ATUReports.add("Fail click on copy button.", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			}
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 		
@@ -584,7 +584,7 @@ public class CopyMenu extends Page {
 				System.out.println("Failed To get the Error Dailog menu.");
 				Assert.assertTrue(false);
 			}
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 		}
 		
 		// This function get course name, and select it course from course list,
@@ -613,7 +613,7 @@ public class CopyMenu extends Page {
 						return false;
 					}
 
-					Thread.sleep(3000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 					return true;
 				}
 				

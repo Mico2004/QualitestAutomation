@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import java.util.concurrent.TimeUnit;
@@ -132,14 +132,14 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		// 6. Hover over the search field with the mouse pointer - A hint is displayed to the user: "Search in this course...".
 		top_bar_helper.moveToElementAndPerform(top_bar_helper.search_box_field, driver);
 		top_bar_helper.verifyWebElementHaveTargetAttributeTitle(top_bar_helper.search_box_field, "Search in this course...");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 7. Set the focus to the field with a mouse pointer.
 		top_bar_helper.search_box_field.click();
 		
 		// Get information about first chapter
 		record.clickOnRecordingTitleInIndex(1);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 		//String first_chapter_title =  driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a/div[2]/p[2]")).getText();	
 		String header_default_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
@@ -202,7 +202,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		// 9. Hover over the chapter icon.
 		Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 		search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9.1. The chapter icon become a bit bigger in size.
 		Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
@@ -250,15 +250,15 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
 		
 		// 17. Change the name of the first chapter from the recording that we mentioned in the preconditions.
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		record.clickOnRecordingTaskThenEditRecording();
 		
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
@@ -267,7 +267,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		edit_recording.changeFirstChapterRecordingNameToTargetName(new_chapter_name);
 		
 		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 18. Search the first chapter with the new name - The chapter is displayed with all the details that we mentioned.

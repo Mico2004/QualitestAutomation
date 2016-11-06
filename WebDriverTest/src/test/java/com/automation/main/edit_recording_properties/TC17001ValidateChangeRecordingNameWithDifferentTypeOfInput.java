@@ -145,7 +145,8 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
 		//14.Validate the recording name has changed to "Change recording name" without any white spaces gaps.
-		record.verifyThatTheRecordNameEqualsFromTheString(newNameWithOutGaps,recordNumber,"Record name");
+		record.verifyThatTargetRecordingExistInRecordingList(newNameWithOutGaps);
+	
 		
 		//15.Check another recording respective checkbox
 		record.unselectallCheckbox();
@@ -173,7 +174,8 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		
 		//22.Validate the recording name change to !@#$%^&*(){}|"?><*/-–
-		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber,"Record name");
+		record.verifyThatTargetRecordingExistInRecordingList(newName);
+		
 		
 		//23.Check another recording respective checkbox
 		record.unselectallCheckbox();
@@ -201,9 +203,9 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		
 		//30.Validate the recording name change to !@#$%^&*(){}|"?><*/-–
-		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber,"Record name");
+		record.verifyThatTargetRecordingExistInRecordingList(newName);
 		
-	
+		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}

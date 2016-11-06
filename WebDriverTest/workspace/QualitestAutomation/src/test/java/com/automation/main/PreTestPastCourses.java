@@ -12,7 +12,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -111,7 +111,7 @@ tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 	   //ownership change	
 		int i=1;
 		String past_course_a=course.selectCourseThatStartingWith("PastCourseA");
-	    Thread.sleep(3000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 
 	    ///check for free status checkbox for edit properties
 	    List<String> courses = record.getCourseRecordingList();
@@ -122,11 +122,11 @@ tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 	    	
 	    	driver.findElement(By.id("Checkbox"+Integer.toString(i))).click();
 	    	record.toEditRecordingPropertiesMenu();
-	    	Thread.sleep(2000);
+	    	Thread.sleep(Page.TIMEOUT_TINY);
 	    	
 	    	erp_window.changeOwner("User1");	
 	    	erp_window.save_button.click();
-	    	Thread.sleep(11000);
+	    	Thread.sleep(Page.TIMEOUT_TINY);
 	
 	    	System.out.println("before ok");
 	    	confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
@@ -149,11 +149,11 @@ tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
  		}
  	    driver.findElement(By.id("Checkbox"+Integer.toString(i))).click();
  		record.toEditRecordingPropertiesMenu();
- 		Thread.sleep(2000);
+ 		Thread.sleep(Page.TIMEOUT_TINY);
  		
  		erp_window.changeOwner("User1");
  		erp_window.save_button.click();
- 		Thread.sleep(11000);
+ 		Thread.sleep(Page.TIMEOUT_TINY);
  	
  		System.out.println("before ok");
         confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
@@ -164,39 +164,39 @@ tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
  		
     	// 1. Login as ADMIN.
  		tegrity.loginAdmin("Admin");
- 		Thread.sleep(2000);
+ 		Thread.sleep(Page.TIMEOUT_TINY);
  		
  		// 2. Click on course builder href link
  		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
  		
- 		Thread.sleep(10000);
+ 		Thread.sleep(Page.TIMEOUT_TINY);
  		
  		// 3. Click on create course href link 
  		driver.switchTo().frame(0);
  		//mange_adhoc_course_enrollments.clickOnNewCourse();
- 		Thread.sleep(2000);
+ 		Thread.sleep(Page.TIMEOUT_TINY);
  		
  		// Search target course name
  		mange_adhoc_course_enrollments.searchAndFilterCourses(past_course_a);
  		
- 		Thread.sleep(7000);
+ 		Thread.sleep(Page.TIMEOUT_TINY);
  	
  		
  		// Click on result first course (the only one) membership button
  		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
  		
  		
- 		Thread.sleep(2000);
+ 		Thread.sleep(Page.TIMEOUT_TINY);
  		mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list,"User1");
  	    System.out.println("removed instructor 1");
- 		Thread.sleep(1000);
+ 		Thread.sleep(Page.TIMEOUT_TINY);
  		// Add selected user to instructor list
  		mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
- 		Thread.sleep(3000);   		
+ 		Thread.sleep(Page.TIMEOUT_TINY);   		
  		mangage_adhoc_courses_membership_window.ok_button.click();
- 		Thread.sleep(1000);
+ 		Thread.sleep(Page.TIMEOUT_TINY);
  	    driver.switchTo().alert().accept();
- 	    Thread.sleep(2000);
+ 	    Thread.sleep(Page.TIMEOUT_TINY);
  	    
 
 		System.out.println("Done.");

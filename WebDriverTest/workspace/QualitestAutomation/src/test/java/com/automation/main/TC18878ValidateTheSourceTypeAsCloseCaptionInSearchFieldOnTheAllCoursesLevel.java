@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -128,10 +128,10 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Upload for first recording target close catpion
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		List<String> listOfRecorders = record.getCourseRecordingList();
 		record.selectIndexCheckBox(4);
 		record.clickOnRecordingTaskThenEditRecording();
@@ -141,7 +141,7 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 				driver.switchTo().frame(0);
 				break;
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
 		
@@ -151,14 +151,14 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 					System.out.println("2222");
 					break;
 				} else {
-					Thread.sleep(1000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 				}
 			} catch (Exception e) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 				
 		}
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
 			break;
@@ -166,7 +166,7 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		
 		driver.findElements(By.cssSelector(".optionList>li>a")).get(4).click();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 //		driver.findElement(By.id("UploadFile")).click();
 //		driver.findElement(By.id("UploadFile")).click();
@@ -175,7 +175,7 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 ////		driver.findElement(By.cssSelector(".jcf-button-content")).click();
 //		robot.keyPress(KeyEvent.VK_ENTER);
 //		robot.keyRelease(KeyEvent.VK_ENTER);
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 		// click on the upload link
 		// click on the upload link
 		WebElement element = driver.findElement(By.xpath(".//*[@id='AddCaptioningForm']/div[3]/span"));
@@ -187,7 +187,7 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		robot.mouseMove(-100, 100);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		String path = "C:\\WebDriverTest\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
 		
@@ -201,15 +201,15 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		driver.findElement(By.id("AddCaptioning")).click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
@@ -223,7 +223,7 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 				break;
 			   }			
-			else Thread.sleep(3000);
+			else Thread.sleep(Page.TIMEOUT_TINY);
 		}
 
 		String text_from_caption_for_test = "QualitestAutomationCaption";
@@ -242,7 +242,7 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(3000);	
+			Thread.sleep(Page.TIMEOUT_TINY);	
 			
 			// 3. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();

@@ -41,7 +41,8 @@ public class MoveWindow extends Page {
 	public WebElement move_button;
 	@FindBy(id = "ModalDialogHeader")
 	public WebElement move_menu_title;
-	
+	@FindBy(id="members_value")
+	public WebElement instructorTextBox;
 	@FindBy(xpath = "//*[@id=\"courseListSelect\"]/option")
 	public  List<WebElement> course_list;
 	@FindBy(id = "CancelButton")
@@ -372,4 +373,17 @@ public class MoveWindow extends Page {
 			Assert.assertTrue(true);
 		}
 	}
+	
+   public void setInstructorName(String instructorName){
+	   try{
+		   
+		   
+	   }catch(Exception e){
+		   ATUReports.add("Failed to Set Instructor name", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	   }
+	   
+	   
+	   
+	   
+   }
 }

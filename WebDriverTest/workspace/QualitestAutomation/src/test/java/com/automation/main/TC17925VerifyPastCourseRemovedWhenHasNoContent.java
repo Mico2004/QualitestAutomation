@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -104,25 +104,25 @@ mangage_adhoc_courses_membership_window = PageFactory.initElements(driver, Manag
 //ownership change	
 	int i=1;
  String past_course_a=course.selectCourseThatStartingWith("PastCourseA");
- Thread.sleep(3000);
+ Thread.sleep(Page.TIMEOUT_TINY);
 course.signOut();
-Thread.sleep(2000);
+Thread.sleep(Page.TIMEOUT_TINY);
 
 tegrity.loginAdmin("Admin");
-Thread.sleep(2000);
+Thread.sleep(Page.TIMEOUT_TINY);
 
 // 2. Click on user builder href link
 admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 
-Thread.sleep(10000);
+Thread.sleep(Page.TIMEOUT_TINY);
 // 3. Click on create course href link 
 driver.switchTo().frame(0);
-Thread.sleep(4000);
+Thread.sleep(Page.TIMEOUT_TINY);
 mange_adhoc_users_page.clickOnNewUser();
-Thread.sleep(2000);
+Thread.sleep(Page.TIMEOUT_TINY);
 
 create_new_user_window.createNewUser(user,user, "abc@com.com", "111", "111");
-Thread.sleep(1000);
+Thread.sleep(Page.TIMEOUT_TINY);
 
 try {	
 	
@@ -130,7 +130,7 @@ try {
 } catch (Exception msg) {
 	
 }
-Thread.sleep(2000);
+Thread.sleep(Page.TIMEOUT_TINY);
 for(String window: driver.getWindowHandles()) {
 	driver.switchTo().window(window);
 	break;
@@ -139,7 +139,7 @@ mange_adhoc_users_page.toAdminDashBoard();
 
 //1. Login as INSTRUCTOR.
 	///	tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		String login_url = driver.getCurrentUrl();
 		String university_name  = login_url.split("/")[2].substring(0,  login_url.split("/")[2].length() - 12);
@@ -147,33 +147,33 @@ mange_adhoc_users_page.toAdminDashBoard();
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		
-		Thread.sleep(10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Click on create course href link 
 		driver.switchTo().frame(0);
 		//mange_adhoc_course_enrollments.clickOnNewCourse();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Search target course name
 		mange_adhoc_course_enrollments.searchAndFilterCourses(past_course_a);
 		
-		Thread.sleep(7000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		
 		// Click on result first course (the only one) membership button
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list,user);
 		mangage_adhoc_courses_membership_window.first_user_of_instructors_list.click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Add selected user to instructor list
 		mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		mangage_adhoc_courses_membership_window.ok_button.click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	    driver.switchTo().alert().accept();
-	    Thread.sleep(2000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 
 
 // 1. Login with SuperUser.
@@ -194,13 +194,13 @@ mange_adhoc_users_page.toAdminDashBoard();
 	
 
 		record.toEditRecordingPropertiesMenu();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		erp_window.changeOwner("User1");
 		
 		erp_window.save_button.click();
 		
 
-	  Thread.sleep(11000);
+	  Thread.sleep(Page.TIMEOUT_TINY);
 	
 		System.out.println("before ok");
        confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
@@ -210,54 +210,54 @@ mange_adhoc_users_page.toAdminDashBoard();
 		
    	// 1. Login as ADMIN.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		
-		Thread.sleep(10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Click on create course href link 
 		driver.switchTo().frame(0);
 		//mange_adhoc_course_enrollments.clickOnNewCourse();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Search target course name
 		mange_adhoc_course_enrollments.searchAndFilterCourses(past_course_a);
 		
-		Thread.sleep(7000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		
 		// Click on result first course (the only one) membership button
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 		
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list,"User1");
 	    System.out.println("removed instructor 1");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Add selected user to instructor list
 		mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Click on result first course (the only one) membership button
 				mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
-				Thread.sleep(3000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 		mangage_adhoc_courses_membership_window.searchForUser(user);	
 		
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Select first user from user list (the only user it found because of the uniq of the search)
 		mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// Add selected user to instructor list
 		mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		mangage_adhoc_courses_membership_window.ok_button.click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	    driver.switchTo().alert().accept();
-	    Thread.sleep(2000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 	    
 	    System.out.println("Done.");
 	    ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

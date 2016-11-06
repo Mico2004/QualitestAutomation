@@ -13,7 +13,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -137,11 +137,11 @@ public class ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 		System.out.println("Current course: " + current_course);
 		//course.selectCourse(record);
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Get information about first chapter
 		record.first_recording_title.click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 				
 		String header_default_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
@@ -149,7 +149,7 @@ public class ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 		
 		// Click on "My account" link at the rigth corner of the header.
 		top_bar_helper.clickOnMyAccountLink();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 5. Validate the search field is display at the top right of the UI page below the top navigation bar.
@@ -163,7 +163,7 @@ public class ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 		// 7.2. A hint is displayed to the user: "Search in all your courses...".
 		top_bar_helper.moveToElement(top_bar_helper.search_box_field, driver).perform();
 		top_bar_helper.verifyWebElementHaveTargetAttributeTitle(top_bar_helper.search_box_field, "Search in all of your courses...");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. Set the focus to the field with a mouse pointer.
 		top_bar_helper.search_box_field.click();
@@ -227,7 +227,7 @@ public class ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 		// 10. Hover over the chapter icon.
 		Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 		search_page.moveToElement(search_page.video_wrap_link_to_focus_list.get(0), driver).perform();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 10.1. The chapter icon become a bit bigger in size.
 		Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();

@@ -2,7 +2,7 @@ package com.automation.main;
 
 import java.awt.List;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -101,7 +101,7 @@ public class TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings {
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		//4.click on  student tab
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		//5.select check box
 		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.getCheckbox());// check box is selected
       ;

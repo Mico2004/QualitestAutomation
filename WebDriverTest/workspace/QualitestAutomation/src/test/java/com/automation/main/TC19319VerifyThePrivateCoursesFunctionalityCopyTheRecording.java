@@ -2,7 +2,7 @@ package com.automation.main;
 
 
 import java.util.Date;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -154,7 +154,7 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		// Click the "Copy Recording" button.
 		copy.clickOnCopyButton();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// "Recording has been queued for copy" message box is displayed.
 		// Click the "OK" button.
@@ -165,9 +165,9 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		
 		
 		// Unselect first checkbox, and select second checkbox
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.unselectIndexCheckBox(1);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.selectIndexCheckBox(2);
 		
 		// Select the "Recording Tasks -> Copy" menu item.
@@ -182,7 +182,7 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		// Click the "Copy Recording" button.
 		copy.clickOnCopyButton();
 				
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 				
 		// "Recording has been queued for copy" message box is displayed.
 		// Click the "OK" button.
@@ -198,12 +198,12 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		// Click the "Courses" breadcrumb.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 2. Select the private course.
 		course.selectCourseThatStartingWith(PropertyManager.getProperty("User1"));
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Select the recording.
 		record.selectIndexCheckBox(1);
@@ -235,12 +235,12 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		// 12. Click the "Courses" breadcrumb.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 13. Select the destination course (abc).
 		course.selectCourseThatStartingWith("abc");
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 14. Verify that copied recording is displayed.
 		record.verifyThatTargetRecordingExistInRecordingList(selected_recording);
@@ -257,14 +257,14 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		//19. Click on the 'Courses' breadcrumb
 		player_page.returnToCoursesPage(course);
 //		driver.navigate().back();
-//		Thread.sleep(1000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		record.returnToCourseListPage();
-//		Thread.sleep(1000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 20. Select a non private course (ad).
 		course.selectCourseThatStartingWith("ad");
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 21. Select a recording.
 		record.selectIndexCheckBox(1);
@@ -281,7 +281,7 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		
 		// 25. Click the "Copy Recording" button.
 		copy.clickOnCopyButton();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 26. "Recording has been queued for copy" message box is displayed.
 		// 27. Click the "OK" button.
@@ -296,12 +296,12 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		
 		// 30. Click the "Courses" breadcrumb.
 		record.returnToCourseListPage();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 31. Select the destination private course.
 		course.selectCourseThatStartingWith(PropertyManager.getProperty("User1"));
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 32. Verify that copied recording is displayed.
 		record.verifyThatTargetRecordingExistInRecordingList(selected_recording);

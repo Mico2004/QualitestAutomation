@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.testng.annotations.AfterClass;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -121,7 +121,7 @@ public class TC15466AddFewFilesWithSameTitle {
 			{
 			// 4.Select "Course tasks -> Add Additional Content File" menu item
 			record.toUploadAdditionalContentFile();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			// 5.verify additional content file title info
 			add_additional_content_window.verifyAdditionalContentFileWindowTitle();
 			add_additional_content_window.verifyAdditionalContentFileWindowInfo();

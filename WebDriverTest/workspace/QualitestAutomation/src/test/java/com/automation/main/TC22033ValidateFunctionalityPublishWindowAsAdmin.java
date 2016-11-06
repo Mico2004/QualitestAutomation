@@ -4,7 +4,7 @@ package com.automation.main;
 
 
 import org.testng.annotations.AfterClass;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -135,23 +135,23 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			// 4. Login as Admin.
 			if (login_as==0) {
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(5000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			} else {
 				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(5000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 			
 			// 5. Click on "view course list" under "courses" section.
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			
 			// 6. In "All courses" page, search for Ab course.
-			Thread.sleep(8000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			admin_dashboard_view_course_list.searchForTargetCourseName(source_course_name);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 7. Click on that name.
 			admin_dashboard_view_course_list.clickOnFirstCourseLink();
-			Thread.sleep(10000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 8. Check the checkbox of an Published recording
 			String checked_recording_name = record.selectRecordingWithOutTargetStatus("Not Published");
@@ -174,12 +174,12 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			// 14. Click on the "Save" button.
 			publish_window.clickOnSaveButton();
 			
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 15. The "Publish" window disappears.
 			publish_window.verifyPublishWindowClosed();
 			
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 16. The recording status changed to "Not Published".
 			record.verifyTargetRecordingHaveTargetStatus(checked_recording_name, "Not Published");
@@ -192,7 +192,7 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			player_page.verifyTimeBufferStatusForXSec(10);
 			
 //			driver.navigate().back();
-//			Thread.sleep(1000);
+//			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			
 			// 20. Sign out.
@@ -205,7 +205,7 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			
 			// 22. Open the course that contains the uploaded recordings.
 			course.selectCourseThatStartingWith("Ab");
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			// 23. Validate the recordings you changed earlier isn't displayed.
 			record.verifyThatTargetRecordingNotExistInRecordingList(checked_recording_name);

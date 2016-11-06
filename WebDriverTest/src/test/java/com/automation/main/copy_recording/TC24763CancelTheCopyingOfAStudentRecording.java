@@ -125,7 +125,9 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 4. Select source recording.
 		// 5. Select "Recording Tasks -> Copy" menu item.
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		
+		
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.getCheckboxAccordingToIndex(record.getRecordingIndexWithoutAnyStatus()));
 		clickedRecording = copy.verifyCopyMenu(record);
 		System.out.println("Clicked on recording: " + clickedRecording);
 		
@@ -153,7 +155,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("The recording has not this status IE, FF, Safari Ready or none at all.");
-			ATUReports.add("The recording has this status IE, FF, Safari Ready or none at all.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("The recording has this status IE, FF, Safari Ready or none at all.", "Clean status", recording_status, LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 		
@@ -214,7 +216,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 15. Select source recording.
 		// 16. Select "Recording Tasks -> Copy" menu item.
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.getCheckboxAccordingToIndex(record.getRecordingIndexWithoutAnyStatus()));
 		clickedRecording = copy.verifyCopyMenu(record);
 		System.out.println("Clicked on recording: " + clickedRecording);
 		

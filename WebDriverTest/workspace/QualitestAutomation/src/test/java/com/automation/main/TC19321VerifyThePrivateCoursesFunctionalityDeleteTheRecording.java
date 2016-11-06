@@ -4,7 +4,7 @@ package com.automation.main;
 import java.util.Date;
 
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -146,7 +146,7 @@ public class TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording {
 		delete_menu.clickOnDeleteButton();
 		
 		// 7. Verify that recording is deleted
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.verifyThatTargetRecordingNotExistInRecordingList(selected_recording_name);
 		
 		System.out.println("Done.");

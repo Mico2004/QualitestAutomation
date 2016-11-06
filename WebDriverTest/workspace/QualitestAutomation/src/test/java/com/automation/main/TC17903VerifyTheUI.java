@@ -10,7 +10,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -92,16 +92,16 @@ public class TC17903VerifyTheUI {
 		// 2.login as instructor
 
 		tegrity.loginCourses("User1");// log in courses page
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		initializeCourseObject();
 		// 3.Click Past Courses Tab button (without selecting a recording)
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		course.clickOnPastCoursesTabButton();
 		
 		// 4.click course
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.selectFirstCourse(record);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 5.validae bBdcrumbrea visibility
 		boolean result = record.isElementPresent(By.partialLinkText("Courses"));
 		if (result == true) {
@@ -127,7 +127,7 @@ public class TC17903VerifyTheUI {
 			Assert.assertTrue(result);
 		}
 
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 7.check underline
 		Point courses_link = record.courses_link.getLocation();
 		try {
@@ -178,7 +178,7 @@ public class TC17903VerifyTheUI {
 
 		// 10.Validate tabs are displayed correctlly
 		record.tabsLocationVerified();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 11.Validate the tab menu is displayed correctly under the tab name.
 		// record.moveToElementAndClick(record.view_button, driver);
 		System.out.println("UI1");
@@ -262,7 +262,7 @@ public class TC17903VerifyTheUI {
 
 		// 16.click all check box
 		record.checkall.click();// make all checkboxes marked
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		record.verifyAllCheckedboxSelected();
 

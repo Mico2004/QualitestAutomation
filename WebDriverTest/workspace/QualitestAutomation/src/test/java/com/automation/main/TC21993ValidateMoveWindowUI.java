@@ -4,7 +4,7 @@ package com.automation.main;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -130,7 +130,7 @@ public class TC21993ValidateMoveWindowUI {
 			
 		// 4. Login as Full Admin
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 			
 		// 5. Click on "view course list" under "courses" section.
@@ -138,16 +138,16 @@ public class TC21993ValidateMoveWindowUI {
 		
 			
 		// 6. In "All courses" page search for the full name of the Ab course.
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		admin_dashboard_view_course_list.searchForTargetCourseName(target_course_name);
 			
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 7. Click on that course.
 		admin_dashboard_view_course_list.clickOnFirstCourseLink();
 			
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. Click on a checkbox of one recording.
 		record.getCheckbox().click();
@@ -156,7 +156,7 @@ public class TC21993ValidateMoveWindowUI {
 		// 10. The menu items are displayed.
 		// 11. Click on the menu item "Move".
 		record.clickOnRecordingTaskThenMove();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 12. The move window displays.
 		boolean is_move_window_closed = move_window.isMoveMenuClosed();
@@ -191,9 +191,9 @@ public class TC21993ValidateMoveWindowUI {
 		
 		// Fill in a name of an Instructor in to the text field, pick that Instructor from the autocomplete dropdown & click on "List Courses"
 		driver.findElement(By.id("members_value")).sendKeys(username);
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		driver.findElement(By.id("SearchButton")).click();
 		
 		// A "Choose a course that you would like to move your selected recording(s) to" text below the Instructor's search field

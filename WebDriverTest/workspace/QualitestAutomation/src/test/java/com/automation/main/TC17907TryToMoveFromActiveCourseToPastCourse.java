@@ -3,7 +3,7 @@ package com.automation.main;
 
 
 import java.util.List;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -103,7 +103,7 @@ public class TC17907TryToMoveFromActiveCourseToPastCourse {
 		// 2. Click on past course tab.
 		course.clickOnPastCoursesTabButton();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Get past course list.
 		List<String> past_course_list = course.getCourseList();
@@ -111,7 +111,7 @@ public class TC17907TryToMoveFromActiveCourseToPastCourse {
 		// 4. Click on active course tab.
 		course.clickOnActiveCoursesTabButton();
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 5. Select the active course.
 		currentCourse = course.selectCourseThatStartingWith("Ab");
@@ -149,7 +149,7 @@ public class TC17907TryToMoveFromActiveCourseToPastCourse {
 		// 10. Click the "Additional Content" tab.
 		record.clickOnAdditionContentTab();
 				
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 			
 		// 11. Select the content item.
 		record.selectFirstCheckbox();

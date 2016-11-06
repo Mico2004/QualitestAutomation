@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -148,30 +148,30 @@ public class TestSuitePreSetCopyRecordings7 {
 		// Copy all tests from Bank Valid Recording to course starting
 		// with Ab
 //		course.waitForVisibility(course.active_courses_tab_button);
-		Thread.sleep(2000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record, delete_menu);
-		Thread.sleep(2000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
-		Thread.sleep(2000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 2, record, delete_menu);
-		Thread.sleep(2000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 3, record, delete_menu);
-		Thread.sleep(2000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 
 		
 		
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 0, record, copy,
 				confirm_menu);
-		Thread.sleep(2000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 1, record, copy,
 				confirm_menu);
-		Thread.sleep(2000);			
+		Thread.sleep(Page.TIMEOUT_TINY);			
 		// Copy all additional content from Bank Valid Recording to course
 		// starting with Ab
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 2, record, copy,
 				confirm_menu);
-		Thread.sleep(2000);			
+		Thread.sleep(Page.TIMEOUT_TINY);			
 		// Copy all student recordings from Bank Valid Recording to course
 		// starting with Ab
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 3, record, copy,
@@ -214,7 +214,7 @@ public class TestSuitePreSetCopyRecordings7 {
 //			break;
 //		}
 //		course.signOut();
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //
 //		////////////////////////// unenrolling user 1 past course A And B
 //		////////////////////////// +changing recording ownership
@@ -235,30 +235,30 @@ public class TestSuitePreSetCopyRecordings7 {
 //		}
 //
 //		String past_course_a = course.selectCourseThatStartingWith("PastCourseA");
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		String user1 = PropertyManager.getProperty("User1");
 //		String user4 = PropertyManager.getProperty("User4");
 //		record.changeRecordingOwnership(confirm_menu, erp_window, user1, null);
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		for (String window : driver.getWindowHandles()) {
 //			driver.switchTo().window(window);
 //			break;
 //		}
 //		record.returnToCourseListPage();
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		String past_course_b = course.selectCourseThatStartingWith("PastCourseB");
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //
 //		record.changeRecordingOwnership(confirm_menu, erp_window, user1, null);
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		record.signOut();
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		tegrity.loginCourses("User4");// log in courses page to register user in
 //										// database
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		course.signOut();
 //		tegrity.loginAdmin("Admin");
-//		Thread.sleep(5000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		// 4. Click on course builder href link
 //
 //		// String
@@ -267,17 +267,17 @@ public class TestSuitePreSetCopyRecordings7 {
 //		// past_course_b="PastCourseBawsserverautomation113032016121315_Name";
 //
 //		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-//		Thread.sleep(10000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_a, user1,
 //				mangage_adhoc_courses_membership_window);
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		for (String window : driver.getWindowHandles()) {
 //			driver.switchTo().window(window);
 //			break;
 //		}
 //		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_b, user1,
 //				mangage_adhoc_courses_membership_window);
-//		Thread.sleep(3000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //
 //		driver.quit();
 

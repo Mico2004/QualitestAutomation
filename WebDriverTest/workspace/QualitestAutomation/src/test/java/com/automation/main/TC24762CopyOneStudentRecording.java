@@ -3,7 +3,7 @@ package com.automation.main;
 import java.awt.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -99,7 +99,7 @@ public class TC24762CopyOneStudentRecording {
 			// 2.login as instructor
 			tegrity.loginCourses("User1");// log in courses page
 			driver.navigate().to("https://" + driver.getCurrentUrl().split("/")[2] + "/api/courses/Active");
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			String xml_source_code = driver.findElement(By.tagName("body")).getText();
 			driver.quit();
 
@@ -128,31 +128,31 @@ public class TC24762CopyOneStudentRecording {
 			//4.1  Click the 'Student Recording' tab
 	    	record.clickOnStudentRecordingsTab();
 			record.waitForVisibility(record.first_recording);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			//5.take recorder namme for later 
 			String original_recorder_name = driver.findElement(By.id("RecordedBy1")).getText();/// take recorder namme for later 
 			// 6.verify check box is selected and then load copy menu
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
         	record.verifyCopyMenu();// verify copy menu
 
 			//7.return to recording page and than to course page
 			copy.CancelButton.click();// return to recording page
 			System.out.println("clicked on cancel button");
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.returnToCourseListPage();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			//8. Verify Only courses where this USER signed as INSTRUCTOR are displayed in "Course List"
 
 			course.first_course_button.click();
 			record.waitForVisibility(record.student_recordings_tab);
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			record.verifyCopyMenu();// verify copy menu
 			copy=PageFactory.initElements(driver,CopyMenu.class);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			copy.copy_course_list = copy.getStringFromElement(copy.course_list);
 			int course_number=copy.course_list.size(); 
 			int count_instructors= course.patternAppearenceinString(xml_source_code,"<CurrentUserRole>Instructor</CurrentUserRole>");
@@ -173,7 +173,7 @@ public class TC24762CopyOneStudentRecording {
 				System.out.println("number Of count_instructors role equals Number Of courses");
 				ATUReports.add("all courses assigned as instructors","xml file" ,"num of instructors:"+count_instructors,"num of instructors:"+course_number, LogAs.PASSED, null);        
 				// driver.navigate().back();
-				Thread.sleep(2000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 
 			}
 			else
@@ -194,7 +194,7 @@ public class TC24762CopyOneStudentRecording {
 			System.out.println(copy.course_list.get(1).getText());
 			//11.select target course
 			copy.selectTargetCourseFromCourseList(copy.course_list.get(1).getText());
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			//12.verify background color of copy menu
 			System.out.println(
 					copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]"))));
@@ -214,7 +214,7 @@ public class TC24762CopyOneStudentRecording {
 
 			//16.retuen to course page
 			record.returnToCourseListPage();/// return to course list page
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 
 
@@ -225,7 +225,7 @@ public class TC24762CopyOneStudentRecording {
 			///click on student tab
 			record.clickOnStudentRecordingsTab();
 			record.waitForVisibility(record.first_recording);
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			String first_recording = driver.findElement(By.id("Recording1")).getText();
 			
 			
@@ -240,13 +240,13 @@ public class TC24762CopyOneStudentRecording {
 
 
 			//19.verify recording is expandable
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			record.verifyFirstExpandableRecording();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			//20.dispaly recording
 			player_page.verifyTimeBufferStatusForXSec(15);// check source display
 
@@ -258,16 +258,16 @@ public class TC24762CopyOneStudentRecording {
 			}
 			//21.Click "Courses" link at breadcrumbs
 			record.returnToCourseListPage();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			//click on courses
 			//course.course_list.get(1).click();
 			course.selectCourseByName(course_name);
 
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
             record.waitForVisibility(record.student_recordings_tab);
 			record.clickOnStudentRecordingsTab();
-        Thread.sleep(3000);
+        Thread.sleep(Page.TIMEOUT_TINY);
             //22.verify date,duration,recorder name as original
         	
 			//fill recording list with data :duration,date,names,recorder names
@@ -283,7 +283,7 @@ public class TC24762CopyOneStudentRecording {
 			record.verifyTimeDuration(dur);
 			record.VerifyRecorderNameAsOriginal(original_recorder_name);
 			//23.bold font for recording title
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			record.recordingBoldFont(record.student_recordings_tab);/// verify bold style in recording title
 
 			//24.verify sorting by date ,title and duration
@@ -293,12 +293,12 @@ public class TC24762CopyOneStudentRecording {
 			record.convertRecordingsListToNames();
 			record.verifyRecordingSortedByTitle(record.recording_list_names);
 			record.pressViewButtonAndSelect("Date");
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			record.convertRecordingsListToDate();/// check sort by date
 			record.verifyRecordingSortedByDate(record.recordings_list_date_string);
 			record.pressViewButtonAndSelect("Duration");
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 			record.convertRecordingsListToDuration();/// check sort by date
 			record.verifyRecordingSortedByDuration(record.recording_list_duration_string);
@@ -310,23 +310,23 @@ public class TC24762CopyOneStudentRecording {
 
 			//initialize course object
 			initializeCourseObject();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			//27.Select destination course
 			course.selectCourseByName(destination_course_name);
 			record.waitForVisibility(record.student_recordings_tab);
 			record.student_recordings_tab.click();
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			//28.select recording by name
 			record.convertRecordingsListToNames();
 		///	record.selectRecordingByName(first_recording);
 			
 			//29."Recording Chapters" are expanded
-			Thread.sleep(3000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			String target_recording = record.getFirstRecordingTitle();
 			record.clickOnTargetRecordingAndOpenItsPlayback(target_recording);
-			Thread.sleep(15000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			///30.Click any chapter:verify plays correctly 
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display

@@ -8,7 +8,7 @@ import java.util.HashSet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -158,7 +158,7 @@ catch(Exception e)
 	public void verifyAllCheckedboxSelected() throws InterruptedException {
 
 		record.checkall.click();// make all checkboxes marked
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 
 		record.verifyAllCheckedboxSelected();
@@ -190,7 +190,7 @@ catch(Exception e)
 
 	@Test(dependsOnMethods = "verifyCopyMenuTitle", description = "verify background color is as university color")
 	public void verifyMenuColor() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
         copy.verifyMenuColor(record);
 
 	}

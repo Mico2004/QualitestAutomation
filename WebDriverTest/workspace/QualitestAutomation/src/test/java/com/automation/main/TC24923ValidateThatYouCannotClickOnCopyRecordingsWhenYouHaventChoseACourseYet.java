@@ -7,7 +7,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import org.omg.Messaging.SyncScopeHelper;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -135,19 +135,19 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		
 		// 5. Login as Admin.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	
 		// 6. Click on "view course list" under "courses" section.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		
 		// 7. In "All courses" page, search for Ab course.
-		Thread.sleep(8000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		admin_dashboard_view_course_list.searchForTargetCourseName(source_course_name);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 8. Click on that course name.
 		admin_dashboard_view_course_list.clickOnFirstCourseLink();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9. Click on a checkbox of one recording.
 		record.selectFirstCheckbox();
@@ -155,7 +155,7 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		// 10. Hover over "Recording tasks" menu.
 		// 11. Click on the menu item "Copy".
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 12. The copy window displays.
 		boolean is_copy_window_closed = copy.isCopyMenuClosed();
@@ -172,7 +172,7 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		
 		// 13. On the window, click on "Copy Recording(s)" button.
 		copy.ClickOnCopyButtonWithoutChoosingCourse();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 14. There is a error window displays with the text "a course must be selected".
@@ -195,7 +195,7 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		
 		// 17. Click on the text field, and write the name an instructor.
 		driver.findElement(By.id("members_value")).sendKeys(username);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 18. The text is written on the field. There is also a dropdown list opened which contains several existing instructor which may match the search.
 		String dropdown_result = driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).getText();
@@ -212,7 +212,7 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		
 		// 19. Click ,on the dropdown list, on the name of one instructor.
 		driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 20. The chosen name displays on the text field for search (near "list courses" button).
 		String chosen_name = driver.findElement(By.id("members_value")).getAttribute("value");
@@ -230,13 +230,13 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		// 21. Click on "Copy Recording(s)" button.
 		copy.ClickOnCopyButtonWithoutChoosingCourse();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 22. There is a error window displays with the text "a course must be selected".
 		// 23. On the error window, click on "ok" button.
 		confirmation_menu.clickOnOkButtonOnErrorWindow();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 24. Error window is closed.
 		is_closed = confirmation_menu.checkIfWindowModalWithTargetNameIsClosed("Error");
@@ -253,7 +253,7 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		
 		// 25. Click on "List courses" button.
 		driver.findElement(By.id("SearchButton")).click();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		// 26. The list of available courses to copy the recording to is displayed.
 		List<String> courses_to_move = copy.getCourseList();
@@ -270,12 +270,12 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		
 		// 27. Click on "Copy Recording(s)" button.
 		copy.ClickOnCopyButtonWithoutChoosingCourse();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 28. There is a error window displays with the text "a course must be selected".
 		// 29. On the error window, click on "ok" button.
 		confirmation_menu.clickOnOkButtonOnErrorWindow();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 30. Error window is closed.
 		is_closed = confirmation_menu.checkIfWindowModalWithTargetNameIsClosed("Error");

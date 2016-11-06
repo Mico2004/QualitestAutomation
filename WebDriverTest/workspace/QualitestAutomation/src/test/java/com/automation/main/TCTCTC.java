@@ -16,7 +16,7 @@ import org.eclipse.jetty.util.ArrayUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -139,44 +139,44 @@ public class  TCTCTC {
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();		
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 2. select course
 		String targetCourse = course.selectCourseThatStartingWith("Ab");
 		System.out.println("choosing course that start with AB");
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. select record
 		record.selectFirstCheckbox();
 		System.out.println("choosing record");
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 4. move to copy menu
 		record.clickOnRecordingTaskThenCopy();
 		System.out.println("moving to copy menu");
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//5. verify that the search bar is empty
 		copy.verifySearchCourseBoxText();
 		System.out.println("verify that the search bar is empty");
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//6. copy the list of the courses in the copy_menu
 		List <String> nameOfCourses = copy.getCourseList();
 		
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//7. click on the search bar
 		copy.clickOnSearchButton();
 		System.out.println("click on the search bar");
 		
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//8. verify that the list of courses in the copy_menu wasn't change 
 		List <String> nameOfCoursesAfterClickingTheSearchButton = copy.getCourseList();
@@ -190,7 +190,7 @@ public class  TCTCTC {
 			
 		}
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//9. wrote invalid course in the search bar and click on search button 
 		 copy.sendKeysToSearchInputBox("Invalid Course");
@@ -206,13 +206,13 @@ public class  TCTCTC {
 			 System.out.println("the size of the list after clicking on the search button is valid");
 		 }
 		
-		 Thread.sleep(1000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		 //10. getting back to the original course List
 		 copy.deleteValueInSearchInputBox();
 		 copy.clickOnSearchButton();
 		 
-		 Thread.sleep(1000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		 //11. wrote non-premission course  name and verify that the list is empty
 		 String course_name_not_have_premissions = "BankValidRecordings";
@@ -229,18 +229,18 @@ public class  TCTCTC {
 				 System.out.println("the size of the list after clicking on the search button is valid");
 			 }
 		
-		 Thread.sleep(1000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		 //12. getting back to the original course List
 		 copy.deleteValueInSearchInputBox();
 		 copy.clickOnSearchButton();
 		 
-		 Thread.sleep(1000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		 //13. copy the first course name that wrote in the list 
 		 String otherCourse  =copy.selectCourseFromCourseListOtherThenCurrentCourse(targetCourse);
 		 
-		 Thread.sleep(1000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		 //14. check that the selected course is the only one that appread after the searching
 		 copy.sendKeysToSearchInputBox(otherCourse);
@@ -258,13 +258,13 @@ public class  TCTCTC {
 				 System.out.println("the size of the list after clicking on the search button is valid");
 			 }
 		 
-		 Thread.sleep(1000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		//15. getting back to the original course List
 		 copy.deleteValueInSearchInputBox();
 		 copy.clickOnSearchButton();
 		 
-		 Thread.sleep(1000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 
 		 //16. getting the list of that pattern that apperad on some courses 
 		 nameOfCourses = copy.getCourseList();
@@ -277,13 +277,13 @@ public class  TCTCTC {
 				}
 			}
 			
-			Thread.sleep(1000);	
+			Thread.sleep(Page.TIMEOUT_TINY);	
 			
 		 //17. search the courses that have the pattern in the search and compare with the second list
 			copy.sendKeysToSearchInputBox(course_name_that_part_of_serveral_courses);
 			copy.isTextDisplayedInSearchBox(course_name_that_part_of_serveral_courses);
 			
-			Thread.sleep(1000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			
 			
 			copy.clickOnSearchButton();

@@ -2,7 +2,7 @@ package com.automation.main;
 
 
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -97,7 +97,7 @@ String os;
 		
 		//course.selectCourse(record);
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		//verify that the color of the menu is grey
 		record.verifyRecordingMenuColor(record.copy_button);
@@ -107,7 +107,7 @@ String os;
 		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.getCheckbox());
 		record.unClickOneCheckBoxOrVerifyNotSelected(record.getCheckbox());
 		record.checkall.click();// make all checkboxes marked
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		record.verifyAllCheckedboxSelected();
@@ -121,7 +121,7 @@ String os;
 		record.getCheckbox().click();
 		record.clickOnRecordingTaskThenCopy();
 		copy.verifyCopyMenuTitle();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		copy.verifyMenuColor(record);
 		copy.verifyInfoText();

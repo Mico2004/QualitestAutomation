@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -117,23 +117,23 @@ public class TC17933VerifypastCourseWithStudentRecording {
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
 
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		System.out.println("Past1");
 		// 2. Click on user builder href link
 		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 
-		Thread.sleep(10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 3. Click on create course href link
 		driver.switchTo().frame(0);
-		Thread.sleep(4000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		mange_adhoc_users_page.clickOnNewUser();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		System.out.println("Past2");
 		create_new_user_window.createNewUser(user, user, "abc@com.com", "111", "111");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		try {
 
@@ -141,7 +141,7 @@ public class TC17933VerifypastCourseWithStudentRecording {
 		} catch (Exception msg) {
 
 		}
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		for (String window : driver.getWindowHandles()) {
 			driver.switchTo().window(window);
 			break;
@@ -150,7 +150,7 @@ public class TC17933VerifypastCourseWithStudentRecording {
 		System.out.println("Past3");
 		// 1. Login as INSTRUCTOR.
 		/// tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		String login_url = driver.getCurrentUrl();
 		String university_name = login_url.split("/")[2].substring(0, login_url.split("/")[2].length() - 12);
@@ -158,12 +158,12 @@ public class TC17933VerifypastCourseWithStudentRecording {
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		System.out.println("Past4");
-		Thread.sleep(10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		// 3. Click on create course href link
 		driver.switchTo().frame(0);
 		// mange_adhoc_course_enrollments.clickOnNewCourse();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		mange_adhoc_course_enrollments.clickOnNewCourse();
 		create_new_course_window.waitForVisibility(create_new_course_window.course_id_input);
@@ -175,15 +175,15 @@ public class TC17933VerifypastCourseWithStudentRecording {
 				driver.switchTo().alert().accept();
 				break;
 			} catch (Exception msg) {
-				Thread.sleep(1000);
+				Thread.sleep(Page.TIMEOUT_TINY);
 			}
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		// Search target course name
 		mange_adhoc_course_enrollments.searchAndFilterCourses(PastTempCourse);
 		System.out.println("Past5");
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		// Click on result first course (the only one) membership button
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
@@ -208,7 +208,7 @@ public class TC17933VerifypastCourseWithStudentRecording {
 	/*	mangage_adhoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
 */
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// enroll the super user to the course
 		// Click on result first course (the only one) membership button
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
@@ -234,7 +234,7 @@ public class TC17933VerifypastCourseWithStudentRecording {
 	/*	mangage_adhoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(
 				By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
 */
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		for (String window : driver.getWindowHandles()) {
 			driver.switchTo().window(window);
@@ -257,18 +257,18 @@ public class TC17933VerifypastCourseWithStudentRecording {
 		course.signOut();
 		System.out.println("Past8");
 		// 1. Login as ADMIN.
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		tegrity.loginCoursesByParameter(user);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course.signOut();
 
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 
-		Thread.sleep(10000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastTempCourse, user,
 				mangage_adhoc_courses_membership_window);
@@ -283,7 +283,7 @@ public class TC17933VerifypastCourseWithStudentRecording {
 		tegrity.loginCoursesByParameter(user);
 		initializeCourseObject();
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(2000);		
+		Thread.sleep(Page.TIMEOUT_TINY);		
 		course.deleteAllRecordingsInCourseStartWith(PastTempCourse, 2, record, delete_menu);
 		course.verifyPastCoursesTabNotDisplayed();
 

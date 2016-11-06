@@ -5,7 +5,7 @@ package com.automation.main;
 import java.util.List;
 import org.openqa.selenium.By;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -121,7 +121,7 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		
 		// Click student recording
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Select source recording.
 		record.selectFirstCheckbox();
@@ -135,11 +135,11 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		
 		// Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// Click on "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
@@ -152,7 +152,7 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		
 		// 4. Click the 'Student Recording' tab.
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 5. Select source recording.
 		String first_recording_name = record.getFirstRecordingTitle();
@@ -181,12 +181,12 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		
 		// 8. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 9. Message box "Recording has been queued for copy" is displayed.
 		// 10. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 11. Message box is closed.
 //		if(confirm_menu.isConfirmationMenuClosed()) {
@@ -233,7 +233,7 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		// 17. Click the 'Student Recording' tab.
 		record.clickOnStudentRecordingsTab();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 18. Verify that copied recording has a title with number mark.
 		List<String> recording_list = record.getCourseRecordingList();
@@ -265,7 +265,7 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		record.clickOnRecordingTitleInIndex(i);
 		
 		// 20. Click on any chapter.
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 		
 		// 21. "Tegrity Player" is displayed - Recording is playing correctly.

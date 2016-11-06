@@ -9,7 +9,7 @@ import java.sql.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -57,7 +57,7 @@ public class AddAdditionalContentFileWindow extends Page {
 	
 	/// verify Add Additional Content File title
 	public void verifyAdditionalContentFileWindowTitle() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String val = additional_content_file_title.getText();
 		if (val.equals("Add Additional Content File")) {
 			System.out.println("Add Additional Content File window title verified ");
@@ -94,7 +94,7 @@ public class AddAdditionalContentFileWindow extends Page {
 //		robot.keyPress(KeyEvent.VK_V);
 //		robot.keyRelease(KeyEvent.VK_V);
 //		robot.keyRelease(KeyEvent.VK_CONTROL);
-//		Thread.sleep(5000);
+//		Thread.sleep(Page.TIMEOUT_TINY);
 //		robot.keyPress(KeyEvent.VK_ENTER);
 //		robot.keyRelease(KeyEvent.VK_ENTER);
 
@@ -105,11 +105,11 @@ public class AddAdditionalContentFileWindow extends Page {
 
 		String file_name = path.substring(51);
 		//select_upload_additional_file.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		uploadFile(path);
 		System.out.println("file selected successfully");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		verifyAdditionalContentFileNamePriorToSelectButton();/// verify its
 																/// location
 		add_additional_file_button.click();/// add
@@ -121,7 +121,7 @@ public class AddAdditionalContentFileWindow extends Page {
 
 	/// verify Add Additional Content File info
 	public void verifyAdditionalContentFileWindowInfo() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String val = additional_content_file_info.getText();
 		if (val.equals("Select a file to upload as additional content to this course.")) {
 			System.out.println("Add Additional Content File window info verified ");
@@ -136,7 +136,7 @@ public class AddAdditionalContentFileWindow extends Page {
 
 	// verify selected file displayed in search box
 	public void verifyAdditionalContentFileName(String name) throws InterruptedException {
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String val = add_additional_file_selected_name.getText();
 		if (val.equals("name of selected file is correctly displayed in inputbox.")) {
 			System.out.println("name of selected file is correctly displayed in inputbox.");
@@ -150,7 +150,7 @@ public class AddAdditionalContentFileWindow extends Page {
 
 	// verify selected file name displayed prior to select button
 	public void verifyAdditionalContentFileNamePriorToSelectButton() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		Point file_text = add_additional_file_selected_name.getLocation();
 		Point select_button = select_upload_additional_file.getLocation();
 
@@ -168,7 +168,7 @@ public class AddAdditionalContentFileWindow extends Page {
 
 	// verify location of progressbar
 	public void verifyProgressBar() throws InterruptedException {
-		Thread.sleep(500);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		if(isElemenetDisplayed(By.xpath("//*[@id=\"addFileWindow\"]/form/div[1]/div[4]"))){
 			Point bar=upload_progress_bar.getLocation();
 			Point Upload = select_upload_additional_file.getLocation();
@@ -190,11 +190,11 @@ public class AddAdditionalContentFileWindow extends Page {
 
 		String file_name = path.substring(51);
 		//select_upload_additional_file.click();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 
 		uploadFile(path);
 		System.out.println("file selected successfully");
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		verifyAdditionalContentFileNamePriorToSelectButton();/// verify its
 		add_additional_file_button.click();
 	
@@ -223,13 +223,13 @@ public class AddAdditionalContentFileWindow extends Page {
 
 			String file_name = path.substring(51);
 			//select_upload_additional_file.click();
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 
 
 			uploadFile(path);
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			System.out.println("file selected successfully");
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			verifyAdditionalContentFileNamePriorToSelectButton();/// verify its
 																	/// location
 			add_additional_file_button.click();/// add
@@ -238,7 +238,7 @@ public class AddAdditionalContentFileWindow extends Page {
 		}
 		// verify selected file name displayed prior to select button
 		public void verifyAdditionalContentButtonsLocation() throws InterruptedException {
-			Thread.sleep(2000);
+			Thread.sleep(Page.TIMEOUT_TINY);
 			Point file_text = add_additional_file_selected_name.getLocation();
 			Point select_button = select_upload_additional_file.getLocation();
             Point cancel=cancel_additional_file_button.getLocation();

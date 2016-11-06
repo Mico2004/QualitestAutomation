@@ -120,9 +120,7 @@ public class CreateNewUserWindow extends Page {
 		setConfirmPassword(confirm_password);
 		clickOnOkButton();		
 		waitForAlert(60);
-		driver.switchTo().alert().accept();			
-
-		
+		driver.switchTo().alert().accept();					
 		System.out.println("New user created. Username: " + user_name + ". User id: " + user_id + ". Password: " + password);
 		ATUReports.add("User Creation",user_name,"New User was created","New User was created",LogAs.PASSED,null);
 	}

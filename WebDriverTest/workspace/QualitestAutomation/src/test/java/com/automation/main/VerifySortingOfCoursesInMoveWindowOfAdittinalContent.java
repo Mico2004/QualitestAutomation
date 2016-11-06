@@ -2,7 +2,7 @@ package com.automation.main;
 
 import java.awt.List;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -68,7 +68,7 @@ public class VerifySortingOfCoursesInMoveWindowOfAdittinalContent {
 					record = PageFactory.initElements(driver, RecordingHelperPage.class);
 					//4.click on  test tab
 					record.clickOnTestAdittionalContentTab();
-					Thread.sleep(2000);
+					Thread.sleep(Page.TIMEOUT_TINY);
 					//5.select check box
 	
 			        record.getCheckbox().click();

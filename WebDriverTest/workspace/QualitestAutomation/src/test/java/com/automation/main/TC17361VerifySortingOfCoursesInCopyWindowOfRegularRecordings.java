@@ -3,7 +3,7 @@ package com.automation.main;
 import java.awt.List;
 
 import org.jboss.netty.channel.ReceiveBufferSizePredictor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -83,7 +83,7 @@ public class TC17361VerifySortingOfCoursesInCopyWindowOfRegularRecordings {
 		course.selectCourseThatStartingWith("Ab");
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.getCheckbox());// check box is selected
-        Thread.sleep(2000);
+        Thread.sleep(Page.TIMEOUT_TINY);
 	
         record.clickOnRecordingTaskThenCopy();
 		//7.verify courses are displayed in alphabetical order

@@ -32,7 +32,7 @@ package com.automation.main;
 
 
 import java.util.List;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -128,7 +128,7 @@ DesiredCapabilities capability;
 		// 2. Select course (named start with: "BankInvalidRecordings").
 		course.selectCourseThatStartingWith("BankInvalidRecording");
 		
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 3. Select recording with "Erorr" status.
 		List<String> recording_list = record.getCourseRecordingList(); 
@@ -144,13 +144,13 @@ DesiredCapabilities capability;
 		// 4. Select "Recording Tasks -> Move" menu item.
 		record.clickOnRecordingTaskThenMove();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 5. Message box "Cannot copy in-process or failed recording" is displayed.
 		// 6. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterCannotMoveInProcessOrFailRecordings();
 		
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 7. Message box is closed.
 		boolean is_message_box_closed = confirm_menu.isConfirmationMenuClosed();

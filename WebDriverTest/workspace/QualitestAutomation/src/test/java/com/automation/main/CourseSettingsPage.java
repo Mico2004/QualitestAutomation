@@ -8,7 +8,7 @@ import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -96,7 +96,7 @@ public class CourseSettingsPage extends Page {
 			ATUReports.add("Clickedon ok button.", "True.", "False.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function force select enable audio checkbox
@@ -118,7 +118,7 @@ public class CourseSettingsPage extends Page {
 
 		// enable_mp3_podcast_button.click();
 
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function force select enable audio checkbox
@@ -140,7 +140,7 @@ public class CourseSettingsPage extends Page {
 
 		// enable_mp3_podcast_button.click();
 
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function verify that course setting page dispaly
@@ -344,7 +344,7 @@ public class CourseSettingsPage extends Page {
 			ATUReports.add("Fail click on  visibility checkbox.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		clickOnOkButton();
 	}
 
@@ -375,7 +375,7 @@ public class CourseSettingsPage extends Page {
 			ATUReports.add("Fail click on  visibility checkbox.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		clickOnOkButton();
 	}
 
@@ -406,7 +406,7 @@ public class CourseSettingsPage extends Page {
 			ATUReports.add("Fail click on enable student testing checkbox", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		clickOnOkButton();
 	}
 
@@ -437,7 +437,7 @@ public class CourseSettingsPage extends Page {
 			ATUReports.add("Fail click on allow student downloading checkbox", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		clickOnOkButton();
 	}
 

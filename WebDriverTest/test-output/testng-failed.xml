@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Suite]">
-  <listeners>
-    <listener class-name="atu.testng.reports.listeners.ATUReportsListener"/>
-    <listener class-name="atu.testng.reports.listeners.ConfigurationListener"/>
-    <listener class-name="atu.testng.reports.listeners.MethodListener"/>
-  </listeners>
-  <test name="Test(failed)">
+<suite name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
     <classes>
-      <class name="com.automation.main.edit_recording_properties.TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput">
+      <class name="com.automation.main.admin_course_view_recording_tasks.TC22032DeleteARegularRecordingAsADMIN">
         <methods>
-          <include name="closeBroswer"/>
-          <include name="test17001"/>
+          <include name="quitBrowser"/>
           <include name="setup"/>
+          <include name="test22032"/>
         </methods>
-      </class> <!-- com.automation.main.edit_recording_properties.TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput -->
+      </class> <!-- com.automation.main.admin_course_view_recording_tasks.TC22032DeleteARegularRecordingAsADMIN -->
     </classes>
-  </test> <!-- Test(failed) -->
-</suite> <!-- Failed suite [Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

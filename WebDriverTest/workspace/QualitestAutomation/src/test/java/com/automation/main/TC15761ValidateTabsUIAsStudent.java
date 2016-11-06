@@ -3,7 +3,7 @@ package com.automation.main;
 
 import java.util.Date;
 import java.text.DateFormat;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -150,12 +150,12 @@ public class TC15761ValidateTabsUIAsStudent {
 		
 		// 8. Logout.
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		
 		// 9. Login as a STUDENT.
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		// 10. Open "Course details" page as an STUDENT.
 		course.selectCourseThatStartingWith("Ba");
@@ -175,7 +175,7 @@ public class TC15761ValidateTabsUIAsStudent {
 		
 		// Post test
 		top_bar_helper.clickOnSignOut();
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		tegrity.loginCourses("SuperUser");
 		course.selectCourseThatStartingWith("Ba");
 		record.clickOnCourseTaskThenCourseSettings();

@@ -8,7 +8,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -74,7 +74,7 @@ public class MoveWindow extends Page {
 			ATUReports.add("Fail click on move recordings button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	// This function return true if move menu is closed,
@@ -112,12 +112,12 @@ public class MoveWindow extends Page {
 			ATUReports.add("Fail click on cancel button.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	}
 
 	/// verify move menu title
 	public void verifyMoveMenuTitle() throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		String val = move_menu_title.getText();
 		if (val.equals("Move")) {
 			ATUReports.add("move menu title verified ", LogAs.PASSED, null);
@@ -132,7 +132,7 @@ public class MoveWindow extends Page {
 
 	// verify move menu background color is same as recording background color
 	public void verifyMenuColor(RecordingHelperPage rec) throws InterruptedException {
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 	String background_rec=rec.getBackGroundColor(rec.background);
 	String menu_background=getBackGroundColor(move_menu_background);
 		if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(move_menu_background))) {

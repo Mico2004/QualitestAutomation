@@ -3,7 +3,7 @@ package com.automation.main;
 
 
 import java.util.List;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -107,23 +107,23 @@ public class TC15588MoveARecordingWithAPodcast {
 		//2. As a source course select a course with "Enable MP3 Podcast" option enabled in "Course Settings".
 		currentCourse = course.selectCourseThatStartingWith("Ab");
 		System.out.println("Current course: " + currentCourse);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnCourseTaskThenCourseSettings();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course_settings.enableAudioPodcast();
 		course_settings.clickOnOkButton();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.returnToCourseListPage();
 		
 		//3. As a destination course select a course with "Enable MP3 Podcast" option enabled in "Course Settings".
 		targetCourse = course.selectCourseThatStartingWith("abc");
 		System.out.println("Target course: " + targetCourse);
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.clickOnCourseTaskThenCourseSettings();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		course_settings.enableAudioPodcast();
 		course_settings.clickOnOkButton();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.deleteAllRecordings(delete_menu);
 		record.returnToCourseListPage();
 		
@@ -175,7 +175,7 @@ public class TC15588MoveARecordingWithAPodcast {
 			Assert.assertTrue(false);
 		}
 		
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 12. Recording's status change when the copying started
 		List<String> source_recording_list = record.getCourseRecordingList(); 
 				
@@ -213,21 +213,21 @@ public class TC15588MoveARecordingWithAPodcast {
 	    System.out.println(driver.getTitle());
 	    System.out.println(driver.getWindowHandle());
 	    
-	    Thread.sleep(3000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 	    
 	    System.out.println(driver.getPageSource());
 	    
 	    String url_of_podcast_instructor = podcast_page.getTargetPodcastHref(first_recording_title);
 	    podcast_page.clickOnTargetPodcast(first_recording_title);
 	    
-	    Thread.sleep(5000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 	
 	    player_page.verifyPartiallyUrl(url_of_podcast_instructor.split("/")[5]);
 	   
 	    // 18. Click "Sign Out" link.
 	    driver.close();
 	
-	    Thread.sleep(2000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 	    
 	    for (String handle : driver.getWindowHandles()) {
 		    driver.switchTo().window(handle);
@@ -240,7 +240,7 @@ public class TC15588MoveARecordingWithAPodcast {
 //	    System.out.println(driver.getTitle());
 //	    System.out.println(driver.getWindowHandle());
 	    
-	    Thread.sleep(2000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 	    
 	    record.clickOnSignOut();
 	    
@@ -270,12 +270,12 @@ public class TC15588MoveARecordingWithAPodcast {
 //	    System.out.println(driver.getTitle());
 //	    System.out.println(driver.getWindowHandle());
 	    
-	    Thread.sleep(2000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 	    
 	    String url_of_podcast_student = podcast_page.getTargetPodcastHref(first_recording_title);
 	    podcast_page.clickOnTargetPodcast(first_recording_title);
 	    
-	    Thread.sleep(5000);
+	    Thread.sleep(Page.TIMEOUT_TINY);
 	
 	    player_page.verifyPartiallyUrl(url_of_podcast_student.split("/")[5]);
 	    

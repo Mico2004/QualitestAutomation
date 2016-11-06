@@ -3,7 +3,7 @@ package com.automation.main;
 import java.awt.List;
 
 import org.apache.commons.collections.comparators.FixedOrderComparator;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -81,7 +81,7 @@ public class TC17369VerifySortingOfCoursesInCopyWindowOfAdittinalContent {
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		//4.click on  test tab
 		record.clickOnAdditionContentTab();
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		//5.select check box
 		record.ClickOneCheckBoxOrVerifyAlreadySelected(record.getCheckbox());// check box is selected
         

@@ -15,7 +15,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.nio.file.Files;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriver;import com.automation.main.page_helpers.Page;import com.automation.main.page_helpers.Page;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -141,9 +141,9 @@ public class TC21599GuestPremissions {
 		 record.convertRecordingsListToNames();
 		 String recording_publish=record.recording_list_names.get(0);
 		 record.unpublishFirstRecording(record.recordings_tab,publish_window);
-		 Thread.sleep(3000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 record.unpublishFirstRecording(record.student_recordings_tab,publish_window);
-    	 Thread.sleep(3000);
+    	 Thread.sleep(Page.TIMEOUT_TINY);
 		 record.convertRecordingsListToNames();
 		 String student_publish=record.recording_list_names.get(0);
 		 // 7.Go to the university's 'Course Settings' and enable ' Enable
@@ -156,7 +156,7 @@ public class TC21599GuestPremissions {
 		 record.toCourseSettingsPage();		
 		 //8.verify allow all students to download is checked
 		 course_settings.CheckAllowStudentDownload();
-		 Thread.sleep(1000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 record.toCourseSettingsPage();	
 		 course_settings.forceWebElementToBeSelected(course_settings.checkbox_allow_students_to_download_recordings, "allow students to download recordings");
 
@@ -199,21 +199,21 @@ public class TC21599GuestPremissions {
 		
 		 //17.Make sure the regular recording you unpublished is not displayed
 		 record.clickOnRecordingsTab();
-		 Thread.sleep(2000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 record.isRecordingExist(recording_publish,false);
 		
 		 //18.Click the 'Student Recordings' tab
-		 Thread.sleep(2000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 //19.Make sure the student recording you unpublished is not displayed
 		 record.isRecordingExist(student_publish, false);
 		
 		 //20.Click the 'Recordings' tab
 		 record.clickOnRecordingsTab();
-		 Thread.sleep(3000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 //21.Click on some recording
 		 record.verifyFirstExpandableRecording();
 		 driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		 Thread.sleep(15000);
+		 Thread.sleep(Page.TIMEOUT_TINY);
 		 player_page.verifyTimeBufferStatusForXSec(20);// check source display
 		 ///// to go back to recording window handler
 		 for (String handler : driver.getWindowHandles()) {
@@ -287,7 +287,7 @@ public class TC21599GuestPremissions {
 
 		/// 30.Hover over the "Recording tasks" drop down list.
 		record.moveToElementAndClick(record.recording_tasks_button, driver);
-		Thread.sleep(2000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		record.verifyDisableDownloadAndMessageAppears();
 
 		// 31.Check recording checkbox.
@@ -387,22 +387,22 @@ public class TC21599GuestPremissions {
 		// ctrl+a
 		robot.mouseMove(500, 500);
 		robot.keyPress(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyPress(KeyEvent.VK_A);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyRelease(KeyEvent.VK_A);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// ctrl+c
 		robot.keyPress(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyPress(KeyEvent.VK_C);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyRelease(KeyEvent.VK_C);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Clipboard clipboard = toolkit.getSystemClipboard();
 		String result = (String) clipboard.getData(DataFlavor.stringFlavor);
@@ -422,7 +422,7 @@ public class TC21599GuestPremissions {
 		record.verifyFirstExpandableRecording();
 		record.waitForVisibility(driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")));
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		player_page.verifyTimeBufferStatusForXSec(10);// check source display
 		String rss_feed_course_link = driver.getCurrentUrl();
 
@@ -457,22 +457,22 @@ public class TC21599GuestPremissions {
 		// ctrl+a
 		robot.mouseMove(500, 500);
 		robot.keyPress(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyPress(KeyEvent.VK_A);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyRelease(KeyEvent.VK_A);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// ctrl+c
 		robot.keyPress(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyPress(KeyEvent.VK_C);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyRelease(KeyEvent.VK_C);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		Thread.sleep(200);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		toolkit = Toolkit.getDefaultToolkit();
 		clipboard = toolkit.getSystemClipboard();
 		result = (String) clipboard.getData(DataFlavor.stringFlavor);
@@ -508,19 +508,19 @@ public class TC21599GuestPremissions {
 		record.convertRecordingsListToNames();
 	    record.verifyRecordingSortedByTitle(record.recording_list_names);
 	    record.pressViewButtonAndSelect("Date");
-		Thread.sleep(1000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		
 		record.convertRecordingsListToDate();/// check sort by date
 		record.verifyRecordingSortedByDate(record.recordings_list_date_string);
        record.pressViewButtonAndSelect("Duration");
-       Thread.sleep(1000);
+       Thread.sleep(Page.TIMEOUT_TINY);
 		
        record.convertRecordingsListToDuration();/// check sort by date
 		record.verifyRecordingSortedByDuration(record.recording_list_duration_string);
       
 //		  ///40.click on additional content tab
            record.clickOnAdditionContentTab();
-	       Thread.sleep(2000);
+	       Thread.sleep(Page.TIMEOUT_TINY);
 	       record.convertAdditionalContantListToNames();
 	       String file_name=record.additional_content_list_names.get(0);
 	       String download_path= System.getProperty("user.home") + File.separatorChar +"Downloads"+ File.separatorChar+file_name;
@@ -554,10 +554,10 @@ public class TC21599GuestPremissions {
 		/// 4.select additional content tab
 		record.waitForVisibility(record.additional_content_tab);
 		record.clickOnAdditionContentTab();
-		Thread.sleep(3000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		/// 5.select file by its name
 		record.selectAdditionalContentByName(file_name);
-		Thread.sleep(5000);
+		Thread.sleep(Page.TIMEOUT_TINY);
 		// 6.verify downloaded file is valid using md5
 		record.VerifyDownloadedFileIsExist(download_path);
 
