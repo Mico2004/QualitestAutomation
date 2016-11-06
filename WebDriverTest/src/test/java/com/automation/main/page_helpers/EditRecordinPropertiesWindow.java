@@ -538,11 +538,11 @@ public class EditRecordinPropertiesWindow extends Page {
 		String recordName = null;
 	try {
 		recordName = recording_title.getText();
-		save_button.click();
+		cancel_button.click();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
 		System.out.println("save succeded");
 		Thread.sleep(2000);
-		confirm.clickOnOkButtonAfterConfirmEditRecordingProperties();
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("RecordingStatus1")));
 	} catch (Exception e) {
 		System.out.println("clicked on recording title input failed");
 		e.getMessage();
@@ -685,7 +685,7 @@ public class EditRecordinPropertiesWindow extends Page {
 	// that title open or closed
 	public boolean isConfirmationMenuClosed() throws InterruptedException {
 		try {
-			for(int i = 0; i < 25 ; i++){
+			for(int i = 0; i < 30 ; i++){
 				if(!save_button.isDisplayed()){
 					return true;
 				}else{
@@ -695,7 +695,10 @@ public class EditRecordinPropertiesWindow extends Page {
 			return false;
 		} catch (org.openqa.selenium.NoSuchElementException msg) {
 			return true;
+		} catch (org.openqa.selenium.StaleElementReferenceException msg){
+			return true;
 		}
+		
 	}
 
 		// This function verify that confirm window is close
