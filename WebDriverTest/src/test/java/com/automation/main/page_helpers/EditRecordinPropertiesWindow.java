@@ -745,8 +745,43 @@ public class EditRecordinPropertiesWindow extends Page {
 			ATUReports.add("The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
+		  String[]parts= correctDate.split(" ");
+		
+		  if(parts[0].length() == 1) {
+			  parts[0] = "0" + parts[0];
+		  } 
+		  if(parts[1].length() == 1) {
+			  parts[1] = "0" + parts[1];
+		  }
+		  correctDate = parts[0] + "/"  + parts[1] + "/"  + parts[2];
 		
 		return correctDate;
 	}
+
+
+	public String clickOnDifferentOwnerThatTheExist(String recordBy) {
+		
+		String[]splitRecordBy= recordBy.split(" ");
+		String recordByToCheck  =splitRecordBy[2];	
+		for(WebElement ie: owner_button_select) {
+			String currentOwner = ie.getText();	
+			String[]splitOwner= currentOwner.split(" ");
+			String OwnerToCheck = splitOwner[1].substring(1, splitOwner[1].length()-1);
+			if(!OwnerToCheck.contains(recordByToCheck)){
+				clickElement(ie);
+				System.out.println("Click on the instractur: " + currentOwner);				
+				ATUReports.add("The instracutor is found at the list.", "Success.", "Success", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+				String OwnerToReturn = "recorded by: " + OwnerToCheck;
+				return OwnerToReturn;
+			}		
+		}
+		System.out.println("No Found new instracutor at the list.");				
+		ATUReports.add("No Found new instracutor at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		Assert.assertTrue(false);
+		return null;
+	}
+
+
 	
 }

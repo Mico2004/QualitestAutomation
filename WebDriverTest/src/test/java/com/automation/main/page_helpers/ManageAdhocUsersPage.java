@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -40,22 +41,23 @@ public class ManageAdhocUsersPage extends Page {
 	public WebElement new_user_button;
 	@FindBy(linkText = "Admin Dashboard")
 	WebElement to_admin_dashboard;
+	@FindBy(xpath="//div[@id='contentDIV']/table/tbody") WebElement contentTable;
 	@FindBy(id = "ctl00_ContentPlaceHolder1_txtSearch") WebElement filter_search_user_input;
 	@FindBy(id = "ctl00_ContentPlaceHolder1_btnSearch") WebElement filter_search_button;
 
 	public void clickOnNewUser() throws InterruptedException {
-		for (int i = 0; i < 10; i++) {
-			try {
-				new_user_button.click();
-				System.out.println("Clicked on new user button.");
-				break;
+		       try{
+		    	   new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(new_user_button));		    
+		    	   new_user_button.click();
+		    	   System.out.println("Clicked on new user button.");
+		    	   
 			} catch (Exception msg) {
-				System.out.println("Not clicked on new user button.");
-				Thread.sleep(1000);
+					ATUReports.add("Not clicked on new user link", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					
 			}
 		}
 
-	}
+	
 
 	// back to admin dash board
 	public void toAdminDashBoard() throws InterruptedException {
@@ -102,5 +104,7 @@ public class ManageAdhocUsersPage extends Page {
 		}
 		
 	}
+	
+
 
 }
