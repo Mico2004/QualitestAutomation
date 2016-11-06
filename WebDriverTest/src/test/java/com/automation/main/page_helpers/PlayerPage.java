@@ -4,6 +4,8 @@ package com.automation.main.page_helpers;
 
 import java.util.List;
 import java.util.Locale;
+
+import org.apache.commons.collections.functors.SwitchTransformer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -148,27 +150,17 @@ public class PlayerPage extends Page {
 			return false;
 		}
 
-		// Wait for switching frame
-		for (int i = 0; i < 25; i++) {
+		// Wait for switching frame		
 			try {
-				driver.switchTo().frame(0);
-				System.out.println("Switching to player frame.");
+				getIntoFrame(0);	
 				ATUReports.add("Switching to player frame.", "Success to switch to player frame.",
 						"Success to switch to player frame.", LogAs.PASSED, null);
-				Assert.assertTrue(true);
-				break;
-			} catch (org.openqa.selenium.NoSuchFrameException msg) {
-				if (i == 24) {
+			} catch (Exception msg) {			
 					System.out.println("Switching to player frame.");
 					ATUReports.add("Switching to player frame.", "Success to switch to player frame.",
 							"Fail to switch to player frame.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-					Assert.assertTrue(false);
-					return false;
-				} else {
-					Thread.sleep(1000);
-				}
+					Assert.assertTrue(false);							
 			}
-		}
 
 		// Thread.sleep(10000);
 

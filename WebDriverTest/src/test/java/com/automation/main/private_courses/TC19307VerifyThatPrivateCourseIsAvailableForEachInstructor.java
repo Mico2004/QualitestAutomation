@@ -208,8 +208,9 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		 String temp_instructor_user_name = "InstructorTemp" + sdf.format(date);
 		  
+
 		// mange_adhoc_users_page.waitForPageToLoad();
-		 Thread.sleep(12000); 
+		 mange_adhoc_users_page.waitForPageToLoad();	 
 		 mange_adhoc_users_page.clickOnNewUser();
 			
 		 create_new_user_window.createNewUser(temp_instructor_user_name, temp_instructor_user_name, "abc@com.com", "111", "111");

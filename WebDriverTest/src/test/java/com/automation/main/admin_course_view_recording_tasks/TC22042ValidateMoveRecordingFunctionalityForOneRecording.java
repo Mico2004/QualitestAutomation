@@ -229,7 +229,8 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				}
 				
 				// 13. Click on the text field, and write the name of the (existing) instuctor which belong to the course you are moving the chosen record from.
-				driver.findElement(By.id("members_value")).sendKeys(username);
+				move_window.sendKeysToWebElementInput(move_window.instructorTextBox, username);
+				
 				Thread.sleep(1000);
 				
 				// 14. The text is written on the field. There is also a dropdown list opened which contains several existing instructor which may match the search.

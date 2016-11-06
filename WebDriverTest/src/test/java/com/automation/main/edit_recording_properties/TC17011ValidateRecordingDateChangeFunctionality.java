@@ -134,6 +134,7 @@ public class TC17011ValidateRecordingDateChangeFunctionality {
 		//8.The date is in the following format: 'XX/XX/XXXX'.
 		String correctDate =edit_recording_properties_window.verifyThatTheCalendarInTheRightFormat();
 		
+		
 		//9.Click the "Save" button
 		edit_recording_properties_window.clickOnSaveButton();
 				

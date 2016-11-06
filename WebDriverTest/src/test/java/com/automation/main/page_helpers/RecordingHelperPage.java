@@ -4844,12 +4844,6 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 
-
-	
-	
-	
-	
-	
 	public int getRecordingIndexWithoutAnyStatus(){
 	try{
 		int i = 1;
@@ -4868,19 +4862,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}catch(Exception e){
 			ATUReports.add("Retrieving clear status recording failed",e.getMessage(),  LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return 0;
-		}
-		
-		
+		}	
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-
 	public void verifyThatTheRecordNameEqualsFromTheString(String recordOperation,int index,String operation){
 		
 	try{

@@ -553,7 +553,7 @@ public class EditRecordinPropertiesWindow extends Page {
 	}
 
 
-	public void verifyThatAllTheInstractorsInTheDropDownList() {
+	public void verifyThatAllTheTypeInTheDropDownList() {
 	
 		boolean isAllTheInstractorsInTheList=true;
 		try{
@@ -579,12 +579,24 @@ public class EditRecordinPropertiesWindow extends Page {
 	}
   }
 	
-	public void addOwnersToList(){
+	public void addOwnersToList(String OwnerType){
 		
-		owners.add(PropertyManager.getProperty("ExcutiveAdmin"));
-		owners.add(PropertyManager.getProperty("SuperUser"));
-		owners.add(PropertyManager.getProperty("User1"));
-		owners.add(PropertyManager.getProperty("User2"));
+		owners.clear();
+		if(OwnerType.equals("Instractor")){
+			owners.add(PropertyManager.getProperty("ExcutiveAdmin"));
+			owners.add(PropertyManager.getProperty("SuperUser"));
+			owners.add(PropertyManager.getProperty("User1"));
+			owners.add(PropertyManager.getProperty("User2"));
+		} else if( OwnerType.equals("Student")) {
+			owners.add(PropertyManager.getProperty("User2"));
+			owners.add(PropertyManager.getProperty("User4"));
+		} else {
+			owners.add(PropertyManager.getProperty("ExcutiveAdmin"));
+			owners.add(PropertyManager.getProperty("SuperUser"));
+			owners.add(PropertyManager.getProperty("User1"));
+			owners.add(PropertyManager.getProperty("User2"));
+
+		}
 	}
 	
 	public void verifyThatBoardersOfTheDropDownAreInBlack(WebElement element) {
@@ -617,15 +629,15 @@ public class EditRecordinPropertiesWindow extends Page {
 		for(WebElement ie: type_button_select) {
 			String currentType = ie.getText(); 
 			if(!recording_types.contains(currentType)){
-				System.out.println("The instracutor are not found at the list.");				
-				ATUReports.add("The instracutor are not found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("The drop down is not contians all the types.");				
+				ATUReports.add("The drop down is not contians all the types.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				isAllTheRecordingsTypesInTheList = false;
 				break;
 			}
 		}
 		if(isAllTheRecordingsTypesInTheList){
-			System.out.println("All The instracutors are found at the list.");
-			ATUReports.add("All The instracutors are found at the list.", "Success.", "Success.", LogAs.PASSED, null);
+			System.out.println("The drop down is contians all the types.");
+			ATUReports.add("The drop down is contians all the types.", "Success.", "Success.", LogAs.PASSED, null);
 		}	
 		}catch(Exception e){
 			e.getMessage();
@@ -673,7 +685,7 @@ public class EditRecordinPropertiesWindow extends Page {
 	// that title open or closed
 	public boolean isConfirmationMenuClosed() throws InterruptedException {
 		try {
-			for(int i = 0; i < 20 ; i++){
+			for(int i = 0; i < 25 ; i++){
 				if(!save_button.isDisplayed()){
 					return true;
 				}else{
@@ -702,8 +714,6 @@ public class EditRecordinPropertiesWindow extends Page {
 		}
 	
 	
-	
-
 	public void verifyThatHoverOnButtonAndSeeShadow(WebElement button,String text) throws NoSuchElementException, InterruptedException {
 		
 		try{
@@ -745,8 +755,9 @@ public class EditRecordinPropertiesWindow extends Page {
 			ATUReports.add("The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		  String[]parts= correctDate.split(" ");
-		
+
+		  String[]parts= correctDate.split("/");
+
 		  if(parts[0].length() == 1) {
 			  parts[0] = "0" + parts[0];
 		  } 
@@ -761,6 +772,7 @@ public class EditRecordinPropertiesWindow extends Page {
 
 	public String clickOnDifferentOwnerThatTheExist(String recordBy) {
 		
+		try {
 		String[]splitRecordBy= recordBy.split(" ");
 		String recordByToCheck  =splitRecordBy[2];	
 		for(WebElement ie: owner_button_select) {
@@ -776,6 +788,12 @@ public class EditRecordinPropertiesWindow extends Page {
 				return OwnerToReturn;
 			}		
 		}
+		
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
 		System.out.println("No Found new instracutor at the list.");				
 		ATUReports.add("No Found new instracutor at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
@@ -783,5 +801,50 @@ public class EditRecordinPropertiesWindow extends Page {
 	}
 
 
+	public void ChooseDiffrenetType(String type) {
+		
+		try {
+			for(WebElement ie: type_button_select) {
+				String currentType = ie.getText();	
+				if(currentType.equals(type)){
+					clickElement(ie);
+					System.out.println("Click on the Type: " + currentType);				
+					ATUReports.add("Click on the Type: " + currentType, "Success.", "Success", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+					return;
+				}
+			}
+			
+			System.out.println("No Found new instracutor at the list.");				
+			ATUReports.add("No Found new instracutor at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);	
+			
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+
+	public void verifyThatTheTypeWasChoosen(String type){
+		
+		try {
+			String currentType = type_select.getText();
+				if(currentType.equals(type)){
+					System.out.println("Verify that the type was choosen.");				
+					ATUReports.add("Verify that the type was choosen.", "Success.", "Success", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+					return;
+				}
+			
+			
+			System.out.println("Verify that the type was choosen.");				
+			ATUReports.add("Verify that the type was choosen.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);	
+			
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
 	
 }

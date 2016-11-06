@@ -5,37 +5,39 @@
     <classes>
  		
  		
- 		
- 		 <!-- Copy Recording -->
-	     <!-- Local pretest -->
-		 <class name="com.automation.main.TestSuitePreSetCopyRecordings_CopyRecordings" />	
-	  	 <class name="com.automation.main.TC15534ExixtenceOfUIItemsCopy"/>
-	     <class name="com.automation.main.TC15538CancelTheCopying"/> 						
-	     <class name="com.automation.main.TC15550CopyOneRecordingToSeveralCoureses"/>    
- 	     <class name="com.automation.main.TC15552CopySeveralRecordings"/>
-	     <class name="com.automation.main.TC15553TryCopyWithoutSelectingCourse"/>      			
-	     <class name="com.automation.main.TC15563CopyRecordingToTheSameCourse"/>		 
-	     <class name="com.automation.main.TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists"/>
-	     <class name="com.automation.main.TC15567SearchCoursesInCopyWindow"/>  
-	       <class name="com.automation.main.TC15535CopyOneRecording"/>   
-	     <class name="com.automation.main.TC15579TryToCopyRecordingWhileItIsBeingCopied"/>
-	     <class name="com.automation.main.TC15601TryToCopyRecordingAsAStudent"/>     
-	     <class name="com.automation.main.TC15655TryToCopyRecordingWhileItIsBeingMoved"/>
-	     <class name="com.automation.main.TC15660TryToCopyFailedRecording"/>
-	     <class name="com.automation.main.TC15898VerifyTheCopyingMovingStatusOfADestinationRecording"/>     
-	     <class name="com.automation.main.TC17361VerifySortingOfCoursesInCopyWindowOfRegularRecordings"/>
-	     <class name="com.automation.main.TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording"/>
-	  	 <class name="com.automation.main.TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings"/>
-	     <class name="com.automation.main.TC17366VerifySortingOfCoursesInCopyWindowOfProctoringRecordings"/>
-	     <class name="com.automation.main.TC17367VerifySortingOfCoursesInMoveWindowOfProctoringRecordings"/>
-	     <class name="com.automation.main.TC17369VerifySortingOfCoursesInCopyWindowOfAdittinalContent"/>     
-	   <class name="com.automation.main.TC17370VerifySortingOfCoursesInMoveWindowOfAdittinalContent"/>
-	     <class name="com.automation.main.TC24762CopyOneStudentRecording"/>
-	     <class name="com.automation.main.TC24763CancelTheCopyingOfAStudentRecording"/>     
-	     <class name="com.automation.main.TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExists"/>
-	     <class name="com.automation.main.TC24765TryToCopyAStudentRecordingAsAStudent"/>  
-    <!-- <class name="com.automation.main.TC15557CopyRecordingWithPodcast"/>      N/A CHROME   -->
-    
+ 	<!-- Copy Recording -->
+			<!-- Local pretest -->
+			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_CopyRecordings" />
+			<class name="com.automation.main.copy_recording.TC15534ExixtenceOfUIItemsCopy" />
+			<class name="com.automation.main.copy_recording.TC15538CancelTheCopying" />
+			<class name="com.automation.main.copy_recording.TC15535CopyOneRecording" />
+			<class name="com.automation.main.copy_recording.TC15550CopyOneRecordingToSeveralCoureses" />
+			<class name="com.automation.main.copy_recording.TC15552CopySeveralRecordings" />
+			<class name="com.automation.main.copy_recording.TC15553TryCopyWithoutSelectingCourse" />
+			<class name="com.automation.main.copy_recording.TC15563CopyRecordingToTheSameCourse" />
+			<class name="com.automation.main.copy_recording.TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists" />
+			<class name="com.automation.main.copy_recording.TC15567SearchCoursesInCopyWindow" />
+			<class name="com.automation.main.copy_recording.TC15579TryToCopyRecordingWhileItIsBeingCopied" />
+			<class name="com.automation.main.copy_recording.TC15601TryToCopyRecordingAsAStudent" />
+			<class name="com.automation.main.copy_recording.TC15535CopyOneRecording" />
+			<class name="com.automation.main.copy_recording.TC15655TryToCopyRecordingWhileItIsBeingMoved" />
+			<class name="com.automation.main.copy_recording.TC15660TryToCopyFailedRecording" />
+			<class name="com.automation.main.copy_recording.TC15898VerifyTheCopyingMovingStatusOfADestinationRecording" />
+			<class name="com.automation.main.copy_recording.TC17361VerifySortingOfCoursesInCopyWindowOfRegularRecordings" />
+			<class name="com.automation.main.copy_recording.TC17362VerifySortingOfCoursesInMoveWindowOfREgularRecording" />
+			<class name="com.automation.main.copy_recording.TC17365VerifySortingOfCoursesInMoveWindowOfStudentRecordings" />
+			<class name="com.automation.main.copy_recording.TC17366VerifySortingOfCoursesInCopyWindowOfProctoringRecordings" />
+			<class name="com.automation.main.copy_recording.TC17367VerifySortingOfCoursesInMoveWindowOfProctoringRecordings" />
+			<class name="com.automation.main.copy_recording.TC17369VerifySortingOfCoursesInCopyWindowOfAdittinalContent" />
+			<class name="com.automation.main.copy_recording.TC17370VerifySortingOfCoursesInMoveWindowOfAdittinalContent" />
+			<class name="com.automation.main.copy_recording.TC24762CopyOneStudentRecording" />
+			<class name="com.automation.main.copy_recording.TC24763CancelTheCopyingOfAStudentRecording" />
+			<class name="com.automation.main.copy_recording.TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExists" />
+			<class name="com.automation.main.copy_recording.TC24765TryToCopyAStudentRecordingAsAStudent" />
+			
+
+		 
+ 
     </classes>
     
   </test> <!-- Test -->

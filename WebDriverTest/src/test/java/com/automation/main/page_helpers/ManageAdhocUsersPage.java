@@ -106,5 +106,16 @@ public class ManageAdhocUsersPage extends Page {
 	}
 	
 
+	public void waitForPageToLoad(){
+		try{
+			getIntoFrame(0);
+			waitForVisibility(new_user_button, 40);
+			waitForVisibility(contentTable, 40);
+			
+		}catch(Exception e){
+			ATUReports.add("Loading 'Manage Ad-Hock Users' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
 
 }
