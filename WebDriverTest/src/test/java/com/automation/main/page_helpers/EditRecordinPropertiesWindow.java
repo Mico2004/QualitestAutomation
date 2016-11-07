@@ -696,18 +696,25 @@ public class EditRecordinPropertiesWindow extends Page {
 	// that title open or closed
 	public boolean isConfirmationMenuClosed() throws InterruptedException {
 		try {
-			for(int i = 0; i < 60 ; i++){
-				if(!save_button.isDisplayed()){
-					return true;
-				}else{
-					Thread.sleep(1000);
-				}			
-			}
+//			for(int i = 0; i < 60 ; i++){
+//				if(!save_button.isDisplayed()){
+//					return true;
+//				}else{
+//					Thread.sleep(1000);
+//				}			
+//			}
+		if(new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.id("EditButton")))){
+			System.out.println("The Edit Recording Properites window was close at time.");
+			ATUReports.add("The Edit Recording Properites window was close at time.", "Success.", "Success.", LogAs.PASSED, null);
+			return true;
+		}else {
+			System.out.println("The Edit Recording Properites window was not close at time.");
+			ATUReports.add("The Edit Recording Properites window was not close at time.",  "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
-		} catch (org.openqa.selenium.NoSuchElementException msg) {
-			return true;
-		} catch (org.openqa.selenium.StaleElementReferenceException msg){
-			return true;
+		}}catch (org.openqa.selenium.TimeoutException e) {
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			return false;
 		}
 		
 	}
@@ -880,5 +887,15 @@ public class EditRecordinPropertiesWindow extends Page {
 		return  OwnerToCheck +" (" + splitOwner[0] +")";
 		
 	}
+
+	public String getOwner(String UserName) {
+		
+		String[]splitOwner= UserName.split(" ");
+		String OwnerToCheck = splitOwner[1].substring(1, splitOwner[1].length()-1);
+		
+		return OwnerToCheck;
+	}
+	
+	
 	
 }
