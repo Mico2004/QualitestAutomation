@@ -268,8 +268,7 @@
 			
 			   
 
-			    
-<<<<<<< HEAD
+
 			<!-- Add additional content files-->
 		    <!-- Local pretest -->
 		    
@@ -302,7 +301,7 @@
     	  	<class name="com.automation.main.add_additional_content_file.TC15470AddFileWithTheSameTitleExistingLink" />
     	    <class name="com.automation.main.add_additional_content_file.TC15489TryToAddFileDuringAnotherUpload" />
    
-=======
+
 		    <!-- Add additional content files-->
 	    	<!-- Local pretest -->
 	     	<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_AddAdditional" />
@@ -334,12 +333,11 @@
    	  		<class name="com.automation.main.add_additional_content_file.TC15467CancelTheAdding" />   	  	
    	  	  	<class name="com.automation.main.add_additional_content_file.TC15470AddFileWithTheSameTitleExistingLink" />
    	  	  	<class name="com.automation.main.add_additional_content_file.TC15489TryToAddFileDuringAnotherUpload" />
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+
 
 		</classes>
 		
 		
-		<class name="com.automation.main.pre_post_test.PostTest" />
 	</test> <!-- Test -->
 
 	<listeners>
