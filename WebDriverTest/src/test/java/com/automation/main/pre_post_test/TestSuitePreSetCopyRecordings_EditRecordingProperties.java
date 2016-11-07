@@ -128,7 +128,7 @@ public class TestSuitePreSetCopyRecordings_EditRecordingProperties {
 	public void closeBroswer() {
 		driver.quit();
 	}
-
+//
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
