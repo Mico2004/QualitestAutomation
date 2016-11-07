@@ -10,7 +10,9 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -100,6 +102,18 @@ public class DeleteMenu extends Page {
 			return false;
 		} catch (Exception msg) {
 			return true;
+		}
+	}
+	
+	public void verifyDeleteMenuClosed() {
+		try {
+			new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.visibilityOf(delete_button)));
+			System.out.println("Delete window is closed.");
+			ATUReports.add("Delete window is closed.", LogAs.PASSED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));						
+		} catch (Exception msg) {
+			System.out.println("Delete window not closed.");
+			ATUReports.add("Delete window not closed.", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
 		}
 	}
 
