@@ -55,7 +55,7 @@ public class LoginHelperPage extends Page {
 	public LoginHelperPage(WebDriver driver) throws Exception {
 		super(driver);
 		setPageTitle("Tegrity Lecture Capture");	
-
+		setPageUrl(DriverSelector.setDriverUniversity("awsserverautomation-perf-1"));
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 
 	}
