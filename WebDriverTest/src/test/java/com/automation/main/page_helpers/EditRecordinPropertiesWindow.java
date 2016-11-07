@@ -15,6 +15,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -513,6 +515,20 @@ public class EditRecordinPropertiesWindow extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	public void clickOnCancelButton() {
+		try {
+			wait.until(ExpectedConditions.visibilityOf(cancel_button));			
+		    ((JavascriptExecutor) driver).executeScript("document.getElementById(\""+cancel_button.getAttribute("id")+"\").click();");
+			System.out.println("Clicked on cancel button.");
+			ATUReports.add("Clicked on cancel button.", "Success.", "Success.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception msg) {
+			System.out.println("Fail to click on cancel button.");
+			ATUReports.add("Clicked on cancel button.", "Success.", "Fail."+msg.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
 
 	// change title name of recording
 	public void changeRecordingName(String name, ConfirmationMenu confirm) {
@@ -935,6 +951,24 @@ public class EditRecordinPropertiesWindow extends Page {
 			}
 		}
 		return strToReturn;
+	}
+
+
+	public void clickOnTheGreyArea() throws InterruptedException {
+		try {
+			if(driver instanceof FirefoxDriver){
+				cancel_button.sendKeys(Keys.ESCAPE);
+			} else {
+				Actions action = new Actions(driver);
+				action.sendKeys(Keys.ESCAPE).build().perform();
+			}
+			ATUReports.add("Clicked on ESC button.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception e) {
+			ATUReports.add("Fail click on ESC button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		Thread.sleep(2000);
 	}
 	
 	
