@@ -47,6 +47,7 @@
 			<artifactId>jcommon</artifactId>
 			<version>0.9.5</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
@@ -93,8 +94,6 @@
 				<artifactId>selenium-grid-hub</artifactId>
 				<version>1.0.5</version>
 			</dependency>
-
-
 		</dependencies>
 	</dependencyManagement>
 	<build>
@@ -110,7 +109,6 @@
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.2</version>
