@@ -895,6 +895,47 @@ public class EditRecordinPropertiesWindow extends Page {
 		
 		return OwnerToCheck;
 	}
+
+	public void verifyUserIsNotOnTheOwnerList(String User) {
+		
+		boolean isAllTheInstractorsInTheList=true;
+		try{
+		clickElementJS(owner_select);
+		int i = 0;
+		for(WebElement ie: owner_button_select) {
+			String currentOwner = ie.getText(); 
+			if(currentOwner.contains(User)){
+				System.out.println("The user is found at the list.");				
+				ATUReports.add("The user is found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				isAllTheInstractorsInTheList = false;
+				break;
+			}
+			i++;
+		}
+		if(isAllTheInstractorsInTheList){
+			System.out.println("The user is not found at the list.");
+			ATUReports.add("The user is not found at the list.", "Success.", "Success.", LogAs.PASSED, null);
+		}
+	}catch(Exception e){
+		e.getMessage();
+		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	}
+		
+	}
+
+
+	public String getOwnerName(String User) {
+		
+		String strToReturn = null;
+		for(WebElement ie: owner_button_select) {
+			String currentOwner = ie.getText(); 
+			if(currentOwner.contains(User)){
+				strToReturn = getOwner(currentOwner);
+				break;
+			}
+		}
+		return strToReturn;
+	}
 	
 	
 	
