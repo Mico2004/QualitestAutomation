@@ -7,9 +7,6 @@ import java.util.Date;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -208,8 +205,6 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		 String temp_instructor_user_name = "InstructorTemp" + sdf.format(date);
 		  
-
-		// mange_adhoc_users_page.waitForPageToLoad();
 		 mange_adhoc_users_page.waitForPageToLoad();	 
 		 mange_adhoc_users_page.clickOnNewUser();
 			
@@ -412,6 +407,8 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 Thread.sleep(4000);
 		 admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 		 
+		 mange_adhoc_users_page.waitForPageToLoad();
+		 
 		 date = new Date();
 		 sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		 String temp_student_user_name = "StudentTemp" + sdf.format(date);
@@ -429,8 +426,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 			
 		 create_new_user_window.createNewUser(temp_student_user_name, temp_student_user_name, "abc@com.com", "111", "111");
 	
-	
-		
+
 		 for(String window: driver.getWindowHandles()) {
 		 	driver.switchTo().window(window);
 		 	break;
