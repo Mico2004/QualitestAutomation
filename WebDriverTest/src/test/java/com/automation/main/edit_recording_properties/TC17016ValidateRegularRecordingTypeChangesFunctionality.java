@@ -144,7 +144,6 @@ public class TC17016ValidateRegularRecordingTypeChangesFunctionality  {
 				
 		//15.The second model window disappears.
 		confirm_menu.verifyConfirmWindowIsClosed();
-	
 			
 		//16.Click on the "Students Recordings" tab
 		record.clickOnStudentRecordingsTab();

@@ -126,8 +126,7 @@ public class TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFuncti
 		//7.The drop down edit box contains only INSTRUCTORS users.	
 		edit_recording_properties_window.addOwnersToList("Instractor",0);
 		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
-
-		
+	
 		//8.Choose one of the users
 		String newOwner = edit_recording_properties_window.clickOnDifferentOwnerThatTheExist(recordBy);
 		

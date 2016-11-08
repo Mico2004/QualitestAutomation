@@ -137,7 +137,7 @@ public class TC17021ValidateDiscardingChangesFunctionlity  {
 		edit_recording_properties_window.waitForPageToLoad();
 		
 		//12.Select some other Creation date.
-		calendarPage.pickDateTwoDaysFromToday();
+		calendarPage.changeCreateDay(2);
 				
 		//13.Click on the "Cancel" button or click the grey area outside of the model window*
 		if(type_of_function == 0 ){
@@ -224,7 +224,7 @@ public class TC17021ValidateDiscardingChangesFunctionlity  {
 		edit_recording_properties_window.changeRecordingNameToTargetName(name);
 		
 		//31.Select some other Creation date.
-		calendarPage.pickDateTwoDaysFromToday();
+		calendarPage.changeCreateDay(2);
 		
 		//32.Choose some other owner from the owner drop down list
 		edit_recording_properties_window.changeOwner(PropertyManager.getProperty("User2"));

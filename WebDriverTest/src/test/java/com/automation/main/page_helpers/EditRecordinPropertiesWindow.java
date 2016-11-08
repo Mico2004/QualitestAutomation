@@ -664,7 +664,7 @@ public void verifyUserIsNotOnTheOwnerList(String User) {
 		int i = 0;
 		for(WebElement ie: owner_button_select) {
 			String currentOwner = ie.getText(); 
-			if(searchOwnerInTheOwnerList(currentOwner)){
+			if(!searchOwnerInTheOwnerList(currentOwner)){
 				//	currentOwner.contains(owners.get(i))){
 				System.out.println("The instracutor are not found at the list.");				
 				ATUReports.add("The instracutor are not found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));

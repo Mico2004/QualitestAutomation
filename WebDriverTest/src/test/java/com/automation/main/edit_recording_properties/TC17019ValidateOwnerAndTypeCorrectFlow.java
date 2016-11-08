@@ -113,7 +113,7 @@ public class TC17019ValidateOwnerAndTypeCorrectFlow  {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String InstructorUser = "InstructorTemp" + sdf.format(date);	
-		String StudentUser = "StudentUser" + sdf.format(date);
+		String StudentUser = "StudentTemp" + sdf.format(date);
 					
 		//create new users	
 		manage_Adhoc_Users_Page.clickOnNewUser();	
@@ -123,6 +123,7 @@ public class TC17019ValidateOwnerAndTypeCorrectFlow  {
 		create_new_user_window.createNewUser(StudentUser, StudentUser, "abc@com.com", "111", "111");
 				
 		//click on the Admin Dashboard
+		manage_Adhoc_Users_Page.exitInnerFrame();
 		manage_Adhoc_Users_Page.toAdminDashBoard();
 				
 		//1Click on the 'Ad Hock courses and enrollments' link
@@ -219,8 +220,7 @@ public class TC17019ValidateOwnerAndTypeCorrectFlow  {
 		
 		//1Click on the 'Ad Hock courses and enrollments' link
 		admin_dash_board_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		
-		
+			
 		//17.Unenroll both users from the course
 		//search the right course that start with Ab
 		manage_adhoc_courses_enrollments_page.waitForThePageToLoad();

@@ -128,7 +128,7 @@ public class CalendarPage extends Page {
 	
 	}	
 	
-	public void pickDateTwoDaysFromToday() throws ParseException, InterruptedException {
+	public void changeCreateDay(int days) throws ParseException, InterruptedException {
 		
 		String id = date_Field.getAttribute("id");
 		String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
@@ -140,34 +140,31 @@ public class CalendarPage extends Page {
 			
 	    int dayInt = Integer.parseInt(day);
 	    int monthInt = Integer.parseInt(month);
-	    int yearInt = Integer.parseInt(year);
 	    int pickTwoDayBefore = 0;
 		
-	    if(dayInt == 1 || dayInt == 2){
-	    	
-	    	if( monthInt == 1 ) {
-	    		if(dayInt  == 1) {
-	    			pickTwoDayBefore = 30;
-	    		} else pickTwoDayBefore = 31;
-	    		yearInt -=1;
-	    	} else if(monthInt == 3 ) {
-	    		if(dayInt  == 1) {
-	    			pickTwoDayBefore = 27;
-	    		} else pickTwoDayBefore = 28;
+	    
+	    
+	    if(dayInt == 1 || dayInt == 2 || dayInt ==3){
+
+	    	if(monthInt == 3 ) {	
+	    		pickTwoDayBefore-=days;
+	    		if(pickTwoDayBefore <=0)
+	    			pickTwoDayBefore +=28;
 	    		
-	    	} else if(monthInt == 11 || monthInt == 9 || monthInt == 8 || monthInt == 11 || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
-	    		if(dayInt  == 1) {
-	    			pickTwoDayBefore = 30;
-	    		} else pickTwoDayBefore = 31;
+	    	} else if(monthInt == 1 ||monthInt == 11 || monthInt == 9 || monthInt == 8  || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
+	    		pickTwoDayBefore-=days;
+	    		if(pickTwoDayBefore <=0)
+	    			pickTwoDayBefore +=31;   			
 	    	} else if(monthInt == 12 || monthInt == 10 || monthInt == 7 || monthInt == 5) {
-	    		if(dayInt  == 1) {
-	    			pickTwoDayBefore = 29;
-	    		} else pickTwoDayBefore = 30;
+	    		pickTwoDayBefore-=days;
+	    		if(pickTwoDayBefore <=0)
+	    			pickTwoDayBefore +=30;
 	    	}
-	    	clickElement(arrowLeft);
+	    	if(pickTwoDayBefore != 1)	
+	    		clickElement(arrowLeft);
 	    	monthInt -=1; 
 	    } else {  	
-	    	 pickTwoDayBefore = dayInt -2;
+	    	 pickTwoDayBefore = dayInt -days;
 	    }
 	    String dayNewNumber = Integer.toString(pickTwoDayBefore);
 	    WebElement table = driver.findElement(By.className("table-condensed"));
@@ -197,7 +194,7 @@ public class CalendarPage extends Page {
     	}
     	ATUReports.add("Not Verify the day from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		System.out.println("Not Verify the day from the calendar.");
-		//Assert.assertTrue(false);	
+	    Assert.assertTrue(false);	
 	}
 
 
