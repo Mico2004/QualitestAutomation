@@ -186,6 +186,7 @@ public class TC16999ValidateEditRecordingPropertiesModelWindowUI {
 		//20.Verify drop down list is displayed with all available users option to assign as the recording creator.
 		edit_recording_properties_window.addOwnersToList("Instractor",0);
 		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
+
 		edit_recording_properties_window.verifyThatBoardersOfTheDropDownAreInBlack(edit_recording_properties_window.owner_select);
 		
 		//21.Verify drop down list is displayed with the following options: Regular recording,Proctoring recording,Student recording

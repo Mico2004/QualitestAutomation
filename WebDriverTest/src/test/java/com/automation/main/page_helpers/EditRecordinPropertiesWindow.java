@@ -515,6 +515,7 @@ public class EditRecordinPropertiesWindow extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+
 	public void clickOnCancelButton() {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(cancel_button));			
@@ -528,6 +529,7 @@ public class EditRecordinPropertiesWindow extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+
 	// change title name of recording
 	public void changeRecordingName(String name, ConfirmationMenu confirm) {
 		try {
@@ -612,22 +614,7 @@ public void ChooseDiffrenetType(String type) {
 		}
 	}
 
-	public String getRecordBy(String recordByName) {
-		
-		String[]splitOwner= recordByName.split(" ");
-		String OwnerToCheck = splitOwner[1].substring(1, splitOwner[1].length()-1);
-			
-		return  "recorded by: "+OwnerToCheck;
-		
-	}
-	
-	public String getNewRecordNameForTest(String recordByName) {
-		
-		String[]splitOwner= recordByName.split(" ");
-		String OwnerToCheck = splitOwner[1].substring(1, splitOwner[1].length()-1);
-		
-		return  OwnerToCheck +" (" + splitOwner[0] +")";
-	}
+
 	
 public void verifyUserIsNotOnTheOwnerList(String User) {
 		
@@ -684,8 +671,34 @@ public void verifyUserIsNotOnTheOwnerList(String User) {
   }
 	
 
+	public void addOwnersToList(String OwnerType){
+		try{
+			owners.clear();
+			if(OwnerType.equals("Instractor")){
+				owners.add(PropertyManager.getProperty("ExcutiveAdmin"));
+				owners.add(PropertyManager.getProperty("SuperUser"));
+				owners.add(PropertyManager.getProperty("User1"));
+				owners.add(PropertyManager.getProperty("User2"));
+			} else if( OwnerType.equals("Student")) {
+				owners.add(PropertyManager.getProperty("User3"));
+				owners.add(PropertyManager.getProperty("User4"));
+			} else {
+				owners.add(PropertyManager.getProperty("ExcutiveAdmin"));
+				owners.add(PropertyManager.getProperty("SuperUser"));
+				owners.add(PropertyManager.getProperty("User1"));
+				owners.add(PropertyManager.getProperty("User2"));
+				owners.add(PropertyManager.getProperty("User3"));
+				owners.add(PropertyManager.getProperty("User4"));
+			}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+
+
 	public boolean searchOwnerInTheOwnerList(String currentOwner) {
-		
+
 		boolean isTheOwnerContains = false;
 		for(String Owner: owners){
 			if(currentOwner.contains(Owner)){
@@ -697,8 +710,7 @@ public void verifyUserIsNotOnTheOwnerList(String User) {
 	}
 	
 	
-	public void addOwnersToList(String OwnerType,int UniqueTest){
-
+	public void addOwnersToList(String OwnerType,int UniqueTest){
 		try{
 		owners.clear();
 		if(OwnerType.equals("Instractor")){
@@ -810,6 +822,7 @@ public void verifyThatAllTheOptionsListInTheDropDwon() {
 
 
 	public void insertChapterName(String target_name) {
+
 		try {
 		recording_name.sendKeys(target_name);
 		System.out.println("Recording name changed to: " + target_name);
@@ -819,6 +832,7 @@ public void verifyThatAllTheOptionsListInTheDropDwon() {
 			e.getMessage();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
+
 	}
 
 	
@@ -863,36 +877,6 @@ public void verifyThatAllTheOptionsListInTheDropDwon() {
 			}
 		}
 	
-	
-		public String clickOnDifferentOwnerThatTheExist(String recordBy) {
-			
-			try {
-			String[]splitRecordBy= recordBy.split(" ");
-			String recordByToCheck  =splitRecordBy[2];	
-			for(WebElement ie: owner_button_select) {
-				String currentOwner = ie.getText();	
-				String[]splitOwner= currentOwner.split(" ");
-				String OwnerToCheck = splitOwner[1].substring(1, splitOwner[1].length()-1);
-				if(!OwnerToCheck.contains(recordByToCheck)){
-					clickElement(ie);
-					System.out.println("Click on the instractur: " + currentOwner);				
-					ATUReports.add("The instracutor is found at the list.", "Success.", "Success", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-					String OwnerToReturn = "recorded by: " + OwnerToCheck;
-					return OwnerToReturn;
-				}		
-			}
-			
-			}catch(Exception e){
-				e.getMessage();
-				ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			}
-			
-			System.out.println("No Found new instracutor at the list.");				
-			ATUReports.add("No Found new instracutor at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-			return null;
-		}
 
 	public void verifyThatHoverOnButtonAndSeeShadow(WebElement button,String text) throws NoSuchElementException, InterruptedException {
 		
@@ -935,10 +919,99 @@ public void verifyThatAllTheOptionsListInTheDropDwon() {
 			ATUReports.add("The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
+
+		  String[]parts= correctDate.split("/");
+
+		  if(parts[0].length() == 1) {
+			  parts[0] = "0" + parts[0];
+		  } 
+		  if(parts[1].length() == 1) {
+			  parts[1] = "0" + parts[1];
+		  }
+		  correctDate = parts[0] + "/"  + parts[1] + "/"  + parts[2];
 		
 		return correctDate;
 	}
+
+
+	public String clickOnDifferentOwnerThatTheExist(String recordBy) {
+		
+		try {
+		String[]splitRecordBy= recordBy.split(" ");
+		String recordByToCheck  =splitRecordBy[2];	
+		for(WebElement ie: owner_button_select) {
+			String currentOwner = ie.getText();	
+			String[]splitOwner= currentOwner.split(" ");
+			String OwnerToCheck = splitOwner[1].substring(1, splitOwner[1].length()-1);
+			if(!OwnerToCheck.contains(recordByToCheck)){
+				clickElement(ie);
+				System.out.println("Click on the instractur: " + currentOwner);				
+				ATUReports.add("The instracutor is found at the list.", "Success.", "Success", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+				String OwnerToReturn = "recorded by: " + OwnerToCheck;
+				return OwnerToReturn;
+			}		
+		}
+		
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
+		System.out.println("No Found new instracutor at the list.");				
+		ATUReports.add("No Found new instracutor at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		Assert.assertTrue(false);
+		return null;
+	}
+
+
+
+
 	
+
+
+	public String getRecordBy(String recordByName) {
+		
+		String[]splitOwner= recordByName.split(" ");
+		String OwnerToCheck = splitOwner[1].substring(1, splitOwner[1].length()-1);
+			
+		return  "recorded by: "+OwnerToCheck;
+		
+	}
+
+
+	public String getNewRecordNameForTest(String recordByName) {
+		
+		String[]splitOwner= recordByName.split(" ");
+		String OwnerToCheck = splitOwner[1].substring(1, splitOwner[1].length()-1);
+		
+		return  OwnerToCheck +" (" + splitOwner[0] +")";
+		
+	}
+
+	public String getOwner(String UserName) {
+		
+		String[]splitOwner= UserName.split(" ");
+		String OwnerToCheck = splitOwner[1].substring(1, splitOwner[1].length()-1);
+		
+		return OwnerToCheck;
+	}
+
+	
+	public String getOwnerName(String User) {
+		
+		String strToReturn = null;
+		for(WebElement ie: owner_button_select) {
+			String currentOwner = ie.getText(); 
+			if(currentOwner.contains(User)){
+				strToReturn = getOwner(currentOwner);
+				break;
+			}
+		}
+		return strToReturn;
+	}
+
+
 	public void clickOnTheGreyArea() throws InterruptedException {
 		try {
 			if(driver instanceof FirefoxDriver){
@@ -956,4 +1029,5 @@ public void verifyThatAllTheOptionsListInTheDropDwon() {
 		Thread.sleep(2000);
 	}
 	
+
 }

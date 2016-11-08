@@ -17,12 +17,10 @@ import com.automation.main.page_helpers.CalendarPage;
 import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CoursesHelperPage;
-import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.ManageAdHocCoursesMembershipWindow;
 import com.automation.main.page_helpers.ManageAdhocCoursesEnrollmentsPage;
-import com.automation.main.page_helpers.ManageAdhocUsersPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
 import atu.testng.reports.ATUReports;
@@ -31,11 +29,13 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import junitx.util.PropertyManager;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.automation.main.page_helpers.CreateNewUserWindow;
+import com.automation.main.page_helpers.ManageAdhocUsersPage;
+
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -276,6 +276,7 @@ public class TC17019ValidateOwnerAndTypeCorrectFlow  {
 			
 		//click on the cancel button for the next test 
 		edit_recording_properties_window.clickElement(edit_recording_properties_window.cancel_button);
+
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
