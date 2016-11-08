@@ -5,28 +5,8 @@
     <classes>
     
 			
-	
-	  					<!-- Past courses -->
+					<!-- Past courses -->
 					<!-- Local pretest -->	
-
-				<!--	 <class name="com.automation.main.past_courses.Testing" /> 	-->	
-					<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordingsAndPastCourse" /> 
-					<!--  Static Test Cases  -->	
-   	  	 	 		<class name="com.automation.main.past_courses.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself" />
-    	  	 		<class name="com.automation.main.past_courses.TC17906TryToCopyFromActiveCourseToPastCourse" />
-    	  	 		<class name="com.automation.main.past_courses.TC17907TryToMoveFromActiveCourseToPastCourse" />
-    	  	 		<class name="com.automation.main.past_courses.TC17942VerifyTheDisabledTasks" />
-    	  	 		<class name="com.automation.main.past_courses.TC17903VerifyTheUI" /> 
-    	  	 		<class name="com.automation.main.past_courses.TC24766VerifyCopyFromPastCourseToActiveCourse" />
-    	  	 		<class name="com.automation.main.past_courses.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus" /> 
-    	  	 		<!--  Dynamic Test Cases  -->		
-    	            <class name="com.automation.main.past_courses.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings" />
-    	  	 		<class name="com.automation.main.past_courses.TC17938VerifyPastCourseWithTestRecording" />
-    	  	 		<class name="com.automation.main.past_courses.TC17933VerifypastCourseWithStudentRecording" /> 
-    	  	 		<class name="com.automation.main.past_courses.TC17929And17941And17944PastCourses" />
-    	  	 		<class name="com.automation.main.past_courses.TC24835VerifyStudentsCantSeePastCourseTab" /> 
-    	  	  	
-
 			
 			 	<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_PastCourses"/> 
 					
@@ -46,7 +26,8 @@
     	  	 		<class name="com.automation.main.past_courses.TC17933VerifypastCourseWithStudentRecording" /> 
     	  	 		<class name="com.automation.main.past_courses.TC17929And17941And17944PastCourses" />
     	  	 		<class name="com.automation.main.past_courses.TC24835VerifyStudentsCantSeePastCourseTab" />   
-  	 		
+    	  	 		
+    	  	 		
 
     </classes>
   </test> <!-- Test -->

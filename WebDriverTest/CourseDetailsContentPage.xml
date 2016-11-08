@@ -5,7 +5,7 @@
     <classes>
 
 
-  			<!-- Course Details Content page -->
+	     		<!-- Course Details Content page -->
 	        <!-- Local pretest -->
         	<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_CourseDetails" />
     	  	<class name="com.automation.main.course_detailes_content_page.TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThePlayer" />

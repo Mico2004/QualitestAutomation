@@ -5,22 +5,23 @@
     <classes>
   			
   			
-  	<!-- Move recordings -->
+  			<!-- Move recordings -->
 			<!-- Local pretest -->
-			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_MoveRecordings" />
-			<class name="com.automation.main.move_recording.TC15580ExistenceOfUIItemsMove" />
-			<class name="com.automation.main.move_recording.TC15583CancelTheMoving" />
-			<class name="com.automation.main.move_recording.TC15586TryToMoveWithoutSelectingACourse" />
-			<class name="com.automation.main.move_recording.TC15594SearchCourseInMoveWindow" />
-			<class name="com.automation.main.move_recording.TC15595TryToMoveRecordingWhileItIsBeingCopied" />
-			<class name="com.automation.main.move_recording.TC15602TryToMoveRecordingAsAStudent" />
-			<class name="com.automation.main.move_recording.TC15899VerifyAMovingCopyingStatusOfADestinationRecording" />
-			<class name="com.automation.main.move_recording.TC15654TryToMoveRecordingWhileItIsBeingMoved" />
-			<class name="com.automation.main.move_recording.TC15661TryToMoveFailedRecording" />
-			<class name="com.automation.main.move_recording.TC15582MoveOneRecording" />
-			<class name="com.automation.main.move_recording.TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists" />
-			<class name="com.automation.main.move_recording.TC15585MoveSeveralRecordings" />
-		    <class name="com.automation.main.move_recording.TC15588MoveARecordingWithAPodcast" />
+			<class name="com.automation.main.TestSuitePreSetCopyRecordings_MoveRecordings" />
+  			<class name="com.automation.main.TC15580ExistenceOfUIItemsMove" />
+  			<class name="com.automation.main.TC15583CancelTheMoving" />
+  			<class name="com.automation.main.TC15586TryToMoveWithoutSelectingACourse" />
+  			<class name="com.automation.main.TC15594SearchCourseInMoveWindow" />  			
+  			<class name="com.automation.main.TC15595TryToMoveRecordingWhileItIsBeingCopied" />
+  			<class name="com.automation.main.TC15602TryToMoveRecordingAsAStudent" />
+  			<class name="com.automation.main.TC15899VerifyAMovingCopyingStatusOfADestinationRecording" />
+  			<class name="com.automation.main.TC15654TryToMoveRecordingWhileItIsBeingMoved" />
+  			<class name="com.automation.main.TC15661TryToMoveFailedRecording" />  			
+  			<class name="com.automation.main.TC15582MoveOneRecording" />  		
+  			<class name="com.automation.main.TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists" />		
+  			<class name="com.automation.main.TC15585MoveSeveralRecordings" />  			
+  	<!--	<class name="com.automation.main.TC15588MoveARecordingWithAPodcast" />       N/A CHROME -->
+  			
   			
      
     </classes>

@@ -147,7 +147,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
-		// 1.1. Get the of abc course.
+		// 1.1. Get the of Ab course.
 		String instructor_public_course = course.selectCourseThatStartingWith(PropertyManager.getProperty("course2"));
 		
 		// 2. Open the following URL - https://<UNIVERSITYURL/api/courses/active.
@@ -200,17 +200,21 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 // 9. Login as admin.
 		 tegrity.loginAdmin("Admin");
 		 
-		 // 9.1. Go to user builder page on admin dashboard.		 
+		 // 9.1. Go to user builder page on admin dashboard.
+
+		 Thread.sleep(4000);
+		 
 		 admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 		 
+		 Thread.sleep(10000);
+	
 		 // 10. Create a new user and assign him to a course as Instructor (User1 sandbox course).
 		 Date date = new Date();
 		 SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		 String temp_instructor_user_name = "InstructorTemp" + sdf.format(date);
 		  
-
-		// mange_adhoc_users_page.waitForPageToLoad();
-		 mange_adhoc_users_page.waitForPageToLoad();	 
+		 mange_adhoc_users_page.waitForPageToLoad();
+		 
 		 mange_adhoc_users_page.clickOnNewUser();
 			
 		 create_new_user_window.createNewUser(temp_instructor_user_name, temp_instructor_user_name, "abc@com.com", "111", "111");
@@ -327,8 +331,8 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 tegrity.loginCourses("User1");// log in courses page
 		 initializeCourseObject();
 		 
-		 // 20.2. Get name of abc course.
-		 String abc_course_name = course.selectCourseThatStartingWith("abc");
+		 // 20.2. Get name of Ab course.
+		 String Ab_course_name = course.selectCourseThatStartingWith("Ab");
 		 
 		 // 20.3. Logout.
 		 top_bar_helper.signOut();
@@ -350,7 +354,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 }
 		 
 		// Search target course name
-		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(abc_course_name);
+		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ab_course_name);
 		 
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton();	
@@ -512,7 +516,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		}
 		 
 		// Search target course name
-		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(abc_course_name);
+		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ab_course_name);
 		 
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton();	

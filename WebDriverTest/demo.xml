@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+  <test name="Test">
+    <classes>
+    
+    		
+		 	 				<!-- Past courses -->
+					<!-- Local pretest -->	
+				<!--	 <class name="com.automation.main.past_courses.Testing" /> 	-->	
+					<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordingsAndPastCourse" /> 
+					<!--  Static Test Cases  -->	
+   	  	 	 		<class name="com.automation.main.past_courses.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself" />
+    	  	 		<class name="com.automation.main.past_courses.TC17906TryToCopyFromActiveCourseToPastCourse" />
+    	  	 		<class name="com.automation.main.past_courses.TC17907TryToMoveFromActiveCourseToPastCourse" />
+    	  	 		<class name="com.automation.main.past_courses.TC17942VerifyTheDisabledTasks" />
+    	  	 		<class name="com.automation.main.past_courses.TC17903VerifyTheUI" /> 
+    	  	 		<class name="com.automation.main.past_courses.TC24766VerifyCopyFromPastCourseToActiveCourse" />
+    	  	 		<class name="com.automation.main.past_courses.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus" /> 
+    	  	 		<!--  Dynamic Test Cases  -->		
+    	            <class name="com.automation.main.past_courses.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings" />
+    	  	 		<class name="com.automation.main.past_courses.TC17938VerifyPastCourseWithTestRecording" />
+    	  	 		<class name="com.automation.main.past_courses.TC17933VerifypastCourseWithStudentRecording" /> 
+    	  	 		<class name="com.automation.main.past_courses.TC17929And17941And17944PastCourses" />
+    	  	 		<class name="com.automation.main.past_courses.TC24835VerifyStudentsCantSeePastCourseTab" /> 
+    	  	  	
+			
+			
+		    <!-- Public Courses -->
+			<!-- Local pretest -->
+			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_PublicCourses" />
+			<!-- Static test cases -->		
+			<class name="com.automation.main.public_courses.TC21807ValidatePublicCoursesUILogIn" /> 
+			<class name="com.automation.main.public_courses.TC21856ValidateThePublicCoursesTabUIAfterChanges" />
+			<class name="com.automation.main.public_courses.TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff" />
+			<class name="com.automation.main.public_courses.TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveInstructorStudentPermissionsAndValidateThatYourPermissionsAreLikeGuest"/>
+			<class name="com.automation.main.public_courses.TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses" />		
+			<!-- dynamic test cases -->
+			<class name="com.automation.main.public_courses.TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCourses" />
+			<class name="com.automation.main.public_courses.TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNotPublicCourses" />
+			
+			
+			
+
+
+    	  	  	
+    	 
+  
+    </classes>
+  </test> <!-- Test -->
+  <listeners>
+		<listener class-name="atu.testng.reports.listeners.ATUReportsListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.ConfigurationListener"></listener>
+		<listener class-name="atu.testng.reports.listeners.MethodListener"></listener>
+	</listeners>
+</suite> <!-- Suite -->

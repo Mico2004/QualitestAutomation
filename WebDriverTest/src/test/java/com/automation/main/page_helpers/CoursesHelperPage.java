@@ -42,6 +42,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.google.common.base.Predicate;
+import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
+
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -730,9 +732,9 @@ public class CoursesHelperPage extends Page {
 				ATUReports.add("Enter to the additional content tab.", LogAs.PASSED, null);
 			} catch (Exception msg) {
 				System.out.println("There is no additional content tab.");
-				ATUReports.add("There is no additional content tab.", LogAs.PASSED, null);
+				ATUReports.add("There is no additional content tab.", LogAs.WARNING, null);
 				waitForVisibility(recording_helper_page.course_link);
-				recording_helper_page.course_link.click();
+				recording_helper_page.returnToCourseListPage();
 				return;
 			}
 		} else if (type_of_recordings == 2) {
@@ -741,8 +743,9 @@ public class CoursesHelperPage extends Page {
 						.until(ExpectedConditions.visibilityOf(recording_helper_page.student_recordings_tab));
 				recording_helper_page.student_recordings_tab.click();
 			} catch (Exception msg) {
-				System.out.println("There is no student recordings tab.");
-				recording_helper_page.returnToCourseListPage(this);
+				System.out.println();
+				ATUReports.add("There is no student recordings tab.", LogAs.WARNING, null);
+				recording_helper_page.returnToCourseListPage();
 				return;
 			}
 		} else if (type_of_recordings == 3) {
@@ -751,48 +754,37 @@ public class CoursesHelperPage extends Page {
 				recording_helper_page.tests_tab.click();
 			} catch (Exception msg) {
 				System.out.println("There is no tests tab.");
-				recording_helper_page.returnToCourseListPage(this);
+				ATUReports.add("There is no tests tab.", LogAs.WARNING, null);
+				recording_helper_page.returnToCourseListPage();
 				return;
 			}
 		}
-
-		if ((type_of_recordings == 0) || (type_of_recordings == 2)) {
-			recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordingsAndUncheckUndeleteableRecordings();
-			recording_helper_page.deleteAllRecordings(delete_menu);
-		} else if ((type_of_recordings == 1) || (type_of_recordings == 3)) {
-			if (type_of_recordings == 3) {
-				recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordingsAndUncheckUndeleteableRecordings();
-			} 
-			new WebDriverWait(driver, 5)
-					.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
-			Thread.sleep(2000);
+		if ((type_of_recordings == 0) || (type_of_recordings == 2) ||(type_of_recordings == 3) ) {
 			recording_helper_page.SelectOneCheckBoxOrVerifyAlreadySelected(recording_helper_page.check_all_checkbox);
-			Thread.sleep(500);
-			// Thread.sleep(2000);
-			// wait.until(ExpectedConditions.visibilityOf(recording_helper_page.check_all_checkbox));
-			// recording_helper_page.check_all_checkbox.click();
-			try {
-				if (type_of_recordings == 1) {
-						recording_helper_page.checkExistenceOfNonDeleteItemsStatusInAdditionalContentAndUncheckUndeleteableContent();	
-					    recording_helper_page.clickOnContentTaskThenDelete();
-				} else if (type_of_recordings == 3) {
+			recording_helper_page.checkExistenceOfNonDeleteRecordingsStatusInRecordingsAndUncheckUndeleteableRecordings();
+				if(recording_helper_page.verifyIfCheckedRecordingsAreEditable()){
 					recording_helper_page.clickOnRecordingTaskThenDelete();
-				}
-				Thread.sleep(1000);
-				delete_menu.clickOnDeleteButton();
-			} catch (Exception msg) {
-				System.out.println("There is no recordings in target course.");
+					delete_menu.clickOnDeleteButton();
+			}
+		} else if ((type_of_recordings == 1) ) {			
+			Thread.sleep(500);
+			recording_helper_page.SelectOneCheckBoxOrVerifyAlreadySelected(recording_helper_page.check_all_checkbox);					
+			recording_helper_page.checkExistenceOfNonDeleteItemsStatusInAdditionalContentAndUncheckUndeleteableContent();	
+				if(recording_helper_page.verifyIfCheckedContentsAreEditable()){
+					recording_helper_page.clickOnContentTaskThenDelete();
+					delete_menu.clickOnDeleteButton();
 			}
 		}
-
-		recording_helper_page.returnToCourseListPage(this);
-
-		waitForVisibility(course_list.get(0));
-	}catch(Exception e){
-		System.out.println("Error"+e.getMessage());
-		
+			Thread.sleep(1000);
+			
+			recording_helper_page.returnToCourseListPage();		
+			waitForVisibility(course_list.get(0));
+		} catch (Exception msg) {
+			ATUReports.add("Delete failed",msg.getMessage() ,LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));			
+		}
 	}
-	}
+	
+	
 	
 	public String getCurrentUrlCoursePage() {
 		String currUrl = ((JavascriptExecutor) driver).executeScript("return window.document.location.href").toString();

@@ -117,7 +117,7 @@ public class TC17019ValidateOwnerAndTypeCorrectFlow  {
 		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
 		
 		//get the Instructor User after changing the owner for verify later
-		String InstructorUser =  edit_recording_properties_window.getOwnerName("SuperUser");
+		String InstructorUser =  edit_recording_properties_window.getOwnerName("User2");
 		
 		//8.Choose the "Student Recording" option from the Type drop down list
 		edit_recording_properties_window.ChooseDiffrenetType("Student recording");

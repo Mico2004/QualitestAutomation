@@ -17,7 +17,7 @@
 			<class name="com.automation.main.delete_additional_content.TC15814DeleteALastContentItem" />
 			
 			
-			<!-- Private Courses -->
+			 	  	<!-- Private Courses -->
 			<!-- Local pretest -->
      	    <class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_PrivateCourses" />
       		<class name="com.automation.main.private_courses.TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor"/>  
@@ -67,13 +67,13 @@
 			<!-- Local pretest -->
 			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_MoveRecordings" />
 			<class name="com.automation.main.move_recording.TC15580ExistenceOfUIItemsMove" />
-			<class name="com.automation.main.move_recording.TC15654TryToMoveRecordingWhileItIsBeingMoved" />
 			<class name="com.automation.main.move_recording.TC15583CancelTheMoving" />
 			<class name="com.automation.main.move_recording.TC15586TryToMoveWithoutSelectingACourse" />
 			<class name="com.automation.main.move_recording.TC15594SearchCourseInMoveWindow" />
 			<class name="com.automation.main.move_recording.TC15595TryToMoveRecordingWhileItIsBeingCopied" />
 			<class name="com.automation.main.move_recording.TC15602TryToMoveRecordingAsAStudent" />
 			<class name="com.automation.main.move_recording.TC15899VerifyAMovingCopyingStatusOfADestinationRecording" />
+			<class name="com.automation.main.move_recording.TC15654TryToMoveRecordingWhileItIsBeingMoved" />
 			<class name="com.automation.main.move_recording.TC15661TryToMoveFailedRecording" />
 			<class name="com.automation.main.move_recording.TC15582MoveOneRecording" />
 			<class name="com.automation.main.move_recording.TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists" />
@@ -82,23 +82,25 @@
 		
  			
  
-		 	        <!-- Delete recordings -->
+			<!-- Delete recordings -->
 			<!-- Local pretest -->
 			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_DeleteRecordings" />
-			<class name="com.automation.main.delete_recordings.TC15624ExistenceOfUIItemsDelete"/>
-			<class name="com.automation.main.delete_recordings.TC15645TryToDeleteCopyingRecording"/>
+		    <class name="com.automation.main.delete_recordings.TC15624ExistenceOfUIItemsDelete"/> 
 		    <class name="com.automation.main.delete_recordings.TC15640TryToDeleteAStudentRecordingAsAStudent"/>   
   		    <class name="com.automation.main.delete_recordings.TC15634DeleteAStudentRecordingAsInstructor"/>
   		    <class name="com.automation.main.delete_recordings.TC15649TryToDeleteMovingRecording"/>  
    	        <class name="com.automation.main.delete_recordings.TC15639TryToDeleteARegularRecordingAsAStudent"/> 
  	        <class name="com.automation.main.delete_recordings.TC15644CancelTheDelete"/>   
    	        <class name="com.automation.main.delete_recordings.TC15653DeleteFailedRecording"/>
+   	        <class name="com.automation.main.delete_recordings.TC15645TryToDeleteCopyingRecording"/> 
  	   	    <class name="com.automation.main.delete_recordings.TC15627DeleteARegularRecordingAsInstructor"/>
    	        <class name="com.automation.main.delete_recordings.TC15635DeleteAProctoringRecordingAsInstructor"/>
       		<class name="com.automation.main.delete_recordings.TC15642DeleteSeveralRecordings"/>  	     
             <class name="com.automation.main.delete_recordings.TC15896DeleteALastRecording"/>  
-		
 	    
+ 
+	
+			
 
 
 			
@@ -134,118 +136,92 @@
 			<class name="com.automation.main.login_as_guest.TC21600ValidateGuestPermissonsInPlayer" />
 			
 
+
 				
 		    <!-- Search: Search field and search result page -->
 			<!-- Local pretest -->
-			
 			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_Search" />
-    	    <class name="com.automation.main.search.TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage" />   	 
-    	  	<class name="com.automation.main.search.TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsInstructor" />    	  		  	<class name="com.automation.main.search.TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCourseLevelUI" />
-    	  	<class name="com.automation.main.search.TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel" />
-    	  	<class name="com.automation.main.search.TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseLevel" />
-    	  	<class name="com.automation.main.search.TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourseLevel" />
-    	  	<class name="com.automation.main.search.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel" /> 
-    	  	<class name="com.automation.main.search.TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCourseLevel" />
-    	  	<class name="com.automation.main.search.TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel" />
-    	  	<class name="com.automation.main.search.TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel" />
-    	  	<class name="com.automation.main.search.TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheActivCourseLevel" />
-    	  	<class name="com.automation.main.search.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel" />
-    	  	<class name="com.automation.main.search.TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAllCoursesLevel" />
-    	  	<class name="com.automation.main.search.TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel" /> 
-    	  	<class name="com.automation.main.search.TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCoursesLevel" />
-    	  	<class name="com.automation.main.search.TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCourseLevel" />
-    	  	<class name="com.automation.main.search.TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCoursesLevel" />
- 	  		<class name="com.automation.main.search.TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCoursesLevel" />
-    	  	<class name="com.automation.main.search.TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLevel" />
-    	  	<class name="com.automation.main.search.TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel" />
-    	  	<class name="com.automation.main.search.TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage" /> 
-    	  	<class name="com.automation.main.search.TC18895ValidateTheFunctionalityOfSearchFieldInDetailedReportsPage" />
-    	  	<class name="com.automation.main.search.TC18897ValidateTheFunctionalityOfSearchFieldInCustomAnalysisPage" />
-    	  	<class name="com.automation.main.search.TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNotInRoll" />
-			<class name="com.automation.main.search.TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField" />
+			<class name="com.automation.main.search_field_and_search_results_page.TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel" />
+			 <class name="com.automation.main.search_field_and_search_results_page.TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel" />
+			   <class name="com.automation.main.search_field_and_search_results_page.TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel" />			
+    	      <class name="com.automation.main.search_field_and_search_results_page.TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage" />	   
+    	     <class name="com.automation.main.search_field_and_search_results_page.TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsInstructor" />  	   
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField" />  	    
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCourseLevel" />
+       	  	<class name="com.automation.main.search_field_and_search_results_page.TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLevel" />    	  	
+    	    <class name="com.automation.main.search_field_and_search_results_page.TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourseLevel" />
+            <class name="com.automation.main.search_field_and_search_results_page.TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCourseLevel" /> 
+         <class name="com.automation.main.search_field_and_search_results_page.TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAllCoursesLevel" />          	    	        	       	   
+    	    <class name="com.automation.main.search_field_and_search_results_page.TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseLevel" />
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel" />
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel" />
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheActivCourseLevel" /> 	  
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel" /> 
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCoursesLevel" />
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCoursesLevel" />
+ 	  		<class name="com.automation.main.search_field_and_search_results_page.TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCoursesLevel" />
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage" /> 
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18895ValidateTheFunctionalityOfSearchFieldInDetailedReportsPage" />
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18897ValidateTheFunctionalityOfSearchFieldInCustomAnalysisPage" />
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNotInRoll" />
+    	  	<class name="com.automation.main.search_field_and_search_results_page.TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCourseLevelUI" />
+			<class name="com.automation.main.search_field_and_search_results_page.TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCourseLevel" /> 
 			
-  
+   
 
-    	  	 	  	  
-            <!-- Supported search sources(ADMIN,ANONYMOUS) -->
-            <!-- Local pretest -->
-       
-        <class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_SupportedSearch"/>
-        <class name="com.automation.main.supported_search.TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST" />   
-        <class name="com.automation.main.supported_search.TC22663ValidateSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST" /> 
-        <class name="com.automation.main.supported_search.TC22737ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search.TC22738ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnTheRecordingLevelLoginAsGUEST" />	
-        <class name="com.automation.main.supported_search.TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search.TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search.TC22667ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search.TC23083ValidateTheFunctionalityOfSpecialCharactersInSearchFieldRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search.TC22696ValidateTheFunctionalityOfSpecialCharactersInSearchFieldRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search.TC22726ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search.TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search.TC22729ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search.TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search.TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search.TC22735ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search.TC22694ValidateTheFunctionalityOfResultsNumberInSearchFieldAsADMIN" /> 
-      	<class name="com.automation.main.supported_search.TC23077ValidateTheFunctionalityOfResultsNumberInSearchFieldAsGUEST" /> 
-        <class name="com.automation.main.supported_search.TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsADMIN" />
-        <class name="com.automation.main.supported_search.TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCourseLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search.TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCoursesLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN" />
-        <class name="com.automation.main.supported_search.TC22692ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTheRecordingLevelAsADMIN" /> 
-        <class name="com.automation.main.supported_search.TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTheRecordingLevelAsGUSET" /> 
-  		<class name="com.automation.main.supported_search.TC22727ValidateInvalidSearchOfRecordingChapterInSearchFieldOnRecordingLevelLoginAsGUEST" />
-        <class name="com.automation.main.supported_search.TC22691ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheRecordingLevelLoginAsADMIN" />
     	  	  	  	  	  	
     	  	  	
     	 
 	        <!-- Course Details Content page -->
 	        <!-- Local pretest -->
-        	<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_CourseDetails" />
-    	  	<class name="com.automation.main.course_detailes_content_page.TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThePlayer" />
-    	  	<class name="com.automation.main.course_detailes_content_page.TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthTheEditor" />
-    	   	<class name="com.automation.main.course_detailes_content_page.TC15626ValidateCourseContentPageUIAsInstructor" />
-    	   	<class name="com.automation.main.course_detailes_content_page.TC15647NavigateThrougthALongRecordingsListInRecordingsTab" />
-    	    <class name="com.automation.main.course_detailes_content_page.TC15686ValidateTheRecordingNameOfNewRecordingIsDisplayedInBold" /> 
-    	  	<class name="com.automation.main.course_detailes_content_page.TC15761ValidateTabsUIAsStudent" />
-    	  	<class name="com.automation.main.course_detailes_content_page.TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThePlayerAsStudent" />
-    	  	<class name="com.automation.main.course_detailes_content_page.TC15446ValidateExpandingViewingAndCollapsingTheChapters" />
-    	  	<class name="com.automation.main.course_detailes_content_page.TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin" />
-    	  	<class name="com.automation.main.course_detailes_content_page.TC15711ValidateResumeBoxUI" />
-    	   	<class name="com.automation.main.course_detailes_content_page.TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying" />
-    	   	<class name="com.automation.main.course_detailes_content_page.TC17044ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndSignOut" />
-    	   	<class name="com.automation.main.course_detailes_content_page.TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBrowser" />
-    	   	<class name="com.automation.main.course_detailes_content_page.TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack" />
-    	   	<class name="com.automation.main.course_detailes_content_page.TC17047ValidateResumeBoxWhenSignOut" />
-    	   	<class name="com.automation.main.course_detailes_content_page.TC17050ValidateUserSeperationWhenWatchingRecording" />
-    	   	<class name="com.automation.main.course_detailes_content_page.TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying" />
-    	   	<class name="com.automation.main.course_detailes_content_page.TC17041ValidateResumeBoxWhenRecordingIsPaused" />
-    	  	<class name="com.automation.main.course_detailes_content_page.TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordings" />
-    	  	<class name="com.automation.main.course_detailes_content_page.TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser" />
+        	    <class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_CourseDetails" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThePlayer" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthTheEditor" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC15626ValidateCourseContentPageUIAsInstructor" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC15647NavigateThrougthALongRecordingsListInRecordingsTab" />
+    	  	    <class name="com.automation.main.course_detailes_content_page.TC15686ValidateTheRecordingNameOfNewRecordingIsDisplayedInBold" /> 
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC15761ValidateTabsUIAsStudent" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThePlayerAsStudent" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordings" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC15446ValidateExpandingViewingAndCollapsingTheChapters" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC15711ValidateResumeBoxUI" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC17044ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndSignOut" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBrowser" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC17047ValidateResumeBoxWhenSignOut" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC17050ValidateUserSeperationWhenWatchingRecording" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying" />
+    	  	  	<class name="com.automation.main.course_detailes_content_page.TC17041ValidateResumeBoxWhenRecordingIsPaused" />
     	  	  
-    
+    	  	  
+    	  	
+			   
 			
-    	  	<!-- Past courses -->
-			<!-- Local pretest -->	
-			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_PastCourses" /> 
-			<!--  Static Test Cases  -->	
-   	  	 	<class name="com.automation.main.past_courses.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself" />
-    	  	<class name="com.automation.main.past_courses.TC17906TryToCopyFromActiveCourseToPastCourse" />
-    	  	<class name="com.automation.main.past_courses.TC17907TryToMoveFromActiveCourseToPastCourse" />
-    	  	<class name="com.automation.main.past_courses.TC17942VerifyTheDisabledTasks" />
-    	  	<class name="com.automation.main.past_courses.TC17903VerifyTheUI" /> 
-    	  	<class name="com.automation.main.past_courses.TC24766VerifyCopyFromPastCourseToActiveCourse" />
-    	  	<class name="com.automation.main.past_courses.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus" /> 
-    	  	<!--  Dynamic Test Cases  -->		
-    	    <class name="com.automation.main.past_courses.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings" />
-    	  	<class name="com.automation.main.past_courses.TC17938VerifyPastCourseWithTestRecording" />
-    	  	<class name="com.automation.main.past_courses.TC17933VerifypastCourseWithStudentRecording" /> 
-    	  	<class name="com.automation.main.past_courses.TC17929And17941And17944PastCourses" />
-    	  	<class name="com.automation.main.past_courses.TC24835VerifyStudentsCantSeePastCourseTab" /> 
+    	  	 		<!-- Past courses -->
+					<!-- Local pretest -->	
+				<!--	 <class name="com.automation.main.past_courses.Testing" /> 	-->	
+					<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordingsAndPastCourse" /> 
+					<!--  Static Test Cases  -->	
+   	  	 	 		<class name="com.automation.main.past_courses.TC17905TryToCopyFromPastCourseToAnotherPastCourseToItself" />
+    	  	 		<class name="com.automation.main.past_courses.TC17906TryToCopyFromActiveCourseToPastCourse" />
+    	  	 		<class name="com.automation.main.past_courses.TC17907TryToMoveFromActiveCourseToPastCourse" />
+    	  	 		<class name="com.automation.main.past_courses.TC17942VerifyTheDisabledTasks" />
+    	  	 		<class name="com.automation.main.past_courses.TC17903VerifyTheUI" /> 
+    	  	 		<class name="com.automation.main.past_courses.TC24766VerifyCopyFromPastCourseToActiveCourse" />
+    	  	 		<class name="com.automation.main.past_courses.TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementStatus" /> 
+    	  	 		<!--  Dynamic Test Cases  -->		
+    	            <class name="com.automation.main.past_courses.TC17925VerifyThePastCourseFunctionalityWithRegularRecordings" />
+    	  	 		<class name="com.automation.main.past_courses.TC17938VerifyPastCourseWithTestRecording" />
+    	  	 		<class name="com.automation.main.past_courses.TC17933VerifypastCourseWithStudentRecording" /> 
+    	  	 		<class name="com.automation.main.past_courses.TC17929And17941And17944PastCourses" />
+    	  	 		<class name="com.automation.main.past_courses.TC24835VerifyStudentsCantSeePastCourseTab" /> 
     	
     	  	  	
     	 
-			<!--  Public Courses -->
+ 
 			<!-- Local pretest -->
 			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_PublicCourses" />
 			<!-- Static test cases -->		
@@ -259,38 +235,49 @@
 			<class name="com.automation.main.public_courses.TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNotPublicCourses" />
 			
 			
-			<!-- Add additional content files-->
-		    <!-- Local pretest -->
-		    
-		    <class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_AddAdditional" />
-    	     <class name="com.automation.main.add_additional_content_file.TC15455AddMp3File" /> 
-			<class name="com.automation.main.add_additional_content_file.TC15467CancelTheAdding" /> 	
-    	    <class name="com.automation.main.add_additional_content_file.TC15468AddFirstFileVerifyNewTabAdditionalContentCreated" /> 
-    	  	<class name="com.automation.main.add_additional_content_file.TC15475ExistenceOfUIItems" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15471UploadTheFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15897ViewTheUploadedFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15447AddDocFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15448AddPptFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15449AddPptxFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15450AddDocxFile" />
-        	<class name="com.automation.main.add_additional_content_file.TC15451AddRtfFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15452AddTxtFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15453AddPdfFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15454AddAviFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15456AddMp4File" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15457AddMovFile" />
-    	    <class name="com.automation.main.add_additional_content_file.TC15458AddMpgFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15459AddZipFile" />    	 
-    	  	<class name="com.automation.main.add_additional_content_file.TC15460AddRarFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15461AddGifFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15462AddJpgFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15463AddPngFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15464AddXlsFile" />
-    	  	<class name="com.automation.main.add_additional_content_file.TC15465AddXlsxFile" />  	  	  	
-    	  	<class name="com.automation.main.add_additional_content_file.TC15466AddFewFilesWithSameTitle" /> 	   	  	
-    	  	<class name="com.automation.main.add_additional_content_file.TC15470AddFileWithTheSameTitleExistingLink" />
-    	    <class name="com.automation.main.add_additional_content_file.TC15489TryToAddFileDuringAnotherUpload" />
-   			
+			  <!-- Supported search sources(ADMIN,ANONYMOUS) -->
+			  <!-- Local pretest -->
+			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_SupportedSearch"/>
+       		 <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
+        	 <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordingLevelLoginAsADMIN" />
+     		 <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsGUEST" />
+       		 <class name="com.automation.main.supported_search_sources_admin_anonymous.TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN" />
+      
+      
+      
+      
+			 <!-- Add additional content files-->
+		     	<!-- Local pretest -->
+		     	<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_AddAdditional" />
+    	  	  	<class name="com.automation.main.add_additional_content_file.TC15475ExistenceOfUIItems" />
+    	  	  	<class name="com.automation.main.add_additional_content_file.TC15471UploadTheFile" />
+    	  	  	<class name="com.automation.main.add_additional_content_file.TC15897ViewTheUploadedFile" />
+    	  	  	<class name="com.automation.main.add_additional_content_file.TC15447AddDocFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15448AddPptFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15449AddPptxFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15450AddDocxFile" />
+        	  	<class name="com.automation.main.add_additional_content_file.TC15451AddRtfFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15452AddTxtFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15453AddPdfFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15454AddAviFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15455AddMp3File" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15456AddMp4File" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15457AddMovFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15458AddMpgFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15459AddZipFile" />    	 
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15460AddRarFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15461AddGifFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15462AddJpgFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15463AddPngFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15464AddXlsFile" />
+    	  	    <class name="com.automation.main.add_additional_content_file.TC15465AddXlsxFile" />  	  	  	
+    	  	  	<class name="com.automation.main.add_additional_content_file.TC15466AddFewFilesWithSameTitle" />
+    	  		<class name="com.automation.main.add_additional_content_file.TC15467CancelTheAdding" />   	  	  	
+    	  	  	<class name="com.automation.main.add_additional_content_file.TC15470AddFileWithTheSameTitleExistingLink" />
+    	  	  	<class name="com.automation.main.add_additional_content_file.TC15489TryToAddFileDuringAnotherUpload" />
+                <class name="com.automation.main.add_additional_content_file.TC15468AddFirstFileVerifyNewTabAdditionalContentCreated" />
+ 					
+    	  	  	
 
 		</classes>
 	</test> <!-- Test -->
