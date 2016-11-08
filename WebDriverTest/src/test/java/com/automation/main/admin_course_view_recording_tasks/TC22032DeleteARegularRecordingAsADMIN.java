@@ -197,6 +197,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				if (recording_type==2) {
 					record.toEditRecordingPropertiesMenu();		
 					checked_recording_title =edit_recording_properties_window.getRecordName(confirmation_menu);
+					
 				} else {
 					checked_recording_title = record.getFirstRecordingTitle();
 				}
@@ -249,10 +250,8 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				}
 					
 				// 15. Click "Delete" button.
-				delete_menu.clickOnDeleteButton();
-				
-				Thread.sleep(2000);
-				
+				delete_menu.clickOnDeleteButton();				
+				Thread.sleep(2000);				
 				// 16. Delete window is closed.
 				is_delete_window_closed = delete_menu.isDeleteMenuClose();
 				
@@ -281,9 +280,9 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				}
 				// the name in the test tab aren't unique
 				else{
+					
 					record.toEditRecordingPropertiesMenu();		
-					String checked_recording_title_after =edit_recording_properties_window.getRecordName(confirmation_menu);
-									
+					String checked_recording_title_after =edit_recording_properties_window.getRecordName(confirmation_menu);									
 					if(!checked_recording_title.equals(checked_recording_title_after) &&((recording_list_before_delete_recording.size() - recording_list_after_delete_recording.size())==1)) {
 						System.out.println("Verified that selected recording is deleted and not displayed.");
 						ATUReports.add("Recording is not dispaly in recording list.", "True.", "True.", LogAs.PASSED, null);

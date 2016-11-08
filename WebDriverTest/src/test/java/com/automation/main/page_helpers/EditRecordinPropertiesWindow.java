@@ -515,7 +515,7 @@ public class EditRecordinPropertiesWindow extends Page {
 			Assert.assertTrue(false);
 		}
 	}
-	
+
 	public void clickOnCancelButton() {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(cancel_button));			
@@ -567,8 +567,82 @@ public class EditRecordinPropertiesWindow extends Page {
 	}
 		return recordName;
 	}
+	
+public void ChooseDiffrenetType(String type) {
+		
+		try {
+			for(WebElement ie: type_button_select) {
+				String currentType = ie.getText();	
+				if(currentType.equals(type)){
+					clickElement(ie);
+					System.out.println("Click on the Type: " + currentType);				
+					ATUReports.add("Click on the Type: " + currentType, "Success.", "Success", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+					return;
+				}
+			}
+			
+			System.out.println("No Found new instracutor at the list.");				
+			ATUReports.add("No Found new instracutor at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);	
+			
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+
+	public void verifyThatTheTypeWasChoosen(String type){
+		
+		try {
+			String currentType = new Select(type_select).getFirstSelectedOption().getText();
+				if(currentType.equals(type)){
+					System.out.println("Verify that the type was choosen.");				
+					ATUReports.add("Verify that the type was choosen.", "Success.", "Success", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+					return;
+				}
+			
+			
+			System.out.println("Verify that the type was choosen.");				
+			ATUReports.add("Verify that the type was choosen.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);	
+			
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
 
 
+	
+public void verifyUserIsNotOnTheOwnerList(String User) {
+		
+		boolean isAllTheInstractorsInTheList=true;
+		try{
+		clickElementJS(owner_select);
+		int i = 0;
+		for(WebElement ie: owner_button_select) {
+			String currentOwner = ie.getText(); 
+			if(currentOwner.contains(User)){
+				System.out.println("The user is found at the list.");				
+				ATUReports.add("The user is found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				isAllTheInstractorsInTheList = false;
+				break;
+			}
+			i++;
+		}
+		if(isAllTheInstractorsInTheList){
+			System.out.println("The user is not found at the list.");
+			ATUReports.add("The user is not found at the list.", "Success.", "Success.", LogAs.PASSED, null);
+		}
+	}catch(Exception e){
+		e.getMessage();
+		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	}
+		
+	}
+	
 	public void verifyThatAllTheTypeInTheDropDownList() {
 	
 		boolean isAllTheInstractorsInTheList=true;
@@ -577,7 +651,8 @@ public class EditRecordinPropertiesWindow extends Page {
 		int i = 0;
 		for(WebElement ie: owner_button_select) {
 			String currentOwner = ie.getText(); 
-			if(!currentOwner.contains(owners.get(i))){
+			if(searchOwnerInTheOwnerList(currentOwner)){
+				//	currentOwner.contains(owners.get(i))){
 				System.out.println("The instracutor are not found at the list.");				
 				ATUReports.add("The instracutor are not found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				isAllTheInstractorsInTheList = false;
@@ -595,8 +670,47 @@ public class EditRecordinPropertiesWindow extends Page {
 	}
   }
 	
+
 	public void addOwnersToList(String OwnerType){
-		
+		try{
+			owners.clear();
+			if(OwnerType.equals("Instractor")){
+				owners.add(PropertyManager.getProperty("ExcutiveAdmin"));
+				owners.add(PropertyManager.getProperty("SuperUser"));
+				owners.add(PropertyManager.getProperty("User1"));
+				owners.add(PropertyManager.getProperty("User2"));
+			} else if( OwnerType.equals("Student")) {
+				owners.add(PropertyManager.getProperty("User3"));
+				owners.add(PropertyManager.getProperty("User4"));
+			} else {
+				owners.add(PropertyManager.getProperty("ExcutiveAdmin"));
+				owners.add(PropertyManager.getProperty("SuperUser"));
+				owners.add(PropertyManager.getProperty("User1"));
+				owners.add(PropertyManager.getProperty("User2"));
+				owners.add(PropertyManager.getProperty("User3"));
+				owners.add(PropertyManager.getProperty("User4"));
+			}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+
+
+	public boolean searchOwnerInTheOwnerList(String currentOwner) {
+
+		boolean isTheOwnerContains = false;
+		for(String Owner: owners){
+			if(currentOwner.contains(Owner)){
+				isTheOwnerContains = true;
+				break;					
+			}
+		}
+		return isTheOwnerContains;
+	}
+	
+	
+	public void addOwnersToList(String OwnerType,int UniqueTest){
 		try{
 		owners.clear();
 		if(OwnerType.equals("Instractor")){
@@ -615,10 +729,23 @@ public class EditRecordinPropertiesWindow extends Page {
 			owners.add(PropertyManager.getProperty("User3"));
 			owners.add(PropertyManager.getProperty("User4"));
 		}
+		if(UniqueTest == 1){
+			owners.add("InstructorTemp");
+		}
+		if(UniqueTest == 2){
+			owners.add("StudentTemp");
+		}
+		if(UniqueTest == 3){
+			owners.add("InstructorTemp");
+			owners.add("StudentTemp");
+		}
+		
+		
 	}catch(Exception e){
 		e.getMessage();
 		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	}
+
 	}
 	
 	public void verifyThatBoardersOfTheDropDownAreInBlack(WebElement element) {
@@ -643,7 +770,7 @@ public class EditRecordinPropertiesWindow extends Page {
 		}	
 	}
 
-	public void verifyThatAllTheOptionsListInTheDropDwon() {
+public void verifyThatAllTheOptionsListInTheDropDwon() {
 		
 		try{		
 		boolean isAllTheRecordingsTypesInTheList=true;
@@ -695,17 +822,17 @@ public class EditRecordinPropertiesWindow extends Page {
 
 
 	public void insertChapterName(String target_name) {
-		
+
 		try {
-			recording_name.sendKeys(target_name);
-			System.out.println("Recording name changed to: " + target_name);
-			ATUReports.add("Recording name changed.", "Change to: " + target_name,"Changed to " + recording_name + target_name, LogAs.PASSED, null);
-			Assert.assertTrue(true);
+		recording_name.sendKeys(target_name);
+		System.out.println("Recording name changed to: " + target_name);
+		ATUReports.add("Recording name changed.", "Change to: " + target_name,"Changed to " + recording_name + target_name, LogAs.PASSED, null);
+		Assert.assertTrue(true);
 		} catch (Exception e) {
 			e.getMessage();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
-		
+
 	}
 
 	
@@ -750,7 +877,7 @@ public class EditRecordinPropertiesWindow extends Page {
 			}
 		}
 	
-	
+
 	public void verifyThatHoverOnButtonAndSeeShadow(WebElement button,String text) throws NoSuchElementException, InterruptedException {
 		
 		try{
@@ -838,51 +965,9 @@ public class EditRecordinPropertiesWindow extends Page {
 	}
 
 
-	public void ChooseDiffrenetType(String type) {
-		
-		try {
-			for(WebElement ie: type_button_select) {
-				String currentType = ie.getText();	
-				if(currentType.equals(type)){
-					clickElement(ie);
-					System.out.println("Click on the Type: " + currentType);				
-					ATUReports.add("Click on the Type: " + currentType, "Success.", "Success", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-					return;
-				}
-			}
-			
-			System.out.println("No Found new instracutor at the list.");				
-			ATUReports.add("No Found new instracutor at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);	
-			
-		}catch(Exception e){
-			e.getMessage();
-			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		}
-	}
 
-	public void verifyThatTheTypeWasChoosen(String type){
-		
-		try {
-			String currentType = new Select(type_select).getFirstSelectedOption().getText();
-				if(currentType.equals(type)){
-					System.out.println("Verify that the type was choosen.");				
-					ATUReports.add("Verify that the type was choosen.", "Success.", "Success", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-					return;
-				}
-			
-			
-			System.out.println("Verify that the type was choosen.");				
-			ATUReports.add("Verify that the type was choosen.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);	
-			
-		}catch(Exception e){
-			e.getMessage();
-			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		}
-	}
+
+	
 
 
 	public String getRecordBy(String recordByName) {
@@ -912,34 +997,7 @@ public class EditRecordinPropertiesWindow extends Page {
 		return OwnerToCheck;
 	}
 
-	public void verifyUserIsNotOnTheOwnerList(String User) {
-		
-		boolean isAllTheInstractorsInTheList=true;
-		try{
-		clickElementJS(owner_select);
-		int i = 0;
-		for(WebElement ie: owner_button_select) {
-			String currentOwner = ie.getText(); 
-			if(currentOwner.contains(User)){
-				System.out.println("The user is found at the list.");				
-				ATUReports.add("The user is found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				isAllTheInstractorsInTheList = false;
-				break;
-			}
-			i++;
-		}
-		if(isAllTheInstractorsInTheList){
-			System.out.println("The user is not found at the list.");
-			ATUReports.add("The user is not found at the list.", "Success.", "Success.", LogAs.PASSED, null);
-		}
-	}catch(Exception e){
-		e.getMessage();
-		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-	}
-		
-	}
-
-
+	
 	public String getOwnerName(String User) {
 		
 		String strToReturn = null;
@@ -971,6 +1029,5 @@ public class EditRecordinPropertiesWindow extends Page {
 		Thread.sleep(2000);
 	}
 	
-	
-	
+
 }

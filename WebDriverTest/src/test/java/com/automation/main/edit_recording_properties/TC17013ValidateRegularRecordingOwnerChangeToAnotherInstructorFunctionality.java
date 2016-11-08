@@ -124,7 +124,8 @@ public class TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFuncti
 			
 		//6.Click on the "Owner" drop down button
 		//7.The drop down edit box contains only INSTRUCTORS users.	
-		edit_recording_properties_window.addOwnersToList("Instractor");
+
+		edit_recording_properties_window.addOwnersToList("Instractor",0);
 		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
 
 		

@@ -152,7 +152,17 @@ DesiredCapabilities capability;
 		Thread.sleep(1000);
 		
 		// 7. "Delete" window is closed.
-		delete_menu.verifyDeleteMenuClosed();
+		boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();
+	
+		if(is_delete_window_closed) {
+			System.out.println("Delete window is closed.");
+			ATUReports.add("Delete window is closed.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Delete window not closed.");
+			ATUReports.add("Delete window not closed.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
 		
 		// 8. Verify that selected recording is deleted.
 		List <String> current_recording_list = record.getCourseRecordingList();

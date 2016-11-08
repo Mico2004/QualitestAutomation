@@ -2,7 +2,6 @@ package com.automation.main.page_helpers;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
@@ -10,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 
@@ -114,19 +112,16 @@ public class ConfirmationMenu extends Page {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(header_title_list.get(0)));
 			// String souce_page = driver.getPageSource();
-			try{
-				new WebDriverWait(driver,15 ).until(ExpectedConditions.textToBePresentInElement(header_title_list.get(0), "Success"));
-		    }catch(org.openqa.selenium.TimeoutException e){
+			if (!header_title_list.get(0).getText().contains("Success")) {
 				System.out.println("Error window title is wrong");
 				ATUReports.add("Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			}	
-			try{
-				new WebDriverWait(driver,15 ).until(ExpectedConditions.textToBePresentInElement(error_msg_body_list.get(0), "Error window title is wrong"));
-		    }catch(org.openqa.selenium.TimeoutException e){
+				Assert.assertEquals(false, true);
+			}
+			if (!error_msg_body_list.get(0).getText().contains("Recording has been queued for copy")) {
 				System.out.println("Error window description is wrong");
 				ATUReports.add("Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			}	
-			waitForVisibility(ok_button);
+				Assert.assertEquals(false, true);
+			}
 			ok_button.click();
 			System.out.println("Clicked on OK button");
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
@@ -136,7 +131,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add("Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(1500);
+		Thread.sleep(3000);
 	}
 
 	// This function clicks on ok button of copy menu

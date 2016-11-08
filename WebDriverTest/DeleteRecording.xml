@@ -5,21 +5,23 @@
     <classes>
     
     
-            <!-- Delete recordings -->
+   
+		 	        <!-- Delete recordings -->
 			<!-- Local pretest -->
-			<class name="com.automation.main.TestSuitePreSetCopyRecordings_DeleteRecordings" />
-  		    <class name="com.automation.main.TC15640TryToDeleteAStudentRecordingAsAStudent"/>   
-  		   	<class name="com.automation.main.TC15634DeleteAStudentRecordingAsInstructor"/>
-  			<class name="com.automation.main.TC15649TryToDeleteMovingRecording"/>  
-   	    	<class name="com.automation.main.TC15639TryToDeleteARegularRecordingAsAStudent"/> 
- 	      	<class name="com.automation.main.TC15644CancelTheDelete"/>   
-   	     	<class name="com.automation.main.TC15653DeleteFailedRecording"/> 
-         	<class name="com.automation.main.TC15645TryToDeleteCopyingRecording"/> 
- 		  	<class name="com.automation.main.TC15627DeleteARegularRecordingAsInstructor"/>
-   	     	<class name="com.automation.main.TC15635DeleteAProctoringRecordingAsInstructor"/>
-   	     	<class name="com.automation.main.TC15896DeleteALastRecording"/>  
-	      	<class name="com.automation.main.TC15642DeleteSeveralRecordings"/>  
-	  
+			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_DeleteRecordings" />
+			<class name="com.automation.main.delete_recordings.TC15624ExistenceOfUIItemsDelete"/>
+			<class name="com.automation.main.delete_recordings.TC15645TryToDeleteCopyingRecording"/>
+		    <class name="com.automation.main.delete_recordings.TC15640TryToDeleteAStudentRecordingAsAStudent"/>   
+  		    <class name="com.automation.main.delete_recordings.TC15634DeleteAStudentRecordingAsInstructor"/>
+  		    <class name="com.automation.main.delete_recordings.TC15649TryToDeleteMovingRecording"/>  
+   	        <class name="com.automation.main.delete_recordings.TC15639TryToDeleteARegularRecordingAsAStudent"/> 
+ 	        <class name="com.automation.main.delete_recordings.TC15644CancelTheDelete"/>   
+   	        <class name="com.automation.main.delete_recordings.TC15653DeleteFailedRecording"/>
+ 	   	    <class name="com.automation.main.delete_recordings.TC15627DeleteARegularRecordingAsInstructor"/>
+   	        <class name="com.automation.main.delete_recordings.TC15635DeleteAProctoringRecordingAsInstructor"/>
+      		<class name="com.automation.main.delete_recordings.TC15642DeleteSeveralRecordings"/>  	     
+            <class name="com.automation.main.delete_recordings.TC15896DeleteALastRecording"/>  
+		
            
      
     </classes>
