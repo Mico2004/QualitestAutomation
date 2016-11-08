@@ -4677,17 +4677,22 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void checkExistenceOfNonEditRecordingsStatusInTheIndex(int index) throws InterruptedException {
 		
 		try {
-		  Boolean isTheStatusDisapper =  new WebDriverWait(driver, 120).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("RecordingStatus" +Integer.toString(index)+"']"), "Recording is being edited."));
+		 driver.navigate().refresh();
+		 Boolean isTheStatusDisapper =  new WebDriverWait(driver, 120).until(ExpectedConditions.invisibilityOfElementWithText(By.id("RecordingStatus" +Integer.toString(index)), "Recording is being edited."));
+		 Thread.sleep(2000);
 		  if(isTheStatusDisapper) {
 			  System.out.println("The status has change in less then 120 seconds");
 			  ATUReports.add("The status has change in less then 120 seconds.", "True.", "True.", LogAs.PASSED, null);
+			  Assert.assertTrue(true);
 		  } else {
-			  System.out.println("The status has change in less then 120 seconds");
-			  ATUReports.add("The status has not change in less then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			  System.out.println("The status has change in more then 120 seconds");
+			  ATUReports.add("The status has not change in more then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			  Assert.assertTrue(false);
 		  }
 		}catch(org.openqa.selenium.TimeoutException msg){
-			 System.out.println("The status has change in less then 120 seconds");
-			  ATUReports.add("The status has not change in less then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			 System.out.println("The status has change in more then 120 seconds");
+			  ATUReports.add("The status has not change in more then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			  Assert.assertTrue(false);
 		}
 	}
 	

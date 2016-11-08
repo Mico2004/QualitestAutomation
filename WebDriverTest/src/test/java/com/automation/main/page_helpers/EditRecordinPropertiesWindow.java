@@ -133,6 +133,7 @@ public class EditRecordinPropertiesWindow extends Page {
 	
 	public void waitForPageToLoad(){
 	
+		try{
 		wait.until(ExpectedConditions.visibilityOf(edit_recording_properties_title));
 		wait.until(ExpectedConditions.visibilityOf(recording_title));
 		wait.until(ExpectedConditions.visibilityOf(date_Field));
@@ -140,6 +141,11 @@ public class EditRecordinPropertiesWindow extends Page {
 		wait.until(ExpectedConditions.visibilityOf(type_select));
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("CancelButton")));
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("EditButton")));
+		
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 	}
 	
 	public void checkTheFirstTypeThatAprearsOnLabelIsCorrect(WebElement Tab){
