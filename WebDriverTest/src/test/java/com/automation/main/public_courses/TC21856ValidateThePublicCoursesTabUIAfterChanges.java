@@ -152,7 +152,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
-		String Ab_course_name = course.selectCourseThatStartingWith("Ab");
+		String abc_course_name = course.selectCourseThatStartingWith("abc");
 		
 		top_bar_helper.signOut();
 	
@@ -219,7 +219,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 			}
 		}
 		
-		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ab_course_name);
+		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(abc_course_name);
 		
 		Thread.sleep(1000);
 		// Click on result first course (the only one) membership button
@@ -329,7 +329,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		
 		
 		
-		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ab_course_name);
+		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(abc_course_name);
 		
 		Thread.sleep(1000);
 		// Click on result first course (the only one) membership button
