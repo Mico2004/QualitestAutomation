@@ -105,7 +105,6 @@ public class ManageAdhocUsersPage extends Page {
 		
 	}
 	
-
 	public void waitForPageToLoad(){
 		try{
 			wait.until(ExpectedConditions.visibilityOf(to_admin_dashboard));

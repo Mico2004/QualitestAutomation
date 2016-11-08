@@ -506,7 +506,9 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 				Thread.sleep(1000);
 			}
 		}
-		 
+		
+		manage_adhoc_courses_enrollments_page.waitForThePageToLoad();
+		
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(abc_course_name);
 		 

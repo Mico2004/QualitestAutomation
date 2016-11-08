@@ -92,6 +92,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement searchbox;
 	@FindBy(id = "CheckAll")
 	public WebElement checkall;
+	@FindBy(id ="RecordingDate1")
+	WebElement date_first_rec;
 	@FindBy(xpath = "//*[starts-with(@id,'Checkbox')]")
 	public List<WebElement> checkboxlist;// @FindBy(css="//input[@type='checkbox']")// List<WebElement> checkboxlist;
 	@FindBy(xpath = "//*[@id='Recording1']/strong")
@@ -128,8 +130,6 @@ public class RecordingHelperPage extends Page {
 	public WebElement course_being_copied_status;
 	@FindBy(id = "RecordingLength1")
 	WebElement duration_first_rec;
-	@FindBy(id ="RecordingDate1")
-	WebElement date_first_rec;
 	@FindBy(xpath = "//*[starts-with(@id,'RecordingLength')]")
 	List<WebElement> recordings_list_duratuon;
 	@FindBy(xpath = "//*[starts-with(@id,'RecordingDate')]")
@@ -2659,12 +2659,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		boolean is_exist = isTargetRecordingExist(target_recording);
 		
 		if (is_exist) {
-			System.out.println("Target recording exist in recording list.");
+			System.out.println("Target recording exist in recording list?");
 			ATUReports.add("Recording list.", "Target recording exist.", "Target recording exist.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
-			System.out.println("Target recording not exist in recording list.");
-			ATUReports.add("Target recording not exist in recording list.", "Target recording exist.", "Target recording not exist.", LogAs.FAILED,
+			System.out.println("Target recording not exist in recording list?");
+			ATUReports.add("Target recording not exist in recording list?", "Target recording exist.", "Target recording not exist.", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 		}
@@ -4547,8 +4547,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
-	
-public boolean verifyIfCheckedRecordingsAreEditable() throws InterruptedException {
+		
+	public boolean verifyIfCheckedRecordingsAreEditable() throws InterruptedException {
 		try{
 		Thread.sleep(1000);	
 		if(!verifyOneOrMoreCheckboxIsChecked())
@@ -4607,6 +4607,8 @@ public boolean verifyIfCheckedRecordingsAreEditable() throws InterruptedExceptio
 		}
 		
 	}
+	
+
 	public void checkExistenceOfNoncopyableRecordingsStatusInRecordings() throws InterruptedException {
 		int i = 0;
 		Thread.sleep(1000);
@@ -4906,6 +4908,12 @@ public boolean verifyIfCheckedRecordingsAreEditable() throws InterruptedExceptio
 	}
 	
 
+
+	
+	
+	
+	
+	
 	public int getRecordingIndexWithoutAnyStatus(){
 	try{
 		int i = 1;
@@ -4924,9 +4932,12 @@ public boolean verifyIfCheckedRecordingsAreEditable() throws InterruptedExceptio
 		}catch(Exception e){
 			ATUReports.add("Retrieving clear status recording failed",e.getMessage(),  LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return 0;
-		}	
+		}
+		
+		
 	}
 
+	
 	public void verifyThatTheRecordNameEqualsFromTheString(String recordOperation,int index,String operation){
 		
 	try{
@@ -4949,8 +4960,7 @@ public boolean verifyIfCheckedRecordingsAreEditable() throws InterruptedExceptio
 			break;		
 		case "Recording duration":	
 			recordNameToCompare =getTheRecordingDurationByRecordIndex(index);
-			break;
-									
+			break;	
 		}
 		
 
