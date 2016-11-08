@@ -577,7 +577,8 @@ public class EditRecordinPropertiesWindow extends Page {
 		int i = 0;
 		for(WebElement ie: owner_button_select) {
 			String currentOwner = ie.getText(); 
-			if(!currentOwner.contains(owners.get(i))){
+			if(searchOwnerInTheOwnerList(currentOwner)){
+				//	currentOwner.contains(owners.get(i))){
 				System.out.println("The instracutor are not found at the list.");				
 				ATUReports.add("The instracutor are not found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				isAllTheInstractorsInTheList = false;
@@ -595,7 +596,21 @@ public class EditRecordinPropertiesWindow extends Page {
 	}
   }
 	
-	public void addOwnersToList(String OwnerType){
+	
+	public boolean searchOwnerInTheOwnerList(String currentOwner) {
+		
+		boolean isTheOwnerContains = false;
+		for(String Owner: owners){
+			if(currentOwner.contains(Owner)){
+				isTheOwnerContains = true;
+				break;					
+			}
+		}
+		return isTheOwnerContains;
+	}
+	
+	
+	public void addOwnersToList(String OwnerType,int UniqueTest){
 		
 		try{
 		owners.clear();
@@ -615,6 +630,18 @@ public class EditRecordinPropertiesWindow extends Page {
 			owners.add(PropertyManager.getProperty("User3"));
 			owners.add(PropertyManager.getProperty("User4"));
 		}
+		if(UniqueTest == 1){
+			owners.add("InstructorTemp");
+		}
+		if(UniqueTest == 2){
+			owners.add("StudentTemp");
+		}
+		if(UniqueTest == 3){
+			owners.add("InstructorTemp");
+			owners.add("StudentTemp");
+		}
+		
+		
 	}catch(Exception e){
 		e.getMessage();
 		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));

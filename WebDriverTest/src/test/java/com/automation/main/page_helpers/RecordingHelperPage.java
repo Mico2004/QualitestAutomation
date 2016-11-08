@@ -1061,7 +1061,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void selectIndexCheckBox(int index) throws InterruptedException {	
 		try{
 		Thread.sleep(500);
-		new WebDriverWait(driver, 12).until(ExpectedConditions.visibilityOfElementLocated(By.id("Checkbox"+index)));	
+		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id("Checkbox"+index)));	
 		WebElement target_checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));	
 		SelectOneCheckBoxOrVerifyAlreadySelected(target_checkbox);
 		}
@@ -4548,6 +4548,65 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		Assert.assertTrue(true);
 	}
 	
+public boolean verifyIfCheckedRecordingsAreEditable() throws InterruptedException {
+		try{
+		Thread.sleep(1000);	
+		if(!verifyOneOrMoreCheckboxIsChecked())
+			return false;
+		for(int i=1; i<=checkboxlist.size();i++){
+			if(driver.findElement(By.id("Checkbox"+i)).isSelected()){
+				if(driver.findElement(By.id("RecordingStatus"+i)).getText().equals("Moving/Copying") ||
+				   driver.findElement(By.id("RecordingStatus"+i)).getText().equals("Being copied from") ||
+				   driver.findElement(By.id("RecordingStatus"+i)).getText().equals("Being moved from") ||
+				   driver.findElement(By.id("RecordingStatus"+i)).getText().equals("Recording is being edited.") ){
+					return false;						
+				}					
+			}		
+		}
+		return true;
+		}catch(Exception e){
+		ATUReports.add("Status verification failed", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		return false;
+		}
+		
+	}
+	
+	public boolean verifyIfCheckedContentsAreEditable() throws InterruptedException {
+		try{
+		Thread.sleep(1000);
+		if(!verifyOneOrMoreCheckboxIsChecked())
+			return false;
+		for(int i=1; i<=checkboxlist.size();i++){
+			if(driver.findElement(By.id("Checkbox"+i)).isSelected()){
+				if(driver.findElement(By.id("ItemStatus"+i)).getText().equals("Uploading") || 
+						driver.findElement(By.id("ItemStatus"+i)).getText().equals("Error")){
+					return false;						
+				}					
+			}		
+		}
+		return true;
+		}catch(Exception e){
+		ATUReports.add("Status verification failed", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		return false;
+		}
+		
+	}
+	
+	public boolean verifyOneOrMoreCheckboxIsChecked() throws InterruptedException {
+		try{
+		Thread.sleep(1000);
+		for(int i=1; i<=checkboxlist.size();i++){
+			if(driver.findElement(By.id("Checkbox"+i)).isSelected()){			
+					return true;									
+			}		
+		}
+		return false;
+		}catch(Exception e){
+		ATUReports.add("Check state verification failed", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		return false;
+		}
+		
+	}
 	public void checkExistenceOfNoncopyableRecordingsStatusInRecordings() throws InterruptedException {
 		int i = 0;
 		Thread.sleep(1000);
@@ -4867,7 +4926,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			return 0;
 		}	
 	}
-	
+
 	public void verifyThatTheRecordNameEqualsFromTheString(String recordOperation,int index,String operation){
 		
 	try{

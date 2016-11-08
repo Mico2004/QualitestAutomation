@@ -117,7 +117,7 @@ public class TC17016ValidateRegularRecordingTypeChangesFunctionality  {
 		edit_recording_properties_window.verifyThatTheTypeWasChoosen("Student recording");
 			
 		//8.The drop down edit box contains only STUDENT users.	
-		edit_recording_properties_window.addOwnersToList("Student");
+		edit_recording_properties_window.addOwnersToList("Student",0);
 		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
 			
 		//9. Select one of the STUDENT users
