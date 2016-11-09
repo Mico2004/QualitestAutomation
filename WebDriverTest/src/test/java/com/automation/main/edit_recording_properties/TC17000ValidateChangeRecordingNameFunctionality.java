@@ -164,8 +164,7 @@ public class TC17000ValidateChangeRecordingNameFunctionality {
 		record.verifyThatTheRecordNameEqualsFromTheString(recordeDate,recordNumber,"Record date");
 		
 		//16.Validate the 'Recording is being' edited status disappears within maximum of 2 minutes
-		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber);
-	
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,120);
 		}
 		
 		System.out.println("Done.");

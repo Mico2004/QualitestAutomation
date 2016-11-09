@@ -160,7 +160,7 @@ public class TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFuncti
 		record.verifyThatTheRecordNameEqualsFromTheString(recordDate,recordNumber,"Record date");
 	
 		//16.Validate the 'Recording is being' edited status disappears within maximum of 2 minutes
-		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber);
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,120);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

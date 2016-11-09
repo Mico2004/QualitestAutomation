@@ -658,17 +658,16 @@ public void verifyUserIsNotOnTheOwnerList(String User) {
 		for(WebElement ie: owner_button_select) {
 			String currentOwner = ie.getText(); 
 			if(!searchOwnerInTheOwnerList(currentOwner)){
-				//	currentOwner.contains(owners.get(i))){
-				System.out.println("The instracutor are not found at the list.");				
-				ATUReports.add("The instracutor are not found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("The Owners are not found at the list.");				
+				ATUReports.add("The Owners are not found at the list.", "Success.", "Fail", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				isAllTheInstractorsInTheList = false;
 				break;
 			}
 			i++;
 		}
 		if(isAllTheInstractorsInTheList){
-			System.out.println("All The instracutors are found at the list.");
-			ATUReports.add("All The instracutors are found at the list.", "Success.", "Success.", LogAs.PASSED, null);
+			System.out.println("All The Owners are found at the list.");
+			ATUReports.add("All The Owners are found at the list.", "Success.", "Success.", LogAs.PASSED, null);
 		}
 	}catch(Exception e){
 		e.getMessage();

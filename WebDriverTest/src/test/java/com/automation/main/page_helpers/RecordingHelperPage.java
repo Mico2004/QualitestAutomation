@@ -1761,14 +1761,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void unselectallCheckbox() {
 		try {	
 			if (check_all_checkbox.isSelected()) {
-				check_all_checkbox.click();
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
 				System.out.println("Checkbox all is not selected");
 				ATUReports.add("Checkbox all is not selected", LogAs.PASSED, null);
 
 				Assert.assertTrue(true);
 			} else {
-				check_all_checkbox.click();
-				check_all_checkbox.click();
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
 				System.out.println("Checkbox all is selected");
 				ATUReports.add("Checkbox all is selected", LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -4674,25 +4674,25 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 	
-	public void checkExistenceOfNonEditRecordingsStatusInTheIndex(int index) throws InterruptedException {
+	public void checkExistenceOfNonEditRecordingsStatusInTheIndex(int index,int seconds) throws InterruptedException {
 		
 		try {
-		 driver.navigate().refresh();
-		 Boolean isTheStatusDisapper =  new WebDriverWait(driver, 120).until(ExpectedConditions.invisibilityOfElementWithText(By.id("RecordingStatus" +Integer.toString(index)), "Recording is being edited."));
-		 Thread.sleep(2000);
+		
+		 Boolean isTheStatusDisapper =  new WebDriverWait(driver, seconds).until(ExpectedConditions.invisibilityOfElementWithText(By.id("RecordingStatus" +Integer.toString(index)), "Recording is being edited."));		 
 		  if(isTheStatusDisapper) {
-			  System.out.println("The status has change in less then 120 seconds");
-			  ATUReports.add("The status has change in less then 120 seconds.", "True.", "True.", LogAs.PASSED, null);
+			  System.out.println("The status has change in less then " + Integer.toString(seconds)+ " seconds");
+			  ATUReports.add("The status has change in less then " + Integer.toString(seconds)+ " seconds", "True.", "True.", LogAs.PASSED, null);
 			  Assert.assertTrue(true);
-		  } else {
-			  System.out.println("The status has change in more then 120 seconds");
-			  ATUReports.add("The status has not change in more then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			  Assert.assertTrue(false);
 		  }
 		}catch(org.openqa.selenium.TimeoutException msg){
-			 System.out.println("The status has change in more then 120 seconds");
-			  ATUReports.add("The status has not change in more then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			  Assert.assertTrue(false);
+			 if(seconds == 30){
+				 driver.navigate().refresh();
+				 Thread.sleep(2000);
+			 } else{
+				 System.out.println("The status has change in more then " + Integer.toString(seconds)+ " seconds");
+				 ATUReports.add("The status has change in more then " + Integer.toString(seconds)+ " seconds", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				 Assert.assertTrue(false);
+			 }
 		}
 	}
 	

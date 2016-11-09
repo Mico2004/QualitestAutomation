@@ -132,7 +132,7 @@ public class TC17022ValidateMultipleChangesInARowOnTheSameRecording  {
 		record.verifyThatTargetRecordingExistInRecordingList(name);
 					
 		//wait the status disappear 
-		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber);
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,30);
 		
 		//15.Check the same recording respective checkbox 
 		recordNumber = record.getIndexOfRecordFromRecordName(name);
@@ -172,7 +172,7 @@ public class TC17022ValidateMultipleChangesInARowOnTheSameRecording  {
 		record.verifyThatTargetRecordingExistInRecordingList(name);
 			
 		//wait the status disappear 
-		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber);
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,30);
 				
 		//27.Check the same recording respective checkbox 
 		recordNumber = record.getIndexOfRecordFromRecordName(name);
@@ -211,13 +211,13 @@ public class TC17022ValidateMultipleChangesInARowOnTheSameRecording  {
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
 		//38.The recording Creation date han't changed.
+		recordNumber = record.getIndexOfRecordFromRecordName(name);
 		record.verifyThatTheRecordNameEqualsFromTheString(correctDate,recordNumber,"Record date");
 		
 		//wait the status disappear 
-		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber);
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,30);
 						
 		//39.Check the same recording respective checkbox 
-		recordNumber = record.getIndexOfRecordFromRecordName(name);
 		record.unselectallCheckbox();
 		record.selectIndexCheckBox(recordNumber);
 					
@@ -253,13 +253,13 @@ public class TC17022ValidateMultipleChangesInARowOnTheSameRecording  {
 		confirm_menu.verifyConfirmWindowIsClosed();
 				
 		//51.The recording Creation date han't changed.
+		recordNumber = record.getIndexOfRecordFromRecordName(name);
 		record.verifyThatTheRecordNameEqualsFromTheString(correctDate,recordNumber,"Record date");
 		
 		//wait the status disappear 
-		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber);
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,30);
 								
 		//52.Check the same recording respective checkbox 
-		recordNumber = record.getIndexOfRecordFromRecordName(name);
 		record.unselectallCheckbox();
 		record.selectIndexCheckBox(recordNumber);
 		String recordBy = record.getTheRecordedByRecordIndex(recordNumber);
@@ -302,10 +302,9 @@ public class TC17022ValidateMultipleChangesInARowOnTheSameRecording  {
 		record.verifyThatTheRecordNameEqualsFromTheString(newOwner,recordNumber,"Record creator");
 		
 		//wait the status disappear 
-		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber);
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,30);
 										
 		//66.Check the same recording respective checkbox 
-		recordNumber = record.getIndexOfRecordFromRecordName(name);
 		record.unselectallCheckbox();
 		record.selectIndexCheckBox(recordNumber);
 									
@@ -347,7 +346,7 @@ public class TC17022ValidateMultipleChangesInARowOnTheSameRecording  {
 		record.verifyThatTheRecordNameEqualsFromTheString(newOwner,recordNumber,"Record creator");
 		
 		//wait the status disappear 
-		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber);
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,30);
 									
 		//80.Check the same recording respective checkbox 
 		recordNumber = record.getIndexOfRecordFromRecordName(name);
@@ -401,7 +400,7 @@ public class TC17022ValidateMultipleChangesInARowOnTheSameRecording  {
 		record.verifyThatTheRecordNameEqualsFromTheString(recordBy,recordNumber,"Record creator");	
 		
 		//wait the status disappear 
-		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber);
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,30);
 		
 		//95.Check some recording respective checkbox 
 		record.selectIndexCheckBox(recordNumber);
