@@ -141,28 +141,22 @@ public class CalendarPage extends Page {
 	    int dayInt = Integer.parseInt(day);
 	    int monthInt = Integer.parseInt(month);
 	    int pickTwoDayBefore = 0;
-		    
+	    pickTwoDayBefore= dayInt -days;
 	    if(dayInt == 1 || dayInt == 2 || dayInt ==3){
-
 	    	if(monthInt == 3 ) {	
-	    		pickTwoDayBefore-=days;
 	    		if(pickTwoDayBefore <=0)
-	    			pickTwoDayBefore +=28;
-	    		
-	    	} else if(monthInt == 1 ||monthInt == 11 || monthInt == 9 || monthInt == 8  || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
-	    		pickTwoDayBefore-=days;
+	    			pickTwoDayBefore +=28;    		
+	    	} else if(monthInt == 1 || monthInt == 11 || monthInt == 9 || monthInt == 8  || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
 	    		if(pickTwoDayBefore <=0)
 	    			pickTwoDayBefore +=31;   			
-	    	} else if(monthInt == 12 || monthInt == 10 || monthInt == 7 || monthInt == 5) {
-	    		pickTwoDayBefore-=days;
+	    	} else if(monthInt == 12 || monthInt == 10 || monthInt == 7 || monthInt == 5) {	
 	    		if(pickTwoDayBefore <=0)
 	    			pickTwoDayBefore +=30;
 	    	}
-	    	if(pickTwoDayBefore != 1)	
+	    	if(pickTwoDayBefore != 1)	{
 	    		clickElement(arrowLeft);
-	    	monthInt -=1; 
-	    } else {  	
-	    	 pickTwoDayBefore = dayInt -days;
+	    	    monthInt -=1; 
+	    	}
 	    }
 	    String dayNewNumber = Integer.toString(pickTwoDayBefore);
 	    WebElement table = driver.findElement(By.className("table-condensed"));
@@ -183,9 +177,10 @@ public class CalendarPage extends Page {
     		String color = e.getCssValue("color").toString();
     		System.out.println(e.getText());
     		System.out.println(color);
-    		String grey = "rgba(102, 102, 102,1)";
+    		String grey = "rgba(102, 102, 102, 1)";
     		if(color.equals(grey)){
-    			clickElement(e);
+    			//clickElement(e);
+    			((JavascriptExecutor) driver).executeScript("arguments[0].click();",e);
     			ATUReports.add("Verify the day from the calendar.", LogAs.PASSED, null);
     			System.out.println("Verify the day from the calendar.");
     			Assert.assertTrue(true);	
