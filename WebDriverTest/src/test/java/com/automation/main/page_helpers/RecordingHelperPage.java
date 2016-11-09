@@ -4679,7 +4679,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 		
 		 Boolean isTheStatusDisapper =  new WebDriverWait(driver, seconds).until(ExpectedConditions.invisibilityOfElementWithText(By.id("RecordingStatus" +Integer.toString(index)), "Recording is being edited."));		 
-		  if(isTheStatusDisapper) {
+
+		 if(isTheStatusDisapper) {
 			  System.out.println("The status has change in less then " + Integer.toString(seconds)+ " seconds");
 			  ATUReports.add("The status has change in less then " + Integer.toString(seconds)+ " seconds", "True.", "True.", LogAs.PASSED, null);
 			  Assert.assertTrue(true);
@@ -5001,7 +5002,18 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		waitForVisibility(date_first_rec);
 		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingDate"+Integer.toString(index)+"']"));
-		return record.getText();
+		
+		  String[]parts= record.getText().split("/");
+
+		  if(parts[0].length() == 1) {
+			  parts[0] = "0" + parts[0];
+		  } 
+		  if(parts[1].length() == 1) {
+			  parts[1] = "0" + parts[1];
+		  }
+		  String correctDate = parts[0] + "/"  + parts[1] + "/"  + parts[2];
+			
+		return correctDate;
 	}
 	
 	public String getTheRecordingNameIndex(int index){

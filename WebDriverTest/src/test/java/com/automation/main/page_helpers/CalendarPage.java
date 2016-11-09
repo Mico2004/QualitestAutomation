@@ -141,9 +141,7 @@ public class CalendarPage extends Page {
 	    int dayInt = Integer.parseInt(day);
 	    int monthInt = Integer.parseInt(month);
 	    int pickTwoDayBefore = 0;
-		
-	    
-	    
+		    
 	    if(dayInt == 1 || dayInt == 2 || dayInt ==3){
 
 	    	if(monthInt == 3 ) {	
@@ -183,8 +181,10 @@ public class CalendarPage extends Page {
 	    
     	for(WebElement e :Numbers ){
     		String color = e.getCssValue("color").toString();
-    		String grey = "rgb(153, 153, 153)";
-    		if(!color.equals(grey)){
+    		System.out.println(e.getText());
+    		System.out.println(color);
+    		String grey = "rgba(102, 102, 102,1)";
+    		if(color.equals(grey)){
     			clickElement(e);
     			ATUReports.add("Verify the day from the calendar.", LogAs.PASSED, null);
     			System.out.println("Verify the day from the calendar.");
