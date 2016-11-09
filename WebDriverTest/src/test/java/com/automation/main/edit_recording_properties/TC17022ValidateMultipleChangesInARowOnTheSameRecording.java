@@ -107,83 +107,83 @@ public class TC17022ValidateMultipleChangesInARowOnTheSameRecording  {
 			
 		//6.Type some other name to the "Name" edit box.
 		String name = "Change recording name";
-//		edit_recording_properties_window.changeRecordingNameToTargetName(name);
-//		
-//		//7.Click the "Save" button
-//		edit_recording_properties_window.clickOnSaveButton();
-//				
-//		//8.The model window is closed.
-//		edit_recording_properties_window.verifyConfirmWindowIsClosed();
-//				
-//		//9. The header background color is as the customize or defualt university background color.
-//		confirm_menu.verifyConfirmBackgroundColor(record);
-//				
-//		//10.The "Ok" Button is displayed on the bottom right corner of the model window.
-//		confirm_menu.verifyTheLocationOfTheOkButtonIsInTheButtomRight();
-//				
-//		//11.The "Edit Recording Properties" caption is displayed inside the header.
-//		//12.The informative text "Recording properties have been queued for edit" is displayed below the header.	
-//		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
-//				
-//		//13.The second model window disappears.
-//		confirm_menu.verifyConfirmWindowIsClosed();
-//				
-//		//14.Validate the recording name has changed to "Change recording name" 
-//		record.verifyThatTargetRecordingExistInRecordingList(name);
-//					
-//		//wait the status disappear 
-//		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,30);
-//		
-//		//15.Check the same recording respective checkbox 
-//		recordNumber = record.getIndexOfRecordFromRecordName(name);
-//		record.unselectallCheckbox();
-//		record.selectIndexCheckBox(recordNumber);
-//		
-//		//16.click on the recording tasks->edit recording properties option
-//		record.toEditRecordingPropertiesMenu();
-//					
-//		//17.wait for edit reocrding properties window to open
-//		edit_recording_properties_window.waitForPageToLoad();
-//		
-//		//18.Type some other name to the "Name" edit box.
-//		name = "Change recording name2";
-//		edit_recording_properties_window.changeRecordingNameToTargetName(name);
-//		
-//		//19.Click the "Save" button
-//		edit_recording_properties_window.clickOnSaveButton();
-//						
-//		//20.The model window is closed.
-//		edit_recording_properties_window.verifyConfirmWindowIsClosed();
-//						
-//		//21. The header background color is as the customize or defualt university background color.
-//		confirm_menu.verifyConfirmBackgroundColor(record);
-//						
-//		//22.The "Ok" Button is displayed on the bottom right corner of the model window.
-//		confirm_menu.verifyTheLocationOfTheOkButtonIsInTheButtomRight();
-//						
-//		//23.The "Edit Recording Properties" caption is displayed inside the header.
-//		//24.The informative text "Recording properties have been queued for edit" is displayed below the header.	
-//		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
-//						
-//		//25.The second model window disappears.
-//		confirm_menu.verifyConfirmWindowIsClosed();
-//						
-//		//26.Validate the recording name has changed to "Change recording name" 
-//		record.verifyThatTargetRecordingExistInRecordingList(name);
-//			
-//		//wait the status disappear 
-//		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,30);
-//				
-//		//27.Check the same recording respective checkbox 
-//		recordNumber = record.getIndexOfRecordFromRecordName(name);
-//		record.unselectallCheckbox();
-//		record.selectIndexCheckBox(recordNumber);
-//			
-//		//28.click on the recording tasks->edit recording properties option
-//		record.toEditRecordingPropertiesMenu();
-//					
-//		//29.wait for edit reocrding properties window to open
-//		edit_recording_properties_window.waitForPageToLoad();
+		edit_recording_properties_window.changeRecordingNameToTargetName(name);
+		
+		//7.Click the "Save" button
+		edit_recording_properties_window.clickOnSaveButton();
+				
+		//8.The model window is closed.
+		edit_recording_properties_window.verifyConfirmWindowIsClosed();
+				
+		//9. The header background color is as the customize or defualt university background color.
+		confirm_menu.verifyConfirmBackgroundColor(record);
+				
+		//10.The "Ok" Button is displayed on the bottom right corner of the model window.
+		confirm_menu.verifyTheLocationOfTheOkButtonIsInTheButtomRight();
+				
+		//11.The "Edit Recording Properties" caption is displayed inside the header.
+		//12.The informative text "Recording properties have been queued for edit" is displayed below the header.	
+		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
+				
+		//13.The second model window disappears.
+		confirm_menu.verifyConfirmWindowIsClosed();
+				
+		//14.Validate the recording name has changed to "Change recording name" 
+		record.verifyThatTargetRecordingExistInRecordingList(name);
+					
+		//wait the status disappear 
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,30);
+		
+		//15.Check the same recording respective checkbox 
+		recordNumber = record.getIndexOfRecordFromRecordName(name);
+		record.unselectallCheckbox();
+		record.selectIndexCheckBox(recordNumber);
+		
+		//16.click on the recording tasks->edit recording properties option
+		record.toEditRecordingPropertiesMenu();
+					
+		//17.wait for edit reocrding properties window to open
+		edit_recording_properties_window.waitForPageToLoad();
+		
+		//18.Type some other name to the "Name" edit box.
+		name = "Change recording name2";
+		edit_recording_properties_window.changeRecordingNameToTargetName(name);
+		
+		//19.Click the "Save" button
+		edit_recording_properties_window.clickOnSaveButton();
+						
+		//20.The model window is closed.
+		edit_recording_properties_window.verifyConfirmWindowIsClosed();
+						
+		//21. The header background color is as the customize or defualt university background color.
+		confirm_menu.verifyConfirmBackgroundColor(record);
+						
+		//22.The "Ok" Button is displayed on the bottom right corner of the model window.
+		confirm_menu.verifyTheLocationOfTheOkButtonIsInTheButtomRight();
+						
+		//23.The "Edit Recording Properties" caption is displayed inside the header.
+		//24.The informative text "Recording properties have been queued for edit" is displayed below the header.	
+		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
+						
+		//25.The second model window disappears.
+		confirm_menu.verifyConfirmWindowIsClosed();
+						
+		//26.Validate the recording name has changed to "Change recording name" 
+		record.verifyThatTargetRecordingExistInRecordingList(name);
+			
+		//wait the status disappear 
+		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,30);
+				
+		//27.Check the same recording respective checkbox 
+		recordNumber = record.getIndexOfRecordFromRecordName(name);
+		record.unselectallCheckbox();
+		record.selectIndexCheckBox(recordNumber);
+			
+		//28.click on the recording tasks->edit recording properties option
+		record.toEditRecordingPropertiesMenu();
+					
+		//29.wait for edit reocrding properties window to open
+		edit_recording_properties_window.waitForPageToLoad();
 			
 		//30.Select some other Creation date.
 		calendarPage.changeCreateDay(2);
