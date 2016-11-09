@@ -11,7 +11,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
 import com.automation.main.page_helpers.CalendarPage;
@@ -22,24 +21,20 @@ import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
+public class TC7440ValidateOwnerAndTypeCorrectFlowWhenCourseHasALotOfEnrollments {
 
 
 	// Set Property for ATU Reporter Configuration
@@ -85,8 +80,8 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput at " + DateToStr, "Starting the test: TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC7440ValidateOwnerAndTypeCorrectFlowWhenCourseHasALotOfEnrollments at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC7440ValidateOwnerAndTypeCorrectFlowWhenCourseHasALotOfEnrollments at " + DateToStr, "Starting the test: TC7440ValidateOwnerAndTypeCorrectFlowWhenCourseHasALotOfEnrollments at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -97,13 +92,14 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 
 	
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC17001 Validate Change recording name with different type of input")
-	public void test17001() throws InterruptedException, ParseException {
-		
+	@Test (description="TC7440 Validate Owner and type correct flow when course has a lot of enrollments")
+	public void test7440() throws InterruptedException, ParseException {
 		
 		
 		//1.log in courses page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
+		
+		//Login as INSTRUCTOR
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
 		
@@ -114,97 +110,66 @@ public class TC17001ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);
 		
+		//get the recording length creator and date are the same as before the edit;
+		String recordBy = record.getTheRecordedByRecordIndex(recordNumber);
+		String recordeDate = record.getTheRecordingDateIndex(recordNumber);
+		
 		//4.click on the recording tasks->edit recording properties option
 		record.toEditRecordingPropertiesMenu();
 			
 		//5.wait for edit reocrding properties window to open
 		edit_recording_properties_window.waitForPageToLoad();
 		
-		//6.Click inside of the "Name" editbox type the text "<10 spaces>Change<10 spaces>recording name<10 spaces>"
-		String newName = "          Change          recording name          ";
-		String newNameWithOutGaps = "Change recording name";
-		edit_recording_properties_window.changeRecordingNameToTargetName(newName);
+		///6.Type some other name to the "Name" edit box.
+		String name = "newNameForTesting2";
+		edit_recording_properties_window.changeRecordingNameToTargetName(name);
 		
-		//7.Click the "Save" button
+		//7.Select some other Creation date.
+		calendarPage.changeCreateDay(2);
+		
+		//get the new date for later
+		String correctDate =edit_recording_properties_window.verifyThatTheCalendarInTheRightFormat();
+		
+		//8.Choose some other type from the type drop down list
+		edit_recording_properties_window.ChooseDiffrenetType("Student recording");
+		
+		//9.Choose some other owner from the owner drop down list
+		String newOwner = edit_recording_properties_window.clickOnDifferentOwnerThatTheExist(recordBy);
+				
+		//10.Click the "Save" button
 		edit_recording_properties_window.clickOnSaveButton();
 		
-		//8.The model window is closed.
+		//11.The model window is closed.
 		edit_recording_properties_window.verifyConfirmWindowIsClosed();
 		
-		//9. The header background color is as the customize or defualt university background color.
+		//12. The header background color is as the customize or defualt university background color.
 		confirm_menu.verifyConfirmBackgroundColor(record);
-		
-		//10.The "Ok" Button is displayed on the bottom right corner of the model window.
+			
+		//13.The "Ok" Button is displayed on the bottom right corner of the model window.
 		confirm_menu.verifyTheLocationOfTheOkButtonIsInTheButtomRight();
 		
-		//11.The "Edit Recording Properties" caption is displayed inside the header.
-		//12.The informative text "Recording properties have been queued for edit" is displayed below the header.	
+		//14.The "Edit Recording Properties" caption is displayed inside the header.
+		//15.The informative text "Recording properties have been queued for edit" is displayed below the header.
 		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		
-		//13.The second model window disappears.
+		//16.The second model window disappears.
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
-		//14.Validate the recording name has changed to "Change recording name" without any white spaces gaps.
-		record.verifyThatTargetRecordingExistInRecordingList(newNameWithOutGaps);
-	
+		//17.Validate the recording has been passed to "Student Recordings" tab
+		record.verifyThatTargetRecordingNotExistInRecordingList(name);
 		
-		//15.Check another recording respective checkbox
-		record.unselectallCheckbox();
-		String newRecordToChange = record.selectRecordingThatChangeFromThatName(newNameWithOutGaps);
-		recordNumber = record.getIndexOfRecordFromRecordName(newRecordToChange);
-		record.selectIndexCheckBox(recordNumber);
+		//19.Select "Students Recordings" tab
+		record.clickOnStudentRecordingsTab();
 		
-		//16.Click on 'Recording Tasks - Edit Recording Properties' option
-		record.toEditRecordingPropertiesMenu();
+		//20.Validate the Recording name has changed.
+		record.verifyThatTargetRecordingExistInRecordingList(name);
+		recordNumber = record.getIndexOfRecordFromRecordName(name);
+			
+		//21.Validate the recording "Recorded by" value has been changed.
+		record.verifyThatTheRecordNameEqualsFromTheString(newOwner,recordNumber,"Record creator");
 		
-		//17.wait for edit reocrding properties window to open
-		edit_recording_properties_window.waitForPageToLoad();
-		
-		//18.Copy  the  !@#$%^&*(){}|"?><*/-– funny characters string to name text box
-		newName = "!@#$%^&*(){}|\"?><*/-–";	
-		edit_recording_properties_window.changeRecordingNameToTargetName(newName);
-		
-		//19.Click The save button
-		edit_recording_properties_window.clickOnSaveButton();
-		
-		//20.The model window is closed.
-		edit_recording_properties_window.verifyConfirmWindowIsClosed();
-		
-		//21.Click "OK" button in the confirmation model window
-		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
-		
-		//22.Validate the recording name change to !@#$%^&*(){}|"?><*/-–
-		record.verifyThatTargetRecordingExistInRecordingList(newName);
-		
-		
-		//23.Check another recording respective checkbox
-		record.unselectallCheckbox();
-		String newRecord = record.selectRecordingThatChangeFromThatName(newName);
-		recordNumber = record.getIndexOfRecordFromRecordName(newRecord);
-		record.selectIndexCheckBox(recordNumber);
-		
-		//24.Click on 'Recording Tasks - Edit Recording Properties' option
-		record.toEditRecordingPropertiesMenu();
-				
-		//25.wait for edit reocrding properties window to open
-		edit_recording_properties_window.waitForPageToLoad();
-		
-		//26.Copy the ¶©®ù◊ non ascii string to the Name textbox
-		newName = "¶©®ù◊";
-		edit_recording_properties_window.changeRecordingNameToTargetName(newName);
-		
-		//27.Click The save button
-		edit_recording_properties_window.clickOnSaveButton();
-		
-		//28.The model window is closed.
-		edit_recording_properties_window.verifyConfirmWindowIsClosed();
-		
-		//29.Click "OK" button in the confirmation model window
-		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
-		
-		//30.Validate the recording name change to !@#$%^&*(){}|"?><*/-–
-		record.verifyThatTargetRecordingExistInRecordingList(newName);
-		
+		//22.Validate the recording "Recording Date" has been changed.
+		record.verifyThatTheRecordNameEqualsFromTheString(correctDate,recordNumber,"Record date");
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

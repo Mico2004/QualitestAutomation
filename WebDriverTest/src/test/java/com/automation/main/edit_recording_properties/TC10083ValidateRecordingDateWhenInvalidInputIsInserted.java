@@ -11,6 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
 import com.automation.main.page_helpers.CalendarPage;
@@ -21,20 +22,24 @@ import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
+
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.reports.utils.Utils;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+import junitx.util.PropertyManager;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC17023ValidateOwnerAndTypeCorrectFlowWhenCourseHasALotOfEnrollments {
+public class TC10083ValidateRecordingDateWhenInvalidInputIsInserted {
 
 
 	// Set Property for ATU Reporter Configuration
@@ -57,8 +62,6 @@ public class TC17023ValidateOwnerAndTypeCorrectFlowWhenCourseHasALotOfEnrollment
 	CopyMenu copy;
 	DesiredCapabilities capability;
     
-	
-
 	@BeforeClass
 	public void setup() {
 		try {
@@ -80,8 +83,8 @@ public class TC17023ValidateOwnerAndTypeCorrectFlowWhenCourseHasALotOfEnrollment
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC17023ValidateOwnerAndTypeCorrectFlowWhenCourseHasALotOfEnrollments at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC17023ValidateOwnerAndTypeCorrectFlowWhenCourseHasALotOfEnrollments at " + DateToStr, "Starting the test: TC17023ValidateOwnerAndTypeCorrectFlowWhenCourseHasALotOfEnrollments at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC10083ValidateRecordingDateWhenInvalidInputIsInserted at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC10083ValidateRecordingDateWhenInvalidInputIsInserted at " + DateToStr, "Starting the test: TC10083ValidateRecordingDateWhenInvalidInputIsInserted at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -89,87 +92,77 @@ public class TC17023ValidateOwnerAndTypeCorrectFlowWhenCourseHasALotOfEnrollment
 		this.driver.quit();
 	}
 		
-
-	
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC17023 Validate Owner and type correct flow when course has a lot of enrollments")
-	public void test17023() throws InterruptedException, ParseException {
+	@Test (description="TC10083 validate recording date change functionality")
+	public void test10083() throws InterruptedException, ParseException {
 		
 		
 		//1.log in courses page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
-		
-		//Login as INSTRUCTOR
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
 		
 		//2.open some course whom listed you as instructor
 		course.selectCourseThatStartingWith("Ab");
 		
+
+		for(int type_of_user = 0; type_of_user < 2; type_of_user++) {
+			
+		if(type_of_user == 1){
+			record.clickOnStudentRecordingsTab();
+		}
+		
 		//3.Check some recording respective checkbox 
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);
 		
-		//get the recording length creator and date are the same as before the edit;
-		String recordBy = record.getTheRecordedByRecordIndex(recordNumber);
-		String recordeDate = record.getTheRecordingDateIndex(recordNumber);
+		//get the recording length creator and date are the same as before the edit
+		String recordLen = record.getTheRecordLengthByRecordIndex(recordNumber);
+		//String recordBy = record.getTheRecordedByRecordIndex(recordNumber);
+		String recordName = record.getTheRecordingNameIndex(recordNumber);
 		
 		//4.click on the recording tasks->edit recording properties option
 		record.toEditRecordingPropertiesMenu();
 			
 		//5.wait for edit reocrding properties window to open
 		edit_recording_properties_window.waitForPageToLoad();
-		
-		///6.Type some other name to the "Name" edit box.
-		String name = "newNameForTesting2";
-		edit_recording_properties_window.changeRecordingNameToTargetName(name);
-		
-		//7.Select some other Creation date.
+			
+		//6.Click inside of the "Date" editbox 
+		//7.Pick [<today>- (2 days) ] date
 		calendarPage.changeCreateDay(2);
 		
-		//get the new date for later
+		//8.The date is in the following format: 'XX/XX/XXXX'.
 		String correctDate =edit_recording_properties_window.verifyThatTheCalendarInTheRightFormat();
-		
-		//8.Choose some other type from the type drop down list
-		edit_recording_properties_window.ChooseDiffrenetType("Student recording");
-		
-		//9.Choose some other owner from the owner drop down list
-		String newOwner = edit_recording_properties_window.clickOnDifferentOwnerThatTheExist(recordBy);
-				
-		//10.Click the "Save" button
-		edit_recording_properties_window.clickOnSaveButton();
-		
-		//11.The model window is closed.
-		edit_recording_properties_window.verifyConfirmWindowIsClosed();
-		
-		//12. The header background color is as the customize or defualt university background color.
-		confirm_menu.verifyConfirmBackgroundColor(record);
 			
-		//13.The "Ok" Button is displayed on the bottom right corner of the model window.
+		//9.Click the "Save" button
+		edit_recording_properties_window.clickOnSaveButton();
+				
+		//10.The model window is closed.
+		edit_recording_properties_window.verifyConfirmWindowIsClosed();
+				
+		//11. The header background color is as the customize or defualt university background color.
+		confirm_menu.verifyConfirmBackgroundColor(record);
+					
+		//12.The "Ok" Button is displayed on the bottom right corner of the model window.
 		confirm_menu.verifyTheLocationOfTheOkButtonIsInTheButtomRight();
-		
-		//14.The "Edit Recording Properties" caption is displayed inside the header.
-		//15.The informative text "Recording properties have been queued for edit" is displayed below the header.
+				
+		//13.The "Edit Recording Properties" caption is displayed inside the header.
+		//14.The informative text "Recording properties have been queued for edit" is displayed below the header.
 		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
-		
-		//16.The second model window disappears.
+				
+		//15.The second model window disappears.
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
-		//17.Validate the recording has been passed to "Student Recordings" tab
-		record.verifyThatTargetRecordingNotExistInRecordingList(name);
-		
-		//19.Select "Students Recordings" tab
-		record.clickOnStudentRecordingsTab();
-		
-		//20.Validate the Recording name has changed.
-		record.verifyThatTargetRecordingExistInRecordingList(name);
-		recordNumber = record.getIndexOfRecordFromRecordName(name);
-			
-		//21.Validate the recording "Recorded by" value has been changed.
-		record.verifyThatTheRecordNameEqualsFromTheString(newOwner,recordNumber,"Record creator");
-		
-		//22.Validate the recording "Recording Date" has been changed.
+		//16.Validate the recording creation date has changed to the date you selected earlier
+		recordNumber = record.getIndexOfRecordFromRecordName(recordName);
 		record.verifyThatTheRecordNameEqualsFromTheString(correctDate,recordNumber,"Record date");
+		
+		//17.Validate the recording name, creator and duration are the same as before the edit
+		record.verifyThatTheRecordNameEqualsFromTheString(recordName,recordNumber,"Record name");
+		record.verifyThatTheRecordNameEqualsFromTheString(recordLen,recordNumber,"Record length");
+		//record.verifyThatTheRecordNameEqualsFromTheString(recordBy,recordNumber,"Record creator");
+		
+	}
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

@@ -34,7 +34,7 @@ import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC17021ValidateDiscardingChangesFunctionlity  {
+public class TC7315ValidateDiscardingChangesFunctionlity  {
 
 
 	// Set Property for ATU Reporter Configuration
@@ -72,8 +72,8 @@ public class TC17021ValidateDiscardingChangesFunctionlity  {
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC17021ValidateDiscardingChangesFunctionlity at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC17021ValidateDiscardingChangesFunctionlity at " + DateToStr, "Starting the test: TC17021ValidateDiscardingChangesFunctionlity at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC7315ValidateDiscardingChangesFunctionlity at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC7315ValidateDiscardingChangesFunctionlity at " + DateToStr, "Starting the test: TC7315ValidateDiscardingChangesFunctionlity at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -82,8 +82,8 @@ public class TC17021ValidateDiscardingChangesFunctionlity  {
 	}
 		
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC17021 Validate discarding changes functionlity")
-	public void test17021() throws InterruptedException, ParseException {
+	@Test (description="TC7315 Validate discarding changes functionlity")
+	public void test7315() throws InterruptedException, ParseException {
 		
 		
 		//1.log in courses page

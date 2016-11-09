@@ -34,7 +34,7 @@ import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC17022ValidateMultipleChangesInARowOnTheSameRecording  {
+public class TC7381ValidateMultipleChangesInARowOnTheSameRecording  {
 
 
 	// Set Property for ATU Reporter Configuration
@@ -72,8 +72,8 @@ public class TC17022ValidateMultipleChangesInARowOnTheSameRecording  {
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC17022ValidateMultipleChangesInARowOnTheSameRecording at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC17022ValidateMultipleChangesInARowOnTheSameRecording at " + DateToStr, "Starting the test: TC17022ValidateMultipleChangesInARowOnTheSameRecording at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC7381ValidateMultipleChangesInARowOnTheSameRecording at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC7381ValidateMultipleChangesInARowOnTheSameRecording at " + DateToStr, "Starting the test: TC7381ValidateMultipleChangesInARowOnTheSameRecording at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -82,7 +82,7 @@ public class TC17022ValidateMultipleChangesInARowOnTheSameRecording  {
 	}
 		
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC17022 Validate multiple changes in A row on the same recording")
+	@Test (description="TC7381 Validate multiple changes in A row on the same recording")
 	public void test17022() throws InterruptedException, ParseException {
 		
 		

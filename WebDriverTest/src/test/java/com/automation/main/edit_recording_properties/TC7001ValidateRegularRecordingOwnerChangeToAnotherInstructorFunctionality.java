@@ -39,7 +39,7 @@ import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC17000ValidateChangeRecordingNameFunctionality {
+public class TC7001ValidateRegularRecordingOwnerChangeToAnotherInstructorFunctionality  {
 
 
 	// Set Property for ATU Reporter Configuration
@@ -62,8 +62,6 @@ public class TC17000ValidateChangeRecordingNameFunctionality {
 	CopyMenu copy;
 	DesiredCapabilities capability;
     
-	
-
 	@BeforeClass
 	public void setup() {
 		try {
@@ -85,8 +83,8 @@ public class TC17000ValidateChangeRecordingNameFunctionality {
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC17000ValidateChangeRecordingNameFunctionality at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC17000ValidateChangeRecordingNameFunctionality at " + DateToStr, "Starting the test: TC17000ValidateChangeRecordingNameFunctionality at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC7001ValidateRegularRecordingOwnerChangeToAnotherInstructorFunctionality at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC7001ValidateRegularRecordingOwnerChangeToAnotherInstructorFunctionality at " + DateToStr, "Starting the test: TC7001ValidateRegularRecordingOwnerChangeToAnotherInstructorFunctionality at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -94,12 +92,9 @@ public class TC17000ValidateChangeRecordingNameFunctionality {
 		this.driver.quit();
 	}
 		
-
-	
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC17000 Validate Change recording name functionality")
-	public void test17000() throws InterruptedException, ParseException {
-		
+	@Test (description="TC7001 Validate regular recording Owner change to another instructor functionality")
+	public void test7001() throws InterruptedException, ParseException {
 		
 		
 		//1.log in courses page
@@ -111,12 +106,6 @@ public class TC17000ValidateChangeRecordingNameFunctionality {
 		course.selectCourseThatStartingWith("Ab");
 		
 		
-		for(int type_of_user = 0; type_of_user < 2; type_of_user++) {
-			
-		if(type_of_user == 1){
-			record.clickOnStudentRecordingsTab();
-		}
-		
 		//3.Check some recording respective checkbox 
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);
@@ -124,48 +113,54 @@ public class TC17000ValidateChangeRecordingNameFunctionality {
 		//get the recording length creator and date are the same as before the edit
 		String recordLen = record.getTheRecordLengthByRecordIndex(recordNumber);
 		String recordBy = record.getTheRecordedByRecordIndex(recordNumber);
-		String recordeDate = record.getTheRecordingDateIndex(recordNumber);
+		String recordName = record.getTheRecordingNameIndex(recordNumber);
+		String recordDate = record.getTheRecordingDateIndex(recordNumber);
 		
 		//4.click on the recording tasks->edit recording properties option
 		record.toEditRecordingPropertiesMenu();
 			
 		//5.wait for edit reocrding properties window to open
 		edit_recording_properties_window.waitForPageToLoad();
-		
-		//6.Click inside of the "Name" editbox type the text "<10 spaces>Change<10 spaces>recording name<10 spaces>"
-		String newName = "Change recording name";
-		edit_recording_properties_window.changeRecordingNameToTargetName(newName);
-		
-		//7.Click the "Save" button
-		edit_recording_properties_window.clickOnSaveButton();
-		
-		//8.The model window is closed.
-		edit_recording_properties_window.verifyConfirmWindowIsClosed();
-		
-		//9. The header background color is as the customize or defualt university background color.
-		confirm_menu.verifyConfirmBackgroundColor(record);
 			
-		//10.The "Ok" Button is displayed on the bottom right corner of the model window.
+		//6.Click on the "Owner" drop down button
+		//7.The drop down edit box contains only INSTRUCTORS users.	
+
+		edit_recording_properties_window.addOwnersToList("Instractor",0);
+		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
+	
+		//8.Choose one of the users
+		String newOwner = edit_recording_properties_window.clickOnDifferentOwnerThatTheExist(recordBy);
+		
+		//9.Click the "Save" button
+		edit_recording_properties_window.clickOnSaveButton();
+				
+		//10.The model window is closed.
+		edit_recording_properties_window.verifyConfirmWindowIsClosed();
+				
+		//11. The header background color is as the customize or defualt university background color.
+		confirm_menu.verifyConfirmBackgroundColor(record);
+					
+		//12.The "Ok" Button is displayed on the bottom right corner of the model window.
 		confirm_menu.verifyTheLocationOfTheOkButtonIsInTheButtomRight();
-		
-		//11.The "Edit Recording Properties" caption is displayed inside the header.
-		//12.The informative text "Recording properties have been queued for edit" is displayed below the header.
+				
+		//13.The "Edit Recording Properties" caption is displayed inside the header.
+		//14.The informative text "Recording properties have been queued for edit" is displayed below the header.
 		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
-		
-		//13.The second model window disappears.
+				
+		//15.The second model window disappears.
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
-		//14.Validate the recording name has changed to "Change recording name" without any white spaces gaps.
-		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber,"Record name");
+		//16.Validate The recording Owner has changed to user you selected earlier.
+		recordNumber = record.getIndexOfRecordFromRecordName(recordName);
+		record.verifyThatTheRecordNameEqualsFromTheString(newOwner,recordNumber,"Record creator");
 		
-		//15.Validate the recording length, creator and date are the same as before the edit
+		//17.Validate the recording name, creator and duration are the same as before the edit
+		record.verifyThatTheRecordNameEqualsFromTheString(recordName,recordNumber,"Record name");
 		record.verifyThatTheRecordNameEqualsFromTheString(recordLen,recordNumber,"Record length");
-		//record.verifyThatTheRecordNameEqualsFromTheString(recordBy,recordNumber,"Record creator");
-		record.verifyThatTheRecordNameEqualsFromTheString(recordeDate,recordNumber,"Record date");
-		
+		record.verifyThatTheRecordNameEqualsFromTheString(recordDate,recordNumber,"Record date");
+	
 		//16.Validate the 'Recording is being' edited status disappears within maximum of 2 minutes
 		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,120);
-		}
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

@@ -38,7 +38,7 @@ import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC16999ValidateEditRecordingPropertiesModelWindowUI {
+public class TC6975ValidateEditRecordingPropertiesModelWindowUI {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -81,8 +81,8 @@ public class TC16999ValidateEditRecordingPropertiesModelWindowUI {
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC16999ValidateEditRecordingPropertiesModelWindowUI at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC16999ValidateEditRecordingPropertiesModelWindowUI at " + DateToStr, "Starting the test: TC16999ValidateEditRecordingPropertiesModelWindowUI at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC6975ValidateEditRecordingPropertiesModelWindowUI at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC6975ValidateEditRecordingPropertiesModelWindowUI at " + DateToStr, "Starting the test: TC6975ValidateEditRecordingPropertiesModelWindowUI at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -93,8 +93,8 @@ public class TC16999ValidateEditRecordingPropertiesModelWindowUI {
 
 	
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC 16999 Validate edit recording properties model window UI")
-	public void test16999() throws InterruptedException, ParseException {
+	@Test (description="TC6975 Validate edit recording properties model window UI")
+	public void test6975() throws InterruptedException, ParseException {
 		
 		
 		

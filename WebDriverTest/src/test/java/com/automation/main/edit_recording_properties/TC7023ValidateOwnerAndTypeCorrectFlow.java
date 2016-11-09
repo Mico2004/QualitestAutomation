@@ -39,7 +39,7 @@ import com.automation.main.page_helpers.ManageAdhocUsersPage;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC17019ValidateOwnerAndTypeCorrectFlow  {
+public class TC7023ValidateOwnerAndTypeCorrectFlow  {
 
 
 	// Set Property for ATU Reporter Configuration
@@ -85,8 +85,8 @@ public class TC17019ValidateOwnerAndTypeCorrectFlow  {
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC17019ValidateOwnerAndTypeCorrectFlow at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC17019ValidateOwnerAndTypeCorrectFlow at " + DateToStr, "Starting the test: TC17019ValidateOwnerAndTypeCorrectFlow at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC7023ValidateOwnerAndTypeCorrectFlow at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC7023ValidateOwnerAndTypeCorrectFlow at " + DateToStr, "Starting the test: TC7023ValidateOwnerAndTypeCorrectFlow at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -95,8 +95,8 @@ public class TC17019ValidateOwnerAndTypeCorrectFlow  {
 	}
 		
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC17019 Validate Owner and type correct flow")
-	public void test17019() throws InterruptedException, ParseException {
+	@Test (description="TC7023 Validate Owner and type correct flow")
+	public void test7023() throws InterruptedException, ParseException {
 		
 		//1.pre test and Instructor and student user
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	

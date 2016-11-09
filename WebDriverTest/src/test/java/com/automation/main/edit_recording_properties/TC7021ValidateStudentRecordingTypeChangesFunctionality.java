@@ -11,7 +11,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
 import com.automation.main.page_helpers.CalendarPage;
@@ -22,15 +21,11 @@ import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
 
 import java.text.DateFormat;
@@ -39,7 +34,7 @@ import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFunctionality  {
+public class TC7021ValidateStudentRecordingTypeChangesFunctionality  {
 
 
 	// Set Property for ATU Reporter Configuration
@@ -64,8 +59,6 @@ public class TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFuncti
     
 	@BeforeClass
 	public void setup() {
-		try {
-
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 			calendarPage = PageFactory.initElements(driver, CalendarPage.class);
@@ -76,15 +69,11 @@ public class TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFuncti
 			edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
-		} catch (Exception e) {
-			ATUReports.add("Fail Step", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
-		}
-		
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFunctionality at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFunctionality at " + DateToStr, "Starting the test: TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFunctionality at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC7021ValidateStudentRecordingTypeChangesFunctionality at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC7021ValidateStudentRecordingTypeChangesFunctionality at " + DateToStr, "Starting the test: TC7021ValidateStudentRecordingTypeChangesFunctionality at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -93,8 +82,8 @@ public class TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFuncti
 	}
 		
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC17013 Validate regular recording Owner change to another instructor functionality")
-	public void test17013() throws InterruptedException, ParseException {
+	@Test (description="TC7021 Validate student recording type changes functionality")
+	public void test7021() throws InterruptedException, ParseException {
 		
 		
 		//1.log in courses page
@@ -105,6 +94,8 @@ public class TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFuncti
 		//2.open some course whom listed you as instructor
 		course.selectCourseThatStartingWith("Ab");
 		
+		//3.Click on the "Student Recordings" tab
+		record.clickOnStudentRecordingsTab();
 		
 		//3.Check some recording respective checkbox 
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
@@ -112,25 +103,29 @@ public class TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFuncti
 		
 		//get the recording length creator and date are the same as before the edit
 		String recordLen = record.getTheRecordLengthByRecordIndex(recordNumber);
-		String recordBy = record.getTheRecordedByRecordIndex(recordNumber);
 		String recordName = record.getTheRecordingNameIndex(recordNumber);
 		String recordDate = record.getTheRecordingDateIndex(recordNumber);
-		
+				
 		//4.click on the recording tasks->edit recording properties option
 		record.toEditRecordingPropertiesMenu();
 			
 		//5.wait for edit reocrding properties window to open
 		edit_recording_properties_window.waitForPageToLoad();
 			
-		//6.Click on the "Owner" drop down button
-		//7.The drop down edit box contains only INSTRUCTORS users.	
-
+		//6.Verify drop down list is displayed with the following options: Regular recording,Proctoring recording,Student recording
+		edit_recording_properties_window.verifyThatAllTheOptionsListInTheDropDwon();
+		
+		//7.Choose Regular recording
+		edit_recording_properties_window.ChooseDiffrenetType("Regular recording");
+		edit_recording_properties_window.verifyThatTheTypeWasChoosen("Regular recording");
+			
+		//8.The drop down edit box contains only INSTRUCTORS users.	
 		edit_recording_properties_window.addOwnersToList("Instractor",0);
 		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
-	
-		//8.Choose one of the users
-		String newOwner = edit_recording_properties_window.clickOnDifferentOwnerThatTheExist(recordBy);
-		
+				
+		//get the record by after changing the owner for verify later
+		String recordBy =  edit_recording_properties_window.getRecordBy(new Select(edit_recording_properties_window.owner_select).getFirstSelectedOption().getText());
+					
 		//9.Click the "Save" button
 		edit_recording_properties_window.clickOnSaveButton();
 				
@@ -149,18 +144,81 @@ public class TC17013ValidateRegularRecordingOwnerChangeToAnotherInstructorFuncti
 				
 		//15.The second model window disappears.
 		confirm_menu.verifyConfirmWindowIsClosed();
+	
+		//16. The recording is no longer displayed in the "Student Recordings" tab content.
+		record.verifyThatTargetRecordingNotExistInRecordingList(recordName);
 		
-		//16.Validate The recording Owner has changed to user you selected earlier.
+		//17.Click on the "Students Recordings" tab
+		record.clickOnRecordingsTab();
+		
+		//18. The recording information - "recorded by" value has changed to the INSTRUCTOR user selected earlier.
+		//19.Validate the recording name, creator and duration are the same as before the edit
+		record.verifyThatTargetRecordingExistInRecordingList(recordName);
 		recordNumber = record.getIndexOfRecordFromRecordName(recordName);
-		record.verifyThatTheRecordNameEqualsFromTheString(newOwner,recordNumber,"Record creator");
 		
-		//17.Validate the recording name, creator and duration are the same as before the edit
+	    record.verifyThatTheRecordNameEqualsFromTheString(recordBy,recordNumber,"Record creator");	
 		record.verifyThatTheRecordNameEqualsFromTheString(recordName,recordNumber,"Record name");
 		record.verifyThatTheRecordNameEqualsFromTheString(recordLen,recordNumber,"Record length");
 		record.verifyThatTheRecordNameEqualsFromTheString(recordDate,recordNumber,"Record date");
 	
-		//16.Validate the 'Recording is being' edited status disappears within maximum of 2 minutes
-		record.checkExistenceOfNonEditRecordingsStatusInTheIndex(recordNumber,120);
+		//20.Return to the "Students" tab
+		record.clickOnStudentRecordingsTab();
+		
+		//21.Check some recording respective checkbox 
+		recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);
+				
+		//20.get the recording length creator and date are the same as before the edit
+		recordLen = record.getTheRecordLengthByRecordIndex(recordNumber);
+		recordName = record.getTheRecordingNameIndex(recordNumber);
+		recordDate = record.getTheRecordingDateIndex(recordNumber);
+						
+		//21.click on the recording tasks->edit recording properties option
+		record.toEditRecordingPropertiesMenu();
+					
+		//22.wait for edit reocrding properties window to open
+		edit_recording_properties_window.waitForPageToLoad();
+		
+		//23.Verify drop down list is displayed with the following options: Regular recording,Proctoring recording,Student recording
+		edit_recording_properties_window.verifyThatAllTheOptionsListInTheDropDwon();
+				
+		//24.Choose Student recording
+		edit_recording_properties_window.ChooseDiffrenetType("Proctoring recording");
+		// changing the owner to be unique from the other owners
+		edit_recording_properties_window.changeOwner(PropertyManager.getProperty("User2"));
+		
+		//getting the creator name for later
+		String recordNameForTestTab = edit_recording_properties_window.getNewRecordNameForTest(new Select(edit_recording_properties_window.owner_select).getFirstSelectedOption().getText());
+		
+		//25.Click the "Save" button
+		edit_recording_properties_window.clickOnSaveButton();
+				
+		//26.The model window is closed.
+		edit_recording_properties_window.verifyConfirmWindowIsClosed();
+				
+		//27. The header background color is as the customize or default university background color.
+		confirm_menu.verifyConfirmBackgroundColor(record);
+					
+		//28.The "Ok" Button is displayed on the bottom right corner of the model window.
+		confirm_menu.verifyTheLocationOfTheOkButtonIsInTheButtomRight();
+				
+		//29.The "Edit Recording Properties" caption is displayed inside the header.
+		//30.The informative text "Recording properties have been queued for edit" is displayed below the header.
+		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
+				
+		//31.The second model window disappears.
+		confirm_menu.verifyConfirmWindowIsClosed();
+		
+		//33.Click on the "Tests" tab
+		record.clickOnTestsTab();
+		
+		//34.The recording name has changed to the user name of the recording creator.
+		record.verifyThatTargetRecordingExistInRecordingList(recordNameForTestTab);
+		recordNumber = record.getIndexOfRecordFromRecordName(recordNameForTestTab);
+	
+		//35.The recording creation date and duration weren't changed
+		record.verifyThatTheRecordNameEqualsFromTheString(recordLen,recordNumber,"Recording duration");
+		record.verifyThatTheRecordNameEqualsFromTheString(recordDate,recordNumber,"Record date");
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
