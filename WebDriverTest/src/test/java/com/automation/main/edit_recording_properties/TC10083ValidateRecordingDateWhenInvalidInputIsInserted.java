@@ -104,65 +104,64 @@ public class TC10083ValidateRecordingDateWhenInvalidInputIsInserted {
 		
 		//2.open some course whom listed you as instructor
 		course.selectCourseThatStartingWith("Ab");
-		
-
-		for(int type_of_user = 0; type_of_user < 2; type_of_user++) {
-			
-		if(type_of_user == 1){
-			record.clickOnStudentRecordingsTab();
-		}
-		
+				
 		//3.Check some recording respective checkbox 
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);
-		
-		//get the recording length creator and date are the same as before the edit
-		String recordLen = record.getTheRecordLengthByRecordIndex(recordNumber);
-		//String recordBy = record.getTheRecordedByRecordIndex(recordNumber);
-		String recordName = record.getTheRecordingNameIndex(recordNumber);
-		
+
 		//4.click on the recording tasks->edit recording properties option
 		record.toEditRecordingPropertiesMenu();
 			
 		//5.wait for edit reocrding properties window to open
 		edit_recording_properties_window.waitForPageToLoad();
-			
+		
 		//6.Click inside of the "Date" editbox 
-		//7.Pick [<today>- (2 days) ] date
-		calendarPage.changeCreateDay(2);
+		edit_recording_properties_window.clickElementJS(edit_recording_properties_window.date_Field);	
 		
-		//8.The date is in the following format: 'XX/XX/XXXX'.
-		String correctDate =edit_recording_properties_window.verifyThatTheCalendarInTheRightFormat();
-			
-		//9.Click the "Save" button
-		edit_recording_properties_window.clickOnSaveButton();
-				
-		//10.The model window is closed.
-		edit_recording_properties_window.verifyConfirmWindowIsClosed();
-				
-		//11. The header background color is as the customize or defualt university background color.
-		confirm_menu.verifyConfirmBackgroundColor(record);
-					
-		//12.The "Ok" Button is displayed on the bottom right corner of the model window.
-		confirm_menu.verifyTheLocationOfTheOkButtonIsInTheButtomRight();
-				
-		//13.The "Edit Recording Properties" caption is displayed inside the header.
-		//14.The informative text "Recording properties have been queued for edit" is displayed below the header.
-		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
-				
-		//15.The second model window disappears.
-		confirm_menu.verifyConfirmWindowIsClosed();
+		//7.Type "32/01/2000" inside the date text box
+		edit_recording_properties_window.changeDate("01/32/2000");
 		
-		//16.Validate the recording creation date has changed to the date you selected earlier
-		recordNumber = record.getIndexOfRecordFromRecordName(recordName);
-		record.verifyThatTheRecordNameEqualsFromTheString(correctDate,recordNumber,"Record date");
+		//8.The save button is disabled
+		edit_recording_properties_window.verifySaveButtonDisable();
 		
-		//17.Validate the recording name, creator and duration are the same as before the edit
-		record.verifyThatTheRecordNameEqualsFromTheString(recordName,recordNumber,"Record name");
-		record.verifyThatTheRecordNameEqualsFromTheString(recordLen,recordNumber,"Record length");
-		//record.verifyThatTheRecordNameEqualsFromTheString(recordBy,recordNumber,"Record creator");
+		//9.Type "01/13/2000" inside the date text box
+		edit_recording_properties_window.changeDate("13/01/2000");
+				
+		//10.The save button is disabled
+		edit_recording_properties_window.verifySaveButtonDisable();
 		
-	}
+		//11.Type "00/01/2000" inside the date text box
+		edit_recording_properties_window.changeDate("00/01/2000");
+				
+		//12.The save button is disabled
+		edit_recording_properties_window.verifySaveButtonDisable();
+				
+		//13.Type "01/00/2000" inside the date text box
+		edit_recording_properties_window.changeDate("01/00/2000");
+						
+		//14.The save button is enable
+		edit_recording_properties_window.verifySaveButtonDisable();
+		
+		//15.Type "01/01/99999" inside the date text box
+		edit_recording_properties_window.changeDate("01/01/99999");
+				
+		//16.The save button is disabled
+		edit_recording_properties_window.verifySaveButtonDisable();
+				
+		//17.Type "aa/bb/asas" inside the date text box
+		edit_recording_properties_window.changeDate("aa/bb/asas");
+						
+		//18.The save button is disabled
+		edit_recording_properties_window.verifySaveButtonDisable();
+		
+		//19.Type "32/01/2000" inside the date text box
+		edit_recording_properties_window.changeDate("01/01/2017");
+		
+		//20.The save button is enabled
+		edit_recording_properties_window.verifySaveButtonEnable();
+		
+		//21. click on cancel for the next test
+		edit_recording_properties_window.clickOnCancelButton();
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

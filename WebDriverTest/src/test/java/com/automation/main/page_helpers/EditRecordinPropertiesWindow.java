@@ -271,8 +271,8 @@ public class EditRecordinPropertiesWindow extends Page {
 			System.out.println("Verify that the save button is disable.");
 			ATUReports.add("Verify that the save button is disable.", LogAs.PASSED, null);
 		} else {
-			System.out.println("Verify that the save button is disable.");
-			ATUReports.add("Verify that the save button is disable.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println("Not Verify that the save button is disable.");
+			ATUReports.add("Not Verify that the save button is disable.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 		String grey_color = "rgba(66, 139, 202, 1)";	
 		if (save_button.getCssValue("background-color").equals(grey_color)) {
@@ -289,6 +289,30 @@ public class EditRecordinPropertiesWindow extends Page {
 		}	
 	}
 	
+	public void verifySaveButtonEnable() throws InterruptedException{
+
+		try {		
+		if (save_button.isEnabled()) {
+			System.out.println("Verify that the save button is enable.");
+			ATUReports.add("Verify that the save button is enable.", LogAs.PASSED, null);
+		} else {
+			System.out.println("Not Verify that the save button is enable.");
+			ATUReports.add("Not Verify that the save button is enable.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+		String grey_color = "rgba(66, 139, 202, 1)";	
+		if (!save_button.getCssValue("background-color").equals(grey_color)) {
+			System.out.println("Save button background color is not grey.");
+			ATUReports.add("save button background color is not grey.", LogAs.PASSED, null);
+		} else {
+			ATUReports.add("Save button background color is grey.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println("Save button background color is grey.");
+		}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
+		}	
+	}
 
 	public void verifyInfomativeText() {
 		
@@ -970,11 +994,6 @@ public void verifyThatAllTheOptionsListInTheDropDwon() {
 	}
 
 
-
-
-	
-
-
 	public String getRecordBy(String recordByName) {
 		
 		String[]splitOwner= recordByName.split(" ");
@@ -1032,6 +1051,22 @@ public void verifyThatAllTheOptionsListInTheDropDwon() {
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(2000);
+	}
+
+
+	public void changeDate(String date) {
+		try {
+		date_Field.clear();
+		date_Field.sendKeys(date);
+		System.out.println("changing the date to: " + date);		
+		ATUReports.add("changing the date to: " + date, LogAs.PASSED, null);
+		Assert.assertTrue(true);
+		} catch (Exception e) {
+			e.getMessage();
+			ATUReports.add("Fail changing the date to:" + date + e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		
 	}
 	
 

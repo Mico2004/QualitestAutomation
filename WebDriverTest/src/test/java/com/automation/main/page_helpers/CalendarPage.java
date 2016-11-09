@@ -132,8 +132,7 @@ public class CalendarPage extends Page {
 		
 		String id = date_Field.getAttribute("id");
 		String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
-		clickElementJS(date_Field);
-		
+		clickElementJS(date_Field);	
 		Thread.sleep(500);
 		getMonthAndYearFromCalendar();
 		getDayFromCalender();
@@ -193,5 +192,4 @@ public class CalendarPage extends Page {
 	}
 
 
-	
 }
