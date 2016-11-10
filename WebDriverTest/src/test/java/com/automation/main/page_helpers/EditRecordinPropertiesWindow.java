@@ -878,14 +878,7 @@ public void verifyThatAllTheOptionsListInTheDropDwon() {
 	// that title open or closed
 	public boolean isConfirmationMenuClosed() throws InterruptedException {
 		try {
-//			for(int i = 0; i < 60 ; i++){
-//				if(!save_button.isDisplayed()){
-//					return true;
-//				}else{
-//					Thread.sleep(1000);
-//				}			
-//			}
-		if(new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.id("EditButton")))){
+		if(new WebDriverWait(driver, 80).until(ExpectedConditions.invisibilityOfElementLocated(By.id("EditButton")))){
 			System.out.println("The Edit Recording Properites window was close at time.");
 			ATUReports.add("The Edit Recording Properites window was close at time.", "Success.", "Success.", LogAs.PASSED, null);
 			return true;

@@ -201,7 +201,7 @@ public class preTestUniversity {
 		//9.select the static course
 		copy.selectTargetCourseFromCourseList(PropertyManager.getProperty("StaticCourse"));
 		
-		//10.click on the ocpy button
+		//10.click on the copy button
 		copy.clickOnCopyButton();
 		
 		//11.click on the ok button

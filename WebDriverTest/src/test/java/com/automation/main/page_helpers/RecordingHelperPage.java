@@ -4674,12 +4674,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 	
-	public void checkExistenceOfNonEditRecordingsStatusInTheIndex(int index,int seconds) throws InterruptedException {
+	public void checkExistenceOfNonEditRecordingsStatusInTheIndex(int index,int seconds,String tab) throws InterruptedException {
 		
-		try {	
-		
+		try {			
 		Thread.sleep(2000);	
-		driver.navigate().refresh();	
+		driver.navigate().refresh();
+		if(tab.equals("Student")){
+			clickOnStudentRecordingsTab();
+		}
 		Thread.sleep(2000);
 		Boolean isTheStatusDisapper =  new WebDriverWait(driver, seconds).until(ExpectedConditions.invisibilityOfElementWithText(By.id("RecordingStatus" +Integer.toString(index)), "Recording is being edited."));		 
 		 if(isTheStatusDisapper) {
