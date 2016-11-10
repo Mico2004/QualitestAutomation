@@ -706,7 +706,7 @@ public class CoursesHelperPage extends Page {
 				return;
 			}
 		}
-		if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
+		if ((type_of_recordings == 0) || (type_of_recordings == 1) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
 			try {
 				record_helper_page.checkStatusExistenceForMaxTTime(6000);
 				record_helper_page.returnToCourseListPage(this);

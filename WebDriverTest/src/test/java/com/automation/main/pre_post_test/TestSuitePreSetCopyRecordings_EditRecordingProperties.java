@@ -152,12 +152,12 @@ public class TestSuitePreSetCopyRecordings_EditRecordingProperties {
 		 record.signOut();
 		  
   	  System.out.println("b0");
-		  final List<Integer> CourseAbContent = Arrays.asList(0,2,3); //For Ab		
+		  final List<Integer> CourseAbContent = Arrays.asList(0,2,3); //For Ab	
 		    Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
 			{
 				put(PropertyManager.getProperty("course1"),CourseAbContent);			
 			}
-			};
+		};
 		TestSuitePreSetGeneric h=new TestSuitePreSetGeneric(driver);
 		System.out.println("b1");
 		h.GenricPreset(CoursesAndContent);
