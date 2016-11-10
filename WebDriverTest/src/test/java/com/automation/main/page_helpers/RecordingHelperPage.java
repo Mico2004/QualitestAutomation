@@ -4676,24 +4676,21 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	
 	public void checkExistenceOfNonEditRecordingsStatusInTheIndex(int index,int seconds) throws InterruptedException {
 		
-		try {
+		try {	
 		
-		 Boolean isTheStatusDisapper =  new WebDriverWait(driver, seconds).until(ExpectedConditions.invisibilityOfElementWithText(By.id("RecordingStatus" +Integer.toString(index)), "Recording is being edited."));		 
-
+		Thread.sleep(2000);	
+		driver.navigate().refresh();	
+		Thread.sleep(2000);
+		Boolean isTheStatusDisapper =  new WebDriverWait(driver, seconds).until(ExpectedConditions.invisibilityOfElementWithText(By.id("RecordingStatus" +Integer.toString(index)), "Recording is being edited."));		 
 		 if(isTheStatusDisapper) {
 			  System.out.println("The status has change in less then " + Integer.toString(seconds)+ " seconds");
 			  ATUReports.add("The status has change in less then " + Integer.toString(seconds)+ " seconds", "True.", "True.", LogAs.PASSED, null);
 			  Assert.assertTrue(true);
 		  }
 		}catch(org.openqa.selenium.TimeoutException msg){
-			 if(seconds == 30){
-				 driver.navigate().refresh();
-				 Thread.sleep(2000);
-			 } else{
 				 System.out.println("The status has change in more then " + Integer.toString(seconds)+ " seconds");
 				 ATUReports.add("The status has change in more then " + Integer.toString(seconds)+ " seconds", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				 Assert.assertTrue(false);
-			 }
+				 Assert.assertTrue(false);	
 		}
 	}
 	
