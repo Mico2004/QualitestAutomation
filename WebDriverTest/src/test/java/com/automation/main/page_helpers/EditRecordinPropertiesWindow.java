@@ -768,6 +768,16 @@ public void verifyUserIsNotOnTheOwnerList(String User) {
 			owners.add("InstructorTemp");
 			owners.add("StudentTemp");
 		}
+		if(UniqueTest == 4){
+			owners.add("automationInstructorUser");
+		}
+		if(UniqueTest == 5){		
+			owners.add("automationStudentUser");
+		}
+		if(UniqueTest == 6){
+			owners.add("automationInstructorUser");
+			owners.add("automationStudentUser");
+		}
 		
 		
 	}catch(Exception e){

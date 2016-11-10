@@ -86,10 +86,8 @@ public class AdminDashboardPage extends Page {
 	WebElement advancedServiceSettings;
 	@FindBy (xpath="//*[@id='ServiceSettingsBox']/ul/li/a[text() = 'Reprocess Tegrity Recordings']") 
 	WebElement reprocessTegrityRecordings;
-
-	
-	
-	
+	@FindBy (xpath=".//*[@id='IntegrationBox']/ul/li/a[text() = 'Manage AAIRS']")
+	WebElement ManageAAIRS;
 	@FindBy (id="StatusBox")
 	WebElement StatusBox;
 	@FindBy (id="RecordersRecordingsBox")
@@ -102,7 +100,6 @@ public class AdminDashboardPage extends Page {
 	WebElement EventsAlertsBox;
 	@FindBy (id="CoursesBox")
 	WebElement CoursesBox;
-
 	@FindBy (id="IntegrationBox")
 	WebElement IntegrationBox;
 	List <WebElement> dashboardSections;
@@ -212,11 +209,7 @@ public class AdminDashboardPage extends Page {
 					ATUReports.add("Click on target submenu of Users:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 					return;
-
-				
-
-
-			
+		
 		}
 		
 	}
@@ -271,8 +264,32 @@ public class AdminDashboardPage extends Page {
 		
 		
 	}
-
-
+	public void clickOnTargetSubmenuIntegration(String target) {
+		
+		try {
+			waitForVisibility(IntegrationBox);
+		switch(target){
+			case "Manage AAIRS": 
+				targetLink=ManageAAIRS;
+				break;
+			}	
+		linkText=targetLink.getText();
+		waitForVisibility(targetLink);
+		System.out.println("clickOnTargetSubmenuIntegration6");
+		targetLink.click();					
+		System.out.println("clickOnTargetSubmenuIntegration7");
+		System.out.println("Click on target submenu of Courses: "+linkText  );
+		ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+		return;
+		} catch (Exception msg) {
+			System.out.println("Not click on target submenu of Courses: " + targetLink.getText().toString());
+			System.out.println("ERROR msg: " + msg.getMessage());
+			ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+			return;
+		}
+}
 	
 	
 	
