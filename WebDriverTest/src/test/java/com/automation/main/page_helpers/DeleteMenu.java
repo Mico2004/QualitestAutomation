@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -64,12 +65,13 @@ public class DeleteMenu extends Page {
 	// This function clicks on delete button of copy menu
 	public void clickOnDeleteButton() throws InterruptedException {
 		String alertWindowText="";
+		String id= "DeleteButton";
 		try {
 			System.out.println("delete1");
 			wait.until(ExpectedConditions.visibilityOf(delete_button));
 			Thread.sleep(2000);
 			System.out.println("delete2");
-			delete_button.click();
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("Clicked on delete button.");
 			ATUReports.add("Click Delete button", "Clicked on delete button", "Clicked on delete button", LogAs.PASSED,null);
 			Assert.assertTrue(true);			
