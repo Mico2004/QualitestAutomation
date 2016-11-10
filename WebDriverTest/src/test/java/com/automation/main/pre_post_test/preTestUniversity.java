@@ -21,9 +21,11 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
+import com.automation.main.page_helpers.ManageAAIRS;
 import com.automation.main.page_helpers.ManageAdHocCoursesMembershipWindow;
 import com.automation.main.page_helpers.ManageAdhocCoursesEnrollmentsPage;
 import com.automation.main.page_helpers.ManageAdhocUsersPage;
+import com.automation.main.page_helpers.ManageExcelCoursesEnrollments;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
 
@@ -56,7 +58,9 @@ public class preTestUniversity {
 	public ManageAdhocUsersPage mange_adhoc_users_page;
 	public CreateNewUserWindow create_new_user_window;
 	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
+	public ManageExcelCoursesEnrollments manageExcelCoursesEnrollments;
 	public CoursesHelperPage course;
+	public ManageAAIRS manageAAIRS;
 	public RecordingHelperPage record;
 	public AdminDashboardViewCourseList admin_Dashboard_view_courseList;
 	CopyMenu copy;
@@ -94,11 +98,15 @@ public class preTestUniversity {
 		
 		admin_Dashboard_view_courseList = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		
+		manageAAIRS =  PageFactory.initElements(driver,ManageAAIRS.class);
+		
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+		
+		manageExcelCoursesEnrollments = PageFactory.initElements(driver,ManageExcelCoursesEnrollments.class);
 		
 		wait = new WebDriverWait(driver, 30);
 		
@@ -119,6 +127,9 @@ public class preTestUniversity {
 	public void preTestUniversity() throws InterruptedException
 	{
 		
+		String excelmem = "src/test/resources/excelmem.xls";
+		String users = "src/test/resources/users.xls";
+		
 		//login as instructor
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
@@ -128,6 +139,31 @@ public class preTestUniversity {
 		//4. enter to manage AAIRS
 		admin_dashboard_page.clickOnTargetSubmenuIntegration("Manage AAIRS");
 		
+		//5. add excel properties
+		manageAAIRS.waitForPageToLoad();
+		manageAAIRS.AddExcelImportToAuthentication();
+		
+		//6.return to the admin dashboard
+		manageAAIRS.clickOnAdminDashboard();
+		
+		//7. click on Manage Excel Courses / Enrollments
+		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Excel Courses / Enrollments");
+		
+		//8. wait until the page finish loading
+		manageExcelCoursesEnrollments.waitForPageToLoad();
+		
+		//9.upload excelmem
+		manageExcelCoursesEnrollments.uploadExcelFile(excelmem);
+		manageExcelCoursesEnrollments.clickElement(manageExcelCoursesEnrollments.importButton);
+		manageExcelCoursesEnrollments.checkThatTheUploadSucceded();
+		
+		//10.upload users
+		manageExcelCoursesEnrollments.uploadExcelFile(users);
+		manageExcelCoursesEnrollments.clickElement(manageExcelCoursesEnrollments.importButton);
+		manageExcelCoursesEnrollments.checkThatTheUploadSucceded();
+		
+		//signout
+		tegrity.signOut();
 		
 		
 		//1.enter to each user to see him at the owner edit records properties

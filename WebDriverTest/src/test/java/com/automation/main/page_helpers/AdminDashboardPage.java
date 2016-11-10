@@ -57,10 +57,10 @@ public class AdminDashboardPage extends Page {
 	WebElement manageAdHockCourses;
 	@FindBy (xpath="//*[@id='CoursesBox']/ul/li/a[text() = 'View Course List']") 
 	WebElement viewCourseList;
-
 	@FindBy (xpath="//*[@id='CoursesBox']/ul/li/a[text() = 'Manage Course Settings']") 
 	WebElement manageCourseSettings;
-
+	@FindBy (xpath="//*[@id='CoursesBox']/ul/li/a[text() = 'Manage Excel Courses / Enrollments']") 
+	WebElement ManageExcelCoursesEnrollments;
 	@FindBy (xpath="//*[@id='CoursesBox']/ul/li/a[text() = 'View Archive']") 
 	WebElement viewArchive;
 	@FindBy (xpath="//*[@id='UsersBox']/ul/li/a[text() = 'Manage Admin Roles']") 
@@ -131,7 +131,11 @@ public class AdminDashboardPage extends Page {
 			break;
 		case "Manage Ad-hoc Courses / Enrollments (Course Builder)": 
 			targetLink=manageAdHockCourses;
-			break;		
+			break;
+		case "Manage Excel Courses / Enrollments":
+			targetLink=ManageExcelCoursesEnrollments;
+			break;
+			
 			default: targetLink=manageAdHockCourses;
 		}
 		linkText=targetLink.getText();
