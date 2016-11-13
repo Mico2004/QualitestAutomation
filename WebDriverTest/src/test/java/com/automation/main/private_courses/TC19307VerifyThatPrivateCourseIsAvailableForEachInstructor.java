@@ -34,8 +34,6 @@ import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;

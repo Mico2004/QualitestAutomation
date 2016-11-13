@@ -66,8 +66,6 @@ public class TC6984ValidateChangeRecordingNameFunctionality {
 
 	@BeforeClass
 	public void setup() {
-		try {
-
 
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 			calendarPage = PageFactory.initElements(driver, CalendarPage.class);
@@ -78,11 +76,6 @@ public class TC6984ValidateChangeRecordingNameFunctionality {
 			edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
-		} catch (Exception e) {
-			ATUReports.add("Fail Step", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
-		}
-		
-
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
 		 System.out.println("Starting the test: 6984ValidateChangeRecordingNameFunctionality at " + DateToStr);
