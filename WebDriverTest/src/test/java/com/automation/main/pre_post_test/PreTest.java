@@ -274,7 +274,7 @@ public class PreTest {
 		writer.println("Browser=firefox");//for manual testing
 		writer.println("HelpdeskAdmin=hdadmin");
 		writer.println("ExcutiveAdmin=executivead");
-		writer.println("StaticCourse=automationMultipleEnrollmentCourse");
+		writer.println("StaticCourse=automationMultipleEnrollmentCourse Name");
 		writer.println("StaticInstructor=automationInstructorUser1");
 		writer.println("StaticStudent=automationStudentUser1");
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();

@@ -66,6 +66,8 @@ public class DriverSelector {
 			driver = new FirefoxDriver(capabilities);	
 			//driver = new FirefoxDriver();
 			//driver = new MarionetteDriver(capabilities);
+
+			
 			break;
 		case Chrome:
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");

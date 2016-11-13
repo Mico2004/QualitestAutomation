@@ -133,50 +133,51 @@ public class preTestUniversity {
 		//login as instructor
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
-		//3.add records from the bank to the automation course
-		tegrity.loginAdmin("Admin");
+//		//3.add records from the bank to the automation course
+//		tegrity.loginAdmin("Admin");
+//		
+//		//4. enter to manage AAIRS
+//		admin_dashboard_page.clickOnTargetSubmenuIntegration("Manage AAIRS");
+//		
+//		//5. add excel properties
+//		manageAAIRS.waitForPageToLoad();
+//		manageAAIRS.AddExcelImportToAuthentication();
+//		
+//		//6.return to the admin dashboard
+//		record.exitInnerFrame();
+//		manageAAIRS.clickOnAdminDashboard();
+//		
+//		//7. click on Manage Excel Courses / Enrollments
+//		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Excel Courses / Enrollments");
+//		
+//		//8. wait until the page finish loading
+//		manageExcelCoursesEnrollments.waitForPageToLoad();
+//		
+//		//9.upload excelmem
+//		manageExcelCoursesEnrollments.uploadExcelFile(excelmem);
+//		manageExcelCoursesEnrollments.clickElement(manageExcelCoursesEnrollments.importButton);
+//		manageExcelCoursesEnrollments.checkThatTheUploadSucceded();
+//		
+//		//10.upload users
+//		manageExcelCoursesEnrollments.uploadExcelFile(users);
+//		manageExcelCoursesEnrollments.clickElement(manageExcelCoursesEnrollments.importButton);
+//		manageExcelCoursesEnrollments.checkThatTheUploadSucceded();
+//		
+//		//signout
+//		tegrity.signOut();
 		
-		//4. enter to manage AAIRS
-		admin_dashboard_page.clickOnTargetSubmenuIntegration("Manage AAIRS");
-		
-		//5. add excel properties
-		manageAAIRS.waitForPageToLoad();
-		manageAAIRS.AddExcelImportToAuthentication();
-		
-		//6.return to the admin dashboard
-		manageAAIRS.clickOnAdminDashboard();
-		
-		//7. click on Manage Excel Courses / Enrollments
-		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Excel Courses / Enrollments");
-		
-		//8. wait until the page finish loading
-		manageExcelCoursesEnrollments.waitForPageToLoad();
-		
-		//9.upload excelmem
-		manageExcelCoursesEnrollments.uploadExcelFile(excelmem);
-		manageExcelCoursesEnrollments.clickElement(manageExcelCoursesEnrollments.importButton);
-		manageExcelCoursesEnrollments.checkThatTheUploadSucceded();
-		
-		//10.upload users
-		manageExcelCoursesEnrollments.uploadExcelFile(users);
-		manageExcelCoursesEnrollments.clickElement(manageExcelCoursesEnrollments.importButton);
-		manageExcelCoursesEnrollments.checkThatTheUploadSucceded();
-		
-		//signout
-		tegrity.signOut();
-		
-		
-		//1.enter to each user to see him at the owner edit records properties
-		for(int i=1 ; i<=2; i++){
-			tegrity.loginCoursesByParameter("automationInstructorUser" +i);
-			tegrity.signOut();
-		}
-	
-		//2.enter to each user to see him at the owner edit records properties
-		for(int i=1 ; i<=135; i++){
-			tegrity.loginCoursesByParameter("automationStudentUser" +i);
-			tegrity.signOut();
-		}
+//		
+//		//1.enter to each user to see him at the owner edit records properties
+//		for(int i=1 ; i<=2; i++){
+//			tegrity.loginCoursesByParameter("automationInstructorUser" +i);
+//			tegrity.signOut();
+//		}
+//	
+//		//2.enter to each user to see him at the owner edit records properties
+//		for(int i=1 ; i<=135; i++){
+//			tegrity.loginCoursesByParameter("automationStudentUser" +i);
+//			tegrity.signOut();
+//		}
 		
 		//3.add records from the bank to the automation course
 		tegrity.loginAdmin("Admin");

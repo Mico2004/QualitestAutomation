@@ -2,6 +2,7 @@ package com.automation.main.page_helpers;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,7 +29,7 @@ public class ManageAAIRS extends Page {
 	
 	@FindBy(xpath = ".//*[@id='DATASET_MAIN']/a")
 	public WebElement editButtonAuthorization;
-	@FindBy(xpath = ".//*[@id='DATASET_Excel_Import_AUTO_CONFIG_21']/div[1]")
+	@FindBy(id = "DATASET_Excel_Import_AUTO_CONFIG_21")
 	public WebElement excelImportAuthorization;
 	@FindBy(id = ".//*[@id='DATASET_SORTABLE")
 	public WebElement Authorization;
@@ -46,10 +47,27 @@ public class ManageAAIRS extends Page {
 	public WebElement aarisTitle;
 	@FindBy(id = "DATASET_MAIN")
 	public WebElement Main;
+	@FindBy(xpath = ".//*[@id='DATASET_MAIN']/tablet/body")
+	public WebElement AuthorizationTable;
+	@FindBy(xpath = ".//*[@id='AUTH_MAIN']/table/tbody")
+	public WebElement DirectLoginAuthenticationTable ;
+	
 	
 	public void AddExcelImportToAuthentication(){
 		
 		clickElement(editButtonAuthorization);
+		
+		
+		List<WebElement> tableRows = AuthorizationTable.findElements(By.xpath("tr"));
+		List<WebElement> tableCells= AuthorizationTable.findElements(By.xpath("tr/td"));
+		
+		for(WebElement row : tableRows) {
+		    List<WebElement> cells = row.findElements(By.xpath("td"));
+		   }
+		for(WebElement cell : tableCells) {
+		   
+		}
+		
 		dragAndDrop(excelImportAuthorization,Authorization);
 		clickElement(editButtonDirectLoginAuthentication);
 		dragAndDrop(excelImportAuthentication,DirectLoginAuthentication);
@@ -60,6 +78,7 @@ public class ManageAAIRS extends Page {
 		
 		waitForVisibility(adminDashboard);
 		waitForVisibility(manageAAIRS);
+		driver.switchTo().frame(0);
 		waitForVisibility(aarisTitle);
 		waitForVisibility(Main);
 	}
