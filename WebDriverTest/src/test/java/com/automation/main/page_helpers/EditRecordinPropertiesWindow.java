@@ -95,11 +95,8 @@ public class EditRecordinPropertiesWindow extends Page {
 			System.out.println("clicked on owner scroll");
 			for (WebElement el : owner_button_select) {
 				val = el.getText();
-				if (val.contains(name)) {
-					
-					el.click();
-					owner_button.sendKeys(Keys.ENTER);
-					// moveToElementAndClick(el, driver);
+				if (val.contains(name)) {					
+					clickElement(el);
 					System.out.println("user selected");
 					ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership successfully", LogAs.PASSED, null);					
 					return;

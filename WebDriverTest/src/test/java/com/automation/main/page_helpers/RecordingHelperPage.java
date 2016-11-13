@@ -1997,10 +1997,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
 		}
-		
-		
-		
-		
+
 	}
 
 	// check if recording has a being copied from status
@@ -4679,6 +4676,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {			
 		Thread.sleep(2000);	
 		driver.navigate().refresh();
+		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id("RecordingsTab")));		 
 		if(tab.equals("Student")){
 			clickOnStudentRecordingsTab();
 		}

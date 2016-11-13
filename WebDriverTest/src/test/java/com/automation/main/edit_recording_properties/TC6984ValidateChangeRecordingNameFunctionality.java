@@ -149,7 +149,8 @@ public class TC6984ValidateChangeRecordingNameFunctionality {
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
 		//14.Validate the recording name has changed to "Change recording name" without any white spaces gaps.
-		record.verifyThatTheRecordNameEqualsFromTheString(newName,recordNumber,"Record name");
+		record.verifyThatTargetRecordingExistInRecordingList(newName);
+		recordNumber = record.getIndexOfRecordFromRecordName(newName);
 		
 		//15.Validate the recording length, creator and date are the same as before the edit
 		record.verifyThatTheRecordNameEqualsFromTheString(recordLen,recordNumber,"Record length");
