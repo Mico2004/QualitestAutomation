@@ -2535,6 +2535,27 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		}
 	}
+	
+	// Verify that recooding has no status on the index record
+	public void verifyNoStatusInTheIndex(int index) {
+		try {
+			
+			String status = driver.findElement(By.id(("RecordingStatus")+ Integer.toString(index))).getText();
+			if (status.equals("")) {
+				System.out.println("Verify no status in the index:" + index);		
+				ATUReports.add("Verify no status in the index:" + index, "status", "Empty", "Empty", LogAs.PASSED,null);
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("Not Verify no status in the index:" + index);
+				ATUReports.add("verify no status in the index:" + index, "status", "Empty", "Not Empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+		} catch (Exception e) {
+			System.out.println("Not Verify no status in the index:" + index);
+			ATUReports.add("verify no status in the index:" + index, "status", "Empty", "Not Empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
 
 	// take additional content list of elements and extracts its name
 	public List<String> convertAdditionalContantListToNames() {
@@ -3176,6 +3197,29 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 
 	}
+	
+	public void veirfyStatusNotPublishOnTheFirstRecord(){
+		
+		try {
+			String firstStatus = first_recording_status.getText();
+			if(firstStatus.equals("Not Published")){		
+				System.out.println("veirfy that the status is not publish on the first record.");
+				ATUReports.add("veirfy that the status is not publish on the first record.", "True.", "True.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			}else {
+				System.out.println("Not veirfy that the status is not publish on the first record.");
+				ATUReports.add("Not veirfy that the status is not publish on the first record.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(true);
+			}
+			
+		} catch(Exception msg) {
+			System.out.println("Not veirfy that the status is not publish on the first record.");
+			ATUReports.add("Not veirfy that the status is not publish on the first record.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+			
+	}
+	
 
 	/// to publish recording window
 	public void toPublishRecording(PublishWindow publish) {

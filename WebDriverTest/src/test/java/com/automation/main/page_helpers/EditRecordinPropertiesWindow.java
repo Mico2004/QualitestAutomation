@@ -91,7 +91,7 @@ public class EditRecordinPropertiesWindow extends Page {
 		String val="";
 		try {
 			waitForVisibility(owner_button);
-			owner_button.click();
+			clickElementJS(owner_button);
 			System.out.println("clicked on owner scroll");
 			for (WebElement el : owner_button_select) {
 				val = el.getText();
