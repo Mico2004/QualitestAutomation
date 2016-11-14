@@ -2513,7 +2513,25 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		i++;
 		}
 	}
+	
+	public void waitForThePageToLoad(){
+	
+		try {
+			waitForVisibility(institute_logo);
+			waitForVisibility(courses_link);
+			waitForVisibility(course_title);
+			waitForVisibility(recording_tasks_button);
+			waitForVisibility(recordings_tab);
+			waitForVisibility(first_course_title);
+		
+		} catch(Exception e) {
+			e.printStackTrace();
+			ATUReports.add("the page can't load " + e.getMessage() ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(true);
 
+		}
+	}
+	
 	// Verify that recooding has no error status
 	public void verifyNoErrorStatus(WebElement element) {
 		try {

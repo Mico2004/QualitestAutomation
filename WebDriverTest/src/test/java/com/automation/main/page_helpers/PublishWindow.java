@@ -32,7 +32,8 @@ public class PublishWindow extends Page {
 	publish_window_title;
 	@FindBy(id = "NeverOption")
 	public WebElement never_option;
-	@FindBy(id = "SubmitButton") WebElement save_button;
+	@FindBy(id = "SubmitButton")
+	WebElement save_button;
 	@FindBy(id = "AlwaysOption")
 	WebElement always_select_button;
 	@FindBy(id = "DateRangeOption")
@@ -161,6 +162,36 @@ public class PublishWindow extends Page {
 		}
 	}
 	
+	// This function verify that always option is: 0 - not selected, 1 - selected
+		public void verifyThatAlwaysOptionSelectedOrNotSelected(int selected) {
+			boolean is_selected = always_select_button.isSelected();
+			
+			if(selected == 0) {
+				if(is_selected) {
+					System.out.println("Always option is selected.");
+					ATUReports.add("Always option.", "Not selected.", "Selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				} else {
+					System.out.println("Always option is not selected.");
+					ATUReports.add("Always option.", "Not selected.", "Not selected.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				}
+			} else {
+				if(is_selected) {
+					System.out.println("Always option is selected.");
+					ATUReports.add("Always option.", "Selected.", "Selected.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} else {
+					System.out.println("Always option is not selected.");
+					ATUReports.add("Always option.", "Selected.", "Not selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				}
+			}
+		}
+		
+	
+	
+	
 	// This function clicks on save button
 	public void clickOnSaveButton()
 	{
@@ -179,8 +210,6 @@ public class PublishWindow extends Page {
 			Assert.assertTrue(false);
 		}
 	}
-
-
 
 	public void waitForPageToLoad() {
 		
@@ -268,8 +297,6 @@ public class PublishWindow extends Page {
 			
 		}
 
-
-
 		public void verifyInfomativeTextAndVerifyBelowTheOtherInfoText() {
 			
 			try {
@@ -297,10 +324,8 @@ public class PublishWindow extends Page {
 				e.printStackTrace();
 				ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
-			
-			
+						
 		}
-
 
 		public void verifyThatTheRadioButtonsWillDisplayBelow() {
 			try {
@@ -430,7 +455,7 @@ public class PublishWindow extends Page {
 				}
 
 		public void verifyThatAfterClickingOnTheFromTheCalenderWidgetIsDisplayed(WebElement element,WebElement calender) {
-						
+		try{			
 			clickElementJS(element);	
 			if(calender.isDisplayed()){
 				System.out.println("verify that After Clicking On The From The Calender Widget Is Displayed.");
@@ -439,6 +464,30 @@ public class PublishWindow extends Page {
 				System.out.println("not verify that After Clicking On The From The Calender Widget Is Displayed.");
 				ATUReports.add("not verify that After Clicking On The From The Calender Widget Is Displayed.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
-	
-		}		
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
+			}
+		}	
+			
+		public void chooseRadioButton(String choose) {
+		
+		try{
+			switch(choose){	
+				case "Always":
+					clickElementJS(always_select_button);
+					break;
+				case "Date Range":
+					clickElementJS(date_range_select_button);
+					break;
+				case "Never":
+					clickElementJS(never_select_button);
+					break;				
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
 }
