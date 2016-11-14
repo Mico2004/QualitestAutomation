@@ -166,18 +166,18 @@ public class preTestUniversity {
 //		//signout
 //		tegrity.signOut();
 		
-//		
-//		//1.enter to each user to see him at the owner edit records properties
-//		for(int i=1 ; i<=2; i++){
-//			tegrity.loginCoursesByParameter("automationInstructorUser" +i);
-//			tegrity.signOut();
-//		}
-//	
-//		//2.enter to each user to see him at the owner edit records properties
-//		for(int i=1 ; i<=135; i++){
-//			tegrity.loginCoursesByParameter("automationStudentUser" +i);
-//			tegrity.signOut();
-//		}
+		
+		//1.enter to each user to see him at the owner edit records properties
+		for(int i=1 ; i<=2; i++){
+			tegrity.loginCoursesByParameter("automationInstructorUser" +i);
+			tegrity.signOut();
+		}
+	
+		//2.enter to each user to see him at the owner edit records properties
+		for(int i=1 ; i<=135; i++){
+			tegrity.loginCoursesByParameter("automationStudentUser" +i);
+			tegrity.signOut();
+		}
 		
 		//3.add records from the bank to the automation course
 		tegrity.loginAdmin("Admin");
