@@ -10,16 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.swing.ListModel;
-
-import org.apache.commons.collections.FastArrayList;
-import org.apache.commons.lang3.ObjectUtils.Null;
-import org.apache.commons.logging.Log;
-import org.apache.xerces.dom3.as.ASAttributeDeclaration;
 //import org.apache.commons.collections.FastArrayList;
-import org.omg.Messaging.SyncScopeHelper;
-import org.openqa.selenium.Architecture;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
