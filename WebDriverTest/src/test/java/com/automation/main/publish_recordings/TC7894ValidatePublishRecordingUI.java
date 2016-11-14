@@ -9,6 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
 import com.automation.main.page_helpers.CalendarPage;
@@ -19,6 +20,7 @@ import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.PublishWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
+
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -98,11 +100,10 @@ public class TC7894ValidatePublishRecordingUI {
 			}
 		
 		//3.click on the recording tasks drop_down button
-		record.moveToElementAndPerform(record.recording_tasks_button, driver);
-		//mouseHoverJScript(record.recording_tasks_button);
+		record.mouseHoverJScript(record.recording_tasks_button);
 		
 		//4. verify that the publish button option is greyed out and disable
-//		record.verifyRecordingMenuColor(record.publish_button);
+		record.verifyRecordingMenuColor(record.publish_button);
 
 		//5.check several recordings respective checkboxes
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
