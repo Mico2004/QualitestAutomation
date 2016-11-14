@@ -83,7 +83,7 @@ public class TC7381ValidateMultipleChangesInARowOnTheSameRecording  {
 		
 	// @Parameters({"web","title"}) in the future
 	@Test (description="TC7381 Validate multiple changes in A row on the same recording")
-	public void test17022() throws InterruptedException, ParseException {
+	public void test7381() throws InterruptedException, ParseException {
 		
 		
 		//1.log in courses page

@@ -4676,7 +4676,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {			
 		Thread.sleep(2000);	
 		driver.navigate().refresh();
-		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id("RecordingsTab")));		 
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOfElementLocated(By.id("RecordingsTab")));		 
 		if(tab.equals("Student")){
 			clickOnStudentRecordingsTab();
 		}
