@@ -104,7 +104,8 @@ public class EditRecordinPropertiesWindow extends Page {
 			}			
 		} catch (Exception e) {
 			System.out.println("clicked on owner scroll failed");
-			ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
+			ATUReports.add("Changes Ownership"+ e.getMessage(),"Instructor: "+val+" Changed ownsership successfully","Changed ownsership failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
