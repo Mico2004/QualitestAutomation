@@ -78,6 +78,30 @@ public class CalendarPage extends Page {
 		
 	}
 	
+	//The current month is presented - year-month in the format of (xxxx)-(yyy)
+    public void verifyThatFormatOfTheMonthAndYear(WebElement ie) throws ParseException {
+    
+    	String monthAndYearString = ie.getText();													
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM");
+		sdf.setLenient(false);
+		try {
+
+			//if not valid, it will throw ParseException
+			Date date = sdf.parse(monthAndYearString);
+			System.out.println(date);
+			System.out.println("The date is in the following format: 'yyyy-MMM'");
+			ATUReports.add("The date is in the following format: 'yyyy-MMM'", "Success.", "Success.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+		} catch (ParseException e) {
+			System.out.println("The date is not in the following format: 'yyyy-MMM'" );				
+			ATUReports.add("The date is not in the following format: 'yyyy-MMM'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		
+	}
+	
+	
 	
 	public void getDayFromCalender() {
 		String id = "day ng-scope ng-binding active";
