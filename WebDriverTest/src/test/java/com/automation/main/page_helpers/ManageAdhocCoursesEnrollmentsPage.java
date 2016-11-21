@@ -37,8 +37,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	}
 
 	@FindBy(id = "ctl00_ContentPlaceHolder1_NewCourseButton")
-	public
-	WebElement new_course_button;
+	public	WebElement new_course_button;
 	@FindBy(id = "ctl00_ContentPlaceHolder1_txtSearch")
 	WebElement filter_search_input;
 	@FindBy(id = "ctl00_ContentPlaceHolder1_btnSearch")
@@ -61,6 +60,23 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		}
 	}
 
+	
+	public void waitForThePageToLoad(){
+		
+		try{
+		wait.until(ExpectedConditions.visibilityOf(admin_dashboard_link));
+		driver.switchTo().frame(0);
+		wait.until(ExpectedConditions.visibilityOf(new_course_button));
+		wait.until(ExpectedConditions.visibilityOf(filter_search_button));
+		wait.until(ExpectedConditions.visibilityOf(first_course_membership_button));
+		
+		} catch(org.openqa.selenium.TimeoutException e){
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
+		}
+	
+	}
+	
 	public void clickOnFilterButton() {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(filter_search_button));
@@ -75,7 +91,6 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	public void setFilterSearchBox(String set_to) throws InterruptedException {
 		for(int i=0; i<30; i++) {
 			try {
-				Thread.sleep(5000);
 				wait.until(ExpectedConditions.visibilityOf(filter_search_input));				
 				filter_search_input.clear();				
 				filter_search_input.sendKeys(set_to);
@@ -86,6 +101,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 				System.out.println("Filter search box setted to: " + set_to);
 			} catch (Exception msg) {
 				Thread.sleep(1000);
+				msg.getMessage();
 				System.out.println("Filter search box fail set to: " + set_to);
 			}
 		}
@@ -117,7 +133,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		for(int i=0; i<30; i++) {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(first_course_membership_button));
-				first_course_membership_button.click();
+				clickElementJS(first_course_membership_button);
 				ATUReports.add("Clicked on first course membership button",LogAs.PASSED,null);
 				System.out.println("Clicked on first course membership button");
 				return true;
@@ -225,7 +241,8 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	/// un-enrolls instructor to course
 	public void unEnrollInstructorToCourse(String course, String user,ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window) throws InterruptedException {
 		// Click on create course href link
-	try{driver.switchTo().frame(0);
+	try{
+		driver.switchTo().frame(0);
         Thread.sleep(2000);
         // Search target course name
 		searchAndFilterCourses(course);

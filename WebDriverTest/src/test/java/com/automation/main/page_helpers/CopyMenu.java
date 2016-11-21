@@ -66,8 +66,13 @@ public class CopyMenu extends Page {
 	public WebElement copy_button;
 	@FindBy(id = "courseListSelect")
 	public WebElement course_list_select;
+	@FindBy(id= "members_value")
+	public WebElement instructor_name;
+	@FindBy(css = ".angucomplete-title.ng-scope.ng-binding")
+	public WebElement dropdownInstructor;
+	@FindBy(id= "SearchButton")
+	public WebElement listCourses;
 	
-
 	// This function clicks on copy button of copy menu
 	public void clickOnCopyButton()  {
 			
@@ -83,8 +88,7 @@ public class CopyMenu extends Page {
 			Assert.assertTrue(true);	}
 			catch(Exception e){
 				System.out.println(e.getMessage() +" message 2"+e.getLocalizedMessage());
-				
-				
+			
 			}
 
 	}
@@ -409,6 +413,26 @@ public class CopyMenu extends Page {
 		}
 
 	}
+	
+	public void copyFromAdmin(String keys_to_send){
+		try {
+			instructor_name.clear();
+			instructor_name.sendKeys(keys_to_send);
+			System.out.println("The following keys sent successfully: " + keys_to_send);
+			ATUReports.add("Enter text in search box", keys_to_send, "Success", "Success", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception e) {
+			System.out.println("The following keys not sent unsuccessfully: " + keys_to_send);
+			ATUReports.add("Enter text in search box", keys_to_send, "Success", "Failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		waitForVisibility(dropdownInstructor);
+		clickElement(dropdownInstructor);	
+		clickElementJS(listCourses);		
+	}
+	
+	
+	
 
 	// This function get string from the user and write it / send keys of it to
 	// search input box of copy menu

@@ -191,16 +191,16 @@ public class TestSuitePreSetGeneric {
 			// verify recordings status is clear from the bank
 			System.out.println("0");
 			if(CoursesForRegularRecordings!=null)
-			course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
-			System.out.println("1"); Thread.sleep(4000);
+				course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
+			System.out.println("1"); 
 			if(CoursesForStudentRecordings!=null)
-			course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record); 
-			System.out.println("3"); Thread.sleep(4000);
+				course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record); 
+			System.out.println("3"); 
 			if(CoursesForProcRecordings!=null)
-			course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record); 
-			System.out.println("4"); Thread.sleep(4000);			
-			    
+				course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record); 
+			System.out.println("4"); 		
+			if(CoursesForAdditionalContent!=null)
+				course.verifyRecordingsStatusIsClear("BankValidRecording", 1,record); 
 	
-
 	}
 }

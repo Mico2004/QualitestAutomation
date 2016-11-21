@@ -51,8 +51,8 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_btnOK")
 	public WebElement ok_button;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_btnCancel") WebElement cancel_button;
-	@FindBy(xpath="//*[@id=\"ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxInstructors\"]/option") List<WebElement> instructor_elements_list;
-	@FindBy(xpath="//*[@id=\"ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxStudents\"]/option") List<WebElement> student_elements_list;
+	public @FindBy(xpath="//*[@id=\"ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxInstructors\"]/option") List<WebElement> instructor_elements_list;
+	public @FindBy(xpath="//*[@id=\"ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxStudents\"]/option") List<WebElement> student_elements_list;
 
 	
 	public boolean clickOnSearchUserButton() {

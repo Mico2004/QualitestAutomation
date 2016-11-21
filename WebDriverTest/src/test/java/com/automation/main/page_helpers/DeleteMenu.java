@@ -5,14 +5,13 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -66,12 +65,13 @@ public class DeleteMenu extends Page {
 	// This function clicks on delete button of copy menu
 	public void clickOnDeleteButton() throws InterruptedException {
 		String alertWindowText="";
+		String id= "DeleteButton";
 		try {
 			System.out.println("delete1");
 			wait.until(ExpectedConditions.visibilityOf(delete_button));
 			Thread.sleep(2000);
 			System.out.println("delete2");
-			delete_button.click();
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("Clicked on delete button.");
 			ATUReports.add("Click Delete button", "Clicked on delete button", "Clicked on delete button", LogAs.PASSED,null);
 			Assert.assertTrue(true);			
@@ -102,18 +102,6 @@ public class DeleteMenu extends Page {
 			return false;
 		} catch (Exception msg) {
 			return true;
-		}
-	}
-	
-	public void verifyDeleteMenuClosed() {
-		try {
-			new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.visibilityOf(delete_button)));
-			System.out.println("Delete window is closed.");
-			ATUReports.add("Delete window is closed.", LogAs.PASSED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));						
-		} catch (Exception msg) {
-			System.out.println("Delete window not closed.");
-			ATUReports.add("Delete window not closed.", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
 		}
 	}
 

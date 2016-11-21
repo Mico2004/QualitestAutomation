@@ -128,6 +128,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement course_being_copied_status;
 	@FindBy(id = "RecordingLength1")
 	WebElement duration_first_rec;
+	@FindBy(id ="RecordingDate1")
+	WebElement date_first_rec;
 	@FindBy(xpath = "//*[starts-with(@id,'RecordingLength')]")
 	List<WebElement> recordings_list_duratuon;
 	@FindBy(xpath = "//*[starts-with(@id,'RecordingDate')]")
@@ -1060,6 +1062,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// This function select first recording from recording list
 	public void selectIndexCheckBox(int index) throws InterruptedException {	
 		try{
+		Thread.sleep(500);
 		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.id("Checkbox"+index)));	
 		WebElement target_checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));	
 		SelectOneCheckBoxOrVerifyAlreadySelected(target_checkbox);
@@ -1760,14 +1763,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void unselectallCheckbox() {
 		try {	
 			if (check_all_checkbox.isSelected()) {
-				check_all_checkbox.click();
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
 				System.out.println("Checkbox all is not selected");
 				ATUReports.add("Checkbox all is not selected", LogAs.PASSED, null);
 
 				Assert.assertTrue(true);
 			} else {
-				check_all_checkbox.click();
-				check_all_checkbox.click();
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
 				System.out.println("Checkbox all is selected");
 				ATUReports.add("Checkbox all is selected", LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -1996,10 +1999,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
 		}
-		
-		
-		
-		
+
 	}
 
 	// check if recording has a being copied from status
@@ -2515,7 +2515,25 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		i++;
 		}
 	}
+	
+	public void waitForThePageToLoad(){
+	
+		try {
+			waitForVisibility(institute_logo);
+			waitForVisibility(courses_link);
+			waitForVisibility(course_title);
+			waitForVisibility(recording_tasks_button);
+			waitForVisibility(recordings_tab);
+			waitForVisibility(first_course_title);
+		
+		} catch(Exception e) {
+			e.printStackTrace();
+			ATUReports.add("the page can't load " + e.getMessage() ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(true);
 
+		}
+	}
+	
 	// Verify that recooding has no error status
 	public void verifyNoErrorStatus(WebElement element) {
 		try {
@@ -2535,6 +2553,27 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add("verify recording status isnot  Error", "status", "Error", "Not Error", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 
+		}
+	}
+	
+	// Verify that recooding has no status on the index record
+	public void verifyNoStatusInTheIndex(int index) {
+		try {
+			
+			String status = driver.findElement(By.id(("RecordingStatus")+ Integer.toString(index))).getText();
+			if (status.equals("")) {
+				System.out.println("Verify no status in the index:" + index);		
+				ATUReports.add("Verify no status in the index:" + index, "status", "Empty", "Empty", LogAs.PASSED,null);
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("Not Verify no status in the index:" + index);
+				ATUReports.add("verify no status in the index:" + index, "status", "Empty", "Not Empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+		} catch (Exception e) {
+			System.out.println("Not Verify no status in the index:" + index);
+			ATUReports.add("verify no status in the index:" + index, "status", "Empty", "Not Empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
 		}
 	}
 
@@ -2658,12 +2697,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		boolean is_exist = isTargetRecordingExist(target_recording);
 		
 		if (is_exist) {
-			System.out.println("Target recording exist in recording list?");
+			System.out.println("Target recording exist in recording list.");
 			ATUReports.add("Recording list.", "Target recording exist.", "Target recording exist.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
-			System.out.println("Target recording not exist in recording list?");
-			ATUReports.add("Target recording not exist in recording list?", "Target recording exist.", "Target recording not exist.", LogAs.FAILED,
+			System.out.println("Target recording not exist in recording list.");
+			ATUReports.add("Target recording not exist in recording list.", "Target recording exist.", "Target recording not exist.", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 		}
@@ -3178,6 +3217,29 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 
 	}
+	
+	public void veirfyStatusNotPublishOnTheFirstRecord(){
+		
+		try {
+			String firstStatus = first_recording_status.getText();
+			if(firstStatus.equals("Not Published")){		
+				System.out.println("veirfy that the status is not publish on the first record.");
+				ATUReports.add("veirfy that the status is not publish on the first record.", "True.", "True.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			}else {
+				System.out.println("Not veirfy that the status is not publish on the first record.");
+				ATUReports.add("Not veirfy that the status is not publish on the first record.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(true);
+			}
+			
+		} catch(Exception msg) {
+			System.out.println("Not veirfy that the status is not publish on the first record.");
+			ATUReports.add("Not veirfy that the status is not publish on the first record.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+			
+	}
+	
 
 	/// to publish recording window
 	public void toPublishRecording(PublishWindow publish) {
@@ -4546,8 +4608,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
-	
-	
+
+		
 	public boolean verifyIfCheckedRecordingsAreEditable() throws InterruptedException {
 		try{
 		Thread.sleep(1000);	
@@ -4607,8 +4669,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 		
 	}
-	
-	public void checkExistenceOfNoncopyableRecordingsStatusInRecordings() throws InterruptedException {
+		public void checkExistenceOfNoncopyableRecordingsStatusInRecordings() throws InterruptedException {
 		int i = 0;
 		Thread.sleep(1000);
 		for (WebElement e : driver.findElements(By.cssSelector(".recordingStatus"))) {
@@ -4674,20 +4735,26 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 	
-	public void checkExistenceOfNonEditRecordingsStatusInTheIndex(int index) throws InterruptedException {
+	public void checkExistenceOfNonEditRecordingsStatusInTheIndex(int index,int seconds,String tab) throws InterruptedException {
 		
-		try {
-		  Boolean isTheStatusDisapper =  new WebDriverWait(driver, 120).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("RecordingStatus" +Integer.toString(index)+"']"), "Recording is being edited."));
-		  if(isTheStatusDisapper) {
-			  System.out.println("The status has change in less then 120 seconds");
-			  ATUReports.add("The status has change in less then 120 seconds.", "True.", "True.", LogAs.PASSED, null);
-		  } else {
-			  System.out.println("The status has change in less then 120 seconds");
-			  ATUReports.add("The status has not change in less then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		try {			
+		Thread.sleep(2000);	
+		driver.navigate().refresh();
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOfElementLocated(By.id("RecordingsTab")));		 
+		if(tab.equals("Student")){
+			clickOnStudentRecordingsTab();
+		}
+		Thread.sleep(2000);
+		Boolean isTheStatusDisapper =  new WebDriverWait(driver, seconds).until(ExpectedConditions.invisibilityOfElementWithText(By.id("RecordingStatus" +Integer.toString(index)), "Recording is being edited."));		 
+		 if(isTheStatusDisapper) {
+			  System.out.println("The status has change in less then " + Integer.toString(seconds)+ " seconds");
+			  ATUReports.add("The status has change in less then " + Integer.toString(seconds)+ " seconds", "True.", "True.", LogAs.PASSED, null);
+			  Assert.assertTrue(true);
 		  }
 		}catch(org.openqa.selenium.TimeoutException msg){
-			 System.out.println("The status has change in less then 120 seconds");
-			  ATUReports.add("The status has not change in less then 120 seconds.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				 System.out.println("The status has change in more then " + Integer.toString(seconds)+ " seconds");
+				 ATUReports.add("The status has change in more then " + Integer.toString(seconds)+ " seconds", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				 Assert.assertTrue(false);	
 		}
 	}
 	
@@ -4907,12 +4974,6 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 
-
-	
-	
-	
-	
-	
 	public int getRecordingIndexWithoutAnyStatus(){
 	try{
 		int i = 1;
@@ -4931,19 +4992,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}catch(Exception e){
 			ATUReports.add("Retrieving clear status recording failed",e.getMessage(),  LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return 0;
-		}
-		
-		
+		}	
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
+	
 	public void verifyThatTheRecordNameEqualsFromTheString(String recordOperation,int index,String operation){
 		
 	try{
@@ -4961,9 +5013,15 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		case "Record date":	
 			recordNameToCompare =getTheRecordingDateIndex(index);
 			break;
+		case "Recording title":	
+			recordNameToCompare =getTheRecordTitleByRecordIndex(index);
+			break;		
+		case "Recording duration":	
+			recordNameToCompare =getTheRecordingDurationByRecordIndex(index);
+
+			break;
 		}
 		
-
 
 		if(recordNameToCompare.equals(recordOperation)){
 			System.out.println("The " + operation+ ":" + recordNameToCompare + " is equals from the String: " + recordOperation );
@@ -5003,9 +5061,20 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	
 	public String getTheRecordingDateIndex(int index){
 		
-		waitForVisibility(first_recording_title);
+		waitForVisibility(date_first_rec);
 		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingDate"+Integer.toString(index)+"']"));
-		return record.getText();
+		
+		  String[]parts= record.getText().split("/");
+
+		  if(parts[0].length() == 1) {
+			  parts[0] = "0" + parts[0];
+		  } 
+		  if(parts[1].length() == 1) {
+			  parts[1] = "0" + parts[1];
+		  }
+		  String correctDate = parts[0] + "/"  + parts[1] + "/"  + parts[2];
+			
+		return correctDate;
 	}
 	
 	public String getTheRecordingNameIndex(int index){
@@ -5020,6 +5089,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		return recording_list_names.indexOf(record) + 1;
 	}
 	
+<<<<<<< HEAD
 	public void waitForRegularRecordingListToLoad(int seconds){
 		try{
 			new WebDriverWait(driver,seconds ).until(ExpectedConditions.visibilityOf(first_recording));
@@ -5037,5 +5107,20 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 	
+
+	public String getTheRecordTitleByRecordIndex(int index){
+		
+		waitForVisibility(first_course_title_tests);
+		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingTitle"+Integer.toString(index)+"']"));
+		return record.getText();
+	}
+	
+	public String getTheRecordingDurationByRecordIndex(int index){
+		
+		waitForVisibility(first_course_title_tests);
+		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingDuration"+Integer.toString(index)+"']"));
+		return record.getText();
+	}
+
 	
 }

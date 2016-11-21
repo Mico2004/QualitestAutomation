@@ -79,7 +79,7 @@ public class Page {
 
 			wait.until(ExpectedConditions.elementToBeClickable(element));
 			element.click();
-			System.out.println("Clicked on " + element.getText() + " element");
+			System.out.println("Clicked on" + element.getText() + " element");
 			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
 					null);
 		} catch (Exception msg) {
@@ -97,6 +97,27 @@ public class Page {
 		}
 
 	}
+	
+	public void dragAndDrop(WebElement drag,WebElement drop){
+		
+		waitForVisibility(drag);
+		waitForVisibility(drop);
+			
+		try {
+			Actions act=new Actions(driver);
+			act.dragAndDrop(drag, drop).build().perform();
+			System.out.println("drag and drop on WebElement.");
+			ATUReports.add("drag and drop on WebElement.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+
+		} catch (NoSuchElementException e) {
+			System.out.println("Not drag and drop on WebElement.");
+			ATUReports.add("Not drag and drop on WebElement.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+			
+	}
+	
 	
 	public void clickElementJS(WebElement element) // clicking element
 	{
@@ -167,7 +188,7 @@ public class Page {
 	{
 		element.clear();
 		element.sendKeys(text);		
-	//	Assert.assertEquals(text, element.getAttribute("value"));
+		Assert.assertEquals(text, element.getAttribute("value"));
 
 	}
 	
@@ -1320,6 +1341,8 @@ public class Page {
 		}	
 		return linkTexts;
 	}
-
+	public String getUniversityName(){		
+		return universityName.getText().split(" ")[0];		
+	}
 }
 

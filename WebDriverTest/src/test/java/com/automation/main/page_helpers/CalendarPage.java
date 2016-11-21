@@ -78,6 +78,30 @@ public class CalendarPage extends Page {
 		
 	}
 	
+	//The current month is presented - year-month in the format of (xxxx)-(yyy)
+    public void verifyThatFormatOfTheMonthAndYear(WebElement ie) throws ParseException {
+    
+    	String monthAndYearString = ie.getText();													
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM");
+		sdf.setLenient(false);
+		try {
+
+			//if not valid, it will throw ParseException
+			Date date = sdf.parse(monthAndYearString);
+			System.out.println(date);
+			System.out.println("The date is in the following format: 'yyyy-MMM'");
+			ATUReports.add("The date is in the following format: 'yyyy-MMM'", "Success.", "Success.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+		} catch (ParseException e) {
+			System.out.println("The date is not in the following format: 'yyyy-MMM'" );				
+			ATUReports.add("The date is not in the following format: 'yyyy-MMM'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		
+	}
+	
+	
 	
 	public void getDayFromCalender() {
 		String id = "day ng-scope ng-binding active";
@@ -90,7 +114,7 @@ public class CalendarPage extends Page {
 	 
 	String id = date_Field.getAttribute("id");
 	String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
-	clickElement(date_Field);
+	clickElementJS(date_Field);
 	Thread.sleep(500);
 	
 	String[] splited_structure_displayed = correctDate.split("/");	
@@ -128,46 +152,34 @@ public class CalendarPage extends Page {
 	
 	}	
 	
-	public void pickDateTwoDaysFromToday() throws ParseException, InterruptedException {
+	public void changeCreateDay(int days) throws ParseException, InterruptedException {
 		
 		String id = date_Field.getAttribute("id");
 		String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
-		clickElementJS(date_Field);
-		
+		clickElementJS(date_Field);	
 		Thread.sleep(500);
 		getMonthAndYearFromCalendar();
 		getDayFromCalender();
 			
 	    int dayInt = Integer.parseInt(day);
 	    int monthInt = Integer.parseInt(month);
-	    int yearInt = Integer.parseInt(year);
 	    int pickTwoDayBefore = 0;
-		
-	    if(dayInt == 1 || dayInt == 2){
-	    	
-	    	if( monthInt == 1 ) {
-	    		if(dayInt  == 1) {
-	    			pickTwoDayBefore = 30;
-	    		} else pickTwoDayBefore = 31;
-	    		yearInt -=1;
-	    	} else if(monthInt == 3 ) {
-	    		if(dayInt  == 1) {
-	    			pickTwoDayBefore = 27;
-	    		} else pickTwoDayBefore = 28;
-	    		
-	    	} else if(monthInt == 11 || monthInt == 9 || monthInt == 8 || monthInt == 11 || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
-	    		if(dayInt  == 1) {
-	    			pickTwoDayBefore = 30;
-	    		} else pickTwoDayBefore = 31;
-	    	} else if(monthInt == 12 || monthInt == 10 || monthInt == 7 || monthInt == 5) {
-	    		if(dayInt  == 1) {
-	    			pickTwoDayBefore = 29;
-	    		} else pickTwoDayBefore = 30;
+	    pickTwoDayBefore= dayInt -days;
+	    if(dayInt == 1 || dayInt == 2 || dayInt ==3){
+	    	if(monthInt == 3 ) {	
+	    		if(pickTwoDayBefore <=0)
+	    			pickTwoDayBefore +=28;    		
+	    	} else if(monthInt == 1 || monthInt == 11 || monthInt == 9 || monthInt == 8  || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
+	    		if(pickTwoDayBefore <=0)
+	    			pickTwoDayBefore +=31;   			
+	    	} else if(monthInt == 12 || monthInt == 10 || monthInt == 7 || monthInt == 5) {	
+	    		if(pickTwoDayBefore <=0)
+	    			pickTwoDayBefore +=30;
 	    	}
-	    	clickElement(arrowLeft);
-	    	monthInt -=1; 
-	    } else {  	
-	    	 pickTwoDayBefore = dayInt -2;
+	    	if(pickTwoDayBefore != 1)	{
+	    		clickElement(arrowLeft);
+	    	    monthInt -=1; 
+	    	}
 	    }
 	    String dayNewNumber = Integer.toString(pickTwoDayBefore);
 	    WebElement table = driver.findElement(By.className("table-condensed"));
@@ -186,9 +198,12 @@ public class CalendarPage extends Page {
 	    
     	for(WebElement e :Numbers ){
     		String color = e.getCssValue("color").toString();
-    		String grey = "rgb(153, 153, 153)";
-    		if(!color.equals(grey)){
-    			clickElement(e);
+    		System.out.println(e.getText());
+    		System.out.println(color);
+    		String grey = "rgba(102, 102, 102, 1)";
+    		if(color.equals(grey)){
+    			//clickElement(e);
+    			((JavascriptExecutor) driver).executeScript("arguments[0].click();",e);
     			ATUReports.add("Verify the day from the calendar.", LogAs.PASSED, null);
     			System.out.println("Verify the day from the calendar.");
     			Assert.assertTrue(true);	
@@ -197,9 +212,8 @@ public class CalendarPage extends Page {
     	}
     	ATUReports.add("Not Verify the day from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		System.out.println("Not Verify the day from the calendar.");
-		//Assert.assertTrue(false);	
+	    Assert.assertTrue(false);	
 	}
-	
-	
-	
+
+
 }

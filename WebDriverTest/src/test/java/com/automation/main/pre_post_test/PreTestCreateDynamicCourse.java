@@ -6,9 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-
-import org.apache.http.impl.client.EntityEnclosingRequestWrapper;
-import org.omg.PortableInterceptor.AdapterManagerIdHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.Point;

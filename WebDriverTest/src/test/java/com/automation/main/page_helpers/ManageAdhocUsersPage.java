@@ -64,7 +64,7 @@ public class ManageAdhocUsersPage extends Page {
 		to_admin_dashboard.click();
 		Thread.sleep(2000);
 	}
-
+	
 	/// create new user
 	public void createNewUser(String name, CreateNewUserWindow create_new_user_window) throws InterruptedException {
 
@@ -105,10 +105,14 @@ public class ManageAdhocUsersPage extends Page {
 		
 	}
 	
+
 	public void waitForPageToLoad(){
 		try{
+			wait.until(ExpectedConditions.visibilityOf(to_admin_dashboard));
 			getIntoFrame(0);
 			waitForVisibility(new_user_button, 40);
+			wait.until(ExpectedConditions.visibilityOf(filter_search_button));
+			wait.until(ExpectedConditions.visibilityOf(filter_search_user_input));
 			waitForVisibility(contentTable, 40);
 			
 		}catch(Exception e){
