@@ -31,6 +31,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC15899VerifyAMovingCopyingStatusOfADestinationRecording {
@@ -169,6 +171,8 @@ public class TC15899VerifyAMovingCopyingStatusOfADestinationRecording {
 		// 9. Select destination course.
 		course.selectTargetCourse(target_course);
 		
+		record.waitForRegularRecordingListToLoad(20);
+		
 		// 10. Verify that destination recording has a "Moving/Copying" status.
 		// 10.1. Recr`row is grayed out.
 		// 10.2. Recording has a "Moving/Copying" status.	
@@ -177,18 +181,26 @@ public class TC15899VerifyAMovingCopyingStatusOfADestinationRecording {
 		for(int i = 0; i < current_recording_list.size(); i++) {
 			if(current_recording_list.get(i).equals(selected_recording_name)) {
 				is_found = true;
-				record.checkRecordingInIndexIStatus(i + 1, "Moving/Copying");
-				if(!record.isIndexRecordingClickable(i + 1)) {
-					System.out.println("Recording is grayed out");
-					ATUReports.add("Recording is grayed out", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				} else {
-					System.out.println("Recording is not grayed out");
-					ATUReports.add("Recording is not grayed out", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
+				
+				if(record.isIndexRecordingClickable(i + 1)) {
+					if(!record.checkRecordingInIndexIStatus(i + 1, ""));
+						if(!record.checkRecordingInIndexIStatus(i + 1, "IE, FF, Safari Ready")){	
+						ATUReports.add("Destination recording verification", "Recording is'nt grayed out and has no status", "Recording is'nt grayed out and has not status", LogAs.PASSED, null);
+						Assert.assertTrue(true);}
+						else
+							ATUReports.add("Destination recording verification", "Recording is'nt grayed out and has no status", "Recording is'nt grayed out but has a status", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+							
+						
+				}else {
+						if(record.checkRecordingInIndexIStatus(i + 1, "Being moved from")){
+						System.out.println("Recording is grayed out");
+						ATUReports.add("Destination recording verification", "Recording is'nt grayed out and has not status", "Recording is'nt grayed out and has not status", LogAs.PASSED, null);
+						Assert.assertTrue(true);}
+						else
+							ATUReports.add("Destination recording verification", "Recording is and has status", "Recording is grayed out but has a status", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	
 			}
+		}
 		}
 		
 		if(is_found == false) {
@@ -196,6 +208,9 @@ public class TC15899VerifyAMovingCopyingStatusOfADestinationRecording {
 			ATUReports.add("Recording is not found on destination course.", "Recording is found", "Recording is not found", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
+		
+		
+
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

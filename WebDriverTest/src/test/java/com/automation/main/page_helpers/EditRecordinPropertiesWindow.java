@@ -538,11 +538,11 @@ public class EditRecordinPropertiesWindow extends Page {
 		String recordName = null;
 	try {
 		recordName = recording_title.getText();
-		save_button.click();
+		cancel_button.click();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
 		System.out.println("save succeded");
 		Thread.sleep(2000);
-		confirm.clickOnOkButtonAfterConfirmEditRecordingProperties();
+	//	confirm.clickOnOkButtonAfterConfirmEditRecordingProperties();
 	} catch (Exception e) {
 		System.out.println("clicked on recording title input failed");
 		e.getMessage();

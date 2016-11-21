@@ -50,6 +50,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	@FindBy(id = "ctl00_ContentPlaceHolder1_TegrityCourseRepeater_ctl00_LinkButton2")
 	WebElement first_course_delete_button;
 	@FindBy(css = ".clsGridListEntryInfo1") WebElement first_course_name;
+	@FindBy(xpath="//div[@id='contentDIV']/table/tbody") WebElement contentTable;
 
 	public void clickOnNewCourse() {
 		try {
@@ -294,4 +295,17 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			Assert.assertTrue(false);
 			}
 		}
+		public void waitForPageToLoad(){
+			try{
+				getIntoFrame(0);
+				waitForVisibility(new_course_button, 40);
+				waitForVisibility(contentTable, 40);
+				
+			}catch(Exception e){
+				ATUReports.add("Loading 'Manage Ad-Hock Courses' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+		}
+		
+		
 }

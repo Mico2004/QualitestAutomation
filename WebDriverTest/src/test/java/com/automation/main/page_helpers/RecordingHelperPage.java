@@ -694,6 +694,7 @@ public class RecordingHelperPage extends Page {
  {
 		System.out.println("checkAllCheckBox1");
 		wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
+if(!check_all_checkbox.isSelected()){
 		wait.until(ExpectedConditions.elementToBeClickable(check_all_checkbox));
 		System.out.println("checkAllCheckBox2");		
 		((JavascriptExecutor) driver).executeScript("document.getElementById(\"CheckAll\").click();");		
@@ -717,8 +718,9 @@ public class RecordingHelperPage extends Page {
 		ATUReports.add("All recording checked.", "All recording checked", "All recording checked", LogAs.PASSED,
 				null);
 		Assert.assertTrue(true);
-
 		return recording_names_list;
+}
+		return null;
 	}
 
 	// This function get String as recording name, and compare this string to
@@ -5017,6 +5019,23 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		convertRecordingsListToNames();
 		return recording_list_names.indexOf(record) + 1;
 	}
+	
+	public void waitForRegularRecordingListToLoad(int seconds){
+		try{
+			new WebDriverWait(driver,seconds ).until(ExpectedConditions.visibilityOf(first_recording));
+			
+		}catch(Exception e){try{
+			driver.navigate().refresh();
+			new WebDriverWait(driver,seconds ).until(ExpectedConditions.visibilityOf(first_recording));
+		}
+		catch(Exception ex){
+			ATUReports.add("Waiting for first recording to appear", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		}
+		
+		
+	}
+	
 	
 	
 }

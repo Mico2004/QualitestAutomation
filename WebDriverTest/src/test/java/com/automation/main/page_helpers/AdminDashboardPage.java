@@ -107,6 +107,8 @@ public class AdminDashboardPage extends Page {
 	WebElement IntegrationBox;
 	List <WebElement> dashboardSections;
 	String linkText="";
+	@FindBy(xpath="//*[@id=\"copyright\"]/div")
+	public WebElement universityName;
 	
 	// This function get String with the name of target submenu of Courses and clicks on it
 	public void clickOnTargetSubmenuCourses(String target) 
@@ -199,9 +201,8 @@ public class AdminDashboardPage extends Page {
 		System.out.println("clickOnTargetSubmenuUsers5");
 				
 					waitForVisibility(targetLink);
-					System.out.println("clickOnTargetSubmenuUsers6");
-					targetLink.click();					
-					System.out.println("clickOnTargetSubmenuUsers7");
+					System.out.println("clickOnTaretSubmenuUsers6");
+					targetLink.click();								
 					System.out.println("clickOnTargetSubmenuUsers: "+linkText  );
 					ATUReports.add("Click on target submenu of Users:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
@@ -273,7 +274,9 @@ public class AdminDashboardPage extends Page {
 	}
 
 
-	
+	public String getUniversityName(){		
+		return universityName.getText().split(" ")[0];		
+	}
 	
 	
 }

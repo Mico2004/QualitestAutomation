@@ -343,15 +343,10 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 // 22. Enroll the instructor you created earlier to Ab course as instructor.
 		 Thread.sleep(3000);
 		 admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+		 
+		 
+		 manage_adhoc_courses_enrollments_page.waitForPageToLoad();
 	
-		 for(int i=0; i<10; i++) {
-			 try {
-			 	driver.switchTo().frame(0);
-		 		break;
-		 	} catch(Exception msg) {
-		 		Thread.sleep(1000);
-	 		}
-		 }
 		 
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ab_course_name);
@@ -416,18 +411,14 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 Thread.sleep(4000);
 		 admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 		 
+		 
+		 
 		 date = new Date();
 		 sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		 String temp_student_user_name = "StudentTemp" + sdf.format(date);
-		  
-		 for(int i=0; i<5; i++ ) {
-				try {
-					driver.switchTo().frame(0);
-					break;
-				} catch(Exception msg) {
-					Thread.sleep(1000);
-				}
-		}
+		 
+		 
+		 mange_adhoc_users_page.waitForPageToLoad();		
 		 
 		 mange_adhoc_users_page.clickOnNewUser();
 			
@@ -506,14 +497,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		// 36. Enroll the student user to a course as instructor.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 	
-		for(int i=0; i<10; i++) {
-			try {
-				driver.switchTo().frame(0);
-				break;
-			} catch(Exception msg) {
-				Thread.sleep(1000);
-			}
-		}
+		manage_adhoc_courses_enrollments_page.waitForPageToLoad();
 		 
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(Ab_course_name);
