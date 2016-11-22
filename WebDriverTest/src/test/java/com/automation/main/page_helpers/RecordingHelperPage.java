@@ -5089,7 +5089,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		return recording_list_names.indexOf(record) + 1;
 	}
 	
-<<<<<<< HEAD
+
 	public void waitForRegularRecordingListToLoad(int seconds){
 		try{
 			new WebDriverWait(driver,seconds ).until(ExpectedConditions.visibilityOf(first_recording));

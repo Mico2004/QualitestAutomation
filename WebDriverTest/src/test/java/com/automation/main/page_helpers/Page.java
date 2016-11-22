@@ -59,6 +59,7 @@ public class Page {
 	public WebElement logo;
 	@FindBy(id = "SignOutLink")
 	public WebElement sign_out;
+	String universityName="";
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -1342,7 +1343,8 @@ public class Page {
 		return linkTexts;
 	}
 	public String getUniversityName(){		
-		return universityName.getText().split(" ")[0];		
+		
+		return universityName.split(" ")[0];		
 	}
 }
 
