@@ -5,18 +5,18 @@
     <classes>
   		
   					
-  	   <!-- Private Courses -->
-	   <!-- Local pretest -->
-      <class name="com.automation.main.TestSuitePreSetCopyRecordings_PrivateCourses" /> 
-       <class name="com.automation.main.TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor"/>  
-       <class name="com.automation.main.TC19316CreateAndDeleteAPrivateCourse"/>  
-       <class name="com.automation.main.TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents"/>  
-       <class name="com.automation.main.TC19318VerifyThePrivateCoursesFunctionalityCreateARecordingAndWatchIt"/>  
-       <class name="com.automation.main.TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording"/>  
-       <class name="com.automation.main.TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording"/>  
-       <class name="com.automation.main.TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording"/>  
-       <class name="com.automation.main.TC19322VerifyThePrivateCoursesFunctionalityCopyTheRecordingToPrivateCourse"/>  
-       <class name="com.automation.main.TC19326PublishThePrivateCourse"/> 
+ 			<!-- Private Courses -->
+			<!-- Local pretest -->
+     	    <class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_PrivateCourses" />
+      		<class name="com.automation.main.private_courses.TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor"/>  
+      	 	<class name="com.automation.main.private_courses.TC19316CreateAndDeleteAPrivateCourse"/>  
+     	    <class name="com.automation.main.private_courses.TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents"/>  
+     	 	<class name="com.automation.main.private_courses.TC19318VerifyThePrivateCoursesFunctionalityCreateARecordingAndWatchIt"/>  
+      	 	<class name="com.automation.main.private_courses.TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording"/>  
+     	 	<class name="com.automation.main.private_courses.TC19320VerifyThePrivateCoursesFunctionalityMoveTheRecording"/>  
+     	 	<class name="com.automation.main.private_courses.TC19321VerifyThePrivateCoursesFunctionalityDeleteTheRecording"/>  
+         	<class name="com.automation.main.private_courses.TC19322VerifyThePrivateCoursesFunctionalityCopyTheRecordingToPrivateCourse"/>  
+         	<class name="com.automation.main.private_courses.TC19326PublishThePrivateCourse"/> 
  
     </classes>
   </test> <!-- Test -->

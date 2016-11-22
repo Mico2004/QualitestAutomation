@@ -3,9 +3,9 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
-   
-       	  	   <class name="com.automation.main.TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheActivCourseLevel" />
-
+    		  <class name="com.automation.main.edit_recording_properties.TC17021ValidateDiscardingChangesFunctionlity" />
+    	  	  
+    	  	 
     </classes>
   </test> <!-- Test -->
 

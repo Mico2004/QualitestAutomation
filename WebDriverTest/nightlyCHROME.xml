@@ -66,19 +66,20 @@
 			<!-- Local pretest -->
 			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_MoveRecordings" />
 			<class name="com.automation.main.move_recording.TC15580ExistenceOfUIItemsMove" />
+			<class name="com.automation.main.move_recording.TC15654TryToMoveRecordingWhileItIsBeingMoved" />
 			<class name="com.automation.main.move_recording.TC15583CancelTheMoving" />
 			<class name="com.automation.main.move_recording.TC15586TryToMoveWithoutSelectingACourse" />
 			<class name="com.automation.main.move_recording.TC15594SearchCourseInMoveWindow" />
 			<class name="com.automation.main.move_recording.TC15595TryToMoveRecordingWhileItIsBeingCopied" />
 			<class name="com.automation.main.move_recording.TC15602TryToMoveRecordingAsAStudent" />
 			<class name="com.automation.main.move_recording.TC15899VerifyAMovingCopyingStatusOfADestinationRecording" />
-			<class name="com.automation.main.move_recording.TC15654TryToMoveRecordingWhileItIsBeingMoved" />
 			<class name="com.automation.main.move_recording.TC15661TryToMoveFailedRecording" />
 			<class name="com.automation.main.move_recording.TC15582MoveOneRecording" />
 			<class name="com.automation.main.move_recording.TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists" />
 			<class name="com.automation.main.move_recording.TC15585MoveSeveralRecordings" />
-		 
- 
+		    <!--<class name="com.automation.main.move_recording.TC15588MoveARecordingWithAPodcast" />  -->
+		
+ 			
  
  
  
@@ -86,13 +87,13 @@
 			<!-- Local pretest -->
 			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_DeleteRecordings" />
 			<class name="com.automation.main.delete_recordings.TC15624ExistenceOfUIItemsDelete"/>
+			<class name="com.automation.main.delete_recordings.TC15645TryToDeleteCopyingRecording"/>
 		    <class name="com.automation.main.delete_recordings.TC15640TryToDeleteAStudentRecordingAsAStudent"/>   
   		    <class name="com.automation.main.delete_recordings.TC15634DeleteAStudentRecordingAsInstructor"/>
   		    <class name="com.automation.main.delete_recordings.TC15649TryToDeleteMovingRecording"/>  
    	        <class name="com.automation.main.delete_recordings.TC15639TryToDeleteARegularRecordingAsAStudent"/> 
  	        <class name="com.automation.main.delete_recordings.TC15644CancelTheDelete"/>   
    	        <class name="com.automation.main.delete_recordings.TC15653DeleteFailedRecording"/>
-   	        <class name="com.automation.main.delete_recordings.TC15645TryToDeleteCopyingRecording"/> 
  	   	    <class name="com.automation.main.delete_recordings.TC15627DeleteARegularRecordingAsInstructor"/>
    	        <class name="com.automation.main.delete_recordings.TC15635DeleteAProctoringRecordingAsInstructor"/>
       		<class name="com.automation.main.delete_recordings.TC15642DeleteSeveralRecordings"/>  	     
@@ -142,7 +143,7 @@
 			<!-- Local pretest -->
 			
 			<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_Search" />
-    	 <!-- <class name="com.automation.main.search.TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage" /> -->     	 
+    	    <class name="com.automation.main.search.TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage" />   	 
     	  	<class name="com.automation.main.search.TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsInstructor" />    	  		  	<class name="com.automation.main.search.TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCourseLevelUI" />
     	  	<class name="com.automation.main.search.TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel" />
     	  	<class name="com.automation.main.search.TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseLevel" />
@@ -265,9 +266,47 @@
 			<class name="com.automation.main.public_courses.TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCourses" />
 			<class name="com.automation.main.public_courses.TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNotPublicCourses" />
 			
+<<<<<<< HEAD
+	
+=======
 			   
 
 			    
+<<<<<<< HEAD
+			<!-- Add additional content files-->
+		    <!-- Local pretest -->
+		    
+		    <class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_AddAdditional" />
+    	     <class name="com.automation.main.add_additional_content_file.TC15455AddMp3File" /> 
+			<class name="com.automation.main.add_additional_content_file.TC15467CancelTheAdding" /> 	
+    	    <class name="com.automation.main.add_additional_content_file.TC15468AddFirstFileVerifyNewTabAdditionalContentCreated" /> 
+    	  	<class name="com.automation.main.add_additional_content_file.TC15475ExistenceOfUIItems" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15471UploadTheFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15897ViewTheUploadedFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15447AddDocFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15448AddPptFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15449AddPptxFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15450AddDocxFile" />
+        	<class name="com.automation.main.add_additional_content_file.TC15451AddRtfFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15452AddTxtFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15453AddPdfFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15454AddAviFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15456AddMp4File" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15457AddMovFile" />
+    	    <class name="com.automation.main.add_additional_content_file.TC15458AddMpgFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15459AddZipFile" />    	 
+    	  	<class name="com.automation.main.add_additional_content_file.TC15460AddRarFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15461AddGifFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15462AddJpgFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15463AddPngFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15464AddXlsFile" />
+    	  	<class name="com.automation.main.add_additional_content_file.TC15465AddXlsxFile" />  	  	  	
+    	  	<class name="com.automation.main.add_additional_content_file.TC15466AddFewFilesWithSameTitle" /> 	   	  	
+    	  	<class name="com.automation.main.add_additional_content_file.TC15470AddFileWithTheSameTitleExistingLink" />
+    	    <class name="com.automation.main.add_additional_content_file.TC15489TryToAddFileDuringAnotherUpload" />
+   
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 		    <!-- Add additional content files-->
 	    	<!-- Local pretest -->
 	     	<class name="com.automation.main.pre_post_test.TestSuitePreSetCopyRecordings_AddAdditional" />
@@ -299,11 +338,15 @@
    	  		<class name="com.automation.main.add_additional_content_file.TC15467CancelTheAdding" />   	  	
    	  	  	<class name="com.automation.main.add_additional_content_file.TC15470AddFileWithTheSameTitleExistingLink" />
    	  	  	<class name="com.automation.main.add_additional_content_file.TC15489TryToAddFileDuringAnotherUpload" />
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
+>>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation.git
 
 		</classes>
 		
 		
-		<class name="com.automation.main.pre_post_test.PostTest" />
 	</test> <!-- Test -->
 
 	<listeners>
