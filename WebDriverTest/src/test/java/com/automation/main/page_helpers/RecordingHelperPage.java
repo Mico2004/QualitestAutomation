@@ -3200,7 +3200,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			clickElementJS(tab);	
 			SelectOneCheckBoxOrVerifyAlreadySelected(checkbox);				
-			clickElementJS(publish_button);
+			clickOnRecordingTaskThenPublish();
 			clickElementJS(publish.never_select_button);						
 			waitForVisibility(publish.save_button);	
 			clickElementJS(publish.save_button);
