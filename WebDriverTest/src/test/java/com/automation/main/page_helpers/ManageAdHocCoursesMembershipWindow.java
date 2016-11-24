@@ -155,7 +155,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	public boolean clickOnAddSelectedUserToInstructorList() {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(add_selected_as_instructor_button));
-			add_selected_as_instructor_button.click();
+			clickElementJS(add_selected_as_instructor_button);
 			System.out.println("Added selected to instructor list.");
 			return true;
 		} catch (Exception msg) {
@@ -166,7 +166,8 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	
 	public boolean clickOnRemoveSelectedUserToInstructorList() {
 		try {
-			remove_selected_from_instructor_list_button.click();
+			wait.until(ExpectedConditions.visibilityOf(remove_selected_from_instructor_list_button));
+			clickElementJS(remove_selected_from_instructor_list_button);
 			System.out.println("Removed selected to instructor list.");
 			return true;
 		} catch (Exception msg) {
@@ -177,7 +178,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	public boolean clickOnAddSelectedUserToStudentList() {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(add_selected_as_student_button));
-			add_selected_as_student_button.click();
+			clickElementJS(add_selected_as_student_button);
 			System.out.println("Added selected to student list.");
 			return true;
 		} catch (Exception msg) {
@@ -288,7 +289,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	///"Removed selected to students list."
 	public boolean clickOnRemoveSelectedUserToStudentsList() {
 		try {
-			remove_selected_from_student_list_button.click();
+			clickElementJS(remove_selected_from_student_list_button);
 			System.out.println("Removed selected to students list.");
 			ATUReports.add("Removed selected to students list.", LogAs.PASSED, null);
         	Assert.assertTrue(true);
