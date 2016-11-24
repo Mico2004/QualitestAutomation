@@ -1,5 +1,6 @@
 package com.automation.main.page_helpers;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -78,6 +79,21 @@ public class CalendarPage extends Page {
 		
 	}
 	
+	public void getMonthAndYearFromCalendarWithElement(WebElement ie) throws ParseException {
+		
+		String monthAndYearString = ie.getText();
+		String[] splited_structure_displayed_yearAndMonth = monthAndYearString.split("-");
+		year = splited_structure_displayed_yearAndMonth[0];
+		
+		Date date = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(splited_structure_displayed_yearAndMonth[1]);
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    int monthNumer = cal.get(Calendar.MONTH) + 1 ;
+	    month = Integer.toString(monthNumer);
+		
+	}
+	
+	
 	//The current month is presented - year-month in the format of (xxxx)-(yyy)
     public void verifyThatFormatOfTheMonthAndYear(WebElement ie) throws ParseException {
     
@@ -150,7 +166,27 @@ public class CalendarPage extends Page {
 		System.out.println("Not Verify the day from the calendar.");
 	}
 	
-	}	
+	}
+	
+	public String changeCreateDayWithoutDayPickerActive(int days,WebElement element,By by) throws ParseException, InterruptedException {
+		
+		DateFormat dateFormat = new SimpleDateFormat("dd");
+		Date date = new Date();
+		Thread.sleep(500);
+		String currentDay = dateFormat.format(date);
+		int dayNumber = Integer.parseInt(currentDay);
+		int dayPicker = dayNumber - days;
+		String dayPick = Integer.toString(dayPicker);
+		getMonthAndYearFromCalendarWithElement(element);
+		changeDayOnCalender(dayPick,by);	
+		String returnDate = month + "/" + dayPick + "/" + year;
+		
+		return returnDate;
+		
+		
+	}
+	
+
 	
 	public void changeCreateDay(int days) throws ParseException, InterruptedException {
 		
@@ -182,7 +218,13 @@ public class CalendarPage extends Page {
 	    	}
 	    }
 	    String dayNewNumber = Integer.toString(pickTwoDayBefore);
-	    WebElement table = driver.findElement(By.className("table-condensed"));
+	    By by = By.className("table-condensed");
+	    changeDayOnCalender(dayNewNumber,by);
+	}
+
+	public void changeDayOnCalender(String dayNewNumber ,By by){
+		
+		WebElement table = driver.findElement(by);
 	    List<WebElement> rows = table.findElements(By.tagName("tr"));
 	    List<WebElement> Numbers = new ArrayList<WebElement>() ;
 	    int rowNumber = rows.size();
@@ -190,7 +232,8 @@ public class CalendarPage extends Page {
 	    	List<WebElement> cols = table.findElements(By.tagName("td"));
 	    	int colsNum = cols.size();
 	    	for(int j = 0; j< colsNum ; j++) {
-	    		if(cols.get(j).getText().equals(dayNewNumber)){
+	    		String currentNumber = cols.get(j).getText();
+	    		if(currentNumber.equals(dayNewNumber)){
 	    			Numbers.add(cols.get(j));    			
 	    		}
 	    	}
@@ -212,8 +255,9 @@ public class CalendarPage extends Page {
     	}
     	ATUReports.add("Not Verify the day from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		System.out.println("Not Verify the day from the calendar.");
-	    Assert.assertTrue(false);	
+	    Assert.assertTrue(false);
 	}
-
-
+	
+	
+	
 }

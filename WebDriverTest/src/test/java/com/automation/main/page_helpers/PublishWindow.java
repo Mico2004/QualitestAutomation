@@ -1,5 +1,9 @@
 package com.automation.main.page_helpers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -162,6 +166,33 @@ public class PublishWindow extends Page {
 		}
 	}
 	
+	// This function verify that never option is: 0 - not selected, 1 - selected
+		public void verifyThatDateRangeOptionSelectedOrNotSelected(int selected) {
+			boolean is_selected = date_range_select_button.isSelected();
+			
+			if(selected == 0) {
+				if(is_selected) {
+					System.out.println("date range option is selected.");
+					ATUReports.add("date range option.", "Not selected.", "Selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				} else {
+					System.out.println("date range option is not selected.");
+					ATUReports.add("date range option.", "Not selected.", "Not selected.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				}
+			} else {
+				if(is_selected) {
+					System.out.println("date range option is selected.");
+					ATUReports.add("date range option.", "Selected.", "Selected.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} else {
+					System.out.println("date range option is not selected.");
+					ATUReports.add("date range option.", "Selected.", "Not selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				}
+			}
+		}
+		
 	// This function verify that always option is: 0 - not selected, 1 - selected
 		public void verifyThatAlwaysOptionSelectedOrNotSelected(int selected) {
 			boolean is_selected = always_select_button.isSelected();
@@ -189,7 +220,6 @@ public class PublishWindow extends Page {
 			}
 		}
 		
-	
 	
 	
 	// This function clicks on save button
@@ -490,4 +520,24 @@ public class PublishWindow extends Page {
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
+
+
+
+		public void veirfyDateFromThisDate(String date ,WebElement dateCalender) throws ParseException {
+			
+			try{			
+				String dateToCompare = dateCalender.getAttribute("value");
+				if(dateToCompare.equals(date)){
+					System.out.println("verify that the right date is displayed in textbox");
+					ATUReports.add("verify that the right date is displayed in textbox.", LogAs.PASSED, null);
+				}else {
+					System.out.println("not verify that the right date is displayed in textbox.");
+					ATUReports.add("not verify that the right date is displayed in textbox.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
+				}	
+		}
 }

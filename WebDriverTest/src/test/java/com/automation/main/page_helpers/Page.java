@@ -490,10 +490,10 @@ public class Page {
 	public void verifyDate(String date) {
 		String[] split = date.split("/");
 		String checkdays = split[1];
-
 		String checkmonths = split[0];
-
 		String checkyear = split[2];
+		
+		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date datecurrent = new Date();
 		if ((Integer.valueOf(checkmonths) > 12) || (Integer.valueOf(checkmonths) < 1)

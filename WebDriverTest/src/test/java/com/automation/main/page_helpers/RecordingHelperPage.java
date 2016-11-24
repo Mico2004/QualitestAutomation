@@ -3223,11 +3223,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if(firstStatus.equals("Not Published")){		
 				System.out.println("veirfy that the status is not publish on the first record.");
 				ATUReports.add("veirfy that the status is not publish on the first record.", "True.", "True.", LogAs.PASSED, null);
-				Assert.assertTrue(true);
 			}else {
 				System.out.println("Not veirfy that the status is not publish on the first record.");
 				ATUReports.add("Not veirfy that the status is not publish on the first record.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				Assert.assertTrue(true);
 			}
 			
 		} catch(Exception msg) {
