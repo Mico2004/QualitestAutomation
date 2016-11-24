@@ -270,10 +270,6 @@ public class AdminDashboardPage extends Page {
 		
 	}
 
-
-
-
-
 	public void clickOnTargetSubmenuIntegration(String target) {
 		
 		try {

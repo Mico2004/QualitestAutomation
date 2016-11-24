@@ -403,6 +403,8 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 mange_adhoc_users_page.waitForPageToLoad();
 
 		 
+		 mange_adhoc_users_page.waitForPageToLoad();
+		 
 		 date = new Date();
 		 sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		 String temp_student_user_name = "StudentTemp" + sdf.format(date);
@@ -486,6 +488,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		// 36. Enroll the student user to a course as instructor.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 	
+
 
 		manage_adhoc_courses_enrollments_page.waitForPageToLoad();
 		 

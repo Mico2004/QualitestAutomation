@@ -3202,7 +3202,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			clickElementJS(tab);	
 			SelectOneCheckBoxOrVerifyAlreadySelected(checkbox);				
-			clickElementJS(publish_button);
+			clickOnRecordingTaskThenPublish();
 			clickElementJS(publish.never_select_button);						
 			waitForVisibility(publish.save_button);	
 			clickElementJS(publish.save_button);
@@ -5090,6 +5090,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 
+
 	public void waitForRegularRecordingListToLoad(int seconds){
 		try{
 			new WebDriverWait(driver,seconds ).until(ExpectedConditions.visibilityOf(first_recording));
@@ -5121,6 +5122,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingDuration"+Integer.toString(index)+"']"));
 		return record.getText();
 	}
+
 
 	
 }
