@@ -23,7 +23,7 @@ import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
@@ -54,7 +54,7 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 	public DeleteMenu delete_menu;
 	public MoveWindow move_window;
 	public AdminDashboardPage admin_dashboard_page;
-	public EditRecordinPropertiesWindow edit_recording_properties_window;
+	public EditRecordingPropertiesWindow edit_recording_properties_window;
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
 	WebDriver driver;
 	WebDriverWait wait;
@@ -81,7 +81,7 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		confirmation_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		wait = new WebDriverWait(driver, 30);
 		
 		 Date curDate = new Date();

@@ -16,7 +16,7 @@ import com.automation.main.page_helpers.CalendarPage;
 import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CourseSettingsPage;
 import com.automation.main.page_helpers.CoursesHelperPage;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.PlayerPage;
 import com.automation.main.page_helpers.PublishWindow;
@@ -48,7 +48,7 @@ public class TC7933ValidateTheDateRange {
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
 	public CalendarPage calendarPage;
-	public EditRecordinPropertiesWindow edit_recording_properties_window;
+	public EditRecordingPropertiesWindow edit_recording_properties_window;
 	public AdminDashboardPage admin_dash_board_page;
 	WebDriver driver;
 	WebDriverWait wait;

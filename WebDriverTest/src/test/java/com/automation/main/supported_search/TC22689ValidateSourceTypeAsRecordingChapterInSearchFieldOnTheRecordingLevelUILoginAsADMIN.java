@@ -26,7 +26,7 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.EditRecording;
 import com.automation.main.page_helpers.EmailAndConnectionSettingsPage;
 import com.automation.main.page_helpers.EmailInboxPage;
@@ -63,7 +63,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 
 	}
 
-	public EditRecordinPropertiesWindow erp_window;
+	public EditRecordingPropertiesWindow erp_window;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
@@ -95,7 +95,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	public EmailLoginPage email_login;
 	public EmailInboxPage email_inbox;
 	public RunDiagnosticsPage run_diagnostics;
-	public EditRecordinPropertiesWindow edit_recording_properties_window;
+	public EditRecordingPropertiesWindow edit_recording_properties_window;
 	public PlayerPage player_page;
 	public PublishWindow publish_window;
 	public AdminDashboardViewCourseList admin_view_course_list;
@@ -131,7 +131,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		advanced_services_setting_page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
@@ -147,7 +147,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		search_page = PageFactory.initElements(driver, SearchPage.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		admin_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
-		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
 		System.out.println("Starting the test: TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecordingLevelUILoginAsADMIN at " + DateToStr);

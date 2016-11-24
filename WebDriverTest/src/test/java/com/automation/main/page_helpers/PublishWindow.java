@@ -93,8 +93,6 @@ public class PublishWindow extends Page {
 		}
 	}
 	
-	
-	
 	// This function verify that publish window is open
 	public void verifyPublishWindowOpen() {
 		boolean is_closed = isPublishWindowClosed();
@@ -110,7 +108,7 @@ public class PublishWindow extends Page {
 		}
 	}
 	
-		public void clickOnCancelButton() {
+	public void clickOnCancelButton() {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(cancel_button));	
 				
@@ -172,7 +170,7 @@ public class PublishWindow extends Page {
 	}
 	
 	// This function verify that never option is: 0 - not selected, 1 - selected
-		public void verifyThatDateRangeOptionSelectedOrNotSelected(int selected) {
+	public void verifyThatDateRangeOptionSelectedOrNotSelected(int selected) {
 			boolean is_selected = date_range_select_button.isSelected();
 			
 			if(selected == 0) {
@@ -199,7 +197,7 @@ public class PublishWindow extends Page {
 		}
 		
 	// This function verify that always option is: 0 - not selected, 1 - selected
-		public void verifyThatAlwaysOptionSelectedOrNotSelected(int selected) {
+	public void verifyThatAlwaysOptionSelectedOrNotSelected(int selected) {
 			boolean is_selected = always_select_button.isSelected();
 			
 			if(selected == 0) {
@@ -225,8 +223,6 @@ public class PublishWindow extends Page {
 			}
 		}
 		
-	
-	
 	// This function clicks on save button
 	public void clickOnSaveButton()
 	{
@@ -264,9 +260,8 @@ public class PublishWindow extends Page {
 		
 	}
 	
-	
 	// verify Publish menu background color is same as recording background color
-		public void verifyPublishColor(RecordingHelperPage rec) throws InterruptedException {
+	public void verifyPublishColor(RecordingHelperPage rec) throws InterruptedException {
 			
 			try{
 			Thread.sleep(2000);	
@@ -287,12 +282,11 @@ public class PublishWindow extends Page {
 
 				}
 		}
-		
-		
+				
 		/**
-		 * this function verify edit recording properties Title
+	 * this function verify edit recording properties Title
 		 */
-		public void verifyPublishWindowTitle() throws InterruptedException {
+	public void verifyPublishWindowTitle() throws InterruptedException {
 			try{
 			waitForVisibility(publish_window_title);
 			String val = publish_window_title.getText();
@@ -311,9 +305,8 @@ public class PublishWindow extends Page {
 
 				}
 		}
-		
-		
-		public void verifyInfomativeText() {
+			
+	public void verifyInfomativeText() {
 			
 			try {
 				String infoText  = publish_window_text.getText();
@@ -332,7 +325,7 @@ public class PublishWindow extends Page {
 			
 		}
 
-		public void verifyInfomativeTextAndVerifyBelowTheOtherInfoText() {
+	public void verifyInfomativeTextAndVerifyBelowTheOtherInfoText() {
 			
 			try {
 				String infoText  = publish_window_text2.getText();			
@@ -362,7 +355,7 @@ public class PublishWindow extends Page {
 						
 		}
 
-		public void verifyThatTheRadioButtonsWillDisplayBelow() {
+	public void verifyThatTheRadioButtonsWillDisplayBelow() {
 			try {
 				
 				Point LocText2 = publish_window_text2.getLocation();
@@ -386,9 +379,8 @@ public class PublishWindow extends Page {
 			
 			
 		}
-		
-		
-		public void VerifyTheLocationOfTheSaveAndCancel() {
+			
+	public void VerifyTheLocationOfTheSaveAndCancel() {
 			
 			try{
 				
@@ -418,7 +410,7 @@ public class PublishWindow extends Page {
 				}
 			}
 	
-		public void VerifyTheContentOfTheAvailablePublishingOptions() {
+	public void VerifyTheContentOfTheAvailablePublishingOptions() {
 		
 			try{
 				
@@ -489,7 +481,7 @@ public class PublishWindow extends Page {
 					}
 				}
 
-		public void verifyThatAfterClickingOnTheFromTheCalenderWidgetIsDisplayed(WebElement element,WebElement calender) {
+	public void verifyThatAfterClickingOnTheFromTheCalenderWidgetIsDisplayed(WebElement element,WebElement calender) {
 		try{			
 			clickElementJS(element);	
 			if(calender.isDisplayed()){
@@ -506,7 +498,7 @@ public class PublishWindow extends Page {
 			}
 		}	
 			
-		public void chooseRadioButton(String choose) {
+	public void chooseRadioButton(String choose) {
 		
 		try{
 			switch(choose){	
@@ -526,9 +518,7 @@ public class PublishWindow extends Page {
 		}
 	}
 
-
-
-		public void veirfyDateFromThisDate(String date ,WebElement dateCalender) throws ParseException {
+	public void veirfyDateFromThisDate(String date ,WebElement dateCalender) throws ParseException {
 			
 			try{			
 				String dateToCompare = dateCalender.getAttribute("value");
@@ -545,4 +535,29 @@ public class PublishWindow extends Page {
 
 				}	
 		}
+
+	// The date is in the following format: 'XX/XX/XXXX'.
+	public void verifyThatTheCalendarInTheRightFormat(WebElement date_Field){
+		
+		String id = date_Field.getAttribute("id");
+		String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		sdf.setLenient(false);
+		try {
+
+			//if not valid, it will throw ParseException
+			Date date = sdf.parse(correctDate);
+			System.out.println(date);
+			System.out.println("The date is in the following format: 'XX/XX/XXXX'");
+			ATUReports.add("The date is in the following format: 'XX/XX/XXXX'", "Success.", "Success.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+		} catch (ParseException e) {
+			System.out.println("The date is not in the following format: 'XX/XX/XXXX'" );				
+			ATUReports.add("The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+
+	}
 }

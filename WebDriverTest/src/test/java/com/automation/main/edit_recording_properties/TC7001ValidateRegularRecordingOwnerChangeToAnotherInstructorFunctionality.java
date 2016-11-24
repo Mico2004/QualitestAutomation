@@ -18,7 +18,7 @@ import com.automation.main.page_helpers.CalendarPage;
 import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CoursesHelperPage;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.utilities.DriverSelector;
@@ -48,7 +48,7 @@ public class TC7001ValidateRegularRecordingOwnerChangeToAnotherInstructorFunctio
 
 	}
 	
-	public EditRecordinPropertiesWindow edit_recording_properties_window;
+	public EditRecordingPropertiesWindow edit_recording_properties_window;
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
@@ -73,7 +73,7 @@ public class TC7001ValidateRegularRecordingOwnerChangeToAnotherInstructorFunctio
 			admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-			edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+			edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
 		} catch (Exception e) {

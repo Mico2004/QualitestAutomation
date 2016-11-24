@@ -2187,7 +2187,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 
 	/// changing recording ownership
-	public void changeRecordingOwnership(ConfirmationMenu confirm_menu, EditRecordinPropertiesWindow erp_window,
+	public void changeRecordingOwnership(ConfirmationMenu confirm_menu, EditRecordingPropertiesWindow erp_window,
 			String new_owner, WebElement checkbox_element) throws InterruptedException {
 		int i = 1;
 		/// check for free status checkbox for edit properties

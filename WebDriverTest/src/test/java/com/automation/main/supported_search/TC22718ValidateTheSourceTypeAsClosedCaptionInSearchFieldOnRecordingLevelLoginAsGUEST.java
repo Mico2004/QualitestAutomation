@@ -25,7 +25,7 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.EditRecording;
 import com.automation.main.page_helpers.EmailAndConnectionSettingsPage;
 import com.automation.main.page_helpers.EmailInboxPage;
@@ -61,7 +61,7 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 
 	}
 
-	public EditRecordinPropertiesWindow erp_window;
+	public EditRecordingPropertiesWindow erp_window;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
@@ -126,7 +126,7 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		advanced_services_setting_page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);

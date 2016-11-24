@@ -34,8 +34,8 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class EditRecordinPropertiesWindow extends Page {
-	public EditRecordinPropertiesWindow(WebDriver browser) {
+public class EditRecordingPropertiesWindow extends Page {
+	public EditRecordingPropertiesWindow(WebDriver browser) {
 		super(browser);
 		// TODO Auto-generated constructor stub
 	}
