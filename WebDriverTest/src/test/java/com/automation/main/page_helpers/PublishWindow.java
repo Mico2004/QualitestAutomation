@@ -76,7 +76,8 @@ public class PublishWindow extends Page {
 	public WebElement titleOfCalenderStart;
 	@FindBy(xpath =".//*[@id='publishRecordingWindow']/form/div[1]/div[1]/div[2]/div/div[2]/div[2]/div/table/thead/tr[1]/th[3]")
 	public WebElement titleOfCalenderEnd;
-	
+	@FindBy(xpath =".//*[@id='publishRecordingWindow']/form/div[1]/div[2]/span[2]")
+	public WebElement errorTitle;
 	
 	// This function return true if publish window is closed,
 	// and false if it is open

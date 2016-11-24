@@ -661,22 +661,52 @@ public class EditRecordingPropertiesWindow extends Page {
 		for(WebElement ie: owner_button_select) {
 			String currentOwner = ie.getText(); 
 			if(!searchOwnerInTheOwnerList(currentOwner)){
-				System.out.println("The Owners are not found at the list.");				
-				ATUReports.add("The Owners are not found at the list.", "Success.", "Fail", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("The " + currentOwner + "is not supposed to be at the list of owners at that course.");				
+				ATUReports.add("The " + currentOwner + "is not supposed to be at the list of owners at that course.", "Success.", "Fail.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				isAllTheInstractorsInTheList = false;
 				break;
 			}
 			i++;
 		}
 		if(isAllTheInstractorsInTheList){
-			System.out.println("All The Owners are found at the list.");
-			ATUReports.add("All The Owners are found at the list.", "Success.", "Success.", LogAs.PASSED, null);
+			System.out.println("All The Owners are found at the list of owners.");
+			ATUReports.add("All The Owners are found at the list of owners.", "Success.", "Success.", LogAs.PASSED, null);
 		}
 	}catch(Exception e){
 		e.getMessage();
 		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	}
   }
+	
+	public void verifyThatAllTheTypeInTheDropDownListDemo() {
+		
+		boolean isAllTheInstractorsInTheList=true;
+		try{
+		clickElementJS(owner_select);
+		int i = 0;
+		for(WebElement ie: owner_button_select) {
+			String currentOwner = ie.getText(); 
+			if(!searchOwnerInTheOwnerList(currentOwner)){
+				System.out.println("The " + currentOwner + "is not supposed to be at the list of owners at that course.");				
+				ATUReports.add("The " + currentOwner + "is not supposed to be at the list of owners at that course.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				isAllTheInstractorsInTheList = false;
+				break;
+			}
+			i++;
+		}
+		if(isAllTheInstractorsInTheList){
+			System.out.println("All The Owners are found at the list of owners.");
+			ATUReports.add("All The Owners are found at the list of owners.", "Success.", "Success.", LogAs.PASSED, null);
+		}
+	}catch(Exception e){
+		e.getMessage();
+		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	}
+  }
+	
+
+	
+	
 	
 	public boolean searchOwnerInTheOwnerList(String currentOwner) {
 

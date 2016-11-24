@@ -3872,21 +3872,19 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			waitForVisibility(checkbox);
 			if (checkbox.isSelected()) {
-				System.out.println("Checkbox is already selected.");
-				ATUReports.add("Checkbox.", "Selected/Already selected.", "Already selected.", LogAs.PASSED, null);
+				System.out.println("select the Checkbox" + checkbox.getAttribute("id"));
+				ATUReports.add("select the Checkbox" + checkbox.getAttribute("id"), "Selected/Already selected.", "Already selected.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
-			} else {
-				
+			} else {			
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);			
-				//checkbox.click();
 				System.out.println("Checkbox is selected");
-				ATUReports.add("Checkbox.", "Success to select.", "Sucess to select.", LogAs.PASSED, null);
+				ATUReports.add("select the Checkbox" + checkbox.getAttribute("id"), "Success to select.", "Sucess to select.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
 			System.out.println("Checkbox is not selected.");
-			ATUReports.add("Checkbox.", "Success select.", "Fail to select.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Fail to select the Checkbox" + checkbox.getAttribute("id"), "Success select.", "Fail to select.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
