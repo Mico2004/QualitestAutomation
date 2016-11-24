@@ -586,7 +586,10 @@ public class EditRecordinPropertiesWindow extends Page {
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
 		System.out.println("save succeded");
 		Thread.sleep(2000);
+
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("RecordingStatus1")));
+
+
 	} catch (Exception e) {
 		System.out.println("clicked on recording title input failed");
 		e.getMessage();

@@ -665,7 +665,7 @@ public class CoursesHelperPage extends Page {
 		if (type_of_recordings == 1) {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(record_helper_page.additional_content_tab));
-				record_helper_page.additional_content_tab.click();
+				record_helper_page.clickOnAdditionContentTab();
 			} catch (Exception msg) {
 				System.out.println("There is no additional content tab.");
 				try {
@@ -679,7 +679,7 @@ public class CoursesHelperPage extends Page {
 		} else if (type_of_recordings == 2) {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(record_helper_page.student_recordings_tab));
-				record_helper_page.student_recordings_tab.click();
+				record_helper_page.clickOnStudentRecordingsTab();
 				System.out.println("Click on student recordings tab.");
 			} catch (Exception msg) {
 				System.out.println("There is no student recordings tab.");
@@ -694,7 +694,7 @@ public class CoursesHelperPage extends Page {
 		} else if (type_of_recordings == 3) {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(record_helper_page.tests_tab));
-				record_helper_page.tests_tab.click();
+				record_helper_page.clickOnTestsTab();
 			} catch (Exception msg) {
 				System.out.println("There is no tests tab.");
 				try {

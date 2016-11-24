@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 
@@ -42,6 +43,9 @@ public class ConfirmationMenu extends Page {
 	@FindBy(css = ".emphasis.ng-binding")
 	List<WebElement> error_msg_body_list;
 	@FindBy(css = ".modal-body>.emphasis.ng-binding")
+	
+	WebElement error_msg_body;
+	@FindBy(css = ".emphasis.ng-binding")
 	WebElement correct_error_msg_body;
 	@FindBy(xpath = "//*[@id=\"alertWindow\"]/div[1]/p")
 	public
@@ -116,13 +120,17 @@ public class ConfirmationMenu extends Page {
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				System.out.println("Error window title is wrong");
 				ATUReports.add("Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				Assert.assertEquals(false, true);
+
+
+			}	
+			try{
+				new WebDriverWait(driver,15 ).until(ExpectedConditions.textToBePresentInElement(error_msg_body, "Recording has been queued for copy"));
+		    }catch(org.openqa.selenium.TimeoutException e){
+		    	ATUReports.add("Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
 			}
-			if (!error_msg_body_list.get(0).getText().contains("Recording has been queued for copy")) {
-				System.out.println("Error window description is wrong");
-				ATUReports.add("Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				Assert.assertEquals(false, true);
-			}
+
+
 			ok_button.click();
 			System.out.println("Clicked on OK button");
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
@@ -582,7 +590,7 @@ public class ConfirmationMenu extends Page {
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
+			
 		}
 		Thread.sleep(3000);
 	}

@@ -188,16 +188,23 @@ DesiredCapabilities capability;
 		
 		for(int i = 0; i < current_recording_list.size(); i++) {
 			if(current_recording_list.get(i).equals(selected_recording_name)) {
-				record.checkRecordingInIndexIStatus(i + 1, "Moving/Copying");
-				if(!record.isIndexRecordingClickable(i + 1)) {
-					System.out.println("Recording is grayed out");
-					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is grayed out", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				} else {
-					System.out.println("Recording is not grayed out");
-					ATUReports.add("Recording title.", "Recording is grayed out", "Recording is not grayed out", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
+				if(record.isIndexRecordingClickable(i + 1)) {
+					if(!record.checkRecordingInIndexIStatus(i + 1, ""));
+						if(!record.checkRecordingInIndexIStatus(i + 1, "IE, FF, Safari Ready")){	
+						ATUReports.add("Destination recording verification", "Recording is'nt grayed out and has no status", "Recording is'nt grayed out and has not status", LogAs.PASSED, null);
+						Assert.assertTrue(true);}
+						else
+							ATUReports.add("Destination recording verification", "Recording is'nt grayed out and has no status", "Recording is'nt grayed out but has a status", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+							
+						
+				}else {
+						if(record.checkRecordingInIndexIStatus(i + 1, "Moving/Copying")){
+						System.out.println("Recording is grayed out");
+						ATUReports.add("Destination recording verification", "Recording is'nt grayed out and has not status", "Recording is'nt grayed out and has not status", LogAs.PASSED, null);
+						Assert.assertTrue(true);}
+						else
+							ATUReports.add("Destination recording verification", "Recording is and has status", "Recording is grayed out but has a status", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				} 
 	
 			}
 		}

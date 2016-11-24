@@ -33,9 +33,11 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTestsTabsAsADMIN {
+public class TC21988ValidateRecordingTasksUI {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -231,9 +233,8 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				
 				// 13. Click on a checkbox of one recording.
 				// But first click on search filed to make recording tasks menu go away
-				record.searchbox.click();
-				record.getCheckbox().click();
-				
+			//	record.searchbox.click();
+				record.selectIndexCheckBox(1);				
 				Thread.sleep(1000);
 				
 				// 14. The checkbox is checked.
@@ -292,8 +293,8 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 				
 				// 18. Check several checkboxes .
 				// But first click on search filed to make recording tasks menu go away
-				record.searchbox.click();
-				record.check_all_checkbox.click();
+				//record.searchbox.click();
+				record.checkAllCheckBox();
 				
 				// 19. The checkbox is checked.
 				record.verifyAllCheckedboxSelected();
@@ -367,7 +368,7 @@ public class TC21988ValidateRecordingTasksUIInRecordingsStudentRecordingsAndTest
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("The button: " + button + " is not correct.");
-			ATUReports.add("The button: " + button, "Correct", "Incorrect", LogAs.FAILED, null);
+			ATUReports.add("The button: " + button, "Correct", "Incorrect", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

@@ -35,6 +35,8 @@ import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testrecorder.ATUTestRecorder;
+import atu.testrecorder.exceptions.ATUTestRecorderException;
 
 public class TC15457AddMovFile {
 	// Set Property for ATU Reporter Configuration
@@ -68,10 +70,13 @@ public class TC15457AddMovFile {
 	String instructor1;
 	String instructor2;
 	List<String> for_enroll;
+	ATUTestRecorder recorder; 
 
 	@BeforeClass
-	public void setup() {
-
+	public void setup() throws ATUTestRecorderException {
+		recorder = new ATUTestRecorder("C:\\Users\\mickaele\\Desktop\\","Video",false);
+		
+		recorder.start(); 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
 
@@ -108,9 +113,10 @@ public class TC15457AddMovFile {
 	}
 
 	@AfterClass
-	public void closeBroswer() {
+	public void closeBroswer() throws ATUTestRecorderException {
 		
 		this.driver.quit();
+		recorder.stop();
 	}
 	
 	

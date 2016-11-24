@@ -44,8 +44,8 @@ public class LoginHelperPage extends Page {
 	public WebElement errorHeader;
 	@FindBy(css = ".btn.btn-primary")
 	public WebElement eula_accept_button;
-	@FindBy(xpath = "//*[@id=\"main\"]/form/div[2]/div[6]/button")
-	public WebElement Login_as_guest_button;
+	@FindBy(xpath = "//button[@ng-click=\"loginAsGuest()\"]")
+	public WebElement Login_as_guest_button;	
 	@FindBy(xpath = "//*[@id=\"main\"]/form/div[2]/div[6]/p")
 	public WebElement Login_as_guest_info;
 	private CoursesHelperPage course;
@@ -55,7 +55,6 @@ public class LoginHelperPage extends Page {
 	public LoginHelperPage(WebDriver driver) throws Exception {
 		super(driver);
 		setPageTitle("Tegrity Lecture Capture");	
-
 		setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 		//setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
@@ -232,8 +231,26 @@ public class LoginHelperPage extends Page {
 			waitForVisibility(usernamefield);
 			waitForVisibility(button_login);
 			waitForVisibility(passfield);
-			waitForVisibility(Login_as_guest_button);
+			try{
+			waitForVisibility(Login_as_guest_button,10);
 			clickElement(Login_as_guest_button);
+			}catch(Exception e){
+				
+				try{
+					String[] urlArray=driver.getCurrentUrl().split("/");
+					urlArray[4]="courses";
+					String url=urlArray[0]+urlArray[1]+urlArray[2]+urlArray[3]+urlArray[4];
+					driver.get(url);
+					new WebDriverWait(driver, 15)
+					.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
+			}catch(Exception ex ){
+				ATUReports.add("Login as guest button isn't visible", LogAs.FAILED,
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));			
+			}
+			}
+			
+			
+			
 			try {
 				new WebDriverWait(driver, 30)
 						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));

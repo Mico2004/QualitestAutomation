@@ -4,7 +4,7 @@
   <test name="Test">
     <classes>
   			
-  			<class name="com.automation.main.pre_post_test.PreTest" />
+  		<class name="com.automation.main.delete_additional_content.TC15815CancelTheDelete" />
             
            
      

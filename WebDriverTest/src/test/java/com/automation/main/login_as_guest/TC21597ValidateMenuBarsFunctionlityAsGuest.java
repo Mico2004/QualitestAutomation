@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.automation.main.page_helpers.AddAdditionalContentFileWindow;
@@ -42,8 +43,13 @@ import com.automation.main.page_helpers.RunDiagnosticsPage;
 import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
+import atu.testng.reports.listeners.ATUReportsListener;
+import atu.testng.reports.listeners.ConfigurationListener;
+import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import io.appium.java_client.SwipeElementDirection;
 
+@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 	// Set Property for ATU Reporter Configuration
 	{
@@ -86,6 +92,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 	String instructor1;
 	String instructor2;
 	List<String> for_enroll;
+	
 
 	@BeforeClass
 	public void setup() {
@@ -141,6 +148,8 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		//// pre condition
 
 		// 1.load page
+		
+	
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		String university_url=tegrity.pageUrl.substring(0, tegrity.pageUrl.length()-8);
 		/// 2.login as user1
@@ -182,7 +191,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Set Email and Connection Settings");
 		email_setting.waitForVisibility(email_setting.admin_email);
-		email_setting.fillNewEmailSetting("rndsupport@tegrity.com", "qualitestmcgrawhill@armyspy.com",
+		email_setting.fillNewEmailSetting(EmailInboxPage.EMAIL_SENDING_USER, "qualitestmcgrawhill@armyspy.com",
 				"qualitestmcgrawhill@armyspy.com", confirm_menu);
 		/// sign out and start test
 		for (String window : driver.getWindowHandles()) {
@@ -201,6 +210,8 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		// 1.login as guest
 		tegrity.loginAsguest();
 		/// 3.verify redirect to public courses+verify user name is Guest
+		
+		String URL=driver.getCurrentUrl();
 		course.waitForVisibility(course.public_courses_tab_button);
 
 		/// 4.verify "Disclaimer" leads [Guest] User to the EULA accepting page.
@@ -258,6 +269,8 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		/// 11.verify select 'Require first time users to accept a EULA'
+		String universityNAME=admin_dashboard_page.getUniversityName();
+		System.out.println("universityNAME: "+universityNAME);
 		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
 		advanced_services_setting_page.waitForVisibility(advanced_services_setting_page.eula_checkbox);
 		/// 12.disable checkbox
@@ -273,7 +286,7 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		Thread.sleep(3000);
 		admin_dashboard_page.signOut();
 		// 14.login as guest
-		tegrity.waitForVisibility(tegrity.Login_as_guest_button);
+
 		tegrity.loginAsguest();
 		course.waitForVisibility(course.sign_out);
 		// 15.verify no disclaimer option in menu bar
@@ -337,10 +350,23 @@ public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 		email_login.LoginEmailPage("qualitestmcgrawhill");
 		/// 25.Make sure you recived the email
         Thread.sleep(3000);
-       
-		email_inbox.verifyEmailMessage(driver, subject, sender, comment,"Guest (rndsupport@tegrity.com)");
+        
+		//email_inbox.verifyEmailMessage(driver, subject, EmailInboxPage.EMAIL_SENDING_USER, " Guest ("+EmailInboxPage.EMAIL_SENDING_USER+") "+comment,"");
 		/// 26.Click on "Run diagnostic" menu item.
 		// 1.load page
+        
+        
+        
+        email_inbox.verifyEmailMessage(driver, subject, EmailInboxPage.EMAIL_SENDING_USER,
+        	    "Guest (rndsupport@tegrity.com) "+comment,
+        	    "",
+        	    "Guest",
+        	    universityNAME,
+        	    URL);
+        
+        
+        
+        
 		Thread.sleep(3000);
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		Thread.sleep(3000);
