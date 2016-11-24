@@ -602,6 +602,33 @@ public class RecordingHelperPage extends Page {
 		}
 
 	}
+	
+	public void clickOnCourseTaskThenUploadARecording() throws InterruptedException {
+		WebElement element=course_tasks_button;
+		String id="UploadRecording";
+		try {
+			System.out.println("clickOnCourseTaskThen1");
+			waitForVisibility(element);
+			System.out.println("Afterwait");
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("course_settings displayed");
+			ATUReports.add("Select course Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Thread.sleep(1500);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnCourseTaskThen6");
+			ATUReports.add("Select course Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
+		}
+
+	}
+	
+	
 
 	// This function click on Recorind Task then on delete in the sub menu
 	public void clickOnRecordingTaskThenDelete() throws InterruptedException {

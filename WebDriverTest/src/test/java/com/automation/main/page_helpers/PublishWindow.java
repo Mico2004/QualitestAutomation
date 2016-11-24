@@ -112,8 +112,13 @@ public class PublishWindow extends Page {
 	
 		public void clickOnCancelButton() {
 			try {
-				wait.until(ExpectedConditions.visibilityOf(cancel_button));			
-			    ((JavascriptExecutor) driver).executeScript("document.getElementById(\""+cancel_button.getAttribute("id")+"\").click();");
+				wait.until(ExpectedConditions.visibilityOf(cancel_button));	
+				
+				while(isPublishWindowClosed() == false) {
+					((JavascriptExecutor) driver).executeScript("document.getElementById(\""+cancel_button.getAttribute("id")+"\").click();");
+					Thread.sleep(1000);
+				}
+				
 				System.out.println("Clicked on cancel button.");
 				ATUReports.add("Clicked on cancel button.", "Success.", "Success.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
