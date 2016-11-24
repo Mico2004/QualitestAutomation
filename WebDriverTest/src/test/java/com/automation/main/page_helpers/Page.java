@@ -59,6 +59,7 @@ public class Page {
 	public WebElement logo;
 	@FindBy(id = "SignOutLink")
 	public WebElement sign_out;
+	String universityName="";
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -490,10 +491,10 @@ public class Page {
 	public void verifyDate(String date) {
 		String[] split = date.split("/");
 		String checkdays = split[1];
-
 		String checkmonths = split[0];
-
 		String checkyear = split[2];
+		
+		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date datecurrent = new Date();
 		if ((Integer.valueOf(checkmonths) > 12) || (Integer.valueOf(checkmonths) < 1)
@@ -1341,6 +1342,9 @@ public class Page {
 		}	
 		return linkTexts;
 	}
-
+	public String getUniversityName(){		
+		
+		return universityName.split(" ")[0];		
+	}
 }
 
