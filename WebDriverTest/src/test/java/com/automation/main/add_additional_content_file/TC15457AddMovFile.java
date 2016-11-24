@@ -74,11 +74,9 @@ public class TC15457AddMovFile {
 
 	@BeforeClass
 	public void setup() throws ATUTestRecorderException {
-		recorder = new ATUTestRecorder("C:\\Users\\mickaele\\Desktop\\","Video",false);
-		
-		recorder.start(); 
+		//recorder = new ATUTestRecorder("C:\\Users\\mickaele\\Desktop\\","Video",false);	
+		//recorder.start(); 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -116,7 +114,7 @@ public class TC15457AddMovFile {
 	public void closeBroswer() throws ATUTestRecorderException {
 		
 		this.driver.quit();
-		recorder.stop();
+		//recorder.stop();
 	}
 	
 	
