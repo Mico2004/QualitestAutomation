@@ -90,8 +90,8 @@ public class TC6984ValidateChangeRecordingNameFunctionality {
 
 	
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC17000 Validate Change recording name functionality")
-	public void test17000() throws InterruptedException, ParseException {
+	@Test (description="6984 Validate Change Recording Name Functionality")
+	public void test6984() throws InterruptedException, ParseException {
 		
 		
 		
