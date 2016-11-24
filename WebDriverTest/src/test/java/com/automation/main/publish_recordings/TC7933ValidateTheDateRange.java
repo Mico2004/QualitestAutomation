@@ -89,7 +89,7 @@ public class TC7933ValidateTheDateRange {
 	
 	// @Parameters({"web","title"}) in the future
 	@Test (description="TC7933 Validate The Date Range")
-	public void test793() throws InterruptedException, ParseException {
+	public void test7933() throws InterruptedException, ParseException {
 		
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
 		initializeCourseObject();
