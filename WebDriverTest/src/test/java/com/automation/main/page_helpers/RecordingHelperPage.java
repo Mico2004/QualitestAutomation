@@ -3872,14 +3872,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			waitForVisibility(checkbox);
 			if (checkbox.isSelected()) {
-				System.out.println("select the Checkbox" + checkbox.getAttribute("id"));
-				ATUReports.add("select the Checkbox" + checkbox.getAttribute("id"), "Selected/Already selected.", "Already selected.", LogAs.PASSED, null);
+				System.out.println("select the Checkbox " + checkbox.getAttribute("id"));
+				ATUReports.add("select the Checkbox " + checkbox.getAttribute("id"), "Selected/Already selected.", "Already selected.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
 			} else {			
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);			
-				System.out.println("Checkbox is selected");
-				ATUReports.add("select the Checkbox" + checkbox.getAttribute("id"), "Success to select.", "Sucess to select.", LogAs.PASSED, null);
+				System.out.println("Checkbox is selected ");
+				ATUReports.add("select the Checkbox " + checkbox.getAttribute("id"), "Success to select.", "Sucess to select.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
