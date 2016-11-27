@@ -362,6 +362,8 @@ public class RecordingHelperPage extends Page {
 		
 		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Recording is being edited.")));
 	
+		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Pending")));
+		
 		}catch(org.openqa.selenium.TimeoutException msg){
 			
 			ATUReports.add("Timeout for status disappearing is over but status is still displayed",LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
@@ -5145,6 +5147,33 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		waitForVisibility(first_course_title_tests);
 		WebElement record = driver.findElement(By.xpath("//*[@id='RecordingDuration"+Integer.toString(index)+"']"));
 		return record.getText();
+	}
+
+	public void uploadRecordingThruogthKeys() {
+	
+		String path = "C:\\ProgramData\\Tegrity\\recordings\\Anatomy  Head & neck 2";
+		Actions action = new Actions(driver);
+		
+		// enter to the tegrity program
+		action.sendKeys(Keys.ENTER).build().perform();
+		
+		// enter to the browse
+		action.sendKeys(Keys.TAB).build().perform();
+		action.sendKeys(Keys.TAB).build().perform();
+		action.sendKeys(Keys.TAB).build().perform();
+		action.sendKeys(Keys.TAB).build().perform();
+		action.sendKeys(Keys.ENTER).build().perform();
+	
+		// paste the path of the file 
+		action.sendKeys(path).build().perform();
+		action.sendKeys(Keys.TAB).build().perform();
+		action.sendKeys(Keys.ENTER).build().perform();
+		
+		// press on the upload recordings
+		action.sendKeys(Keys.TAB).build().perform();
+		action.sendKeys(Keys.TAB).build().perform();
+		action.sendKeys(Keys.ENTER).build().perform();
+			
 	}
 
 

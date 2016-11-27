@@ -166,10 +166,10 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		publish_window.verifyThatTheCalendarInTheRightFormat(publish_window.end_date);
 			
 		//24.Click on the "Save" button
-		publish_window.clickOnSaveButton();
+		publish_window.clickOnSaveButtonWithOutCloseTheWindow();
 		
 		//25.The following message is displayed below the publish option: "Please enter an end-date that is after or the same as the beginning date".
-		publish_window.verifyErrorTestDisplayedAndValid();
+		publish_window.verifyErrorTitleWrongDatesDisplayedAndValid();
 		
 		//26. Click the left "Select Date" text box
 		//27. Delete the left textbox content
@@ -182,10 +182,10 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		publish_window.clearTheDateOfTheWebElement(publish_window.end_date);
 		
 		//28.Click on the "Save" button
-		publish_window.clickOnSaveButton();
+		publish_window.clickOnSaveButtonWithOutCloseTheWindow();
 				
 		//29.The following message is displayed below the publish option: "Please enter an end-date that is after or the same as the beginning date".
-		publish_window.verifyErrorTestDisplayedAndValid();
+		publish_window.verifyErrorTitleMissingDatesDisplayedAndValid();
 			
 		//30. Click the left "Select Date" text box
 		//31. Choose the current date
@@ -196,10 +196,10 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		publish_window.verifyThatTheCalendarInTheRightFormat(publish_window.start_date);
 		
 		//33.Click on the "Save" button
-		publish_window.clickOnSaveButton();
+		publish_window.clickOnSaveButtonWithOutCloseTheWindow();
 						
 		//34.The following message is displayed below the publish option: "Please enter an end-date that is after or the same as the beginning date".
-		publish_window.verifyErrorTestDisplayedAndValid();
+		publish_window.verifyErrorTitleMissingDatesDisplayedAndValid();
 		
 		//35. Click the left "Select Date" text box
 		//36. Delete the left textbox content
@@ -215,10 +215,10 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		publish_window.verifyThatTheCalendarInTheRightFormat(publish_window.end_date);
 		
 		//40.Click on the "Save" button
-		publish_window.clickOnSaveButton();
+		publish_window.clickOnSaveButtonWithOutCloseTheWindow();
 						
 		//41.The following message is displayed below the publish option: "Please enter an end-date that is after or the same as the beginning date".
-		publish_window.verifyErrorTestDisplayedAndValid();
+		publish_window.verifyErrorTitleMissingDatesDisplayedAndValid();
 		
 		//42. Click the left "Select Date" text box
 		//43. Choose the current date
@@ -237,23 +237,24 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		publish_window.verifyThatTheCalendarInTheRightFormat(publish_window.end_date);
 		
 		//48.Click on the "Save" button
-		publish_window.clickOnSaveButton();
+		publish_window.clickOnSaveButtonWithOutCloseTheWindow();
 								
 		//49.The following message is displayed below the publish option: "Please enter an end-date that is after or the same as the beginning date".
-		publish_window.verifyErrorTestDisplayedAndValid();
+		publish_window.verifyErrorTitleWrongDatesDisplayedAndValid();
 		
 		//50.Change both of the "Select Date" textboxes text to "12345"
-		publish_window.sendKeysToWebElementInput(publish_window.start_date, "12345");
-		publish_window.sendKeysToWebElementInput(publish_window.end_date, "12345");
+		publish_window.sendKeysToWebElementInput(publish_window.start_date, "2212345");
+		publish_window.sendKeysToWebElementInput(publish_window.end_date, "2212345");
 			
 		//51.Click on the "Save" button
-		publish_window.clickOnSaveButton();
+		publish_window.clickOnSaveButtonWithOutCloseTheWindow();
 								
 		//52.The following message is displayed below the publish option: "Please enter an end-date that is after or the same as the beginning date".
-		publish_window.verifyErrorTestDisplayedAndValid();
+		publish_window.verifyErrorTitleInvalidDatesDisplayedAndValid();
 		
 		//53. Click the left "Select Date" text box
 		//54. Choose the current date
+		publish_window.clearTheDateOfTheWebElement(publish_window.start_date);
 		publish_window.clickElement(publish_window.start);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(2,publish_window.titleOfCalenderStart,byStart);
 				
@@ -262,6 +263,7 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 				
 		//56. Click the left "Select Date" text box
 		//57. Choose the current date
+		publish_window.clearTheDateOfTheWebElement(publish_window.end_date);
 		publish_window.clickElement(publish_window.end);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(1,publish_window.titleOfCalenderEnd,byEnd);
 				

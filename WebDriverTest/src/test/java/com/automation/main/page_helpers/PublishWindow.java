@@ -77,7 +77,11 @@ public class PublishWindow extends Page {
 	@FindBy(xpath =".//*[@id='publishRecordingWindow']/form/div[1]/div[1]/div[2]/div/div[2]/div[2]/div/table/thead/tr[1]/th[3]")
 	public WebElement titleOfCalenderEnd;
 	@FindBy(xpath =".//*[@id='publishRecordingWindow']/form/div[1]/div[2]/span[2]")
-	public WebElement errorTitle;
+	public WebElement errorTitleWrongDates;
+	@FindBy(xpath =".//*[@id='publishRecordingWindow']/form/div[1]/div[2]/span[3]")
+	public WebElement errorTitleMissingDates;
+	@FindBy(xpath =".//*[@id='publishRecordingWindow']/form/div[1]/div[2]/span[1]")
+	public WebElement errorTitleInvalidDates;
 	
 	// This function return true if publish window is closed,
 	// and false if it is open
@@ -243,6 +247,23 @@ public class PublishWindow extends Page {
 		}
 	}
 
+	
+	public void clickOnSaveButtonWithOutCloseTheWindow()
+	{
+		try{
+			waitForVisibility(save_button);
+			save_button.click();		
+			System.out.println("Clicked on save button.");
+			ATUReports.add("Clicked on save button.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch(Exception msg) {
+			System.out.println("Not clicked on save button.");
+			ATUReports.add("Clicked on save button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	
 	public void waitForPageToLoad() {
 		
 		try{
@@ -326,12 +347,12 @@ public class PublishWindow extends Page {
 			
 		}
 
-	public void verifyErrorTestDisplayedAndValid() {
+	public void verifyErrorTitleInvalidDatesDisplayedAndValid() {
 		
 		try {	
-			if(errorTitle.isDisplayed()){		
-				String errorTitleText  = errorTitle.getText();		
-				if (errorTitleText.equals("Please enter an end-date that is after or the same as the beginning date")) {
+			if(errorTitleInvalidDates.isDisplayed()){		
+				String errorTitleText  = errorTitleInvalidDates.getText();		
+				if (errorTitleText.equals("Cannot publish the selected recordings. Please contact Tegrity support")) {
 					System.out.println("The error message is displayed and valid.");
 					ATUReports.add("The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
 				} else{
@@ -349,6 +370,53 @@ public class PublishWindow extends Page {
 		
 	}
 	
+public void verifyErrorTitleMissingDatesDisplayedAndValid() {
+		
+		try {	
+			if(errorTitleMissingDates.isDisplayed()){		
+				String errorTitleText  = errorTitleMissingDates.getText();		
+				if (errorTitleText.equals("Please specify both the beginning and end dates.")) {
+					System.out.println("The error message is displayed and valid.");
+					ATUReports.add("The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
+				} else{
+					System.out.println("The error message is displayed and not valid.");
+					ATUReports.add("The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}				
+			} else {
+				System.out.println("The error message is not displayed.");
+				ATUReports.add("The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		} catch (Exception e) {	
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
+	}
+	
+	public void verifyErrorTitleWrongDatesDisplayedAndValid() {
+		
+		try {	
+			if(errorTitleWrongDates.isDisplayed()){		
+				String errorTitleText  = errorTitleWrongDates.getText();		
+				if (errorTitleText.equals("Please enter an end-date that is after or the same as the beginning date.")) {
+					System.out.println("The error message is displayed and valid.");
+					ATUReports.add("The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
+				} else{
+					System.out.println("The error message is displayed and not valid.");
+					ATUReports.add("The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}				
+			} else {
+				System.out.println("The error message is not displayed.");
+				ATUReports.add("The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		} catch (Exception e) {	
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
+	}
+	
+
 	public void verifyInfomativeTextAndVerifyBelowTheOtherInfoText() {
 			
 			try {
