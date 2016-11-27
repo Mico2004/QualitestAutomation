@@ -147,19 +147,17 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 		record.returnToCourseListPage();
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		record.signOut();
+		
 		
 		// 2. Repeat for INSTRUCTOR and STUDENT.
 		for(int type_of_user=0; type_of_user<2; type_of_user++) {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
-				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				tegrity.loginCourses("User1");			
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
 			}
 			
 			
@@ -180,17 +178,14 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 				driver.switchTo().window(handler);
 				break;
 			}
-			top_bar_helper.signOut();
-			Thread.sleep(1000);
-			
+			record.signOut();
+				
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
-				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				tegrity.loginCourses("User1");			
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
 			}
 			
 			// 9. Open the recording course you just watch.
@@ -205,9 +200,7 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 			record.verifyWebElementDisplayed(record.list_of_resume_buttons.get(0), "Resume box");
 			
 			// Sign out
-			top_bar_helper.signOut();
-			
-			Thread.sleep(2000);
+			record.signOut();	
 		}
 		
 		System.out.println("Done.");
