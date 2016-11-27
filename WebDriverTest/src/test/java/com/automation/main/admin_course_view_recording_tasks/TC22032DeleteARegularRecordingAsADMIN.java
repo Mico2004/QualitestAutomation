@@ -191,8 +191,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				
 				// 8. Click on a checkbox of one recording.
 				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-				
-				
+					
 				String checked_recording_title = null;
 				if (recording_type==2) {
 					record.toEditRecordingPropertiesMenu();		
@@ -208,17 +207,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				Thread.sleep(3000);
 				
 				// 13. "Delete" window is displayed.
-				boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();
-				
-				if(!is_delete_window_closed) {
-					System.out.println("Delete window is opened.");
-					ATUReports.add("Delete window.", "Open.", "Open.", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				} else {
-					System.out.println("Delete window is closed.");
-					ATUReports.add("Delete window.", "Open.", "Closed.", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
+				delete_menu.verifyDeleteWindowOpen();
 				
 				if(!(driver instanceof ChromeDriver)) {
 					// 14. Verify that only selected recording displayed in "List of Recordings".
@@ -253,18 +242,8 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				delete_menu.clickOnDeleteButton();				
 				Thread.sleep(2000);				
 				// 16. Delete window is closed.
-				is_delete_window_closed = delete_menu.isDeleteMenuClose();
-				
-				if(is_delete_window_closed) {
-					System.out.println("Delete window is closed.");
-					ATUReports.add("Delete window.", "Open.", "Closed.", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				} else {
-					System.out.println("Delete window is opened.");
-					ATUReports.add("Delete window.", "Open.", "Open.", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
-				
+				delete_menu.verifyDeleteWindowClosed();
+					
 				// 17. Verify that selected recording is deleted - Selected recording is not displayed in "Recordings" tab.
 				List<String> recording_list_after_delete_recording = record.getCourseRecordingList();
 				
@@ -280,7 +259,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				}
 				// the name in the test tab aren't unique
 				else{
-					
+					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 					record.toEditRecordingPropertiesMenu();		
 					String checked_recording_title_after =edit_recording_properties_window.getRecordName(confirmation_menu);									
 					if(!checked_recording_title.equals(checked_recording_title_after) &&((recording_list_before_delete_recording.size() - recording_list_after_delete_recording.size())==1)) {

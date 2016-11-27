@@ -194,11 +194,8 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		String bookmark_to_add=sdf.format(date);
 		Thread.sleep(1000);
 		player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
-
-
-		for (String handler : driver.getWindowHandles()) {
-			driver.switchTo().window(handler);
-		}
+		player_page.exitInnerFrame();
+		
 		/// 12.sign out super user
 		record.signOut();
 		Thread.sleep(1000);
