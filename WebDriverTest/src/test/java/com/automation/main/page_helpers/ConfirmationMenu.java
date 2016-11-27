@@ -488,7 +488,7 @@ public class ConfirmationMenu extends Page {
 	// appears in HTML source code.
 	public void clickOnOkButtonAfterConfirmAddAdditionalContentFile(String file_name) throws InterruptedException {
 		try {
-			Thread.sleep(1000);
+			waitForVisibility(add_additional_content_confirm_note);
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);

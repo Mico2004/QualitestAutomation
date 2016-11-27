@@ -160,7 +160,6 @@ public class TC15475ExistenceOfUIItems {
 			add_additional_content_window.uploadFileByPathNoConfirmationForTheUI(fullPathToFile,file_name);
             //7.verify uploading correctness:elapsed time,estimated time,percentage,speed and
 			//add_additional_content_window.verifyUploadInfoCorrectness(file_name);
-            confirm_menu.waitForVisibility(confirm_menu.add_additional_content_confirm_note);
             confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);
             
 			// 8.check if redirected to additional content tab

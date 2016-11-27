@@ -228,19 +228,17 @@ public class AddAdditionalContentFileWindow extends Page {
 		public void uploadFileByPathNoConfirmationForTheUI(String path,String fileName) throws Exception {
 
 			String file_name = path.substring(51);
-			//select_upload_additional_file.click();
+			Thread.sleep(2000);
 			uploadFile(path);
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			System.out.println("file selected successfully");
 			verifyAdditionalContentFileNamePriorToSelectButton();/// verify its																	/// location
-			add_additional_file_button.click();/// add
+			clickElementJS(add_additional_file_button);
 			verifyUploadInfoCorrectness(fileName);
 			verifyProgressBar();
 			
 		}
-		
-		
-		
+			
 		// verify selected file name displayed prior to select button
 		public void verifyAdditionalContentButtonsLocation() throws InterruptedException {
 			//Thread.sleep(1500);
