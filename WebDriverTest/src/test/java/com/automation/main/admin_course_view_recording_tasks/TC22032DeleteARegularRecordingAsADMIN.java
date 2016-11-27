@@ -196,7 +196,8 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				if (recording_type==2) {
 					record.toEditRecordingPropertiesMenu();		
 					checked_recording_title =edit_recording_properties_window.getRecordName(confirmation_menu);
-					
+					driver.navigate().refresh();
+					record.clickOnTestsTab();
 				} else {
 					checked_recording_title = record.getFirstRecordingTitle();
 				}
