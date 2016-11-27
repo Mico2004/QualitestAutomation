@@ -149,17 +149,14 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
-		
+		record.signOut();
+	
 		// 2. Login as Student.
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
 		
 		// 3. Click on the Precondtional Course.
-		course.selectCourseThatStartingWith("abc");
-		Thread.sleep(1000);
-		
+		String courseName =course.selectCourseThatStartingWith("abc");
+	
 		// 4. Select some Recording and click on it.
 		// 5. Click on the first chapter.
 		String first_recording_name = record.getFirstRecordingTitle();
@@ -173,17 +170,13 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 			driver.switchTo().window(handler);
 			break;
 		}
-		top_bar_helper.signOut();
-		Thread.sleep(3000);
+		record.signOut();
 		
 		// 7. Login as Excutive Admin.
 		tegrity.loginCourses("ExcutiveAdmin");
-		Thread.sleep(3000);
-		
-		
+				
 		// 8. Click on the Preconditional Course.
-		course.selectCourseThatStartingWith("abc");
-		Thread.sleep(3000);
+		course.selectCourseThatStartingWith(courseName);
 
 		// 9. Validate that bookmark sign is not displayed in the recording, left of recording date.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {
@@ -194,15 +187,13 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 			Assert.assertTrue(false);
 		}
 		
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
-		
+		record.signOut();	
 		// 10. Login as Instructor.
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
+
 		
 		// 11. Click on the Precondtional Course.
-		course.selectCourseThatStartingWith("abc");
+		course.selectCourseThatStartingWith(courseName);
 		
 		// 12. Select some Recording and click on it.
 		// 13. Click on the first chapter.
@@ -217,17 +208,14 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 			driver.switchTo().window(handler);
 			break;
 		}
-		top_bar_helper.signOut();
-		Thread.sleep(3000);
-		
+		record.signOut();
+	
 		// 15. Login as HelpDesk Admin.
 		tegrity.loginCourses("ExcutiveAdmin");
-		Thread.sleep(3000);
-
 				
 		// 16. Click on the Preconditional Course.
-		course.selectCourseThatStartingWith("abc");
-		Thread.sleep(3000);
+		course.selectCourseThatStartingWith(courseName);
+	
 		
 		// 17. Validate that bookmark sign is displayed in the recording, left of recording date.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {
