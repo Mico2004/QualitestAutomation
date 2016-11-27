@@ -326,6 +326,29 @@ public class PublishWindow extends Page {
 			
 		}
 
+	public void verifyErrorTestDisplayedAndValid() {
+		
+		try {	
+			if(errorTitle.isDisplayed()){		
+				String errorTitleText  = errorTitle.getText();		
+				if (errorTitleText.equals("Please enter an end-date that is after or the same as the beginning date")) {
+					System.out.println("The error message is displayed and valid.");
+					ATUReports.add("The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
+				} else{
+					System.out.println("The error message is displayed and not valid.");
+					ATUReports.add("The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}				
+			} else {
+				System.out.println("The error message is not displayed.");
+				ATUReports.add("The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		} catch (Exception e) {	
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
+	}
+	
 	public void verifyInfomativeTextAndVerifyBelowTheOtherInfoText() {
 			
 			try {
@@ -540,9 +563,7 @@ public class PublishWindow extends Page {
 	// The date is in the following format: 'XX/XX/XXXX'.
 	public void verifyThatTheCalendarInTheRightFormat(WebElement date_Field){
 		
-		String id = date_Field.getAttribute("id");
-		String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
-		
+		String correctDate = date_Field.getAttribute("value");		
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 		sdf.setLenient(false);
 		try {
@@ -561,4 +582,20 @@ public class PublishWindow extends Page {
 		}
 
 	}
+
+	
+	public void clearTheDateOfTheWebElement(WebElement element) {
+		
+		try{			
+			element.clear();
+			System.out.println("Delete the textbox content.");
+			ATUReports.add("Delete the textbox content.","Erase.","Erase.", LogAs.PASSED, null);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
+			}	
+	}
+
 }
