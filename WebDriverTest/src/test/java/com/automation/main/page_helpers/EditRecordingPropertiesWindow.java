@@ -688,7 +688,7 @@ public class EditRecordingPropertiesWindow extends Page {
 			String currentOwner = ie.getText(); 
 			if(!searchOwnerInTheOwnerList(currentOwner)){
 				System.out.println("The " + currentOwner + "is not supposed to be at the list of owners at that course.");				
-				ATUReports.add("The " + currentOwner + "is not supposed to be at the list of owners at that course.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add("Verify that all the right owners are at that dropdown list.", "The " + currentOwner + "is not supposed to be at the list of owners at that course.", "The " + currentOwner + "is at the list of owners at that course.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				isAllTheInstractorsInTheList = false;
 				break;
 			}
@@ -696,7 +696,7 @@ public class EditRecordingPropertiesWindow extends Page {
 		}
 		if(isAllTheInstractorsInTheList){
 			System.out.println("All The Owners are found at the list of owners.");
-			ATUReports.add("All The Owners are found at the list of owners.", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add("Verify that all the right owners are at that dropdown list.",  "All the owners are at the list of owners at that course.", "All the owners are at the list of owners at that course.", LogAs.PASSED, null);
 		}
 	}catch(Exception e){
 		e.getMessage();
