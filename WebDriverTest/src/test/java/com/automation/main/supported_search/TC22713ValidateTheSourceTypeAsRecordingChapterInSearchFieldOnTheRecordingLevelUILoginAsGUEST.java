@@ -267,7 +267,6 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 				break;
 			}
 
-			Thread.sleep(10000);
 			player_page.verifyTimeBufferStatusForXSec(10);// check source display
 
 			for (String handler : driver.getWindowHandles()) {
@@ -288,13 +287,8 @@ public class TC22713ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheRec
 			Thread.sleep(4000);
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			//24.click on "Courses" and verify course page
-
 			player_page.returnToCoursesPage(course);
 			////25.navigate back to player then to recordings page
-			driver.navigate().back();
-			player_page.waitForVisibility(player_page.breadcrumbs_box_elements_list.get(0));
-			Thread.sleep(2000);
-			player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
 			driver.navigate().back();
 			Thread.sleep(4000);
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
