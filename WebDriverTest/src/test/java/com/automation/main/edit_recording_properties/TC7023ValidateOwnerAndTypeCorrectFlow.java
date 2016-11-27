@@ -183,7 +183,7 @@ public class TC7023ValidateOwnerAndTypeCorrectFlow  {
 		//6.Click on the "Owner" drop down button
 		//7.The drop down edit box contains only INSTRUCTORS users.	
 		edit_recording_properties_window.addOwnersToList("Instractor",1);
-		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
+		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownListDemo();
 		
 		//8.Choose the "Student Recording" option from the Type drop down list
 		edit_recording_properties_window.ChooseDiffrenetType("Student recording");

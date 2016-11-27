@@ -567,7 +567,7 @@ public class EditRecordingPropertiesWindow extends Page {
 		recordName = recording_title.getText();
 		cancel_button.click();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
-		System.out.println("save succeded");
+		System.out.println("cancel succeded");
 		Thread.sleep(2000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("RecordingStatus1")));
 	} catch (Exception e) {
@@ -634,8 +634,8 @@ public class EditRecordingPropertiesWindow extends Page {
 		for(WebElement ie: owner_button_select) {
 			String currentOwner = ie.getText(); 
 			if(currentOwner.contains(User)){
-				System.out.println("The user is found at the list.");				
-				ATUReports.add("The user is found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("The user " + currentOwner +  " is found at the list.");				
+				ATUReports.add("The user " + currentOwner +  " is found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				isAllTheInstractorsInTheList = false;
 				break;
 			}
