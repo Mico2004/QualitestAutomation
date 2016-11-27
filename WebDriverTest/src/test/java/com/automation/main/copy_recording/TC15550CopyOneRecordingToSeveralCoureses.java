@@ -250,7 +250,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 			} else {
 				System.out.println("Target course name is not clicked: " + target_course_list.get(i));
 			}
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			// 20. Verify that recording is copied to course.
 			isRecordingExist = record.isRecordingExist(source_recording, true);
 			
