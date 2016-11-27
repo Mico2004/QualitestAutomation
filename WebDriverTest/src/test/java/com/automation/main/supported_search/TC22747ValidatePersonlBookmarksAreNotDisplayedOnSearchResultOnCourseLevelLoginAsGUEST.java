@@ -167,17 +167,15 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			// 3.click on course
 			String course_name = course.selectCourseThatStartingWith("Ab");
 			
-			 // 4.to course settings
-			 record.waitForVisibility(record.course_tasks_button);
-			 record.toCourseSettingsPage();
+			// 4.to course settings
+			// 5.verify checked visibility of course(make it public) 
+			record.waitForVisibility(record.course_tasks_button);
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsSelected();
+			course_settings.clickOnOkButton();
+			Thread.sleep(2000);
+			record.signOut();
 			
-			 // 5.verify checked visibility of course(make it public)
-			 course_settings.checkCourseVisibility();
-			 Thread.sleep(2000);
-			 course_settings.signOut();
-			
-			
-			tegrity.waitForVisibility(tegrity.passfield);
 			// 6.login as student
 			tegrity.loginCourses("User4");
 			course.waitForVisibility(course.first_course_button);
