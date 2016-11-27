@@ -243,6 +243,17 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			// 6. delete bookmarks
 			player_page.deleteAllBookmark();
+			player_page.exitInnerFrame();
+			record.signOut();
+			
+			tegrity.loginCourses("User1");
+			
+			course.selectCourseThatStartingWith("Ab");
+							
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+			course_settings.clickOnOkButton();
 			
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
