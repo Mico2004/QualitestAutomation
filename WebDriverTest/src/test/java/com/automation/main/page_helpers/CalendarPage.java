@@ -106,12 +106,12 @@ public class CalendarPage extends Page {
 			Date date = sdf.parse(monthAndYearString);
 			System.out.println(date);
 			System.out.println("The date is in the following format: 'yyyy-MMM'");
-			ATUReports.add("The date is in the following format: 'yyyy-MMM'", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add("The date is in the following format: 'yyyy-MMM'" + "and the date is: " + monthAndYearString , "Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			
 		} catch (ParseException e) {
 			System.out.println("The date is not in the following format: 'yyyy-MMM'" );				
-			ATUReports.add("The date is not in the following format: 'yyyy-MMM'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("The date is in the following format: 'yyyy-MMM'" + "and the date is: " + monthAndYearString, "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
