@@ -3251,6 +3251,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void veirfyStatusNotPublishOnTheFirstRecord(){
 		
 		try {
+			waitForVisibility(first_recording_status);
 			String firstStatus = first_recording_status.getText();
 			if(firstStatus.equals("Not Published")){		
 				System.out.println("veirfy that the status is not publish on the first record.");
