@@ -183,7 +183,6 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 			
 			// 9. Open the recording course you just watch.
 			course.selectCourseThatStartingWith(current_course);
-			Thread.sleep(1000);
 			
 			// 10. Click on the recording you just watched.
 			record.verifyFirstExpandableRecording();
