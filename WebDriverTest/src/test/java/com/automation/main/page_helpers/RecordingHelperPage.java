@@ -372,6 +372,30 @@ public class RecordingHelperPage extends Page {
 		ATUReports.add("There is not more status for any recording", LogAs.PASSED,null);		
 	}
 
+	
+	public void checkStatusExistenceUnpublish() throws InterruptedException {
+		System.out.println("Begin Status Check");	
+		try{
+		new WebDriverWait(driver, 7).until(ExpectedConditions.textToBePresentInElement(wrapper, "length: "));		
+		}
+		catch(org.openqa.selenium.TimeoutException msg){
+			
+			ATUReports.add("There are no recordings in this course tab ",LogAs.WARNING, null);
+		}
+		try{
+		new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Not Published")));
+		
+		}catch(org.openqa.selenium.TimeoutException msg){
+			
+			ATUReports.add("Timeout for status disappearing is over but status is still displayed",LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+		}		
+		
+		ATUReports.add("There is not more status for any recording", LogAs.PASSED,null);		
+	}
+
+	
+	
+	
 
 	// This function check for all recordings if they are clickable.
 	// if all recordings clickable it return true,
