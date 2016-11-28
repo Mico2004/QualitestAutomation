@@ -266,7 +266,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		driver.findElements(By.cssSelector("#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")).get(1).click();
 		
 		// 17. Change the name of the first chapter from the recording that we mentioned in the preconditions.
-		Thread.sleep(3000);
+		record.waitForThePageToLoad();
 		record.selectIndexCheckBox(recordNumber);
 		Thread.sleep(500);
 		

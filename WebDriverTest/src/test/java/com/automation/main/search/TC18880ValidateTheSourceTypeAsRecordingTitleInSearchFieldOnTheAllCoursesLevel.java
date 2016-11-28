@@ -177,7 +177,6 @@ public class TC18880ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheAllCo
 			}
 			Thread.sleep(3000);
 			
-			
 			// 4. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
 			

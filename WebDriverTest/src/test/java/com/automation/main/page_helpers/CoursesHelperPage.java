@@ -256,8 +256,6 @@ public class CoursesHelperPage extends Page {
 	//// select course by name
 	public void selectCourseByName(final String destination_course_name) throws InterruptedException {
 
-		//boolean clicked = false;
-		//int i = 0;
 
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));
 		System.out.println("wait wrapper");
@@ -431,13 +429,8 @@ public class CoursesHelperPage extends Page {
 				selectCourseByName(target_course_name);
 				// wait.until(ExpectedConditions.textToBePresentInElement(By.id("target_course_name"),
 				// target_course_name));
-				System.out.println("select4");
-				try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				System.out.println("select4");		
+				Thread.sleep(4000);
 				System.out.println("selected the course: " + target_course_name);
 				ATUReports.add("select the course: " + target_course_name, LogAs.PASSED, null);
 				// wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("CourseTitle"),
