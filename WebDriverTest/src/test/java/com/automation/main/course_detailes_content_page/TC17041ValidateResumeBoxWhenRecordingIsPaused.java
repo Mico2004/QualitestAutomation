@@ -152,25 +152,22 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		record.signOut();
+		
 		
 		// 2. Repeat for INSTRUCTOR and STUDENT.
 		for(int type_of_user=0; type_of_user<2; type_of_user++) {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
-				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				tegrity.loginCourses("User1");	
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
 			}
-			
-			
+				
 			// 4. Click on a certain course.
 			course.selectCourseThatStartingWith(current_course);
-			Thread.sleep(1000);
+		
 			
 			// 5. Click on the first chapter and wait the player will start play the recording
 			String first_recording_name = record.getFirstRecordingTitle();
@@ -182,7 +179,7 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 					
 			// 7. Navigate back with the browser back button.
 			driver.navigate().back();
-			Thread.sleep(5000);
+			record.waitForThePageToLoad();
 			
 			WebElement we = driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope"));
 			String recording_init_background = record.getBackGroundColor(we);
@@ -230,14 +227,8 @@ public class TC17041ValidateResumeBoxWhenRecordingIsPaused {
 			// 10.1. Redirect to player page.
 			// 10.2. The player start playing the recording from the last slide mentioned in the "Resume Watching" text box.
 			player_page.verifyTimeBufferStatusForXSec(5);
-						
-			// Sign out
-			for(String handler: driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
-				break;
-			}
-			top_bar_helper.signOut();
-			Thread.sleep(1000);
+			player_page.exitInnerFrame();
+			record.signOut();
 		}
 		
 
