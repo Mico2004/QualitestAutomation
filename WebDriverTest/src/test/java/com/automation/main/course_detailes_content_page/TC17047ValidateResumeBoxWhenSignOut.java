@@ -141,8 +141,7 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 		// 1. Make sure that the STUDENT and INSTRUCTOR users you are using never watched the recording used in this test case.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-		
-		
+			
 		String current_course = course.selectCourseThatStartingWith("abc");
 		record.returnToCourseListPage();
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
@@ -163,21 +162,15 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 			
 			// 4. Click on a certain course.
 			course.selectCourseThatStartingWith(current_course);
-			Thread.sleep(1000);
-			
+		
 			// 5. Click on a certain recording.
-			record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
+			record.checkStatusExistenceForMaxTTime(250);
 			String first_recording_name = record.getFirstRecordingTitle();
 			record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_name);
 						
 			// 6. Click on the first chapter and wait the player will start to play.
 			player_page.verifyTimeBufferStatusForXSec(5);
-			
-			// 7. Click Sign out while recording is playing.
-			for(String handler: driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
-				break;
-			}
+			player_page.exitInnerFrame();
 			record.signOut();
 				
 			if(type_of_user==0) {
