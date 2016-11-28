@@ -241,7 +241,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 					
 				// 15. Click "Delete" button.
 				delete_menu.clickOnDeleteButton();				
-				Thread.sleep(2000);				
+				Thread.sleep(4000);				
 				// 16. Delete window is closed.
 				delete_menu.verifyDeleteWindowClosed();
 					
@@ -277,7 +277,6 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		
 			}
 			
-			Thread.sleep(2000);
 			// 18. Logout.
 			record.signOut();
 			
