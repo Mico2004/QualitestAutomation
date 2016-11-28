@@ -111,7 +111,7 @@ public class CalendarPage extends Page {
 			
 		} catch (ParseException e) {
 			System.out.println("The date is not in the following format: 'yyyy-MMM'" );				
-			ATUReports.add("The date is in the following format: 'yyyy-MMM'" + "and the date is: " + monthAndYearString, "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("The date is in the following format: 'yyyy-MMM' and the date is: " + monthAndYearString, "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
