@@ -2514,8 +2514,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				Assert.assertTrue(false);
 			} else {
 				System.out.println("Verified that there is no Student Recordings tab.");
-				ATUReports.add("Verified that there is no Student Recordings tab.", "True.", "True.", LogAs.PASSED,
-						null);
+				ATUReports.add("Verified that there is no Student Recordings tab.", "True.", "True.", LogAs.PASSED,null);
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
@@ -5140,8 +5139,6 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		return recording_list_names.indexOf(record) + 1;
 	}
 	
-
-
 	public void waitForRegularRecordingListToLoad(int seconds){
 		try{
 			new WebDriverWait(driver,seconds ).until(ExpectedConditions.visibilityOf(first_recording));
@@ -5155,10 +5152,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 		}
 		
-		
 	}
-	
-	
 
 	public String getTheRecordTitleByRecordIndex(int index){
 		
@@ -5201,6 +5195,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			
 	}
 
-
-	
+	public void checkThatTheirAreNoRecordsInTheRecordingsPage() {
+		
+		List<String> source_recording_list = getCourseRecordingList(); 
+		
+		if(source_recording_list.size() == 0 ){
+			System.out.println("The recordings aren't displayed in the recording page." );
+			ATUReports.add("Verify that The recordings aren't displayed in the recording page." ,"The recordings aren't displayed in the recording page.","The recordings aren't displayed in the recording page.",LogAs.PASSED, null);		
+		}else{
+			System.out.println("The recordings displayed in the recording page." );
+			ATUReports.add("Verify that The recordings aren't displayed in the recording page." ,"The recordings aren't displayed in the recording page.","The recordings displayed in the recording page.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+		}			
+	}	
 }
