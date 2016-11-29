@@ -183,7 +183,7 @@ public class TC7023ValidateOwnerAndTypeCorrectFlow  {
 		//6.Click on the "Owner" drop down button
 		//7.The drop down edit box contains only INSTRUCTORS users.	
 		edit_recording_properties_window.addOwnersToList("Instractor",1);
-		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownListDemo();
+		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
 		
 		//8.Choose the "Student Recording" option from the Type drop down list
 		edit_recording_properties_window.ChooseDiffrenetType("Student recording");
@@ -191,7 +191,7 @@ public class TC7023ValidateOwnerAndTypeCorrectFlow  {
 		
 		//9.The Owner drop down list consists only from STUDENTS users.
 		edit_recording_properties_window.addOwnersToList("Student",2);
-		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownListDemo();
+		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
 							
 		//10.Choose the "Proctoring Recordings" option from the Type drop down list
 		edit_recording_properties_window.ChooseDiffrenetType("Proctoring recording");
@@ -199,7 +199,7 @@ public class TC7023ValidateOwnerAndTypeCorrectFlow  {
 		
 		//11.The Owner drop down list is consist from all INSTRUCTORS and STUDENTS users.
 		edit_recording_properties_window.addOwnersToList("Proctoring",3);
-		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownListDemo();
+		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
 		
 		//12.Choose the "Regular Recordings" Option from the type drop down list
 		edit_recording_properties_window.ChooseDiffrenetType("Regular recording");
@@ -207,7 +207,7 @@ public class TC7023ValidateOwnerAndTypeCorrectFlow  {
 		
 		//13.The Owner drop down list consists only from INSTRUCTORS users.
 		edit_recording_properties_window.addOwnersToList("Instractor",1);
-		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownListDemo();
+		edit_recording_properties_window.verifyThatAllTheTypeInTheDropDownList();
 			
 		//click on the cancel button for the next test 
 		edit_recording_properties_window.clickElement(edit_recording_properties_window.cancel_button);
