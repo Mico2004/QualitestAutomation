@@ -307,10 +307,9 @@ public class RecordingHelperPage extends Page {
 						"There are recordings in target course, then it will delete them all.", LogAs.PASSED, null);
 						
 				checkAllCheckBox();
-				clickOnRecordingTaskThenDelete();	
-				
+				clickOnRecordingTaskThenDelete();				
 				delete_menu.clickOnDeleteButton();				
-				Thread.sleep(1000);;
+				Thread.sleep(1000);
 			}
 		} catch (Exception msg) {
 			System.out.println("Failed to check the checkbox and delete all recordings"+msg.getLocalizedMessage());
@@ -3070,15 +3069,15 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for (String file_name : additional_content_list_names) {
 
 			if (file_name.equals(name)) {
-				System.out.println("selected file name is  displayed.");
-				ATUReports.add("selected file name is  displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
+				System.out.println("The file:" + name + " is displayed when he shouldn't.");
+				ATUReports.add("The file:" + name + " is displayed when he shouldn't.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
 				return false;
 
 			}
 
 		}
-		System.out.println("selected file name is not displayed.");
-		ATUReports.add("selected file name is not displayed.", LogAs.PASSED, null);
+		System.out.println("The file:" + name + " is not displayed.");
+		ATUReports.add("The file:" + name + " is not displayed.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		return true;
 
