@@ -3,6 +3,7 @@ package com.automation.main.page_helpers;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -363,6 +364,9 @@ public class RecordingHelperPage extends Page {
 		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Recording is being edited.")));
 	
 		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Pending")));
+		
+		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Available Soon")));
+		
 		
 		}catch(org.openqa.selenium.TimeoutException msg){
 			
@@ -5168,31 +5172,55 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		return record.getText();
 	}
 
-	public void uploadRecordingThruogthKeys() {
+	public void uploadRecordingThruogthKeys() throws AWTException {
 	
-		String path = "C:\\ProgramData\\Tegrity\\recordings\\Anatomy  Head & neck 2";
+		String path = "\\workspace\\QualitestAutomation\\resources\\documents\\Marie Curie -Bal, Amrit  (FINAL)";
+		path = System.getProperty("user.dir") + path;
 		Actions action = new Actions(driver);
 		
 		// enter to the tegrity program
-		action.sendKeys(Keys.ENTER).build().perform();
+		Robot robot = new Robot();
+		robot.delay(2000);
+		robot.keyPress(KeyEvent.VK_TAB);	
+		robot.keyRelease(KeyEvent.VK_TAB);
+		robot.keyPress(KeyEvent.VK_TAB);	
+		robot.keyRelease(KeyEvent.VK_TAB);
+		robot.keyPress(KeyEvent.VK_ENTER);	
+		robot.keyRelease(KeyEvent.VK_ENTER);		
 		
-		// enter to the browse
-		action.sendKeys(Keys.TAB).build().perform();
-		action.sendKeys(Keys.TAB).build().perform();
-		action.sendKeys(Keys.TAB).build().perform();
-		action.sendKeys(Keys.TAB).build().perform();
-		action.sendKeys(Keys.ENTER).build().perform();
-	
-		// paste the path of the file 
-		action.sendKeys(path).build().perform();
-		action.sendKeys(Keys.TAB).build().perform();
-		action.sendKeys(Keys.ENTER).build().perform();
+		// enter to the browse		
+		robot.delay(8000);
+		robot.keyPress(KeyEvent.VK_TAB);	
+		robot.keyRelease(KeyEvent.VK_TAB);
+		robot.keyPress(KeyEvent.VK_TAB);	
+		robot.keyRelease(KeyEvent.VK_TAB);
+		robot.keyPress(KeyEvent.VK_TAB);	
+		robot.keyRelease(KeyEvent.VK_TAB);
+		robot.keyPress(KeyEvent.VK_ENTER);	
+		robot.keyRelease(KeyEvent.VK_ENTER);
 		
-		// press on the upload recordings
-		action.sendKeys(Keys.TAB).build().perform();
-		action.sendKeys(Keys.TAB).build().perform();
-		action.sendKeys(Keys.ENTER).build().perform();
-			
+		 // paste the path of the recording 
+		 robot.delay(1000);	
+		 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		 StringSelection stringSelection = new StringSelection(path);
+		 clipboard.setContents(stringSelection, null);
+		 robot.keyPress(KeyEvent.VK_CONTROL);
+		 robot.keyPress(KeyEvent.VK_V);
+		 robot.keyRelease(KeyEvent.VK_V);
+		 robot.keyRelease(KeyEvent.VK_CONTROL);
+		 robot.keyPress(KeyEvent.VK_TAB);	
+		 robot.keyRelease(KeyEvent.VK_TAB);
+		 robot.keyPress(KeyEvent.VK_ENTER);
+		 robot.keyRelease(KeyEvent.VK_ENTER);
+		 
+		 //press on the upload
+		 robot.delay(2000);
+		 robot.keyPress(KeyEvent.VK_TAB);	
+		 robot.keyRelease(KeyEvent.VK_TAB);
+		 robot.keyPress(KeyEvent.VK_ENTER);	
+		 robot.keyRelease(KeyEvent.VK_ENTER);
+		 robot.delay(7000);
+
 	}
 
 	public void checkThatTheirAreNoRecordsInTheRecordingsPage() {

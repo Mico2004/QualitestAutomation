@@ -28,6 +28,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+
+import java.awt.AWTException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -71,6 +73,7 @@ public class TC7946ValidateChangesInAutomaticallyPublishStudentRecordingsSetting
 			publish_window = PageFactory.initElements(driver, PublishWindow.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
+			edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
 			course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 
@@ -88,47 +91,77 @@ public class TC7946ValidateChangesInAutomaticallyPublishStudentRecordingsSetting
 	
 	// @Parameters({"web","title"}) in the future
 	@Test (description="TC7946 validate changes in automatically publish student recordings settings doesnt change existing student recordings")
-	public void test7946() throws InterruptedException, ParseException {
+	public void test7946() throws InterruptedException, ParseException, AWTException {
 		
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
 		initializeCourseObject();
 		
 		//1.pre test upload record login as INSTRUCTOR
-		tegrity.loginCourses("User4");
+		tegrity.loginCourses("User1");
 		
 		//2.Open the course "Course details" page 
 		course.selectCourseThatStartingWith("Ab");	
 		
-		//3.click on upload a recording
+		//3.make Publish recordings after upload checked
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.forceWebElementToBeSelected(course_settings_page.checkbox_publish_after_upload, "Publish recordings after upload");
+		course_settings_page.clickOnOkButton();
+			
+		//4.move to the student tab
+		record.clickOnStudentRecordingsTab();
+		
+		//5.click on upload a recording
 		record.clickOnCourseTaskThenUploadARecording();
 		
-		//4.upload keys
+		//6.upload keys
 		record.uploadRecordingThruogthKeys();
-		
-		//5. check that the pending for record to upload is over	
-		record.checkStatusExistenceForMaxTTime(450);
-		
-		//6. sign out
+			
+		//5. sign out
 		record.signOut();
 			
-		//7.pre test upload record login as INSTRUCTOR
+		//6.pre test upload record login as INSTRUCTOR
 		tegrity.loginCourses("User1");
 				
 		//8.Open the course "Course details" page 
 		course.selectCourseThatStartingWith("Ab");	
 			
-		//9.make Publish recordings after upload checked
-		record.clickOnCourseTaskThenCourseSettings();
-		course_settings_page.forceWebElementToBeUnselected(course_settings_page.checkbox_publish_after_upload, "Publish recordings after upload");
-		course_settings_page.clickOnOkButton();
+		//10.check that the pending for record to upload is over	
+		record.checkStatusExistenceForMaxTTime(450);
 		
-		//10.Click on "Student recordings" tab
+		//11.select the index of the record that we just uploaded
+		String recordingName = "Marie Curie -Bal, Amrit  (FINAL)";
+		int recordingNumber = record.getIndexOfRecordFromRecordName(recordingName);
+		record.selectIndexCheckBox(recordingNumber);
+		
+		//12. open edit properties
+		record.toEditRecordingPropertiesMenu();
+		
+		//13.wait for edit recording properties window to open
+		edit_recording_properties_window.waitForPageToLoad();
+		
+		//14.Choose some other type from the type drop down list
+		edit_recording_properties_window.ChooseDiffrenetType("Student recording");
+		
+		//15.Click the "Save" button
+		edit_recording_properties_window.clickOnSaveButton();
+		
+		//16. sign out
+		record.signOut();
+					
+		//17.login as INSTRUCTOR
+		tegrity.loginCourses("User1");
+						
+		//18.Open the course "Course details" page 
+		course.selectCourseThatStartingWith("Ab");	
+			
+		//19.move to the student tab
 		record.clickOnStudentRecordingsTab();
 		
-		//11.Validate the Students recordings you uploaded earlier are still published.
-		record.verifyNoStatusInTheIndex(1);
+		//20.Validate the Students recordings you uploaded earlier are still published.
+		recordingNumber = record.getIndexOfRecordFromRecordName(recordingName);
+		record.verifyNoStatusInTheIndex(recordingNumber);
 		
-	
+		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	
