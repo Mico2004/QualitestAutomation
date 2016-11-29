@@ -202,7 +202,6 @@ public class TC7898ValidateFunctionalityOfAlwaysOptionInThePublishWindowSingleRe
 		
 				//19.Sign out
 				record.signOut();
-		
 			}
 		}
 		
