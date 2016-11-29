@@ -264,7 +264,7 @@ public class CoursesHelperPage extends Page {
 		WebElement sCourse2 = driver.findElement(By.id(id));
 		String CourseId=sCourse2.getAttribute("id");
 		
-		for(int index=0; index<5 ; index ++){
+		for(int index=0; index<10 ; index ++){
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+CourseId+"\").click();");
 			Thread.sleep(1000);
 			if(isElementPresent(By.id("CourseTitle"))) {
