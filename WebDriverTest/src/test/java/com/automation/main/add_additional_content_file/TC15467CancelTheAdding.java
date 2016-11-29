@@ -135,6 +135,7 @@ public void test15467() throws Exception {
 		// 7. add file and cancel uploading
 		add_additional_content_window.toUploadFileByPathThenSelectFile(fullPathToFile);
 		//add_additional_content_window.waitForVisibility(add_additional_content_window.upload_progress_bar);
+		Thread.sleep(100);
 		add_additional_content_window.clickOnCancelButton();
 		//confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);
 		
