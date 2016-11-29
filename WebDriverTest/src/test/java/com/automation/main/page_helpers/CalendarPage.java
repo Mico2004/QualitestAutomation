@@ -36,6 +36,8 @@ public class CalendarPage extends Page {
 	WebElement monthAndYear;
 	public @FindBy(css = ".glyphicon.glyphicon-arrow-left")
 	WebElement arrowLeft;
+	public @FindBy(css = ".glyphicon.glyphicon-arrow-right")
+	WebElement arrowRight;
 	public @FindBy(css =".week.ng-binding.firstDisplayWeek")
 	WebElement firstWeek;
 	public @FindBy(xpath= ".//*[@id='editRecordingWindow']/form/div[1]/div[2]/div/div[2]/div/table/tbody")
@@ -173,14 +175,12 @@ public class CalendarPage extends Page {
 		DateFormat dateFormat = new SimpleDateFormat("dd");
 		Date date = new Date();
 		Thread.sleep(500);
-		String currentDay = dateFormat.format(date);
-		int dayNumber = Integer.parseInt(currentDay);
-		int dayPicker = dayNumber - days;
-		String dayPick = Integer.toString(dayPicker);
+		day = dateFormat.format(date);
 		getMonthAndYearFromCalendarWithElement(element);
+		int dayPicker =getTheDayOnMonth(days);
+		String dayPick = Integer.toString(dayPicker);
 		changeDayOnCalender(dayPick,by);	
 		String returnDate = month + "/" + dayPick + "/" + year;
-		
 		return returnDate;
 		
 		
@@ -195,31 +195,53 @@ public class CalendarPage extends Page {
 		clickElementJS(date_Field);	
 		Thread.sleep(500);
 		getMonthAndYearFromCalendar();
-		getDayFromCalender();
-			
-	    int dayInt = Integer.parseInt(day);
-	    int monthInt = Integer.parseInt(month);
-	    int pickTwoDayBefore = 0;
-	    pickTwoDayBefore= dayInt -days;
-	    if(dayInt == 1 || dayInt == 2 || dayInt ==3){
-	    	if(monthInt == 3 ) {	
-	    		if(pickTwoDayBefore <=0)
-	    			pickTwoDayBefore +=28;    		
-	    	} else if(monthInt == 1 || monthInt == 11 || monthInt == 9 || monthInt == 8  || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
-	    		if(pickTwoDayBefore <=0)
-	    			pickTwoDayBefore +=31;   			
-	    	} else if(monthInt == 12 || monthInt == 10 || monthInt == 7 || monthInt == 5) {	
-	    		if(pickTwoDayBefore <=0)
-	    			pickTwoDayBefore +=30;
-	    	}
-	    	if(pickTwoDayBefore != 1)	{
-	    		clickElement(arrowLeft);
-	    	    monthInt -=1; 
-	    	}
-	    }
+		getDayFromCalender();	
+		int pickTwoDayBefore = getTheDayOnMonth(days);
 	    String dayNewNumber = Integer.toString(pickTwoDayBefore);
 	    By by = By.className("table-condensed");
 	    changeDayOnCalender(dayNewNumber,by);
+	}
+	
+	
+	
+	public int getTheDayOnMonth(int days){
+		
+		int dayInt = Integer.parseInt(day);
+		    int monthInt = Integer.parseInt(month);
+		    int pickTwoDayBefore = 0;
+		    pickTwoDayBefore= dayInt -days;
+		    if(dayInt == 1 || dayInt == 2 || dayInt ==3){
+		    	if(monthInt == 3 ) {	
+		    		if(pickTwoDayBefore <=0)
+		    			pickTwoDayBefore +=28;    		
+		    	} else if(monthInt == 1 || monthInt == 11 || monthInt == 9 || monthInt == 8  || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
+		    		if(pickTwoDayBefore <=0)
+		    			pickTwoDayBefore +=31;   			
+		    	} else if(monthInt == 12 || monthInt == 10 || monthInt == 7 || monthInt == 5) {	
+		    		if(pickTwoDayBefore <=0)
+		    			pickTwoDayBefore +=30;
+		    	}
+		    	if(pickTwoDayBefore != 1)	{
+		    		clickElement(arrowLeft);
+		    	    monthInt -=1; 
+		    	}
+		    } else if ( days < 0  && dayInt>= 28){
+		    	if(monthInt == 2 ) {	
+		    		if(pickTwoDayBefore >28)
+		    			pickTwoDayBefore -=28;    		
+		    	} else if(monthInt == 1 || monthInt == 3 || monthInt == 5 || monthInt == 7  || monthInt == 8 || monthInt == 10 ||  monthInt == 12) {
+		    		if(pickTwoDayBefore >31)
+		    			pickTwoDayBefore -=31;   			
+		    	} else if(monthInt == 4 || monthInt == 6 || monthInt == 9 || monthInt == 11) {	
+		    		if(pickTwoDayBefore >30)
+		    			pickTwoDayBefore -=30;
+		    	}
+		    	if(pickTwoDayBefore == 1 || pickTwoDayBefore == 2 )	{
+		    		clickElement(arrowRight);
+		    	    monthInt +=1; 
+		    	}
+		    }
+		    return pickTwoDayBefore;
 	}
 
 	public void changeDayOnCalender(String dayNewNumber ,By by){
