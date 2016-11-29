@@ -537,7 +537,7 @@ public class Page {
 			Thread.sleep(1000);
 			System.out.println("signOut1");		 
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");			
-			new WebDriverWait(driver, 25).until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
+			//new WebDriverWait(driver, 25).until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
 			System.out.println("signOut3");
 			for (int second = 0;second<=60; second++) {		
 				if (second >= 60) {
@@ -562,6 +562,7 @@ public class Page {
 		} catch (Exception e) {
 			System.out.println("LogOut from user not succeeded 3");
 			ATUReports.add("Sign Out failed", e.getMessage(), LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
 		}	
 		System.out.println("signOut5");
 	}

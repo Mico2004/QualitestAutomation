@@ -256,7 +256,6 @@ public class CoursesHelperPage extends Page {
 	//// select course by name
 	public void selectCourseByName(final String destination_course_name) throws InterruptedException {
 
-
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));
 		System.out.println("wait wrapper");
 		WebElement element = driver.findElement(By.xpath("//a[contains(@title,'" + destination_course_name + "')]"));
@@ -279,7 +278,7 @@ public class CoursesHelperPage extends Page {
 		}catch(TimeoutException e){
 			System.out.println("Course wasn't selected successfully: couese title isn't visible");
 			ATUReports.add("Course wasn't selected successfully: couese title isn't visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
-			
+			Assert.assertTrue(false);
 		}
 		
 		/*
