@@ -537,7 +537,7 @@ public class Page {
 			Thread.sleep(1000);
 			System.out.println("signOut1");		 
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");			
-			//new WebDriverWait(driver, 25).until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
+			new WebDriverWait(driver, 25).until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
 			System.out.println("signOut3");
 			for (int second = 0;second<=60; second++) {		
 				if (second >= 60) {
