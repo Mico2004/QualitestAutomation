@@ -42,6 +42,12 @@ public class CalendarPage extends Page {
 	WebElement firstWeek;
 	public @FindBy(xpath= ".//*[@id='editRecordingWindow']/form/div[1]/div[2]/div/div[2]/div/table/tbody")
 	WebElement calenderTable;
+	public @FindBy(xpath = ".//*[@id='publishRecordingWindow']/form/div[1]/div[1]/div[2]/div/div[2]/div[2]/div/table/thead/tr[1]/th[2]/i")
+	WebElement arrowLeftPublishRight;
+	public @FindBy(xpath = ".//*[@id='publishRecordingWindow']/form/div[1]/div[1]/div[2]/div/div[2]/div[2]/div/table/thead/tr[1]/th[4]/i")
+	WebElement arrowRightPublishRight;
+	
+	
 	String day,month,year;
 	
 
@@ -170,14 +176,14 @@ public class CalendarPage extends Page {
 	
 	}
 	
-	public String changeCreateDayWithoutDayPickerActive(int days,WebElement element,By by) throws ParseException, InterruptedException {
+	public String changeCreateDayWithoutDayPickerActive(int days,WebElement element,By by ,WebElement rightArrow ,WebElement leftArrow) throws ParseException, InterruptedException {
 		
 		DateFormat dateFormat = new SimpleDateFormat("dd");
 		Date date = new Date();
 		Thread.sleep(500);
 		day = dateFormat.format(date);
 		getMonthAndYearFromCalendarWithElement(element);
-		int dayPicker =getTheDayOnMonth(days);
+		int dayPicker =getTheDayOnMonth(days,rightArrow,leftArrow);
 		String dayPick = Integer.toString(dayPicker);
 		changeDayOnCalender(dayPick,by);	
 		String returnDate = month + "/" + dayPick + "/" + year;
@@ -185,9 +191,13 @@ public class CalendarPage extends Page {
 		
 		
 	}
-	
+	/**
+	 * Enter on the calendar label and get the month year and day after subtract days
+	 * @param days days the amount of days that we should subtract or author
+	 * @throws ParseException
+	 * @throws InterruptedException
+	 */
 
-	
 	public void changeCreateDay(int days) throws ParseException, InterruptedException {
 		
 		String id = date_Field.getAttribute("id");
@@ -196,15 +206,20 @@ public class CalendarPage extends Page {
 		Thread.sleep(500);
 		getMonthAndYearFromCalendar();
 		getDayFromCalender();	
-		int pickTwoDayBefore = getTheDayOnMonth(days);
+		int pickTwoDayBefore = getTheDayOnMonth(days,arrowLeft,arrowRight);
 	    String dayNewNumber = Integer.toString(pickTwoDayBefore);
 	    By by = By.className("table-condensed");
 	    changeDayOnCalender(dayNewNumber,by);
 	}
 	
 	
-	
-	public int getTheDayOnMonth(int days){
+	/**
+	 * This function is returning the current day after subtract days
+	 *  ( days can be negative and we can author instead subtract)
+	 * @param days the amount of days that we should subtract or author
+	 * @return The current day - days
+	 */
+	public int getTheDayOnMonth(int days ,WebElement rightArrow ,WebElement leftArrow ){
 		
 		int dayInt = Integer.parseInt(day);
 		    int monthInt = Integer.parseInt(month);
@@ -222,7 +237,7 @@ public class CalendarPage extends Page {
 		    			pickTwoDayBefore +=30;
 		    	}
 		    	if(pickTwoDayBefore != 1)	{
-		    		clickElement(arrowLeft);
+		    		clickElement(leftArrow);
 		    	    monthInt -=1; 
 		    	}
 		    } else if ( days < 0  && dayInt>= 28){
@@ -237,13 +252,18 @@ public class CalendarPage extends Page {
 		    			pickTwoDayBefore -=30;
 		    	}
 		    	if(pickTwoDayBefore == 1 || pickTwoDayBefore == 2 )	{
-		    		clickElement(arrowRight);
+		    		clickElement(rightArrow);
 		    	    monthInt +=1; 
 		    	}
 		    }
 		    return pickTwoDayBefore;
 	}
 
+	/**
+	 * 
+	 * @param dayNewNumber
+	 * @param by
+	 */
 	public void changeDayOnCalender(String dayNewNumber ,By by){
 		
 		WebElement table = driver.findElement(by);

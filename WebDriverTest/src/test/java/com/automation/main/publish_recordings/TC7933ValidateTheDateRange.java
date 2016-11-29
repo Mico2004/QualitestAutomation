@@ -117,14 +117,14 @@ public class TC7933ValidateTheDateRange {
 		
 		//7. In left calendar select the passed date
 		publish_window.clickElement(publish_window.start);
-		String date = calendarPage.changeCreateDayWithoutDayPickerActive(2,publish_window.titleOfCalenderStart,byStart);
+		String date = calendarPage.changeCreateDayWithoutDayPickerActive(2,publish_window.titleOfCalenderStart,byStart ,calendarPage.arrowRight , calendarPage.arrowLeft);
 		
 		//8.Selected date is displayed in left textbox
 		publish_window.veirfyDateFromThisDate(date,publish_window.start_date);
 		
 		//9. In right calendar select the passed date
 		publish_window.clickElement(publish_window.end);
-		date = calendarPage.changeCreateDayWithoutDayPickerActive(1,publish_window.titleOfCalenderEnd,byEnd);
+		date = calendarPage.changeCreateDayWithoutDayPickerActive(1,publish_window.titleOfCalenderEnd,byEnd ,calendarPage.arrowRightPublishRight , calendarPage.arrowLeftPublishRight);
 		
 		//10.Selected date is displayed in right textbox
 		publish_window.veirfyDateFromThisDate(date,publish_window.end_date);
@@ -154,7 +154,7 @@ public class TC7933ValidateTheDateRange {
 		
 		//17. In right calendar select the passed date
 		publish_window.clickElement(publish_window.end);
-		date = calendarPage.changeCreateDayWithoutDayPickerActive(-2,publish_window.titleOfCalenderEnd,byEnd);
+		date = calendarPage.changeCreateDayWithoutDayPickerActive(-2,publish_window.titleOfCalenderEnd,byEnd,calendarPage.arrowRightPublishRight , calendarPage.arrowLeftPublishRight);
 				
 		//18.Selected date is displayed in right textbox
 		publish_window.veirfyDateFromThisDate(date,publish_window.end_date);
@@ -184,7 +184,7 @@ public class TC7933ValidateTheDateRange {
 				
 		//26. In right calendar select the passed date
 		publish_window.clickElement(publish_window.start_date);
-		date = calendarPage.changeCreateDayWithoutDayPickerActive(-1,publish_window.titleOfCalenderStart,byStart);
+		date = calendarPage.changeCreateDayWithoutDayPickerActive(-1,publish_window.titleOfCalenderStart,byStart , calendarPage.arrowRight , calendarPage.arrowLeft);
 						
 		//27.Selected date is displayed in right textbox
 		publish_window.veirfyDateFromThisDate(date,publish_window.start_date);
