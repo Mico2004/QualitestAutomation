@@ -194,7 +194,8 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 					
 				String checked_recording_title = null;
 				if (recording_type==2) {
-					record.toEditRecordingPropertiesMenu();		
+					record.toEditRecordingPropertiesMenu();	
+					edit_recording_properties_window.waitForPageToLoad();
 					checked_recording_title =edit_recording_properties_window.getRecordName(confirmation_menu);
 					driver.navigate().refresh();
 					record.clickOnTestsTab();
@@ -261,7 +262,8 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				// the name in the test tab aren't unique
 				else{
 					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-					record.toEditRecordingPropertiesMenu();		
+					record.toEditRecordingPropertiesMenu();	
+					edit_recording_properties_window.waitForPageToLoad();
 					String checked_recording_title_after =edit_recording_properties_window.getRecordName(confirmation_menu);									
 					if(!checked_recording_title.equals(checked_recording_title_after) &&((recording_list_before_delete_recording.size() - recording_list_after_delete_recording.size())==1)) {
 						System.out.println("Verified that selected recording is deleted and not displayed.");
