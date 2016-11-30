@@ -3262,6 +3262,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			clickElementJS(publish.never_select_button);						
 			waitForVisibility(publish.save_button);	
 			clickElementJS(publish.save_button);
+			Thread.sleep(500);
 			if (isElementPresent(By.id("ModalDialogHeader"))) {
 				clickElementJS(publish.save_button);
 			}
@@ -5234,5 +5235,21 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("The recordings displayed in the recording page." );
 			ATUReports.add("Verify that The recordings aren't displayed in the recording page." ,"The recordings aren't displayed in the recording page.","The recordings displayed in the recording page.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
 		}			
+	}
+
+	public void verifyThatWeHaveHintToWebElement(WebElement element, String text) {		
+		try {
+			String title = element.getAttribute("title");
+			if(title.equals(text)){
+				System.out.println("Verify that we can see hint to the webElement: " +element.getText() + "the hint is: " + title );
+				ATUReports.add("Verify that we can see hint to the webElement: " +element.getText() + "the hint is: " + title ,"The hint is display.","The hint is display.",LogAs.PASSED, null);		
+			}else{
+				System.out.println("Not Verify that we can see hint to the webElement: " +element.getText() + "the hint is: " + title);
+				ATUReports.add("Verify that we can see hint to the webElement: " +element.getText() + "the hint is: " + title ,"The hint is display.","The hint is not display.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+			}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
 	}	
 }
