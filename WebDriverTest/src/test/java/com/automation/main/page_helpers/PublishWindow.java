@@ -286,7 +286,6 @@ public class PublishWindow extends Page {
 	public void verifyPublishColor(RecordingHelperPage rec) throws InterruptedException {
 			
 			try{
-			Thread.sleep(2000);	
 			String background_rec = rec.getBackGroundColor(rec.background);
 			String menu_background = getBackGroundColor(publish_window_title_background);
 			if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(publish_window_title_background))) {
