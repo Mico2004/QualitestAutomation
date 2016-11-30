@@ -4299,6 +4299,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			moveToElement(webElement,driver).perform();
 			Thread.sleep(100);
 		}
+			
 		System.out.println("It is possible to scroll the recordings list page.");
 		ATUReports.add("It is possible to scroll the recording list page.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);

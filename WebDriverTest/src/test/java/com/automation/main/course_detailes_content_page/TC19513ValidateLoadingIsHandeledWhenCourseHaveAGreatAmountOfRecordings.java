@@ -165,12 +165,12 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 		
 		record.checkStatusExistenceForMaxTTime(600);
 		
-		// 2. Login as INSTRUCTOR.
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
-		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
+		//signout
+		record.signOut();
 		
+		// 2. Login as INSTRUCTOR.
+		tegrity.loginCourses("User1");
+			
 		// 3. Enter to the predefined course.
 		course.selectCourseThatStartingWith("abc");
 		
@@ -183,41 +183,13 @@ public class TC19513ValidateLoadingIsHandeledWhenCourseHaveAGreatAmountOfRecordi
 		// 4. Click on another Tab (Student, Additional Recordings etc).
 		record.clickOnStudentRecordingsTab();
 		
-//		int counter = 0;
-//		while(true) {
-//			counter++;
-//			String student_tab_color = record.getBackGroundColor(record.student_recordings_tab);
-//			if (counter == 60) {
-//				break;
-//			} else if(student_tab_color.equals("#ffffff")) {
-//				Thread.sleep(1000);
-//				continue;
-//			} else {
-//				break;
-//			}
-//		}
-		Thread.sleep(5000);
+		wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
 		
 //		System.out.println(record.getBackGroundColor(record.recordings_tab));
 		
 		// 5. Return to the "Regular Recordings" tab.
 		record.clickOnRecordingsTab();
-		
-//		counter = 0;
-//		while(true) {
-//			counter++;
-//			String recording_tab = record.getBackGroundColor(record.recordings_tab);
-//			if (counter == 60) {
-//				break;
-//			} else if(recording_tab.equals("#ffffff")) {
-//				Thread.sleep(1000);
-//				continue;
-//			} else {
-//				break;
-//			}
-//		}
-		Thread.sleep(5000);
-		
+				
 		// 5.1. The loading event is handeled properly (spinning loading symbol for example).
 		wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
 		
