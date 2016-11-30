@@ -5251,5 +5251,5 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			e.getMessage();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
-	}	
+	}
 }

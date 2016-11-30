@@ -175,33 +175,22 @@ public class TC7990ValidateTagMenuItemUI {
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(tag_window.header_checkbox);
 		tag_window.verifyAllTheTagCheckboxesAreChecked();
 
-		//25. unCheck the "Header" checkbox.
+		//25. Uncheck the "Header" checkbox.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(tag_window.header_checkbox);
 		tag_window.verifyAllTheTagCheckboxesAreUnChecked();
+		
+		//26.Check all the "Tag" checkboxes.
+		tag_window.CheckAllTheTagCheckboxes();
+		tag_window.verifyTheHeaderCheckboxIsChecked();
 			
-		//10.The text "When would you like the selected recordings to be available?" shall be displayed below.
-		publish_window.verifyInfomativeTextAndVerifyBelowTheOtherInfoText();
+		//27.unCheck all the "Tag" checkboxes.
+		tag_window.CheckAllTheTagCheckboxes();
+		tag_window.verifyTheHeaderCheckboxIsUnChecked();
 		
-		//11.The list of available options shall be displayed next.
-		publish_window.verifyThatTheRadioButtonsWillDisplayBelow();
+		//28.Validate the unchecked "Tag" checkbox is with white background.
+		tag_window.verifyTheTableColor("White");
 		
-		//12.The "Save" button is displayed at the bottom right of the window.
-		//13.The "Cancel" button is displayed left to the "Save" button.
-		publish_window.VerifyTheLocationOfTheSaveAndCancel();
 		
-		//14.Validate the content of the available publishing options
-		publish_window.VerifyTheContentOfTheAvailablePublishingOptions();
-		
-		//15.Click on the "From" text box
-		//16. The current month is presented - year-month in the format of (xxxx)-(yyy)
-		publish_window.verifyThatAfterClickingOnTheFromTheCalenderWidgetIsDisplayed(publish_window.start,publish_window.calenderStart);
-		calendarPage.verifyThatFormatOfTheMonthAndYear(publish_window.titleOfCalenderStart);
-		
-		//15.Click on the "From" text box
-		//16. The current month is presented - year-month in the format of (xxxx)-(yyy)
-		publish_window.verifyThatAfterClickingOnTheFromTheCalenderWidgetIsDisplayed(publish_window.end,publish_window.calenderEnd);
-		calendarPage.verifyThatFormatOfTheMonthAndYear(publish_window.titleOfCalenderEnd);
-		publish_window.clickOnCancelButton();
 		}
 		
 		System.out.println("Done.");

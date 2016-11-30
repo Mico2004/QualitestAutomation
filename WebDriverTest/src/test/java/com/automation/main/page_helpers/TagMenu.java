@@ -292,4 +292,9 @@ public class TagMenu extends Page {
 			}		
 		
 	}
+
+	public void verifyTheTableColor(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }
