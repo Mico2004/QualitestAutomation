@@ -129,7 +129,7 @@ public class TC7946ValidateChangesInAutomaticallyPublishStudentRecordingsSetting
 		record.checkStatusExistenceForMaxTTime(450);
 		
 		//11.select the index of the record that we just uploaded
-		String recordingName = "Marie Curie -Bal, Amrit  (FINAL)";
+		String recordingName = "Marie Curie -Bal, Amrit (FINAL)";	                       
 		int recordingNumber = record.getIndexOfRecordFromRecordName(recordingName);
 		record.selectIndexCheckBox(recordingNumber);
 		
