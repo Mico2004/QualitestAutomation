@@ -119,7 +119,7 @@ public class CalendarPage extends Page {
 			
 		} catch (ParseException e) {
 			System.out.println("The date is not in the following format: 'yyyy-MMM'" );				
-			ATUReports.add("The date is in the following format: 'yyyy-MMM' and the date is: " + monthAndYearString, "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("The date is in the following format: 'yyyy-MMM' and the date is: " + monthAndYearString + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -239,6 +239,7 @@ public class CalendarPage extends Page {
 		    	if(pickTwoDayBefore != 1)	{
 		    		clickElement(leftArrow);
 		    	    monthInt -=1; 
+		    	    month = Integer.toString(monthInt);
 		    	}
 		    } else if ( days < 0  && dayInt>= 28){
 		    	if(monthInt == 2 ) {	
@@ -254,6 +255,7 @@ public class CalendarPage extends Page {
 		    	if(pickTwoDayBefore == 1 || pickTwoDayBefore == 2 )	{
 		    		clickElement(rightArrow);
 		    	    monthInt +=1; 
+		    	    month = Integer.toString(monthInt);
 		    	}
 		    }
 		    return pickTwoDayBefore;
