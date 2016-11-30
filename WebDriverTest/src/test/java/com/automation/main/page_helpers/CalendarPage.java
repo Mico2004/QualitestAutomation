@@ -45,33 +45,8 @@ public class CalendarPage extends Page {
 	public @FindBy(xpath = ".//*[@id='publishRecordingWindow']/form/div[1]/div[1]/div[2]/div/div[2]/div[2]/div/table/thead/tr[1]/th[2]/i")
 	WebElement arrowLeftPublishRight;
 	public @FindBy(xpath = ".//*[@id='publishRecordingWindow']/form/div[1]/div[1]/div[2]/div/div[2]/div[2]/div/table/thead/tr[1]/th[4]/i")
-	WebElement arrowRightPublishRight;
-	
-	
+	WebElement arrowRightPublishRight;	
 	String day,month,year;
-	
-
-	public void verifyTest(){
-		 
-		String correctDate = date_Field.getText();
-		clickElement(date_Field);
-		List<WebElement> tr_collection=calenderTable.findElements(By.xpath("tbody/tr"));
-   
-	        int row_num,col_num;
-	        row_num=1;
-	        for(WebElement trElement : tr_collection)
-	        {
-	            List<WebElement> td_collection=trElement.findElements(By.xpath("td"));
-	            col_num=1;
-	            for(WebElement tdElement : td_collection)
-	            {
-	                System.out.println("row # "+row_num+", col # "+col_num+ "text="+tdElement.getText());
-	                col_num++;
-	            }
-	            row_num++;
-	        } 
-	    }
-	
 	
 	public void getMonthAndYearFromCalendar() throws ParseException {
 		
@@ -106,7 +81,7 @@ public class CalendarPage extends Page {
     public void verifyThatFormatOfTheMonthAndYear(WebElement ie) throws ParseException {
     
     	String monthAndYearString = ie.getText();													
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM",Locale.ENGLISH);
 		sdf.setLenient(false);
 		try {
 
@@ -301,7 +276,4 @@ public class CalendarPage extends Page {
 		System.out.println("Not Verify the day from the calendar.");
 	    Assert.assertTrue(false);
 	}
-	
-	
-	
 }
