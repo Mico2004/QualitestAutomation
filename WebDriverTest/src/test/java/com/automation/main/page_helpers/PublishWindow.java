@@ -233,7 +233,7 @@ public class PublishWindow extends Page {
 	{
 		try {
 			while(isPublishWindowClosed() == false) {
-				save_button.click();
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", save_button);	
 				Thread.sleep(3000);
 			}
 			
@@ -252,7 +252,7 @@ public class PublishWindow extends Page {
 	{
 		try{
 			waitForVisibility(save_button);
-			save_button.click();		
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", save_button);		
 			System.out.println("Clicked on save button.");
 			ATUReports.add("Clicked on save button.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
