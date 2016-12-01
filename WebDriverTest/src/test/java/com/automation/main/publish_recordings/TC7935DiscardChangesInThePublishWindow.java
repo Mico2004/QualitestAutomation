@@ -175,11 +175,11 @@ public class TC7935DiscardChangesInThePublishWindow {
 		publish_window.verifyThatDateRangeOptionSelectedOrNotSelected(1);
 		
 		//26.In left calendar select the date of today
-		publish_window.clickElement(publish_window.start);
+		publish_window.clickElementJS(publish_window.start);
 		String date = calendarPage.changeCreateDayWithoutDayPickerActive(0,publish_window.titleOfCalenderStart,byStart ,calendarPage.arrowRight , calendarPage.arrowLeft);
 		
 		//27. In right calendar select the date of today
-		publish_window.clickElement(publish_window.end);
+		publish_window.clickElementJS(publish_window.end);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(0,publish_window.titleOfCalenderEnd,byEnd,calendarPage.arrowRightPublishRight , calendarPage.arrowLeftPublishRight);
 		
 		//28.Click on the "Cancel" button

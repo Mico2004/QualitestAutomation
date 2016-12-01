@@ -151,7 +151,7 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		
 		//18. Click the left "Select Date" text box
 		//19. Choose the current date
-		publish_window.clickElement(publish_window.start);
+		publish_window.clickElementJS(publish_window.start);
 		String date = calendarPage.changeCreateDayWithoutDayPickerActive(0,publish_window.titleOfCalenderStart,byStart ,calendarPage.arrowRight , calendarPage.arrowLeft);
 		
 		//20. The textbox text changes to the selected date in the following format: XX/XX/XXXX or x/x/xxxx
@@ -159,7 +159,7 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		
 		//21. Click the right "Select Date" text box
 		//22. Choose the current date
-		publish_window.clickElement(publish_window.end);
+		publish_window.clickElementJS(publish_window.end);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(1,publish_window.titleOfCalenderEnd,byEnd,calendarPage.arrowRightPublishRight , calendarPage.arrowLeftPublishRight);
 				
 		//23. The textbox text changes to the selected date in the following format: XX/XX/XXXX or x/x/xxxx
@@ -173,12 +173,12 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		
 		//26. Click the left "Select Date" text box
 		//27. Delete the left textbox content
-		publish_window.clickElement(publish_window.start);
+		publish_window.clickElementJS(publish_window.start);
 		publish_window.clearTheDateOfTheWebElement(publish_window.start_date);
 		
 		//26. Click the right "Select Date" text box
 		//27. Delete the right textbox content
-		publish_window.clickElement(publish_window.end);
+		publish_window.clickElementJS(publish_window.end);
 		publish_window.clearTheDateOfTheWebElement(publish_window.end_date);
 		
 		//28.Click on the "Save" button
@@ -189,7 +189,7 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 			
 		//30. Click the left "Select Date" text box
 		//31. Choose the current date
-		publish_window.clickElement(publish_window.start);
+		publish_window.clickElementJS(publish_window.start);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(0,publish_window.titleOfCalenderStart,byStart ,calendarPage.arrowRight , calendarPage.arrowLeft);
 		
 		//32. The textbox text changes to the selected date in the following format: XX/XX/XXXX or x/x/xxxx
@@ -203,12 +203,12 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		
 		//35. Click the left "Select Date" text box
 		//36. Delete the left textbox content
-		publish_window.clickElement(publish_window.start);
+		publish_window.clickElementJS(publish_window.start);
 		publish_window.clearTheDateOfTheWebElement(publish_window.start_date);
 		
 		//37. Click the left "Select Date" text box
 		//38. Choose the current date
-		publish_window.clickElement(publish_window.end);
+		publish_window.clickElementJS(publish_window.end);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(0,publish_window.titleOfCalenderEnd,byEnd , calendarPage.arrowRightPublishRight , calendarPage.arrowLeftPublishRight);
 		
 		//39. The textbox text changes to the selected date in the following format: XX/XX/XXXX or x/x/xxxx
@@ -222,7 +222,7 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		
 		//42. Click the left "Select Date" text box
 		//43. Choose the current date
-		publish_window.clickElement(publish_window.start);
+		publish_window.clickElementJS(publish_window.start);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(1,publish_window.titleOfCalenderStart,byStart ,calendarPage.arrowRight , calendarPage.arrowLeft);
 		
 		//44. The textbox text changes to the selected date in the following format: XX/XX/XXXX or x/x/xxxx
@@ -230,7 +230,7 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		
 		//45. Click the left "Select Date" text box
 		//46. Choose the current date
-		publish_window.clickElement(publish_window.end);
+		publish_window.clickElementJS(publish_window.end);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(2,publish_window.titleOfCalenderEnd,byEnd , calendarPage.arrowRightPublishRight , calendarPage.arrowLeftPublishRight);
 		
 		//47. The textbox text changes to the selected date in the following format: XX/XX/XXXX or x/x/xxxx
@@ -255,7 +255,7 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		//53. Click the left "Select Date" text box
 		//54. Choose the current date
 		publish_window.clearTheDateOfTheWebElement(publish_window.start_date);
-		publish_window.clickElement(publish_window.start);
+		publish_window.clickElementJS(publish_window.start);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(2,publish_window.titleOfCalenderStart,byStart ,calendarPage.arrowRight , calendarPage.arrowLeft);
 				
 		//55. The textbox text changes to the selected date in the following format: XX/XX/XXXX or x/x/xxxx
@@ -264,7 +264,7 @@ public class TC7937ValidateInvalidValidInputInDateRangeOption {
 		//56. Click the left "Select Date" text box
 		//57. Choose the current date
 		publish_window.clearTheDateOfTheWebElement(publish_window.end_date);
-		publish_window.clickElement(publish_window.end);
+		publish_window.clickElementJS(publish_window.end);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(1,publish_window.titleOfCalenderEnd,byEnd , calendarPage.arrowRightPublishRight , calendarPage.arrowLeftPublishRight);
 				
 		//58. The textbox text changes to the selected date in the following format: XX/XX/XXXX or x/x/xxxx

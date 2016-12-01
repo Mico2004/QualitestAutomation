@@ -116,14 +116,14 @@ public class TC7933ValidateTheDateRange {
 		publish_window.verifyThatDateRangeOptionSelectedOrNotSelected(1);
 		
 		//7. In left calendar select the passed date
-		publish_window.clickElement(publish_window.start);
+		publish_window.clickElementJS(publish_window.start);
 		String date = calendarPage.changeCreateDayWithoutDayPickerActive(2,publish_window.titleOfCalenderStart,byStart ,calendarPage.arrowRight , calendarPage.arrowLeft);
 		
 		//8.Selected date is displayed in left textbox
 		publish_window.veirfyDateFromThisDate(date,publish_window.start_date);
 		
 		//9. In right calendar select the passed date
-		publish_window.clickElement(publish_window.end);
+		publish_window.clickElementJS(publish_window.end);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(1,publish_window.titleOfCalenderEnd,byEnd ,calendarPage.arrowRightPublishRight , calendarPage.arrowLeftPublishRight);
 		
 		//10.Selected date is displayed in right textbox
@@ -153,7 +153,7 @@ public class TC7933ValidateTheDateRange {
 		publish_window.chooseRadioButton("Date Range");
 		
 		//17. In right calendar select the passed date
-		publish_window.clickElement(publish_window.end);
+		publish_window.clickElementJS(publish_window.end);
 		date = calendarPage.changeCreateDayWithoutDayPickerActive(-2,publish_window.titleOfCalenderEnd,byEnd,calendarPage.arrowRightPublishRight , calendarPage.arrowLeftPublishRight);
 				
 		//18.Selected date is displayed in right textbox
