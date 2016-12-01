@@ -128,8 +128,7 @@ public class TC15649TryToDeleteMovingRecording {
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
 		
-		Thread.sleep(1000);
-		
+
 		// 9. Message box is closed.
 		boolean is_closed = confirm_menu.isConfirmationMenuClosed();
 		
@@ -162,10 +161,7 @@ public class TC15649TryToDeleteMovingRecording {
 		// 12. While recording is being moved, select "Recording Tasks -> Delete" menu item.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenDelete();
-		
-		Thread.sleep(1000);
-		
-		
+			
 		// 13. Message box "Cannot copy in-process or failed recordings" is displayed.
 		// 14. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterCouldNotBeDeleted();
@@ -178,8 +174,6 @@ public class TC15649TryToDeleteMovingRecording {
 		
 		// 16. Click "Courses" link in the breadcrumbs.
 		record.returnToCourseListPage();
-		
-		Thread.sleep(2000);
 		
 		// 17. Select destination course.
 		course.clickOnTargetCourseName(destination_course_name);

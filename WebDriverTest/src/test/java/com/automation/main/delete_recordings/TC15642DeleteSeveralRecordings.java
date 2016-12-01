@@ -189,9 +189,6 @@ public class TC15642DeleteSeveralRecordings {
 		// 6. Click "Delete" button
 		delete_menu.clickOnDeleteButton();
 		
-		
-		Thread.sleep(3000);
-		
 		// 7. "Delete" window is closed.
 		boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();
 	

@@ -88,8 +88,7 @@ public class TC15653DeleteFailedRecording {
 		// 3.select invalid courses
 		course.selectCourseThatStartingWith("BankInvalid");
 		// 4.select first recording
-		Thread.sleep(2000);
-
+	
 		record.getCheckbox().click();// first recording
 		// 5.check its status
 		record.verifyErrorStatus(record.first_recording_status);

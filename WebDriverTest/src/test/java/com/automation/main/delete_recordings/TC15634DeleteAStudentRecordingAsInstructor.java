@@ -67,9 +67,6 @@ DesiredCapabilities capability;
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 
-		
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
@@ -117,9 +114,7 @@ DesiredCapabilities capability;
 		
 		// 3. Click on "Student Recordings" tab.
 		record.clickOnStudentRecordingsTab();
-		
-		Thread.sleep(1000);
-		
+				
 		// 4. Select recording to delete.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		String selected_recording_title = record.getFirstRecordingTitle();
@@ -150,21 +145,9 @@ DesiredCapabilities capability;
 		
 		// 7. Click "Delete" button
 		delete_menu.clickOnDeleteButton();
-			
-		Thread.sleep(1000);
 		
 		// 8. "Delete" window is closed.
-		boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();
-	
-		if(is_delete_window_closed) {
-			System.out.println("Delete window is closed.");
-			ATUReports.add("Delete window is closed.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("Delete window not closed.");
-			ATUReports.add("Delete window not closed.", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
+		delete_menu.verifyDeleteWindowClosed();
 		
 		// 9. Verify that selected recording is deleted.
 		List <String> current_recording_list = record.getCourseRecordingList();

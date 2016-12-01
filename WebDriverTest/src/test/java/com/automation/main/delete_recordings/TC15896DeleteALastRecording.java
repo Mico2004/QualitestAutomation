@@ -81,17 +81,6 @@ public class TC15896DeleteALastRecording {
 
 	}
 
-	/*
-	 * @Test public void testNewLogs() throws AWTException, IOException {
-	 * 
-	 * ATUReports.add("INfo Step", LogAs.INFO, new CaptureScreen(
-	 * ScreenshotOf.BROWSER_PAGE)); ATUReports.add("Pass Step", LogAs.PASSED,
-	 * new CaptureScreen( ScreenshotOf.DESKTOP)); /// WebElement element =
-	 * driver /// .findElement(By.xpath("/html/body/div/h1/a")); ATUReports.add(
-	 * "Warning Step", LogAs.WARNING, new CaptureScreen(element));
-	 * ATUReports.add("Fail step","" ,"",LogAs.FAILED, new CaptureScreen(
-	 * ScreenshotOf.DESKTOP)); }
-	 */
 
 	@Test (description= "TC 15896 Delete A Last Recording")
 	public void test15896() throws InterruptedException {
@@ -106,8 +95,7 @@ public class TC15896DeleteALastRecording {
 		
 		// 3.Click "Recording Tasks" button (without selecting a recording)
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(2000);
-		
+	
 		if(record.getNumberOfRecordings() > 1) {
 			// Preset
 			

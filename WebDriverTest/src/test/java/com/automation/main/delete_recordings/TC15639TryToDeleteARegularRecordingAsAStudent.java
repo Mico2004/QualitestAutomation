@@ -129,17 +129,8 @@ public class TC15639TryToDeleteARegularRecordingAsAStudent {
 		}
 		
 		// 5. Select several recordings.
-		try {
-			record.check_all_checkbox.click();
-			System.out.println("Clicked on selected all checkbox.");
-			ATUReports.add("Clicked on selected all checkbox.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} catch (Exception msg) {
-			System.out.println("Fail to clicked on selected all checkbox.");
-			ATUReports.add("Fail to clicked on selected all checkbox.", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
-		
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkall);
+			
 		record.verifyAllCheckedboxSelected();
 		
 		// 6. Click the "Recording Tasks" button.
