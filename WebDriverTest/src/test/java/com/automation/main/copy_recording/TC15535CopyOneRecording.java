@@ -107,9 +107,7 @@ public class TC15535CopyOneRecording {
 		//		
 		driver=DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		
-		if(!(driver instanceof FirefoxDriver)){
-			
-		}
+	
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
@@ -177,7 +175,6 @@ public class TC15535CopyOneRecording {
 
 
 		//9.take recorder name for later 
-
 		String destination_course_name = course_list.get(1);
 		System.out.println(destination_course_name);
 		//11.select target course
