@@ -164,7 +164,6 @@ public class TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 		String url =  course.getCurrentUrlCoursePage(); 
 
 		record.signOut();
-		Thread.sleep(1000);
 		tegrity.waitForVisibility(tegrity.passfield);
 		
 		// 2.login as admin

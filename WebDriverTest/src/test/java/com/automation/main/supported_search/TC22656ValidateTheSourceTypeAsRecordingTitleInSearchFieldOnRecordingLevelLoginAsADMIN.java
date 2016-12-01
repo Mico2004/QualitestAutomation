@@ -166,7 +166,6 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			String url =  course.getCurrentUrlCoursePage(); 
 
 			record.signOut();
-			Thread.sleep(1000);
 			tegrity.waitForVisibility(tegrity.passfield);
 		
 			// 2.login as admin
