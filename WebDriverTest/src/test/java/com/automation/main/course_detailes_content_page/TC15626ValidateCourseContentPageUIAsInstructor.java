@@ -155,14 +155,11 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 5. Click on the course link your about to test.
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(1000);
 		
 		// 6. Hover over "Course Tasks" drop-down".
 		// 7. Choose "Course settings" option.
 		record.clickOnCourseTaskThenCourseSettings();
-		
-		Thread.sleep(1000);
-		
+			
 		// 8. Enable all settings in "Course settings" page.
 		course_settings_page.checkAllCourseSettingsCheckboxs();
 		
@@ -197,7 +194,6 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 13. Click on Course from the 'Active Courses' tab.
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(1000);
 		
 		// 14. Hover over an available recording.
 		record.moveToElementAndPerform(record.first_recording_title, driver);
@@ -331,14 +327,12 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 25. Click on the course name that you about to test.
 		current_course = course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(1000);
 		
 		// 26. Validate the course name caption is displayed at the top left corner (Under the "Breadcrumb").
 		record.verifyThatStringIsCourseName(current_course);
 		
 		// 27. Click on "Course Tasks" -> "Course Settings" and check the "Enable student testing (Remote Proctoring mode) checkbox, and click ok.
 		record.clickOnCourseTaskThenCourseSettings();
-		Thread.sleep(1000);
 		course_settings_page.CheckEnableStudentTesting();
 		
 		// 28. Validate the "Start a Recording" button is displayed at the top right of the page.
@@ -401,7 +395,6 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		//34. Open chosen course.
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(1000);
 		
 		// 35. Validate that the "Recordings" tab is chosen by defualt.
 		record.verifyThatTargetTypeOfTabIsChosen(0);
