@@ -196,11 +196,17 @@ public class CalendarPage extends Page {
 	 */
 	public int getTheDayOnMonth(int days ,WebElement rightArrow ,WebElement leftArrow ){
 		
-		int dayInt = Integer.parseInt(day);
+			int dayInt = Integer.parseInt(day);
 		    int monthInt = Integer.parseInt(month);
 		    int pickTwoDayBefore = 0;
+		    DateFormat dateFormat = new SimpleDateFormat("MM");
+    		Date date = new Date();
+    		String monthToCheck = dateFormat.format(date);
 		    pickTwoDayBefore= dayInt -days;
 		    if(dayInt == 1 || dayInt == 2 || dayInt ==3){
+		    	if(!monthToCheck.equals(month)){
+		    		monthInt++;
+		    	}
 		    	if(monthInt == 3 ) {	
 		    		if(pickTwoDayBefore <=0)
 		    			pickTwoDayBefore +=28;    		
@@ -212,11 +218,16 @@ public class CalendarPage extends Page {
 		    			pickTwoDayBefore +=30;
 		    	}
 		    	if(pickTwoDayBefore != 1)	{
-		    		clickElement(leftArrow);
-		    	    monthInt -=1; 
+		    		if(monthToCheck.equals(month)){
+		    			clickElement(leftArrow);	    	
+		    		}
+		    		monthInt -=1; 
 		    	    month = Integer.toString(monthInt);
 		    	}
 		    } else if ( days < 0  && dayInt>= 28){
+		    	if(!monthToCheck.equals(month)){
+		    		monthInt--;
+		    	}
 		    	if(monthInt == 2 ) {	
 		    		if(pickTwoDayBefore >28)
 		    			pickTwoDayBefore -=28;    		
@@ -228,8 +239,10 @@ public class CalendarPage extends Page {
 		    			pickTwoDayBefore -=30;
 		    	}
 		    	if(pickTwoDayBefore == 1 || pickTwoDayBefore == 2 )	{
-		    		clickElement(rightArrow);
-		    	    monthInt +=1; 
+		    		if(monthToCheck.equals(month)){
+		    			clickElement(rightArrow);   			
+		    		}
+		    		monthInt +=1; 
 		    	    month = Integer.toString(monthInt);
 		    	}
 		    }
