@@ -161,7 +161,6 @@ public class TC24925ValidateMoveRecordingDropdownAndSearchFunctionalities {
 				} else if (selected_tab==2) {
 					record.clickOnTestsTab();
 				}
-				Thread.sleep(1000);
 				
 				wait.until(ExpectedConditions.visibilityOf(record.getCheckbox()));
 				
@@ -171,11 +170,10 @@ public class TC24925ValidateMoveRecordingDropdownAndSearchFunctionalities {
 				// 9. Hover over "Recording tasks" menu.
 				// 10. Click on the menu item "Move".
 				record.clickOnRecordingTaskThenMove();
-				Thread.sleep(2000);
 				
 				// 11. Click on the text field, and write an instuctor name which does not exist (like "aaaaaadfasdasdaa").
 				driver.findElement(By.id("members_value")).sendKeys("aaaaaadssdfafaasa");
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 				
 				// 12. The dropdown is displaying an informative text "No Results"
 				String dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
@@ -201,10 +199,11 @@ public class TC24925ValidateMoveRecordingDropdownAndSearchFunctionalities {
 				// 15. Click on the text field, and write the name of the (existing) student.
 				driver.findElement(By.id("members_value")).clear();
 				driver.findElement(By.id("members_value")).sendKeys(PropertyManager.getProperty("User4"));
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 				
 				// 16. The dropdown is displaying an informative text "No Results"
 				dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
+				Thread.sleep(1000);
 				
 				if(dropdown_result.equals("No results found")) {
 					System.out.println("Dropdown list opened with the text: No results found");
@@ -219,10 +218,11 @@ public class TC24925ValidateMoveRecordingDropdownAndSearchFunctionalities {
 				// 17. Click on the text field, and write the name of the (existing) instuctor which exists only in another university.
 				driver.findElement(By.id("members_value")).clear();
 				driver.findElement(By.id("members_value")).sendKeys("kosins1");
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 				
 				// 18. The dropdown is displaying an informative text "No Results".
 				dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
+				Thread.sleep(1000);
 				
 				if(dropdown_result.equals("No results found")) {
 					System.out.println("Dropdown list opened with the text: No results found");
@@ -238,10 +238,11 @@ public class TC24925ValidateMoveRecordingDropdownAndSearchFunctionalities {
 				String username = PropertyManager.getProperty("User1");
 				driver.findElement(By.id("members_value")).clear();
 				driver.findElement(By.id("members_value")).sendKeys(PropertyManager.getProperty("User1").substring(0, PropertyManager.getProperty("User1").length()-3));
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 				
 				// 20. The user is displayed in the drop down list.
 				dropdown_result = driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).getText();
+				Thread.sleep(1000);
 				
 				if(dropdown_result.equals(username)) {
 					System.out.println("Dropdown list opened with the text: " + username);
