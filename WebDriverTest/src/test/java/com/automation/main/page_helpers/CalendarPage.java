@@ -216,6 +216,23 @@ public class CalendarPage extends Page {
     		Date date = new Date();
     		String monthToCheck = dateFormat.format(date);
 		    pickTwoDayBefore= dayInt -days;
+		    
+		    if(!monthToCheck.equals(month)){
+			   int digitToMove = Integer.parseInt(monthToCheck) - Integer.parseInt(month);
+			   if(digitToMove < 0 ){
+				   for(int i = 0 ; i < digitToMove * (-1) ;i++){
+					   clickElement(leftArrow);
+					   monthInt -=1; 
+			    	   month = Integer.toString(monthInt);
+			   		}
+			   } else {
+				   for(int i = 0 ; i < digitToMove ;i++){
+					   clickElement(rightArrow);
+					   monthInt +=1; 
+			    	   month = Integer.toString(monthInt);
+			   		}
+			   }  
+		    }       
 		    if(dayInt == 1 || dayInt == 2 || dayInt ==3){
 		    	if(!monthToCheck.equals(month)){
 		    		monthInt++;
@@ -232,7 +249,8 @@ public class CalendarPage extends Page {
 		    	}
 		    	if(pickTwoDayBefore != 1)	{
 		    		if(monthToCheck.equals(month)){
-		    			clickElement(leftArrow);	    	
+		    			clickElement(leftArrow);
+		    		
 		    		}
 		    		monthInt -=1; 
 		    	    month = Integer.toString(monthInt);
