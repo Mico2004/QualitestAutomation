@@ -209,7 +209,10 @@ public class TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 		
 		//8. search the bookmark on the admin
 		top_bar_helper.searchForTargetText(to_search);
-		Thread.sleep(1000);
+		
+		//8.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+		search_page.verifyLoadingSpinnerImage();
+		search_page.waitUntilSpinnerImageDisappear();
 		// verify that we got bookmark and one result
 		search_page.verifyBookmarkIconDisplayedIndexSearchResult(1);
 		search_page.verifyResultContainOneResultWithTargetTitle(to_search);
