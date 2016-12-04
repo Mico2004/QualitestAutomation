@@ -124,24 +124,24 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		initializeCourseObject();
 		
 		// 2. Delete all Recordings, Student Recordings and Tests from abc.
-		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("abc", 3, record, delete_menu);
-		
-		// 3. Using course functions copy Recordings, Student Recording and Tests from ValidBank to abc.
-		// Copy all recording from Bank Valid Recording to course starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 0, record, copy, confirmation_menu);
-		// Copy all student recordings from Bank Valid Recording to course starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 2, record, copy, confirmation_menu);
-		// Copy all tests from Bank Valid Recording to course starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 3, record, copy, confirmation_menu);
-		
-		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
-		System.out.println("1");  
-		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
-		System.out.println("3");
-		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
-		System.out.println("4");
+//		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
+//		course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
+//		course.deleteAllRecordingsInCourseStartWith("abc", 3, record, delete_menu);
+//		
+//		// 3. Using course functions copy Recordings, Student Recording and Tests from ValidBank to abc.
+//		// Copy all recording from Bank Valid Recording to course starting with Ab
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 0, record, copy, confirmation_menu);
+//		// Copy all student recordings from Bank Valid Recording to course starting with Ab
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 2, record, copy, confirmation_menu);
+//		// Copy all tests from Bank Valid Recording to course starting with Ab
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 3, record, copy, confirmation_menu);
+//		
+//		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
+//		System.out.println("1");  
+//		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
+//		System.out.println("3");
+//		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
+//		System.out.println("4");
 		
 
 		// 4. Get full name of abc course.
@@ -160,10 +160,9 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 			// 6. Login as Admin.
 			if(i_login_as_admin==0) {
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(5000);
+			
 			} else {
 				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(5000);
 			}
 			
 			
@@ -184,7 +183,6 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				} else if (recording_type==2) {
 					record.clickOnTestsTab();
 				}
-				Thread.sleep(1000);
 				
 				// recording list before delete the recording
 				List<String> recording_list_before_delete_recording = record.getCourseRecordingList(); 
@@ -199,14 +197,14 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 					checked_recording_title =edit_recording_properties_window.getRecordName(confirmation_menu);
 					driver.navigate().refresh();
 					record.clickOnTestsTab();
+					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 				} else {
 					checked_recording_title = record.getFirstRecordingTitle();
 				}
 				
-				
+			
 				// 12. Select "Recording Tasks -> Delete".
 				record.clickOnRecordingTaskThenDelete();
-				Thread.sleep(3000);
 				
 				// 13. "Delete" window is displayed.
 				delete_menu.verifyDeleteWindowOpen();
@@ -242,7 +240,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 					
 				// 15. Click "Delete" button.
 				delete_menu.clickOnDeleteButton();				
-				Thread.sleep(4000);				
+								
 				// 16. Delete window is closed.
 				delete_menu.verifyDeleteWindowClosed();
 					

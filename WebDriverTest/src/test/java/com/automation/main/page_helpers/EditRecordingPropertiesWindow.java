@@ -564,11 +564,10 @@ public class EditRecordingPropertiesWindow extends Page {
 	public String getRecordName(ConfirmationMenu confirm) {
 		String recordName = null;
 	try {
-		recordName = recording_title.getText();
+		recordName = recording_title.getAttribute("value");
 		cancel_button.click();
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
 		System.out.println("cancel succeded");
-		Thread.sleep(2000);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("RecordingStatus1")));
 	} catch (Exception e) {
 		System.out.println("clicked on recording title input failed");
