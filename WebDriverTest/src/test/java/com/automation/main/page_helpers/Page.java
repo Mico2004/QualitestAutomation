@@ -253,11 +253,21 @@ public class Page {
 		try {
 			Thread.sleep(1000);	
 			wait.until(ExpectedConditions.visibilityOf(element));
+		} catch (org.openqa.selenium.TimeoutException e) {
+			System.out.println("Waiting for element visibiliy failed");
+			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
+		} catch (org.openqa.selenium.NoSuchElementException e) {
+			System.out.println("Waiting for element visibiliy failed");
+			ATUReports.add("Waiting for element visibility","Element is visibile before timout","Element was not found",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();	
 		} catch (Exception e) {
 			System.out.println("Waiting for element visibiliy failed");
 			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	public void waitForVisibility(WebElement element, int seconds)// visibility of an element
@@ -265,11 +275,19 @@ public class Page {
 		try {
 			Thread.sleep(500);	
 			new WebDriverWait(driver, seconds).until(ExpectedConditions.visibilityOf(element));			
+		} catch (org.openqa.selenium.TimeoutException e) {
+			System.out.println("Waiting for element visibiliy failed");
+			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
+		} catch (org.openqa.selenium.NoSuchElementException e) {
+			System.out.println("Waiting for element visibiliy failed");
+			ATUReports.add("Waiting for element visibility","Element is visibile before timout","Element was not found",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("Waiting for element visibiliy failed");
 			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
-		}
+		}	
 	}
 
 	public boolean isElementPresent(By by) {
