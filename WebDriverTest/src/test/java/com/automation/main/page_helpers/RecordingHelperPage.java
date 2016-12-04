@@ -491,7 +491,7 @@ public class RecordingHelperPage extends Page {
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("The screen chapter was expaned");
 			ATUReports.add("The screen chapter was expaned", LogAs.PASSED, null);							
-			Thread.sleep(1500);
+			Thread.sleep(2000);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
