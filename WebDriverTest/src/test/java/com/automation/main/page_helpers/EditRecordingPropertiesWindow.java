@@ -194,7 +194,7 @@ public class EditRecordingPropertiesWindow extends Page {
 		Thread.sleep(2000);	
 		String background_rec = rec.getBackGroundColor(rec.background);
 		String menu_background = getBackGroundColor(edit_recordings_properties_background);
-		if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(edit_recordings_properties_background))) {
+		if (background_rec.equals(menu_background)) {
 			ATUReports.add("edit Properties menu background color is same as recording background color","Success.", "Success.", LogAs.PASSED, null);
 			System.out.println("edit Properties menu background color is same as recording background color");
 			Assert.assertTrue(true);

@@ -271,6 +271,10 @@ public class RecordingHelperPage extends Page {
 	public @FindBy(css = ".ng-scope>.ng-scope.ng-binding") WebElement breadcrumbs_courses_link;
 	public @FindBy(id = "InstituteLogotype") WebElement institute_logo;
 	public @FindBy(css = ".dropdown-menu.text-left>div>li>span") WebElement view_menu_tags_text;
+	public @FindBy(css = ".tagsContainer>div>label") WebElement showAllRecordings;
+	public @FindBy(css = ".tagsContainer>div>div>label>input")WebElement first_tag;
+	public @FindBy(css = ".ng-valid.ng-dirty") List<WebElement> checkboxs_tags;
+
 	public ConfirmationMenu confirm_menu;
 	public CopyMenu copyMenu;
 	
@@ -1060,6 +1064,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String initialText=TabContainer.getText();
 			System.out.println("StudentRecordingsTab1");
 			waitForVisibility(element);
+			if(!isElementPresent(student_recordings_tab)){
+				driver.navigate().refresh();
+				waitForThePageToLoad();
+			}
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");	
 			waitForContentOfTabToLoad(initialText,TabContainer);
 			System.out.println("StudentRecordingsTab3");
@@ -1735,7 +1743,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("TestsTab1");
 			waitForVisibility(element);
 			String initialText=TabContainer.getText();
-			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			if(!isElementPresent(test_tab)){		
+				driver.navigate().refresh();
+				waitForThePageToLoad();
+			}
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");	
 			System.out.println("TestsTab2");
 			waitForContentOfTabToLoad(initialText,TabContainer);
 			ATUReports.add("Select TestsTab -> "+id, id+" was click",
@@ -1836,6 +1848,25 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		} catch (Exception msg) {
 			System.out.println("Checkbox all is not selected");
 			ATUReports.add("Checkbox all is not selected", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		}
+	}
+	
+	public void veirfyThatTheCheckboxIsNotSelect(WebElement checkbox) {
+		try {	
+			if (!checkbox.isSelected()) {
+				System.out.println("The Checkbox " +checkbox.getText() + "is not selected");
+				ATUReports.add("The Checkbox " +checkbox.getText() + "is not selected", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			} else {			
+				System.out.println("The Checkbox " +checkbox.getText() + "is selected");
+				ATUReports.add("The Checkbox " +checkbox.getText() + "is selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(true);
+			}
+
+		} catch (Exception msg) {
+			System.out.println("The Checkbox " +checkbox.getText() + "is selected");
+			ATUReports.add("The Checkbox " +checkbox.getText() + "is selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(true);
 		}
 	}
@@ -5252,4 +5283,21 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 	}
+
+	public void verifyWebElementisCheckable(WebElement element) {
+		try {
+			String type = element.getAttribute("type");
+			if(type.equals("checkbox")){
+				System.out.println("Verify that the element: " +element.getText() + "is checkable.");
+				ATUReports.add("Verify that the element: " +element.getText() + "is checkable.","The element is checkable.","The element is checkable.",LogAs.PASSED, null);		
+			}else{
+				System.out.println("Not Verify that the element: " +element.getText() + "is checkable.");
+				ATUReports.add("Not Verify that the element: " +element.getText() + "is checkable." ,"The element is checkable.","The element is not checkable.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+			}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
+
 }
