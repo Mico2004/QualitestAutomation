@@ -79,12 +79,11 @@ public class CalendarPage extends Page {
 	
 	//The current month is presented - year-month in the format of (xxxx)-(yyy)
     public void verifyThatFormatOfTheMonthAndYear(WebElement ie) throws ParseException {
-    
-    	String monthAndYearString = ie.getText();													
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM",Locale.ENGLISH);
-		sdf.setLenient(false);
+    	String monthAndYearString = null;
 		try {
-
+			monthAndYearString = ie.getText();													
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM",Locale.ENGLISH);
+			sdf.setLenient(false);
 			//if not valid, it will throw ParseException
 			Date date = sdf.parse(monthAndYearString);
 			System.out.println(date);
@@ -96,11 +95,13 @@ public class CalendarPage extends Page {
 			System.out.println("The date is not in the following format: 'yyyy-MMM'" );				
 			ATUReports.add("The date is in the following format: 'yyyy-MMM' and the date is: " + monthAndYearString + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
-		}
+		} catch (Exception e) {
+		System.out.println("No such Element exists" );				
+		ATUReports.add("No such Element exists " + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		Assert.assertTrue(false);
+	}
 		
 	}
-	
-	
 	
 	public void getDayFromCalender() {
 		String id = "day ng-scope ng-binding active";
@@ -153,18 +154,24 @@ public class CalendarPage extends Page {
 	
 	public String changeCreateDayWithoutDayPickerActive(int days,WebElement element,By by ,WebElement rightArrow ,WebElement leftArrow) throws ParseException, InterruptedException {
 		
-		DateFormat dateFormat = new SimpleDateFormat("dd");
-		Date date = new Date();
-		Thread.sleep(500);
-		day = dateFormat.format(date);
-		getMonthAndYearFromCalendarWithElement(element);
-		int dayPicker =getTheDayOnMonth(days,rightArrow,leftArrow);
-		String dayPick = Integer.toString(dayPicker);
-		changeDayOnCalender(dayPick,by);	
-		String returnDate = month + "/" + dayPick + "/" + year;
+		String returnDate = null;
+		try {
+			DateFormat dateFormat = new SimpleDateFormat("dd");
+			Date date = new Date();
+			Thread.sleep(500);
+			day = dateFormat.format(date);
+			getMonthAndYearFromCalendarWithElement(element);
+			int dayPicker =getTheDayOnMonth(days,rightArrow,leftArrow);
+			String dayPick = Integer.toString(dayPicker);
+			changeDayOnCalender(dayPick,by);	
+			returnDate = month + "/" + dayPick + "/" + year;
+			
+		} catch (Exception e) {
+			e.getMessage();;			
+			ATUReports.add(e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
 		return returnDate;
-		
-		
 	}
 	/**
 	 * Enter on the calendar label and get the month year and day after subtract days
@@ -175,16 +182,22 @@ public class CalendarPage extends Page {
 
 	public void changeCreateDay(int days) throws ParseException, InterruptedException {
 		
-		String id = date_Field.getAttribute("id");
-		String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
-		clickElementJS(date_Field);	
-		Thread.sleep(500);
-		getMonthAndYearFromCalendar();
-		getDayFromCalender();	
-		int pickTwoDayBefore = getTheDayOnMonth(days,arrowLeft,arrowRight);
-	    String dayNewNumber = Integer.toString(pickTwoDayBefore);
-	    By by = By.className("table-condensed");
-	    changeDayOnCalender(dayNewNumber,by);
+		try {
+			String id = date_Field.getAttribute("id");
+			String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
+			clickElementJS(date_Field);	
+			Thread.sleep(500);
+			getMonthAndYearFromCalendar();
+			getDayFromCalender();	
+			int pickTwoDayBefore = getTheDayOnMonth(days,arrowLeft,arrowRight);
+			String dayNewNumber = Integer.toString(pickTwoDayBefore);
+			By by = By.className("table-condensed");
+			changeDayOnCalender(dayNewNumber,by);
+		} catch (Exception e) {
+			e.getMessage();;			
+			ATUReports.add(e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
 	}
 	
 	

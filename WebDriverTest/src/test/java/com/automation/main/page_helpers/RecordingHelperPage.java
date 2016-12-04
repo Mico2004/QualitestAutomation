@@ -1064,7 +1064,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String initialText=TabContainer.getText();
 			System.out.println("StudentRecordingsTab1");
 			waitForVisibility(element);
-			if(!isElementPresent(student_recordings_tab)){
+			if(!student_recordings_tab.isDisplayed()){
 				driver.navigate().refresh();
 				waitForThePageToLoad();
 			}
@@ -1743,7 +1743,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("TestsTab1");
 			waitForVisibility(element);
 			String initialText=TabContainer.getText();
-			if(!isElementPresent(test_tab)){		
+			if(!test_tab.isDisplayed()){		
 				driver.navigate().refresh();
 				waitForThePageToLoad();
 			}
