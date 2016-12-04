@@ -207,12 +207,17 @@ public class CourseSettingsPage extends Page {
 	}
 	
 	public void makeSureThatMakeCoursePublicIsSelected() {
-		if (checkbox_make_course_public_visable.isSelected()) {
-			System.out.println("The checkbox of make course public already selected.");
-			ATUReports.add("Make course public.", "Selected.", "Selected.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			selectMakeCoursePublicAndVerifyThatItSelected();
+		try {
+			if (checkbox_make_course_public_visable.isSelected()) {
+				System.out.println("The checkbox of make course public already selected.");
+				ATUReports.add("Make course public.", "Selected.", "Selected.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			} else {
+				selectMakeCoursePublicAndVerifyThatItSelected();
+			}
+		} catch (Exception msg) {
+			msg.printStackTrace();
+			ATUReports.add("Make course public." + msg.getMessage(), "Selected.", "Not Selected.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 
