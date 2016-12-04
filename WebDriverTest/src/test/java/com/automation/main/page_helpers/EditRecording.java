@@ -108,7 +108,7 @@ public class EditRecording extends Page {
 		
 		ConfirmationMenu confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		RecordingHelperPage record = PageFactory.initElements(driver, RecordingHelperPage.class);
-		
+		try {
 		
 		for(int i=0; i<10; i++) {
 			try {
@@ -176,8 +176,13 @@ public class EditRecording extends Page {
 			else Thread.sleep(3000);
 		}
 		
-		//return to the course
-		clickElement(Breadcrumbs);
+			//return to the course
+			clickElement(Breadcrumbs);
+		
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 	
 		
 	}
@@ -188,7 +193,7 @@ public class EditRecording extends Page {
 		ConfirmationMenu confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		RecordingHelperPage record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		
-		
+		try {
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
@@ -261,7 +266,10 @@ public class EditRecording extends Page {
 			}
 			else Thread.sleep(3000);
 		}
-	
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 	}
 	
 
@@ -271,7 +279,8 @@ public class EditRecording extends Page {
 		
 		ConfirmationMenu confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		RecordingHelperPage record = PageFactory.initElements(driver, RecordingHelperPage.class);
-		
+		try{
+			
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
@@ -336,7 +345,10 @@ public class EditRecording extends Page {
 		
 		//return to the course
 		clickElement(Breadcrumbs);
-	 	
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 	
 	}
 	
@@ -346,7 +358,7 @@ public class EditRecording extends Page {
 		ConfirmationMenu confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		RecordingHelperPage record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		
-		
+		try{
 		for(int i=0; i<10; i++) {
 			try {
 				driver.switchTo().frame(0);
@@ -410,5 +422,9 @@ public class EditRecording extends Page {
 		
 	    System.out.println("Wait the the element edit chapter will click from the list.");
 		ATUReports.add("Wait the the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	}
 	}
 }
