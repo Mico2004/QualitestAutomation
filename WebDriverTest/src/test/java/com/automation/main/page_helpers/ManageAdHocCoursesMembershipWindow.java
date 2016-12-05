@@ -198,7 +198,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 				String val=el.getText();			
 				if(el.getText().contains(name)) {
 					Thread.sleep(2000);
-					el.click();
+					clickElement(el);
 					System.out.println("User selected from user list.");
 					return true;
 				}
