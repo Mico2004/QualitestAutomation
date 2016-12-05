@@ -32,7 +32,7 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.ManageAdHocCoursesMembershipWindow;
 import com.automation.main.page_helpers.ManageAdhocCoursesEnrollmentsPage;
@@ -77,7 +77,7 @@ public class TestSuitePreSetCopyRecordings_DeleteAdditional {
 	public ManageAdhocUsersPage mange_adhoc_users_page;
 	public CreateNewUserWindow create_new_user_window;
 	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
-	public EditRecordinPropertiesWindow erp_window;
+	public EditRecordingPropertiesWindow erp_window;
 
 	@BeforeClass
 	public void setup() {
@@ -115,7 +115,7 @@ public class TestSuitePreSetCopyRecordings_DeleteAdditional {
 
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);

@@ -24,7 +24,7 @@ import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CourseSettingsPage;
 import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.EditRecording;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.PlayerPage;
@@ -51,7 +51,7 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 	}
 	
 	public DeleteMenu delete_menu;
-	public EditRecordinPropertiesWindow edit_recording_properties_window;
+	public EditRecordingPropertiesWindow edit_recording_properties_window;
 	public PlayerPage player_page;
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
 	public AdminDashboardPage admin_dash_board_page;
@@ -107,7 +107,7 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
-		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		
 		 Date curDate = new Date();
@@ -141,61 +141,48 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 		// 1. Make sure that the STUDENT and INSTRUCTOR users you are using never watched the recording used in this test case.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-		
-		
+			
 		String current_course = course.selectCourseThatStartingWith("abc");
 		record.returnToCourseListPage();
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		record.signOut();
+		
 		
 		// 2. Repeat for INSTRUCTOR and STUDENT.
 		for(int type_of_user=0; type_of_user<2; type_of_user++) {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
-				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				tegrity.loginCourses("User1");			
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
 			}
 			
 			
 			// 4. Click on a certain course.
 			course.selectCourseThatStartingWith(current_course);
-			Thread.sleep(1000);
-			
+		
 			// 5. Click on a certain recording.
-			record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
+			record.checkStatusExistenceForMaxTTime(250);
 			String first_recording_name = record.getFirstRecordingTitle();
 			record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_name);
 						
 			// 6. Click on the first chapter and wait the player will start to play.
 			player_page.verifyTimeBufferStatusForXSec(5);
-			
-			// 7. Click Sign out while recording is playing.
-			for(String handler: driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
-				break;
-			}
-			top_bar_helper.signOut();
-			Thread.sleep(1000);
-			
+			player_page.exitInnerFrame();
+			record.signOut();
+				
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
-				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				tegrity.loginCourses("User1");			
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
 			}
 			
 			// 9. Open the recording course you just watch.
 			course.selectCourseThatStartingWith(current_course);
-			Thread.sleep(1000);
 			
 			// 10. Click on the recording you just watched.
 			record.verifyFirstExpandableRecording();
@@ -205,9 +192,7 @@ public class TC17047ValidateResumeBoxWhenSignOut {
 			record.verifyWebElementDisplayed(record.list_of_resume_buttons.get(0), "Resume box");
 			
 			// Sign out
-			top_bar_helper.signOut();
-			
-			Thread.sleep(2000);
+			record.signOut();	
 		}
 		
 		System.out.println("Done.");

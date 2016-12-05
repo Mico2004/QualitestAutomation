@@ -189,7 +189,7 @@ public class Page {
 	{
 		element.clear();
 		element.sendKeys(text);		
-		Assert.assertEquals(text, element.getAttribute("value"));
+		//Assert.assertEquals(text, element.getAttribute("value"));
 
 	}
 	
@@ -253,11 +253,21 @@ public class Page {
 		try {
 			Thread.sleep(1000);	
 			wait.until(ExpectedConditions.visibilityOf(element));
+		} catch (org.openqa.selenium.TimeoutException e) {
+			System.out.println("Waiting for element visibiliy failed");
+			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
+		} catch (org.openqa.selenium.NoSuchElementException e) {
+			System.out.println("Waiting for element visibiliy failed");
+			ATUReports.add("Waiting for element visibility","Element is visibile before timout","Element was not found",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();	
 		} catch (Exception e) {
 			System.out.println("Waiting for element visibiliy failed");
 			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	public void waitForVisibility(WebElement element, int seconds)// visibility of an element
@@ -265,11 +275,19 @@ public class Page {
 		try {
 			Thread.sleep(500);	
 			new WebDriverWait(driver, seconds).until(ExpectedConditions.visibilityOf(element));			
+		} catch (org.openqa.selenium.TimeoutException e) {
+			System.out.println("Waiting for element visibiliy failed");
+			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
+		} catch (org.openqa.selenium.NoSuchElementException e) {
+			System.out.println("Waiting for element visibiliy failed");
+			ATUReports.add("Waiting for element visibility","Element is visibile before timout","Element was not found",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("Waiting for element visibiliy failed");
 			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
-		}
+		}	
 	}
 
 	public boolean isElementPresent(By by) {
@@ -433,11 +451,11 @@ public class Page {
 				Assert.fail("timeout");
 			try {
 				if (driver.getTitle().equals(title))// check
-					ATUReports.add(" load page succeeded",Url,LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP)); // if
+					ATUReports.add(" load page succeeded",Url,LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE)); // if
 																													// list
 				break;
 			} catch (Exception e) {
-				ATUReports.add(" load page failed",Url ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+				ATUReports.add(" load page failed",Url ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 
 			Thread.sleep(1000);
@@ -491,10 +509,10 @@ public class Page {
 	public void verifyDate(String date) {
 		String[] split = date.split("/");
 		String checkdays = split[1];
-
 		String checkmonths = split[0];
-
 		String checkyear = split[2];
+		
+		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date datecurrent = new Date();
 		if ((Integer.valueOf(checkmonths) > 12) || (Integer.valueOf(checkmonths) < 1)
@@ -562,6 +580,7 @@ public class Page {
 		} catch (Exception e) {
 			System.out.println("LogOut from user not succeeded 3");
 			ATUReports.add("Sign Out failed", e.getMessage(), LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
 		}	
 		System.out.println("signOut5");
 	}
@@ -824,11 +843,29 @@ public class Page {
 			System.out.println("String sent to WebElement: " + string_to_send);
 			ATUReports.add("String send to WebElement.", string_to_send, string_to_send, LogAs.PASSED, null);
 		} catch (Exception msg) {
+			msg.printStackTrace();
 			System.out.println("String do not send to WebElement: " + string_to_send);
 			ATUReports.add("String do not send to WebElement.", string_to_send, "", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 
+	public void sendStringwithAction(WebElement we, String string_to_send) {
+		try {
+			Actions builder = new Actions(driver);
+			builder.sendKeys(we,string_to_send);
+			builder.build().perform();
+			System.out.println("String sent to WebElement: " + string_to_send);
+			ATUReports.add("String send to WebElement.", string_to_send, string_to_send, LogAs.PASSED, null);
+		} catch (Exception msg) {
+			msg.printStackTrace();
+			System.out.println("String do not send to WebElement: " + string_to_send);
+			ATUReports.add("String do not send to WebElement.", string_to_send, "", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+	
+	
+	
+	
 	// Verify that
 	// The next result display below the current result in case there is next
 	// result.

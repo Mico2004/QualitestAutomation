@@ -29,7 +29,7 @@ import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
@@ -57,7 +57,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
-	public EditRecordinPropertiesWindow edit_recording_properties_window;
+	public EditRecordingPropertiesWindow edit_recording_properties_window;
 	public DeleteMenu delete_menu;
 	public MoveWindow move_window;
 	public AdminDashboardPage admin_dashboard_page;
@@ -87,7 +87,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		confirmation_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		wait = new WebDriverWait(driver, 30);
 		
 		 Date curDate = new Date();
@@ -124,24 +124,24 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		initializeCourseObject();
 		
 		// 2. Delete all Recordings, Student Recordings and Tests from abc.
-		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("abc", 3, record, delete_menu);
-		
-		// 3. Using course functions copy Recordings, Student Recording and Tests from ValidBank to abc.
-		// Copy all recording from Bank Valid Recording to course starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 0, record, copy, confirmation_menu);
-		// Copy all student recordings from Bank Valid Recording to course starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 2, record, copy, confirmation_menu);
-		// Copy all tests from Bank Valid Recording to course starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 3, record, copy, confirmation_menu);
-		
-		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
-		System.out.println("1");  
-		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
-		System.out.println("3");
-		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
-		System.out.println("4");
+//		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
+//		course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
+//		course.deleteAllRecordingsInCourseStartWith("abc", 3, record, delete_menu);
+//		
+//		// 3. Using course functions copy Recordings, Student Recording and Tests from ValidBank to abc.
+//		// Copy all recording from Bank Valid Recording to course starting with Ab
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 0, record, copy, confirmation_menu);
+//		// Copy all student recordings from Bank Valid Recording to course starting with Ab
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 2, record, copy, confirmation_menu);
+//		// Copy all tests from Bank Valid Recording to course starting with Ab
+//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 3, record, copy, confirmation_menu);
+//		
+//		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
+//		System.out.println("1");  
+//		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
+//		System.out.println("3");
+//		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
+//		System.out.println("4");
 		
 
 		// 4. Get full name of abc course.
@@ -160,10 +160,9 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 			// 6. Login as Admin.
 			if(i_login_as_admin==0) {
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(5000);
+			
 			} else {
 				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(5000);
 			}
 			
 			
@@ -184,41 +183,31 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				} else if (recording_type==2) {
 					record.clickOnTestsTab();
 				}
-				Thread.sleep(1000);
 				
 				// recording list before delete the recording
 				List<String> recording_list_before_delete_recording = record.getCourseRecordingList(); 
 				
 				// 8. Click on a checkbox of one recording.
 				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-				
-				
+					
 				String checked_recording_title = null;
 				if (recording_type==2) {
-					record.toEditRecordingPropertiesMenu();		
+					record.toEditRecordingPropertiesMenu();	
+					edit_recording_properties_window.waitForPageToLoad();
 					checked_recording_title =edit_recording_properties_window.getRecordName(confirmation_menu);
-					
+					driver.navigate().refresh();
+					record.clickOnTestsTab();
+					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 				} else {
 					checked_recording_title = record.getFirstRecordingTitle();
 				}
 				
-				
+			
 				// 12. Select "Recording Tasks -> Delete".
 				record.clickOnRecordingTaskThenDelete();
-				Thread.sleep(3000);
 				
 				// 13. "Delete" window is displayed.
-				boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();
-				
-				if(!is_delete_window_closed) {
-					System.out.println("Delete window is opened.");
-					ATUReports.add("Delete window.", "Open.", "Open.", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				} else {
-					System.out.println("Delete window is closed.");
-					ATUReports.add("Delete window.", "Open.", "Closed.", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
+				delete_menu.verifyDeleteWindowOpen();
 				
 				if(!(driver instanceof ChromeDriver)) {
 					// 14. Verify that only selected recording displayed in "List of Recordings".
@@ -251,20 +240,10 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 					
 				// 15. Click "Delete" button.
 				delete_menu.clickOnDeleteButton();				
-				Thread.sleep(2000);				
+								
 				// 16. Delete window is closed.
-				is_delete_window_closed = delete_menu.isDeleteMenuClose();
-				
-				if(is_delete_window_closed) {
-					System.out.println("Delete window is closed.");
-					ATUReports.add("Delete window.", "Open.", "Closed.", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				} else {
-					System.out.println("Delete window is opened.");
-					ATUReports.add("Delete window.", "Open.", "Open.", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
-				
+				delete_menu.verifyDeleteWindowClosed();
+					
 				// 17. Verify that selected recording is deleted - Selected recording is not displayed in "Recordings" tab.
 				List<String> recording_list_after_delete_recording = record.getCourseRecordingList();
 				
@@ -280,8 +259,9 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 				}
 				// the name in the test tab aren't unique
 				else{
-					
-					record.toEditRecordingPropertiesMenu();		
+					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+					record.toEditRecordingPropertiesMenu();	
+					edit_recording_properties_window.waitForPageToLoad();
 					String checked_recording_title_after =edit_recording_properties_window.getRecordName(confirmation_menu);									
 					if(!checked_recording_title.equals(checked_recording_title_after) &&((recording_list_before_delete_recording.size() - recording_list_after_delete_recording.size())==1)) {
 						System.out.println("Verified that selected recording is deleted and not displayed.");
@@ -297,7 +277,6 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		
 			}
 			
-			Thread.sleep(2000);
 			// 18. Logout.
 			record.signOut();
 			

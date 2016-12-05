@@ -23,7 +23,7 @@ import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CourseSettingsPage;
 import com.automation.main.page_helpers.CoursesHelperPage;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.EditRecording;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.PlayerPage;
@@ -49,7 +49,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 
 	}
 	
-	public EditRecordinPropertiesWindow edit_recording_properties_window;
+	public EditRecordingPropertiesWindow edit_recording_properties_window;
 	public PlayerPage player_page;
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
 	public AdminDashboardPage admin_dash_board_page;
@@ -105,7 +105,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
-		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		
 
 		 Date curDate = new Date();

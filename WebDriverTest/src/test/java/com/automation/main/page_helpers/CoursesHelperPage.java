@@ -256,9 +256,6 @@ public class CoursesHelperPage extends Page {
 	//// select course by name
 	public void selectCourseByName(final String destination_course_name) throws InterruptedException {
 
-		//boolean clicked = false;
-		//int i = 0;
-
 		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));
 		System.out.println("wait wrapper");
 		WebElement element = driver.findElement(By.xpath("//a[contains(@title,'" + destination_course_name + "')]"));
@@ -267,7 +264,7 @@ public class CoursesHelperPage extends Page {
 		WebElement sCourse2 = driver.findElement(By.id(id));
 		String CourseId=sCourse2.getAttribute("id");
 		
-		for(int index=0; index<5 ; index ++){
+		for(int index=0; index<10 ; index ++){
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+CourseId+"\").click();");
 			Thread.sleep(1000);
 			if(isElementPresent(By.id("CourseTitle"))) {
@@ -281,7 +278,7 @@ public class CoursesHelperPage extends Page {
 		}catch(TimeoutException e){
 			System.out.println("Course wasn't selected successfully: couese title isn't visible");
 			ATUReports.add("Course wasn't selected successfully: couese title isn't visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
-			
+			Assert.assertTrue(false);
 		}
 		
 		/*
@@ -431,13 +428,8 @@ public class CoursesHelperPage extends Page {
 				selectCourseByName(target_course_name);
 				// wait.until(ExpectedConditions.textToBePresentInElement(By.id("target_course_name"),
 				// target_course_name));
-				System.out.println("select4");
-				try {
-					Thread.sleep(4000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				System.out.println("select4");		
+				Thread.sleep(4000);
 				System.out.println("selected the course: " + target_course_name);
 				ATUReports.add("select the course: " + target_course_name, LogAs.PASSED, null);
 				// wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("CourseTitle"),

@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -94,6 +95,21 @@ public class AddAdditionalContentFileWindow extends Page {
 		select_upload_additional_file.sendKeys(path);
 	}
 
+	public void clickOnCancelButton() {
+		try {		
+		    ((JavascriptExecutor) driver).executeScript("document.getElementById(\""+cancel_additional_file_button.getAttribute("id")+"\").click();");
+			System.out.println("Clicked on cancel button.");
+			ATUReports.add("Clicked on cancel button.", "Success.", "Success.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception msg) {
+			System.out.println("Fail to click on cancel button.");
+			ATUReports.add("Clicked on cancel button.", "Success.", "Fail."+msg.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	
+	
 	/// upload a file by giving its string path
 	public void uploadFileByPath(String path, ConfirmationMenu confirm) throws Exception {
 
@@ -228,19 +244,17 @@ public class AddAdditionalContentFileWindow extends Page {
 		public void uploadFileByPathNoConfirmationForTheUI(String path,String fileName) throws Exception {
 
 			String file_name = path.substring(51);
-			//select_upload_additional_file.click();
+			Thread.sleep(2000);
 			uploadFile(path);
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			System.out.println("file selected successfully");
 			verifyAdditionalContentFileNamePriorToSelectButton();/// verify its																	/// location
-			add_additional_file_button.click();/// add
+			clickElementJS(add_additional_file_button);
 			verifyUploadInfoCorrectness(fileName);
 			verifyProgressBar();
 			
 		}
-		
-		
-		
+			
 		// verify selected file name displayed prior to select button
 		public void verifyAdditionalContentButtonsLocation() throws InterruptedException {
 			//Thread.sleep(1500);

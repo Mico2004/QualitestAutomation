@@ -573,6 +573,7 @@ public class PlayerPage extends Page {
 			}
 			driver.switchTo().frame(0);
 			waitForVisibility(list_of_results);
+			Thread.sleep(1000);
 			if (list_of_results.getText().contains("No results found for:")) {
 				System.out.println("no results found for " + to_search);
 				ATUReports.add("search for results", to_search, "empty list", "empty list", LogAs.PASSED, null);

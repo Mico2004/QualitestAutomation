@@ -135,7 +135,6 @@ DesiredCapabilities capability;
 		
 		// 6. Click "Copy Recording(s)".
 		copy.clickOnCopyButton();
-		Thread.sleep(1000);
 		
 		// 7. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -172,8 +171,6 @@ DesiredCapabilities capability;
 		// 8. While recording is being copied, click the "Courses" link at the breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(2000);
-		
 		// 9. Select destination course.
 		course.selectTargetCourse(target_course);
 		
@@ -189,14 +186,13 @@ DesiredCapabilities capability;
 		for(int i = 0; i < current_recording_list.size(); i++) {
 			if(current_recording_list.get(i).equals(selected_recording_name)) {
 				if(record.isIndexRecordingClickable(i + 1)) {
-					if(!record.checkRecordingInIndexIStatus(i + 1, ""));
+					if(!record.checkRecordingInIndexIStatus(i + 1, "")){
 						if(!record.checkRecordingInIndexIStatus(i + 1, "IE, FF, Safari Ready")){	
-						ATUReports.add("Destination recording verification", "Recording is'nt grayed out and has no status", "Recording is'nt grayed out and has not status", LogAs.PASSED, null);
-						Assert.assertTrue(true);}
+							ATUReports.add("Destination recording verification", "Recording is'nt grayed out and has no status", "Recording is'nt grayed out and has not status", LogAs.PASSED, null);
+							Assert.assertTrue(true);}
 						else
 							ATUReports.add("Destination recording verification", "Recording is'nt grayed out and has no status", "Recording is'nt grayed out but has a status", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-							
-						
+					}				
 				}else {
 						if(record.checkRecordingInIndexIStatus(i + 1, "Moving/Copying")){
 						System.out.println("Recording is grayed out");

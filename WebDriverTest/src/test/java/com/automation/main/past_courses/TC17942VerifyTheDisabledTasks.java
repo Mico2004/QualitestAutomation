@@ -14,7 +14,7 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.ManageAdHocCoursesMembershipWindow;
 import com.automation.main.page_helpers.ManageAdhocCoursesEnrollmentsPage;
@@ -36,7 +36,7 @@ public class TC17942VerifyTheDisabledTasks {
 
 	}
 
-	public EditRecordinPropertiesWindow erp_window;
+	public EditRecordingPropertiesWindow erp_window;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
@@ -79,7 +79,7 @@ public class TC17942VerifyTheDisabledTasks {
 
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);

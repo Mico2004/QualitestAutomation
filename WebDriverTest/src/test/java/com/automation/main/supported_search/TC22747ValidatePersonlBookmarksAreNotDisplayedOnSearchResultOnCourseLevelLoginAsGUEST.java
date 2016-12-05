@@ -24,7 +24,7 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.EmailAndConnectionSettingsPage;
 import com.automation.main.page_helpers.EmailInboxPage;
 import com.automation.main.page_helpers.EmailLoginPage;
@@ -59,7 +59,7 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 
 		}
 
-		public EditRecordinPropertiesWindow erp_window;
+		public EditRecordingPropertiesWindow erp_window;
 		public LoginHelperPage tegrity;
 		public CoursesHelperPage course;
 		public RecordingHelperPage record;
@@ -124,7 +124,7 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
 			wait = new WebDriverWait(driver, 30);
 			move_window = PageFactory.initElements(driver, MoveWindow.class);
-			erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+			erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 			admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 			advanced_services_setting_page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
 			mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
@@ -167,17 +167,15 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			// 3.click on course
 			String course_name = course.selectCourseThatStartingWith("Ab");
 			
-			 // 4.to course settings
-			 record.waitForVisibility(record.course_tasks_button);
-			 record.toCourseSettingsPage();
+			// 4.to course settings
+			// 5.verify checked visibility of course(make it public) 
+			record.waitForVisibility(record.course_tasks_button);
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsSelected();
+			course_settings.clickOnOkButton();
+			Thread.sleep(2000);
+			record.signOut();
 			
-			 // 5.verify checked visibility of course(make it public)
-			 course_settings.checkCourseVisibility();
-			 Thread.sleep(2000);
-			 course_settings.signOut();
-			
-			
-			tegrity.waitForVisibility(tegrity.passfield);
 			// 6.login as student
 			tegrity.loginCourses("User4");
 			course.waitForVisibility(course.first_course_button);
@@ -245,6 +243,17 @@ public class TC22747ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 			player_page.verifyTimeBufferStatusForXSec(2);// check source display
 			// 6. delete bookmarks
 			player_page.deleteAllBookmark();
+			player_page.exitInnerFrame();
+			record.signOut();
+			
+			tegrity.loginCourses("User1");
+			
+			course.selectCourseThatStartingWith("Ab");
+							
+			// Make course public
+			record.clickOnCourseTaskThenCourseSettings();
+			course_settings.makeSureThatMakeCoursePublicIsUnSelected();
+			course_settings.clickOnOkButton();
 			
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

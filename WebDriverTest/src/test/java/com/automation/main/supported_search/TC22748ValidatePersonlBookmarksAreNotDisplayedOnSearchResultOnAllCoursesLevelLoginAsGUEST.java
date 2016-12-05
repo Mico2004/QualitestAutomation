@@ -24,7 +24,7 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.EmailAndConnectionSettingsPage;
 import com.automation.main.page_helpers.EmailInboxPage;
 import com.automation.main.page_helpers.EmailLoginPage;
@@ -54,7 +54,7 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 
 	}
 
-	public EditRecordinPropertiesWindow erp_window;
+	public EditRecordingPropertiesWindow erp_window;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
@@ -114,7 +114,7 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		advanced_services_setting_page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
@@ -194,11 +194,8 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		String bookmark_to_add=sdf.format(date);
 		Thread.sleep(1000);
 		player_page.addBookmarkInSpecificTime(bookmark_to_add, "0:00:32");
-
-
-		for (String handler : driver.getWindowHandles()) {
-			driver.switchTo().window(handler);
-		}
+		player_page.exitInnerFrame();
+		
 		/// 12.sign out super user
 		record.signOut();
 		Thread.sleep(1000);

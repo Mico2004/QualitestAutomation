@@ -154,9 +154,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		// 7. Message box "Recording has been queued for move" is displayed.
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
-		
-		Thread.sleep(1000);
-		
+			
 		// 9. Message box is closed.
 		boolean is_closed = confirm_menu.isConfirmationMenuClosed();
 		
@@ -189,9 +187,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		// 12. While recording has a "Being moved from", select "Recording Tasks -> Copy" menu item.
 		record.selectTargetRecordingCheckbox(selected_recording_name);
 		record.clickOnRecordingTaskThenCopy();
-		
-		Thread.sleep(1000);
-		
+	
 		// 13. Message box "Cannot copy in-process or failed recordings" is displayed.
 		// 14. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterCannotCopyInProcessOrFailRecordings();
@@ -199,7 +195,6 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		// 15. Message box is closed.
 		confirm_menu.isConfirmationMenuClosed();
 		
-//		record.checkStatusExistenceForMaxTTime(360);
 		record.waitUntilFirstRecordingBeingMovedFromStatusDissaper();
 		
 		// 16. Click "Courses" link in the breadcrumbs.

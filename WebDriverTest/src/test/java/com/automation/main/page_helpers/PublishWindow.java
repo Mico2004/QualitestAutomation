@@ -1,5 +1,9 @@
 package com.automation.main.page_helpers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -72,7 +76,12 @@ public class PublishWindow extends Page {
 	public WebElement titleOfCalenderStart;
 	@FindBy(xpath =".//*[@id='publishRecordingWindow']/form/div[1]/div[1]/div[2]/div/div[2]/div[2]/div/table/thead/tr[1]/th[3]")
 	public WebElement titleOfCalenderEnd;
-	
+	@FindBy(xpath =".//*[@id='publishRecordingWindow']/form/div[1]/div[2]/span[2]")
+	public WebElement errorTitleWrongDates;
+	@FindBy(xpath =".//*[@id='publishRecordingWindow']/form/div[1]/div[2]/span[3]")
+	public WebElement errorTitleMissingDates;
+	@FindBy(xpath =".//*[@id='publishRecordingWindow']/form/div[1]/div[2]/span[1]")
+	public WebElement errorTitleInvalidDates;
 	
 	// This function return true if publish window is closed,
 	// and false if it is open
@@ -89,8 +98,6 @@ public class PublishWindow extends Page {
 		}
 	}
 	
-	
-	
 	// This function verify that publish window is open
 	public void verifyPublishWindowOpen() {
 		boolean is_closed = isPublishWindowClosed();
@@ -106,10 +113,15 @@ public class PublishWindow extends Page {
 		}
 	}
 	
-		public void clickOnCancelButton() {
+	public void clickOnCancelButton() {
 			try {
-				wait.until(ExpectedConditions.visibilityOf(cancel_button));			
-			    ((JavascriptExecutor) driver).executeScript("document.getElementById(\""+cancel_button.getAttribute("id")+"\").click();");
+				wait.until(ExpectedConditions.visibilityOf(cancel_button));	
+				
+				while(isPublishWindowClosed() == false) {
+					((JavascriptExecutor) driver).executeScript("document.getElementById(\""+cancel_button.getAttribute("id")+"\").click();");
+					Thread.sleep(1000);
+				}
+				
 				System.out.println("Clicked on cancel button.");
 				ATUReports.add("Clicked on cancel button.", "Success.", "Success.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -162,8 +174,35 @@ public class PublishWindow extends Page {
 		}
 	}
 	
+	// This function verify that never option is: 0 - not selected, 1 - selected
+	public void verifyThatDateRangeOptionSelectedOrNotSelected(int selected) {
+			boolean is_selected = date_range_select_button.isSelected();
+			
+			if(selected == 0) {
+				if(is_selected) {
+					System.out.println("date range option is selected.");
+					ATUReports.add("date range option.", "Not selected.", "Selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				} else {
+					System.out.println("date range option is not selected.");
+					ATUReports.add("date range option.", "Not selected.", "Not selected.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				}
+			} else {
+				if(is_selected) {
+					System.out.println("date range option is selected.");
+					ATUReports.add("date range option.", "Selected.", "Selected.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} else {
+					System.out.println("date range option is not selected.");
+					ATUReports.add("date range option.", "Selected.", "Not selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				}
+			}
+		}
+		
 	// This function verify that always option is: 0 - not selected, 1 - selected
-		public void verifyThatAlwaysOptionSelectedOrNotSelected(int selected) {
+	public void verifyThatAlwaysOptionSelectedOrNotSelected(int selected) {
 			boolean is_selected = always_select_button.isSelected();
 			
 			if(selected == 0) {
@@ -189,15 +228,12 @@ public class PublishWindow extends Page {
 			}
 		}
 		
-	
-	
-	
 	// This function clicks on save button
 	public void clickOnSaveButton()
 	{
 		try {
 			while(isPublishWindowClosed() == false) {
-				save_button.click();
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", save_button);	
 				Thread.sleep(3000);
 			}
 			
@@ -211,6 +247,23 @@ public class PublishWindow extends Page {
 		}
 	}
 
+	
+	public void clickOnSaveButtonWithOutCloseTheWindow()
+	{
+		try{
+			waitForVisibility(save_button);
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", save_button);		
+			System.out.println("Clicked on save button.");
+			ATUReports.add("Clicked on save button.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch(Exception msg) {
+			System.out.println("Not clicked on save button.");
+			ATUReports.add("Clicked on save button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	
 	public void waitForPageToLoad() {
 		
 		try{
@@ -229,12 +282,10 @@ public class PublishWindow extends Page {
 		
 	}
 	
-	
 	// verify Publish menu background color is same as recording background color
-		public void verifyPublishColor(RecordingHelperPage rec) throws InterruptedException {
+	public void verifyPublishColor(RecordingHelperPage rec) throws InterruptedException {
 			
 			try{
-			Thread.sleep(2000);	
 			String background_rec = rec.getBackGroundColor(rec.background);
 			String menu_background = getBackGroundColor(publish_window_title_background);
 			if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(publish_window_title_background))) {
@@ -252,12 +303,11 @@ public class PublishWindow extends Page {
 
 				}
 		}
-		
-		
+				
 		/**
-		 * this function verify edit recording properties Title
+	 * this function verify edit recording properties Title
 		 */
-		public void verifyPublishWindowTitle() throws InterruptedException {
+	public void verifyPublishWindowTitle() throws InterruptedException {
 			try{
 			waitForVisibility(publish_window_title);
 			String val = publish_window_title.getText();
@@ -276,9 +326,8 @@ public class PublishWindow extends Page {
 
 				}
 		}
-		
-		
-		public void verifyInfomativeText() {
+			
+	public void verifyInfomativeText() {
 			
 			try {
 				String infoText  = publish_window_text.getText();
@@ -297,7 +346,77 @@ public class PublishWindow extends Page {
 			
 		}
 
-		public void verifyInfomativeTextAndVerifyBelowTheOtherInfoText() {
+	public void verifyErrorTitleInvalidDatesDisplayedAndValid() {
+		
+		try {	
+			if(errorTitleInvalidDates.isDisplayed()){		
+				String errorTitleText  = errorTitleInvalidDates.getText();		
+				if (errorTitleText.equals("Cannot publish the selected recordings. Please contact Tegrity support")) {
+					System.out.println("The error message is displayed and valid.");
+					ATUReports.add("The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
+				} else{
+					System.out.println("The error message is displayed and not valid.");
+					ATUReports.add("The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}				
+			} else {
+				System.out.println("The error message is not displayed.");
+				ATUReports.add("The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		} catch (Exception e) {	
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
+	}
+	
+public void verifyErrorTitleMissingDatesDisplayedAndValid() {
+		
+		try {	
+			if(errorTitleMissingDates.isDisplayed()){		
+				String errorTitleText  = errorTitleMissingDates.getText();		
+				if (errorTitleText.equals("Please specify both the beginning and end dates.")) {
+					System.out.println("The error message is displayed and valid.");
+					ATUReports.add("The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
+				} else{
+					System.out.println("The error message is displayed and not valid.");
+					ATUReports.add("The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}				
+			} else {
+				System.out.println("The error message is not displayed.");
+				ATUReports.add("The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		} catch (Exception e) {	
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
+	}
+	
+	public void verifyErrorTitleWrongDatesDisplayedAndValid() {
+		
+		try {	
+			if(errorTitleWrongDates.isDisplayed()){		
+				String errorTitleText  = errorTitleWrongDates.getText();		
+				if (errorTitleText.equals("Please enter an end-date that is after or the same as the beginning date.")) {
+					System.out.println("The error message is displayed and valid.");
+					ATUReports.add("The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
+				} else{
+					System.out.println("The error message is displayed and not valid.");
+					ATUReports.add("The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}				
+			} else {
+				System.out.println("The error message is not displayed.");
+				ATUReports.add("The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		} catch (Exception e) {	
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
+	}
+	
+
+	public void verifyInfomativeTextAndVerifyBelowTheOtherInfoText() {
 			
 			try {
 				String infoText  = publish_window_text2.getText();			
@@ -327,7 +446,7 @@ public class PublishWindow extends Page {
 						
 		}
 
-		public void verifyThatTheRadioButtonsWillDisplayBelow() {
+	public void verifyThatTheRadioButtonsWillDisplayBelow() {
 			try {
 				
 				Point LocText2 = publish_window_text2.getLocation();
@@ -351,9 +470,8 @@ public class PublishWindow extends Page {
 			
 			
 		}
-		
-		
-		public void VerifyTheLocationOfTheSaveAndCancel() {
+			
+	public void VerifyTheLocationOfTheSaveAndCancel() {
 			
 			try{
 				
@@ -383,7 +501,7 @@ public class PublishWindow extends Page {
 				}
 			}
 	
-		public void VerifyTheContentOfTheAvailablePublishingOptions() {
+	public void VerifyTheContentOfTheAvailablePublishingOptions() {
 		
 			try{
 				
@@ -454,7 +572,7 @@ public class PublishWindow extends Page {
 					}
 				}
 
-		public void verifyThatAfterClickingOnTheFromTheCalenderWidgetIsDisplayed(WebElement element,WebElement calender) {
+	public void verifyThatAfterClickingOnTheFromTheCalenderWidgetIsDisplayed(WebElement element,WebElement calender) {
 		try{			
 			clickElementJS(element);	
 			if(calender.isDisplayed()){
@@ -471,7 +589,7 @@ public class PublishWindow extends Page {
 			}
 		}	
 			
-		public void chooseRadioButton(String choose) {
+	public void chooseRadioButton(String choose) {
 		
 		try{
 			switch(choose){	
@@ -490,4 +608,61 @@ public class PublishWindow extends Page {
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
+
+	public void veirfyDateFromThisDate(String date ,WebElement dateCalender) throws ParseException {
+			
+			try{			
+				String dateToCompare = dateCalender.getAttribute("value");
+				if(dateToCompare.equals(date)){
+					System.out.println("verify that the right date is displayed in textbox");
+					ATUReports.add("verify that the right date is displayed in textbox.", LogAs.PASSED, null);
+				}else {
+					System.out.println("not verify that the right date is displayed in textbox.");
+					ATUReports.add("not verify that the right date is displayed in textbox.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
+				}	
+		}
+
+	// The date is in the following format: 'XX/XX/XXXX'.
+	public void verifyThatTheCalendarInTheRightFormat(WebElement date_Field){
+		
+		String correctDate = date_Field.getAttribute("value");		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		sdf.setLenient(false);
+		try {
+
+			//if not valid, it will throw ParseException
+			Date date = sdf.parse(correctDate);
+			System.out.println(date);
+			System.out.println("The date is in the following format: 'XX/XX/XXXX'");
+			ATUReports.add("The date is in the following format: 'XX/XX/XXXX'", "Success.", "Success.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+		} catch (ParseException e) {
+			System.out.println("The date is not in the following format: 'XX/XX/XXXX'" );				
+			ATUReports.add("The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+
+	}
+
+	
+	public void clearTheDateOfTheWebElement(WebElement element) {
+		
+		try{			
+			element.clear();
+			System.out.println("Delete the textbox content.");
+			ATUReports.add("Delete the textbox content.","Erase.","Erase.", LogAs.PASSED, null);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
+			}	
+	}
+
 }

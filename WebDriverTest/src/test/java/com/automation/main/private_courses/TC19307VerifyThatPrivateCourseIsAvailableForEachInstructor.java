@@ -40,7 +40,6 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import junitx.util.PropertyManager;
-import junitx.util.ResourceManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
@@ -190,7 +189,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 record.veriftyThatStartRecordingButtonDisplayed();
 		 
 		 // 8.1. Logout.
-		 top_bar_helper.signOut();
+		 	 record.signOut();
 		 
 		 // 9. Login as admin.
 		 tegrity.loginAdmin("Admin");
@@ -264,7 +263,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		}
 		
 		
-		top_bar_helper.signOut();
+			 record.signOut();
 		 
 		// 12. Login as the instructor you created.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -312,7 +311,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 record.veriftyThatStartRecordingButtonDisplayed();
 		 
 		 // 20. Sign Out.
-		 top_bar_helper.signOut();
+		 	 record.signOut();
 		
 		 
 		 // 20.1. Login as User1.
@@ -324,7 +323,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 String abc_course_name = course.selectCourseThatStartingWith("abc");
 		 
 		 // 20.3. Logout.
-		 top_bar_helper.signOut();
+		 	 record.signOut();
 		 
 		 // 21. Login as admin.
 		 tegrity.loginAdmin("Admin");
@@ -368,7 +367,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		}
 	
 				
-		top_bar_helper.signOut();
+			 record.signOut();
 		
 		// 24. Login as the instructor you created.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
@@ -389,22 +388,18 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		 wait.until(ExpectedConditions.visibilityOf(course.course_list.get(0)));
 		
 		 course.verifyCourseExist(temp_instructor_user_name+" sandbox course");
+		 Thread.sleep(1000);
 		 
 		 // 28. Sign Out.
-		 top_bar_helper.signOut();
+		 record.signOut();
 		 
 		 // 29 Login as admin.
 		 tegrity.loginAdmin("Admin");	
 		 
 		 // 30. Create a user. 
-		 Thread.sleep(4000);
 		 admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 
-		 mange_adhoc_users_page.waitForPageToLoad();
-
-		 
-		 mange_adhoc_users_page.waitForPageToLoad();
-		 
+		
 		 date = new Date();
 		 sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		 String temp_student_user_name = "StudentTemp" + sdf.format(date);
@@ -469,7 +464,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		}
 			
 			
-		top_bar_helper.signOut();
+			 record.signOut();
 		
 		
 		// 33. Login as the student.
@@ -478,22 +473,16 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		initializeCourseObject();
 		
 		// 34. Sign Out.
-		top_bar_helper.signOut();
+		record.signOut();
 		
 		// 35. Login as Admin.
 		tegrity.loginAdmin("Admin");	
 		
-		Thread.sleep(4000);
-		
 		// 36. Enroll the student user to a course as instructor.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 	
-
-
 		manage_adhoc_courses_enrollments_page.waitForPageToLoad();
 		 
-
-
 		// Search target course name
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(abc_course_name);
 		 
@@ -525,7 +514,7 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 		}
 	
 				
-		top_bar_helper.signOut();
+			 record.signOut();
 		
 		// 38. Login as the Instructor.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

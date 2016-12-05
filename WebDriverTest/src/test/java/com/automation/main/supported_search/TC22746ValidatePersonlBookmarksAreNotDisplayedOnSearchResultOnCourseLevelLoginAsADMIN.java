@@ -24,7 +24,7 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.EmailAndConnectionSettingsPage;
 import com.automation.main.page_helpers.EmailInboxPage;
 import com.automation.main.page_helpers.EmailLoginPage;
@@ -54,7 +54,7 @@ public class TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 
 	}
 
-	public EditRecordinPropertiesWindow erp_window;
+	public EditRecordingPropertiesWindow erp_window;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
@@ -117,7 +117,7 @@ public class TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		course_settings = PageFactory.initElements(driver, CourseSettingsPage.class);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		advanced_services_setting_page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
@@ -209,7 +209,10 @@ public class TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 		
 		//8. search the bookmark on the admin
 		top_bar_helper.searchForTargetText(to_search);
-		Thread.sleep(1000);
+		
+		//8.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+		search_page.verifyLoadingSpinnerImage();
+		search_page.waitUntilSpinnerImageDisappear();
 		// verify that we got bookmark and one result
 		search_page.verifyBookmarkIconDisplayedIndexSearchResult(1);
 		search_page.verifyResultContainOneResultWithTargetTitle(to_search);

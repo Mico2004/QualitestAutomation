@@ -99,16 +99,19 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 		// @Parameters({"web","title"}) in the future
 		@Test (description="TC 15624 Existence Of UI Items Delete")
 		public void test15624() throws InterruptedException {
-		//1.load page
+			//1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+			
 			//2.login as instructor
 			tegrity.loginCourses("User1");// log in courses page
 			initializeCourseObject();
+			
 			//3.Click "Recording Tasks" button (without selecting a recording)
 			course.selectCourseThatStartingWith("Ab");
 			
 			//4.a.verify move button is grey
 			record.verifyRecordingMenuColor(record.delete_button);
+			
 			//4.b.verify move button is disabled
 			record.verifyDisabledMenu();
 			
@@ -119,8 +122,7 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 			record.unClickOneCheckBoxOrVerifyNotSelected(record.checkbox);
 		
 			//7.click all check box
-			record.checkall.click();// make all checkboxes marked
-			Thread.sleep(2000);
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.check_all_checkbox);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			record.verifyAllCheckedboxSelected();
 			
@@ -130,7 +132,8 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 			
 			//9.to delete menu
 			record.getCheckbox().click();
-		//list all recording names to check which one is selected and should appear in delete menu
+			
+			//list all recording names to check which one is selected and should appear in delete menu
 			record.convertRecordingsListToNames();
 		    int counter=0;
 			for(WebElement element:record.checkboxlist)
@@ -142,24 +145,22 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 			counter++;
 			}
 			
+			record.toDeleteMenu(); 
 			
+			//10.verify Delete title        
+			delete.verifyDeleteMenuTitle();
 			
-			record.toDeleteMenu();
-	        Thread.sleep(2000);
-			//10.verify Delete title
-          
-            delete.verifyDeleteMenuTitle();
-		    Thread.sleep(2000);
 			//11.verify menu color
 		    delete.verifyDeleteColor(record);
-			///12.verify text
+			
+		    ///12.verify text
 		    delete.verifyInfoText();
-		   //13.verify has same lists of courses in move menu and course page
-		  delete.verifySelectedRecordingsInDeleteMenu(recording_for_delete);
-		
-			//14.verify button locations
-		
-			delete.verifyDeleteMenuElementsLocation();
+		   
+		    //13.verify has same lists of courses in move menu and course page
+		    delete.verifySelectedRecordingsInDeleteMenu(recording_for_delete);
+			
+		   //14.verify button locations
+		    delete.verifyDeleteMenuElementsLocation();
 		}
 
 		// description = "get courses list"

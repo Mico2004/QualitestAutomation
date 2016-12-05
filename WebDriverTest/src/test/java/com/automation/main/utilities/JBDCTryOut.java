@@ -9,7 +9,7 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.ManageAdHocCoursesMembershipWindow;
 import com.automation.main.page_helpers.ManageAdhocCoursesEnrollmentsPage;
@@ -48,7 +48,7 @@ public class JBDCTryOut {
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
 
 	}
-    public EditRecordinPropertiesWindow erp_window;
+    public EditRecordingPropertiesWindow erp_window;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
@@ -56,7 +56,7 @@ public class JBDCTryOut {
 	public DeleteMenu delete_menu;
 	public MoveWindow move_window;
 	public PlayerPage player_page;
-	public EditRecordinPropertiesWindow edit_window;
+	public EditRecordingPropertiesWindow edit_window;
 	public ConfirmationMenu confirmationM_window;
 	WebDriver driver;
 	WebDriverWait wait;

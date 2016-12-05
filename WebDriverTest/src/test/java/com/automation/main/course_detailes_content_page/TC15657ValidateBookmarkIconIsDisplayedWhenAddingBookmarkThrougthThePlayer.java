@@ -23,7 +23,7 @@ import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CourseSettingsPage;
 import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.EditRecording;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.PlayerPage;
@@ -52,7 +52,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 	}
 	
 	public DeleteMenu delete_menu;
-	public EditRecordinPropertiesWindow edit_recording_properties_window;
+	public EditRecordingPropertiesWindow edit_recording_properties_window;
 	public PlayerPage player_page;
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
 	public AdminDashboardPage admin_dash_board_page;
@@ -107,7 +107,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
-		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		
 		 Date curDate = new Date();
@@ -153,26 +153,23 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 	
 		record.clickOnRecordingTaskThenCopy();
 		copy.selectTargetCourseFromCourseListThatStartWith("abc");
-		copy.clickOnCopyButton();
-		Thread.sleep(1000);
+		copy.clickOnCopyButton();	
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecordings();
-		Thread.sleep(1000);
 		record.checkStatusExistenceForMaxTTime(360);
 		
 		// 4. Logout.
-		top_bar_helper.signOut();
+		record.signOut();
 		
-		Thread.sleep(1000);
 		
 		// 5. Login as an INSTRUCTOR (User1)
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
+		
 		
 		// 6. Enter to the course page (Course2).
 		course.selectCourseThatStartingWith("abc");
 		//getting the url for the admin
 		String url =  course.getCurrentUrlCoursePage(); 
-		Thread.sleep(1000);
+		
 
 		
 		// 7.1. The uploaded recording is displayed with no "bookmark" symbol displayed.
@@ -201,12 +198,10 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		}
 		
 		// 13. Sign out.
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		record.signOut();
 		
 		// 14. Login as a STUDENT (User4).
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
 		
 		// 15. Open the course that contains "ex1" recording.
 		course.selectCourseThatStartingWith("abc");
@@ -219,13 +214,11 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		}
 		
 		// Sign Out
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		record.signOut();
 		
 		// 17. Login as a Admin.
 		tegrity.loginAdmin("Admin");
 		
-		Thread.sleep(3000);
 		// Click on "view course list" under "courses" section.
 		admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 		
@@ -245,13 +238,12 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		}
 		
 		// 20. Sign Out.
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		record.signOut();
+	
 		
 		// 21. Login as student (User4).
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
-		
+	
 		// 22. Enter to the course page.
 		course.selectCourseThatStartingWith("abc");
 		
@@ -276,16 +268,15 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		Thread.sleep(1000);
 		
 		// Sign Out
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
-		
+		record.signOut();
+			
 		// 26. Login as another student to the same course (User2).
 		tegrity.loginCourses("User2");
-		Thread.sleep(1000);
+		
 		
 		// 27. Enter to the same course page
 		course.selectCourseThatStartingWith("abc");
-		Thread.sleep(1000);
+		
 		
 		// 28. Make sure the bookmark symbol do no appear for the recording you just add a bookmark.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {

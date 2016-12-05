@@ -73,11 +73,7 @@ public class TC22049ValidateCopyWindowFunctionality {
 
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
@@ -85,7 +81,6 @@ public class TC22049ValidateCopyWindowFunctionality {
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		confirmation_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-
 		wait = new WebDriverWait(driver, 30);
 		 
 		Date curDate = new Date();

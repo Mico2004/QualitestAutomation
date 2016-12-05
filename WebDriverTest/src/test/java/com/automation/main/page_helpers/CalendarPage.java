@@ -1,5 +1,6 @@
 package com.automation.main.page_helpers;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,34 +36,17 @@ public class CalendarPage extends Page {
 	WebElement monthAndYear;
 	public @FindBy(css = ".glyphicon.glyphicon-arrow-left")
 	WebElement arrowLeft;
+	public @FindBy(css = ".glyphicon.glyphicon-arrow-right")
+	WebElement arrowRight;
 	public @FindBy(css =".week.ng-binding.firstDisplayWeek")
 	WebElement firstWeek;
 	public @FindBy(xpath= ".//*[@id='editRecordingWindow']/form/div[1]/div[2]/div/div[2]/div/table/tbody")
 	WebElement calenderTable;
+	public @FindBy(xpath = ".//*[@id='publishRecordingWindow']/form/div[1]/div[1]/div[2]/div/div[2]/div[2]/div/table/thead/tr[1]/th[2]/i")
+	WebElement arrowLeftPublishRight;
+	public @FindBy(xpath = ".//*[@id='publishRecordingWindow']/form/div[1]/div[1]/div[2]/div/div[2]/div[2]/div/table/thead/tr[1]/th[4]/i")
+	WebElement arrowRightPublishRight;	
 	String day,month,year;
-	
-
-	public void verifyTest(){
-		 
-		String correctDate = date_Field.getText();
-		clickElement(date_Field);
-		List<WebElement> tr_collection=calenderTable.findElements(By.xpath("tbody/tr"));
-   
-	        int row_num,col_num;
-	        row_num=1;
-	        for(WebElement trElement : tr_collection)
-	        {
-	            List<WebElement> td_collection=trElement.findElements(By.xpath("td"));
-	            col_num=1;
-	            for(WebElement tdElement : td_collection)
-	            {
-	                System.out.println("row # "+row_num+", col # "+col_num+ "text="+tdElement.getText());
-	                col_num++;
-	            }
-	            row_num++;
-	        } 
-	    }
-	
 	
 	public void getMonthAndYearFromCalendar() throws ParseException {
 		
@@ -78,30 +62,46 @@ public class CalendarPage extends Page {
 		
 	}
 	
-	//The current month is presented - year-month in the format of (xxxx)-(yyy)
-    public void verifyThatFormatOfTheMonthAndYear(WebElement ie) throws ParseException {
-    
-    	String monthAndYearString = ie.getText();													
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM");
-		sdf.setLenient(false);
-		try {
-
-			//if not valid, it will throw ParseException
-			Date date = sdf.parse(monthAndYearString);
-			System.out.println(date);
-			System.out.println("The date is in the following format: 'yyyy-MMM'");
-			ATUReports.add("The date is in the following format: 'yyyy-MMM'", "Success.", "Success.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-			
-		} catch (ParseException e) {
-			System.out.println("The date is not in the following format: 'yyyy-MMM'" );				
-			ATUReports.add("The date is not in the following format: 'yyyy-MMM'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-		}
+	public void getMonthAndYearFromCalendarWithElement(WebElement ie) throws ParseException {
+		
+		String monthAndYearString = ie.getText();
+		String[] splited_structure_displayed_yearAndMonth = monthAndYearString.split("-");
+		year = splited_structure_displayed_yearAndMonth[0];
+		
+		Date date = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(splited_structure_displayed_yearAndMonth[1]);
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    int monthNumer = cal.get(Calendar.MONTH) + 1 ;
+	    month = Integer.toString(monthNumer);
 		
 	}
 	
 	
+	//The current month is presented - year-month in the format of (xxxx)-(yyy)
+    public void verifyThatFormatOfTheMonthAndYear(WebElement ie) throws ParseException {
+    	String monthAndYearString = null;
+		try {
+			monthAndYearString = ie.getText();													
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MMM",Locale.ENGLISH);
+			sdf.setLenient(false);
+			//if not valid, it will throw ParseException
+			Date date = sdf.parse(monthAndYearString);
+			System.out.println(date);
+			System.out.println("The date is in the following format: 'yyyy-MMM'");
+			ATUReports.add("The date is in the following format: 'yyyy-MMM'" + "and the date is: " + monthAndYearString , "Success.", "Success.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+		} catch (ParseException e) {
+			System.out.println("The date is not in the following format: 'yyyy-MMM'" );				
+			ATUReports.add("The date is in the following format: 'yyyy-MMM' and the date is: " + monthAndYearString + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		} catch (Exception e) {
+		System.out.println("No such Element exists" );				
+		ATUReports.add("No such Element exists " + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		Assert.assertTrue(false);
+	}
+		
+	}
 	
 	public void getDayFromCalender() {
 		String id = "day ng-scope ng-binding active";
@@ -150,39 +150,144 @@ public class CalendarPage extends Page {
 		System.out.println("Not Verify the day from the calendar.");
 	}
 	
-	}	
+	}
 	
+	public String changeCreateDayWithoutDayPickerActive(int days,WebElement element,By by ,WebElement rightArrow ,WebElement leftArrow) throws ParseException, InterruptedException {
+		
+		String returnDate = null;
+		try {
+			DateFormat dateFormat = new SimpleDateFormat("dd");
+			Date date = new Date();
+			Thread.sleep(500);
+			day = dateFormat.format(date);
+			getMonthAndYearFromCalendarWithElement(element);
+			int dayPicker =getTheDayOnMonth(days,rightArrow,leftArrow);
+			String dayPick = Integer.toString(dayPicker);
+			changeDayOnCalender(dayPick,by);	
+			returnDate = month + "/" + dayPick + "/" + year;
+			
+		} catch (Exception e) {
+			e.getMessage();			
+			ATUReports.add("The error message is: " + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		return returnDate;
+	}
+	/**
+	 * Enter on the calendar label and get the month year and day after subtract days
+	 * @param days days the amount of days that we should subtract or author
+	 * @throws ParseException
+	 * @throws InterruptedException
+	 */
+
 	public void changeCreateDay(int days) throws ParseException, InterruptedException {
 		
-		String id = date_Field.getAttribute("id");
-		String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
-		clickElementJS(date_Field);	
-		Thread.sleep(500);
-		getMonthAndYearFromCalendar();
-		getDayFromCalender();
-			
-	    int dayInt = Integer.parseInt(day);
-	    int monthInt = Integer.parseInt(month);
-	    int pickTwoDayBefore = 0;
-	    pickTwoDayBefore= dayInt -days;
-	    if(dayInt == 1 || dayInt == 2 || dayInt ==3){
-	    	if(monthInt == 3 ) {	
-	    		if(pickTwoDayBefore <=0)
-	    			pickTwoDayBefore +=28;    		
-	    	} else if(monthInt == 1 || monthInt == 11 || monthInt == 9 || monthInt == 8  || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
-	    		if(pickTwoDayBefore <=0)
-	    			pickTwoDayBefore +=31;   			
-	    	} else if(monthInt == 12 || monthInt == 10 || monthInt == 7 || monthInt == 5) {	
-	    		if(pickTwoDayBefore <=0)
-	    			pickTwoDayBefore +=30;
-	    	}
-	    	if(pickTwoDayBefore != 1)	{
-	    		clickElement(arrowLeft);
-	    	    monthInt -=1; 
-	    	}
-	    }
-	    String dayNewNumber = Integer.toString(pickTwoDayBefore);
-	    WebElement table = driver.findElement(By.className("table-condensed"));
+		try {
+			String id = date_Field.getAttribute("id");
+			String correctDate = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
+			clickElementJS(date_Field);	
+			Thread.sleep(500);
+			getMonthAndYearFromCalendar();
+			getDayFromCalender();	
+			int pickTwoDayBefore = getTheDayOnMonth(days,arrowLeft,arrowRight);
+			String dayNewNumber = Integer.toString(pickTwoDayBefore);
+			By by = By.className("table-condensed");
+			changeDayOnCalender(dayNewNumber,by);
+		} catch (Exception e) {
+			e.getMessage();;			
+			ATUReports.add(e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	
+	/**
+	 * This function is returning the current day after subtract days
+	 *  ( days can be negative and we can author instead subtract)
+	 * @param days the amount of days that we should subtract or author
+	 * @return The current day - days
+	 */
+	public int getTheDayOnMonth(int days ,WebElement rightArrow ,WebElement leftArrow ){
+		
+			int dayInt = Integer.parseInt(day);
+		    int monthInt = Integer.parseInt(month);
+		    int pickTwoDayBefore = 0;
+		    DateFormat dateFormat = new SimpleDateFormat("MM");
+    		Date date = new Date();
+    		String monthToCheck = dateFormat.format(date);
+		    pickTwoDayBefore= dayInt -days;
+		    
+		    if(!monthToCheck.equals(month)){
+			   int digitToMove = Integer.parseInt(monthToCheck) - Integer.parseInt(month);
+			   if(digitToMove < 0 ){
+				   for(int i = 0 ; i < digitToMove * (-1) ;i++){
+					   clickElement(leftArrow);
+					   monthInt -=1; 
+			    	   month = Integer.toString(monthInt);
+			   		}
+			   } else {
+				   for(int i = 0 ; i < digitToMove ;i++){
+					   clickElement(rightArrow);
+					   monthInt +=1; 
+			    	   month = Integer.toString(monthInt);
+			   		}
+			   }  
+		    }       
+		    if(dayInt == 1 || dayInt == 2 || dayInt ==3){
+		    	if(!monthToCheck.equals(month)){
+		    		monthInt++;
+		    	}
+		    	if(monthInt == 3 ) {	
+		    		if(pickTwoDayBefore <=0)
+		    			pickTwoDayBefore +=28;    		
+		    	} else if(monthInt == 1 || monthInt == 11 || monthInt == 9 || monthInt == 8  || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
+		    		if(pickTwoDayBefore <=0)
+		    			pickTwoDayBefore +=31;   			
+		    	} else if(monthInt == 12 || monthInt == 10 || monthInt == 7 || monthInt == 5) {	
+		    		if(pickTwoDayBefore <=0)
+		    			pickTwoDayBefore +=30;
+		    	}
+		    	if(pickTwoDayBefore != 1)	{
+		    		if(monthToCheck.equals(month)){
+		    			clickElement(leftArrow);
+		    		
+		    		}
+		    		monthInt -=1; 
+		    	    month = Integer.toString(monthInt);
+		    	}
+		    } else if ( days < 0  && dayInt>= 28){
+		    	if(!monthToCheck.equals(month)){
+		    		monthInt--;
+		    	}
+		    	if(monthInt == 2 ) {	
+		    		if(pickTwoDayBefore >28)
+		    			pickTwoDayBefore -=28;    		
+		    	} else if(monthInt == 1 || monthInt == 3 || monthInt == 5 || monthInt == 7  || monthInt == 8 || monthInt == 10 ||  monthInt == 12) {
+		    		if(pickTwoDayBefore >31)
+		    			pickTwoDayBefore -=31;   			
+		    	} else if(monthInt == 4 || monthInt == 6 || monthInt == 9 || monthInt == 11) {	
+		    		if(pickTwoDayBefore >30)
+		    			pickTwoDayBefore -=30;
+		    	}
+		    	if(pickTwoDayBefore == 1 || pickTwoDayBefore == 2 )	{
+		    		if(monthToCheck.equals(month)){
+		    			clickElement(rightArrow);   			
+		    		}
+		    		monthInt +=1; 
+		    	    month = Integer.toString(monthInt);
+		    	}
+		    }
+		    return pickTwoDayBefore;
+	}
+
+	/**
+	 * 
+	 * @param dayNewNumber
+	 * @param by
+	 */
+	public void changeDayOnCalender(String dayNewNumber ,By by){
+		
+		WebElement table = driver.findElement(by);
 	    List<WebElement> rows = table.findElements(By.tagName("tr"));
 	    List<WebElement> Numbers = new ArrayList<WebElement>() ;
 	    int rowNumber = rows.size();
@@ -190,7 +295,8 @@ public class CalendarPage extends Page {
 	    	List<WebElement> cols = table.findElements(By.tagName("td"));
 	    	int colsNum = cols.size();
 	    	for(int j = 0; j< colsNum ; j++) {
-	    		if(cols.get(j).getText().equals(dayNewNumber)){
+	    		String currentNumber = cols.get(j).getText();
+	    		if(currentNumber.equals(dayNewNumber)){
 	    			Numbers.add(cols.get(j));    			
 	    		}
 	    	}
@@ -212,8 +318,6 @@ public class CalendarPage extends Page {
     	}
     	ATUReports.add("Not Verify the day from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		System.out.println("Not Verify the day from the calendar.");
-	    Assert.assertTrue(false);	
+	    Assert.assertTrue(false);
 	}
-
-
 }

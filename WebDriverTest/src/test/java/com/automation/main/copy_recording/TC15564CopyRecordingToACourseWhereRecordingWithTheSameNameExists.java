@@ -123,9 +123,10 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		current_course = course.selectCourseThatStartingWith("Ab");
 		
 		// 2.5. Select source recording.
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		String init_first_recording_name = record.getFirstRecordingTitle();
-		
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);
+		String init_first_recording_name = record.getIndexRecorderNameOfRecording(recordNumber);
+	
 		// 2.6. Select "Recording Tasks -> Copy" menu item.
 		record.clickOnRecordingTaskThenCopy();
 		
@@ -134,11 +135,9 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		
 		// 2.8 Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
-		Thread.sleep(2000);
-		
+			
 		// 2.9. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(2000);
 		
 		// 2.10. Click on "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();

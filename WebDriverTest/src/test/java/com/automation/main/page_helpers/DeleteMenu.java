@@ -86,6 +86,35 @@ public class DeleteMenu extends Page {
 		Thread.sleep(2000);
 	}
 
+	public void verifyDeleteWindowClosed() {
+		boolean is_closed = isDeleteMenuClose();
+		
+		if(is_closed) {
+			System.out.println("Delete window is close.");
+			ATUReports.add("Delete window.", "Close.", "Close.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Delete window is open.");
+			ATUReports.add("Delete window.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	public void verifyDeleteWindowOpen() {
+		boolean is_closed = isDeleteMenuClose();
+		
+		if(!is_closed) {
+			System.out.println("Delete window is open.");
+			ATUReports.add("Delete window.", "Open.", "Open.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Delete window is close.");
+			ATUReports.add("Delete window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	
 	public List<String> getRecordingList() {
 		List<String> current_recording_list = new ArrayList<String>();
 

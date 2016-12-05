@@ -115,9 +115,7 @@ public class TC15635DeleteAProctoringRecordingAsInstructor {
 		
 		// 3. Click on "Tests" tab.
 		record.clickOnTestsTab();
-		
-		Thread.sleep(1000);
-		
+
 		// 4. Select recording to delete.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
@@ -150,20 +148,8 @@ public class TC15635DeleteAProctoringRecordingAsInstructor {
 		// 7. Click "Delete" button
 		delete_menu.clickOnDeleteButton();
 			
-		Thread.sleep(1000);
-		
 		// 8. "Delete" window is closed.
-		boolean is_delete_window_closed = delete_menu.isDeleteMenuClose();
-	
-		if(is_delete_window_closed) {
-			System.out.println("Delete window is closed.");
-			ATUReports.add("Delete window is closed.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("Delete window not closed.");
-			ATUReports.add("Delete window not closed.", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
+		delete_menu.verifyDeleteWindowClosed();
 		
 		// 9. Verify that selected recording is deleted.
 		List <String> current_recording_list = record.getCourseRecordingList();

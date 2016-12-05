@@ -4,8 +4,6 @@ import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,7 +22,7 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.ManageAdHocCoursesMembershipWindow;
 import com.automation.main.page_helpers.ManageAdhocCoursesEnrollmentsPage;
@@ -35,8 +33,6 @@ import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
-import atu.testrecorder.ATUTestRecorder;
-import atu.testrecorder.exceptions.ATUTestRecorderException;
 
 public class TC15457AddMovFile {
 	// Set Property for ATU Reporter Configuration
@@ -45,7 +41,7 @@ public class TC15457AddMovFile {
 
 	}
 
-	public EditRecordinPropertiesWindow erp_window;
+	public EditRecordingPropertiesWindow erp_window;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
@@ -70,15 +66,13 @@ public class TC15457AddMovFile {
 	String instructor1;
 	String instructor2;
 	List<String> for_enroll;
-	ATUTestRecorder recorder; 
+	//ATUTestRecorder recorder; 
 
 	@BeforeClass
-	public void setup() throws ATUTestRecorderException {
-		recorder = new ATUTestRecorder("C:\\Users\\mickaele\\Desktop\\","Video",false);
-		
-		recorder.start(); 
+	public void setup(){// throws ATUTestRecorderException {
+		//recorder = new ATUTestRecorder("C:\\Users\\mickaele\\Desktop\\","Video",false);	
+		//recorder.start(); 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -92,7 +86,7 @@ public class TC15457AddMovFile {
 
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
@@ -113,10 +107,10 @@ public class TC15457AddMovFile {
 	}
 
 	@AfterClass
-	public void closeBroswer() throws ATUTestRecorderException {
+	public void closeBroswer() {//throws ATUTestRecorderException {
 		
 		this.driver.quit();
-		recorder.stop();
+		//recorder.stop();
 	}
 	
 	
@@ -184,7 +178,7 @@ public class TC15457AddMovFile {
 
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);

@@ -48,8 +48,9 @@ public class ConfirmationMenu extends Page {
 	@FindBy(css = ".emphasis.ng-binding")
 	WebElement correct_error_msg_body;
 	@FindBy(xpath = "//*[@id=\"alertWindow\"]/div[1]/p")
-	public
-	WebElement add_additional_content_confirm_note;
+	public WebElement add_additional_content_confirm_note;
+	@FindBy(xpath = "//*[@id=\"alertWindow\"]/div[1]/p")
+	public WebElement correct_error_msg;
 	@FindBy(id = "alertWindow")
 	WebElement alertWindow;
 	
@@ -409,7 +410,7 @@ public class ConfirmationMenu extends Page {
 	// This function check that there is message: "Please select an instructor",
 	// and click on ok button
 	public void clickOnOkButtonAfterErrorNoInstructorSelected() {
-		String error_msg = correct_error_msg_body.getText();
+		String error_msg = correct_error_msg.getText();
 		if (error_msg.equals("Please select an instructor")) {
 			System.out.println("Correct error message: Please select an instructor");
 			ATUReports.add("Correct error message.", "Please select an instructor", "Please select an instructor",
@@ -488,7 +489,7 @@ public class ConfirmationMenu extends Page {
 	// appears in HTML source code.
 	public void clickOnOkButtonAfterConfirmAddAdditionalContentFile(String file_name) throws InterruptedException {
 		try {
-			Thread.sleep(1000);
+			waitForVisibility(add_additional_content_confirm_note);
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);

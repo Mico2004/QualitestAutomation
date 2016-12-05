@@ -121,7 +121,6 @@ public class TC15645TryToDeleteCopyingRecording {
 		String selected_recording_name = record.getFirstRecordingTitle();
 		System.out.println("Record to select: " + selected_recording_name);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.check_all_checkbox);
-		Thread.sleep(1000);
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
 
@@ -130,8 +129,7 @@ public class TC15645TryToDeleteCopyingRecording {
 
 		// 6. Click "Copy Recording(s)".
 		copy.clickOnCopyButton();
-		Thread.sleep(1000);
-
+		
 		// 7. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecordings();
 
@@ -212,8 +210,6 @@ public class TC15645TryToDeleteCopyingRecording {
 		// breadcrumbs.
 		record.returnToCourseListPage();
 
-		Thread.sleep(2000);
-
 		// 9. Select destination course.
 		course.selectTargetCourse(target_course);
 
@@ -253,8 +249,8 @@ public class TC15645TryToDeleteCopyingRecording {
 		// While recording is being copied, select "Recording Tasks -> Delete"
 		// menu item
 		record.clickOnRecordingTaskThenDelete();
-		Thread.sleep(1000);
-		
+		;
+
 		// Message box "The following recording(s) could not be deleted:" is displayed
 		if (driver.findElement(By.cssSelector(".emphasis.ng-binding")).getText()
 				.startsWith("The following recording(s) could not be deleted:")) {

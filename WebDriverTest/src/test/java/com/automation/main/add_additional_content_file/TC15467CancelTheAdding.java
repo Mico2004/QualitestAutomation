@@ -23,7 +23,7 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.CreateNewCourseWindow;
 import com.automation.main.page_helpers.CreateNewUserWindow;
 import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.EditRecordinPropertiesWindow;
+import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.ManageAdHocCoursesMembershipWindow;
 import com.automation.main.page_helpers.ManageAdhocCoursesEnrollmentsPage;
@@ -47,7 +47,7 @@ public class TC15467CancelTheAdding {
 
 	}
 
-	public EditRecordinPropertiesWindow erp_window;
+	public EditRecordingPropertiesWindow erp_window;
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
@@ -88,7 +88,7 @@ public void setup() {
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-		erp_window = PageFactory.initElements(driver, EditRecordinPropertiesWindow.class);
+		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
@@ -135,7 +135,8 @@ public void test15467() throws Exception {
 		// 7. add file and cancel uploading
 		add_additional_content_window.toUploadFileByPathThenSelectFile(fullPathToFile);
 		//add_additional_content_window.waitForVisibility(add_additional_content_window.upload_progress_bar);
-		add_additional_content_window.clickElementJS(add_additional_content_window.cancel_additional_file_button);
+		Thread.sleep(100);
+		add_additional_content_window.clickOnCancelButton();
 		//confirm_menu.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);
 		
 		record.clickOnAdditionContentTab();
