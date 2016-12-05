@@ -335,26 +335,36 @@ public class RecordingHelperPage extends Page {
 	}
 
 	public boolean checkRecordingInIndexIStatus(int index, String status) {
-		String recording_status = driver.findElement(By.id("RecordingStatus" + Integer.toString(index))).getText();
-		System.out.println(recording_status);
-		if (recording_status.equals(status)) {
-			System.out.println(
-					"Recordings in index: " + index + " status is correct - " + recording_status + " == " + status);
-			ATUReports.add(
-					"Recordings in index: " + index + " status is correct - " + recording_status + " == " + status,
-					LogAs.PASSED, null);
-			Assert.assertEquals(recording_status, status);
-			return true;
+
+		try {
+			if (!driver.findElement(By.id("RecordingStatus" + Integer.toString(index))).isDisplayed()) {
+				String recording_status = driver.findElement(By.id("RecordingStatus" + Integer.toString(index)))
+						.getText();
+				System.out.println(recording_status);
+				if (recording_status.equals(status)) {
+					System.out.println("Recordings in index: " + index + " status is correct - " + recording_status
+							+ " == " + status);
+					ATUReports.add("Recordings in index: " + index + " status is correct - " + recording_status + " == "
+							+ status, LogAs.PASSED, null);
+					Assert.assertEquals(recording_status, status);
+					return true;
+				}
+
+				System.out.println("Recordings in index: " + index + " status is not correct - " + recording_status
+						+ " != " + status);
+				ATUReports.add("Recordings in index: " + index + " status is not correct - " + recording_status + " != "
+						+ status, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
+				Assert.assertEquals(recording_status, status);
+			} else {
+				return true;
+			}
+			return false;
+			
+		} catch (Exception e) {
+			ATUReports.add("Recording  check failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			return false;
 		}
-
-		System.out.println(
-				"Recordings in index: " + index + " status is not correct - " + recording_status + " != " + status);
-		ATUReports.add(
-				"Recordings in index: " + index + " status is not correct - " + recording_status + " != " + status,
-				LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-
-		Assert.assertEquals(recording_status, status);
-		return false;
 	}
 
 	// This function check for existence in status of any recording for t time

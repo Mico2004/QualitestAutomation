@@ -663,7 +663,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// 38. Sign Out.
 		top_bar_helper.signOut();
 		
-		// 39. Login as Admin.
+	/*	// 39. Login as Admin.
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);
 		
 		// 40. Disenroll the user from the course.
@@ -722,7 +722,7 @@ public class TC19316CreateAndDeleteAPrivateCourse {
 		// 43. Make sure the course is displayed in the 'Past Courses' tab.
 		course.clickOnPastCoursesTabButton();
 		Thread.sleep(2000);
-		course.verifyCourseExist(temp_another_course_name);
+		course.verifyCourseExist(temp_another_course_name);*/
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
