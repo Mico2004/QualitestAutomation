@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
 import com.automation.main.page_helpers.CalendarPage;
+import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CourseSettingsPage;
 import com.automation.main.page_helpers.CoursesHelperPage;
@@ -50,6 +51,7 @@ public class TC7946ValidateChangesInAutomaticallyPublishStudentRecordingsSetting
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
 	public CalendarPage calendarPage;
+	public ConfirmationMenu confirm_menu;
 	public EditRecordingPropertiesWindow edit_recording_properties_window;
 	public AdminDashboardPage admin_dash_board_page;
 	WebDriver driver;
@@ -73,6 +75,7 @@ public class TC7946ValidateChangesInAutomaticallyPublishStudentRecordingsSetting
 			publish_window = PageFactory.initElements(driver, PublishWindow.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
+			confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 			edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 			player_page = PageFactory.initElements(driver, PlayerPage.class);
 			course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
@@ -145,19 +148,23 @@ public class TC7946ValidateChangesInAutomaticallyPublishStudentRecordingsSetting
 		//15.Click the "Save" button
 		edit_recording_properties_window.clickOnSaveButton();
 		
-		//16. sign out
+		//16. click on the Ok button
+		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
+		
+		//17. sign out
 		record.signOut();
 					
-		//17.login as INSTRUCTOR
+		//18.login as INSTRUCTOR
 		tegrity.loginCourses("User1");
 						
-		//18.Open the course "Course details" page 
+		//19.Open the course "Course details" page 
 		course.selectCourseThatStartingWith("Ab");	
 			
-		//19.move to the student tab
+		//20.move to the student tab
+		record.waitForThePageToLoad();
 		record.clickOnStudentRecordingsTab();
 		
-		//20.Validate the Students recordings you uploaded earlier are still published.
+		//21.Validate the Students recordings you uploaded earlier are still published.
 		recordingNumber = record.getIndexOfRecordFromRecordName(recordingName);
 		record.verifyNoStatusInTheIndex(recordingNumber);
 		
