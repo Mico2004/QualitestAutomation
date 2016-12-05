@@ -165,13 +165,14 @@ public class CourseSettingsPage extends Page {
 	public void selectMakeCoursePublicAndVerifyThatItSelected() {
 		try {
 			waitForVisibility(checkbox_make_course_public_visable);
-			checkbox_make_course_public_visable.click();
+			clickElementJS(checkbox_make_course_public_visable);
 			if (checkbox_make_course_public_visable.isSelected()) {
 				System.out.println("Selected make this course public and verified that it selected.");
 				ATUReports.add("Select this course public and verify that it selected.", "True.", "True.", LogAs.PASSED,
 						null);
 				Assert.assertTrue(true);
 			} else {
+				
 				System.out.println("Selected make this course public but verified that it not selected.");
 				ATUReports.add("Selected this course public and verify that it selected.", "True.", "False.",
 						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -210,7 +211,7 @@ public class CourseSettingsPage extends Page {
 		try {
 			if (checkbox_make_course_public_visable.isSelected()) {
 				System.out.println("The checkbox of make course public already selected.");
-				ATUReports.add("Make course public.", "Selected.", "Selected.", LogAs.PASSED, null);
+				ATUReports.add("The checkbox of make course public already selected.", "Selected.", "Selected.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				selectMakeCoursePublicAndVerifyThatItSelected();
@@ -227,7 +228,7 @@ public class CourseSettingsPage extends Page {
 		waitForVisibility(checkbox_make_course_public_visable);
 		if (checkbox_make_course_public_visable.isSelected()) {
 			try {
-				checkbox_make_course_public_visable.click();
+				clickElementJS(checkbox_make_course_public_visable);
 				System.out.println("Unselected make course public.");
 				ATUReports.add("Unselected make course public if selected.", "True.", "True.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
