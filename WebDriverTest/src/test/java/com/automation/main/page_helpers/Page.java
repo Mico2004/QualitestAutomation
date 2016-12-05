@@ -451,11 +451,11 @@ public class Page {
 				Assert.fail("timeout");
 			try {
 				if (driver.getTitle().equals(title))// check
-					ATUReports.add(" load page succeeded",Url,LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP)); // if
+					ATUReports.add(" load page succeeded",Url,LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE)); // if
 																													// list
 				break;
 			} catch (Exception e) {
-				ATUReports.add(" load page failed",Url ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+				ATUReports.add(" load page failed",Url ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 
 			Thread.sleep(1000);
