@@ -69,6 +69,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement recording_button;
 	@FindBy(linkText = "Recording Tasks")
 	public WebElement recording_tasks_button;
+	@FindBy(linkText = "View")
+	public WebElement view_tasks_button;
 	@FindBy(id = "CourseTask")
 	public WebElement course_tasks_button;
 	@FindBy(id = "CourseSettings")
@@ -271,9 +273,9 @@ public class RecordingHelperPage extends Page {
 	public @FindBy(css = ".ng-scope>.ng-scope.ng-binding") WebElement breadcrumbs_courses_link;
 	public @FindBy(id = "InstituteLogotype") WebElement institute_logo;
 	public @FindBy(css = ".dropdown-menu.text-left>div>li>span") WebElement view_menu_tags_text;
-	public @FindBy(css = ".tagsContainer>div>label") WebElement showAllRecordings;
+	public @FindBy(css = ".tagsContainer>div>label>input") WebElement showAllRecordings;
 	public @FindBy(css = ".tagsContainer>div>div>label>input")WebElement first_tag;
-	public @FindBy(css = ".ng-valid.ng-dirty") List<WebElement> checkboxs_tags;
+	public @FindBy(css = ".tagsContainer>div>div>label>input") List<WebElement> checkboxs_tags;
 
 	public ConfirmationMenu confirm_menu;
 	public CopyMenu copyMenu;
@@ -1935,7 +1937,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	public void verifyColorButton(String color) throws InterruptedException {
 
-			String white = "#0e76bf";/// blue in ie chrome and firefox
+			String white = "#0e76bf";/// white in ie chrome and firefox
 			String white2 = "#e6e617";
 			if (color.equals(white) || color.equals(white2)) {
 			

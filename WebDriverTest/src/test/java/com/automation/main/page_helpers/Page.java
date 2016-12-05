@@ -843,11 +843,29 @@ public class Page {
 			System.out.println("String sent to WebElement: " + string_to_send);
 			ATUReports.add("String send to WebElement.", string_to_send, string_to_send, LogAs.PASSED, null);
 		} catch (Exception msg) {
+			msg.printStackTrace();
 			System.out.println("String do not send to WebElement: " + string_to_send);
 			ATUReports.add("String do not send to WebElement.", string_to_send, "", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 
+	public void sendStringwithAction(WebElement we, String string_to_send) {
+		try {
+			Actions builder = new Actions(driver);
+			builder.sendKeys(we,string_to_send);
+			builder.build().perform();
+			System.out.println("String sent to WebElement: " + string_to_send);
+			ATUReports.add("String send to WebElement.", string_to_send, string_to_send, LogAs.PASSED, null);
+		} catch (Exception msg) {
+			msg.printStackTrace();
+			System.out.println("String do not send to WebElement: " + string_to_send);
+			ATUReports.add("String do not send to WebElement.", string_to_send, "", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+	
+	
+	
+	
 	// Verify that
 	// The next result display below the current result in case there is next
 	// result.
