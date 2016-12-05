@@ -5234,7 +5234,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		robot.keyRelease(KeyEvent.VK_ENTER);
 		
 		 // paste the path of the recording 
-		 robot.delay(1000);	
+		 robot.delay(2000);	
 		 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		 StringSelection stringSelection = new StringSelection(path);
 		 clipboard.setContents(stringSelection, null);
