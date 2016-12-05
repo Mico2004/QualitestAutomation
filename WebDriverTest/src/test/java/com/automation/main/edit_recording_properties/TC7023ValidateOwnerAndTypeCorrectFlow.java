@@ -106,6 +106,7 @@ public class TC7023ValidateOwnerAndTypeCorrectFlow  {
 		tegrity.loginAdmin("Admin");
 				
 		//Click on the 'Manage Ad-hoc Users (User Builder)' link
+		admin_dash_board_page.waitForPageToLoad();
 		admin_dash_board_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");		
 		manage_Adhoc_Users_Page.waitForPageToLoad();
 				

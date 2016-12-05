@@ -102,6 +102,8 @@ public class AdminDashboardPage extends Page {
 	WebElement CoursesBox;
 	@FindBy (id="IntegrationBox")
 	WebElement IntegrationBox;
+	@FindBy (id="Admin Dashboard")
+	WebElement AdminDashboardTitle;
 	List <WebElement> dashboardSections;
 	String linkText="";
 	@FindBy(xpath="//*[@id=\"copyright\"]/div")
@@ -162,7 +164,19 @@ public class AdminDashboardPage extends Page {
 		
 	}
 
-
+	public void waitForPageToLoad(){
+		try{
+			wait.until(ExpectedConditions.visibilityOf(AdminDashboardTitle));
+			wait.until(ExpectedConditions.visibilityOf(viewCourseList));
+			wait.until(ExpectedConditions.visibilityOf(manageAdHocUsers));
+			wait.until(ExpectedConditions.visibilityOf(advancedServiceSettings));
+			
+		}catch(Exception e){
+			ATUReports.add("Loading 'Admin dashboard page' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
 	// This function get String with the name of target submenu of Users and clicks on it
 	public void clickOnTargetSubmenuUsers(String target) throws InterruptedException 
 		
