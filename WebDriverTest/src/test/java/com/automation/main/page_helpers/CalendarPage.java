@@ -167,8 +167,8 @@ public class CalendarPage extends Page {
 			returnDate = month + "/" + dayPick + "/" + year;
 			
 		} catch (Exception e) {
-			e.getMessage();;			
-			ATUReports.add(e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.getMessage();			
+			ATUReports.add("The error message is: " + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		return returnDate;
