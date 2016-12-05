@@ -1135,9 +1135,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 		catch(Exception e){
 			System.out.println("catch selectIndexCheckBox");
-			ATUReports.add("Fail to select checkbox","Check succeeded","Check failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			
-			
+			e.printStackTrace();
+			ATUReports.add("Fail to select checkbox" +e.getMessage(),"Check succeeded","Check failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		
 		}
 	}
 
