@@ -148,26 +148,23 @@ public class TC7946ValidateChangesInAutomaticallyPublishStudentRecordingsSetting
 		//15.Click the "Save" button
 		edit_recording_properties_window.clickOnSaveButton();
 		
-		//16.
+		//16. click on the Ok button
 		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 		
-		//16. sign out
+		//17. sign out
 		record.signOut();
 					
-		//17.login as INSTRUCTOR
+		//18.login as INSTRUCTOR
 		tegrity.loginCourses("User1");
 						
-		//18.Open the course "Course details" page 
+		//19.Open the course "Course details" page 
 		course.selectCourseThatStartingWith("Ab");	
 			
-		//verify that we don't see the edit status
-		record.refresh();
-		
-		//19.move to the student tab
+		//20.move to the student tab
 		record.waitForThePageToLoad();
 		record.clickOnStudentRecordingsTab();
 		
-		//20.Validate the Students recordings you uploaded earlier are still published.
+		//21.Validate the Students recordings you uploaded earlier are still published.
 		recordingNumber = record.getIndexOfRecordFromRecordName(recordingName);
 		record.verifyNoStatusInTheIndex(recordingNumber);
 		
