@@ -151,7 +151,7 @@ public class TC6992ValidateChangeRecordingNameWithDifferentTypeOfInput {
 		record.unselectallCheckbox();
 		String newRecordToChange = record.selectRecordingThatChangeFromThatName(newNameWithOutGaps);
 		recordNumber = record.getIndexOfRecordFromRecordName(newRecordToChange);
-		if(!record.checkRecordingInIndexIStatus(recordNumber,"")){
+		if(!(record.getIndexRecordingStatus(recordNumber).equals(""))){
 			recordNumber++;
 		}
 		record.selectIndexCheckBox(recordNumber);
