@@ -206,8 +206,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			
 			// 7. Hover over on "Course tasks" menu.
 			record.moveToElementAndClick(record.course_task_button,driver);
-			Thread.sleep(1000);
-			
+		
 			// 8. Validate that on both browsers the options are: "Upload a recording", "Upload video file", "Upload Audio File" , separated grey line, "Subscribe to your course's" (text), "RSS feed", "Podcast", "Video podcast".
 			// "Upload a recording" - UploadRecording
 			record.verifyWebElementDisplayed(record.upload_recording, "Upload a recording");
@@ -217,7 +216,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			record.verifyWebElementDisplayed(record.upload_audio_file, "Upload audio file");
 			
 			// "Subscribe to your course's" (text)
-			if(driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[1]/div[1]/div[2]/div/ul/li/ul/li[8]/span")).getText().equals("Subscribe to Your Course's...")) {
+			if(record.SubscribeToACourse.getText().equals("Subscribe to Your Course's...")) {
 				System.out.println("Verified that following text is displayed: Subscribe to your course's");
 				ATUReports.add("Verified that following text is displayed: Subscribe to your course's", "True.", "True.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -259,7 +258,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			
 			// 14. Click on "Additional Contents" on both browsers.
 			record.clickOnAdditionContentTab();
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			
 			// 15. Validate that the files list on both browsers containts the same recordings.
 			if(type_of_course==0) {
@@ -270,7 +269,7 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			
 			// 16. Click on "Student Recordings" on both browsers.
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(2000);
+		
 			
 			// 17. Validate that the recordings list on both browsers containts the same recordings.
 			if(type_of_course==0) {
@@ -285,10 +284,11 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 			// 19. Open one of the public course playback.
 			if(type_of_course==1) {
 				record.clickOnRecordingsTab();
-				Thread.sleep(2000);
+			
 				String first_recording_title = record.getFirstRecordingTitle();
 				record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_title);
-				player_page.verifyTimeBufferStatusForXSec(10);
+				player_page.verifyTimeBufferStatusForXSec(5);
+				
 			} else {
 				record.returnToCourseListPage();
 			}
@@ -350,18 +350,11 @@ public class TC21938VerifyStudentPermissionsConsitrncyOnActivePublicCourses {
 		}
 		
 		// PostTest
-//		driver.navigate().back();
-//		Thread.sleep(1000);
-		for(String handler: driver.getWindowHandles()) {
-			driver.switchTo().window(handler);
-			break;
-		}
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
-		
-		tegrity.loginAdmin("Admin");
-		Thread.sleep(1000);
+		record.exitInnerFrame();
+		record.signOut();
 			
+		tegrity.loginAdmin("Admin");
+	
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
 		Thread.sleep(2000);		
 		
