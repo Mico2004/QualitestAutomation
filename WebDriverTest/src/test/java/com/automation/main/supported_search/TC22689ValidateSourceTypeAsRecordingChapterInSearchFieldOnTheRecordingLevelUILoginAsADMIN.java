@@ -221,7 +221,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	    record.clickOnTheFirstCaptherWithOutTheExpand();
 	
 		// 8.Select the Recording by clicking on one of the chapters
-		player_page.verifyTimeBufferStatusForXSec(10);// check source display
+		player_page.verifyTimeBufferStatusForXSec(5);// check source display
 
 			///// to go back to crecording window handler	
 		for (String handler : driver.getWindowHandles()) {

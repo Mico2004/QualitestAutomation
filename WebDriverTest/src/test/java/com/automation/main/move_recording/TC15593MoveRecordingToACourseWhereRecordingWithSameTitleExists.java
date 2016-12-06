@@ -269,9 +269,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		record.clickOnRecordingTitleInIndex(2);
 		
 		// 16. Click on any chapter. 
-		Thread.sleep(2000);
-		
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		
 		//List <WebElement> panels = driver.findElements(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap"));
 		//panels.get(new_recording_index).click();
@@ -284,7 +282,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		//Thread.sleep(10000);
 
-		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.verifyTimeBufferStatusForXSec(5);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

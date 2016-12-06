@@ -198,7 +198,7 @@ public class TC15535CopyOneRecording {
 		record.returnToCourseListPage();
 		//course.course_list.get(1).click();
 		course.selectFirstCourse(record);
-		Thread.sleep(2000);
+		
 		
 		record.verifyFirstExpandableRecording();
 		record.clickOnTheFirstCaptherWithOutTheExpand();
@@ -254,10 +254,8 @@ public class TC15535CopyOneRecording {
 			
 		//click on courses
 		record.returnToCourseListPage();
-		Thread.sleep(2000);
 		
-		//select the target course
-		
+		//select the target course	
 		course.selectTargetCourse(destination_course_name);
 		
 		//course.course_list.get(1).click();
@@ -272,8 +270,7 @@ public class TC15535CopyOneRecording {
 
 		//24.Click "Courses" link at breadcrumbs
 		player_page.returnToCoursesPage(course);
-		Thread.sleep(3000);
-
+	
 		//25.sign-out
 		record.signOut();// sign out
 		//26.login courses as student

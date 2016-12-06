@@ -124,7 +124,7 @@ public class TC15582MoveOneRecording {
 		Thread.sleep(2000);
 		
 		record.returnToCourseListPage();
-		Thread.sleep(2000);
+		
 		
 		// 8. Verify Only courses where this USER signed as INSTRUCTOR are
 		// displayed in "Course List"
@@ -135,7 +135,7 @@ public class TC15582MoveOneRecording {
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
 		move_menu = PageFactory.initElements(driver, MoveWindow.class);
-		Thread.sleep(3000);
+		
 		
 		move_menu.move_course_list = move_menu.getStringFromElement(move_menu.course_list);
 		int course_number = move_menu.course_list.size();
@@ -178,7 +178,6 @@ public class TC15582MoveOneRecording {
 		// move menu
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
-		Thread.sleep(1000);
 		
 		// Select destination course:mark destination course by clicking on it
 		String destination_course_name = move_menu.course_list.get(0).getText();
@@ -229,10 +228,10 @@ public class TC15582MoveOneRecording {
 		record.recordingPageBoldFont();/// verify bold style in recording title
 		// 21."Recording Chapters" are expanded
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(2000);
+		
 		// 22.player is working
 		record.clickOnTheFirstCaptherWithOutTheExpand();
-		player_page.verifyTimeBufferStatusForXSec(10);// check source display
+		player_page.verifyTimeBufferStatusForXSec(5);// check source display
 		///// to go back to crecording window handler
 		for (String handler : driver.getWindowHandles()) {
 			driver.switchTo().window(handler);
@@ -243,10 +242,10 @@ public class TC15582MoveOneRecording {
 		// 24.login as student
 		tegrity.loginCourses("User4");// log in courses page
 		initializeCourseObject();
-		Thread.sleep(2000);
+		
 		// 25.select destination course
 		course.selectCourseByName(destination_course_name);
-		Thread.sleep(2000);
+		
 		// 26."Recording Chapters" are expanded
 		record.pressViewButtonAndSelect("Date");/// 2 times sort by date to make
 												/// recording first
@@ -254,10 +253,10 @@ public class TC15582MoveOneRecording {
 		Thread.sleep(2000);
 		record.searchbox.click();// prevent ekement not clickable
 		record.verifyFirstExpandableRecording();
-		Thread.sleep(2000);
+	
 		// 27.player is working
 		record.clickOnTheFirstCaptherWithOutTheExpand();
-		player_page.verifyTimeBufferStatusForXSec(10);// check source display
+		player_page.verifyTimeBufferStatusForXSec(5);// check source display
  
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

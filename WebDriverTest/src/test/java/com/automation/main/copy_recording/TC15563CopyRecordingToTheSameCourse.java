@@ -129,7 +129,6 @@ public class TC15563CopyRecordingToTheSameCourse {
 		record.clickOnRecordingTaskThenCopy();
 		copy.selectTargetCourseFromCourseList(copy_to);
 		copy.clickOnCopyButton();
-		Thread.sleep(1000);
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		record.checkStatusExistenceForMaxTTime(360);
 		record.returnToCourseListPage();
@@ -150,12 +149,9 @@ public class TC15563CopyRecordingToTheSameCourse {
 		
 		//5. Select the same course as a destination.
 		copy.selectTargetCourseFromCourseList(currentCourse);
-		
-		
+				
 		//6. Click "Copy Recording(s)" button without selecting a course
 		copy.clickOnCopyButton();
-		
-		Thread.sleep(1000);
 		
 		//7. Click "OK" button
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
@@ -301,9 +297,8 @@ public class TC15563CopyRecordingToTheSameCourse {
 		
 		
 		//17. Click on any chapter.
-		Thread.sleep(3000);
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 		
 		//List <WebElement> panels = driver.findElements(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap"));
 		
@@ -313,7 +308,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		//Thread.sleep(10000);
 		
 		//18. Recording is displayed and playing correctly.
-		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.verifyTimeBufferStatusForXSec(5);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
