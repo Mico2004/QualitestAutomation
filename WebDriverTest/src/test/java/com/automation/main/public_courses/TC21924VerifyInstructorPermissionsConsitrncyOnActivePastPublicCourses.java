@@ -58,10 +58,6 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 
 	}
 
-	public TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCourses() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public PlayerPage player_page;
 	public ManageAdHocCoursesMembershipWindow mange_ad_hoc_courses_membership_window;
 	public ManageAdhocCoursesEnrollmentsPage manage_adhoc_courses_enrollments_page;
@@ -93,30 +89,18 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
-		// 
 		ATUReports.setWebDriver(driver);
-
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
-		copy = PageFactory.initElements(driver, CopyMenu.class);
-		
+		copy = PageFactory.initElements(driver, CopyMenu.class);		
 		mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
 		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
-
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
-
 		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
-
-		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
-		
+		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);	
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
-
 		top_bar_helper = PageFactory.initElements(driver, TopBarHelper.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		manage_adhoc_courses_enrollments_page = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
@@ -207,10 +191,9 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 		
 		// 1. Make sure the Instructor has past course which is publicly visible.
 		// Login with SuperUser
-		
-		
 		tegrity.loginCourses("SuperUser");// log in courses page
 		initializeCourseObject();		
+		
 		//  Go to PastCourseA (which is past course of User1) and make it public	
 		String past_public_course_name = course.selectCourseThatStartingWith("PastCourseA"+course.getFQDN()+course.getPreSetTimeStamp());		
 		record.clickOnCourseTaskThenCourseSettings();
@@ -537,7 +520,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 					
 			// 33. Click on "Additional Contents" on both browsers.
 			record.clickOnAdditionContentTab();
-			Thread.sleep(2000);
+			
 					
 			// 34. Validate that the files list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -548,7 +531,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 					
 			// 35. Click the 'Student Recordings' tab.
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(2000);
+			
 					
 			// 36. Validate that the recordings list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -559,8 +542,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 					
 			// 37. Click the 'Tests' tab.
 			record.clickOnTestsTab();
-			Thread.sleep(2000);
-					
+				
 			// 38. Validate that the recordings list on both browsers contains the same recordings.
 			if(type_of_course==0) {
 				past_course_tests_list = record.getCourseRecordingList();
@@ -571,10 +553,9 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			// 39. Open one of the public course playback - The recording is playable.
 			if(type_of_course==1) {
 				record.clickOnRecordingsTab();
-				Thread.sleep(1000);
 				String first_recording_title = record.getFirstRecordingTitle();
 				record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_title);
-				player_page.verifyTimeBufferStatusForXSec(10);
+				player_page.verifyTimeBufferStatusForXSec(5);
 			} else {
 				record.returnToCourseListPage();
 			}
@@ -616,8 +597,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			ATUReports.add("Verfied that additional content list on public and past course contains the same additional content.", "True.", "False.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-				
-				
+					
 		// Validate that the recordings list on both browsers contains the same recordings - Student Recordings
 		if(past_course_student_recording_list.size() == public_course_student_recording_list.size()) {
 			past_course_student_recording_list.removeAll(public_course_student_recording_list);
@@ -654,22 +634,29 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			Assert.assertTrue(false);
 		}
 
-		
 		// PostTest
-		driver.navigate().back();
-		Thread.sleep(1000);
-		top_bar_helper.signOut();
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		//signout
+		record.exitInnerFrame();
+		record.signOut();
+		
+		// login as super user
 		tegrity.loginCourses("SuperUser");
+		
+		// enter to the public course
 		course.selectCourseThatStartingWith(active_public_course_name);
+		
+		//make course public
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		
+		// return to the course list page
 		record.returnToCourseListPage();
-		Thread.sleep(1000);		
+		
+		//enter to the public past course
 		course.selectCourseThatStartingWith(past_public_course_name);
+		
+		//make course public
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();

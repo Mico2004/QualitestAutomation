@@ -3032,6 +3032,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	/// selects dditional content file by name
 	public void selectAdditionalContentByName(String additional_content_name) throws InterruptedException {
 
+		Thread.sleep(1000);
 		for (WebElement el : additional_content_list) {
 			if ((el.getText().equals(additional_content_name))) {
 

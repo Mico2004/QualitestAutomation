@@ -177,7 +177,7 @@ public class TC15475ExistenceOfUIItems {
             //9.signout
 			record.waitForVisibility(record.sign_out);
 			record.signOut();
-			Thread.sleep(4000);
+			
 			//tegrity.waitForVisibility(tegrity.usernamefield);
 			//10.login as student
 			tegrity.loginCourses("User4");
@@ -189,7 +189,6 @@ public class TC15475ExistenceOfUIItems {
 			record.clickOnAdditionContentTab();
 			
 		//13.select uploaded additional content
-			Thread.sleep(6000);
 			record.convertAdditionalContantListToNames();
 			record.selectAdditionalContentByName(file_name);
 			

@@ -175,6 +175,40 @@ public class ConfirmationMenu extends Page {
 		Thread.sleep(3000);
 	}
 
+	    // This function clicks on ok button of tag menu
+		// It also checks that the window need to contain the following:
+		// title = "An error has occurred."
+		// description = "Cannot add more than 20 characters"
+		// Can be improved if can access the elements and not only check if the
+		// title and description
+		// appears in HTML source code.
+		public void clickOnOkButtonOnErrorTagWindow(String errorMessage) throws InterruptedException {
+			try {
+				Thread.sleep(1500);
+				if (!header_title_list.get(1).getText().contains("An error has occurred.")) {
+					System.out.println("Error window title is wrong");
+					ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertEquals(false, true);
+				}
+				if (!error_msg_body_list.get(0).getText().contains(errorMessage)) {
+					System.out.println("Error window description is wrong");
+					ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertEquals(false, true);
+				}
+				ok_button.click();
+				System.out.println("Clicked on OK button");
+				ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			} catch (Exception e) {
+				System.out.println("Fail click on OK button");
+				e.printStackTrace();
+				ATUReports.add("Fail click on OK button." + e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+			Thread.sleep(1000);
+		}
+	
+	
 	// This function clicks on ok button of copy menu
 	// It also checks that the window need to contain the following:
 	// title = "Success"

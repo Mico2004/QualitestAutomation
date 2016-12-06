@@ -265,15 +265,12 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 			break;
 		}
 		
-		Thread.sleep(1000);
-		
 		// Sign Out
 		record.signOut();
 			
 		// 26. Login as another student to the same course (User2).
 		tegrity.loginCourses("User2");
-		
-		
+			
 		// 27. Enter to the same course page
 		course.selectCourseThatStartingWith("abc");
 		

@@ -35,6 +35,8 @@ import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 public class TC15447AddDocFile {
 	// Set Property for ATU Reporter Configuration
@@ -124,14 +126,14 @@ public class TC15447AddDocFile {
 	    course.waitForVisibility(course.sign_out);
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(3000);
+		
 		//3.1 try to delete older file if exists
 		String download_path= System.getProperty("user.home") + File.separatorChar +"Downloads"+ File.separatorChar+file_name;
 		record.tryToDeleteOlderFile(download_path);
 		
 		// 4.Select "Course tasks -> Add Additional Content File" menu item
 		record.toUploadAdditionalContentFile();
-		Thread.sleep(2000);
+		
 		// 5.verify additional content file title info
 		add_additional_content_window.verifyAdditionalContentFileWindowTitle();
 		add_additional_content_window.verifyAdditionalContentFileWindowInfo();
@@ -149,12 +151,12 @@ public class TC15447AddDocFile {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("not redirected to additional content tab");
-			ATUReports.add("not redirected to additional content tab", LogAs.FAILED, null);
+			ATUReports.add("not redirected to additional content tab", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		// 8.Click on file's title:Standard open file/download dialog is
 		// displayed
-		Thread.sleep(3000);
+		
 		record.convertRecordingsListToNames();
 		driver.quit();///////////////////////// for download file!!!!!!!!!!!!!
 
@@ -198,16 +200,15 @@ public class TC15447AddDocFile {
 		tegrity.loginCourses("User1");
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(3000);
+		
 		/// 4.select additional content tab
 		record.clickOnAdditionContentTab();
-		Thread.sleep(3000);
-		///5.try do delete older file
 		
+		///5.try do delete older file
 		
 		/// 5.select file by its name
 		record.selectAdditionalContentByName(file_name);
-		Thread.sleep(5000);
+		
 		// 6.verify downloaded file is valid using md5
 		record.VerifyDownloadedFileIsValid(file_name);
 

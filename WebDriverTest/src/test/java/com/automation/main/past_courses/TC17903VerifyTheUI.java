@@ -59,15 +59,7 @@ public class TC17903VerifyTheUI {
 	@BeforeClass
 	public void setup() {
 
-	
-
-			/// System.setProperty("webdriver.ie.driver",
-			/// "src/test/resources/chromedriver.exe");
-
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			/// ATUReports.add("selected browser type", LogAs.PASSED, new
-			/// CaptureScreen(ScreenshotOf.DESKTOP));
-			
 			recording_for_delete = new ArrayList<String>();
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			delete = PageFactory.initElements(driver, DeleteMenu.class);
@@ -93,27 +85,26 @@ public class TC17903VerifyTheUI {
 	public void test17903() throws InterruptedException {
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		
 		// 2.login as instructor
-
 		tegrity.loginCourses("User1");// log in courses page
-		Thread.sleep(3000);
 		initializeCourseObject();
+		
 		// 3.Click Past Courses Tab button (without selecting a recording)
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		course.clickOnPastCoursesTabButton();
 		
 		// 4.click course
-		Thread.sleep(3000);
 		course.selectFirstCourse(record);
-		Thread.sleep(2000);
+
 		// 5.validae bBdcrumbrea visibility
 		boolean result = record.isElementPresent(By.partialLinkText("Courses"));
 		if (result == true) {
-			ATUReports.add("courses breadcrumb exists", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add("courses breadcrumb exists", LogAs.PASSED, null);
 			System.out.println("courses breadcrumb exists");
 			Assert.assertTrue(result);
 		} else {
-			ATUReports.add("courses breadcrumb doesnt exist", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add("courses breadcrumb doesnt exist", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("courses breadcrumb doesnt exist");
 			Assert.assertTrue(result);
 		}
@@ -122,11 +113,11 @@ public class TC17903VerifyTheUI {
 		String cha = record.breadcrumbs.getText();
 
 		if (cha.equals("> Courses")) {
-			ATUReports.add("courses breadcrumb > exists", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add("courses breadcrumb > exists", LogAs.PASSED, null);
 			System.out.println("courses breadcrumb > exists");
 			Assert.assertTrue(result);
 		} else {
-			ATUReports.add("courses breadcrumb > doesnt exist", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add("courses breadcrumb > doesnt exist", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("courses breadcrumb > doesnt exist");
 			Assert.assertTrue(result);
 		}
@@ -147,17 +138,13 @@ public class TC17903VerifyTheUI {
 
 		boolean underline = record.verifyUnderlineCss(record.courses_link, driver);
 		if (underline == true) {
-			Assert.assertTrue(true);
 			System.out.println("The underline of the link caption appears");
-			ATUReports.add("The underline of the link caption appears", LogAs.PASSED,
-					new CaptureScreen(ScreenshotOf.DESKTOP));
-
+			ATUReports.add("The underline of the link caption appears", LogAs.PASSED,null);
+			Assert.assertTrue(true);
 		} else {
-			Assert.assertTrue(false);
 			System.out.println("The underline of the link caption doesnt appear");
-			ATUReports.add("The underline of the link caption doesnt appear", LogAs.PASSED,
-					new CaptureScreen(ScreenshotOf.DESKTOP));
-
+			ATUReports.add("The underline of the link caption doesnt appear", LogAs.PASSED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
 		}
 
 		record.moveToElement(record.courses_link, driver).perform();
@@ -165,17 +152,13 @@ public class TC17903VerifyTheUI {
 		// 8.has title of "Courses" so we can be sure when we move courser to it
 		// "courses" appear next to it
 		if (record.courses_link.getAttribute("title").equals("Courses")) {
-			Assert.assertTrue(true);
 			System.out.println("The hint with the link caption appears");
-			ATUReports.add("The hint with the link caption appears", LogAs.PASSED,
-					new CaptureScreen(ScreenshotOf.DESKTOP));
-
-		} else {
-			Assert.assertTrue(false);
+			ATUReports.add("The hint with the link caption appears", LogAs.PASSED,null);
+			Assert.assertTrue(true);
+		} else {	
 			System.out.println("The hint with the link caption doesnt appear");
-			ATUReports.add("The hint with the link caption doesnt appear", LogAs.PASSED,
-					new CaptureScreen(ScreenshotOf.DESKTOP));
-
+			ATUReports.add("The hint with the link caption doesnt appear", LogAs.PASSED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
 		}
 
 		/// 9.not able to check cursor change
@@ -202,41 +185,32 @@ public class TC17903VerifyTheUI {
 		System.out.println("course_tasks.getX(): "+course_tasks.getX());
 		System.out.println("record.view_button.getLocation().getX(): "+view.getX());
 		System.out.println("checkbox_select_all.getX()): "+checkbox_select_all.getX());
-		if ((rec_tasks.getX() > course_tasks.getX()) && 
-		    (view.getY() == rec_tasks.getY()) && 
-		    (view.getX() < course_tasks.getX())	&& 
-		    (course_tasks.getX() > record.view_button.getLocation().getX())	&& 
+		if ((rec_tasks.getX() > course_tasks.getX()) && (view.getY() == rec_tasks.getY()) && 
+		    (view.getX() < course_tasks.getX())	&& (course_tasks.getX() > record.view_button.getLocation().getX())	&& 
 		    (course_tasks.getX() < checkbox_select_all.getX())) 
 		{
 			System.out.println(	"courses button right to view button,view dropdown alligned left,recording tasks alligned right and checkbox is right to it");
-			ATUReports.add(	"courses button right to view button,view dropdown alligned left,recording tasks alligned right",LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
-
+			ATUReports.add(	"courses button right to view button,view dropdown alligned left,recording tasks alligned right",LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Tab menu is not displayed correctly");
+			ATUReports.add("Tab menu is not displayed correctly", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
-			ATUReports.add("Tab menu is not displayed correctly", LogAs.FAILED,
-					new CaptureScreen(ScreenshotOf.DESKTOP));
-
 		}
 
 		// 12.Hover over "Course Tasks" element
 		record.moveToElementAndClick(record.course_task_button, driver);
 		if ((record.course_task_button.getAttribute("title").equals("Course Tasks"))
 				&& (record.podcast_button.isDisplayed()) && (record.course_settings_button.isDisplayed())
-				&& (record.video_podcast.isDisplayed()) && (record.subscribe_button.isDisplayed())
+				&& (record.video_podcast.isDisplayed()) && (record.SubscribeToACourse.isDisplayed())
 				&& (record.rssfeed.isDisplayed())) {
-			System.out.println("all buttons are located and there is a hint");
+			System.out.println("all buttons are located and there is a hint");		
+			ATUReports.add("all buttons are located and there is a hint", LogAs.PASSED,null);
 			Assert.assertTrue(true);
-			ATUReports.add("all buttons are located and there is a hint", LogAs.PASSED,
-					new CaptureScreen(ScreenshotOf.DESKTOP));
-
 		} else {
-
-			System.out.println(" not all buttons are located");
+			System.out.println(" not all buttons are located");	
+			ATUReports.add(" not all buttons are located", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
-			ATUReports.add(" not all buttons are located", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
-
 		}
 
 		// 13.Hover over "Recordings Tasks" element
@@ -246,16 +220,13 @@ public class TC17903VerifyTheUI {
 				&& (record.move_button.isDisplayed()) && (record.share_recording_button.isDisplayed())
 				&& (record.edit_rec_properties_button.isDisplayed()) && (record.edit_rec_button.isDisplayed())) {
 			System.out.println("all buttons are located and there is a hint");
+			ATUReports.add("all buttons are located and there is a hint", LogAs.PASSED,null);
 			Assert.assertTrue(true);
-			ATUReports.add("all buttons are located and there is a hint", LogAs.PASSED,
-					new CaptureScreen(ScreenshotOf.DESKTOP));
 
 		} else {
-
-			System.out.println(" not all buttons are located");
+			System.out.println(" not all buttons are located");		
+			ATUReports.add(" not all buttons are located", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
-			ATUReports.add(" not all buttons are located", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
-
 		}
 		// 14.click one check box
 		record.searchbox.click();
@@ -265,13 +236,12 @@ public class TC17903VerifyTheUI {
 		record.unClickOneCheckBoxOrVerifyNotSelected(record.checkbox);
 
 		// 16.click all check box
-		record.checkall.click();// make all checkboxes marked
-		Thread.sleep(2000);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkall);// make all checkboxes marked
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		record.verifyAllCheckedboxSelected();
 
 		// 17.verify all check box not selected
-		record.checkall.click();// make all checkboxes unmarked
+		record.unselectallCheckbox();
 		record.verifyAllCheckedboxNotSelected();
 
 		System.out.println("Done.");
