@@ -158,9 +158,7 @@ public class TC24765TryToCopyAStudentRecordingAsAStudent {
 		
 		// 6. Click "Student Recordings" tab.
 		record.clickOnStudentRecordingsTab();
-		
-		Thread.sleep(1000);
-		
+			
 		// 7. Select any recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
