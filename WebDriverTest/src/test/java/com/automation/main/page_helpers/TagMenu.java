@@ -61,10 +61,11 @@ public class TagMenu extends Page {
 	public final String TABLE_WHITE = "#ffffff";
 	
 	// This function create new tag
-	public void createNewTag(String new_tag) {
+	public void createNewTag(String new_tag) throws InterruptedException {
 		clickElementJS(create_new_tag_button);
 		sendStringwithAction(edit_new_tag_input, new_tag);		
-		clickElementWithOutIdJS(submit_edit_button);			
+		clickElementWithOutIdJS(submit_edit_button);
+		Thread.sleep(1000);
 	//	for(WebElement we: delete_submit_tags_list) {
 	//		if(we.getText().equals("Submit")) {
 	//			clickElement(we);
@@ -134,7 +135,24 @@ public class TagMenu extends Page {
 		}
 	}
 	
-	// This function verify that publish window is open
+	// This function verify that tag window is close
+		public void verifyTagWindowClose() throws InterruptedException {
+			
+			Thread.sleep(500);
+			
+			boolean is_closed = isTagWindowClosed();			
+			if(is_closed) {
+				System.out.println("Tag window is close.");
+				ATUReports.add("Tag window.", "Close.", "Close.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("Tag window is open.");
+				ATUReports.add("Tag window.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+		}
+	
+	// This function verify that tag window is open
 	public void verifyTagWindowOpen() {
 		boolean is_closed = isTagWindowClosed();
 		
@@ -149,7 +167,7 @@ public class TagMenu extends Page {
 		}
 	}
 		
-	// This function verify that publish window is open
+	// This function verify that tag window is open
 	public void verifyTagEditWindowOpen() {
 		
 		if(edit_title.isDisplayed()) {
@@ -173,7 +191,6 @@ public class TagMenu extends Page {
 			wait.until(ExpectedConditions.visibilityOf(tag_window_title_background));
 			wait.until(ExpectedConditions.visibilityOf(tag_window_text));
 			wait.until(ExpectedConditions.visibilityOf(nameLabel));
-			wait.until(ExpectedConditions.visibilityOf(privateLabel));
 			wait.until(ExpectedConditions.visibilityOf(cancel_button));
 			wait.until(ExpectedConditions.visibilityOf(apply_button));
 			
@@ -464,8 +481,15 @@ public class TagMenu extends Page {
 	}
 
 	public void saveAllTheInstractors() {
-		instructors.add("Test");
-		instructors.add("Example");
+		
+		List<WebElement> rows = tableOfTags.findElements(By.tagName("tr"));		
+		int rowNumber = rows.size();	    
+	    for(int i = 0 ; i< rowNumber ; i++) {
+	    	WebElement currentRaw = rows.get(i);
+	    	List<WebElement> cols = currentRaw.findElements(By.tagName("td"));
+	    	String currentName = cols.get(1).getText();
+	    	instructors.add(currentName);
+		} 	
 	}
 
 	public void verifyAllInstractorAreDisplay() {
@@ -481,8 +505,8 @@ public class TagMenu extends Page {
 			}    
 		    for(String instructor : instructors){
 		    	if(!searchInstractorInTheInstractorList(instructor,currInst)){
-		    		ATUReports.add("The instructor:" +instructor +"isn't found on the list." ,"Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-	    			System.out.println("The instructor:" +instructor +"isn't found on the list.");
+		    		ATUReports.add("The instructor:" +instructor +" isn't found on the list." ,"Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    			System.out.println("The instructor:" +instructor +" isn't found on the list.");
 	    			return;
 		    	}
 		    	ATUReports.add("all the instuctors are found on the list.","Success.", "Success.", LogAs.PASSED, null);

@@ -265,18 +265,30 @@ public class RecordingHelperPage extends Page {
 	List<WebElement> visibleChapters;
 	@FindBy(id="scrollableArea")
 	WebElement TabContainer;
-	public @FindBy(xpath="//span[text()=\"Subscribe to Your Course's...\"]")WebElement SubscribeToACourse;
-	public @FindBy(css = ".resume-button.ng-scope>a") List<WebElement> list_of_resume_buttons;
-	public @FindBy(css = ".video-wrap") List<WebElement> video_wraps_of_chapters_of_opened_recording_list;
-	public @FindBy(css = ".thumbnail-image") List<WebElement> images_thumbnail_of_recording_chapters_list;
-	public @FindBy(id = "TegrityLogo") WebElement tegrity_logo;
-	public @FindBy(css = ".ng-scope>.ng-scope.ng-binding") WebElement breadcrumbs_courses_link;
-	public @FindBy(id = "InstituteLogotype") WebElement institute_logo;
-	public @FindBy(css = ".dropdown-menu.text-left>div>li>span") WebElement view_menu_tags_text;
-	public @FindBy(css = ".tagsContainer>div>label>input") WebElement showAllRecordings;
-	public @FindBy(css = ".tagsContainer>div>div>label>input")WebElement first_tag;
-	public @FindBy(css = ".tagsContainer>div>div>label>input") List<WebElement> checkboxs_tags;
-
+	@FindBy(xpath="//span[text()=\"Subscribe to Your Course's...\"]")
+	public WebElement SubscribeToACourse;
+	@FindBy(css = ".resume-button.ng-scope>a")
+	public List<WebElement> list_of_resume_buttons;
+	@FindBy(css = ".video-wrap")
+	public List<WebElement> video_wraps_of_chapters_of_opened_recording_list;
+	@FindBy(css = ".thumbnail-image")
+	public List<WebElement> images_thumbnail_of_recording_chapters_list;
+	@FindBy(id = "TegrityLogo")
+	public WebElement tegrity_logo;
+	@FindBy(css = ".ng-scope>.ng-scope.ng-binding")
+	public WebElement breadcrumbs_courses_link;
+	@FindBy(id = "InstituteLogotype")
+	public WebElement institute_logo;
+	@FindBy(css = ".dropdown-menu.text-left>div>li>span")
+	public WebElement view_menu_tags_text;
+	@FindBy(css = ".tagsContainer>div>label>input")
+	public WebElement showAllRecordings;
+	@FindBy(css = ".tagsContainer>div>div>label>input")
+	public WebElement first_tag;
+	@FindBy(css = ".tagsContainer>div>div>label>input") 
+	public List<WebElement> checkboxs_tags;
+	@FindBy(css = ".tagStyle.ng-scope.ng-binding")
+	public List<WebElement> recording_tags;
 	public ConfirmationMenu confirm_menu;
 	public CopyMenu copyMenu;
 	
@@ -1883,6 +1895,24 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 	}
 	
+	public void veirfyThatTheCheckboxIsSelect(WebElement checkbox) {
+		try {	
+			if (checkbox.isSelected()) {
+				System.out.println("The Checkbox " +checkbox.getText() + "is selected");
+				ATUReports.add("The Checkbox " +checkbox.getText() + "is selected", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			} else {			
+				System.out.println("The Checkbox " +checkbox.getText() + "is not selected");
+				ATUReports.add("The Checkbox " +checkbox.getText() + "is not selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(true);
+			}
+
+		} catch (Exception msg) {
+			System.out.println("The Checkbox " +checkbox.getText() + "is not selected");
+			ATUReports.add("The Checkbox " +checkbox.getText() + "is not selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(true);
+		}
+	}
 	
 	
 	// This function get recording name.
@@ -5312,4 +5342,58 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}	
 	}
 
+	public void verifyAllTheTagCheckedboxNotSelected() {
+		
+		for(int i=0 ;i< checkboxs_tags.size() ; i++){
+			if(checkboxs_tags.get(i).isSelected()){
+				System.out.println("Not Verify that all tag checkboxs are not selected, the tag: " + checkboxs_tags.get(i).getText() + "is selected.");
+				ATUReports.add("Not Verify that all tag checkboxs are not selected, the tag: " + checkboxs_tags.get(i).getText() + "is selected." ,"The element is not selected.","The element is selected.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+				return;
+			}
+		}
+		System.out.println("Verify that all tag checkboxs are not selected.");
+		ATUReports.add("Verify that all tag checkboxs are not selected.","The elements are not selected.","The elements are not selected.",LogAs.PASSED, null);			
+		
+	}
+
+	public void checkThatAllTheRecordingsAreAppeared(int listSize) {
+		try {
+			int currentSize = getCourseRecordingList().size();
+			if(listSize == currentSize){
+				System.out.println("Verify that all records are appeared.");
+				ATUReports.add("Verify that all records appeared.","Success.","Success.",LogAs.PASSED, null);		
+			}else{
+				System.out.println("Not Verify that all records are appeared.");
+				ATUReports.add("Not Verify that all records are appeared." ,"Success.", "Fail.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+			}
+		}catch(Exception e){
+		e.getMessage();
+		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	}	
+	}
+
+	public void ValidateTheSeveralTaggedRecordingTagsAreSortedByName() {
+		try {
+			int numberOfTags = recording_tags.size();
+			List<String> nameOfTags = new ArrayList<String>();
+			
+			for(int i = 0 ; i< numberOfTags ; i++){
+				nameOfTags.add(recording_tags.get(i).getText());
+			}
+			
+			for(int i=0 ; i< numberOfTags - 1 ;i++){
+	    		if(nameOfTags.get(i).compareTo(nameOfTags.get(i+1)) > 0 ) {
+	    			ATUReports.add("Not Verify that tags list sorted by TagName.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    			System.out.println("Not Verify that tags list sorted by TagName.");
+	    			return;
+	    		}
+	    	}
+	    	ATUReports.add("Verify that tags list sorted by TagName.", LogAs.PASSED, null);
+			System.out.println("Verify that tags list sorted by TagName.");	
+		
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
 }
