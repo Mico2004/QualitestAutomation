@@ -140,7 +140,7 @@ public class TC15468AddFirstFileVerifyNewTabAdditionalContentCreated {
 		record.verifyNoAdditionalContentTab();
 		// 4.Select "Course tasks -> Add Additional Content File" menu item
 		record.toUploadAdditionalContentFile();
-		Thread.sleep(2000);
+	
 		// 5.verify additional content file title info
 		add_additional_content_window.verifyAdditionalContentFileWindowTitle();
 		add_additional_content_window.verifyAdditionalContentFileWindowInfo();
@@ -209,11 +209,10 @@ public class TC15468AddFirstFileVerifyNewTabAdditionalContentCreated {
 		
 		/// 4.select additional content tab
 		record.clickOnAdditionContentTab();
-		Thread.sleep(1000);
-	
+		
 		/// 5.select file by its name
 		record.selectAdditionalContentByName(file_name);
-		Thread.sleep(5000);
+		
 		// 6.verify downloaded file is valid using md5
 		record.VerifyDownloadedFileIsValid(file_name);
 		
