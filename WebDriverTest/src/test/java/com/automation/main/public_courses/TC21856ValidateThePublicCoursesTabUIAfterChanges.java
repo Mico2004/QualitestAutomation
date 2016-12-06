@@ -46,6 +46,7 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import junitx.util.PropertyManager;
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 
@@ -147,19 +148,20 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 	@Test (description = "TC 21856 Validate The Public Courses Tab UI After Changes")
 	public void test21856() throws Exception
 	{
-		// 1. Get Ab course name of User1.
+		// 1. Get abc course name of User1.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
+		tegrity.loginCourses("SuperUser");
 		
-		String abc_course_name = course.selectCourseThatStartingWith("abc");
+		String abc_course_name = PropertyManager.getProperty("course2");	
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", abc_course_name, 1, record,copy, confirm_menu);
 		
-		top_bar_helper.signOut();
+		record.signOut();
 	
 		
 		// 2. Create 1 instructor and 1 student and enroll them to Ab course.
 		tegrity.loginAdmin("Admin");	
-		Thread.sleep(2000);
+		
 		
 		//make sure that we have public tabs
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
@@ -259,18 +261,16 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		mange_ad_hoc_courses_membership_window.wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")));
 		
 		// Signout
-		for(String window: driver.getWindowHandles()) {
-			driver.switchTo().window(window);
-			break;
-		}
-		manage_adhoc_courses_enrollments_page.waitForVisibility(driver.findElement(By.id("SignOutLink")));
-		driver.findElement(By.id("SignOutLink")).click();
+		manage_adhoc_courses_enrollments_page.exitInnerFrame();
+		manage_adhoc_courses_enrollments_page.signOut();
+		//manage_adhoc_courses_enrollments_page.waitForVisibility(driver.findElement(By.id("SignOutLink")));
+		//driver.findElement(By.id("SignOutLink")).click();
 		
 		// 4. Make sure the 'Make this course publicly visible' university course settings are 'Lock' and 'On'.
 		// 5. Make sure to have a public course in the university.
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);
 		
-		course.selectCourseThatStartingWith("Ab");
+		course.selectCourseThatStartingWith("abc");
 		
 		record.clickOnAdditionContentTab();
 		record.toUploadAdditionalContentLink();
@@ -309,10 +309,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		// 14. Login as Admin.
 		tegrity.loginAdmin("Admin");
 		
-		// 15. Unenroll both Instructor and Student from some course.
-		Thread.sleep(2000);
-		
-		
+		// 15. Unenroll both Instructor and Student from some course.	
 		// 3. Make sure to have two users which are enroll to the same course, first as Instructor and Second as Student both of the users don't have past courses.
 		// Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
@@ -327,30 +324,22 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 			}
 		}
 		
-		
-		
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(abc_course_name);
 		
-		Thread.sleep(1000);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton();
-		Thread.sleep(1000);	
-		
+			
 		// Search target user name in membership window
 		mange_ad_hoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(temp_instructor_user_name);
 
 		// Add selected user to instructor list
 		mange_ad_hoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
 		
-		Thread.sleep(3000);
-		
 		// Search target user name in membership window
 		mange_ad_hoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse(temp_student_user_name);
 
 		// Add selected user to instructor list
 		mange_ad_hoc_courses_membership_window.clickOnRemoveSelectedUserToStudentsList();
-		
-		Thread.sleep(3000);
 		
 		mange_ad_hoc_courses_membership_window.waitForVisibility(mange_ad_hoc_courses_membership_window.ok_button);
 		
