@@ -61,10 +61,11 @@ public class TagMenu extends Page {
 	public final String TABLE_WHITE = "#ffffff";
 	
 	// This function create new tag
-	public void createNewTag(String new_tag) {
+	public void createNewTag(String new_tag) throws InterruptedException {
 		clickElementJS(create_new_tag_button);
 		sendStringwithAction(edit_new_tag_input, new_tag);		
-		clickElementWithOutIdJS(submit_edit_button);			
+		clickElementWithOutIdJS(submit_edit_button);
+		Thread.sleep(1000);
 	//	for(WebElement we: delete_submit_tags_list) {
 	//		if(we.getText().equals("Submit")) {
 	//			clickElement(we);
@@ -173,7 +174,6 @@ public class TagMenu extends Page {
 			wait.until(ExpectedConditions.visibilityOf(tag_window_title_background));
 			wait.until(ExpectedConditions.visibilityOf(tag_window_text));
 			wait.until(ExpectedConditions.visibilityOf(nameLabel));
-			wait.until(ExpectedConditions.visibilityOf(privateLabel));
 			wait.until(ExpectedConditions.visibilityOf(cancel_button));
 			wait.until(ExpectedConditions.visibilityOf(apply_button));
 			
