@@ -125,7 +125,7 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		// 2.5. Select source recording.
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);
-		String init_first_recording_name = record.getIndexRecorderNameOfRecording(recordNumber);
+		String init_first_recording_name = record.getTheRecordingNameIndex(recordNumber);
 	
 		// 2.6. Select "Recording Tasks -> Copy" menu item.
 		record.clickOnRecordingTaskThenCopy();
@@ -155,8 +155,7 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		if (first_recording_name.equals(init_first_recording_name)) {
 			System.out.println("Recording name is same as in precondition.");
 			ATUReports.add("Recording name.", "Recording name is same as in precondition.", "Recording name is same as in precondition.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-			
+			Assert.assertTrue(true);	
 			//so select this recoding
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		} else {
@@ -173,11 +172,11 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		
 		// 7. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
-		Thread.sleep(2000);
+	
 		
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(2000);
+	
 		
 		// 8.1. Message box is closed
 		if(confirm_menu.isConfirmationMenuClosed()) {
