@@ -30,7 +30,7 @@ import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC8032ValidateTheTagCheckboxesUI {
+public class TC8036VadlitadeTheTagNamesAreSortedInTheTagIndicator {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -53,7 +53,7 @@ public class TC8032ValidateTheTagCheckboxesUI {
 	CopyMenu copy;
 	DesiredCapabilities capability;
 
-	
+
 	@BeforeClass
 	public void setup() {
 
@@ -69,8 +69,8 @@ public class TC8032ValidateTheTagCheckboxesUI {
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC8032ValidateTheTagCheckboxesUI at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC8032ValidateTheTagCheckboxesUI at " + DateToStr, "Starting the test: TC8032ValidateTheTagCheckboxesUI at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC8036VadlitadeTheTagNamesAreSortedInTheTagIndicator at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC8036VadlitadeTheTagNamesAreSortedInTheTagIndicator at " + DateToStr, "Starting the test: TC8036VadlitadeTheTagNamesAreSortedInTheTagIndicator at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -79,8 +79,8 @@ public class TC8032ValidateTheTagCheckboxesUI {
 	}
 		
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC8032 Validate the tag checkboxes UI")
-	public void test8032() throws InterruptedException, ParseException {
+	@Test (description="TC8036 Vadlitade the tag names are Sorted in the Tag indicator")
+	public void test8036() throws InterruptedException, ParseException {
 		
 		//1.Enter the university
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
@@ -93,6 +93,12 @@ public class TC8032ValidateTheTagCheckboxesUI {
 		//2.Click on preconditional course from the courses list.
 		course.selectCourseThatStartingWith("Ab");
 			
+		for(int type_of_user = 0; type_of_user <2; type_of_user++) {
+			
+			if(type_of_user == 1){
+				record.clickOnStudentRecordingsTab();
+			}
+		
 		//3.check several recordings respective checkboxes
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 				
@@ -104,12 +110,19 @@ public class TC8032ValidateTheTagCheckboxesUI {
 		tag_window.verifyTagWindowOpen();
 		
 		//6.we need to create tags
-		tag_window.createNewTag("Record");
-		tag_window.saveAllTheInstractors();
-			
+		if(type_of_user== 0) {
+			tag_window.createNewTag("A");
+			tag_window.createNewTag("B");
+			} else {
+			tag_window.createNewTag("C");
+			tag_window.createNewTag("D");
+			}
+		
 		//8.click on the cancel button
 		tag_window.clickElementJS(tag_window.apply_button);
 						
+		}
+		
 		//9.sign out end preconditions
 		record.signOut();
 			
@@ -119,82 +132,48 @@ public class TC8032ValidateTheTagCheckboxesUI {
 		//11.Click on preconditional course from the courses list.
 		course.selectCourseThatStartingWith("Ab");
 		
-		//12.check several recordings respective checkboxes
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);	
+		//0 - for regular recording ,1- for student recording ,2- for student user
+		for(int type_of_user = 0; type_of_user < 3; type_of_user++) {
+			
+			if(type_of_user == 1){
+				record.clickOnStudentRecordingsTab();
+			}
+			
+			if(type_of_user ==2){
 				
-		//13.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
-		record.clickOnRecordingTaskThenTag();
+				//sign out 
+				record.signOut();
+					
+				//9.Login as STUDENT 
+				tegrity.loginCourses("User4");
 				
-		//14.The "Tag" Dialog window is appeared.
-		tag_window.waitForPageToLoad();
-		tag_window.verifyTagWindowOpen();
+				//10.Click on the Ab course
+				course.selectCourseThatStartingWith("Ab");
+			}
 		
-		//15.The selected recording tags checkbox is checked.
-		tag_window.verifyAllTheTagCheckboxesAreChecked();
+			//12.Validate the several tagged recording tags are sorted by name.
+			record.ValidateTheSeveralTaggedRecordingTagsAreSortedByName();
 		
-		//16.All the INSTRUCTOR owned tags is displayed.
-		tag_window.verifyAllInstractorAreDisplay();
-		
-		//17.Click on the "Cancel" button.
-		tag_window.clickElementJS(tag_window.cancel_button);
-		
-		//19.The "Tag Dialog" window is disappeared.
-		tag_window.verifyTagWindowClose();
-		
-		//20.Check recordings without tags checkboxes.
-		record.unselectIndexCheckBox(1);
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);	
-		
-		//21.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
-		record.clickOnRecordingTaskThenTag();
-				
-		//22.The "Tag" Dialog window is appeared.
-		tag_window.waitForPageToLoad();
-		tag_window.verifyTagWindowOpen();
-		
-		//23.The selected recording tags checkbox is checked.
-		tag_window.verifyAllTheTagCheckboxesAreUnChecked();
-				
-		//24.All the INSTRUCTOR owned tags is displayed.
-		tag_window.verifyAllInstractorAreDisplay();
-		
-		//25.Click on the "Cancel" button.
-		tag_window.clickElementJS(tag_window.cancel_button);
-		
-		//26.The "Tag Dialog" window is disappeared.
-		tag_window.verifyTagWindowClose();
-		
-		//27.Check at least one tagged recordings and at least one not tagged recordings checkboxes. 
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);	
-		
-		//28.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
-		record.clickOnRecordingTaskThenTag();
-				
-		//29.The "Tag" Dialog window is appeared.
-		tag_window.waitForPageToLoad();
-		tag_window.verifyTagWindowOpen();
-		
-		//30. The selected recording tags checkbox are in undefined state.
-		tag_window.verifyCheckboxInUndefinedState();
-		
-		//31.All the INSTRUCTOR owned tags is displayed.
-		tag_window.verifyAllInstractorAreDisplay();
-		
-		//32.Click on the "Cancel" button.
-		tag_window.clickElementJS(tag_window.cancel_button);
-				
-		//33.The "Tag Dialog" window is disappeared.
-		tag_window.verifyTagWindowClose();
+		}
 		
 		//post test delete all the tags
-		//34.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
+		//13.sign out end preconditions
+		record.signOut();
+					
+		//14.Login as INSTRUCTOR 
+		tegrity.loginCourses("User1");
+				
+		//15.Click on preconditional course from the courses list.
+		course.selectCourseThatStartingWith("Ab");
+		
+		//16.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
 		record.clickOnRecordingTaskThenTag();
 				
-		//35.The "Tag" Dialog window is appeared.
+		//17.The "Tag" Dialog window is appeared.
 		tag_window.waitForPageToLoad();
 		tag_window.verifyTagWindowOpen();
 		
-		//36.delete all tags
+		//18.delete all tags
 		tag_window.deleteAllExistingTags();
 		
 		System.out.println("Done.");

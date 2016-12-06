@@ -287,6 +287,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement first_tag;
 	@FindBy(css = ".tagsContainer>div>div>label>input") 
 	public List<WebElement> checkboxs_tags;
+	@FindBy(css = ".tagStyle.ng-scope.ng-binding")
+	public List<WebElement> recording_tags;
 	public ConfirmationMenu confirm_menu;
 	public CopyMenu copyMenu;
 	
@@ -5370,4 +5372,28 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}	
 	}
 
+	public void ValidateTheSeveralTaggedRecordingTagsAreSortedByName() {
+		try {
+			int numberOfTags = recording_tags.size();
+			List<String> nameOfTags = new ArrayList<String>();
+			
+			for(int i = 0 ; i< numberOfTags ; i++){
+				nameOfTags.add(recording_tags.get(i).getText());
+			}
+			
+			for(int i=0 ; i< numberOfTags - 1 ;i++){
+	    		if(nameOfTags.get(i).compareTo(nameOfTags.get(i+1)) > 0 ) {
+	    			ATUReports.add("Not Verify that tags list sorted by TagName.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    			System.out.println("Not Verify that tags list sorted by TagName.");
+	    			return;
+	    		}
+	    	}
+	    	ATUReports.add("Verify that tags list sorted by TagName.", LogAs.PASSED, null);
+			System.out.println("Verify that tags list sorted by TagName.");	
+		
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
 }
