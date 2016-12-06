@@ -45,6 +45,7 @@ public class TagMenu extends Page {
 	@FindBy(xpath =".//*[@id='tagRecordingWindow']/form/div[1]/div[2]/div[3]/button[1]")public WebElement cancel_edit_button;
 	@FindBy(xpath =".//*[@id='tagRecordingWindow']/form/div[1]/div[2]/div[3]/button[2]")public WebElement submit_edit_button;
 	@FindBy(xpath =".//*[@id='tagRecordingWindow']/form/div[1]/div[2]/div[3]/button[3]")public WebElement delete_button;
+	
 	@FindBy(id = "CreateButton") public WebElement create_new_tag_button;
 	@FindBy(id = "CancelButton") public WebElement cancel_button;
 	@FindBy(id = "ApplyButton") public WebElement apply_button;
