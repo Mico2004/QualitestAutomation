@@ -126,10 +126,10 @@ public class TC15471UploadTheFile {
 	    course.waitForVisibility(course.sign_out);
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(3000);
+	
 		// 4.Select "Course tasks -> Add Additional Content File" menu item
 		record.toUploadAdditionalContentFile();
-		Thread.sleep(2000);
+
 		// 5.verify additional content file title info
 		add_additional_content_window.verifyAdditionalContentFileWindowTitle();
 		add_additional_content_window.verifyAdditionalContentFileWindowInfo();
@@ -154,7 +154,7 @@ public class TC15471UploadTheFile {
 		}
 		// 9.Click on file's title:Standard open file/download dialog is
 		// displayed
-		Thread.sleep(3000);
+	
 		record.convertRecordingsListToNames();
 		driver.quit();///////////////////////// for download file!!!!!!!!!!!!!
 
@@ -198,16 +198,16 @@ public class TC15471UploadTheFile {
 		tegrity.loginCourses("User1");
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(3000);
+	
 		/// 4.select additional content tab
 		record.clickOnAdditionContentTab();
-		Thread.sleep(3000);
+	
 		///5.try do delete older file
 		
 		
 		/// 5.select file by its name
 		record.selectAdditionalContentByName(file_name);
-		Thread.sleep(5000);
+	
 		// 6.verify downloaded file is valid using md5
 		record.VerifyDownloadedFileIsValid(file_name);
 

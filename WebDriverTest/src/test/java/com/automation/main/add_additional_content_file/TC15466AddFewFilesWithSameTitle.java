@@ -139,7 +139,7 @@ public class TC15466AddFewFilesWithSameTitle {
 			{
 			// 4.Select "Course tasks -> Add Additional Content File" menu item
 			record.toUploadAdditionalContentFile();
-			Thread.sleep(2000);
+		
 			// 5.verify additional content file title info
 			add_additional_content_window.verifyAdditionalContentFileWindowTitle();
 			add_additional_content_window.verifyAdditionalContentFileWindowInfo();

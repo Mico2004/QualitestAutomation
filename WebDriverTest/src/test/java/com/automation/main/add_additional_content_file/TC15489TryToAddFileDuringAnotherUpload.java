@@ -133,7 +133,7 @@ public class TC15489TryToAddFileDuringAnotherUpload {
 		  
 				// 5.Select "Course tasks -> Add Additional Content File" menu item
 				record.toUploadAdditionalContentFile();
-				Thread.sleep(2000);
+			
 				// 6.verify additional content file title info
 				add_additional_content_file_window.verifyAdditionalContentFileWindowTitle();
 				add_additional_content_file_window.verifyAdditionalContentFileWindowInfo();

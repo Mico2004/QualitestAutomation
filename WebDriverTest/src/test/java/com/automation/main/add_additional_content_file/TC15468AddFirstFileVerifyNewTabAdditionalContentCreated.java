@@ -34,6 +34,8 @@ import java.util.Date;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 public class TC15468AddFirstFileVerifyNewTabAdditionalContentCreated {
 	// Set Property for ATU Reporter Configuration
@@ -156,7 +158,7 @@ public class TC15468AddFirstFileVerifyNewTabAdditionalContentCreated {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("not redirected to additional content tab");
-			ATUReports.add("not redirected to additional content tab", LogAs.FAILED, null);
+			ATUReports.add("not redirected to additional content tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		record.clickOnAdditionContentTab();
@@ -204,10 +206,10 @@ public class TC15468AddFirstFileVerifyNewTabAdditionalContentCreated {
 		tegrity.loginCourses("User1");
 		// 3.Select course
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(3000);
+		
 		/// 4.select additional content tab
 		record.clickOnAdditionContentTab();
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 	
 		/// 5.select file by its name
 		record.selectAdditionalContentByName(file_name);
