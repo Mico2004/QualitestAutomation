@@ -289,7 +289,10 @@ public class RecordingHelperPage extends Page {
 	public List<WebElement> checkboxs_tags;
 	@FindBy(css = ".tagStyle.ng-scope.ng-binding")
 	public List<WebElement> recording_tags;
+	@FindBy(css = ".tagsContainer>div>div>label")
+	public List<WebElement> view_tag_names;
 	public ConfirmationMenu confirm_menu;
+	
 	public CopyMenu copyMenu;
 	
 	// Set Property for ATU Reporter Configuration
@@ -3999,20 +4002,20 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			waitForVisibility(check);
 			if (!check.isSelected()) {
-				System.out.println("one checkbox is not selected");
-				ATUReports.add("one checkbox is not selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+				System.out.println("The checkbox: " + check.getText() + " is not selected");
+				ATUReports.add("The checkbox: " + check.getText() + " is not selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 				Assert.assertTrue(true);
 				return;
 			} else {
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check);			
 				//checkbox.click();
 				if (!check.isSelected()) {
-					System.out.println("one checkbox is not selected");
-					ATUReports.add("one checkbox is not selected", LogAs.PASSED,new CaptureScreen(ScreenshotOf.DESKTOP));
+					System.out.println("The checkbox: " + check.getText() + " is not selected");
+					ATUReports.add("The checkbox: " + check.getText() + " is not selected", LogAs.PASSED,new CaptureScreen(ScreenshotOf.DESKTOP));
 					Assert.assertTrue(true);
 				} else {
-					System.out.println("one checkbox is  selected");
-					ATUReports.add("one checkbox is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+					System.out.println("The checkbox: " + check.getText() + " is selected");
+					ATUReports.add("The checkbox: " + check.getText() + " is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 					Assert.assertTrue(false);
 				}
 			}
@@ -5373,7 +5376,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}	
 	}
 
-	public void ValidateTheSeveralTaggedRecordingTagsAreSortedByName() {
+	public void validateTheSeveralTaggedRecordingTagsAreSortedByName() {
 		try {
 			int numberOfTags = recording_tags.size();
 			List<String> nameOfTags = new ArrayList<String>();
@@ -5384,12 +5387,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			
 			for(int i=0 ; i< numberOfTags - 1 ;i++){
 	    		if(nameOfTags.get(i).compareTo(nameOfTags.get(i+1)) > 0 ) {
-	    			ATUReports.add("Not Verify that tags list sorted by TagName.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    			ATUReports.add("Not Verify that tags list sorted by TagName.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    			System.out.println("Not Verify that tags list sorted by TagName.");
 	    			return;
 	    		}
 	    	}
-	    	ATUReports.add("Verify that tags list sorted by TagName.", LogAs.PASSED, null);
+	    	ATUReports.add("Verify that tags list sorted by TagName.","Success.","Success.", LogAs.PASSED, null);
 			System.out.println("Verify that tags list sorted by TagName.");	
 		
 		}catch(Exception e){
@@ -5397,4 +5400,51 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
+
+	public void verifyTagApperedUderTheSelectRecordings() {
+		try {
+			for(int i = 0 ; i< recording_tags.size() ; i++){
+				if(!recording_tags.get(i).isDisplayed()){
+					ATUReports.add("Not Verify that tags appered on the first recording.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					System.out.println("Not Verify that tags appered on the first recording.");	    			
+			}
+		}
+		 	
+			ATUReports.add("Verify that tags appered on the first recording.","Success.","Success.", LogAs.PASSED, null);
+			System.out.println("Verify that tags appered on the first recording.");	
+	    
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
+	//verify The tags are displayed in the "View" dropdown list
+	public void verifyTheTagsAreDisplayInTheViewDropdown(List<String> namesOfTags) {
+		
+		for(int i = 0 ; i< view_tag_names.size() ; i++) {
+			String currentTag = view_tag_names.get(i).getText();
+			if(!searchOwnerInTheOwnerList(currentTag,namesOfTags)){
+				ATUReports.add("Not verify The tags are displayed in the View dropdown list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("Not verify The tags are displayed in the View dropdown list..");
+				return;
+			}
+		}
+		ATUReports.add("verify The tags are displayed in the View dropdown list..","Success.","Success.", LogAs.PASSED, null);
+		System.out.println("verify The tags are displayed in the View dropdown list..");	
+		
+	}
+	
+	public boolean searchOwnerInTheOwnerList(String currentTag,List<String> namesOfTags) {
+
+		boolean isTheOwnerContains = false;
+		for(String Tag: namesOfTags){
+			if(currentTag.contains(Tag)){
+				isTheOwnerContains = true;
+				break;					
+			}
+		}
+		return isTheOwnerContains;
+	}
+	
+	
 }
