@@ -261,7 +261,7 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 		record.returnToCourseListPage();
 		
 		// 18. Select first destination course
-		course.clickOnTargetCourseName(first_target_course);
+		course.selectCourseByName(first_target_course);
 		
 		wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
 		
