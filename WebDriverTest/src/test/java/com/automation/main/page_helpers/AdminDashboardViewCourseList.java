@@ -42,8 +42,7 @@ public class AdminDashboardViewCourseList extends Page {
 	@FindBy(id = "jqg_gridData_1")
 	WebElement first_course_in_list_checkbox;
 	@FindBy(css = ".linksStyle")
-	public
-	WebElement first_course_link;
+	public WebElement first_course_link;
 	@FindBy(xpath = "//*[@id=\"2\"]/td[5]/a") WebElement second_course_link;
 	@FindBy(xpath = ".//*[@id='1']/td[6]") WebElement first_instructor_ids;
 	@FindBy(xpath = "//*[@id=\"main\"]/div[1]/h2") WebElement all_courses_title;
