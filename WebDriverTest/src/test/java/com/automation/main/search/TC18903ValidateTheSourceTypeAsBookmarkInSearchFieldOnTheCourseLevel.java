@@ -150,7 +150,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+	
 		
 		// TODO: Delete all bookmarks and create new bookmark
 		Date date = new Date();
@@ -166,9 +166,7 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 		//player_page.moveToElementAndPerform(driver.findElement(By.cssSelector(".BookmarkSelected")),driver);
 		
 		record.signOut();
-		Thread.sleep(3000);
-		
-		
+	
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {
 			type_of_user=3;
@@ -185,20 +183,17 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 				// 2. Login as INSTRUCTOR.
 			tegrity.loginCourses("User1");
 			}
-			Thread.sleep(3000);
+		
 	
 			if(type_of_user != 0) {
 				// 3. Open some course.
 				course.selectCourseThatStartingWith(current_course);
 			} else {
 				// Click on "view course list" under "courses" section.
-				Thread.sleep(500);
-				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
-				
+				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");	
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(1000);
 			}
 			
 			
@@ -295,7 +290,6 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 			
 			// 14. Sign Out.
 			record.signOut();
-			Thread.sleep(3000);
 		}
 		
 		// Unpublic Ab course1. 

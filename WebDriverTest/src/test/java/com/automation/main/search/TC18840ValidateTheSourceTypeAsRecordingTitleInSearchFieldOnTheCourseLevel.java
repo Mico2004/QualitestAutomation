@@ -149,7 +149,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		
 		
 		// Get 4 recording titles
 		List<String> recording_list = record.getCourseRecordingList();
@@ -158,11 +158,11 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 		//if we have last then 4 records we need to copy record from the bank
 		if(numberOfRecords < 4) {
 		
-			top_bar_helper.signOut();
-			Thread.sleep(1000);
+			record.signOut();
+			
 		
 			tegrity.loginCourses("SuperUser");
-			Thread.sleep(1000);
+			
 			
 			course.selectCourseThatStartingWith("BankValid");
 			
@@ -177,14 +177,14 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 				record.selectIndexCheckBox(4);
 			}
 			  record.clickOnRecordingTaskThenCopy();
-			  Thread.sleep(1000);
+			 
 			  
 			  copy.selectTargetCourseFromCourseList(current_course);
 			  copy.clickOnCopyButton();
 			  
 			  course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
 			  record.returnToCourseListPage();
-			  Thread.sleep(1000);
+			  
 		  
 			  course.selectCourseThatStartingWith("Ab");
 			
@@ -236,21 +236,16 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 				tegrity.loginAdmin("Admin");
 				recording_title_for_the_test = recording_for_admin;
 			}
-		
-			Thread.sleep(3000);
-			
+	
 			if(type_of_user < 3) {
 				// 3. Open some course.
 				course.selectCourseThatStartingWith(current_course);
 			} else {
 				// Click on "view course list" under "courses" section.
-				Thread.sleep(2000);
-				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
-				
+				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");	
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(1000);
 			}
 			
 			

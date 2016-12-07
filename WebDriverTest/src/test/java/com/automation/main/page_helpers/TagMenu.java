@@ -491,8 +491,27 @@ public class TagMenu extends Page {
 	    	String currentName = cols.get(1).getText();
 	    	instructors.add(currentName);
 		} 	
+	  
 	}
 
+	public void verifyCreatedNameIsDisplayedInTheEditTagList(String name){
+		waitForVisibility(tableOfTags);
+		List<WebElement> rows = tableOfTags.findElements(By.tagName("tr"));		
+		int rowNumber = rows.size();	    
+	    for(int i = 0 ; i< rowNumber ; i++) {
+	    	WebElement currentRaw = rows.get(i);
+	    	List<WebElement> cols = currentRaw.findElements(By.tagName("td"));
+	    	String currentName = cols.get(1).getText();
+	    	if(currentName.equals(name)){
+	    		ATUReports.add("The name: " +name +" found on the list." ,"Success.", "Success.", LogAs.PASSED, null);
+    			System.out.println("The name: " +name +" found on the list.");
+    			return;
+	    	}	
+	    }
+	    ATUReports.add("The name: " +name +" isn't found on the list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		System.out.println("The name: " +name +" isn't found on the list.");
+		} 	
+		
 	public void verifyAllInstractorAreDisplay() {
 		try{
 			List<WebElement> rows = tableOfTags.findElements(By.tagName("tr"));		

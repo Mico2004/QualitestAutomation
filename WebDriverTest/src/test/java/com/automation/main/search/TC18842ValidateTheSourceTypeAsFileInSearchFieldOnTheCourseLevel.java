@@ -155,15 +155,14 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
-		
+	
 		record.returnToCourseListPage();
 
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(1000);
+		
 		record.clickOnAdditionContentTab();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		
 		List<String> current_additional_content_list = record.getCoursAdditionalContentList();
 		String target_additional_content_for_the_test = null;
@@ -176,21 +175,18 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 				}
 			}
 		}
-		Thread.sleep(1000);
+	
 		record.clickOnContentTaskThenCopy();
 		copy.selectTargetCourseFromCourseListThatStartWith("Ab");
-		Thread.sleep(2000);
+	
 		copy.clickOnCopyButton();
-		Thread.sleep(8000);
+		
 		confirm_menu.clickOnOkButton();
-		Thread.sleep(2000);
+		
 		
 		System.out.println("Target additional content for the test is: " + target_additional_content_for_the_test);
 		
 		record.signOut();
-		Thread.sleep(2000);
-		
-		
 		
 		// Looping for INSTRUCTOR, Student and Guest
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {
@@ -207,19 +203,16 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(5000);	
-			
+		
 			if(type_of_user != 3) {
 				// 3. Open some course.
 				current_course = course.selectCourseThatStartingWith("Ab");
 			} else {
 				// Click on "view course list" under "courses" section.
-				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
-				
+				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");	
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(1000);
 			}
 			
 			
@@ -274,7 +267,6 @@ public class TC18842ValidateTheSourceTypeAsFileInSearchFieldOnTheCourseLevel {
 			
 			// 7. Sign Out.
 			record.signOut();
-			Thread.sleep(3000);	
 		}
 		
 		// Unpublic Ab course1. 

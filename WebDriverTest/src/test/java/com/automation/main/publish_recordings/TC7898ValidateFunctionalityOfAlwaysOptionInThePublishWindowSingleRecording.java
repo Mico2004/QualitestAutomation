@@ -180,7 +180,7 @@ public class TC7898ValidateFunctionalityOfAlwaysOptionInThePublishWindowSingleRe
 				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 						
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
 				record.waitForThePageToLoad();		
 				}

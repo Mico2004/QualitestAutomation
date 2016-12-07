@@ -251,7 +251,7 @@ public class Page {
 	public void waitForVisibility(WebElement element)// visibility of an element
 	{
 		try {
-			Thread.sleep(1000);	
+			Thread.sleep(500);	
 			wait.until(ExpectedConditions.visibilityOf(element));
 		} catch (org.openqa.selenium.TimeoutException e) {
 			System.out.println("Waiting for element visibiliy failed");
@@ -552,7 +552,7 @@ public class Page {
 	/// sign out from any page except Login page
 	public void signOut() {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 			System.out.println("signOut1");		 
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");			
 			new WebDriverWait(driver, 25).until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));
@@ -852,6 +852,8 @@ public class Page {
 	public void sendStringwithAction(WebElement we, String string_to_send) {
 		try {
 			Actions builder = new Actions(driver);
+			//like clear
+			((JavascriptExecutor) driver).executeScript("arguments[0].value ='';",we);
 			builder.sendKeys(we,string_to_send);
 			builder.build().perform();
 			System.out.println("String sent to WebElement: " + string_to_send);

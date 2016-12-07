@@ -152,7 +152,7 @@ public class TC8036VadlitadeTheTagNamesAreSortedInTheTagIndicator {
 			}
 		
 			//12.Validate the several tagged recording tags are sorted by name.
-			record.ValidateTheSeveralTaggedRecordingTagsAreSortedByName();
+			record.validateTheSeveralTaggedRecordingTagsAreSortedByName();
 		
 		}
 		

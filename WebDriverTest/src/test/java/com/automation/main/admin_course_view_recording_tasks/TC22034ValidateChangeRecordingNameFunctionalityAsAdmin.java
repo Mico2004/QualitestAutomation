@@ -35,6 +35,8 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -125,15 +127,14 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 		
 		// 4. Login as Admin.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(5000);
 	
 		// 5. Click on "view course list" under "courses" section.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		
 		// 6. move to the course through url
-		Thread.sleep(5000);
+		admin_dashboard_view_course_list.waitForThePageToLoad();
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-		Thread.sleep(1000);
+		
 		
 		// 8. Click on a checkbox of one recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -146,15 +147,14 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Edit recording properties option is disabled.");
-			ATUReports.add("Edit recording properies option.", "Enabled.", "Disabled.", LogAs.FAILED, null);
+			ATUReports.add("Edit recording properies option.", "Enabled.", "Disabled.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
-		
+
 		// 9. Click on the "Recording Tasks" drop-down button.
 		// 11. Click on the "Edit Recording properties".
 		record.toEditRecordingPropertiesMenu();
-		Thread.sleep(3000);
+		edit_recording_properties_window.waitForPageToLoad();
 		
 		// 12. The "Edit recording properties" modal window is displayed.
 		boolean is_closed = edit_recording_properties_window.isEditRecordingProperiesClosed();
@@ -165,7 +165,7 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Edit recording proerties modal is not displayed.");
-			ATUReports.add("Edit recording properties modal window.", "Open.", "Close.", LogAs.FAILED, null);
+			ATUReports.add("Edit recording properties modal window.", "Open.", "Close.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -177,12 +177,10 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 		
 		// 14. Click the "Save" button.
 		edit_recording_properties_window.clickOnSaveButton();
-		Thread.sleep(15000);
-		
+			
 		// 15. Click the "Ok" button.
 		confirmation_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
-		Thread.sleep(3000);
-		
+			
 		// 16. The modal window is closed.
 		is_closed = edit_recording_properties_window.isEditRecordingProperiesClosed();
 		
@@ -192,11 +190,11 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Edit recording proerties modal is displayed.");
-			ATUReports.add("Edit recording properties modal window.", "Open.", "Open.", LogAs.FAILED, null);
+			ATUReports.add("Edit recording properties modal window.", "Open.", "Open.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
 		
+	
 		// 17. The confirmation window disappears.
 		is_closed = confirmation_menu.isConfirmationMenuClosed();
 		
@@ -206,10 +204,10 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("The confirmation window is displayed.");
-			ATUReports.add("The confirmation window.", "Open.", "Open.", LogAs.FAILED, null);
+			ATUReports.add("The confirmation window.", "Open.", "Open.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+	
 		
 		// 18. Validate the recording name has changed to "Change recording name".
 		List<String> recording_list = record.getCourseRecordingList(); 
@@ -220,7 +218,7 @@ public class TC22034ValidateChangeRecordingNameFunctionalityAsAdmin {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Recording name has changed to: " + change_to_name);
-			ATUReports.add("Recording name has changed to: " + change_to_name, "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Recording name has changed to: " + change_to_name, "True.", "False.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		

@@ -150,14 +150,11 @@ public class TC21988ValidateRecordingTasksUI {
 			
 			// 5. Click on "view course list" under "courses" section.
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
-		
-			
+				
 			// 6. move to the course through 
-			Thread.sleep(5000);
+			admin_dashboard_view_course_list.waitForThePageToLoad();
 			admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-			Thread.sleep(1000);
-			
-			
+					
 			// Loop through Recordings, Student Recordings and Tests Tab
 			for (int i_tabs = 0; i_tabs<3; i_tabs++) {
 				if (i_tabs == 1) {

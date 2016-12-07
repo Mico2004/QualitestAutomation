@@ -141,7 +141,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+	
 		
 		// Create tags for first recording
 		Date date = new Date();
@@ -157,10 +157,8 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 
 		tag_menu.createNewTag(tags_for_search);
 		
-		
-		Thread.sleep(1000);
 		tag_menu.clickOnApplyButton();
-		Thread.sleep(1000);
+		
 		
 		record.signOut();
 		
@@ -189,19 +187,16 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);
-			
+				
 			// 3. Open some course.
 			if(type_of_user < 3) {
 				course.selectCourseThatStartingWith(current_course);
 			} else {
 				// Click on "view course list" under "courses" section.
-				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
-				
+				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");	
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(1000);
 			}
 			
 			

@@ -42,12 +42,13 @@ public class AdminDashboardViewCourseList extends Page {
 	@FindBy(id = "jqg_gridData_1")
 	WebElement first_course_in_list_checkbox;
 	@FindBy(css = ".linksStyle")
-	public
-	WebElement first_course_link;
+	public WebElement first_course_link;
 	@FindBy(xpath = "//*[@id=\"2\"]/td[5]/a") WebElement second_course_link;
 	@FindBy(xpath = ".//*[@id='1']/td[6]") WebElement first_instructor_ids;
 	@FindBy(xpath = "//*[@id=\"main\"]/div[1]/h2") WebElement all_courses_title;
+	@FindBy(xpath =".//*[@id='tegrityBreadcrumbsBox']/li/a")WebElement adminDashboard;
 	@FindBy(className = "linksStyle") List<WebElement> courses_link;
+	@FindBy (css = ".btn.btn-default.btn-menu.nolink") WebElement courseTasks;
 	
 	// @FindBy(id = "ctl00_ContentPlaceHolder1_txtSearch") WebElement
 	// filter_search_input;
@@ -76,6 +77,19 @@ public class AdminDashboardViewCourseList extends Page {
 	// }
 	// }
 
+	public void waitForThePageToLoad(){
+		try{
+			wait.until(ExpectedConditions.visibilityOf(adminDashboard));
+			wait.until(ExpectedConditions.visibilityOf(courseTasks));
+			wait.until(ExpectedConditions.visibilityOf(first_course_in_list_checkbox));
+			wait.until(ExpectedConditions.visibilityOf(first_course_link));
+			
+		}catch(Exception e){
+			ATUReports.add("Loading 'All courses admin' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
 
 	public void moveToCoursesThroughGet(String url){
 		

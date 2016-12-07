@@ -127,27 +127,24 @@ public class TC22006ValidateMoveRecordingCancelFunctionality {
 			
 		// 4. Login as Full Admin
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(3000);
-			
-			
+	
+				
 		// 5. Click on "view course list" under "courses" section.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
-		Thread.sleep(3000);
 			
 		// 6. move to the course through url
-		Thread.sleep(5000);
+		admin_dashboard_view_course_list.waitForThePageToLoad();
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-		Thread.sleep(1000);
 		
 		// 8. Click on a checkbox of one recording.
-		record.getCheckbox().click();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		
 		String checked_recording_title = record.getFirstRecordingTitle();
 			
 		// 9. Hover over "Recording tasks" menu.
 		// 10. The menu items are displayed.
 		// 11. Click on the menu item "Move".
 		record.clickOnRecordingTaskThenMove();
-		Thread.sleep(3000);
 		
 		// The move window displays.
 		boolean is_move_window_closed = move_window.isMoveMenuClosed();
@@ -204,8 +201,6 @@ public class TC22006ValidateMoveRecordingCancelFunctionality {
 		// 16. Hover over "Recording tasks" menu.
 		// 17. Click on the menu item "Move".
 		record.clickOnRecordingTaskThenMove();
-		Thread.sleep(3000);
-		
 		
 		// 18. The move window displays.
 		is_move_window_closed = move_window.isMoveMenuClosed();

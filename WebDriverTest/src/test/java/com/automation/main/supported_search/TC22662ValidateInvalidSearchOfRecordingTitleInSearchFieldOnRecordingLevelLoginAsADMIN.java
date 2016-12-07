@@ -170,12 +170,11 @@ public class TC22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecordin
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		// 3.Click on "View Course List" link
-		Thread.sleep(1500);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		// 4.verify all courses page
 		admin_view_course_list.verifyAllCoursesPage();
 		// 5.Select a course
-		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
+		admin_view_course_list.waitForThePageToLoad();
 		admin_view_course_list.moveToCoursesThroughGet(url);
 		/// 6.Click on one of the Recording link
 		record.waitForVisibility(record.checkbox2);

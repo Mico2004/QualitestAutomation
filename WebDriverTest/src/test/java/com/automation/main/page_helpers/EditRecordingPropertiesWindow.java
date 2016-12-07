@@ -566,9 +566,7 @@ public class EditRecordingPropertiesWindow extends Page {
 	try {
 		recordName = recording_title.getAttribute("value");
 		cancel_button.click();
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
 		System.out.println("cancel succeded");
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("RecordingStatus1")));
 	} catch (Exception e) {
 		System.out.println("clicked on recording title input failed");
 		e.getMessage();

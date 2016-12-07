@@ -129,15 +129,15 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		
 		// 5. Login as Admin.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(5000);
+	
 	
 		// 6. Click on "view course list" under "courses" section.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		
 		// 7-8. move to the course through url
-		Thread.sleep(5000);
+		admin_dashboard_view_course_list.waitForThePageToLoad();
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-		Thread.sleep(1000);
+		
 
 		
 		// 9. Click on a checkbox of one recording.
@@ -146,8 +146,7 @@ public class TC24923ValidateThatYouCannotClickOnCopyRecordingsWhenYouHaventChose
 		// 10. Hover over "Recording tasks" menu.
 		// 11. Click on the menu item "Copy".
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(3000);
-		
+	
 		// 12. The copy window displays.
 		boolean is_copy_window_closed = copy.isCopyMenuClosed();
 		

@@ -147,7 +147,7 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1500);
+	
 		
 		// Get Recording Chapter information.
 		record.clickElement(record.first_recording_title);
@@ -156,9 +156,7 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 
 		
 		record.signOut();
-		Thread.sleep(3000);
-		
-		
+			
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 2; type_of_user++) {
 			
@@ -169,19 +167,16 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 				// 2. Login as Student.
 				tegrity.loginCourses("User4");
 			} 
-			Thread.sleep(3000);
 			
 			if(type_of_user < 3) {
 				// 3. Open some course from the active courses Tab.
 				course.selectCourseThatStartingWith(current_course);
 			} else {
 				// Click on "view course list" under "courses" section.
-				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
-				
+				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");	
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(1000);
 			}
 			
 			
@@ -195,7 +190,6 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 			// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();
 			search_page.waitUntilSpinnerImageDisappear();
-			Thread.sleep(500);
 			
 			// 5.2. The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)".
 			search_page.verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfound(current_course, recording_chapter);
@@ -263,7 +257,6 @@ public class TC18857ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAct
 			player_page.returnToCoursesPage(course);
 			// 13. Sign Out.
 			record.signOut();
-			Thread.sleep(3000);
 		}
 		
 		// Unpublic Ab course1. 

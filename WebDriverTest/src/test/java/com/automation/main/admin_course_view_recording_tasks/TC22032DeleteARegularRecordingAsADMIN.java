@@ -41,6 +41,8 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -124,24 +126,24 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 		initializeCourseObject();
 		
 		// 2. Delete all Recordings, Student Recordings and Tests from abc.
-//		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
-//		course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
-//		course.deleteAllRecordingsInCourseStartWith("abc", 3, record, delete_menu);
-//		
-//		// 3. Using course functions copy Recordings, Student Recording and Tests from ValidBank to abc.
-//		// Copy all recording from Bank Valid Recording to course starting with Ab
-//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 0, record, copy, confirmation_menu);
-//		// Copy all student recordings from Bank Valid Recording to course starting with Ab
-//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 2, record, copy, confirmation_menu);
-//		// Copy all tests from Bank Valid Recording to course starting with Ab
-//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 3, record, copy, confirmation_menu);
-//		
-//		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
-//		System.out.println("1");  
-//		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
-//		System.out.println("3");
-//		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
-//		System.out.println("4");
+		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("abc", 3, record, delete_menu);
+		
+		// 3. Using course functions copy Recordings, Student Recording and Tests from ValidBank to abc.
+		// Copy all recording from Bank Valid Recording to course starting with Ab
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 0, record, copy, confirmation_menu);
+		// Copy all student recordings from Bank Valid Recording to course starting with Ab
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 2, record, copy, confirmation_menu);
+		// Copy all tests from Bank Valid Recording to course starting with Ab
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "abc", 3, record, copy, confirmation_menu);
+		
+		course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
+		System.out.println("1");  
+		course.verifyRecordingsStatusIsClear("BankValidRecording",2,record);
+		System.out.println("3");
+		course.verifyRecordingsStatusIsClear("BankValidRecording",3,record);
+		System.out.println("4");
 		
 
 		// 4. Get full name of abc course.
@@ -169,12 +171,11 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 			// 7. Click on "view course list" under "courses" section.
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			
-			// 6. move to the course through url
-			Thread.sleep(5000);
+			// 8. move to the course through url
+			admin_dashboard_view_course_list.waitForThePageToLoad();
 			admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-			Thread.sleep(1000);
 			
-		
+	
 			// Repeat TC for Recordings, Stduent Recording and Tests Tabs
 			for(int recording_type=0; recording_type<3; recording_type++) {
 				
@@ -220,7 +221,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 							Assert.assertTrue(true);
 						} else {
 							System.out.println("Not verified that only selected recording displayed in List of Recordings.");
-							ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "False.", LogAs.FAILED, null);
+							ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "False.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 							Assert.assertTrue(false);
 						}
 					} else {
@@ -232,7 +233,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 							Assert.assertTrue(true);
 						} else {
 							System.out.println("Not verified that only selected recording displayed in List of Recordings.");
-							ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "False.", LogAs.FAILED, null);
+							ATUReports.add("Only selected recording displayed in List of Recordings.", "True.", "False.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 							Assert.assertTrue(false);
 						}
 					}
@@ -254,7 +255,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("Not verified that selected recording is deleted and not displayed.");
-					ATUReports.add("Recording is not dispaly in recording list.", "True.", "False.", LogAs.FAILED, null);
+					ATUReports.add("Recording is not dispaly in recording list.", "True.", "False.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 				// the name in the test tab aren't unique
@@ -269,7 +270,7 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 						Assert.assertTrue(true);
 					} else {
 						System.out.println("Not verified that selected recording is deleted and not displayed.");
-						ATUReports.add("Recording is not dispaly in recording list.", "True.", "False.", LogAs.FAILED, null);
+						ATUReports.add("Recording is not dispaly in recording list.", "True.", "False.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					}
 								

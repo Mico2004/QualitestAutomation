@@ -201,7 +201,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		Thread.sleep(1500);
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
-		Thread.sleep(1500);
+		admin_view_course_list.waitForThePageToLoad();
 		
 		// 4.verify all courses page
 		admin_view_course_list.verifyAllCoursesPage();

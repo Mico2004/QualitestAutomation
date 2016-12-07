@@ -141,7 +141,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+	
 		
 		course.selectCourseThatStartingWith("Ab");
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -151,8 +151,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String recording_text = "reocrd" + sdf.format(date); 
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
-		Thread.sleep(8000);
-
+		Thread.sleep(4000);
 		
 		record.signOut();
 		
@@ -172,19 +171,15 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			} 
-			Thread.sleep(3000);
-		
+				
 			// 3. Open some course.
 			if(type_of_user == 3) {
 		
 				// Click on "view course list" under "courses" section.
-				Thread.sleep(1000);
-				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
-				
+				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");	
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(1000);
 				
 			}
 				

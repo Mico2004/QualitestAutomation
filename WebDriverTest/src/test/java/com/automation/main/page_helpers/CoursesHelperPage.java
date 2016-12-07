@@ -106,6 +106,8 @@ public class CoursesHelperPage extends Page {
 	WebElement courses_heading;
 	@FindBy(id="CourseFrame1")
 	WebElement courseFrame;
+	@FindBy(linkText = "Recording Tasks")
+	public WebElement recording_tasks_button;
 	public ConfirmationMenu confirm_menu;
 	public LoginHelperPage tegrity;
 	
@@ -429,7 +431,7 @@ public class CoursesHelperPage extends Page {
 				// wait.until(ExpectedConditions.textToBePresentInElement(By.id("target_course_name"),
 				// target_course_name));
 				System.out.println("select4");		
-				Thread.sleep(4000);
+				waitForVisibility(recording_tasks_button);
 				System.out.println("selected the course: " + target_course_name);
 				ATUReports.add("select the course: " + target_course_name, LogAs.PASSED, null);
 				// wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("CourseTitle"),

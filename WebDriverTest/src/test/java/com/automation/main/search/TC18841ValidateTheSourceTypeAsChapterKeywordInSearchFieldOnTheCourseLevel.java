@@ -145,7 +145,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+		
 		
 		// set Chapter Keyword for recording
 		Date date = new Date();
@@ -159,9 +159,7 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_chapter_keyword);
 		
 		record.signOut();
-		Thread.sleep(3000);
-		
-		
+	
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {
 			
@@ -178,19 +176,16 @@ public class TC18841ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheCours
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);
 			
 			if(type_of_user < 3) {
 				// 3. Open some course.
 				course.selectCourseThatStartingWith(current_course);
 			} else {
 				// Click on "view course list" under "courses" section.
-				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
-				
+				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");	
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(1000);
 			}
 			
 			
