@@ -450,6 +450,8 @@ public class CoursesHelperPage extends Page {
 	}
 	}
 
+
+	
 	// This function get two courses (starting with), first the source, second
 	// the destination
 	// third arg is type of recordings 0 - Recordings, 1 - Additional content, 2
