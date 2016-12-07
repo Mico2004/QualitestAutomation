@@ -131,25 +131,22 @@ public class TC22184ValidateThatYouCannotClickOnMoveRecordingsWhenYouHaventChose
 		
 		// 5. Login as Admin.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(5000);
+		
 	
 		// 6. Click on "view course list" under "courses" section.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		
 		// 7. move to the course through url
-		Thread.sleep(5000);
+		admin_dashboard_view_course_list.waitForThePageToLoad();
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-		Thread.sleep(1000);
-
-		
+			
 		// 9. Click on a checkbox of one recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
 		// 10. Hover over "Recording tasks" menu.
 		// 11. Click on the menu item "Move".
 		record.clickOnRecordingTaskThenMove();
-		Thread.sleep(3000);
-		
+	
 		// 12. The copy window displays.
 		boolean is_move_window_closed = move_window.isMoveMenuClosed();
 		
@@ -165,8 +162,6 @@ public class TC22184ValidateThatYouCannotClickOnMoveRecordingsWhenYouHaventChose
 		
 		// 13. On the window, click on "Move Recording(s)" button.
 		move_window.clickOnMoveRecordings();
-		Thread.sleep(1000);
-		
 		
 		// 14. There is a error window displays with the text "a course must be selected".
 		// 15. On the error window, click on "ok" button.
@@ -223,13 +218,10 @@ public class TC22184ValidateThatYouCannotClickOnMoveRecordingsWhenYouHaventChose
 		// 21. Click on "Move Recording(s)" button.
 		move_window.clickOnMoveRecordings();
 		
-		Thread.sleep(1000);
 		
 		// 22. There is a error window displays with the text "a course must be selected".
 		// 23. On the error window, click on "ok" button.
 		confirmation_menu.clickOnOkButtonOnErrorWindow();
-		
-		Thread.sleep(1000);
 		
 		// 24. Error window is closed.
 		is_closed = confirmation_menu.checkIfWindowModalWithTargetNameIsClosed("Error");
@@ -246,7 +238,7 @@ public class TC22184ValidateThatYouCannotClickOnMoveRecordingsWhenYouHaventChose
 		
 		// 25. Click on "List courses" button.
 		driver.findElement(By.id("SearchButton")).click();
-		Thread.sleep(1000);
+	
 
 		// 26. The list of available courses to copy the recording to is displayed.
 		List<String> courses_to_move = copy.getCourseList();
@@ -263,12 +255,12 @@ public class TC22184ValidateThatYouCannotClickOnMoveRecordingsWhenYouHaventChose
 		
 		// 27. Click on "Move Recording(s)" button.
 		move_window.clickOnMoveRecordings();
-		Thread.sleep(1000);
+	
 		
 		// 28. There is a error window displays with the text "a course must be selected".
 		// 29. On the error window, click on "ok" button.
 		confirmation_menu.clickOnOkButtonOnErrorWindow();
-		Thread.sleep(1000);
+		
 		
 		// 30. Error window is closed.
 		is_closed = confirmation_menu.checkIfWindowModalWithTargetNameIsClosed("Error");

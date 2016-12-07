@@ -186,10 +186,9 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 			// Repeat TC for Recordings, Stduent Recording and Tests Tabs
 			for(int recording_type=0; recording_type<3; recording_type++) {
 				// 6. move to the course through url
-				Thread.sleep(5000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url_source);	
-				Thread.sleep(1000);
-				
+			
 				if(recording_type==1) {
 					record.clickOnStudentRecordingsTab();
 				} else if (recording_type==2) {
@@ -213,7 +212,7 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				// 10. The menu items are displayed.
 				// 11. Click on the menu item "Move".
 				record.clickOnRecordingTaskThenMove();
-				Thread.sleep(3000);
+				
 				
 				// 12. The move window displays.
 				boolean is_move_window_closed = move_window.isMoveMenuClosed();
@@ -302,8 +301,6 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				// 24. Click on "Move recording(s)" button.
 				move_window.clickOnMoveRecordings();
 				
-				Thread.sleep(2000);
-				
 				// 25. The informative message "Recording(s) have been queued for move" shall be displayed.
 				// 26. Click on "ok" button.
 				confirmation_menu.clickOnOkButtonAfterConfirmMoveRecording();
@@ -366,7 +363,6 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				
 				// 30. The record is disappeared from the list after a while.
 				record.checkStatusExistenceForMaxTTime(450);
-				Thread.sleep(2000);
 				List<String> after_moving_complete_recording_list = record.getCourseRecordingList();
 				
 				
@@ -429,10 +425,8 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				
 				
 				//  move to the course through url
-				Thread.sleep(5000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url_destination);	
-				Thread.sleep(1000);
-
 				
 				if(recording_type==1) {
 					record.clickOnStudentRecordingsTab();

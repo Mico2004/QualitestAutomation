@@ -143,34 +143,26 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
-		
-
+	
 		record.returnToCourseListPage();
-		Thread.sleep(1000);
 			
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(1000);
+	
 			
 		//String recording_name = record.getFirstRecordingTitle();
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);	
-		Thread.sleep(1000);
-			
-
+	
 		record.clickOnRecordingTaskThenCopy();
 		copy.selectTargetCourseFromCourseList(current_course);
 		copy.clickOnCopyButton();
-		Thread.sleep(1000);
-			
+				
 	    confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		Thread.sleep(1000);
 			
 		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
 			
 		record.returnToCourseListPage();
-		Thread.sleep(2000);
-			
+		
 		course.selectCourseThatStartingWith("Ab");
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenEditRecording();
@@ -179,12 +171,10 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String recording_text = "reocrd" + sdf.format(date); 
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(recording_text);
-		Thread.sleep(8000);
-
+		Thread.sleep(4000);
 			
 		record.signOut();
-		
-		
+				
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {
 			if(type_of_user == 0) {
@@ -200,24 +190,18 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);
 		
 			// 3. Open some course.
 			if(type_of_user < 3) {
 				course.selectCourseThatStartingWith(current_course);
-				Thread.sleep(1000);
 			} else {
 				// Click on "view course list" under "courses" section.
-				Thread.sleep(1000);
-				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
-				
+				admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");	
 				// In "All courses" page, search for Ab course.
-				Thread.sleep(8000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-				Thread.sleep(1000);
 			}
-		
-			
+				
 			// 4. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
 			

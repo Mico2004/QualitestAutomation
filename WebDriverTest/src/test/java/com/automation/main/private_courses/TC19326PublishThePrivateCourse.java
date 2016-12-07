@@ -148,11 +148,11 @@ public class TC19326PublishThePrivateCourse {
 		
 		// 2. Click the "Course List" link.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
-		Thread.sleep(3000);
 		
-		// 3. Select the INSTRUCTOR's private course in the list and click it(move to the course through url
+		//// 3. Select the INSTRUCTOR's private course in the list and click it(move to the course through url
+		admin_dashboard_view_course_list.waitForThePageToLoad();
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-		Thread.sleep(1000);
+
 //		driver.navigate().to(url_private_course);
 //		Thread.sleep(3000);
 		
@@ -163,17 +163,14 @@ public class TC19326PublishThePrivateCourse {
 		
 		// 5. "Course Settings" page is displayed
 		course_settings_page.verifyCourseSettingDisplay();
-		Thread.sleep(2000);
 		
 		// 6. Check the "Make this course publicly visible" checkbox
 		// 7. Checkbox is checked.
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
-		
-		Thread.sleep(2000);
-		
+			
 		// 8. Press the "OK" button.
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(2000);
+		
 		
 		// 9. USER is redirected to "Course Details" page.
 		String url_of_redirected_back_to_private_course = driver.getCurrentUrl();
@@ -211,7 +208,6 @@ public class TC19326PublishThePrivateCourse {
 		// 14. Login as Guest.	
 		tegrity.loginAsguest();
 		
-		Thread.sleep(2000);
 		
 		// 15. Verify that INSTRUCTOR's private course is displayed in "Public Courses" tab.
 		course.clickOnPublicCoursesTab();
@@ -219,7 +215,6 @@ public class TC19326PublishThePrivateCourse {
 		// 16. Open the course.	
 		course.selectCourseThatStartingWith(private_course);
 
-		Thread.sleep(5000);
 //		course.moveToElement(driver.findElement(ById(private_course), driver)
 		
 		// 17. Play one of it's recordings.
@@ -235,11 +230,10 @@ public class TC19326PublishThePrivateCourse {
 		
 		// 20. Verify that INSTRUCTOR's private course is displayed in "Public Courses" tab.
 		// 21. Open the course.
-		Thread.sleep(2000);
 		course.clickOnPublicCoursesTab();
 		Thread.sleep(2000);
 		course.selectCourseThatStartingWith(private_course);
-		Thread.sleep(2000);
+	
 		
 		// 22. Play one of it's recordings	The recording is being played
 		String recoring_to_play = record.getFirstRecordingTitle();

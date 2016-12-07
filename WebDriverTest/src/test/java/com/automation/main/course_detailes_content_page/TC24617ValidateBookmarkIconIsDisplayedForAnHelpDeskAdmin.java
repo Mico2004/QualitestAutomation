@@ -150,15 +150,12 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
-		
+				
 		// 2. Login as Student.
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
-		
+				
 		// 3. Click on the Precondtional Course.
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(1000);
 		
 		// 4. Select some Recording and click on it.
 		// 5. Click on the first chapter.
@@ -174,19 +171,19 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 			break;
 		}
 		top_bar_helper.signOut();
-		Thread.sleep(3000);
+		
 		
 		// 7. Login as HelpDesk Admin.
 		tegrity.loginAdmin("HelpdeskAdmin");
-		Thread.sleep(3000);
+		
 		
 		// 8. Click on "View Course List".
 		admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 		
 		// 9. move to the course through url
-		Thread.sleep(5000);
+		admin_dashboard_view_course_list.waitForThePageToLoad();
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-		Thread.sleep(1000);
+		
 		
 		// 10. Validate that bookmark sign is not displayed in the recording, left of recording date.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {
@@ -198,11 +195,9 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 		}
 		
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
 		
 		// 11. Login as Instructor.
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
 		
 		// 12. Click on the Precondtional Course.
 		course.selectCourseThatStartingWith(current_course);
@@ -221,21 +216,17 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 			break;
 		}
 		top_bar_helper.signOut();
-		Thread.sleep(3000);
 		
 		// 16. Login as HelpDesk Admin.
 		tegrity.loginAdmin("HelpdeskAdmin");
-		Thread.sleep(3000);
-				
+					
 		// 17. Click on "View Course List".
 		admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
 				
 		// 18. move to the course through url
-		Thread.sleep(5000);
+		admin_dashboard_view_course_list.waitForThePageToLoad();
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-		Thread.sleep(1000);
-
-	
+		
 		// 19. Validate that bookmark sign is displayed in the recording, left of recording date.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {
 			record.verifyIndexRecordingHaveBookmark(1);

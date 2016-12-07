@@ -162,10 +162,10 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 			// 4. Login as Full Admin
 			if(i_login_as_admin==0) {
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(5000);
+				
 			} else {
 				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(5000);
+				
 			}
 			
 			
@@ -175,11 +175,9 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 			// Repeat TC for Recordings, Stduent Recording and Tests Tabs
 			for(int recording_type=0; recording_type<3; recording_type++) {
 				// 6. move to the course through url
-				Thread.sleep(5000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url_source);	
-				Thread.sleep(1000);
-				
-				
+
 				if(recording_type==1) {
 					record.clickOnStudentRecordingsTab();
 				} else if (recording_type==2) {
@@ -418,9 +416,9 @@ public class TC24922ValidateCopyRecordingFunctionalityForOneRecording {
 				
 				
 				// . move to the course through url
-				Thread.sleep(5000);
+				admin_dashboard_view_course_list.waitForThePageToLoad();
 				admin_dashboard_view_course_list.moveToCoursesThroughGet(url_destination);	
-				Thread.sleep(1000);
+				
 					
 				if(recording_type==1) {
 					record.clickOnStudentRecordingsTab();

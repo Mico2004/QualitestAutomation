@@ -145,15 +145,15 @@ public class TC22049ValidateCopyWindowFunctionality {
 		
 		// 6. Login as Admin.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(5000);
+	
 	
 		// 7. Click on "view course list" under "courses" section.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		
 		// 8-9. move to the course through url
-		Thread.sleep(5000);
+		admin_dashboard_view_course_list.waitForThePageToLoad();
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url_source);	
-		Thread.sleep(1000);
+		
 		
 		// 10. Click on a checkbox of one recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
@@ -163,7 +163,6 @@ public class TC22049ValidateCopyWindowFunctionality {
 		// 11. Hover over "Recording tasks" menu.
 		// 12. Click on the menu item "Copy".
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(3000);
 		
 		// 13. The copy window displays.
 		boolean is_copy_window_closed = copy.isCopyMenuClosed();
@@ -265,7 +264,6 @@ public class TC22049ValidateCopyWindowFunctionality {
 		
 		// 27. Click on "Copy recording(s)" button.
 		copy.clickOnCopyButton();		
-		Thread.sleep(800);
 		
 		// 28. The informative message "Recording(s) have been queued for copy" shall be displayed.
 		// 29. Click on "ok" button.
@@ -315,10 +313,8 @@ public class TC22049ValidateCopyWindowFunctionality {
 		
 
 		//  move to the course through url
-		Thread.sleep(5000);
+		admin_dashboard_view_course_list.waitForThePageToLoad();
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url_destination);	
-		Thread.sleep(1000);
-		
 		
 		// 35. Validate that the recording which you have copied is displayed on the list.
 		// 36. validate that the username displayed in the right of 'recorded by: ' of the copied recording ,isn't changed after the copy.

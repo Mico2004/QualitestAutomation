@@ -118,31 +118,26 @@ public class TC21993ValidateMoveWindowUI {
 		
 		// 3. Logout.
 		record.signOut();
-		
-		
-			
+				
 		// 4. Login as Full Admin
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
-			
 			
 		// 5. Click on "view course list" under "courses" section.
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
-		
 			
 		// 6. move to the course through url
-		Thread.sleep(5000);
+		admin_dashboard_view_course_list.waitForThePageToLoad();
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-		Thread.sleep(1000);
-		
+	
 		// 8. Click on a checkbox of one recording.
-		record.getCheckbox().click();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		
 			
 		// 9. Hover over "Recording tasks" menu.
 		// 10. The menu items are displayed.
 		// 11. Click on the menu item "Move".
 		record.clickOnRecordingTaskThenMove();
-		Thread.sleep(3000);
+		
 		
 		// 12. The move window displays.
 		boolean is_move_window_closed = move_window.isMoveMenuClosed();

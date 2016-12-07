@@ -160,24 +160,23 @@ public class TCase22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecor
 		String url =  course.getCurrentUrlCoursePage(); 
 
 		record.signOut();
-		Thread.sleep(1000);
+		
 		tegrity.waitForVisibility(tegrity.passfield);
 		
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
 		// 3.Click on "View Course List" link
-		Thread.sleep(1500);
+		
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		// 4.verify all courses page
 		admin_view_course_list.verifyAllCoursesPage();
 		// 5.Select a course
-		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
+		admin_view_course_list.waitForThePageToLoad();
 		admin_view_course_list.moveToCoursesThroughGet(url);
 		/// 6.Click on one of the Recording link
-		record.waitForVisibility(record.checkbox2);
-		Thread.sleep(1000);
-		record.checkbox2.click();
+		
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 		record.toEditRecordingPropertiesMenu();
 		erp_window.waitForVisibility(erp_window.save_button);
 		erp_window.changeRecordingName(recording_name, confirm_menu);
@@ -186,7 +185,7 @@ public class TCase22662ValidateInvalidSearchOfRecordingTitleInSearchFieldOnRecor
 		record.verifyFirstExpandableRecording();
 		record.clickOnTheFirstCaptherWithOutTheExpand();
 		// 8.Select the Recording by clicking on one of the chapters
-		player_page.verifyTimeBufferStatusForXSec(10);// check source display
+		player_page.verifyTimeBufferStatusForXSec(5);// check source display
 	
 		///// to go back to crecording window handler
 		String curr_win=driver.getWindowHandle();	

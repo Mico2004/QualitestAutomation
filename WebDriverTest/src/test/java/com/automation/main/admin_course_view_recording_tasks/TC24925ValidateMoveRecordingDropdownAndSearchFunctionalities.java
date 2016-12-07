@@ -139,19 +139,19 @@ public class TC24925ValidateMoveRecordingDropdownAndSearchFunctionalities {
 			// 4. Login as Admin.
 			if (login_as==0) {
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(5000);
+			
 			} else {
 				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(5000);
+			
 			}
 			
 			// 5. Click on "view course list" under "courses" section.
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			
 			// 6. move to the course through url
-			Thread.sleep(5000);
+			admin_dashboard_view_course_list.waitForThePageToLoad();
 			admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-			Thread.sleep(1000);
+			
 			
 			// Repeat TC for "Student recording" and "Tests" tabs
 			for(int selected_tab=0; selected_tab<3; selected_tab++) {

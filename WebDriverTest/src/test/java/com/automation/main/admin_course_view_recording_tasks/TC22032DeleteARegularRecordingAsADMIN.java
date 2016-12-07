@@ -171,12 +171,11 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 			// 7. Click on "view course list" under "courses" section.
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			
-			// 6. move to the course through url
-			admin_dashboard_view_course_list.waitForVisibility(admin_dashboard_view_course_list.first_course_link);
+			// 8. move to the course through url
+			admin_dashboard_view_course_list.waitForThePageToLoad();
 			admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-			Thread.sleep(1000);
 			
-		
+	
 			// Repeat TC for Recordings, Stduent Recording and Tests Tabs
 			for(int recording_type=0; recording_type<3; recording_type++) {
 				

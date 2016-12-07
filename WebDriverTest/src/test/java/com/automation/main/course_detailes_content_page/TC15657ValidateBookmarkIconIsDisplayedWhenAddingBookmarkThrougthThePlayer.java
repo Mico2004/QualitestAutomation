@@ -219,16 +219,11 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		// 17. Login as a Admin.
 		tegrity.loginAdmin("Admin");
 		
-		// Click on "view course list" under "courses" section.
-		admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");
-		
-		
-		// 18. Open the course that contains "ex1" recording.
-		// In "All courses" page, search for abc course.
-		Thread.sleep(8000);
-		
+		//18. Click on "view course list" under "courses" section.
+		admin_dash_board_page.clickOnTargetSubmenuCourses("View Course List");	
+		// In "All courses" page, search for Ab course.
+		admin_dashboard_view_course_list.waitForThePageToLoad();
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
-		
 		
 		// 19. Validate the bookmark symbol is displayed in the "ex1" recording information.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {

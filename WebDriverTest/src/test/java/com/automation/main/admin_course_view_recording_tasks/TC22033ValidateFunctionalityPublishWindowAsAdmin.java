@@ -133,20 +133,16 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			// 4. Login as Admin.
 			if (login_as==0) {
 				tegrity.loginAdmin("Admin");
-				Thread.sleep(5000);
 			} else {
-				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(5000);
+				tegrity.loginAdmin("HelpdeskAdmin");		
 			}
 			
 			// 5. Click on "view course list" under "courses" section.
 			admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 			
 			// 6. move to the course through url
-			Thread.sleep(5000);
+			admin_dashboard_view_course_list.waitForThePageToLoad();
 			admin_dashboard_view_course_list.moveToCoursesThroughGet(url);	
-			Thread.sleep(1000);
-
 			
 			// 8. Check the checkbox of an Published recording
 			String checked_recording_name = record.selectRecordingWithOutTargetStatus("Not Published");
@@ -169,13 +165,9 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			// 14. Click on the "Save" button.
 			publish_window.clickOnSaveButton();
 			
-			Thread.sleep(1000);
-			
 			// 15. The "Publish" window disappears.
 			publish_window.verifyPublishWindowClosed();
-			
-			Thread.sleep(1000);
-			
+				
 			// 16. The recording status changed to "Not Published".
 			record.verifyTargetRecordingHaveTargetStatus(checked_recording_name, "Not Published");
 			
@@ -200,8 +192,7 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			
 			// 22. Open the course that contains the uploaded recordings.
 			course.selectCourseThatStartingWith("Ab");
-			Thread.sleep(2000);
-			
+	
 			// 23. Validate the recordings you changed earlier isn't displayed.
 			record.verifyThatTargetRecordingNotExistInRecordingList(checked_recording_name);
 			
@@ -222,11 +213,6 @@ public class TC22033ValidateFunctionalityPublishWindowAsAdmin {
 			// 29. No Error alert is displayed.
 			record.clickOnTargetRecordingAndOpenItsPlayback(checked_recording_name);
 			player_page.verifyTimeBufferStatusForXSec(10);
-			
-//			for(String handler: driver.getWindowHandles()) {
-//				driver.switchTo().window(handler);
-//				break;
-//			}
 			
 			// 30. Logout.
 			top_bar_helper.exitInnerFrame();

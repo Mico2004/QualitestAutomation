@@ -151,9 +151,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		String url =  course.getCurrentUrlCoursePage(); 
 
 		record.signOut();
-		Thread.sleep(1000);
-		tegrity.waitForVisibility(tegrity.passfield);
-
+	
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");
 		admin_dashboard_page.waitForVisibility(admin_dashboard_page.sign_out);
@@ -172,7 +170,7 @@ public class TC23431ValidateTheSourceTypeAsManualChapterKeywordInSearchFieldOnTh
 		// 4.verify all courses page
 		admin_view_course_list.verifyAllCoursesPage();
 		// 5.Select a course
-		admin_view_course_list.waitForVisibility(admin_view_course_list.first_course_link);
+		admin_view_course_list.waitForThePageToLoad();
 		admin_view_course_list.moveToCoursesThroughGet(url);
 
 		// 6.Click on one of the Recording link
