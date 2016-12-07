@@ -141,10 +141,9 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+	
 		
 		// Upload for first recording target close catpion
-		Thread.sleep(2000);
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);	
 		record.clickOnRecordingTaskThenEditRecording();
@@ -168,10 +167,10 @@ public class TC18878ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheAllCour
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(3000);	
+			
 			
 			// 3. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 			// 4. Search some "Closed Caption" and press ENTER.
 			top_bar_helper.searchForTargetText(text_from_caption_for_test);

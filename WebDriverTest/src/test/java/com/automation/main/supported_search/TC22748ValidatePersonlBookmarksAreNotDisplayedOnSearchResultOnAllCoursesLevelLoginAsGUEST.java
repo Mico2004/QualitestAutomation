@@ -163,6 +163,7 @@ public class TC22748ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnAllCo
 		 // 4. make course public
 		 record.waitForVisibility(record.course_tasks_button);
 		 record.clickOnCourseTaskThenCourseSettings();
+		 course_settings.waitForPageToLoad();
 		 course_settings.makeSureThatMakeCoursePublicIsSelected();
 		 course_settings.clickOnOkButton();
 		 Thread.sleep(1000);

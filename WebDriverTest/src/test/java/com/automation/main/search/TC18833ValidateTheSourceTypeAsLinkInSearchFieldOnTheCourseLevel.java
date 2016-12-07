@@ -175,7 +175,6 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);
 			
 			if(type_of_user < 3) {
 				// 3. Open some course.

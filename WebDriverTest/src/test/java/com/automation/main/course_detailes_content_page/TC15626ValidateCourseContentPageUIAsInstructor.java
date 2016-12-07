@@ -138,7 +138,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		// Preconditions:
 		// 1. Login as Admin.
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(3000);
+		
 		
 		// 2. Validate that "Enable student testing" is checked in "Advance service setting".
 		admin_dash_board_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
@@ -159,8 +159,10 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		// 6. Hover over "Course Tasks" drop-down".
 		// 7. Choose "Course settings" option.
 		record.clickOnCourseTaskThenCourseSettings();
-			
+		
+		
 		// 8. Enable all settings in "Course settings" page.
+		course_settings_page.waitForPageToLoad();
 		course_settings_page.checkAllCourseSettingsCheckboxs();
 		
 		// 9. Click "Ok" button.
@@ -169,7 +171,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 10. Add Student recordings, Test recordings, Additional content to the course you are about to test.
 		record.returnToCourseListPage();
-		Thread.sleep(1000);
+		
 		
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
 		course.deleteAllRecordingsInCourseStartWith("Ba", 1, record, delete_menu);

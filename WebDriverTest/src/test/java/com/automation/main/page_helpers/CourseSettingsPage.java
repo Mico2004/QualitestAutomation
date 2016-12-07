@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -80,6 +81,14 @@ public class CourseSettingsPage extends Page {
 	public WebElement allow_download;
 	@FindBy(id = "PubliclyVisibleAvaliable")
 	public WebElement checkbox_enable_PubliclyVisible;
+	@FindBy(xpath= ".//*[@id='tegrityBreadcrumbsBox']/li[1]/a")
+	public WebElement courses_button;
+	@FindBy(xpath= ".//*[@id='tegrityBreadcrumbsBox']/li[2]/a")
+	public WebElement courses_name;
+	@FindBy(id = "CourseSettings")
+	public WebElement courseTitle;
+	@FindBy(xpath= ".//*[@id='main']/div/div/div[1]/h3")
+	public WebElement recording_title;
 	
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {
@@ -125,6 +134,25 @@ public class CourseSettingsPage extends Page {
 		Thread.sleep(3000);
 	}
 
+	public void waitForPageToLoad(){
+		try{
+			wait.until(ExpectedConditions.visibilityOf(courses_button));
+			wait.until(ExpectedConditions.visibilityOf(courses_name));
+			wait.until(ExpectedConditions.visibilityOf(courseTitle));
+			wait.until(ExpectedConditions.visibilityOf(recording_title));
+			wait.until(ExpectedConditions.visibilityOf(checkbox_enable_counter));
+			wait.until(ExpectedConditions.visibilityOf(enable_student_testing_checkbox));
+			wait.until(ExpectedConditions.visibilityOf(checkbox_publish_after_upload));
+				
+		}catch (Exception e){
+			ATUReports.add("enter to course settings faild (screenshot)", e.getMessage(),
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
+			e.printStackTrace();
+			Assert.assertTrue(false);
+			
+		}
+	}
+	
 	// This function force select enable audio checkbox
 	public void enableAudioPodcast() throws InterruptedException {
 		if (!enable_mp3_podcast_button.isSelected()) {
@@ -309,6 +337,7 @@ public class CourseSettingsPage extends Page {
 
 	// This function checks all checkbox in course settings page
 	public void checkAllCourseSettingsCheckboxs() {
+		try {
 		// EnableCounter - Enable minute counter
 		forceWebElementToBeSelected(checkbox_enable_counter, "Enable minute counter");
 		// AllowToRecord - Allow students to record
@@ -345,6 +374,11 @@ public class CourseSettingsPage extends Page {
 
 		// EnableStudentTesting - Enable student testing (Remote Proctoring// mode)
 		forceWebElementToBeSelected(checkbox_enable_student_testing, "Enable student testing (Remote Proctoring mode)");
+		} catch (Exception e) {
+			System.out.println("Fail click on visibility checkbox.");
+			ATUReports.add("Fail click on visibility checkbox.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
 	}
 
 	// This function verifies course visibility is unchecked

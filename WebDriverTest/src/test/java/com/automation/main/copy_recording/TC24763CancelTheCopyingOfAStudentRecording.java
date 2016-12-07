@@ -162,8 +162,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 9. Click "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
-		
-		Thread.sleep(2000);
+	
 		
 		// 10. Select the destination course.
 		boolean isTargetCourseClicked = course.clickOnTargetCourseName(targetCourse);
@@ -173,7 +172,7 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 			System.out.println("Target course name is not clicked: " + targetCourse);
 		}
 		
-		Thread.sleep(2000);
+		record.waitForThePageToLoad();
 		
 		// 11. Verify that recording wasn't copied.
 		if(record.student_recordings_tab.isDisplayed()) {

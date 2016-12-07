@@ -176,9 +176,9 @@ public class TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevel
 		// 3.Click on "View Course List" link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("View Course List");
 		// 4.verify all courses page
+		admin_view_course_list.waitForThePageToLoad();
 		admin_view_course_list.verifyAllCoursesPage();
 		// 5.Select a course
-		admin_view_course_list.waitForThePageToLoad();
 		admin_view_course_list.moveToCoursesThroughGet(url);	
 		
 		/// 6.Click on one of the Recording link
