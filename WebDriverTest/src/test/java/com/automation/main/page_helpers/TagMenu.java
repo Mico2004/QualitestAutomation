@@ -483,6 +483,7 @@ public class TagMenu extends Page {
 
 	public void saveAllTheInstractors() {
 		
+		instructors.clear();
 		List<WebElement> rows = tableOfTags.findElements(By.tagName("tr"));		
 		int rowNumber = rows.size();	    
 	    for(int i = 0 ; i< rowNumber ; i++) {
@@ -529,9 +530,10 @@ public class TagMenu extends Page {
 	    			System.out.println("The instructor:" +instructor +" isn't found on the list.");
 	    			return;
 		    	}
-		    	ATUReports.add("all the instuctors are found on the list.","Success.", "Success.", LogAs.PASSED, null);
-				System.out.println("all the instuctors are found on the list.");
-		    }	    
+		    }
+		    ATUReports.add("all the instuctors are found on the list.","Success.", "Success.", LogAs.PASSED, null);
+			System.out.println("all the instuctors are found on the list.");
+		    	    
 		}catch(Exception e){
 			e.printStackTrace();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
