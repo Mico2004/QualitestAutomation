@@ -5418,9 +5418,28 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 	}
+	
+	public void verifyTagNotApperedUderTheSelectRecordings() {
+		try {
+			if(!recording_tags.isEmpty()){
+				ATUReports.add("Not Verify that tags not appered on the first recording.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("Not Verify that not tags appered on the first recording.");	    			
+			} else { 	
+				ATUReports.add("Verify that tags not appered on the first recording.","Success.","Success.", LogAs.PASSED, null);
+				System.out.println("Verify that tags not appered on the first recording.");	
+			}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
+	
+	
+	
 	//verify The tags are displayed in the "View" dropdown list
 	public void verifyTheTagsAreDisplayInTheViewDropdown(List<String> namesOfTags) {
 		
+	try {	
 		for(int i = 0 ; i< view_tag_names.size() ; i++) {
 			String currentTag = view_tag_names.get(i).getText();
 			if(!searchOwnerInTheOwnerList(currentTag,namesOfTags)){
@@ -5431,7 +5450,26 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 		ATUReports.add("verify The tags are displayed in the View dropdown list..","Success.","Success.", LogAs.PASSED, null);
 		System.out.println("verify The tags are displayed in the View dropdown list..");	
-		
+	}catch(Exception e){
+		e.getMessage();
+		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	}	
+	}
+	
+	//verify The tags are displayed in the "View" dropdown list
+	public void verifyTheTagsAreNotDisplayInTheViewDropdown() {
+		try {
+			if(view_tag_names.size() > 0){
+				ATUReports.add("Not verify The tags are not displayed in the View dropdown list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("Not verify The tags are not displayed in the View dropdown list..");			
+			}else {	
+				ATUReports.add("verify The tags are not displayed in the View dropdown list..","Success.","Success.", LogAs.PASSED, null);
+				System.out.println("verify The tags are not displayed in the View dropdown list..");	
+			}
+		}catch(Exception e){
+				e.getMessage();
+				ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
 	}
 	
 	public boolean searchOwnerInTheOwnerList(String currentTag,List<String> namesOfTags) {
