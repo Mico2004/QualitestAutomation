@@ -38,6 +38,7 @@ public class DeleteMenu extends Page {
 	}
 
 	@FindBy(id = "ModalDialogHeader")
+	public
 	WebElement delete_menu_title;
 	@FindBy(id = "DeleteButton")
 	WebElement delete_button;

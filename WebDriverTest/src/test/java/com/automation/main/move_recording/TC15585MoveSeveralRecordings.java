@@ -3,8 +3,11 @@ package com.automation.main.move_recording;
 
 
 import java.util.List;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -123,9 +126,9 @@ public class TC15585MoveSeveralRecordings {
 			
 			record.checkAllCheckBox();
 			record.clickOnRecordingTaskThenDelete();
-			Thread.sleep(2000);
+			
 			delete_menu.clickOnDeleteButton();
-			Thread.sleep(2000);
+			delete_menu.wait.until(ExpectedConditions.invisibilityOfElementLocated((By.id("ModalDialogHeader"))));
 		}
 		
 		// 4. Go back to courses list.
