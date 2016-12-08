@@ -1606,9 +1606,15 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	// this function check if index recording is clickable
 	public boolean isIndexRecordingClickable(int index) {
-		if (driver.findElement(By.id("Recording" + Integer.toString(index))).getAttribute("disabled").equals(true)) {
-			return true;
-		} else {
+		try {
+			if (driver.findElement(By.id("Recording" + Integer.toString(index))).getAttribute("disabled").equals(true)) {
+				return true;
+			} else {
+			return false;
+			}
+		} catch (Exception msg) {
+			System.out.println("The element is not found.");
+			ATUReports.add("The element is not found", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 		}
 	}

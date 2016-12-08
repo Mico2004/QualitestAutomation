@@ -121,26 +121,23 @@ public class TC15582MoveOneRecording {
 		
 		// 7.return to recording page and than to course page
 		move_menu.clickOnCancelButton();
-		Thread.sleep(2000);
 		
 		record.returnToCourseListPage();
 		
 		
 		// 8. Verify Only courses where this USER signed as INSTRUCTOR are
 		// displayed in "Course List"
-		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.first_course_button.click();
-		Thread.sleep(2000);
+		first_course = course.first_course_button.getText();
+		course.selectFirstCourse(record);
+		
 		
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
-		move_menu = PageFactory.initElements(driver, MoveWindow.class);
 		
-		
+		record.waitForVisibility(move_menu.course_list_select);
 		move_menu.move_course_list = move_menu.getStringFromElement(move_menu.course_list);
 		int course_number = move_menu.course_list.size();
-		int count_instructors = course.patternAppearenceinString(xml_source_code,
-				"<CurrentUserRole>Instructor</CurrentUserRole>") - 1;
+		int count_instructors = course.patternAppearenceinString(xml_source_code,"<CurrentUserRole>Instructor</CurrentUserRole>") - 1;
 		if (count_instructors == course_number) {
 			for (int i = 0; i < move_menu.move_course_list.length; i++) {
 				boolean result = move_menu.searchWordInString(move_menu.move_course_list[i], xml_source_code);
@@ -153,18 +150,19 @@ public class TC15582MoveOneRecording {
 
 				}
 			}
-			Assert.assertTrue(true);
 			System.out.println("number Of count_instructors role equals Number Of courses");
 			ATUReports.add("all courses assigned as instructors", "xml file", "num of instructors:" + count_instructors,
 					"num of instructors:" + course_number, LogAs.PASSED, null);
+			Assert.assertTrue(true);
 			driver.navigate().back();
 			Thread.sleep(2000);
 
 		} else {
-			Assert.assertTrue(false);
 			System.out.println("number Of count_instructors role not equals Number Of courses");
 			ATUReports.add("all courses assigned as instructors", "xml file", "num of instructors:" + count_instructors,
 					"num of instructors:" + course_number, LogAs.FAILED, null);
+			Assert.assertTrue(false);
+			
 
 		}
 
