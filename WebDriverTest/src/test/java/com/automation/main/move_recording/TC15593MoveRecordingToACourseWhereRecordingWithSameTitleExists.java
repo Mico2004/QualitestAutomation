@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -146,7 +147,7 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		
 		
 		// Wait until the copy status will disspear, becuase if we will move + copy it will fail to move
-		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
+		record.checkStatusExistenceForMaxTTime(450);;
 		
 		// 2.10. Click on "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
@@ -269,7 +270,8 @@ public class TC15593MoveRecordingToACourseWhereRecordingWithSameTitleExists {
 		record.clickOnRecordingTitleInIndex(2);
 		
 		// 16. Click on any chapter. 
-		record.clickOnTheFirstCaptherWithOutTheExpand();
+		//record.clickOnTheFirstCaptherWithOutTheExpand();	
+		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
 		
 		//List <WebElement> panels = driver.findElements(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap"));
 		//panels.get(new_recording_index).click();
