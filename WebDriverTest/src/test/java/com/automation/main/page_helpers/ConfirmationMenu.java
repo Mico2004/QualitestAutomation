@@ -121,8 +121,6 @@ public class ConfirmationMenu extends Page {
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				System.out.println("Error window title is wrong");
 				ATUReports.add("Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-
-
 			}	
 			try{
 				new WebDriverWait(driver,15 ).until(ExpectedConditions.textToBePresentInElement(error_msg_body, "Recording has been queued for copy"));

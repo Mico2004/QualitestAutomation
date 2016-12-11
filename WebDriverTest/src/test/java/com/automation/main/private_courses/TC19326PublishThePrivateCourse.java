@@ -4,6 +4,8 @@ package com.automation.main.private_courses;
 
 import java.text.DateFormat;
 import java.util.Date;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -141,7 +143,8 @@ public class TC19326PublishThePrivateCourse {
 		
 		//1.1 pretest make sure that the course will be public
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
-		Thread.sleep(2000);		
+		Thread.sleep(3000);	
+		
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
 		admin_course_settings_page.clickOnSaveButton();

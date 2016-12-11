@@ -175,7 +175,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 				}
 		}
 		 
-		wait.until(ExpectedConditions.visibilityOf(mange_adhoc_users_page.new_user_button));
+		 wait.until(ExpectedConditions.visibilityOf(mange_adhoc_users_page.new_user_button));
 		 
 		 mange_adhoc_users_page.clickOnNewUser();
 			
@@ -216,11 +216,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		
 		// 7. Enroll this USER as STUDENT to any course.
 		tegrity.loginAdmin("Admin");	
-		 
-		 Thread.sleep(1000);
-		
-		
-		 
+		 	 
 		 // Enroll the user as student to a course.
 		 admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 			

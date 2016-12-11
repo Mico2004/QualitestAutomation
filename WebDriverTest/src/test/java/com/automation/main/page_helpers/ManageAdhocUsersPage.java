@@ -39,7 +39,7 @@ public class ManageAdhocUsersPage extends Page {
 
 	@FindBy(id = "ctl00_ContentPlaceHolder1_lbNewUser")
 	public WebElement new_user_button;
-	@FindBy(linkText = "Admin Dashboard")
+	@FindBy(xpath = ".//*[@id='tegrityBreadcrumbsBox']/li/a")
 	WebElement to_admin_dashboard;
 	@FindBy(xpath="//div[@id='contentDIV']/table/tbody") WebElement contentTable;
 	@FindBy(id = "ctl00_ContentPlaceHolder1_txtSearch") WebElement filter_search_user_input;
@@ -116,7 +116,8 @@ public class ManageAdhocUsersPage extends Page {
 			waitForVisibility(contentTable, 40);
 			
 		}catch(Exception e){
-			ATUReports.add("Loading 'Manage Ad-Hock Users' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Loading 'Manage Ad-Hock Users' page failed" + e.getMessage(),  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
 			Assert.assertTrue(false);
 		}
 	}

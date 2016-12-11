@@ -1841,9 +1841,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void unselectIndexCheckBox(int index) {
 		try {
 			checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));
-			checkbox.click();
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);			
 			if (checkbox.isSelected()) {
-				checkbox.click();
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);			
 				System.out.println("Checkbox is not selected in index: " + index);
 				ATUReports.add("Checkbox not selected in index: " + index, LogAs.PASSED, null);
 
