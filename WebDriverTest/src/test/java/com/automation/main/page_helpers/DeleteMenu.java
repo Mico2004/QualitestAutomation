@@ -138,8 +138,9 @@ public class DeleteMenu extends Page {
 	// This function clicks on cancel button of delete menu
 	public void clickOnCancelButton() throws InterruptedException {
 		try {
+			String id = "CancelButton";
 			wait.until(ExpectedConditions.visibilityOf(cancel_button));
-			cancel_button.click();
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("Clicked on cancel button.");
 			ATUReports.add("Click cancel button", "Clicked on cancel button", "Clicked on cancel button", LogAs.PASSED,
 					null);
