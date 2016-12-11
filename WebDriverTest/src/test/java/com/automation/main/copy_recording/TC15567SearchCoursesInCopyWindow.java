@@ -108,20 +108,14 @@ public class TC15567SearchCoursesInCopyWindow {
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
-		
-		Thread.sleep(1000);
-		
+			
 		// 2. Select course.
 		currentCourse = course.selectCourseThatStartingWith("Ab");
 		System.out.println("Current course: " + currentCourse);
 		//course.selectCourse(record);
 		
-		Thread.sleep(1000);
-		
 		// 3. Select recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		
-		Thread.sleep(1000);
 		
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();

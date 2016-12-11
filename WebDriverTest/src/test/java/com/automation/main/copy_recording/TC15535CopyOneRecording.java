@@ -181,10 +181,8 @@ public class TC15535CopyOneRecording {
 		copy.selectTargetCourseFromCourseList(destination_course_name);
 		Thread.sleep(2000);
 		//12.verify background color of copy menu
-		System.out.println(
-				copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]"))));
-		copy.verifyBlueColor(
-				copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]")))); 
+		System.out.println(copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]"))));
+		copy.verifyBlueColor(copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]")))); 
 		//13.Click the "Copy Recording(s)" button
 		copy.clickOnCopyButton(record);// click copy button ConfirmationMenu
 		confirm = PageFactory.initElements(driver, ConfirmationMenu.class);
