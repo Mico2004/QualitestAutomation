@@ -136,9 +136,7 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 		
 		// 4. Select "Recording Tasks -> Copy"
 		record.clickOnRecordingTaskThenCopy();
-		
-		Thread.sleep(1000);
-		
+			
 		// save course list, we will copy in first time to course in 3rd index
 		// and in second time to course in 4th index
 		//List<String> current_copy_menu_course_list = copy.getCourseList(); 
@@ -165,9 +163,7 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 		
 		// 7. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
-		
-		Thread.sleep(1000);
-		
+			
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		
@@ -209,9 +205,7 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 		
 		// 13. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
-		
-		Thread.sleep(1000);
-		
+	
 		// 14. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		
