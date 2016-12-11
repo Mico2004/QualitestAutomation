@@ -158,7 +158,8 @@ public class CopyMenu extends Page {
 		for (int i = 0; i < course_list.size(); i++) {
 			selected_course = course_list.get(i).getText();
 			if (selected_course.equals(target_course_name)) {
-				((JavascriptExecutor) driver).executeScript("arguments[0].click();", course_list.get(i));		
+				WebElement element = course_list.get(i);
+				clickElement(element);
 				System.out.println("course is selected from Copy manu course list: " + target_course_name);
 				ATUReports.add("course is selected from Copy manu course list: " + target_course_name, LogAs.PASSED, null);
 				Assert.assertTrue(true);
