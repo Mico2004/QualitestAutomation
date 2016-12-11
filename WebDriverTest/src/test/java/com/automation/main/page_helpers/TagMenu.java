@@ -181,6 +181,20 @@ public class TagMenu extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	// This function verify that tag window is open
+	public void verifyTagDeleteWindowOpen() {
+		
+		if(edit_title.isDisplayed()) {
+			System.out.println("Tag delete window is open.");
+			ATUReports.add("Tag delete window.", "Open.", "Open.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Tag delete window is close.");
+			ATUReports.add("Tagdelete window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
 		
 	/**
 	 * this function waits for tag window to display
@@ -217,6 +231,7 @@ public class TagMenu extends Page {
 			}
 		
 	}
+	
 	
 	// verify Publish menu background color is same as recording background color
 	public void verifyTagColor(RecordingHelperPage rec, WebElement background) throws InterruptedException {

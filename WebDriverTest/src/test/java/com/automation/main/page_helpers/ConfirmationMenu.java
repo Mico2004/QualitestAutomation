@@ -97,7 +97,7 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
-			ok_button.click();
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();",ok_button);
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
@@ -131,8 +131,7 @@ public class ConfirmationMenu extends Page {
 				Assert.assertTrue(false);
 			}
 
-
-			ok_button.click();
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", ok_button);		
 			System.out.println("Clicked on OK button");
 			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);

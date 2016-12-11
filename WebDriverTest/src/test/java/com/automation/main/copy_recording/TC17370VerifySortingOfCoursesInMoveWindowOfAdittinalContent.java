@@ -83,14 +83,15 @@ public class TC17370VerifySortingOfCoursesInMoveWindowOfAdittinalContent {
 					initializeCourseObject();
 				    //3.select course
 					course.selectCourseThatStartingWith("Ab");
-					Thread.sleep(1000);
+					
 					record = PageFactory.initElements(driver, RecordingHelperPage.class);
 					//4.click on  test tab
 					record.clickOnAdditionContentTab();
 					Thread.sleep(2000);
 					//5.select check box
 	
-			        record.getCheckbox().click();
+			        record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+			        
 					///6.select move menu
 			   
 			        record.clickOnContentTaskThenMove();

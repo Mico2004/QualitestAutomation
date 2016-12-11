@@ -107,8 +107,6 @@ public class TC15552CopySeveralRecordings {
 		targetCourse = course.selectCourseThatStartingWith("abc");
 		System.out.println("First course clicked: " + targetCourse);
 		
-		Thread.sleep(3000);
-		
 		// 3. Get abc course recording list.
 		int number_of_recordings_in_target_course = record.getNumberOfRecordings();
 		
@@ -124,7 +122,6 @@ public class TC15552CopySeveralRecordings {
 			
 			record.checkAllCheckBox();
 			record.clickOnRecordingTaskThenDelete();
-			Thread.sleep(2000);
 			delete_menu.clickOnDeleteButton();
 			Thread.sleep(2000);
 		}
@@ -234,13 +231,10 @@ public class TC15552CopySeveralRecordings {
 		// 16. Go back to courses list.
 		record.returnToCourseListPage();
 				
-		Thread.sleep(3000);
 		
 		// 17. Select abc course.
 		targetCourse = course.selectCourseThatStartingWith("abc");
 		System.out.println("target course clicked: " + targetCourse);
-		
-		Thread.sleep(3000);
 		
 		// 18. Get first course recording list after copying.
 		List<String> after_copying_target_course_recordings_list = record.getCourseRecordingList();

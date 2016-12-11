@@ -261,8 +261,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		
 		//14. After copying is finished, statuses at both recordings will disappear.
 			record.checkStatusExistenceForMaxTTime(300);
-			record.checkStatusExistenceForMaxTTime(300);
-		
+	
 		//15. Verify that source recording is not removed from course.
 		all_recordings_list = record.getCourseRecordingList();
 		

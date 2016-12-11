@@ -30,6 +30,8 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -140,8 +142,6 @@ public class TC15538CancelTheCopying {
 		//8. Click "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(2000);
-		
 		//9. Select the destination course.
 		boolean isTargetCourseClicked = course.clickOnTargetCourseName(targetCourse);
 		if (isTargetCourseClicked) {
@@ -170,14 +170,14 @@ public class TC15538CancelTheCopying {
 		//11. Click "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(2000);
-		
 		//12. Select the source course.
 		isTargetCourseClicked = course.clickOnTargetCourseName(currentCourse);
 		if (isTargetCourseClicked) {
 			System.out.println("Target course name clicked: " + currentCourse);
+			ATUReports.add("Target course name clicked: " + currentCourse, LogAs.PASSED, null);
 		} else {
 			System.out.println("Target course name is not clicked: " + currentCourse);
+			ATUReports.add("Target course name is not clicked: " + currentCourse, LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		
 		//13. Select source recording.

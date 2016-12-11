@@ -165,7 +165,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 		Thread.sleep(1000);
 		
 		// 7. Select course.
-		course.clickOnTargetCourseName(currentCourse);
+		course.selectCourseThatStartingWith(currentCourse);
 
 		
 		// 8. Select target recording

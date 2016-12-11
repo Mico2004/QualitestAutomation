@@ -155,11 +155,10 @@ public class CopyMenu extends Page {
 		String selected_course = null;
 		Thread.sleep(1500);
 		waitForVisibility(first_course_on_the_list);
-	
 		for (int i = 0; i < course_list.size(); i++) {
 			selected_course = course_list.get(i).getText();
 			if (selected_course.equals(target_course_name)) {
-				clickElement(course_list.get(i));
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", course_list.get(i));		
 				System.out.println("course is selected from Copy manu course list: " + target_course_name);
 				ATUReports.add("course is selected from Copy manu course list: " + target_course_name, LogAs.PASSED, null);
 				Assert.assertTrue(true);

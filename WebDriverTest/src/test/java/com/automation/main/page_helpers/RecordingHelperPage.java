@@ -855,7 +855,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for (int i = 0; i < 5; i++) {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(courses_link));
-				courses_link.click();
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", courses_link);		
 				Thread.sleep(1000);
 				break;
 			} catch (Exception msg) {

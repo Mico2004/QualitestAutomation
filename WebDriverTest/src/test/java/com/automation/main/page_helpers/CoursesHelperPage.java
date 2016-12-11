@@ -135,7 +135,7 @@ public class CoursesHelperPage extends Page {
 			wait.until(ExpectedConditions.elementToBeClickable(course_list.get(i)));
 			String current_course = course_list.get(i).getText();
 			if (current_course.equals(course_name)) {
-				course_list.get(i).click();
+				clickElementWithOutIdJS(course_list.get(i));
 				System.out.println("Clicked on target course name: " + course_name);
 				ATUReports.add("Clicked on target course name: " + course_name, LogAs.PASSED, null);
 				return true;
