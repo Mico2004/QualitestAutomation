@@ -99,20 +99,19 @@ String os;
 		
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.unClickOneCheckBoxOrVerifyNotSelected(record.checkbox);
-		record.checkall.click();// make all checkboxes marked
-		Thread.sleep(2000);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkall);// make all checkboxes marked
 		
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		record.verifyAllCheckedboxSelected();
 		
 		/// driver.navigate().refresh();
-		record.checkall.click();// make all checkboxes unmarked
+		record.unselectallCheckbox();// make all checkboxes unmarked
 		
 		
 		/// record.checkall.click();// make all checkboxes unmarked
 		record.verifyAllCheckedboxNotSelected();
 		
-		record.getCheckbox().click();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenCopy();
 		copy.verifyCopyMenuTitle();
 		Thread.sleep(2000);

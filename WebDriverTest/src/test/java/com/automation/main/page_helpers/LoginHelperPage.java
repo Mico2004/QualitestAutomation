@@ -162,7 +162,7 @@ public class LoginHelperPage extends Page {
 			waitForVisibility(passfield);
 			fillUserFromProperyFile(user_name);
 			fillPass();
-			clickElement(button_login);
+			clickElementJS(button_login);
 			new WebDriverWait(driver, 30).until(ExpectedConditions.titleContains("Tegrity"));
 			ATUReports.add("Login as", PropertyManager.getProperty(user_name), "Success login", "Success login", LogAs.PASSED, null);
 		} catch (Exception e) {

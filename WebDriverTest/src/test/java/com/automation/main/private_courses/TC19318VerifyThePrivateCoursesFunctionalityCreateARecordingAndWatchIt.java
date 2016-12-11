@@ -185,7 +185,7 @@ public class TC19318VerifyThePrivateCoursesFunctionalityCreateARecordingAndWatch
 		
 		// 7. The recording playback page is opened.
 		// 8. The recording is being played.
-		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.verifyTimeBufferStatusForXSec(5);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
