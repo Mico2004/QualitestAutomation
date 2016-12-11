@@ -100,9 +100,6 @@ public class TC15552CopySeveralRecordings {
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
-		Thread.sleep(3000);
-		
-		
 		// 2. Select abc course.
 		targetCourse = course.selectCourseThatStartingWith("abc");
 		System.out.println("First course clicked: " + targetCourse);
@@ -149,10 +146,7 @@ public class TC15552CopySeveralRecordings {
 				
 		// 7. Select "Recording Tasks -> Copy" menu item.
 		record.clickOnRecordingTaskThenCopy();
-		
-		
-		Thread.sleep(3000);
-		
+			
 		// 8. Select destination course.
 		boolean is_target_course_selected = copy.selectTargetCourseFromCourseList(targetCourse);
 		if (is_target_course_selected) {
