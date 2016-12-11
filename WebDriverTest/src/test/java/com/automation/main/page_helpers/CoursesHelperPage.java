@@ -493,9 +493,8 @@ public class CoursesHelperPage extends Page {
 		Thread.sleep(2000);
 		while (!record_helper_page.check_all_checkbox.isSelected()) {
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
-			new WebDriverWait(driver, 10)
-					.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
-			clickElement(record_helper_page.check_all_checkbox);		 					
+			new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
+			record_helper_page.SelectOneCheckBoxOrVerifyAlreadySelected(record_helper_page.check_all_checkbox);		 					
 			Thread.sleep(1000);
 		}
 		if ((type_of_recordings == 0) || (type_of_recordings == 2) ||  (type_of_recordings == 3)) {

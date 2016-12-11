@@ -207,8 +207,6 @@ public class TC19307VerifyThatPrivateCourseIsAvailableForEachInstructor {
 			
 		 create_new_user_window.createNewUser(temp_instructor_user_name, temp_instructor_user_name, "abc@com.com", "111", "111");
 	
-	
-		
 		 for(String window: driver.getWindowHandles()) {
 		 	driver.switchTo().window(window);
 		 	break;
