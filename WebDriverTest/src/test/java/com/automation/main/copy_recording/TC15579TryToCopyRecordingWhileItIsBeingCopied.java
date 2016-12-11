@@ -265,7 +265,7 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 		
 		wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
 		
-		// 19. Verify that recording is copied successfully
+		// 19. Verify that recording is copied successfullyhh
 		// 19.1. Recording is displayed in "Recordings" tab
 		
 		List<String> recordings_of_first_target_course = record.getCourseRecordingList();
