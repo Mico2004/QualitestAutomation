@@ -185,7 +185,6 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		// Unselect first checkbox, and select second checkbox
 		Thread.sleep(1000);
 		record.unselectIndexCheckBox(1);
-		Thread.sleep(1000);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 		
 		// Select the "Recording Tasks -> Copy" menu item.
@@ -215,13 +214,9 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		
 		// Click the "Courses" breadcrumb.
 		record.returnToCourseListPage();
-		
-		Thread.sleep(2000);
-		
+				
 		// 2. Select the private course.
 		course.selectCourseThatStartingWith(PropertyManager.getProperty("User1"));
-		
-		Thread.sleep(2000);
 		
 		// 3. Select the recording.
 		record.selectIndexCheckBox(1);
@@ -253,13 +248,9 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		// 12. Click the "Courses" breadcrumb.
 		record.returnToCourseListPage();
 		
-		Thread.sleep(2000);
-		
 		// 13. Select the destination course (abc).
 		course.selectCourseThatStartingWith("abc");
-		
-		Thread.sleep(1000);
-		
+			
 		// 14. Verify that copied recording is displayed.
 		record.verifyThatTargetRecordingExistInRecordingList(selected_recording);
 		
@@ -281,9 +272,7 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		
 		// 20. Select a non private course (ad).
 		course.selectCourseThatStartingWith("ad");
-		
-		Thread.sleep(2000);
-		
+	
 		// 21. Select a recording.
 		record.selectIndexCheckBox(1);
 		selected_recording = record.getFirstRecordingTitle();

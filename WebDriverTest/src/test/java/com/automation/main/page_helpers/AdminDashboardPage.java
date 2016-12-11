@@ -8,6 +8,7 @@ import java.util.List;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -147,7 +148,7 @@ public class AdminDashboardPage extends Page {
 				
 					waitForVisibility(targetLink);
 					System.out.println("clickOnTargetSubmenuCourses6");
-					targetLink.click();					
+					((JavascriptExecutor) driver).executeScript("arguments[0].click();", targetLink);								
 					System.out.println("clickOnTargetSubmenuCourses7");
 					System.out.println("Click on target submenu of Courses: "+linkText  );
 					ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
