@@ -166,7 +166,7 @@ public class TC19318VerifyThePrivateCoursesFunctionalityCreateARecordingAndWatch
 		// Click the "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		
-		// Message box is closed.
+		// Message box is closed..
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
 		// When the "Copy" process is finished, verify that recording is displayed in source course.
