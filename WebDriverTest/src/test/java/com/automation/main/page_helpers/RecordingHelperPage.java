@@ -5406,6 +5406,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
+	
+	
+	
 
 	public void verifyTagApperedUderTheSelectRecordings() {
 		try {
@@ -5418,6 +5421,25 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		 	
 			ATUReports.add("Verify that tags appered on the first recording.","Success.","Success.", LogAs.PASSED, null);
 			System.out.println("Verify that tags appered on the first recording.");	
+	    
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
+	
+	// verify tag is display in the select recording
+	public void verifyTagApperedUderTheSelectRecording(String tag) {
+		try {
+			for(int i = 0 ; i< recording_tags.size() ; i++){
+				if(recording_tags.get(i).getText().equals(tag)){
+					ATUReports.add("Verify that the tag: " + tag + " appered on the first recording.","Success.", "Success.", LogAs.PASSED,null) ;
+					System.out.println("Verify that the tag: " + tag + " appered on the first recording.");
+					return;
+			}
+		}	
+			ATUReports.add("Verify that the tag: " + tag + " isn't appered on the first recording.","Success.","Success.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE)) ;
+			System.out.println("Verify that the tag: " + tag + "isn't appered on the first recording.");	
 	    
 		}catch(Exception e){
 			e.getMessage();
