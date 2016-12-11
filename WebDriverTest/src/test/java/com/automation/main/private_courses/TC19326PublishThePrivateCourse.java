@@ -136,7 +136,8 @@ public class TC19326PublishThePrivateCourse {
 			
 		// 1. Login as ADMIN 
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(3000);
+		
+		admin_dashboard_page.waitForPageToLoad();
 		
 		//1.1 pretest make sure that the course will be public
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		

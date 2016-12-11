@@ -152,7 +152,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 		// 3. Create a new user, don't enroll him to any courses.
 		tegrity.loginAdmin("Admin");	
 		 
-		 Thread.sleep(2000);
+		admin_dashboard_page.waitForPageToLoad();
 		 
 //		 admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
 //		 

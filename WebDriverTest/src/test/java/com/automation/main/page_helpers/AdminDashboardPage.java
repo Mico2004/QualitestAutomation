@@ -217,15 +217,16 @@ public class AdminDashboardPage extends Page {
 				
 					waitForVisibility(targetLink);
 					System.out.println("clickOnTaretSubmenuUsers6");
-					targetLink.click();								
+					targetLink.click();
+					
 					System.out.println("clickOnTargetSubmenuUsers: "+linkText  );
 					ATUReports.add("Click on target submenu of Users:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					return;
 				} catch (Exception msg) {
 					System.out.println("Not click on target submenu of Users: " + targetLink.getText().toString());
-					System.out.println("ERROR msg: " + msg.getMessage());
 					ATUReports.add("Click on target submenu of Users:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					System.out.println("ERROR msg: " + msg.getMessage());				
 					Assert.assertTrue(false);
 					return;
 		
