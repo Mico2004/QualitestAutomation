@@ -166,7 +166,7 @@ public class TC19318VerifyThePrivateCoursesFunctionalityCreateARecordingAndWatch
 		// Click the "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		
-		// Message box is closed.
+		// Message box is closed..
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
 		// When the "Copy" process is finished, verify that recording is displayed in source course.
@@ -185,7 +185,7 @@ public class TC19318VerifyThePrivateCoursesFunctionalityCreateARecordingAndWatch
 		
 		// 7. The recording playback page is opened.
 		// 8. The recording is being played.
-		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.verifyTimeBufferStatusForXSec(5);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

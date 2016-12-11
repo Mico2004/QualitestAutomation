@@ -481,7 +481,7 @@ public class RecordingHelperPage extends Page {
 		try{		
 			System.out.println("returnToCourseListPage1");		
 			wait.until(ExpectedConditions.visibilityOf(courses_link));		
-			courses_link.click();			
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", courses_link);						
 			Thread.sleep(2000);		
 			System.out.println("returnToCourseListPage2");	
 			ATUReports.add("Clicked on Courses link.", "Go back to courses page",		
@@ -496,7 +496,7 @@ public class RecordingHelperPage extends Page {
 			try{
 				driver.navigate().refresh();		
 			wait.until(ExpectedConditions.visibilityOf(courses_link));		
-			courses_link.click();	
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", courses_link);	
 			}catch(Exception e){		
 				System.out.println("Not clicked on Courses link." + msg.getMessage() );		
 				ATUReports.add("Not clicked on Courses link.", "Courses page heading",		
