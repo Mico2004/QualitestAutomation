@@ -1960,10 +1960,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyRecordingMenuColor(WebElement el) throws InterruptedException {
 
 		String grey_color = "rgba(128, 128, 128, 1)";
-		moveToElementAndClick(recording_tasks_button, driver);
-
 		waitForVisibility(recording_tasks_button);
-		mouseHoverJScript(recording_tasks_button);
+		moveToElementAndPerform(recording_tasks_button, driver);
+
 		//moveToElementAndClick(recording_tasks_button, driver);
 		//for (int i = 0; i < 5; i++) {
 		//	recording_tasks_button.sendKeys(Keys.TAB);// solution

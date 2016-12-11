@@ -91,7 +91,6 @@ String os;
 		
 		//course.selectCourse(record);
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(2000);
 		
 		//verify that the color of the menu is grey
 		record.verifyRecordingMenuColor(record.copy_button);
