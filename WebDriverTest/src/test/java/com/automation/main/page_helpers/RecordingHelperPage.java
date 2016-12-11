@@ -5429,6 +5429,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	
 	// verify tag is display in the select recording
 	public void verifyTagApperedUderTheSelectRecording(String tag) {
+		
 		try {
 			for(int i = 0 ; i< recording_tags.size() ; i++){
 				if(recording_tags.get(i).getText().equals(tag)){

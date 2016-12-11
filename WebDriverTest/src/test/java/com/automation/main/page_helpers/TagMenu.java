@@ -583,5 +583,29 @@ public class TagMenu extends Page {
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 	}
+
+	public void verifyThatTagIsNotDisplayedInTheRecordingsTagsList(String validNewName) {
+		try{
+			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(".//*[@id='tagRecordingWindow']/form/div[1]/div[2]/div[3]/button[3]")));
+			List<WebElement> rows = tableOfTags.findElements(By.tagName("tr"));		
+			int rowNumber = rows.size();	    
+		    for(int i = 0 ; i< rowNumber ; i++) {
+		    	WebElement currentRaw = rows.get(i);
+		    	List<WebElement> cols = currentRaw.findElements(By.tagName("td"));
+		    	String currentName = cols.get(1).getText();
+		    	if(currentName.equals(validNewName)){
+		    		ATUReports.add("The instructor:" +validNewName +" is found on the list." ,"Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    			System.out.println("The instructor:" +validNewName +" is found on the list.");
+	    			return;
+		    	}
+			}    
+		    ATUReports.add("all the instuctors are found on the list.","Success.", "Success.", LogAs.PASSED, null);
+			System.out.println("all the instuctors are found on the list.");
+		    	    
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}	
+	}
 	
 }
