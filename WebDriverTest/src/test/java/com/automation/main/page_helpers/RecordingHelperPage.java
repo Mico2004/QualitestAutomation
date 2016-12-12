@@ -5275,7 +5275,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		// enter to the tegrity program
 		Robot robot = new Robot();
-		robot.delay(2000);
+		robot.delay(3000);
 		robot.keyPress(KeyEvent.VK_TAB);	
 		robot.keyRelease(KeyEvent.VK_TAB);
 		robot.keyPress(KeyEvent.VK_TAB);	
