@@ -145,7 +145,6 @@ public class TC19326PublishThePrivateCourse {
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
 		Thread.sleep(3000);	
 		
-		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
 		admin_course_settings_page.clickOnSaveButton();
 		Thread.sleep(2000);	

@@ -880,8 +880,10 @@ public class CoursesHelperPage extends Page {
 		String university_name = login_url.split("/")[2].substring(0, login_url.split("/")[2].length() - 12);
 		String active_course_api = "https://" + university_name + ".tegrity.com/api/courses/active";
 		if (driver instanceof InternetExplorerDriver) {
-			driver.close();
+			driver.quit();
+			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 			driver = new ChromeDriver();
+			driver.manage().window().maximize();
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 			if (number == 0) {

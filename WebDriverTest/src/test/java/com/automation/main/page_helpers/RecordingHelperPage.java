@@ -99,6 +99,8 @@ public class RecordingHelperPage extends Page {
 	public List<WebElement> checkboxlist;// @FindBy(css="//input[@type='checkbox']")// List<WebElement> checkboxlist;
 	@FindBy(xpath = "//*[@id='Recording1']/strong")
 	public WebElement first_recording_title;
+	@FindBy(xpath = "//*[@id='Recording2']/strong")
+	public WebElement second_recording_title;
 	@FindBy(xpath = "//*[@id='Recording1']/strong")
 	WebElement first_course_title;
 	@FindBy(xpath = "//*[@id='Recording2']/strong")
@@ -512,7 +514,7 @@ public class RecordingHelperPage extends Page {
 	public void clickOnRecordingTitleInIndex(int index) throws InterruptedException {
 		System.out.println("Click on title in index: " + index);
 		WebElement element=first_recording;
-		String id="Recording" + Integer.toString(index);
+		String id="//*[@id='Recording" + Integer.toString(index) + "']/strong";
 		try {
 			waitForVisibility(element);
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
@@ -546,12 +548,22 @@ public class RecordingHelperPage extends Page {
 		try{
 			waitForVisibility(first_recording_title);
 		}catch (Exception e){
-			ATUReports.add("Timeout for first recording", e.getMessage(),
-					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
+			ATUReports.add("Timeout for first recording", e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
 			Assert.assertTrue(false);
 			return null;
 		}
 		return first_recording_title.getText();
+	}
+	
+	public String getSecondRecordingTitle() {
+		try{
+			waitForVisibility(second_recording_title);
+		}catch (Exception e){
+			ATUReports.add("Timeout for second recording", e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
+			Assert.assertTrue(false);
+			return null;
+		}
+		return second_recording_title.getText();
 	}
 	
 	public String getFirstRecordingTitleTest() {

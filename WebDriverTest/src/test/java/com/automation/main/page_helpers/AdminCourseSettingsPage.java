@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -63,7 +64,7 @@ public class AdminCourseSettingsPage extends Page {
 	// This function clicks on save button
 	public void clickOnSaveButton() {
 		try {
-			save_button.click();
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", save_button);			
 			System.out.println("Clicked on save button.");
 			ATUReports.add("Clicked on save button.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);

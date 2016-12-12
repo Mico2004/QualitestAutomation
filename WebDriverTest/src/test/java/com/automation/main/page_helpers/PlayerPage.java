@@ -891,7 +891,7 @@ public class PlayerPage extends Page {
 			ATUReports.add("correct Courses ", "contains", "contains", "contains", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			try {
-				breadcrumbs_box_elements_list.get(0).click();
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", breadcrumbs_box_elements_list.get(0));								
 				waitForVisibility(course.first_course_button);
 				System.out.println("verify course page");
 				ATUReports.add("verify course page", "breadcrumbs", "contains", "contains", LogAs.PASSED, null);
