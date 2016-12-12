@@ -152,9 +152,6 @@ public class TC15585MoveSeveralRecordings {
 		// 7. Select "Recording Tasks -> Move" menu item.
 		record.clickOnRecordingTaskThenMove();
 		
-		
-		Thread.sleep(2000);
-		
 		// 8. Select destination course.
 		boolean is_target_course_selected = copy.selectTargetCourseFromCourseList(targetCourse);
 		if (is_target_course_selected) {
@@ -162,15 +159,10 @@ public class TC15585MoveSeveralRecordings {
 		} else {
 			System.out.println("Target course not selected: " + targetCourse);
 		}
-		
-		Thread.sleep(2000);
-		
-		
+			
 		// 9. Click "Move Recording(s)" button.
 		move_window.clickOnMoveRecordings();
-		
-		Thread.sleep(3000);
-				
+						
 		// 10. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecordings();
 		

@@ -110,8 +110,8 @@ public class TC15582MoveOneRecording {
 		
 		// 4.select first course
 		String first_course = course.first_course_button.getText();
-		course.selectFirstCourse(record);
-		
+		course.selectCourseThatStartingWith(first_course);
+	
 		// 5.verify check box is selected and then load move menu
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();

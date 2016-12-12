@@ -5456,8 +5456,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					return;
 			}
 		}	
-			ATUReports.add("Verify that the tag: " + tag + " isn't appered on the first recording.","Success.","Success.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE)) ;
-			System.out.println("Verify that the tag: " + tag + "isn't appered on the first recording.");	
+			ATUReports.add("Not Verify that the tag: " + tag + " appered on the first recording.","Success.","Success.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE)) ;
+			System.out.println("Not Verify that the tag: " + tag + " appered on the first recording.");	
 	    
 		}catch(Exception e){
 			e.getMessage();
