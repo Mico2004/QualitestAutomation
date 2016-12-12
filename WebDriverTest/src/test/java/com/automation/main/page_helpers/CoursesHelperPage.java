@@ -856,9 +856,10 @@ public class CoursesHelperPage extends Page {
 	// This function clicks on public courses tab
 	public void clickOnPublicCoursesTab() {
 		try {
+			String id = "PublicCourses";
 			waitForVisibility(public_courses_tab);
 			String initialCourseText=courseFrame.getText();
-			public_courses_tab.click();						
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");					
 			waitForContentOfTabToLoad(initialCourseText,courseFrame);
 		//	fluentWaitInvisibility(first_course_button, 5, 100);
 			//fluentWaitVisibility(first_course_button, 10, 500);

@@ -55,9 +55,9 @@ public class LoginHelperPage extends Page {
 	public LoginHelperPage(WebDriver driver) throws Exception {
 		super(driver);
 		setPageTitle("Tegrity Lecture Capture");	
-		setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
+		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
-		//setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
+		setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 
 
@@ -184,7 +184,7 @@ public class LoginHelperPage extends Page {
 			waitForVisibility(passfield);
 			setUserText(user_name);
 			fillPass();
-			clickElement(button_login);
+			clickElementJS(button_login);
 			try {
 				new WebDriverWait(driver, 30)
 						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));

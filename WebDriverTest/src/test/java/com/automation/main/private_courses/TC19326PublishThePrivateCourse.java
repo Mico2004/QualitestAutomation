@@ -194,8 +194,6 @@ public class TC19326PublishThePrivateCourse {
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
-		Thread.sleep(1000);
-		
 		// 11. Click the "Public Courses" tab.
 		course.clickOnPublicCoursesTab();
 		
