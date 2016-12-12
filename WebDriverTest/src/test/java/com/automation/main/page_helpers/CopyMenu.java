@@ -47,6 +47,8 @@ public class CopyMenu extends Page {
 	public WebElement copy_title;
 	@FindBy(id = "InfoText")
 	public WebElement info_text;
+	@FindBy(id ="ModalDialogHeader")
+	public WebElement copy_title2;
 	@FindBy(id = "courseSearchText")
 	public WebElement search_box;
 	@FindBy(name = "searchCourse")
@@ -846,6 +848,26 @@ public class CopyMenu extends Page {
 				ATUReports.add("Copy menu.", "Close.", "Close.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
+		}
+
+		/**
+		 * this function waits for tag window to display
+		 */
+		public void waitForPageToLoad() {
+			
+			try{
+				wait.until(ExpectedConditions.visibilityOf(copy_title));
+				wait.until(ExpectedConditions.visibilityOf(copy_title2));
+				wait.until(ExpectedConditions.visibilityOf(info_text));
+				wait.until(ExpectedConditions.visibilityOf(listCourses));
+				wait.until(ExpectedConditions.visibilityOf(cancel_button));
+				wait.until(ExpectedConditions.visibilityOf(copy_button));
+				
+				}catch(Exception e){
+					e.getMessage();
+					ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}
+			
 		}
 		
 	

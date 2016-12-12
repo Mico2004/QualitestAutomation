@@ -244,10 +244,10 @@ public class TC24764CopyAStudentRecordingToACourseWhereRecordingWithSameTitleExi
 		record.clickOnRecordingTitleInIndex(i);
 		
 		// 20. Click on any chapter.
-		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
+		record.clickOnTheFirstCaptherWithOutTheExpand();
 		
 		// 21. "Tegrity Player" is displayed - Recording is playing correctly.
-		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.verifyTimeBufferStatusForXSec(5);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

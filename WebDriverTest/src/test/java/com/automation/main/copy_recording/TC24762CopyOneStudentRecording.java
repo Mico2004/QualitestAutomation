@@ -124,12 +124,10 @@ public class TC24762CopyOneStudentRecording {
 			//4.1  Click the 'Student Recording' tab
 	    	record.clickOnStudentRecordingsTab();
 			record.waitForVisibility(record.first_recording);
-			Thread.sleep(3000);
 		
 			//5.take recorder namme for later 
 			String original_recorder_name = driver.findElement(By.id("RecordedBy1")).getText();/// take recorder namme for later 
 			// 6.verify check box is selected and then load copy menu
-			Thread.sleep(1000);
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
         	record.verifyCopyMenu();// verify copy menu
        
@@ -138,7 +136,6 @@ public class TC24762CopyOneStudentRecording {
 			Thread.sleep(2000);
 			
 			record.returnToCourseListPage();
-			Thread.sleep(2000);
 			//8. Verify Only courses where this USER signed as INSTRUCTOR are displayed in "Course List"
 
 			course.first_course_button.click();
@@ -189,7 +186,6 @@ public class TC24762CopyOneStudentRecording {
 			
 			//11.select target course
 			copy.selectTargetCourseFromCourseList(copy.course_list.get(1).getText());
-			Thread.sleep(2000);
 			
 			//12.verify background color of copy menu
 			System.out.println(copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]"))));
@@ -210,10 +206,7 @@ public class TC24762CopyOneStudentRecording {
 
 			//16.retuen to course page
 			record.returnToCourseListPage();/// return to course list page
-			Thread.sleep(2000);
-
-
-
+	
 			//17.click on course and go to recording page
 			course.course_list.get(1).click();
 			record.waitForVisibility(record.student_recordings_tab);
@@ -221,7 +214,6 @@ public class TC24762CopyOneStudentRecording {
 			///click on student tab
 			record.clickOnStudentRecordingsTab();
 			record.waitForVisibility(record.first_recording);
-			Thread.sleep(3000);
 			String first_recording = driver.findElement(By.id("Recording1")).getText();
 			
 			
@@ -239,8 +231,6 @@ public class TC24762CopyOneStudentRecording {
 			Thread.sleep(3000);
 
 			record.verifyFirstExpandableRecording();
-			Thread.sleep(3000);
-
 			record.clickOnTheFirstCaptherWithOutTheExpand();
 			//20.dispaly recording
 			player_page.verifyTimeBufferStatusForXSec(15);// check source display
@@ -253,16 +243,13 @@ public class TC24762CopyOneStudentRecording {
 			}
 			//21.Click "Courses" link at breadcrumbs
 			player_page.returnToCoursesPage(course);
-			Thread.sleep(3000);
-
+		
 			//click on courses
 			//course.course_list.get(1).click();
-			course.selectCourseByName(course_name);
+			course.selectCourseThatStartingWith(course_name);
 
-			Thread.sleep(3000);
             record.waitForVisibility(record.student_recordings_tab);
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(3000);
             //22.verify date,duration,recorder name as original
         	
 			//fill recording list with data :duration,date,names,recorder names
@@ -306,13 +293,12 @@ public class TC24762CopyOneStudentRecording {
 
 			//initialize course object
 			initializeCourseObject();
-			Thread.sleep(2000);
+			
 			
 			//27.Select destination course
 			course.selectCourseByName(destination_course_name);
 			record.waitForVisibility(record.student_recordings_tab);
-			record.student_recordings_tab.click();
-			Thread.sleep(3000);
+			record.clickOnStudentRecordingsTab();
 			
 			//28.select recording by name
 			record.convertRecordingsListToNames();
@@ -322,14 +308,12 @@ public class TC24762CopyOneStudentRecording {
 			Thread.sleep(3000);
 			String target_recording = record.getFirstRecordingTitle();
 			record.clickOnTargetRecordingAndOpenItsPlayback(target_recording);
-			Thread.sleep(15000);
 			
 			///30.Click any chapter:verify plays correctly 
-			player_page.verifyTimeBufferStatusForXSec(10);// check source display
+			player_page.verifyTimeBufferStatusForXSec(5);// check source display
 
 			System.out.println("Done.");
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
-			
 			
 		}
 
