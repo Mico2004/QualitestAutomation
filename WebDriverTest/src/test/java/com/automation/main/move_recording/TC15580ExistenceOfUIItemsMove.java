@@ -107,19 +107,18 @@ public class TC15580ExistenceOfUIItemsMove {
 		record.unClickOneCheckBoxOrVerifyNotSelected(record.checkbox);
 	
 		//7.click all check box
-		record.checkall.click();// make all checkboxes marked
-		Thread.sleep(2000);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkall);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		record.verifyAllCheckedboxSelected();
 		
 		//8.verify all check box not selected
-		record.checkall.click();// make all checkboxes unmarked
+		record.unselectallCheckbox();
 		record.verifyAllCheckedboxNotSelected();
 		
 		//9.to move menu
-		record.getCheckbox().click();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
-		Thread.sleep(2000);
+
 		//10.verify move title
 		move_Window.verifyMoveMenuTitle();
 	    Thread.sleep(2000);
