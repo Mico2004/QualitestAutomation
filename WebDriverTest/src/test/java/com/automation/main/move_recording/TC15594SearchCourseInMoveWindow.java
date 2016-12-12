@@ -105,21 +105,15 @@ public class TC15594SearchCourseInMoveWindow {
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
-		
-		Thread.sleep(1000);
-		
+				
 		// 2. Select course.
 		currentCourse = course.selectCourseThatStartingWith("Ab");
 		System.out.println("Current course: " + currentCourse);
 		//course.selectCourse(record);
 		
-		Thread.sleep(1000);
-		
 		// 3. Select recording.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		
-		Thread.sleep(1000);
-		
+			
 		// 4. Select "Recording Tasks -> Move"
 		record.toMoveMenu();
 		
@@ -147,7 +141,7 @@ public class TC15594SearchCourseInMoveWindow {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Course list is changed");
-			ATUReports.add("Course list", "Course list is not changed", "Course list is changed", LogAs.FAILED, null);
+			ATUReports.add("Course list", "Course list is not changed", "Course list is changed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -178,7 +172,7 @@ public class TC15594SearchCourseInMoveWindow {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Course list is not empty");
-			ATUReports.add("Course list", "Course list is empty", "Course list is not empty", LogAs.FAILED, null);
+			ATUReports.add("Course list", "Course list is empty", "Course list is not empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -210,12 +204,10 @@ public class TC15594SearchCourseInMoveWindow {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Course list is not empty");
-			ATUReports.add("Course list", "Course list is empty", "Course list is not empty", LogAs.FAILED, null);
+			ATUReports.add("Course list", "Course list is empty", "Course list is not empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		
-		Thread.sleep(1000);
-		
+
 		// 15. Enter specific course's title in "Search" field.
 		String specific_course_title = course_list_after_clicking_on_search_button.get(1);
 		copy.deleteValueInSearchInputBox();
@@ -242,12 +234,10 @@ public class TC15594SearchCourseInMoveWindow {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Specific cours titile is not displayed");
-			ATUReports.add("Course list", "Specific cours titile is displayed", "Specific cours titile is not displayed", LogAs.FAILED, null);
+			ATUReports.add("Course list", "Specific cours titile is displayed", "Specific cours titile is not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		
-		Thread.sleep(1000);
-		
+			
 		// 19. Enter text which is part of several courses titles in "Search" field.
 		String course_name_that_part_of_serveral_courses = "Name";
 		copy.deleteValueInSearchInputBox();
@@ -284,11 +274,11 @@ public class TC15594SearchCourseInMoveWindow {
 		} else {
 			if ((current_course_list.size() <= 1)) {
 				System.out.println("Error - number of common  courses which displayed with same name is 1 or less");
-				ATUReports.add("Course list", "Only courses with common text in titles are displayed in course list", "Error - number of common  courses which displayed with same name is 1 or less", LogAs.FAILED, null);
+				ATUReports.add("Course list", "Only courses with common text in titles are displayed in course list", "Error - number of common  courses which displayed with same name is 1 or less", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			} else {
 				System.out.println("Not only courses with common text in titles are displayed in course list");
-				ATUReports.add("Course list", "Only courses with common text in titles are displayed in course list", "Not only courses with common text in titles are displayed in course list", LogAs.FAILED, null);
+				ATUReports.add("Course list", "Only courses with common text in titles are displayed in course list", "Not only courses with common text in titles are displayed in course list", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 			

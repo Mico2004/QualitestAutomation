@@ -169,7 +169,7 @@ public class CoursesHelperPage extends Page {
 		try {
 			waitForVisibility(first_course_button);
 			course_name = first_course_button.getText();
-			clickElement(first_course_button);
+			clickElementJS(first_course_button);
 			Thread.sleep(3000);
 			ATUReports.add("Select course", "Clicked on first course", "Course Details page is displayed", LogAs.PASSED,
 					null);
