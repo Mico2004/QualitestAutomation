@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -66,7 +67,8 @@ public class MoveWindow extends Page {
 	public void clickOnMoveRecordings() throws InterruptedException {
 		try {
 			waitForVisibility(move_button);
-			move_button.click();
+			String id = "MoveButton";
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
 			System.out.println("Clicked on move recordings button.");
 			ATUReports.add("Clicked on move recordings button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -104,7 +106,8 @@ public class MoveWindow extends Page {
 	public void clickOnCancelButton() throws InterruptedException {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(cancel_button));
-			cancel_button.click();
+			String id = "CancelButton";
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
 			System.out.println("Clicked on cancel button.");
 			ATUReports.add("Clicked on cancel button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);

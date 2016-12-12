@@ -311,7 +311,6 @@ public class RecordingHelperPage extends Page {
 
 	public void deleteAllRecordings(DeleteMenu delete_menu) throws InterruptedException {
 		try {
-			Thread.sleep(1000);
 			System.out.println("deleteAllRecordings1");
 			checkStatusExistenceForMaxTTime(300);
 			wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));

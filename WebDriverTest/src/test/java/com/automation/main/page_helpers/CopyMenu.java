@@ -670,9 +670,7 @@ public class CopyMenu extends Page {
 	public boolean selectTargetCourseFromCourseListThatStartWith(String name_starting_with) throws InterruptedException {
 
 					waitForVisibility(first_course_on_the_list);
-
 					String selected_course = null;
-
 					for (int i = 0; i < course_list.size(); i++) {
 						selected_course = course_list.get(i).getText();
 						if (selected_course.startsWith(name_starting_with)) {

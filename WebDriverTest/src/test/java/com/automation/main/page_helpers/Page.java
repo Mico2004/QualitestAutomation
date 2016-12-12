@@ -367,7 +367,7 @@ public class Page {
 			Assert.assertTrue(false);
 		}
 	}
-
+	
 	public Action moveToElement(WebElement element, WebDriver driver) throws NoSuchElementException {
 		try {
 			Actions builder = new Actions(driver);
@@ -415,6 +415,20 @@ public class Page {
 		driver.navigate().refresh();
 	}
 
+	public void getTheElementAndClick(String id){
+		try {
+			WebElement element = driver.findElement(By.id(id));
+			String text = element.getText();
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
+			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);		
+			System.out.println("Clicked on " + text + " element");
+		} catch (Exception e) {
+			System.out.println("The element not found");
+			ATUReports.add("The element not found" ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+	
+	
 	public String getBackGroundColor(WebElement element)// get background by an
 														// element
 	{
