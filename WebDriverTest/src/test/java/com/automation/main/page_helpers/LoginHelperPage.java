@@ -184,7 +184,7 @@ public class LoginHelperPage extends Page {
 			waitForVisibility(passfield);
 			setUserText(user_name);
 			fillPass();
-			clickElement(button_login);
+			clickElementJS(button_login);
 			try {
 				new WebDriverWait(driver, 30)
 						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
