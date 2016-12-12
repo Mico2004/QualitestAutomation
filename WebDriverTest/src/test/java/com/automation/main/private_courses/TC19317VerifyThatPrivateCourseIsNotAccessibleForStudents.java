@@ -175,7 +175,7 @@ public class TC19317VerifyThatPrivateCourseIsNotAccessibleForStudents {
 				}
 		}
 		 
-		 wait.until(ExpectedConditions.visibilityOf(mange_adhoc_users_page.new_user_button));
+		 mange_adhoc_users_page.waitForVisibility(mange_adhoc_users_page.new_user_button);
 		 
 		 mange_adhoc_users_page.clickOnNewUser();
 			

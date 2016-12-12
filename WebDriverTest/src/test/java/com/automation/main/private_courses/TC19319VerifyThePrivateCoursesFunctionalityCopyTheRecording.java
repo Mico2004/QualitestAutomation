@@ -261,7 +261,7 @@ public class TC19319VerifyThePrivateCoursesFunctionalityCopyTheRecording {
 		
 		// 17. The recording playback page is displayed.
 		// 18. The recording is being played.
-		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.verifyTimeBufferStatusForXSec(5);
 		
 		//19. Click on the 'Courses' breadcrumb
 		player_page.returnToCoursesPage(course);
