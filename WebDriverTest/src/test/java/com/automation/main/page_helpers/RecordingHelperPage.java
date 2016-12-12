@@ -5273,6 +5273,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		path = System.getProperty("user.dir") + path;
 		Actions action = new Actions(driver);
 		
+//		Action tab= action.sendKeys(Keys.TAB).build();
+//		tab.perform();
+//	    tab= action.sendKeys(Keys.TAB).build();
+//		tab.perform();
+//        Action releaseEnter= action.sendKeys(Keys.ENTER) .build();
+//        releaseEnter.perform();
+		
 		// enter to the tegrity program
 		Robot robot = new Robot();
 		robot.delay(3000);
