@@ -1515,7 +1515,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}catch(Exception e)
 		{
 			System.out.println("There are not recordings in the course tab");
-			ATUReports.add("Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab",LogAs.FAILED,null);
+			ATUReports.add("Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}			
 		WebElement recording=null;		
@@ -1550,7 +1550,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}catch(Exception e)
 		{
 			System.out.println("There are not recordings in the course tab");
-			ATUReports.add("Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab",LogAs.FAILED,null);
+			ATUReports.add("Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}			
 		WebElement recording=null;		
@@ -2857,13 +2857,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		boolean is_exist = isTargetRecordingExist(target_recording);
 		
 		if (is_exist) {
-			System.out.println("Target recording exist in recording list.");
+			System.out.println("Target recording:" + target_recording +" exist in recording list.");
 			ATUReports.add("Recording list.", "Target recording exist.", "Target recording exist.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
-			System.out.println("Target recording not exist in recording list.");
-			ATUReports.add("Target recording not exist in recording list.", "Target recording exist.", "Target recording not exist.", LogAs.FAILED,
-					null);
+			System.out.println("Target recording:" + target_recording +" not exist in recording list.");
+			ATUReports.add("Target recording:" + target_recording +" not exist in recording list.", "Target recording exist.", "Target recording not exist.",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

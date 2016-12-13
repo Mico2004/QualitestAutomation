@@ -332,7 +332,7 @@ public class TC7990ValidateTagMenuItemUI {
 		tag_window.clickElement(tag_window.cancel_button);
 		
 		//71.The "Tag Dialog" window is disappeared.
-		tag_window.isTagWindowClosed();
+		tag_window.verifyTagWindowClose();
 		
 		//72.Check at least one tagged recordings and at least one not tagged recordings checkboxes.
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);

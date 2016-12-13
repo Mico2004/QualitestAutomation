@@ -139,8 +139,7 @@ public class TagMenu extends Page {
 	// This function verify that tag window is close
 		public void verifyTagWindowClose() throws InterruptedException {
 			
-			Thread.sleep(500);
-			
+			Thread.sleep(500);		
 			boolean is_closed = isTagWindowClosed();			
 			if(is_closed) {
 				System.out.println("Tag window is close.");
