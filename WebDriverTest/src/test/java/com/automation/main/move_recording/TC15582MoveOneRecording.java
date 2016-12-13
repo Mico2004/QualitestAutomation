@@ -203,7 +203,7 @@ public class TC15582MoveOneRecording {
 		// 14.Click "Courses" link at breadcrumbs
 		record.returnToCourseListPage();
 		// 15.Select destination course
-		course.selectSecondCourse(record);
+		course.selectCourseByName(destination_course_name);
 		/// 16.moved recording is displayed
 		record.isRecordingExist(source_recording, true);
 		// 17.Date of recording is displayed correctly+first sort by date

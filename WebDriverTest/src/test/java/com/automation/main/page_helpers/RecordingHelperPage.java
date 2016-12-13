@@ -834,26 +834,26 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		recording_list_names = convertRecordingsListToNames();
 		if (recording_list_names.contains(recording_name)) {
 			if (need_to_be_exists == true) {
-				System.out.println("Recording is exist.");
-				ATUReports.add("Recording is exist.", LogAs.PASSED, null);
+				System.out.println("The Recording:" + recording_name +" is exist.");
+				ATUReports.add("The Recording:" + recording_name +" is exist.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return true;
 			} else {
-				System.out.println("Recording is exist.");
-				ATUReports.add("Recording is exist.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("The Recording:" + recording_name +" is not exist.");
+				ATUReports.add("The Recording:" + recording_name +" is not exist.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 				return false;
 			}
 
 		}
 		if (need_to_be_exists == true) {
-			System.out.println("Recording is not exist.");
-			ATUReports.add("Recording is not exist.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println("The Recording:" + recording_name +" is not exist.");
+			ATUReports.add("The Recording:" + recording_name +" is not exist.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return false;
 		} else {
-			System.out.println("Recording is not exist.");
-			ATUReports.add("Recording is not exist.", LogAs.PASSED, null);
+			System.out.println("The Recording:" + recording_name +" is exist.");
+			ATUReports.add("The Recording:" + recording_name +" is exist.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return true;
 		}
