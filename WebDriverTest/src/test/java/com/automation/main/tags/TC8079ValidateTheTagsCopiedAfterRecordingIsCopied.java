@@ -149,7 +149,7 @@ public class TC8079ValidateTheTagsCopiedAfterRecordingIsCopied {
 				}else if(number_of_recording ==1) {
 					tag_window.createNewTag(SecondVaildName);
 					//10. make the tag private
-					tag_window.clickElement(tag_window.edit_tag_button_list.get(0));
+					tag_window.clickElementWithOutIdJS(tag_window.edit_tag_button_list.get(0));
 					record.SelectOneCheckBoxOrVerifyAlreadySelected(tag_window.privte_checkbox);
 				}
 				//11.Click on the "Apply" button

@@ -122,8 +122,9 @@ public class Page {
 	
 	public void clickElementJS(WebElement element) // clicking element
 	{
-		String text = element.getText();
+		String text = null;
 		try {
+			text = element.getText();
 			String id = element.getAttribute("id");
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
 			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
@@ -139,7 +140,7 @@ public class Page {
 						null);
 			} catch (Exception e1) {
 				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked failed:"+msg.getMessage(), LogAs.WARNING,
-						null);
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				
 			}
 		}
@@ -165,7 +166,7 @@ public class Page {
 						null);
 			} catch (Exception e1) {
 				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked failed:"+msg.getMessage(), LogAs.WARNING,
-						null);
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				
 			}
 		}
