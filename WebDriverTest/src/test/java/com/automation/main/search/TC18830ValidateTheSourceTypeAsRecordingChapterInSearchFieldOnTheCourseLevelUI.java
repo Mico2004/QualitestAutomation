@@ -126,7 +126,6 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 			
 		// 3. Open some course.
 		current_course = course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(1000);
 		System.out.println("Current course: " + current_course);
 		//course.selectCourse(record);
 		
@@ -148,12 +147,12 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		Thread.sleep(3000);
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);
-		Thread.sleep(1000);
+	
 		//String first_chapter_title = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 		//String first_chapter_title =  driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a/div[2]/p[2]")).getText();	
 		
 		record.clickOnRecordingTaskThenEditRecording();
-		Thread.sleep(2000);
+		
 		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
@@ -268,11 +267,8 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		// 17. Change the name of the first chapter from the recording that we mentioned in the preconditions.
 		record.waitForThePageToLoad();
 		record.selectIndexCheckBox(recordNumber);
-		Thread.sleep(500);
-		
 		
 		record.clickOnRecordingTaskThenEditRecording();
-		Thread.sleep(2000);
 		
 		date = new Date();
 		String new_chapter_name = "newname" + sdf.format(date);	

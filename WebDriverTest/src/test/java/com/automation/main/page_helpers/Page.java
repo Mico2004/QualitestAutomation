@@ -77,7 +77,6 @@ public class Page {
 	{
 		String text = element.getText();
 		try {
-
 			wait.until(ExpectedConditions.visibilityOf(element));
 			element.click();
 			System.out.println("Clicked on " + element.getText() + " element");
@@ -150,7 +149,6 @@ public class Page {
 	
 	public void clickElementWithOutIdJS(WebElement element) // clicking element
 	{
-		waitForVisibility(element);
 		String text = element.getText();
 		try {
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);		
