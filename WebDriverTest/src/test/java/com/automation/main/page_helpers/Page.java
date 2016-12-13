@@ -78,7 +78,7 @@ public class Page {
 		String text = element.getText();
 		try {
 
-			wait.until(ExpectedConditions.elementToBeClickable(element));
+			wait.until(ExpectedConditions.visibilityOf(element));
 			element.click();
 			System.out.println("Clicked on " + element.getText() + " element");
 			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
@@ -149,6 +149,7 @@ public class Page {
 	
 	public void clickElementWithOutIdJS(WebElement element) // clicking element
 	{
+		waitForVisibility(element);
 		String text = element.getText();
 		try {
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);		

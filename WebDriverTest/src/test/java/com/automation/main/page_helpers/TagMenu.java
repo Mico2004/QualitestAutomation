@@ -365,13 +365,57 @@ public class TagMenu extends Page {
 		    	List<WebElement> cols = currentRaw.findElements(By.tagName("td"));
 		    	WebElement currentCols = cols.get(0);
 		    	WebElement currentCheckbox = currentCols.findElement(By.tagName("input"));
-		    	clickElementWithOutIdJS(currentCheckbox);
+		    	if(!currentCheckbox.isSelected()){
+		    		clickElementWithOutIdJS(currentCheckbox);
+		    	}
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}		
 	}
+	
+public void unCheckAllTheTagCheckboxes() {
+		
+		try{
+			List<WebElement> rows = tableOfTags.findElements(By.tagName("tr"));		
+			int rowNumber = rows.size();	    
+		    for(int i = 0 ; i< rowNumber ; i++) {
+		    	WebElement currentRaw = rows.get(i);
+		    	List<WebElement> cols = currentRaw.findElements(By.tagName("td"));
+		    	WebElement currentCols = cols.get(0);
+		    	WebElement currentCheckbox = currentCols.findElement(By.tagName("input"));
+		    	if(currentCheckbox.isSelected()){
+		    		clickElementWithOutIdJS(currentCheckbox);
+		    	}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}		
+	}
+
+public void unCheckOneTagCheckboxes(String name) {
+	
+	try{
+		List<WebElement> rows = tableOfTags.findElements(By.tagName("tr"));		
+		int rowNumber = rows.size();	    
+	    for(int i = 0 ; i< rowNumber ; i++) {
+	    	WebElement currentRaw = rows.get(i);
+	    	List<WebElement> cols = currentRaw.findElements(By.tagName("td"));
+	    	WebElement currentCols = cols.get(0);
+	    	WebElement currentCheckbox = currentCols.findElement(By.tagName("input"));
+	    	String currentName = cols.get(1).getAttribute("title");
+	    	if(currentCheckbox.isSelected() && currentName.equals(name)){
+	    		clickElementWithOutIdJS(currentCheckbox);
+	    	}
+		}
+	}catch(Exception e){
+		e.printStackTrace();
+		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}		
+}
+
 
 	public void verifyTheHeaderCheckboxIsChecked() {
 		try{

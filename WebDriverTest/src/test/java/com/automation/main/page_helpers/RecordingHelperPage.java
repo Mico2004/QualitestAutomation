@@ -1659,6 +1659,17 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}
 		}
 	}
+	
+	public void unselectTargetRecordingCheckbox(String recording_name) throws InterruptedException {
+		wait.until(ExpectedConditions.elementToBeClickable(checkbox));
+		List<String> recording_list = getCourseRecordingList();
+
+		for (int i = 0; i < recording_list.size(); i++) {
+			if (recording_list.get(i).equals(recording_name)) {
+				unselectIndexCheckBox(i + 1);
+			}
+		}
+	}
 
 	// This function check if recording in target index is select
 	public boolean isIndexRecordingSelected(int index) {
@@ -1851,7 +1862,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// This function unselect index recording from recording list
 	public void unselectIndexCheckBox(int index) {
 		try {
-			checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));
+			WebElement checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);			
 			if (checkbox.isSelected()) {
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);			
@@ -1876,23 +1887,23 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {	
 			if (check_all_checkbox.isSelected()) {
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
-				System.out.println("Checkbox all is not selected");
-				ATUReports.add("Checkbox all is not selected", LogAs.PASSED, null);
+				System.out.println("Unselecet all the checkboxs");
+				ATUReports.add("Unselecet all the checkboxs", LogAs.PASSED, null);
 
 				Assert.assertTrue(true);
 			} else {
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
-				Thread.sleep(400);
+				Thread.sleep(1000);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
-				System.out.println("Checkbox all is selected");
-				ATUReports.add("Checkbox all is selected", LogAs.PASSED, null);
+				System.out.println("Unselecet all the checkboxs.");
+				ATUReports.add("Unselecet all the checkboxs.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 
 		} catch (Exception msg) {
-			System.out.println("Checkbox all is not selected");
-			ATUReports.add("Checkbox all is not selected", LogAs.PASSED, null);
-			Assert.assertTrue(true);
+			System.out.println("Failed unselecet all the checkboxs.");
+			ATUReports.add("Failed unselecet all the checkboxs.", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
 		}
 	}
 	
@@ -2173,6 +2184,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		driver.findElement(By.id("Checkbox" + Integer.toString(index))).click();
 		return index;
 	}
+	
 
 	// check if recording has a being copied from status
 	public boolean hasBeingcopiedfromStatus(WebElement element) {
@@ -5447,8 +5459,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	
 	// verify tag is display in the select recording
 	public void verifyTagApperedUderTheSelectRecording(String tag) {
-		
+
 		try {
+			Thread.sleep(1500);
 			for(int i = 0 ; i< recording_tags.size() ; i++){
 				if(recording_tags.get(i).getText().equals(tag)){
 					ATUReports.add("Verify that the tag: " + tag + " appered on the first recording.","Success.", "Success.", LogAs.PASSED,null) ;
