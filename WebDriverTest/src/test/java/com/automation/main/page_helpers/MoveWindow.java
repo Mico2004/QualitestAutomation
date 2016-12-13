@@ -77,7 +77,7 @@ public class MoveWindow extends Page {
 			ATUReports.add("Fail click on move recordings button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 	}
 
 	// This function return true if move menu is closed,

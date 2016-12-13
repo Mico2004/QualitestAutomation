@@ -176,6 +176,8 @@ public class TC15582MoveOneRecording {
 		// move menu
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenMove();
+		Thread.sleep(2000);
+		
 		
 		// Select destination course:mark destination course by clicking on it
 		String destination_course_name = move_menu.course_list.get(0).getText();
@@ -183,10 +185,8 @@ public class TC15582MoveOneRecording {
 		System.out.println("first destination was marked");
 		
 		/// 10.Click "Move Recording(s)"
-		move_menu.moveRecording.click();
-		System.out.println("moving recording");
-		Thread.sleep(2000);
-		
+		move_menu.clickOnMoveRecordings();
+	
 		// 11.click on ok button in confirmation menu
 		confirm = PageFactory.initElements(driver, ConfirmationMenu.class);
 		confirm.clickOnOkButton();
