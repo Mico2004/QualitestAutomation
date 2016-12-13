@@ -153,7 +153,8 @@ public class CopyMenu extends Page {
 	// This function get course name, and select it course from course list,
 	// then it return true if it success, and false otherwise.
 	public boolean selectTargetCourseFromCourseList(String target_course_name) throws InterruptedException {
-
+		
+		try {
 		String selected_course = null;
 		Thread.sleep(1500);
 		waitForVisibility(first_course_on_the_list);
@@ -167,10 +168,8 @@ public class CopyMenu extends Page {
 				Assert.assertTrue(true);
 				break;
 			}
-
+			
 		}
-		
-		
 		
 		if (selected_course == null) {
 			System.out.println("course is not selected from Copy manu course list: " + target_course_name);
@@ -179,8 +178,14 @@ public class CopyMenu extends Page {
 			return false;
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		return true;
+		} catch (Exception msg) {
+			msg.printStackTrace();
+			ATUReports.add(msg.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+			return false;
+		}
 	}
 	
 	
