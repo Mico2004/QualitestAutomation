@@ -138,7 +138,7 @@ public class TestCaseSearchCourseInMoveWindow {
 		Thread.sleep(1000);
 		
 		// 4. Select "Recording Tasks -> Move"
-		record.toMoveMenu();
+		record.clickOnRecordingTaskThenMove();
 		
 		// get course list to compare with course list from point #6
 		List<String> course_list_preclick_on_search_button = copy.getCourseList(); 

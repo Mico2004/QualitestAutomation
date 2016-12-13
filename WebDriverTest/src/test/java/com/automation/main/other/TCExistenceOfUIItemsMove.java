@@ -126,7 +126,7 @@ String os;
 		
 		//9.to move menu
 		record.getCheckbox().click();
-		record.toMoveMenu();
+		record.clickOnRecordingTaskThenMove();
         Thread.sleep(2000);
 		//10.verify move title
 		move_Window.verifyMoveMenuTitle();

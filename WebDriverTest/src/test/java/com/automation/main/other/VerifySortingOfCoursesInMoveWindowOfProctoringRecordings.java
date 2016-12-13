@@ -79,7 +79,8 @@ public class VerifySortingOfCoursesInMoveWindowOfProctoringRecordings {
 			
 		        record.getCheckbox().click();
 				///6.select move menu
-		        record.toMoveMenu();
+		        record.clickOnRecordingTaskThenMove();
+		        
 			//7.verify courses are displayed in alphabetical order
 				record.verifyRecordingSortedByTitle(copy.getCourseList());///verify sorted by title
 				driver.quit();

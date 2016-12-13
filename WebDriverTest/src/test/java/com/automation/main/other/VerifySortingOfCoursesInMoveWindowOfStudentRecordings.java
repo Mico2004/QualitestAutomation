@@ -118,7 +118,7 @@ public class VerifySortingOfCoursesInMoveWindowOfStudentRecordings {
         //6.to move menu
      
 		record.getCheckbox().click();
-        record.toMoveMenu();
+		record.clickOnRecordingTaskThenMove();
 		//7.verify courses are displayed in alphabetical order
 		record.verifyRecordingSortedByTitle(copy.getCourseList());///verify sorted by title
 		driver.quit();

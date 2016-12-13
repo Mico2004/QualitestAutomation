@@ -115,7 +115,7 @@ public class TC15594SearchCourseInMoveWindow {
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			
 		// 4. Select "Recording Tasks -> Move"
-		record.toMoveMenu();
+		record.clickOnRecordingTaskThenMove();
 		
 		// Verify that "Search" field is empty
 		copy.isTextDisplayedInSearchBox("");
