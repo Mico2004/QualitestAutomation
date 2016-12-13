@@ -140,11 +140,11 @@ public class TC18833ValidateTheSourceTypeAsLinkInSearchFieldOnTheCourseLevel {
 		String current_course = course.selectCourseThatStartingWith("Ab");
 		String url =  course.getCurrentUrlCoursePage(); 
 		// Make course public
+		
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
-		
+	
 		
 		// Upload additional content link
         // record.clickOnAdditionContentTab();

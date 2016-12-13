@@ -203,13 +203,11 @@ public class TC19326PublishThePrivateCourse {
 		course.verifyCourseExist(private_course);
 		
 		// 13. Sign out.
-		top_bar_helper.signOut();
-		
-		
+		record.signOut();
+			
 		// 14. Login as Guest.	
 		tegrity.loginAsguest();
-		
-		
+			
 		// 15. Verify that INSTRUCTOR's private course is displayed in "Public Courses" tab.
 		course.clickOnPublicCoursesTab();
 		
