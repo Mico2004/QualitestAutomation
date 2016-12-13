@@ -857,7 +857,6 @@ public class CopyMenu extends Page {
 				wait.until(ExpectedConditions.visibilityOf(copy_title));
 				wait.until(ExpectedConditions.visibilityOf(copy_title2));
 				wait.until(ExpectedConditions.visibilityOf(info_text));
-				wait.until(ExpectedConditions.visibilityOf(listCourses));
 				wait.until(ExpectedConditions.visibilityOf(cancel_button));
 				wait.until(ExpectedConditions.visibilityOf(copy_button));
 				

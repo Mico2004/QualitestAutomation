@@ -513,7 +513,7 @@ public class RecordingHelperPage extends Page {
 	public void clickOnRecordingTitleInIndex(int index) throws InterruptedException {
 		System.out.println("Click on title in index: " + index);
 		WebElement element=first_recording;
-		String id="//*[@id='Recording" + Integer.toString(index) + "']/strong";
+		String id="Recording" + Integer.toString(index);
 		try {
 			waitForVisibility(element);
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
