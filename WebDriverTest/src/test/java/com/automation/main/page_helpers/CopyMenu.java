@@ -464,7 +464,7 @@ public class CopyMenu extends Page {
 	public void isTextDisplayedInSearchBox(String is_this_text_displayed) throws InterruptedException {
 		try {
 			String current_text_in_search_box = search_box.getAttribute("value");
-
+			
 			if (current_text_in_search_box.equals(is_this_text_displayed)) {
 				System.out.println("Text is displayed in search textbox");
 				ATUReports.add("Text is displayed in search textbox", is_this_text_displayed, current_text_in_search_box, LogAs.PASSED, null);

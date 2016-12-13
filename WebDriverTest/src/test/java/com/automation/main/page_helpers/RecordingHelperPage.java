@@ -1580,41 +1580,6 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		return differentRecordName;
 	}
 
-	
-	
-	
-		
-	// verify move menu
-	public void toMoveMenu() throws InterruptedException {
-
-		// waitForVisibility(recording_tasks_button);
-		// moveToElementAndClick(recording_tasks_button, driver);
-		// for (int i = 0; i < 10; i++) {
-		// recording_tasks_button.sendKeys(Keys.TAB);// solution
-		// try { // to
-		// move_button.click(); // solve
-		//
-		// Thread.sleep(1000);
-		// if (isElementPresent(By.id("ModalDialogHeader"))) {
-		// System.out.println("Move menu confirmed");
-		// ATUReports.add("click succeeded", LogAs.PASSED, null);
-		// }
-		//
-		// return;
-		// } catch (Exception e) {
-		//
-		// }
-		// }
-		// // hover
-		// // and
-		// // click
-		//
-		// ATUReports.add("click failed ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		// System.out.println("Move to move menu failed");
-		clickOnRecordingTaskThenMove();
-	}
-
-
 	// this function check if index recording is clickable
 	public boolean isIndexRecordingClickable(int index) {
 		try {
