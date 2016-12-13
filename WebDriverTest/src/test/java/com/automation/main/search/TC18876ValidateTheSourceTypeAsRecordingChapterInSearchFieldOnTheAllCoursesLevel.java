@@ -143,7 +143,6 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 		initializeCourseObject();
 		
 		String current_course = course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(1000);
 		
 		// Change first chapter name
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
@@ -162,8 +161,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
-		
+	
 		
 		// Get Recording Chapter information.
 		record.first_recording_title.click();
@@ -171,8 +169,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 		String recording_chapter = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 		
 		record.signOut();
-		Thread.sleep(3000);
-		
+	
 		for(int type_of_user=0; type_of_user<3; type_of_user++) {
 			if(type_of_user==0) {
 				// 2. Log in as INSTRUCTOR.
@@ -184,7 +181,6 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 				// 2. Log in as anonymous.
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(3000);
 				
 			// 3. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
@@ -260,7 +256,6 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 			
 			// 12. Sign Out.
 			record.signOut();
-			Thread.sleep(3000);
 		}
 		
 		
