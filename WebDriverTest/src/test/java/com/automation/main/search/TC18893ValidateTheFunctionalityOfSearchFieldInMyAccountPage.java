@@ -136,11 +136,7 @@ public class TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage {
 		
 		// 3. Open some Log in as INSTRUCTOR course.
 		current_course = course.selectCourseThatStartingWith("Ab");
-//		current_course = course.selectCourseThatStartingWith("abc");
 		System.out.println("Current course: " + current_course);
-		//course.selectCourse(record);
-		
-		Thread.sleep(2000);
 		
 		// Get information about first chapter
 		record.first_recording_title.click();
