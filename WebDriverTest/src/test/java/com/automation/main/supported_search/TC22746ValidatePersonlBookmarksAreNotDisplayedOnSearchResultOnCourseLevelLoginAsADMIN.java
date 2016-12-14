@@ -169,7 +169,6 @@ public class TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 
 		///6.add bookmark
-
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String bookmark_to_add=sdf.format(date);

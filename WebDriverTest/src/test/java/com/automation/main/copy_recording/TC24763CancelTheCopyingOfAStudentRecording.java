@@ -137,7 +137,6 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		System.out.println("Target course: " + targetCourse);
 		
 		// 7. Click "Cancel" button.
-		Thread.sleep(2000);
 		copy.clickOnCancelButton(record);
 		Thread.sleep(2000);
 
@@ -199,7 +198,6 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 12. Click "Courses" link at breadcrumbs.
 		record.returnToCourseListPage();
-		Thread.sleep(2000);
 		
 		// 13. Select the source course.
 		isTargetCourseClicked = course.clickOnTargetCourseName(currentCourse);
@@ -211,7 +209,6 @@ public class TC24763CancelTheCopyingOfAStudentRecording {
 		
 		// 14. Click the 'Student Recording' tab.
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000);
 		
 		// 15. Select source recording.
 		// 16. Select "Recording Tasks -> Copy" menu item.
