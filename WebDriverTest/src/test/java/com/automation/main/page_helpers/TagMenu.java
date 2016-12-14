@@ -305,8 +305,9 @@ public class TagMenu extends Page {
 	}
 
 	public void verifyAllTheTagCheckboxesAreChecked() {
-		try{
 		
+		try{
+		waitForVisibility(tableOfTags);
 		List<WebElement> rows = tableOfTags.findElements(By.tagName("tr"));		
 		int rowNumber = rows.size();	    
 	    for(int i = 0 ; i< rowNumber ; i++) {
