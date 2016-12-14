@@ -196,9 +196,9 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			waitForVisibility(first_user_of_user_list);
 			for(WebElement el:list) { 
 				String val=el.getText();			
-				if(el.getText().contains(name)) {
+				if(val.contains(name)) {
 					Thread.sleep(2000);
-					clickElement(el);
+					clickElementJS(el);
 					System.out.println("User selected from user list.");
 					return true;
 				}
