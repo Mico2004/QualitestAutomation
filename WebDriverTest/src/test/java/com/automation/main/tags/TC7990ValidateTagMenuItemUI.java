@@ -183,7 +183,7 @@ public class TC7990ValidateTagMenuItemUI {
 		tag_window.verifyTheHeaderCheckboxIsChecked();
 			
 		//27.unCheck all the "Tag" checkboxes.
-		tag_window.CheckAllTheTagCheckboxes();
+		tag_window.unCheckAllTheTagCheckboxes();
 		tag_window.verifyTheHeaderCheckboxIsUnChecked();
 		
 		//28.Validate the unchecked "Tag" checkbox is with white background.
