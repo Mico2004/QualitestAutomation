@@ -133,8 +133,7 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 		String header_default_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
 					
 		record.returnToCourseListPage();
-		Thread.sleep(1000);
-					
+		
 		
 		top_bar_helper.signOut();
 		
@@ -148,8 +147,6 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);
-			
 			
 			// 3. Click on "Detailed reports" from "Reports" drop dawn list.
 			top_bar_helper.clickOnReportThenWeekly();
@@ -286,7 +283,6 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 			
 			// 16. Sign Out.
 			top_bar_helper.signOut();
-			Thread.sleep(3000);
 		}
 		
 		System.out.println("Done.");
