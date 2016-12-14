@@ -286,8 +286,8 @@ public class TC18903ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheCourseLevel
 				search_page.verifySearchResultIsEmpty();
 				
 			}
-			Thread.sleep(1000);
-			
+		
+	
 			// 14. Sign Out.
 			record.signOut();
 		}

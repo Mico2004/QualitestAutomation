@@ -152,12 +152,12 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(1000);
+	
 		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 		
 		Thread.sleep(3000);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		Thread.sleep(500);
+
 		record.clickOnRecordingTaskThenEditRecording();
 		Thread.sleep(2000);
 		
@@ -172,7 +172,6 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		
 		// 2. Log in as STUDENT (User4).
 		tegrity.loginCourses("User4");
-		Thread.sleep(2000);
 		
 		// 3. Set the focus to the field with a mouse pointer.
 		top_bar_helper.search_box_field.click();
@@ -183,12 +182,10 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		search_page.verifyResultContainOneResultWithTargetTitle(new_chapter_name);
 		
 		// 5. Sign Out.
-		top_bar_helper.signOut();
-		Thread.sleep(3000);
-		
+		record.signOut();
+	
 		// 6. Log in as another Student (User2) that does'nt in rolled to the same course that contains the recording that you search earlier.
 		tegrity.loginCourses("User2");
-		Thread.sleep(2000);
 		
 		// 7. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(new_chapter_name);
@@ -198,7 +195,6 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		
 		// 8. Sign Out.
 		top_bar_helper.signOut();
-		Thread.sleep(3000);
 		
 		tegrity.loginCourses("User1");
 		

@@ -145,7 +145,6 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
 		
 		// TODO: Delete all bookmarks and create new bookmark
 		 Date date = new Date();
@@ -154,10 +153,9 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 		
 		String bookmarked_recording_title = record.getFirstRecordingTitle();
 		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
-		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.verifyTimeBufferStatusForXSec(5);
 		//record.clickOnFirstVisibleChapter();
-		
-		
+			
 		player_page.deleteAllBookmark();
 		player_page.addTargetBookmark(bookmark_for_search);
 		
@@ -166,11 +164,8 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 			break;
 		}
 
-		
 		top_bar_helper.signOut();
-		Thread.sleep(3000);
-		
-		
+	
 		// Looping for Instructor, Student and Guest
 		for(int type_of_user = 0; type_of_user < 3; type_of_user++) {
 			
@@ -184,8 +179,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(3000);	
-			
+				
 			// 3. Set the focus to the field with a mouse pointer.
 			top_bar_helper.search_box_field.click();
 			
@@ -253,7 +247,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 			
 			// 11. Sign Out.
 			top_bar_helper.signOut();
-			Thread.sleep(3000);
+			
 		}
 		
 		// Unpublic Ab course1. 

@@ -131,16 +131,14 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
-		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		record.signOut();
 		
 		// 2. Log in as INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
-		
+			
 		// 3. Open some course.
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(1000);
+		
 		// 3.1 wait until the status will disappear
 		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 		// 4. Set the focus to the field with a mouse pointer.
@@ -149,11 +147,9 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		// 5. Change the name of the chapter that we mentioned in the preconditions to "/\[]:;|=,+*?<>".
 		Thread.sleep(3000);
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		Thread.sleep(500);
+	
 		record.clickOnRecordingTaskThenEditRecording();
-		Thread.sleep(2000);
-		
-
+	
 		String new_chapter_name = "/\\[]:;|=,+*?<>";
 		
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(new_chapter_name);
@@ -172,11 +168,9 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		Thread.sleep(4000);
 		
 		record.selectIndexCheckBox(1);
-		Thread.sleep(500);
+	
 		
 		record.clickOnRecordingTaskThenEditRecording();
-		Thread.sleep(2000);
-		
 
 		new_chapter_name = "abc?<>";
 		
