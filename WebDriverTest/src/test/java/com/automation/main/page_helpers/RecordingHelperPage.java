@@ -1174,7 +1174,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		catch(Exception e){
 			System.out.println("catch selectIndexCheckBox");
 			e.printStackTrace();
-			ATUReports.add("Fail to select checkbox" +e.getMessage(),"Check succeeded","Check failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Fail to select checkbox " +e.getMessage(),"Check succeeded","Check failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		
 		}
 	}
@@ -5496,8 +5496,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for(int i = 0 ; i< view_tag_names.size() ; i++) {
 			String currentTag = view_tag_names.get(i).getText();
 			if(!searchOwnerInTheOwnerList(currentTag,namesOfTags)){
-				ATUReports.add("Not verify The tags are displayed in the View dropdown list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				System.out.println("Not verify The tags are displayed in the View dropdown list..");
+				ATUReports.add("Not verify The tag:" + currentTag + "are displayed in the View dropdown list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("Not verify The tag:" + currentTag + "are displayed in the View dropdown list.");
 				return;
 			}
 		}

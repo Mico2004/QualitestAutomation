@@ -122,9 +122,9 @@ public class TC8058ValidateCreatingAddingANewPublicTag {
 			//8.Enter some valid new name.
 			//9.Click on the "Submit" button
 			if(numberOfTag == 0) {
-				validNewName = "Test";
+				validNewName = "Kiko";
 			} else {
-				validNewName = "Example";
+				validNewName = "Hello";
 			}
 			tag_window.createNewTag(validNewName);
 			namesOfTags.add(validNewName);
