@@ -56,9 +56,7 @@ public class TC15535CopyOneRecording {
 		try {
 
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-			driver = new ChromeDriver();///// MUST FOR TEST TO GET XML
-
-			
+			driver = new ChromeDriver();///// MUST FOR TEST TO GET XML	
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			wait = new WebDriverWait(driver, 30);
 		} catch (Exception e) {
