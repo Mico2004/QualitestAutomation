@@ -200,11 +200,13 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 					Thread.sleep(2000);
 					clickElementJS(el);
 					System.out.println("User selected from user list.");
+					ATUReports.add("User selected from user list.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					return true;
 				}
 			}
 			
 			System.out.println("The user isn't on the list.");
+			ATUReports.add("The user isn't on the list.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 		}catch(UnhandledAlertException ex){
 			System.out.println("Alert pop up");
