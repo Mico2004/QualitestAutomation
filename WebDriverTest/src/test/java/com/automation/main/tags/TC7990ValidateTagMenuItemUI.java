@@ -356,9 +356,6 @@ public class TC7990ValidateTagMenuItemUI {
 		//77.Click on the "Cancel" button.
 		tag_window.clickElement(tag_window.cancel_button);
 				
-		//78.The "Tag Dialog" window is disappeared.
-		tag_window.isTagWindowClosed();
-		
 		}
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
