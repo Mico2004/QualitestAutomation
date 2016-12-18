@@ -196,9 +196,6 @@ public class TC22032DeleteARegularRecordingAsADMIN {
 					record.toEditRecordingPropertiesMenu();	
 					edit_recording_properties_window.waitForPageToLoad();
 					checked_recording_title =edit_recording_properties_window.getRecordName(confirmation_menu);
-					driver.navigate().refresh();
-					record.clickOnTestsTab();
-					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 				} else {
 					checked_recording_title = record.getFirstRecordingTitle();
 				}
