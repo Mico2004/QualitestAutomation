@@ -114,7 +114,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			return true;
 		}catch (Exception msg) {
 			System.out.println("Didn't Accecpt alert message."+msg.getMessage());
-			ATUReports.add("Click enrollment diaglog OK button", "OK button was clicked","Clicked Failed:"+msg.getLocalizedMessage(),LogAs.FAILED,null);
+			ATUReports.add("Click enrollment diaglog OK button", "OK button was clicked","Clicked Failed:"+msg.getLocalizedMessage(),LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 			}
 		}
