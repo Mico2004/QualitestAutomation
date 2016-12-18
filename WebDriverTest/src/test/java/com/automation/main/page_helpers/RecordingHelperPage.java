@@ -14,7 +14,11 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.PublicKey;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import org.openqa.selenium.support.PageFactory;
@@ -125,6 +129,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement student_recordings_tab;
 	@FindBy(id = "TestsTab")
 	public  WebElement tests_tab;
+	@FindBy(id = "BookmarksTab")
+	public  WebElement bookmarks_tab;
 	@FindBy(id = "AdditionalContentTab")
 	public WebElement additional_content_tab;
 	@FindBy(id = "MoveTask2")
@@ -140,7 +146,7 @@ public class RecordingHelperPage extends Page {
 	@FindBy(xpath = "//*[starts-with(@id,'RecordingLength')]")
 	List<WebElement> recordings_list_duratuon;
 	@FindBy(xpath = "//*[starts-with(@id,'RecordingDate')]")
-	List<WebElement> recordings_list_date;
+	public List<WebElement> recordings_list_date;
 	@FindBy(xpath = "//*[starts-with(@id,'RecordedBy')]")
 	List<WebElement> recordings_list_recordr_name;/// recorder name list
 	public List<String> recordings_list_date_string;
@@ -174,7 +180,7 @@ public class RecordingHelperPage extends Page {
 	@FindBy(id = "ContentTasks")
 	public WebElement content_tasks_button;
 	@FindBy(id = "UserName")
-	WebElement user_name;
+	public WebElement user_name;
 	@FindBy(id = "CopyTask2")
 	public WebElement copy_button2;
 	@FindBy (xpath="//*[@class=\"recordingInfoContainer ng-scope\"]/div")
@@ -295,8 +301,25 @@ public class RecordingHelperPage extends Page {
 	public List<WebElement> recording_tags;
 	@FindBy(css = ".tagsContainer>div>div>label")
 	public List<WebElement> view_tag_names;
-	public ConfirmationMenu confirm_menu;
-	
+	@FindBy(css =".itemTitle>a")
+	public List<WebElement> bookmarks_names;
+	@FindBy(css =".deleteBookmark")
+	public List<WebElement> delete_bookmark_icon;
+	@FindBy(id ="SortingsBookmarks")
+	public WebElement view_button_bookmarks;
+	@FindBy(xpath = ".//*[@id='scrollableArea']/div[1]/div[1]/div[1]/div[3]/ul/li/ul/li[1]/span")
+	public WebElement sort_by;	
+	@FindBy(xpath = ".//*[@id='scrollableArea']/div[1]/div[1]/div[1]/div[3]/ul/li/ul/li[2]")
+	public WebElement divider;	
+	@FindBy(css = ".dropdown-menu.text-left>li>a")
+	public List<WebElement> list_below_sort_by_view;
+	@FindBy(linkText = "Recording")
+	public WebElement view_button_recording;
+	@FindBy(linkText = "Date")
+	public WebElement view_button_date;
+	@FindBy(linkText = "Bookmark type")
+	public WebElement view_button_bookmark_type;
+	public ConfirmationMenu confirm_menu;	
 	public CopyMenu copyMenu;
 	
 	// Set Property for ATU Reporter Configuration
@@ -1126,6 +1149,39 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 
 	}
+	
+	// this function clicks on bookmarks tab (in type of recordings menu)
+		public void clickOnBookmarksTab() {
+			WebElement element=bookmarks_tab;
+			String id="BookmarksTab";
+			try {
+				String initialText=TabContainer.getText();
+				System.out.println("BookmarkRecordingsTab1");
+				waitForVisibility(element);
+				if(!bookmarks_tab.isDisplayed()){
+					driver.navigate().refresh();
+					waitForThePageToLoad();
+				}
+				((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+				Thread.sleep(1000);
+				waitForContentOfTabToLoad(initialText,TabContainer);
+				System.out.println("BookmarkRecordingsTab3");
+				ATUReports.add("Select BookmarkRecordingsTab -> "+id, id+" was click",
+						id+" was clicked", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+				return;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				System.out.println("BookmarkRecordingsTab4");
+				ATUReports.add("Select BookmarkRecordingsTab -> "+id, id+" was click",id+" wasn't clicked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println(id+" was clicked");
+				Assert.assertTrue(false);
+			}
+			
+
+		}
+	
+	
 
 	// This function click on Recorind Task then on move in the sub menu
 	public void clickOnRecordingTaskThenMove() throws InterruptedException {
@@ -2597,6 +2653,25 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			Assert.assertTrue(true);
 		}
 	}
+	
+	public void verifyBookmarkTab() {
+		try {
+			if (!bookmarks_tab.isDisplayed()) {
+				System.out.println("The Bookmarks tab isn't displayed.");
+				ATUReports.add("Verified The Bookmarks tab isn't displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			} else {
+				System.out.println("The Bookmarks tab is displayed.");
+				ATUReports.add("The Bookmarks tab is displayed.", "True.", "True.", LogAs.PASSED,null);
+				Assert.assertTrue(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			ATUReports.add("Failed to verify the display of the bookmark tab" + e.getMessage(), "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
 
 	// verify there is no tests Tab
 	public void verifyNoTestsTab() {
@@ -4505,6 +4580,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		Assert.assertTrue(true);
 	}
 	
+
+		
+	
 	// This function verify that the format is: length: X:XX:XX.
 	public void verifyFormatOfRecordingLength() {
 		for(WebElement webElement: recordings_list_duratuon) {
@@ -5347,11 +5425,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			String title = element.getAttribute("title");
 			if(title.equals(text)){
-				System.out.println("Verify that we can see hint to the webElement: " +element.getText() + "the hint is: " + title );
-				ATUReports.add("Verify that we can see hint to the webElement: " +element.getText() + "the hint is: " + title ,"The hint is display.","The hint is display.",LogAs.PASSED, null);		
+				System.out.println("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title );
+				ATUReports.add("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is display.",LogAs.PASSED, null);		
 			}else{
-				System.out.println("Not Verify that we can see hint to the webElement: " +element.getText() + "the hint is: " + title);
-				ATUReports.add("Verify that we can see hint to the webElement: " +element.getText() + "the hint is: " + title ,"The hint is display.","The hint is not display.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+				System.out.println("Not Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title);
+				ATUReports.add("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is not display.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
 			}
 		}catch(Exception e){
 			e.getMessage();
@@ -5535,6 +5613,272 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}
 		}
 		return isTheOwnerContains;
+	}
+	// verify That All the bookmarks are displayed (Instructor and Student)
+	public void verifyThatAllTheBookmarksDisplayInTheBookmarkTab(List<String> namesOfbookmarks) {
+		waitForVisibility(bookmarks_names.get(0));
+		try { 
+			for(WebElement webElement: bookmarks_names) {
+				String bookmarksName = webElement.getAttribute("title");
+				if(!namesOfbookmarks.contains(bookmarksName)) {
+					System.out.println("Not verify that the bookmark:" + namesOfbookmarks+ " is displayed on the bookmarks tab.");
+					ATUReports.add("Not verify that the bookmark:" + namesOfbookmarks+ " is displayed on the bookmarks tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					return;		
+			}
+		}
+		System.out.println("Verify that all the bookmarks are displayed in the bookmarks tab.");
+		ATUReports.add("Verify that all the bookmarks are displayed in the bookmarks tab.", "True.", "True.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
+	
+	// The date is in the following format: 'XX/XX/XXXX'.
+	public void verifyThatTheRecordingDateInTheRightFormat(WebElement correctDate){
+		
+		String currDate = correctDate.getText();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		Date date = new Date();
+		String todayDate = sdf.format(date);
+		sdf.setLenient(false);
+		try {
+
+			//if not valid, it will throw ParseException
+			date = sdf.parse(currDate);
+			System.out.println(date);
+			System.out.println("The date is in the following format: 'XX/XX/XXXX'");
+			ATUReports.add("The date is in the following format: 'XX/XX/XXXX'", "Success.", "Success.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+			String[]parts= currDate.split("/");
+
+			  if(parts[0].length() == 1) {
+				  parts[0] = "0" + parts[0];
+			  } 
+			  if(parts[1].length() == 1) {
+				  parts[1] = "0" + parts[1];
+			  }
+			  currDate = parts[0] + "/"  + parts[1] + "/"  + parts[2];
+			
+			if(currDate.contains(todayDate)){
+				System.out.println("Verify that the date is correct.");
+				ATUReports.add("Verify that the date is correct.", "Success.", "Success.", LogAs.PASSED, null);		
+			} else {
+				System.out.println("Not Verify that the date is correct." );				
+				ATUReports.add("Not Verify that the date is correct.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+				
+		} catch (ParseException e) {
+			System.out.println("The date is not in the following format: 'XX/XX/XXXX'" );				
+			ATUReports.add("The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}	 
+	}
+	// verify that the delete bookmark icon need to display or not
+	public boolean isDeleteBookmarkNeedToDisplay(WebElement user_name, WebElement name) {
+		
+		String bookmark  = name.getText();
+		String name_of_user = user_name.getText();
+		if((name_of_user.contains("User1") && bookmark.contains("Ins")) || ( name_of_user.contains("User4") && bookmark.contains("Stu")))
+				return true;
+		else return false;
+	}
+	
+	// verify That The Color Of The Bookmark Equal To The Type
+	public void verifyThatTheColorOfTheBookmarkEqualToTheType(int bookmark_number) {
+		
+		try {
+			WebElement type = driver.findElement(By.xpath(".//*[@id='RecordingDate"+Integer.toString(bookmark_number+1)+"']/span[1]"));
+			String typeOfBookmark = type.getAttribute("class");
+			String url = null;
+			switch(typeOfBookmark){
+			case "bookmark-important":
+				url = "bookmark_important.png";
+				break;
+			case "bookmark-unclear":
+				url = "bookmark_unclear.png";
+				break;
+			case "bookmark-instructor":
+				url = "bookmark_instructor.png";
+			break;
+			}
+			String color = type.getCssValue("background-image");
+			if(color.contains(url)){
+				System.out.println("Verify that the color of the bookmark equal to the type.");
+				ATUReports.add("Verify that the color of the bookmark equal to the type.", "Success.", "Success.", LogAs.PASSED, null);		
+			} else {
+				System.out.println("Not Verify that the color of the bookmark equal to the type." );				
+				ATUReports.add("Not Verify that the color of the bookmark equal to the type.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+	
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+
+	public void verifyAllIndicatorsAreAtTheRightAlign(int bookmark_number,boolean isDeleteIsDisplay) {
+		
+		try{
+			
+		WebElement type = driver.findElement(By.xpath(".//*[@id='RecordingDate"+Integer.toString(bookmark_number+1)+"']/span[1]"));
+		WebElement date = recordings_list_date.get(bookmark_number);
+		WebElement name = bookmarks_names.get(bookmark_number);
+		WebElement delete = null;
+		if(isDeleteIsDisplay){
+			delete = driver.findElement(By.xpath(".//*[@id='RecordingDate"+Integer.toString(bookmark_number+1)+"']/a"));
+		} else delete = driver.findElement(By.xpath(".//*[@id='RecordingDate"+Integer.toString(bookmark_number+1)+"']/span[2]"));
+		Point nameLoc = name.getLocation();
+		Point deleteLoc = delete.getLocation();
+		Point dateLoc = date.getLocation();
+		Point typeLoc = type.getLocation();
+		
+			if(deleteLoc.getX()> typeLoc.getX() && typeLoc.getX() > dateLoc.getX() && dateLoc.getX()> nameLoc.getX()){
+				System.out.println("verify all indicators are at the right align.");
+			ATUReports.add("verify all indicators are at the right align.", "Success.", "Success.", LogAs.PASSED, null);		
+		} else {
+			System.out.println("Not verify all indicators are at the right align." );				
+			ATUReports.add("Not Vverify all indicators are at the right align.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+	
+	//Type of bookmark indicator with static text '| type:' followed by: (important (red), unclear(yellow), instructor(blue))
+	public void verifyTypeOfBookmarkIndicatorFollowByColor(int bookmark_number) {
+	
+	try{
+		WebElement type = driver.findElement(By.xpath(".//*[@id='ItemUrl"+Integer.toString(bookmark_number+1)+"']/span[2]"));
+		WebElement typeColor = driver.findElement(By.xpath(".//*[@id='RecordingDate"+Integer.toString(bookmark_number+1)+"']/span[1]"));
+		String typeOfBookmark = type.getText();
+		String url = null;
+		switch(typeOfBookmark){
+		case "| type: important":
+			url = "bookmark_important.png";
+			break;
+		case "| type: unclear":
+			url = "bookmark_unclear.png";
+			break;
+		case "| type: instructor bookmark":
+			url = "bookmark_instructor.png";
+		break;
+		}
+		String color = typeColor.getCssValue("background-image");
+		
+		if(color.contains(url)){
+			System.out.println("Verify type of bookmark indicator follow by color.");
+			ATUReports.add("Verify type of bookmark indicator follow by color.", "Success.", "Success.", LogAs.PASSED, null);		
+		} else {
+			System.out.println("Not Verify type of bookmark indicator follow by color." );				
+			ATUReports.add("Not Verify type of bookmark indicator follow by color.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}catch(Exception e){
+		e.getMessage();
+		ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	}
+	}
+	
+	// static text 'recording:' followed by: recording name
+	public void verifyRecordingfollowedByRecordingName(String recordName ,int bookmark_number) {
+		try{
+			WebElement recording = driver.findElement(By.xpath(".//*[@id='ItemUrl"+Integer.toString(bookmark_number+1)+"']/span[1]"));
+			String currRecording = recording.getText();
+			String []recrodingSplit = currRecording.split(": ");
+			String newNameWithOutSpace = recrodingSplit[1].substring(0);
+			
+			if(recrodingSplit[0].equals("recording") && recordName.equals(newNameWithOutSpace)){
+				System.out.println("Verify static text 'recording:' followed by: recording name.");
+				ATUReports.add("Verify static text 'recording:' followed by: recording name.", "Success.", "Success.", LogAs.PASSED, null);		
+			} else {
+				System.out.println("Not Verify static text 'recording:' followed by: recording name." );				
+				ATUReports.add("Not Verify static text 'recording:' followed by: recording name.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+
+	public void verifyIndicatorsAreAlignLeftBelowTheBookmarkLink(int bookmark_number) {
+		
+		try{
+		WebElement recording = driver.findElement(By.xpath(".//*[@id='ItemUrl"+Integer.toString(bookmark_number+1)+"']/span[1]"));
+		WebElement type = driver.findElement(By.xpath(".//*[@id='ItemUrl"+Integer.toString(bookmark_number+1)+"']/span[2]"));
+		WebElement name = bookmarks_names.get(bookmark_number);
+		Point nameLoc = name.getLocation();
+		Point recordingLoc = recording.getLocation();
+		Point typeLoc = type.getLocation();
+		
+			if(typeLoc.getY()> nameLoc.getY() && nameLoc.getX() == recordingLoc.getX() && typeLoc.getX()> nameLoc.getX()){
+				System.out.println("verify all indicators are at the bellow and left align.");
+			ATUReports.add("verify all indicators are at the bellow and left align.", "Success.", "Success.", LogAs.PASSED, null);		
+		} else {
+			System.out.println("Not verify all indicators are at the right align." );				
+			ATUReports.add("Not verify all indicators are at the right align.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+
+	public void verifyDeleteBookmarDisplay(int bookmark_number) {
+		try{
+		WebElement web_element = driver.findElement(By.xpath(".//*[@id='RecordingDate"+Integer.toString(bookmark_number+1)+"']/a"));
+		if (web_element.isDisplayed()) {
+			System.out.println("Verify that "+ web_element.getAttribute("title") + " is displayed.");
+			ATUReports.add("Verify that " + web_element.getAttribute("title") + " is displayed.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not Verify that " + web_element.getAttribute("title") + " is not displayed.");
+			ATUReports.add("Not Verify that " + web_element.getAttribute("title") + " is not displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+	
+	public void verifyDeleteBookmarNotDisplay(int bookmark_number) {
+		try{
+		WebElement web_element = driver.findElement(By.xpath(".//*[@id='RecordingDate"+Integer.toString(bookmark_number+1)+"']/a"));
+		if (!web_element.isDisplayed()) {
+			System.out.println("Verify that "+ web_element.getAttribute("title") + " is not displayed.");
+			ATUReports.add("Verify that "+ web_element.getAttribute("title") + " is not displayed.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Not Verify that " + web_element.getAttribute("title") + " is displayed.");
+			ATUReports.add("Not Verify that " + web_element.getAttribute("title") + " is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+	
+	// This function verify that WebElement is not displayed, and String with
+	// description
+	public void verifyBookMarkTypeNotDisplayedInAnyTabExcpectOne(List<WebElement> web_elements, String description) {
+		int count = 0 ; 	
+		for(WebElement element : web_elements) {
+			if (element.getAttribute("title").equals(description)) {
+				count++;
+				if(count > 1 ) {
+					System.out.println(description + " is displayed.");
+					ATUReports.add(description + " is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					return;
+				}
+			}
+		}
+		System.out.println(description + " is not displayed.");
+		ATUReports.add(description + " is not displayed.", "True.", "True.", LogAs.PASSED, null);
+
 	}
 	
 	

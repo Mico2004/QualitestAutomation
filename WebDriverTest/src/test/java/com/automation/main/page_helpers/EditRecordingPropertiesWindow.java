@@ -357,24 +357,6 @@ public class EditRecordingPropertiesWindow extends Page {
 			}
 		}
 		
-	public void VerifyFontColor(WebElement element,String Color) {
-		
-		try{
-		String ColorName  = getFontColor(element);
-		if(Color.equals(ColorName)){
-			 System.out.println("Verify the font color of: " + element.getText());
-			 ATUReports.add("Verify the font color of: " + element.getText(),"Success.", "Success.", LogAs.PASSED, null);
-			}else {
-			 System.out.println("Not Verify the font color of: " + element.getText());
-			 ATUReports.add("Not Verify the font color of: " + element.getText(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			}	
-		}catch(Exception e){
-			e.getMessage();
-			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-
-			}
-	}
-	
 	/**
 	 * this function verify that the title location is aligned left
 	 */

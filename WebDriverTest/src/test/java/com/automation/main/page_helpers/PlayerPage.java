@@ -66,6 +66,8 @@ public class PlayerPage extends Page {
 	WebElement bookmark_listCss;
 	@FindBy(id = "tegritySearchBox")
 	WebElement search_box;
+	@FindBy(id = "ddComboDiv")
+	WebElement bookmarkType;
 	@FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[3]/a/div[2]/p[2]")
 	WebElement second_record_player;
 	@FindBy(id = "NumbOfRes")
@@ -137,8 +139,11 @@ public class PlayerPage extends Page {
 	List<WebElement> SearchResultTimes;
 	@FindBy(css= ".SearchResultLocation")
 	public List<WebElement> SearchResultlocation;
-
-
+	@FindBy(xpath = ".//*[@id='ddPopupDiv']/div[2]/div")
+	public WebElement important;
+	@FindBy(xpath = ".//*[@id='ddPopupDiv']/div[1]/div")
+	public WebElement inclear;
+	
 	
 	// This function get as input number of seconds.
 	// It will check if the player plays for this number of seconds.
@@ -244,6 +249,12 @@ public class PlayerPage extends Page {
 				"The time buffer is moving correctly.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		return true;
+	}
+	
+	public void changeTheBookmarkToBeImportant() {
+	
+		clickElementJS(bookmarkType);
+		clickElementWithOutIdJS(important);	
 	}
 	
 	public void verifyUniversityLogoVisibilityAndLocation() throws InterruptedException {
@@ -732,19 +743,14 @@ public class PlayerPage extends Page {
 	public void deleteAllBookmark() throws InterruptedException {
 	
 		if(bookmark_list.size()>0){
-			for(int i = 1; i < 5 ; i++){
-				for (WebElement we : bookmark_list) {
-					try {     
+				for (WebElement we : bookmark_list) { 
+						if(bookmark_list.size()==0){
+							break;
+						}
 						moveToElementAndPerform(we, driver);
 						WebElement bookmarkDelete = driver.findElement(By.xpath(".//*[@id='BookmarkList']/div/img[3]" ));
-						clickElement(bookmarkDelete);
-					}catch(Exception Ex) {
-						System.out.println("bookmark failed deleting");
+						clickElementWithOutIdJS(bookmarkDelete);					
 					}
-			} if(bookmark_list.size()==0){
-				break;
-			}
-		}
 		} else {
 			System.out.println("There no bookmarks here.");
 			ATUReports.add("There no bookmarks here.", "True.", "True.", LogAs.PASSED, null);

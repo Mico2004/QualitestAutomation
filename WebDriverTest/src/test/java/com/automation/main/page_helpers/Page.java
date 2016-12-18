@@ -351,6 +351,27 @@ public class Page {
 		}
 	}
 
+	public WebElement getElement(String by, String direction, int number) {
+		
+		WebElement element = null;
+		switch(by){
+		case "css":
+			 List<WebElement> elements = driver.findElements(By.cssSelector(direction));
+			 element = elements.get(number);
+			break;
+		case "xpath":
+			element = driver.findElement(By.xpath(direction));
+			break;
+		case "id":
+			element = driver.findElement(By.id(direction));
+			break;
+		}
+	
+		return element;
+		
+	}
+	
+	
 	/// hover to element and click on it
 	public void moveToElementAndClick(WebElement element, WebDriver driver) throws NoSuchElementException {
 		waitForVisibility(element);
@@ -504,7 +525,7 @@ public class Page {
 
 	}
 	
-
+	
 	public  boolean isElementPresent(WebElement element) {
 		boolean flag = false;
 		try {
@@ -741,6 +762,26 @@ public class Page {
 		int number3 = Integer.parseInt(numbers[2]);
 		return String.format("#%02x%02x%02x", number1, number2, number3);
 	}
+		
+   public void VerifyFontColor(WebElement element,String Color) {
+		
+		try{
+		String ColorName  = getFontColor(element);
+		if(Color.equals(ColorName)){
+			 System.out.println("Verify the font color of: " + element.getText());
+			 ATUReports.add("Verify the font color of: " + element.getText(),"Success.", "Success.", LogAs.PASSED, null);
+			}else {
+			 System.out.println("Not Verify the font color of: " + element.getText());
+			 ATUReports.add("Not Verify the font color of: " + element.getText(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}	
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
+			}
+	}
+	
+	
 	
 	// get font color by an element
 	public String getColorFromCssElement(WebElement element,String cssVal) {
@@ -808,7 +849,7 @@ public class Page {
 	// This function verify that WebElement is displayed, and String with
 	// description
 	public void verifyWebElementDisplayed(WebElement web_element, String description) {
-			
+		
 		waitForVisibility(web_element);
 		if (web_element.isDisplayed()) {
 			System.out.println(description + " is displayed.");
@@ -819,7 +860,24 @@ public class Page {
 			ATUReports.add(description + " is not displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
+		
 	}
+	
+	public void verifyWebElementClassNameDisplayed(WebElement web_element, String expected) {
+		
+		waitForVisibility(web_element);
+		String className = web_element.getAttribute("class");
+		if (className.equals(expected)) {
+			System.out.println(expected + " is displayed.");
+			ATUReports.add(expected + " is displayed.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println(expected + " is not displayed.");
+			ATUReports.add(expected + " is not displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}		
+	}
+	
 
 	// This function verify that WebElement is not displayed, and String with
 	// description
@@ -834,6 +892,7 @@ public class Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
 
 	// This function verify that WebElement title/hint is target string
 	public void verifyWebElementHaveTargetAttributeTitle(WebElement web_element, String target_text) {
@@ -878,8 +937,6 @@ public class Page {
 			ATUReports.add("String do not send to WebElement.", string_to_send, "", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
-	
-	
 	
 	
 	// Verify that
