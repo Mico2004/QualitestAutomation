@@ -119,21 +119,15 @@ public class TC15563CopyRecordingToTheSameCourse {
 		// PreSet 
 		// user - use dynamic users (1) and course(2) delete all recordings from course (2) and move one recording to the course
 		// enter source course and delete all recordings
-		String copy_to = course.selectCourseThatStartingWith("abc");
+		course.selectCourseThatStartingWith("abc");
 		record.deleteAllRecordings(delete_menu);
 		
 		// come back to courses, go to Ab course, and copy one recording to abc then return to courses page list
 		record.returnToCourseListPage();
-		course.selectCourseThatStartingWith("Ab");
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		record.clickOnRecordingTaskThenCopy();
-		copy.selectTargetCourseFromCourseList(copy_to);
-		copy.clickOnCopyButton();
-		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		record.checkStatusExistenceForMaxTTime(360);
-		record.returnToCourseListPage();
 		
-		
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "abc", 0, record,copy, confirm_menu);
+		course.verifyRecordingsStatusIsClear("Ab", 0,record);
+			
 		// 2. Select course.
 		currentCourse = course.selectCourseThatStartingWith("abc");
 		System.out.println("Current course: " + currentCourse);
