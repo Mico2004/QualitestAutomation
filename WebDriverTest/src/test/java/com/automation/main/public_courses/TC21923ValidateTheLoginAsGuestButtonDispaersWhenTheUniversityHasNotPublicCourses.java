@@ -142,10 +142,7 @@ public class TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNot
 		initializeCourseObject();
 		
 		// 2. On the University Course settings make sure all of the "Make this Course publicy visible" is locked and off.
-		Thread.sleep(2000);
-		
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
-		
 		Thread.sleep(2000);
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicSelected();
@@ -176,9 +173,7 @@ public class TC21923ValidateTheLoginAsGuestButtonDispaersWhenTheUniversityHasNot
 		// 9. Login as Admin.
 		tegrity.loginAdmin("Admin");
 		
-		// 10. On the University Course settings make sure all of the "Make this Course publicy visible" is unlocked and off.
-		Thread.sleep(2000);
-		
+		// 10. On the University Course settings make sure all of the "Make this Course publicy visible" is unlocked and off.	
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");
 		
 		Thread.sleep(2000);
