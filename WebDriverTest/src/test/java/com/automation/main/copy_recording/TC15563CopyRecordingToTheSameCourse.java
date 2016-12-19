@@ -152,32 +152,10 @@ public class TC15563CopyRecordingToTheSameCourse {
 		
 		
 		// 8. Message window is closed.
-		boolean is_closed = confirm_menu.isConfirmationMenuClosed();
-		
-		if (is_closed) {
-			System.out.println("Message window is closed.");
-			ATUReports.add("Message window.", "Message window is closed.", "Message window is closed.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("Message window is not closed.");
-			ATUReports.add("Message window.", "Message window is closed.", "Message window is not closed.", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
+		confirm_menu.verifyConfirmWindowIsClosed();
 		
 		// 9. Copy window is closed.
-		is_closed = copy.isCopyMenuClosed();
-		
-		if (is_closed) {
-			System.out.println("Copy window is closed.");
-			ATUReports.add("Copy window.", "Copy window is closed.", "Copy window is closed.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("Copy window is not closed.");
-			ATUReports.add("Copy window.", "Copy window is closed.", "Copy window is not closed.", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
-	
-		
+		copy.verifyThatCopyMenuClose();
 		
 		//10. Source recording has a status "Being copying from".
 		//11. New recording is displayed.
@@ -295,10 +273,7 @@ public class TC15563CopyRecordingToTheSameCourse {
 		//List <WebElement> panels = driver.findElements(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap"));
 		
 		//panels.get(new_recording_index).click();
-		
-		//TODO: add WebDriverWait
-		//Thread.sleep(10000);
-		
+			
 		//18. Recording is displayed and playing correctly.
 		player_page.verifyTimeBufferStatusForXSec(5);
 		
