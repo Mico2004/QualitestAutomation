@@ -813,7 +813,7 @@ public class CoursesHelperPage extends Page {
 			}
 		}
 		System.out.println("course  not exists");
-		ATUReports.add("Course existence verification",name,"Course "+ name+" Found in course list ","Course "+ name+" wasn't Found in course list " ,LogAs.FAILED,null);
+		ATUReports.add("Course existence verification",name,"Course "+ name+" Found in course list ","Course "+ name+" wasn't Found in course list " ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		return false;
 	}
 
