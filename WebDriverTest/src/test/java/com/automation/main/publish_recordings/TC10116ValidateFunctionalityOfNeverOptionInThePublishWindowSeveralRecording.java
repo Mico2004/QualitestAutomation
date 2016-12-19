@@ -113,6 +113,9 @@ public class TC10116ValidateFunctionalityOfNeverOptionInThePublishWindowSeveralR
 		//5.Select the "Always" radio box
 		publish_window.waitForPageToLoad();
 		publish_window.verifyPublishWindowOpen();
+		
+		//The "Always" radio button is marked.
+		publish_window.verifyThatAlwaysOptionSelectedOrNotSelected(1);
 		publish_window.chooseRadioButton("Never");
 		
 		//6.Press the "Save" button
@@ -121,7 +124,6 @@ public class TC10116ValidateFunctionalityOfNeverOptionInThePublishWindowSeveralR
 		
 		//7.The recordings "" status changed to "Not Publish".
 		List<String> source_recording_list = record.getCourseRecordingList(); 
-
 		for(int i = 0; i < source_recording_list.size() ; i++) {
 				record.checkRecordingInIndexIStatus((i + 1), "Not Published");
 			}
