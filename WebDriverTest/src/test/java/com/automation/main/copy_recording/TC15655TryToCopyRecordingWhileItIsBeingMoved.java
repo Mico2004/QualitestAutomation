@@ -195,17 +195,13 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		// 15. Message box is closed.
 		confirm_menu.isConfirmationMenuClosed();
 		
-		record.waitUntilFirstRecordingBeingMovedFromStatusDissaper();
+		record.checkStatusExistenceForMaxTTime(200);
 		
 		// 16. Click "Courses" link in the breadcrumbs.
 		record.returnToCourseListPage();
 		
 		// 17. Select destination course.
-		course.clickOnTargetCourseName(destination_course_name);
-		
-		//wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
-		Thread.sleep(3000);
-		//wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
+		course.selectCourseThatStartingWith(destination_course_name);
 		
 		// 18. Verify that recording is copied successfully.
 		List<String> target_course_recording_list = record.getCourseRecordingList();
