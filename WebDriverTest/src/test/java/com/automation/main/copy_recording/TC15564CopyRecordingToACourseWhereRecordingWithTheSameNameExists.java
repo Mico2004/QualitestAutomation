@@ -172,33 +172,16 @@ public class TC15564CopyRecordingToACourseWhereRecordingWithTheSameNameExists {
 		
 		// 7. Click "Copy Recording(s)" button.
 		copy.clickOnCopyButton();
-	
+		Thread.sleep(1000);
 		
 		// 8. Click "OK" button.
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-	
-		
-		// 8.1. Message box is closed
-		if(confirm_menu.isConfirmationMenuClosed()) {
-			System.out.println("Message box is closed");
-			ATUReports.add("Message box.", "Message box is closed.", "Message box is closed.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("Message box is not closed");
-			ATUReports.add("Message box.", "Message box is closed.", "Message box is not closed.", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
-		
-		// 8.2. "Copy" window is closed
-		if(copy.isCopyMenuClosed()) {
-			System.out.println("Copy window is closed");
-			ATUReports.add("Copy window.", "Copy window is closed.", "Copy window is closed.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("Copy window is not closed");
-			ATUReports.add("Copy window.", "Copy window is closed.", "Copy window is not closed", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
+			
+		// 8.1 Message window is closed.
+		confirm_menu.verifyConfirmWindowIsClosed();
+				
+		// 8.2 Copy window is closed.
+		copy.verifyThatCopyMenuClose();
 		
 		// 9. Source recording has a status "Being copying from".
 //		record.checkRecordingInIndexIStatus(1, "Being copied from");

@@ -79,7 +79,7 @@ public class CopyMenu extends Page {
 	public void clickOnCopyButton()  {
 			
 		String id = "CopyButton";
-			try{
+		try{
 			System.out.println("Copy1");
 			waitForVisibility(copy_button);			
 			System.out.println("Copy2");
@@ -87,12 +87,10 @@ public class CopyMenu extends Page {
 			System.out.println("Clicked on copy button");
 			ATUReports.add("Clicked on copy button", LogAs.PASSED, null);			
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("CopyButton")));
-			Assert.assertTrue(true);	}
-			catch(Exception e){
-				System.out.println(e.getMessage() +" message 2"+e.getLocalizedMessage());
-			
-			}
-
+			Assert.assertTrue(true);
+		}catch(Exception e){
+				System.out.println(e.getMessage() +" message 2"+e.getLocalizedMessage());		
+		}
 	}
 
 	// This function go over all course in copy menu select them.
@@ -178,7 +176,7 @@ public class CopyMenu extends Page {
 			return false;
 		}
 
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		return true;
 		} catch (Exception msg) {
 			msg.printStackTrace();

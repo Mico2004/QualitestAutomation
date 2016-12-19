@@ -1726,7 +1726,7 @@ public class CoursesHelperPage extends Page {
 			record_helper_page.clickOnTestsTab();
 		}
 
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 
 		// wait.until(ExpectedConditions.visibilityOf(record_helper_page.first_recording_title));
 
