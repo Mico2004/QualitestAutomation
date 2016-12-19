@@ -53,7 +53,7 @@ public class TC7990ValidateTagMenuItemUI {
 	public static WebDriver thread_driver;
 	CopyMenu copy;
 	DesiredCapabilities capability;
-    
+	String firstTag;
 	
 
 	@BeforeClass
@@ -87,6 +87,8 @@ public class TC7990ValidateTagMenuItemUI {
 		
 		//1.log in courses page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
+		
+		//login as INSTRUCTOR
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
 		
@@ -227,7 +229,7 @@ public class TC7990ValidateTagMenuItemUI {
 		//40.the "Apply" hint is displayed
 		record.verifyThatWeHaveHintToWebElement(tag_window.apply_button,"Apply");
 		
-		//41.click on the cancel button
+		//41.click on the apply button
 		tag_window.clickElementJS(tag_window.apply_button);
 		
 		//42.Hover over the "View" drop-down list menu.
@@ -267,13 +269,20 @@ public class TC7990ValidateTagMenuItemUI {
 		tag_window.waitForPageToLoad();
 		tag_window.verifyTagWindowOpen();
 		
-		//53.Click on the "Edit Tag" icon.
-		String firstTag = tag_window.getFirstTagName();
-		tag_window.clickElement(tag_window.edit_tag_button_list.get(0));
+		//53.Click on the "Edit Tag" icon/ Click on the "Create New Tag" Button.
+		for(int click_on = 0; click_on < 2; click_on++) {
+	
+			if(click_on == 0){
+				firstTag = tag_window.getFirstTagName();
+				tag_window.clickElement(tag_window.edit_tag_button_list.get(0));
+			} else{
+				firstTag = "";
+				tag_window.clickElement(tag_window.create_new_tag_button);
+			}
 		
 		//54.The color of the TopPanel is configurable in the "Customize User Interface" window in Admin Dashboard
-		tag_window.verifyTagEditWindowOpen();
 		tag_window.waitForEditPageToLoad();
+		tag_window.verifyTagEditWindowOpen();
 		tag_window.verifyTheTableColor("Edit_Grey");
 		
 		//55.The Tag textbox is displayed.
@@ -298,22 +307,48 @@ public class TC7990ValidateTagMenuItemUI {
 		//60.The "Cancel" button color is grey.
 		record.verifyColorButton(tag_window.getBackGroundImageColor(tag_window.cancel_edit_button));
 		
+		//62.the "Cancel" hint is displayed
+		record.verifyThatWeHaveHintToWebElement(tag_window.cancel_edit_button,"Cancel");
+		
 		//61. The "Submit" button is displayed.
 		tag_window.verifyWebElementDisplayed(tag_window.submit_edit_button,"Submit edit button");
 		
 		//62. The "Submit "button color is blue.
 		copy.verifyBlueColor(tag_window.getBackGroundImageColor(tag_window.submit_edit_button)); 
 		
+		//62.the "Submit" hint is displayed
+		record.verifyThatWeHaveHintToWebElement(tag_window.submit_edit_button,"Submit");
+			
 		//63. Click on the "Cancel" button.
 		tag_window.clickElement(tag_window.cancel_edit_button);
+		
+		}
+		
+		//63. Click on the "Cancel" button.
 		tag_window.clickElement(tag_window.cancel_button);
 		
 		//64.The "Tag Dialog" window is disappeared.
 		tag_window.isTagWindowClosed();
 		 
+		//65.Check recordings with tags checkboxes
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		
+		//66.Click on the "Tag" in the "Recording Tasks" drop-down list menu item.
+		record.clickOnRecordingTaskThenTag();
+								
+		//67.The "Tag" Dialog window is appeared.
+		tag_window.waitForPageToLoad();
+		tag_window.verifyTagWindowOpen();
+		
+		//68. All the tags checkboxes are unchecked.
+		tag_window.verifyAllTheTagCheckboxesAreChecked();
+		
+		//69. All the INSTRUCTOR owned tags is displayed.
+		tag_window.verifyAllInstractorAreDisplay();
+		
 		//65.Check recordings without tags checkboxes.
 		record.unselectallCheckbox();
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox3);
 		 
 		//66.Click on the "Tag" in the "Recording Tasks" drop-down list menu item.
 		record.clickOnRecordingTaskThenTag();

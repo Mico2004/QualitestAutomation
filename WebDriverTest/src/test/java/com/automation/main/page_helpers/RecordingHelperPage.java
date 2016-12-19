@@ -5865,7 +5865,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// This function verify that WebElement is not displayed, and String with
 	// description
 	public void verifyBookMarkTypeNotDisplayedInAnyTabExcpectOne(List<WebElement> web_elements, String description) {
+		
 		int count = 0 ; 	
+		try{
 		for(WebElement element : web_elements) {
 			if (element.getAttribute("title").equals(description)) {
 				count++;
@@ -5878,7 +5880,36 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 		System.out.println(description + " is not displayed.");
 		ATUReports.add(description + " is not displayed.", "True.", "True.", LogAs.PASSED, null);
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
 
+	//Click on regular recording bookmark
+	public void clickOnRegularRecordingBookmark(String bookmarkType) {
+		
+		try{
+			for(int number_of_bookmarks = 0 ; number_of_bookmarks<bookmarks_names.size() ; number_of_bookmarks++) {
+				WebElement type = driver.findElement(By.xpath(".//*[@id='ItemUrl"+Integer.toString(number_of_bookmarks+1)+"']/span[2]"));
+				String typeS = type.getText();
+				if(bookmarkType.contains(typeS)){
+					clickElementWithOutIdJS(bookmarks_names.get(number_of_bookmarks));
+					System.out.println("click On Regular Recording Bookmark " + bookmarkType);
+					ATUReports.add("click On Regular Recording Bookmark " + bookmarkType, "True.", "True.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+					return;
+				}
+			}
+		
+			System.out.println("Can't click On Regular Recording Bookmark " + bookmarkType);
+			ATUReports.add("Can't click On Regular Recording Bookmark " + bookmarkType, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 	}
 	
 	
