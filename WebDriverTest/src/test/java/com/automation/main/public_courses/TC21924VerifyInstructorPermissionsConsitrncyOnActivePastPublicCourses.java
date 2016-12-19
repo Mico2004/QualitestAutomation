@@ -316,7 +316,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			
 			// 16. Click on "Additional Contents" on both browsers.
 			record.clickOnAdditionContentTab();
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			
 			// 17. Validate that the files list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -327,7 +327,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			
 			// 18. Click the 'Student Recordings' tab.
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			
 			// 19. Validate that the recordings list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -338,7 +338,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 			
 			// 20 Click the 'Tests' tab.
 			record.clickOnTestsTab();
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			
 			// 21. Validate that the recordings list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -520,7 +520,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 					
 			// 33. Click on "Additional Contents" on both browsers.
 			record.clickOnAdditionContentTab();
-			
+			Thread.sleep(1000);
 					
 			// 34. Validate that the files list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -531,7 +531,7 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 					
 			// 35. Click the 'Student Recordings' tab.
 			record.clickOnStudentRecordingsTab();
-			
+			Thread.sleep(1000);
 					
 			// 36. Validate that the recordings list on both browsers contains the same recordings.
 			if(type_of_course==0) {
@@ -542,7 +542,8 @@ public class TC21924VerifyInstructorPermissionsConsitrncyOnActivePastPublicCours
 					
 			// 37. Click the 'Tests' tab.
 			record.clickOnTestsTab();
-				
+			Thread.sleep(1000);
+			
 			// 38. Validate that the recordings list on both browsers contains the same recordings.
 			if(type_of_course==0) {
 				past_course_tests_list = record.getCourseRecordingList();

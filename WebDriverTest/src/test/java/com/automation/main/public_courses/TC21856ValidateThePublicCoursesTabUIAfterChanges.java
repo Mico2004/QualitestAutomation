@@ -182,9 +182,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 				Thread.sleep(500);
 			}
 		}
-		
-//		Thread.sleep(100);
-		
+			
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String temp_instructor_user_name = "InstructorTemp" + sdf.format(date);
@@ -353,8 +351,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 			driver.switchTo().window(window);
 			break;
 		}
-		manage_adhoc_courses_enrollments_page.waitForVisibility(driver.findElement(By.id("SignOutLink")));
-		driver.findElement(By.id("SignOutLink")).click();
+		manage_adhoc_courses_enrollments_page.signOut();
 		
 		// 16. Login as Instructor.
 		tegrity.loginCoursesByParameter(temp_instructor_user_name);
