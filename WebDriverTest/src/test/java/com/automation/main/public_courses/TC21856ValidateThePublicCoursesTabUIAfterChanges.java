@@ -221,10 +221,8 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(abc_course_name);
 		
-		Thread.sleep(1000);
 		// Click on result first course (the only one) membership button
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton();
-		Thread.sleep(1000);	
 		
 		// Search target user name in membership window
 		mange_ad_hoc_courses_membership_window.searchForUser(temp_instructor_user_name);	
@@ -234,11 +232,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 
 		// Add selected user to instructor list
 		mange_ad_hoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
-		
-		mange_ad_hoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(temp_instructor_user_name);
-		
-		Thread.sleep(1000);
-		
+			
 		// Search target user name in membership window
 		mange_ad_hoc_courses_membership_window.searchForUser(temp_student_user_name);	
 
@@ -247,12 +241,7 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 
 		// Add selected user to instructor list
 		mange_ad_hoc_courses_membership_window.clickOnAddSelectedUserToStudentList();
-		
-		
-		mange_ad_hoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse(temp_student_user_name);
-		
-		mange_ad_hoc_courses_membership_window.waitForVisibility(mange_ad_hoc_courses_membership_window.ok_button);
-		
+			
 		// Confirm user membership list
 		mange_ad_hoc_courses_membership_window.clickOnOkButton();
 	
@@ -274,10 +263,8 @@ public class TC21856ValidateThePublicCoursesTabUIAfterChanges {
 		record.toUploadAdditionalContentLink();
 		add_additional_content_link_window.createNewAdditionalContentLink(confirm_menu, "current page", driver.getCurrentUrl());
 		
-		record.clickOnCourseTaskThenCourseSettings();
-		
+		record.clickOnCourseTaskThenCourseSettings();	
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
-		Thread.sleep(2000);
 		course_settings_page.clickOnOkButton();
 		
 		// 6. Login as Instructor.
