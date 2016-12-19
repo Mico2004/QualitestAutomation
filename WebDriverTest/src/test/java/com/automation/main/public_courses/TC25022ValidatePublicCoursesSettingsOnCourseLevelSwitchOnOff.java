@@ -167,15 +167,12 @@ public class TC25022ValidatePublicCoursesSettingsOnCourseLevelSwitchOnOff {
 		// 3. Click on the course from the precondition.
 		String selected_course_name = course.selectCourseThatStartingWith("abc");
 		
-		
 		// 4. Click on "Course Tasks"-->"Course Settings".
 		record.clickOnCourseTaskThenCourseSettings();
 		
-		
 		// 5. Check the option "Make this course publicly visible".
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
-		
-		
+			
 		// 6. Click OK.
 		course_settings_page.clickOnOkButton();
 		
