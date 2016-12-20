@@ -73,15 +73,20 @@ public class CreateNewCourseWindow extends Page {
 	}
 	
 	public void createNewCourse(String course_name, String course_id) throws InterruptedException  {
-//		wait.until(ExpectedConditions.visibilityOf(title_modal_window));
-		setCourseName(course_name);
-		wait.until(ExpectedConditions.textToBePresentInElementValue(course_name_input, course_name));
-		setCourseId(course_id);
-		wait.until(ExpectedConditions.textToBePresentInElementValue(course_id_input, course_id));
-		clickOnOkButton();		
-		System.out.println("New course created. Course name: " + course_name + ". Course id: " + course_id);
-		waitForAlert(60);
 	
+		try{
+		//		wait.until(ExpectedConditions.visibilityOf(title_modal_window));
+			setCourseName(course_name);
+			wait.until(ExpectedConditions.textToBePresentInElementValue(course_name_input, course_name));
+			setCourseId(course_id);
+			wait.until(ExpectedConditions.textToBePresentInElementValue(course_id_input, course_id));
+			clickOnOkButton();		
+			System.out.println("New course created. Course name: " + course_name + ". Course id: " + course_id);
+			waitForAlert(60);
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 	}
 	
 	
