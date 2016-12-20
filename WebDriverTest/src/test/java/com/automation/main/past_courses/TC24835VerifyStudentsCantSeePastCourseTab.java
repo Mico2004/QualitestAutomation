@@ -134,14 +134,15 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(5000);
+	
 
 		// 4. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		Thread.sleep(10000);
+		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		/// 5.build new course past course 1
 		driver.switchTo().frame(0);
 		Thread.sleep(4000);
+		
 		mange_adhoc_course_enrollments.clickOnNewCourse();
 		Thread.sleep(3000);
 
@@ -184,8 +185,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		}
 		Thread.sleep(3000);
 		// enroll instructors
-		mange_adhoc_course_enrollments.enrollInstructorToCourse(past_course_student, list_superuser,
-				mangage_adhoc_courses_membership_window);
+		mange_adhoc_course_enrollments.enrollInstructorToCourse(past_course_student, list_superuser,mangage_adhoc_courses_membership_window);
 		Thread.sleep(5000);
 
 		for (String window : driver.getWindowHandles()) {
@@ -211,8 +211,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 			driver.switchTo().window(window);
 			break;
 		}
-		mange_adhoc_course_enrollments.enrollStudentsToCourse(past_course_student2, list_student,
-				mangage_adhoc_courses_membership_window);
+		mange_adhoc_course_enrollments.enrollStudentsToCourse(past_course_student2, list_student,mangage_adhoc_courses_membership_window);
 		Thread.sleep(5000);
 		for (String window : driver.getWindowHandles()) {
 			driver.switchTo().window(window);
@@ -222,17 +221,14 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		Thread.sleep(2000);
 
 		admin_dashboard_page.signOut();
-		Thread.sleep(3000);
+	
 		tegrity.loginCourses("SuperUser");				
 		initializeCourseObject();
-		
-		
+			
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", past_course_student, 0, record, copy, confirm_menu);
-		Thread.sleep(2000);
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", past_course_student2, 0, record, copy, confirm_menu);
-		Thread.sleep(2000);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record); 
-		Thread.sleep(2000);		
+		
 		course.signOut();
 		tegrity.waitForVisibility(tegrity.button_login);
 		driver.quit();
@@ -270,21 +266,19 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 				ManageAdHocCoursesMembershipWindow.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		
-		
-		
+			
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// 2.login as admin
 		tegrity.waitForVisibility(tegrity.button_login);
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(5000);
+		
 
 		// 3. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		Thread.sleep(10000);
+		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		/// 4.unenroll student from course
-		mange_adhoc_course_enrollments.unEnrollStusentsFromCourse(past_course_student, student,
-				mangage_adhoc_courses_membership_window);
+		mange_adhoc_course_enrollments.unEnrollStusentsFromCourse(past_course_student, student,mangage_adhoc_courses_membership_window);
 		Thread.sleep(4000);
 
 		/// 5.sign out
@@ -294,12 +288,11 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		}
 
 		mange_adhoc_users_page.toAdminDashBoard();
-		Thread.sleep(5000);
+		admin_dashboard_page.waitForPageToLoad();
 		admin_dashboard_page.signOut();
-		Thread.sleep(3000);
+	
 		/// 6. login as student
-		tegrity.loginCoursesByParameter(student);
-		Thread.sleep(3000);
+		tegrity.loginCoursesByParameter(student);	
 		initializeCourseObject();
 		// 7.Verify the 'Past Courses' tab isn't displayed
 		course.verifyNoPastCoursesTab();
@@ -314,7 +307,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		course.signOut();
 		// 10.login as admin
 		tegrity.loginAdmin("Admin");
-        Thread.sleep(5000);
+
 		//11.click on manage ad-hoc course
         admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		Thread.sleep(10000);
@@ -329,10 +322,10 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
 		Thread.sleep(2000);
         admin_dashboard_page.signOut();
-    	Thread.sleep(3000);
+    
     	//14.login as a student
     	tegrity.loginCoursesByParameter(student);
-    	Thread.sleep(3000);
+    	
     	// 15.Verify the 'Past Courses' tab isn't displayed
     	course.verifyNoPastCoursesTab();
     	Thread.sleep(2000);
