@@ -143,6 +143,14 @@ public class PlayerPage extends Page {
 	public WebElement important;
 	@FindBy(xpath = ".//*[@id='ddPopupDiv']/div[1]/div")
 	public WebElement inclear;
+	@FindBy(id= "ChapterMarksHolderDiv")
+	public WebElement seek_bar;
+	@FindBy(css = ".BookmarkTime")
+	public List<WebElement> bookmarkTimeList;
+	@FindBy(css = ".BookmarkTextInst")
+	public List<WebElement> bookmarkIsnstNames;
+	@FindBy(css = ".BookmarkText")
+	public List<WebElement> bookmarkStudentNames;
 	
 	
 	// This function get as input number of seconds.
@@ -166,8 +174,6 @@ public class PlayerPage extends Page {
 							"Fail to switch to player frame.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);							
 			}
-
-		// Thread.sleep(10000);
 
 		// Wait max 45sec to load the player
 //		if((driver instanceof InternetExplorerDriver) || (driver instanceof ChromeDriver)){
@@ -725,18 +731,16 @@ public class PlayerPage extends Page {
 	
 
 	// This function add String to bookmark
-	public void addTargetBookmark(String target_bookmark) throws InterruptedException {
+	public String addTargetBookmark(String target_bookmark) throws InterruptedException {
 		System.out.println(time_buffer_status.getText());
-		Thread.sleep(500);
 		sendStringToWebElement(bookmark_input_text, target_bookmark);
+		clickElementJS(add_bookmark_button);
 		Thread.sleep(500);
-		clickElement(add_bookmark_button);
-		if(!bookmark_input_text.getText().isEmpty()){
-			clickElementJS(add_bookmark_button);
-		}
+		String timeToReturn =  time_buffer_status.getText();
 		System.out.println(time_buffer_status.getText());
 		System.out.println("Target bookmark added.");
 		ATUReports.add("Target bookmark added.", "True.", "True.", LogAs.PASSED, null);
+		return timeToReturn;
 	}
 
 	// This function delete all bookmarks
@@ -1320,6 +1324,61 @@ public class PlayerPage extends Page {
 		ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}		
 		
+	}
+
+	public void checkThatWeStartTheRecordFromThisTime(String time) throws InterruptedException {
+		try{
+			Thread.sleep(5000);
+			exitInnerFrame();
+			Thread.sleep(500);
+			getIntoFrame(0);
+			new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(time_buffer_status));
+			new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElement(time_buffer_status,time));
+			System.out.println("Verifed that the record start from the bookmark.");
+			ATUReports.add("Verifed that the record start from the bookmark.", "True.", "True.", LogAs.PASSED, null);
+		} catch (Exception e) {
+			System.out.println("Not Verifed that the record start from the bookmark.");
+			ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}		
+	}
+
+	public void makeSureThatTheBookmarkIsCanBeenSeeingOnTheSeekBar(String bookmarkType) {
+	
+		try{	
+			List<WebElement> bookmarkSigns = seek_bar.findElements(By.xpath("//*[contains(@id,'TimeSlider.Bookmark')]"));
+			boolean IsTheBookmarkOnTheSeekBar = false;
+			for(WebElement element: bookmarkSigns){	
+				String bookmarkColor = element.getAttribute("src");
+				if(bookmarkColor != null){
+					if(bookmarkType.equals("instructor")){
+						if(bookmarkColor.contains("BM_TAG_I")){
+							IsTheBookmarkOnTheSeekBar = true;
+							break;
+						}
+					} else if(bookmarkType.equals("unclear")){
+						if(bookmarkColor.contains("BM_TAG_T1")){
+							IsTheBookmarkOnTheSeekBar = true;
+							break;
+						}
+					} else if(bookmarkType.equals("important")){
+						if(bookmarkColor.contains("BM_TAG_T2")){
+							IsTheBookmarkOnTheSeekBar = true;
+							break;
+						}
+					}
+				}
+			}
+			if(IsTheBookmarkOnTheSeekBar) {
+				System.out.println("Verifed that the bookmark " + bookmarkType +" is on the seek bar.");
+				ATUReports.add("Verifed that the bookmark " + bookmarkType +" is on the seek bar.", "True.", "True.", LogAs.PASSED, null);
+			} else {
+				System.out.println("Not Verifed that the bookmark " + bookmarkType +" is on the seek bar.");
+				ATUReports.add("Not Verifed that the bookmark " + bookmarkType +" is on the seek bar." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+			} catch (Exception e) {
+				e.getMessage();
+				ATUReports.add(e.getMessage() , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}	
 	}
 	
 	

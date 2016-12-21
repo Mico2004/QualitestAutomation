@@ -5887,29 +5887,35 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 
 	//Click on regular recording bookmark
-	public void clickOnRegularRecordingBookmark(String bookmarkType) {
+	public String clickOnRegularRecordingBookmark(String bookmarkType) {
 		
+		String nameOfBookmark = null;
 		try{
 			for(int number_of_bookmarks = 0 ; number_of_bookmarks<bookmarks_names.size() ; number_of_bookmarks++) {
 				WebElement type = driver.findElement(By.xpath(".//*[@id='ItemUrl"+Integer.toString(number_of_bookmarks+1)+"']/span[2]"));
 				String typeS = type.getText();
-				if(bookmarkType.contains(typeS)){
+				if(typeS.contains(bookmarkType)){
+					nameOfBookmark = bookmarks_names.get(number_of_bookmarks).getText();
 					clickElementWithOutIdJS(bookmarks_names.get(number_of_bookmarks));
-					System.out.println("click On Regular Recording Bookmark " + bookmarkType);
-					ATUReports.add("click On Regular Recording Bookmark " + bookmarkType, "True.", "True.", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-					return;
+					break;
 				}
 			}
-		
-			System.out.println("Can't click On Regular Recording Bookmark " + bookmarkType);
-			ATUReports.add("Can't click On Regular Recording Bookmark " + bookmarkType, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-
+			if(nameOfBookmark != null){
+				System.out.println("click On The Bookmark " + bookmarkType);
+				ATUReports.add("click On RThe Bookmark " + bookmarkType, "True.", "True.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			
+			} else{
+				System.out.println("Can't click On The Bookmark " + bookmarkType);
+				ATUReports.add("Can't click On The Bookmark " + bookmarkType, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+			
 		}catch(Exception e){
-			e.getMessage();
+			e.printStackTrace();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
+		return nameOfBookmark;
 	}
 	
 	
