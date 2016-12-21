@@ -156,20 +156,10 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
 			
 		// 9. Message box is closed.
-		boolean is_closed = confirm_menu.isConfirmationMenuClosed();
-		
-		if (is_closed) {
-			System.out.println("Message box is closed");
-			ATUReports.add("Message box is closed", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("Message box is not closed");
-			ATUReports.add("Message box is not closed", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
-		
+		confirm_menu.verifyConfirmWindowIsClosed();
+
 		// 10. "Move" window is closed.
-		is_closed = move_window.isMoveMenuClosed();
+		boolean is_closed = move_window.isMoveMenuClosed();
 		
 		if (is_closed) {
 			System.out.println("Move window is closed");
@@ -195,7 +185,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		// 15. Message box is closed.
 		confirm_menu.isConfirmationMenuClosed();
 		
-		record.checkStatusExistenceForMaxTTime(200);
+		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
 		
 		// 16. Click "Courses" link in the breadcrumbs.
 		record.returnToCourseListPage();
@@ -204,44 +194,12 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		course.selectCourseThatStartingWith(destination_course_name);
 		
 		// 18. Verify that recording is copied successfully.
-		List<String> target_course_recording_list = record.getCourseRecordingList();
 		
-		System.out.println("#of recorings : " + target_course_recording_list.size());
-		
-		int i = 0;
-		boolean is_recording_found = false;
-		for(String recording : target_course_recording_list) {
-			i++;
-			if(recording.equals(selected_recording_name)) {
-				is_recording_found = true;
-				break;
-			}
-		}
-		
-		// 18.1. Recording is displayed in "Recordings" tab
-		if(is_recording_found) {
-			System.out.println("Recording is displayed in recordings tab");
-			ATUReports.add("Recording is displayed in recordings tab", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("Recording is not displayed in recordings tab");
-			ATUReports.add("Recording is not displayed in recordings tab", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		}
+		record.verifyRecordingDisplayedCorrectly(selected_recording_name);
 	
 		// 18.2. The recording finished moving - has this status "IE, FF, Safari Ready" or none at all
-		String recording_status = record.getIndexRecordingStatus(i);
-		
-		if((recording_status.equals("IE, FF, Safari Ready")) || recording_status.equals("")) {
-			System.out.println("The recording has this status IE, FF, Safari Ready or none at all.");
-			ATUReports.add("The recording has this status IE, FF, Safari Ready or none at all.", "True.", "True.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("The recording has not this status IE, FF, Safari Ready or none at all.");
-			ATUReports.add("Verfied that all recordings have delete available status.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			ATUReports.add("the status is: " + recording_status, "True.", "False.", LogAs.WARNING, null);
-			Assert.assertTrue(false);
-		}
+		record.verifyNoStatusInTheIndex(1);
+	
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
