@@ -194,7 +194,6 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		course.selectCourseThatStartingWith(destination_course_name);
 		
 		// 18. Verify that recording is copied successfully.
-		
 		record.verifyRecordingDisplayedCorrectly(selected_recording_name);
 	
 		// 18.2. The recording finished moving - has this status "IE, FF, Safari Ready" or none at all
