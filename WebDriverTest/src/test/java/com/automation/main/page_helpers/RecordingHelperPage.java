@@ -5891,7 +5891,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		String nameOfBookmark = null;
 		try{
-			for(int number_of_bookmarks = 0 ; number_of_bookmarks<bookmarks_names.size() ; number_of_bookmarks++) {
+			for(int number_of_bookmarks = 0 ; number_of_bookmarks < bookmarks_names.size() ; number_of_bookmarks++) {
 				WebElement type = driver.findElement(By.xpath(".//*[@id='ItemUrl"+Integer.toString(number_of_bookmarks+1)+"']/span[2]"));
 				String typeS = type.getText();
 				if(typeS.contains(bookmarkType)){
@@ -5902,7 +5902,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}
 			if(nameOfBookmark != null){
 				System.out.println("click On The Bookmark " + bookmarkType);
-				ATUReports.add("click On RThe Bookmark " + bookmarkType, "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add("click On The Bookmark " + bookmarkType, "True.", "True.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			
 			} else{
@@ -5916,6 +5916,33 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		return nameOfBookmark;
+	}
+
+	public void deleteBookmarkInBookmarkTab(String bookmarkName) {
+		
+		int number_of_bookmarks = 0;
+		try{
+			for(WebElement name :bookmarks_names ){
+				String nameS = name.getText();
+				if(nameS.equals(bookmarkName)){
+					WebElement element = driver.findElement(By.xpath(".//*[@id='RecordingDate"+Integer.toString(number_of_bookmarks+1)+"']/a"));
+ 					clickElementWithOutIdJS(element);
+ 					System.out.println("delete the Bookmark " + bookmarkName);
+ 					ATUReports.add("click the Bookmark " + bookmarkName, "True.", "True.", LogAs.PASSED, null);
+ 					waitForAlert(60);
+ 					driver.switchTo().alert().accept();					
+ 					System.out.println("Click on the alert massege");
+ 					ATUReports.add("Click on the alert massege","Success","Success",LogAs.PASSED,null);
+ 					return;
+				} else number_of_bookmarks++;
+			}
+			System.out.println("Can't find the bookmark: " + bookmarkName);
+			ATUReports.add("Can't find the bookmark: " + bookmarkName, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);	
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 	}
 	
 	

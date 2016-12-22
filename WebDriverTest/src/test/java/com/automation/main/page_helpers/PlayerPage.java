@@ -1380,6 +1380,32 @@ public class PlayerPage extends Page {
 				ATUReports.add(e.getMessage() , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}	
 	}
-	
-	
+
+	public void verifybookmarkIsntFoundInBookmarkList(String bookmark_to_check,String type) {
+		
+		if(bookmark_list.size()>0){
+				if(type.equals("Ins")){
+					for (WebElement we : bookmarkIsnstNames) { 
+						String bookmark = we.getText();
+						if(bookmark.equals(bookmark_to_check)){
+							System.out.println("Not Verify that the bookmarks " + bookmark_to_check + " isn't found.");
+							ATUReports.add("Not Verify that the bookmarks " + bookmark_to_check + " isn't found." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						}
+					}
+				} else {
+					for (WebElement we : bookmarkStudentNames) { 
+						String bookmark = we.getText();
+						if(bookmark.equals(bookmark_to_check)){
+							System.out.println("Not Verify that the bookmarks " + bookmark_to_check + " isn't found." );
+							ATUReports.add("Not Verify that the bookmarks " + bookmark_to_check + " isn't found."  , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						}
+					}
+				}
+				System.out.println("Verify that the bookmarks " + bookmark_to_check + " isn't found.");
+				ATUReports.add("Verify that the bookmarks " + bookmark_to_check + " isn't found", "True.", "True.", LogAs.PASSED, null);			
+	} else {
+		System.out.println("Verify that the bookmarks " + bookmark_to_check + " isn't found.");
+		ATUReports.add("Verify that the bookmarks " + bookmark_to_check + " isn't found.", "True.", "True.", LogAs.PASSED, null);
+	}	
+  }	
 }
