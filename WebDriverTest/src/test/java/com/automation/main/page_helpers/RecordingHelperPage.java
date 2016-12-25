@@ -5654,6 +5654,27 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}	
 	}
 	
+	// verify That All the bookmarks are displayed (Instructor and Student)
+	public void verifyThatTheBookmarkDisplayInTheBookmarkTab(String bookmark) {
+			waitForVisibility(bookmarks_names.get(0));
+			try { 
+				for(WebElement webElement: bookmarks_names) {
+					String bookmarksName = webElement.getAttribute("title");
+					if(bookmark.equals(bookmarksName)) {
+						System.out.println("Verify that the bookmark is: " + bookmark +" displayed in the bookmarks tab.");
+						ATUReports.add("Verify that the bookmark is: " + bookmark +" displayed in the bookmarks tab.", "True.", "True.", LogAs.PASSED, null);
+						return;		
+				}
+			}
+			System.out.println("Not Verify that the bookmark is: " + bookmark +" displayed in the bookmarks tab.");
+			ATUReports.add("Not Verify that the bookmark is: " + bookmark +" displayed in the bookmarks tab..", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}catch(Exception e){
+				e.getMessage();
+				ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}	
+		}
+	
+	
 	// The date is in the following format: 'XX/XX/XXXX'.
 	public void verifyThatTheRecordingDateInTheRightFormat(WebElement correctDate){
 		
@@ -5937,6 +5958,32 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		return nameOfBookmark;
 	}
 
+	//Click on regular recording bookmark
+	public void clickOnTheTargetBookmark(String bookmarkName) {
+		
+		
+		try{
+			for(int number_of_bookmarks = 0 ; number_of_bookmarks < bookmarks_names.size() ; number_of_bookmarks++) {
+				WebElement name = bookmarks_names.get(number_of_bookmarks);
+				String nameS = name.getText();
+				if(nameS.contains(bookmarkName)){	
+					clickElementWithOutIdJS(name);
+					System.out.println("click On The Bookmark " + bookmarkName);
+					ATUReports.add("click On The Bookmark " + bookmarkName, "True.", "True.", LogAs.PASSED, null);
+					return;
+				}
+			}
+			
+			System.out.println("Can't click On The Bookmark " + bookmarkName);
+			ATUReports.add("Can't click On The Bookmark " + bookmarkName, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);	
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
+	
+	
 	public void deleteBookmarkInBookmarkTab(String bookmarkName) {
 		
 		int number_of_bookmarks = 0;
