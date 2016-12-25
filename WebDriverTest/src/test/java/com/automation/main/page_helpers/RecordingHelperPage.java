@@ -112,7 +112,7 @@ public class RecordingHelperPage extends Page {
 	@FindBy(xpath = "//*[@id='Recording2']/strong")
 	WebElement second_course_title;
 	@FindBy(xpath = "//*[@id='RecordingTitle1']/strong")
-	WebElement first_course_title_tests;
+	public WebElement first_course_title_tests;
 	@FindBy(css="#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")
 	public WebElement courses_link;
 	@FindBy(id = "CheckAll")
@@ -6009,4 +6009,24 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
+
+	public void verifyBookmarkIsNotDisplay(String bookmarkName) {
+		try{
+			for(int number_of_bookmarks = 0 ; number_of_bookmarks < bookmarks_names.size() ; number_of_bookmarks++) {
+				WebElement name = bookmarks_names.get(number_of_bookmarks);
+				String nameS = name.getText();
+				if(nameS.equals(bookmarkName)){	
+					System.out.println("The Bookmark " + bookmarkName + "is display.");
+					ATUReports.add("The Bookmark " + bookmarkName + "is display.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					return;
+				}
+			}
+				System.out.println("The Bookmark " + bookmarkName + "is not display.");
+				ATUReports.add("The Bookmark " + bookmarkName + "is not display.", "True.", "True.", LogAs.PASSED, null);
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
+
 }
