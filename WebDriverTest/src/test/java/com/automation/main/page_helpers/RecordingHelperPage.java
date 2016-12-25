@@ -2654,6 +2654,25 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 	}
 	
+	// verify there is no bookmark Tab
+		public void verifyNoSBookmarkTab() {
+			try {
+				if (bookmarks_tab.isDisplayed()) {
+					System.out.println("The bookmark Recordings tab shouldn't be displayed, but it is.");
+					ATUReports.add("The bookmark Recordings tab shouldn't be displayed, but it is.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				} else {
+					System.out.println("Verified that there is no bookmark Recordings tab.");
+					ATUReports.add("Verified that there is no bookmark Recordings tab.", "True.", "True.", LogAs.PASSED,null);
+					Assert.assertTrue(true);
+				}
+			} catch (Exception e) {
+				System.out.println("The bookmark Recordings tab shouldn't be displayed, but it is.");
+				ATUReports.add("The bookmark Recordings tab shouldn't be displayed, but it is.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+		}
+	
 	public void verifyBookmarkTab() {
 		try {
 			if (!bookmarks_tab.isDisplayed()) {
