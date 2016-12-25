@@ -204,21 +204,23 @@ public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsI
 		player_page.exitInnerFrame();
 		player_page.returnToCoursePageByNameAsUserOrGuest(course);
 		
-		}
-		
 		//post test-delete all the bookmarks
 		//29.Click on the course name that you moved the recording to
 		course.selectCourseThatStartingWith("abc");
+				
+		//30.Click on the bookmarks tab
+		record.clickOnBookmarksTab();
+				
+		//31. delete the bookmark
+		record.deleteBookmarkInBookmarkTab(bookmark_to_add);
 		
-		//30.open the recording for watching 
-		record.verifyFirstExpandableRecording();
-		record.clickOnTheFirstCaptherWithOutTheExpand();
-				
-		//31.display recording and click on the stop button
-		player_page.verifyTimeBufferStatusForXSec(2);
-				
-		//32. delete all the bookmarks
-		player_page.deleteAllBookmark();
+		//32. return beck to the course page
+		record.returnToCourseListPage();
+		
+		}
+		
+		
+		
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
