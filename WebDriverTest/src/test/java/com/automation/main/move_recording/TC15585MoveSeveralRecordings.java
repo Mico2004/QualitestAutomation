@@ -102,21 +102,15 @@ public class TC15585MoveSeveralRecordings {
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
 		
-		Thread.sleep(3000);
-		
-		
 		// 2. Select first course.
 		targetCourse = course.selectCourseThatStartingWith("abc");
 		System.out.println("Target course clicked: " + targetCourse);
-		
-		Thread.sleep(1000);
 		
 		// 3. Get first course recording list.
 		int number_of_recordings_in_target_course = record.getNumberOfRecordings();
 		
 		System.out.println(number_of_recordings_in_target_course);		
-		
-		
+			
 		if (number_of_recordings_in_target_course == 0) {
 			ATUReports.add("There is no recordings in target course.", LogAs.PASSED, null);
 			System.out.println("There is no recordings in target course.");
