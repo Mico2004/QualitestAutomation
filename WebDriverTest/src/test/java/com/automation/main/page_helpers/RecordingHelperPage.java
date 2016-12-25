@@ -5960,8 +5960,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	//Click on regular recording bookmark
 	public void clickOnTheTargetBookmark(String bookmarkName) {
-		
-		
+
 		try{
 			for(int number_of_bookmarks = 0 ; number_of_bookmarks < bookmarks_names.size() ; number_of_bookmarks++) {
 				WebElement name = bookmarks_names.get(number_of_bookmarks);
@@ -6010,6 +6009,4 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
-	
-	
 }

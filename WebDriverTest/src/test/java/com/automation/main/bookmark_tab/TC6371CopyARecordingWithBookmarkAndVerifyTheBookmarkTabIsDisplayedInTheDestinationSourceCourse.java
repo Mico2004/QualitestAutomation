@@ -33,7 +33,7 @@ import java.util.List;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsInTheSourceCourseAndAppearsInTheDestinationCourse {
+public class TC6371CopyARecordingWithBookmarkAndVerifyTheBookmarkTabIsDisplayedInTheDestinationSourceCourse {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -78,8 +78,8 @@ public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsI
 			
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsInTheSourceCourseAndAppearsInTheDestinationCourse at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsInTheSourceCourseAndAppearsInTheDestinationCourse at " + DateToStr, "Starting the test: TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsInTheSourceCourseAndAppearsInTheDestinationCourse at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC6371CopyARecordingWithBookmarkAndVerifyTheBookmarkTabIsDisplayedInTheDestinationSourceCourse at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC6371CopyARecordingWithBookmarkAndVerifyTheBookmarkTabIsDisplayedInTheDestinationSourceCourse at " + DateToStr, "Starting the test: TC6371CopyARecordingWithBookmarkAndVerifyTheBookmarkTabIsDisplayedInTheDestinationSourceCourse at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -88,9 +88,8 @@ public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsI
 	}
 		
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC6368 Move a recording with a bookmark and verify the bookmark tab disappears in the source course and appears in the destination course")
-	public void test6368() throws InterruptedException {
-		
+	@Test (description="TC6371 Copy a recording with bookmark and verify the bookmark tab is displayed in the destination/source course")
+	public void test6371() throws InterruptedException {
 		
 		//1.Enter the university
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
@@ -148,7 +147,7 @@ public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsI
 		
 		//13.Hover over the "Recording Tasks" menu 
 		//14.Click on "move" option 
-		record.clickOnRecordingTaskThenMove();
+		record.clickOnRecordingTaskThenCopy();
 		
 		//15.A move window dialog opens
 		confirm_menu.verifyConfirmWindowIsOpen();
@@ -157,28 +156,25 @@ public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsI
 		copy.selectTargetCourseFromCourseListThatStartWith("abc");
 				
 		//17.Click "Move Recording(s)" button.
-		move_window.clickOnMoveRecordings();
+		copy.clickOnCopyButton();
 						
 		//18.Click "OK" button.
-		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
+		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		
 		//19. Message window is closed.
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
-		if(type_of_user == 1){
-			record.clickOnStudentRecordingsTab();		
-		}
-		
 		//20.verify that the status is clear
 		record.checkStatusExistenceForMaxTTime(220);
 		
-		//21.The bokkmarks tab disappear 
-		record.refresh();
-		record.waitForThePageToLoad();
-		record.verifyNoSBookmarkTab();
+		//21.Click on the bookmarks tab 
+		record.clickOnBookmarksTab();
 		
-		//22.Click on courses breadcrumbs
-		record.returnToCourseListPage();
+		//22.The bookmarks of the copied recording is still on the list with the correct details
+		record.verifyThatTheBookmarkDisplayInTheBookmarkTab(bookmark_to_add);
+		
+		//23.Click on courses breadcrumbs
+		player_page.returnToCoursePageByNameAsUserOrGuest(course);
 		
 		//23.Click on the course name that you moved the recording to
 		course.selectCourseThatStartingWith("abc");
@@ -217,11 +213,24 @@ public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsI
 		//32. return beck to the course page
 		record.returnToCourseListPage();
 		
+		//29.Click on the course name that you moved the recording to
+		course.selectCourseThatStartingWith("Ab");
+		
+		//30.Click on the bookmarks tab
+		record.clickOnBookmarksTab();
+				
+		//31. delete the bookmark
+		record.deleteBookmarkInBookmarkTab(bookmark_to_add);
+		
+		//32. return beck to the course page
+		record.returnToCourseListPage();
+		
 		}
 		
+		
+
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 	
 }
-
