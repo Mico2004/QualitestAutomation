@@ -324,7 +324,7 @@ public class TC7990ValidateTagMenuItemUI {
 		
 		}
 		
-		//63. Click on the "Cancel" button.
+		//63. Click on the "apply" button.
 		tag_window.clickElement(tag_window.cancel_button);
 		
 		//64.The "Tag Dialog" window is disappeared.
@@ -346,9 +346,12 @@ public class TC7990ValidateTagMenuItemUI {
 		//69. All the INSTRUCTOR owned tags is displayed.
 		tag_window.verifyAllInstractorAreDisplay();
 		
-		//65.Check recordings without tags checkboxes.
+		//70. Click on the "apply" button.
+		tag_window.clickElement(tag_window.cancel_button);
+		
+		//71.Check recordings without tags checkboxes.
 		record.unselectallCheckbox();
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox3);
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 		 
 		//66.Click on the "Tag" in the "Recording Tasks" drop-down list menu item.
 		record.clickOnRecordingTaskThenTag();
