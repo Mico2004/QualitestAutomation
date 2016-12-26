@@ -13,26 +13,19 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.PublicKey;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,7 +33,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 //import com.automation.objects.RecordingObject;
-import org.testng.asserts.LoggingAssert;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -50,7 +42,6 @@ import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import java.io.StringReader;
 import java.util.Set;
-import java.util.concurrent.TimeoutException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Result;
@@ -62,8 +53,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
-
-//import Client.Robotil;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class RecordingHelperPage extends Page {
@@ -5345,8 +5334,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	
 		String path = "\\workspace\\QualitestAutomation\\resources\\documents\\Marie Curie -Bal, Amrit  (FINAL)";
 		path = System.getProperty("user.dir") + path;
-		Actions action = new Actions(driver);
-		
+//		Actions action = new Actions(driver);
+//		
 //		Action tab= action.sendKeys(Keys.TAB).build();
 //		tab.perform();
 //	    tab= action.sendKeys(Keys.TAB).build();
@@ -5381,7 +5370,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 //		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
 //		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
 //		Thread.sleep(7000);
-//		
+		
 		// enter to the tegrity program
 		Robot robot = new Robot();
 		robot.delay(3000);
