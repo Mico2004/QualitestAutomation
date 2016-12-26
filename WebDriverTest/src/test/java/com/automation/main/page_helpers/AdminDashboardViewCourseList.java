@@ -37,12 +37,11 @@ public class AdminDashboardViewCourseList extends Page {
 		// TODO Auto-generated constructor stub
 	}
 
-	@FindBy(id = "gs_FriendlyName")
-	WebElement course_name_search_box;
-	@FindBy(id = "jqg_gridData_1")
-	WebElement first_course_in_list_checkbox;
-	@FindBy(css = ".linksStyle")
-	public WebElement first_course_link;
+	@FindBy(id = "gs_FriendlyName")WebElement course_name_search_box;
+	@FindBy(id = "jqg_gridData_1") WebElement first_course_in_list_checkbox;
+	@FindBy(id = "cb_gridData") WebElement first_checkbox;
+	@FindBy(id = "gridData_FriendlyName") WebElement course_name;
+	@FindBy(css = ".linksStyle") public WebElement first_course_link;
 	@FindBy(xpath = "//*[@id=\"2\"]/td[5]/a") WebElement second_course_link;
 	@FindBy(xpath = ".//*[@id='1']/td[6]") WebElement first_instructor_ids;
 	@FindBy(xpath = "//*[@id=\"main\"]/div[1]/h2") WebElement all_courses_title;
@@ -81,9 +80,8 @@ public class AdminDashboardViewCourseList extends Page {
 		try{
 			wait.until(ExpectedConditions.visibilityOf(adminDashboard));
 			wait.until(ExpectedConditions.visibilityOf(courseTasks));
-			Thread.sleep(2000);
-			//wait.until(ExpectedConditions.visibilityOf(first_course_in_list_checkbox));
-			//wait.until(ExpectedConditions.visibilityOf(first_course_link));
+			wait.until(ExpectedConditions.visibilityOf(first_checkbox));
+			wait.until(ExpectedConditions.visibilityOf(course_name));
 			
 		}catch(Exception e){
 			ATUReports.add("Loading 'All courses admin' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
