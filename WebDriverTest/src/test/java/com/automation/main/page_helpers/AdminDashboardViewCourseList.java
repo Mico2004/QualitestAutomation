@@ -81,8 +81,9 @@ public class AdminDashboardViewCourseList extends Page {
 		try{
 			wait.until(ExpectedConditions.visibilityOf(adminDashboard));
 			wait.until(ExpectedConditions.visibilityOf(courseTasks));
-			wait.until(ExpectedConditions.visibilityOf(first_course_in_list_checkbox));
-			wait.until(ExpectedConditions.visibilityOf(first_course_link));
+			Thread.sleep(2000);
+			//wait.until(ExpectedConditions.visibilityOf(first_course_in_list_checkbox));
+			//wait.until(ExpectedConditions.visibilityOf(first_course_link));
 			
 		}catch(Exception e){
 			ATUReports.add("Loading 'All courses admin' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
