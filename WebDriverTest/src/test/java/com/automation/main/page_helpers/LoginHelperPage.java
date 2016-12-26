@@ -55,10 +55,10 @@ public class LoginHelperPage extends Page {
 	public LoginHelperPage(WebDriver driver) throws Exception {
 		super(driver);
 		setPageTitle("Tegrity Lecture Capture");	
-		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
+		setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 		//setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
-		setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
+		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 
 
 	}
@@ -102,8 +102,7 @@ public class LoginHelperPage extends Page {
 
 	public void loginCourses(String user_name) throws InterruptedException// login
 																			// courses
-	{
-		
+	{	
 		initializeCourse();
 		try {
 			waitForVisibility(usernamefield);
@@ -156,7 +155,6 @@ public class LoginHelperPage extends Page {
 																		// courses
 	{
 		try {
-			Thread.sleep(2000);
 			waitForVisibility(usernamefield);
 			waitForVisibility(button_login);
 			waitForVisibility(passfield);
@@ -226,17 +224,19 @@ public class LoginHelperPage extends Page {
 
 	/// login as guest
 	public void loginAsguest() throws InterruptedException {
-		try {
+		try {		
 			initializeCourse();
 			waitForVisibility(usernamefield);
 			waitForVisibility(button_login);
 			waitForVisibility(passfield);
 			try{
-			waitForVisibility(Login_as_guest_button,10);
-			clickElement(Login_as_guest_button);
+				new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(Login_as_guest_button));
+				clickElement(Login_as_guest_button);
 			}catch(Exception e){
-				
 				try{
+					driver.navigate().refresh();
+					new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOf(Login_as_guest_button));			
+					clickElement(Login_as_guest_button);
 					String[] urlArray=driver.getCurrentUrl().split("/");
 					urlArray[4]="courses";
 					String url=urlArray[0]+urlArray[1]+urlArray[2]+urlArray[3]+urlArray[4];
