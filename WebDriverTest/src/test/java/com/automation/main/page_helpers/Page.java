@@ -585,7 +585,7 @@ public class Page {
 	}
 
 	/// sign out from any page except Login page
-	public void signOut() {
+	public void signOut()  {
 		try {
 			Thread.sleep(500);
 			System.out.println("signOut1");		 
@@ -611,12 +611,13 @@ public class Page {
 				}else{
 					Thread.sleep(3000);
 				}
-			}		
+			}
+			Thread.sleep(1500);	
 		} catch (Exception e) {
 			System.out.println("LogOut from user not succeeded 3");
 			ATUReports.add("Sign Out failed", e.getMessage(), LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
-		}	
+		}
 		System.out.println("signOut5");
 	}
 
