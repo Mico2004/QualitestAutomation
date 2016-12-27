@@ -1341,6 +1341,21 @@ public class PlayerPage extends Page {
 			ATUReports.add("Not Verifed that the record start from the bookmark." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}		
 	}
+	public void VeirfyDeleteAndEditBookmarkNotDisplayInstractor() {
+		
+		try{	
+			if(delete_button.isDisplayed() || add_bookmark_button.isDisplayed()){
+				System.out.println("Not Verifed that the delete button or the add button aren't display.");
+				ATUReports.add("Not Verifed that the delete button or the add button aren't display." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				} else {
+				System.out.println("Verifed that the delete button or the add button aren't display.");
+				ATUReports.add("Verifed that the delete button or the add button aren't display.", "True.", "True.", LogAs.PASSED, null);
+				}			
+		} catch (Exception e) {
+			System.out.println("Verifed that the delete button or the add button aren't display.");
+			ATUReports.add("Verifed that the delete button or the add button aren't display.", "True.", "True.", LogAs.PASSED, null);
+		}	
+	}
 
 	public void makeSureThatTheBookmarkIsCanBeenSeeingOnTheSeekBar(String bookmarkType) {
 	
