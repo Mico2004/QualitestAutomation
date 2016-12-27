@@ -227,7 +227,7 @@ public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSee
 				record.clickOnBookmarksTab();
 			}
 			
-			//19.Sign Out
+			//19.Sign Out =
 			record.signOut();
 				
 			//20.Login as INSTRUCTOR 
