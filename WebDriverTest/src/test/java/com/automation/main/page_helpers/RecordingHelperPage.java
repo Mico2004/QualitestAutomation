@@ -5564,8 +5564,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyTagNotApperedUderTheSelectRecordings() {
 		try {
 			if(!recording_tags.isEmpty()){
-				ATUReports.add("Not Verify that tags not appered on the first recording.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				System.out.println("Not Verify that not tags appered on the first recording.");	    			
+				ATUReports.add("Verify that tags not appered on the first recording.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("Verify that tags not appered on the first recording.");	    			
 			} else { 	
 				ATUReports.add("Verify that tags not appered on the first recording.","Success.","Success.", LogAs.PASSED, null);
 				System.out.println("Verify that tags not appered on the first recording.");	
