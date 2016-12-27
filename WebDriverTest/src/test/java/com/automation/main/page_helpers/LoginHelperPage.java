@@ -248,8 +248,7 @@ public class LoginHelperPage extends Page {
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));			
 			}
 			}
-			
-			
+				
 			
 			try {
 				new WebDriverWait(driver, 30)
