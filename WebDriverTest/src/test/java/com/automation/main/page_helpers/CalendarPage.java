@@ -194,7 +194,7 @@ public class CalendarPage extends Page {
 			By by = By.className("table-condensed");
 			changeDayOnCalender(dayNewNumber,by);
 		} catch (Exception e) {
-			e.getMessage();;			
+			e.getMessage();			
 			ATUReports.add(e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -310,7 +310,7 @@ public class CalendarPage extends Page {
     		if(color.equals(grey)){
     			//clickElement(e);
     			((JavascriptExecutor) driver).executeScript("arguments[0].click();",e);
-    			ATUReports.add("Verify the day from the calendar.", LogAs.PASSED, null);
+    			ATUReports.add("Verify the day from the calendar.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
     			System.out.println("Verify the day from the calendar.");
     			Assert.assertTrue(true);	
     			return;

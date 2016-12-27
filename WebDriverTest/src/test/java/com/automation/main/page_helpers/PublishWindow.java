@@ -234,7 +234,7 @@ public class PublishWindow extends Page {
 		try {
 			while(isPublishWindowClosed() == false) {
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", save_button);	
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 			}
 			
 			System.out.println("Clicked on save button.");
