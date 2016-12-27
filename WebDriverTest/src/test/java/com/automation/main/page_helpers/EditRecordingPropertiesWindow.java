@@ -857,12 +857,12 @@ public class EditRecordingPropertiesWindow extends Page {
 			boolean is_closed = isConfirmationMenuClosed();
 
 			if (is_closed) {
-				System.out.println("Confirm window is closed.");
-				ATUReports.add("Confirm window.", "Closed.", "Closed.", LogAs.PASSED, null);
+				System.out.println("Edit recordings properties window is closed.");
+				ATUReports.add("Edit recordings properties window.", "Closed.", "Closed.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
-				System.out.println("Confirm window is open.");
-				ATUReports.add("Confirm window.", "Closed.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("Edit recordings properties window is open.");
+				ATUReports.add("Edit recordings properties window.", "Closed.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
