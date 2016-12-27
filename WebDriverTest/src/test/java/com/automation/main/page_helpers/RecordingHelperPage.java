@@ -5413,6 +5413,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		 robot.keyPress(KeyEvent.VK_ENTER);	
 		 robot.keyRelease(KeyEvent.VK_ENTER);
 		 robot.delay(7000);
+		 
+		 System.out.println("Upload recording from the tegrity application." );
+		 ATUReports.add("Upload recording from the tegrity application." ,LogAs.PASSED, null);		
 
 	}
 
@@ -6018,4 +6021,42 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}	
 	}
 
+	public int selectRecordingThatChangeFromThatNameAndWithOutStatus(String original_recorder_name) throws InterruptedException {
+		
+		int statusNumber = 1;  
+		try{
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recorded by"));
+		}catch(Exception e){
+			System.out.println("There are not recordings in the course tab");
+			ATUReports.add("Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}			
+		WebElement recording=null;		
+		String differentRecordName = null;
+		System.out.println(original_recorder_name);
+		try{		
+			for (WebElement el : recordings_list) {		
+				System.out.println(el.getText());
+				String status = driver.findElement(By.id("RecordingStatus1" + Integer.toString(statusNumber))).getText();
+				if (!(el.getText().equals(original_recorder_name)) && !(el.getText().equals("Recordings")) && !(el.getText().equals("Recording Tasks")) &&  status.equals("")) {
+					differentRecordName = el.getText();
+					System.out.println("Recording found");
+					ATUReports.add("Recording found", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+					break;
+			} else statusNumber++;
+		
+		}
+		
+		}catch(WebDriverException e){
+			handlesClickIsNotVisible(recording);
+			waitForVisibility(visibleFirstChapter);
+			System.out.println(" no such recording found");
+			ATUReports.add("no such recording", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);		
+		}
+		return statusNumber;
+	}
+
+	
 }
