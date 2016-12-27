@@ -130,7 +130,7 @@ public class TestSuitePreSetCopyRecordings_Tags {
 		this.driver.quit();
 	}
 
-	// description = "get courses list"
+	//// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
