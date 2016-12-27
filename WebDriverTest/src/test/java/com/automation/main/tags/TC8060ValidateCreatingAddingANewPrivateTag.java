@@ -235,7 +235,7 @@ public class TC8060ValidateCreatingAddingANewPrivateTag {
 			}
 	
 			//35. The tag is appeared under the selected recordings.
-			record.verifyTagNotApperedUderTheSelectRecordings();
+			record.verifyTagNotAppearedUderTheSelectRecordings();
 		
 			//36.The tags are displayed in the "View" dropdown list
 			record.moveToElementAndPerform(record.view_tasks_button,driver);

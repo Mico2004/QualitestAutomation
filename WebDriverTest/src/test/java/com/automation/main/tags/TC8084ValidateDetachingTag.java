@@ -186,7 +186,7 @@ public class TC8084ValidateDetachingTag {
 				tag_window.verifyTagWindowClose();
 					
 				//19.The additional tag has been attached to the selected recordings.
-				record.verifyTagNotApperedUderTheSelectRecordings();
+				record.verifyTagNotAppearedUderTheSelectRecordings();
 													
 				//20.Check one available recording checkbox. 
 				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);

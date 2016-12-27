@@ -5561,14 +5561,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}	
 	}
 	
-	public void verifyTagNotApperedUderTheSelectRecordings() {
+	public void verifyTagNotAppearedUderTheSelectRecordings() {
 		try {
 			if(!recording_tags.isEmpty()){
-				ATUReports.add("Verify that tags not appered on the first recording.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				System.out.println("Verify that tags not appered on the first recording.");	    			
+				ATUReports.add("Verify that student can't see the tag on first recording.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("Verify that student can't see the tag on first recording.");	    			
 			} else { 	
-				ATUReports.add("Verify that tags not appered on the first recording.","Success.","Success.", LogAs.PASSED, null);
-				System.out.println("Verify that tags not appered on the first recording.");	
+				ATUReports.add("Verify that student can't see the tag on first recording.","Success.","Success.", LogAs.PASSED, null);
+				System.out.println("Verify that student can't see the tag on first recording.");	
 			}
 		}catch(Exception e){
 			e.getMessage();

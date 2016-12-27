@@ -186,7 +186,7 @@ public class TC8089ValidatePublicTagsChangesToPrivateAfterInstrutorIsEnrolledToS
 		course.selectCourseThatStartingWith(current_course);
 						
 		//23.Validate that the INSTRUCTOR's public recording tags are not displayed.
-		record.verifyTagNotApperedUderTheSelectRecordings();
+		record.verifyTagNotAppearedUderTheSelectRecordings();
 		
 		//24.sign out
 		record.signOut();
