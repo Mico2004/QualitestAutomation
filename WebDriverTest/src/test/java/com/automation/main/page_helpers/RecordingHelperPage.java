@@ -6037,7 +6037,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try{		
 			for (WebElement el : recordings_list) {		
 				System.out.println(el.getText());
-				String status = driver.findElement(By.id("RecordingStatus1" + Integer.toString(statusNumber))).getText();
+				String status = driver.findElement(By.id("RecordingStatus" + Integer.toString(statusNumber))).getText();
 				if (!(el.getText().equals(original_recorder_name)) && !(el.getText().equals("Recordings")) && !(el.getText().equals("Recording Tasks")) &&  status.equals("")) {
 					differentRecordName = el.getText();
 					System.out.println("Recording found");
