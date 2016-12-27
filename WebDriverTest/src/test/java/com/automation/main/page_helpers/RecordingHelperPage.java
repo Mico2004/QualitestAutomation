@@ -6023,7 +6023,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	public int selectRecordingThatChangeFromThatNameAndWithOutStatus(String original_recorder_name) throws InterruptedException {
 		
-		int statusNumber = 1;  
+		int statusNumber = 1;
+		int countingNumber = 0;
 		try{
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recorded by"));
 		}catch(Exception e){
@@ -6044,7 +6045,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					ATUReports.add("Recording found", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					break;
-			} else statusNumber++;
+			} 	else if(countingNumber <2){
+					countingNumber++;
+			} else {
+				statusNumber++;
+			}
 		
 		}
 		
