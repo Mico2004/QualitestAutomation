@@ -1338,7 +1338,7 @@ public class PlayerPage extends Page {
 			ATUReports.add("Verifed that the record start from the bookmark.", "True.", "True.", LogAs.PASSED, null);
 		} catch (Exception e) {
 			System.out.println("Not Verifed that the record start from the bookmark.");
-			ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Not Verifed that the record start from the bookmark." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}		
 	}
 
