@@ -126,6 +126,7 @@ public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSee
 			}
 			
 			//4.Click on the title of one of the recordings and then click on one of the chapters to play it
+			record.pressViewButtonAndSelect("Duration");
 			recordName = record.getFirstRecordingTitle();
 			record.verifyFirstExpandableRecording();
 			record.clickOnTheFirstCaptherWithOutTheExpand();

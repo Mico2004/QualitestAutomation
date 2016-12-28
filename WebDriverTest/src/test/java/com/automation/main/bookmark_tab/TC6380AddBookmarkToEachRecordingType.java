@@ -94,7 +94,7 @@ public class TC6380AddBookmarkToEachRecordingType {
 		
 	// @Parameters({"web","title"}) in the future
 	@Test (description="TC6380 Add bookmark to each recording type")
-	public void test6371() throws InterruptedException {
+	public void test6380() throws InterruptedException {
 		
 		//1.Enter the university
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
@@ -116,10 +116,12 @@ public class TC6380AddBookmarkToEachRecordingType {
 		 
 		//4.open the recording for watching 
 		if(type_of_tab < 2) { 
+			record.pressViewButtonAndSelect("Duration");
 			recordName = record.getFirstRecordingTitle();
 			record.verifyFirstExpandableRecording();
 			
 		} else{
+			record.pressViewButtonAndSelect("Duration");
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			record.toEditRecordingPropertiesMenu();	
 			edit_recording_properties_window.waitForPageToLoad();

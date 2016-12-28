@@ -104,7 +104,8 @@ public class TC6337VerifyLaunchPlaybackFromBookmarkLinkNOTEUnclearImportantAndIn
 		//3.Click on certain course from the courses list.
 		course.selectCourseThatStartingWith("Ab");
 		
-		//4.open the recording for watching 
+		//4.open the recording for watching
+		record.pressViewButtonAndSelect("Duration");
 		recordName = record.getFirstRecordingTitle();
 		record.verifyFirstExpandableRecording();
 		record.clickOnTheFirstCaptherWithOutTheExpand();

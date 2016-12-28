@@ -5821,7 +5821,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String currRecording = recording.getText();
 			String []recrodingSplit = currRecording.split(": ");
 			String newNameWithOutSpace = recrodingSplit[1].substring(0);
-			
+			System.out.println(recordName);
+			System.out.println(newNameWithOutSpace);
 			if(recrodingSplit[0].equals("recording") && recordName.equals(newNameWithOutSpace)){
 				System.out.println("Verify static text 'recording:' followed by: recording name.");
 				ATUReports.add("Verify static text 'recording:' followed by: recording name.", "Success.", "Success.", LogAs.PASSED, null);		

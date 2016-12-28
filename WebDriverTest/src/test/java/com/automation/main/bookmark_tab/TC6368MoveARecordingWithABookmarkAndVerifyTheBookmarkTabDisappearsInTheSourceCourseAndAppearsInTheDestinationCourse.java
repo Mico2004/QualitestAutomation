@@ -110,6 +110,7 @@ public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsI
 		}
 			
 		//4.open the recording for watching 
+		record.pressViewButtonAndSelect("Duration");
 		recordName = record.getFirstRecordingTitle();
 		record.verifyFirstExpandableRecording();
 		record.clickOnTheFirstCaptherWithOutTheExpand();
