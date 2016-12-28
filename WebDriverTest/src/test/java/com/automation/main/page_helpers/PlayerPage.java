@@ -25,7 +25,6 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-
 import java.awt.AWTException;
 import java.awt.Frame;
 import java.awt.Robot;
@@ -57,7 +56,7 @@ public class PlayerPage extends Page {
 	@FindBy(id = "InputTextArea")
 	WebElement bookmark_input_text;
 	@FindBy(css = ".BookmarkButton")
-	WebElement delete_button;
+	public WebElement delete_button;
 	@FindBy(css = ".BookmarkSelected>.BookmarkButton")
 	List<WebElement> selected_bookmark_buttons_list;
 	@FindBy(xpath = ".//*[@id='BookmarkList']/div")
