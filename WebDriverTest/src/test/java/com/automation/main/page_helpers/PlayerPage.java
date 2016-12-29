@@ -1331,8 +1331,8 @@ public class PlayerPage extends Page {
 			exitInnerFrame();
 			Thread.sleep(500);
 			getIntoFrame(0);
-			new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(time_buffer_status));
-			new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElement(time_buffer_status,time));
+			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(time_buffer_status));
+			new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(time_buffer_status,time));
 			System.out.println("Verifed that the record start from the bookmark.");
 			ATUReports.add("Verifed that the record start from the bookmark.", "True.", "True.", LogAs.PASSED, null);
 		} catch (Exception e) {

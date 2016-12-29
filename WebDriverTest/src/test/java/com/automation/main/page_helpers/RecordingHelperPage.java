@@ -6021,7 +6021,27 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 	}
-
+	
+	public void verifyBookmarkIsDisplay(String bookmarkName) {
+		try{
+			for(int number_of_bookmarks = 0 ; number_of_bookmarks < bookmarks_names.size() ; number_of_bookmarks++) {
+				WebElement name = bookmarks_names.get(number_of_bookmarks);
+				String nameS = name.getText();
+				if(nameS.equals(bookmarkName)){	
+					System.out.println("The Bookmark " + bookmarkName + "is display.");
+					ATUReports.add("The Bookmark " + bookmarkName + "is display.", "True.", "True.", LogAs.PASSED, null);
+					return;
+				}
+			}
+				System.out.println("The Bookmark " + bookmarkName + "is not display.");
+				ATUReports.add("The Bookmark " + bookmarkName + "is not display.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
+	
+	
 	public int selectRecordingThatChangeFromThatNameAndWithOutStatus(String original_recorder_name) throws InterruptedException {
 		
 		int statusNumber = 1;

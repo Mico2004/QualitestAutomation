@@ -169,8 +169,8 @@ public class AdminDashboardPage extends Page {
 		try{
 			wait.until(ExpectedConditions.visibilityOf(AdminDashboardTitle));
 			wait.until(ExpectedConditions.visibilityOf(viewCourseList));
-			wait.until(ExpectedConditions.visibilityOf(manageAdHocUsers));
-			wait.until(ExpectedConditions.visibilityOf(advancedServiceSettings));
+			wait.until(ExpectedConditions.visibilityOf(ImpersonateUser));
+			wait.until(ExpectedConditions.visibilityOf(ManageAAIRS));
 			
 		}catch(Exception e){
 			ATUReports.add("Loading 'Admin dashboard page' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));

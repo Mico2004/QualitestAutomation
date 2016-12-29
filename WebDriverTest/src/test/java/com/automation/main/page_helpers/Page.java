@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +30,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -1227,6 +1229,22 @@ public class Page {
 			ATUReports.add("Target keys sent.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
+	}
+	
+	public void moveToTheOtherTabAndCloseTheOldTab(String current_handler){
+		
+		waitForVisibility(logo);					
+		Set<String> allHandles = driver.getWindowHandles();
+												
+		driver.switchTo().window(current_handler);
+		driver.close();
+						
+		for(String handler: allHandles) {
+		    if(!handler.equals(current_handler)){
+				driver.switchTo().window(handler);
+				break;
+				 }
+	  	}
 	}
 
 	// This function verify that element contains one of the elements of the
