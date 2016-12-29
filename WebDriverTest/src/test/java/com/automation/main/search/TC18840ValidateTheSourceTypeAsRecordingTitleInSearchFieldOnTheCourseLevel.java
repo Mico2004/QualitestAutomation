@@ -176,16 +176,13 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			}else if (numberOfRecords <1){
 				record.selectIndexCheckBox(4);
 			}
-			  record.clickOnRecordingTaskThenCopy();
-			 
-			  
+			  record.clickOnRecordingTaskThenCopy();		  
 			  copy.selectTargetCourseFromCourseList(current_course);
 			  copy.clickOnCopyButton();
 			  
 			  course.verifyRecordingsStatusIsClear("BankValidRecording",0,record);
 			  record.returnToCourseListPage();
 			  
-		  
 			  course.selectCourseThatStartingWith("Ab");
 			
 		}

@@ -155,19 +155,16 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// Logout.
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
 		
 		
 		// 2. Repeat the test for STUDENT and INSTRUCTOR.
 		for(int type_of_user=0; type_of_user<2; type_of_user++) {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR.
-				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				tegrity.loginCourses("User1");	
 			} else {
 				// 3. Login as an STUDENT.
-				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
+				tegrity.loginCourses("User4");			
 			}
 			
 			
@@ -217,18 +214,18 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			if(type_of_user==0) {
 				// Login as an INSTRUCTOR.
 				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				
 			} else {
 				// Login as an STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
+		
 			}
 		
 			initializeCourseObject();
 			
 			// 9. Open the recording course you just watch.
 			course.selectCourseThatStartingWith("Ba");
-			Thread.sleep(1000);
+			
 			
 			String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));
 			
@@ -236,7 +233,6 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			record.clickElement(record.first_recording_title);
 			
 			// 10.1. The "> Resume watching +(The first slide)" box is displayed.
-			Thread.sleep(2000);
 			record.verifyWebElementTargetText(record.list_of_resume_buttons.get(0), "Resume Watching");
 
 			// 10.2. The recording chapters are displayed to the user.
@@ -284,7 +280,6 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 				break;
 			}
 			top_bar_helper.signOut();
-			Thread.sleep(1000);
 		}
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
