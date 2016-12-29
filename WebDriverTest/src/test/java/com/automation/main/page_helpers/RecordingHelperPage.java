@@ -53,6 +53,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
+import Client.Robotil;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class RecordingHelperPage extends Page {
@@ -5366,85 +5367,77 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	
 		String path = "\\workspace\\QualitestAutomation\\resources\\documents\\Marie Curie -Bal, Amrit  (FINAL)";
 		path = System.getProperty("user.dir") + path;
-//		Actions action = new Actions(driver);
-//		
-//		Action tab= action.sendKeys(Keys.TAB).build();
-//		tab.perform();
-//	    tab= action.sendKeys(Keys.TAB).build();
-//		tab.perform();
-//        Action releaseEnter= action.sendKeys(Keys.ENTER) .build();
-//        releaseEnter.perform();
+
+		Robotil robotil=new Robotil("localhost", 5555);	
+		Thread.sleep(3000);
+		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
+		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
+		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
+	
+		Thread.sleep(5000);
+		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
+		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
+		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
+		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
 		
-//		Robotil robotil=new Robotil("localhost", 5555);	
-//		Thread.sleep(3000);
-//		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
-//		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
-//		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
-//	
-//		Thread.sleep(5000);
-//		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
-//		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
-//		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
-//		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
-//		
-//		
-//		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-//		StringSelection stringSelection = new StringSelection(path);
-//		clipboard.setContents(stringSelection, null);	
-//		robotil.pressKey(KeyEvent.VK_CONTROL);
-//		robotil.pressKey(KeyEvent.VK_V);
-//		robotil.releaseKey(KeyEvent.VK_V);
-//		robotil.releaseKey(KeyEvent.VK_CONTROL);
-//		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
-//		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
-//		
-//		Thread.sleep(2000);
-//		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
-//		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
-//		Thread.sleep(7000);
 		
-		// enter to the tegrity program
-		Robot robot = new Robot();
-		robot.delay(3000);
-		robot.keyPress(KeyEvent.VK_TAB);	
-		robot.keyRelease(KeyEvent.VK_TAB);
-		robot.keyPress(KeyEvent.VK_TAB);	
-		robot.keyRelease(KeyEvent.VK_TAB);
-		robot.keyPress(KeyEvent.VK_ENTER);	
-		robot.keyRelease(KeyEvent.VK_ENTER);		
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		StringSelection stringSelection = new StringSelection(path);
+		clipboard.setContents(stringSelection, null);	
+		robotil.pressKey(KeyEvent.VK_CONTROL);
+		robotil.pressKey(KeyEvent.VK_V);
+		robotil.releaseKey(KeyEvent.VK_V);
+		robotil.releaseKey(KeyEvent.VK_CONTROL);
+		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
+		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
 		
-		// enter to the browse		
-		robot.delay(8000);
-		robot.keyPress(KeyEvent.VK_TAB);	
-		robot.keyRelease(KeyEvent.VK_TAB);
-		robot.keyPress(KeyEvent.VK_TAB);	
-		robot.keyRelease(KeyEvent.VK_TAB);
-		robot.keyPress(KeyEvent.VK_TAB);	
-		robot.keyRelease(KeyEvent.VK_TAB);
-		robot.keyPress(KeyEvent.VK_ENTER);	
-		robot.keyRelease(KeyEvent.VK_ENTER);
+		Thread.sleep(2000);
+		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
+		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
+		Thread.sleep(7000);
 		
-		 // paste the path of the recording 
-		 robot.delay(2000);	
-		 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		 StringSelection stringSelection = new StringSelection(path);
-		 clipboard.setContents(stringSelection, null);
-		 robot.keyPress(KeyEvent.VK_CONTROL);
-		 robot.keyPress(KeyEvent.VK_V);
-		 robot.keyRelease(KeyEvent.VK_V);
-		 robot.keyRelease(KeyEvent.VK_CONTROL);
-		 robot.keyPress(KeyEvent.VK_TAB);	
-		 robot.keyRelease(KeyEvent.VK_TAB);
-		 robot.keyPress(KeyEvent.VK_ENTER);
-		 robot.keyRelease(KeyEvent.VK_ENTER);
-		 
-		 //press on the upload
-		 robot.delay(2000);
-		 robot.keyPress(KeyEvent.VK_TAB);	
-		 robot.keyRelease(KeyEvent.VK_TAB);
-		 robot.keyPress(KeyEvent.VK_ENTER);	
-		 robot.keyRelease(KeyEvent.VK_ENTER);
-		 robot.delay(7000);
+//		// enter to the tegrity program
+//		Robot robot = new Robot();
+//		robot.delay(3000);
+//		robot.keyPress(KeyEvent.VK_TAB);	
+//		robot.keyRelease(KeyEvent.VK_TAB);
+//		robot.keyPress(KeyEvent.VK_TAB);	
+//		robot.keyRelease(KeyEvent.VK_TAB);
+//		robot.keyPress(KeyEvent.VK_ENTER);	
+//		robot.keyRelease(KeyEvent.VK_ENTER);		
+//		
+//		// enter to the browse		
+//		robot.delay(8000);
+//		robot.keyPress(KeyEvent.VK_TAB);	
+//		robot.keyRelease(KeyEvent.VK_TAB);
+//		robot.keyPress(KeyEvent.VK_TAB);	
+//		robot.keyRelease(KeyEvent.VK_TAB);
+//		robot.keyPress(KeyEvent.VK_TAB);	
+//		robot.keyRelease(KeyEvent.VK_TAB);
+//		robot.keyPress(KeyEvent.VK_ENTER);	
+//		robot.keyRelease(KeyEvent.VK_ENTER);
+//		
+//		 // paste the path of the recording 
+//		 robot.delay(2000);	
+//		 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+//		 StringSelection stringSelection = new StringSelection(path);
+//		 clipboard.setContents(stringSelection, null);
+//		 robot.keyPress(KeyEvent.VK_CONTROL);
+//		 robot.keyPress(KeyEvent.VK_V);
+//		 robot.keyRelease(KeyEvent.VK_V);
+//		 robot.keyRelease(KeyEvent.VK_CONTROL);
+//		 robot.keyPress(KeyEvent.VK_TAB);	
+//		 robot.keyRelease(KeyEvent.VK_TAB);
+//		 robot.keyPress(KeyEvent.VK_ENTER);
+//		 robot.keyRelease(KeyEvent.VK_ENTER);
+//		 
+//		 //press on the upload
+//		 robot.delay(2000);
+//		 robot.keyPress(KeyEvent.VK_TAB);	
+//		 robot.keyRelease(KeyEvent.VK_TAB);
+//		 robot.keyPress(KeyEvent.VK_ENTER);	
+//		 robot.keyRelease(KeyEvent.VK_ENTER);
+//		 robot.delay(7000);
 		 
 		 System.out.println("Upload recording from the tegrity application." );
 		 ATUReports.add("Upload recording from the tegrity application." ,LogAs.PASSED, null);		
@@ -5666,7 +5659,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		if(countOfRecords < countOfList){
 			System.out.println("Not all bookmarks are appeared in the bookmarks tab.");
 			ATUReports.add("Not all bookmarks are appeared in the bookmarks tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		} else {		
+		} else {
+		
 		try { 
 			for(WebElement webElement: bookmarks_names) {
 				String bookmarksName = webElement.getAttribute("title");
