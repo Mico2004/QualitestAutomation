@@ -218,8 +218,6 @@ public class TC8079ValidateTheTagsCopiedAfterRecordingIsCopied {
 				record.verifyTagApperedUderTheSelectRecording(SecondVaildName);
 			}
 			
-			
-		
 			//26.return to course page
 			record.returnToCourseListPage();
 			

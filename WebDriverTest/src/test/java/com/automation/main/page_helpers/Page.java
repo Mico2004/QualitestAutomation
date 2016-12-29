@@ -852,7 +852,7 @@ public class Page {
 	// This function verify that WebElement is displayed, and String with
 	// description
 	public void verifyWebElementDisplayed(WebElement web_element, String description) {
-		
+		try {
 		waitForVisibility(web_element);
 		if (web_element.isDisplayed()) {
 			System.out.println(description + " is displayed.");
@@ -863,7 +863,10 @@ public class Page {
 			ATUReports.add(description + " is not displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
-		
+		} catch (Exception msg) {
+			msg.printStackTrace();
+			ATUReports.add(msg.getMessage(), "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 	}
 	
 	public void verifyWebElementClassNameDisplayed(WebElement web_element, String expected) {
