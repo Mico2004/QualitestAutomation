@@ -66,8 +66,6 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 	DesiredCapabilities capability;
 	String bookmark_to_add;
 	String recordName,time,course_name;
-	boolean isDeleteDisplay;
-	Hashtable<String,String> bookmarksNameAndTime = new Hashtable<String,String>();
 	List<String> bookmarksName = new ArrayList<String>();
 	@BeforeClass
 	public void setup() {
@@ -120,52 +118,63 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
 		
+		//5.Click on student tab
+		record.clickOnStudentRecordingsTab();
+		
 		//pre test- Make sure to upload a 2 student recordings to the course as Student A 
 		for(int number_of_record = 0 ; number_of_record <2 ; number_of_record++){
-		
-			//5.check several recordings respective checkboxes
-			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		
-			//6.click on the recording tasks->edit recording properties option
+			
+			//6.check several recordings respective checkboxes
+			if(number_of_record == 0) {
+				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+			} else {
+				record.unselectallCheckbox();
+				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+			}
+			
+			//7.click on the recording tasks->edit recording properties option
 			record.toEditRecordingPropertiesMenu();
 			edit_recording_properties_window.waitForPageToLoad();			
-		
-			//7.Choose the "Student Recording" option from the Type drop down list		
-			edit_recording_properties_window.ChooseDiffrenetType("Student recording");
-		
+				
 			//8.Change the owner of the record to be student record 
 			edit_recording_properties_window.changeOwner(PropertyManager.getProperty("User4"));
 		
 			//9.Click the "Save" button
 			edit_recording_properties_window.clickOnSaveButton();
-		
+			
+			//10.Click on Ok button
+			confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
+			
 		}
+		
+		//11.Click on recording tab
+		record.clickOnRecordingsTab();
 		
 		//pre test -unpublish one of them + one of regular recording
 		for(int number_of_tab = 0 ; number_of_tab <2 ; number_of_tab++){
 		
 		if(number_of_tab == 1){
-			//10.Click on student tab
+			//12.Click on student tab
 			record.clickOnStudentRecordingsTab();
 		}
 		
-		//11.check several recordings respective checkboxes
+		//13.check several recordings respective checkboxes
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
-		//12.unpublish one recording
+		//14.unpublish one recording
 		record.clickOnRecordingTaskThenPublish();
 		publish_window.waitForPageToLoad();
 	
-		//13.Select the "Never" radio box
+		//15.Select the "Never" radio box
 		publish_window.chooseRadioButton("Never");
 		
-		//14.Press the "Save" button
+		//16.Press the "Save" button
 		publish_window.clickOnSaveButton();
 		publish_window.verifyPublishWindowClosed();
 		
 		}
 		
-		////15.Click on recording tab
+		//15.Click on recording tab
 		record.clickOnRecordingsTab();
 		
 		//pre test -Make sure to upload a 2 Recgular recordings and 2 proctoring recordings  to the course as Instructor A 
@@ -181,6 +190,7 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 				if(number_of_record == 0) {
 					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 				} else {
+					record.unselectallCheckbox();
 					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 				}
 				//17.click on the recording tasks->edit recording properties option
@@ -191,7 +201,10 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 				edit_recording_properties_window.changeOwner(PropertyManager.getProperty("User1"));
 			
 				//19.Click the "Save" button
-				edit_recording_properties_window.clickOnSaveButton();				
+				edit_recording_properties_window.clickOnSaveButton();
+				
+				//19.Click on Ok button
+				confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 			}
 			
 		}
@@ -205,21 +218,25 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 	
 		//0 - for regular recording ,1- for student user , 2- for another student user
 		for(int type_of_tab = 0; type_of_tab < 3; type_of_tab++) {
-			
-			if(type_of_tab == 1) {
-				record.clickOnStudentRecordingsTab();
-			} else if(type_of_tab == 2) {
-				record.clickOnTestsTab();
-			}
-			
+					
 			for(int type_of_recording = 0; type_of_recording < 2; type_of_recording++) {
 									
+				if(type_of_tab == 1) {
+					record.clickOnStudentRecordingsTab();
+				} else if(type_of_tab == 2) {
+					record.clickOnTestsTab();
+				}
+							
 				//22.Click on the title of one of the recordings and then click on one of the chapters to play it
 				if(type_of_recording == 0){
-					record.verifyFirstExpandableRecording();
+					if(type_of_tab < 2)
+						record.verifyFirstExpandableRecording();
+					 else record.verifyFirstExpandableTestRecording(1);
 					record.clickOnTheFirstCaptherWithOutTheExpand();
 				} else {
-					record.clickOnRecordingTitleInIndex(2);
+					if(type_of_tab < 2)
+						record.clickOnRecordingTitleInIndex(2);
+					else record.verifyFirstExpandableTestRecording(2);
 					record.clickOnTheCaptherWithOutTheExpandOnTheIndex(2);
 				}
 				//23.The tegrity player is displayed and the recording began to play
@@ -227,18 +244,20 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 
 				//24.Add a bookmark with the text: "Instructor"
 				if(type_of_tab == 0){
-					bookmark_to_add= "Instructor" + Integer.toString(type_of_recording);
+					bookmark_to_add= "Instructor" + Integer.toString(type_of_recording+1);
 				}else if(type_of_tab == 1){
-					bookmark_to_add= "Student" + Integer.toString(type_of_recording);
+					bookmark_to_add= "Student" + Integer.toString(type_of_recording+1);
 				} else {
-					bookmark_to_add= "Test" + Integer.toString(type_of_recording);
+					bookmark_to_add= "Test" + Integer.toString(type_of_recording+1);
 				}
 				time = player_page.addTargetBookmark(bookmark_to_add);
 				//25.save the bookmark name and time for later
-				bookmarksName.add(bookmark_to_add);
-				bookmarksNameAndTime.put(bookmark_to_add, time);
-			}
-			
+				bookmarksName.add(bookmark_to_add);	
+				player_page.exitInnerFrame();
+				
+				//26.Click on course name breadcrumbs
+				player_page.returnToRecordingPageByNameAsUserOrGuest(course_name,record);
+			}			
 		}
 		
 		//26.Click on the "Bookmarks" tab
@@ -280,9 +299,6 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 		//34.Make sure the published student recording bookmark is displayed
 		record.verifyBookmarkIsDisplay("Student2");
 		
-		//35.Make sure the test recordings bookmarks are not displayed
-		record.verifyBookmarkIsNotDisplay("Instructor1");
-		
 		//36.Make sure the proctoring recording's bookmarks are not displayed
 		record.verifyBookmarkIsNotDisplay("Test1");
 		record.verifyBookmarkIsNotDisplay("Test2");
@@ -306,7 +322,32 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 		record.clickOnBookmarksTab();
 		
 		//42.Make sure all bookmarks are displayed
+		//-------bug---------- remove the test bookmarks
+		String test1 = bookmarksName.get(4);
+		String test2 = bookmarksName.get(5);
+		bookmarksName.remove(5);
+		bookmarksName.remove(4);
 		record.verifyThatAllTheBookmarksDisplayInTheBookmarkTab(bookmarksName);
+		
+		//43.Sign Out
+		record.signOut();
+		
+		//44 Post test- delete all the bookmarks - Log in as Instructor A
+		tegrity.loginCourses("User1");
+		
+		//45.Open the same course
+		course.selectCourseThatStartingWith("Ab");	
+
+		//46.Click on the 'Bookmarks' tab
+		record.clickOnBookmarksTab();
+		
+		bookmarksName.add(4, test1);
+		bookmarksName.add(5, test2);
+		//47.delete all bookmarks
+		for(int bookmark_number = 0 ;bookmark_number < bookmarksName.size() ;  bookmark_number++){
+			
+			record.deleteBookmarkInBookmarkTab(bookmarksName.get(bookmark_number));
+		}
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

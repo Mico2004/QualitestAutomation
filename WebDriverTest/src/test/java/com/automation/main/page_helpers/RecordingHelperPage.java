@@ -1359,6 +1359,38 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		       }
 	 }
 	
+	/// verify recording is expandable
+		public void verifyFirstExpandableTestRecording(int index) throws InterruptedException {	
+
+			      System.out.println("Click on title in index: " +Integer.toString(index));
+					WebElement element=first_course_title_tests;
+					String id="RecordingTitle" + Integer.toString(index);
+					try {
+						waitForVisibility(element);
+						((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+						System.out.println("recording chapter was expaned");
+						ATUReports.add("recording chapter was expaned", LogAs.PASSED, null);							
+						Thread.sleep(1500);
+						Assert.assertTrue(true);
+						return;
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+						System.out.println("recording chapter wasn't expaned");
+						ATUReports.add("recording chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						Assert.assertTrue(false);
+					}
+			         
+			       if (isElementPresent(firsr_record_player_name)) {
+			           ATUReports.add("video recording was displayed", LogAs.PASSED, null);
+			           System.out.println("video recording was displayed");
+			           Assert.assertTrue(true);
+			       } else {
+			           ATUReports.add("video recording was not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			           System.out.println("video recording was not displayed");
+			           Assert.assertTrue(false);
+			       }
+		 }
+	
 	// press on view button and than select option
 	public void pressViewButtonAndSelect(String choice) throws InterruptedException {
 
@@ -5628,6 +5660,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// verify That All the bookmarks are displayed (Instructor and Student)
 	public void verifyThatAllTheBookmarksDisplayInTheBookmarkTab(List<String> namesOfbookmarks) {
 		waitForVisibility(bookmarks_names.get(0));
+		int countOfRecords = bookmarks_names.size();
+		int countOfList = namesOfbookmarks.size();
+		
+		if(countOfRecords < countOfList){
+			System.out.println("Not all bookmarks are appeared in the bookmarks tab.");
+			ATUReports.add("Not all bookmarks are appeared in the bookmarks tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		} else {		
 		try { 
 			for(WebElement webElement: bookmarks_names) {
 				String bookmarksName = webElement.getAttribute("title");
@@ -5635,7 +5674,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					System.out.println("Not verify that the bookmark:" + namesOfbookmarks+ " is displayed on the bookmarks tab.");
 					ATUReports.add("Not verify that the bookmark:" + namesOfbookmarks+ " is displayed on the bookmarks tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					return;		
-			}
+			} 
 		}
 		System.out.println("Verify that all the bookmarks are displayed in the bookmarks tab.");
 		ATUReports.add("Verify that all the bookmarks are displayed in the bookmarks tab.", "True.", "True.", LogAs.PASSED, null);
@@ -5643,8 +5682,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}catch(Exception e){
 			e.getMessage();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		}	
-	}
+		}
+	  }
+   }
 	
 	// verify That All the bookmarks are displayed (Instructor and Student)
 	public void verifyThatTheBookmarkDisplayInTheBookmarkTab(String bookmark) {
@@ -6009,13 +6049,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				WebElement name = bookmarks_names.get(number_of_bookmarks);
 				String nameS = name.getText();
 				if(nameS.equals(bookmarkName)){	
-					System.out.println("The Bookmark " + bookmarkName + "is display.");
-					ATUReports.add("The Bookmark " + bookmarkName + "is display.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					System.out.println("The Bookmark " + bookmarkName + " is display.");
+					ATUReports.add("The Bookmark " + bookmarkName + " is display.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					return;
 				}
 			}
-				System.out.println("The Bookmark " + bookmarkName + "is not display.");
-				ATUReports.add("The Bookmark " + bookmarkName + "is not display.", "True.", "True.", LogAs.PASSED, null);
+				System.out.println("The Bookmark " + bookmarkName + " is not display.");
+				ATUReports.add("The Bookmark " + bookmarkName + " is not display.", "True.", "True.", LogAs.PASSED, null);
 		}catch(Exception e){
 			e.printStackTrace();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
