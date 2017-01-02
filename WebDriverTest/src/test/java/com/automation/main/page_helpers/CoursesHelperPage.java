@@ -104,6 +104,8 @@ public class CoursesHelperPage extends Page {
 	public List<WebElement> new_recordings_title_and_number_of_new_recordings;
 	@FindBy(id = "CoursesHeading")
 	WebElement courses_heading;
+	@FindBy(id = "SignOutLink")
+	WebElement SignOut;
 	@FindBy(id="CourseFrame1")
 	WebElement courseFrame;
 	@FindBy(linkText = "Recording Tasks")
@@ -145,6 +147,22 @@ public class CoursesHelperPage extends Page {
 		System.out.println("Not clicked on target course name: " + course_name);
 		ATUReports.add("Not clicked on target course name" + course_name, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		return false;
+	}
+	
+	public void waitForThePageToLoad(){
+		
+		try {
+			waitForVisibility(logo);
+			waitForVisibility(SignOut);
+			waitForVisibility(user_name);
+			Thread.sleep(1000);
+		
+		} catch(Exception e) {
+			e.printStackTrace();
+			ATUReports.add("the page can't load " + e.getMessage() ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(true);
+
+		}
 	}
 
 	public String selectSecondCourse(RecordingHelperPage rec) throws InterruptedException {// select

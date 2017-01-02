@@ -84,7 +84,8 @@ public class AdminDashboardViewCourseList extends Page {
 			wait.until(ExpectedConditions.visibilityOf(course_name));
 			
 		}catch(Exception e){
-			ATUReports.add("Loading 'All courses admin' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
+			ATUReports.add("Loading 'All courses admin' page failed" + e.getMessage(),  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

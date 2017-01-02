@@ -181,8 +181,12 @@ public class TC6397VerifyInstructorCanAllTheBookmarksInTheCourseReadAndWritePerm
 				//adding him back for later use
 				bookmarksName.add(1,student1);
 			}
-			record.verifyThatAllTheBookmarksDisplayInTheBookmarkTab(bookmarksName);
-				
+			if(type_of_user <2 ) {
+				record.verifyThatAllTheBookmarksDisplayInTheBookmarkTab(bookmarksName);
+			} else {
+				record.verifyBookmarkIsDisplay("Instructor");
+				record.verifyBookmarkIsDisplay("Student 2");
+			}
 			//12.sign out
 			record.signOut();
 			
@@ -199,8 +203,8 @@ public class TC6397VerifyInstructorCanAllTheBookmarksInTheCourseReadAndWritePerm
 			String current_handler = driver.getWindowHandle();		
 			impersonate_user.EnterTheUserIdAndPressOnImpersonate(PropertyManager.getProperty("User1"));
 		
-			//16.Move to the open tab and close the old tab
-			
+			//16.Move to the open tab and close the old tab		
+			course.waitForThePageToLoad();
 			record.moveToTheOtherTabAndCloseTheOldTab(current_handler);
 			
 			//17.Click on the course that mentioned in the preconditions

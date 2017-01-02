@@ -1234,11 +1234,9 @@ public class Page {
 		}
 	}
 	
-	public void moveToTheOtherTabAndCloseTheOldTab(String current_handler){
-		
-		waitForVisibility(logo);					
-		Set<String> allHandles = driver.getWindowHandles();
-												
+	public void moveToTheOtherTabAndCloseTheOldTab(String current_handler) throws InterruptedException{
+						
+		Set<String> allHandles = driver.getWindowHandles();								
 		driver.switchTo().window(current_handler);
 		driver.close();
 						
