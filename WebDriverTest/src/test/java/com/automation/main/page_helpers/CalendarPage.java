@@ -211,52 +211,59 @@ public class CalendarPage extends Page {
 		
 			int dayInt = Integer.parseInt(day);
 		    int monthInt = Integer.parseInt(month);
+		    int yearInt = Integer.parseInt(year);
 		    int pickTwoDayBefore = 0;
 		    DateFormat dateFormat = new SimpleDateFormat("MM");
     		Date date = new Date();
     		String monthToCheck = dateFormat.format(date);
+    		int  monthToCheackInt = Integer.parseInt(monthToCheck);
 		    pickTwoDayBefore= dayInt -days;
 		    
-		    if(!monthToCheck.equals(month)){
+		    if(monthToCheackInt != monthInt){
 			   int digitToMove = Integer.parseInt(monthToCheck) - Integer.parseInt(month);
-			   if(digitToMove < 0 ){
-				   for(int i = 0 ; i < digitToMove * (-1) ;i++){
+			   if(digitToMove < 0 ){			
+					   clickElement(rightArrow);
+					   monthInt +=1;
+					   monthInt%=12;
+			    	   month = Integer.toString(monthInt);
+			    	   if(monthInt == 1){
+			    		   yearInt+=1;
+			    			year = Integer.toString(yearInt);
+			    	   }
+			   	
+			   } else {				
 					   clickElement(leftArrow);
 					   monthInt -=1; 
-			    	   month = Integer.toString(monthInt);
-			   		}
-			   } else {
-				   for(int i = 0 ; i < digitToMove ;i++){
-					   clickElement(rightArrow);
-					   monthInt +=1; 
-			    	   month = Integer.toString(monthInt);
+					   if(monthInt == 0){
+						   monthInt+=12;				  
+						   month = Integer.toString(monthInt);
+						   yearInt-=1;
+			    		   year = Integer.toString(yearInt);
 			   		}
 			   }  
 		    }       
-		    if(dayInt == 1 || dayInt == 2 || dayInt ==3){
-		    	if(!monthToCheck.equals(month)){
-		    		monthInt++;
-		    	}
+		    if(pickTwoDayBefore <=0){
 		    	if(monthInt == 3 ) {	
-		    		if(pickTwoDayBefore <=0)
 		    			pickTwoDayBefore +=28;    		
-		    	} else if(monthInt == 1 || monthInt == 11 || monthInt == 9 || monthInt == 8  || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
-		    		if(pickTwoDayBefore <=0)
+		    	} else if(monthInt == 11 || monthInt == 9 || monthInt == 8  || monthInt == 6 || monthInt == 4 ||  monthInt == 2) {
 		    			pickTwoDayBefore +=31;   			
 		    	} else if(monthInt == 12 || monthInt == 10 || monthInt == 7 || monthInt == 5) {	
-		    		if(pickTwoDayBefore <=0)
 		    			pickTwoDayBefore +=30;
-		    	}
-		    	if(pickTwoDayBefore != 1)	{
-		    		if(monthToCheck.equals(month)){
-		    			clickElement(leftArrow);
-		    		
-		    		}
+		    	} else if(monthInt == 1){		    		
+		    			pickTwoDayBefore +=31;
+		    			yearInt-=1;
+		    			year = Integer.toString(yearInt);
+		    	}	    
+		    		if(monthToCheackInt == monthInt){
+		    			clickElement(leftArrow);		
 		    		monthInt -=1; 
+		    		if(monthInt == 0){
+						   monthInt+=12;
+					   }
 		    	    month = Integer.toString(monthInt);
 		    	}
-		    } else if ( days < 0  && dayInt>= 28){
-		    	if(!monthToCheck.equals(month)){
+		    } else if (pickTwoDayBefore>= 28){
+		    	if(monthToCheackInt != monthInt){
 		    		monthInt--;
 		    	}
 		    	if(monthInt == 2 ) {	
@@ -270,11 +277,17 @@ public class CalendarPage extends Page {
 		    			pickTwoDayBefore -=30;
 		    	}
 		    	if(pickTwoDayBefore == 1 || pickTwoDayBefore == 2 )	{
-		    		if(monthToCheck.equals(month)){
+		    		if(monthToCheackInt != monthInt){
 		    			clickElement(rightArrow);   			
 		    		}
-		    		monthInt +=1; 
+		    		monthInt +=1;
+		    		monthInt%=12;
 		    	    month = Integer.toString(monthInt);
+		    	    if(monthInt == 1){
+		    	    	yearInt+=1;
+		    			year = Integer.toString(yearInt);
+		    	    }
+		    	    
 		    	}
 		    }
 		    return pickTwoDayBefore;
@@ -287,6 +300,7 @@ public class CalendarPage extends Page {
 	 */
 	public void changeDayOnCalender(String dayNewNumber ,By by){
 		
+		int count = 0;
 		WebElement table = driver.findElement(by);
 	    List<WebElement> rows = table.findElements(By.tagName("tr"));
 	    List<WebElement> Numbers = new ArrayList<WebElement>() ;
@@ -307,8 +321,12 @@ public class CalendarPage extends Page {
     		System.out.println(e.getText());
     		System.out.println(color);
     		String grey = "rgba(102, 102, 102, 1)";
-    		if(color.equals(grey)){
-    			//clickElement(e);
+    		String backgroundColor =  "rgba(238, 238, 238, 1)";
+    		if(dayNewNumber.equals("1") && e.getCssValue("background-color").toString().equals(backgroundColor)){ // it's will click on the column of the week so we ingore it
+    			count++;
+    			continue;
+    		}
+    		if(color.equals(grey)){		
     			((JavascriptExecutor) driver).executeScript("arguments[0].click();",e);
     			ATUReports.add("Verify the day from the calendar.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
     			System.out.println("Verify the day from the calendar.");
