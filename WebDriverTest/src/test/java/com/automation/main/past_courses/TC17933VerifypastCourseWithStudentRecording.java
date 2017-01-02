@@ -274,18 +274,16 @@ public class TC17933VerifypastCourseWithStudentRecording {
 		course.signOut();
 		System.out.println("Past8");
 		// 1. Login as ADMIN.
-		Thread.sleep(2000);
 		tegrity.loginCoursesByParameter(user);
-		Thread.sleep(2000);
 		course.signOut();
 
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+
 
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 
-		Thread.sleep(10000);
+		mange_adhoc_course_enrollments.waitForPageToLoad();
 
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastTempCourse, user,
 				mangage_adhoc_courses_membership_window);

@@ -136,15 +136,14 @@ public class TC17929And17941And17944PastCourses {
 		
 		
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		Thread.sleep(2000);		
+	
 		
 		tegrity.loginAdmin("Admin");
 		Thread.sleep(2000);
 		System.out.println("Past1");
 		// 2. Click on user builder href link
-		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
-		
-		Thread.sleep(10000);
+		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");	
+		mange_adhoc_course_enrollments.waitForPageToLoad();
 		// 3. Click on create course href link
 		driver.switchTo().frame(0);
 		Thread.sleep(4000);
@@ -179,8 +178,7 @@ public class TC17929And17941And17944PastCourses {
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		System.out.println("Past4");
-		Thread.sleep(10000);
-
+		mange_adhoc_course_enrollments.waitForPageToLoad();
 		// 3. Click on create course href link
 		driver.switchTo().frame(0);
 		// mange_adhoc_course_enrollments.clickOnNewCourse();
