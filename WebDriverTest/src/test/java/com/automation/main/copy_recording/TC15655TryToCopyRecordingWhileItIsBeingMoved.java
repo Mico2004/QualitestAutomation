@@ -67,24 +67,10 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 	@BeforeClass
 	public void setup() {
 
-		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
-//		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
-
-		
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
-		copy = PageFactory.initElements(driver, CopyMenu.class);
-		
+		copy = PageFactory.initElements(driver, CopyMenu.class);		
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
@@ -122,7 +108,6 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		
 		// Preset login and delete all recording in Ba, Then copy one recording from Ab to Ba.
 		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
-		Thread.sleep(3000);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "Ba", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("Ab", 0,record);
 		
@@ -185,7 +170,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		// 15. Message box is closed.
 		confirm_menu.isConfirmationMenuClosed();
 		
-		record.waitUntilFirstRecordingBeingCopiedFromStatusDissaper();
+		record.checkStatusExistenceForMaxTTime(220);
 		
 		// 16. Click "Courses" link in the breadcrumbs.
 		record.returnToCourseListPage();
@@ -194,6 +179,7 @@ public class TC15655TryToCopyRecordingWhileItIsBeingMoved {
 		course.selectCourseThatStartingWith(destination_course_name);
 		
 		// 18. Verify that recording is copied successfully.
+		record.convertRecordingsListToNames();
 		record.verifyRecordingDisplayedCorrectly(selected_recording_name);
 	
 		// 18.2. The recording finished moving - has this status "IE, FF, Safari Ready" or none at all
