@@ -203,13 +203,9 @@ public class TC6329VerifyUIAsInstructorAndStudent {
 				}
 				//24.Hover over the "view" drop down menu
 				record.moveToElementAndPerform(record.view_button_bookmarks,driver);
-				
-				//25.there is a "view" hint
-				record.verifyThatWeHaveHintToWebElement(record.view_button_bookmarks, "View");
 					
-				//26.the list menu contains:
+				//25.the list menu contains:
 				//1.Sort By(Hovering over it shows a text cursor)
-				Thread.sleep(1000);
 				record.verifyWebElementTargetText(record.sort_by, "Sort By");
 				record.verifyWebElementDisplayed(record.sort_by, "Sort By");
 						
@@ -227,6 +223,9 @@ public class TC6329VerifyUIAsInstructorAndStudent {
 				//5.Bookmark type(Hovering over it shows a hand cursor)
 				record.verifyWebElementDisplayed(record.view_button_bookmark_type, "Bookmark type");
 				record.verifyWebElementTargetText(record.view_button_bookmark_type, "Bookmark type");
+				
+				//26.there is a "view" hint
+				record.verifyThatWeHaveHintToWebElement(record.view_button_bookmarks, "View");
 				
 				//27.Verify the 'Bookmark Type' option is not displayed in any other tab
 				//Instructor_ - (Recordings,Additional Content,Student Recordings, Tests)
