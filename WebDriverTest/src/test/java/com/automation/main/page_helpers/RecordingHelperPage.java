@@ -5369,7 +5369,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		path = System.getProperty("user.dir") + path;
 
 		Robotil robotil=new Robotil("localhost", 5555);	
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
 		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
 		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
@@ -5381,6 +5381,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
 		
 		
+		Thread.sleep(2000);
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		StringSelection stringSelection = new StringSelection(path);
 		clipboard.setContents(stringSelection, null);	
