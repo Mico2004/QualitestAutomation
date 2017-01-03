@@ -30,17 +30,17 @@ public class EulaPage extends Page {
 		if((accept_button.isDisplayed())&&(decline_button.isDisplayed())&&(eula_message.isDisplayed()))
 		{
 			System.out.println("accept and decline buttons and eula message are visible");
-			ATUReports.add("accept and decline buttons and eula message are not visible","3 elements:accept,declineand eula message","visible"," not visible",LogAs.PASSED, null);
+			ATUReports.add(time +" accept and decline buttons and eula message are not visible","3 elements:accept,declineand eula message","visible"," not visible",LogAs.PASSED, null);
 
 			if(message.equals(eula_message.getText()))
 		{
 			System.out.println(" eula message matches the one written in  admin advanced services");
-			ATUReports.add(" eula message matches the one written in  admin advanced services","eula message and the one in admin advanced settings","equal","equal",LogAs.PASSED, null);
+			ATUReports.add(time +"  eula message matches the one written in  admin advanced services","eula message and the one in admin advanced settings","equal","equal",LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 		else {
 			System.out.println(" eula message dont  matches the one written in  admin advanced services");
-			ATUReports.add(" eula message matches the one written in  admin advanced services","eula message and the one in admin advanced settings","equal"," not equal",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +"  eula message matches the one written in  admin advanced services","eula message and the one in admin advanced settings","equal"," not equal",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
 			Assert.assertTrue(false);
 		}
@@ -48,7 +48,7 @@ public class EulaPage extends Page {
 		else 
 		{
 			System.out.println("accept and decline buttons and eula message are not visible");
-			ATUReports.add("accept and decline buttons and eula message are not visible","3 elements:accept,declineand eula message","visible"," not visible",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" accept and decline buttons and eula message are not visible","3 elements:accept,declineand eula message","visible"," not visible",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	
@@ -62,19 +62,19 @@ public class EulaPage extends Page {
 		if (decline_button.isDisplayed()) {
 			decline_button.click();
 			System.out.println("click on decline");
-			ATUReports.add("click on decline", LogAs.PASSED, null);
+			ATUReports.add(time +" click on decline", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 		else {
 			System.out.println("click on decline failed");
-			ATUReports.add("click on decline failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" click on decline failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
 	catch(Exception e)
 	{
 		System.out.println("click on decline exception");
-		ATUReports.add("click on decline exception", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" click on decline exception", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 	}
 	}
@@ -86,19 +86,19 @@ public class EulaPage extends Page {
 			if (accept_button.isDisplayed()) {
 				accept_button.click();
 				System.out.println("click on accept");
-				ATUReports.add("click on accept", LogAs.PASSED, null);
+				ATUReports.add(time +" click on accept", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 			else {
 				System.out.println("click on accept failed");
-				ATUReports.add("click on accept failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" click on accept failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
 		catch(Exception e)
 		{
 			System.out.println("click on accept exception");
-			ATUReports.add("click on accept exception", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" click on accept exception", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		}

@@ -5,19 +5,13 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.Page;
-import com.automation.main.utilities.DriverSelector;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -57,8 +51,9 @@ public class LoginHelperPage extends Page {
 		setPageTitle("Tegrity Lecture Capture");	
 		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
+		setPageUrl("https://awsserverautomation5-qabr.tegrity.com");
 		//setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
-		setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
+		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 
 
 	}
@@ -114,7 +109,7 @@ public class LoginHelperPage extends Page {
 			try {
 				new WebDriverWait(driver, 30).until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
 			} catch (TimeoutException e) {
-				ATUReports.add("Login Timeout (Screenshot)", PropertyManager.getProperty(user_name), "Login Success", LogAs.FAILED,
+				ATUReports.add(time +" Login Timeout (Screenshot)", PropertyManager.getProperty(user_name), "Login Success", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 
@@ -123,22 +118,22 @@ public class LoginHelperPage extends Page {
 				try {
 					eula_accept_button.click();
 					System.out.println("Clicked on accept Eula button");
-					ATUReports.add("Click on EULA accept",PropertyManager.getProperty(user_name) ,"Accept clicked", "Accept clicked", LogAs.PASSED, null);
+					ATUReports.add(time +" Click on EULA accept",PropertyManager.getProperty(user_name) ,"Accept clicked", "Accept clicked", LogAs.PASSED, null);
 					new WebDriverWait(driver, 30)
 							.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
 					;
 				} catch (Exception msg) {
 					System.out.println("No EULA button.");
-					ATUReports.add("Click on EULA accept",PropertyManager.getProperty(user_name) ,"Accept clicked", "Acceot wasn't clicked", LogAs.FAILED,
+					ATUReports.add(time +" Click on EULA accept",PropertyManager.getProperty(user_name) ,"Accept clicked", "Acceot wasn't clicked", LogAs.FAILED,
 							new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			} else if (driver.getTitle().contains("Tegrity - Courses")) {
-				ATUReports.add("Tegrity courses home page is visible", PropertyManager.getProperty(user_name),"Course List page is displayed",
+				ATUReports.add(time +" Tegrity courses home page is visible", PropertyManager.getProperty(user_name),"Course List page is displayed",
 						"Course List page is displayed", LogAs.PASSED, null);
 			}
 		} catch (Exception e) {
-			ATUReports.add("Login Failed (Screenshot)", PropertyManager.getProperty(user_name),"Login Success", "Login failed", LogAs.FAILED,
+			ATUReports.add(time +" Login Failed (Screenshot)", PropertyManager.getProperty(user_name),"Login Success", "Login failed", LogAs.FAILED,
 					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -162,9 +157,9 @@ public class LoginHelperPage extends Page {
 			fillPass();
 			clickElementJS(button_login);
 			new WebDriverWait(driver, 30).until(ExpectedConditions.titleContains("Tegrity"));
-			ATUReports.add("Login as", PropertyManager.getProperty(user_name), "Success login", "Success login", LogAs.PASSED, null);
+			ATUReports.add(time +" Login as", PropertyManager.getProperty(user_name), "Success login", "Success login", LogAs.PASSED, null);
 		} catch (Exception e) {
-			ATUReports.add("Login as", PropertyManager.getProperty(user_name), "Success login", "Success fail (Screenshot)", LogAs.FAILED,
+			ATUReports.add(time +" Login as", PropertyManager.getProperty(user_name), "Success login", "Success fail (Screenshot)", LogAs.FAILED,
 					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -187,7 +182,7 @@ public class LoginHelperPage extends Page {
 				new WebDriverWait(driver, 30)
 						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
 			} catch (TimeoutException e) {
-				ATUReports.add("Login Timeout (Screenshot)", user_name, "Login Success", "Login Success", LogAs.FAILED,
+				ATUReports.add(time +" Login Timeout (Screenshot)", user_name, "Login Success", "Login Success", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 
@@ -196,22 +191,22 @@ public class LoginHelperPage extends Page {
 				try {
 					eula_accept_button.click();
 					System.out.println("Clicked on accept Eula button");
-					ATUReports.add("Click on EULA accept",user_name ,"Accept clicked", "Accept clicked", LogAs.PASSED, null);
+					ATUReports.add(time +" Click on EULA accept",user_name ,"Accept clicked", "Accept clicked", LogAs.PASSED, null);
 					new WebDriverWait(driver, 30)
 							.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
 					;
 				} catch (Exception msg) {
 					System.out.println("No EULA button.");
-					ATUReports.add("Click on EULA accept",user_name ,"Accept clicked", "Acceot wasn't clicked", LogAs.FAILED,
+					ATUReports.add(time +" Click on EULA accept",user_name ,"Accept clicked", "Acceot wasn't clicked", LogAs.FAILED,
 							new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			} else if (driver.getTitle().contains("Tegrity - Courses")) {
-				ATUReports.add("Tegrity courses home page is visible",user_name ,"Course List page is displayed",
+				ATUReports.add(time +" Tegrity courses home page is visible",user_name ,"Course List page is displayed",
 						"Course List page is displayed", LogAs.PASSED, null);
 			}
 		} catch (Exception e) {
-			ATUReports.add("Login Failed (Screenshot)", user_name, "Login Success", "Login Failed",  LogAs.FAILED,
+			ATUReports.add(time +" Login Failed (Screenshot)", user_name, "Login Success", "Login Failed",  LogAs.FAILED,
 					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -244,7 +239,7 @@ public class LoginHelperPage extends Page {
 					new WebDriverWait(driver, 15)
 					.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
 			}catch(Exception ex ){
-				ATUReports.add("Login as guest button isn't visible", LogAs.FAILED,
+				ATUReports.add(time +" Login as guest button isn't visible", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));			
 			}
 			}
@@ -254,20 +249,20 @@ public class LoginHelperPage extends Page {
 				new WebDriverWait(driver, 30)
 						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
 			} catch (TimeoutException e) {
-				ATUReports.add("Login Timeout (Screenshot)","Login Success","Login Failed", LogAs.FAILED,
+				ATUReports.add(time +" Login Timeout (Screenshot)","Login Success","Login Failed", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 			if (driver.getTitle().contains("Tegrity - Courses")) {
-				ATUReports.add("Tegrity courses home page is visible","Course List page is displayed",
+				ATUReports.add(time +" Tegrity courses home page is visible","Course List page is displayed",
 						"Course List page is displayed", LogAs.PASSED, null);
 			} else {
-				ATUReports.add("Login Failed (Screenshot)", "Login Success","Login Failed", LogAs.FAILED,
+				ATUReports.add(time +" Login Failed (Screenshot)", "Login Success","Login Failed", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} catch (Exception e) {
-			ATUReports.add("Login Failed (Screenshot)","Login Success","Login Failed", LogAs.FAILED,
+			ATUReports.add(time +" Login Failed (Screenshot)","Login Success","Login Failed", LogAs.FAILED,
 					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -283,11 +278,11 @@ public class LoginHelperPage extends Page {
 		// TODO Auto-generated method stub
 		if (Login_as_guest_button.isDisplayed()) {
 			System.out.println("login as guest button is verified");
-			ATUReports.add("verify guest button", "login button as guest", "visible", "visible", LogAs.PASSED, null);
+			ATUReports.add(time +" verify guest button", "login button as guest", "visible", "visible", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("login as guest button is not verified");
-			ATUReports.add("verify guest button", "login button as guest", "visible", "not visible", LogAs.FAILED,
+			ATUReports.add(time +" verify guest button", "login button as guest", "visible", "not visible", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 		}
@@ -302,12 +297,12 @@ public class LoginHelperPage extends Page {
 		if ((Login_as_guest_info.getText().equals("Some courses may allow guest access")
 				&& (info.getY() > login.getY()))) {
 			System.out.println("login as guest info is verified+location");
-			ATUReports.add("verify guest info line+location", "login guest info line", "visible", "visible",
+			ATUReports.add(time +" verify guest info line+location", "login guest info line", "visible", "visible",
 					LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("login as guest info,location is not verified");
-			ATUReports.add("verify guest info line location", "login guest info line", "visible", "not visible",
+			ATUReports.add(time +" verify guest info line location", "login guest info line", "visible", "not visible",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}

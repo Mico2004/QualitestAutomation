@@ -70,10 +70,10 @@ public class ConfirmationMenu extends Page {
 			}
 			waitForVisibility(ok_button);		
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();",ok_button);
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}  
 		Thread.sleep(1000);	
@@ -90,18 +90,18 @@ public class ConfirmationMenu extends Page {
 		try {
 			// String souce_page = driver.getPageSource();
 			if (!header_title_list.get(0).getText().contains("Success")) {
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(0).getText().contains("Recordings have been queued for copy")) {
-				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();",ok_button);
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -120,22 +120,22 @@ public class ConfirmationMenu extends Page {
 			// String souce_page = driver.getPageSource();
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				System.out.println("Error window title is wrong");
-				ATUReports.add("Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}	
 			try{
 				new WebDriverWait(driver,15 ).until(ExpectedConditions.textToBePresentInElement(error_msg_body, "Recording has been queued for copy"));
 		    }catch(org.openqa.selenium.TimeoutException e){
-		    	ATUReports.add("Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		    	ATUReports.add(time +" Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", ok_button);		
 			System.out.println("Clicked on OK button");
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on OK button");
-			ATUReports.add("Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -152,21 +152,21 @@ public class ConfirmationMenu extends Page {
 		try {
 			if (!header_title_list.get(1).getText().contains("Error")) {
 				System.out.println("Error window title is wrong");
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(1).getText().contains("A course must be selected")) {
 				System.out.println("Error window description is wrong");
-				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
 			System.out.println("Clicked on OK button");
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on OK button");
-			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -184,22 +184,22 @@ public class ConfirmationMenu extends Page {
 				Thread.sleep(1500);
 				if (!header_title_list.get(1).getText().contains("An error has occurred.")) {
 					System.out.println("Error window title is wrong");
-					ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertEquals(false, true);
 				}
 				if (!error_msg_body_list.get(0).getText().contains(errorMessage)) {
 					System.out.println("Error window description is wrong");
-					ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertEquals(false, true);
 				}
 				ok_button.click();
 				System.out.println("Clicked on OK button");
-				ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+				ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} catch (Exception e) {
 				System.out.println("Fail click on OK button");
 				e.printStackTrace();
-				ATUReports.add("Fail click on OK button." + e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Fail click on OK button." + e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 			Thread.sleep(1000);
@@ -217,21 +217,21 @@ public class ConfirmationMenu extends Page {
 		try {
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				System.out.println("Error window title is wrong");
-				ATUReports.add("Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(0).getText().contains("Recording has been queued for move")) {
 				System.out.println("Error window description is wrong");
-				ATUReports.add("Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
 			System.out.println("Clicked on OK button");
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on OK button");
-			ATUReports.add("Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -260,21 +260,21 @@ public class ConfirmationMenu extends Page {
 		try {
 			if (!header_title_list.get(0).getText().contains("Copy")) {
 				System.out.println("Error window title is wrong");
-				ATUReports.add("Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(0).getText().contains("Cannot copy in-process or fail recordings")) {
 				System.out.println("Error window description is wrong");
-				ATUReports.add("Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
 			System.out.println("Clicked on OK button");
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on OK button");
-			ATUReports.add("Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -283,11 +283,11 @@ public class ConfirmationMenu extends Page {
 	public void verifyCopySourceRecordingStatus(String expected) {
 		String status = "Being copied from";
 		if (expected.equals(status)) {
-			ATUReports.add("right status", LogAs.PASSED, null);
+			ATUReports.add(time +" right status", LogAs.PASSED, null);
 			System.out.println("right status");
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add("wrong status...", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" wrong status...", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("wrong status...");
 			Assert.assertTrue(false);
 		}
@@ -297,10 +297,10 @@ public class ConfirmationMenu extends Page {
 	public void verifyMoveSourceRecordingStatus(String expected) {
 		String status = "Recording has been queued for move";
 		if (expected.equals(status)) {
-			ATUReports.add("right status", LogAs.PASSED, null);
+			ATUReports.add(time +" right status", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add("werong status...", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" werong status...", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -316,18 +316,18 @@ public class ConfirmationMenu extends Page {
 		try {
 			// String souce_page = driver.getPageSource();
 			if (!header_title_list.get(0).getText().contains("Success")) {
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(0).getText().contains("Recordings have been queued for move")) {
-				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -346,21 +346,21 @@ public class ConfirmationMenu extends Page {
 			String souce_page = driver.getPageSource();
 			if (!souce_page.contains("Move")) {
 				System.out.println("Error window title is wrong");
-				ATUReports.add("Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!souce_page.contains("Cannot move in-process or fail recordings")) {
 				System.out.println("Error window description is wrong");
-				ATUReports.add("Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
 			System.out.println("Clicked on OK button");
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on OK button");
-			ATUReports.add("Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -379,21 +379,21 @@ public class ConfirmationMenu extends Page {
 			String souce_page = driver.getPageSource();
 			if (!souce_page.contains("Delete")) {
 				System.out.println("Error window title is wrong");
-				ATUReports.add("Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!souce_page.contains("The following recording(s) could not be deleted")) {
 				System.out.println("Error window description is wrong");
-				ATUReports.add("Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
 			System.out.println("Clicked on OK button");
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on OK button");
-			ATUReports.add("Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -418,21 +418,21 @@ public class ConfirmationMenu extends Page {
 			String source_page = driver.getPageSource();
 			if (!source_page.contains("Edit Recording Properties")) {
 				System.out.println("Error window title is wrong.");
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!source_page.contains("Recording properties have been queued for edit")) {
 				System.out.println("Error window description is wrong.");
-				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", ok_button);			
 			System.out.println("Clicked on OK button.");
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on OK button.");
-			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -444,23 +444,23 @@ public class ConfirmationMenu extends Page {
 		String error_msg = correct_error_msg.getText();
 		if (error_msg.equals("Please select an instructor")) {
 			System.out.println("Correct error message: Please select an instructor");
-			ATUReports.add("Correct error message.", "Please select an instructor", "Please select an instructor",
+			ATUReports.add(time +" Correct error message.", "Please select an instructor", "Please select an instructor",
 					LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not correct error messsage instead: Please select an instructor. Appear: " + error_msg);
-			ATUReports.add("Not correct error message.", "Please select an instructor", error_msg, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not correct error message.", "Please select an instructor", error_msg, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
 		try {
 			ok_button.click();
 			System.out.println("Clicked on ok button.");
-			ATUReports.add("Clicked on ok button.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on ok button.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Not clicked on ok button.");
-			ATUReports.add("Clicked on ok button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on ok button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -487,11 +487,11 @@ public class ConfirmationMenu extends Page {
 
 		if (is_closed) {
 			System.out.println("Confirm window is closed.");
-			ATUReports.add("Confirm window.", "Closed.", "Closed.", LogAs.PASSED, null);
+			ATUReports.add(time +" Confirm window.", "Closed.", "Closed.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Confirm window is open.");
-			ATUReports.add("Confirm window.", "Closed.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Confirm window.", "Closed.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -502,11 +502,11 @@ public class ConfirmationMenu extends Page {
 
 		if (is_closed) {
 			System.out.println("Confirm window is closed.");
-			ATUReports.add("Confirm window.", "Open.", "Closed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Confirm window.", "Open.", "Closed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} else {
 			System.out.println("Confirm window is open.");
-			ATUReports.add("Confirm window.", "Open.", "Open.", LogAs.PASSED, null);
+			ATUReports.add(time +" Confirm window.", "Open.", "Open.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 	}
@@ -522,19 +522,19 @@ public class ConfirmationMenu extends Page {
 		try {
 			waitForVisibility(add_additional_content_confirm_note);
 			if (!header_title_list.get(0).getText().contains("Success")) {
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(0).getText().contains(file_name + " was uploaded successfully")) {
-				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			waitForVisibility(ok_button);
 			ok_button.click();
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -545,18 +545,18 @@ public class ConfirmationMenu extends Page {
 		try {
 			Thread.sleep(1000);
 			if (!header_title_list.get(0).getText().contains("Error")) {
-				ATUReports.add("Error window title is wrong.", LogAs.PASSED, null);
+				ATUReports.add(time +" Error window title is wrong.", LogAs.PASSED, null);
 				
 			}
 			if (!error_msg_body_list.get(0).getText().contains("An error has occurred.")) {
-				ATUReports.add("Error window description is wrong.", LogAs.PASSED, null);
+				ATUReports.add(time +" Error window description is wrong.", LogAs.PASSED, null);
 			}
 			waitForVisibility(ok_button);
 			ok_button.click();
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -566,18 +566,18 @@ public class ConfirmationMenu extends Page {
 		try {
 			
 			if (!header_title_list.get(0).getText().contains("Success")) {
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(0).getText().contains("Additional content link is successfully added.")) {
-				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -587,18 +587,18 @@ public class ConfirmationMenu extends Page {
 		try {
 
 			if (!header_title_list.get(0).getText().contains("Success")) {
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(0).getText().contains("Settings have been updated")) {
-				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -610,18 +610,18 @@ public class ConfirmationMenu extends Page {
 		try {
 
 			if (!header_title_list.get(0).getText().contains("Success")) {
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(0).getText().contains("Email sent successfully")) {
-				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			
 		}
 		Thread.sleep(3000);
@@ -633,18 +633,18 @@ public class ConfirmationMenu extends Page {
 		try {
 
 			if (!header_title_list.get(0).getText().contains("Success")) {
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(0).getText().contains("Settings have been updated")) {
-				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
@@ -664,11 +664,11 @@ public class ConfirmationMenu extends Page {
 
 		if (is_closed) {
 			System.out.println("Confirm window is closed.");
-			ATUReports.add("Confirm window.", "Closed.", "Closed.", LogAs.PASSED, null);
+			ATUReports.add(time +" Confirm window.", "Closed.", "Closed.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Confirm window is open.");
-			ATUReports.add("Confirm window.", "Closed.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Confirm window.", "Closed.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -678,11 +678,11 @@ public class ConfirmationMenu extends Page {
 	{
 		try {		
 			if (!header_title_list.get(0).getText().contains("Success")) {
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(0).getText().contains("Closed captions were added successfully")) {
-				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			Thread.sleep(5000);
@@ -690,11 +690,11 @@ public class ConfirmationMenu extends Page {
 			wait.until(ExpectedConditions.elementToBeClickable(ok_button));
 			ok_buttonCss.click();
 			ok_button.click();
-			/*ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			/*ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			System.out.println("Clicked on OK button.");*/
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("failed to click on ok button.", LogAs.WARNING, null);
+			ATUReports.add(time +" failed to click on ok button.", LogAs.WARNING, null);
 		}
 		Thread.sleep(3000);
 	}
@@ -704,11 +704,11 @@ public class ConfirmationMenu extends Page {
 	{
 		try {		
 			if (!header_title_list.get(0).getText().contains("Success")) {
-				ATUReports.add("Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			if (!error_msg_body_list.get(0).getText().contains("Add operation completed successfully!")) {
-				ATUReports.add("Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
 			Thread.sleep(5000);
@@ -716,10 +716,10 @@ public class ConfirmationMenu extends Page {
 			wait.until(ExpectedConditions.elementToBeClickable(ok_button));
 			ok_buttonCss.click();
 			ok_button.click();
-			ATUReports.add("Clicked on OK button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Clicked on OK button", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on OK button", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		Thread.sleep(3000);
 	}
@@ -729,11 +729,11 @@ public class ConfirmationMenu extends Page {
 		String background_rec = rec.getBackGroundColor(rec.background);
 		String menu_background = getBackGroundColor(background_header_title);
 		if (background_rec.equals(menu_background)) {
-			ATUReports.add("Confirm menu background color is same as recording background color.", LogAs.PASSED, null);
+			ATUReports.add(time +" Confirm menu background color is same as recording background color.", LogAs.PASSED, null);
 			System.out.println("Confirm menu background color is same as recording background color.");
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add("Confirm menu background color is not same as recording background color.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Confirm menu background color is not same as recording background color.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("Confirm menu background color is not same as recording background color.");
 			Assert.assertTrue(false);
 		}
@@ -747,10 +747,10 @@ public class ConfirmationMenu extends Page {
 		Point okButton = ok_button.getLocation();
 		
 		if (headerTitle.getX() < okButton.getX() && headerTitle.getY() < okButton.getY() ) {
-			ATUReports.add("The location of the ok button is on the right bottom.", LogAs.PASSED, null);
+			ATUReports.add(time +" The location of the ok button is on the right bottom.", LogAs.PASSED, null);
 			System.out.println("The location of the ok button is on the right bottom.");			
 		} else {
-			ATUReports.add("The location of the ok button is not on the right bottom.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The location of the ok button is not on the right bottom.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("The location of the ok button is not on the right bottom.");
 		
 		}

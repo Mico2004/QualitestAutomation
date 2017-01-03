@@ -58,11 +58,11 @@ public class PodcastPage extends Page {
 				try {
 					podcast_titles.get(i).click();
 					System.out.println("Clicked on podcast title: " + podcast_title);
-					ATUReports.add("Clicked on podcast title: " + podcast_title, LogAs.PASSED, null);
+					ATUReports.add(time +" Clicked on podcast title: " + podcast_title, LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				} catch(Exception e) {
 					System.out.println("Fail click on podcast title: " + podcast_title);
-					ATUReports.add("Fail click on podcast title: " + podcast_title, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Fail click on podcast title: " + podcast_title, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 				Thread.sleep(3000);
@@ -78,11 +78,11 @@ public class PodcastPage extends Page {
 				try {
 					podcast_audio_mp3.get(i).click();
 					System.out.println("Clicked on podcast title: " + podcast_title);
-					ATUReports.add("Clicked on podcast title: " + podcast_title, LogAs.PASSED, null);
+					ATUReports.add(time +" Clicked on podcast title: " + podcast_title, LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				} catch(Exception e) {
 					System.out.println("Fail click on podcast title: " + podcast_title);
-					ATUReports.add("Fail click on podcast title: " + podcast_title, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Fail click on podcast title: " + podcast_title, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 				Thread.sleep(3000);
@@ -102,13 +102,13 @@ public class PodcastPage extends Page {
 				Thread.sleep(1000);
 			} catch(Exception msg) {
 				System.out.println("Fail to watch all podcasts.");
-				ATUReports.add("Watch all podcasts.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Watch all podcasts.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 			
 		}
 		System.out.println("Watch all podcasts.");
-		ATUReports.add("Watch all podcasts.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Watch all podcasts.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 }

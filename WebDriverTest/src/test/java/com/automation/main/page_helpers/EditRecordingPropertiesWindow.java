@@ -98,14 +98,14 @@ public class EditRecordingPropertiesWindow extends Page {
 				if (val.contains(name)) {					
 					clickElement(el);
 					System.out.println("user selected");
-					ATUReports.add("Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership successfully", LogAs.PASSED, null);					
+					ATUReports.add(time +" Changes Ownership","Instructor: "+val+" Changed ownsership successfully","Changed ownsership successfully", LogAs.PASSED, null);					
 					return;
 				}
 			}			
 		} catch (Exception e) {
 			System.out.println("clicked on owner scroll failed");
 			e.printStackTrace();
-			ATUReports.add("Changes Ownership"+ e.getMessage(),"Instructor: "+val+" Changed ownsership successfully","Changed ownsership failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Changes Ownership"+ e.getMessage(),"Instructor: "+val+" Changed ownsership successfully","Changed ownsership failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
@@ -114,11 +114,11 @@ public class EditRecordingPropertiesWindow extends Page {
 		String nameToCompare = label.getText();
 		if (nameToCompare.equals(LabelName)) {
 			System.out.println("the label: " + LabelName + " equals to " + nameToCompare );
-			ATUReports.add("the label: " + LabelName + " equals to " + nameToCompare, "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" the label: " + LabelName + " equals to " + nameToCompare, "Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("the label: " + LabelName + " not equals to " + nameToCompare);
-			ATUReports.add("the label: " + LabelName + " not equals to " + nameToCompare, "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" the label: " + LabelName + " not equals to " + nameToCompare, "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}	
 		}catch(Exception e){
@@ -173,11 +173,11 @@ public class EditRecordingPropertiesWindow extends Page {
 		
 		if(IsWeInTheCorrectTypeOption){
 			System.out.println("the type: " + FirstSelctor + "is correct to " + TabName);
-			ATUReports.add("the type: " + FirstSelctor + "is correct to " + TabName,"Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" the type: " + FirstSelctor + "is correct to " + TabName,"Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("the type: " + FirstSelctor + "is not correct to " + TabName);
-			ATUReports.add("the type: " + FirstSelctor + "is not correct to " + TabName,"Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" the type: " + FirstSelctor + "is not correct to " + TabName,"Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}	
 		}catch(Exception e){
@@ -195,11 +195,11 @@ public class EditRecordingPropertiesWindow extends Page {
 		String background_rec = rec.getBackGroundColor(rec.background);
 		String menu_background = getBackGroundColor(edit_recordings_properties_background);
 		if (background_rec.equals(menu_background)) {
-			ATUReports.add("edit Properties menu background color is same as recording background color","Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" edit Properties menu background color is same as recording background color","Success.", "Success.", LogAs.PASSED, null);
 			System.out.println("edit Properties menu background color is same as recording background color");
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add("edit Properties menu background color is not  same as recording background color","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" edit Properties menu background color is not  same as recording background color","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("edit Propertiese menu background color is  not same as recording background color");
 			Assert.assertTrue(false);
 		}
@@ -219,10 +219,10 @@ public class EditRecordingPropertiesWindow extends Page {
 		String val = edit_recording_properties_title.getText();
 		if (val.equals("Edit Recording Properties")) {
 			System.out.println("Edit Recording Properties menu title verified.");
-			ATUReports.add("Edit Recording Properties menu title verified.", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" Edit Recording Properties menu title verified.", "Success.", "Success.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Edit Recording Properties menu title not verified.");
-			ATUReports.add("Edit Recording Properties menu title not verified.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Edit Recording Properties menu title not verified.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		Assert.assertEquals("Edit Recording Properties", val);
 		}catch(Exception e){
@@ -242,14 +242,14 @@ public class EditRecordingPropertiesWindow extends Page {
 			String warning = warningText.getText();	
 			if(warning.equals("Please specify the recording name")){
 				System.out.println("Verify Warning is Display.");
-				ATUReports.add("Verify Warning is Display.", "Success.", "Success.", LogAs.PASSED, null);
+				ATUReports.add(time +" Verify Warning is Display.", "Success.", "Success.", LogAs.PASSED, null);
 			}else {
 				System.out.println("Verify Warning is Display but the message is diffrenet from Please specify the recording Name.");
-				ATUReports.add("Verify Warning is Display.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verify Warning is Display.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}		
 		} else {
 			System.out.println("Verify Warning is not Display.");
-			ATUReports.add("Verify Warning is not Display.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verify Warning is not Display.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		}catch(Exception e){
 			e.getMessage();
@@ -263,17 +263,17 @@ public class EditRecordingPropertiesWindow extends Page {
 		try {		
 		if (!save_button.isEnabled()) {
 			System.out.println("Verify that the save button is disable.");
-			ATUReports.add("Verify that the save button is disable.","Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify that the save button is disable.","Success.", "Success.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not Verify that the save button is disable.");
-			ATUReports.add("Not Verify that the save button is disable.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not Verify that the save button is disable.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 		String grey_color = "rgba(66, 139, 202, 1)";	
 		if (save_button.getCssValue("background-color").equals(grey_color)) {
 			System.out.println("Save button background color is grey.");
-			ATUReports.add("save button background color is grey.","Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" save button background color is grey.","Success.", "Success.", LogAs.PASSED, null);
 		} else {
-			ATUReports.add("Save button background color is not grey.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Save button background color is not grey.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("Save button background color is not grey.");
 		}
 		}catch(Exception e){
@@ -288,17 +288,17 @@ public class EditRecordingPropertiesWindow extends Page {
 		try {		
 		if (save_button.isEnabled()) {
 			System.out.println("Verify that the save button is enable.");
-			ATUReports.add("Verify that the save button is enable.","Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify that the save button is enable.","Success.", "Success.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not Verify that the save button is enable.");
-			ATUReports.add("Not Verify that the save button is enable.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not Verify that the save button is enable.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 		String grey_color = "rgba(66, 139, 202, 1)";	
 		if (!save_button.getCssValue("background-color").equals(grey_color)) {
 			System.out.println("Save button background color is not grey.");
-			ATUReports.add("save button background color is not grey.","Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" save button background color is not grey.","Success.", "Success.", LogAs.PASSED, null);
 		} else {
-			ATUReports.add("Save button background color is grey.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Save button background color is grey.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("Save button background color is grey.");
 		}
 		}catch(Exception e){
@@ -315,10 +315,10 @@ public class EditRecordingPropertiesWindow extends Page {
 			
 			if (infoText.equals("Note: The creation date is used by the reports. This recording will only appear in reports that include the new date and will no longer appear in reports for the old date.")) {
 				System.out.println("Valid Infomative Text.");
-				ATUReports.add("Valid Infomative Text.","Success.", "Success.", LogAs.PASSED, null);
+				ATUReports.add(time +" Valid Infomative Text.","Success.", "Success.", LogAs.PASSED, null);
 			} else {
 				System.out.println("Not Valid Infomative Text.");
-				ATUReports.add("Not Valid Infomative Text.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not Valid Infomative Text.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		} catch (Exception e) {	
 			e.printStackTrace();
@@ -338,17 +338,17 @@ public class EditRecordingPropertiesWindow extends Page {
 		if((save.getY() > title.getY()) && (save.getX() > cancel.getX()))
 		{
 		 System.out.println("The Save button is displayed on the bottom right corner of the model window.");
-		 ATUReports.add("The Save button is displayed on the bottom right corner of the model window.","Success.", "Success.", LogAs.PASSED, null);
+		 ATUReports.add(time +" The Save button is displayed on the bottom right corner of the model window.","Success.", "Success.", LogAs.PASSED, null);
 		}else {
 		 System.out.println("The Save button isn't displayed on the bottom right corner of the model window.");
-		 ATUReports.add("The Save button isn't displayed on the bottom right corner of the model window.", "Success.", "Fail.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		 ATUReports.add(time +" The Save button isn't displayed on the bottom right corner of the model window.", "Success.", "Fail.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		if((cancel.getY() > title.getY()) && (cancel.getX() < save.getX())) {
 			 System.out.println("The Cancel button is displayed on the left of the Save button.");
-			 ATUReports.add("The Cancel button is displayed on the left of the Save button.","Success.", "Success.", LogAs.PASSED, null);
+			 ATUReports.add(time +" The Cancel button is displayed on the left of the Save button.","Success.", "Success.", LogAs.PASSED, null);
 			}else {
 			 System.out.println("The Cancel button is not displayed on the left of the Save button.");
-			 ATUReports.add("The Cancel button is not displayed on the left of the Save button.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			 ATUReports.add(time +" The Cancel button is not displayed on the left of the Save button.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		}catch(Exception e){
 			e.getMessage();
@@ -369,10 +369,10 @@ public class EditRecordingPropertiesWindow extends Page {
 
 		if((title.getX() < cancel.getX())){
 		 System.out.println("The location of the edit recording properties is aligned left.");
-		 ATUReports.add("The location of the edit recording properties is aligned left.","Success.", "Success.", LogAs.PASSED, null);
+		 ATUReports.add(time +" The location of the edit recording properties is aligned left.","Success.", "Success.", LogAs.PASSED, null);
 		}else {
 		 System.out.println("The location of the edit recording properties is not aligned left.");
-		 ATUReports.add("The location of the edit recording properties is not aligned left.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		 ATUReports.add(time +" The location of the edit recording properties is not aligned left.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		}catch(Exception e){
 			e.getMessage();
@@ -389,10 +389,10 @@ public class EditRecordingPropertiesWindow extends Page {
 		if((labelLoc.getX() < editTextLoc.getX()))
 		{
 		 System.out.println("The location of the label " + label.getText() + " recording properties is aligned left.");
-			ATUReports.add("The location of the label " + label.getText() + " recording properties is aligned left.","Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" The location of the label " + label.getText() + " recording properties is aligned left.","Success.", "Success.", LogAs.PASSED, null);
 		}else {
 		 System.out.println("The location of the label " + label.getText() + " recording properties is not aligned left.");
-			ATUReports.add("The location of the label " + label.getText() + " recording properties is not aligned left.", "Success.", "Fail.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The location of the label " + label.getText() + " recording properties is not aligned left.", "Success.", "Fail.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
     }catch(Exception e){
     	e.getMessage();
@@ -408,17 +408,17 @@ public class EditRecordingPropertiesWindow extends Page {
       
     	if(OutSideString.equals(inputElement)){
 		 System.out.println("The input Element: " +inputElement + " is equals to the out Side String " + OutSideString);
-			ATUReports.add("The input Element: " +inputElement + " is equals to the out Side String " + OutSideString,"Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" The input Element: " +inputElement + " is equals to the out Side String " + OutSideString,"Success.", "Success.", LogAs.PASSED, null);
 		}else if(OutSideString.length()!=inputElement.length()) {
 			StringBuilder sb= new StringBuilder(inputElement);
 			sb.insert(3, "0");
 			if(sb.toString().equals(OutSideString)){
 				 System.out.println("The input Element: " +inputElement + " is equals to the out Side String " + OutSideString);
-				 ATUReports.add("The input Element: " +inputElement + " is equals to the out Side String " + OutSideString,"Success.", "Success.", LogAs.PASSED, null);
+				 ATUReports.add(time +" The input Element: " +inputElement + " is equals to the out Side String " + OutSideString,"Success.", "Success.", LogAs.PASSED, null);
 			}
 		}else{
 		 System.out.println("The input Element: " +inputElement + " is not equals to the out Side String " + OutSideString);
-			ATUReports.add("The input Element: " +inputElement + " is not equals to the out Side String " + OutSideString, "Success.", "Fail.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The input Element: " +inputElement + " is not equals to the out Side String " + OutSideString, "Success.", "Fail.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
     }catch(Exception e){
     	e.getMessage();
@@ -442,10 +442,10 @@ public class EditRecordingPropertiesWindow extends Page {
     	
       	if(isCreationUserAppreadOnTheList){
    		    System.out.println("The user: " + user + " is appread on the list");
-   			ATUReports.add("The user: " + user + " is appread on the list","Success.", "Success.", LogAs.PASSED, null);
+   			ATUReports.add(time +" The user: " + user + " is appread on the list","Success.", "Success.", LogAs.PASSED, null);
    		}else {
    		    System.out.println("The user: " + user + " is not appread on the list");
-   			ATUReports.add("The user: " + user + " is not appread on the list", "Success.", "Fail.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+   			ATUReports.add(time +" The user: " + user + " is not appread on the list", "Success.", "Fail.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
    		}
     }catch(Exception e){
     	e.getMessage();
@@ -470,9 +470,9 @@ public class EditRecordingPropertiesWindow extends Page {
 		try {
 			new WebDriverWait(driver, 120)
 			.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ModalDialogHeader")));		
-			ATUReports.add("Verifying edit window is closed", "edit window is closed","edit window is closed",LogAs.PASSED,null);
+			ATUReports.add(time +" Verifying edit window is closed", "edit window is closed","edit window is closed",LogAs.PASSED,null);
 		} catch (Exception msg) {
-			ATUReports.add("Verifying edit window is closed", "edit window isn't closed","edit window isn't closed",LogAs.WARNING,null);
+			ATUReports.add(time +" Verifying edit window is closed", "edit window isn't closed","edit window isn't closed",LogAs.WARNING,null);
 		}
 	}
 
@@ -484,12 +484,12 @@ public class EditRecordingPropertiesWindow extends Page {
 			recording_name.sendKeys(target_name);
 			Thread.sleep(3000);
 			System.out.println("Recording name changed to: " + target_name);
-			ATUReports.add("Recording name changed.", "Change to: " + target_name,"Changed to " + recording_name + target_name, LogAs.PASSED, null);
+			ATUReports.add(time +" Recording name changed.", "Change to: " + target_name,"Changed to " + recording_name + target_name, LogAs.PASSED, null);
 			Assert.assertTrue(true);	
 		} catch (Exception msg) {
 			msg.printStackTrace();
 			System.out.println("Fail to change recording name.");
-			ATUReports.add("Recording name changed.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Recording name changed.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -500,11 +500,11 @@ public class EditRecordingPropertiesWindow extends Page {
 			wait.until(ExpectedConditions.visibilityOf(save_button));			
 		    ((JavascriptExecutor) driver).executeScript("document.getElementById(\""+save_button.getAttribute("id")+"\").click();");
 			System.out.println("Clicked on save button.");
-			ATUReports.add("Clicked on save button.", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on save button.", "Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on save button.");
-			ATUReports.add("Clicked on save button.", "Success.", "Fail."+msg.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on save button.", "Success.", "Fail."+msg.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -514,11 +514,11 @@ public class EditRecordingPropertiesWindow extends Page {
 			wait.until(ExpectedConditions.visibilityOf(cancel_button));			
 		    ((JavascriptExecutor) driver).executeScript("document.getElementById(\""+cancel_button.getAttribute("id")+"\").click();");
 			System.out.println("Clicked on cancel button.");
-			ATUReports.add("Clicked on cancel button.", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on cancel button.", "Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on cancel button.");
-			ATUReports.add("Clicked on cancel button.", "Success.", "Fail."+msg.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on cancel button.", "Success.", "Fail."+msg.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -566,14 +566,14 @@ public class EditRecordingPropertiesWindow extends Page {
 				if(currentType.equals(type)){
 					clickElement(ie);
 					System.out.println("Click on the Type: " + currentType);				
-					ATUReports.add("Click on the Type: " + currentType, "Success.", "Success", LogAs.PASSED, null);
+					ATUReports.add(time +" Click on the Type: " + currentType, "Success.", "Success", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					return;
 				}
 			}
 			
 			System.out.println("No Found new instracutor at the list.");				
-			ATUReports.add("No Found new instracutor at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" No Found new instracutor at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);	
 			
 		}catch(Exception e){
@@ -588,14 +588,14 @@ public class EditRecordingPropertiesWindow extends Page {
 			String currentType = new Select(type_select).getFirstSelectedOption().getText();
 				if(currentType.equals(type)){
 					System.out.println("Verify that the type was choosen.");				
-					ATUReports.add("Verify that the type was choosen.", "Success.", "Success", LogAs.PASSED, null);
+					ATUReports.add(time +" Verify that the type was choosen.", "Success.", "Success", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					return;
 				}
 			
 			
 			System.out.println("Verify that the type was choosen.");				
-			ATUReports.add("Verify that the type was choosen.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verify that the type was choosen.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);	
 			
 		}catch(Exception e){
@@ -614,7 +614,7 @@ public class EditRecordingPropertiesWindow extends Page {
 			String currentOwner = ie.getText(); 
 			if(currentOwner.contains(User)){
 				System.out.println("The user " + currentOwner +  " is found at the list.");				
-				ATUReports.add("The user " + currentOwner +  " is found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" The user " + currentOwner +  " is found at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				isAllTheInstractorsInTheList = false;
 				break;
 			}
@@ -622,7 +622,7 @@ public class EditRecordingPropertiesWindow extends Page {
 		}
 		if(isAllTheInstractorsInTheList){
 			System.out.println("The user is not found at the list.");
-			ATUReports.add("The user is not found at the list.", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" The user is not found at the list.", "Success.", "Success.", LogAs.PASSED, null);
 		}
 	}catch(Exception e){
 		e.getMessage();
@@ -641,7 +641,7 @@ public class EditRecordingPropertiesWindow extends Page {
 			String currentOwner = ie.getText(); 
 			if(!searchOwnerInTheOwnerList(currentOwner)){
 				System.out.println("The " + currentOwner + "is not supposed to be at the list of owners at that course.");				
-				ATUReports.add("The " + currentOwner + "is not supposed to be at the list of owners at that course.", "Success.", "Fail.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" The " + currentOwner + "is not supposed to be at the list of owners at that course.", "Success.", "Fail.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				isAllTheInstractorsInTheList = false;
 				break;
 			}
@@ -649,7 +649,7 @@ public class EditRecordingPropertiesWindow extends Page {
 		}
 		if(isAllTheInstractorsInTheList){
 			System.out.println("All The Owners are found at the list of owners.");
-			ATUReports.add("All The Owners are found at the list of owners.", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" All The Owners are found at the list of owners.", "Success.", "Success.", LogAs.PASSED, null);
 		}
 	}catch(Exception e){
 		e.getMessage();
@@ -667,7 +667,7 @@ public class EditRecordingPropertiesWindow extends Page {
 			String currentOwner = ie.getText(); 
 			if(!searchOwnerInTheOwnerList(currentOwner)){
 				System.out.println("The " + currentOwner + "is not supposed to be at the list of owners at that course.");				
-				ATUReports.add("Verify that all the right owners are at that dropdown list.", "The " + currentOwner + "is not supposed to be at the list of owners at that course.", "The " + currentOwner + "is at the list of owners at that course.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verify that all the right owners are at that dropdown list.", "The " + currentOwner + "is not supposed to be at the list of owners at that course.", "The " + currentOwner + "is at the list of owners at that course.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				isAllTheInstractorsInTheList = false;
 				break;
 			}
@@ -675,7 +675,7 @@ public class EditRecordingPropertiesWindow extends Page {
 		}
 		if(isAllTheInstractorsInTheList){
 			System.out.println("All The Owners are found at the list of owners.");
-			ATUReports.add("Verify that all the right owners are at that dropdown list.",  "All the owners are at the list of owners at that course.", "All the owners are at the list of owners at that course.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify that all the right owners are at that dropdown list.",  "All the owners are at the list of owners at that course.", "All the owners are at the list of owners at that course.", LogAs.PASSED, null);
 		}
 	}catch(Exception e){
 		e.getMessage();
@@ -758,10 +758,10 @@ public class EditRecordingPropertiesWindow extends Page {
 		
 		if(borderTopColor.equals(OWNER_BORDER_COLOR) && borderRightColor.equals(OWNER_BORDER_COLOR) && borderBottomColor.equals(OWNER_BORDER_COLOR) && borderLeftColor.equals(OWNER_BORDER_COLOR)){
 			System.out.println("All The borders are at the same color black");
-			ATUReports.add("All The borders are at the same color black.", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" All The borders are at the same color black.", "Success.", "Success.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not All The borders are at the same color black.");				
-			ATUReports.add("Not All The borders are at the same color black.", "Success.", "Fail", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not All The borders are at the same color black.", "Success.", "Fail", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		}catch(Exception e){
 			e.getMessage();
@@ -778,14 +778,14 @@ public class EditRecordingPropertiesWindow extends Page {
 			String currentType = ie.getText(); 
 			if(!recording_types.contains(currentType)){
 				System.out.println("The drop down is not contians all the types.");				
-				ATUReports.add("The drop down is not contians all the types.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" The drop down is not contians all the types.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				isAllTheRecordingsTypesInTheList = false;
 				break;
 			}
 		}
 		if(isAllTheRecordingsTypesInTheList){
 			System.out.println("The drop down is contians all the types.");
-			ATUReports.add("The drop down is contians all the types.", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" The drop down is contians all the types.", "Success.", "Success.", LogAs.PASSED, null);
 		}	
 		}catch(Exception e){
 			e.getMessage();
@@ -824,7 +824,7 @@ public class EditRecordingPropertiesWindow extends Page {
 		try {
 		recording_name.sendKeys(target_name);
 		System.out.println("Recording name changed to: " + target_name);
-		ATUReports.add("Recording name changed.", "Change to: " + target_name,"Changed to " + recording_name + target_name, LogAs.PASSED, null);
+		ATUReports.add(time +" Recording name changed.", "Change to: " + target_name,"Changed to " + recording_name + target_name, LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		} catch (Exception e) {
 			e.getMessage();
@@ -838,11 +838,11 @@ public class EditRecordingPropertiesWindow extends Page {
 		try {
 		if(new WebDriverWait(driver, 80).until(ExpectedConditions.invisibilityOfElementLocated(By.id("EditButton")))){
 			System.out.println("The Edit Recording Properites window was close at time.");
-			ATUReports.add("The Edit Recording Properites window was close at time.", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" The Edit Recording Properites window was close at time.", "Success.", "Success.", LogAs.PASSED, null);
 			return true;
 		}else {
 			System.out.println("The Edit Recording Properites window was not close at time.");
-			ATUReports.add("The Edit Recording Properites window was not close at time.",  "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The Edit Recording Properites window was not close at time.",  "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 		}}catch (org.openqa.selenium.TimeoutException e) {
 			e.getMessage();
@@ -858,11 +858,11 @@ public class EditRecordingPropertiesWindow extends Page {
 
 			if (is_closed) {
 				System.out.println("Edit recordings properties window is closed.");
-				ATUReports.add("Edit recordings properties window.", "Closed.", "Closed.", LogAs.PASSED, null);
+				ATUReports.add(time +" Edit recordings properties window.", "Closed.", "Closed.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Edit recordings properties window is open.");
-				ATUReports.add("Edit recordings properties window.", "Closed.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Edit recordings properties window.", "Closed.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -875,10 +875,10 @@ public class EditRecordingPropertiesWindow extends Page {
 		
 		if(textAfterHover.equals(text)){
 			System.out.println("An inner shadow is applied on the button " + button.getText());
-			ATUReports.add("An inner shadow is applied on the button " + button.getText(), "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" An inner shadow is applied on the button " + button.getText(), "Success.", "Success.", LogAs.PASSED, null);
 		} else {
 			System.out.println("An inner shadow is not applied on the button " + button.getText());				
-			ATUReports.add("An inner shadow is not applied on the button " + button.getText(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" An inner shadow is not applied on the button " + button.getText(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		}catch(Exception e){
 			e.getMessage();
@@ -900,12 +900,12 @@ public class EditRecordingPropertiesWindow extends Page {
 			Date date = sdf.parse(correctDate);
 			System.out.println(date);
 			System.out.println("The date is in the following format: 'XX/XX/XXXX'");
-			ATUReports.add("The date is in the following format: 'XX/XX/XXXX'", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" The date is in the following format: 'XX/XX/XXXX'", "Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			
 		} catch (ParseException e) {
 			System.out.println("The date is not in the following format: 'XX/XX/XXXX'" );				
-			ATUReports.add("The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -934,7 +934,7 @@ public class EditRecordingPropertiesWindow extends Page {
 			if(!OwnerToCheck.contains(recordByToCheck)){
 				clickElement(ie);
 				System.out.println("Click on the instractur: " + currentOwner);				
-				ATUReports.add("The instracutor is found at the list.", "Success.", "Success", LogAs.PASSED, null);
+				ATUReports.add(time +" The instracutor is found at the list.", "Success.", "Success", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				String OwnerToReturn = "recorded by: " + OwnerToCheck;
 				return OwnerToReturn;
@@ -947,7 +947,7 @@ public class EditRecordingPropertiesWindow extends Page {
 		}
 		
 		System.out.println("No Found new instracutor at the list.");				
-		ATUReports.add("No Found new instracutor at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" No Found new instracutor at the list.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 		return null;
 	}
@@ -999,10 +999,10 @@ public class EditRecordingPropertiesWindow extends Page {
 				Actions action = new Actions(driver);
 				action.sendKeys(Keys.ESCAPE).build().perform();
 			}
-			ATUReports.add("Clicked on ESC button.","Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on ESC button.","Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Fail click on ESC button.","Success.", "Fail." ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on ESC button.","Success.", "Fail." ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(2000);
@@ -1013,11 +1013,11 @@ public class EditRecordingPropertiesWindow extends Page {
 		date_Field.clear();
 		date_Field.sendKeys(date);
 		System.out.println("changing the date to: " + date);		
-		ATUReports.add("changing the date to: " + date,"Success.", "Success." ,LogAs.PASSED, null);
+		ATUReports.add(time +" changing the date to: " + date,"Success.", "Success." ,LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		} catch (Exception e) {
 			e.getMessage();
-			ATUReports.add("Fail changing the date to:" + date + e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail changing the date to:" + date + e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		

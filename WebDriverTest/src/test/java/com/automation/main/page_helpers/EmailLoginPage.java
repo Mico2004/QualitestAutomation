@@ -31,13 +31,13 @@ public class EmailLoginPage extends Page {
 		  email_field.sendKeys(email_input_field);
 		 copy.click();
 			System.out.println("login successfully");
-			ATUReports.add("Login as", email_input_field, "Success login", "Success login", LogAs.PASSED, null);
+			ATUReports.add(time +" Login as", email_input_field, "Success login", "Success login", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 	}
 	catch(Exception e)
 	{
 		System.out.println("failed sign in  to gmail inbox");
-		ATUReports.add("Login as", "qualitestmcgrawhill", "Success login", "Success fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Login as", "qualitestmcgrawhill", "Success login", "Success fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 	}
 	}

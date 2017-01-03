@@ -110,11 +110,11 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			waitForAlert(60);
 			clickOkInAlertIfPresent();			
 			System.out.println("Accecpt alert message.");
-			ATUReports.add("Click enrollment diaglog OK button", "OK button was clicked","OK button was clicked",LogAs.PASSED,null);
+			ATUReports.add(time +" Click enrollment diaglog OK button", "OK button was clicked","OK button was clicked",LogAs.PASSED,null);
 			return true;
 		}catch (Exception msg) {
 			System.out.println("Didn't Accecpt alert message."+msg.getMessage());
-			ATUReports.add("Click enrollment diaglog OK button", "OK button was clicked","Clicked Failed:"+msg.getLocalizedMessage(),LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Click enrollment diaglog OK button", "OK button was clicked","Clicked Failed:"+msg.getLocalizedMessage(),LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 			}
 		}
@@ -169,11 +169,11 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			wait.until(ExpectedConditions.visibilityOf(remove_selected_from_instructor_list_button));
 			clickElementJS(remove_selected_from_instructor_list_button);
 			System.out.println("Removed selected to instructor list.");
-			ATUReports.add("Removed selected to instructor list.", LogAs.PASSED, null);
+			ATUReports.add(time +" Removed selected to instructor list.", LogAs.PASSED, null);
 			return true;
 		} catch (Exception msg) {
 			System.out.println("Fail to remove selected to instructor list.");
-			ATUReports.add("Fail to remove selected to instructor list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail to remove selected to instructor list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 		}
 	}
@@ -200,13 +200,13 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 					Thread.sleep(2000);
 					clickElementJS(el);
 					System.out.println("User selected from user list.");
-					ATUReports.add("User selected from user list.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" User selected from user list.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					return true;
 				}
 			}
 			
 			System.out.println("The user isn't on the list.");
-			ATUReports.add("The user isn't on the list.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The user isn't on the list.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 		}catch(UnhandledAlertException ex){
 			System.out.println("Alert pop up");
@@ -232,11 +232,11 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 		    if(enrolled_instructor==true)
 	    	{
 	    		System.out.println("Verified that  selected user is  displaied in instructor list.");
-	    		ATUReports.add("Verified that  selected user is  displaied in instructor list.", LogAs.PASSED, null);
+	    		ATUReports.add(time +" Verified that  selected user is  displaied in instructor list.", LogAs.PASSED, null);
 	    		Assert.assertTrue(true);
 	    	} else {
 	    		System.out.println(" selected user is not displaied in instructor list.");
-	    		ATUReports.add(" selected user is not displaied in instructor list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    		ATUReports.add(time +"  selected user is not displaied in instructor list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    		Assert.assertTrue(false);
 	    	}
 		}
@@ -246,11 +246,11 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			  if(enrolled_instructor==false)
 				{
 					System.out.println("Verified that  selected user is not displaied in instructor list.");
-					ATUReports.add("Verified that  selected user is not displaied in instructor list.", LogAs.PASSED, null);
+					ATUReports.add(time +" Verified that  selected user is not displaied in instructor list.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				} else {
 					System.out.println(" selected user is  displaied in instructor list.");
-					ATUReports.add(" selected user is  displaied in instructor list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +"  selected user is  displaied in instructor list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 		}
@@ -266,11 +266,11 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 		    if(enrolled_student==true)
 	    	{
 	    		System.out.println("Verified that  selected user is  displaied in student list.");
-	    		ATUReports.add("Verified that  selected user is  displaied in student list.", LogAs.PASSED, null);
+	    		ATUReports.add(time +" Verified that  selected user is  displaied in student list.", LogAs.PASSED, null);
 	    		Assert.assertTrue(true);
 	    	} else {
 	    		System.out.println(" selected user is not displaied in student list.");
-	    		ATUReports.add(" selected user is not displaied in student list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    		ATUReports.add(time +"  selected user is not displaied in student list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    		Assert.assertTrue(false);
 	    	}
 		}
@@ -280,11 +280,11 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			  if(enrolled_student==false)
 				{
 					System.out.println("Verified that  selected user is not displaied in student list.");
-					ATUReports.add("Verified that  selected user is not displaied in student list.", LogAs.PASSED, null);
+					ATUReports.add(time +" Verified that  selected user is not displaied in student list.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				} else {
 					System.out.println(" selected user is  displaied in student list");
-					ATUReports.add(" selected user is  displaied in student list", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +"  selected user is  displaied in student list", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 		}
@@ -296,13 +296,13 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			wait.until(ExpectedConditions.visibilityOf(remove_selected_from_student_list_button));
 			clickElementJS(remove_selected_from_student_list_button);
 			System.out.println("Removed selected to students list.");
-			ATUReports.add("Removed selected to students list.", LogAs.PASSED, null);
+			ATUReports.add(time +" Removed selected to students list.", LogAs.PASSED, null);
         	Assert.assertTrue(true);
 			return true;
 		} catch (Exception msg) {
 			System.out.println("Fail to remove selected to students list.");
 			Assert.assertTrue(false);
-			ATUReports.add("Fail to remove selected to students list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail to remove selected to students list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 		}
 	}
@@ -334,15 +334,15 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 		try{
 		for (int i=0; i<60;i++) {
 			if(selectIrUserFromUserList(student_elements_list, student_name)) {
-				ATUReports.add("User was added to course users list",student_name,LogAs.PASSED,null);
+				ATUReports.add(time +" User was added to course users list",student_name,LogAs.PASSED,null);
 				return;
 			} else {
 				Thread.sleep(1000);
 			}
 		}
-		ATUReports.add("User wasn't added to course users list",student_name,LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" User wasn't added to course users list",student_name,LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}catch(Exception e){
-			ATUReports.add("User wasn't added to course users list",student_name,"Error:"+e.getMessage(),LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" User wasn't added to course users list",student_name,"Error:"+e.getMessage(),LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			
 			
 		}

@@ -336,11 +336,11 @@ public class RecordingHelperPage extends Page {
 
 			if (number_of_recordings_in_target_course == 0) {
 				System.out.println("There are no recordings in target course.");
-				ATUReports.add("Recordings.", "There are no recordings in target course.",
+				ATUReports.add(time +" Recordings.", "There are no recordings in target course.",
 						"There are no recordings in target course.", LogAs.PASSED, null);
 			} else {
 				System.out.println("There are recordings in target course, starting deletion of all of them");
-				ATUReports.add("Recordings.", "There are recordings in target course, starting deletion of all of them",
+				ATUReports.add(time +" Recordings.", "There are recordings in target course, starting deletion of all of them",
 						"There are recordings in target course, then it will delete them all.", LogAs.PASSED, null);
 						
 				checkAllCheckBox();
@@ -350,7 +350,7 @@ public class RecordingHelperPage extends Page {
 			}
 		} catch (Exception msg) {
 			System.out.println("Failed to check the checkbox and delete all recordings"+msg.getLocalizedMessage());
-			ATUReports.add("Recordings.", "Failed to check the checkbox and delete all recordings",
+			ATUReports.add(time +" Recordings.", "Failed to check the checkbox and delete all recordings",
 					"Failed to check the checkbox and delete all recordings", LogAs.WARNING, null);
 		}
 	}
@@ -365,7 +365,7 @@ public class RecordingHelperPage extends Page {
 				if (recording_status.equals(status)) {
 					System.out.println("Recordings in index: " + index + " status is correct - " + recording_status
 							+ " == " + status);
-					ATUReports.add("Recordings in index: " + index + " status is correct - " + recording_status + " == "
+					ATUReports.add(time +" Recordings in index: " + index + " status is correct - " + recording_status + " == "
 							+ status, LogAs.PASSED, null);
 					Assert.assertEquals(recording_status, status);
 					return true;
@@ -373,7 +373,7 @@ public class RecordingHelperPage extends Page {
 
 				System.out.println("Recordings in index: " + index + " status is not correct - " + recording_status
 						+ " != " + status);
-				ATUReports.add("Recordings in index: " + index + " status is not correct - " + recording_status + " != "
+				ATUReports.add(time +" Recordings in index: " + index + " status is not correct - " + recording_status + " != "
 						+ status, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
 				Assert.assertEquals(recording_status, status);
@@ -383,7 +383,7 @@ public class RecordingHelperPage extends Page {
 			return false;
 			
 		} catch (Exception e) {
-			ATUReports.add("Recording  check failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Recording  check failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 		}
 	}
@@ -398,7 +398,7 @@ public class RecordingHelperPage extends Page {
 		}
 		catch(org.openqa.selenium.TimeoutException msg){
 			
-			ATUReports.add("There are no recordings in this course tab ",LogAs.WARNING, null);
+			ATUReports.add(time +" There are no recordings in this course tab ",LogAs.WARNING, null);
 		}
 		try{
 		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Moving/Copying")));
@@ -416,10 +416,10 @@ public class RecordingHelperPage extends Page {
 		
 		}catch(org.openqa.selenium.TimeoutException msg){
 			
-			ATUReports.add("Timeout for status disappearing is over but status is still displayed",LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			ATUReports.add(time +" Timeout for status disappearing is over but status is still displayed",LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
 		}		
 		
-		ATUReports.add("There is not more status for any recording", LogAs.PASSED,null);		
+		ATUReports.add(time +" There is not more status for any recording", LogAs.PASSED,null);		
 	}
 
 	
@@ -430,17 +430,17 @@ public class RecordingHelperPage extends Page {
 		}
 		catch(org.openqa.selenium.TimeoutException msg){
 			
-			ATUReports.add("There are no recordings in this course tab ",LogAs.WARNING, null);
+			ATUReports.add(time +" There are no recordings in this course tab ",LogAs.WARNING, null);
 		}
 		try{
 		new WebDriverWait(driver, 10).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(wrapper, "Not Published")));
 		
 		}catch(org.openqa.selenium.TimeoutException msg){
 			
-			ATUReports.add("Timeout for status disappearing is over but status is still displayed",LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			ATUReports.add(time +" Timeout for status disappearing is over but status is still displayed",LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
 		}		
 		
-		ATUReports.add("There is not more status for any recording", LogAs.PASSED,null);		
+		ATUReports.add(time +" There is not more status for any recording", LogAs.PASSED,null);		
 	}
 
 	
@@ -458,7 +458,7 @@ public class RecordingHelperPage extends Page {
 				if (driver.findElement(By.id("Recording" + Integer.toString(i))).getAttribute("disabled")
 						.equals(true)) {
 					System.out.println("Not all recordings is clickable.");
-					ATUReports.add("Not all recordings is clickable.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Not all recordings is clickable.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 					return false;
 				}
@@ -467,7 +467,7 @@ public class RecordingHelperPage extends Page {
 			}
 		}
 		System.out.println("All recordings is clickable.");
-		ATUReports.add("All recordings is clickable.", LogAs.PASSED, null);
+		ATUReports.add(time +" All recordings is clickable.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		return true;
 	}
@@ -500,7 +500,7 @@ public class RecordingHelperPage extends Page {
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", courses_link);						
 			Thread.sleep(2000);		
 			System.out.println("returnToCourseListPage2");	
-			ATUReports.add("Clicked on Courses link.", "Go back to courses page",		
+			ATUReports.add(time +" Clicked on Courses link.", "Go back to courses page",		
 					"Go back to courses page", LogAs.PASSED, null);		
 			wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ActiveCourses"))));
 			System.out.println("returnToCourseListPage3");	
@@ -515,7 +515,7 @@ public class RecordingHelperPage extends Page {
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", courses_link);	
 			}catch(Exception e){		
 				System.out.println("Not clicked on Courses link." + msg.getMessage() );		
-				ATUReports.add("Not clicked on Courses link.", "Courses page heading",		
+				ATUReports.add(time +" Not clicked on Courses link.", "Courses page heading",		
 						"Not found courses page heading. Page url: " + driver.getCurrentUrl(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
 			}		
 			System.out.println("returnToCourseListPage6");			
@@ -533,14 +533,14 @@ public class RecordingHelperPage extends Page {
 			waitForVisibility(element);
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("The screen chapter was expaned");
-			ATUReports.add("The screen chapter was expaned", LogAs.PASSED, null);							
+			ATUReports.add(time +" The screen chapter was expaned", LogAs.PASSED, null);							
 			Thread.sleep(2000);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("The screen chapter wasn't expaned");
-			ATUReports.add("The screen chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The screen chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -562,7 +562,7 @@ public class RecordingHelperPage extends Page {
 		try{
 			waitForVisibility(first_recording_title);
 		}catch (Exception e){
-			ATUReports.add("Timeout for first recording", e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
+			ATUReports.add(time +" Timeout for first recording", e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
 			Assert.assertTrue(false);
 			return null;
 		}
@@ -573,7 +573,7 @@ public class RecordingHelperPage extends Page {
 		try{
 			waitForVisibility(second_recording_title);
 		}catch (Exception e){
-			ATUReports.add("Timeout for second recording", e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
+			ATUReports.add(time +" Timeout for second recording", e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
 			Assert.assertTrue(false);
 			return null;
 		}
@@ -606,7 +606,7 @@ public class RecordingHelperPage extends Page {
 			
 			if (time_counter > 220) {
 				System.out.println("Timeout - Being copied from still appears after 220 seconds");
-				ATUReports.add("Timeout - Being copied from still appears after 220 seconds", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Timeout - Being copied from still appears after 220 seconds", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 				return;
 			} else {
@@ -615,7 +615,7 @@ public class RecordingHelperPage extends Page {
 		}
 
 		System.out.println("Being copied from disappeared from first recording.");
-		ATUReports.add("Being copied from dissapear from first recording.", LogAs.PASSED, null);
+		ATUReports.add(time +" Being copied from dissapear from first recording.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 
@@ -640,7 +640,7 @@ public class RecordingHelperPage extends Page {
 						}
 					}
 					
-					ATUReports.add("Clicked on podcast.", LogAs.PASSED, null);
+					ATUReports.add(time +" Clicked on podcast.", LogAs.PASSED, null);
 					System.out.println("Clicked on podcast.");
 					Assert.assertTrue(true);
 					break;
@@ -653,10 +653,10 @@ public class RecordingHelperPage extends Page {
 			try {
 
 				podcast_button.click();
-				ATUReports.add("Click succeeded.", LogAs.PASSED, null);
+				ATUReports.add(time +" Click succeeded.", LogAs.PASSED, null);
 				System.out.println("Click succeeded.");
 			} catch (Exception e) {
-				ATUReports.add("Click failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Click failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Click failed.");
 			}
 		}
@@ -673,7 +673,7 @@ public class RecordingHelperPage extends Page {
 			System.out.println("Afterwait");
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("course_settings displayed");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Thread.sleep(1500);
 			Assert.assertTrue(true);
@@ -681,7 +681,7 @@ public class RecordingHelperPage extends Page {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -698,7 +698,7 @@ public class RecordingHelperPage extends Page {
 			System.out.println("Afterwait");
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("course_settings displayed");
-			ATUReports.add("Select course Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select course Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Thread.sleep(1500);
 			Assert.assertTrue(true);
@@ -706,7 +706,7 @@ public class RecordingHelperPage extends Page {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnCourseTaskThen6");
-			ATUReports.add("Select course Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select course Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -728,14 +728,14 @@ public class RecordingHelperPage extends Page {
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
 			System.out.println("Delete window displayed");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -754,14 +754,14 @@ public class RecordingHelperPage extends Page {
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
 			System.out.println("copy window displayed");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -821,7 +821,7 @@ if(!check_all_checkbox.isSelected()){
 			String checkbox_indexed = "Checkbox" + Integer.toString(j);
 			if (!driver.findElement(By.id(checkbox_indexed)).isSelected()) {
 				System.out.println("Not all recording checked.");
-				ATUReports.add("Select several recordings", "All recording checked", "Not all recording checked.",
+				ATUReports.add(time +" Select several recordings", "All recording checked", "Not all recording checked.",
 						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 
@@ -830,7 +830,7 @@ if(!check_all_checkbox.isSelected()){
 		}
 
 		System.out.println("All recording checked.");
-		ATUReports.add("All recording checked.", "All recording checked", "All recording checked", LogAs.PASSED,
+		ATUReports.add(time +" All recording checked.", "All recording checked", "All recording checked", LogAs.PASSED,
 				null);
 		Assert.assertTrue(true);
 		return recording_names_list;
@@ -850,12 +850,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		if (recording_list_names.contains(recording_name)) {
 			if (need_to_be_exists == true) {
 				System.out.println("The Recording:" + recording_name +" is exist.");
-				ATUReports.add("The Recording:" + recording_name +" is exist.", LogAs.PASSED, null);
+				ATUReports.add(time +" The Recording:" + recording_name +" is exist.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return true;
 			} else {
 				System.out.println("The Recording:" + recording_name +" is not exist.");
-				ATUReports.add("The Recording:" + recording_name +" is not exist.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" The Recording:" + recording_name +" is not exist.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 				return false;
 			}
@@ -863,12 +863,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 		if (need_to_be_exists == true) {
 			System.out.println("The Recording:" + recording_name +" is not exist.");
-			ATUReports.add("The Recording:" + recording_name +" is not exist.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The Recording:" + recording_name +" is not exist.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return false;
 		} else {
 			System.out.println("The Recording:" + recording_name +" is exist.");
-			ATUReports.add("The Recording:" + recording_name +" is exist.", LogAs.PASSED, null);
+			ATUReports.add(time +" The Recording:" + recording_name +" is exist.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return true;
 		}
@@ -895,19 +895,19 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 			if (courses_title.getText().equals("Courses")) {
 				System.out.println("Click on Courses link.");
-				ATUReports.add("Click on Courses link.", "Courses page heading", "Courses page heading", LogAs.PASSED,
+				ATUReports.add(time +" Click on Courses link.", "Courses page heading", "Courses page heading", LogAs.PASSED,
 						null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Not clicked on Courses link.");
-				ATUReports.add("Not clicked on Courses link.", "Courses page heading",
+				ATUReports.add(time +" Not clicked on Courses link.", "Courses page heading",
 						"Found courses page heading, but not correct. Page heading: " + courses_title.getText(),
 						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} catch (Exception msg) {
 			System.out.println("Not clicked on Courses link.");
-			ATUReports.add("Not clicked on Courses link.", "Courses page heading",
+			ATUReports.add(time +" Not clicked on Courses link.", "Courses page heading",
 					"Not found courses page heading. Page url: " + driver.getCurrentUrl(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -919,11 +919,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		//	signout_link.click();
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");
 			System.out.println("Click on signout link.");
-			ATUReports.add("Click on signout link.", LogAs.PASSED, null);
+			ATUReports.add(time +" Click on signout link.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Not clicked on signout link.");
-			ATUReports.add("Not clicked on signout link.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not clicked on signout link.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -942,21 +942,21 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		if (recording_name.equals(newest_recording)) {
 			if (need_to_be_exists == true) {
-				ATUReports.add("Recording is exists.", LogAs.PASSED, null);
+				ATUReports.add(time +" Recording is exists.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return true;
 			} else {
-				ATUReports.add("Recording is exists.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Recording is exists.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 				return false;
 			}
 		}
 		if (need_to_be_exists == true) {
-			ATUReports.add("Recording is not exists.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Recording is not exists.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return false;
 		} else {
-			ATUReports.add("Recording is not exists.", LogAs.PASSED, null);
+			ATUReports.add(time +" Recording is not exists.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return true;
 		}
@@ -984,14 +984,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				continue;
 			} else {
 				System.out.println("one or more checkboxes are not selected");
-				ATUReports.add("one or more checkboxes are not selected", LogAs.FAILED,
+				ATUReports.add(time +" one or more checkboxes are not selected", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.DESKTOP));
 				Assert.assertTrue(false);
 			}
 
 		}
 		System.out.println("all checkboxes are  selected");
-		ATUReports.add("all checkboxes are  selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+		ATUReports.add(time +" all checkboxes are  selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 		Assert.assertTrue(true);
 
 	}
@@ -1001,13 +1001,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for (WebElement element : checkboxlist) {
 			if ((element.isSelected())) {
 				System.out.println("Some/all checkboxes are  selected");
-				ATUReports.add("All checkboxes are not selected.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" All checkboxes are not selected.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 
 		}
 		System.out.println("All checkboxes are not selected.");
-		ATUReports.add("All checkboxes are not selected.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" All checkboxes are not selected.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 
 	}
@@ -1022,11 +1022,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			Assert.assertTrue(false);
 			Thread.sleep(2000);
 			System.out.println("copy button is enabled");
-			ATUReports.add("copy button is enabled", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" copy button is enabled", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} catch (Exception e) {
 			Assert.assertTrue(true); // assert true
 			System.out.println("copy button is disabled");
-			ATUReports.add("copy button is disabled", LogAs.PASSED, null);
+			ATUReports.add(time +" copy button is disabled", LogAs.PASSED, null);
 		}
 	}
 
@@ -1038,9 +1038,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		boolean assertion = verifyColor(grey_color, copy_button);
 		if (assertion == true) {
 			System.out.println("menu color is grey");
-			ATUReports.add("menu color is grey", LogAs.PASSED, null);
+			ATUReports.add(time +" menu color is grey", LogAs.PASSED, null);
 		} else {
-			ATUReports.add("menu color is not grey", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" menu color is not grey", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("menu color is not grey");
 		}
 		Assert.assertTrue(assertion);// compare
@@ -1059,7 +1059,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String recording_status = el.getText();
 			if (recording_status.equals("")) {
 				System.out.println("Recordings in index: " + index + " status empty");
-				ATUReports.add("Recordings in index: " + index + " status empty", LogAs.PASSED, null);
+				ATUReports.add(time +" Recordings in index: " + index + " status empty", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return true;
 			}
@@ -1068,7 +1068,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 
 		System.out.println("Recordings in index: " + index + " status not empty");
-		ATUReports.add("Recordings in index: " + index + " status not empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Recordings in index: " + index + " status not empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 		return false;
 	}
@@ -1084,7 +1084,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String recording_status = driver.findElement(By.id("RecordingStatus" + (Integer.toString(index)))).getText();
 			if (!recording_status.equals(is_not)) {
 				System.out.println("Recordings in index: " + index + " is not: " + is_not);
-				ATUReports.add("Recordings in index: " + index + " is not: " + is_not, LogAs.PASSED, null);
+				ATUReports.add(time +" Recordings in index: " + index + " is not: " + is_not, LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return true;
 			}
@@ -1092,7 +1092,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			Thread.sleep(1000);
 		}
 		System.out.println("Recordings in index: " + index + " status is: " + is_not);
-		ATUReports.add("Recordings in index: " + index + " status is: " + is_not, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Recordings in index: " + index + " status is: " + is_not, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 		return false;
 	}
@@ -1124,14 +1124,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");	
 			waitForContentOfTabToLoad(initialText,TabContainer);
 			System.out.println("StudentRecordingsTab3");
-			ATUReports.add("Select StudentRecordingsTab -> "+id, id+" was click",
+			ATUReports.add(time +" Select StudentRecordingsTab -> "+id, id+" was click",
 					id+" was clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("StudentRecordingsTab4");
-			ATUReports.add("Select StudentRecordingsTab -> "+id, id+" was click",
+			ATUReports.add(time +" Select StudentRecordingsTab -> "+id, id+" was click",
 					id+" wasn't clicked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" was clicked");
 			Assert.assertTrue(false);
@@ -1156,14 +1156,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				Thread.sleep(1000);
 				waitForContentOfTabToLoad(initialText,TabContainer);
 				System.out.println("BookmarkRecordingsTab3");
-				ATUReports.add("Select BookmarkRecordingsTab -> "+id, id+" was click",
+				ATUReports.add(time +" Select BookmarkRecordingsTab -> "+id, id+" was click",
 						id+" was clicked", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				System.out.println("BookmarkRecordingsTab4");
-				ATUReports.add("Select BookmarkRecordingsTab -> "+id, id+" was click",id+" wasn't clicked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Select BookmarkRecordingsTab -> "+id, id+" was click",id+" wasn't clicked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println(id+" was clicked");
 				Assert.assertTrue(false);
 			}
@@ -1185,14 +1185,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
 			System.out.println("Delete window displayed");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -1220,7 +1220,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		catch(Exception e){
 			System.out.println("catch selectIndexCheckBox");
 			e.printStackTrace();
-			ATUReports.add("Fail to select checkbox " +e.getMessage(),"Check succeeded","Check failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail to select checkbox " +e.getMessage(),"Check succeeded","Check failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		
 		}
 	}
@@ -1230,10 +1230,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		if (recording_list_names.contains(name)) {
 			Assert.assertTrue(true);
-			ATUReports.add("recording copied successfully", LogAs.PASSED, null);
+			ATUReports.add(time +" recording copied successfully", LogAs.PASSED, null);
 		} else {
 			Assert.assertTrue(false);
-			ATUReports.add("recording not copied", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" recording not copied", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 
@@ -1338,23 +1338,23 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					waitForVisibility(element);
 					((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 					System.out.println("recording chapter was expaned");
-					ATUReports.add("recording chapter was expaned", LogAs.PASSED, null);							
+					ATUReports.add(time +" recording chapter was expaned", LogAs.PASSED, null);							
 					Thread.sleep(1500);
 					Assert.assertTrue(true);
 					return;
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 					System.out.println("recording chapter wasn't expaned");
-					ATUReports.add("recording chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" recording chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 		         
 		       if (isElementPresent(firsr_record_player_name)) {
-		           ATUReports.add("video recording was displayed", LogAs.PASSED, null);
+		           ATUReports.add(time +" video recording was displayed", LogAs.PASSED, null);
 		           System.out.println("video recording was displayed");
 		           Assert.assertTrue(true);
 		       } else {
-		           ATUReports.add("video recording was not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		           ATUReports.add(time +" video recording was not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		           System.out.println("video recording was not displayed");
 		           Assert.assertTrue(false);
 		       }
@@ -1370,23 +1370,23 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 						waitForVisibility(element);
 						((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 						System.out.println("recording chapter was expaned");
-						ATUReports.add("recording chapter was expaned", LogAs.PASSED, null);							
+						ATUReports.add(time +" recording chapter was expaned", LogAs.PASSED, null);							
 						Thread.sleep(1500);
 						Assert.assertTrue(true);
 						return;
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
 						System.out.println("recording chapter wasn't expaned");
-						ATUReports.add("recording chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						ATUReports.add(time +" recording chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					}
 			         
 			       if (isElementPresent(firsr_record_player_name)) {
-			           ATUReports.add("video recording was displayed", LogAs.PASSED, null);
+			           ATUReports.add(time +" video recording was displayed", LogAs.PASSED, null);
 			           System.out.println("video recording was displayed");
 			           Assert.assertTrue(true);
 			       } else {
-			           ATUReports.add("video recording was not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			           ATUReports.add(time +" video recording was not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			           System.out.println("video recording was not displayed");
 			           Assert.assertTrue(false);
 			       }
@@ -1425,13 +1425,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			
 			((JavascriptExecutor) driver).executeScript(script);
 			System.out.println("press on sort record" + choice);	
-			ATUReports.add("Select sort_recording_tab -> "+choice, choice+" was click",
+			ATUReports.add(time +" Select sort_recording_tab -> "+choice, choice+" was click",
 					choice+" was clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			ATUReports.add("click not succeded ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" click not succeded ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(choice+" was clicked");
 			Assert.assertTrue(false);
 		}
@@ -1446,12 +1446,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for (String current : title) {
 
 			if (current.compareToIgnoreCase(previous) < 0) {
-				ATUReports.add("not sorted by title...  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" not sorted by title...  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 			previous = current;
 		}
-		ATUReports.add("sorted by title correctly ", LogAs.PASSED, null);
+		ATUReports.add(time +" sorted by title correctly ", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 
@@ -1467,7 +1467,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 																				/// years
 			{
 				System.out.println("Not sorted by date correctly.");
-				ATUReports.add("Sorted by date correctly.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Sorted by date correctly.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			} else {
 				if ((Integer.valueOf(splitdate[2]) == Integer.valueOf(previous[2])))// if
@@ -1478,7 +1478,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				{
 					if ((Integer.valueOf(splitdate[0]) < Integer.valueOf(previous[0]))) {
 						System.out.println("Not sorted by date correctly.");
-						ATUReports.add("Sorted by date correctly.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						ATUReports.add(time +" Sorted by date correctly.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					} else {
 						if ((Integer.valueOf(splitdate[0]) == Integer.valueOf(previous[0])))// if
@@ -1489,7 +1489,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 						{
 							if ((Integer.valueOf(splitdate[1]) < Integer.valueOf(previous[1]))) {
 								System.out.println("Not sorted by date correctly.");
-								ATUReports.add("Sorted by date correctly.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+								ATUReports.add(time +" Sorted by date correctly.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 								Assert.assertTrue(false);
 							}
 						}
@@ -1503,7 +1503,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		}
 		System.out.println("Sorted by date correctly.");
-		ATUReports.add("Sorted by date correctly.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Sorted by date correctly.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 
@@ -1518,7 +1518,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 																				/// years
 			{
 				System.out.println("Not sorted by duration...");
-				ATUReports.add("Not sorted by duration...", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not sorted by duration...", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			} else {
 				if ((Integer.valueOf(splitdate[0]) == Integer.valueOf(previous[0])))// if
@@ -1529,7 +1529,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				{
 					if ((Integer.valueOf(splitdate[1]) < Integer.valueOf(previous[1]))) {
 						System.out.println("Not sorted by duration...");
-						ATUReports.add("Not sorted by duration...  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						ATUReports.add(time +" Not sorted by duration...  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					} else {
 						if ((Integer.valueOf(splitdate[1]) == Integer.valueOf(previous[1])))// if
@@ -1540,7 +1540,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 						{
 							if ((Integer.valueOf(splitdate[2]) < Integer.valueOf(previous[2]))) {
 								System.out.println("SNot sorted by duration...");
-								ATUReports.add("Not sorted by duration...  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+								ATUReports.add(time +" Not sorted by duration...  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 								Assert.assertTrue(false);
 							}
 						}
@@ -1554,7 +1554,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		}
 		System.out.println("Sorted by duration correctly.");
-		ATUReports.add("Sorted by duration correctly.", LogAs.PASSED, null);
+		ATUReports.add(time +" Sorted by duration correctly.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 
@@ -1564,13 +1564,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 			if (original_recorder.equals(name)) {
 
-				ATUReports.add("recorder name equals the original recorder ", LogAs.PASSED, null);
+				ATUReports.add(time +" recorder name equals the original recorder ", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
 			}
 
 		}
-		ATUReports.add("recorder  doesn't name equals the original recorder name ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" recorder  doesn't name equals the original recorder name ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 	}
 
@@ -1578,11 +1578,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		System.out.println(recording_font_title.getCssValue("font-weight"));
 		if ((recording_font_title.getCssValue("font-weight").equals("bold"))
 				|| (recording_font_title.getCssValue("font-weight").equals("700"))) {
-			ATUReports.add("font style is bold ", LogAs.PASSED, null);
+			ATUReports.add(time +" font style is bold ", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 
-			ATUReports.add("font style is not bold", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" font style is not bold", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -1595,7 +1595,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}catch(Exception e)
 		{
 			System.out.println("There are not recordings in the course tab");
-			ATUReports.add("Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}			
 		WebElement recording=null;		
@@ -1608,7 +1608,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				waitForVisibility(recording);				
 				clickElementJS(recording);		
 				System.out.println(" Recording found");
-				ATUReports.add(" Recording found", LogAs.PASSED, null);
+				ATUReports.add(time +"  Recording found", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
 			}
@@ -1618,7 +1618,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			handlesClickIsNotVisible(recording);
 			waitForVisibility(visibleFirstChapter);
 			System.out.println(" no such recording found");
-			ATUReports.add("no such recording", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" no such recording", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			
 		}
@@ -1630,7 +1630,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}catch(Exception e)
 		{
 			System.out.println("There are not recordings in the course tab");
-			ATUReports.add("Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}			
 		WebElement recording=null;		
@@ -1642,7 +1642,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if (!(el.getText().equals(original_recorder_name)) && !(el.getText().equals("Recordings")) && !(el.getText().equals("Recording Tasks"))) {
 				differentRecordName = el.getText();
 				System.out.println(" Recording found");
-				ATUReports.add(" Recording found", LogAs.PASSED, null);
+				ATUReports.add(time +"  Recording found", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				break;
 			}
@@ -1653,7 +1653,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			handlesClickIsNotVisible(recording);
 			waitForVisibility(visibleFirstChapter);
 			System.out.println(" no such recording found");
-			ATUReports.add("no such recording", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" no such recording", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			
 		}
@@ -1670,7 +1670,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}
 		} catch (Exception msg) {
 			System.out.println("The element is not found.");
-			ATUReports.add("The element is not found", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The element is not found", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 		}
 	}
@@ -1687,7 +1687,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				clickOnRecordingTaskThenDelete();
 				delete_menu.clickOnDeleteButton();
 				System.out.println("Recording is found, and deleted: " + recording_name);
-				ATUReports.add("Recording is found, and deleted: " + recording_name, LogAs.PASSED, null);
+				ATUReports.add(time +" Recording is found, and deleted: " + recording_name, LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 		}
@@ -1738,14 +1738,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("AdditionalContentTab2");	
 			waitForContentOfTabToLoad(initialText,TabContainer);
-			ATUReports.add("Select additional_content_tab -> "+id, id+" was click",
+			ATUReports.add(time +" Select additional_content_tab -> "+id, id+" was click",
 					id+" was clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("AdditionalContentTab6");
-			ATUReports.add("Select additional_content_tab -> "+id, id+" was click",
+			ATUReports.add(time +" Select additional_content_tab -> "+id, id+" was click",
 					id+" wasn't clicked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" was clicked");
 			Assert.assertTrue(false);
@@ -1760,14 +1760,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			waitForVisibility(additional_content_tab);
 			additional_content_tab.click();
 			System.out.println("Clicked on additional tab");
-			ATUReports.add("Clicked on additional tab", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on additional tab", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (WebDriverException msg){
 			handlesClickIsNotVisible(additional_content_tab);
 			
 		}catch (Exception msg) {
 			System.out.println("Failed to click on additional tab. ERROR: " + msg);
-			ATUReports.add("Failed to click on additional tab. ERROR: " + msg, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Failed to click on additional tab. ERROR: " + msg, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}*/
 	
@@ -1784,14 +1784,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
 			System.out.println("Delete window displayed");
-			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Content Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Content Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -1809,14 +1809,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
 			System.out.println("Delete window displayed");
-			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Content Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Content Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -1850,14 +1850,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");	
 			System.out.println("TestsTab2");
 			waitForContentOfTabToLoad(initialText,TabContainer);
-			ATUReports.add("Select TestsTab -> "+id, id+" was click",
+			ATUReports.add(time +" Select TestsTab -> "+id, id+" was click",
 					id+" was clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("TestsTab4");
-			ATUReports.add("Select TestsTab -> "+id, id+" was click",
+			ATUReports.add(time +" Select TestsTab -> "+id, id+" was click",
 					id+" wasn't clicked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" was clicked");
 			Assert.assertTrue(false);
@@ -1912,18 +1912,18 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if (checkbox.isSelected()) {
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);			
 				System.out.println("Checkbox is not selected in index: " + index);
-				ATUReports.add("Checkbox not selected in index: " + index, LogAs.PASSED, null);
+				ATUReports.add(time +" Checkbox not selected in index: " + index, LogAs.PASSED, null);
 
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Checkbox not selected in index: " + index);
-				ATUReports.add("Checkbox not selected in index: " + index, LogAs.PASSED, null);
+				ATUReports.add(time +" Checkbox not selected in index: " + index, LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 
 		} catch (Exception msg) {
 			System.out.println("Checkbox not selected in index: " + index);
-			ATUReports.add("Checkbox not selected in index: " + index, LogAs.PASSED, null);
+			ATUReports.add(time +" Checkbox not selected in index: " + index, LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 	}
@@ -1933,7 +1933,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if (check_all_checkbox.isSelected()) {
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
 				System.out.println("Unselecet all the checkboxs");
-				ATUReports.add("Unselecet all the checkboxs", LogAs.PASSED, null);
+				ATUReports.add(time +" Unselecet all the checkboxs", LogAs.PASSED, null);
 
 				Assert.assertTrue(true);
 			} else {
@@ -1941,13 +1941,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				Thread.sleep(1000);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
 				System.out.println("Unselecet all the checkboxs.");
-				ATUReports.add("Unselecet all the checkboxs.", LogAs.PASSED, null);
+				ATUReports.add(time +" Unselecet all the checkboxs.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 
 		} catch (Exception msg) {
 			System.out.println("Failed unselecet all the checkboxs.");
-			ATUReports.add("Failed unselecet all the checkboxs.", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Failed unselecet all the checkboxs.", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1956,17 +1956,17 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {	
 			if (!checkbox.isSelected()) {
 				System.out.println("The Checkbox " +checkbox.getText() + "is not selected");
-				ATUReports.add("The Checkbox " +checkbox.getText() + "is not selected", LogAs.PASSED, null);
+				ATUReports.add(time +" The Checkbox " +checkbox.getText() + "is not selected", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {			
 				System.out.println("The Checkbox " +checkbox.getText() + "is selected");
-				ATUReports.add("The Checkbox " +checkbox.getText() + "is selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" The Checkbox " +checkbox.getText() + "is selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(true);
 			}
 
 		} catch (Exception msg) {
 			System.out.println("The Checkbox " +checkbox.getText() + "is selected");
-			ATUReports.add("The Checkbox " +checkbox.getText() + "is selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The Checkbox " +checkbox.getText() + "is selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(true);
 		}
 	}
@@ -1975,17 +1975,17 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {	
 			if (checkbox.isSelected()) {
 				System.out.println("The Checkbox " +checkbox.getText() + "is selected");
-				ATUReports.add("The Checkbox " +checkbox.getText() + "is selected", LogAs.PASSED, null);
+				ATUReports.add(time +" The Checkbox " +checkbox.getText() + "is selected", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {			
 				System.out.println("The Checkbox " +checkbox.getText() + "is not selected");
-				ATUReports.add("The Checkbox " +checkbox.getText() + "is not selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" The Checkbox " +checkbox.getText() + "is not selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(true);
 			}
 
 		} catch (Exception msg) {
 			System.out.println("The Checkbox " +checkbox.getText() + "is not selected");
-			ATUReports.add("The Checkbox " +checkbox.getText() + "is not selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The Checkbox " +checkbox.getText() + "is not selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(true);
 		}
 	}
@@ -2003,21 +2003,21 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		if (recording_name.equals(newest_recording)) {
 			if (need_to_be_exists == true) {
-				ATUReports.add("Recording is exists.", LogAs.PASSED, null);
+				ATUReports.add(time +" Recording is exists.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return true;
 			} else {
-				ATUReports.add("Recording is exists.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Recording is exists.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 				return false;
 			}
 		}
 		if (need_to_be_exists == true) {
-			ATUReports.add("Recording is not exists.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Recording is not exists.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return false;
 		} else {
-			ATUReports.add("Recording is not exists.", LogAs.PASSED, null);
+			ATUReports.add(time +" Recording is not exists.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return true;
 		}
@@ -2039,10 +2039,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		boolean assertion = verifyColor(grey_color, el);
 		if (assertion == true) {
 			System.out.println("Menu color is grey");
-			ATUReports.add("Menu color is grey", LogAs.PASSED, null);
+			ATUReports.add(time +" Menu color is grey", LogAs.PASSED, null);
 		} else {
 			System.out.println("Menu color is not grey");
-			ATUReports.add("Menu color is not grey", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Menu color is not grey", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		Assert.assertTrue(assertion);// compare// 2// colors
 		Thread.sleep(2000);
@@ -2057,10 +2057,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if (color.equals(white) || color.equals(white2)) {
 			
 				System.out.println("Button background color is White");
-				ATUReports.add("Button background color is White", LogAs.PASSED, null);
+				ATUReports.add(time +" Button background color is White", LogAs.PASSED, null);
 			} else {
 				System.out.println("Button background color is not White");
-				ATUReports.add("Button background color is not White", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Button background color is not White", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		
 
@@ -2074,12 +2074,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		// try {
 		// additional_content_tab.click();
 		// System.out.println("Clicked on test recordings tab");
-		// ATUReports.add("Clicked on test recordings tab", LogAs.PASSED, null);
+		// ATUReports.add(time +" Clicked on test recordings tab", LogAs.PASSED, null);
 		// Assert.assertTrue(true);
 		// } catch (Exception msg) {
 		// System.out.println("Failed to click on test recordings tab. ERROR: "
 		// + msg);
-		// ATUReports.add("Failed to click on test recordings tab. ERROR: " +
+		// ATUReports.add(time +" Failed to click on test recordings tab. ERROR: " +
 		// msg, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		// Assert.assertTrue(false);
 		// }
@@ -2100,7 +2100,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 			if (time_counter > 260) {
 				System.out.println("Timeout - Being moved from still appears after 260 seconds");
-				ATUReports.add("Timeout - Being moved from still appears after 260 seconds", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Timeout - Being moved from still appears after 260 seconds", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 				return;
 			}
@@ -2108,7 +2108,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			else break;
 	}
 		System.out.println("Being moved from dissapear from first recording.");
-		ATUReports.add("Being moved from dissapear from first recording.", LogAs.PASSED, null);
+		ATUReports.add(time +" Being moved from dissapear from first recording.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 
@@ -2125,14 +2125,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 //				Thread.sleep(1000);
 //				if (isElementPresent(By.id("ModalDialogHeader"))) {
 //					System.out.println("Delete menu confirmed");
-//					ATUReports.add("click succeeded", LogAs.PASSED, null);
+//					ATUReports.add(time +" click succeeded", LogAs.PASSED, null);
 //					Assert.assertTrue(true);
 //				}
 //
 //				return;
 //			} catch (Exception e) {
 //				System.out.println("Move to delete menu failed");
-//				ATUReports.add("click failed ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//				ATUReports.add(time +" click failed ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 //			}
 //		}
 		clickOnRecordingTaskThenDelete();
@@ -2144,10 +2144,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		if (status.equals("Error")) {
 			System.out.println(" recording status is Error");
 			Assert.assertTrue(true);
-			ATUReports.add("verify recording status is Error", "status", "Error", "Error", LogAs.PASSED, null);
+			ATUReports.add(time +" verify recording status is Error", "status", "Error", "Error", LogAs.PASSED, null);
 		} else {
 			System.out.println(" recording status is not Error");
-			ATUReports.add("verify recording status is Error", "status", "Error", "Not Error", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" verify recording status is Error", "status", "Error", "Not Error", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -2166,14 +2166,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
 			System.out.println("Delete window displayed");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -2192,14 +2192,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
 			System.out.println("Delete window displayed");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -2235,7 +2235,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public boolean hasBeingcopiedfromStatus(WebElement element) {
 		String val = element.getText();
 		if (val.equals("Being copied from")) {
-			ATUReports.add("check status", "status text", "Being copied from", val, LogAs.PASSED, null);
+			ATUReports.add(time +" check status", "status text", "Being copied from", val, LogAs.PASSED, null);
 			System.out.println("has Being copied from status");
 			Assert.assertTrue(true);
 			return true;
@@ -2243,7 +2243,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		System.out.println("dont have Being copied from status");
 		Assert.assertTrue(false);
 		{
-			ATUReports.add("check status", "status text", "Being copied from", val, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" check status", "status text", "Being copied from", val, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
 			return false;
 		}
@@ -2253,7 +2253,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public boolean hasMovingCopyingStatus(WebElement element) {
 		String val = element.getText();
 		if (val.equals("Moving/Copying")) {
-			ATUReports.add("check status", "status text", "Moving/Copying", val, LogAs.PASSED, null);
+			ATUReports.add(time +" check status", "status text", "Moving/Copying", val, LogAs.PASSED, null);
 			System.out.println("has Moving/Copying status");
 			Assert.assertTrue(true);
 			return true;
@@ -2261,7 +2261,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		System.out.println("dont have Moving/Copying status");
 		Assert.assertTrue(false);
 		{
-			ATUReports.add("check status", "status text", "Moving/Copying", val, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" check status", "status text", "Moving/Copying", val, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
 			return false;
 		}
@@ -2284,12 +2284,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			(studtab.getX() > additionaltab.getX())) 
 		{
 			System.out.println("Verfied tabs location.");
-			ATUReports.add("Verfied tabs location.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied tabs location.", "True.", "True.", LogAs.PASSED, null);
 //			Assert.assertTrue(true);
 			return true;
 		} else {
 			System.out.println("Not verfied tabs location.");
-			ATUReports.add("Verfied tabs location.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied tabs location.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 //			Assert.assertTrue(true);
 			return false;
 		}
@@ -2300,16 +2300,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyNoStartRecording() {
 		try {
 			if (start_recording_button.isDisplayed()) {
-				ATUReports.add("Click on start recording button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Click on start recording button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Click on start recording button.");
 				Assert.assertTrue(false);
 			} else {
-				ATUReports.add("No start recording button", LogAs.PASSED, null);
+				ATUReports.add(time +" No start recording button", LogAs.PASSED, null);
 				System.out.println("No start recording button");
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
-			ATUReports.add("No start recording button", LogAs.PASSED, null);
+			ATUReports.add(time +" No start recording button", LogAs.PASSED, null);
 			System.out.println("No start recording button");
 			Assert.assertTrue(true);
 		}
@@ -2319,16 +2319,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyNoStartTest() {
 		try {
 			if (start_test_button.isDisplayed()) {
-				ATUReports.add("Click on start test button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Click on start test button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Click on start test button.");
 				Assert.assertTrue(false);
 			} else {
-				ATUReports.add("No start test button", LogAs.PASSED, null);
+				ATUReports.add(time +" No start test button", LogAs.PASSED, null);
 				System.out.println("No start test button");
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
-			ATUReports.add("No start test button", LogAs.PASSED, null);
+			ATUReports.add(time +" No start test button", LogAs.PASSED, null);
 			System.out.println("No start test button");
 			Assert.assertTrue(true);
 		}
@@ -2350,16 +2350,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if ((upload_recording.isDisplayed()) && (Add_Additional_Content_File.isDisplayed())
 					&& (upload_audio_file.isDisplayed()) && (upload_video_file.isDisplayed())
 					&& (get_live_webcast.isDisplayed()) && (Add_Additional_Content_Link.isDisplayed())) {
-				ATUReports.add("menu items are displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" menu items are displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("menu items are displayed");
 				Assert.assertTrue(false);
 			} else {
-				ATUReports.add("Verify that next menu items are not displayed ", LogAs.PASSED, null);
+				ATUReports.add(time +" Verify that next menu items are not displayed ", LogAs.PASSED, null);
 				System.out.println("Verify that next menu items are not displayed");
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
-			ATUReports.add("Verify that next menu items are not displayed ", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify that next menu items are not displayed ", LogAs.PASSED, null);
 			System.out.println("Verify that next menu items are not displayed");
 			Assert.assertTrue(true);
 		}
@@ -2532,16 +2532,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyNoAdditionalContentTab() {
 		try {
 			if (additional_content_tab.isDisplayed()) {
-				ATUReports.add("Click on additional tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Click on additional tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Click on additional tab");
 				Assert.assertTrue(false);
 			} else {
-				ATUReports.add("No Click on additional tab", LogAs.PASSED, null);
+				ATUReports.add(time +" No Click on additional tab", LogAs.PASSED, null);
 				System.out.println("No Click on additional tab");
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
-			ATUReports.add("No Click on additional tab", LogAs.PASSED, null);
+			ATUReports.add(time +" No Click on additional tab", LogAs.PASSED, null);
 			System.out.println("No Click on additional tab");
 			Assert.assertTrue(true);
 		}
@@ -2594,14 +2594,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
 			System.out.println("Delete window displayed");
-			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Content Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Content Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -2618,12 +2618,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		if ((additional_content_tab.isDisplayed())&&(additonal.getX()>record.getX())) {
 			System.out.println("additional content tab is on right of recording tab");
-			ATUReports.add("additional content tab is on right of recording tab", LogAs.PASSED, null);
+			ATUReports.add(time +" additional content tab is on right of recording tab", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} else {
 			System.out.println("additional content tab is not on right of recording tab");
-			ATUReports.add("additional content tab is on right of recording tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" additional content tab is on right of recording tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -2662,16 +2662,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			if (student_recordings_tab.isDisplayed()) {
 				System.out.println("The Student Recordings tab shouldn't be displayed, but it is.");
-				ATUReports.add("Verified that there is no Student Recordings tab.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verified that there is no Student Recordings tab.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			} else {
 				System.out.println("Verified that there is no Student Recordings tab.");
-				ATUReports.add("Verified that there is no Student Recordings tab.", "True.", "True.", LogAs.PASSED,null);
+				ATUReports.add(time +" Verified that there is no Student Recordings tab.", "True.", "True.", LogAs.PASSED,null);
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
 			System.out.println("Verified that there is no Student Recordings tab.");
-			ATUReports.add("Verified that there is no Student Recordings tab.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verified that there is no Student Recordings tab.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 	}
@@ -2681,16 +2681,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			try {
 				if (bookmarks_tab.isDisplayed()) {
 					System.out.println("The bookmark Recordings tab shouldn't be displayed, but it is.");
-					ATUReports.add("The bookmark Recordings tab shouldn't be displayed, but it is.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The bookmark Recordings tab shouldn't be displayed, but it is.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				} else {
 					System.out.println("Verified that there is no bookmark Recordings tab.");
-					ATUReports.add("Verified that there is no bookmark Recordings tab.", "True.", "True.", LogAs.PASSED,null);
+					ATUReports.add(time +" Verified that there is no bookmark Recordings tab.", "True.", "True.", LogAs.PASSED,null);
 					Assert.assertTrue(true);
 				}
 			} catch (Exception e) {
 				System.out.println("The bookmark Recordings tab shouldn't be displayed, but it is.");
-				ATUReports.add("The bookmark Recordings tab shouldn't be displayed, but it is.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" The bookmark Recordings tab shouldn't be displayed, but it is.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -2699,16 +2699,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			if (!bookmarks_tab.isDisplayed()) {
 				System.out.println("The Bookmarks tab isn't displayed.");
-				ATUReports.add("Verified The Bookmarks tab isn't displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verified The Bookmarks tab isn't displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			} else {
 				System.out.println("The Bookmarks tab is displayed.");
-				ATUReports.add("The Bookmarks tab is displayed.", "True.", "True.", LogAs.PASSED,null);
+				ATUReports.add(time +" The Bookmarks tab is displayed.", "True.", "True.", LogAs.PASSED,null);
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			ATUReports.add("Failed to verify the display of the bookmark tab" + e.getMessage(), "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Failed to verify the display of the bookmark tab" + e.getMessage(), "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -2718,16 +2718,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyNoTestsTab() {
 		try {
 			if (tests_tab.isDisplayed()) {
-				ATUReports.add("Not verify no test tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not verify no test tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Not verify no test tab.");
 				Assert.assertTrue(false);
 			} else {
-				ATUReports.add("Verify no tests tab.", LogAs.PASSED, null);
+				ATUReports.add(time +" Verify no tests tab.", LogAs.PASSED, null);
 				System.out.println("Verify no tests tab.");
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
-			ATUReports.add("Verify no tests tab.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify no tests tab.", LogAs.PASSED, null);
 			System.out.println("Verify no tests tab.");
 			Assert.assertTrue(true);
 		}
@@ -2745,14 +2745,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			recordings_tab.click();
 			waitForContentOfTabToLoad(initialText,TabContainer);
 			System.out.println("Clicked on recordings tab");
-			ATUReports.add("Clicked on recordings tab", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on recordings tab", LogAs.PASSED, null);
 			clicked=true;
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			clicked=handlesClickIsNotVisible(recordings_tab);
 			if(i>=3){
 			System.out.println("Failed to click on recordings tab. ERROR: " + msg);
-			ATUReports.add("Failed to click on recordings tab. ERROR: " + msg, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Failed to click on recordings tab. ERROR: " + msg, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);}
 		}
 		i++;
@@ -2771,7 +2771,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		} catch(Exception e) {
 			e.printStackTrace();
-			ATUReports.add("the page can't load " + e.getMessage() ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" the page can't load " + e.getMessage() ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(true);
 
 		}
@@ -2784,16 +2784,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if (status.equals("Error")) {
 				System.out.println(" recording status is Error");
 				Assert.assertTrue(false);
-				ATUReports.add("verify recording status is Error", "status", "Error", "Error", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" verify recording status is Error", "status", "Error", "Error", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			} else {
 				System.out.println(" recording status is not Error");
-				ATUReports.add("verify recording status isnot  Error", "status", "Error", "Not Error", LogAs.PASSED,
+				ATUReports.add(time +" verify recording status isnot  Error", "status", "Error", "Not Error", LogAs.PASSED,
 						null);
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
 			System.out.println(" recording status is not Error");
-			ATUReports.add("verify recording status isnot  Error", "status", "Error", "Not Error", LogAs.PASSED, null);
+			ATUReports.add(time +" verify recording status isnot  Error", "status", "Error", "Not Error", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 
 		}
@@ -2806,16 +2806,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String status = driver.findElement(By.id(("RecordingStatus")+ Integer.toString(index))).getText();
 			if (status.equals("")) {
 				System.out.println("Verify no status in the index:" + index);		
-				ATUReports.add("Verify no status in the index:" + index, "status", "Empty", "Empty", LogAs.PASSED,null);
+				ATUReports.add(time +" Verify no status in the index:" + index, "status", "Empty", "Empty", LogAs.PASSED,null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Not Verify no status in the index:" + index);
-				ATUReports.add("verify no status in the index:" + index, "status", "Empty", "Not Empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" verify no status in the index:" + index, "status", "Empty", "Not Empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} catch (Exception e) {
 			System.out.println("Not Verify no status in the index:" + index);
-			ATUReports.add("verify no status in the index:" + index, "status", "Empty", "Not Empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" verify no status in the index:" + index, "status", "Empty", "Not Empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -2845,7 +2845,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String recording_status = driver.findElement(By.id("ItemStatus" + (Integer.toString(index)))).getText();
 			if (!recording_status.equals(is_not)) {
 				System.out.println("additional content file in index: " + index + " is not: " + is_not);
-				ATUReports.add("additional content file in index: " + index + " is not: " + is_not, LogAs.PASSED, null);
+				ATUReports.add(time +" additional content file in index: " + index + " is not: " + is_not, LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return true;
 			}
@@ -2853,7 +2853,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			Thread.sleep(1000);
 		}
 		System.out.println("additional content file in index: " + index + " status is: " + is_not);
-		ATUReports.add("additional content file in index: " + index + " status is: " + is_not, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" additional content file in index: " + index + " status is: " + is_not, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 		return false;
 	}
@@ -2876,14 +2876,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
 			System.out.println("Delete window displayed");
-			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Content Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Content Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Content Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -2924,12 +2924,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		if (!is_exist) {
 			System.out.println("Target recording not exist in recording list.");
-			ATUReports.add("Recording list.", "Target recording not exist.", "Target recording not exist.",
+			ATUReports.add(time +" Recording list.", "Target recording not exist.", "Target recording not exist.",
 					LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Target recording exist in recording list.");
-			ATUReports.add("Recording list.", "Target recording not exist.", "Target recording exist.", LogAs.FAILED,
+			ATUReports.add(time +" Recording list.", "Target recording not exist.", "Target recording exist.", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 		}
@@ -2941,11 +2941,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		if (is_exist) {
 			System.out.println("Target recording:" + target_recording +" exist in recording list.");
-			ATUReports.add("Recording list.", "Target recording exist.", "Target recording exist.", LogAs.PASSED, null);
+			ATUReports.add(time +" Recording list.", "Target recording exist.", "Target recording exist.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Target recording:" + target_recording +" not exist in recording list.");
-			ATUReports.add("Target recording:" + target_recording +" not exist in recording list.", "Target recording exist.", "Target recording not exist.",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Target recording:" + target_recording +" not exist in recording list.", "Target recording exist.", "Target recording not exist.",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -2999,11 +2999,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		if (!is_content_tasks_button_displayed) {
 			System.out.println("Content Tasks button is not displayed.");
-			ATUReports.add("Content Taks button.", "Not displayed.", "Not displayed.", LogAs.PASSED, null);
+			ATUReports.add(time +" Content Taks button.", "Not displayed.", "Not displayed.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Content Tasks button is displayed.");
-			ATUReports.add("Content Taks button.", "Not displayed.", "Displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Content Taks button.", "Not displayed.", "Displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -3013,11 +3013,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyThatNoCheckboxIsDisplayed() {
 		if ((!checkbox.isDisplayed()) && (!check_all_checkbox.isDisplayed())) {
 			System.out.println("No checkbox is displayed.");
-			ATUReports.add("Checkboxs.", "No checkbox displayed.", "No checkbox displayed.", LogAs.PASSED, null);
+			ATUReports.add(time +" Checkboxs.", "No checkbox displayed.", "No checkbox displayed.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("There is checkbox that displayed.");
-			ATUReports.add("Checkboxs.", "No checkbox displayed.", "There is checkbox which displayed.", LogAs.FAILED,
+			ATUReports.add(time +" Checkboxs.", "No checkbox displayed.", "There is checkbox which displayed.", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 		}
@@ -3039,7 +3039,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 			if (current_additiona_content.equals(target_additional_content)) {
 				System.out.println("Target additional content is in additional content list.");
-				ATUReports.add("Additional content list.", "Target additional content in the list.",
+				ATUReports.add(time +" Additional content list.", "Target additional content in the list.",
 						"Target additional content in the list.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
@@ -3047,7 +3047,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 
 		System.out.println("Target additional content is not in additional content list.");
-		ATUReports.add("Additional content list.", "Target additional content in the list.",
+		ATUReports.add(time +" Additional content list.", "Target additional content in the list.",
 				"Target additional content not in the list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 	}
@@ -3062,7 +3062,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 			if (current_additiona_content.equals(target_additional_content)) {
 				System.out.println("Target additional content is in additional content list.");
-				ATUReports.add("Additional content list.", "Target additional content not in the list.",
+				ATUReports.add(time +" Additional content list.", "Target additional content not in the list.",
 						"Target additional content in the list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 				return;
@@ -3070,7 +3070,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 
 		System.out.println("Target additional content is not in additional content list.");
-		ATUReports.add("Additional content list.", "Target additional content not in the list.",
+		ATUReports.add(time +" Additional content list.", "Target additional content not in the list.",
 				"Target additional content not in the list.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
@@ -3089,11 +3089,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyThatStringExistsInCourseName(String subname) {
 		if (getCourseTitle().contains(subname)) {
 			System.out.println("Verified that course name contain target subname: " + subname);
-			ATUReports.add("Verified that course name contain target subname.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verified that course name contain target subname.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that course name contain target subname: " + subname);
-			ATUReports.add("Verified that course name contain target subname.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verified that course name contain target subname.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -3105,12 +3105,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				(searchbox.getLocation().y < recording_button.getLocation().x) &&
 				(recording_button.getLocation().y) < recording_tasks_button.getLocation().y) {
 			System.out.println("Verifed that Start Recording button is displayed.");
-			ATUReports.add("Start recording button.", "Displayed.", "Displayed.", LogAs.PASSED, null);
+			ATUReports.add(time +" Start recording button.", "Displayed.", "Displayed.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 
 		} else {
 			System.out.println("Not verified that Start Recording button is displayed.");
-			ATUReports.add("Start recording button.", "Displayed.", "Not displayed.", LogAs.PASSED, null);
+			ATUReports.add(time +" Start recording button.", "Displayed.", "Not displayed.", LogAs.PASSED, null);
 			Assert.assertTrue(false);
 		}
 	}
@@ -3119,11 +3119,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyThatItIsRecordingsPage() {
 		if ((recordings_tab.isDisplayed()) && (recording_tasks_button.isDisplayed())) {
 			System.out.println("Course details page is displayed.");
-			ATUReports.add("Course details page.", "Displayed.", "Displayed.", LogAs.PASSED, null);
+			ATUReports.add(time +" Course details page.", "Displayed.", "Displayed.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Course details page is not displayed.");
-			ATUReports.add("Course details page.", "Displayed.", "Not displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Course details page.", "Displayed.", "Not displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -3132,11 +3132,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyThatNoRecordingExistInTheCourse() {
 		if (getNumberOfRecordings() == 0) {
 			System.out.println("Verified that no recording exist in the course.");
-			ATUReports.add("Recording list.", "No recording is exist.", "No recording is exist.", LogAs.PASSED, null);
+			ATUReports.add(time +" Recording list.", "No recording is exist.", "No recording is exist.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that no recording exist in the course.");
-			ATUReports.add("Recording list.", "No recording is exist.", "There is recording in the recording list.",
+			ATUReports.add(time +" Recording list.", "No recording is exist.", "There is recording in the recording list.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -3153,7 +3153,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 						waitForVisibility(recording);			
 						clickElementJS(recording);
 						System.out.println("additional content file found");
-						ATUReports.add("additional content file found", LogAs.PASSED, null);
+						ATUReports.add(time +" additional content file found", LogAs.PASSED, null);
 						Assert.assertTrue(true);
 						Thread.sleep(3000);
 						return;											
@@ -3163,7 +3163,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	
 		System.out.println("no such additional content file name");
-		ATUReports.add("no such additional content file name", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" no such additional content file name", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 
 	}
@@ -3182,7 +3182,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			File fileTemp = new File(download_path);
 			if (fileTemp.exists()) {
 				System.out.println("fail to delete file");
-				ATUReports.add("fail to delete file", "delete old file", " deleted successfully", "not deleted",
+				ATUReports.add(time +" fail to delete file", "delete old file", " deleted successfully", "not deleted",
 						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
@@ -3196,12 +3196,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 		if (file1_md5.equals(file2_md5)) {
 			System.out.println("2 files are equal so file is valid");
-			ATUReports.add("2 files are equal so file is valid", LogAs.PASSED, null);
+			ATUReports.add(time +" 2 files are equal so file is valid", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 
 		} else {
 			System.out.println("2 files are  not equal so file is invalid");
-			ATUReports.add("2 files are  not equal so file is invalid", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" 2 files are  not equal so file is invalid", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -3217,24 +3217,24 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					if (fileTemp.exists()) {
 						fileTemp.delete();
 						System.out.println("delete old file");
-						ATUReports.add("try to delete old file", "delete old file", " deleted successfully", "not deleted",
+						ATUReports.add(time +" try to delete old file", "delete old file", " deleted successfully", "not deleted",
 								LogAs.PASSED, null);
 						Assert.assertTrue(true);
 					} else {
 					System.out.println("file wasn't found");
-					ATUReports.add(" old file deleted succesfully", "delete old file", " deleted successfully"," deleted successfully", LogAs.PASSED, null);
+					ATUReports.add(time +"  old file deleted succesfully", "delete old file", " deleted successfully"," deleted successfully", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					}
 				} catch (Exception e) {
 					System.out.println("fail to delete file");
-					ATUReports.add("fail to delete file", "delete old file", " deleted successfully", "not deleted",
+					ATUReports.add(time +" fail to delete file", "delete old file", " deleted successfully", "not deleted",
 							LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			
 		} catch (Exception e) {
 			System.out.println("old file does not exist");
-			ATUReports.add("old file does not exist", "old file does not exist", "old file does not exist",
+			ATUReports.add(time +" old file does not exist", "old file does not exist", "old file does not exist",
 					"old file does not exist", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
@@ -3257,14 +3257,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 			if (file_name.equals(name)) {
 				System.out.println("The file:" + name + " is displayed when he shouldn't.");
-				ATUReports.add("The file:" + name + " is displayed when he shouldn't.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
+				ATUReports.add(time +" The file:" + name + " is displayed when he shouldn't.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
 				return false;
 
 			}
 
 		}
 		System.out.println("The file:" + name + " is not displayed.");
-		ATUReports.add("The file:" + name + " is not displayed.", LogAs.PASSED, null);
+		ATUReports.add(time +" The file:" + name + " is not displayed.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		return true;
 
@@ -3275,7 +3275,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for (String name : list) {
 			if (name_to_check.equals(name)) {
 				System.out.println(" number mark isn't added to file's title");
-				ATUReports.add("number mark isn't added to file's title", "File name and List",
+				ATUReports.add(time +" number mark isn't added to file's title", "File name and List",
 						"number mark isn't added to file's title", "number mark isn't added to file's title",
 						LogAs.PASSED, null);
 				Assert.assertTrue(true);
@@ -3283,7 +3283,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}
 		}
 		System.out.println(" number mark is added to file's title");
-		ATUReports.add("number mark isn't added to file's title", "File name and List",
+		ATUReports.add(time +" number mark isn't added to file's title", "File name and List",
 				"number mark isn't added to file's title", "number mark is added to file's title", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 	}
@@ -3318,11 +3318,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyTopBarMenu() {
 		if ((user_name.isDisplayed()) && (disclaimer.isDisplayed()) && (help.isDisplayed())
 				&& (sign_out.isDisplayed())) {
-			ATUReports.add("top bar menu is displayed", LogAs.PASSED, null);
+			ATUReports.add(time +" top bar menu is displayed", LogAs.PASSED, null);
 			System.out.println("top bar menu is displayed");
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add("top bar menu is not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" top bar menu is not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("top bar menu is not displayed");
 			Assert.assertTrue(false);
 		}
@@ -3332,11 +3332,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyThatThereAreAtLeastTwoRecordings() {
 		if (getCourseRecordingList().size() >= 2) {
 			System.out.println("There are at least 2 recordings in the course.");
-			ATUReports.add("There are at least 2 recordings in the course.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" There are at least 2 recordings in the course.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("There is less then two recordings in the test.");
-			ATUReports.add("There are at least 2 recordings in the course.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" There are at least 2 recordings in the course.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -3345,11 +3345,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyThatContentTaskButtonNotDisplayed() {
 		if (content_tasks_button.isDisplayed()) {
 			System.out.println("Not verified that Content Task not displayed.");
-			ATUReports.add("Verfied that Content Task button not displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied that Content Task button not displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} else {
 			System.out.println("Verfied that Content Task button not displayed.");
-			ATUReports.add("Verfied that Content Task button not displayed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied that Content Task button not displayed.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 	}
@@ -3361,12 +3361,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				(searchbox.getLocation().y < start_test_button.getLocation().x) &&
 				(start_test_button.getLocation().y) < recording_tasks_button.getLocation().y) {
 			System.out.println("Verifed that Start a Test button is displayed.");
-			ATUReports.add("Start a Test button.", "Displayed.", "Displayed.", LogAs.PASSED, null);
+			ATUReports.add(time +" Start a Test button.", "Displayed.", "Displayed.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 
 		} else {
 			System.out.println("Not verified that Start a Test button is displayed.");
-			ATUReports.add("Start a Test button.", "Displayed.", "Not displayed.", LogAs.PASSED, null);
+			ATUReports.add(time +" Start a Test button.", "Displayed.", "Not displayed.", LogAs.PASSED, null);
 			Assert.assertTrue(false);
 		}
 		
@@ -3413,14 +3413,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//*[@id='main']/div/div[1]/ul/li[1]/a")));			
 			System.out.println("edit page displayed");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -3456,7 +3456,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			
 		} catch (Exception e) {
 			System.out.println("failed clicking on tab");
-			ATUReports.add("failed clicking on tab: "+tab.getText(),  "tab  not clicked"+e.getMessage(), LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" failed clicking on tab: "+tab.getText(),  "tab  not clicked"+e.getMessage(), LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -3469,15 +3469,15 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String firstStatus = first_recording_status.getText();
 			if(firstStatus.equals("Not Published")){		
 				System.out.println("veirfy that the status is not publish on the first record.");
-				ATUReports.add("veirfy that the status is not publish on the first record.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" veirfy that the status is not publish on the first record.", "True.", "True.", LogAs.PASSED, null);
 			}else {
 				System.out.println("Not veirfy that the status is not publish on the first record.");
-				ATUReports.add("Not veirfy that the status is not publish on the first record.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not veirfy that the status is not publish on the first record.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 			
 		} catch(Exception msg) {
 			System.out.println("Not veirfy that the status is not publish on the first record.");
-			ATUReports.add("Not veirfy that the status is not publish on the first record.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not veirfy that the status is not publish on the first record.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 			
@@ -3495,13 +3495,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			publish_button.click();
 			waitForVisibility(publish.publish_window_title);
 			System.out.println("verify publish window");
-			ATUReports.add("verify publish window", " wait for title", "title visible", "title visible", LogAs.PASSED,
+			ATUReports.add(time +" verify publish window", " wait for title", "title visible", "title visible", LogAs.PASSED,
 					null);
 			Assert.assertTrue(true);
 
 		} catch (Exception e) {
 			System.out.println("not verify publish window");
-			ATUReports.add("verify publish window", " wait for title", "title visible", "title not visible",
+			ATUReports.add(time +" verify publish window", " wait for title", "title visible", "title not visible",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -3513,11 +3513,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		System.out.println(e.getCssValue("font-weight"));
 		if ((e.getCssValue("font-weight").equals("bold")) || (e.getCssValue("font-weight").equals("700"))) {
 			System.out.println("Font style is bold.");
-			ATUReports.add("Font style is bold.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Font style is bold.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Font style is not bold.");
-			ATUReports.add("font style is bold.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" font style is bold.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -3528,11 +3528,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		System.out.println(e.getCssValue("font-weight"));
 		if ((e.getCssValue("font-weight").equals("bold")) || (e.getCssValue("font-weight").equals("700"))) {
 			System.out.println("Font style is bold.");
-			ATUReports.add("Font style is not bold.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Font style is not bold.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} else {
 			System.out.println("Font style is not bold.");
-			ATUReports.add("Font style is not bold.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Font style is not bold.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 
@@ -3543,7 +3543,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			waitForVisibility(element);
 			element.click();
 			System.out.println("click on course name");
-			ATUReports.add("click on course name", "course name", "clicked", "clicked", LogAs.PASSED, null);
+			ATUReports.add(time +" click on course name", "course name", "clicked", "clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			if(!isElementPresent(By.xpath(".//*[@id='tegrityBreadcrumbsBox']/li/a"))){
 				waitForVisibility(element);
@@ -3553,7 +3553,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		} catch (Exception exception) {
 			
 			System.out.println("failed clicking on course name breadcrumbs");
-			ATUReports.add("click on course name", "course name", "clicked", " not clicked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" click on course name", "course name", "clicked", " not clicked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -3565,23 +3565,23 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			waitForVisibility(element);
 			element.click();
 			System.out.println("click on course name");
-			ATUReports.add("click on course name", "course name", "clicked", "clicked", LogAs.PASSED, null);
+			ATUReports.add(time +" click on course name", "course name", "clicked", "clicked", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			try {
 				waitForVisibility(recordings_tab);
 				System.out.println("record page verified");
-				ATUReports.add("wait for course element visibility", "recordings tab", "visible", "visible",
+				ATUReports.add(time +" wait for course element visibility", "recordings tab", "visible", "visible",
 						LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} catch (Exception exception) {
 				System.out.println(" Timeout course page");
-				ATUReports.add("wait for course element visibility", "recordings tab list", "visible", " not visible",
+				ATUReports.add(time +" wait for course element visibility", "recordings tab list", "visible", " not visible",
 						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} catch (Exception exception) {
 			System.out.println("failed clicking on course name breadcrumbs");
-			ATUReports.add("click on course name", "course name", "clicked", " not clicked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" click on course name", "course name", "clicked", " not clicked", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -3604,23 +3604,23 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if (message.equals(
 					"To perform one of the tasks please select one or more recordings from the list below using the checkboxes on the right.")) {
 				System.out.println("message is correct");
-				ATUReports.add("verify message is correct", "message", "visible", " visible", LogAs.PASSED, null);
+				ATUReports.add(time +" verify message is correct", "message", "visible", " visible", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 
 				if (download.getAttribute("class").equals("disabled")) {
 					System.out.println("download is not disabled");
-					ATUReports.add("download is disabled", "download", "not clickable", " clickable", LogAs.FAILED,
+					ATUReports.add(time +" download is disabled", "download", "not clickable", " clickable", LogAs.FAILED,
 							null);
 					Assert.assertTrue(false);
 				} else {
 					System.out.println("download is disabled");
-					ATUReports.add("download is disabled", "download", "not clickable", "not clickable", LogAs.PASSED,
+					ATUReports.add(time +" download is disabled", "download", "not clickable", "not clickable", LogAs.PASSED,
 							null);
 					Assert.assertTrue(true);
 				}
 			} else {
 				System.out.println("message is not correct");
-				ATUReports.add("verify message is correct", "message", "visible", "Not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" verify message is correct", "message", "visible", "Not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} catch (AWTException e) {
@@ -3640,11 +3640,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 			if (!download.getAttribute("class").equals("disabled")) {
 				System.out.println("download is not disabled");
-				ATUReports.add("download is not disabled", "download", " clickable", " clickable", LogAs.PASSED, null);
+				ATUReports.add(time +" download is not disabled", "download", " clickable", " clickable", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("download is disabled");
-				ATUReports.add("download is disabled", "download", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" download is disabled", "download", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 
@@ -3761,18 +3761,18 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			//.substring(0, tegrity.getPageUrl().length() - 8)
 			if (current.contains(rss_title)) {
 				System.out.println("verified rss page");
-				ATUReports.add("verified rss page", rss_title, "contained", "contained", LogAs.PASSED, null);
+				ATUReports.add(time +" verified rss page", rss_title, "contained", "contained", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("not verified rss page");
 				System.out.println(current);
-				ATUReports.add("not verified rss page" + rss_title, current, "contained", "not contained", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" not verified rss page" + rss_title, current, "contained", "not contained", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 
 		} catch (Exception e) {
 			System.out.println("not able to click to rss feed page");
-			ATUReports.add("verify rss feed page", "Rss_Feed", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" verify rss feed page", "Rss_Feed", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		return xml_source_code;
@@ -3813,24 +3813,24 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			driver.get(podcast_url_xml);
 			xml_source_code = driver.findElement(By.tagName("body")).getText();	
 			System.out.println("clicked to podcast page");
-			ATUReports.add("verify podcast page", "Rss_Feed", "clickable", "clickable", LogAs.PASSED, null);
+			ATUReports.add(time +" verify podcast page", "Rss_Feed", "clickable", "clickable", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			String podcast_title = tegrity.getPageUrl() + "/api/rss";
 		   //.substring(0, tegrity.getPageUrl().length() - 8) 
 
 			if (current.contains(podcast_title)) {
 				System.out.println("verified podcast page");
-				ATUReports.add("verified podcast page", podcast_title, "contained", "contained", LogAs.PASSED, null);
+				ATUReports.add(time +" verified podcast page", podcast_title, "contained", "contained", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println(" not verified podcast page");
-				ATUReports.add("not verified podcast page" + podcast_title, current, " contained", "not contained", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" not verified podcast page" + podcast_title, current, " contained", "not contained", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 
 		} catch (Exception e) {
 			System.out.println("not able to click to podcast page");
-			ATUReports.add("verify podcast page", "podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" verify podcast page", "podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		return xml_source_code;
@@ -3883,14 +3883,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}
 			if (!arrayList.isEmpty()) {
 				System.out.println("first part(university url) of rss url and third(recording characters)  verified");
-				ATUReports.add("first part(university url) of rss url and third(recording characters)  verified",
+				ATUReports.add(time +" first part(university url) of rss url and third(recording characters)  verified",
 						"podcast", "clickable", "not clickable", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 
 			} else {
 				System.out
 						.println("first part(university url) of rss url and third(recording characters) not verified");
-				ATUReports.add("first part(university url) of rss url and third(recording characters) not verified",
+				ATUReports.add(time +" first part(university url) of rss url and third(recording characters) not verified",
 						"podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 
@@ -3898,7 +3898,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("first part(university url) of rss url and third(recording characters) not verified");
-			ATUReports.add("first part(university url) of rss url and third(recording characters) not verified",
+			ATUReports.add(time +" first part(university url) of rss url and third(recording characters) not verified",
 					"podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -3950,14 +3950,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}
 			if (!arrayList.isEmpty()) {
 				System.out.println("first part(university url) of rss url and third(recording characters)  verified");
-				ATUReports.add("first part(university url) of rss url and third(recording characters)  verified",
+				ATUReports.add(time +" first part(university url) of rss url and third(recording characters)  verified",
 						"podcast", "clickable", "not clickable", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 
 			} else {
 				System.out
 						.println("first part(university url) of rss url and third(recording characters) not verified");
-				ATUReports.add("first part(university url) of rss url and third(recording characters) not verified",
+				ATUReports.add(time +" first part(university url) of rss url and third(recording characters) not verified",
 						"podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 
@@ -3965,7 +3965,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("first part(university url) of rss url and third(recording characters) not verified");
-			ATUReports.add("first part(university url) of rss url and third(recording characters) not verified",
+			ATUReports.add(time +" first part(university url) of rss url and third(recording characters) not verified",
 					"podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -3983,7 +3983,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		if (element.length() != 36) {
 			// TODO Auto-generated catch block
 			System.out.println("pattern of podcast not verified");
-			ATUReports.add("pattern of podcast not verified", "podcast", "clickable", "not clickable", LogAs.FAILED,
+			ATUReports.add(time +" pattern of podcast not verified", "podcast", "clickable", "not clickable", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 
@@ -3997,7 +3997,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					if (!((element.charAt(i) == '-') && ((i == 8) || (i == 13) || (i == 18) || (i == 23)))) {
 						// TODO Auto-generated catch block
 						System.out.println("pattern of podcast not verified");
-						ATUReports.add("pattern of podcast not verified", "podcast", "clickable", "not clickable",
+						ATUReports.add(time +" pattern of podcast not verified", "podcast", "clickable", "not clickable",
 								LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 						return;
@@ -4007,7 +4007,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 			// TODO Auto-generated catch block
 			System.out.println("pattern of podcast  verified");
-			ATUReports.add("pattern of podcast  verified", "podcast", "clickable", " clickable", LogAs.PASSED, null);
+			ATUReports.add(time +" pattern of podcast  verified", "podcast", "clickable", " clickable", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 	}
@@ -4019,12 +4019,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		File fileTemp = new File(download_path);
 		if (fileTemp.exists()) {
 			System.out.println("file exists");
-			ATUReports.add("file exists", LogAs.PASSED, null);
+			ATUReports.add(time +" file exists", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 
 		} else {
 			System.out.println("file not exists");
-			ATUReports.add("file not exists", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" file not exists", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -4041,10 +4041,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 		if (isElementPresent(By.id("copyCourseWindow"))) {
 			System.out.println("copy menu verified");
-			ATUReports.add("copy menu verified", LogAs.PASSED, null);
+			ATUReports.add(time +" copy menu verified", LogAs.PASSED, null);
 		} else {
 			System.out.println("no copy menu verification");
-			ATUReports.add("no copy menu verification", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" no copy menu verification", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		return clickedRecordingName;
 	}
@@ -4072,13 +4072,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if (driver.findElement(By.id("ModalDialogHeader")).getText().equals("Copy"))// check if
 			{
 				System.out.println("Copy menu is displayed.");
-				ATUReports.add("Clicked on Recording Task -> Copy.", "Copy menu is displayed.",
+				ATUReports.add(time +" Clicked on Recording Task -> Copy.", "Copy menu is displayed.",
 						"Copy menu is displayed.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
 			System.out.println("Copy menu not verified.");
-			ATUReports.add("Clicked on Recording Task -> Copy.", "Copy menu is displayed.",
+			ATUReports.add(time +" Clicked on Recording Task -> Copy.", "Copy menu is displayed.",
 					"Copy menu is not displayed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -4090,18 +4090,18 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			waitForVisibility(checkbox);
 			if (checkbox.isSelected()) {
 				System.out.println("select the Checkbox " + checkbox.getAttribute("id"));
-				ATUReports.add("select the Checkbox " + checkbox.getAttribute("id"), "Selected/Already selected.", "Already selected.", LogAs.PASSED, null);
+				ATUReports.add(time +" select the Checkbox " + checkbox.getAttribute("id"), "Selected/Already selected.", "Already selected.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
 			} else {			
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);			
 				System.out.println("Checkbox is selected ");
-				ATUReports.add("select the Checkbox " + checkbox.getAttribute("id"), "Success to select.", "Sucess to select.", LogAs.PASSED, null);
+				ATUReports.add(time +" select the Checkbox " + checkbox.getAttribute("id"), "Success to select.", "Sucess to select.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
 			System.out.println("Checkbox is not selected.");
-			ATUReports.add("Fail to select the Checkbox" + checkbox.getAttribute("id"), "Success select.", "Fail to select.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail to select the Checkbox" + checkbox.getAttribute("id"), "Success select.", "Fail to select.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -4113,7 +4113,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			waitForVisibility(check);
 			if (!check.isSelected()) {
 				System.out.println("The checkbox: " + check.getText() + " is not selected");
-				ATUReports.add("The checkbox: " + check.getText() + " is not selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+				ATUReports.add(time +" The checkbox: " + check.getText() + " is not selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 				Assert.assertTrue(true);
 				return;
 			} else {
@@ -4121,17 +4121,17 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				//checkbox.click();
 				if (!check.isSelected()) {
 					System.out.println("The checkbox: " + check.getText() + " is not selected");
-					ATUReports.add("The checkbox: " + check.getText() + " is not selected", LogAs.PASSED,new CaptureScreen(ScreenshotOf.DESKTOP));
+					ATUReports.add(time +" The checkbox: " + check.getText() + " is not selected", LogAs.PASSED,new CaptureScreen(ScreenshotOf.DESKTOP));
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("The checkbox: " + check.getText() + " is selected");
-					ATUReports.add("The checkbox: " + check.getText() + " is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+					ATUReports.add(time +" The checkbox: " + check.getText() + " is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 					Assert.assertTrue(false);
 				}
 			}
 		} catch (Exception e) {
 			System.out.println("one checkbox is selected");
-			ATUReports.add("one checkbox is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add(time +" one checkbox is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 			Assert.assertTrue(false);
 		}
 
@@ -4148,14 +4148,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
 			System.out.println("tag window displayed");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -4238,7 +4238,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if ((current_additional_content.equals(target_additional_content))
 					&& (current_additional_content_type.equals(target_additional_content_type))) {
 				System.out.println("Target additional content is in additional content list.");
-				ATUReports.add("Additional content list.", "Target additional content not in the list.",
+				ATUReports.add(time +" Additional content list.", "Target additional content not in the list.",
 						"Target additional content in the list.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 				return;
@@ -4246,7 +4246,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 
 		System.out.println("Target additional content is not in additional content list.");
-		ATUReports.add("Additional content list.", "Target additional content not in the list.",
+		ATUReports.add(time +" Additional content list.", "Target additional content not in the list.",
 				"Target additional content not in the list.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
@@ -4264,7 +4264,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if ((current_additional_content.equals(target_additional_content))
 					&& (current_additional_content_type.equals(target_additional_content_type))) {
 				System.out.println("Target additional content is in additional content list.");
-				ATUReports.add("Additional content list.", "Target additional content in the list.",
+				ATUReports.add(time +" Additional content list.", "Target additional content in the list.",
 						"Target additional content in the list.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
@@ -4381,14 +4381,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 			if (time_counter > 120) {
 				System.out.println("Timeout - Moving/Copying still appears after 120 seconds");
-				ATUReports.add("Timeout -Moving/Copying still appears after 120 seconds", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Timeout -Moving/Copying still appears after 120 seconds", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 				return;
 			}
 		}
 
 		System.out.println("Moving/Copying dissapear from first recording.");
-		ATUReports.add("Moving/Copying dissapear from first recording.", LogAs.PASSED, null);
+		ATUReports.add(time +" Moving/Copying dissapear from first recording.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 
@@ -4417,11 +4417,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyIndexRecordingHaveNoBookmark(int index) {
 		if (bookmarks_list.get(index - 1).getAttribute("class").contains("ng-hide")) {
 			System.out.println("Verified that target recording have no bookmark.");
-			ATUReports.add("Target recording have no bookmark.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Target recording have no bookmark.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that target recording have no bookmark.");
-			ATUReports.add("Target recording have no bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Target recording have no bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -4431,11 +4431,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyIndexRecordingHaveBookmark(int index) {
 		if (bookmarks_list.get(index - 1).getAttribute("class").equals("bookmark")) {
 			System.out.println("Verified that target recording have bookmark.");
-			ATUReports.add("Target recording have bookmark.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Target recording have bookmark.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that target recording have bookmark.");
-			ATUReports.add("Target recording have bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Target recording have bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -4463,13 +4463,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					pre_web_element = curr_web_element;
 				} else {
 					System.out.println("Not verified that recording chapters are display sequentially.");
-					ATUReports.add("Recording chapters are display sequentially.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Recording chapters are display sequentially.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			}
 		}
 		System.out.println("Verified that recording chapters are display sequentially.");
-		ATUReports.add("Recording chapters are display sequentially.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Recording chapters are display sequentially.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -4480,7 +4480,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 //			org.openqa.selenium.interactions.Action move_to_element = moveToElement(webElement, driver);
 //			if(move_to_element==null) {
 //				System.out.println("It is not possible to scroll the recordings list page.");
-//				ATUReports.add("It is possible to scroll the recording list page.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//				ATUReports.add(time +" It is possible to scroll the recording list page.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 //				Assert.assertTrue(false);
 //			}
 //			move_to_element.perform();
@@ -4489,7 +4489,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 			
 		System.out.println("It is possible to scroll the recordings list page.");
-		ATUReports.add("It is possible to scroll the recording list page.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" It is possible to scroll the recording list page.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -4505,11 +4505,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		if(recordings_list.get(0).getLocation().y < menu_bar.getLocation().y)
 		{
 			System.out.println("Verified that menu bar is scrolled to the uppser part of the page.");
-			ATUReports.add("Verified that menu bar is scrolled to the uppser part of the page.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verified that menu bar is scrolled to the uppser part of the page.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that menu bar is scrolled to the uppser part of the page.");
-			ATUReports.add("Verified that menu bar is scrolled to the uppser part of the page.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verified that menu bar is scrolled to the uppser part of the page.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -4534,7 +4534,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					int curr_seq = Integer.parseInt(to_parse.get(i).split(" ")[0].substring(0, to_parse.get(i).split(" ")[0].length()-1));
 					if((curr_seq - pre_seq) != 1) {
 						System.out.println("Recording chapters not contain the ordinal numbers.");
-						ATUReports.add("Recording chapters contain the ordinal numbers.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						ATUReports.add(time +" Recording chapters contain the ordinal numbers.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					}
 					pre_seq=curr_seq;
@@ -4559,17 +4559,17 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 						(init_sec>59) &&
 						(end_sec>59)) {
 					System.out.println("The recording chapters contain the length from - to in an incorrect format.");
-					ATUReports.add("The recording chapters contain the length from – to in an correct format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The recording chapters contain the length from – to in an correct format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 				
 			}
 			System.out.println("Recording chapters contain the ordinal numbers.");
-			ATUReports.add("Recording chapters contain the ordinal numbers.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Recording chapters contain the ordinal numbers.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			
 			System.out.println("The recording chapters contain the length from - to in an correct format.");
-			ATUReports.add("The recording chapters contain the length from – to in an correct format.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" The recording chapters contain the length from – to in an correct format.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			
 	}
@@ -4585,11 +4585,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		if(number_of_recordings == driver.findElements(By.cssSelector(".thumbnail-image")).size()) {
 			System.out.println("Verified that the recording capters contain the image preview.");
-			ATUReports.add("Recording chapters contain the image preview.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Recording chapters contain the image preview.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that the recording capters contain the image preview.");
-			ATUReports.add("Recording chapters contain the image preview.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Recording chapters contain the image preview.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -4611,13 +4611,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if(splited_date_bookmark.length == 2) {
 				if (!splited_date_bookmark[0].equals("bookmark")) {
 					System.out.println("Not verify that the bookmark icon is displayed prior to the recording date.");
-					ATUReports.add("Verify that the bookmark icon is displayed prior to the recording date.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Verify that the bookmark icon is displayed prior to the recording date.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			}
 		}
 		System.out.println("Verify that the bookmark icon is displayed prior to the recording date.");
-		ATUReports.add("Verify that the bookmark icon is displayed prior to the recording date.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verify that the bookmark icon is displayed prior to the recording date.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -4637,12 +4637,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				continue;
 			} else {
 				System.out.println("Not verfiy that the format is: length: X:XX:XX.");
-				ATUReports.add("Verify that the format is: length: X:XX:XX.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verify that the format is: length: X:XX:XX.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
 		System.out.println("Verfiy that the format is: length: X:XX:XX.");
-		ATUReports.add("Verify that the format is: length: X:XX:XX.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verify that the format is: length: X:XX:XX.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -4656,13 +4656,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				continue;
 			} else {
 				System.out.println("No verifed that the format is: recorded by: Username");
-				ATUReports.add("Verifed that the format is: recorded by: Username", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verifed that the format is: recorded by: Username", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
 		
 		System.out.println("Verifed that the format is: recorded by: Username");
-		ATUReports.add("Verifed that the format is: recorded by: Username", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verifed that the format is: recorded by: Username", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -4686,13 +4686,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				continue;
 			} else {
 				System.out.println("Not verfied that the format of recording adding date is: mm/dd/yyyy.");
-				ATUReports.add("Verfied that the format of recording adding date is: mm/dd/yyyy.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verfied that the format of recording adding date is: mm/dd/yyyy.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
 		
 		System.out.println("Verfied that the format of recording adding date is: mm/dd/yyyy.");
-		ATUReports.add("Verfied that the format of recording adding date is: mm/dd/yyyy.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verfied that the format of recording adding date is: mm/dd/yyyy.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		
 	}
@@ -4707,11 +4707,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		if((splited_breadcrumb[0].equals(">")) && (splited_breadcrumb[1].equals("Courses")) && (breadcrumbs.getLocation().x < searchbox.getLocation().x) &&
 				(searchbox.getLocation().y < breadcrumbs.getLocation().y) && (breadcrumbs.getLocation().y < tegrity_logo.getLocation().y)) {
 			System.out.println("Verfied the breadcrumb UI.");
-			ATUReports.add("Verfied the breadcrumb UI.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied the breadcrumb UI.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verfied the breadcrumb UI.");
-			ATUReports.add("Verfied the breadcrumb UI.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied the breadcrumb UI.", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -4720,11 +4720,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyThatStringIsCourseName(String subname) {
 		if (getCourseTitle().equals(subname)) {
 			System.out.println("Verified that course name is target name: " + subname);
-			ATUReports.add("Verified that course name is target name.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verified that course name is target name.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that course name is target name: " + subname);
-			ATUReports.add("Verified that course name is target name.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verified that course name is target name.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -4761,11 +4761,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		if(init_background_color.equals("#ffffff")) {
 			System.out.println("Verfied that the " + str_tab + " tab is chosen by default");
-			ATUReports.add("Verfied that " + str_tab + " tab is chosen.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied that " + str_tab + " tab is chosen.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verfied that the " + str_tab + " tab is chosen by default");
-			ATUReports.add("Verfied that " + str_tab + " tab is chosen.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied that " + str_tab + " tab is chosen.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -4790,11 +4790,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				(course_task_but.getX() < recording_task_but.getX()) &&
 				(recording_task_but.getX() < checkbox.getX())) {
 			System.out.println("Verfied menus location.");
-			ATUReports.add("Verfied menus location.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied menus location.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verfied menus location.");
-			ATUReports.add("Verfied menus location.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied menus location.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -4818,11 +4818,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			download_button.click();
 			
 			System.out.println("Clicked on Recording Tasks then Download.");
-			ATUReports.add("Clicked on Recording Tasks then Download.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on Recording Tasks then Download.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch(Exception msg) {
 			System.out.println("Fail to on Recording Tasks then Download.");
-			ATUReports.add("Clicked on Recording Tasks then Download.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on Recording Tasks then Download.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -4841,8 +4841,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				System.out.println(current_element);
 			if ((!current_element.equals("")) && (!current_element.equals("IE, FF, Safari Ready")) && (!current_element.equals("Not Published"))) {
 				System.out.println("Not verfired that all recordings have non delete status.");
-				ATUReports.add("Verfied that all recordings have delete available status.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				ATUReports.add("the status is: " + current_element, "True.", "False.", LogAs.WARNING, null);
+				ATUReports.add(time +" Verfied that all recordings have delete available status.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" the status is: " + current_element, "True.", "False.", LogAs.WARNING, null);
 				Assert.assertTrue(false);
 			  }
 			 else {
@@ -4850,7 +4850,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}
 		}
 		System.out.println("Verfired that all recordings have delete available status.");
-		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 
@@ -4872,7 +4872,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 		return true;
 		}catch(Exception e){
-		ATUReports.add("Status verification failed", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Status verification failed", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		return false;
 		}
 		
@@ -4893,7 +4893,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 		return true;
 		}catch(Exception e){
-		ATUReports.add("Status verification failed", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Status verification failed", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		return false;
 		}
 		
@@ -4909,7 +4909,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 		return false;
 		}catch(Exception e){
-		ATUReports.add("Check state verification failed", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Check state verification failed", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		return false;
 		}
 		
@@ -4924,8 +4924,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				System.out.println(current_element);
 			if ((!current_element.equals("")) && (!current_element.equals("IE, FF, Safari Ready")) && (!current_element.equals("Not Published"))&& (!current_element.equals("Being copied from"))) {
 				System.out.println("Not verfired that all recordings have non delete status.");
-				ATUReports.add("Verfied that all recordings have delete available status.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				ATUReports.add("the status is: " + current_element, "True.", "False.", LogAs.WARNING, null);
+				ATUReports.add(time +" Verfied that all recordings have delete available status.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" the status is: " + current_element, "True.", "False.", LogAs.WARNING, null);
 				Assert.assertTrue(false);
 			  }
 			 else {
@@ -4933,7 +4933,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}
 		}
 		System.out.println("Verfired that all recordings have delete available status.");
-		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -4949,14 +4949,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				System.out.println("Unchecked checkbox"+e.getAttribute("id").substring(15, 16));
 				driver.findElement(By.id("Checkbox"+e.getAttribute("id").substring(15, 16))).click();				
 				
-				ATUReports.add("Unchecked checkbox"+e.getAttribute("id").substring(15, 15), "", LogAs.PASSED, null);				
+				ATUReports.add(time +" Unchecked checkbox"+e.getAttribute("id").substring(15, 15), "", LogAs.PASSED, null);				
 			  }
 			 else {
 				break;
 			}
 		}
 		System.out.println("Verfired that all recordings have delete available status.");
-		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -4969,7 +4969,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				System.out.println(current_element);
 			if ((!current_element.equals(""))) {
 				System.out.println("This record canot been edit.");
-				ATUReports.add("This record canot been edit.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" This record canot been edit.", "True.", "True.", LogAs.PASSED, null);
 				i++;
 			  }
 			 else {
@@ -4993,12 +4993,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		Boolean isTheStatusDisapper =  new WebDriverWait(driver, seconds).until(ExpectedConditions.invisibilityOfElementWithText(By.id("RecordingStatus" +Integer.toString(index)), "Recording is being edited."));		 
 		 if(isTheStatusDisapper) {
 			  System.out.println("The status has change in less then " + Integer.toString(seconds)+ " seconds");
-			  ATUReports.add("The status has change in less then " + Integer.toString(seconds)+ " seconds", "True.", "True.", LogAs.PASSED, null);
+			  ATUReports.add(time +" The status has change in less then " + Integer.toString(seconds)+ " seconds", "True.", "True.", LogAs.PASSED, null);
 			  Assert.assertTrue(true);
 		  }
 		}catch(org.openqa.selenium.TimeoutException msg){
 				 System.out.println("The status has change in more then " + Integer.toString(seconds)+ " seconds");
-				 ATUReports.add("The status has change in more then " + Integer.toString(seconds)+ " seconds", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				 ATUReports.add(time +" The status has change in more then " + Integer.toString(seconds)+ " seconds", "True.", "True.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				 Assert.assertTrue(false);	
 		}
 	}
@@ -5025,15 +5025,15 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			if ((!current_element.equals("Available"))) {
 				new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElement(el, "Available"));
 				System.out.println("Not verfired that all additional Content have non delete status.");
-				ATUReports.add("Verfied that all additional Content have delete available status.", "True.", "Status of "+i+" content is: "+current_element, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				ATUReports.add("the status is: " + current_element, "True.", "False.", LogAs.WARNING, null);
+				ATUReports.add(time +" Verfied that all additional Content have delete available status.", "True.", "Status of "+i+" content is: "+current_element, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" the status is: " + current_element, "True.", "False.", LogAs.WARNING, null);
 			  }
 			 
 			
 			i++;
 		}
 		System.out.println("Verfired that all recordings have delete available status.");
-		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -5058,13 +5058,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				String uncheckId = "Checkbox" + Integer.toString(i);                              
 				((JavascriptExecutor) driver).executeScript("document.getElementById(\""+uncheckId+"\").click();");				
 				System.out.println("Unchecked checkbox: "+i);
-				ATUReports.add("Unchecked checkbox: "+i, "", LogAs.PASSED, null);					
+				ATUReports.add(time +" Unchecked checkbox: "+i, "", LogAs.PASSED, null);					
 			  }			 
 			
 			i++;
 		}
 		System.out.println("Verfired that all recordings have delete available status.");
-		ATUReports.add("Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verfied that all recordings have delete available status.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -5109,7 +5109,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("clickOnFirstVisibleChapter1");
 			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
 			System.out.println("clickOnFirstVisibleChapter1");
-			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",
+			ATUReports.add(time +" Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",
 					LogAs.PASSED, null);
 		} catch (org.openqa.selenium.TimeoutException e) {
 			try {
@@ -5118,11 +5118,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 						.executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
 				System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
 				
-				ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",
+				ATUReports.add(time +" Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",
 						LogAs.PASSED, null);
 			} catch (Exception e1) {
 				System.out.println("clickOnFirstVisibleChapter5");
-				ATUReports.add("Clicked on first chapter failed", e1.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Clicked on first chapter failed", e1.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("clickOnFirstVisibleChapter6"+e.getMessage());
 				e1.printStackTrace();
 				Assert.assertTrue(false);
@@ -5130,7 +5130,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		} catch (Exception e) {
 			System.out.println("clickOnFirstVisibleChapter7");
-			ATUReports.add("Clicked on first chapter failed", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on first chapter failed", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("clickOnFirstVisibleChapter8"+e.getMessage());
 			Assert.assertTrue(false);
 			
@@ -5146,18 +5146,18 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			waitForVisibility(first_video_recording);
 			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
 			System.out.println("clickOnFirstVisibleChapter1");
-			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
 		} catch (org.openqa.selenium.TimeoutException e) {
 		
 			System.out.println("clickOnFirstVisibleChapter3");
 			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
 			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
-			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
 				
 	} catch (Exception e) {
 		
 		System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
-		ATUReports.add("Not find the element: "+e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Not find the element: "+e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			
 		}
 	}
@@ -5170,17 +5170,17 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			waitForVisibility(driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[" + Integer.toString(index) + "]/div[2]/div/div[2]/a")));
 			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
 			System.out.println("clickOnFirstVisibleChapter1");
-			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
 		} catch (org.openqa.selenium.TimeoutException e) {
 		
 			System.out.println("clickOnFirstVisibleChapter3");
 			((JavascriptExecutor) driver).executeScript("document.getElementsByClassName(\"video-wrap\")[0].click();");
 			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
-			ATUReports.add("Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on first chapter", "First Chapter was clicked", "First chapter was clicked",LogAs.PASSED, null);
 				
 		} catch (Exception e) {	
 			System.out.println("clickOnFirstVisibleChapter4"+e.getMessage());
-			ATUReports.add("Not find the element: "+e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));			
+			ATUReports.add(time +" Not find the element: "+e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));			
 		}
 	
 	}
@@ -5195,7 +5195,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}catch(Exception e)
 			{
 				System.out.println("There are not recordings in the course tab");
-				ATUReports.add("There are not recordings in the course tab","There are no recordings in the course tab"+e.getMessage(),LogAs.INFO,null);
+				ATUReports.add(time +" There are not recordings in the course tab","There are no recordings in the course tab"+e.getMessage(),LogAs.INFO,null);
 				return false;
 			}	
 	}
@@ -5212,7 +5212,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					return true;
 				}catch(Exception ex){
 					System.out.println("There are no contents in the Additional tab");
-					ATUReports.add("There are no contents in the Additional tab","There are no contents in the Additional tab"+ex.getMessage(),LogAs.INFO,null);
+					ATUReports.add(time +" There are no contents in the Additional tab","There are no contents in the Additional tab"+ex.getMessage(),LogAs.INFO,null);
 					return false;					
 				}				
 			}	
@@ -5235,7 +5235,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		return 0;
 			
 		}catch(Exception e){
-			ATUReports.add("Retrieving clear status recording failed",e.getMessage(),  LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Retrieving clear status recording failed",e.getMessage(),  LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return 0;
 		}	
 	}
@@ -5270,10 +5270,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		if(recordNameToCompare.equals(recordOperation)){
 			System.out.println("The " + operation+ ":" + recordNameToCompare + " is equals from the String: " + recordOperation );
-			ATUReports.add("The " + operation+ ":"+ recordNameToCompare + " is equals from the String: " + recordOperation ,LogAs.PASSED, null);		
+			ATUReports.add(time +" The " + operation+ ":"+ recordNameToCompare + " is equals from the String: " + recordOperation ,LogAs.PASSED, null);		
 		}else{
 			System.out.println("The " + operation+ ":"+ recordNameToCompare + " is different from the String: " + recordOperation );
-			ATUReports.add("The " + operation+ ":"+ recordNameToCompare + " is different from the String: " + recordOperation ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			ATUReports.add(time +" The " + operation+ ":"+ recordNameToCompare + " is different from the String: " + recordOperation ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
 			
 		}
 		
@@ -5343,7 +5343,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			new WebDriverWait(driver,seconds ).until(ExpectedConditions.visibilityOf(first_recording));
 		}
 		catch(Exception ex){
-			ATUReports.add("Waiting for first recording to appear", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Waiting for first recording to appear", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		}
 		
@@ -5441,7 +5441,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 //		 robot.delay(7000);
 		 
 		 System.out.println("Upload recording from the tegrity application." );
-		 ATUReports.add("Upload recording from the tegrity application." ,LogAs.PASSED, null);		
+		 ATUReports.add(time +" Upload recording from the tegrity application." ,LogAs.PASSED, null);		
 
 	}
 
@@ -5451,10 +5451,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		if(source_recording_list.size() == 0 ){
 			System.out.println("The recordings aren't displayed in the recording page." );
-			ATUReports.add("Verify that The recordings aren't displayed in the recording page." ,"The recordings aren't displayed in the recording page.","The recordings aren't displayed in the recording page.",LogAs.PASSED, null);		
+			ATUReports.add(time +" Verify that The recordings aren't displayed in the recording page." ,"The recordings aren't displayed in the recording page.","The recordings aren't displayed in the recording page.",LogAs.PASSED, null);		
 		}else{
 			System.out.println("The recordings displayed in the recording page." );
-			ATUReports.add("Verify that The recordings aren't displayed in the recording page." ,"The recordings aren't displayed in the recording page.","The recordings displayed in the recording page.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+			ATUReports.add(time +" Verify that The recordings aren't displayed in the recording page." ,"The recordings aren't displayed in the recording page.","The recordings displayed in the recording page.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
 		}			
 	}
 
@@ -5463,10 +5463,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String title = element.getAttribute("title");
 			if(title.equals(text)){
 				System.out.println("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title );
-				ATUReports.add("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is display.",LogAs.PASSED, null);		
+				ATUReports.add(time +" Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is display.",LogAs.PASSED, null);		
 			}else{
 				System.out.println("Not Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title);
-				ATUReports.add("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is not display.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+				ATUReports.add(time +" Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is not display.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
 			}
 		}catch(Exception e){
 			e.getMessage();
@@ -5479,10 +5479,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String type = element.getAttribute("type");
 			if(type.equals("checkbox")){
 				System.out.println("Verify that the element: " +element.getText() + "is checkable.");
-				ATUReports.add("Verify that the element: " +element.getText() + "is checkable.","The element is checkable.","The element is checkable.",LogAs.PASSED, null);		
+				ATUReports.add(time +" Verify that the element: " +element.getText() + "is checkable.","The element is checkable.","The element is checkable.",LogAs.PASSED, null);		
 			}else{
 				System.out.println("Not Verify that the element: " +element.getText() + "is checkable.");
-				ATUReports.add("Not Verify that the element: " +element.getText() + "is checkable." ,"The element is checkable.","The element is not checkable.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+				ATUReports.add(time +" Not Verify that the element: " +element.getText() + "is checkable." ,"The element is checkable.","The element is not checkable.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
 			}
 		}catch(Exception e){
 			e.getMessage();
@@ -5495,12 +5495,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for(int i=0 ;i< checkboxs_tags.size() ; i++){
 			if(checkboxs_tags.get(i).isSelected()){
 				System.out.println("Not Verify that all tag checkboxs are not selected, the tag: " + checkboxs_tags.get(i).getText() + "is selected.");
-				ATUReports.add("Not Verify that all tag checkboxs are not selected, the tag: " + checkboxs_tags.get(i).getText() + "is selected." ,"The element is not selected.","The element is selected.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+				ATUReports.add(time +" Not Verify that all tag checkboxs are not selected, the tag: " + checkboxs_tags.get(i).getText() + "is selected." ,"The element is not selected.","The element is selected.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
 				return;
 			}
 		}
 		System.out.println("Verify that all tag checkboxs are not selected.");
-		ATUReports.add("Verify that all tag checkboxs are not selected.","The elements are not selected.","The elements are not selected.",LogAs.PASSED, null);			
+		ATUReports.add(time +" Verify that all tag checkboxs are not selected.","The elements are not selected.","The elements are not selected.",LogAs.PASSED, null);			
 		
 	}
 
@@ -5509,10 +5509,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			int currentSize = getCourseRecordingList().size();
 			if(listSize == currentSize){
 				System.out.println("Verify that all records are appeared.");
-				ATUReports.add("Verify that all records appeared.","Success.","Success.",LogAs.PASSED, null);		
+				ATUReports.add(time +" Verify that all records appeared.","Success.","Success.",LogAs.PASSED, null);		
 			}else{
 				System.out.println("Not Verify that all records are appeared.");
-				ATUReports.add("Not Verify that all records are appeared." ,"Success.", "Fail.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+				ATUReports.add(time +" Not Verify that all records are appeared." ,"Success.", "Fail.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
 			}
 		}catch(Exception e){
 		e.getMessage();
@@ -5531,12 +5531,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			
 			for(int i=0 ; i< numberOfTags - 1 ;i++){
 	    		if(nameOfTags.get(i).compareTo(nameOfTags.get(i+1)) > 0 ) {
-	    			ATUReports.add("Not Verify that tags list sorted by TagName.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    			ATUReports.add(time +" Not Verify that tags list sorted by TagName.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    			System.out.println("Not Verify that tags list sorted by TagName.");
 	    			return;
 	    		}
 	    	}
-	    	ATUReports.add("Verify that tags list sorted by TagName.","Success.","Success.", LogAs.PASSED, null);
+	    	ATUReports.add(time +" Verify that tags list sorted by TagName.","Success.","Success.", LogAs.PASSED, null);
 			System.out.println("Verify that tags list sorted by TagName.");	
 		
 		}catch(Exception e){
@@ -5552,12 +5552,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {
 			for(int i = 0 ; i< recording_tags.size() ; i++){
 				if(!recording_tags.get(i).isDisplayed()){
-					ATUReports.add("Not Verify that tags appered on the first recording.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Not Verify that tags appered on the first recording.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					System.out.println("Not Verify that tags appered on the first recording.");	    			
 			}
 		}
 		 	
-			ATUReports.add("Verify that tags appered on the first recording.","Success.","Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify that tags appered on the first recording.","Success.","Success.", LogAs.PASSED, null);
 			System.out.println("Verify that tags appered on the first recording.");	
 	    
 		}catch(Exception e){
@@ -5573,12 +5573,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			Thread.sleep(1500);
 			for(int i = 0 ; i< recording_tags.size() ; i++){
 				if(recording_tags.get(i).getText().equals(tag)){
-					ATUReports.add("Verify that the tag: " + tag + " appered on the first recording.","Success.", "Success.", LogAs.PASSED,null) ;
+					ATUReports.add(time +" Verify that the tag: " + tag + " appered on the first recording.","Success.", "Success.", LogAs.PASSED,null) ;
 					System.out.println("Verify that the tag: " + tag + " appered on the first recording.");
 					return;
 			}
 		}	
-			ATUReports.add("Not Verify that the tag: " + tag + " appered on the first recording.","Success.","Fail.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE)) ;
+			ATUReports.add(time +" Not Verify that the tag: " + tag + " appered on the first recording.","Success.","Fail.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE)) ;
 			System.out.println("Not Verify that the tag: " + tag + " appered on the first recording.");	
 	    
 		}catch(Exception e){
@@ -5590,10 +5590,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyTagNotAppearedUderTheSelectRecordings() {
 		try {
 			if(!recording_tags.isEmpty()){
-				ATUReports.add("Verify that student can't see the tag on first recording.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verify that student can't see the tag on first recording.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Verify that student can't see the tag on first recording.");	    			
 			} else { 	
-				ATUReports.add("Verify that student can't see the tag on first recording.","Success.","Success.", LogAs.PASSED, null);
+				ATUReports.add(time +" Verify that student can't see the tag on first recording.","Success.","Success.", LogAs.PASSED, null);
 				System.out.println("Verify that student can't see the tag on first recording.");	
 			}
 		}catch(Exception e){
@@ -5611,12 +5611,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		for(int i = 0 ; i< view_tag_names.size() ; i++) {
 			String currentTag = view_tag_names.get(i).getText();
 			if(!searchOwnerInTheOwnerList(currentTag,namesOfTags)){
-				ATUReports.add("Not verify The tag:" + currentTag + "are displayed in the View dropdown list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not verify The tag:" + currentTag + "are displayed in the View dropdown list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Not verify The tag:" + currentTag + "are displayed in the View dropdown list.");
 				return;
 			}
 		}
-		ATUReports.add("verify The tags are displayed in the View dropdown list..","Success.","Success.", LogAs.PASSED, null);
+		ATUReports.add(time +" verify The tags are displayed in the View dropdown list..","Success.","Success.", LogAs.PASSED, null);
 		System.out.println("verify The tags are displayed in the View dropdown list..");	
 	}catch(Exception e){
 		e.getMessage();
@@ -5628,10 +5628,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyTheTagsAreNotDisplayInTheViewDropdown() {
 		try {
 			if(view_tag_names.size() > 0){
-				ATUReports.add("Not verify The tags are not displayed in the View dropdown list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not verify The tags are not displayed in the View dropdown list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Not verify The tags are not displayed in the View dropdown list..");			
 			}else {	
-				ATUReports.add("verify The tags are not displayed in the View dropdown list..","Success.","Success.", LogAs.PASSED, null);
+				ATUReports.add(time +" verify The tags are not displayed in the View dropdown list..","Success.","Success.", LogAs.PASSED, null);
 				System.out.println("verify The tags are not displayed in the View dropdown list..");	
 			}
 		}catch(Exception e){
@@ -5659,7 +5659,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		if(countOfRecords < countOfList){
 			System.out.println("Not all bookmarks are appeared in the bookmarks tab.");
-			ATUReports.add("Not all bookmarks are appeared in the bookmarks tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not all bookmarks are appeared in the bookmarks tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 		
 		try { 
@@ -5667,12 +5667,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				String bookmarksName = webElement.getAttribute("title");
 				if(!namesOfbookmarks.contains(bookmarksName)) {
 					System.out.println("Not verify that the bookmark:" + namesOfbookmarks+ " is displayed on the bookmarks tab.");
-					ATUReports.add("Not verify that the bookmark:" + namesOfbookmarks+ " is displayed on the bookmarks tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Not verify that the bookmark:" + namesOfbookmarks+ " is displayed on the bookmarks tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					return;		
 			} 
 		}
 		System.out.println("Verify that all the bookmarks are displayed in the bookmarks tab.");
-		ATUReports.add("Verify that all the bookmarks are displayed in the bookmarks tab.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verify that all the bookmarks are displayed in the bookmarks tab.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		}catch(Exception e){
 			e.getMessage();
@@ -5689,12 +5689,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					String bookmarksName = webElement.getAttribute("title");
 					if(bookmark.equals(bookmarksName)) {
 						System.out.println("Verify that the bookmark is: " + bookmark +" displayed in the bookmarks tab.");
-						ATUReports.add("Verify that the bookmark is: " + bookmark +" displayed in the bookmarks tab.", "True.", "True.", LogAs.PASSED, null);
+						ATUReports.add(time +" Verify that the bookmark is: " + bookmark +" displayed in the bookmarks tab.", "True.", "True.", LogAs.PASSED, null);
 						return;		
 				}
 			}
 			System.out.println("Not Verify that the bookmark is: " + bookmark +" displayed in the bookmarks tab.");
-			ATUReports.add("Not Verify that the bookmark is: " + bookmark +" displayed in the bookmarks tab..", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not Verify that the bookmark is: " + bookmark +" displayed in the bookmarks tab..", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}catch(Exception e){
 				e.getMessage();
 				ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -5716,7 +5716,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			date = sdf.parse(currDate);
 			System.out.println(date);
 			System.out.println("The date is in the following format: 'XX/XX/XXXX'");
-			ATUReports.add("The date is in the following format: 'XX/XX/XXXX'", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" The date is in the following format: 'XX/XX/XXXX'", "Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			
 			String[]parts= currDate.split("/");
@@ -5731,15 +5731,15 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			
 			if(currDate.contains(todayDate)){
 				System.out.println("Verify that the date is correct.");
-				ATUReports.add("Verify that the date is correct.", "Success.", "Success.", LogAs.PASSED, null);		
+				ATUReports.add(time +" Verify that the date is correct.", "Success.", "Success.", LogAs.PASSED, null);		
 			} else {
 				System.out.println("Not Verify that the date is correct." );				
-				ATUReports.add("Not Verify that the date is correct.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not Verify that the date is correct.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 				
 		} catch (ParseException e) {
 			System.out.println("The date is not in the following format: 'XX/XX/XXXX'" );				
-			ATUReports.add("The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}	 
 	}
@@ -5774,10 +5774,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String color = type.getCssValue("background-image");
 			if(color.contains(url)){
 				System.out.println("Verify that the color of the bookmark equal to the type.");
-				ATUReports.add("Verify that the color of the bookmark equal to the type.", "Success.", "Success.", LogAs.PASSED, null);		
+				ATUReports.add(time +" Verify that the color of the bookmark equal to the type.", "Success.", "Success.", LogAs.PASSED, null);		
 			} else {
 				System.out.println("Not Verify that the color of the bookmark equal to the type." );				
-				ATUReports.add("Not Verify that the color of the bookmark equal to the type.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not Verify that the color of the bookmark equal to the type.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 	
 		}catch(Exception e){
@@ -5804,10 +5804,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 			if(deleteLoc.getX()> typeLoc.getX() && typeLoc.getX() > dateLoc.getX() && dateLoc.getX()> nameLoc.getX()){
 				System.out.println("verify all indicators are at the right align.");
-			ATUReports.add("verify all indicators are at the right align.", "Success.", "Success.", LogAs.PASSED, null);		
+			ATUReports.add(time +" verify all indicators are at the right align.", "Success.", "Success.", LogAs.PASSED, null);		
 		} else {
 			System.out.println("Not verify all indicators are at the right align." );				
-			ATUReports.add("Not Vverify all indicators are at the right align.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not Vverify all indicators are at the right align.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		}catch(Exception e){
 			e.getMessage();
@@ -5838,10 +5838,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 		if(color.contains(url)){
 			System.out.println("Verify type of bookmark indicator follow by color.");
-			ATUReports.add("Verify type of bookmark indicator follow by color.", "Success.", "Success.", LogAs.PASSED, null);		
+			ATUReports.add(time +" Verify type of bookmark indicator follow by color.", "Success.", "Success.", LogAs.PASSED, null);		
 		} else {
 			System.out.println("Not Verify type of bookmark indicator follow by color." );				
-			ATUReports.add("Not Verify type of bookmark indicator follow by color.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not Verify type of bookmark indicator follow by color.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}catch(Exception e){
 		e.getMessage();
@@ -5860,10 +5860,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println(newNameWithOutSpace);
 			if(recrodingSplit[0].equals("recording") && recordName.equals(newNameWithOutSpace)){
 				System.out.println("Verify static text 'recording:' followed by: recording name.");
-				ATUReports.add("Verify static text 'recording:' followed by: recording name.", "Success.", "Success.", LogAs.PASSED, null);		
+				ATUReports.add(time +" Verify static text 'recording:' followed by: recording name.", "Success.", "Success.", LogAs.PASSED, null);		
 			} else {
 				System.out.println("Not Verify static text 'recording:' followed by: recording name." );				
-				ATUReports.add("Not Verify static text 'recording:' followed by: recording name.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not Verify static text 'recording:' followed by: recording name.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		}catch(Exception e){
 			e.getMessage();
@@ -5883,10 +5883,10 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		
 			if(typeLoc.getY()> nameLoc.getY() && nameLoc.getX() == recordingLoc.getX() && typeLoc.getX()> nameLoc.getX()){
 				System.out.println("verify all indicators are at the bellow and left align.");
-			ATUReports.add("verify all indicators are at the bellow and left align.", "Success.", "Success.", LogAs.PASSED, null);		
+			ATUReports.add(time +" verify all indicators are at the bellow and left align.", "Success.", "Success.", LogAs.PASSED, null);		
 		} else {
 			System.out.println("Not verify all indicators are at the right align." );				
-			ATUReports.add("Not verify all indicators are at the right align.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not verify all indicators are at the right align.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		}catch(Exception e){
 			e.getMessage();
@@ -5899,11 +5899,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		WebElement web_element = driver.findElement(By.xpath(".//*[@id='RecordingDate"+Integer.toString(bookmark_number+1)+"']/a"));
 		if (web_element.isDisplayed()) {
 			System.out.println("Verify that "+ web_element.getAttribute("title") + " is displayed.");
-			ATUReports.add("Verify that " + web_element.getAttribute("title") + " is displayed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify that " + web_element.getAttribute("title") + " is displayed.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not Verify that " + web_element.getAttribute("title") + " is not displayed.");
-			ATUReports.add("Not Verify that " + web_element.getAttribute("title") + " is not displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not Verify that " + web_element.getAttribute("title") + " is not displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		}catch(Exception e){
@@ -5917,11 +5917,11 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		WebElement web_element = driver.findElement(By.xpath(".//*[@id='RecordingDate"+Integer.toString(bookmark_number+1)+"']/a"));
 		if (!web_element.isDisplayed()) {
 			System.out.println("Verify that "+ web_element.getAttribute("title") + " is not displayed.");
-			ATUReports.add("Verify that "+ web_element.getAttribute("title") + " is not displayed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify that "+ web_element.getAttribute("title") + " is not displayed.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not Verify that " + web_element.getAttribute("title") + " is displayed.");
-			ATUReports.add("Not Verify that " + web_element.getAttribute("title") + " is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not Verify that " + web_element.getAttribute("title") + " is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		}catch(Exception e){
@@ -5970,12 +5970,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}
 			if(nameOfBookmark != null){
 				System.out.println("click On The Bookmark " + bookmarkType);
-				ATUReports.add("click On The Bookmark " + bookmarkType, "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" click On The Bookmark " + bookmarkType, "True.", "True.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			
 			} else{
 				System.out.println("Can't click On The Bookmark " + bookmarkType);
-				ATUReports.add("Can't click On The Bookmark " + bookmarkType, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Can't click On The Bookmark " + bookmarkType, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 			
@@ -5996,13 +5996,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				if(nameS.contains(bookmarkName)){	
 					clickElementWithOutIdJS(name);
 					System.out.println("click On The Bookmark " + bookmarkName);
-					ATUReports.add("click On The Bookmark " + bookmarkName, "True.", "True.", LogAs.PASSED, null);
+					ATUReports.add(time +" click On The Bookmark " + bookmarkName, "True.", "True.", LogAs.PASSED, null);
 					return;
 				}
 			}
 			
 			System.out.println("Can't click On The Bookmark " + bookmarkName);
-			ATUReports.add("Can't click On The Bookmark " + bookmarkName, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Can't click On The Bookmark " + bookmarkName, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);	
 		}catch(Exception e){
 			e.printStackTrace();
@@ -6021,16 +6021,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 					WebElement element = driver.findElement(By.xpath(".//*[@id='RecordingDate"+Integer.toString(number_of_bookmarks+1)+"']/a"));
  					clickElementWithOutIdJS(element);
  					System.out.println("delete the Bookmark " + bookmarkName);
- 					ATUReports.add("click the Bookmark " + bookmarkName, "True.", "True.", LogAs.PASSED, null);
+ 					ATUReports.add(time +" click the Bookmark " + bookmarkName, "True.", "True.", LogAs.PASSED, null);
  					waitForAlert(60);
  					driver.switchTo().alert().accept();					
  					System.out.println("Click on the alert massege");
- 					ATUReports.add("Click on the alert massege","Success","Success",LogAs.PASSED,null);
+ 					ATUReports.add(time +" Click on the alert massege","Success","Success",LogAs.PASSED,null);
  					return;
 				} else number_of_bookmarks++;
 			}
 			System.out.println("Can't find the bookmark: " + bookmarkName);
-			ATUReports.add("Can't find the bookmark: " + bookmarkName, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Can't find the bookmark: " + bookmarkName, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);	
 		}catch(Exception e){
 			e.printStackTrace();
@@ -6045,12 +6045,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				String nameS = name.getText();
 				if(nameS.equals(bookmarkName)){	
 					System.out.println("The Bookmark " + bookmarkName + " is display.");
-					ATUReports.add("The Bookmark " + bookmarkName + " is display.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The Bookmark " + bookmarkName + " is display.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					return;
 				}
 			}
 				System.out.println("The Bookmark " + bookmarkName + " is not display.");
-				ATUReports.add("The Bookmark " + bookmarkName + " is not display.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" The Bookmark " + bookmarkName + " is not display.", "True.", "True.", LogAs.PASSED, null);
 		}catch(Exception e){
 			e.printStackTrace();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -6064,12 +6064,12 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				String nameS = name.getText();
 				if(nameS.equals(bookmarkName)){	
 					System.out.println("The Bookmark " + bookmarkName + "is display.");
-					ATUReports.add("The Bookmark " + bookmarkName + "is display.", "True.", "True.", LogAs.PASSED, null);
+					ATUReports.add(time +" The Bookmark " + bookmarkName + "is display.", "True.", "True.", LogAs.PASSED, null);
 					return;
 				}
 			}
 				System.out.println("The Bookmark " + bookmarkName + "is not display.");
-				ATUReports.add("The Bookmark " + bookmarkName + "is not display.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" The Bookmark " + bookmarkName + "is not display.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}catch(Exception e){
 			e.printStackTrace();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -6085,7 +6085,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recorded by"));
 		}catch(Exception e){
 			System.out.println("There are not recordings in the course tab");
-			ATUReports.add("Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Select recording","RecordingName: "+original_recorder_name,"Recording clicked","There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}			
 		WebElement recording=null;		
@@ -6098,7 +6098,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				if (!(el.getText().equals(original_recorder_name)) && !(el.getText().equals("Recordings")) && !(el.getText().equals("Recording Tasks")) &&  status.equals("")) {
 					differentRecordName = el.getText();
 					System.out.println("Recording found");
-					ATUReports.add("Recording found", LogAs.PASSED, null);
+					ATUReports.add(time +" Recording found", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					break;
 			} 	else if(countingNumber <2){
@@ -6113,7 +6113,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			handlesClickIsNotVisible(recording);
 			waitForVisibility(visibleFirstChapter);
 			System.out.println(" no such recording found");
-			ATUReports.add("no such recording", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" no such recording", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);		
 		}
 		return statusNumber;

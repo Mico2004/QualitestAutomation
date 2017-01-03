@@ -57,11 +57,16 @@ public class Page {
 	public String pageUrl;
 	public WebDriver driver;
 	public WebDriverWait wait;
+	public String time;
 	@FindBy(id = "InstituteLogotype")
 	public WebElement logo;
 	@FindBy(id = "SignOutLink")
 	public WebElement sign_out;
 	String universityName="";
+	DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+	Date date = new Date();
+	
+
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -73,6 +78,7 @@ public class Page {
 		driver = browser;
 		wait = new WebDriverWait(driver, 30);
 		ATUReports.setWebDriver(driver);
+		time = dateFormat.format(date);
 	}
 
 	public void clickElement(WebElement element) // clicking element
@@ -82,7 +88,7 @@ public class Page {
 			wait.until(ExpectedConditions.visibilityOf(element));
 			element.click();
 			System.out.println("Clicked on " + element.getText() + " element");
-			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+			ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
 					null);
 		} catch (Exception msg) {
 
@@ -90,7 +96,7 @@ public class Page {
 				System.out.println("Clicked failed trying again with JS");
 				String id = element.getAttribute("id");
 				((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
-				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+				ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
 						null);
 
 			} catch (Exception e1) {
@@ -109,12 +115,12 @@ public class Page {
 			Actions act=new Actions(driver);
 			act.dragAndDrop(drag, drop).build().perform();
 			System.out.println("drag and drop on WebElement.");
-			ATUReports.add("drag and drop on WebElement.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" drag and drop on WebElement.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 
 		} catch (NoSuchElementException e) {
 			System.out.println("Not drag and drop on WebElement.");
-			ATUReports.add("Not drag and drop on WebElement.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not drag and drop on WebElement.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 			
@@ -128,7 +134,7 @@ public class Page {
 			text = element.getText();
 			String id = element.getAttribute("id");
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
-			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+			ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
 					null);		
 		} catch (Exception msg) {
 
@@ -137,10 +143,10 @@ public class Page {
 				wait.until(ExpectedConditions.elementToBeClickable(element));
 				element.click();
 				System.out.println("Clicked on " + element.getText() + " element");
-				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+				ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
 						null);
 			} catch (Exception e1) {
-				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked failed:"+msg.getMessage(), LogAs.WARNING,
+				ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked failed:"+msg.getMessage(), LogAs.WARNING,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				
 			}
@@ -155,17 +161,17 @@ public class Page {
 		try {
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);		
 			System.out.println("Clicked on " + text + " element"); 
-			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);		
+			ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);		
 		} catch (Exception msg) {
 			try {
 				System.out.println("Clicked failed trying again with selenium");
 				wait.until(ExpectedConditions.elementToBeClickable(element));
 				element.click();
 				System.out.println("Clicked on " + element.getText() + " element");
-				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+				ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
 						null);
 			} catch (Exception e1) {
-				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked failed:"+msg.getMessage(), LogAs.WARNING,
+				ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked failed:"+msg.getMessage(), LogAs.WARNING,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				
 			}
@@ -178,10 +184,10 @@ public class Page {
 		try {
 			element.click();
 			System.out.println("Clicked on " + description + " element.");
-			ATUReports.add("Clicked on " + description + " element.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on " + description + " element.", "True.", "True.", LogAs.PASSED, null);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on " + description + " element.");
-			ATUReports.add("Clicked on " + description + " element.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on " + description + " element.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 
 	}
@@ -203,7 +209,7 @@ public class Page {
 		try {
 			id = element.getAttribute("id");
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").setAttribute(\"text\", \""+text+"\");");
-			ATUReports.add("Set text: " + id + " element", "Text was set", "Text was set", LogAs.PASSED,
+			ATUReports.add(time +" Set text: " + id + " element", "Text was set", "Text was set", LogAs.PASSED,
 					null);		
 		} catch (Exception msg) {
 
@@ -212,10 +218,10 @@ public class Page {
 				wait.until(ExpectedConditions.elementToBeClickable(element));
 				element.sendKeys(text);
 				System.out.println("Set text:" + element.getText());
-				ATUReports.add("Set text: " + id + " element", "Text was set", "Text was set", LogAs.PASSED,
+				ATUReports.add(time +" Set text: " + id + " element", "Text was set", "Text was set", LogAs.PASSED,
 						null);		
 			} catch (Exception e1) {
-				ATUReports.add("Set text: " + id + " element", "Text was set", "Text was set", LogAs.PASSED,
+				ATUReports.add(time +" Set text: " + id + " element", "Text was set", "Text was set", LogAs.PASSED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
 				
 			}
@@ -257,15 +263,15 @@ public class Page {
 			wait.until(ExpectedConditions.visibilityOf(element));
 		} catch (org.openqa.selenium.TimeoutException e) {
 			System.out.println("Waiting for element visibiliy failed");
-			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
 		} catch (org.openqa.selenium.NoSuchElementException e) {
 			System.out.println("Waiting for element visibiliy failed");
-			ATUReports.add("Waiting for element visibility","Element is visibile before timout","Element was not found",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Waiting for element visibility","Element is visibile before timout","Element was not found",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();	
 		} catch (Exception e) {
 			System.out.println("Waiting for element visibiliy failed");
-			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
 		}
 		
@@ -279,15 +285,15 @@ public class Page {
 			new WebDriverWait(driver, seconds).until(ExpectedConditions.visibilityOf(element));			
 		} catch (org.openqa.selenium.TimeoutException e) {
 			System.out.println("Waiting for element visibiliy failed");
-			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
 		} catch (org.openqa.selenium.NoSuchElementException e) {
 			System.out.println("Waiting for element visibiliy failed");
-			ATUReports.add("Waiting for element visibility","Element is visibile before timout","Element was not found",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Waiting for element visibility","Element is visibile before timout","Element was not found",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("Waiting for element visibiliy failed");
-			ATUReports.add("Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
 		}	
 	}
@@ -316,7 +322,7 @@ public class Page {
 		} else { 
 			
 			System.out.println("We lost the DOM, WebElement not found.");
-			ATUReports.add("We lost the DOM, WebElement not found.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" We lost the DOM, WebElement not found.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return null;
 		}
@@ -347,7 +353,7 @@ public class Page {
 		}else { 
 			
 			System.out.println("We lost the DOM, WebElement not found.");
-			ATUReports.add("We lost the DOM, WebElement not found.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" We lost the DOM, WebElement not found.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return null;
 		}
@@ -381,12 +387,12 @@ public class Page {
 			Actions builder = new Actions(driver);
 			builder.moveToElement(element).click().build().perform();
 			System.out.println("Hovered and clicked on WebElement.");
-			ATUReports.add("Hovered and clicked on WebElement.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Hovered and clicked on WebElement.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 
 		} catch (NoSuchElementException e) {
 			System.out.println("Not hovered and clicked on WebElement.");
-			ATUReports.add("Hovered and clicked on WebElement.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Hovered and clicked on WebElement.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -443,11 +449,11 @@ public class Page {
 			WebElement element = driver.findElement(By.id(id));
 			String text = element.getText();
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
-			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);		
+			ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);		
 			System.out.println("Clicked on " + text + " element");
 		} catch (Exception e) {
 			System.out.println("The element not found");
-			ATUReports.add("The element not found" ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The element not found" ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
@@ -488,11 +494,11 @@ public class Page {
 				Assert.fail("timeout");
 			try {
 				if (driver.getTitle().equals(title))// check
-					ATUReports.add(" load page succeeded",Url,LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE)); // if
+					ATUReports.add(time +"  load page succeeded",Url,LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE)); // if
 																													// list
 				break;
 			} catch (Exception e) {
-				ATUReports.add(" load page failed",Url ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +"  load page failed",Url ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 
 			Thread.sleep(1000);
@@ -556,11 +562,11 @@ public class Page {
 				|| (Integer.valueOf(checkdays) < 1) || (Integer.valueOf(checkdays) > 31)
 				|| (Integer.valueOf(checkyear) < 1995)) {
 			System.out.println(" date is not correctly displaied");
-			ATUReports.add(" date is  not correctly displaied", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +"  date is  not correctly displaied", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} else {
 			System.out.println(" date is correctly displaied");
-			ATUReports.add(" date is correctly displaied", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add(time +"  date is correctly displaied", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 			Assert.assertTrue(true);
 		}
 	}
@@ -577,11 +583,11 @@ public class Page {
 		if ((Integer.valueOf(checkhour) > 24) || (Integer.valueOf(checkhour) < 0) || (Integer.valueOf(checkminutes) < 0)
 				|| (Integer.valueOf(checkminutes) > 59) || (Integer.valueOf(checkseconds) > 59)
 				|| (Integer.valueOf(checkseconds) < 0)) {
-			ATUReports.add(" time is  not correctly displaied", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +"  time is  not correctly displaied", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} else {
 
-			ATUReports.add(" time is correctly displaied", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add(time +"  time is correctly displaied", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 			Assert.assertTrue(true);
 		}
 	}
@@ -597,13 +603,13 @@ public class Page {
 			for (int second = 0;second<=60; second++) {		
 				if (second >= 60) {
 				System.out.println("LogOut from user not succeeded.");
-				ATUReports.add(" Login page timeout", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +"  Login page timeout", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}		
 				if (driver.getTitle().equals("Tegrity Lecture Capture"))// check// if// element// is// present
 				{
 					System.out.println("Signout from user succeeded");
-					ATUReports.add("Sign Out succeeded", LogAs.PASSED, null);
+					ATUReports.add(time +" Sign Out succeeded", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					break;
 				} else if(driver.getTitle().equals("Tegrity - Courses")){
@@ -617,7 +623,7 @@ public class Page {
 			Thread.sleep(1500);	
 		} catch (Exception e) {
 			System.out.println("LogOut from user not succeeded 3");
-			ATUReports.add("Sign Out failed", e.getMessage(), LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Sign Out failed", e.getMessage(), LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		System.out.println("signOut5");
@@ -673,7 +679,7 @@ public class Page {
 			if (second >= 40) {
 
 				Assert.assertTrue(false);
-				ATUReports.add(" no underline", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +"  no underline", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				return false;
 			}
 			try {
@@ -683,7 +689,7 @@ public class Page {
 
 				if (underline.equals("underline"))// check if element is present
 				{
-					ATUReports.add(" has underline", LogAs.PASSED, null);
+					ATUReports.add(time +"  has underline", LogAs.PASSED, null);
 					System.out.println(" has underline");
 					Assert.assertTrue(true);
 					return true;
@@ -772,10 +778,10 @@ public class Page {
 		String ColorName  = getFontColor(element);
 		if(Color.equals(ColorName)){
 			 System.out.println("Verify the font color of: " + element.getText());
-			 ATUReports.add("Verify the font color of: " + element.getText(),"Success.", "Success.", LogAs.PASSED, null);
+			 ATUReports.add(time +" Verify the font color of: " + element.getText(),"Success.", "Success.", LogAs.PASSED, null);
 			}else {
 			 System.out.println("Not Verify the font color of: " + element.getText());
-			 ATUReports.add("Not Verify the font color of: " + element.getText(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			 ATUReports.add(time +" Not Verify the font color of: " + element.getText(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}	
 		}catch(Exception e){
 			e.getMessage();
@@ -904,11 +910,11 @@ public class Page {
 	public void verifyWebElementHaveTargetAttributeTitle(WebElement web_element, String target_text) {
 		if (web_element.getAttribute("title").replaceAll("  ", " ").equals(target_text.replaceAll("  ", " "))) {
 			System.out.println(target_text + " is displayed in title.");
-			ATUReports.add("Target text is displayed in title.", target_text, target_text, LogAs.PASSED, null);
+			ATUReports.add(time +" Target text is displayed in title.", target_text, target_text, LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println(target_text + " is not displayed in title.");
-			ATUReports.add("Target text is not displayed in title.", target_text, web_element.getAttribute("title"),
+			ATUReports.add(time +" Target text is not displayed in title.", target_text, web_element.getAttribute("title"),
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -920,11 +926,11 @@ public class Page {
 			we.click();
 			we.sendKeys(string_to_send);
 			System.out.println("String sent to WebElement: " + string_to_send);
-			ATUReports.add("String send to WebElement.", string_to_send, string_to_send, LogAs.PASSED, null);
+			ATUReports.add(time +" String send to WebElement.", string_to_send, string_to_send, LogAs.PASSED, null);
 		} catch (Exception msg) {
 			msg.printStackTrace();
 			System.out.println("String do not send to WebElement: " + string_to_send);
-			ATUReports.add("String do not send to WebElement.", string_to_send, "", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" String do not send to WebElement.", string_to_send, "", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 
@@ -936,11 +942,11 @@ public class Page {
 			builder.sendKeys(we,string_to_send);
 			builder.build().perform();
 			System.out.println("String sent to WebElement: " + string_to_send);
-			ATUReports.add("String send to WebElement.", string_to_send, string_to_send, LogAs.PASSED, null);
+			ATUReports.add(time +" String send to WebElement.", string_to_send, string_to_send, LogAs.PASSED, null);
 		} catch (Exception msg) {
 			msg.printStackTrace();
 			System.out.println("String do not send to WebElement: " + string_to_send);
-			ATUReports.add("String do not send to WebElement.", string_to_send, "", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" String do not send to WebElement.", string_to_send, "", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
@@ -971,21 +977,21 @@ public class Page {
 
 			if (!not_correct) {
 				System.out.println("Verified that next result display below the current result.");
-				ATUReports.add("Verified that next result display below the current result.", "True.", "True.",
+				ATUReports.add(time +" Verified that next result display below the current result.", "True.", "True.",
 						LogAs.PASSED, null);
 			} else {
 				System.out.println("Not verified that next result display below the current result.");
-				ATUReports.add("Verified that next result display below the current result.", "True.", "False",
+				ATUReports.add(time +" Verified that next result display below the current result.", "True.", "False",
 						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 
 		 } else {
 			   System.out.println("There is 1 or 0 results.");
 			   if(number == 2)
-			   ATUReports.add("There is 1 or 0 results.", "Expect for more then 1 results.", "1 or 0 results.",
+			   ATUReports.add(time +" There is 1 or 0 results.", "Expect for more then 1 results.", "1 or 0 results.",
 			     LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			   else {
-			    ATUReports.add("There is 1 or 0 results.", "Expect exactly 1 results.", "1 or 0 results.",
+			    ATUReports.add(time +" There is 1 or 0 results.", "Expect exactly 1 results.", "1 or 0 results.",
 			      LogAs.PASSED, null);
 			   }
 		 }
@@ -1014,16 +1020,16 @@ public class Page {
 
 				if (!not_correct) {
 					System.out.println("Verified that next result display below the current result.");
-					ATUReports.add("Verified that next result display below the current result.", "True.", "True.",
+					ATUReports.add(time +" Verified that next result display below the current result.", "True.", "True.",
 							LogAs.PASSED, null);
 				} else {
 					System.out.println("Not verified that next result display below the current result.");
-					ATUReports.add("Verified that next result display below the current result.", "True.", "False",
+					ATUReports.add(time +" Verified that next result display below the current result.", "True.", "False",
 							LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 			} else {
 				System.out.println("There is 1 or 0 results.");
-				ATUReports.add("There is 1 or 0 results.", "Expect for more then 1 results.", "1 or 0 results.",
+				ATUReports.add(time +" There is 1 or 0 results.", "Expect for more then 1 results.", "1 or 0 results.",
 						LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		}
@@ -1035,25 +1041,25 @@ public class Page {
 		if (logo.isDisplayed()) {
 
 			System.out.println("verified that logo is displaied");
-			ATUReports.add("verified that logo is displaied", "university logo", "visible", "visible", LogAs.PASSED,
+			ATUReports.add(time +" verified that logo is displaied", "university logo", "visible", "visible", LogAs.PASSED,
 					null);
 			Assert.assertTrue(true);
 			System.out.println(logo_loc.getX() + " " + logo_loc.getY());
 			if ((logo_loc.getX() < 100) && (logo_loc.getY() < 100)) {
 				System.out.println("verified logo location");
-				ATUReports.add("verify logos' location", "university logo", "accurate location", "accurate location",
+				ATUReports.add(time +" verify logos' location", "university logo", "accurate location", "accurate location",
 						LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("not verified logo location");
-				ATUReports.add("verify logos' location", "university logo", "accurate location", "bad location",
+				ATUReports.add(time +" verify logos' location", "university logo", "accurate location", "bad location",
 						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 
 		} else {
 			System.out.println("Not verified that logo is displaied");
-			ATUReports.add("Not verified that logo is displaied", "university logo", "visible", "not visible",
+			ATUReports.add(time +" Not verified that logo is displaied", "university logo", "visible", "not visible",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -1064,12 +1070,12 @@ public class Page {
 	public void isFirstWebElementToTheRightSecondWebElement(WebElement first_webelement, WebElement second_webelement) {
 		if (first_webelement.getLocation().x <= second_webelement.getLocation().x) {
 			System.out.println("The first WebElement is to the right to the second WebElement.");
-			ATUReports.add("The first WebElement is to the right to the second WebElement.", "True.", "True.",
+			ATUReports.add(time +" The first WebElement is to the right to the second WebElement.", "True.", "True.",
 					LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("The first WebElement is not to the right to the second WebElement.");
-			ATUReports.add("The first WebElement is to the right to the second WebElement.", "True.", "False.",
+			ATUReports.add(time +" The first WebElement is to the right to the second WebElement.", "True.", "False.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -1080,12 +1086,12 @@ public class Page {
 	public void verifyWebElementTargetText(WebElement web_element, String target_text) {
 		if (web_element.getText().contains(target_text)) {
 			System.out.println("Verified that target web element have target text: " + target_text);
-			ATUReports.add("WebElement have target text.", target_text, target_text, LogAs.PASSED, null);
+			ATUReports.add(time +" WebElement have target text.", target_text, target_text, LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that target web element have target text: " + target_text + " != "
 					+ web_element.getText());
-			ATUReports.add("WebElement have target text.", target_text, web_element.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" WebElement have target text.", target_text, web_element.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1100,11 +1106,11 @@ public class Page {
 				"return Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight)>document.documentElement.clientHeight ;");
 		if (scrolling_bar) {
 			System.out.println("Verified that there is vertical scrolling.");
-			ATUReports.add("Verify there is vertical scrolling.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify there is vertical scrolling.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that there is vertical scrolling.");
-			ATUReports.add("Verify there is vertical scrolling.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verify there is vertical scrolling.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1115,11 +1121,11 @@ public class Page {
 				"return Math.max(document.body.scrollWidth, document.body.offsetWidth, document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth)>document.documentElement.clientWidth ;");
 		if (scrolling_bar) {
 			System.out.println("Verified that there is horizontal scrolling.");
-			ATUReports.add("Verify there is horizontal scrolling.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify there is horizontal scrolling.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that there is horizontal scrolling.");
-			ATUReports.add("Verify there is horizontal scrolling.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verify there is horizontal scrolling.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1128,11 +1134,11 @@ public class Page {
 	public void verifyWebElementSelected(WebElement webElement) {
 		if (webElement.isSelected()) {
 			System.out.println("Verfied that WebElement selected.");
-			ATUReports.add("Verfied that WebElement selected.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied that WebElement selected.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verifed that WebElement selected.");
-			ATUReports.add("Verfied that WebElement selected.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied that WebElement selected.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1141,11 +1147,11 @@ public class Page {
 	public void verifyWebElementNotSelected(WebElement webElement) {
 		if (webElement.isSelected()) {
 			System.out.println("Not verfied that WebElement not selected.");
-			ATUReports.add("Verfied that WebElement not selected.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied that WebElement not selected.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} else {
 			System.out.println("Verfied that WebElement not selected.");
-			ATUReports.add("Verfied that WebElement not selected.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied that WebElement not selected.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 	}
@@ -1165,7 +1171,7 @@ public class Page {
 			try {
 				new WebDriverWait(driver, 60).until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frame_index));				
 			} catch (Exception msg) {
-				ATUReports.add("Switch to frame failed", msg.getMessage(),"True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Switch to frame failed", msg.getMessage(),"True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);				
 			}
 		
@@ -1182,11 +1188,11 @@ public class Page {
 		int yyyy = Integer.parseInt(splited_date[2]);
 		if ((0 < mm) && (0 < dd) && (999 < yyyy) && (12 >= mm) && (31 >= dd) && (9999 >= yyyy)) {
 			System.out.println("Target date is valid: " + target_date);
-			ATUReports.add("Target date is valid: " + target_date, "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Target date is valid: " + target_date, "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Target date is invalid: " + target_date);
-			ATUReports.add("Target date is valid: " + target_date, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Target date is valid: " + target_date, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1197,12 +1203,12 @@ public class Page {
 		if (web_element.getAttribute(target_attribute).replaceAll("  ", " ")
 				.equals(target_text.replaceAll("  ", " "))) {
 			System.out.println(target_text + " is displayed in " + target_attribute + " attribute.");
-			ATUReports.add("Target text is displayed in " + target_attribute + " attribute.", target_text, target_text,
+			ATUReports.add(time +" Target text is displayed in " + target_attribute + " attribute.", target_text, target_text,
 					LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println(target_text + " is not displayed in " + target_attribute + " attribute.");
-			ATUReports.add("Target text is not displayed in " + target_attribute + " attribute.", target_text,
+			ATUReports.add(time +" Target text is not displayed in " + target_attribute + " attribute.", target_text,
 					web_element.getAttribute(target_attribute), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -1218,18 +1224,18 @@ public class Page {
 
 			if (web_element.getAttribute("value").equals(target_input)) {
 				System.out.println("Target keys sent to WebElement: " + target_input);
-				ATUReports.add("Target keys sent.", target_input, target_input, LogAs.PASSED, null);
+				ATUReports.add(time +" Target keys sent.", target_input, target_input, LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Target keys sent: " + target_input + ", but not appear in the input itself: "
 						+ web_element.getAttribute("value"));
-				ATUReports.add("Target keys send.", target_input, web_element.getAttribute("value"), LogAs.FAILED,
+				ATUReports.add(time +" Target keys send.", target_input, web_element.getAttribute("value"), LogAs.FAILED,
 						null);
 				Assert.assertTrue(false);
 			}
 		} catch (Exception msg) {
 			System.out.println("Fail to sent target keys: " + target_input);
-			ATUReports.add("Target keys sent.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Target keys sent.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1254,7 +1260,7 @@ public class Page {
 		for (String next : list) {
 			if (target_string.contains(next)) {
 				System.out.println("Verfied that element: " + target_string + " in the list.");
-				ATUReports.add("Verfied that element: " + target_string + " in the list.", "True.", "True.",
+				ATUReports.add(time +" Verfied that element: " + target_string + " in the list.", "True.", "True.",
 						LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return next;
@@ -1262,7 +1268,7 @@ public class Page {
 		}
 
 		System.out.println("Not verfied that element: " + target_string + " in the list.");
-		ATUReports.add("Verfied that element: " + target_string + " in the list.", "True.", "False.", LogAs.FAILED,
+		ATUReports.add(time +" Verfied that element: " + target_string + " in the list.", "True.", "False.", LogAs.FAILED,
 				null);
 		Assert.assertTrue(false);
 		return null;
@@ -1397,14 +1403,14 @@ public class Page {
 			} while (!elementFound && i < 10);
 		System.out.println("s7");
 		if (elementFound) {
-			ATUReports.add("Scanning page succeeded: the element was clicked", elementText, "The element is clicked.",
+			ATUReports.add(time +" Scanning page succeeded: the element was clicked", elementText, "The element is clicked.",
 					"The element is clicked.", LogAs.PASSED, null);
 			System.out.println("s8");
 			Assert.assertTrue(true);
 			return true;
 			
 		} else {
-			ATUReports.add("Scanning page failed: the element wasn't found", elementText, "The element is clicked.",
+			ATUReports.add(time +" Scanning page failed: the element wasn't found", elementText, "The element is clicked.",
 					"The element wasn't", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return false;
@@ -1430,7 +1436,7 @@ public class Page {
 					.pollingEvery(pooling, TimeUnit.MILLISECONDS);
 			wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(element)));
 		} catch (Exception e) {
-			ATUReports.add("Error", e.getMessage(), LogAs.WARNING, null);
+			ATUReports.add(time +" Error", e.getMessage(), LogAs.WARNING, null);
 		}
 	}
 	
@@ -1440,7 +1446,7 @@ public class Page {
 					.pollingEvery(pooling, TimeUnit.MILLISECONDS);
 			wait.until(ExpectedConditions.visibilityOf(element));
 		} catch (Exception e) {
-			ATUReports.add("Error", e.getMessage(), LogAs.WARNING, null);
+			ATUReports.add(time +" Error", e.getMessage(), LogAs.WARNING, null);
 		}
 	}
 	public void waitForContentOfTabToLoad(String initialCourseText,WebElement element) {
@@ -1452,7 +1458,7 @@ public class Page {
 			System.out.println("waitForCoursesFrameToLoad2");
 		} catch (Exception e) {
 			System.out.println("Catch waitForCoursesFrameToLoad");
-			ATUReports.add("The tab content failed to load: " + e.getMessage(), LogAs.WARNING,
+			ATUReports.add(time +" The tab content failed to load: " + e.getMessage(), LogAs.WARNING,
 					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 
 		}

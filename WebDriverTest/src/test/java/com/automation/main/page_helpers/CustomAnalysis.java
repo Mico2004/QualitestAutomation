@@ -89,16 +89,16 @@ public class CustomAnalysis extends Page {
 				
 				if(report_type_options.get(target_type-1).getAttribute("selected").equals("true")) {
 					System.out.println("Report type selected successfuly.");
-					ATUReports.add("Report type selected successfuly.", "True.", "True.", LogAs.PASSED, null);
+					ATUReports.add(time +" Report type selected successfuly.", "True.", "True.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("Report type not selected.");
-					ATUReports.add("Report type selected successfuly.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Report type selected successfuly.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			} catch(Exception msg) {
 				System.out.println("Report type not selected.");
-				ATUReports.add("Report type selected successfuly.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Report type selected successfuly.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -115,12 +115,12 @@ public class CustomAnalysis extends Page {
 			
 			exitInnerFrame();
 			System.out.println("Report form appear.");
-			ATUReports.add("Report form appear.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Report form appear.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			exitInnerFrame();
 			System.out.println("Report form not appearing.");
-			ATUReports.add("Report form appear.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Report form appear.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -129,14 +129,14 @@ public class CustomAnalysis extends Page {
 	// This function verify that start date of data selection in format "M/D/YYYY" (for example: "12/15/2013").
 	public void verifyStartDateOfDataSelectionInCorrectFormat() {
 		System.out.println("Checking that start date of data selection in format mm/dd/yyyy.");
-		ATUReports.add("Checking that start date of data selection in format mm/dd/yyyy.", LogAs.PASSED, null);
+		ATUReports.add(time +" Checking that start date of data selection in format mm/dd/yyyy.", LogAs.PASSED, null);
 		verifyThatTargetStringIsValidDate(from_date.getAttribute("value"));
 	}
 	
 	// This function verify that end date of data selection in format "M/D/YYYY" (for example: "1/7/2014").
 	public void verifyEndDateOfDataSelectionInCorrectFormat() {
 		System.out.println("Checking that end date of data selection in format mm/dd/yyyy.");
-		ATUReports.add("Checking that end date of data selection in format mm/dd/yyyy.", LogAs.PASSED, null);
+		ATUReports.add(time +" Checking that end date of data selection in format mm/dd/yyyy.", LogAs.PASSED, null);
 		verifyThatTargetStringIsValidDate(to_date.getAttribute("value"));
 	}
 	
@@ -330,7 +330,7 @@ public class CustomAnalysis extends Page {
 					continue;
 				} else {
 					System.out.println("Not verfied last row contains the Grand Total data which is correct.");
-					ATUReports.add("Verfied last row contains the Grand Total data which is correct.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Verfied last row contains the Grand Total data which is correct.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			}
@@ -339,7 +339,7 @@ public class CustomAnalysis extends Page {
 		
 		exitInnerFrame();
 		System.out.println("Verfied last row contains the Grand Total data which is correct.");
-		ATUReports.add("Verfied last row contains the Grand Total data which is correct.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verfied last row contains the Grand Total data which is correct.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		
 		
@@ -407,11 +407,11 @@ public class CustomAnalysis extends Page {
 			if((webElement.getAttribute("selected") != null) && (webElement.getAttribute("selected").equals("true"))) {
 				if(webElement.getText().equals(target_option)) {
 					System.out.println("Verfied that for grouping " + grouping + " the option: " + target_option + " selected.");
-					ATUReports.add("Verfied that for grouping " + grouping, target_option, target_option, LogAs.PASSED, null);
+					ATUReports.add(time +" Verfied that for grouping " + grouping, target_option, target_option, LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("Not verfied that for grouping " + grouping + " the option: " + target_option + " selected.");
-					ATUReports.add("Verfied that for grouping " + grouping, target_option, webElement.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Verfied that for grouping " + grouping, target_option, webElement.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 				break;
@@ -431,7 +431,7 @@ public class CustomAnalysis extends Page {
 		}
 		
 		System.out.println("Not find target grouping textbox label.");
-		ATUReports.add("Found target grouping textbox label." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Found target grouping textbox label." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(true);
 	}
 	
@@ -441,11 +441,11 @@ public class CustomAnalysis extends Page {
 			if((webElement.getAttribute("selected") != null) && (webElement.getAttribute("selected").equals("true"))) {
 				if(webElement.getText().equals(target_time_aggregation)) {
 					System.out.println("Verfied that time aggregation option: " + target_time_aggregation + " is selected.");
-					ATUReports.add("Verfiy time aggregation option.", target_time_aggregation, target_time_aggregation, LogAs.PASSED, null);
+					ATUReports.add(time +" Verfiy time aggregation option.", target_time_aggregation, target_time_aggregation, LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("No verfied that time aggregation option: " + target_time_aggregation + " is selected.");
-					ATUReports.add("Verfiy time aggregation option.", target_time_aggregation, webElement.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Verfiy time aggregation option.", target_time_aggregation, webElement.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 				break;
@@ -463,11 +463,11 @@ public class CustomAnalysis extends Page {
 		
 		if(from_date.getAttribute("value").equals(dateFormat.format(cal.getTime()))) {
 			System.out.println("Verfied that From calendar contains the yesterday date.");
-			ATUReports.add("Verfied that From calendar contains the yesterday date.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied that From calendar contains the yesterday date.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verfied that From calendar contains the yesterday date.");
-			ATUReports.add("Verfied that From calendar contains the yesterday date.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied that From calendar contains the yesterday date.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -479,11 +479,11 @@ public class CustomAnalysis extends Page {
 		
 		if(to_date.getAttribute("value").equals(dateFormat.format(cal.getTime()))) {
 			System.out.println("Verfied that To calendar contains the today date.");
-			ATUReports.add("Verfied that To calendar contains the today date.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied that To calendar contains the today date.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verfied that To calendar contains the today date.");
-			ATUReports.add("Verfied that To calendar contains the today date.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied that To calendar contains the today date.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -542,11 +542,11 @@ public class CustomAnalysis extends Page {
 			if((webElement.getAttribute("selected") != null) && (webElement.getAttribute("selected").equals("true"))) {
 				if(webElement.getText().equals(target_option)) {
 					System.out.println("Verfied that for grouping " + grouping + " the option: " + target_option + " selected.");
-					ATUReports.add("Verfied that for grouping " + grouping, target_option, target_option, LogAs.PASSED, null);
+					ATUReports.add(time +" Verfied that for grouping " + grouping, target_option, target_option, LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("Not verfied that for grouping " + grouping + " the option: " + target_option + " selected.");
-					ATUReports.add("Verfied that for grouping " + grouping, target_option, webElement.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Verfied that for grouping " + grouping, target_option, webElement.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 				break;
@@ -685,11 +685,11 @@ public class CustomAnalysis extends Page {
 			grouping_textbox_inputs.get(index).sendKeys(Keys.ENTER);
 			
 			System.out.println("Sent keys: " + target_input + ", to target grouping: " + target_grouping + " input.");
-			ATUReports.add("Sent keys: " + target_input + ", to target grouping: " + target_grouping + " input.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Sent keys: " + target_input + ", to target grouping: " + target_grouping + " input.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch(Exception msg) {
 			System.out.println("Fail to send keys: " + target_input + ", to target grouping: " + target_grouping + " input.");
-			ATUReports.add("Sent keys: " + target_input + ", to target grouping: " + target_grouping + " input.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Sent keys: " + target_input + ", to target grouping: " + target_grouping + " input.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -709,7 +709,7 @@ public class CustomAnalysis extends Page {
 			if(padding_left.equals("2.66667px")) {
 				if(!row_subtitles.get(i).getText().equals(target_selected_course)) {
 					System.out.println("Not verified that only data from selected course is displayed.");
-					ATUReports.add("Verify that only data from selected course is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Verify that only data from selected course is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			}
@@ -717,7 +717,7 @@ public class CustomAnalysis extends Page {
 		
 		exitInnerFrame();
 		System.out.println("Verified that only data from selected course is displayed.");
-		ATUReports.add("Verify that only data from selected course is displayed.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verify that only data from selected course is displayed.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		
 	}
@@ -848,11 +848,11 @@ public class CustomAnalysis extends Page {
 		
 		if(levels.size() == target_number_of_levels) {
 			System.out.println("Verified that report results contains: " + target_number_of_levels + " level of grouping.");
-			ATUReports.add("Verified that report results contains # levels of grouping.", Integer.toString(target_number_of_levels), Integer.toString(target_number_of_levels), LogAs.PASSED, null);
+			ATUReports.add(time +" Verified that report results contains # levels of grouping.", Integer.toString(target_number_of_levels), Integer.toString(target_number_of_levels), LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that report results contains: " + target_number_of_levels + " level of grouping, instead: " + levels.size() + ".");
-			ATUReports.add("Verified that report results contains # levels of grouping.", Integer.toString(target_number_of_levels), Integer.toString(levels.size()), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verified that report results contains # levels of grouping.", Integer.toString(target_number_of_levels), Integer.toString(levels.size()), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		exitInnerFrame();
@@ -882,7 +882,7 @@ public class CustomAnalysis extends Page {
 						temp_level_2.addAll(level_2);
 					} else {	
 						System.out.println("Not verfied that each level contains the right content to the downloads in precondition. (Problem with second level)");
-						ATUReports.add("Verfied that each level contains the right content to the downloads in precondition.", "True.", "False (problem with second level).", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						ATUReports.add(time +" Verfied that each level contains the right content to the downloads in precondition.", "True.", "False (problem with second level).", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					}
 				}
@@ -903,7 +903,7 @@ public class CustomAnalysis extends Page {
 						temp_level_4.addAll(level_4);
 					} else {
 						System.out.println("Not verfied that each level contains the right content to the downloads in precondition. (Problem with fourth level)");
-						ATUReports.add("Verfied that each level contains the right content to the downloads in precondition.", "True.", "False (problem with fourth level).", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						ATUReports.add(time +" Verfied that each level contains the right content to the downloads in precondition.", "True.", "False (problem with fourth level).", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					}
 				}
@@ -919,17 +919,17 @@ public class CustomAnalysis extends Page {
 		
 		if(level_1.size() != 0) {
 			System.out.println("Not verfied that each level contains the right content to the downloads in precondition. (Problem with first level)");
-			ATUReports.add("Verfied that each level contains the right content to the downloads in precondition.", "True.", "False (problem with first level).", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied that each level contains the right content to the downloads in precondition.", "True.", "False (problem with first level).", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} else if (level_3 != null) {
 			if(level_3.size() != 0) {
 				System.out.println("Not verfied that each level contains the right content to the downloads in precondition. (Problem with second level)");
-				ATUReports.add("Verfied that each level contains the right content to the downloads in precondition.", "True.", "False (problem with second level).", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verfied that each level contains the right content to the downloads in precondition.", "True.", "False (problem with second level).", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} else {
 			System.out.println("Verfied that each level contains the right content to the downloads in precondition.");
-			ATUReports.add("Verfied that each level contains the right content to the downloads in precondition.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied that each level contains the right content to the downloads in precondition.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 	}
@@ -949,7 +949,7 @@ public class CustomAnalysis extends Page {
 					}
 					if(Integer.parseInt(values_matrix[row][col]) != value_level_1) {
 						System.out.println("Not verfied that each level contain correct number in the table.");
-						ATUReports.add("Verfied that each level contain the correct number in the table.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						ATUReports.add(time +" Verfied that each level contain the correct number in the table.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					}
 				}
@@ -960,7 +960,7 @@ public class CustomAnalysis extends Page {
 					}
 					if(Integer.parseInt(values_matrix[row][col]) != value_level_2) {
 						System.out.println("Not verfied that each level contain correct number in the table.");
-						ATUReports.add("Verfied that each level contain the correct number in the table.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						ATUReports.add(time +" Verfied that each level contain the correct number in the table.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					}
 				}
@@ -971,7 +971,7 @@ public class CustomAnalysis extends Page {
 					}
 					if(Integer.parseInt(values_matrix[row][col]) != value_level_3) {
 						System.out.println("Not verfied that each level contain correct number in the table.");
-						ATUReports.add("Verfied that each level contain the correct number in the table.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						ATUReports.add(time +" Verfied that each level contain the correct number in the table.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					}
 				}
@@ -982,7 +982,7 @@ public class CustomAnalysis extends Page {
 					}
 					if(Integer.parseInt(values_matrix[row][col]) != value_level_4) {
 						System.out.println("Not verfied that each level contain correct number in the table.");
-						ATUReports.add("Verfied that each level contain the correct number in the table.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						ATUReports.add(time +" Verfied that each level contain the correct number in the table.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					}
 				}
@@ -991,7 +991,7 @@ public class CustomAnalysis extends Page {
 		exitInnerFrame();
 		
 		System.out.println("Verified that each level contain the correct number in the table.");
-		ATUReports.add("Verfied that each level contain the correct number in the table.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verfied that each level contain the correct number in the table.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -1003,13 +1003,13 @@ public class CustomAnalysis extends Page {
 			}
 			if(Integer.parseInt(values_matrix[number_of_rows-1][col]) != input_value) {
 				System.out.println("Not verfied that grand total values is correct according to precondition.");
-				ATUReports.add("Verfied that grand total values is correct according to precondition.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verfied that grand total values is correct according to precondition.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
 		
 		System.out.println("Verfied that grand total values is correct according to precondition.");
-		ATUReports.add("Verfied that grand total values is correct according to precondition.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verfied that grand total values is correct according to precondition.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	
@@ -1018,14 +1018,14 @@ public class CustomAnalysis extends Page {
 		for(WebElement webElement: additional_instructor_grouping_dropbox_options) {
 			if(webElement.getText().contains(target_username)) {
 				System.out.println("Verfied that username: " + target_username + " exist in instructor dropbox.");
-				ATUReports.add("Verfied that username: " + target_username + " exist in instructor dropbox.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" Verfied that username: " + target_username + " exist in instructor dropbox.", "True.", "True.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
 			}
 		}
 		
 		System.out.println("Not verfied that username: " + target_username + " exist in instructor dropbox.");
-		ATUReports.add("Verfied that username: " + target_username + " exist in instructor dropbox.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Verfied that username: " + target_username + " exist in instructor dropbox.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 
 	}
@@ -1039,12 +1039,12 @@ public class CustomAnalysis extends Page {
 			if (padding_left.equals("26.6667px")) {
 				if(!valid_recording.contains(row_subtitles.get(i).getText())) {
 					System.out.println("Not verfied that only data from the recording is displayed.");
-					ATUReports.add("Verfied that only data from the recording is displayed.", "True.", "False.", LogAs.PASSED, null);
+					ATUReports.add(time +" Verfied that only data from the recording is displayed.", "True.", "False.", LogAs.PASSED, null);
 					Assert.assertTrue(false);
 				}
 			}
 			System.out.println("Verfied that only data from the recording is displayed.");
-			ATUReports.add("Verfird that only data from the recording is displaued.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfird that only data from the recording is displaued.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(true);
 		}
 	}
@@ -1067,11 +1067,11 @@ public class CustomAnalysis extends Page {
 		
 		if(target_course_list.size() == 0) {
 			System.out.println("Verfied that target list of courses exist in course dropbox options.");
-			ATUReports.add("Verfied that target list of courses exist in course dropbox options.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied that target list of courses exist in course dropbox options.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verfied that target list of courses exist in course dropbox options.");
-			ATUReports.add("Verfied that target list of courses exist in course dropbox options.",  "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied that target list of courses exist in course dropbox options.",  "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1097,13 +1097,13 @@ public class CustomAnalysis extends Page {
 			} else {
 //				System.out.println("Not pass: " + course_name);
 //				System.out.println("Not verfied that every course in course dropbox option list in correct format.");
-				ATUReports.add("Verfied that every course in course dropbox option list in correct format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verfied that every course in course dropbox option list in correct format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
 		
 		System.out.println("Verfied that every course in course dropbox option list in correct format.");
-		ATUReports.add("Verfied that every course in course dropbox option list in correct format.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verfied that every course in course dropbox option list in correct format.", "True.", "True.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 	}
 	

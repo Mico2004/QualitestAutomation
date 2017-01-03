@@ -62,11 +62,11 @@ public class ManageExcelCoursesEnrollments extends Page {
 		File dir = new File(path);
 		if(dir.exists()){
 			System.out.println("File is exist.");
-			ATUReports.add("file is exist ", LogAs.PASSED, null);
+			ATUReports.add(time +" file is exist ", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("File is not exist.");
-			ATUReports.add("File is not exist.", LogAs.FAILED, null);
+			ATUReports.add(time +" File is not exist.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
 		// from here you can use as it wrote	
@@ -82,10 +82,10 @@ public class ManageExcelCoursesEnrollments extends Page {
 		String text = textBox.getText();
 		if(text.equals("Start Import Courses Fetching existing coursesMemberships were updatedCourses were updated Import Process Done.")){
 			System.out.println("File was upload.");
-			ATUReports.add("File was upload.", "True.", "True.", LogAs.PASSED,null);
+			ATUReports.add(time +" File was upload.", "True.", "True.", LogAs.PASSED,null);
 		} else {
 			System.out.println("File was not upload.");
-			ATUReports.add("File was not upload.", "True", "False.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" File was not upload.", "True", "False.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		}catch(Exception e){
 	    	e.getMessage();
@@ -100,11 +100,11 @@ public class ManageExcelCoursesEnrollments extends Page {
 			waitForVisibility(adminDashboard);	
 			adminDashboard.click();
 			System.out.println("Clicked on admin dashboard link.");
-			ATUReports.add("Clicked on admin dashboard link.", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);
+			ATUReports.add(time +" Clicked on admin dashboard link.", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);
 			return true;
 		} catch (Exception msg) {
 			System.out.println("Fail to click on admin dashboard link.");
-			ATUReports.add("Fail on admin dashboard link.", "Clicked succeeded.", "Clicked succeeded..", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail on admin dashboard link.", "Clicked succeeded.", "Clicked succeeded..", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return false;
 		}
 	}

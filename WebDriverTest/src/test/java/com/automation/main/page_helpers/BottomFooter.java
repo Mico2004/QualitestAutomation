@@ -37,10 +37,10 @@ public class BottomFooter extends Page {
 		if((Institute_logo.getLocation().y < tegrity_logo.getLocation().y) &&
 				(tegrity_logo.getLocation().x < search_box.getLocation().x)) {
 			System.out.println("Verifed that the Tegrity logo is displayed on botton in the left side.");
-			ATUReports.add("Verifed that the Tegrity logo is displayed on botton in the left side.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verifed that the Tegrity logo is displayed on botton in the left side.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verifed that the Tegrity logo is displayed on botton in the left side.");
-			ATUReports.add("Verifed that the Tegrity logo is displayed on botton in the left side.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verifed that the Tegrity logo is displayed on botton in the left side.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	

@@ -72,7 +72,7 @@ public class EditRecording extends Page {
 		}
 		
 		System.out.println("Wait that the element edit chapter will click from the list.");
-		ATUReports.add("Wait that the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Wait that the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
 		
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
@@ -86,7 +86,7 @@ public class EditRecording extends Page {
 		//driver.findElements(By.cssSelector(".optionList>li>a")).get(1).click();
 		
 		System.out.println("The element edit chapter was clicked");
-		ATUReports.add("The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
 		
 		
 		Thread.sleep(2000);
@@ -127,7 +127,7 @@ public class EditRecording extends Page {
 			}
 			
 			System.out.println("Wait that the element edit chapter will click from the list.");
-			ATUReports.add("Wait that the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Wait that the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
 			
 		
 		for(String window_handler: driver.getWindowHandles()) {
@@ -140,7 +140,7 @@ public class EditRecording extends Page {
 		clickElement(listButtons.get(1));
 		
 		System.out.println("The element edit chapter was clicked");
-		ATUReports.add("The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
 		
 		
 		//changing the name of the title
@@ -153,7 +153,7 @@ public class EditRecording extends Page {
 		Thread.sleep(2000);
 		
 		System.out.println("Click on the apply.");
-		ATUReports.add("Click on the apply.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Click on the apply.", "True.", "True.", LogAs.PASSED, null);
 		int numberOfAttempts = 0;
 		//click on the ok
 		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){		
@@ -163,13 +163,13 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
 			} else if(message.contains("Error")) {
-				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Get an error while click on apply.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
 				clickElement(ApplyButton);
 				numberOfAttempts++;
 				if(numberOfAttempts == 5) {
-					ATUReports.add("Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			}
@@ -211,7 +211,7 @@ public class EditRecording extends Page {
 		}
 		
 		System.out.println("Wait that the element add closed caption will click from the list.");
-		ATUReports.add("Wait that the element add closed caption will click from the list.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Wait that the element add closed caption will click from the list.", "True.", "True.", LogAs.PASSED, null);
 		
 		Thread.sleep(2000);
 		for(String window_handler: driver.getWindowHandles()) {
@@ -227,7 +227,7 @@ public class EditRecording extends Page {
 		
 	
 		System.out.println("The element add caption was clicked");
-		ATUReports.add("The elementadd caption was clicked", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" The elementadd caption was clicked", "True.", "True.", LogAs.PASSED, null);
 		
 
 		UploadFile.sendKeys(path);
@@ -238,7 +238,7 @@ public class EditRecording extends Page {
 		Thread.sleep(1000);
 		
 		System.out.println("The file close caption was added.");
-		ATUReports.add("The file close caption was added.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" The file close caption was added.", "True.", "True.", LogAs.PASSED, null);
 		
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
@@ -252,7 +252,7 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 				break;
 			} else if(message.contains("Error")) {
-				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, null);
+				ATUReports.add(time +" Get an error while click on apply.", LogAs.WARNING, null);
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
 				clickElementJS(AddCaptioningButton);
@@ -260,7 +260,7 @@ public class EditRecording extends Page {
 				countOfErrors++;
 				if(countOfErrors >= 4) {
 					System.out.println("The error message is return more then 3 times.");
-					ATUReports.add("The error message is return more then 3 times.", "True.", "false", LogAs.FAILED, null);
+					ATUReports.add(time +" The error message is return more then 3 times.", "True.", "false", LogAs.FAILED, null);
 					Assert.assertTrue(false);
 				}
 			}
@@ -299,7 +299,7 @@ public class EditRecording extends Page {
 		}
 			
 		System.out.println("Wait that the element edit chapter will click from the list.");
-		ATUReports.add("Wait that the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Wait that the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
 		
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
@@ -311,7 +311,7 @@ public class EditRecording extends Page {
 		clickElement(listButtons.get(1));
 		
 		System.out.println("The element edit chapter was clicked");
-		ATUReports.add("The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" The element edit chapter was clicked", "True.", "True.", LogAs.PASSED, null);
 		
 		Thread.sleep(2000);
 		
@@ -330,13 +330,13 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
 			} else if(message.contains("Error")) {
-				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, null);
+				ATUReports.add(time +" Get an error while click on apply.", LogAs.WARNING, null);
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
 				clickElement(ApplyButton);
 				numberOfAttempts++;
 				if(numberOfAttempts == 5) {
-					ATUReports.add("Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			}
@@ -376,7 +376,7 @@ public class EditRecording extends Page {
 		}
 		
 		System.out.println("Wait the the element edit chapter will click from the list.");
-		ATUReports.add("Wait the the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Wait the the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
 
 		for(String window_handler: driver.getWindowHandles()) {
 			driver.switchTo().window(window_handler);
@@ -389,7 +389,7 @@ public class EditRecording extends Page {
 		Thread.sleep(2000);
 		
 		System.out.println("The element edit chapter was Clicked");
-		ATUReports.add("The element edit chapter was Clicked.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" The element edit chapter was Clicked.", "True.", "True.", LogAs.PASSED, null);
 		
 		NewKeywordButton.clear();
 		NewKeywordButton.sendKeys(target_keyword);
@@ -405,12 +405,12 @@ public class EditRecording extends Page {
 				confirm_menu.clickOnOkButtonAfterEditRecord();
 				break;
 			} else if(message.contains("Error")) {
-				ATUReports.add("Get an error while click on apply.", LogAs.WARNING, null);
+				ATUReports.add(time +" Get an error while click on apply.", LogAs.WARNING, null);
 				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
 				System.out.println("Get an error while click on apply.");	
 				clickElement(ApplyButton);
 				if(numberOfAttempts == 5) {
-					ATUReports.add("Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			}
@@ -421,7 +421,7 @@ public class EditRecording extends Page {
 		clickElement(Breadcrumbs);	
 		
 	    System.out.println("Wait the the element edit chapter will click from the list.");
-		ATUReports.add("Wait the the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Wait the the element edit chapter will click from the list.", "True.", "True.", LogAs.PASSED, null);
 		}catch(Exception e){
 			e.getMessage();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));

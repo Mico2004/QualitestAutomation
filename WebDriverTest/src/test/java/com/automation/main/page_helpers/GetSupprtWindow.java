@@ -34,13 +34,13 @@ public class GetSupprtWindow extends Page {
 	{
 		if(support_window_title.isDisplayed())
 		{
-			ATUReports.add("support window is visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" support window is visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("support window is visible");
 			Assert.assertTrue(false);
 		}
 		else {
 			
-			ATUReports.add("support window is not visible", LogAs.PASSED, null);
+			ATUReports.add(time +" support window is not visible", LogAs.PASSED, null);
 			System.out.println("support window is not visible");
 			Assert.assertTrue(true);
 		}
@@ -51,13 +51,13 @@ public class GetSupprtWindow extends Page {
 	{
 		if(support_window_title.isDisplayed())
 		{
-			ATUReports.add("support window is visible", LogAs.PASSED, null);
+			ATUReports.add(time +" support window is visible", LogAs.PASSED, null);
 			System.out.println("support window is visible");
 			Assert.assertTrue(true);
 		}
 		else {
 			
-			ATUReports.add("support window is not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" support window is not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("get started block is  not visible");
 			Assert.assertTrue(false);
 		}
@@ -82,14 +82,14 @@ public class GetSupprtWindow extends Page {
 	    send_button.click();
 	        waitForVisibility(confirm.ok_button);
 	    	confirm.clickOnOkButtonAfterConfirmEmailSentSuccessfully();
-	    	ATUReports.add("email sent", LogAs.PASSED, null);
+	    	ATUReports.add(time +" email sent", LogAs.PASSED, null);
 			System.out.println("email sent");
 			Assert.assertTrue(true);
 	}
 		catch(Exception e)
 	    {
 			System.out.println("failed clicking send");
-			ATUReports.add("email  failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" email  failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("email  failed");
 			Assert.assertTrue(false);
 	    }

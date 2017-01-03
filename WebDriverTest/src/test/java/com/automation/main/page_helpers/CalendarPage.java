@@ -88,16 +88,16 @@ public class CalendarPage extends Page {
 			Date date = sdf.parse(monthAndYearString);
 			System.out.println(date);
 			System.out.println("The date is in the following format: 'yyyy-MMM'");
-			ATUReports.add("The date is in the following format: 'yyyy-MMM'" + "and the date is: " + monthAndYearString , "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" The date is in the following format: 'yyyy-MMM'" + "and the date is: " + monthAndYearString , "Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			
 		} catch (ParseException e) {
 			System.out.println("The date is not in the following format: 'yyyy-MMM'" );				
-			ATUReports.add("The date is in the following format: 'yyyy-MMM' and the date is: " + monthAndYearString + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The date is in the following format: 'yyyy-MMM' and the date is: " + monthAndYearString + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} catch (Exception e) {
 		System.out.println("No such Element exists" );				
-		ATUReports.add("No such Element exists " + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" No such Element exists " + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		Assert.assertTrue(false);
 	}
 		
@@ -127,26 +127,26 @@ public class CalendarPage extends Page {
 	getDayFromCalender();
 	
 	if(year.equals(yearToCompare)){
-		ATUReports.add("Verify the year from the calendar.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verify the year from the calendar.", LogAs.PASSED, null);
 		System.out.println("Verify the year from the calendar.");
 	} else {
-		ATUReports.add("Not Verify the year from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Not Verify the year from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		System.out.println("Not Verify the year from the calendar.");
 	}
 	
     if(month.equals(monthToCompare)){
-		ATUReports.add("Verify the month from the calendar.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verify the month from the calendar.", LogAs.PASSED, null);
 		System.out.println("Verify the month from the calendar.");
 	} else {
-		ATUReports.add("Not Verify the month from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Not Verify the month from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		System.out.println("Not Verify the month from the calendar.");
 	}
 
     if(day.equals(dayToCompare)){
-		ATUReports.add("Verify the day from the calendar.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verify the day from the calendar.", LogAs.PASSED, null);
 		System.out.println("Verify the day from the calendar.");
 	} else {
-		ATUReports.add("Not Verify the day from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Not Verify the day from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		System.out.println("Not Verify the day from the calendar.");
 	}
 	
@@ -168,7 +168,7 @@ public class CalendarPage extends Page {
 			
 		} catch (Exception e) {
 			e.getMessage();			
-			ATUReports.add("The error message is: " + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The error message is: " + e.getMessage(), "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		return returnDate;
@@ -328,13 +328,13 @@ public class CalendarPage extends Page {
     		}
     		if(color.equals(grey)){		
     			((JavascriptExecutor) driver).executeScript("arguments[0].click();",e);
-    			ATUReports.add("Verify the day from the calendar.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+    			ATUReports.add(time +" Verify the day from the calendar.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
     			System.out.println("Verify the day from the calendar.");
     			Assert.assertTrue(true);	
     			return;
     		}
     	}
-    	ATUReports.add("Not Verify the day from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+    	ATUReports.add(time +" Not Verify the day from the calendar.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		System.out.println("Not Verify the day from the calendar.");
 	    Assert.assertTrue(false);
 	}

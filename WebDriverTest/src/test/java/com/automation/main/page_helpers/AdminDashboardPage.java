@@ -151,13 +151,13 @@ public class AdminDashboardPage extends Page {
 					((JavascriptExecutor) driver).executeScript("arguments[0].click();", targetLink);								
 					System.out.println("clickOnTargetSubmenuCourses7");
 					System.out.println("Click on target submenu of Courses: "+linkText  );
-					ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
+					ATUReports.add(time +" Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					return;
 				} catch (Exception msg) {
 					System.out.println("Not click on target submenu of Courses: " + targetLink.getText().toString());
 					System.out.println("ERROR msg: " + msg.getMessage());
-					ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 					return;
 	
@@ -173,7 +173,7 @@ public class AdminDashboardPage extends Page {
 			wait.until(ExpectedConditions.visibilityOf(ManageAAIRS));
 			
 		}catch(Exception e){
-			ATUReports.add("Loading 'Admin dashboard page' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Loading 'Admin dashboard page' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -221,12 +221,12 @@ public class AdminDashboardPage extends Page {
 					targetLink.click();
 					
 					System.out.println("clickOnTargetSubmenuUsers: "+linkText  );
-					ATUReports.add("Click on target submenu of Users:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
+					ATUReports.add(time +" Click on target submenu of Users:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					return;
 				} catch (Exception msg) {
 					System.out.println("Not click on target submenu of Users: " + targetLink.getText().toString());
-					ATUReports.add("Click on target submenu of Users:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Click on target submenu of Users:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					System.out.println("ERROR msg: " + msg.getMessage());				
 					Assert.assertTrue(false);
 					return;
@@ -272,13 +272,13 @@ public class AdminDashboardPage extends Page {
 					targetLink.click();					
 					System.out.println("clickOnTargetSubmenuAdvanceServiceSet7");
 					System.out.println("clickOnTargetSubmenuAdvanceServiceSet: "+linkText  );
-					ATUReports.add("Click on target submenu of AdvanceServiceSet:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
+					ATUReports.add(time +" Click on target submenu of AdvanceServiceSet:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					return;
 				} catch (Exception msg) {
 					System.out.println("Not click on target submenu of AdvanceServiceSet: " + targetLink.getText().toString());
 					System.out.println("ERROR msg: " + msg.getMessage());
-					ATUReports.add("Click on target submenu of AdvanceServiceSet:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Click on target submenu of AdvanceServiceSet:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 					return;			
 		}
@@ -301,13 +301,13 @@ public class AdminDashboardPage extends Page {
 		targetLink.click();					
 		System.out.println("clickOnTargetSubmenuIntegration7");
 		System.out.println("Click on target submenu of Courses: "+linkText  );
-		ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
+		ATUReports.add(time +" Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		return;
 		} catch (Exception msg) {
 			System.out.println("Not click on target submenu of Courses: " + targetLink.getText().toString());
 			System.out.println("ERROR msg: " + msg.getMessage());
-			ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return;
 		}

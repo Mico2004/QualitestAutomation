@@ -53,10 +53,10 @@ public class SearchPage extends Page {
 			Thread.sleep(500);
 			if(isElemenetDisplayed(By.cssSelector(".loading-spinner-img"))){	
 				System.out.println("Verfied loading spinner image displayed.");
-				ATUReports.add("Verfied loading spinner image displayed.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" Verfied loading spinner image displayed.", "True.", "True.", LogAs.PASSED, null);
 			} else {
 				System.out.println("The spinner image wasn't displayed.");
-				ATUReports.add("The spinner image wasn't displayed.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" The spinner image wasn't displayed.", "True.", "True.", LogAs.PASSED, null);
 			}
 	}
 	
@@ -70,7 +70,7 @@ public class SearchPage extends Page {
 		if(splited_structure_displayed.length <4) {
 			String array = splited_structure_displayed.toString();
 			System.out.println("the error breadcrmbs is:" + array);
-			ATUReports.add("the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, null);
+			ATUReports.add(time +" the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, null);
 			return;
 		}
 		
@@ -85,17 +85,17 @@ public class SearchPage extends Page {
 				(splited_structure_displayed[2].trim().equals(course_name)) && 
 				(splited_structure_displayed[3].trim().equals(third_structure))) {
 			System.out.println("Verfid breadcrumb structure displayed as required.");
-			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfid breadcrumb structure displayed as required.", "True.", "True.", LogAs.PASSED, null);
 		} else if((splited_structure_displayed[1].trim().equals("Courses")) &&
 					(splited_structure_displayed[2].trim().equals(course_name)) && 
 					(searching_criterion.contains(ChapterName))){
 			System.out.println("breadcrumb structure displayed is cut but it's ok.");
-			ATUReports.add("breadcrumb structure displayed is cut but it's ok.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" breadcrumb structure displayed is cut but it's ok.", "True.", "True.", LogAs.PASSED, null);
 			
 		} else {
 			System.out.println("Not verfid breadcrumb structure displayed as required.");
-			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			ATUReports.add("splited_structure_displayed" +structure_displayed, "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfid breadcrumb structure displayed as required.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" splited_structure_displayed" +structure_displayed, "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	
 	}
@@ -111,10 +111,10 @@ public class SearchPage extends Page {
 				(Integer.parseInt(splited_duration_time[1]) >= 0) && 
 				(Integer.parseInt(splited_duration_time[2]) >= 0)) {
 			System.out.println("Verified duration time displaying format.");
-			ATUReports.add("Verified duration time displaying format.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verified duration time displaying format.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verified duration time displaying format.");
-			ATUReports.add("Verified duration time displaying format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verified duration time displaying format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
@@ -129,7 +129,7 @@ public class SearchPage extends Page {
 		for(WebElement title: title_list) {
 			if(end && both && beginning) {
 				System.out.println("Verified that 3 dots appears at the beginning/end and both.");
-				ATUReports.add("Verified that 3 dots appears at the beginning/end and both.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" Verified that 3 dots appears at the beginning/end and both.", "True.", "True.", LogAs.PASSED, null);
 				return;
 			} else {
 				if(!end) {
@@ -151,7 +151,7 @@ public class SearchPage extends Page {
 		}
 		
 		System.out.println("Not verified that 3 dots appears at the beginning/end and both.");
-		ATUReports.add("Not Verified that 3 dots appears at the beginning/end and both.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Not Verified that 3 dots appears at the beginning/end and both.", "True.", "True.", LogAs.PASSED, null);
 		return;
 	}
 	
@@ -163,12 +163,12 @@ public class SearchPage extends Page {
 		for(WebElement course_title: course_titles_list){
 		if(course_title.getText().equals(compare_with)) {
 			System.out.println("Verifed course title format.");
-			ATUReports.add("Verifed course title format.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verifed course title format.", "True.", "True.", LogAs.PASSED, null);
 			return;
 		}
 	  }
 		System.out.println("Not verifed course title format.");
-		ATUReports.add("Verifed course title format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Verifed course title format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	}
 	
 	// Verify that
@@ -177,10 +177,10 @@ public class SearchPage extends Page {
 		if((recording_titles_list.get(0).getText().startsWith("Recording:")) &&
 				(recording_titles_list.get(0).getText().substring("Recording: ".length()).length()>0)){
 			System.out.println("Verifed recording title format.");
-			ATUReports.add("Verifed recording title format.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verifed recording title format.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verifed recording title format.");
-			ATUReports.add("Verifed recording title format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verifed recording title format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
@@ -190,10 +190,10 @@ public class SearchPage extends Page {
 		if((source_titles_list.get(0).getText().startsWith("Source:")) &&
 				(source_titles_list.get(0).getText().substring("Recording: ".length()).length()>0)){
 			System.out.println("Verifed source title format.");
-			ATUReports.add("Verifed source title format.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verifed source title format.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verifed source title format.");
-			ATUReports.add("Verifed source title format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verifed source title format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
@@ -221,14 +221,14 @@ public class SearchPage extends Page {
 			
 			if(!not_correct) {
 				System.out.println("Verified that next result display below the current result.");
-				ATUReports.add("Verified that next result display below the current result.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" Verified that next result display below the current result.", "True.", "True.", LogAs.PASSED, null);
 			} else {
 				System.out.println("Not verified that next result display below the current result.");
-				ATUReports.add("Verified that next result display below the current result.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verified that next result display below the current result.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		} else {
 			System.out.println("There is 1 or 0 results.");
-			ATUReports.add("There is 1 or 0 results.", "Expected more than 1.", "1 or 0 results.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" There is 1 or 0 results.", "Expected more than 1.", "1 or 0 results.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
@@ -255,14 +255,14 @@ public class SearchPage extends Page {
 			
 			if(!not_correct) {
 				System.out.println("Verified that next result display below the current result.");
-				ATUReports.add("Verified that next result display below the current result.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" Verified that next result display below the current result.", "True.", "True.", LogAs.PASSED, null);
 			} else {
 				System.out.println("Not verified that next result display below the current result.");
-				ATUReports.add("Verified that next result display below the current result.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verified that next result display below the current result.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		} else {
 			System.out.println("There is 1 or 0 results.");
-			ATUReports.add("There is 1 or 0 results.", "There is 1 or 0 results.", "1 or 0 results.", LogAs.PASSED, null);
+			ATUReports.add(time +" There is 1 or 0 results.", "There is 1 or 0 results.", "1 or 0 results.", LogAs.PASSED, null);
 		}
 	}
 	
@@ -289,7 +289,7 @@ public class SearchPage extends Page {
 				video_thumbnails_list.get(index-1).click();
 				Thread.sleep(2000);
 				System.out.println("Clicked on target icon of recording in index: " + index);
-				ATUReports.add("Clicked on target icon of recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" Clicked on target icon of recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
 				return;
 			} catch(Exception msg) {
 				Thread.sleep(1000);
@@ -297,7 +297,7 @@ public class SearchPage extends Page {
 		}
 		
 		System.out.println("Not clicked on target icon of recording in index: " + index);
-		ATUReports.add("Clicked on target icon of recording in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Clicked on target icon of recording in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	}
 	
 	// This function click on title of the chapter of recording in target index
@@ -308,7 +308,7 @@ public class SearchPage extends Page {
 				title_first_chapter.click();
 				Thread.sleep(2000);
 				System.out.println("Clicked on target title recording in index: " + index);
-				ATUReports.add("Clicked on target title recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" Clicked on target title recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
 				return;
 			} catch(Exception msg) {
 				Thread.sleep(1000);
@@ -316,7 +316,7 @@ public class SearchPage extends Page {
 		}
 		
 		System.out.println("Not clicked on target title recording in index: " + index);
-		ATUReports.add("Clicked on target title recording in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Clicked on target title recording in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	}
 		
 	// This function click on recording title of the chapter of recording in target index
@@ -327,7 +327,7 @@ public class SearchPage extends Page {
 				recording_link_titles_list.get(index-1).click();
 				Thread.sleep(2000);
 				System.out.println("Clicked on target recording title of recording in index: " + index);
-				ATUReports.add("Clicked on target recording title of recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" Clicked on target recording title of recording in index: " + index, "True.", "True.", LogAs.PASSED, null);
 				return;
 			} catch(Exception msg) {
 				Thread.sleep(1000);
@@ -335,18 +335,18 @@ public class SearchPage extends Page {
 		}
 		
 		System.out.println("Not clicked on target recording title of recording in index: " + index);
-		ATUReports.add("Clicked on target recording title of recording in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Clicked on target recording title of recording in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	}
 	
 	// This function verify that search result contains one result with target title
 	public void verifyResultContainOneResultWithTargetTitle(String target_title) {
 		if((title_list.size()==1) && (title_list.get(0).getText().equals(target_title))) {
 			System.out.println("Verifed that search results contains one result with target result: " + target_title);
-			ATUReports.add("Verifed that search results contains one result with target result.", target_title, target_title, LogAs.PASSED, null);
+			ATUReports.add(time +" Verifed that search results contains one result with target result.", target_title, target_title, LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verifed that search results contains one result with target result: " + target_title);
-			ATUReports.add("Verifed that search results contains one result with target result.", target_title, title_list.get(0).getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verifed that search results contains one result with target result.", target_title, title_list.get(0).getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -362,12 +362,12 @@ public class SearchPage extends Page {
 			
 			if(Integer.parseInt(resultNumber) == 0){
 				System.out.println("Verified that search result is empty.");
-				ATUReports.add("Verified that search result is empty.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" Verified that search result is empty.", "True.", "True.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 			else {
 				System.out.println("search result is empty.");
-				ATUReports.add("Verified that search result is empty.", "True.", "false.", LogAs.FAILED, null);
+				ATUReports.add(time +" Verified that search result is empty.", "True.", "false.", LogAs.FAILED, null);
 				Assert.assertTrue(false);
 			}
 		} 
@@ -380,11 +380,11 @@ public class SearchPage extends Page {
 		
 		if(title_list.size() == 0) {
 			System.out.println("Verified that search result is empty.");
-			ATUReports.add("Verified that search result is empty.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verified that search result is empty.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that search result is empty.");
-			ATUReports.add("Verified that search result is empty.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verified that search result is empty.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 //			Assert.assertTrue(false);
 		}
 	}
@@ -394,10 +394,10 @@ public class SearchPage extends Page {
 		if(source_titles_list.size()>0) {
 			if(source_titles_list.get(0).getText().equals("Source: Link")) {
 				System.out.println("Verifed source title format.");
-				ATUReports.add("Verifed source title format.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" Verifed source title format.", "True.", "True.", LogAs.PASSED, null);
 			} else {
 				System.out.println("Not verifed source title format.");
-				ATUReports.add("Verifed source title format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verifed source title format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		} else {
 			System.out.println("There is no source titles.");
@@ -408,10 +408,10 @@ public class SearchPage extends Page {
 	public void verifyLinkIconDisplayedIndexSearchResult(int index) {
 		if(driver.findElements(By.cssSelector(".linkToFocus>.ng-binding")).get(index-1).getCssValue("background-image").contains("icon_assets.png")) {
 			System.out.println("Verifed that link icon displayed in index: " + index);
-			ATUReports.add("Verifed that link icon displayed in index: " + index, "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verifed that link icon displayed in index: " + index, "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verifed that link icon displayed in index: " + index);
-			ATUReports.add("Verifed that link icon displayed in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verifed that link icon displayed in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
@@ -426,7 +426,7 @@ public class SearchPage extends Page {
 		if(splited_structure_displayed.length <5) {
 			String array = splited_structure_displayed.toString();
 			System.out.println("the error breadcrmbs is:" + array);
-			ATUReports.add("the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, null);
+			ATUReports.add(time +" the error breadcrmbs is:" + array, "True.", "True.", LogAs.WARNING, null);
 			return;
 		}
 		String[] splited_third_structure_displayed = splited_structure_displayed[4].trim().split(" ");
@@ -438,11 +438,11 @@ public class SearchPage extends Page {
 				(splited_structure_displayed[3].trim().equals(course_name)) && 
 				(splited_structure_displayed[4].trim().equals(third_structure))) {
 			System.out.println("Verfid breadcrumb structure displayed as required.");
-			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfid breadcrumb structure displayed as required.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verfid breadcrumb structure displayed as required.");
-			ATUReports.add("splited_structure_displayed" +structure_displayed, "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" splited_structure_displayed" +structure_displayed, "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfid breadcrumb structure displayed as required.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		
 	}
@@ -452,10 +452,10 @@ public class SearchPage extends Page {
 		if(source_titles_list.size()>0) {
 			if(source_titles_list.get(0).getText().equals("Source: Closed Caption")) {
 				System.out.println("Verifed source title format.");
-				ATUReports.add("Verifed source title format.", "True.", "True.", LogAs.PASSED, null);
+				ATUReports.add(time +" Verifed source title format.", "True.", "True.", LogAs.PASSED, null);
 			} else {
 				System.out.println("Not verifed source title format.");
-				ATUReports.add("Verifed source title format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Verifed source title format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		} else {
 			System.out.println("There is no source titles.");
@@ -484,7 +484,7 @@ public class SearchPage extends Page {
 				if(source_titles_list.get(i).getText().equals(target_format)) {
 					if(title_list.get(i).getText().equals(recording_title)) {
 						System.out.println("Verifed source title format.");
-						ATUReports.add("Verifed source title format.", "True.", "True.", LogAs.PASSED, null);
+						ATUReports.add(time +" Verifed source title format.", "True.", "True.", LogAs.PASSED, null);
 						return;
 					}
 				}
@@ -507,7 +507,7 @@ public class SearchPage extends Page {
 		if(splited_third_structure_displayed.length <3) {
 			String array = splited_structure_displayed.toString();
 			System.out.println("the error breadcrmbs is:" + array);
-			ATUReports.add("the error breadcrmbs is:" + array, "True.", "False.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" the error breadcrmbs is:" + array, "True.", "False.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			return;
 		}
 		
@@ -517,11 +517,11 @@ public class SearchPage extends Page {
 		if((splited_structure_displayed[1].trim().equals("Courses")) &&
 				(splited_structure_displayed[2].trim().equals(third_structure))) {
 			System.out.println("Verfid breadcrumb structure displayed as required.");
-			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfid breadcrumb structure displayed as required.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verfid breadcrumb structure displayed as required.");
-			ATUReports.add("splited_structure_displayed" +structure_displayed, "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			ATUReports.add("Verfid breadcrumb structure displayed as required.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" splited_structure_displayed" +structure_displayed, "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfid breadcrumb structure displayed as required.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		
 	}
@@ -532,14 +532,14 @@ public class SearchPage extends Page {
 		try{
 		if(driver.findElements(By.cssSelector(".linkToFocus>.ng-binding")).get(index-1).getCssValue("background-image").contains("icon_assets.png")) {
 			System.out.println("Verifed that bookmark icon displayed in index: " + index);
-			ATUReports.add("Verifed that bookmark icon displayed in index: " + index, "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verifed that bookmark icon displayed in index: " + index, "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verifed that bookmark icon displayed in index: " + index);
-			ATUReports.add("Verifed that bookmark icon displayed in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verifed that bookmark icon displayed in index: " + index, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			ATUReports.add("Not verifed that bookmark icon displayed in index: " +e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not verifed that bookmark icon displayed in index: " +e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -558,10 +558,10 @@ public class SearchPage extends Page {
 				
 		if(resultNumber == list_size){
 			System.out.println("Verifed that the result number is as written at the breadcrumbs.");
-		ATUReports.add("Verifed that the result number is as written at the breadcrumbs.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verifed that the result number is as written at the breadcrumbs.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 		System.out.printf("Not Verifed that the result number is as written at the breadcrumbs. The number that wrote on the website is: %s and the counted number is: %s" ,resultNumber,list_size);
-		ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." + "website: " + resultNumber +"list: " + list_size , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Not Verifed that the result number is as written at the breadcrumbs." + "website: " + resultNumber +"list: " + list_size , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}		
 		
 	}
@@ -579,10 +579,10 @@ public class SearchPage extends Page {
 		
 		if(resultNumber == list_size){
 			System.out.println("Verifed that the result number is as written at the breadcrumbs.");
-		ATUReports.add("Verifed that the result number is as written at the breadcrumbs.", "True.", "True.", LogAs.PASSED, null);
+		ATUReports.add(time +" Verifed that the result number is as written at the breadcrumbs.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 		System.out.println("Not Verifed that the result number is as written at the breadcrumbs.");
-		ATUReports.add("Not Verifed that the result number is as written at the breadcrumbs." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Not Verifed that the result number is as written at the breadcrumbs." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}		
 		
 	}

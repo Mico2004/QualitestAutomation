@@ -53,32 +53,32 @@ public class AdvancedServiceSettingsPage extends Page {
 			if (!enable_student_testing_checkbox.isSelected()) {
 				enable_student_testing_checkbox.click();
 				System.out.println("checking succefully on enable studnet testing checkbox");
-				ATUReports.add("Click studnet testing checkbox", "studnet testing checkbox status", "Success select", "Success select",
+				ATUReports.add(time +" Click studnet testing checkbox", "studnet testing checkbox status", "Success select", "Success select",
 						LogAs.PASSED, null);
 			} else {
 				System.out.println("already checked Enable student testing checkbox");
-				ATUReports.add("already  checked Enable student testing checkbox", "student testing checkbox status", "Success select",
+				ATUReports.add(time +" already  checked Enable student testing checkbox", "student testing checkbox status", "Success select",
 						"Success select", LogAs.PASSED, null);
 				
 			}
 			if (!enable_youtube_integration.isSelected()) {
 					enable_youtube_integration.click();
 					System.out.println("checking succefully on enable youtube checkbox");
-					ATUReports.add("Click youtube checkbox", "studnet youtube status", "Success select", "Success select",
+					ATUReports.add(time +" Click youtube checkbox", "studnet youtube status", "Success select", "Success select",
 							LogAs.PASSED, null);
 			} else {
 				System.out.println("already checked Enable youtube checkbox checkbox");
-				ATUReports.add("already checked Enable youtube checkbox checkbox", "already checked Enable youtube checkbox checkbox", "Success select",
+				ATUReports.add(time +" already checked Enable youtube checkbox checkbox", "already checked Enable youtube checkbox checkbox", "Success select",
 						"Success select", LogAs.PASSED, null);
 			}
 			if (!enable_automated_capitioning.isSelected()) {
 						enable_automated_capitioning.click();
 						System.out.println("checking succefully on enable Captioning checkbox");
-						ATUReports.add("Click Captioning checkbox", "studnet Captioning status", "Success select", "Success select",
+						ATUReports.add(time +" Click Captioning checkbox", "studnet Captioning status", "Success select", "Success select",
 								LogAs.PASSED, null);
 			} else {
 				System.out.println("already checked automated capitioning checkbox");
-				ATUReports.add("already checked automated capitioning checkbox", "already checked automated capitioning checkbox", "Success select",
+				ATUReports.add(time +" already checked automated capitioning checkbox", "already checked automated capitioning checkbox", "Success select",
 						"Success select", LogAs.PASSED, null);
 			}
 			
@@ -93,7 +93,7 @@ public class AdvancedServiceSettingsPage extends Page {
 			confirm.clickOnOkButton();
 		} catch (Exception e) {
 			System.out.println("failed clicking on student testing checkbox");
-			ATUReports.add("Click student testing checkbox", "student testing checkbox status", "Success select", "failed select",
+			ATUReports.add(time +" Click student testing checkbox", "student testing checkbox status", "Success select", "failed select",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
@@ -127,7 +127,7 @@ public class AdvancedServiceSettingsPage extends Page {
 				confirm.waitForVisibility(confirm.ok_button);
 				confirm.clickonokbuttonafterEulaChangeSetting();
 				System.out.println("clicked succefully on eula checkbox");
-				ATUReports.add("Click eula checkbox", "eula checkbox status", "Success select", "Success select",
+				ATUReports.add(time +" Click eula checkbox", "eula checkbox status", "Success select", "Success select",
 						LogAs.PASSED, null);
 				return eula;
 			} else {
@@ -145,7 +145,7 @@ public class AdvancedServiceSettingsPage extends Page {
 					ok.click();
 					confirm.waitForVisibility(confirm.ok_button);
 					confirm.clickonokbuttonafterEulaChangeSetting();
-					ATUReports.add("Click eula checkbox", "eula checkbox status", "Success select", "Success select",
+					ATUReports.add(time +" Click eula checkbox", "eula checkbox status", "Success select", "Success select",
 							LogAs.PASSED, null);
 					return eula;
 				} 
@@ -153,7 +153,7 @@ public class AdvancedServiceSettingsPage extends Page {
 				driver.switchTo().defaultContent();
 				cancel.click();
 				System.out.println("body is not empty so clicking on cancel button");
-				ATUReports.add("Click eula checkbox", "eula checkbox status", "Success select", "Success select",
+				ATUReports.add(time +" Click eula checkbox", "eula checkbox status", "Success select", "Success select",
 						LogAs.PASSED, null);
 			}
 		} catch (Exception e) {
@@ -172,18 +172,18 @@ public class AdvancedServiceSettingsPage extends Page {
 				confirm.waitForVisibility(confirm.ok_button);
 				confirm.clickOnOkButton();
 				System.out.println("checking succefully on enable studnet testing checkbox");
-				ATUReports.add("Click studnet testing checkbox", "studnet testing checkbox status", "Success select", "Success select",
+				ATUReports.add(time +" Click studnet testing checkbox", "studnet testing checkbox status", "Success select", "Success select",
 						LogAs.PASSED, null);
 			} else {
 				cancel.click();
 				System.out.println("already checked Enable student testing checkbox");
-				ATUReports.add("already  checked Enable student testing checkbox", "student testing checkbox status", "Success select",
+				ATUReports.add(time +" already  checked Enable student testing checkbox", "student testing checkbox status", "Success select",
 						"Success select", LogAs.PASSED, null);
 
 			}
 		} catch (Exception e) {
 			System.out.println("failed clicking on student testing checkbox");
-			ATUReports.add("Click student testing checkbox", "student testing checkbox status", "Success select", "failed select"+e.getMessage(),
+			ATUReports.add(time +" Click student testing checkbox", "student testing checkbox status", "Success select", "failed select"+e.getMessage(),
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
@@ -198,18 +198,18 @@ public class AdvancedServiceSettingsPage extends Page {
 					confirm.waitForVisibility(confirm.ok_button);
 					confirm.clickOnOkButton();
 					System.out.println("checking succefully on enable youtube checkbox");
-					ATUReports.add("Click youtube checkbox", "studnet youtube status", "Success select", "Success select",
+					ATUReports.add(time +" Click youtube checkbox", "studnet youtube status", "Success select", "Success select",
 							LogAs.PASSED, null);
 				} else {
 					cancel.click();
 					System.out.println("already checked Enable youtube checkbox");
-					ATUReports.add("already selected youtube checkbox", "youtube checkbox status", "Success select",
+					ATUReports.add(time +" already selected youtube checkbox", "youtube checkbox status", "Success select",
 							"Success select", LogAs.PASSED, null);
 
 				}
 			} catch (Exception e) {
 				System.out.println("failed clicking on youtube checkbox");
-				ATUReports.add("Click youtube checkbox", "student youtube status", "Success select", "failed select",
+				ATUReports.add(time +" Click youtube checkbox", "student youtube status", "Success select", "failed select",
 						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		
@@ -226,18 +226,18 @@ public class AdvancedServiceSettingsPage extends Page {
 					confirm.waitForVisibility(confirm.ok_button);
 					confirm.clickOnOkButton();
 					System.out.println("checking succefully on enable Captioning checkbox");
-					ATUReports.add("Click Captioning checkbox", "studnet Captioning status", "Success select", "Success select",
+					ATUReports.add(time +" Click Captioning checkbox", "studnet Captioning status", "Success select", "Success select",
 							LogAs.PASSED, null);
 				} else {
 					cancel.click();
 					System.out.println("already checked Enable Captioning checkbox");
-					ATUReports.add("already selected Captioning checkbox", "Captioning checkbox status", "Success select",
+					ATUReports.add(time +" already selected Captioning checkbox", "Captioning checkbox status", "Success select",
 							"Success select", LogAs.PASSED, null);
 
 				}
 			} catch (Exception e) {
 				System.out.println("failed clicking on Captioning checkbox");
-				ATUReports.add("Click Captioning checkbox", "student Captioning status", "Success select", "failed select",
+				ATUReports.add(time +" Click Captioning checkbox", "student Captioning status", "Success select", "failed select",
 						LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		
@@ -256,18 +256,18 @@ public class AdvancedServiceSettingsPage extends Page {
 				confirm.waitForVisibility(confirm.ok_button);
 				confirm.clickonokbuttonafterEulaChangeSetting();
 				System.out.println("unclicked succefully on eula checkbox");
-				ATUReports.add("unClick eula checkbox", "eula checkbox status", "Success select", "Success select",
+				ATUReports.add(time +" unClick eula checkbox", "eula checkbox status", "Success select", "Success select",
 						LogAs.PASSED, null);
 			} else {
 				cancel.click();
 				System.out.println("already unchecked eula checkbox");
-				ATUReports.add("already unchecked eula checkbox", "eula checkbox status", "Success select",
+				ATUReports.add(time +" already unchecked eula checkbox", "eula checkbox status", "Success select",
 						"Success select", LogAs.PASSED, null);
 
 			}
 		} catch (Exception e) {
 			System.out.println("failed clicking on eula checkbox");
-			ATUReports.add("unClick eula checkbox", "eula checkbox status", "Success select", "failed select",	LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" unClick eula checkbox", "eula checkbox status", "Success select", "failed select",	LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 
 	}

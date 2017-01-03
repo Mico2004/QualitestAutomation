@@ -52,7 +52,7 @@ public class ManageAdhocUsersPage extends Page {
 		    	   System.out.println("Clicked on new user button.");
 		    	   
 			} catch (Exception msg) {
-					ATUReports.add("Not clicked on new user link", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Not clicked on new user link", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					
 			}
 		}
@@ -94,12 +94,12 @@ public class ManageAdhocUsersPage extends Page {
 		try{
 			filter_search_button.click();
 			System.out.println("Searched for target username: " + username_to_search);
-			ATUReports.add("Searched for target username: " + username_to_search, "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Searched for target username: " + username_to_search, "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			exitInnerFrame();
 		} catch(Exception msg) {
 			System.out.println("Fail to search for target username: " + username_to_search);
-			ATUReports.add("Searched for target username: " + username_to_search, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Searched for target username: " + username_to_search, "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -116,7 +116,7 @@ public class ManageAdhocUsersPage extends Page {
 			waitForVisibility(contentTable, 40);
 			
 		}catch(Exception e){
-			ATUReports.add("Loading 'Manage Ad-Hock Users' page failed" + e.getMessage(),  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Loading 'Manage Ad-Hock Users' page failed" + e.getMessage(),  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
 			Assert.assertTrue(false);
 		}

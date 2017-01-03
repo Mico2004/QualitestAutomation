@@ -74,7 +74,7 @@ public class TagMenu extends Page {
 	//		}
 	//	}
 		System.out.println("Created tag: " + new_tag);
-		ATUReports.add("Created tag.", new_tag, new_tag, LogAs.PASSED, null);
+		ATUReports.add(time +" Created tag.", new_tag, new_tag, LogAs.PASSED, null);
 	}
 	
 	// This function delete all tags if there any exist
@@ -117,7 +117,7 @@ public class TagMenu extends Page {
 		}
 		
 		System.out.println("Edited tag: " + target_tag);
-		ATUReports.add("Edited tag.", target_tag, target_tag, LogAs.PASSED, null);
+		ATUReports.add(time +" Edited tag.", target_tag, target_tag, LogAs.PASSED, null);
 		
 	}
 	
@@ -143,11 +143,11 @@ public class TagMenu extends Page {
 			boolean is_closed = isTagWindowClosed();			
 			if(is_closed) {
 				System.out.println("Tag window is close.");
-				ATUReports.add("Tag window.", "Close.", "Close.", LogAs.PASSED, null);
+				ATUReports.add(time +" Tag window.", "Close.", "Close.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Tag window is open.");
-				ATUReports.add("Tag window.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Tag window.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -158,11 +158,11 @@ public class TagMenu extends Page {
 		
 		if(!is_closed) {
 			System.out.println("Tag window is open.");
-			ATUReports.add("Tag window.", "Open.", "Open.", LogAs.PASSED, null);
+			ATUReports.add(time +" Tag window.", "Open.", "Open.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Tag window is close.");
-			ATUReports.add("Tag window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Tag window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -172,11 +172,11 @@ public class TagMenu extends Page {
 		
 		if(edit_title.isDisplayed()) {
 			System.out.println("Tag Edit window is open.");
-			ATUReports.add("Tag window.", "Open.", "Open.", LogAs.PASSED, null);
+			ATUReports.add(time +" Tag window.", "Open.", "Open.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Tag Edit window is close.");
-			ATUReports.add("Tag window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Tag window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -186,11 +186,11 @@ public class TagMenu extends Page {
 		
 		if(edit_title.isDisplayed()) {
 			System.out.println("Tag delete window is open.");
-			ATUReports.add("Tag delete window.", "Open.", "Open.", LogAs.PASSED, null);
+			ATUReports.add(time +" Tag delete window.", "Open.", "Open.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Tag delete window is close.");
-			ATUReports.add("Tagdelete window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Tagdelete window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -239,10 +239,10 @@ public class TagMenu extends Page {
 				String background_rec = rec.getBackGroundColor(rec.background);
 				String menu_background = getBackGroundColor(background);
 				if (background_rec.equals(menu_background)) {
-					ATUReports.add("Tag menu background color is same as recording background color", LogAs.PASSED, null);
+					ATUReports.add(time +" Tag menu background color is same as recording background color", LogAs.PASSED, null);
 					System.out.println("Tag menu background color is same as recording background color");				
 				} else {
-					ATUReports.add("Tag menu background color is not same as recording background color", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Tag menu background color is not same as recording background color", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					System.out.println("Tag menu background color is not same as recording background color");
 				}
 				}catch(Exception e){
@@ -295,12 +295,12 @@ public class TagMenu extends Page {
 	    }    
     	for(int i=0 ; i< rowNumber - 1 ;i++){
     		if(nameOfTags.get(i).compareTo(nameOfTags.get(i+1)) > 0 ) {
-    			ATUReports.add("Not Verify that tags list rows sorted by TagName.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+    			ATUReports.add(time +" Not Verify that tags list rows sorted by TagName.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
     			System.out.println("Not Verify that tags list rows sorted by TagName.");
     			return;
     		}
     	}
-    	ATUReports.add("Verify that tags list rows sorted by TagName.", LogAs.PASSED, null);
+    	ATUReports.add(time +" Verify that tags list rows sorted by TagName.", LogAs.PASSED, null);
 		System.out.println("Verify that tags list rows sorted by TagName.");
 	}
 
@@ -316,12 +316,12 @@ public class TagMenu extends Page {
 	    	WebElement currentCols = cols.get(0);
 	    	WebElement currentCheckbox = currentCols.findElement(By.tagName("input"));
 	    	if(!currentCheckbox.isSelected()){
-	    		ATUReports.add("Not Verify all the tag checkboxes are checked.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    		ATUReports.add(time +" Not Verify all the tag checkboxes are checked.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
     			System.out.println("Not Verify all the tag checkboxes are checked.");
     			return;
 	    	}
 	    } 
-	    ATUReports.add("Verify all the tag checkboxes are checked.", LogAs.PASSED, null);
+	    ATUReports.add(time +" Verify all the tag checkboxes are checked.", LogAs.PASSED, null);
 		System.out.println("Verify all the tag checkboxes are checked.");
 	
 		}catch(Exception e){
@@ -341,12 +341,12 @@ public class TagMenu extends Page {
 		    	WebElement currentCols = cols.get(0);
 		    	WebElement currentCheckbox = currentCols.findElement(By.tagName("input"));
 		    	if(currentCheckbox.isSelected()){
-		    		ATUReports.add("Not Verify all the tag checkboxes are unchecked.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		    		ATUReports.add(time +" Not Verify all the tag checkboxes are unchecked.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    			System.out.println("Not Verify all the tag checkboxes are unchecked.");
 	    			return;
 		    	}
 		    } 
-		    ATUReports.add("Verify all the tag checkboxes are unchecked.", LogAs.PASSED, null);
+		    ATUReports.add(time +" Verify all the tag checkboxes are unchecked.", LogAs.PASSED, null);
 			System.out.println("Verify all the tag checkboxes are unchecked.");
 		}catch(Exception e){
 			e.printStackTrace();
@@ -420,11 +420,11 @@ public void unCheckOneTagCheckboxes(String name) {
 	public void verifyTheHeaderCheckboxIsChecked() {
 		try{
 			if(header_checkbox.get(1).isSelected()){
-				 ATUReports.add("Verify header checkboxe is checked.","Success.", "Success.", LogAs.PASSED, null);
+				 ATUReports.add(time +" Verify header checkboxe is checked.","Success.", "Success.", LogAs.PASSED, null);
 				System.out.println("Verify header checkboxe is checked.");
 			}
 			else{
-				ATUReports.add("Not Verify header checkboxe is checked.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not Verify header checkboxe is checked.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
     			System.out.println("Not Verify header checkboxe is checked.");
 			}
 		
@@ -438,11 +438,11 @@ public void unCheckOneTagCheckboxes(String name) {
 		
 		try{
 			if(!header_checkbox.get(1).isSelected()){
-				 ATUReports.add("Verify header checkbox is unchecked.","Success.", "Success.", LogAs.PASSED, null);
+				 ATUReports.add(time +" Verify header checkbox is unchecked.","Success.", "Success.", LogAs.PASSED, null);
 				System.out.println("Verify header checkbox is unchecked.");
 			}
 			else{
-				ATUReports.add("Not Verify header checkbox is unchecked.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not Verify header checkbox is unchecked.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
     			System.out.println("Not Verify header checkbox is unchecked.");
 			}
 		
@@ -485,11 +485,11 @@ public void unCheckOneTagCheckboxes(String name) {
 					
 			}
 		if(ifThisColorOk){
-			 ATUReports.add("Verify that the color: " +choosenColor +" is the background color." ,"Success.", "Success.", LogAs.PASSED, null);
+			 ATUReports.add(time +" Verify that the color: " +choosenColor +" is the background color." ,"Success.", "Success.", LogAs.PASSED, null);
 				System.out.println("Verify that the color: " +choosenColor +" is the background color.");
 			}
 			else{
-				ATUReports.add("Not Verify that the color: " +choosenColor +" is the background color.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not Verify that the color: " +choosenColor +" is the background color.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
  			System.out.println("Not Verify that the color: " +choosenColor +" is the background color.");
 			}
 		
@@ -504,20 +504,20 @@ public void unCheckOneTagCheckboxes(String name) {
 		
 		try {
 			if(edit_new_tag_input.getAttribute("type").equals("text")){
-				 ATUReports.add("Verify edit textbox is editable.","Success.", "Success.", LogAs.PASSED, null);
+				 ATUReports.add(time +" Verify edit textbox is editable.","Success.", "Success.", LogAs.PASSED, null);
 				 System.out.println("Verify edit textbox is editable.");
 				}
 				else{
-					ATUReports.add("Not Verify edit textbox is editable.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Not Verify edit textbox is editable.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    			System.out.println("Not Verify edit textbox is editable.");
 				}
 				
 			if(edit_new_tag_input.getAttribute("value").equals(name)){
-				 ATUReports.add("Verify edit textbox is Contains the tag name.","Success.", "Success.", LogAs.PASSED, null);
+				 ATUReports.add(time +" Verify edit textbox is Contains the tag name.","Success.", "Success.", LogAs.PASSED, null);
 					System.out.println("Verify edit textbox is Contains the tag name.");
 				}
 				else{
-					ATUReports.add("Not Verify edit textbox is Contains the tag name.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Not Verify edit textbox is Contains the tag name.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    			System.out.println("Not Verify edit textbox is Contains the tag name.");
 				}
 			
@@ -563,12 +563,12 @@ public void unCheckOneTagCheckboxes(String name) {
 	    	List<WebElement> cols = currentRaw.findElements(By.tagName("td"));
 	    	String currentName = cols.get(1).getText();
 	    	if(currentName.equals(name)){
-	    		ATUReports.add("The name: " +name +" found on the list." ,"Success.", "Success.", LogAs.PASSED, null);
+	    		ATUReports.add(time +" The name: " +name +" found on the list." ,"Success.", "Success.", LogAs.PASSED, null);
     			System.out.println("The name: " +name +" found on the list.");
     			return;
 	    	}	
 	    }
-	    ATUReports.add("The name: " +name +" isn't found on the list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    ATUReports.add(time +" The name: " +name +" isn't found on the list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		System.out.println("The name: " +name +" isn't found on the list.");
 		} 	
 		
@@ -585,12 +585,12 @@ public void unCheckOneTagCheckboxes(String name) {
 			}    
 		    for(String instructor : instructors){
 		    	if(!searchInstractorInTheInstractorList(instructor,currInst)){
-		    		ATUReports.add("The instructor:" +instructor +" isn't found on the list." ,"Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		    		ATUReports.add(time +" The instructor:" +instructor +" isn't found on the list." ,"Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    			System.out.println("The instructor:" +instructor +" isn't found on the list.");
 	    			return;
 		    	}
 		    }
-		    ATUReports.add("all the instuctors are found on the list.","Success.", "Success.", LogAs.PASSED, null);
+		    ATUReports.add(time +" all the instuctors are found on the list.","Success.", "Success.", LogAs.PASSED, null);
 			System.out.println("all the instuctors are found on the list.");
 		    	    
 		}catch(Exception e){
@@ -615,11 +615,11 @@ public void unCheckOneTagCheckboxes(String name) {
 		try{
 		String className = header_checkbox.get(1).getAttribute("class");
 		if(className.equals("select-all-cb ng-isolate-scope ng-pristine ng-valid")){
-			 ATUReports.add("Verify checkbox in undefined state.","Success.", "Success.", LogAs.PASSED, null);
+			 ATUReports.add(time +" Verify checkbox in undefined state.","Success.", "Success.", LogAs.PASSED, null);
 			 System.out.println("Verify checkbox in undefined state.");
 			}
 			else{
-				ATUReports.add("Not Verify checkbox in undefined state.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Not Verify checkbox in undefined state.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
     			System.out.println("Not Verify checkbox in undefined state.");
 			}
 		}catch(Exception e){
@@ -638,12 +638,12 @@ public void unCheckOneTagCheckboxes(String name) {
 		    	List<WebElement> cols = currentRaw.findElements(By.tagName("td"));
 		    	String currentName = cols.get(1).getText();
 		    	if(currentName.equals(validNewName)){
-		    		ATUReports.add("The instructor:" +validNewName +" is found on the list." ,"Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		    		ATUReports.add(time +" The instructor:" +validNewName +" is found on the list." ,"Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    			System.out.println("The instructor:" +validNewName +" is found on the list.");
 	    			return;
 		    	}
 			}    
-		    ATUReports.add("all the instuctors are found on the list.","Success.", "Success.", LogAs.PASSED, null);
+		    ATUReports.add(time +" all the instuctors are found on the list.","Success.", "Success.", LogAs.PASSED, null);
 			System.out.println("all the instuctors are found on the list.");
 		    	    
 		}catch(Exception e){

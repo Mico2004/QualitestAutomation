@@ -70,11 +70,11 @@ public class MoveWindow extends Page {
 			String id = "MoveButton";
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
 			System.out.println("Clicked on move recordings button.");
-			ATUReports.add("Clicked on move recordings button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on move recordings button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on move recordings button.");
-			ATUReports.add("Fail click on move recordings button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on move recordings button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(2000);
@@ -109,11 +109,11 @@ public class MoveWindow extends Page {
 			String id = "CancelButton";
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
 			System.out.println("Clicked on cancel button.");
-			ATUReports.add("Clicked on cancel button.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on cancel button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			System.out.println("Fail click on cancel button.");
-			ATUReports.add("Fail click on cancel button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail click on cancel button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(1000);
@@ -124,10 +124,10 @@ public class MoveWindow extends Page {
 		Thread.sleep(2000);
 		String val = move_menu_title.getText();
 		if (val.equals("Move")) {
-			ATUReports.add("move menu title verified ", LogAs.PASSED, null);
+			ATUReports.add(time +" move menu title verified ", LogAs.PASSED, null);
 			System.out.println("move menu title verified ");
 		} else {
-			ATUReports.add("move menu title not verified  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" move menu title not verified  ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("move menu title not verified  ");
 		}
 		Assert.assertEquals("Move", val);
@@ -140,11 +140,11 @@ public class MoveWindow extends Page {
 	String background_rec=rec.getBackGroundColor(rec.background);
 	String menu_background=getBackGroundColor(move_menu_background);
 		if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(move_menu_background))) {
-			ATUReports.add("move menu background color is same as recording background color", LogAs.PASSED, null);
+			ATUReports.add(time +" move menu background color is same as recording background color", LogAs.PASSED, null);
 			System.out.println("move menu background color is same as recording background color");
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add("move menu background color is not  same as recording background color", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" move menu background color is not  same as recording background color", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("move menu background color is  not same as recording background color");
 
 			Assert.assertTrue(false);
@@ -157,11 +157,11 @@ public class MoveWindow extends Page {
 		String infotext = "Choose a course that you would like to move your selected recording(s) to";
 		String info = info_text.getText();
 		if (infotext.equals(info)) {
-			ATUReports.add(" info text verified", LogAs.PASSED, null);
+			ATUReports.add(time +"  info text verified", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			System.out.println(" info text verified");
 		} else {
-			ATUReports.add(" info text not unverified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +"  info text not unverified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(" info text not verified");
 			Assert.assertTrue(false);
 		}
@@ -174,7 +174,7 @@ public class MoveWindow extends Page {
 		move_course_list = getStringFromElement(course_list);
 		if (move_course_list.length != course.courses.length - 1) {
 			Assert.assertTrue(false);
-			ATUReports.add("different numbers of  courses in move menu and courses page ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" different numbers of  courses in move menu and courses page ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 			for (String e : course.courses) {
 				course_copy_map.add(e);
@@ -182,12 +182,12 @@ public class MoveWindow extends Page {
 			for (String s : move_course_list) {
 				if (!course_copy_map.contains(s)) {
 					Assert.assertTrue(false);
-					ATUReports.add("courses in move menu and courses page are not matched ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" courses in move menu and courses page are not matched ", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					System.out.println("courses in move menu and courses page are not matched ");
 				}
 			}
 			Assert.assertTrue(true);
-			ATUReports.add("courses in both courses page and move menu are matched", LogAs.PASSED, null);
+			ATUReports.add(time +" courses in both courses page and move menu are matched", LogAs.PASSED, null);
 			System.out.println("courses in both courses page and move menu are matched");
 		}
 
@@ -197,10 +197,10 @@ public class MoveWindow extends Page {
 	public void verifySearchCourseBoxText() {
 		try {
 			Assert.assertEquals(search_box.getAttribute("placeholder"), "Search course by title ...");
-			ATUReports.add("search box text is verified", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add(time +" search box text is verified", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 			System.out.println("search box text is verified");
 		} catch (Exception e) {
-			ATUReports.add("search box text is not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add(time +" search box text is not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 			System.out.println("search box text is not verified");
 		}
 
@@ -220,10 +220,10 @@ public class MoveWindow extends Page {
 		if((info.getY() > title.getY()) &&(copy_menu_course.getY() > info.getY()) &&(searchbox.getX() < searchboxbutton.getX()) &&(searchbox.getY() > copy_menu_course.getY()) &&(searchboxbutton.getY() > copy_menu_course.getY()) &&(cancelbutton.getX() < movebutton.getX()) && (cancelbutton.getY() == movebutton.getY())&&(movebutton.getX()<searchboxbutton.getX())&&(searchbox.getY() < movebutton.getY()))
 	 {
 		 System.out.println("elements location are verified in move menu");
-			ATUReports.add("elements location are verified in move menu", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add(time +" elements location are verified in move menu", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 	 }	 else {
 		 System.out.println("elements location are not verified in move menu");
-			ATUReports.add("elements location are not verified in move menu", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add(time +" elements location are not verified in move menu", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
 	}
  }
 
@@ -238,12 +238,12 @@ public class MoveWindow extends Page {
 
 		if (!move_list.contains(source_course)) {
 			Assert.assertTrue(true);
-			ATUReports.add("courses in move menu dont contain source course", LogAs.PASSED, null);
+			ATUReports.add(time +" courses in move menu dont contain source course", LogAs.PASSED, null);
 			System.out.println("courses in move menu dont contain source course");
 		}
 		else{
 		Assert.assertTrue(false);
-		ATUReports.add("courses in move menu contain source course....", LogAs.PASSED, null);
+		ATUReports.add(time +" courses in move menu contain source course....", LogAs.PASSED, null);
 		System.out.println("courses in move menu  contain source course....");
 		}
 	}
@@ -253,11 +253,11 @@ public class MoveWindow extends Page {
 	public void verifyThatAdminRecordingTasksMoveContainsDefaultTextTypeInstructorName() {
 		if (driver.findElement(By.id("members_value")).getAttribute("placeholder").equals("Type Instructor Name...")) {
 			System.out.println("Verified that it contain default text: Type Instructor Name...");
-			ATUReports.add("Verify default text,", "Verified", "Verified", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify default text,", "Verified", "Verified", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Verified that it not contain default text: Type Instructor Name...");
-			ATUReports.add("Verify default text,", "Verified", "Not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verify default text,", "Verified", "Not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -271,11 +271,11 @@ public class MoveWindow extends Page {
 		
 		if ((search_field.x <= list_courses_button.x) && (search_field.y <= list_courses_button.y)) {
 			System.out.println("Verified that list courses button is displayed next to the search field.");
-			ATUReports.add("Is list courses button is displayed next to the search filed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Is list courses button is displayed next to the search filed.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that list courses button is displayed next to the search field.");
-			ATUReports.add("Is list courses button is displayed next to the search filed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Is list courses button is displayed next to the search filed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 			
@@ -290,11 +290,11 @@ public class MoveWindow extends Page {
 		
 		if ((cancel_button.x <= move_recrodings_button.x) && (cancel_button.y <= move_recrodings_button.y)) {
 			System.out.println("Verified that cancel button is displayed next to move recordings button.");
-			ATUReports.add("Is cancel button is displayed next to move recordings button.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Is cancel button is displayed next to move recordings button.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that cancel button is displayed next to move recordings button.");
-			ATUReports.add("Is cancel button is displayed next to move recordings button.", "True.", "False.", LogAs.PASSED, null);
+			ATUReports.add(time +" Is cancel button is displayed next to move recordings button.", "True.", "False.", LogAs.PASSED, null);
 			Assert.assertTrue(false);
 		}
 	}
@@ -307,11 +307,11 @@ public class MoveWindow extends Page {
 		
 		if(choose_a_course_that_you_would_like_message.getText().equals("Choose a course that you would like to move your selected recording(s) to")) {
 			System.out.println("Verified message: Choose a course that you would like to move your selected recording(s) to");
-			ATUReports.add("Message verfieid.", "Verified.", "Verified.", LogAs.PASSED, null);
+			ATUReports.add(time +" Message verfieid.", "Verified.", "Verified.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified message: Choose a course that you would like to move your selected recording(s) to");
-			ATUReports.add("Message verfieid.", "Verified.", "Not verified.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Message verfieid.", "Verified.", "Not verified.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -320,11 +320,11 @@ public class MoveWindow extends Page {
 		
 		if(search_field_location.y < message_location.y) {
 			System.out.println("Location of the message is correct below instructor search field.");
-			ATUReports.add("Location of message below instructor search field.", "Correct.", "Correct.", LogAs.PASSED, null);
+			ATUReports.add(time +" Location of message below instructor search field.", "Correct.", "Correct.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Location of the message is not correct below instructor search field.");
-			ATUReports.add("Location of the message.", "Correct.", "Not correct: " + search_field_location.y + "!<" + message_location.y, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Location of the message.", "Correct.", "Not correct: " + search_field_location.y + "!<" + message_location.y, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -338,11 +338,11 @@ public class MoveWindow extends Page {
 		
 		if ((search_button_location.y < move_recordings_button_location.y) && (course_search_text_location.x < search_button_location.x)) {
 			System.out.println("Verified that search button to the right of the course search field and above the cancel / move recordings.");
-			ATUReports.add("Verify location of search button.", "Verified.", "Verified.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verify location of search button.", "Verified.", "Verified.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that search button to the right of the course search field and above the cancel / move recordings.");
-			ATUReports.add("Verify location of search button.", "Verified.", "Not verified.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verify location of search button.", "Verified.", "Not verified.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -353,11 +353,11 @@ public class MoveWindow extends Page {
 		
 		if(!is_closed) {
 			System.out.println("Verify that move window open.");
-			ATUReports.add("Move window.", "Open.", "Open.", LogAs.PASSED, null);
+			ATUReports.add(time +" Move window.", "Open.", "Open.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verfied that move window open.");
-			ATUReports.add("Move window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Move window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -368,11 +368,11 @@ public class MoveWindow extends Page {
 		
 		if(!is_closed) {
 			System.out.println("Not verified that move window close.");
-			ATUReports.add("Move window.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Move window.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} else {
 			System.out.println("Verfied that move window close.");
-			ATUReports.add("Move window.", "Close.", "Close.", LogAs.PASSED, null);
+			ATUReports.add(time +" Move window.", "Close.", "Close.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 	}
@@ -382,7 +382,7 @@ public class MoveWindow extends Page {
 		   
 		   
 	   }catch(Exception e){
-		   ATUReports.add("Failed to Set Instructor name", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		   ATUReports.add(time +" Failed to Set Instructor name", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	   }
 	   
 	   

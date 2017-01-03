@@ -66,11 +66,11 @@ public class AdminDashboardViewCourseList extends Page {
 	// try {
 	// wait.until(ExpectedConditions.elementToBeClickable(first_course_in_list_checkbox));
 	// System.out.println("First checkbox of first course is shown.");
-	// ATUReports.add("Is first checkbox of first coursw shown?", "True",
+	// ATUReports.add(time +" Is first checkbox of first coursw shown?", "True",
 	// "True", LogAs.PASSED, null);
 	// return true;
 	// } catch (Exception msg) {
-	// ATUReports.add("Is first checkbox of first coursw shown?", "True",
+	// ATUReports.add(time +" Is first checkbox of first coursw shown?", "True",
 	// "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	// return false;
 	// }
@@ -85,7 +85,7 @@ public class AdminDashboardViewCourseList extends Page {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-			ATUReports.add("Loading 'All courses admin' page failed" + e.getMessage(),  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Loading 'All courses admin' page failed" + e.getMessage(),  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -96,7 +96,7 @@ public class AdminDashboardViewCourseList extends Page {
 	
 		driver.get(url);
 		System.out.println("Moving to the course through get method.");
-		ATUReports.add("Moving to the course through get method", LogAs.PASSED, null);		
+		ATUReports.add(time +" Moving to the course through get method", LogAs.PASSED, null);		
 		new WebDriverWait(driver, 30).until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[1]"), "class", "active"));
 		
 	}
@@ -107,10 +107,10 @@ public class AdminDashboardViewCourseList extends Page {
 			course_name_search_box.sendKeys(course_name);
 			course_name_search_box.sendKeys(Keys.ENTER);
 			System.out.println("Searched for course named: " + course_name);
-			ATUReports.add("Searched for course", "Success", "Success", LogAs.PASSED, null);
+			ATUReports.add(time +" Searched for course", "Success", "Success", LogAs.PASSED, null);
 		} catch (Exception msg) {
 			System.out.println("Fail to search for course named: " + course_name);
-			ATUReports.add("Searched for course", "Success", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Searched for course", "Success", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 
 	}
@@ -120,11 +120,11 @@ public class AdminDashboardViewCourseList extends Page {
 			waitForVisibility(first_course_link);
 			first_course_link.click();
 			System.out.println("Clicked on first course link.");
-			ATUReports.add("Clicked on first course link.", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on first course link.", "Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on first course link.");
-			ATUReports.add("Clicked on first course link.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on first course link.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -137,14 +137,14 @@ public class AdminDashboardViewCourseList extends Page {
 				if (e.getText().startsWith(word)) {
 					e.click();
 					System.out.println("Clicked on first course link.");
-					ATUReports.add("Clicked on first course link.", "Success.", "Success.", LogAs.PASSED, null);
+					ATUReports.add(time +" Clicked on first course link.", "Success.", "Success.", LogAs.PASSED, null);
 					return e.getText();
 				}
 			}
 
 		} catch (Exception msg) {
 			System.out.println("Fail to click on first course link.");
-			ATUReports.add("Clicked on first course link.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on first course link.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
        return null;
@@ -156,11 +156,11 @@ public class AdminDashboardViewCourseList extends Page {
 		System.out.println(all_courses_title.getText());
 		if (all_courses_title.getText().contains("All Courses")) {
 			System.out.println("title matches");
-			ATUReports.add("title matches", "All courses", "matches", "matches", LogAs.PASSED, null);
+			ATUReports.add(time +" title matches", "All courses", "matches", "matches", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("title doesnt matche");
-			ATUReports.add("title doesnt matche", "All courses", "matches", "not matches", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" title doesnt matche", "All courses", "matches", "not matches", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

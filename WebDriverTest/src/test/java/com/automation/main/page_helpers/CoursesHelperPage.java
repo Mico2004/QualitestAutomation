@@ -139,13 +139,13 @@ public class CoursesHelperPage extends Page {
 			if (current_course.equals(course_name)) {
 				clickElementWithOutIdJS(course_list.get(i));
 				System.out.println("Clicked on target course name: " + course_name);
-				ATUReports.add("Clicked on target course name: " + course_name, LogAs.PASSED, null);
+				ATUReports.add(time +" Clicked on target course name: " + course_name, LogAs.PASSED, null);
 				return true;
 			}
 		}
 
 		System.out.println("Not clicked on target course name: " + course_name);
-		ATUReports.add("Not clicked on target course name" + course_name, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Not clicked on target course name" + course_name, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		return false;
 	}
 	
@@ -159,7 +159,7 @@ public class CoursesHelperPage extends Page {
 		
 		} catch(Exception e) {
 			e.printStackTrace();
-			ATUReports.add("the page can't load " + e.getMessage() ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" the page can't load " + e.getMessage() ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(true);
 
 		}
@@ -174,7 +174,7 @@ public class CoursesHelperPage extends Page {
 			clickElement(second_course_button);
 			Thread.sleep(3000);
 			System.out.println("Clicked on second course");
-			ATUReports.add("Select course", "Clicked on second course", "Clicked on second course", LogAs.PASSED, null);
+			ATUReports.add(time +" Select course", "Clicked on second course", "Clicked on second course", LogAs.PASSED, null);
 		} catch (Exception e) {
 		}
 		Assert.assertTrue(true);
@@ -189,11 +189,11 @@ public class CoursesHelperPage extends Page {
 			course_name = first_course_button.getText();
 			clickElementJS(first_course_button);
 			Thread.sleep(3000);
-			ATUReports.add("Select course", "Clicked on first course", "Course Details page is displayed", LogAs.PASSED,
+			ATUReports.add(time +" Select course", "Clicked on first course", "Course Details page is displayed", LogAs.PASSED,
 					null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add("Select course", "Clicked on first course", "Course Details page isn't displayed", LogAs.PASSED,
+			ATUReports.add(time +" Select course", "Clicked on first course", "Course Details page isn't displayed", LogAs.PASSED,
 					 new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -239,11 +239,11 @@ public class CoursesHelperPage extends Page {
 				try {
 					driver.findElement(By.id("Course" + Integer.toString(i + 1))).click();
 					System.out.println("Clicked on target course name: " + course_name_to_select);
-					ATUReports.add("Clicked on target course name: " + course_name_to_select, LogAs.PASSED, null);
+					ATUReports.add(time +" Clicked on target course name: " + course_name_to_select, LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				} catch (Exception msg) {
 					System.out.println("Not clicked on target course name: " + course_name_to_select);
-					ATUReports.add("Not clicked on target course name: " + course_name_to_select, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Not clicked on target course name: " + course_name_to_select, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 				break;
@@ -252,7 +252,7 @@ public class CoursesHelperPage extends Page {
 
 		if (not_found) {
 			System.out.println("Not found course name in course list: " + course_name_to_select);
-			ATUReports.add("Not found course name in course list: " + course_name_to_select, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Not found course name in course list: " + course_name_to_select, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -265,9 +265,9 @@ public class CoursesHelperPage extends Page {
 			course_name = course_button.getText();
 			clickElement(course_button);
 			Thread.sleep(3000);
-			ATUReports.add(" clicked course", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add(time +"  clicked course", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
 		} catch (Exception e) {
-			ATUReports.add(" clicked course failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +"  clicked course failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		Assert.assertTrue(rec.verifyElementTest(rec.recording_tasks_button));
 		return course_name;
@@ -289,7 +289,7 @@ public class CoursesHelperPage extends Page {
 			Thread.sleep(1000);
 			if(isElementPresent(By.id("CourseTitle"))) {
 				System.out.println("successflly select the course.");
-				ATUReports.add("successflly select the course.", LogAs.PASSED, null);
+				ATUReports.add(time +" successflly select the course.", LogAs.PASSED, null);
 				break;			
 			}			
 		}
@@ -297,7 +297,7 @@ public class CoursesHelperPage extends Page {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("CourseTitle")));		
 		}catch(TimeoutException e){
 			System.out.println("Course wasn't selected successfully: couese title isn't visible");
-			ATUReports.add("Course wasn't selected successfully: couese title isn't visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
+			ATUReports.add(time +" Course wasn't selected successfully: couese title isn't visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
 			Assert.assertTrue(false);
 		}
 		
@@ -365,7 +365,7 @@ public class CoursesHelperPage extends Page {
 			e.printStackTrace();
 		}
 
-		ATUReports.add(" course verified", LogAs.PASSED, null);
+		ATUReports.add(time +"  course verified", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		return true;
 	}
@@ -410,10 +410,10 @@ public class CoursesHelperPage extends Page {
 			wait.until(ExpectedConditions.attributeContains(tabParent, "class", "active"));	
 			Thread.sleep(2000);
 			System.out.println("Click on past course tab.");
-			ATUReports.add("Click on past course tab.", LogAs.PASSED, null);
+			ATUReports.add(time +" Click on past course tab.", LogAs.PASSED, null);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on past course tab.");
-			ATUReports.add("Fail to click on past course tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail to click on past course tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -423,10 +423,10 @@ public class CoursesHelperPage extends Page {
 		try {
 			active_courses_tab_button.click();
 			System.out.println("Click on active course tab.");
-			ATUReports.add("Click on active course tab.", LogAs.PASSED, null);
+			ATUReports.add(time +" Click on active course tab.", LogAs.PASSED, null);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on active course tab.");
-			ATUReports.add("Fail to click on active course tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Fail to click on active course tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -451,7 +451,7 @@ public class CoursesHelperPage extends Page {
 				System.out.println("select4");		
 				waitForVisibility(recording_tasks_button);
 				System.out.println("selected the course: " + target_course_name);
-				ATUReports.add("select the course: " + target_course_name, LogAs.PASSED, null);
+				ATUReports.add(time +" select the course: " + target_course_name, LogAs.PASSED, null);
 				// wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("CourseTitle"),
 				// target_course_name));
 				return target_course_name;
@@ -460,7 +460,7 @@ public class CoursesHelperPage extends Page {
 
 		return target_course_name;
 	}catch (Exception e){
-		ATUReports.add("Selecting a course failed (screenshot)", e.getMessage(),
+		ATUReports.add(time +" Selecting a course failed (screenshot)", e.getMessage(),
 				LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
 		e.printStackTrace();
 		Assert.assertTrue(false);
@@ -555,7 +555,7 @@ public class CoursesHelperPage extends Page {
 				Actions builder = new Actions(driver);
 				builder.moveToElement(div, 10, 10).click().build().perform();*/
 				if (i >= 3) {
-					ATUReports.add("Copy failed", "Copy Success", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Copy failed", "Copy Success", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					System.out.println(e.getMessage());
 					Assert.assertTrue(false);
 
@@ -642,7 +642,7 @@ public class CoursesHelperPage extends Page {
 				Actions builder = new Actions(driver);
 				builder.moveToElement(div, 10, 10).click().build().perform();*/
 				if (i >= 3) {					
-					ATUReports.add("Copy failed", "Copy Success", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Copy failed", "Copy Success", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					System.out.println(e.getMessage());
 					Assert.assertTrue(false);
 
@@ -735,10 +735,10 @@ public class CoursesHelperPage extends Page {
 				new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(recording_helper_page.additional_content_tab));
 				recording_helper_page.additional_content_tab.click();
 				System.out.println("Enter to the additional content tab.");
-				ATUReports.add("Enter to the additional content tab.", LogAs.PASSED, null);
+				ATUReports.add(time +" Enter to the additional content tab.", LogAs.PASSED, null);
 			} catch (Exception msg) {
 				System.out.println("There is no additional content tab.");
-				ATUReports.add("There is no additional content tab.", LogAs.PASSED, null);
+				ATUReports.add(time +" There is no additional content tab.", LogAs.PASSED, null);
 				waitForVisibility(recording_helper_page.course_link);
 				recording_helper_page.course_link.click();
 				return;
@@ -809,11 +809,11 @@ public class CoursesHelperPage extends Page {
 	public void verifyNoPastCoursesTab() {
 		try {
 			past_courses_tab_button.click();
-			ATUReports.add("Click on Past courses tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Click on Past courses tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("Click on Past courses tab.");
 			Assert.assertTrue(false);
 		} catch (Exception e) {
-			ATUReports.add("No Past courses tab.", LogAs.PASSED, null);
+			ATUReports.add(time +" No Past courses tab.", LogAs.PASSED, null);
 			System.out.println("No Past courses tab.");
 			Assert.assertTrue(true);
 		}
@@ -826,12 +826,12 @@ public class CoursesHelperPage extends Page {
 			System.out.println("course name to compare: "+courses.get(i));
 			if (courses.get(i).equals(name)) {
 				System.out.println("course exists");
-				ATUReports.add("Course existence verification",name,"Course "+ name+" Found in course list ","Course "+ name+" Found in course list " ,LogAs.PASSED,null);
+				ATUReports.add(time +" Course existence verification",name,"Course "+ name+" Found in course list ","Course "+ name+" Found in course list " ,LogAs.PASSED,null);
 				return true;
 			}
 		}
 		System.out.println("course  not exists");
-		ATUReports.add("Course existence verification",name,"Course "+ name+" Found in course list ","Course "+ name+" wasn't Found in course list " ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Course existence verification",name,"Course "+ name+" Found in course list ","Course "+ name+" wasn't Found in course list " ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		return false;
 	}
 
@@ -852,13 +852,13 @@ public class CoursesHelperPage extends Page {
 			if (name.equals(course)) {
 				System.out.println("course exists");
 				Assert.assertTrue(false);
-				ATUReports.add("course exists", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" course exists", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				return false;
 			}
 		}
 		System.out.println("course  not exists");
 		Assert.assertTrue(true);
-		ATUReports.add("course not exists", LogAs.PASSED, null);
+		ATUReports.add(time +" course not exists", LogAs.PASSED, null);
 
 		return true;
 	}
@@ -876,11 +876,11 @@ public class CoursesHelperPage extends Page {
 			WebElement tabParent=public_courses_tab.findElement(By.xpath(".."));			
 			wait.until(ExpectedConditions.attributeContains(tabParent, "class", "active"));
 			System.out.println("Clicked on public courses tab.");
-			ATUReports.add("Clicked on public courses tab.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on public courses tab.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Not clicked on public courses tab.");
-			ATUReports.add("Clicked on public courses tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on public courses tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -944,18 +944,18 @@ public class CoursesHelperPage extends Page {
 		if (api_number_of_private_course > 0) {
 			if (api_number_of_private_course == 1) {
 				System.out.println("Verified that there is only one course which set as private in active course api.");
-				ATUReports.add("Active course api.", "One course set as private.", "One course set as private.",
+				ATUReports.add(time +" Active course api.", "One course set as private.", "One course set as private.",
 						LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("There is more then one course in the xml with IsPrivate tag set to true.");
-				ATUReports.add("There is one course which set in xml as private.", "Ture.", "True.", LogAs.FAILED,
+				ATUReports.add(time +" There is one course which set in xml as private.", "Ture.", "True.", LogAs.FAILED,
 						null);
 				Assert.assertTrue(false);
 			}
 		} else {
 			System.out.println("There is no course which set as private in active course api.");
-			ATUReports.add("Active course api.", "One course set as private.", "No course set as private.",
+			ATUReports.add(time +" Active course api.", "One course set as private.", "No course set as private.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -992,12 +992,12 @@ public class CoursesHelperPage extends Page {
 
 		if (api_number_of_private_course == 0) {
 			System.out.println("There is no course which set as private in active course api.");
-			ATUReports.add("Active course api.", "No course set as private.", "No course set as private.", LogAs.PASSED,
+			ATUReports.add(time +" Active course api.", "No course set as private.", "No course set as private.", LogAs.PASSED,
 					null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Verified that there is course which set as private in active course api.");
-			ATUReports.add("Active course api.", "No course set as private.", "There is course/s set as private.",
+			ATUReports.add(time +" Active course api.", "No course set as private.", "There is course/s set as private.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -1011,11 +1011,11 @@ public class CoursesHelperPage extends Page {
 
 		if (current_course_list.size() == 0) {
 			System.out.println("Verified that no course is displayed.");
-			ATUReports.add("Course list.", "No course in the list.", "No course in the list.", LogAs.PASSED, null);
+			ATUReports.add(time +" Course list.", "No course in the list.", "No course in the list.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that no course is displayed.");
-			ATUReports.add("Course list.", "There is course in the list.", "No course in the list.", LogAs.FAILED,
+			ATUReports.add(time +" Course list.", "There is course in the list.", "No course in the list.", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 		}
@@ -1024,11 +1024,11 @@ public class CoursesHelperPage extends Page {
 	// verify user is "Guest"
 	public void verifyUserGuest() {
 		if (user_name.getText().equals("Guest")) {
-			ATUReports.add("user guest", LogAs.PASSED, null);
+			ATUReports.add(time +" user guest", LogAs.PASSED, null);
 			System.out.println("user guest");
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add("No user guest", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" No user guest", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("No user guest");
 			Assert.assertTrue(false);
 		}
@@ -1037,11 +1037,11 @@ public class CoursesHelperPage extends Page {
 	/// Validate the "Get Started" box is displayed to the [Guest] User
 	public void verifyGetStartedBox() {
 		if (get_started_box.isDisplayed()) {
-			ATUReports.add("Get Started box is displayed", LogAs.PASSED, null);
+			ATUReports.add(time +" Get Started box is displayed", LogAs.PASSED, null);
 			System.out.println("Get Started box is displayed");
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add("Get Started box is not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Get Started box is not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("Get Started box is not displayed");
 			Assert.assertTrue(false);
 		}
@@ -1051,11 +1051,11 @@ public class CoursesHelperPage extends Page {
 	public void verifyTopBarMenu() {
 		if ((user_name.isDisplayed()) && (disclaimer.isDisplayed()) && (help.isDisplayed())
 				&& (sign_out.isDisplayed())) {
-			ATUReports.add("top bar menu is displayed", LogAs.PASSED, null);
+			ATUReports.add(time +" top bar menu is displayed", LogAs.PASSED, null);
 			System.out.println("top bar menu is displayed");
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add("top bar menu is not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" top bar menu is not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("top bar menu is not displayed");
 			Assert.assertTrue(false);
 		}
@@ -1065,21 +1065,21 @@ public class CoursesHelperPage extends Page {
 	public void verifyNoReportsAndMyAccountLink() {
 		try {
 			reports.click();
-			ATUReports.add("Click on reports link.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Click on reports link.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("Click on reports link.");
 			Assert.assertTrue(false);
 		} catch (Exception e) {
-			ATUReports.add("No reports link", LogAs.PASSED, null);
+			ATUReports.add(time +" No reports link", LogAs.PASSED, null);
 			System.out.println("No reports link");
 			Assert.assertTrue(true);
 		}
 		try {
 			my_account.click();
-			ATUReports.add("Click on my account link.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Click on my account link.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("Click on my account link.");
 			Assert.assertTrue(false);
 		} catch (Exception e) {
-			ATUReports.add("No my account link", LogAs.PASSED, null);
+			ATUReports.add(time +" No my account link", LogAs.PASSED, null);
 			System.out.println("No my account link");
 			Assert.assertTrue(true);
 		}
@@ -1089,11 +1089,11 @@ public class CoursesHelperPage extends Page {
 	public void verifyNoActiveCoursesTab() {
 		try {
 			active_courses_tab_button.click();
-			ATUReports.add("Click on active courses tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Click on active courses tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("Click on active courses tab.");
 			Assert.assertTrue(false);
 		} catch (Exception e) {
-			ATUReports.add("No active courses tab.", LogAs.PASSED, null);
+			ATUReports.add(time +" No active courses tab.", LogAs.PASSED, null);
 			System.out.println("No active courses tab.");
 			Assert.assertTrue(true);
 		}
@@ -1103,11 +1103,11 @@ public class CoursesHelperPage extends Page {
 	public void verifyNoPrivateCoursesTab() {
 		try {
 			private_courses_tab_button.click();
-			ATUReports.add("Click on Past courses tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Click on Past courses tab.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("Click on Past courses tab.");
 			Assert.assertTrue(false);
 		} catch (Exception e) {
-			ATUReports.add("No Past courses tab.", LogAs.PASSED, null);
+			ATUReports.add(time +" No Past courses tab.", LogAs.PASSED, null);
 			System.out.println("No Past courses tab.");
 			Assert.assertTrue(true);
 		}
@@ -1119,11 +1119,11 @@ public class CoursesHelperPage extends Page {
 	public void verifyNoDisclaimerLink() {
 		try {
 			disclaimer.click();
-			ATUReports.add("Click on disclaimer link.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Click on disclaimer link.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("Click on disclaimer link.");
 			Assert.assertTrue(false);
 		} catch (Exception e) {
-			ATUReports.add("No disclaimer link", LogAs.PASSED, null);
+			ATUReports.add(time +" No disclaimer link", LogAs.PASSED, null);
 			System.out.println("No disclaimer link");
 			Assert.assertTrue(true);
 		}
@@ -1140,51 +1140,51 @@ public class CoursesHelperPage extends Page {
 			moveToElement(help, driver).perform();
 			if ((run_diagnostics.isDisplayed())) {
 				System.out.println("run diagnostics  visible");
-				ATUReports.add("run diagnostics visible", LogAs.PASSED, null);
+				ATUReports.add(time +" run diagnostics visible", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 
 				if (get_started.isDisplayed()) {
 					System.out.println("get started  visible");
-					ATUReports.add("get started visible", LogAs.PASSED, null);
+					ATUReports.add(time +" get started visible", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 
 					if ((get_support.isDisplayed())) {
 						System.out.println("get support visible");
-						ATUReports.add("get support visible", LogAs.PASSED, null);
+						ATUReports.add(time +" get support visible", LogAs.PASSED, null);
 						Assert.assertTrue(true);
 
 						if ((online_help.isDisplayed())) {
 							System.out.println("online help visible");
-							ATUReports.add("online help visible", LogAs.PASSED, null);
+							ATUReports.add(time +" online help visible", LogAs.PASSED, null);
 							Assert.assertTrue(true);
 							System.out.println("run diagnostics,get started,get support and online help are visible");
 						} else {
 							System.out.println("online help not visible");
-							ATUReports.add("online help not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+							ATUReports.add(time +" online help not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 							Assert.assertTrue(false);
 						}
 
 					} else {
 						System.out.println("get support not visible");
-						ATUReports.add("get support not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						ATUReports.add(time +" get support not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 						Assert.assertTrue(false);
 					}
 
 				} else {
 
 					System.out.println("get started not visible");
-					ATUReports.add("get started not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" get started not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			} else {
 				System.out.println("run diagnostics not visible");
-				ATUReports.add("run diagnostics not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" run diagnostics not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 
 		} catch (AWTException e) {
 			System.out.println("run diagnostics,get started,get support or online help caused exception");
-			ATUReports.add("run diagnostics,get started,get support or online help caused exception", LogAs.FAILED,
+			ATUReports.add(time +" run diagnostics,get started,get support or online help caused exception", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 		}
@@ -1205,12 +1205,12 @@ public class CoursesHelperPage extends Page {
 			String to_click = element.getText();
 			element.click();
 			System.out.println("clicked element: " + to_click);
-			ATUReports.add("clicked element", LogAs.PASSED, null);
+			ATUReports.add(time +" clicked element", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			String to_click = element.getText();
 			System.out.println("exception clicking: " + to_click);
-			ATUReports.add("exception clicking", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" exception clicking", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1218,12 +1218,12 @@ public class CoursesHelperPage extends Page {
 	/// verify get started block
 	public void verifyGetStartedBlock() {
 		if (get_started_block.isDisplayed()) {
-			ATUReports.add("get started block is visible", LogAs.PASSED, null);
+			ATUReports.add(time +" get started block is visible", LogAs.PASSED, null);
 			System.out.println("get started block is visible");
 			Assert.assertTrue(true);
 		} else {
 
-			ATUReports.add("get started block is not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" get started block is not visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("get started block is not visible");
 			Assert.assertTrue(false);
 		}
@@ -1235,11 +1235,11 @@ public class CoursesHelperPage extends Page {
 		// TODO Auto-generated method stub
 		try {
 			close_get_started_block.click();
-			ATUReports.add("get started block is visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" get started block is visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println("get started block is  visible");
 			Assert.assertTrue(false);
 		} catch (Exception e) {
-			ATUReports.add("get started block is not visible", LogAs.PASSED, null);
+			ATUReports.add(time +" get started block is not visible", LogAs.PASSED, null);
 			System.out.println("get started block is not visible");
 			Assert.assertTrue(true);
 		}
@@ -1254,21 +1254,21 @@ public class CoursesHelperPage extends Page {
 			if ((past_courses_tab_button.getLocation().x < public_courses_tab.getLocation().x)
 					&& (active_courses_tab_button.getLocation().x < past_courses_tab_button.getLocation().x)) {
 				System.out.println("Verified that tabs order is correct.");
-				ATUReports.add("Tabs order.", "Correct.", "Correct.", LogAs.PASSED, null);
+				ATUReports.add(time +" Tabs order.", "Correct.", "Correct.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Not verified that tabs order is correct.");
-				ATUReports.add("Tabs order.", "Correct.", "Not correct.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Tabs order.", "Correct.", "Not correct.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} else {
 			if (active_courses_tab_button.getLocation().x < public_courses_tab.getLocation().x) {
 				System.out.println("Verified that tabs order is correct.");
-				ATUReports.add("Tabs order.", "Correct.", "Correct.", LogAs.PASSED, null);
+				ATUReports.add(time +" Tabs order.", "Correct.", "Correct.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Not verified that tabs order is correct.");
-				ATUReports.add("Tabs order.", "Correct.", "Not correct.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Tabs order.", "Correct.", "Not correct.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -1289,22 +1289,22 @@ public class CoursesHelperPage extends Page {
 
 		if (public_courses_tab.getAttribute("title").equals("Public Courses")) {
 			System.out.println("Hovering over the Public Courses displays the hint correct.");
-			ATUReports.add("Hovering over Public Courses button the hint is displayed to the user.", "True.", "True.",
+			ATUReports.add(time +" Hovering over Public Courses button the hint is displayed to the user.", "True.", "True.",
 					LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Hovering over the Public Courses not displays the hint correct.");
-			ATUReports.add("Hovering over Public Courses button the hint is displayed to the user.", "True.", "False.",
+			ATUReports.add(time +" Hovering over Public Courses button the hint is displayed to the user.", "True.", "False.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
 		if (color_before_hovring.equals(color_after_hovring)) {
 			System.out.println("Not change button color background.");
-			ATUReports.add("Change button color background.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Change button color background.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 			System.out.println("Change button color background.");
-			ATUReports.add("Change button color background.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Change button color background.", "True.", "True.", LogAs.PASSED, null);
 		}
 	}
 
@@ -1320,11 +1320,11 @@ public class CoursesHelperPage extends Page {
 				&& (new_recordings_title_and_number_of_new_recordings.get(0).getText().equals("New Recordings"))) {
 			System.out.println(new_recordings_title_and_number_of_new_recordings.get(0).getText());
 			System.out.println("Verified UI of New Recordings text and total quantity of new recording UI.");
-			ATUReports.add("New recording text and total quantity of new recordings UI.", "Verified.", "Verified.",
+			ATUReports.add(time +" New recording text and total quantity of new recordings UI.", "Verified.", "Verified.",
 					LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verified UI of New Recordings text and total quantity of new recording UI.");
-			ATUReports.add("New recording text and total quantity of new recordings UI.", "Verified.", "Not verified.",
+			ATUReports.add(time +" New recording text and total quantity of new recordings UI.", "Verified.", "Not verified.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
@@ -1335,11 +1335,11 @@ public class CoursesHelperPage extends Page {
 		if ((courses_heading.getLocation().y < public_courses_tab.getLocation().y)
 				&& (courses_heading.getLocation().x < public_courses_tab.getLocation().x)) {
 			System.out.println("Verify that the page caption Courses is displayed at the top left of the page.");
-			ATUReports.add("The page caption Courses is displayed at the top left.", "True.", "True.", LogAs.PASSED,
+			ATUReports.add(time +" The page caption Courses is displayed at the top left.", "True.", "True.", LogAs.PASSED,
 					null);
 		} else {
 			System.out.println("Not verify that the page caption Courses is displayed at the top left of the page.");
-			ATUReports.add("The page caption Courses is displayed at the top left.", "True.", "False.", LogAs.FAILED,
+			ATUReports.add(time +" The page caption Courses is displayed at the top left.", "True.", "False.", LogAs.FAILED,
 					null);
 		}
 	}
@@ -1349,11 +1349,11 @@ public class CoursesHelperPage extends Page {
 	public void verifyActiveCoursesTabDisplayedUnderThePageHeading() {
 		if (courses_heading.getLocation().y < active_courses_tab_button.getLocation().y) {
 			System.out.println("Verified that Active Courses tab displayed under the page heading.");
-			ATUReports.add("Verified Active Courses tab displayed under the page heading.", "True.", "True.",
+			ATUReports.add(time +" Verified Active Courses tab displayed under the page heading.", "True.", "True.",
 					LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verified that Active Courses tab displayed under the page heading.");
-			ATUReports.add("Verified Active Courses tab displayed under the page heading.", "True.", "False.",
+			ATUReports.add(time +" Verified Active Courses tab displayed under the page heading.", "True.", "False.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
@@ -1406,10 +1406,10 @@ public class CoursesHelperPage extends Page {
 
 		if (not_correct) {
 			System.out.println("Not verified that every course record contains correct information.");
-			ATUReports.add("Every course record contains correct information.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Every course record contains correct information.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 			System.out.println("Verified that every course record contains correct information.");
-			ATUReports.add("Every course record contains correct information.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Every course record contains correct information.", "True.", "True.", LogAs.PASSED, null);
 		}
 	}
 
@@ -1452,12 +1452,12 @@ public class CoursesHelperPage extends Page {
 		moveToElement(first_course_button, driver).perform();
 		if (first_course_button.getAttribute("title").equals(first_course_button.getText())) {
 			System.out.println("Hovering over the the course name displays the hint correct.");
-			ATUReports.add("Hovering over the the course name displays the hint correct.", "True.", "True.",
+			ATUReports.add(time +" Hovering over the the course name displays the hint correct.", "True.", "True.",
 					LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Hovering over the the course name not displays the hint correct.");
-			ATUReports.add("Hovering over the the course name displays the hint correct.", "True.", "False.",
+			ATUReports.add(time +" Hovering over the the course name displays the hint correct.", "True.", "False.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -1487,11 +1487,11 @@ public class CoursesHelperPage extends Page {
 	public void verifyThatTagNewRecordingsNotDisplayedToTheRightForGuestUser() {
 		if (new_recordings_title_and_number_of_new_recordings.get(0).getText().equals("New Recordings")) {
 			System.out.println("Not verified that tag new recordings is not displayed to the right for guest user.");
-			ATUReports.add("Verified that tag new recordings is not displayed to the right for guest user.", "True.",
+			ATUReports.add(time +" Verified that tag new recordings is not displayed to the right for guest user.", "True.",
 					"False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 			System.out.println("Verified that tag new recordings is not displayed to the right for guest user.");
-			ATUReports.add("Verified that tag new recordings is not displayed to the right for guest user.", "True.",
+			ATUReports.add(time +" Verified that tag new recordings is not displayed to the right for guest user.", "True.",
 					"True", LogAs.PASSED, null);
 		}
 	}
@@ -1553,11 +1553,11 @@ public class CoursesHelperPage extends Page {
 
 		if (!sorting_not_correct) {
 			System.out.println("Verfied that the list of courses is sorted by their names.");
-			ATUReports.add("Verfied that the list of courses is sorted by their names.", "True.", "True.", LogAs.PASSED,
+			ATUReports.add(time +" Verfied that the list of courses is sorted by their names.", "True.", "True.", LogAs.PASSED,
 					null);
 		} else {
 			System.out.println("Not verfied that the list of courses is sorted by their names.");
-			ATUReports.add("Verfied that the list of courses is sorted by their names.", "True.", "False.",
+			ATUReports.add(time +" Verfied that the list of courses is sorted by their names.", "True.", "False.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
@@ -1566,11 +1566,11 @@ public class CoursesHelperPage extends Page {
 	public void verifyActiveCoursesTabDisplayed() {
 		if (active_courses_tab_button.isDisplayed()) {
 			System.out.println("Verified that the Active Courses tab is displayed.");
-			ATUReports.add("Verified that the Active Courses tab is displayed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verified that the Active Courses tab is displayed.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that the Active Courses tab is displayed.");
-			ATUReports.add("Verified that the Active Courses tab is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verified that the Active Courses tab is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1579,11 +1579,11 @@ public class CoursesHelperPage extends Page {
 	public void verifyPublicCoursesTabDisplayed() {
 		if (public_courses_tab.isDisplayed()) {
 			System.out.println("Verified that the Public Courses tab is displayed.");
-			ATUReports.add("Verified that the Public Courses tab is displayed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verified that the Public Courses tab is displayed.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that the Public Courses tab is displayed.");
-			ATUReports.add("Verified that the Public Courses tab is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verified that the Public Courses tab is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1592,11 +1592,11 @@ public class CoursesHelperPage extends Page {
 	public void verifyPastCoursesTabDisplayed() {
 		if (past_courses_tab_button.isDisplayed()) {
 			System.out.println("Verified that the Past Courses tab is displayed.");
-			ATUReports.add("Verified that the Past Courses tab is displayed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verified that the Past Courses tab is displayed.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verified that the Past Courses tab is displayed.");
-			ATUReports.add("Verified that the Past Courses tab is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verified that the Past Courses tab is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1605,12 +1605,12 @@ public class CoursesHelperPage extends Page {
 	public void verifyPastCoursesTabNotDisplayed() {
 		if (past_courses_tab_button.isDisplayed()) {
 			System.out.println("Not verified that the Past Courses tab is not displayed.");
-			ATUReports.add("Verified that the Past Courses tab is not displayed.", "True.", "False.", LogAs.FAILED,
+			ATUReports.add(time +" Verified that the Past Courses tab is not displayed.", "True.", "False.", LogAs.FAILED,
 					null);
 			Assert.assertTrue(false);
 		} else {
 			System.out.println("Verified that the Past Courses tab is not displayed.");
-			ATUReports.add("Verified that the Past Courses tab is not displayed.", "True.", "True.", LogAs.PASSED,
+			ATUReports.add(time +" Verified that the Past Courses tab is not displayed.", "True.", "True.", LogAs.PASSED,
 					null);
 			Assert.assertTrue(true);
 		}
@@ -1629,26 +1629,26 @@ public class CoursesHelperPage extends Page {
 
 		if (past_courses_tab_button.getAttribute("title").equals("Past Courses")) {
 			System.out.println("Verfied a hint appears with Past Courses text.");
-			ATUReports.add("Verfied a hint appears with Past Courses text.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied a hint appears with Past Courses text.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verfied a hint appears with Past Courses text.");
-			ATUReports.add("Verfied a hint appears with Past Courses text.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied a hint appears with Past Courses text.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 
 		if (!init_background_color.equals(hovring_background_color)) {
 			System.out.println("Verfied background color changed.");
-			ATUReports.add("Verfied background color changed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied background color changed.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verfied background color changed.");
-			ATUReports.add("Verfied background color changed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied background color changed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 
 		if (!init_font_color.equals(hovring_font_color)) {
 			System.out.println("Verfied font color changed.");
-			ATUReports.add("Verfied font color changed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied font color changed.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verfied font color changed.");
-			ATUReports.add("Verfied font color changed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied font color changed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 
@@ -1665,26 +1665,26 @@ public class CoursesHelperPage extends Page {
 
 		if (public_courses_tab.getAttribute("title").equals("Public Courses")) {
 			System.out.println("Verfied a hint appears with Public Courses text.");
-			ATUReports.add("Verfied a hint appears with Public Courses text.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied a hint appears with Public Courses text.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verfied a hint appears with Public Courses text.");
-			ATUReports.add("Verfied a hint appears with Public Courses text.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied a hint appears with Public Courses text.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 
 		if (!init_background_color.equals(hovring_background_color)) {
 			System.out.println("Verfied background color changed.");
-			ATUReports.add("Verfied background color changed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied background color changed.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verfied background color changed.");
-			ATUReports.add("Verfied background color changed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied background color changed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 
 		if (!init_font_color.equals(hovring_font_color)) {
 			System.out.println("Verfied font color changed.");
-			ATUReports.add("Verfied font color changed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Verfied font color changed.", "True.", "True.", LogAs.PASSED, null);
 		} else {
 			System.out.println("Not verfied font color changed.");
-			ATUReports.add("Verfied font color changed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Verfied font color changed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 
@@ -1693,7 +1693,7 @@ public class CoursesHelperPage extends Page {
 	try{
 		if (!public_courses_tab.isDisplayed()) {
 			System.out.println("Verified that target course is not exist in Public Courses.");
-			ATUReports.add("Verified that target course is not exist in Public Courses.", "True.", "True.",
+			ATUReports.add(time +" Verified that target course is not exist in Public Courses.", "True.", "True.",
 					LogAs.PASSED, null);
 		} else {
 			clickOnPublicCoursesTab();
@@ -1705,7 +1705,7 @@ public class CoursesHelperPage extends Page {
 			verifyCourseNotExist(target_course);
 		}
 	}catch (Exception e){
-		ATUReports.add("Error", e.getMessage(),	LogAs.FAILED, null);
+		ATUReports.add(time +" Error", e.getMessage(),	LogAs.FAILED, null);
 		
 		
 	}
@@ -1782,16 +1782,16 @@ public class CoursesHelperPage extends Page {
 	public void verifyNoStartRecording() {
 		try {
 			if (start_recording_button.isDisplayed()) {
-				ATUReports.add("Click on start recording button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Click on start recording button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Click on start recording button.");
 				Assert.assertTrue(false);
 			} else {
-				ATUReports.add("No start recording button", LogAs.PASSED, null);
+				ATUReports.add(time +" No start recording button", LogAs.PASSED, null);
 				System.out.println("No start recording button");
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
-			ATUReports.add("No start recording button", LogAs.PASSED, null);
+			ATUReports.add(time +" No start recording button", LogAs.PASSED, null);
 			System.out.println("No start recording button");
 			Assert.assertTrue(true);
 		}

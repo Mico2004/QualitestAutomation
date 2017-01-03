@@ -104,11 +104,11 @@ public class PublishWindow extends Page {
 		
 		if(!is_closed) {
 			System.out.println("Publish window is open.");
-			ATUReports.add("Publish window.", "Open.", "Open.", LogAs.PASSED, null);
+			ATUReports.add(time +" Publish window.", "Open.", "Open.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Publish window is close.");
-			ATUReports.add("Publish window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Publish window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -123,11 +123,11 @@ public class PublishWindow extends Page {
 				}
 				
 				System.out.println("Clicked on cancel button.");
-				ATUReports.add("Clicked on cancel button.", "Success.", "Success.", LogAs.PASSED, null);
+				ATUReports.add(time +" Clicked on cancel button.", "Success.", "Success.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} catch (Exception msg) {
 				System.out.println("Fail to click on cancel button.");
-				ATUReports.add("Clicked on cancel button.", "Success.", "Fail."+msg.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Clicked on cancel button.", "Success.", "Fail."+msg.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -138,11 +138,11 @@ public class PublishWindow extends Page {
 		
 		if(is_closed) {
 			System.out.println("Publish window is close.");
-			ATUReports.add("Publish window.", "Close.", "Close.", LogAs.PASSED, null);
+			ATUReports.add(time +" Publish window.", "Close.", "Close.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Publish window is open.");
-			ATUReports.add("Publish window.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Publish window.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -154,21 +154,21 @@ public class PublishWindow extends Page {
 		if(selected == 0) {
 			if(is_selected) {
 				System.out.println("Never option is selected.");
-				ATUReports.add("Never option.", "Not selected.", "Selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Never option.", "Not selected.", "Selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			} else {
 				System.out.println("Never option is not selected.");
-				ATUReports.add("Never option.", "Not selected.", "Not selected.", LogAs.PASSED, null);
+				ATUReports.add(time +" Never option.", "Not selected.", "Not selected.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 		} else {
 			if(is_selected) {
 				System.out.println("Never option is selected.");
-				ATUReports.add("Never option.", "Selected.", "Selected.", LogAs.PASSED, null);
+				ATUReports.add(time +" Never option.", "Selected.", "Selected.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Never option is not selected.");
-				ATUReports.add("Never option.", "Selected.", "Not selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Never option.", "Selected.", "Not selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}
@@ -181,21 +181,21 @@ public class PublishWindow extends Page {
 			if(selected == 0) {
 				if(is_selected) {
 					System.out.println("date range option is selected.");
-					ATUReports.add("date range option.", "Not selected.", "Selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" date range option.", "Not selected.", "Selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				} else {
 					System.out.println("date range option is not selected.");
-					ATUReports.add("date range option.", "Not selected.", "Not selected.", LogAs.PASSED, null);
+					ATUReports.add(time +" date range option.", "Not selected.", "Not selected.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				}
 			} else {
 				if(is_selected) {
 					System.out.println("date range option is selected.");
-					ATUReports.add("date range option.", "Selected.", "Selected.", LogAs.PASSED, null);
+					ATUReports.add(time +" date range option.", "Selected.", "Selected.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("date range option is not selected.");
-					ATUReports.add("date range option.", "Selected.", "Not selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" date range option.", "Selected.", "Not selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			}
@@ -208,21 +208,21 @@ public class PublishWindow extends Page {
 			if(selected == 0) {
 				if(is_selected) {
 					System.out.println("Always option is selected.");
-					ATUReports.add("Always option.", "Not selected.", "Selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Always option.", "Not selected.", "Selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				} else {
 					System.out.println("Always option is not selected.");
-					ATUReports.add("Always option.", "Not selected.", "Not selected.", LogAs.PASSED, null);
+					ATUReports.add(time +" Always option.", "Not selected.", "Not selected.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				}
 			} else {
 				if(is_selected) {
 					System.out.println("Always option is selected.");
-					ATUReports.add("Always option.", "Selected.", "Selected.", LogAs.PASSED, null);
+					ATUReports.add(time +" Always option.", "Selected.", "Selected.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("Always option is not selected.");
-					ATUReports.add("Always option.", "Selected.", "Not selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Always option.", "Selected.", "Not selected.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			}
@@ -238,11 +238,11 @@ public class PublishWindow extends Page {
 			}
 			
 			System.out.println("Clicked on save button.");
-			ATUReports.add("Clicked on save button.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on save button.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch(Exception msg) {
 			System.out.println("Not clicked on save button.");
-			ATUReports.add("Clicked on save button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on save button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -254,11 +254,11 @@ public class PublishWindow extends Page {
 			waitForVisibility(save_button);
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", save_button);		
 			System.out.println("Clicked on save button.");
-			ATUReports.add("Clicked on save button.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add(time +" Clicked on save button.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch(Exception msg) {
 			System.out.println("Not clicked on save button.");
-			ATUReports.add("Clicked on save button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" Clicked on save button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -288,12 +288,12 @@ public class PublishWindow extends Page {
 			try{
 			String background_rec = rec.getBackGroundColor(rec.background);
 			String menu_background = getBackGroundColor(publish_window_title_background);
-			if (rec.getBackGroundColor(rec.background).equals(getBackGroundColor(publish_window_title_background))) {
-				ATUReports.add("Publish menu background color is same as recording background color", LogAs.PASSED, null);
+			if (background_rec.equals(getBackGroundColor(publish_window_title_background))) {
+				ATUReports.add(time +" Publish menu background color is same as recording background color", LogAs.PASSED, null);
 				System.out.println("Publish menu background color is same as recording background color");
 				Assert.assertTrue(true);
 			} else {
-				ATUReports.add("Publish menu background color is not  same as recording background color", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Publish menu background color is not  same as recording background color", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Publish menu background color is  not same as recording background color");
 				Assert.assertTrue(false);
 			}
@@ -313,10 +313,10 @@ public class PublishWindow extends Page {
 			String val = publish_window_title.getText();
 			if (val.equals("Publish")) {
 				System.out.println("Publish menu title verified.");
-				ATUReports.add("Publish menu title verified.", LogAs.PASSED, null);
+				ATUReports.add(time +" Publish menu title verified.", LogAs.PASSED, null);
 			} else {
 				System.out.println("Publish menu title not verified.");
-				ATUReports.add("Publish title not verified.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Publish title not verified.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 			Assert.assertEquals("Publish", val);
 			
@@ -334,10 +334,10 @@ public class PublishWindow extends Page {
 				
 				if (infoText.equals("Publishing allows you to control when recordings are made available to students")) {
 					System.out.println("Valid Infomative Text.");
-					ATUReports.add("Valid Infomative Text.", LogAs.PASSED, null);
+					ATUReports.add(time +" Valid Infomative Text.", LogAs.PASSED, null);
 				} else {
 					System.out.println("Not Valid Infomative Text.");
-					ATUReports.add("Not Valid Infomative Text.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Not Valid Infomative Text.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 			} catch (Exception e) {	
 				e.printStackTrace();
@@ -353,14 +353,14 @@ public class PublishWindow extends Page {
 				String errorTitleText  = errorTitleInvalidDates.getText();		
 				if (errorTitleText.equals("Cannot publish the selected recordings. Please contact Tegrity support")) {
 					System.out.println("The error message is displayed and valid.");
-					ATUReports.add("The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
+					ATUReports.add(time +" The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
 				} else{
 					System.out.println("The error message is displayed and not valid.");
-					ATUReports.add("The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}				
 			} else {
 				System.out.println("The error message is not displayed.");
-				ATUReports.add("The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		} catch (Exception e) {	
 			e.printStackTrace();
@@ -376,14 +376,14 @@ public void verifyErrorTitleMissingDatesDisplayedAndValid() {
 				String errorTitleText  = errorTitleMissingDates.getText();		
 				if (errorTitleText.equals("Please specify both the beginning and end dates.")) {
 					System.out.println("The error message is displayed and valid.");
-					ATUReports.add("The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
+					ATUReports.add(time +" The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
 				} else{
 					System.out.println("The error message is displayed and not valid.");
-					ATUReports.add("The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}				
 			} else {
 				System.out.println("The error message is not displayed.");
-				ATUReports.add("The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		} catch (Exception e) {	
 			e.printStackTrace();
@@ -399,14 +399,14 @@ public void verifyErrorTitleMissingDatesDisplayedAndValid() {
 				String errorTitleText  = errorTitleWrongDates.getText();		
 				if (errorTitleText.equals("Please enter an end-date that is after or the same as the beginning date.")) {
 					System.out.println("The error message is displayed and valid.");
-					ATUReports.add("The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
+					ATUReports.add(time +" The error message is displayed and valid.","True.","True.", LogAs.PASSED, null);
 				} else{
 					System.out.println("The error message is displayed and not valid.");
-					ATUReports.add("The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The error message is displayed and not valid.","True.","False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}				
 			} else {
 				System.out.println("The error message is not displayed.");
-				ATUReports.add("The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" The error message is not displayed.","True.","False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		} catch (Exception e) {	
 			e.printStackTrace();
@@ -422,10 +422,10 @@ public void verifyErrorTitleMissingDatesDisplayedAndValid() {
 				String infoText  = publish_window_text2.getText();			
 				if (infoText.equals("When would you like the selected recordings to be available?")) {
 					System.out.println("Valid Infomative Text2.");
-					ATUReports.add("Valid Infomative Text2.", LogAs.PASSED, null);
+					ATUReports.add(time +" Valid Infomative Text2.", LogAs.PASSED, null);
 				} else {
 					System.out.println("Not Valid Infomative Text2.");
-					ATUReports.add("Not Valid Infomative Text2.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" Not Valid Infomative Text2.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 	
 				Point LocText = publish_window_text.getLocation();
@@ -433,10 +433,10 @@ public void verifyErrorTitleMissingDatesDisplayedAndValid() {
 				
 				if(LocText.getY() < LocText2.getY()){
 					System.out.println("The location of the line 'Publishing allows ...' is above the line 'When would you.'");
-					ATUReports.add("The location of the line 'Publishing allows ...' is above the line 'When would you'.", LogAs.PASSED, null);
+					ATUReports.add(time +" The location of the line 'Publishing allows ...' is above the line 'When would you'.", LogAs.PASSED, null);
 				} else {
 					System.out.println("The location of the line 'Publishing allows ...' is below the line 'When would you'");
-					ATUReports.add("The location of the line 'Publishing allows ...' is below the line 'When would you'.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The location of the line 'Publishing allows ...' is below the line 'When would you'.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 	
 			} catch (Exception e) {	
@@ -457,10 +457,10 @@ public void verifyErrorTitleMissingDatesDisplayedAndValid() {
 				
 				if( never.getY()>dateRange.getY()  &&  dateRange.getY() > always.getY() && always.getY() > LocText2.getY()){
 					System.out.println("The location of the radio buttons is below the line 'When would you.'");
-					ATUReports.add("The location of the radio buttons is below the line 'When would you.'.", LogAs.PASSED, null);
+					ATUReports.add(time +" The location of the radio buttons is below the line 'When would you.'.", LogAs.PASSED, null);
 				} else {
 					System.out.println("The location of the radio buttons is above the line 'When would you.'");
-					ATUReports.add("The location of the radio buttons is above the line 'When would you.'", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The location of the radio buttons is above the line 'When would you.'", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 	
 			} catch (Exception e) {	
@@ -482,17 +482,17 @@ public void verifyErrorTitleMissingDatesDisplayedAndValid() {
 			if((save.getY() > title.getY()) && (save.getX() > cancel.getX()))
 			{
 			 System.out.println("The Save button is displayed on the bottom right corner of the model window.");
-			 ATUReports.add("The Save button is displayed on the bottom right corner of the model window.", LogAs.PASSED, null);
+			 ATUReports.add(time +" The Save button is displayed on the bottom right corner of the model window.", LogAs.PASSED, null);
 			}else {
 			 System.out.println("The Save button isn't displayed on the bottom right corner of the model window.");
-			 ATUReports.add("The Save button isn't displayed on the bottom right corner of the model window.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			 ATUReports.add(time +" The Save button isn't displayed on the bottom right corner of the model window.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 			if((cancel.getY() > title.getY()) && (cancel.getX() < save.getX())) {
 				 System.out.println("The Cancel button is displayed on the left of the Save button.");
-				 ATUReports.add("The Cancel button is displayed on the left of the Save button.", LogAs.PASSED, null);
+				 ATUReports.add(time +" The Cancel button is displayed on the left of the Save button.", LogAs.PASSED, null);
 				}else {
 				 System.out.println("The Cancel button is not displayed on the left of the Save button.");
-				 ATUReports.add("The Cancel button is not displayed on the left of the Save button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				 ATUReports.add(time +" The Cancel button is not displayed on the left of the Save button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 			}catch(Exception e){
 				e.getMessage();
@@ -517,52 +517,52 @@ public void verifyErrorTitleMissingDatesDisplayedAndValid() {
 				if(alwaysText.equals("Always"))
 				{
 					System.out.println("The context of the first label is: " +alwaysText +" equels to Always.");
-					ATUReports.add("The context of the first label is: " +alwaysText +" equels to Always.", LogAs.PASSED, null);
+					ATUReports.add(time +" The context of the first label is: " +alwaysText +" equels to Always.", LogAs.PASSED, null);
 				}else {
 					System.out.println("The context of the first label is: " +alwaysText +" not equels to Always.");
-					ATUReports.add("The context of the first label is: " +alwaysText +" not equels to Always.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The context of the first label is: " +alwaysText +" not equels to Always.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 				if(dateRangeText.equals("Date Range"))
 				{
 					System.out.println("The context of the second label is: " +dateRangeText +" equels to Date Range.");
-					ATUReports.add("The context of the second label is: " +dateRangeText +" equels to Date Range.", LogAs.PASSED, null);
+					ATUReports.add(time +" The context of the second label is: " +dateRangeText +" equels to Date Range.", LogAs.PASSED, null);
 				}else {
 					System.out.println("The context of the second label is: " +dateRangeText +" not equels to Date Range.");
-					ATUReports.add("The context of the second label is: " +dateRangeText +" not equels to Date Range.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The context of the second label is: " +dateRangeText +" not equels to Date Range.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 				if(neverText.equals("Never"))
 				{
 					System.out.println("The context of the third label is: " +neverText +" equels to Never.");
-					ATUReports.add("The context of the third label is: " +neverText +" equels to Never.", LogAs.PASSED, null);
+					ATUReports.add(time +" The context of the third label is: " +neverText +" equels to Never.", LogAs.PASSED, null);
 				}else {
 					System.out.println("The context of the third label is: " +neverText +" not equels to Never.");
-					ATUReports.add("The context of the third label is: " +neverText +" not equels to Never.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The context of the third label is: " +neverText +" not equels to Never.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 				
 				if(andText.equals("and"))
 				{
 					System.out.println("The context of the middle label is: " +andText +" equels to and.");
-					ATUReports.add("The context of the middle label is: " +andText +" equels to and.", LogAs.PASSED, null);
+					ATUReports.add(time +" The context of the middle label is: " +andText +" equels to and.", LogAs.PASSED, null);
 				}else {
 					System.out.println("The context of the middle label is: " +andText +" not equels to and.");
-					ATUReports.add("The context of the middle label is: " +andText +" not equels to and.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The context of the middle label is: " +andText +" not equels to and.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 				
 				if(endDateText.equals("Select Date"))
 				{
 					System.out.println("The context of the first date label is: " +fromDateText +" equels to Select Date.");
-					ATUReports.add("The context of the first date label is: " +fromDateText +" equels to and.", LogAs.PASSED, null);
+					ATUReports.add(time +" The context of the first date label is: " +fromDateText +" equels to and.", LogAs.PASSED, null);
 				}else {
 					System.out.println("The context of the first date label is: " +fromDateText +" not equels to Select Date.");
-					ATUReports.add("The context of the first date label is: " +fromDateText +" not equels to Select Date.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The context of the first date label is: " +fromDateText +" not equels to Select Date.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 				if(endDateText.equals("Select Date"))
 				{
 					System.out.println("The context of the end date label is: " +endDateText +" equels to Select Date.");
-					ATUReports.add("The context of the end date label is: " +endDateText +" equels to Select Date.", LogAs.PASSED, null);
+					ATUReports.add(time +" The context of the end date label is: " +endDateText +" equels to Select Date.", LogAs.PASSED, null);
 				}else {
 					System.out.println("The context of the end date label is: " +endDateText +" not equels to Select Date.");
-					ATUReports.add("The context of the end date label is: " +endDateText +" not equels to Select Date.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" The context of the end date label is: " +endDateText +" not equels to Select Date.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 						
 				}catch(Exception e){
@@ -577,10 +577,10 @@ public void verifyErrorTitleMissingDatesDisplayedAndValid() {
 			clickElementJS(element);	
 			if(calender.isDisplayed()){
 				System.out.println("verify that After Clicking On The From The Calender Widget Is Displayed.");
-				ATUReports.add("verify that After Clicking On The From The Calender Widget Is Displayed.", LogAs.PASSED, null);
+				ATUReports.add(time +" verify that After Clicking On The From The Calender Widget Is Displayed.", LogAs.PASSED, null);
 			}else {
 				System.out.println("not verify that After Clicking On The From The Calender Widget Is Displayed.");
-				ATUReports.add("not verify that After Clicking On The From The Calender Widget Is Displayed.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" not verify that After Clicking On The From The Calender Widget Is Displayed.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -615,10 +615,10 @@ public void verifyErrorTitleMissingDatesDisplayedAndValid() {
 				String dateToCompare = dateCalender.getAttribute("value");
 				if(dateToCompare.equals(date)){
 					System.out.println("verify that the right date is displayed in textbox");
-					ATUReports.add("verify that the right date is displayed in textbox.", LogAs.PASSED, null);
+					ATUReports.add(time +" verify that the right date is displayed in textbox.", LogAs.PASSED, null);
 				}else {
 					System.out.println("not verify that the right date is displayed in textbox.");
-					ATUReports.add("not verify that the right date is displayed in textbox.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(time +" not verify that the right date is displayed in textbox.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 			}catch(Exception e){
 				e.printStackTrace();
@@ -639,12 +639,12 @@ public void verifyErrorTitleMissingDatesDisplayedAndValid() {
 			Date date = sdf.parse(correctDate);
 			System.out.println(date);
 			System.out.println("The date is in the following format: 'XX/XX/XXXX'");
-			ATUReports.add("The date is in the following format: 'XX/XX/XXXX'", "Success.", "Success.", LogAs.PASSED, null);
+			ATUReports.add(time +" The date is in the following format: 'XX/XX/XXXX'", "Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			
 		} catch (ParseException e) {
 			System.out.println("The date is not in the following format: 'XX/XX/XXXX'" );				
-			ATUReports.add("The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" The date is not in the following format: 'XX/XX/XXXX'", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -656,7 +656,7 @@ public void verifyErrorTitleMissingDatesDisplayedAndValid() {
 		try{			
 			element.clear();
 			System.out.println("Delete the textbox content.");
-			ATUReports.add("Delete the textbox content.","Erase.","Erase.", LogAs.PASSED, null);
+			ATUReports.add(time +" Delete the textbox content.","Erase.","Erase.", LogAs.PASSED, null);
 			
 		}catch(Exception e){
 			e.printStackTrace();

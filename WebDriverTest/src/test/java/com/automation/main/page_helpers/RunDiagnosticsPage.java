@@ -29,13 +29,13 @@ public RunDiagnosticsPage(WebDriver browser) {
 		{
 			
 			System.out.println("run diagnostics page verified");
-			ATUReports.add("run diagnostics page verified", LogAs.PASSED, null);
+			ATUReports.add(time +" run diagnostics page verified", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 		else
 		{
 			System.out.println("run diagnostics page not  verified");
-			ATUReports.add("run diagnostics page not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" run diagnostics page not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -48,13 +48,13 @@ public RunDiagnosticsPage(WebDriver browser) {
 		if(url.contains(driver.getCurrentUrl()))
 		{
 			System.out.println("run diagnostics url verified");
-			ATUReports.add("run diagnostics url verified", LogAs.PASSED, null);
+			ATUReports.add(time +" run diagnostics url verified", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
 		else
 		{
 			System.out.println("run diagnostics page  url not  verified");
-			ATUReports.add("run diagnostics page url not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" run diagnostics page url not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

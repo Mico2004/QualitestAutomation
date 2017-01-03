@@ -88,11 +88,11 @@ public class ManageAAIRS extends Page {
 			waitForVisibility(adminDashboard);	
 			adminDashboard.click();
 			System.out.println("Clicked on admin dashboard link.");
-			ATUReports.add("Clicked on admin dashboard link.", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);
+			ATUReports.add(time +" Clicked on admin dashboard link.", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);
 			return true;
 		} catch (Exception msg) {
 			System.out.println("Fail to click on admin dashboard link.");
-			ATUReports.add("Fail on admin dashboard link.", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);
+			ATUReports.add(time +" Fail on admin dashboard link.", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,null);
 			return false;
 		}
 	}

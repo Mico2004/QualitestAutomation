@@ -113,14 +113,14 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			clickOnFilterButton();
 			try {
 				wait.until(ExpectedConditions.textToBePresentInElement(first_course_name, course_name));
-				ATUReports.add("Search and filter for a course: "+course_name,LogAs.PASSED,null);
+				ATUReports.add(time +" Search and filter for a course: "+course_name,LogAs.PASSED,null);
 				return true;
 			} catch(Exception msg) {
 				continue;
 			}
 		}
 		
-		ATUReports.add("Search and filter for a course failed: "+course_name,LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Search and filter for a course failed: "+course_name,LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		return false;
 	}
 	
@@ -134,11 +134,11 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			try {
 				wait.until(ExpectedConditions.visibilityOf(first_course_membership_button));
 				clickElementJS(first_course_membership_button);
-				ATUReports.add("Clicked on first course membership button",LogAs.PASSED,null);
+				ATUReports.add(time +" Clicked on first course membership button",LogAs.PASSED,null);
 				System.out.println("Clicked on first course membership button");
 				return true;
 			} catch (Exception msg) {
-				ATUReports.add("Clicked on first course membership button failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Clicked on first course membership button failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("Fail to click on first course membership button. ");
 				Thread.sleep(1000);
 			}
@@ -231,9 +231,9 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			mangage_adhoc_courses_membership_window.ok_button.click();
 			Thread.sleep(1000);
 			driver.switchTo().alert().accept();
-			ATUReports.add("Enrolled "+u+"to course "+course+" as student ","user enrolled to course","user enrolled to course", LogAs.PASSED, null);
+			ATUReports.add(time +" Enrolled "+u+"to course "+course+" as student ","user enrolled to course","user enrolled to course", LogAs.PASSED, null);
 			}catch(Exception e){
-				ATUReports.add("Enrolled "+u+"to course "+course+" as student ","user enrolled to course","user not enrolled to course", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Enrolled "+u+"to course "+course+" as student ","user enrolled to course","user not enrolled to course", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				
 				
 			}
@@ -265,9 +265,9 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		driver.switchTo().alert().accept();
 		System.out.println("clicked on ok");
 		System.out.println("d5");
-		ATUReports.add("unEnrolled "+user+" from course "+course,"user unenrolled from course","user unenrolled from course", LogAs.PASSED, null);
+		ATUReports.add(time +" unEnrolled "+user+" from course "+course,"user unenrolled from course","user unenrolled from course", LogAs.PASSED, null);
 	}catch(Exception e){
-		ATUReports.add("unEnrolled "+user+" from course "+course,"user unenrolled from course","failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" unEnrolled "+user+" from course "+course,"user unenrolled from course","failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		
 		
 	}
@@ -306,9 +306,9 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			waitForAlert(60);
 			clickOkInAlertIfPresent();
 			Thread.sleep(3000);
-			ATUReports.add("Deleted course '"+past_course_student2+"' successfully",LogAs.PASSED,null);
+			ATUReports.add(time +" Deleted course '"+past_course_student2+"' successfully",LogAs.PASSED,null);
 			}catch(Exception e){
-			ATUReports.add("Course deletion '"+past_course_student2+"' failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
+			ATUReports.add(time +" Course deletion '"+past_course_student2+"' failed",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
 			Assert.assertTrue(false);
 			}
 		}
@@ -319,7 +319,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 				waitForVisibility(contentTable, 40);
 				
 			}catch(Exception e){
-				ATUReports.add("Loading 'Manage Ad-Hock Courses' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Loading 'Manage Ad-Hock Courses' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		}

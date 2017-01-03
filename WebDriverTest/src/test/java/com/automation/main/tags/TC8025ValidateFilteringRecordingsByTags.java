@@ -158,9 +158,6 @@ public class TC8025ValidateFilteringRecordingsByTags {
 				course.selectCourseThatStartingWith("Ab");
 			}
 		
-		//12.check several recordings respective checkboxes
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);	
-				
 		//13.Hover over the "View" drop-down list menu.
 		record.moveToElementAndPerform(record.view_tasks_button,driver);
 				

@@ -43,16 +43,16 @@ public class EmailInboxPage extends Page{
 	   if(e.getText().equals(subj)) {
 			e.findElement(By.xpath("../../..")).click();
 			System.out.println("click succeded");
-			ATUReports.add("Subject Verification and click", "Exp: "+subj , "Act: "+e.getText(), LogAs.PASSED, null);	      
+			ATUReports.add(time +" Subject Verification and click", "Exp: "+subj , "Act: "+e.getText(), LogAs.PASSED, null);	      
 	       return 1;
 		}
 		  i++;
 		}
 	 System.out.println("click not succeded");
-	 ATUReports.add("click message","name", "click succeded", "click not succeded", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	 ATUReports.add(time +" click message","name", "click succeded", "click not succeded", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	 Assert.assertTrue(false);
 	 }catch(Exception e){
-		 ATUReports.add("Subject verification", "Subject not found",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		 ATUReports.add(time +" Subject verification", "Subject not found",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		 
 		 
 		 return -1;
@@ -83,44 +83,44 @@ String userID, String userNAME, String customerNAME, String pageURL) throws Inte
 
 	// fromAndComments verification
 	if(!fromAndComments[0].equals("From") || !fromAndComments[1].equals(comment_message_need_to_be)  ){
-		ATUReports.add("From And Comments field verification", "Exp: From: "+comment_message_need_to_be, "Act: "+fromAndComments[0]+": "+fromAndComments[1], LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" From And Comments field verification", "Exp: From: "+comment_message_need_to_be, "Act: "+fromAndComments[0]+": "+fromAndComments[1], LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	 }
 	else
-		ATUReports.add("From And Comments  verification", "Exp: From: "+comment_message_need_to_be, "Act: "+fromAndComments[0]+": "+fromAndComments[1], LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" From And Comments  verification", "Exp: From: "+comment_message_need_to_be, "Act: "+fromAndComments[0]+": "+fromAndComments[1], LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		
 	// UserID verification
 	if(!userId[0].equals("User ID") &&  userNAME.equals("Guest") && userId.length<2){
-		ATUReports.add("User id field verification", "Exp: User ID: ", "Act: "+userId[0], LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" User id field verification", "Exp: User ID: ", "Act: "+userId[0], LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	 }
 	else // *************** need to add logic in case user is not a guest ****************
-		ATUReports.add("User id field verification", "Exp: User ID: ", "Act: "+userId[0], LogAs.PASSED, null);
+		ATUReports.add(time +" User id field verification", "Exp: User ID: ", "Act: "+userId[0], LogAs.PASSED, null);
 	//user name verification	
 	if(!userName[0].equals("User Name") || !userName[1].equals(userNAME)  ){
-		ATUReports.add("User Name field verification", "Exp: User Name: "+userNAME, "Act: "+userName[0]+": "+userName[1], LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" User Name field verification", "Exp: User Name: "+userNAME, "Act: "+userName[0]+": "+userName[1], LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	 }
 	else
-		ATUReports.add("User Name field verification", "Exp: User Name: "+userNAME, "Act: User Name: "+userName[1], LogAs.PASSED, null);
+		ATUReports.add(time +" User Name field verification", "Exp: User Name: "+userNAME, "Act: User Name: "+userName[1], LogAs.PASSED, null);
 	
 	//Customer name verification	
 	if(!customerName[0].equals("Customer Name") || !customerName[1].toLowerCase().equals(customerNAME.toLowerCase())  ){
-		ATUReports.add("Customer name field verification", "Exp: Customer name: "+customerNAME, "Act: "+customerName[0]+": "+customerName[1], LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Customer name field verification", "Exp: Customer name: "+customerNAME, "Act: "+customerName[0]+": "+customerName[1], LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	 }
 	else
-		ATUReports.add("Customer name field verification", "Exp: Customer name: "+customerNAME, "Act: Customer name: "+customerName[1], LogAs.PASSED, null);
+		ATUReports.add(time +" Customer name field verification", "Exp: Customer name: "+customerNAME, "Act: Customer name: "+customerName[1], LogAs.PASSED, null);
 	
 	//Page URL verification	
 	if(!pageUrl[0].equals("Page URL")  || !pageUrl[1].equals(pageURL)  ){
-		ATUReports.add("Page URL field verification", "Exp: Page URL: "+pageURL, "Act: "+pageUrl[0]+pageUrl[1], LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" Page URL field verification", "Exp: Page URL: "+pageURL, "Act: "+pageUrl[0]+pageUrl[1], LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	 }
 	else
-		ATUReports.add("Page URL field verification", "Exp: Page URL: "+pageURL, "Act: Page URL: "+pageUrl[1], LogAs.PASSED, null);
+		ATUReports.add(time +" Page URL field verification", "Exp: Page URL: "+pageURL, "Act: Page URL: "+pageUrl[1], LogAs.PASSED, null);
 	
 	//User agent verification	
 	if(!userAgent[0].equals("Page Agent") && userAgent[1].equals("") ){
-		ATUReports.add("user Agent field verification", "Exp: User Agent: ", "Act: "+userAgent[0]+": Not empty", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time +" user Agent field verification", "Exp: User Agent: ", "Act: "+userAgent[0]+": Not empty", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	 }
 	else
-		ATUReports.add("user Agent field verification", "Exp: User Agent: <Anything>", "Act: User Agent: <Anything>", LogAs.PASSED, null);
+		ATUReports.add(time +" user Agent field verification", "Exp: User Agent: <Anything>", "Act: User Agent: <Anything>", LogAs.PASSED, null);
 		
  }
 	

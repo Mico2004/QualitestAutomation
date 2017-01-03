@@ -25,11 +25,11 @@ public class HelpPage extends Page {
 		if (home_button.isDisplayed()) {
 			verifyHelpPageUrl(driver);
 			System.out.println("help page verified");
-			ATUReports.add("help page verified", LogAs.PASSED, null);
+			ATUReports.add(time +" help page verified", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("help page not verified");
-			ATUReports.add("help page not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" help page not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -39,11 +39,11 @@ public class HelpPage extends Page {
 		String url = driver.getCurrentUrl();
 		if (url.contains("help.tegrity.com/knowledgebase_category/administrators")) {
 			System.out.println("help page url verified");
-			ATUReports.add("help page url verified", LogAs.PASSED, null);
+			ATUReports.add(time +" help page url verified", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("help page url not verified");
-			ATUReports.add("help page url not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" help page url not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -53,11 +53,11 @@ public class HelpPage extends Page {
 		String url = driver.getCurrentUrl();
 		if (url.contains("http://help.tegrity.com/knowledgebase_category/students")) {
 			System.out.println("help page url verified");
-			ATUReports.add("help page url verified", LogAs.PASSED, null);
+			ATUReports.add(time +" help page url verified", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("help page url not verified");
-			ATUReports.add("help page url not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" help page url not verified", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
