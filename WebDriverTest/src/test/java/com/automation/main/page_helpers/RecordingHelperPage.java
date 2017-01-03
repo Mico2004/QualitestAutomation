@@ -193,6 +193,8 @@ public class RecordingHelperPage extends Page {
 	public  WebElement subscribe_button;
 	@FindBy(xpath ="//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[1]/div/h4/div/div[1]/a/strong")
 	public  WebElement firstRec;
+	@FindBy(xpath = ".//*[@id='scrollableArea']/div[1]/div[1]/div[2]/div/ul/li/ul")
+	public WebElement coures_task;
 	@FindBy(id = "VideoPodcast")
 	public WebElement video_podcast;
 	@FindBy(id = "PublishTask")
@@ -225,8 +227,7 @@ public class RecordingHelperPage extends Page {
 	public WebElement get_live_webcast;
 	public List<String> additional_content_list_names;
 	@FindBy(xpath = "//a[starts-with(@id,'NewItem')]")
-	public
-	List<WebElement> additional_content_list;
+	public List<WebElement> additional_content_list;
 	@FindBy(id = "RecordingsTab")
 	public WebElement recordings_tab;
 	@FindBy(id = "UploadFile")
@@ -309,8 +310,14 @@ public class RecordingHelperPage extends Page {
 	public WebElement view_button_date;
 	@FindBy(linkText = "Bookmark type")
 	public WebElement view_button_bookmark_type;
+	@FindBy(id = "moveToPast")
+	public WebElement move_to_past_courses;
+	@FindBy(id = "moveToActive")
+	public WebElement move_to_active_courses;
 	public ConfirmationMenu confirm_menu;	
 	public CopyMenu copyMenu;
+	
+	
 	
 	// Set Property for ATU Reporter Configuration
 	{
@@ -6119,5 +6126,44 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		return statusNumber;
 	}
 
-	
+	public void verifyThatMoveToPastCoursesIsTheLastOneBeforeSubscribe(String ActiveOrPastId) {
+		
+		int countOfLiFromElement; 
+		try { 
+		int indexOfMoveToPastCourseOrAciveCourses = 0;
+		List <WebElement> dropdown= coures_task.findElements(By.tagName("li"));
+		for(WebElement element : dropdown){
+			try{
+				WebElement currLink = element.findElement(By.tagName("a"));
+				String id = currLink.getAttribute("id");
+				if(id.equals(ActiveOrPastId)){
+					break;
+				} else indexOfMoveToPastCourseOrAciveCourses++;
+			}catch(Exception e){
+				indexOfMoveToPastCourseOrAciveCourses++;
+				continue;
+			}
+		}
+		if(ActiveOrPastId.equals("moveToActive")) {
+			countOfLiFromElement = 1;
+		} else countOfLiFromElement = 2;	
+		if(dropdown.get(indexOfMoveToPastCourseOrAciveCourses + countOfLiFromElement).getAttribute("class").equals("divider")){
+			WebElement nextElement = dropdown.get(indexOfMoveToPastCourseOrAciveCourses + countOfLiFromElement +1).findElement(By.tagName("span"));
+			if(nextElement.getText().equals("Subscribe to Your Course's...")){
+				System.out.println("Verify that move to past courses is the last one before subscribe.");
+				ATUReports.add(time +"Verify that move to past courses is the last one before subscribe","Success.","Success.", LogAs.PASSED, null);
+			} else {
+				System.out.println("not Verify that move to past courses is the last one before subscribe 1.");
+				ATUReports.add(time +"Verify that move to past courses is the last one before subscribe 1.","Success.","Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		} else {
+			System.out.println("not Verify that move to past courses is the last one before subscribe 2.");
+			ATUReports.add(time +"Verify that move to past courses is the last one before subscribe 2.","Success.","Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		 
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
 }

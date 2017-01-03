@@ -30,13 +30,10 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Command;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -332,7 +329,6 @@ public class Page {
 	public boolean isElemenetDisplayed(By by) {
 		try {
 			driver.findElement(by).isDisplayed();
-
 			return true;
 		} catch (NoSuchElementException e) {
 			return false;
@@ -894,6 +890,7 @@ public class Page {
 	// This function verify that WebElement is not displayed, and String with
 	// description
 	public void verifyWebElementNotDisplayed(WebElement web_element, String description) {
+		try {
 		if (!web_element.isDisplayed()) {
 			System.out.println(description + " is not displayed.");
 			ATUReports.add(description + " is not displayed.", "True.", "True.", LogAs.PASSED, null);
@@ -902,6 +899,11 @@ public class Page {
 			System.out.println(description + " is displayed.");
 			ATUReports.add(description + " is displayed.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
+		}
+		}catch(NoSuchElementException e) {
+			System.out.println(description + " is not displayed.");
+			ATUReports.add(description + " is not displayed.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
 		}
 	}
 	

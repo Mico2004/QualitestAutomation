@@ -850,15 +850,15 @@ public class CoursesHelperPage extends Page {
 	public boolean verifyCourseNotExist(String name) {
 		for (String course : courses) {
 			if (name.equals(course)) {
-				System.out.println("course exists");
+				System.out.println("The course:" + name +" is exists at that list");
 				Assert.assertTrue(false);
-				ATUReports.add(time +" course exists", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +"The course:" + name +" is exists at that list", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				return false;
 			}
 		}
-		System.out.println("course  not exists");
+		System.out.println("The course:" + name +" is not exists at that list");
 		Assert.assertTrue(true);
-		ATUReports.add(time +" course not exists", LogAs.PASSED, null);
+		ATUReports.add(time +" The course:" + name +" is not exists at that list", LogAs.PASSED, null);
 
 		return true;
 	}

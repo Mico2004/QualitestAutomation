@@ -724,6 +724,28 @@ public class ConfirmationMenu extends Page {
 		Thread.sleep(3000);
 	}
 	
+	public void clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses(String description) throws InterruptedException {
+		try {
+			Thread.sleep(1000);
+			waitForVisibility(header_title_list.get(0));
+			if (!header_title_list.get(0).getText().contains("Move")) {
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertEquals(false, true);
+			}
+			if (!error_msg_body_list.get(0).getText().contains(description)) {
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertEquals(false, true);
+			}
+			ok_button.click();
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception e) {
+			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		Thread.sleep(3000);
+	}
+	
 	public void verifyConfirmBackgroundColor(RecordingHelperPage rec) throws InterruptedException {
 		Thread.sleep(2000);
 		String background_rec = rec.getBackGroundColor(rec.background);
