@@ -64,6 +64,8 @@ public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSee
 	Hashtable<String,String> bookmarksNameAndTime = new Hashtable<String,String>();
 	List<String> bookmarksName = new ArrayList<String>();
 	String course_name;
+	String student1;
+	
 	@BeforeClass
 	public void setup() {
 
@@ -169,15 +171,17 @@ public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSee
 			
 			//11.The bookmark you added is displayed with the correct details
 			if(type_of_user == 2){
-				String student1 = bookmarksName.get(1);	
+				student1 = bookmarksName.get(1);	
 				//.verify that the bookmark student2 is not display
 				record.verifyBookmarkIsNotDisplay(bookmarksName.get(1));
 				bookmarksName.remove(1);
-				//adding him back for later use
+				record.verifyThatAllTheBookmarksDisplayInTheBookmarkTab(bookmarksName);
 				bookmarksName.add(1,student1);
-			}
-			record.verifyThatAllTheBookmarksDisplayInTheBookmarkTab(bookmarksName);
 				
+			} else {
+				record.verifyThatAllTheBookmarksDisplayInTheBookmarkTab(bookmarksName);	
+			}
+			
 			//12.sign out
 			record.signOut();
 			
