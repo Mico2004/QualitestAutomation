@@ -5376,17 +5376,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		path = System.getProperty("user.dir") + path;
 
 		Robotil robotil=new Robotil("localhost", 5555);	
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
 		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
 		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
 	
-		Thread.sleep(5000);
+		Thread.sleep(6000);
 		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
 		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
 		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
 		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
-		
 		
 		Thread.sleep(2000);
 		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -5402,7 +5401,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		Thread.sleep(2000);
 		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
 		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
-		Thread.sleep(7000);
+		Thread.sleep(5000);
 		
 //		// enter to the tegrity program
 //		Robot robot = new Robot();

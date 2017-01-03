@@ -129,7 +129,7 @@ public class TC7946ValidateChangesInAutomaticallyPublishStudentRecordingsSetting
 		course.selectCourseThatStartingWith("Ab");	
 			
 		//10.check that the pending for record to upload is over	
-		record.checkStatusExistenceForMaxTTime(450);
+		record.checkStatusExistenceForMaxTTime(220);
 		
 		//11.select the index of the record that we just uploaded
 		String recordingName = "Marie Curie -Bal, Amrit (FINAL)";	                       
