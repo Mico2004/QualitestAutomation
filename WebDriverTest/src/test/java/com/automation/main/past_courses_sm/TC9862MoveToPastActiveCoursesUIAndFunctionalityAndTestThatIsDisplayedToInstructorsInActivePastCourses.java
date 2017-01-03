@@ -15,6 +15,7 @@ import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
+import com.automation.main.page_helpers.ImpersonateUser;
 import com.automation.main.page_helpers.LoginHelperPage;
 import com.automation.main.page_helpers.PublishWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
@@ -25,6 +26,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import junitx.util.PropertyManager;
+
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -43,6 +46,7 @@ public class TC9862MoveToPastActiveCoursesUIAndFunctionalityAndTestThatIsDisplay
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
+	public ImpersonateUser impersonate_user;
 	public CalendarPage calendarPage;
 	public EditRecordingPropertiesWindow edit_recording_properties_window;
 	public AdminDashboardPage admin_dash_board_page;
@@ -68,7 +72,8 @@ public class TC9862MoveToPastActiveCoursesUIAndFunctionalityAndTestThatIsDisplay
 			tag_window= PageFactory.initElements(driver, TagMenu.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
-
+			impersonate_user = PageFactory.initElements(driver, ImpersonateUser.class);
+			
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
 		 System.out.println("Starting the test: TC9862MoveToPastActiveCoursesUIAndFunctionalityAndTestThatIsDisplayedToInstructorsInActivePastCourses at " + DateToStr);
@@ -88,16 +93,31 @@ public class TC9862MoveToPastActiveCoursesUIAndFunctionalityAndTestThatIsDisplay
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
 		
 		//2.0-Login as INSTRUCTOR , 1- Login as Executive admin
-		for(int type_of_user = 0; type_of_user < 2; type_of_user++) {
+		for(int type_of_user = 0; type_of_user < 3; type_of_user++) {
 			
 		if(type_of_user == 0) {
 			tegrity.loginCourses("User1");
-		}else {
+		}else if(type_of_user ==1) {
 			tegrity.loginAdmin("ExcutiveAdmin");
+		} else {
+			
+			tegrity.loginAdmin("Admin");
+			
+			//14.Click on "Impersonate User" under the "Users" section
+			admin_dash_board_page.waitForPageToLoad();
+			admin_dash_board_page.clickOnTargetSubmenuUsers("Impersonate User");
+			
+			//15.Enter the Instructor's ID you logged in with in step 4 in the text field and click on "Impersonate"
+			String current_handler = driver.getWindowHandle();		
+			impersonate_user.EnterTheUserIdAndPressOnImpersonate(PropertyManager.getProperty("User1"));
+		
+			//16.Move to the open tab and close the old tab		
+			course.waitForThePageToLoad();
+			record.moveToTheOtherTabAndCloseTheOldTab(current_handler);
 		}
 			
 		//3.Click on one of the active courses	
-		if(type_of_user == 0){
+		if(type_of_user == 0 || type_of_user == 2){
 			course_name = course.selectCourseThatStartingWith("abc");
 		} else {
 			course_name = course.selectCourseThatStartingWith("Ab");		
