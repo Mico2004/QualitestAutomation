@@ -100,11 +100,39 @@ public class TC7834VerifyCopyFunctionalityForAManualPastCourse {
 		//5.Select a recording
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
+		//take the record name for later
+		String recordName = record.getFirstRecordingTitle();
+		
 		//6.Select the "Recording Tasks -> Copy" menu item
 		record.clickOnRecordingTaskThenCopy();
 		
 		//7.Verify that no past course is not displayed in list of destination courses
 		copy.VerifyThatCourseIsNotDisplayedInTheListOfCourseDestination("PastCourse");
+		
+		//8.Click the "Cancel" button
+		copy.clickOnCancelButton(record);
+		
+		//9.Select the "Recording Tasks -> Copy" menu item
+		record.clickOnRecordingTaskThenCopy();
+		
+		//10.Choose an active course
+		copy.selectTargetCourseFromCourseListThatStartWith("abc");
+		
+		//11.Click on 'Copy' button
+		copy.clickOnCopyButton();
+		
+		//12.click on the ok button
+		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
+		
+		//13.wait until we finish moving the record
+		record.checkStatusExistenceForMaxTTime(220);
+		
+		//14.Go to destination course
+		record.returnToCourseListPage();
+		course.selectCourseThatStartingWith("abc");
+		
+		//15. *Verify the recording was copied to the destination course*
+		record.verifyThatTargetRecordingExistInRecordingList(recordName);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

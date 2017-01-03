@@ -826,9 +826,9 @@ public class CopyMenu extends Page {
 
 			try{
 				waitForVisibility(first_course_on_the_list);
-				new WebDriverWait(driver, 5).until(ExpectedConditions.textToBePresentInElement(course_list_textbox, target_course_name));
+				new WebDriverWait(driver, 5).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(course_list_textbox, target_course_name)));
 				System.out.println("verify that the course is not display in the list of course destination");
-				ATUReports.add(time +" verify that the course is not display in the list of course destination", "Success.", "Success.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+				ATUReports.add(time +" verify that the course is not display in the list of course destination", "Success.", "Success.",LogAs.PASSED, null);		
 			}catch(org.openqa.selenium.TimeoutException msg){
 				System.out.println("Not verify that the course is not display in the list of course destination");
 				ATUReports.add(time +" verify that the course is not display in the list of course destination", "Success.", "Failed.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
