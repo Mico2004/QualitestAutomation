@@ -141,7 +141,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		Thread.sleep(1000);
 		
 		// 7. Set the focus to the field with a mouse pointer.
-		top_bar_helper.search_box_field.click();
+		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 		
 		// changing the first chapter
 		Thread.sleep(3000);

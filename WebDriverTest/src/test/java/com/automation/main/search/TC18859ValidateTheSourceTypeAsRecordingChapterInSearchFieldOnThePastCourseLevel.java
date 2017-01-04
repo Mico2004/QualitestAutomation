@@ -133,37 +133,34 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
 		//pre test to unroll course from active courses to past courses 
-		
-		
+			
 		// 1. getting the name of the past course
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
-		Thread.sleep(1000); 
 		
 		course.clickOnPastCoursesTabButton();
 		
 		String current_course = course.selectCourseThatStartingWith("PastCourseA");
 		System.out.println("The course that selected is: " + current_course);
-		Thread.sleep(1000); 
+	 
 		
 		// 2. move course from the bank to the past courses 
 		record.signOut();	
 		
 		tegrity.loginCourses("SuperUser");
-		Thread.sleep(1000); 
+		
 		//2.1 enter to the bank
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(3000); 
+
 		
 		// 2.2 get to the student tab
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000); 
+
 		
 		// 2.3 select the first checkbox and enter to the copy menu
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(1000); 
-		
+	
 		copy.selectTargetCourseFromCourseList(current_course);
 		Thread.sleep(1000); 
 		
@@ -175,24 +172,20 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		
 		record.checkStatusExistenceForMaxTTime(360);
-		Thread.sleep(1000); 
-		
+		 		
 		record.signOut();
-		Thread.sleep(1000); 	
+		
 	 	/// end pre test
 		
 		// 1. Validate there is recording in past courses Tab. Search input specified shall be case-insensitive.
 		tegrity.loginCourses("User1");
 		
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(1000);
-		
+	
 		course.selectCourseThatStartingWith("PastCourseA");
-		Thread.sleep(1000);
-		
+	
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000);
-		
+	
 		// Get Recording Chapter information.
 		record.verifyFirstExpandableRecording();
 		//record.first_recording_title.click();
@@ -201,20 +194,19 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 
 		
 		top_bar_helper.signOut();
-		Thread.sleep(3000);
+	
 		
 		// 2. Log in as INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(3000);
+		
 			
 		// 3. Open some course from the past courses Tab.
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(1000);
+		
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(1000);
-			
+		
 		// 4. Set the focus to the field with a mouse pointer.
-		top_bar_helper.search_box_field.click();
+		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 		// 5. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(recording_chapter);
@@ -287,8 +279,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		
 		// 13. Sign Out.
 		record.signOut();
-		Thread.sleep(3000);
-		
+	
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		

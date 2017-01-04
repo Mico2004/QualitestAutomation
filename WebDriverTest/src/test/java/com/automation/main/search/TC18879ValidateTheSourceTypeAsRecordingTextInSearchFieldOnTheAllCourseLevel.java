@@ -184,7 +184,7 @@ public class TC18879ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheAllCou
 			}
 				
 			// 3. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 			// 4. Search the "Recording Text" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(recording_text);

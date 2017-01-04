@@ -166,10 +166,9 @@ public class TC18892ValidateTheFunctionalityOfSearchFieldInCourseSettingPageAsIn
 		top_bar_helper.verifyWebElementHaveTargetAttributeTitle(top_bar_helper.search_box_field, "Search in this course...");
 		Thread.sleep(1000);
 		
-		if(!(driver instanceof InternetExplorerDriver)) {
-			// 8. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
-		}
+
+		// 8. Set the focus to the field with a mouse pointer.
+		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 		
 		// 9. Search some "Recording Chapter" and press ENTER.
 		top_bar_helper.searchForTargetText(first_chapter_title);

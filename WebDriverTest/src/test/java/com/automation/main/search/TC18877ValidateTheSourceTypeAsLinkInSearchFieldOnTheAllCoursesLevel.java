@@ -172,10 +172,10 @@ public class TC18877ValidateTheSourceTypeAsLinkInSearchFieldOnTheAllCoursesLevel
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(3000);	
+		
 			
 			// 3. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 			// 4. Search the "Link" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(new_additional_link_url);

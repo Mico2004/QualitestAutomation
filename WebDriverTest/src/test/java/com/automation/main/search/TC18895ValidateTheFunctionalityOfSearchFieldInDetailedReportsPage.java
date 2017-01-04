@@ -139,9 +139,7 @@ public class TC18895ValidateTheFunctionalityOfSearchFieldInDetailedReportsPage {
 		String header_default_color = top_bar_helper.getBackGroundColor(top_bar_helper.header);
 					
 		record.returnToCourseListPage();
-		Thread.sleep(1000);
-					
-		
+
 		top_bar_helper.signOut();
 		
 		
@@ -154,13 +152,11 @@ public class TC18895ValidateTheFunctionalityOfSearchFieldInDetailedReportsPage {
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);
-			
+		
 			
 			// 3. Click on "Detailed reports" from "Reports" drop dawn list.
 			top_bar_helper.clickOnReportThenDetailedReports();
-			
-			
+					
 			// 4. Validate the search field is display at the top right of the UI page below the top navigation bar.
 			top_bar_helper.verifySearchFieldDisplayedAtTopRight();
 			
@@ -175,7 +171,7 @@ public class TC18895ValidateTheFunctionalityOfSearchFieldInDetailedReportsPage {
 			Thread.sleep(1000);
 			
 			// 7. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 			// 8.1. In case there is no search result found, the empty search results page shall be displayed.
 			top_bar_helper.searchForTargetText("NotExistingRecordingChapter777777777777");

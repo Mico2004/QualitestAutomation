@@ -161,11 +161,9 @@ public class TC18893ValidateTheFunctionalityOfSearchFieldInMyAccountPage {
 		// 7.2. A hint is displayed to the user: "Search in all your courses...".
 		top_bar_helper.moveToElementAndPerform(top_bar_helper.search_box_field, driver);
 		top_bar_helper.verifyWebElementHaveTargetAttributeTitle(top_bar_helper.search_box_field, "Search in all of your courses...");
-		Thread.sleep(1000);
 		
 		// 8. Set the focus to the field with a mouse pointer.
-		top_bar_helper.search_box_field.click();
-	
+		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 		
 		// 9. Search some "Recording Chapter" and press ENTER.
 		top_bar_helper.searchForTargetText(first_chapter_title);

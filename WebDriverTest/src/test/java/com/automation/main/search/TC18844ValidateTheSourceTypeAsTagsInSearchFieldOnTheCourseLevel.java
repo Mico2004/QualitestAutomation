@@ -201,7 +201,7 @@ public class TC18844ValidateTheSourceTypeAsTagsInSearchFieldOnTheCourseLevel {
 			
 			
 			// 4. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 			// 5. Search the "Tags" and that we mentioned in the preconditions press ENTER.
 			top_bar_helper.searchForTargetText(tags_for_search);

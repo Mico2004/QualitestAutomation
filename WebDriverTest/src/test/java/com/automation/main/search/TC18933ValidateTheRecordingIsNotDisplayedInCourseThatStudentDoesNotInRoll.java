@@ -174,7 +174,7 @@ public class TC18933ValidateTheRecordingIsNotDisplayedInCourseThatStudentDoesNot
 		tegrity.loginCourses("User4");
 		
 		// 3. Set the focus to the field with a mouse pointer.
-		top_bar_helper.search_box_field.click();
+		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 		
 		// 4. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(new_chapter_name);

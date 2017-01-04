@@ -154,14 +154,14 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+
 		
 		record.returnToCourseListPage();
 		
 		course.selectCourseThatStartingWith("Ab");
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);
 		course.selectCourseThatStartingWith("BankValid");
-		Thread.sleep(1000);
+	
 		record.clickOnAdditionContentTab();
 		Thread.sleep(2000);
 		
@@ -190,9 +190,8 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 		System.out.println("Target additional content for the test is: " + target_additional_content_for_the_test);
 		
 		record.signOut();
-		Thread.sleep(2000);
 		
-		
+	
 		// Looping for INSTRUCTOR, Student and Guest
 		for(int type_of_user = 0; type_of_user < 3; type_of_user++) {
 			if(type_of_user == 0) {
@@ -205,10 +204,9 @@ public class TC18882ValidateTheSourceTypeAsFileInSearchFieldOnTheAllCoursesLevel
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(3000);	
-			
+					
 			// 3. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 			// 4. Search some "File" and press ENTER.
 			top_bar_helper.searchForTargetText(target_additional_content_for_the_test);

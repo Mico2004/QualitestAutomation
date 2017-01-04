@@ -138,8 +138,7 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
-		
+			
 		// Create tags for first recording
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
@@ -177,10 +176,10 @@ public class TC18883ValidateTheSourceTypeAsTagsInSearchFieldOnTheAllCoursesLevel
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			}
-			Thread.sleep(3000);
+			
 			
 			// 3. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 			// 4. Search the "Tags" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(tags_for_search);

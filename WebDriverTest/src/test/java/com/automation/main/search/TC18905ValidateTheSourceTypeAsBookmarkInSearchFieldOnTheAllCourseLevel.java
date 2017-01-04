@@ -153,7 +153,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 		
 		String bookmarked_recording_title = record.getFirstRecordingTitle();
 		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
-		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.verifyTimeBufferStatusForXSec(5);
 		//record.clickOnFirstVisibleChapter();
 			
 		player_page.deleteAllBookmark();
@@ -181,7 +181,7 @@ public class TC18905ValidateTheSourceTypeAsBookmarkInSearchFieldOnTheAllCourseLe
 			}
 				
 			// 3. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 			// 4. Search some "Bookmark" and press ENTER.
 			top_bar_helper.searchForTargetText(bookmark_for_search);

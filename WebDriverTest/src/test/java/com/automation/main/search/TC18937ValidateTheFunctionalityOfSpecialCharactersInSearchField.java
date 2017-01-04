@@ -142,7 +142,7 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		// 3.1 wait until the status will disappear
 		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
 		// 4. Set the focus to the field with a mouse pointer.
-		top_bar_helper.search_box_field.click();
+		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 	
 		// 5. Change the name of the chapter that we mentioned in the preconditions to "/\[]:;|=,+*?<>".
 		Thread.sleep(3000);

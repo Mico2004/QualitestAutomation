@@ -166,7 +166,7 @@ public class TC18894ValidateTheFunctionalityOfSearchFieldInWeeklySummaryPage {
 			Thread.sleep(1000);
 			
 			// 7. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 			// 8.1. In case there is no search result found, the empty search results page shall be displayed.
 			top_bar_helper.searchForTargetText("NotExistingRecordingChapter777777777777");

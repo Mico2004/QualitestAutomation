@@ -149,8 +149,6 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(2000);
-		
 		
 		// set Chapter Keyword for recording
 		Date date = new Date();
@@ -164,8 +162,6 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 		edit_recording.setTargetKeywordForFirstChapter(recording_chapter_keyword);
 		
 		record.signOut();
-		Thread.sleep(3000);
-		
 		
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 3; type_of_user++) {
@@ -180,14 +176,14 @@ public class TC18881ValidateTheSourceTypeAsChapterKeywordInSearchFieldOnTheAllCo
 				// 2. Login as guest
 				tegrity.loginAsguest();
 			} 
-			Thread.sleep(3000);
+		
 			
 			// 3. Open some course.
 			course.selectCourseThatStartingWith(current_course);
 	
 			
 			// 4. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 			// 5. Search the "Chapter Keyword" that we mentioned in the preconditions and press ENTER.
 			top_bar_helper.searchForTargetText(recording_chapter_keyword);

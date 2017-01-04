@@ -229,7 +229,7 @@ public class TC18840ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnTheCours
 			
 			
 			// 4. Set the focus to the field with a mouse pointer.
-			top_bar_helper.search_box_field.click();
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 			
 			// 5. Search the "Recording Title" that we mentioned in the preconditionsand press ENTER.
 			top_bar_helper.searchForTargetText(recording_title_for_the_test);
