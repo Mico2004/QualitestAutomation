@@ -211,7 +211,6 @@ public class TC22746ValidatePersonlBookmarksAreNotDisplayedOnSearchResultOnCours
 		search_page.verifyBookmarkIconDisplayedIndexSearchResult(1);
 		search_page.verifyResultContainOneResultWithTargetTitle(to_search);
 		
-
 		//post test
 		record.signOut();
 	

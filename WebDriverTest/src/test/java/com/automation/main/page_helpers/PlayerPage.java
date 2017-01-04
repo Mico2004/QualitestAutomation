@@ -745,7 +745,7 @@ public class PlayerPage extends Page {
 
 	// This function delete all bookmarks
 	public void deleteAllBookmark() throws InterruptedException {
-		
+		try{
 		int size = bookmark_list.size();		
 		if(size>0){
 				for (WebElement we : bookmark_list) {
@@ -759,6 +759,10 @@ public class PlayerPage extends Page {
 		} else {
 			System.out.println("There no bookmarks here.");
 			ATUReports.add(time +" There no bookmarks here.", "True.", "True.", LogAs.PASSED, null);
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
+			ATUReports.add(time +e.getMessage(), "Success.", "Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	

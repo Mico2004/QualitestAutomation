@@ -161,7 +161,7 @@ public class TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevel
 		
 		String bookmarked_recording_title = record.getFirstRecordingTitle();
 		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
-		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.verifyTimeBufferStatusForXSec(5);
 		player_page.deleteAllBookmark();
 		player_page.addTargetBookmark(bookmark_for_search);
 		player_page.exitInnerFrame();
@@ -228,7 +228,6 @@ public class TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevel
 			break;
 		}
 
-
 		///14.verify return to recordings page
 		player_page.returnToRecordingPageByNameAsAdmin(current_course,record);
 		//15.navigate back to player recording
@@ -245,10 +244,15 @@ public class TC22693ValidateSourceTypeAsBookmarkInSearchFieldOnTheRecordingLevel
 		player_page.returnToAdminPage(admin_dashboard_page);
 		
 		
-		// post test
-		admin_view_course_list.moveToCoursesThroughGet(url);
+		// post test - delete all the bookmarks
+		record.signOut();
+		
+		tegrity.loginCourses("User1");	
+		course.selectCourseThatStartingWith("Ab");
+	
+		bookmarked_recording_title = record.getFirstRecordingTitle();
 		record.clickOnTargetRecordingAndOpenItsPlayback(bookmarked_recording_title);
-		player_page.verifyTimeBufferStatusForXSec(10);
+		player_page.verifyTimeBufferStatusForXSec(2);
 		player_page.deleteAllBookmark();
 		
 		System.out.println("Done.");
