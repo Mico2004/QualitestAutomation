@@ -79,7 +79,7 @@ public class TestSuitePreSetCopyRecordings_PastCoursesSm {
 	@BeforeClass
 	public void setup() {
 
-//		System.setProperty("webdriver.edge.driver", "src/test/resources/MicrosoftWebDriver.exe");
+///		System.setProperty("webdriver.edge.driver", "src/test/resources/MicrosoftWebDriver.exe");
 		// capability=DesiredCapabilities.internetExplorer();
 		// capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
 		//
