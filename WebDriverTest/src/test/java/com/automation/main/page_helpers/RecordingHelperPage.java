@@ -696,6 +696,58 @@ public class RecordingHelperPage extends Page {
 
 	}
 	
+	// This function click on Course Task then on Move to pass courses in the sub menu
+		public void clickOnCourseTaskThenMoveToPastCourses() throws InterruptedException {
+			WebElement element=course_tasks_button;
+			String id="moveToPast";
+			try {
+				System.out.println("clickOnRecordingTaskThen1");
+				waitForVisibility(element);
+				System.out.println("Afterwait");
+				((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+				System.out.println("course_settings displayed");
+				ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+						id+" window is displayed", LogAs.PASSED, null);
+				Thread.sleep(1000);
+				Assert.assertTrue(true);
+				return;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				System.out.println("clickOnRecordingTaskThen6");
+				ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+						id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println(id+" window not displayed");
+				Assert.assertTrue(false);
+			}
+
+		}
+	
+		// This function click on Course Task then on Move to active courses in the sub menu
+		public void clickOnCourseTaskThenMoveToActiveCourses() throws InterruptedException {
+			WebElement element=course_tasks_button;
+			String id="moveToActive";
+			try {
+				System.out.println("clickOnRecordingTaskThen1");
+				waitForVisibility(element);
+				System.out.println("Afterwait");
+				((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+				System.out.println("course_settings displayed");
+				ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+						id+" window is displayed", LogAs.PASSED, null);
+				Thread.sleep(1000);
+				Assert.assertTrue(true);
+				return;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				System.out.println("clickOnRecordingTaskThen6");
+				ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+						id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println(id+" window not displayed");
+				Assert.assertTrue(false);
+			}
+
+		}
+	
 	public void clickOnCourseTaskThenUploadARecording() throws InterruptedException {
 		WebElement element=course_tasks_button;
 		String id="UploadRecording";
@@ -1804,7 +1856,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			Assert.assertTrue(false);
 		}
 	}
-
+	
+	
 	// This function click on Content Task then on move in the sub menu
 	public void clickOnContentTaskThenMove() throws InterruptedException {
 		WebElement element=content_tasks_button;

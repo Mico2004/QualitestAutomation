@@ -1,5 +1,6 @@
 package com.automation.main.past_courses_sm;
 
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
@@ -13,9 +14,12 @@ import com.automation.main.page_helpers.AdminDashboardViewCourseList;
 import com.automation.main.page_helpers.CalendarPage;
 import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
+import com.automation.main.page_helpers.CourseSettingsPage;
 import com.automation.main.page_helpers.CoursesHelperPage;
+import com.automation.main.page_helpers.DeleteMenu;
 import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
+import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.PublishWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.TagMenu;
@@ -26,12 +30,11 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC7834VerifyCopyFunctionalityForAManualPastCourse {
+public class TC10951VerifyMoveFunctionalityForAManualPastCourse {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -45,6 +48,9 @@ public class TC7834VerifyCopyFunctionalityForAManualPastCourse {
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
 	public CalendarPage calendarPage;
+	public MoveWindow move_Window;
+	public DeleteMenu delete_menu;
+	public CourseSettingsPage course_settings_page;
 	public EditRecordingPropertiesWindow edit_recording_properties_window;
 	public AdminDashboardPage admin_dash_board_page;
 	WebDriver driver;
@@ -54,7 +60,7 @@ public class TC7834VerifyCopyFunctionalityForAManualPastCourse {
 	public ConfirmationMenu confirm_menu;
 	public CopyMenu copy;
 	DesiredCapabilities capability;
-
+	String url;
 
 	@BeforeClass
 	public void setup() {
@@ -69,11 +75,14 @@ public class TC7834VerifyCopyFunctionalityForAManualPastCourse {
 			tag_window= PageFactory.initElements(driver, TagMenu.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
+			move_Window= PageFactory.initElements(driver, MoveWindow.class);
+			course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
+			delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC7834VerifyCopyFunctionalityForAManualPastCourse at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC7834VerifyCopyFunctionalityForAManualPastCourse at " + DateToStr, "Starting the test: TC7834VerifyCopyFunctionalityForAManualPastCourse at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC10951VerifyMoveFunctionalityForAManualPastCourse at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC10951VerifyMoveFunctionalityForAManualPastCourse at " + DateToStr, "Starting the test: TC10951VerifyMoveFunctionalityForAManualPastCourse at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -82,63 +91,113 @@ public class TC7834VerifyCopyFunctionalityForAManualPastCourse {
 	}
 		
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC7834 Verify copy functionality for a manual past course")
-	public void test7834() throws InterruptedException {
+	@Test (description="TC10951 Verify move functionality for a manual past course")
+	public void test10951() throws InterruptedException {
 		
 		//1.Enter the university
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
-		
+				
 		//2.Login as INSTRUCTOR 
 		tegrity.loginCourses("User1");
 		
-		//3.Click the "Past Courses" tab
+		//pre-test!! move record to the pastCourseA
+		
+		//3.Click on the 'Past Courses' tab*
+		course.clickOnPastCoursesTabButton();
+				
+		//4.Select the past course
+		course.selectCourseThatStartingWith("PastCourseA");
+				
+		//5.move the course to active courses
+		record.clickOnCourseTaskThenMoveToActiveCourses();
+		
+		//6.click on the ok after moving to active courses
+		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to active courses");
+		
+		//7.return to the courses page
+		record.returnToCourseListPage();
+		
+		//8.copy on record to pastcoursesA
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "PastCourseA", 0,record, copy, confirm_menu);
+		
+		//9.Select the past course
+		course.selectCourseThatStartingWith("PastCourseA");
+		
+		//10.wait until the moving will finish
+		record.checkStatusExistenceForMaxTTime(220);
+		
+		//11.move to pass courses
+		record.clickOnCourseTaskThenMoveToPastCourses();
+		
+		//12.click on the ok after moving to past courses
+		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to past courses");
+	
+		//13.return to the courses page
+		record.returnToCourseListPage();
+		
+		////////////End pre test///////////////
+		
+		//14.Click on the 'Past Courses' tab*
 		course.clickOnPastCoursesTabButton();
 		
 		//get the second course for later use
 		String PastCourseB = course.getCourseInIndex(2);
 		
-		//4.Select the past course
+		//15.Select the past course
 		course.selectCourseThatStartingWith("PastCourseA");
 		
-		//5.Select a recording
+		//16.Select a recording
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
-		//take the record name for later
+		//get recording name for later use
 		String recordName = record.getFirstRecordingTitle();
 		
-		//6.Select the "Recording Tasks -> Copy" menu item
-		record.clickOnRecordingTaskThenCopy();
+		//17.Select the "Recording Tasks -> Move" menu item
+		record.clickOnRecordingTaskThenMove();
 		
-		//7.Verify that no past course is not displayed in list of destination courses
+		//18."Move" window is displayed
+		move_Window.verifyThatMoveWindowIsOpen();
+			
+		//19.Verify that no past course is not displayed in list of destination courses
 		copy.VerifyThatCourseIsNotDisplayedInTheListOfCourseDestination(PastCourseB);
 		
-		//8.Click the "Cancel" button
-		copy.clickOnCancelButton(record);
+		//20.Click the "Cancel" button	
+		move_Window.clickOnCancelButton();
 		
-		//9.Select the "Recording Tasks -> Copy" menu item
-		record.clickOnRecordingTaskThenCopy();
-		
-		//10.Choose an active course
+		//21.Select the "Recording Tasks -> Move" menu item
+		record.clickOnRecordingTaskThenMove();
+				
+		//22.Choose an active course
 		copy.selectTargetCourseFromCourseListThatStartWith("abc");
 		
-		//11.Click on 'Copy' button
-		copy.clickOnCopyButton();
+		//23.Click on 'Move' button
+		move_Window.clickOnMoveRecordings();
 		
-		//12.click on the ok button
-		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
+		//24.Click on ok button after moving recording
+		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
 		
-		//13.wait until we finish moving the record
+		//25.wait until the recording finish moving
 		record.checkStatusExistenceForMaxTTime(220);
 		
-		//14.Go to destination course
+		//26.Verify the recording is not present in the source course
+		record.verifyThatTargetRecordingNotExistInRecordingList(recordName);
+		
+		//27.Go to destination course
 		record.returnToCourseListPage();
 		course.selectCourseThatStartingWith("abc");
 		
-		//15. *Verify the recording was copied to the destination course*
+		//28.Verify the recording was Moved to the destination course
 		record.verifyThatTargetRecordingExistInRecordingList(recordName);
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	
 	}
+	
+	// description = "get courses list"
+			public void initializeCourseObject() throws InterruptedException {
+
+				course = PageFactory.initElements(driver, CoursesHelperPage.class);
+				course.courses = course.getCoursesListFromElement(course.course_list);
+			}
 }
