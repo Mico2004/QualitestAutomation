@@ -751,6 +751,7 @@ public class PreTest {
 		tegrity.loginCoursesByParameter(SuperUsername);
 		initializeCourseObject();
 	    course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseA", 3, record, copy, confirm_menu);
+	    course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseA", 1, record, copy, confirm_menu);
 	    course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseB", 3, record, copy, confirm_menu);
 	    course.verifyRecordingsStatusIsClear("BankValid", 3, record);
 		course.signOut();
