@@ -120,14 +120,12 @@ public class TC8072ValidateDeletingTag {
 		//7.create 2 tags for the test
 		if(type_of_user == 0){
 			validNewName = "Test";
-			tag_window.createNewTag(validNewName);		
 		}else if (type_of_user == 1) {
-			validNewName = "Exam";
-			tag_window.createNewTag(validNewName);
+			validNewName = "Exam";			
 		} else {
-			validNewName = "Tag";
-			tag_window.createNewTag(validNewName);
+			validNewName = "Tag";			
 		}
+		tag_window.createNewTag(validNewName);
 		//8.Click on the "Apply" button
 		record.clickElementJS(tag_window.apply_button);
 		
@@ -177,6 +175,9 @@ public class TC8072ValidateDeletingTag {
 		//19.The "Tag Dialog" is disappeared.
 		tag_window.verifyTagWindowClose();
 						
+		//20. verify that the tag is not appeared
+		record.verifyTagNotAppearedUderTheSelectRecordings();
+		
 		//20.sign out
 		record.signOut();
 					
@@ -192,6 +193,9 @@ public class TC8072ValidateDeletingTag {
 		if(type_of_user == 1) {
 			record.clickOnStudentRecordingsTab();
 		}
+		
+		//20. verify that the tag is not appeared
+		record.verifyTagNotAppearedUderTheSelectRecordings();
 		
 		//22.Check one available recording checkbox. 
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);

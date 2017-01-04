@@ -5629,7 +5629,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void verifyTagApperedUderTheSelectRecording(String tag) {
 
 		try {
-			Thread.sleep(1500);
+			Thread.sleep(1000);
 			for(int i = 0 ; i< recording_tags.size() ; i++){
 				if(recording_tags.get(i).getText().equals(tag)){
 					ATUReports.add(time +" Verify that the tag: " + tag + " appered on the first recording.","Success.", "Success.", LogAs.PASSED,null) ;
@@ -5660,6 +5660,26 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 	}
+	
+	//verify The tags are displayed in the "View" dropdown list
+		public void verifyTheTagIsNotAppeardAtTheFirstRecord(List<String> namesOfTags) {
+			
+		try {	
+			for(int i = 0 ; i< view_tag_names.size() ; i++) {
+				String currentTag = view_tag_names.get(i).getText();
+				if(!searchOwnerInTheOwnerList(currentTag,namesOfTags)){
+					ATUReports.add(time +" Not verify The tag:" + currentTag + "are displayed in the View dropdown list.","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					System.out.println("Not verify The tag:" + currentTag + "are displayed in the View dropdown list.");
+					return;
+				}
+			}
+			ATUReports.add(time +" verify The tags are displayed in the View dropdown list..","Success.","Success.", LogAs.PASSED, null);
+			System.out.println("verify The tags are displayed in the View dropdown list..");	
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+		}
 	
 	
 	
