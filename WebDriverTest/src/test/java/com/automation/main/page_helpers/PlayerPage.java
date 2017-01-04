@@ -150,7 +150,8 @@ public class PlayerPage extends Page {
 	public List<WebElement> bookmarkIsnstNames;
 	@FindBy(css = ".BookmarkText")
 	public List<WebElement> bookmarkStudentNames;
-	
+	@FindBy(css = ".BookmarkButton")
+	public List<WebElement> bookmarks_buttons;
 	
 	// This function get as input number of seconds.
 	// It will check if the player plays for this number of seconds.
@@ -744,16 +745,17 @@ public class PlayerPage extends Page {
 
 	// This function delete all bookmarks
 	public void deleteAllBookmark() throws InterruptedException {
-	
-		if(bookmark_list.size()>0){
-				for (WebElement we : bookmark_list) { 
-						if(bookmark_list.size()==0){
-							break;
-						}
-						moveToElementAndPerform(we, driver);
-						WebElement bookmarkDelete = driver.findElement(By.xpath(".//*[@id='BookmarkList']/div/img[3]" ));
-						clickElementWithOutIdJS(bookmarkDelete);					
+		
+		int size = bookmark_list.size();		
+		if(size>0){
+				for (WebElement we : bookmark_list) {
+							moveToElementAndPerform(we, driver);
+						    clickElementWithOutIdJS(bookmarks_buttons.get(2));						   
 					}
+				Thread.sleep(500);
+				if( bookmark_list.size() > 0){
+					  clickElementWithOutIdJS(driver.findElement(By.xpath(".//*[@id='BookmarkList']/div/img[3]")));		
+				}							
 		} else {
 			System.out.println("There no bookmarks here.");
 			ATUReports.add(time +" There no bookmarks here.", "True.", "True.", LogAs.PASSED, null);
