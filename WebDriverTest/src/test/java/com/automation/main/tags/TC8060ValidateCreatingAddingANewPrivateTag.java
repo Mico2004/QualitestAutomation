@@ -131,7 +131,7 @@ public class TC8060ValidateCreatingAddingANewPrivateTag {
 			
 			//9.Check the "Private" checkbox.
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(tag_window.privte_checkbox);
-			
+				
 			//10.Click on the "Submit" button.
 			tag_window.clickElementWithOutIdJS(tag_window.submit_edit_button);
 			
