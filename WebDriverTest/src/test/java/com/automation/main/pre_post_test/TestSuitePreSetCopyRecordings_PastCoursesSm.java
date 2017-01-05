@@ -1,29 +1,16 @@
 package com.automation.main.pre_post_test;
 
-
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
@@ -38,13 +25,11 @@ import com.automation.main.page_helpers.ManageAdhocCoursesEnrollmentsPage;
 import com.automation.main.page_helpers.ManageAdhocUsersPage;
 import com.automation.main.page_helpers.MoveWindow;
 import com.automation.main.page_helpers.RecordingHelperPage;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TestSuitePreSetCopyRecordings_PastCoursesSm {
@@ -88,6 +73,7 @@ public class TestSuitePreSetCopyRecordings_PastCoursesSm {
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
+		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
@@ -116,13 +102,6 @@ public class TestSuitePreSetCopyRecordings_PastCoursesSm {
 		this.driver.quit();
 	}
 
-	// description = "get courses list"
-	public void initializeCourseObject() throws InterruptedException {
-
-		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
-	}
-	
 	@Test(description = "Login course page")
 	public void loginCourses() throws InterruptedException {
 		
@@ -149,7 +128,7 @@ public class TestSuitePreSetCopyRecordings_PastCoursesSm {
 		record.returnToCourseListPage();
 				
 		//6.copy on record to pastcoursesA
-		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseA", 0,record, copy, confirm_menu);
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "PastCourseA", 0,record, copy, confirm_menu);
 				
 		//7.Select the past course
 		course.selectCourseThatStartingWith("PastCourseA");
