@@ -2,6 +2,7 @@ package com.automation.main.pre_post_test;
 
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -79,35 +80,20 @@ public class TestSuitePreSetCopyRecordings_PastCoursesSm {
 	@BeforeClass
 	public void setup() {
 
-///		System.setProperty("webdriver.edge.driver", "src/test/resources/MicrosoftWebDriver.exe");
-		// capability=DesiredCapabilities.internetExplorer();
-		// capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
-		//
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
-
-		//
-		
-		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
+	
 		ATUReports.setWebDriver(driver);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
-
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
-
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
-
 		mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
-
 		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
@@ -136,20 +122,49 @@ public class TestSuitePreSetCopyRecordings_PastCoursesSm {
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
+	
 
 
 	@Test(description = "Login course page")
 	public void loginCourses() throws InterruptedException {
-		System.out.println("b0");
-		  final List<Integer> CourseAbContent = Arrays.asList(0); //For Ab		
-		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
-			{
-				put(PropertyManager.getProperty("course1"),CourseAbContent);			
-			}
-			};
-		TestSuitePreSetGeneric h=new TestSuitePreSetGeneric(driver);
-		System.out.println("b1");
-		h.GenricPreset(CoursesAndContent);
+		
+		//1.Enter the university
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		
+		//2.Login as INSTRUCTOR 
+		tegrity.loginCourses("User1");
+		
+		//adding one recording to the pastCourseA
+		//1.Click on the 'Past Courses' tab*
+		course.clickOnPastCoursesTabButton();
+						
+		//2.Select the past course
+		course.selectCourseThatStartingWith("PastCourseA");
+						
+		//3.move the course to active courses
+		record.clickOnCourseTaskThenMoveToActiveCourses();
+				
+		//4.click on the ok after moving to active courses
+		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to active courses");
+				
+		//5.return to the courses page
+		record.returnToCourseListPage();
+				
+		//6.copy on record to pastcoursesA
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseA", 0,record, copy, confirm_menu);
+				
+		//7.Select the past course
+		course.selectCourseThatStartingWith("PastCourseA");
+				
+		//8.wait until the moving will finish
+		record.checkStatusExistenceForMaxTTime(220);
+				
+		//9.move to pass courses
+		record.clickOnCourseTaskThenMoveToPastCourses();
+				
+		//10.click on the ok after moving to past courses
+		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to past courses");
+			
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 

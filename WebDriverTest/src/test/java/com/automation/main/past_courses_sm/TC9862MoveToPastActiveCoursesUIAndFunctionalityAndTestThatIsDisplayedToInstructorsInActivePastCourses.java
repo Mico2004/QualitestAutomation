@@ -92,7 +92,7 @@ public class TC9862MoveToPastActiveCoursesUIAndFunctionalityAndTestThatIsDisplay
 		//1.Enter the university
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
 		
-		//2.0-Login as INSTRUCTOR , 1- Login as Executive admin 
+		//2.0-Login as INSTRUCTOR , 1- Login as Executive admin  ; 2- Impersonate User
 		for(int type_of_user = 0; type_of_user < 3; type_of_user++) {
 			
 		if(type_of_user == 0) {
