@@ -1,16 +1,11 @@
 package com.automation.main.page_helpers;
 
-import java.awt.Point;
-import java.util.List;
 
-import org.omg.Messaging.SyncScopeHelper;
+import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import atu.testng.reports.ATUReports;
@@ -340,6 +335,7 @@ public class SearchPage extends Page {
 	
 	// This function verify that search result contains one result with target title
 	public void verifyResultContainOneResultWithTargetTitle(String target_title) {
+		try {
 		if((title_list.size()==1) && (title_list.get(0).getText().equals(target_title))) {
 			System.out.println("Verifed that search results contains one result with target result: " + target_title);
 			ATUReports.add(time +" Verifed that search results contains one result with target result.", target_title, target_title, LogAs.PASSED, null);
@@ -348,6 +344,10 @@ public class SearchPage extends Page {
 			System.out.println("Not verifed that search results contains one result with target result: " + target_title);
 			ATUReports.add(time +" Verifed that search results contains one result with target result.", target_title, title_list.get(0).getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
+		}
+		} catch(Exception msg) {
+			msg.printStackTrace();
+			ATUReports.add(time + msg.getMessage(), "Success.", "Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	
