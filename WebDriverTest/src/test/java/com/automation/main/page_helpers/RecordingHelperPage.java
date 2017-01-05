@@ -3719,17 +3719,18 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	/// visible
 	public void verifyClickableElementIsNotVisible(WebElement element, String element_name) {
 		try {
-			element.click();
+			
+			String clickable = element.getAttribute("ng-click");
+			if(clickable == null) {
+				System.out.println(element_name + "is not visible");
+				ATUReports.add(element_name + "is not visible", element_name, "not clickable", "clickable", LogAs.PASSED,null);	
+			} else{
 			System.out.println(element_name + "is  visible");
-			ATUReports.add(element_name + "is  visible", element_name, "not clickable", "clickable", LogAs.FAILED,
-					null);
-			Assert.assertTrue(false);
-
+			ATUReports.add(element_name + "is  visible", element_name, "not clickable", "clickable", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
 		} catch (Exception e) {
-			System.out.println(element_name + "is not visible");
-			ATUReports.add(element_name + "is not visible", element_name, "not clickable", "clickable", LogAs.PASSED,
-					null);
-			Assert.assertTrue(true);
+			e.printStackTrace();
+			ATUReports.add(element_name + "is  visible", element_name, "not clickable", "clickable", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 
@@ -3742,7 +3743,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		} else {
 			System.out.println(element_name + "is disabled");
 			ATUReports.add(element_name + "is disabled", element_name, "clickable", " not clickable", LogAs.FAILED,
-					null);
+					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -3924,7 +3925,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String first = teg.getPageUrl() + "/api/podcast/";;
 			//substring(0, teg.getPageUrl().length() - 8) 
 			//String university = teg.getPageUrl().substring(0, teg.getPageUrl().length() - 8);
-			String third = podcast_url.substring(podcast_url.length() - (teg.getPageUrl().length() +2 ));
+			String third = podcast_url.substring(podcast_url.length() - (teg.getPageUrl().length() +4 ));
 			String guid = third.substring(0,36);
 			org.w3c.dom.NodeList nodeList = document.getElementsByTagName("enclosure");
 			for (int i = 0; i < nodeList.getLength(); i++) {
@@ -3932,7 +3933,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				String element = ((Element) nodeList.item(i)).getAttribute("url");
 				if ((element.contains(first)) && ((element.contains(guid)))) {
 					// extract only pattern
-					String pattern = element.substring(59, 95);
+					String pattern = element.substring(57, 93);
 					arrayList.add(pattern);
 					/// check pattern
 					podcastPatternVerification(pattern);
@@ -4000,7 +4001,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				System.out.println(element);
 				if (element.equals(rss_url)) {
 					// extract only pattern
-					String pattern = element.substring(59, 95);
+					String pattern = element.substring(57, 93);
 					arrayList.add(pattern);
 					/// check pattern
 					podcastPatternVerification(pattern);

@@ -289,12 +289,10 @@ public class TC21599GuestPremissions {
 
 		Robot robot = null;
 		try {
-		//	robot = new Robot();
-		//	robot.mouseMove(-100, -100);
-			//record.moveToElementAndClick(record.course_tasks_button, driver);
-			record.moveToElement(record.course_task_button, driver).perform();
+			
+			record.moveToElementAndPerform(record.course_task_button, driver);
 			// subscribe not visible
-			record.verifyClickableElementIsNotVisible(record.subscribe_button, "subscribe");
+			record.verifyClickableElementIsNotVisible(record.SubscribeToACourse, "subscribe");
 
 			/// rss feed is enabled
 			record.verifyElementIsEnabled(record.rssfeed, "rss_feed");
