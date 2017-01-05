@@ -89,22 +89,21 @@ public class TC8062ValidateEditingPublicTag {
 		
 		//1.Enter the university
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
-		
+			
 		//*+preconditions:+*Recordings in course with several tags is required for this test.	
-		//2.pre test - Login as INSTRUCTOR 
+		//2.Login as INSTRUCTOR 
 		tegrity.loginCourses("User1");
 		
 		//3.Click on certain course from the courses list.
 		course.selectCourseThatStartingWith("Ab");
 		
-		//0 - for regular recording ,1- for student recording ,2- for student user
+		//0 - for regular recording ,1- for student recording 
 		for(int type_of_user = 0; type_of_user < 2; type_of_user++) {
-			
+					
 			if(type_of_user == 1){
 				record.clickOnStudentRecordingsTab();
 			}
-		
-		
+			
 		//4.Check one available recording checkbox. 
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
@@ -114,136 +113,121 @@ public class TC8062ValidateEditingPublicTag {
 		//6.The "Tag" Dialog window is appeared.
 		tag_window.waitForPageToLoad();
 		
-		//7.create 2 tags for the test
+		//7.create tags for the test	
 		if(type_of_user == 0){
-			tag_window.createNewTag("Test");
-			tag_window.createNewTag("Example");
-		} else {
-			tag_window.createNewTag("Tag");
-			tag_window.createNewTag("Macro");
+			validNewName = "Test";
+		}else if (type_of_user == 1) {
+			validNewName = "Exam";			
 		}
+		tag_window.createNewTag(validNewName);	
 		//8.Click on the "Apply" button
 		record.clickElementJS(tag_window.apply_button);
 		
 		//9. sign out
 		record.signOut();
-		
+			
 		//10.Login as INSTRUCTOR 
 		tegrity.loginCourses("User1");
-				
+	
 		//11.Click on preconditional course from the courses list.
 		course.selectCourseThatStartingWith("Ab");
 		
 		if(type_of_user == 1){
 			record.clickOnStudentRecordingsTab();
 		}
+						
+		//12.Check one available recording checkbox. 
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 					
-		if(type_of_user ==2){
+		//13.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
+		record.clickOnRecordingTaskThenTag();
+				
+		//14.The "Tag" Dialog window is appeared.
+		tag_window.waitForPageToLoad();
+		tag_window.verifyTagWindowOpen();
+					
+		//15.Click on the "Edit Tag" icon.
+		if(type_of_user ==0){
+		    validNewName = "Tegrity";
+		} else if(type_of_user ==1) {
+			validNewName = "Mik";
+		}	
+		tag_window.clickElement(tag_window.edit_tag_button_list.get(0));
+					
+		//16.The "Edit Tag" window is appeared.
+		tag_window.verifyTagEditWindowOpen();
+					
+		//17.Enter some valid new name.
+		tag_window.sendStringwithAction(tag_window.edit_new_tag_input, validNewName);
+					
+		//18.Click on the "Submit" button.
+		tag_window.clickElementWithOutIdJS(tag_window.submit_edit_button);
+					
+		//19.The created name is displayed in the "Edit Tag" list.
+		tag_window.verifyCreatedNameIsDisplayedInTheEditTagList(validNewName);
+					
+		//20.Validate the edited tag checkbox is checked.
+		tag_window.verifyAllTheTagCheckboxesAreChecked();
+					
+		//21.Click on the "Apply" button
+		record.clickElementJS(tag_window.apply_button);
+					
+		//22.The "Tag Dialog" is disappeared.
+		tag_window.verifyTagWindowClose();
+					
+		//23.The modified tag is appeared under the selected recordings.
+		record.verifyTagApperedUderTheSelectRecordings();
+					
+		//24.The tags in the "Tag Indicator" are sorted by the name.
+		record.validateTheSeveralTaggedRecordingTagsAreSortedByName();
+					
+		//25.sign out
+		record.signOut();
+					
+		//26.Login as other enrolled to the preconditional INSTRUCTOR
+		tegrity.loginCourses("User2");
 						
-			//sign out 
-			record.signOut();
-							
-			//9.Login as STUDENT 
-			tegrity.loginCourses("User4");
-						
-			//10.Click on the Ab course
-			course.selectCourseThatStartingWith("Ab");
+		//26.Click on certain course from the courses list.
+		course.selectCourseThatStartingWith("Ab");
+					
+		if(type_of_user == 1) {
+			record.clickOnStudentRecordingsTab();
 		}
-					
-					//12.Check one available recording checkbox. 
-					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-					
-					//13.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
-					record.clickOnRecordingTaskThenTag();
-				
-					//14.The "Tag" Dialog window is appeared.
-					tag_window.waitForPageToLoad();
-					tag_window.verifyTagWindowOpen();
-					
-					//15.Click on the "Edit Tag" icon.
-					if(type_of_user ==0){
-						validNewName = "Tegrity";
-					} else {
-						validNewName = "Mik";
-					}
-					tag_window.clickElement(tag_window.edit_tag_button_list.get(0));
-					
-					//16.The "Edit Tag" window is appeared.
-					tag_window.verifyTagEditWindowOpen();
-					
-					//17.Enter some valid new name.
-					tag_window.sendStringwithAction(tag_window.edit_new_tag_input, validNewName);
-					
-					//18.Click on the "Submit" button.
-					tag_window.clickElementWithOutIdJS(tag_window.submit_edit_button);
-					
-					//19.The created name is displayed in the "Edit Tag" list.
-					tag_window.verifyCreatedNameIsDisplayedInTheEditTagList(validNewName);
-					
-					//20.Validate the edited tag checkbox is checked.
-					tag_window.verifyAllTheTagCheckboxesAreChecked();
-					
-					//21.Click on the "Apply" button
-					record.clickElementJS(tag_window.apply_button);
-					
-					//22.The "Tag Dialog" is disappeared.
-					tag_window.verifyTagWindowClose();
-					
-					//23.The modified tag is appeared under the selected recordings.
-					record.verifyTagApperedUderTheSelectRecordings();
-					
-					//24.The tags in the "Tag Indicator" are sorted by the name.
-					record.validateTheSeveralTaggedRecordingTagsAreSortedByName();
-					
-					//25.sign out
-					record.signOut();
-					
-					if(type_of_user < 2){
-						tegrity.loginCourses("User2");
-					} else{
-						tegrity.loginCourses("User3");		
-					}
-					
-					//26.Click on certain course from the courses list.
-					course.selectCourseThatStartingWith("Ab");
-					
-					if(type_of_user == 1) {
-						record.clickOnStudentRecordingsTab();
-					}
-					
-					record.verifyTagApperedUderTheSelectRecording(validNewName);
-					
-					//27.sign out
-					record.signOut();
-					
-					//28.Login as INSTRUCTOR 
-					tegrity.loginCourses("User1");
-					
-					//29.Click on the Ab course
-					course.selectCourseThatStartingWith("Ab");
-					
-					if(type_of_user == 1) {
-						record.clickOnStudentRecordingsTab();
-					}
-					
-					//30.Check one available recording checkbox. 
-					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-								
-					//31.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
-					record.clickOnRecordingTaskThenTag();
-						
-					//32.The "Tag" Dialog window is appeared.
-					tag_window.waitForPageToLoad();
-					tag_window.verifyTagWindowOpen();
-				
-					//33. delete all the existing tags
-					tag_window.deleteAllExistingTags();
-					
-					//34.click on the cancel button
-					tag_window.clickElementJS(tag_window.cancel_button);
-		  }
 		
-	
+		//27. verify that we can see the new tag name			
+		record.verifyTagApperedUderTheSelectRecording(validNewName);
+					
+		//28. sign out
+		record.signOut();
+					
+		//29.Login as INSTRUCTOR 
+		tegrity.loginCourses("User1");
+		
+		//30.Click on preconditional course from the courses list.
+		course.selectCourseThatStartingWith("Ab");
+				
+		if(type_of_user == 1){
+			record.clickOnStudentRecordingsTab();
+		}
+								
+		//31.Check one available recording checkbox. 
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		
+		//32.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
+		record.clickOnRecordingTaskThenTag();
+						
+		//33.The "Tag" Dialog window is appeared.
+		tag_window.waitForPageToLoad();
+		tag_window.verifyTagWindowOpen();
+		
+		//34. delete all the existing tags
+		tag_window.deleteAllExistingTags();
+					
+		//35.click on the cancel button
+		tag_window.clickElementJS(tag_window.cancel_button);
+		
+		}
+		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	
