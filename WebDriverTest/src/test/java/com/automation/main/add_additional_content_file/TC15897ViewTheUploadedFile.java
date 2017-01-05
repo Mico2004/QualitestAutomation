@@ -436,8 +436,7 @@ public class TC15897ViewTheUploadedFile {
 				record.VerifyDownloadedFileIsValid(file_name2);
 	         	
 				record.signOut();
-				
-								
+												
 				tegrity.loginCourses("User1");
 				// 3.Select course+delete previous files
 				course.deleteAllRecordingsInCourseStartWith("Ab", 1, record, delete_menu);

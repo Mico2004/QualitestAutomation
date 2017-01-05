@@ -3261,7 +3261,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		} else {
 			System.out.println("2 files are  not equal so file is invalid");
-			ATUReports.add(time +" 2 files are  not equal so file is invalid", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" 2 files are  not equal so file is invalid" + file1_md5 + file2_md5, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
