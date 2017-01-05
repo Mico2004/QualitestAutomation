@@ -145,16 +145,16 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		
-		// 1. Make sure that the STUDENT and INSTRUCTOR users you are using never watched the recording used in this test case.
-		tegrity.loginCourses("SuperUser");
+//		// 1. Make sure that the STUDENT and INSTRUCTOR users you are using never watched the recording used in this test case.
+//		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-	
-		// Copy one recording to Ba course
-		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
-		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
-		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
-		// Logout.
-		top_bar_helper.signOut();
+//	
+//		// Copy one recording to Ba course
+//		course.deleteAllRecordingsInCourseStartWith("Ba", 0, record, delete_menu);
+//		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
+//		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
+//		// Logout.
+//		top_bar_helper.signOut();
 		
 		
 		// 2. Repeat the test for STUDENT and INSTRUCTOR.
@@ -181,11 +181,15 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			
 			// 7. Close the browser while recording is playing the first chapter.
 			String current_handler = driver.getWindowHandle();
+			
 			driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "n");
-								
+			
+			//Actions builder = new Actions(driver);
+			//Action mouseOver = builder.moveToElement(driver.findElement(By.tagName("body"))).sendKeys(Keys.chord(Keys.CONTROL, "n")).build();
+			//mouseOver.perform();
+				
 			Set<String> allHandles = driver.getWindowHandles();
-								
-								
+																
 			driver.switchTo().window(current_handler);
 			driver.close();
 			if(driver instanceof FirefoxDriver){
@@ -225,8 +229,7 @@ public class TC17043ValidateResumeBoxWhenBrowserIsClosedWhileRecordingPlaying {
 			
 			// 9. Open the recording course you just watch.
 			course.selectCourseThatStartingWith("Ba");
-			
-			
+					
 			String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));
 			
 			// 10. Click on the recording you just watched.

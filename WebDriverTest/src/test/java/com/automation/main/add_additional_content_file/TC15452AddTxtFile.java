@@ -9,6 +9,9 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -162,10 +165,23 @@ public class TC15452AddTxtFile {
 
 		//////// set up for download file
 
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
+		//System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+		//driver = new ChromeDriver();
+		//driver.manage().window().maximize();
 
+		System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");	
+		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+		capabilities.setCapability("marionette", true);		
+		FirefoxProfile fxProfile = new FirefoxProfile();
+	    fxProfile.setPreference("browser.download.folderList",2);
+	    fxProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
+	    fxProfile.setPreference("browser.download.manager.showWhenStarting",false);
+	    fxProfile.setPreference("browser.download.dir","C:\\Users\\moshikk\\Downloads");    
+	    fxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk","text/anytext ,text/plain,text/html,application/plain" );
+	    capabilities.setCapability(FirefoxDriver.PROFILE, fxProfile);	
+		driver = new FirefoxDriver(capabilities);	
+		
+		
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		wait = new WebDriverWait(driver, 30);

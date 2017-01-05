@@ -123,8 +123,6 @@ public class TestSuitePreSetCopyRecordings_PastCoursesSm {
 		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 	
-
-
 	@Test(description = "Login course page")
 	public void loginCourses() throws InterruptedException {
 		
