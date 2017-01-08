@@ -226,7 +226,7 @@ public class TC21599GuestPremissions {
 		
 		 //17.Make sure the regular recording you unpublished is not displayed
 		 record.clickOnRecordingsTab();
-		 Thread.sleep(2000);
+
 		 record.isRecordingExist(recording_publish,false);
 		
 		 //18.Click the 'Student Recordings' tab
@@ -237,7 +237,7 @@ public class TC21599GuestPremissions {
 		
 		 //20.Click the 'Recordings' tab
 		 record.clickOnRecordingsTab();
-		 Thread.sleep(3000);
+		
 		 //21.Click on some recording
 		 record.verifyFirstExpandableRecording();
 		 record.clickOnTheFirstCaptherWithOutTheExpand();
