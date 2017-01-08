@@ -176,7 +176,7 @@ public class TC15452AddTxtFile {
 	    fxProfile.setPreference("browser.download.folderList",2);
 	    fxProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
 	    fxProfile.setPreference("browser.download.manager.showWhenStarting",false);
-	    fxProfile.setPreference("browser.download.dir","C:\\Users\\moshikk\\Downloads");    
+	    fxProfile.setPreference("browser.download.dir",System.getProperty("user.home") + File.separatorChar + "Downloads" + File.separatorChar);       
 	    fxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk","text/anytext ,text/plain,text/html,application/plain" );
 	    capabilities.setCapability(FirefoxDriver.PROFILE, fxProfile);	
 		driver = new FirefoxDriver(capabilities);	

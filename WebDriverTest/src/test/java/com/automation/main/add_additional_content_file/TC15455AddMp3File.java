@@ -176,7 +176,7 @@ public class TC15455AddMp3File {
 	    fxProfile.setPreference("browser.download.folderList",2);
 	    fxProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
 	    fxProfile.setPreference("browser.download.manager.showWhenStarting",false);
-	    fxProfile.setPreference("browser.download.dir","C:\\Users\\moshikk\\Downloads");   
+	    fxProfile.setPreference("browser.download.dir",System.getProperty("user.home") + File.separatorChar + "Downloads" + File.separatorChar);    
 	    fxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk" ,"audio/mp3;audio/mpeg3;audio/x-mpeg-3" );
 	    capabilities.setCapability(FirefoxDriver.PROFILE, fxProfile);		
 		driver = new FirefoxDriver(capabilities);	
