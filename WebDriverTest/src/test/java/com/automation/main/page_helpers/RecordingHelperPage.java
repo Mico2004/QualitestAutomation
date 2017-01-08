@@ -3230,8 +3230,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	/// verify downloaded file is valid
 	public void VerifyDownloadedFileIsValid(String file_name) throws Exception {
-		String download_path = System.getProperty("user.home") + File.separatorChar + "Downloads" + File.separatorChar
-				+ file_name;
+		String download_path = System.getProperty("user.home") + File.separatorChar + "Downloads" + File.separatorChar+ file_name;
 
 		Path download_path_to_delete = Paths.get(download_path);
 		String resource_file_path = System.getProperty("user.dir")+ "\\workspace\\QualitestAutomation\\resources\\documents\\" + file_name;
@@ -3261,7 +3260,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 		} else {
 			System.out.println("2 files are  not equal so file is invalid");
-			ATUReports.add(time +" 2 files are  not equal so file is invalid" + file1_md5 + file2_md5, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +" 2 files are  not equal so file is invalid " + file1_md5 + " " + file2_md5, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
