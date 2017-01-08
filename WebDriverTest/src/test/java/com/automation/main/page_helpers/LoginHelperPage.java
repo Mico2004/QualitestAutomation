@@ -49,9 +49,10 @@ public class LoginHelperPage extends Page {
 	public LoginHelperPage(WebDriver driver) throws Exception {
 		super(driver);
 		setPageTitle("Tegrity Lecture Capture");	
-		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
+		//setPageUrl("https://trolls-qa.tegrity.com");
+		setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
-		setPageUrl("https://awsserverautomation5-qabr.tegrity.com");
+		//setPageUrl("https://awsserverautomation5-qabr.tegrity.com");
 		//setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 
@@ -227,7 +228,7 @@ public class LoginHelperPage extends Page {
 			try{
 				new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(Login_as_guest_button));
 				clickElement(Login_as_guest_button);
-			}catch(Exception e){
+			}catch(TimeoutException e){
 				try{
 					driver.navigate().refresh();
 					new WebDriverWait(driver, 15).until(ExpectedConditions.visibilityOf(Login_as_guest_button));			
