@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import com.automation.main.page_helpers.Page;
+import com.automation.main.utilities.DriverSelector;
+
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -50,11 +52,11 @@ public class LoginHelperPage extends Page {
 		super(driver);
 		setPageTitle("Tegrity Lecture Capture");	
 		//setPageUrl("https://trolls-qa.tegrity.com");
-		setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
+		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 		//setPageUrl("https://awsserverautomation5-qabr.tegrity.com");
-		//setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
-		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
+		///setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
+		setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 
 
 	}
