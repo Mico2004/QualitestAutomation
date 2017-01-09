@@ -12,6 +12,7 @@ import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
 import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
+import com.automation.main.page_helpers.CourseSettingsPage;
 import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.DeleteMenu;
 import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
@@ -48,6 +49,7 @@ public class TC6390VerifyTheBookmarkTabIsDisplayedOnlyInstructorsBookmarksAsGues
 	public RecordingHelperPage record;
 	public PlayerPage player_page;
 	public AdminDashboardPage admin_dash_board_page;
+	public CourseSettingsPage course_settings_page;
 	public DeleteMenu delete_menu;
 	WebDriver driver;
 	WebDriverWait wait;
@@ -80,6 +82,7 @@ public class TC6390VerifyTheBookmarkTabIsDisplayedOnlyInstructorsBookmarksAsGues
 			copy = PageFactory.initElements(driver, CopyMenu.class);
 			delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 			move_window = PageFactory.initElements(driver, MoveWindow.class);
+			course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 			edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 			
 		 Date curDate = new Date();
@@ -99,7 +102,16 @@ public class TC6390VerifyTheBookmarkTabIsDisplayedOnlyInstructorsBookmarksAsGues
 		
 		//1.Enter the university
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
-			
+		
+		course.selectCourseThatStartingWith("Ab");
+
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
+		course_settings_page.clickOnOkButton();
+		
+		record.signOut();
+					
 		for(int type_of_recording = 0; type_of_recording < 2; type_of_recording++) {
 			
 			bookmarksNameIns.clear();
@@ -212,6 +224,11 @@ public class TC6390VerifyTheBookmarkTabIsDisplayedOnlyInstructorsBookmarksAsGues
 									
 		//23.Click on certain course from the courses list.
 		course.selectCourseThatStartingWith("Ab");
+							
+		// Make course unpublic
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings_page.clickOnOkButton();
 				
 		//25.Open the 'Bookmarks' tab
 		record.clickOnBookmarksTab();
