@@ -292,7 +292,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 				 		System.out.println("1.1");
 						tegrity.loginCourses("User1");
 						System.out.println("2");
-						Thread.sleep(3000);						 
+						;						 
 						System.out.println("a3");
 						course.deleteAllRecordingsInCourseStartWith("Ab", 0, record,delete_menu); 
 						
@@ -317,7 +317,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 					record.getCheckbox().click();
 					//5.Select the "Recording Tasks -> Copy" menu item
 					record.clickOnRecordingTaskThenCopy();
-					Thread.sleep(3000);
+					
 					//6.Select an active course and click the 'Copy' button
 					copy.selectTargetCourseFromCourseList(courseA);
 					Thread.sleep(2000);
@@ -327,7 +327,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 					Thread.sleep(3000);
 					//7.Click the "Additional Content" tab
 						record.clickOnAdditionContentTab();
-						Thread.sleep(4000);
+						Thread.sleep(2000);
 						String additional_content=record.first_additional_content_title.getText();
 						record.getCheckbox().click();	
 			///8.Select the "Content tasks -> Copy" menu item
@@ -347,7 +347,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 						record.getCheckbox().click();	
 			///10.Select the "Content tasks -> Copy" menu item
 						record.clickOnRecordingTaskThenCopy();
-						Thread.sleep(3000);
+					
 						copy.selectTargetCourseFromCourseList(courseA);
 						Thread.sleep(2000);
 							copy.clickOnCopyButton();
@@ -357,7 +357,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 					///11.Click on the 'Courses' breadcrumb	
 						record.returnToCourseListPage();
 				///12.Select the destination course
-                      Thread.sleep(3000);
+                  
 				course.clickOnActiveCoursesTabButton();
 				Thread.sleep(2000);
 				course.selectCourseByName(courseA);
@@ -382,9 +382,8 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 			record.selectRecordingByName(recordings);
 			Thread.sleep(3000);
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
-		
-			player_page.verifyTimeBufferStatusForXSec(25);// check source display
+			
+			player_page.verifyTimeBufferStatusForXSec(5);// check source display
 
 			///// to go back to crecording window handler
 			for (String handler : driver.getWindowHandles()) {
@@ -393,7 +392,7 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 			}
 			
 			record.returnToCourseListPage();
-			Thread.sleep(3000);
+
 			course.selectCourseByName(courseA);
 			Thread.sleep(3000);
 			///15.select couese and press additional content tab
@@ -436,9 +435,9 @@ public class TCase24766VerifyCopyFromPastCourseToActiveCourse {
 			record.selectRecordingByName(student_recording);
 			Thread.sleep(3000);
 			driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-			Thread.sleep(15000);
+
 		//18.1 dispaly recording
-			player_page.verifyTimeBufferStatusForXSec(15);// check source display
+			player_page.verifyTimeBufferStatusForXSec(5);// check source display
 
 			//18.2 go back to crecording window handler
 			for (String handler : driver.getWindowHandles()) {

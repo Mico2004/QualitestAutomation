@@ -154,7 +154,7 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		
 		
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+
 		/// 2.Click the "Course Builder" link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		Thread.sleep(10000);
