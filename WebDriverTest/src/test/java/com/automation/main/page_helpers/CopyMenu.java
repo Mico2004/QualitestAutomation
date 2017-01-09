@@ -519,11 +519,9 @@ public class CopyMenu extends Page {
 		if ((expected.equals(blue)) || (expected.equals(blue2)) || (expected.equals(blue3)) || expected.equals(blue4)) {
 			System.out.println("The color of that button is blue.");
 			ATUReports.add(time +" The color of that button is blue.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
 		} else {
 			System.out.println("color of course selected is not blue...");
 			ATUReports.add(time +" color of course selected is not blue...", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
 		}
 	}
 

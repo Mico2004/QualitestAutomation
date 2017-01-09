@@ -631,7 +631,7 @@ public class ConfirmationMenu extends Page {
 	public void clickonokbuttonafterEulaChangeSetting() throws InterruptedException {
 
 		try {
-
+			Thread.sleep(1000);
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
