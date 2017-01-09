@@ -187,22 +187,22 @@ public class TC8082ValidateAttachingTag {
 				validNewName = "NewTag";
 				tag_window.createNewTag(validNewName);
 				
-				//22.unselect the new tag
-				tag_window.unCheckOneTagCheckboxes(validNewName);
-				
-				//22.Click on the "Apply" button
-				record.clickElementJS(tag_window.apply_button);
-				
-				//23.select that tag
-				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-				
-				//24.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
-				record.clickOnRecordingTaskThenTag();
-						
-				//25.The "Tag" Dialog window is appeared.
-				tag_window.waitForPageToLoad();
-				tag_window.verifyTagWindowOpen();
-				
+//				//22.unselect the new tag
+//				tag_window.unCheckOneTagCheckboxes(validNewName);
+//				
+//				//22.Click on the "Apply" button
+//				record.clickElementJS(tag_window.apply_button);
+//				
+//				//23.select that tag
+//				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+//				
+//				//24.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
+//				record.clickOnRecordingTaskThenTag();
+//						
+//				//25.The "Tag" Dialog window is appeared.
+//				tag_window.waitForPageToLoad();
+//				tag_window.verifyTagWindowOpen();
+//				
 				//26.Check additional tag checkbox in the "Tag List"
 				tag_window.CheckAllTheTagCheckboxes();
 				

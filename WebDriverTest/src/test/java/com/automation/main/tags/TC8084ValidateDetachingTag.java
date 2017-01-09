@@ -120,6 +120,7 @@ public class TC8084ValidateDetachingTag {
 			
 				//6.The "Tag" Dialog window is appeared.
 				tag_window.waitForPageToLoad();
+				tag_window.verifyTagWindowOpen();
 				
 				//7.create 2 tags for the test
 				if(type_of_user == 0){

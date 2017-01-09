@@ -168,12 +168,10 @@ public class TC10117ValidateTagUniquenessNameForAPrivateTag {
 		//24.Click on the "Cancel" button.
 		tag_window.clickElementWithOutIdJS(tag_window.cancel_edit_button);
 			
-		//45. delete all the existing tags
+		//25. delete all the existing tags
 		tag_window.deleteAllExistingTags();
 		
-		//26.Click on the "Cancel edit" button.
-		tag_window.clickElementWithOutIdJS(tag_window.cancel_edit_button);
-		
+
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 			
