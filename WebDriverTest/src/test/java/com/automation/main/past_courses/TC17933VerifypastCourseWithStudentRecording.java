@@ -99,6 +99,8 @@ public class TC17933VerifypastCourseWithStudentRecording {
 
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
+		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
+
 		
 
 		 Date curDate = new Date();
@@ -119,25 +121,10 @@ public class TC17933VerifypastCourseWithStudentRecording {
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		user = "user" + sdf.format(date);
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-
 		initializeCourseObject();
-		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
-
-		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
-
-		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
-
-		mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
-
-		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
-
-		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
-				ManageAdHocCoursesMembershipWindow.class);
-
-		Thread.sleep(2000);
-
+		
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+	
 		System.out.println("Past1");
 		// 2. Click on user builder href link
 		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");

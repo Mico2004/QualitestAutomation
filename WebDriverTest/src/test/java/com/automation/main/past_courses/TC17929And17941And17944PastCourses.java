@@ -440,7 +440,7 @@ public class TC17929And17941And17944PastCourses {
 		Thread.sleep(2000);
 
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+	
 		System.out.println("Past1");
 
 		// 2. Click on course builder href link
@@ -562,7 +562,7 @@ public class TC17929And17941And17944PastCourses {
 		Thread.sleep(2000);
 
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+
 		System.out.println("Past1");
 
 		// 2. Click on course builder href link

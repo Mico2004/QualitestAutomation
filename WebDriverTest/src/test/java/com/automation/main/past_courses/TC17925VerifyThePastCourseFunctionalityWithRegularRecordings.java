@@ -133,8 +133,7 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 		System.out.println("Past1");
 		// 2. Click on user builder href link
 		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
-
-		Thread.sleep(10000);
+		mange_adhoc_users_page.waitForPageToLoad();
 		// 3. Click on create course href link
 		driver.switchTo().frame(0);
 		Thread.sleep(4000);

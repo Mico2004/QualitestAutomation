@@ -344,9 +344,8 @@ public class TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementS
 		initializeCourseObject();
 		/// 2. Verify that "Past Courses" tab is not displayed
 
-		Thread.sleep(3000);
 		String past_course_a = course.selectCourseThatStartingWith("PastCourseA");
-		Thread.sleep(3000);
+
 
 		// 3. Signout
 		for (String window : driver.getWindowHandles()) {
@@ -393,7 +392,6 @@ public class TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementS
 		initializeCourseObject();
 		/// 2. Verify that "Past Courses" tab is not displayed
 
-		Thread.sleep(3000);
 		// 13.Click Past Courses Tab button (without selecting a recording)
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		// 14.verify patcourses button
@@ -409,7 +407,6 @@ public class TC17901CreatePastCourseAndVerifyAppearanceAccordinglyToEnrollementS
 		initializeCourseObject();
 		/// 2. Verify that "Past Courses" tab is not displayed
 
-		Thread.sleep(3000);
 		// 17.Click Past Courses Tab button (without selecting a recording)
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		// 18.verify patcourses tab not exist
