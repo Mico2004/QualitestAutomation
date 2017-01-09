@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +27,8 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -5503,6 +5506,28 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		 System.out.println("Upload recording from the tegrity application." );
 		 ATUReports.add(time +" Upload recording from the tegrity application." ,LogAs.PASSED, null);		
 
+	}
+	
+	
+	public void startingATestThruogthKeys() throws AWTException, InterruptedException {
+		
+		Robotil robotil=new Robotil("localhost", 5555);	
+		Thread.sleep(1000);
+		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
+		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);			
+		if(driver instanceof FirefoxDriver){
+			robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
+		}
+		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
+		Thread.sleep(3000);
+		
+		
+		robotil.pressKey(KeyEvent.VK_ALT);
+		robotil.pressAndReleaseKey(KeyEvent.VK_F4);			
+		robotil.releaseKey(KeyEvent.VK_ALT);
+		
+		System.out.println("verify that The modal window is closed and the PC/Mac Recorder opens." );
+		ATUReports.add(time +" verify that The modal window is closed and the PC/Mac Recorder opens." ,LogAs.PASSED, null);		
 	}
 
 	public void checkThatTheirAreNoRecordsInTheRecordingsPage() {

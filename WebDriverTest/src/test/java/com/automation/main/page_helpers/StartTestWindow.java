@@ -43,11 +43,11 @@ public class StartTestWindow extends Page {
 			public void verifyThatTheTextInTheTextboxIsEqualsToTheTextFromAdmin(String message) {
 				try {
 					if(test_message.getText().equals(message)) {
-						System.out.println("The text" + message +" from the admin is equals to the text box in the start test window: " +test_message.getText());
-						ATUReports.add(time +"The text" + message +" from the admin is equals to the text box in the start test window: " +test_message.getText(), "Success.", "Success.", LogAs.PASSED, null);		
+						System.out.println("The text " + message +" from the admin is equals to the text box in the start test window: " +test_message.getText());
+						ATUReports.add(time +"The text " + message +" from the admin is equals to the text box in the start test window: " +test_message.getText(), "Success.", "Success.", LogAs.PASSED, null);		
 					} else {
-						System.out.println("Fail to click on cancel button.");
-						ATUReports.add(time +"The text" + message +" from the admin is equals to the text box in the start test window: " +test_message.getText(), "Success.", "Success.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+						System.out.println("The text " + message +" from the admin is not equals to the text box in the start test window: " +test_message.getText());
+						ATUReports.add(time +"The text" + message +" from the admin is not equals to the text box in the start test window: " +test_message.getText(), "Success.", "Success.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					}
 					
 				} catch (Exception msg) {
@@ -121,8 +121,8 @@ public class StartTestWindow extends Page {
 			System.out.println("start a test menu background color is same as recording background color");
 			Assert.assertTrue(true);
 		} else {
-			ATUReports.add(time +" edit Properties menu background color is not  same as recording background color","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			System.out.println("edit Propertiese menu background color is  not same as recording background color");
+			ATUReports.add(time +" start a test menu background color is same as recording background color","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println("start a test menu background color is same as recording background color");
 			Assert.assertTrue(false);
 		}
 		}catch(Exception e){

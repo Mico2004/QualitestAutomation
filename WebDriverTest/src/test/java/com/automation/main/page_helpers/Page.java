@@ -668,6 +668,33 @@ public class Page {
 		return foundme;
 	}
 
+	public String getBackGroundImageColor(WebElement element)// get background by an
+	// element
+	{
+		String text = "";
+		try {
+			text = element.getCssValue("background-image").toString();
+		} catch (Exception msg) {
+			return "";
+		}
+		try {
+			// Split css value of rgb
+			String[] splited_structure_displayed = text.split("0%");
+			String splited_third_structure_displayed = splited_structure_displayed[1].substring(2, 18);
+			String[] numbers = splited_third_structure_displayed.replace("rgb(", "").replace(")", "").split(",");
+			int number1 = Integer.parseInt(numbers[0]);
+			numbers[1] = numbers[1].trim();
+			int number2 = Integer.parseInt(numbers[1]);	
+			numbers[2] = numbers[2].trim();
+			int number3 = Integer.parseInt(numbers[2]);
+			return String.format("#%02x%02x%02x", number1, number2, number3);
+		} catch (Exception msg) {
+			return text;
+		}
+
+	}
+	
+	
 	// this function returns true if element has underline or not
 	public boolean verifyUnderlineCss(WebElement element, WebDriver driver) throws InterruptedException {
 		String underline = "";

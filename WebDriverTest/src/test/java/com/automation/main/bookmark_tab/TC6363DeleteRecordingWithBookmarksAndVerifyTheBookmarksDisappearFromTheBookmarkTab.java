@@ -154,8 +154,7 @@ public class TC6363DeleteRecordingWithBookmarksAndVerifyTheBookmarksDisappearFro
 		//16.Click on the Bookmarks tab after the recording disappears from the recordings list
 		record.refresh();
 		record.waitForThePageToLoad();
-		record.verifyNoSBookmarkTab();
-	
+		record.verifyNoSBookmarkTab();	
 		}
 		
 		System.out.println("Done.");

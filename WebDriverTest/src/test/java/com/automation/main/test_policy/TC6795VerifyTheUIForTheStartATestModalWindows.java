@@ -29,6 +29,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+
+import java.awt.AWTException;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -94,7 +96,7 @@ public class TC6795VerifyTheUIForTheStartATestModalWindows {
 		
 	// @Parameters({"web","title"}) in the future
 	@Test (description="TC6795 Verify the UI for the 'Start a Test' modal windows")
-	public void test6795() throws InterruptedException {
+	public void test6795() throws InterruptedException, AWTException {
 		
 		//1.Open tegrity "Login page"
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
@@ -107,6 +109,7 @@ public class TC6795VerifyTheUIForTheStartATestModalWindows {
 		admin_dash_board_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
 		
 		//4.Check the "Enable student testing" checkbox
+		advanced_service_settings_page.waitForThePageToLoad();
 		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_student_testing_checkbox, "enable_student_testing_checkbox");
 		
 		//5.Check the "Show institutional testing policy" checkbox
@@ -138,10 +141,17 @@ public class TC6795VerifyTheUIForTheStartATestModalWindows {
 				
 		//14.Login as INSTRUCTOR 
 		tegrity.loginCourses("User1");
-			
+		
 		//15.Click on some course link
 		course.selectCourseThatStartingWith("Ab");
 		
+		for(int number_of_tab = 0 ; number_of_tab <2 ; number_of_tab++){
+			
+			if(number_of_tab == 1){
+				//12.Click on student tab
+				record.clickOnStudentRecordingsTab();
+			}
+
 		//16.Use the "Start a Test" button
 		record.clickElementJS(record.start_test_button);
 		
@@ -155,38 +165,44 @@ public class TC6795VerifyTheUIForTheStartATestModalWindows {
 		start_test_window.verifyThatTheTextInTheTextboxIsEqualsToTheTextFromAdmin(messageAdmin);
 		
 		//20.verify background and text color of accept button
-		copy.verifyBlueColor(start_test_window.getBackGroundColor(start_test_window.accept_button)); 
+		record.verifyColorButton(start_test_window.getBackGroundImageColor(start_test_window.accept_button)); 
 		
 		//21.verify background and text color of cancel button
-		record.verifyColorButton(start_test_window.getBackGroundColor(start_test_window.cancel_button));
+		record.verifyColorButton(start_test_window.getBackGroundImageColor(start_test_window.cancel_button));
 
 		//22.verify that location of the save and cancel
 		start_test_window.VerifyTheLocationOfTheSaveAndCancel();
 	
-		//14.Click the "Accept" button
-		start_test_window.clickOnAcceptButton();
+		//23.Click the "Accept" button - *The Institution's policy changed to the Course's policy.*
+		start_test_window.clickElementJS(start_test_window.accept_button);
 		
-		//15.The course is not displayed in the 'Active Courses' page
-		course.verifyCourseNotExist(course_name);
+		//24.The color of the window's header is the same as the university's header color.
+		start_test_window.verifyBackgroundColor(record);
 		
-		//16.Click on the 'Past Courses' tab*
-		course.clickOnPastCoursesTabButton();
+		//25. The "Start a Test" window title is displayed in the header.
+		start_test_window.verifyStartTestTitle();
 		
-		//17.The course is displayed in the 'Past Courses' tab content*
-		course.verifyCourseExist(course_name);
-		
-		//18.post test - return the course ad to active courses
-		course.selectCourseThatStartingWith("ad");
-		
-		//19.Hover over the "Course Tasks"
-		record.moveToElementAndPerform(record.course_task_button, driver);
-		
-		//20.Click on the 'Course Tasks - Move to Active Courses'
-		record.clickOnCourseTaskThenMoveToActiveCourses();
+		//26.The Course's policy is displayed in the modal window's content, below the header - *this must match the unique text you filled in the preconditions*, as Instructor.
+		start_test_window.verifyThatTheTextInTheTextboxIsEqualsToTheTextFromAdmin(messageCourse);
 				
-		//21.Click on the ok after moving to past courses
-		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to active courses");
-			
+		
+		//27.The "Accept" button is displayed on the bottom/right of the modal window - *the button is blue*.
+		copy.verifyBlueColor(start_test_window.getBackGroundImageColor(start_test_window.accept_button)); 
+		
+		//28.The "Cancel" button is displayed on the right bottom of the modal window - to the left of the "Accept" button - *the button is white*.
+		record.verifyColorButton(start_test_window.getBackGroundImageColor(start_test_window.cancel_button));
+		
+		//22.verify that location of the save and cancel
+		start_test_window.VerifyTheLocationOfTheSaveAndCancel();
+		
+		//23.Click the "Accept" button - The modal window is closed and the PC/Mac Recorder opens.
+		start_test_window.clickElementJS(start_test_window.accept_button);
+		
+		//24.verify that The modal window is closed and the PC/Mac Recorder opens.
+		record.startingATestThruogthKeys();
+		
+		}
+		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	

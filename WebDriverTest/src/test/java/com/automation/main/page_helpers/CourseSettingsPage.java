@@ -482,12 +482,11 @@ public class CourseSettingsPage extends Page {
 	
 	String message = null;	
 	try {
-		driver.switchTo().frame(1);
-		Thread.sleep(1000);
+		driver.switchTo().frame(0);
 		WebElement element = driver.findElement(By.xpath("/html/body"));
 		element.clear();
 		element.sendKeys("This is the Course Policy");
-		message = driver.findElement(By.xpath("/html/body/p")).getText();
+		message = driver.findElement(By.xpath("/html/body")).getText();
 		driver.switchTo().defaultContent();		
 		WebElement wi = driver.findElement(By.xpath("//*[@id='main']"));
 		Actions builder = new Actions(driver);

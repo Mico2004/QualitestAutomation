@@ -12,6 +12,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
@@ -174,7 +175,7 @@ public class AdvancedServiceSettingsPage extends Page {
 				System.out.println("already clicked on show institution test checkbox");
 				ATUReports.add(time +"already clicked on show institution test checkbox", "Success.", "Success.",LogAs.PASSED, null);
 			}			
-			driver.switchTo().frame(1);		 
+			driver.switchTo().frame(0);				
 			text_body.clear();
 			text_body.sendKeys("This is the Admin Policy");
 			message = driver.findElement(By.xpath("/html/body/p")).getText();
@@ -183,7 +184,7 @@ public class AdvancedServiceSettingsPage extends Page {
 			Actions builder = new Actions(driver);
 			builder.sendKeys(Keys.PAGE_DOWN);
 			builder.moveToElement(wi).build().perform();		
-			clickElementWithOutIdJS(ok);			
+			clickElementWithOutIdJS(ok);
 			confirm.clickonokbuttonafterEulaChangeSetting();
 				
 		} catch (Exception e) {
@@ -314,5 +315,20 @@ public class AdvancedServiceSettingsPage extends Page {
 		}
 		clickElement(driver.findElement(By.cssSelector(".btn.btn-default")));
 		
+	}
+	
+	public void waitForThePageToLoad(){
+		try {
+			waitForVisibility(adminDashboard);
+			waitForVisibility(enable_youtube_integration);
+			waitForVisibility(enable_automated_capitioning);
+			waitForVisibility(enable_student_testing_checkbox);
+	
+		} catch(Exception e) {
+			e.printStackTrace();
+			ATUReports.add(time +" the page advance Service settings can't load " + e.getMessage() ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(true);
+
+		}
 	}
 }
