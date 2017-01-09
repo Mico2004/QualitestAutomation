@@ -133,7 +133,10 @@ public class TagMenu extends Page {
 			
 		} catch (org.openqa.selenium.NoSuchElementException msg) {
 			return true;
+		} catch(org.openqa.selenium.StaleElementReferenceException ex){
+			return true;
 		}
+		
 	}
 	
 	// This function verify that tag window is close
