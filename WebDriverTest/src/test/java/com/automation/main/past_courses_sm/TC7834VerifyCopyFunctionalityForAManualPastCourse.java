@@ -25,6 +25,8 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import junitx.util.PropertyManager;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -95,7 +97,7 @@ public class TC7834VerifyCopyFunctionalityForAManualPastCourse {
 		course.clickOnPastCoursesTabButton();
 		
 		//get the second course for later use
-		String PastCourseB = course.getCourseInIndex(2);
+		String PastCourseB = PropertyManager.getProperty("course9");
 		
 		//4.Select the past course
 		course.selectCourseThatStartingWith("PastCourseA");
