@@ -29,7 +29,8 @@ public class AdvancedServiceSettingsPage extends Page {
 		super(browser);
 		// TODO Auto-generated constructor stub
 	}
-
+	@FindBy(xpath="html/body")
+	public WebElement text_body;
 	@FindBy(xpath = "//*[@id=\"main\"]/div/div[5]/div/label/input")
 	public WebElement eula_checkbox;
 	@FindBy(xpath = "//*[@id=\"main\"]/div/div[6]/button[1]")
@@ -38,11 +39,12 @@ public class AdvancedServiceSettingsPage extends Page {
 	public WebElement cancel;
 	@FindBy(xpath=".//*[@id='main']//label/input[@ng-change='changeStudentTestingMode()']")
 	public WebElement enable_student_testing_checkbox;
-	
 	@FindBy(xpath=".//*[@id='main']/div/div[1]/div[1]/label/input")
 	public WebElement enable_youtube_integration;
 	@FindBy(xpath=".//*[@id='main']/div/div[2]/div[1]/label/input")
 	public WebElement enable_automated_capitioning;
+	@FindBy(xpath=".//*[@id='main']/div/div[4]/div[1]/label/input")
+	public WebElement show_institution_testing_policy;
 	@FindBy(xpath=".//*[@id='tegrityBreadcrumbsBox']/li/a") WebElement adminDashboard;
 
 	public void enableYoutbeCapitionStudent(ConfirmationMenu confirm) {
@@ -162,6 +164,36 @@ public class AdvancedServiceSettingsPage extends Page {
 		return eula;
 
 	}
+	public String showInstitutionTestPolicyAndClickOk(ConfirmationMenu confirm){
+		
+		String message = null;
+		try {
+			if (!show_institution_testing_policy.isSelected()) {
+				clickElementWithOutIdJS(show_institution_testing_policy);			
+			} else {
+				System.out.println("already clicked on show institution test checkbox");
+				ATUReports.add(time +"already clicked on show institution test checkbox", "Success.", "Success.",LogAs.PASSED, null);
+			}			
+			driver.switchTo().frame(1);		 
+			text_body.clear();
+			text_body.sendKeys("This is the Admin Policy");
+			message = driver.findElement(By.xpath("/html/body/p")).getText();
+			driver.switchTo().defaultContent();			
+			WebElement wi = driver.findElement(By.xpath("//*[@id='main']"));
+			Actions builder = new Actions(driver);
+			builder.sendKeys(Keys.PAGE_DOWN);
+			builder.moveToElement(wi).build().perform();		
+			clickElementWithOutIdJS(ok);			
+			confirm.clickonokbuttonafterEulaChangeSetting();
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("failed clicking on Show institutional testing policy");
+			ATUReports.add(time +"Click Show institutional testing policy",  "Success select", "failed select"+e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		return message;
+	}
+	
 
 	public void enableStudyTestingCheckboxAndClickOk(ConfirmationMenu confirm){
 		try {

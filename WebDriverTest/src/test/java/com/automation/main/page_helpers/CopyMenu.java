@@ -517,8 +517,8 @@ public class CopyMenu extends Page {
 		String blue2 = "#26a0da";
 		String blue4 = "#0e76bf";/// blue in ie chrome and firefox
 		if ((expected.equals(blue)) || (expected.equals(blue2)) || (expected.equals(blue3)) || expected.equals(blue4)) {
-			System.out.println("color of course selected is blue");
-			ATUReports.add(time +" color of course selected is blue", LogAs.PASSED, null);
+			System.out.println("The color of that button is blue.");
+			ATUReports.add(time +" The color of that button is blue.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("color of course selected is not blue...");

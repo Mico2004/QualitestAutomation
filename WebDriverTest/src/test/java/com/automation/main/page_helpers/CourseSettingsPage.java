@@ -87,6 +87,8 @@ public class CourseSettingsPage extends Page {
 	public WebElement courses_name;
 	@FindBy(id = "CourseSettings")
 	public WebElement courseTitle;
+	@FindBy(id = "ShowTestingPolicy")
+	public WebElement checkbox_show_testing_policy;
 	@FindBy(xpath= ".//*[@id='main']/div/div/div[1]/h3")
 	public WebElement recording_title;
 	
@@ -473,6 +475,31 @@ public class CourseSettingsPage extends Page {
 		}
 		Thread.sleep(3000);
 		clickOnOkButton();
+	}
+	
+	
+	public String addTextToShowCourseTesting() throws InterruptedException {
+	
+	String message = null;	
+	try {
+		driver.switchTo().frame(1);
+		Thread.sleep(1000);
+		WebElement element = driver.findElement(By.xpath("/html/body"));
+		element.clear();
+		element.sendKeys("This is the Course Policy");
+		message = driver.findElement(By.xpath("/html/body/p")).getText();
+		driver.switchTo().defaultContent();		
+		WebElement wi = driver.findElement(By.xpath("//*[@id='main']"));
+		Actions builder = new Actions(driver);
+		builder.sendKeys(Keys.PAGE_DOWN);
+		builder.moveToElement(wi).build().perform();
+		System.out.println("writing course policy in the text box.");
+		ATUReports.add(time +" writing course policy in the text box.", "Success.","Success.", LogAs.PASSED, null);
+	} catch (Exception e) {
+		System.out.println("Fail to write course policy in the text box.");
+		ATUReports.add(time +" Fail to write course policy in the text box.", "Success.","Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	return message;
 	}
 
 	// This function verifies enable student recording is checked

@@ -568,6 +568,7 @@ public class RecordingHelperPage extends Page {
 	public String getFirstRecordingTitle() {
 		try{
 			waitForVisibility(first_recording_title);
+			System.out.println("The first record is: " + first_recording_title.getText());			
 		}catch (Exception e){
 			ATUReports.add(time +" Timeout for first recording", e.getMessage(),LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
 			Assert.assertTrue(false);
@@ -5745,8 +5746,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			for(WebElement webElement: bookmarks_names) {
 				String bookmarksName = webElement.getAttribute("title");
 				if(!namesOfbookmarks.contains(bookmarksName)) {
-					System.out.println("Not verify that the bookmark:" + namesOfbookmarks+ " is displayed on the bookmarks tab.");
-					ATUReports.add(time +" Not verify that the bookmark:" + namesOfbookmarks+ " is displayed on the bookmarks tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					System.out.println("Not verify that the bookmark:" + bookmarksName+ " is displayed on the bookmarks tab.");
+					ATUReports.add(time +" Not verify that the bookmark:" + bookmarksName+ " is displayed on the bookmarks tab.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					return;		
 			} 
 		}

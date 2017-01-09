@@ -641,10 +641,11 @@ public class ConfirmationMenu extends Page {
 				Assert.assertEquals(false, true);
 			}
 			ok_button.click();
-			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
+			System.out.println("Clicked on OK button.");
+			ATUReports.add(time +"Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
-			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add(time +"Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		Thread.sleep(3000);
