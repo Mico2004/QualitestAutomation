@@ -103,6 +103,9 @@ public class TC6390VerifyTheBookmarkTabIsDisplayedOnlyInstructorsBookmarksAsGues
 		//1.Enter the university
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
 		
+		// login as ins
+		tegrity.loginCourses("User1");
+		
 		course.selectCourseThatStartingWith("Ab");
 
 		// Make course public
