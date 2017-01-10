@@ -40,6 +40,7 @@ public class DriverSelector {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public static WebDriver getDriver(BrowserType type) {
 		WebDriver driver = null;
 		DesiredCapabilities capability = null;

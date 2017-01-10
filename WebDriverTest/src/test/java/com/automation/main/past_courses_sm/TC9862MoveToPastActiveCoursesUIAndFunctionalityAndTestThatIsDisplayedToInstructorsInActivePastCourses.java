@@ -99,8 +99,7 @@ public class TC9862MoveToPastActiveCoursesUIAndFunctionalityAndTestThatIsDisplay
 			tegrity.loginCourses("User1");
 		}else if(type_of_user ==1) {
 			tegrity.loginAdmin("ExcutiveAdmin");
-		} else {
-			
+		} else {		
 			tegrity.loginAdmin("Admin");
 			
 			//14.Click on "Impersonate User" under the "Users" section

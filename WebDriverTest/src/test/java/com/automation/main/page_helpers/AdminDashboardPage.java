@@ -173,7 +173,8 @@ public class AdminDashboardPage extends Page {
 			wait.until(ExpectedConditions.visibilityOf(ManageAAIRS));
 			
 		}catch(Exception e){
-			ATUReports.add(time +" Loading 'Admin dashboard page' page failed",  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			e.printStackTrace();
+			ATUReports.add(time +" Loading 'Admin dashboard page' page failed" + e.getMessage(),  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
