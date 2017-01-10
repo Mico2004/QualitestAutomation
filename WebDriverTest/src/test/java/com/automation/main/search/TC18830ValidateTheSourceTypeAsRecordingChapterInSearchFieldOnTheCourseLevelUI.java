@@ -65,30 +65,14 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 	@BeforeClass
 	public void setup() {
 
-		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
-
-		
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
-		copy = PageFactory.initElements(driver, CopyMenu.class);
-		
-		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-		
+		copy = PageFactory.initElements(driver, CopyMenu.class);		
+		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);		
 		top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
-		search_page = PageFactory.initElements(driver, SearchPage.class);
-		
-		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);
-		
+		search_page = PageFactory.initElements(driver, SearchPage.class);		
+		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);		
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
 		
 		 Date curDate = new Date();
@@ -98,21 +82,18 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		 "Starting the test: TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCourseLevelUI at " + DateToStr, LogAs.PASSED, null);
 		
 	}
-	
-	
+		
 	@AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
 	}
 
-	
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		course.courses = course.getStringFromElement(course.course_list);
 	}
-
 	
 	@Test(description = "TC 18830 Validate The Source Type As Recording Chapter In Search Field On The Course Level UI")
 	public void test18830() throws InterruptedException
@@ -144,7 +125,6 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 		
 		// changing the first chapter
-		Thread.sleep(3000);
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);
 	
@@ -152,8 +132,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		//String first_chapter_title =  driver.findElement(By.xpath(".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a/div[2]/p[2]")).getText();	
 		
 		record.clickOnRecordingTaskThenEditRecording();
-		
-		
+			
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String first_chapter_title = "newname" + sdf.format(date);
@@ -164,8 +143,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		
 		// 8. Search the first chapter from the recording that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(first_chapter_title);
-		
-		
+			
 		// 8.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 		search_page.verifyLoadingSpinnerImage();
 		
@@ -217,7 +195,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		// 9. Hover over the chapter icon.
 		Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 		search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		
 		// 9.1. The chapter icon become a bit bigger in size.
 		Point after_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
@@ -273,10 +251,7 @@ public class TC18830ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheCou
 		date = new Date();
 		String new_chapter_name = "newname" + sdf.format(date);	
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(new_chapter_name);
-		
-		Thread.sleep(2000);
-		
-		
+					
 		// 18. Search the first chapter with the new name - The chapter is displayed with all the details that we mentioned.
 		top_bar_helper.searchForTargetText(new_chapter_name);
 		search_page.waitUntilSpinnerImageDisappear();
