@@ -132,6 +132,22 @@ public class StartTestWindow extends Page {
 			}
 	}
 	
+	// This function verify that start a test window is open
+	public void verifyStartATestWindowOpen() throws InterruptedException {
+		
+		Thread.sleep(500);
+		boolean is_closed = isStartATestWindowClosed();
+		if(!is_closed) {
+			System.out.println("Start a test window is open.");
+			ATUReports.add(time +" Start a test window.", "Open.", "Open.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Start a test window is close.");
+			ATUReports.add(time +" Start a test window.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
 	/**
  * this function verify Start a Test Title
 	 */

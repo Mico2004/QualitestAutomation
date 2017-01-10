@@ -44,7 +44,7 @@ public class AdvancedServiceSettingsPage extends Page {
 	public WebElement enable_youtube_integration;
 	@FindBy(xpath=".//*[@id='main']/div/div[2]/div[1]/label/input")
 	public WebElement enable_automated_capitioning;
-	@FindBy(xpath=".//*[@id='main']/div/div[4]/div[1]/label/input")
+	@FindBy(xpath=".//*[@id='main']/div/div[4]/div[2]/label/input")
 	public WebElement show_institution_testing_policy;
 	@FindBy(xpath=".//*[@id='tegrityBreadcrumbsBox']/li/a") WebElement adminDashboard;
 

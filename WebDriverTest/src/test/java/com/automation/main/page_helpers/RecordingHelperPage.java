@@ -5512,7 +5512,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void startingATestThruogthKeys() throws AWTException, InterruptedException {
 		
 		Robotil robotil=new Robotil("localhost", 5555);	
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
 		robotil.pressAndReleaseKey(KeyEvent.VK_TAB);			
 		if(driver instanceof FirefoxDriver){
