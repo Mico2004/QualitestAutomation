@@ -188,7 +188,7 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		System.out.println("b0");
 		  final List<Integer> CourseAbContent = Arrays.asList(0,1,2,3); //For Ab	
 		  final List<Integer> CoursePastAContent = Arrays.asList(0,1,2,3); //For PAST A
-		  final List<Integer> CoursePastBContent = Arrays.asList(0); //For PAST B
+		  final List<Integer> CoursePastBContent = Arrays.asList(0,3); //For PAST B
 		  
 		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
 			{
