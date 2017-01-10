@@ -52,11 +52,11 @@ public class LoginHelperPage extends Page {
 		super(driver);
 		setPageTitle("Tegrity Lecture Capture");	
 		//setPageUrl("https://trolls-qa.tegrity.com");
-		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
+		setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 		//setPageUrl("https://awsserverautomation5-qabr.tegrity.com");
 		///setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
-		setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
+		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 
 
 	}
@@ -244,14 +244,14 @@ public class LoginHelperPage extends Page {
 				ATUReports.add(time +" Login as guest button isn't visible", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));			
 			}
 		}							
-//			try {
-//				new WebDriverWait(driver, 30)
-//						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
-//			} catch (TimeoutException e) {
-//				ATUReports.add(time +" Login Timeout (Screenshot)","Login Success","Login Failed", LogAs.FAILED,
-//						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-//				Assert.assertTrue(false);
-//			}
+			try {
+				new WebDriverWait(driver, 30)
+						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
+			} catch (TimeoutException e) {
+				ATUReports.add(time +" Login Timeout (Screenshot)","Login Success","Login Failed", LogAs.FAILED,
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
 			
 			if (driver.getTitle().contains("Tegrity - Courses")) {
 				ATUReports.add(time +" Tegrity courses home page is visible","Course List page is displayed",
