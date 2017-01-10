@@ -30,6 +30,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Command;
@@ -692,6 +693,23 @@ public class Page {
 			return text;
 		}
 
+	}
+	
+	public void clickEscOnKeyBoardToCloseTheWindow(WebElement cancel_button) throws InterruptedException {
+		try {
+			if(driver instanceof FirefoxDriver){
+				cancel_button.sendKeys(Keys.ESCAPE);
+			} else{
+				Actions action = new Actions(driver);
+				action.sendKeys(Keys.ESCAPE).build().perform();
+			}
+			ATUReports.add(time +" Clicked on ESC button.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception e) {
+			ATUReports.add(time +" Fail click on ESC button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+		Thread.sleep(3000);
 	}
 	
 	

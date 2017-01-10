@@ -74,12 +74,7 @@ public class StartTestWindow extends Page {
 	public void clickOnCancelButton() {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(cancel_button));	
-			
-			while(isStartATestWindowClosed() == false) {
-				((JavascriptExecutor) driver).executeScript("document.getElementById(\""+cancel_button.getAttribute("id")+"\").click();");
-				Thread.sleep(1000);
-			}
-			
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+cancel_button.getAttribute("id")+"\").click();");
 			System.out.println("Clicked on cancel button.");
 			ATUReports.add(time +" Clicked on cancel button.", "Success.", "Success.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -94,11 +89,7 @@ public class StartTestWindow extends Page {
 	public void clickOnAcceptButton()
 	{
 		try {
-			while(isStartATestWindowClosed() == false) {
-				((JavascriptExecutor) driver).executeScript("arguments[0].click();", accept_button);	
-				Thread.sleep(2000);
-			}
-			
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", accept_button);			
 			System.out.println("Clicked on accept button.");
 			ATUReports.add(time +" Clicked on accept button.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);

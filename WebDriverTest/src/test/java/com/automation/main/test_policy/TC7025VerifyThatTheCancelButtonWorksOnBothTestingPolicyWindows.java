@@ -1,6 +1,7 @@
 package com.automation.main.test_policy;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -36,7 +37,7 @@ import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC6795VerifyTheUIForTheStartATestModalWindows {
+public class TC7025VerifyThatTheCancelButtonWorksOnBothTestingPolicyWindows {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -85,8 +86,8 @@ public class TC6795VerifyTheUIForTheStartATestModalWindows {
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC6795VerifyTheUIForTheStartATestModalWindows at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC6795VerifyTheUIForTheStartATestModalWindows at " + DateToStr, "Starting the test: TC6795VerifyTheUIForTheStartATestModalWindows at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC7025VerifyThatTheCancelButtonWorksOnBothTestingPolicyWindows at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC7025VerifyThatTheCancelButtonWorksOnBothTestingPolicyWindows at " + DateToStr, "Starting the test: TC6807VerifyThatWhenBothTheInstitutionAndCourseTestingPoliciesAreDisabledTheRecorderIsLaunched at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -95,8 +96,8 @@ public class TC6795VerifyTheUIForTheStartATestModalWindows {
 	}
 		
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC6795 Verify the UI for the 'Start a Test' modal windows")
-	public void test6795() throws InterruptedException, AWTException {
+	@Test (description="TC7025 Verify that the Cancel button works on both Testing policy windows")
+	public void test7025() throws InterruptedException, AWTException {
 		
 		//1.Open tegrity "Login page"
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
@@ -108,41 +109,39 @@ public class TC6795VerifyTheUIForTheStartATestModalWindows {
 		admin_dash_board_page.waitForPageToLoad();
 		admin_dash_board_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
 		
-		//4.Check the "Enable student testing" checkbox
+		//4.*check* the Enable student testing (Remote Proctoring Mode) checkbox
 		advanced_service_settings_page.waitForThePageToLoad();
-		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_student_testing_checkbox, "enable_student_testing_checkbox");
+		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_student_testing_checkbox, "Enable student testing (Remote Proctoring Mode)");
 		
 		//5.Check the "Show institutional testing policy" checkbox
-		//6.Fill some unique text into the institution's policy text area & use the "OK" button on the bottom of the page to save the changes
 		String messageAdmin = advanced_service_settings_page.showInstitutionTestPolicyAndClickOk(confirm_menu);
-
-		//7.sign out
+		
+		//6.sign out
 		record.signOut();
 		
-		//8.Login as INSTRUCTOR 
+		//7.Login as INSTRUCTOR 
 		tegrity.loginCourses("User1");
 		
-		//9.Open some course link
+		//8.Open some course link
 		course.selectCourseThatStartingWith("Ab");
 		
-		//10.Choose the "Course settings" option from the "Course Tasks" manu
+		//9.Choose the "Course settings" option from the "Course Tasks" manu
 		record.clickOnCourseTaskThenCourseSettings();
-		
-		//11.Check the "Enable students testing" "On/Off" checkbox
+			
+		//10.Check the "Show course testing policy" "On/Off" checkbox
 		course_settings_page.forceWebElementToBeSelected(course_settings_page.checkbox_enable_student_testing, "Enable student testing (Remote Proctoring mode)");
 		
-		//12.Check the "Show course testing policy" "On/Off" checkbox
+		//11.Check the "Show course testing policy" "On/Off" checkbox
 		course_settings_page.forceWebElementToBeSelected(course_settings_page.checkbox_show_testing_policy, "Enable show testing policy");
-		String messageCourse = course_settings_page.addTextToShowCourseTesting();
 		course_settings_page.clickOnOkButton();
 		
-		//13.End of preconditions - sign out
+		//11.End of preconditions - sign out
 		record.signOut();
 				
-		//14.Login as INSTRUCTOR 
+		//12.Login as INSTRUCTOR 
 		tegrity.loginCourses("User1");
 		
-		//15.Click on some course link
+		//13.Click on some course link
 		course.selectCourseThatStartingWith("Ab");
 		
 		for(int number_of_tab = 0 ; number_of_tab <2 ; number_of_tab++){
@@ -151,55 +150,43 @@ public class TC6795VerifyTheUIForTheStartATestModalWindows {
 				//12.Click on student tab
 				record.clickOnStudentRecordingsTab();
 			}
+			
+			 for(int cancel_way = 0 ;cancel_way <2 ; cancel_way++){
 
-		//16.Use the "Start a Test" button
-		record.clickElementJS(record.start_test_button);
+				 //14.The "Start a Test" button is present
+				 record.verifyWebElementDisplayed(record.start_test_button, "Start a Test");
+			
+				 //15.Use the "Start a Test" button
+				 record.clickElementJS(record.start_test_button);
+			
+				 //16.The "Start a Test" modal window is displayed containing the Institution's Testing Policy
+				 start_test_window.verifyStartATestWindowOpen();
+				 start_test_window.verifyThatTheTextInTheTextboxIsEqualsToTheTextFromAdmin(messageAdmin);
 		
-		//17.The color of the window's header is the same as the university's header color.
-		start_test_window.verifyBackgroundColor(record);
+				 //17.Click the "Cancel" button
+				 if(cancel_way == 0){
+					 start_test_window.clickOnCancelButton();
+				 } else {
+					 start_test_window.clickEscOnKeyBoardToCloseTheWindow(start_test_window.cancel_button);
+				 }
+			
+				 //18.Click the "Start a Test" button
+				 record.clickElementJS(record.start_test_button);
 		
-		//18.The "Start a Test" window title is displayed in the header.
-		start_test_window.verifyStartTestTitle();
-				
-		//19.The Institution's policy is displayed in the modal window's content, below the header - this must match the unique text you filled in the preconditions,as admin 
-		start_test_window.verifyThatTheTextInTheTextboxIsEqualsToTheTextFromAdmin(messageAdmin);
+				 //19.The "Start a Test" modal window is displayed containing the Institution's Testing Policy
+				 start_test_window.verifyStartATestWindowOpen();
+				 start_test_window.verifyThatTheTextInTheTextboxIsEqualsToTheTextFromAdmin(messageAdmin);
 		
-		//20.verify background and text color of accept button
-		record.verifyColorButton(start_test_window.getBackGroundImageColor(start_test_window.accept_button)); 
+				 //20.Click the "Accept" button
+				 start_test_window.clickOnAcceptButton();
 		
-		//21.verify background and text color of cancel button
-		record.verifyColorButton(start_test_window.getBackGroundImageColor(start_test_window.cancel_button));
-
-		//22.verify that location of the save and cancel
-		start_test_window.VerifyTheLocationOfTheSaveAndCancel();
-	
-		//23.Click the "Accept" button - *The Institution's policy changed to the Course's policy.*
-		start_test_window.clickElementJS(start_test_window.accept_button);
-		
-		//24.The color of the window's header is the same as the university's header color.
-		start_test_window.verifyBackgroundColor(record);
-		
-		//25. The "Start a Test" window title is displayed in the header.
-		start_test_window.verifyStartTestTitle();
-		
-		//26.The Course's policy is displayed in the modal window's content, below the header - *this must match the unique text you filled in the preconditions*, as Instructor.
-		start_test_window.verifyThatTheTextInTheTextboxIsEqualsToTheTextFromAdmin(messageCourse);
-					
-		//27.The "Accept" button is displayed on the bottom/right of the modal window - *the button is blue*.
-		copy.verifyBlueColor(start_test_window.getBackGroundImageColor(start_test_window.accept_button)); 
-		
-		//28.The "Cancel" button is displayed on the right bottom of the modal window - to the left of the "Accept" button - *the button is white*.
-		record.verifyColorButton(start_test_window.getBackGroundImageColor(start_test_window.cancel_button));
-		
-		//22.verify that location of the save and cancel
-		start_test_window.VerifyTheLocationOfTheSaveAndCancel();
-		
-		//23.Click the "Accept" button - The modal window is closed and the PC/Mac Recorder opens.
-		start_test_window.clickElementJS(start_test_window.accept_button);
-		
-		//24.verify that The modal window is closed and the PC/Mac Recorder opens.
-		record.startingATestThruogthKeys();
-		
+				 //21.Click the "Cancel" button
+				 if(cancel_way == 0){
+					 start_test_window.clickOnCancelButton();
+				 } else {
+					 start_test_window.clickEscOnKeyBoardToCloseTheWindow(start_test_window.cancel_button);
+				 }		
+			 }
 		}
 		
 		System.out.println("Done.");

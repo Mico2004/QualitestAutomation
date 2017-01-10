@@ -356,7 +356,7 @@ public class AddAdditionalContentFileWindow extends Page {
 		verifyUploadElapsedTime();
 
 	}
-
+	
 	public void clickEscOnKeyBoardToCloseCopyWindow() throws InterruptedException {
 		try {
 			cancel_additional_file_button.sendKeys(Keys.ESCAPE);
@@ -368,4 +368,5 @@ public class AddAdditionalContentFileWindow extends Page {
 		}
 		Thread.sleep(3000);
 	}
+	
 }
