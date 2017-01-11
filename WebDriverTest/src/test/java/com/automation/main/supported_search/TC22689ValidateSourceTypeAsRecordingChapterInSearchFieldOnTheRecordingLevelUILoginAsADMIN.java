@@ -169,7 +169,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		course.waitForVisibility(course.first_course_button);
 				
 		//2.1 take course being copied to name and then return
-		String course_name=course.selectCourseThatStartingWith("Ab");
+		String course_name=course.selectCourseThatStartingWith("Ba");
 		String url =  course.getCurrentUrlCoursePage(); 
 
 		
@@ -180,12 +180,8 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
 		String RecordingChapter = "NewChapterName" + sdf.format(date); 
 		edit_recording.changeFirstChapterRecordingNameToTargetNameNew(RecordingChapter);
-		Thread.sleep(2000);
-			
+		
 		record.signOut();
-		Thread.sleep(1000);
-		tegrity.waitForVisibility(tegrity.passfield);
-
 
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");
@@ -215,7 +211,6 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 	    record.convertRecordingsListToNames();
 	    record.convertRecordingsListToRecorderName();
 	    
-	
 	   	String recording_to_search=record.recording_list_names.get(0);
 	    record.verifyFirstExpandableRecording();
 	    record.clickOnTheFirstCaptherWithOutTheExpand();

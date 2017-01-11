@@ -706,23 +706,19 @@ public class ConfirmationMenu extends Page {
 		try {		
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				Assert.assertEquals(false, true);
+				System.out.println("Error window title is wrong.");
 			}
 			if (!error_msg_body_list.get(0).getText().contains("Add operation completed successfully!")) {
+				System.out.println("Error window description is wrong.");
 				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				Assert.assertEquals(false, true);
 			}
-			Thread.sleep(5000);
-			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
-			wait.until(ExpectedConditions.elementToBeClickable(ok_button));
-			ok_buttonCss.click();
-			ok_button.click();
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", ok_button);	
+			System.out.println("Clicked on OK button.");
 			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
 		} catch (Exception e) {
 			ATUReports.add(time +" Clicked on OK button", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 	}
 	
 	public void clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses(String description) throws InterruptedException {

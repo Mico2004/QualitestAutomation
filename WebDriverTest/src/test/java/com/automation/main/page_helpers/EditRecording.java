@@ -14,6 +14,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 
@@ -43,6 +45,8 @@ public class EditRecording extends Page {
 	List<WebElement> listButtons;
 	@FindBy(id = "NewKeyword")
 	public WebElement NewKeywordButton;
+	@FindBy(id = "ModalDialogHeader")
+	public WebElement header;
 
 	
 	
@@ -154,30 +158,34 @@ public class EditRecording extends Page {
 		
 		System.out.println("Click on the apply.");
 		ATUReports.add(time +" Click on the apply.", "True.", "True.", LogAs.PASSED, null);
-		int numberOfAttempts = 0;
-		//click on the ok
-		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){		
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
-			String message = getTextFromWebElement(ie,5);
-			if(message.contains("Success")){
-				confirm_menu.clickOnOkButtonAfterEditRecord();
-				break;
-			} else if(message.contains("Error")) {
-				ATUReports.add(time +" Get an error while click on apply.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
-				System.out.println("Get an error while click on apply.");	
-				clickElement(ApplyButton);
-				numberOfAttempts++;
-				if(numberOfAttempts == 5) {
-					ATUReports.add(time +" Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-					Assert.assertTrue(false);
-				}
-			}
-			else Thread.sleep(3000);
-		}
 		
-			//return to the course
-			clickElement(Breadcrumbs);
+//		int numberOfAttempts = 0;
+//		//click on the ok
+//		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){		
+//			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
+//			String message = getTextFromWebElement(ie,5);
+//			if(message.contains("Success")){
+//				confirm_menu.clickOnOkButtonAfterEditRecord();
+//				break;
+//			} else if(message.contains("Error")) {
+//				ATUReports.add(time +" Get an error while click on apply.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
+//				System.out.println("Get an error while click on apply.");	
+//				clickElement(ApplyButton);
+//				numberOfAttempts++;
+//				if(numberOfAttempts == 5) {
+//					ATUReports.add(time +" Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//					Assert.assertTrue(false);
+//				}
+//			}
+//			else Thread.sleep(3000);
+//		}
+		
+		new WebDriverWait(driver, 20).until(ExpectedConditions.textToBePresentInElement(header, "Success"));
+		confirm_menu.clickOnOkButtonAfterEditRecord();
+			
+		//return to the course
+		clickElement(Breadcrumbs);
 		
 		}catch(Exception e){
 			e.getMessage();
