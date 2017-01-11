@@ -194,13 +194,15 @@ public class TC9862MoveToPastActiveCoursesUIAndFunctionalityAndTestThatIsDisplay
 		
 		//27.Click on the "Courses" button
 		record.returnToCourseListPage();
+			
+		if(course.isPastCoursesTabExist()){
+			
+			//28.click on the "Past Courses" tab
+			course.clickOnPastCoursesTabButton();
 		
-		//28.click on the "Past Courses" tab
-		course.clickOnPastCoursesTabButton();
-		
-		//29.The course is not displayed in the "Past Course" list
-		course.verifyCourseNotExist(course_name);
-		
+			//29.The course is not displayed in the "Past Course" list	
+			course.verifyCourseNotExist(course_name);
+		}
 		//30.sign out from user
 		record.signOut();
 		}

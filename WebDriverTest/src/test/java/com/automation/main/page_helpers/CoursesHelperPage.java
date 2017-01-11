@@ -818,6 +818,26 @@ public class CoursesHelperPage extends Page {
 			Assert.assertTrue(true);
 		}
 	}
+	
+	// verify there is no past courses tab
+	public boolean isPastCoursesTabExist() {
+		try {
+			if(past_courses_tab_button.isDisplayed()){
+				ATUReports.add(time +" past courses tab is display.", LogAs.PASSED, null);
+				System.out.println("past courses tab is display.");
+				return true;
+			} else {
+				ATUReports.add(time +" past courses tab is not display.", LogAs.PASSED, null);
+				System.out.println("past courses tab is not display.");
+				return false;
+			}
+		} catch (Exception e) {
+			ATUReports.add(time +" past courses tab is not display.", LogAs.PASSED, null);
+			System.out.println("past courses tab is not display.");
+			return false;
+		}
+	}
+	
 
 	// verify course name exists in course list
 	public boolean verifyCourseExist(String name) {
