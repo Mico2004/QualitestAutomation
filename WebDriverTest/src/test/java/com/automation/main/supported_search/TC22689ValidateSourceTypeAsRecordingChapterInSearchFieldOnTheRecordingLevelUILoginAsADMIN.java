@@ -169,7 +169,7 @@ public class TC22689ValidateSourceTypeAsRecordingChapterInSearchFieldOnTheRecord
 		course.waitForVisibility(course.first_course_button);
 				
 		//2.1 take course being copied to name and then return
-		String course_name=course.selectCourseThatStartingWith("Ba");
+		String course_name=course.selectCourseThatStartingWith("Ab");
 		String url =  course.getCurrentUrlCoursePage(); 
 
 		
