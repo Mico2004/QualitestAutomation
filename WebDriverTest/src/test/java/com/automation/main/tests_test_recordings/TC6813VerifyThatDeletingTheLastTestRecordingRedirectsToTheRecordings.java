@@ -29,15 +29,12 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
-import junitx.util.PropertyManager;
-
-import java.awt.AWTException;
 import java.text.DateFormat;
 import java.util.Date;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC6790VerifyThatTheTestsTabIsntDisplayedForStudentsAndGuests {
+public class TC6813VerifyThatDeletingTheLastTestRecordingRedirectsToTheRecordings {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -87,8 +84,8 @@ public class TC6790VerifyThatTheTestsTabIsntDisplayedForStudentsAndGuests {
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC6790VerifyThatTheTestsTabIsntDisplayedForStudentsAndGuests at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC6790VerifyThatTheTestsTabIsntDisplayedForStudentsAndGuests at " + DateToStr, "Starting the test: TC6790VerifyThatTheTestsTabIsntDisplayedForStudentsAndGuests at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC6813VerifyThatDeletingTheLastTestRecordingRedirectsToTheRecordings at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC6813VerifyThatDeletingTheLastTestRecordingRedirectsToTheRecordings at " + DateToStr, "Starting the test: TC6813VerifyThatDeletingTheLastTestRecordingRedirectsToTheRecordings at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -97,100 +94,37 @@ public class TC6790VerifyThatTheTestsTabIsntDisplayedForStudentsAndGuests {
 	}
 		
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC6790 Verify that the 'Tests' tab isn't displayed for Students & Guests")
-	public void test6790() throws InterruptedException {
+	@Test (description="TC6813 Verify that deleting the last Test recording redirects to the Recordings tab")
+	public void test6813() throws InterruptedException {
 		
 		//1.Open tegrity "Login page"
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
 				
-		//*Preconditions:*  At least one of those test recording's *belongs to that Student*
-		//* At least one of those test recording's *does not belong to that Student*
-		//2.Login as an INSTRUCTOR
+		//2.Login as INSTRUCTOR
 		tegrity.loginCourses("User1");
 		
-		//3.Open some course link
+		//3.Select the course from the precondition
 		course.selectCourseThatStartingWith("Ab");
 		
-		//4.Click on the test tab
+		//4.Open the "Tests" tab
 		record.clickOnTestsTab();
 		
-		//5.Click on the first checkbox
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		//5.Select *all* Test recordings
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.check_all_checkbox);
 		
-		//6. hover on the Recording Task and click on the edit recording properties 
-		record.toEditRecordingPropertiesMenu();
+		//6.Hover over the "Recording Tasks" menu and select the "Delete" option
+		record.clickOnRecordingTaskThenDelete();
 		
-		//7.change the owner to be Student -(At least one of those test recording's *belongs to that Student*0
-		edit_recording_properties_window.waitForPageToLoad();
-		edit_recording_properties_window.changeOwner(PropertyManager.getProperty("User4"));
-		
-		//8.Click the "Save" button
-		edit_recording_properties_window.clickOnSaveButton();
-		
-		//9.Click on Ok after change the owner
-		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();	
-		
-		//10.Click on the first checkbox
-		record.unselectIndexCheckBox(1);
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
-		
-		//11.hover on the Recording Task and click on the edit recording properties 
-		record.toEditRecordingPropertiesMenu();
-		
-		//12.change the owner to be Intractur - At least one of those test recording's *does not belong to that Student*
-		edit_recording_properties_window.waitForPageToLoad();
-		edit_recording_properties_window.changeOwner(PropertyManager.getProperty("User1"));
-		
-		//13.Click the "Save" button
-		edit_recording_properties_window.clickOnSaveButton();
-		
-		//14.Click on Ok after change the owner
-		confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();	
-		
-		//15.Make course public
-		record.clickOnCourseTaskThenCourseSettings();
-		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
-		course_settings_page.clickOnOkButton();
-					
-		//16. sign out
-		record.signOut();
-		
-		//*End of preconditions*
-		//17.Login as an STUDENT
-		tegrity.loginCourses("User4");
-		
-		//18.Select the course from the precondition
-		course.selectCourseThatStartingWith("Ab");
-		
-		//19.Verify that the "Tests" tab is *not* displayed
-		record.verifyNoTestsTab();
-		
-		//20 sign out
-		record.signOut();
-		
-		//21.Login as as guest
-		tegrity.loginAsguest();
-		
-		//22.Select the course from the precondition
-		course.selectCourseThatStartingWith("Ab");
+		//7.Click the "Delete" button
+		delete_menu.verifyDeleteWindowOpen();
+		delete_menu.clickOnDeleteButton();
 				
-		//23.Verify that the "Tests" tab is *not* displayed
+		//8.The Delete window is closed & all of the selected recordings are (being) deleted
+		delete_menu.verifyDeleteWindowClosed();
+		
+		//9.*Verify that once all of the recordings in the "Tests" tab are deleted*
 		record.verifyNoTestsTab();
-		
-		//24.sign out
-		record.signOut();
-		
-		//25.Login as an INSTRUCTOR
-		tegrity.loginCourses("User1");
-				
-		//26.Open some course link
-		course.selectCourseThatStartingWith("Ab");
-		
-		//27.Make course Unpublic
-		record.clickOnCourseTaskThenCourseSettings();
-		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
-		course_settings_page.clickOnOkButton();
-		
+			
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	

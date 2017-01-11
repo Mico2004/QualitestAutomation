@@ -6264,4 +6264,19 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 	}
+	
+	public void verifyThatTheirAreNoRecording(){
+		try {
+			if(recordings_list.size() == 0){
+				System.out.println("Verify that the are no records in this tab.");
+				ATUReports.add(time +"Verify that the are no records in this tab.","Success.","Success.", LogAs.PASSED, null);
+			} else {
+				System.out.println("not Verify that the are no records in this tab.");
+				ATUReports.add(time +"Verify that the are no records in this tab.","Success.","Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}	
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
 }
