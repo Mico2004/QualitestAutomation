@@ -90,7 +90,37 @@ public class MoveWindow extends Page {
 			return true;
 		}
 	}
-
+	
+	// This function verify that Move menu open
+	public void verifyThatCopyMenuOpen() {
+		boolean is_closed = isMoveMenuClosed();
+		
+		if(!is_closed) {
+			System.out.println("Move menu is open.");
+			ATUReports.add(time +" Move menu.", "Open.", "Open.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("Move menu is close.");
+			ATUReports.add(time +" Move menu.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	// This function verify that Move menu close
+	public void verifyThatCopyMenuClose() {
+		boolean is_closed = isMoveMenuClosed();
+		
+		if(!is_closed) {
+			System.out.println("Move menu is open.");
+			ATUReports.add(time +" Move menu.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		} else {
+			System.out.println("Move menu is close.");
+			ATUReports.add(time +" Move menu.", "Close.", "Close.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		}
+	}
+	
 	// This function return course list
 	public List<String> getCourseList() {
 		List<String> course_list_text = new ArrayList<String>();

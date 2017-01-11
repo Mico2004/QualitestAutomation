@@ -2796,8 +2796,28 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			Assert.assertTrue(true);
 		}
 	}
+	
+		// check if test tab display or not
+		public boolean isTestTabDisplay() {
+			try {
+				if (tests_tab.isDisplayed()) {
+					ATUReports.add(time +" test tab display.", LogAs.PASSED, null);
+					System.out.println("test tab display.");
+					return true;
+				} else {
+					ATUReports.add(time +" test tab not display.", LogAs.PASSED, null);
+					System.out.println("test tab display.");
+					return false;
+				}
+			} catch (Exception e) {
+				ATUReports.add(time +" test tab not display.", LogAs.PASSED, null);
+				System.out.println("test tab not display.");
+				return false;
+			}
+		}
+	
 
-	// thic function clicks on Recordings tab tab (in type of recordings
+	// this function clicks on Recordings tab tab (in type of recordings
 	// menu)
 	public void clickOnRecordingsTab() {
 		boolean clicked=false;
