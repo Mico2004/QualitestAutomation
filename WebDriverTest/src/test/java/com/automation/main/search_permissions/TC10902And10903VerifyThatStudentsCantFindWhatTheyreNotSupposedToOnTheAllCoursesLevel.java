@@ -34,7 +34,7 @@ import junitx.util.PropertyManager;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC10902VerifyThatStudentsCantFindWhatTheyreNotSupposedToOnTheAllCoursesLevel {
+public class TC10902And10903VerifyThatStudentsCantFindWhatTheyreNotSupposedToOnTheAllCoursesLevel {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -98,208 +98,258 @@ public class TC10902VerifyThatStudentsCantFindWhatTheyreNotSupposedToOnTheAllCou
 	public void closeBroswer() {
 		this.driver.quit();
 	}
+	
+	@AfterClass
+	public void postTest() throws InterruptedException {
 
-	@Test(description = "TC10902 Verify that Students can't find Tests AND unpublished regular/other student's recordings AND other user's private tags AND other Student's bookmarks on the all courses level")
-	public void test10902() throws InterruptedException
-	{
+		for(int type_of_user = 0 ; type_of_user <2; type_of_user++){
+			
+			if(type_of_user == 0){
+				//19.Login as the Instructor 
+				tegrity.loginCourses("User1");
+			}else {
+				//19.Login as the Student
+				tegrity.loginCourses("User3");
+			}
+			
+			//20.Open some course for that.
+			course.selectCourseThatStartingWith("Ab");
+				
+			//21.Check the first publish record
+			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+			
+			//22.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
+			record.clickOnRecordingTaskThenTag();
+	
+			//23.The "Tag" Dialog window is appeared.
+			tag_window.waitForPageToLoad();
+			tag_window.verifyTagWindowOpen();
+			
+			//24.delete all the tags
+			tag_window.deleteAllExistingTags();
+			
+			//25.Click on the "Apply" button
+			tag_window.clickElementJS(tag_window.apply_button);
+		
+			//26.delete all the bookmarks
+			if(type_of_user == 1) {
+				
+				record.clickOnBookmarksTab();					
+				record.deleteBookmarkInBookmarkTab("InsTestUnclearStu");
+				record.deleteBookmarkInBookmarkTab("StuTestUnclearStu");
+			}
+								
+			//27.sign out
+			record.signOut();
+		}
+	}
+
+	@BeforeClass
+	public void preTest() throws InterruptedException {
+		
 		//1.Open tegrity "Login page"
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		
+				
 		// pre preconditions
 		//1 change the names of the record that will be unique
 		tegrity.loginCourses("User1");
-		
+				
 		//1.1.Open some course for that.
 		current_course = course.selectCourseThatStartingWith("Ab");
-		
+				
 		for(int number_of_tab = 0 ; number_of_tab <2 ; number_of_tab++){
-			
+					
 			if(number_of_tab == 1 ){
 				record.clickOnStudentRecordingsTab();
 			}
 			//2.1.change the first name
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			edit_recording_properties_window.changeNameOfRecord(record,confirm_menu);
-			
+					
 			//2.2 change the second name
 			record.unselectIndexCheckBox(1);
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 			edit_recording_properties_window.changeNameOfRecord(record,confirm_menu);
 		}
-		//1.2 sign out
-		record.signOut();
-		
-		//2.*Preconditions: 
-		//Have a Student enrolled to a course with these:
-		//At least one Unpublished Regular Recording , Student Recording 
-		tegrity.loginCourses("User1");
+			//1.2 sign out
+			record.signOut();
 				
-		//2.1.Open some course for that.
-		current_course = course.selectCourseThatStartingWith("Ab");
-		
-		for(int number_of_tab = 0 ; number_of_tab <2 ; number_of_tab++){
-		
-			if(number_of_tab == 1 ){
-				record.clickOnStudentRecordingsTab();
-			}
-			//2.2.check several recordings respective checkboxes
-			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+			//2.*Preconditions: 
+			//Have a Student enrolled to a course with these:
+			//At least one Unpublished Regular Recording , Student Recording 
+			tegrity.loginCourses("User1");
+						
+			//2.1.Open some course for that.
+			current_course = course.selectCourseThatStartingWith("Ab");
 				
-			//2.3.Click the "Recording Tasks" drop-down menu and choose the "Publish" option
-			record.clickOnRecordingTaskThenPublish();
-			
-			//2.4.Validate "Publish" window content is displayed correctly
-			//The window title is "Publish".
-			publish_window.waitForPageToLoad();
-			publish_window.chooseRadioButton("Never");
-			
-			//2.5.Press the "Save" button
-			publish_window.clickOnSaveButton();
-			
-			//need that names for later use
-			if(number_of_tab == 0){	
-				unpublish_regular_record = record.getFirstRecordingTitle();
-			} else {
-				unpublish_student_record = record.getFirstRecordingTitle();
-			}
-		}
-		
-		//need that for later
-		publish_record = record.getSecondRecordingTitle();
-			
-		//3.change the owner of the Student recording and test recordings X2
-		for(int number_of_tab = 0 ; number_of_tab <3; number_of_tab++){
-			
-			if(number_of_tab == 1) {
-				record.clickOnTestsTab();
-			}
-			
-			//3.1.check several recordings respective checkboxes
-			if(number_of_tab <2){
-				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-			} else {
-				record.unselectIndexCheckBox(1);
-				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
-			}
-			//3.2 hover on the Recording Task and click on the edit recording properties 
-			record.toEditRecordingPropertiesMenu();
-			
-			//3.3 change the owner to be Student -(At least one of those test recording's *belongs to that Student*0
-			edit_recording_properties_window.waitForPageToLoad();
-			if(number_of_tab <2){
-				edit_recording_properties_window.changeOwner(PropertyManager.getProperty("User3"));					
-			}else {
-				edit_recording_properties_window.changeOwner(PropertyManager.getProperty("User4"));
-			}		
-			//3.4 Click the "Save" button
-			edit_recording_properties_window.clickOnSaveButton();
-			
-			//3.5 Click on Ok after change the owner
-			confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();	
-			
-		}
-		
-		//need that for later use
-		test_student_record = record.getFirstRecordingTitleTest();
-		test_different_student = record.getSecondRecordingTestTitle();
-		
-		//3.5 sign out
-		record.signOut();
-		
-		//3.6 Login as STUDENT
-		tegrity.loginCourses("User3");
-		
-		//3.7.Open some course for that.
-		course.selectCourseThatStartingWith(current_course);
-			
-		//4.At least one Published Regular or Student Recording with - a different Student's bookmark	
-		for(int number_of_tab = 0 ; number_of_tab <2; number_of_tab++){
-			
-			if(number_of_tab == 1){
-				record.clickOnStudentRecordingsTab();
-			}
+			for(int number_of_tab = 0 ; number_of_tab <2 ; number_of_tab++){
 				
-		//4.1.move to the player to add bookmark 
-		record.clickOnTargetRecordingAndOpenItsPlayback(record.getSecondRecordingTitle());
-	
-		//4.2.display recording and click on the stop button
-		player_page.verifyTimeBufferStatusForXSec(2);
-
-		///4.3.add new unclear bookmark
-		if(number_of_tab == 0){
-			player_page.addTargetBookmark("InsTestUnclearStu");
-			publish_regular_difftenet_student_bookmark = "InsTestUnclearStu";
-		} else {
-			player_page.addTargetBookmark("StuTestUnclearStu");
-			publish_student_difftenet_student_bookmark ="StuTestUnclearStu";
-		}
-		player_page.exitInnerFrame();
-			
-		//4.4.return to the recording tab
-		player_page.returnToRecordingPageByNameAsUserOrGuest(current_course, record);
-			
-		}
-		
-		//5. At least one Published Regular Or Student Recording with - a different Student's tag
-		for(int type_of_user = 0 ; type_of_user <2; type_of_user++){
-		
-			for(int number_of_tab = 0 ; number_of_tab <2; number_of_tab++){
-			
-				if(number_of_tab == 1){
+				if(number_of_tab == 1 ){
 					record.clickOnStudentRecordingsTab();
 				}
-					
-				//5.1.Check the first publish record
-				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
-				
-				//5.2.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
-				record.clickOnRecordingTaskThenTag();
-		
-				//5.3.The "Tag" Dialog window is appeared.
-				tag_window.waitForPageToLoad();
-				tag_window.verifyTagWindowOpen();
-				
-				//5.4.Click on the "Create New Tag" Button.
-				if(type_of_user== 0) {
-					if(number_of_tab ==0){
-						publish_regualr_tag_diffrenet_student = "RegularRecordingStu";
-						validNewName = publish_regualr_tag_diffrenet_student;
-					} else {
-						publish_diffrenet_student_tag = "StudentRecordingStu";
-						validNewName = publish_diffrenet_student_tag;
-					}
-				} else {
-					if(number_of_tab ==0){
-						publish_regular_private_tag_ins = "RegularRecordinIns";
-						validNewName = publish_regular_private_tag_ins;
+				//2.2.check several recordings respective checkboxes
+				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 						
-					} else {
-						publish_student_private_tag_ins = "StudentRecordingIns";
-						validNewName = publish_student_private_tag_ins;
-					}
-				}
-				if(type_of_user == 0){
-					tag_window.createNewTag(validNewName);
+				//2.3.Click the "Recording Tasks" drop-down menu and choose the "Publish" option
+				record.clickOnRecordingTaskThenPublish();
+					
+				//2.4.Validate "Publish" window content is displayed correctly
+				//The window title is "Publish".
+				publish_window.waitForPageToLoad();
+				publish_window.chooseRadioButton("Never");
+					
+				//2.5.Press the "Save" button
+				publish_window.clickOnSaveButton();
+					
+				//need that names for later use
+				if(number_of_tab == 0){	
+					unpublish_regular_record = record.getFirstRecordingTitle();
 				} else {
-					tag_window.createPrivateNewTag(validNewName);
+					unpublish_student_record = record.getFirstRecordingTitle();
 				}
-				//5.5.Click on the "Apply" button
-				record.clickElementJS(tag_window.apply_button);
 			}
+				
+			//need that for later
+			publish_record = record.getSecondRecordingTitle();
+					
+			//3.change the owner of the Student recording and test recordings X2
+			for(int number_of_tab = 0 ; number_of_tab <3; number_of_tab++){
+					
+				if(number_of_tab == 1) {
+					record.clickOnTestsTab();
+				}
+					
+				//3.1.check several recordings respective checkboxes
+				if(number_of_tab <2){
+					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+				} else {
+					record.unselectIndexCheckBox(1);
+					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+				}
+				//3.2 hover on the Recording Task and click on the edit recording properties 
+				record.toEditRecordingPropertiesMenu();
+					
+				//3.3 change the owner to be Student -(At least one of those test recording's *belongs to that Student*0
+				edit_recording_properties_window.waitForPageToLoad();
+				if(number_of_tab <2){
+					edit_recording_properties_window.changeOwner(PropertyManager.getProperty("User3"));					
+				}else {
+					edit_recording_properties_window.changeOwner(PropertyManager.getProperty("User4"));
+				}		
+				//3.4 Click the "Save" button
+				edit_recording_properties_window.clickOnSaveButton();
+					
+				//3.5 Click on Ok after change the owner
+				confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();	
+					
+			}
+				
+				//need that for later use
+				test_student_record = record.getFirstRecordingTitleTest();
+				test_different_student = record.getSecondRecordingTestTitle();
+				
+				//3.5 sign out
+				record.signOut();
+				
+				//3.6 Login as STUDENT
+				tegrity.loginCourses("User3");
+				
+				//3.7.Open some course for that.
+				course.selectCourseThatStartingWith(current_course);
+					
+				//4.At least one Published Regular or Student Recording with - a different Student's bookmark	
+				for(int number_of_tab = 0 ; number_of_tab <2; number_of_tab++){
+					
+					if(number_of_tab == 1){
+						record.clickOnStudentRecordingsTab();
+					}
+						
+				//4.1.move to the player to add bookmark 
+				record.clickOnTargetRecordingAndOpenItsPlayback(record.getSecondRecordingTitle());
 			
-			//5.6 sign out
-			record.signOut();
-			
-			//5.7 Login as Instructor
-			tegrity.loginCourses("User1");
-			
-			//5.8.Open some course for that.
-			course.selectCourseThatStartingWith("Ab");
-		}
-		
-		//*End of preconditions*
-		//6.sign out
-		record.signOut();
+				//4.2.display recording and click on the stop button
+				player_page.verifyTimeBufferStatusForXSec(2);
+
+				///4.3.add new unclear bookmark
+				if(number_of_tab == 0){
+					player_page.addTargetBookmark("InsTestUnclearStu");
+					publish_regular_difftenet_student_bookmark = "InsTestUnclearStu";
+				} else {
+					player_page.addTargetBookmark("StuTestUnclearStu");
+					publish_student_difftenet_student_bookmark ="StuTestUnclearStu";
+				}
+				player_page.exitInnerFrame();
+					
+				//4.4.return to the recording tab
+				player_page.returnToRecordingPageByNameAsUserOrGuest(current_course, record);
+					
+				}
+				
+				//5. At least one Published Regular Or Student Recording with - a different Student's tag
+				for(int type_of_user = 0 ; type_of_user <2; type_of_user++){
+				
+					for(int number_of_tab = 0 ; number_of_tab <2; number_of_tab++){
+					
+						if(number_of_tab == 1){
+							record.clickOnStudentRecordingsTab();
+						}
+							
+						//5.1.Check the first publish record
+						record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
+						
+						//5.2.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
+						record.clickOnRecordingTaskThenTag();
+				
+						//5.3.The "Tag" Dialog window is appeared.
+						tag_window.waitForPageToLoad();
+						tag_window.verifyTagWindowOpen();
+						
+						//5.4.Click on the "Create New Tag" Button.
+						if(type_of_user== 0) {
+							if(number_of_tab ==0){
+								publish_regualr_tag_diffrenet_student = "RegularRecordingStu";
+								validNewName = publish_regualr_tag_diffrenet_student;
+							} else {
+								publish_diffrenet_student_tag = "StudentRecordingStu";
+								validNewName = publish_diffrenet_student_tag;
+							}
+						} else {
+							if(number_of_tab ==0){
+								publish_regular_private_tag_ins = "RegularRecordinIns";
+								validNewName = publish_regular_private_tag_ins;
+								
+							} else {
+								publish_student_private_tag_ins = "StudentRecordingIns";
+								validNewName = publish_student_private_tag_ins;
+							}
+						}
+						if(type_of_user == 0){
+							tag_window.createNewTag(validNewName);
+						} else {
+							tag_window.createPrivateNewTag(validNewName);
+						}
+						//5.5.Click on the "Apply" button
+						record.clickElementJS(tag_window.apply_button);
+					}
+					
+					//5.6 sign out
+					record.signOut();
+					
+					//5.7 Login as Instructor
+					tegrity.loginCourses("User1");
+					
+					//5.8.Open some course for that.
+					course.selectCourseThatStartingWith("Ab");
+				}
+				//*End of preconditions*
+				//6.sign out
+				record.signOut();
+	
+	}
+	
+	@Test(description = "TC10902 Verify that Students can't find Tests AND unpublished regular/other student's recordings AND other user's private tags AND other Student's bookmarks on the all courses level")
+	public void test10902() throws InterruptedException
+	{
 		
 		//7.Login as the Student from the precondition
 		tegrity.loginCourses("User4");
@@ -374,49 +424,52 @@ public class TC10902VerifyThatStudentsCantFindWhatTheyreNotSupposedToOnTheAllCou
 		//18.sign out
 		record.signOut();
 				
-		for(int type_of_user = 0 ; type_of_user <2; type_of_user++){
-		
-			if(type_of_user == 0){
-				//19.Login as the Instructor 
-				tegrity.loginCourses("User1");
-			}else {
-				//19.Login as the Student
-				tegrity.loginCourses("User3");
-			}
-			
-			//20.Open some course for that.
-			course.selectCourseThatStartingWith("Ab");
-				
-			//21.Check the first publish record
-			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-			
-			//22.Click the "Recording Tasks" drop-down menu and choose the "Tag" option
-			record.clickOnRecordingTaskThenTag();
 	
-			//23.The "Tag" Dialog window is appeared.
-			tag_window.waitForPageToLoad();
-			tag_window.verifyTagWindowOpen();
-			
-			//24.delete all the tags
-			tag_window.deleteAllExistingTags();
-			
-			//25.Click on the "Apply" button
-			tag_window.clickElementJS(tag_window.apply_button);
-		
-			//26.delete all the bookmarks
-			if(type_of_user == 1) {
-				
-				record.clickOnBookmarksTab();					
-				record.deleteBookmarkInBookmarkTab("InsTestUnclearStu");
-				record.deleteBookmarkInBookmarkTab("StuTestUnclearStu");
-			}
-								
-			//27.sign out
-			record.signOut();
-		}
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 
 		
+	}
+	
+	@Test(description = "TC10903 Verify that Students can't find Tests AND unpublished regular/other student's recordings AND other user's private tags AND other Student's bookmarks on the course level")
+	public void test10903() throws InterruptedException
+	{
+		
+		//7.Login as the Student from the precondition
+		tegrity.loginCourses("User4");
+		
+		//8.Open the course from the precondition
+		current_course = course.selectCourseThatStartingWith("Ab");		
+		
+		//9.Set the focus to the field with a mouse pointer.- click on the Search field
+		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
+				
+		//9.Search the first chapter from the recording that we mentioned in the preconditions and press ENTER.
+		top_bar_helper.searchForTargetText(publish_record);
+					
+		//10.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+		search_page.verifyLoadingSpinnerImage();	
+		search_page.waitUntilSpinnerImageDisappear();
+		search_page.exitInnerFrame();
+				
+		//11.*The recording is found* and displayed in the search results
+		search_page.verifyWebElementDisplayed(search_page.title_list.get(0), "Recording name");
+				
+		//12.Click on the course's name breadcrumb & click on the Search field
+		search_page.clickBackToCoursesInBreadcrumbs();
+				
+		for(int name_of_record = 0 ; name_of_record < 10 ;name_of_record++ ){
+		
+		
+		
+		
+		
+		}	
+		
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+	
+	
 	}
 }
