@@ -336,7 +336,12 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 		tegrity.loginCourses("User1");
 		
 		//45.Open the same course
-		course.selectCourseThatStartingWith("Ab");	
+		course.selectCourseThatStartingWith("Ab");
+
+		//46.uncheck 'Make this course publicly visible' setting
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings_page.clickOnOkButton();
 
 		//46.Click on the 'Bookmarks' tab
 		record.clickOnBookmarksTab();
