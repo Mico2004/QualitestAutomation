@@ -308,6 +308,16 @@ public class EditRecordingPropertiesWindow extends Page {
 		}	
 	}
 
+	public void changeNameOfRecord(RecordingHelperPage record, ConfirmationMenu confirm_menu) throws InterruptedException {	
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
+		String new_recording_name = "NewName" + sdf.format(date);	
+		record.toEditRecordingPropertiesMenu();
+		changeRecordingName(new_recording_name, confirm_menu);	
+	}
+	
+	
+	
 	public void verifyInfomativeText() {
 		
 		try {

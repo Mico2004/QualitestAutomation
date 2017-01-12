@@ -228,8 +228,6 @@ public class TC6371CopyARecordingWithBookmarkAndVerifyTheBookmarkTabIsDisplayedI
 		
 		}
 		
-		
-
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}

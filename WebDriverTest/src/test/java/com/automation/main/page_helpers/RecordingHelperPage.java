@@ -106,6 +106,8 @@ public class RecordingHelperPage extends Page {
 	WebElement second_course_title;
 	@FindBy(xpath = "//*[@id='RecordingTitle1']/strong")
 	public WebElement first_course_title_tests;
+	@FindBy(xpath = "//*[@id='RecordingTitle2']/strong")
+	public WebElement second_course_title_tests;
 	@FindBy(css="#tegrityBreadcrumbsBox>.ng-scope>.ng-scope.ng-binding")
 	public WebElement courses_link;
 	@FindBy(id = "CheckAll")
@@ -594,6 +596,10 @@ public class RecordingHelperPage extends Page {
 	public String getFirstRecordingTitleTest() {
 		wait.until(ExpectedConditions.visibilityOf(first_course_title_tests));
 		return first_course_title_tests.getText();
+	}
+	public String getSecondRecordingTestTitle() {
+		wait.until(ExpectedConditions.visibilityOf(second_course_title_tests));
+		return second_course_title_tests.getText();
 	}
 	
 	public String getSecondRecordingTitleTest() {

@@ -373,8 +373,7 @@ public class SearchPage extends Page {
 		} 
 		
 	}
-	
-	
+		
 	// This function verify that search result is empty
 	public void verifySearchResultIsEmpty() {
 		
@@ -385,9 +384,10 @@ public class SearchPage extends Page {
 		} else {
 			System.out.println("Not verified that search result is empty.");
 			ATUReports.add(time +" Verified that search result is empty.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-//			Assert.assertTrue(false);
 		}
 	}
+	
+	
 	
 	// Verify that The source title in the format as follows: " Source: Link".
 	public void verifyThatSourceTitleInTheFormatSourceLink() {

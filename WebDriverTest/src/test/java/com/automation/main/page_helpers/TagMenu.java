@@ -67,12 +67,6 @@ public class TagMenu extends Page {
 		sendStringwithAction(edit_new_tag_input, new_tag);		
 		clickElementWithOutIdJS(submit_edit_button);
 		Thread.sleep(1000);
-	//	for(WebElement we: delete_submit_tags_list) {
-	//		if(we.getText().equals("Submit")) {
-	//			clickElement(we);
-	//			break;
-	//		}
-	//	}
 		System.out.println("Created tag: " + new_tag);
 		ATUReports.add(time +" Created tag.", new_tag, new_tag, LogAs.PASSED, null);
 	}
@@ -82,15 +76,20 @@ public class TagMenu extends Page {
 		while(delete_tag_button_list.size()>0) {
 			clickElement(delete_tag_button_list.get(0));
 			clickElementWithOutIdJS(delete_button);
-//			for(WebElement we: delete_submit_tags_list) {
-//				if(we.getText().equals("Delete")) {
-//					clickElement(we);
-//					break;
-//				}
-//			}
 			Thread.sleep(1000);
 		}
 	}
+	
+	public void createPrivateNewTag(String new_tag) throws InterruptedException {
+		clickElementJS(create_new_tag_button);
+		sendStringwithAction(edit_new_tag_input, new_tag);
+		clickElementJS(privte_checkbox);
+		clickElementWithOutIdJS(submit_edit_button);
+		Thread.sleep(1000);
+		System.out.println("Created tag: " + new_tag);
+		ATUReports.add(time +" Created tag.", new_tag, new_tag, LogAs.PASSED, null);
+	}
+	
 	
 	// This function click on apply button
 	public void clickOnApplyButton() {
