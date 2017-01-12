@@ -106,7 +106,7 @@ public class TC6390VerifyTheBookmarkTabIsDisplayedOnlyInstructorsBookmarksAsGues
 		// login as ins
 		tegrity.loginCourses("User1");
 		
-		course.selectCourseThatStartingWith("Ab");
+		course_name= course.selectCourseThatStartingWith("Ab");
 
 		// Make course public
 		record.clickOnCourseTaskThenCourseSettings();
@@ -134,7 +134,7 @@ public class TC6390VerifyTheBookmarkTabIsDisplayedOnlyInstructorsBookmarksAsGues
 		}
 					
 		//3.Click on certain course from the courses list.
-		course_name= course.selectCourseThatStartingWith("Ab");
+		course.selectCourseThatStartingWith(course_name);
 		url =  course.getCurrentUrlCoursePage();
 		
 		if(type_of_recording == 1) {
