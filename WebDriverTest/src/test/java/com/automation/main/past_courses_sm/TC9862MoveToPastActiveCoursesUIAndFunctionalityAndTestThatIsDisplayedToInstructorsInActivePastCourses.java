@@ -117,7 +117,7 @@ public class TC9862MoveToPastActiveCoursesUIAndFunctionalityAndTestThatIsDisplay
 			
 		//3.Click on one of the active courses	
 		if(type_of_user == 0 || type_of_user == 2){
-			course_name = course.selectCourseThatStartingWith("abc");
+			course_name = course.selectCourseThatStartingWith("Ba");
 		} else {
 			course_name = course.selectCourseThatStartingWith("Ab");		
 		}
