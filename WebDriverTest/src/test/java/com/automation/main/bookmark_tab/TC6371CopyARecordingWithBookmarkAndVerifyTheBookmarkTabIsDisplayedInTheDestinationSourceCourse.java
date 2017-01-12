@@ -151,7 +151,7 @@ public class TC6371CopyARecordingWithBookmarkAndVerifyTheBookmarkTabIsDisplayedI
 		record.clickOnRecordingTaskThenCopy();
 		
 		//15.A move window dialog opens
-		confirm_menu.verifyConfirmWindowIsOpen();
+		copy.verifyThatCopyMenuOpen();
 		
 		//16.click on the "delete" button in the Delete dialog window 
 		copy.selectTargetCourseFromCourseListThatStartWith("abc");
@@ -163,7 +163,7 @@ public class TC6371CopyARecordingWithBookmarkAndVerifyTheBookmarkTabIsDisplayedI
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		
 		//19. Message window is closed.
-		confirm_menu.verifyConfirmWindowIsClosed();
+		copy.verifyThatCopyMenuClose();
 		
 		//20.verify that the status is clear
 		record.checkStatusExistenceForMaxTTime(220);
@@ -175,7 +175,7 @@ public class TC6371CopyARecordingWithBookmarkAndVerifyTheBookmarkTabIsDisplayedI
 		record.verifyThatTheBookmarkDisplayInTheBookmarkTab(bookmark_to_add);
 		
 		//23.Click on courses breadcrumbs
-		player_page.returnToCoursePageByNameAsUserOrGuest(course);
+		record.returnToCourseListPage();
 		
 		//23.Click on the course name that you moved the recording to
 		course.selectCourseThatStartingWith("abc");

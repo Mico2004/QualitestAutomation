@@ -154,9 +154,18 @@ public class TC6363DeleteRecordingWithBookmarksAndVerifyTheBookmarksDisappearFro
 		//16.Click on the Bookmarks tab after the recording disappears from the recordings list
 		record.refresh();
 		record.waitForThePageToLoad();
-		record.verifyNoSBookmarkTab();	
-		}
 		
+		//17. if the bookmark tab is display we check that our bookmark is not appeared
+		if(record.isBookmarkTabDisplay()){			
+			
+			//18.Click on bookmark tab
+			record.clickOnBookmarksTab();
+		
+			//19. verify that the out bookamrk is not display in the bookmark tab
+			record.verifyBookmarkIsNotDisplay(record_name);
+			} 
+		
+		}
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}		

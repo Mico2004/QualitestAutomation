@@ -2822,6 +2822,25 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			}
 		}
 	
+		
+		// check if test tab display or not
+		public boolean isBookmarkTabDisplay() {
+			try {
+				if (bookmarks_tab.isDisplayed()) {
+					ATUReports.add(time +" Bookmark tab display.", LogAs.PASSED, null);
+					System.out.println("Bookmark tab display.");
+					return true;
+				} else {
+					ATUReports.add(time +" Bookmark tab not display.", LogAs.PASSED, null);
+					System.out.println("Bookmark tab display.");
+					return false;
+				}
+			} catch (Exception e) {
+				ATUReports.add(time +" Bookmark tab not display.", LogAs.PASSED, null);
+				System.out.println("Bookmark tab not display.");
+				return false;
+			}
+		}
 
 	// this function clicks on Recordings tab tab (in type of recordings
 	// menu)

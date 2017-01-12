@@ -152,7 +152,7 @@ public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsI
 		record.clickOnRecordingTaskThenMove();
 		
 		//15.A move window dialog opens
-		confirm_menu.verifyConfirmWindowIsOpen();
+		move_window.verifyThatMoveWindowIsOpen();
 		
 		//16.click on the "delete" button in the Delete dialog window 
 		copy.selectTargetCourseFromCourseListThatStartWith("abc");
