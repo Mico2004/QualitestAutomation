@@ -296,9 +296,9 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		initializeCourseObject();
 		// 7.Verify the 'Past Courses' tab isn't displayed
 		course.verifyNoPastCoursesTab();
-		Thread.sleep(2000);
+	
 		course.clickOnActiveCoursesTabButton();
-		Thread.sleep(2000);
+	
 		// 8.Verfiy the un-enrolled course isn't displayed in the 'Active
 		// Courses' tab
 		initializeCourseObject();
@@ -328,11 +328,9 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
     	
     	// 15.Verify the 'Past Courses' tab isn't displayed
     	course.verifyNoPastCoursesTab();
-    	Thread.sleep(2000);
-
+ 
     	course.clickOnActiveCoursesTabButton();
-    	Thread.sleep(2000);
-    			
+			
     	// 16.Verfiy the un-enrolled course isn't displayed in the 'Active
     	// Courses' tab
     	initializeCourseObject();

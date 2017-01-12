@@ -199,11 +199,11 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 			     mange_adhoc_course_enrollments.clickOnAdminDashboard();
 			     Thread.sleep(2000);
 			     admin_dashboard_page.signOut();
-			     Thread.sleep(3000);
+			 
 			     tegrity.loginCourses("SuperUser");
-			     Thread.sleep(3000);
+			 
 			     course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecordings",course_for_delete ,0, record, copy, confirm_menu);
-			     Thread.sleep(2000);
+			
 			     for (String window : driver.getWindowHandles()) {
 					 driver.switchTo().window(window);
 					 break;
@@ -214,40 +214,29 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 			     tegrity.loginCoursesByParameter(instructor1);
 			     Thread.sleep(3000);
 			     course.selectCourseThatStartingWith(course_for_delete);
-			     Thread.sleep(3000);
+			
 			     ///check for free status checkbox for edit properties
 		    	record.changeRecordingOwnership(confirm_menu, erp_window, instructor1,record.getCheckbox());
 		           record.signOut();
 			     
-				 
-			
+				 		
 			///////////////////////////////////////////////end of preset
 		          			
 			// 2.login as admin
 	        tegrity.loginAdmin("Admin");// log in courses page
-			Thread.sleep(5000);
+			
 		//3.click on course builder
-	       admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		Thread.sleep(5000);
-	       ///4.Click the "Delete" link relevant to the course	
-
- 		Thread.sleep(10000);
- 		
- 		// 3. Click on create course href link 
- 		driver.switchTo().frame(0);
- 		//mange_adhoc_course_enrollments.clickOnNewCourse();
- 		Thread.sleep(2000);
- 		
+	    admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+	
  		// Search target course name
+	    mange_adhoc_course_enrollments.waitForThePageToLoad();
  		mange_adhoc_course_enrollments.searchAndFilterCourses(course_for_delete);
  		
  		Thread.sleep(7000);
-			mange_adhoc_course_enrollments.clickOnFirstCourseDeleteButton();
-			Thread.sleep(3000);
-			///5.click on ok to delete
-			
-			
-			Thread.sleep(2000);	
+		mange_adhoc_course_enrollments.clickOnFirstCourseDeleteButton();
+
+			///5.click on ok to delete		
+			Thread.sleep(5000);	
 			 driver.switchTo().alert().accept();
 			System.out.println("clicked on ok");
 			   Thread.sleep(2000);
@@ -264,7 +253,6 @@ public class TC17944VerifyCoursedisplayedInPastCoursesAfterDeletion {
 			      ///7.login as instructor
 			     tegrity.loginCoursesByParameter(instructor1);
 			     initializeCourseObject();
-			     Thread.sleep(2000);
 			     //8.click on past couses tab
 			     course.clickOnPastCoursesTabButton();
 			     Thread.sleep(2000);

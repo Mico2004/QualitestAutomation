@@ -118,7 +118,7 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 	public void test24766() throws Exception {
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("User1");		
-		Thread.sleep(4000); 
+	
 		System.out.println("a3");
 		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record,delete_menu);		
 		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record,delete_menu);		
@@ -134,10 +134,10 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		}
 		/// 2.click past courses tab
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(3000);
+	
 		/// 3.select past course
-		course.selectCourseByName("PastCourseA");
-		Thread.sleep(3000);
+		course.selectCourseThatStartingWith("PastCourseA");
+		
 		/// 4.Select the recording
 		record.recordings_tab.click();
 		Thread.sleep(3000);
@@ -147,7 +147,7 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		record.getCheckbox().click();
 		// 5.Select the "Recording Tasks -> Copy" menu item
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(3000);
+	
 		// 6.Select an active course and click the 'Copy' button
 		copy.selectTargetCourseFromCourseList(destination_course_name);
 		Thread.sleep(2000);
@@ -157,7 +157,7 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		Thread.sleep(3000);
 		// 7.Click the "Additional Content" tab
 		record.clickOnAdditionContentTab();
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 		wait.until(ExpectedConditions.visibilityOf(record.first_additional_content_title));
 		String additional_content = record.first_additional_content_title.getText();
 		
@@ -165,7 +165,7 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		/// 8.Select the "Content tasks -> Copy" menu item
 
 		record.clickOnContentTaskThenCopy();
-		Thread.sleep(3000);
+	
 		copy.selectTargetCourseFromCourseList(destination_course_name);
 		Thread.sleep(2000);
 		copy.clickOnCopyButton();
@@ -176,11 +176,10 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		record.clickOnStudentRecordingsTab();
 		Thread.sleep(2000);
 		String student_recording = record.getFirstRecordingTitle();
-		wait.until(ExpectedConditions.elementToBeClickable(record.getCheckbox()));
-		record.getCheckbox().click();
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		/// 10.Select the "Content tasks -> Copy" menu item
 		record.clickOnRecordingTaskThenCopy();
-		Thread.sleep(3000);
+	
 		copy.selectTargetCourseFromCourseList(destination_course_name);
 		Thread.sleep(2000);
 		copy.clickOnCopyButton();
@@ -190,7 +189,7 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		/// 11.Click on the 'Courses' breadcrumb
 		record.returnToCourseListPage();
 		/// 12.Select the destination course
-		Thread.sleep(3000);
+
 		course.clickOnActiveCoursesTabButton();
 		Thread.sleep(2000);
 		course.selectCourseThatStartingWith("Ab");
@@ -226,9 +225,9 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		}
 
 		player_page.returnToCoursesPage(course);
-		Thread.sleep(3000);
+	
 		course.selectCourseThatStartingWith("Ab");
-		Thread.sleep(3000);
+
 		/// 15.select couese and press additional content tab
 		record.clickOnAdditionContentTab();
 		Thread.sleep(2000);
@@ -271,9 +270,9 @@ public class TC24766VerifyCopyFromPastCourseToActiveCourse {
 		wait.until(ExpectedConditions
 				.visibilityOfAllElementsLocatedBy(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")));
 		driver.findElement(By.cssSelector(".panel-body>.video-outer.ng-scope>.video-wrap")).click();
-		Thread.sleep(15000);
+	
 		// 18.1 dispaly recording
-		player_page.verifyTimeBufferStatusForXSec(15);// check source display
+		player_page.verifyTimeBufferStatusForXSec(2);// check source display
 
 		// 18.2 go back to crecording window handler
 		for (String handler : driver.getWindowHandles()) {
