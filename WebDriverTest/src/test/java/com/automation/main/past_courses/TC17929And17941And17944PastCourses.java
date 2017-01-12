@@ -139,14 +139,12 @@ public class TC17929And17941And17944PastCourses {
 	
 		
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+
 		System.out.println("Past1");
 		// 2. Click on user builder href link
 		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");	
-		mange_adhoc_course_enrollments.waitForPageToLoad();
+		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		// 3. Click on create course href link
-		driver.switchTo().frame(0);
-		Thread.sleep(4000);
 		mange_adhoc_users_page.clickOnNewUser();
 		Thread.sleep(2000);
 		System.out.println("Past2");
@@ -340,16 +338,15 @@ public class TC17929And17941And17944PastCourses {
 		// login with instructor so the courses will be registered in DB
 		Thread.sleep(2000);
 		tegrity.loginCoursesByParameter(user);
-		Thread.sleep(2000);
 		course.signOut();
 
 		// *****************
 		// 1. Login with SuperUser.
 
 		tegrity.loginCoursesByParameter(user);
-		Thread.sleep(3000);
+	
 		course.selectCourseThatStartingWith(PastTempCourse);
-		Thread.sleep(3000);
+	
 		record.toUploadAdditionalContentFile();
 		Thread.sleep(2000);
 		// 5.verify additional content file title info
@@ -369,9 +366,9 @@ public class TC17929And17941And17944PastCourses {
 		}
 		course.sign_out.click();
 		tegrity.loginCourses("SuperUser");
-		Thread.sleep(3000);
+
 		course.selectCourseThatStartingWith(PastTemp2Course);
-		Thread.sleep(3000);
+
 		// 4.Select "Course tasks -> Add Additional Content File" menu item
 		record.toUploadAdditionalContentFile();
 		Thread.sleep(2000);
@@ -395,13 +392,12 @@ public class TC17929And17941And17944PastCourses {
 		// unenroll user from courses
 
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+	
 
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 
-		Thread.sleep(10000);
-
+		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastTempCourse, user,
 				mangage_adhoc_courses_membership_window);
 		for (String window : driver.getWindowHandles()) {
@@ -446,15 +442,9 @@ public class TC17929And17941And17944PastCourses {
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		System.out.println("Past4");
-		Thread.sleep(10000);
-
-		// 3. Click on create course href link
-		driver.switchTo().frame(0);
-		// mange_adhoc_course_enrollments.clickOnNewCourse();
-
-		Thread.sleep(3000);
 
 		// Search target course name
+		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.searchAndFilterCourses(PastTempCourse);
 		System.out.println("Past5");
 		Thread.sleep(5000);
@@ -538,9 +528,9 @@ public class TC17929And17941And17944PastCourses {
 	public void test17944() throws Exception {
 		Thread.sleep(2000);
 		tegrity.loginCoursesByParameter(user);
-		Thread.sleep(3000);
+	
 		course.selectCourseThatStartingWith(PastTempCourse);
-		Thread.sleep(3000);
+		
 		record.toUploadAdditionalContentFile();
 		Thread.sleep(2000);
 		// 5.verify additional content file title info
@@ -557,7 +547,7 @@ public class TC17929And17941And17944PastCourses {
 			driver.switchTo().window(window);
 			break;
 		}
-		course.sign_out.click();
+		record.signOut();
 
 		Thread.sleep(2000);
 
@@ -568,15 +558,9 @@ public class TC17929And17941And17944PastCourses {
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		System.out.println("Past4");
-		Thread.sleep(10000);
-
-		// 3. Click on create course href link
-		driver.switchTo().frame(0);
-		// mange_adhoc_course_enrollments.clickOnNewCourse();
-
-		Thread.sleep(3000);
 
 		// Search target course name
+		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.searchAndFilterCourses(PastTempCourse);
 		System.out.println("Past5");
 		Thread.sleep(5000);

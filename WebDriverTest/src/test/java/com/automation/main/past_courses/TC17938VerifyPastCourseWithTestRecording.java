@@ -137,15 +137,12 @@ public class TC17938VerifyPastCourseWithTestRecording {
 					ManageAdHocCoursesMembershipWindow.class);		
 			
 			tegrity.loginAdmin("Admin");
-			Thread.sleep(2000);
+		
 			System.out.println("Past1");
 			// 2. Click on user builder href link
 			admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
 
-			Thread.sleep(10000);
-			// 3. Click on create course href link
-			driver.switchTo().frame(0);
-			Thread.sleep(4000);
+			mange_adhoc_users_page.waitForPageToLoad();
 			mange_adhoc_users_page.clickOnNewUser();
 			Thread.sleep(2000);
 			System.out.println("Past2");
@@ -175,13 +172,8 @@ public class TC17938VerifyPastCourseWithTestRecording {
 			// 2. Click on course builder href link
 			admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 			System.out.println("Past4");
-			Thread.sleep(10000);
 
-			// 3. Click on create course href link
-			driver.switchTo().frame(0);
-			// mange_adhoc_course_enrollments.clickOnNewCourse();
-			Thread.sleep(2000);
-
+			mange_adhoc_course_enrollments.waitForThePageToLoad();
 			mange_adhoc_course_enrollments.clickOnNewCourse();
 			create_new_course_window.waitForVisibility(create_new_course_window.course_id_input);
 			String PastTempCourse = "PastTempCourse" + sdf.format(date);
@@ -270,19 +262,19 @@ public class TC17938VerifyPastCourseWithTestRecording {
 			course.signOut();
 			System.out.println("Past8");
 			// 1. Login as ADMIN.
-			Thread.sleep(2000);
+	
 			tegrity.loginCoursesByParameter(user);
-			Thread.sleep(2000);
+
 			course.signOut();
 
 			tegrity.loginAdmin("Admin");
-			Thread.sleep(2000);
+
 
 			// 2. Click on course builder href link
 			admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 
-			Thread.sleep(10000);
-
+	
+			mange_adhoc_course_enrollments.waitForThePageToLoad();
 			mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastTempCourse, user,
 					mangage_adhoc_courses_membership_window);
 
