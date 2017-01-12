@@ -96,11 +96,11 @@ public class TC10913VerifyAfterMovingAnEmptyCourseToPastCoursesManuallyTheCourse
 		//2.Pre - test Login as INSTRUCTOR 
 		tegrity.loginCourses("User1");
 		
-//		//3.delete all the records in ad course
-//		course.deleteAllRecordingsInCourseStartWith("ad", 0, record, delete_menu);
-//		course.deleteAllRecordingsInCourseStartWith("ad", 1, record, delete_menu);
-//		course.deleteAllRecordingsInCourseStartWith("ad", 2, record, delete_menu);
-//		course.deleteAllRecordingsInCourseStartWith("ad", 3, record, delete_menu);
+		//3.delete all the records in ad course
+		course.deleteAllRecordingsInCourseStartWith("ad", 0, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("ad", 1, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("ad", 2, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("ad", 3, record, delete_menu);
 		
 		//4.sign out
 		record.signOut();
