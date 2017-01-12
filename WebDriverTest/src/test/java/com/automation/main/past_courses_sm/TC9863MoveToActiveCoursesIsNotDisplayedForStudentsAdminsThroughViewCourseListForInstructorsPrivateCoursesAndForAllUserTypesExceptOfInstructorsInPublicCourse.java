@@ -163,6 +163,16 @@ public class TC9863MoveToActiveCoursesIsNotDisplayedForStudentsAdminsThroughView
 			record.signOut();
 		
 		}
+		
+		//pre test- make the course punlic
+		tegrity.loginCourses("User1");
+				
+		course.selectCourseThatStartingWith("Ab");
+			
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings_page.clickOnOkButton();
 		 
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
