@@ -114,10 +114,10 @@ public class TC17942VerifyTheDisabledTasks {
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		// 2.login as instructor
         tegrity.loginCourses("User1");// log in courses page
-		Thread.sleep(3000);
+
 	//3.click on past couses tab
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(2000);
+
 		//4.select course
 		course.selectCourseThatStartingWith("PastCourseA");
 		//5.Verify that "Start Recording" button is not displayed

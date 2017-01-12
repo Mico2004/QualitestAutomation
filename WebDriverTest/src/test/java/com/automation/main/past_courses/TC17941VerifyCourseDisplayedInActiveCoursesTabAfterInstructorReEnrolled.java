@@ -127,22 +127,18 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 			
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("SuperUser");// log in courses page
-		Thread.sleep(2000);
-		//
-		// // ownership change
 		
+		// // ownership change
 		String past_course_a = course.selectCourseThatStartingWith("PastCourseA");/// get
 																					/// course																			/// name
-		Thread.sleep(3000);
 		course.signOut();
-		Thread.sleep(2000);
-		tegrity.loginAdmin("Admin");
-		Thread.sleep(5000);
 
+		tegrity.loginAdmin("Admin");
+	
 		// 2. Click on user builder href link
 		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
-    	Thread.sleep(10000);
-
+  
+    	mange_adhoc_users_page.waitForPageToLoad();
     	mange_adhoc_users_page.createNewUser(instructor1, create_new_user_window);
 		Thread.sleep(2000);
 		for (String window : driver.getWindowHandles()) {
@@ -160,8 +156,9 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 		Thread.sleep(4000);
 		// 3.click on course builder
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		Thread.sleep(10000);
+
 		// 3. Click on create course href link
+		mange_adhoc_course_enrollments.waitForThePageToLoad();
         mange_adhoc_course_enrollments.enrollInstructorToCourse(past_course_a,for_enroll,mangage_adhoc_courses_membership_window);
 		Thread.sleep(2000);
 
@@ -173,13 +170,13 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 		mange_adhoc_course_enrollments.clickOnAdminDashboard();
 		Thread.sleep(2000);
 		admin_dashboard_page.signOut();
-		Thread.sleep(3000);
+	
 
 		////// ownership change
 		tegrity.loginCoursesByParameter(instructor1);
-		Thread.sleep(3000);
+
 		course.selectCourseThatStartingWith(past_course_a);
-		Thread.sleep(3000);
+
         record.changeRecordingOwnership(confirm_menu, erp_window,instructor1,record.getCheckbox());
 		record.signOut();
 
@@ -187,11 +184,11 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 
 		// 2.login as admin
 		tegrity.loginAdmin("Admin");// log in courses page
-		Thread.sleep(5000);
+
 		// 3.click on course builder
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 
-		Thread.sleep(10000);
+		mange_adhoc_course_enrollments.waitForThePageToLoad();
         mange_adhoc_course_enrollments.unEnrollInstructorToCourse(past_course_a,instructor1,mangage_adhoc_courses_membership_window);
 		Thread.sleep(2000);
 		/// 6. sign out
@@ -208,10 +205,10 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 		/// 7.login as instructor
 		tegrity.loginCoursesByParameter(instructor1);
 		initializeCourseObject();
-		Thread.sleep(2000);
+	;
 		// 8.click on past couses tab
 		course.clickOnPastCoursesTabButton();
-		Thread.sleep(2000);
+	
 		// 9.Verify that the deleted course is displayed in "Past Courses" tab
 		try {
 			course.selectCourseByName(past_course_a);
@@ -226,16 +223,14 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 
 		// 10.Sign out
 		record.signOut();
-		Thread.sleep(3000);
+	
 		// 11.login as admin
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(3000);
-
-		// 12.click on course builder
+	
+	// 12.click on course builder
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 
-		Thread.sleep(10000);
-
+		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.enrollInstructorToCourse(past_course_a, for_enroll, mangage_adhoc_courses_membership_window);
 		Thread.sleep(2000);
 
@@ -250,10 +245,9 @@ public class TC17941VerifyCourseDisplayedInActiveCoursesTabAfterInstructorReEnro
 		admin_dashboard_page.sign_out.click();
 		/// 17.login as instructor
 		tegrity.loginCoursesByParameter(instructor1);
-		Thread.sleep(2000);
+
 		// 18.Verify that the course is displayed in "Active Courses" tab
 		course.clickOnActiveCoursesTabButton();
-		Thread.sleep(2000);
 		initializeCourseObject();
 		boolean result = course.verifyCourseExist(past_course_a);
 		if (result == true) {
