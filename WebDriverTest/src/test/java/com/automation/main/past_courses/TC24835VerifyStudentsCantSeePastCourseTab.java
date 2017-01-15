@@ -139,10 +139,7 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 		// 4. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 		mange_adhoc_course_enrollments.waitForThePageToLoad();
-		/// 5.build new course past course 1
-		driver.switchTo().frame(0);
-		Thread.sleep(4000);
-		
+		/// 5.build new course past course 1	
 		mange_adhoc_course_enrollments.clickOnNewCourse();
 		Thread.sleep(3000);
 

@@ -143,7 +143,7 @@ public class TC17929And17941And17944PastCourses {
 		System.out.println("Past1");
 		// 2. Click on user builder href link
 		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");	
-		mange_adhoc_course_enrollments.waitForThePageToLoad();
+		mange_adhoc_users_page.waitForPageToLoad();
 		// 3. Click on create course href link
 		mange_adhoc_users_page.clickOnNewUser();
 		Thread.sleep(2000);
@@ -178,10 +178,6 @@ public class TC17929And17941And17944PastCourses {
 		System.out.println("Past4");
 		mange_adhoc_course_enrollments.waitForPageToLoad();
 		// 3. Click on create course href link
-		driver.switchTo().frame(0);
-		// mange_adhoc_course_enrollments.clickOnNewCourse();
-		Thread.sleep(2000);
-
 		mange_adhoc_course_enrollments.clickOnNewCourse();
 		create_new_course_window.waitForVisibility(create_new_course_window.course_id_input);
 

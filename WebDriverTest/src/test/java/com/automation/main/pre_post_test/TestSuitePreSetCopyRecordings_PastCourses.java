@@ -157,10 +157,11 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 
 		/// 2.Click the "Course Builder" link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		Thread.sleep(10000);
+		
 		/// 3.Click the "Membership" link related to the course+unenroll
 		/// instructor 1
 		System.out.println("before 3");
+		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastCourseA, PropertyManager.getProperty("User1"),
 				mangage_adhoc_courses_membership_window);
 		Thread.sleep(4000);

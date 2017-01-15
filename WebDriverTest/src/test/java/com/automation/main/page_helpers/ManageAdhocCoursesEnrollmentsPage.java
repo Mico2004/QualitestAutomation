@@ -242,7 +242,6 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	public void unEnrollInstructorToCourse(String course, String user,ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window) throws InterruptedException {
 		// Click on create course href link
 	try{
-		driver.switchTo().frame(0);
         Thread.sleep(2000);
         // Search target course name
 		searchAndFilterCourses(course);
