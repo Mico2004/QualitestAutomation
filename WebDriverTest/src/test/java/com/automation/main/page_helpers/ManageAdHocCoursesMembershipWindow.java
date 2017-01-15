@@ -198,7 +198,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 				String val=el.getText();			
 				if(val.contains(name)) {
 					Thread.sleep(2000);
-					clickElementJS(el);
+					el.click();
 					System.out.println("User selected from user list.");
 					ATUReports.add(time +" User selected from user list.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					return true;
