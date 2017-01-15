@@ -68,28 +68,16 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
     DesiredCapabilities capability;
 	@BeforeClass
 	public void setup() {
-
 		
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
-
-		//
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
-		copy = PageFactory.initElements(driver, CopyMenu.class);
-		
-		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-		
+		copy = PageFactory.initElements(driver, CopyMenu.class);		
+		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);		
 		top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
-		search_page = PageFactory.initElements(driver, SearchPage.class);
-		
-		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);
-		
-		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
-		
+		search_page = PageFactory.initElements(driver, SearchPage.class);		
+		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);		
+		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);		
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
 		
 		 Date curDate = new Date();
@@ -99,8 +87,7 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		 "Starting the test: TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField at " + DateToStr, LogAs.PASSED, null);
 		
 	}
-	
-	
+		
 	@AfterClass
 	public void closeBroswer() {
 		this.driver.quit();
@@ -164,12 +151,9 @@ public class TC18937ValidateTheFunctionalityOfSpecialCharactersInSearchField {
 		search_page.verifySearchResultIsEmpty();
 		
 		// 7. Change the name of the chapter that we mentioned in the preconditions to "abc?<>".
-		driver.navigate().to(course_url);
-		Thread.sleep(4000);
+		search_page.clickBackToCourseInBreadcrumbs();
 		
-		record.selectIndexCheckBox(1);
-	
-		
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);	
 		record.clickOnRecordingTaskThenEditRecording();
 
 		new_chapter_name = "abc?<>";

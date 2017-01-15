@@ -1,32 +1,19 @@
 package com.automation.main.course_detailes_content_page;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
+
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import javax.swing.ListModel;
-
-import org.hamcrest.Description;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.AddAdditionalContentLinkWindow;
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
@@ -44,7 +31,6 @@ import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.page_helpers.SearchPage;
 import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -89,32 +75,17 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
     @BeforeClass
 	public void setup() {
 
-		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
+
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
-
-
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
-		copy = PageFactory.initElements(driver, CopyMenu.class);
-		
-		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-		
+		copy = PageFactory.initElements(driver, CopyMenu.class);		
+		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);		
 		top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
-		search_page = PageFactory.initElements(driver, SearchPage.class);
-		
-		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);
-		
+		search_page = PageFactory.initElements(driver, SearchPage.class);		
+		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);		
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
-		
 		add_additional_content_link_window = PageFactory.initElements(driver, AddAdditionalContentLinkWindow.class);
 		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
@@ -158,9 +129,8 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 		// 3. Click on a recording's title.
 		record.waitForVisibility(record.first_recording_title);
 		String recording_init_background = record.getBackGroundColor(driver.findElement(By.cssSelector(".panel.item-list.ng-isolate-scope")));
-		record.clickElement(record.first_recording_title);
-		Thread.sleep(3000);
-		
+		record.verifyFirstExpandableRecording();
+	
 		// 4. Verify that recording chapters are displayed as descripted.
 		// 4.1. The recording chapters are displayed to the USER.
 		// 4.2. The recording chapters are displayed sequentially.
