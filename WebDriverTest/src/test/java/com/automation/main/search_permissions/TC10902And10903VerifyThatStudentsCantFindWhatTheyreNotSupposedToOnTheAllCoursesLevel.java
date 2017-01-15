@@ -5,7 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.automation.main.page_helpers.BottomFooter;
@@ -67,7 +69,7 @@ public class TC10902And10903VerifyThatStudentsCantFindWhatTheyreNotSupposedToOnT
 	SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss"); 
 	String new_recording_name = "NewName" + sdf.format(date);	
 
-  	@BeforeClass
+	@BeforeTest
 	public void setup() {
 		
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
@@ -93,8 +95,7 @@ public class TC10902And10903VerifyThatStudentsCantFindWhatTheyreNotSupposedToOnT
 		
 	}
 	
-	
-	@AfterClass
+	@AfterTest
 	public void closeBroswer() {
 		this.driver.quit();
 	}
@@ -456,15 +457,61 @@ public class TC10902And10903VerifyThatStudentsCantFindWhatTheyreNotSupposedToOnT
 		search_page.verifyWebElementDisplayed(search_page.title_list.get(0), "Recording name");
 				
 		//12.Click on the course's name breadcrumb & click on the Search field
-		search_page.clickBackToCoursesInBreadcrumbs();
+		search_page.clickBackToCourseInBreadcrumbs();
 				
 		for(int name_of_record = 0 ; name_of_record < 10 ;name_of_record++ ){
 		
+			//13.Set the focus to the field with a mouse pointer.
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
+					
+			if(name_of_record == 0){
+				//14.Search for the *Unpublished Regular Recording* from the precondition by *name*	
+				top_bar_helper.searchForTargetText(unpublish_regular_record);
+			}else if(name_of_record == 1){
+				//14.Search for the *Unpublished Student Recording* from the precondition by *name*
+				top_bar_helper.searchForTargetText(unpublish_student_record);
+			}else if(name_of_record == 2){
+				//14.Search for the *Test Recording* - +by that Student+ from the precondition by *name*
+				top_bar_helper.searchForTargetText(test_student_record);
+			}else if(name_of_record == 3){
+				//14.Search for the *Test Recording* - +by a different Student+ from the precondition by *name*
+				top_bar_helper.searchForTargetText(test_different_student);
+			}else if(name_of_record == 4){
+				//14.Search for the *Published Regular Recording* from the precondition *by another Student's Tag*
+				top_bar_helper.searchForTargetText(publish_regualr_tag_diffrenet_student);
+			}else if(name_of_record == 5){
+				//14.Search for the *Published Regular Recording* from the precondition *by another Student's Bookmark*
+				top_bar_helper.searchForTargetText(publish_regular_difftenet_student_bookmark);
+			}else if(name_of_record == 6){
+				//14.Search for the *Published Regular Recording* from the precondition by an *Instructor's Private Tag*
+				top_bar_helper.searchForTargetText(publish_regular_private_tag_ins);
+			}else if(name_of_record == 7){
+				//14.Search for the *Published Student Recording* from the precondition *by another Student's Tag*
+				top_bar_helper.searchForTargetText(publish_diffrenet_student_tag);
+			}else if(name_of_record == 8){
+				//14.Search for the *Published Student Recording* from the precondition by *another Student's Bookmark*
+				top_bar_helper.searchForTargetText(publish_student_difftenet_student_bookmark);
+			}else if(name_of_record == 9){
+				//14.Search for the *Published Student Recording* from the precondition by an *Instructor's Private Tag*
+				top_bar_helper.searchForTargetText(publish_student_private_tag_ins);
+			}
+	
+			//15.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+			search_page.verifyLoadingSpinnerImage();	
+			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
+			
+			//16.*It is NOT found*
+			search_page.verifySearchResultIsEmpty();
+			
+			//17.Click on the "Courses" breadcrumb & click on the Search field
+			search_page.clickBackToCourseInBreadcrumbs();
+			
+		}
 		
-		
-		
-		
-		}	
+		//After test delete the tags and the bookmarks
+		//18.sign out
+		record.signOut();
 		
 		
 		System.out.println("Done.");
