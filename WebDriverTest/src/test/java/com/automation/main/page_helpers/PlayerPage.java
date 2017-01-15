@@ -64,7 +64,7 @@ public class PlayerPage extends Page {
 	@FindBy(css = "#BookmarkList")
 	WebElement bookmark_listCss;
 	@FindBy(id = "tegritySearchBox")
-	WebElement search_box;
+	public	WebElement search_box;
 	@FindBy(id = "ddComboDiv")
 	WebElement bookmarkType;
 	@FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[3]/a/div[2]/p[2]")
