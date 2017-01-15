@@ -57,14 +57,7 @@ public class TC15896DeleteALastRecording {
 	@BeforeClass
 	public void setup() {
 	
-
-			/// System.setProperty("webdriver.ie.driver",
-			/// "src/test/resources/chromedriver.exe");
-
 			driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			/// ATUReports.add("selected browser type", LogAs.PASSED, new
-			/// CaptureScreen(ScreenshotOf.DESKTOP));
-			 
 			recording_for_delete = new ArrayList<String>();
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			delete = PageFactory.initElements(driver, DeleteMenu.class);
@@ -101,7 +94,7 @@ public class TC15896DeleteALastRecording {
 			
 			// 4. Delete all recording except the first
 			record.checkAllCheckBox();
-			record.clickElement(record.checkboxlist.get(0));
+			record.unselectIndexCheckBox(1);
 			
 			// 5. Click on delete menu and delete all recording
 			record.clickOnRecordingTaskThenDelete();

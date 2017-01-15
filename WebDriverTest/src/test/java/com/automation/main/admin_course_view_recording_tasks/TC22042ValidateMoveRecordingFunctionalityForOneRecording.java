@@ -172,11 +172,9 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 		
 			// 4. Login as Full Admin
 			if(i_login_as_admin==0) {
-				tegrity.loginAdmin("Admin");
-				Thread.sleep(5000);
+				tegrity.loginAdmin("Admin");				
 			} else {
 				tegrity.loginAdmin("HelpdeskAdmin");
-				Thread.sleep(5000);
 			}
 			
 			
@@ -198,7 +196,7 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				
 				
 				// 8. Click on a checkbox of one recording.
-				record.getCheckbox().click();
+				record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 				
 				String checked_recording_title = null;
 				if (recording_type==2) {
@@ -212,21 +210,10 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				// 10. The menu items are displayed.
 				// 11. Click on the menu item "Move".
 				record.clickOnRecordingTaskThenMove();
-				
-				
+						
 				// 12. The move window displays.
-				boolean is_move_window_closed = move_window.isMoveMenuClosed();
-				
-				if(!is_move_window_closed) {
-					System.out.println("Move window is opened.");
-					ATUReports.add("Move window.", "Open.", "Open.", LogAs.PASSED, null);
-					Assert.assertTrue(true);
-				} else {
-					System.out.println("Move window is closed.");
-					ATUReports.add("Move window.", "Open.", "Closed.", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
-				
+				move_window.verifyThatMoveWindowIsOpen();
+					
 				// 13. Click on the text field, and write the name of the (existing) instuctor which belong to the course you are moving the chosen record from.
 				move_window.sendKeysToWebElementInput(move_window.instructorTextBox, username);
 				

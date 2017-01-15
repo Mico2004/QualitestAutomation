@@ -107,7 +107,7 @@ public class MoveWindow extends Page {
 	}
 	
 	// This function verify that Move menu close
-	public void verifyThatCopyMenuClose() {
+	public void verifyThatMoveMenuClose() {
 		boolean is_closed = isMoveMenuClosed();
 		
 		if(!is_closed) {

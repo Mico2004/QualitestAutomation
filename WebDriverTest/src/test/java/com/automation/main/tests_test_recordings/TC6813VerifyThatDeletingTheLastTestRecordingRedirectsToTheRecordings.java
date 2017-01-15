@@ -180,7 +180,7 @@ public class TC6813VerifyThatDeletingTheLastTestRecordingRedirectsToTheRecording
 		confirm_menu.clickOnOkButtonAfterConfirmMoveRecording();
 		
 		//24."Move" window is closed
-		move_menu.verifyThatCopyMenuClose();
+		move_menu.verifyThatMoveMenuClose();
 		
 		//25.Selected Recording has a "Moving/Copying" status
 		record.checkRecordingInIndexIStatus(1, "Moving/Copying");
