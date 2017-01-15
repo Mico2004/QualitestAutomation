@@ -164,8 +164,7 @@ public class TC18876ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnTheAll
 	
 		
 		// Get Recording Chapter information.
-		record.first_recording_title.click();
-		Thread.sleep(1000);
+		record.verifyFirstExpandableRecording();
 		String recording_chapter = driver.findElement(By.cssSelector(".video-wrap")).getText().split("\n")[1];
 		
 		record.signOut();
