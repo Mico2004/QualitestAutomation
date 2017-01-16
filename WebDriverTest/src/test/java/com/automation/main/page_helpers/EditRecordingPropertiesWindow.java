@@ -16,6 +16,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -541,6 +542,11 @@ public class EditRecordingPropertiesWindow extends Page {
 			Thread.sleep(1000);
 			recording_title.clear();
 			recording_title.sendKeys(name);
+			if(driver instanceof InternetExplorerDriver){
+				Actions builder = new Actions(driver);
+				builder.sendKeys(recording_title,name);
+				builder.build().perform();
+			}
 			System.out.println("enetered new name");
 			save_button.click();
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));

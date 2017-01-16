@@ -252,28 +252,10 @@ public class EditRecording extends Page {
 			driver.switchTo().window(window_handler);
 			break;
 		}
-		int countOfErrors = 0;
-		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){		
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
-			String message = getTextFromWebElement(ie,5);
-			if(message.contains("Success")){
-				confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
-				break;
-			} else if(message.contains("Error")) {
-				ATUReports.add(time +" Get an error while click on apply.", LogAs.WARNING, null);
-				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
-				System.out.println("Get an error while click on apply.");	
-				clickElementJS(AddCaptioningButton);
-				Thread.sleep(2000);
-				countOfErrors++;
-				if(countOfErrors >= 4) {
-					System.out.println("The error message is return more then 3 times.");
-					ATUReports.add(time +" The error message is return more then 3 times.", "True.", "false", LogAs.FAILED, null);
-					Assert.assertTrue(false);
-				}
-			}
-			else Thread.sleep(3000);
-		}
+		
+		new WebDriverWait(driver, 20).until(ExpectedConditions.textToBePresentInElement(header, "Success"));
+		confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
+			
 		}catch(Exception e){
 			e.getMessage();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
