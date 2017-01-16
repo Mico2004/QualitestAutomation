@@ -190,7 +190,6 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 		System.out.println("Past5");
 
 		// Click on result first course (the only one) membership button
-		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 
 		// Search target user name in membership window
@@ -284,8 +283,7 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 		// Add selected user to instructor list
 		mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 
-		mangage_adhoc_courses_membership_window
-				.waitMaxTimeUntillInstructorEnrollToCourse(PropertyManager.getProperty("SuperUser"));
+		mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(PropertyManager.getProperty("SuperUser"));
 
 		mangage_adhoc_courses_membership_window.waitForVisibility(mangage_adhoc_courses_membership_window.ok_button);
 
@@ -341,8 +339,7 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 
 		mange_adhoc_course_enrollments.waitForThePageToLoad();
-		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastTempCourse, user,
-				mangage_adhoc_courses_membership_window);
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastTempCourse, user,mangage_adhoc_courses_membership_window);
 		for (String window : driver.getWindowHandles()) {
 			driver.switchTo().window(window);
 			break;
