@@ -115,13 +115,11 @@ public class TC6380AddBookmarkToEachRecordingType {
 		}
 		 
 		//4.open the recording for watching 
-		if(type_of_tab < 2) { 
-			record.pressViewButtonAndSelect("Duration");
+		record.pressViewButtonAndSelect("Duration");
+		if(type_of_tab < 2) { 		
 			recordName = record.getFirstRecordingTitle();
-			record.verifyFirstExpandableRecording();
-			
+			record.verifyFirstExpandableRecording();		
 		} else{
-			record.pressViewButtonAndSelect("Duration");
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			record.toEditRecordingPropertiesMenu();	
 			edit_recording_properties_window.waitForPageToLoad();

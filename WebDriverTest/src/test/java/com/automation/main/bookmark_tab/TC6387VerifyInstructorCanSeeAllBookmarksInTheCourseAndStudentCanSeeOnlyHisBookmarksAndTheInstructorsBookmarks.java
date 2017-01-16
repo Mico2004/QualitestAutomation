@@ -173,7 +173,7 @@ public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSee
 			if(type_of_user == 2){
 				student1 = bookmarksName.get(1);	
 				//.verify that the bookmark student2 is not display
-				record.verifyBookmarkIsNotDisplay(bookmarksName.get(1));
+				record.verifyBookmarkIsNotDisplay(student1);
 				bookmarksName.remove(1);
 				record.verifyThatAllTheBookmarksDisplayInTheBookmarkTab(bookmarksName);
 				bookmarksName.add(1,student1);
