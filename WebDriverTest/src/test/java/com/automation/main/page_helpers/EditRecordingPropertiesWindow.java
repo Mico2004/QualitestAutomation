@@ -537,16 +537,11 @@ public class EditRecordingPropertiesWindow extends Page {
 	// change title name of recording
 	public void changeRecordingName(String name, ConfirmationMenu confirm) {
 		try {
-			recording_title.click();
+			//recording_title.click();
 			System.out.println("clicked on recording title input");
 			Thread.sleep(1000);
 			recording_title.clear();
 			recording_title.sendKeys(name);
-			if(driver instanceof InternetExplorerDriver){
-				Actions builder = new Actions(driver);
-				builder.sendKeys(recording_title,name);
-				builder.build().perform();
-			}
 			System.out.println("enetered new name");
 			save_button.click();
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("recordingTItle")));
