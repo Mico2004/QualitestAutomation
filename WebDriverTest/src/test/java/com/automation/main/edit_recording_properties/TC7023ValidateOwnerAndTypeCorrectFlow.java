@@ -226,11 +226,12 @@ public class TC7023ValidateOwnerAndTypeCorrectFlow  {
 		manage_adhoc_courses_enrollments_page.searchAndFilterCourses(CourseName);
 				
 		//press on membership of the first course and remove the student and the instructor
+		manage_adhoc_courses_enrollments_page.waitForThePageToLoad();
 		manage_adhoc_courses_enrollments_page.clickOnFirstCourseMembershipButton();
-		manage_AdHoc_courses_membership_window.selectIrUserFromUserList(manage_AdHoc_courses_membership_window.instructor_elements_list, InstructorUser);
+		manage_AdHoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(InstructorUser);
 		manage_AdHoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
 				
-		manage_AdHoc_courses_membership_window.selectIrUserFromUserList(manage_AdHoc_courses_membership_window.student_elements_list, StudentUser);
+		manage_AdHoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse(StudentUser);
 		manage_AdHoc_courses_membership_window.clickOnRemoveSelectedUserToStudentsList();	
 		manage_AdHoc_courses_membership_window.clickOnOkButton();
 				
