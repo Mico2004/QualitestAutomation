@@ -135,8 +135,7 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 //	
 //			
 //		//String recording_name = record.getFirstRecordingTitle();
-//		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
-//		record.selectIndexCheckBox(recordNumber);	
+//		
 //	
 //		record.clickOnRecordingTaskThenCopy();
 //		copy.selectTargetCourseFromCourseList(current_course);
@@ -149,7 +148,8 @@ public class TC18836ValidateTheSourceTypeAsRecordingTextInSearchFieldOnTheCourse
 //		record.returnToCourseListPage();
 		
 		course.selectCourseThatStartingWith("Ab");
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
+		record.selectIndexCheckBox(recordNumber);	
 		record.clickOnRecordingTaskThenEditRecording();
 			
 		Date date = new Date();
