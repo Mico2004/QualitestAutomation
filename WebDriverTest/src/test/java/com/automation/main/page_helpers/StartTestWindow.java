@@ -1,5 +1,6 @@
 package com.automation.main.page_helpers;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -104,7 +105,7 @@ public class StartTestWindow extends Page {
 	public void verifyBackgroundColor(RecordingHelperPage rec) throws InterruptedException {
 		
 		try{
-		Thread.sleep(1000);	
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));
 		String background_rec = rec.getBackGroundColor(rec.background);
 		String menu_background = getBackGroundColor(start_test_window_background);
 		if (background_rec.equals(menu_background)) {
