@@ -138,24 +138,21 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
+
 		
 		// Upload for first recording target close catpion
-		Thread.sleep(2000);
-
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.selectIndexCheckBox(recordNumber);	
 		
 		record.clickOnRecordingTaskThenEditRecording();
 	
-		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
-		
+		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";	
 		edit_recording.addCaptionSrtToFirstChapterRecording(path);
-		
-		Thread.sleep(5000);
 		String text_from_caption_for_test = "QualitestAutomationCaption";	
 		
 		player_page.returnToCoursesPage(course);
+		
+		record.signOut();
 		
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {
@@ -170,7 +167,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 				// 2. Login as ADMIN
 				tegrity.loginAdmin("Admin");
 			}
-			Thread.sleep(3000);
+			
 			
 			if(type_of_user < 3) {
 				// 3. Open some course.
