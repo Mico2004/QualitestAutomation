@@ -213,7 +213,6 @@ public class TC17929And17941And17944PastCourses {
 		System.out.println("Past5");
 		
 		// Click on result first course (the only one) membership button
-		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 
 		// Search target user name in membership window
@@ -241,8 +240,6 @@ public class TC17929And17941And17944PastCourses {
 		// Click on result first course (the only one) membership button
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 		
-		
-
 		// Search target user name in membership window
 		mangage_adhoc_courses_membership_window.searchForUser(PropertyManager.getProperty("SuperUser"));
 
@@ -271,7 +268,6 @@ public class TC17929And17941And17944PastCourses {
 		System.out.println("Past5_1");
 
 		// Click on result first course (the only one) membership button
-		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 
 		// Search target user name in membership window
@@ -443,7 +439,6 @@ public class TC17929And17941And17944PastCourses {
 		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.searchAndFilterCourses(PastTempCourse);
 		System.out.println("Past5");
-		Thread.sleep(5000);
 
 		// Click on result first course (the only one) membership button
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
@@ -475,7 +470,6 @@ public class TC17929And17941And17944PastCourses {
 		// Search target course name
 		mange_adhoc_course_enrollments.searchAndFilterCourses(PastTemp2Course);
 		System.out.println("Past5_1");
-		Thread.sleep(5000);
 
 		// Click on result first course (the only one) membership button
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
