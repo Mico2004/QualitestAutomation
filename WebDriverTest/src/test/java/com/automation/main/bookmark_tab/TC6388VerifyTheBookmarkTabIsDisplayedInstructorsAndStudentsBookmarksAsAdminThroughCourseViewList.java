@@ -175,7 +175,7 @@ public class TC6388VerifyTheBookmarkTabIsDisplayedInstructorsAndStudentsBookmark
 		admin_dashboard_view_course_list.moveToCoursesThroughGet(url);
 				
 		//12.Click on the course that mentioned in the preconditions
-		course.selectCourseThatStartingWith("Ab");	
+		//course.selectCourseThatStartingWith("Ab");	
 			
 		//13.Click on the "Bookmarks" tab
 		record.clickOnBookmarksTab();	
@@ -206,11 +206,13 @@ public class TC6388VerifyTheBookmarkTabIsDisplayedInstructorsAndStudentsBookmark
 		//19.The instructor bookmarks are displayed on the seek bar (instructor: blue color)
 		player_page.makeSureThatTheBookmarkIsCanBeenSeeingOnTheSeekBar("instructor");
 		
+		//The instructor bookmarks are displayed on "Bookmarks" window 
+		player_page.verifybookmarkIsFoundInBookmarkList(bookmarksNameIns.get(0), "Ins");
+		player_page.verifybookmarkIsFoundInBookmarkList(bookmarksNameIns.get(1), "Ins");
+		
 		//20.The instructor bookmarks are displayed on "Bookmarks" window and the admin can't add or delete the bookmarks.
 		player_page.VeirfyDeleteAndEditBookmarkNotDisplayInstractor();
-			
-		
-			
+							
 		//21.Sign Out
 		player_page.exitInnerFrame();
 		record.signOut();
