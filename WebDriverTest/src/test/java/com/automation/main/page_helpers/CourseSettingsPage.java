@@ -95,9 +95,9 @@ public class CourseSettingsPage extends Page {
 	// This function clicks on ok button of copy menu
 	public void clickOnOkButton() throws InterruptedException {
 		try {
-			//Actions builder = new Actions(driver);  //  new line
-			//builder.sendKeys(Keys.PAGE_DOWN); //  new line
-			//builder.moveToElement(ok_button).build().perform(); //  new line
+			Actions builder = new Actions(driver);  //  new line
+			builder.sendKeys(Keys.PAGE_DOWN); //  new line
+			builder.moveToElement(ok_button).build().perform(); //  new line
 			waitForVisibility(ok_button);
 			String id = "SaveButton";
 			//ok_button.click();
