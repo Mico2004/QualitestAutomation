@@ -319,6 +319,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement move_to_past_courses;
 	@FindBy(id = "moveToActive")
 	public WebElement move_to_active_courses;
+	@FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a/div[2]/p[2]")
+	public WebElement first_chapter_recording;
 	public ConfirmationMenu confirm_menu;	
 	public CopyMenu copyMenu;
 	
@@ -1805,6 +1807,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			String initialText=TabContainer.getText();
 			waitForVisibility(element);
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			Thread.sleep(1000);
 			System.out.println("AdditionalContentTab2");	
 			waitForContentOfTabToLoad(initialText,TabContainer);
 			ATUReports.add(time +" Select additional_content_tab -> "+id, id+" was click",
@@ -4332,6 +4335,26 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	}
 	
+	//This Function return the index of the first link in the additional content tab
+	public int getIndexOfFirstLinkAdditionalContent() throws InterruptedException {
+		int index = 1;
+		
+		for (int i = 0; i < additional_content_list_names.size(); i++) {
+			try {
+						if(isElementPresent(By.cssSelector("#ItemUrl" + Integer.toString(index)))) {
+								break;
+						} else {
+							index++;
+						}
+			} catch (Exception msg) {
+				Thread.sleep(500);
+			}
+		}
+		return index;
+
+	}
+	
+	
 
 	// This function get additional content (as string) and type (as string),
 	// and checks if it is
@@ -6323,5 +6346,15 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			e.printStackTrace();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
+	}
+
+	public String getfirstChapterOfFirstRecord() {
+		
+		waitForVisibility(first_chapter_recording);
+		return first_chapter_recording.getText();
+	}
+
+	public String getLinkIndexAdditionalContent(int index) {
+		return driver.findElement(By.cssSelector("#ItemUrl" + Integer.toString(index) + ">span")).getText();
 	}
 }

@@ -151,11 +151,11 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// 4. Logout.
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+
 		
 		// 5. Login as Instructor (User1).
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
+
 		
 		// 6. Enter to the course page.
 		course.selectCourseThatStartingWith(current_course);
@@ -211,11 +211,11 @@ public class TC15663ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		
 		// 13. Sign out.
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+
 		
 		// 14. Login as a STUDENT.
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
+	
 		
 		// 15. Open the course that contains "ex3" recording.
 		course.selectCourseThatStartingWith(current_course); 
