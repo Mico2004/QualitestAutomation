@@ -66,6 +66,7 @@ public class TC6994ValidateRecordingDateChangeFunctionality {
 			admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+			course = PageFactory.initElements(driver, CoursesHelperPage.class);
 			edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
@@ -93,12 +94,10 @@ public class TC6994ValidateRecordingDateChangeFunctionality {
 		//1.log in courses page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
 		tegrity.loginCourses("User1");
-		initializeCourseObject();
-		
+	
 		//2.open some course whom listed you as instructor
 		course.selectCourseThatStartingWith("Ab");
 		
-
 		for(int type_of_user = 0; type_of_user < 2; type_of_user++) {
 			
 		if(type_of_user == 1){
@@ -146,6 +145,13 @@ public class TC6994ValidateRecordingDateChangeFunctionality {
 		//15.The second model window disappears.
 		confirm_menu.verifyConfirmWindowIsClosed();
 		
+		//refresh the website to check bug
+		record.refresh();
+		record.waitForThePageToLoad();
+		if(type_of_user == 1){
+			record.clickOnStudentRecordingsTab();
+		}
+		
 		//16.Validate the recording creation date has changed to the date you selected earlier
 		recordNumber = record.getIndexOfRecordFromRecordName(recordName);
 		record.verifyThatTheRecordNameEqualsFromTheString(correctDate,recordNumber,"Record date");
@@ -161,11 +167,5 @@ public class TC6994ValidateRecordingDateChangeFunctionality {
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}
 
-	// description = "get courses list"
-	public void initializeCourseObject() throws InterruptedException {
-
-		course = PageFactory.initElements(driver, CoursesHelperPage.class);
-		course.courses = course.getCoursesListFromElement(course.course_list);
-	}
 }
 
