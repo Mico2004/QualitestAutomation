@@ -83,37 +83,20 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 	@BeforeClass
 	public void setup() {
 
-		// System.setProperty("webdriver.edge.driver",
-		// "src/test/resources/MicrosoftWebDriver.exe");
-		// capability=DesiredCapabilities.internetExplorer();
-		// capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
-		//
-
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
-		//
 		ATUReports.setWebDriver(driver);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
-
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
-
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
-
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
-
 		mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
-
 		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
-		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
-				ManageAdHocCoursesMembershipWindow.class);
-
+		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,ManageAdHocCoursesMembershipWindow.class);
 		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
@@ -130,8 +113,6 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		driver.quit();
 	}
 
-
-
 	// description = "get courses list"
 	public void initializeCourseObject() throws InterruptedException {
 
@@ -140,7 +121,7 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 	}
 
 	@Test( description = "Past Courses Pretest")
-	public void testSuitePreSetCopyRecordingsAndPastCourse() throws InterruptedException {
+	public void testSuitePastCourse() throws InterruptedException {
 		// 1. Login with SuperUser.
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		Thread.sleep(2000);
@@ -172,6 +153,7 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		}
 
 		System.out.println("before 3");
+		driver.switchTo().frame(0);
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastCourseB, PropertyManager.getProperty("User1"),
 				mangage_adhoc_courses_membership_window);
 		Thread.sleep(4000);
