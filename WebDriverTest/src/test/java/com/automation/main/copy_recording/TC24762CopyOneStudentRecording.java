@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -68,17 +69,7 @@ public class TC24762CopyOneStudentRecording {
 			
 			
 		}
-		/*
-		 * @Test public void testNewLogs() throws AWTException, IOException {
-		 * 
-		 * ATUReports.add("INfo Step", LogAs.INFO, new CaptureScreen(
-		 * ScreenshotOf.BROWSER_PAGE)); ATUReports.add("Pass Step", LogAs.PASSED,
-		 * new CaptureScreen( ScreenshotOf.DESKTOP)); /// WebElement element =
-		 * driver /// .findElement(By.xpath("/html/body/div/h1/a")); ATUReports.add(
-		 * "Warning Step", LogAs.WARNING, new CaptureScreen(element));
-		 * ATUReports.add("Fail step","" ,"",LogAs.FAILED, new CaptureScreen(
-		 * ScreenshotOf.DESKTOP)); }
-		 */
+
 	
 		
 		@AfterClass
@@ -96,14 +87,8 @@ public class TC24762CopyOneStudentRecording {
 			Thread.sleep(1000);
 			String xml_source_code = driver.findElement(By.tagName("body")).getText();
 			driver.quit();
-
-			// 1.load main page chrome
-			System.setProperty("webdriver.edge.driver", "src/test/resources/MicrosoftWebDriver.exe");
-			//		capability=DesiredCapabilities.internetExplorer();
-			//		capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
-			//		
-			driver=DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-			
+	
+			driver=DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());		
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 			record = PageFactory.initElements(driver, RecordingHelperPage.class);
 			copy = PageFactory.initElements(driver, CopyMenu.class);
@@ -117,7 +102,7 @@ public class TC24762CopyOneStudentRecording {
 			initializeCourseObject();
 			// 4.select first course
 			course = PageFactory.initElements(driver, CoursesHelperPage.class);
-			//course.selectFirstCourse(record);
+		
 			String course_name=course.selectCourseThatStartingWith("Ab");
 				
 			record.waitForVisibility(record.first_recording);
@@ -141,7 +126,7 @@ public class TC24762CopyOneStudentRecording {
 			course.first_course_button.click();
 			record.waitForVisibility(record.student_recordings_tab);
 			record.clickOnStudentRecordingsTab();
-			Thread.sleep(3000);
+	
 			
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			record.verifyCopyMenu();// verify copy menu
@@ -198,7 +183,7 @@ public class TC24762CopyOneStudentRecording {
 			confirm.clickOnOkButton();// click on ok button String
 			
 			//15.verify "being copy from" status
-			record.waitForVisibility(record.course_being_copied_status);
+			wait.until(ExpectedConditions.visibilityOf(record.course_being_copied_status));
 			String status = record.course_being_copied_status.getText();
 			confirm.verifyCopySourceRecordingStatus(status); ///
 
