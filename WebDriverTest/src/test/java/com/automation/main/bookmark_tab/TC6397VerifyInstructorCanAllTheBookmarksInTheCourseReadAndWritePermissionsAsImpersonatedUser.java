@@ -97,8 +97,8 @@ public class TC6397VerifyInstructorCanAllTheBookmarksInTheCourseReadAndWritePerm
 	}
 		
 	// @Parameters({"web","title"}) in the future
-	@Test (description="Verify the bookmark tab is displayed (only instructors bookmarks)  as guest (public course)")
-	public void test6390() throws InterruptedException {
+	@Test (description="TC6397 Verify the bookmark tab is displayed (only instructors bookmarks)  as guest (public course)")
+	public void test6397() throws InterruptedException {
 		
 
 		//1.Enter the university
