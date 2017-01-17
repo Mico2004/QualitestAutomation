@@ -547,7 +547,7 @@ public class TC10902AndTC10903And10907 {
 		//12.Click on the course's name breadcrumb & click on the Search field
 		search_page.clickBackToCourseInBreadcrumbs();
 				
-		for(int name_of_record = 0 ; name_of_record < 10 ;name_of_record++ ){
+		for(int name_of_record = 0 ; name_of_record < 9 ;name_of_record++ ){
 		
 			//13.Set the focus to the field with a mouse pointer.
 			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
@@ -562,24 +562,21 @@ public class TC10902AndTC10903And10907 {
 				//14.Search for the *Test Recording* - +by that Student+ from the precondition by *name*
 				top_bar_helper.searchForTargetText(test_student_record);
 			}else if(name_of_record == 3){
-				//14.Search for the *Test Recording* - +by a different Student+ from the precondition by *name*
-				top_bar_helper.searchForTargetText(test_different_student);
-			}else if(name_of_record == 4){
-				//14.Search for the *Published Regular Recording* from the precondition *by another Student's Tag*
+				//14.Search for the Published Regular Recording from the precondition by a Student's Tag
 				top_bar_helper.searchForTargetText(publish_regualr_tag_diffrenet_student);
-			}else if(name_of_record == 5){
-				//14.Search for the *Published Regular Recording* from the precondition *by another Student's Bookmark*
+			}else if(name_of_record == 4){
+				//14.Search for the Published Regular Recording from the precondition by a Student's Bookmark
 				top_bar_helper.searchForTargetText(publish_regular_difftenet_student_bookmark);
-			}else if(name_of_record == 6){
-				//14.Search for the *Published Regular Recording* from the precondition by an *Instructor's Private Tag*
+			}else if(name_of_record == 5){
+				//14.Search for the Published Regular Recording from the precondition by an Instructor's Private Tag
 				top_bar_helper.searchForTargetText(publish_regular_private_tag_ins);
-			}else if(name_of_record == 7){
-				//14.Search for the *Published Student Recording* from the precondition *by another Student's Tag*
+			}else if(name_of_record == 6){
+				//14.Search for the Published Student Recording from the precondition by a Student's Tag
 				top_bar_helper.searchForTargetText(publish_diffrenet_student_tag);
-			}else if(name_of_record == 8){
-				//14.Search for the *Published Student Recording* from the precondition by *another Student's Bookmark*
+			}else if(name_of_record == 7){
+				//14.Search for the Published Regular Recording from the precondition by a Student's Bookmark
 				top_bar_helper.searchForTargetText(publish_student_difftenet_student_bookmark);
-			}else if(name_of_record == 9){
+			}else if(name_of_record == 8){
 				//14.Search for the *Published Student Recording* from the precondition by an *Instructor's Private Tag*
 				top_bar_helper.searchForTargetText(publish_student_private_tag_ins);
 			}
