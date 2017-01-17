@@ -8,10 +8,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
-
 import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CoursesHelperPage;
@@ -27,7 +25,6 @@ import com.automation.main.page_helpers.SearchPage;
 import com.automation.main.page_helpers.TagMenu;
 import com.automation.main.page_helpers.TopBarHelper;
 import com.automation.main.utilities.DriverSelector;
-
 import java.awt.AWTException;
 import java.text.DateFormat;
 import atu.testng.reports.ATUReports;
@@ -40,7 +37,7 @@ import junitx.util.PropertyManager;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC10905VerifyStudentsCantFindContentFromUnenrolledCoursesNonpublicOnAllCoursesLevel {
+public class TC10906VerifyInstructorCanFindContentFromUnenrolledCoursesThroughPastCourses {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -96,9 +93,9 @@ public class TC10905VerifyStudentsCantFindContentFromUnenrolledCoursesNonpublicO
 		
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC10905VerifyStudentsCantFindContentFromUnenrolledCoursesNonpublicOnAllCoursesLevel at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC10905VerifyStudentsCantFindContentFromUnenrolledCoursesNonpublicOnAllCoursesLevel at " + DateToStr,
-		 "Starting the test: TC10905VerifyStudentsCantFindContentFromUnenrolledCoursesNonpublicOnAllCoursesLevel at " + DateToStr, LogAs.PASSED, null);
+		 System.out.println("Starting the test: TC10906VerifyInstructorCanFindContentFromUnenrolledCoursesThroughPastCourses at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC10906VerifyInstructorCanFindContentFromUnenrolledCoursesThroughPastCourses at " + DateToStr,
+		 "Starting the test: TC10906VerifyInstructorCanFindContentFromUnenrolledCoursesThroughPastCourses at " + DateToStr, LogAs.PASSED, null);
 		
 	}
 	
@@ -107,41 +104,52 @@ public class TC10905VerifyStudentsCantFindContentFromUnenrolledCoursesNonpublicO
 		this.driver.quit();
 	}
 	
-	@Test(description = "TC10905 Verify Students can't find content from unenrolled courses (non-public) on all courses level")
-	public void test10905() throws InterruptedException, AWTException
+	@Test(description = "TC10906 Verify Instructor can find content from unenrolled courses through past courses")
+	public void test10906() throws InterruptedException, AWTException
 	{
 		//1.Open tegrity "Login page"
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 				
 		// pre preconditions
-		//1.add caption to the first record
+		//Enter as INSTRACTOR
 		tegrity.loginCourses("User1");
 		
-		//1.1.Open some course for that.
-		current_course = course.selectCourseThatStartingWith("abc");
+		//1.copy one record from each tab
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 0, record, copy, confirm_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 1, record, copy, confirm_menu);
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 2, record, copy, confirm_menu);
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "Ba", 3, record, copy, confirm_menu);
+		
+		//1.1wait until we finish copying records
+		current_course = course.selectCourseThatStartingWith("Ba");
+		record.checkStatusExistenceForMaxTTime(220);
+		
+		
+		//2.add caption to the first record
+		//2.1.Open some course for that.	
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		
-		//1.2.enter to edit recording
+		//2.2.enter to edit recording
 		record.clickOnRecordingTaskThenEditRecording();
 				
-		//1.3.add caption to the first chapter
+		//2.3.add caption to the first chapter
 		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";	
 		caption_student = "QualitestAutomationCaption";	
 		edit_recording.addCaptionSrtToFirstChapterRecording(path);
 				
-		//1.4 return to the recording page
+		//2.4 return to the recording page
 		player_page.returnToCoursesPage(course);
 		
-		//1.5 enter to the course to get the test record name for later
+		//2.5 enter to the course to get the test record name for later
 		course.selectCourseThatStartingWith(current_course);
 					
-		//change the names of the records
+		//3.change the names of the records
 		for(int number_of_tab = 0 ; number_of_tab <2 ; number_of_tab++){
 					
 			if(number_of_tab == 1 ){
 				record.clickOnStudentRecordingsTab();
 			}
-			//1.6.change the first name
+			//3.1.change the first name
 			record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			edit_recording_properties_window.changeNameOfRecord(record,confirm_menu);
 		}
@@ -175,33 +183,33 @@ public class TC10905VerifyStudentsCantFindContentFromUnenrolledCoursesNonpublicO
 			}	
 		}
 			
-		//1.7 sign out		
+		//4.3 sign out		
 		record.signOut();
 		
-		//2.add 2 bookmark to the user4(Student)
-		tegrity.loginCourses("User4");
+		//5.add 2 bookmark to the user4(Student)
+		tegrity.loginCourses("User1");
 					
-		//2.1.Open some course for that.
+		//5.1.Open some course for that.
 		course.selectCourseThatStartingWith(current_course);
 		String url =  course.getCurrentUrlCoursePage();
 						
-		//2.2.move to the player to add bookmark 
+		//5.2.move to the player to add bookmark 
 		first_recording_bookmarks = record.getFirstRecordingTitle();
 		record.clickOnTargetRecordingAndOpenItsPlayback(first_recording_bookmarks);
 			
-		//2.3.display recording and click on the stop button
+		//5.3.display recording and click on the stop button
 		player_page.verifyTimeBufferStatusForXSec(2);
 
-		///2.4.add new unclear bookmark
+		///5.4.add new unclear bookmark
 		player_page.addTargetBookmark("UnclearStudent");
 		student_bookmark_unclear = "UnclearStudent";
 		
-		//2.5.add new important bookmark
+		//5.5.add new important bookmark
 		player_page.changeTheBookmarkToBeImportant();
 		player_page.addTargetBookmark("ImportantStudent");
 		student_bookmark_important ="ImportantStudent";
 		
-		//2.6.return to the recording page
+		//5.6.return to the recording page
 		player_page.exitInnerFrame();
 		player_page.returnToRecordingPageByNameAsUserOrGuest(current_course,record);			
 		

@@ -36,7 +36,7 @@ import junitx.util.PropertyManager;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC10902And10903VerifyThatStudentsCantFindWhatTheyreNotSupposedToOnTheAllCoursesLevel {
+public class TC10902AndTC10903 {
 
 	// Set Property for ATU Reporter Configuration
 	{
