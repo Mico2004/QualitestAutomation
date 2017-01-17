@@ -36,7 +36,7 @@ import junitx.util.PropertyManager;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC10902AndTC10903 {
+public class TC10902AndTC10903And10907 {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -438,6 +438,94 @@ public class TC10902AndTC10903 {
 		
 		//7.Login as the Student from the precondition
 		tegrity.loginCourses("User4");
+		
+		//8.Open the course from the precondition
+		current_course = course.selectCourseThatStartingWith("Ab");		
+		
+		//9.Set the focus to the field with a mouse pointer.- click on the Search field
+		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
+				
+		//9.Search the first chapter from the recording that we mentioned in the preconditions and press ENTER.
+		top_bar_helper.searchForTargetText(publish_record);
+					
+		//10.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+		search_page.verifyLoadingSpinnerImage();	
+		search_page.waitUntilSpinnerImageDisappear();
+		search_page.exitInnerFrame();
+				
+		//11.*The recording is found* and displayed in the search results
+		search_page.verifyWebElementDisplayed(search_page.title_list.get(0), "Recording name");
+				
+		//12.Click on the course's name breadcrumb & click on the Search field
+		search_page.clickBackToCourseInBreadcrumbs();
+				
+		for(int name_of_record = 0 ; name_of_record < 10 ;name_of_record++ ){
+		
+			//13.Set the focus to the field with a mouse pointer.
+			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
+					
+			if(name_of_record == 0){
+				//14.Search for the *Unpublished Regular Recording* from the precondition by *name*	
+				top_bar_helper.searchForTargetText(unpublish_regular_record);
+			}else if(name_of_record == 1){
+				//14.Search for the *Unpublished Student Recording* from the precondition by *name*
+				top_bar_helper.searchForTargetText(unpublish_student_record);
+			}else if(name_of_record == 2){
+				//14.Search for the *Test Recording* - +by that Student+ from the precondition by *name*
+				top_bar_helper.searchForTargetText(test_student_record);
+			}else if(name_of_record == 3){
+				//14.Search for the *Test Recording* - +by a different Student+ from the precondition by *name*
+				top_bar_helper.searchForTargetText(test_different_student);
+			}else if(name_of_record == 4){
+				//14.Search for the *Published Regular Recording* from the precondition *by another Student's Tag*
+				top_bar_helper.searchForTargetText(publish_regualr_tag_diffrenet_student);
+			}else if(name_of_record == 5){
+				//14.Search for the *Published Regular Recording* from the precondition *by another Student's Bookmark*
+				top_bar_helper.searchForTargetText(publish_regular_difftenet_student_bookmark);
+			}else if(name_of_record == 6){
+				//14.Search for the *Published Regular Recording* from the precondition by an *Instructor's Private Tag*
+				top_bar_helper.searchForTargetText(publish_regular_private_tag_ins);
+			}else if(name_of_record == 7){
+				//14.Search for the *Published Student Recording* from the precondition *by another Student's Tag*
+				top_bar_helper.searchForTargetText(publish_diffrenet_student_tag);
+			}else if(name_of_record == 8){
+				//14.Search for the *Published Student Recording* from the precondition by *another Student's Bookmark*
+				top_bar_helper.searchForTargetText(publish_student_difftenet_student_bookmark);
+			}else if(name_of_record == 9){
+				//14.Search for the *Published Student Recording* from the precondition by an *Instructor's Private Tag*
+				top_bar_helper.searchForTargetText(publish_student_private_tag_ins);
+			}
+	
+			//15.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+			search_page.verifyLoadingSpinnerImage();	
+			search_page.waitUntilSpinnerImageDisappear();
+			search_page.exitInnerFrame();
+			
+			//16.*It is NOT found*
+			search_page.verifySearchResultIsEmpty();
+			
+			//17.Click on the "Courses" breadcrumb & click on the Search field
+			search_page.clickBackToCourseInBreadcrumbs();
+			
+		}
+		
+		//After test delete the tags and the bookmarks
+		//18.sign out
+		record.signOut();
+		
+		
+		System.out.println("Done.");
+		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+	
+	
+	}
+	
+	@Test(description = "TC10907 Verify that Guests can't find Tests AND unpublished regular/student recordings AND private tags AND Student bookmarks on the all courses level")
+	public void test10907() throws InterruptedException
+	{
+		
+		//7.Login as the guest from the precondition
+		tegrity.loginAsguest();
 		
 		//8.Open the course from the precondition
 		current_course = course.selectCourseThatStartingWith("Ab");		
