@@ -686,11 +686,7 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
-			Thread.sleep(5000);
-			wait.until(ExpectedConditions.elementToBeClickable(ok_buttonCss));
-			wait.until(ExpectedConditions.elementToBeClickable(ok_button));
-			ok_buttonCss.click();
-			ok_button.click();
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", ok_button);
 			/*ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			System.out.println("Clicked on OK button.");*/
 			Assert.assertTrue(true);

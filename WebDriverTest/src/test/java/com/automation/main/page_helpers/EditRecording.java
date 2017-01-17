@@ -254,7 +254,7 @@ public class EditRecording extends Page {
 		}
 		
 		new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElement(header, "Success"));
-		confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
+		confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 			
 		}catch(Exception e){
 			e.getMessage();
