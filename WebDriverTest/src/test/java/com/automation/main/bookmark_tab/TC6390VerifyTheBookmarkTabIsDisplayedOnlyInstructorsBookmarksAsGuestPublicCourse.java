@@ -230,7 +230,9 @@ public class TC6390VerifyTheBookmarkTabIsDisplayedOnlyInstructorsBookmarksAsGues
 		//21.Sign Out
 		player_page.exitInnerFrame();
 		record.signOut();
-				
+			
+		}
+		
 		//22.Login as INSTRUCTOR 
 		tegrity.loginCourses("User1");		
 									
@@ -258,7 +260,7 @@ public class TC6390VerifyTheBookmarkTabIsDisplayedOnlyInstructorsBookmarksAsGues
 			
 		//24.Sign Out
 		record.signOut();
-			}
+			
 					
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
