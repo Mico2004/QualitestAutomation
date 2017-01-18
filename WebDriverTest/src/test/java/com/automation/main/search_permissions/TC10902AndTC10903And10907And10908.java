@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import com.automation.main.page_helpers.BottomFooter;
 import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
+import com.automation.main.page_helpers.CourseSettingsPage;
 import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.EditRecording;
 import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
@@ -55,6 +56,7 @@ public class TC10902AndTC10903And10907And10908 {
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
 	public ConfirmationMenu confirm_menu;
+	public CourseSettingsPage course_settings_page;
 	public PlayerPage player_page;
 	WebDriver driver;
 	WebDriverWait wait;
@@ -81,6 +83,7 @@ public class TC10902AndTC10903And10907And10908 {
 		tag_window= PageFactory.initElements(driver, TagMenu.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
+		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		publish_window = PageFactory.initElements(driver, PublishWindow.class);
 		search_page = PageFactory.initElements(driver, SearchPage.class);	
@@ -524,80 +527,105 @@ public class TC10902AndTC10903And10907And10908 {
 	public void test10907() throws InterruptedException
 
 	{
+		//pre condition -make the course public 
+		//Login as INSTRUCTOR
+		tegrity.loginCourses("User1");
 		
-		//7.Login as the guest from the precondition
+		//1. enter to the course Ab
+		current_course =course.selectCourseThatStartingWith("Ab");
+
+		//1.1 Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
+		course_settings_page.clickOnOkButton();
+		
+		//1.2 log out
+		record.signOut();
+		
+		//2.Login as the guest from the precondition
 		tegrity.loginAsguest();
 		
-		//8.Open the course from the precondition
-		current_course = course.selectCourseThatStartingWith("Ab");		
+		//3.Open the course from the precondition
+		 course.selectCourseThatStartingWith(current_course);		
 		
-		//9.Set the focus to the field with a mouse pointer.- click on the Search field
+		//4.Set the focus to the field with a mouse pointer.- click on the Search field
 		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 				
-		//9.Search the first chapter from the recording that we mentioned in the preconditions and press ENTER.
+		//5.Search the first chapter from the recording that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(publish_record);
 					
-		//10.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+		//6.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 		search_page.verifyLoadingSpinnerImage();	
 		search_page.waitUntilSpinnerImageDisappear();
 		search_page.exitInnerFrame();
 				
-		//11.*The recording is found* and displayed in the search results
+		//7.*The recording is found* and displayed in the search results
 		search_page.verifyWebElementDisplayed(search_page.title_list.get(0), "Recording name");
 				
-		//12.Click on the course's name breadcrumb & click on the Search field
+		//8.Click on the course's name breadcrumb & click on the Search field
 		search_page.clickBackToCourseInBreadcrumbs();
 				
 		for(int name_of_record = 0 ; name_of_record < 9 ;name_of_record++ ){
 		
-			//13.Set the focus to the field with a mouse pointer.
+			//9.Set the focus to the field with a mouse pointer.
 			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 					
 			if(name_of_record == 0){
-				//14.Search for the *Unpublished Regular Recording* from the precondition by *name*	
+				//10.Search for the *Unpublished Regular Recording* from the precondition by *name*	
 				top_bar_helper.searchForTargetText(unpublish_regular_record);
 			}else if(name_of_record == 1){
-				//14.Search for the *Unpublished Student Recording* from the precondition by *name*
+				//10.Search for the *Unpublished Student Recording* from the precondition by *name*
 				top_bar_helper.searchForTargetText(unpublish_student_record);
 			}else if(name_of_record == 2){
-				//14.Search for the *Test Recording* - +by that Student+ from the precondition by *name*
+				//10.Search for the *Test Recording* - +by that Student+ from the precondition by *name*
 				top_bar_helper.searchForTargetText(test_student_record);
 			}else if(name_of_record == 3){
-				//14.Search for the Published Regular Recording from the precondition by a Student's Tag
+				//10.Search for the Published Regular Recording from the precondition by a Student's Tag
 				top_bar_helper.searchForTargetText(publish_regualr_tag_diffrenet_student);
 			}else if(name_of_record == 4){
-				//14.Search for the Published Regular Recording from the precondition by a Student's Bookmark
+				//10.Search for the Published Regular Recording from the precondition by a Student's Bookmark
 				top_bar_helper.searchForTargetText(publish_regular_difftenet_student_bookmark);
 			}else if(name_of_record == 5){
-				//14.Search for the Published Regular Recording from the precondition by an Instructor's Private Tag
+				//10.Search for the Published Regular Recording from the precondition by an Instructor's Private Tag
 				top_bar_helper.searchForTargetText(publish_regular_private_tag_ins);
 			}else if(name_of_record == 6){
-				//14.Search for the Published Student Recording from the precondition by a Student's Tag
+				//10.Search for the Published Student Recording from the precondition by a Student's Tag
 				top_bar_helper.searchForTargetText(publish_diffrenet_student_tag);
 			}else if(name_of_record == 7){
-				//14.Search for the Published Regular Recording from the precondition by a Student's Bookmark
+				//10.Search for the Published Regular Recording from the precondition by a Student's Bookmark
 				top_bar_helper.searchForTargetText(publish_student_difftenet_student_bookmark);
 			}else if(name_of_record == 8){
-				//14.Search for the *Published Student Recording* from the precondition by an *Instructor's Private Tag*
+				//10.Search for the *Published Student Recording* from the precondition by an *Instructor's Private Tag*
 				top_bar_helper.searchForTargetText(publish_student_private_tag_ins);
 			}
 	
-			//15.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+			//11.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();	
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
 			
-			//16.*It is NOT found*
+			//12.*It is NOT found*
 			search_page.verifySearchResultIsEmpty();
 			
-			//17.Click on the "Courses" breadcrumb & click on the Search field
+			//13.Click on the "Courses" breadcrumb & click on the Search field
 			search_page.clickBackToCourseInBreadcrumbs();
 			
 		}
 		
 		//After test delete the tags and the bookmarks
-		//18.sign out
+		//14.sign out
 		record.signOut();
+		
+		//15.login as INSTRUCTOR
+		tegrity.loginCourses("User1");
+		
+		//16. enter to the public course
+		course.selectCourseThatStartingWith("Ab");
+						
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings_page.clickOnOkButton();
 		
 		
 		System.out.println("Done.");
@@ -609,83 +637,105 @@ public class TC10902AndTC10903And10907And10908 {
 	@Test(description = "TC10908 Verify that Guests can't find Tests AND unpublished regular/student recordings AND private tags AND Student bookmarks on the course level")
 	public void test10908() throws InterruptedException
 	{
+		//pre condition -make the course public 
+		//Login as INSTRUCTOR
+		tegrity.loginCourses("User1");
 		
-		//7.Login as the Student from the precondition
-		tegrity.loginCourses("User4");
+		//1. enter to the course Ab
+		current_course =course.selectCourseThatStartingWith("Ab");
+
+		//1.1 Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
+		course_settings_page.clickOnOkButton();
 		
-		//8.Open the course from the precondition
+		//1.2 log out
+		record.signOut();
+		
+		//2.Login as guest
+		tegrity.loginAsguest();
+		
+		//3.Open the course from the precondition
 		current_course = course.selectCourseThatStartingWith("Ab");		
 		
-		//9.Set the focus to the field with a mouse pointer.- click on the Search field
+		//4.Set the focus to the field with a mouse pointer.- click on the Search field
 		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 				
-		//9.Search the first chapter from the recording that we mentioned in the preconditions and press ENTER.
+		//5.Search the first chapter from the recording that we mentioned in the preconditions and press ENTER.
 		top_bar_helper.searchForTargetText(publish_record);
 					
-		//10.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+		//6.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 		search_page.verifyLoadingSpinnerImage();	
 		search_page.waitUntilSpinnerImageDisappear();
 		search_page.exitInnerFrame();
 				
-		//11.*The recording is found* and displayed in the search results
+		//7.*The recording is found* and displayed in the search results
 		search_page.verifyWebElementDisplayed(search_page.title_list.get(0), "Recording name");
 				
-		//12.Click on the course's name breadcrumb & click on the Search field
+		//8.Click on the course's name breadcrumb & click on the Search field
 		search_page.clickBackToCourseInBreadcrumbs();
 				
-		for(int name_of_record = 0 ; name_of_record < 10 ;name_of_record++ ){
+		for(int name_of_record = 0 ; name_of_record < 9 ;name_of_record++ ){
 		
-			//13.Set the focus to the field with a mouse pointer.
+			//9.Set the focus to the field with a mouse pointer.
 			top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
 					
 			if(name_of_record == 0){
-				//14.Search for the *Unpublished Regular Recording* from the precondition by *name*	
+				//10.Search for the *Unpublished Regular Recording* from the precondition by *name*	
 				top_bar_helper.searchForTargetText(unpublish_regular_record);
 			}else if(name_of_record == 1){
-				//14.Search for the *Unpublished Student Recording* from the precondition by *name*
+				//10.Search for the *Unpublished Student Recording* from the precondition by *name*
 				top_bar_helper.searchForTargetText(unpublish_student_record);
 			}else if(name_of_record == 2){
-				//14.Search for the *Test Recording* - +by that Student+ from the precondition by *name*
+				//10.Search for the *Test Recording* - +by that Student+ from the precondition by *name*
 				top_bar_helper.searchForTargetText(test_student_record);
 			}else if(name_of_record == 3){
-				//14.Search for the *Test Recording* - +by a different Student+ from the precondition by *name*
-				top_bar_helper.searchForTargetText(test_different_student);
-			}else if(name_of_record == 4){
-				//14.Search for the *Published Regular Recording* from the precondition *by another Student's Tag*
+				//10.Search for the Published Regular Recording from the precondition by a Student's Tag
 				top_bar_helper.searchForTargetText(publish_regualr_tag_diffrenet_student);
-			}else if(name_of_record == 5){
-				//14.Search for the *Published Regular Recording* from the precondition *by another Student's Bookmark*
+			}else if(name_of_record == 4){
+				//10.Search for the *Published Regular Recording* from the precondition *by another Student's Bookmark*
 				top_bar_helper.searchForTargetText(publish_regular_difftenet_student_bookmark);
-			}else if(name_of_record == 6){
-				//14.Search for the *Published Regular Recording* from the precondition by an *Instructor's Private Tag*
+			}else if(name_of_record == 5){
+				//10.Search for the *Published Regular Recording* from the precondition by an *Instructor's Private Tag*
 				top_bar_helper.searchForTargetText(publish_regular_private_tag_ins);
-			}else if(name_of_record == 7){
-				//14.Search for the *Published Student Recording* from the precondition *by another Student's Tag*
+			}else if(name_of_record == 6){
+				//10.Search for the *Published Student Recording* from the precondition by Student's Tag
 				top_bar_helper.searchForTargetText(publish_diffrenet_student_tag);
-			}else if(name_of_record == 8){
-				//14.Search for the *Published Student Recording* from the precondition by *another Student's Bookmark*
+			}else if(name_of_record == 7){
+				//10.Search for the *Published Student Recording* from the precondition by student's Bookmark
 				top_bar_helper.searchForTargetText(publish_student_difftenet_student_bookmark);
-			}else if(name_of_record == 9){
-				//14.Search for the *Published Student Recording* from the precondition by an *Instructor's Private Tag*
+			}else if(name_of_record == 8){
+				//10.Search for the *Published Student Recording* from the precondition by an *Instructor's Private Tag*
 				top_bar_helper.searchForTargetText(publish_student_private_tag_ins);
 			}
 	
-			//15.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+			//11.In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 			search_page.verifyLoadingSpinnerImage();	
 			search_page.waitUntilSpinnerImageDisappear();
 			search_page.exitInnerFrame();
 			
-			//16.*It is NOT found*
+			//12.*It is NOT found*
 			search_page.verifySearchResultIsEmpty();
 			
-			//17.Click on the "Courses" breadcrumb & click on the Search field
+			//13.Click on the "Courses" breadcrumb & click on the Search field
 			search_page.clickBackToCourseInBreadcrumbs();
 			
 		}
 		
 		//After test delete the tags and the bookmarks
-		//18.sign out
+		//14.sign out
 		record.signOut();
+				
+		//15.login as INSTRUCTOR
+		tegrity.loginCourses("User1");
+		
+		//16. enter to the public course
+		course.selectCourseThatStartingWith("Ab");
+						
+		// Make course public
+		record.clickOnCourseTaskThenCourseSettings();
+		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
+		course_settings_page.clickOnOkButton();
 		
 		
 		System.out.println("Done.");
