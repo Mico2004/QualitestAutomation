@@ -9,6 +9,7 @@ import java.util.Date;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -273,8 +274,9 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 
 		// 3. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		mange_adhoc_course_enrollments.waitForThePageToLoad();
+		
 		/// 4.unenroll student from course
+		wait.until(ExpectedConditions.visibilityOf(mange_adhoc_course_enrollments.admin_dashboard_link));
 		mange_adhoc_course_enrollments.unEnrollStusentsFromCourse(past_course_student, student,mangage_adhoc_courses_membership_window);
 		Thread.sleep(4000);
 
@@ -307,8 +309,9 @@ public class TC24835VerifyStudentsCantSeePastCourseTab {
 
 		//11.click on manage ad-hoc course
         admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		Thread.sleep(10000);
+
 		//12.delete course by name
+        wait.until(ExpectedConditions.visibilityOf(mange_adhoc_course_enrollments.admin_dashboard_link));
 		mange_adhoc_course_enrollments.deleteCourseByNameSearch(past_course_student2);
 		Thread.sleep(3000);
 		///13.sign out

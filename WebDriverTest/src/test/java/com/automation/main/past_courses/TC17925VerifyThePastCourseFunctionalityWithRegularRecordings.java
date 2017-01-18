@@ -172,8 +172,7 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 			}
 		}		
 		mange_adhoc_course_enrollments.clickOnNewCourse();
-		create_new_course_window.waitForVisibility(create_new_course_window.course_id_input);
-		
+		create_new_course_window.waitForVisibility(create_new_course_window.course_id_input);	
 		create_new_course_window.createNewCourse(PastTemp2Course + "_Name", PastTemp2Course);
 
 		for (int j = 0; j < 5; j++) {
@@ -245,7 +244,6 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 		System.out.println("Past5_1");
 	
 		// Click on result first course (the only one) membership button
-		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 
 		// Search target user name in membership window

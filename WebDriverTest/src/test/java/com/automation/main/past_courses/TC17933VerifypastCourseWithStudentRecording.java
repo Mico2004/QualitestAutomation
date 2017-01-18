@@ -72,36 +72,23 @@ public class TC17933VerifypastCourseWithStudentRecording {
 	public void setup() {
 
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		
-
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		wait = new WebDriverWait(driver, 30);
-
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
 		copy = PageFactory.initElements(driver, CopyMenu.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-
-		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
-
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
-
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
-
 		mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
-
 		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
-
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
-
-		
 
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
@@ -181,7 +168,6 @@ public class TC17933VerifypastCourseWithStudentRecording {
 		System.out.println("Past5");
 
 		// Click on result first course (the only one) membership button
-		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.clickOnFirstCourseMembershipButton();
 
 		// Search target user name in membership window

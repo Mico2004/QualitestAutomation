@@ -45,7 +45,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	@FindBy(id = "ctl00_ContentPlaceHolder1_TegrityCourseRepeater_ctl00_LinkButton3")
 	WebElement first_course_membership_button;
 	@FindBy(partialLinkText = "Admin Dashboard")
-	WebElement admin_dashboard_link;
+	public WebElement admin_dashboard_link;
 	@FindBy(id = "ctl00_ContentPlaceHolder1_TegrityCourseRepeater_ctl00_LinkButton2")
 	WebElement first_course_delete_button;
 	@FindBy(css = ".clsGridListEntryInfo1") WebElement first_course_name;
