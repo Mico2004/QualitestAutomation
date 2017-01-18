@@ -158,7 +158,8 @@ public class TC6390VerifyTheBookmarkTabIsDisplayedOnlyInstructorsBookmarksAsGues
 			bookmark_to_add= "TestUnclearStu";
 			bookmarksNameStu.add(bookmark_to_add);
 		}
-		String time = player_page.addTargetBookmark(bookmark_to_add);
+		player_page.addTargetBookmark(bookmark_to_add);
+		String time = player_page.getTimeOfBookmark(bookmark_to_add);
 		bookmarksNameAndTime.put(bookmark_to_add,time);
 				
 		//7.add new important bookmark
@@ -170,7 +171,8 @@ public class TC6390VerifyTheBookmarkTabIsDisplayedOnlyInstructorsBookmarksAsGues
 			bookmark_to_add= "TestImportantStu";
 			bookmarksNameStu.add(bookmark_to_add);
 		}	
-		time = player_page.addTargetBookmark(bookmark_to_add);
+		player_page.addTargetBookmark(bookmark_to_add);
+		time = player_page.getTimeOfBookmark(bookmark_to_add);
 		bookmarksNameAndTime.put(bookmark_to_add,time);
 		player_page.exitInnerFrame();
 		

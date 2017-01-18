@@ -250,7 +250,8 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 				} else {
 					bookmark_to_add= "Test" + Integer.toString(type_of_recording+1);
 				}
-				time = player_page.addTargetBookmark(bookmark_to_add);
+				player_page.addTargetBookmark(bookmark_to_add);
+				time = player_page.getTimeOfBookmark(bookmark_to_add);
 				//25.save the bookmark name and time for later
 				bookmarksName.add(bookmark_to_add);	
 				player_page.exitInnerFrame();

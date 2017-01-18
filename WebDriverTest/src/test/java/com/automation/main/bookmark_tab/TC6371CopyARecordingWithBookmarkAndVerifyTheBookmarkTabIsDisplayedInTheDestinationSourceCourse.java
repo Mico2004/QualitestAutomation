@@ -123,7 +123,8 @@ public class TC6371CopyARecordingWithBookmarkAndVerifyTheBookmarkTabIsDisplayedI
 		}else {
 			bookmark_to_add= "TestUnclearStu";
 		}
-		String time = player_page.addTargetBookmark(bookmark_to_add);
+		player_page.addTargetBookmark(bookmark_to_add);
+		String time = player_page.getTimeOfBookmark(bookmark_to_add);
 		bookmarksNameAndTime.put(bookmark_to_add,time);
 		player_page.exitInnerFrame();
 			

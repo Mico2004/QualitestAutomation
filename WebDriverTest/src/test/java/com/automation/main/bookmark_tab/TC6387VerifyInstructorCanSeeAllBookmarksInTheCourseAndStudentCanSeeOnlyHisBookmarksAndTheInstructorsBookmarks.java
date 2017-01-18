@@ -145,7 +145,8 @@ public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSee
 			} else {
 				bookmark_to_add= "Student 2";
 			}
-			time = player_page.addTargetBookmark(bookmark_to_add);
+			player_page.addTargetBookmark(bookmark_to_add);
+			time = player_page.getTimeOfBookmark(bookmark_to_add);
 			//8. save the bookmark name and time for later
 			bookmarksName.add(bookmark_to_add);
 			bookmarksNameAndTime.put(bookmark_to_add, time);

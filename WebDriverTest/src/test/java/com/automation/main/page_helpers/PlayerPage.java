@@ -61,6 +61,8 @@ public class PlayerPage extends Page {
 	List<WebElement> selected_bookmark_buttons_list;
 	@FindBy(xpath = ".//*[@id='BookmarkList']/div")
 	List<WebElement> bookmark_list;
+	@FindBy(xpath = ".//*[@id='BookmarkList']/div/div")
+	List<WebElement> bookmark_list_numbers;
 	@FindBy(css = "#BookmarkList")
 	WebElement bookmark_listCss;
 	@FindBy(id = "tegritySearchBox")
@@ -152,6 +154,7 @@ public class PlayerPage extends Page {
 	public List<WebElement> bookmarkStudentNames;
 	@FindBy(css = ".BookmarkButton")
 	public List<WebElement> bookmarks_buttons;
+	private String timeReturn;
 	
 	// This function get as input number of seconds.
 	// It will check if the player plays for this number of seconds.
@@ -731,18 +734,47 @@ public class PlayerPage extends Page {
 	
 
 	// This function add String to bookmark
-	public String addTargetBookmark(String target_bookmark) throws InterruptedException {
+	public void addTargetBookmark(String target_bookmark) throws InterruptedException {
 		System.out.println(time_buffer_status.getText());
 		sendStringToWebElement(bookmark_input_text, target_bookmark);
 		clickElementJS(add_bookmark_button);
-		Thread.sleep(500);
-		String timeToReturn =  time_buffer_status.getText();
+		//Thread.sleep(500);
+		//String timeToReturn =  time_buffer_status.getText();
 		System.out.println(time_buffer_status.getText());
 		System.out.println("Target bookmark added.");
 		ATUReports.add(time +" Target bookmark added.", "True.", "True.", LogAs.PASSED, null);
-		return timeToReturn;
+		//return timeToReturn;
 	}
-
+	
+	
+	public String getTimeOfBookmark(String target_bookmark) throws InterruptedException{
+		
+		String time = null,timeReturn = null;
+		try {
+		Thread.sleep(500);	
+		int size = bookmark_list_numbers.size();	
+		for(int i = 0  ;i<size ; i++){
+			
+			String currentName = driver.findElement(By.xpath(".//*[@id='BookmarkList']/div[" + Integer.toString(i+1)+ "]/div/div[3]")).getText();
+			if(currentName.equals(target_bookmark)){
+				time = driver.findElement(By.xpath(".//*[@id='BookmarkList']/div["+ Integer.toString(i+1)+ "]/div/div[2]")).getText();
+				break;
+			}
+		}
+		String timeToReturn =  time_buffer_status.getText();
+		String[] SplitTime = timeToReturn.split("/");
+		timeReturn = time + " /" + SplitTime[1];
+		System.out.println(timeReturn);
+		return timeReturn;
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			return timeReturn;
+		}
+		
+	}
+	
 	// This function delete all bookmarks
 	public void deleteAllBookmark() throws InterruptedException {
 		try{
