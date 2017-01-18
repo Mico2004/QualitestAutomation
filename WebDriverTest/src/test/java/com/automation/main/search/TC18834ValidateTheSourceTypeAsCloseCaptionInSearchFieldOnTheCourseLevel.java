@@ -151,9 +151,7 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 		String text_from_caption_for_test = "QualitestAutomationCaption";	
 		
 		player_page.returnToCoursesPage(course);
-		
-		record.signOut();
-		
+				
 		// Looping for Student, Guest and ADMIN
 		for(int type_of_user = 0; type_of_user < 4; type_of_user++) {
 	
