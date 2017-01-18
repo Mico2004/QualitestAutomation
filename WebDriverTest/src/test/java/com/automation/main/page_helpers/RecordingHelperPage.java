@@ -6357,4 +6357,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public String getLinkIndexAdditionalContent(int index) {
 		return driver.findElement(By.cssSelector("#ItemUrl" + Integer.toString(index) + ">span")).getText();
 	}
+
+	public void returnBackIfWeMoveToTheInstallionsPage() {
+		
+		try{
+		if(recording_button.isDisplayed()){
+			driver.navigate().back();
+		}
+		
+		}catch(Exception e){
+			
+		}	
+	}
 }

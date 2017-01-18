@@ -127,7 +127,7 @@ public class StartTestWindow extends Page {
 	// This function verify that start a test window is open
 	public void verifyStartATestWindowOpen() throws InterruptedException {
 		
-		Thread.sleep(500);
+		waitForVisibility(start_test_window_title);
 		boolean is_closed = isStartATestWindowClosed();
 		if(!is_closed) {
 			System.out.println("Start a test window is open.");

@@ -160,6 +160,10 @@ public class TC6805VerifyThatWhenTheCourseTestingPolicyIsEnabledTheRecorderIsLau
 		//17.verify that The modal window is closed and the PC/Mac Recorder opens.
 		record.startingATestThruogthKeys();
 		
+		//18. if we move to the installstion we need to go back
+		record.returnBackIfWeMoveToTheInstallionsPage();
+		
+		
 		}
 		
 		System.out.println("Done.");
