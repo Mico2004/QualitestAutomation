@@ -764,8 +764,7 @@ public class PreTest {
 		///3.Click the "Membership" link related to the course+unenroll
 		mange_adhoc_course_enrollments.waitForThePageToLoad();
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PropertyManager.getProperty("course8"), user1Username,mangage_adhoc_courses_membership_window);
-		mange_adhoc_course_enrollments.exitInnerFrame();
-		
+	
         // 3.Click the "Membership" link related to the course+unenroll
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PropertyManager.getProperty("course9"), user1Username,mangage_adhoc_courses_membership_window);
 		mange_adhoc_course_enrollments.exitInnerFrame();
