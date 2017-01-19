@@ -142,6 +142,7 @@ public class TC15647NavigateThrougthALongRecordingsListInRecordingsTab {
 		
 		// 2. Add a lot of recordings so the recordings list will overflow the page size.
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		
 		// 2.1. The recordings list is long and doesn't fit on a single page.	
 		course.selectCourseThatStartingWith("abc");
@@ -156,7 +157,7 @@ public class TC15647NavigateThrougthALongRecordingsListInRecordingsTab {
 		
 		// 3. Upload more recordings.
 		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
+		
 		
 		//4. Make a browser window smaller.
 		Dimension dimension = new Dimension(1200, 800);

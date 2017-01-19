@@ -408,7 +408,7 @@ public class RecordingHelperPage extends Page {
 	public void checkStatusExistenceForMaxTTime(int time_in_sec) throws InterruptedException {
 		System.out.println("Begin Status Check");	
 		try{
-		new WebDriverWait(driver, 7).until(ExpectedConditions.textToBePresentInElement(wrapper, "length: "));		
+		new WebDriverWait(driver, 5).until(ExpectedConditions.textToBePresentInElement(wrapper, "length: "));		
 		}
 		catch(org.openqa.selenium.TimeoutException msg){
 			
@@ -5323,7 +5323,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	
 	public boolean checkIfThereAreRecordingsInTab(){
 		try{
-			Thread.sleep(1500);
+			Thread.sleep(1000);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "length: "));
 			return true;
 			}catch(Exception e)
@@ -5336,7 +5336,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	
 	public boolean checkIfThereAreContentsInAdditionalTab(){
 		try{
-			Thread.sleep(1500);
+			Thread.sleep(1000);
 			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "file size:"));
 			return true;
 			}catch(Exception e)
