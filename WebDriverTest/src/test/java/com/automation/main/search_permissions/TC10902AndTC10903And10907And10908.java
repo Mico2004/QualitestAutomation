@@ -306,7 +306,6 @@ public class TC10902AndTC10903And10907And10908 {
 				
 						//5.3.The "Tag" Dialog window is appeared.
 						tag_window.waitForPageToLoad();
-						tag_window.verifyTagWindowOpen();
 						
 						//5.4.Click on the "Create New Tag" Button.
 						if(type_of_user== 0) {

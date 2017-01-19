@@ -188,7 +188,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 		// 12. Click "OK".
 		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
 		
-		// 13. Message window is closed.
+		// 13. Message window is closed.	
 		boolean is_closed = confirm_menu.isConfirmationMenuClosed();
 		
 		if (is_closed) {
@@ -221,7 +221,7 @@ public class TC15550CopyOneRecordingToSeveralCoureses {
 			if(source_recording.equals(source_recording_list.get(i))) {
 				record.checkRecordingInIndexIStatus((i + 1), "Being copied from");
 				// 16. Recording's status change after the copying is done
-				//record.checkStatusExistenceForMaxTTime(120);
+				//ecord.checkStatusExistenceForMaxTTime(120);
 				record.checkThatRecordingStatusTargetIndexIsEmpty((i + 1), 460);
 				break;
 			}

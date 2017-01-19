@@ -14,6 +14,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import com.automation.main.page_helpers.AddAdditionalContentFileWindow;
+import com.automation.main.page_helpers.AddAdditionalContentLinkWindow;
 import com.automation.main.page_helpers.AdminDashboardPage;
 import com.automation.main.page_helpers.AdminDashboardViewCourseList;
 
@@ -61,6 +63,8 @@ public class TC10905AndTC10906 {
 	public AdminDashboardViewCourseList admin_dashboard_view_course_list;
 	public ManageAdhocCoursesEnrollmentsPage mange_adhoc_course_enrollments;
 	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
+	public AddAdditionalContentFileWindow add_additional_content_window;
+	public AddAdditionalContentLinkWindow add_additional_content_link_window;
 	public PublishWindow publish_window;
 	public TopBarHelper top_bar_helper;
 	public LoginHelperPage tegrity;
@@ -77,7 +81,8 @@ public class TC10905AndTC10906 {
 	String student_bookmark_unclear,student_bookmark_important,student_tag1,student_tag2,caption_student,first_chapter_recording_name,first_reqular_recording;
 	String first_student_recording,first_test_recording,first_link_recording,first_file_recording,first_link_name,first_record_tag,first_recording_bookmarks;
 	String ins_bookmark_unclear,ins_bookmark_important,ins_tag1,ins_tag2;
-
+	String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testXls.xls";
+	
 	@BeforeTest
 	public void setup() {
 		
@@ -89,7 +94,9 @@ public class TC10905AndTC10906 {
 		top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
 		tag_window= PageFactory.initElements(driver, TagMenu.class);
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
+		add_additional_content_link_window = PageFactory.initElements(driver,AddAdditionalContentLinkWindow.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
+		add_additional_content_window = PageFactory.initElements(driver, AddAdditionalContentFileWindow.class);
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
@@ -124,9 +131,19 @@ public class TC10905AndTC10906 {
 				
 		//1.copy one record from each tab                               
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 0, record, copy, confirm_menu);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 1, record, copy, confirm_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 2, record, copy, confirm_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 3, record, copy, confirm_menu);
+		
+		//1.1upload 1 file and 1 link
+		course.selectCourseThatStartingWith("ad");
+		
+		//1.2 clicks on content task->upload additonal content file by path
+		record.toUploadAdditionalContentFile();
+		add_additional_content_window.uploadFileByPath(fullPathToFile, confirm_menu);
+		
+		//1.3 clicks on content task->upload additonal link file
+		record.toUploadAdditionalContentLink();
+		add_additional_content_link_window.createNewAdditionalContentLink(confirm_menu, "Moshik_Link_Test", "www.link.com");
 		
 		course.signOut();
 				
@@ -230,11 +247,15 @@ public class TC10905AndTC10906 {
 		tag_window.clickElementJS(tag_window.apply_button);
 				
 		//8.delete all the bookmarks	
-		record.clickOnBookmarksTab();
-		for(int number_of_bookmark = 0 ; number_of_bookmark < bookmarkList.size() ;number_of_bookmark ++ ){
-			record.deleteBookmarkInBookmarkTab(bookmarkList.get(number_of_bookmark));
-			}
+		if(record.isBookmarkTabDisplay()){
+			record.clickOnBookmarksTab();
+			record.deleteAllTheBookmarks();
 		}
+		
+		//9.sign out
+		record.signOut();
+		}
+		
 	 }
 	 
 	@Test(description = "TC10905 Verify Students can't find content from unenrolled courses (non-public) on all courses level")

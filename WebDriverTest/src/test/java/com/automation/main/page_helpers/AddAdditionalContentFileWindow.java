@@ -69,7 +69,7 @@ public class AddAdditionalContentFileWindow extends Page {
 	}
 
 	////// upload additional content
-	public void uploadFile(String path) throws Exception {
+	public void uploadFile(String path) {
 
 		path = System.getProperty("user.dir") + path;
 		File dir = new File(path);
@@ -102,7 +102,7 @@ public class AddAdditionalContentFileWindow extends Page {
 	}
 
 	/// upload a file by giving its string path
-	public void uploadFileByPath(String path, ConfirmationMenu confirm) throws Exception {
+	public void uploadFileByPath(String path, ConfirmationMenu confirm) throws InterruptedException  {
 
 		String file_name = path.substring(51);
 		// select_upload_additional_file.click();
