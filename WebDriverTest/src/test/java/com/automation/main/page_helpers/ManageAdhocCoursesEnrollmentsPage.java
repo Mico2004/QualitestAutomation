@@ -245,10 +245,10 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
         Thread.sleep(2000);
         // Search target course name
 		searchAndFilterCourses(course);
-        Thread.sleep(7000);
+        Thread.sleep(2000);
 		/// click on membership button
 		clickOnFirstCourseMembershipButton();
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		/// 5.unroll instructor
 		System.out.println("d1");
 		mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list, user);

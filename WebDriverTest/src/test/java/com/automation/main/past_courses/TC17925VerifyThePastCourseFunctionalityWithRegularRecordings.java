@@ -7,6 +7,7 @@ import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -336,13 +337,10 @@ public class TC17925VerifyThePastCourseFunctionalityWithRegularRecordings {
 		// 2. Click on course builder href link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 
-		mange_adhoc_course_enrollments.waitForThePageToLoad();
+		wait.until(ExpectedConditions.visibilityOf(mange_adhoc_course_enrollments.admin_dashboard_link));
+		driver.switchTo().frame(0);
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastTempCourse, user,mangage_adhoc_courses_membership_window);
-		for (String window : driver.getWindowHandles()) {
-			driver.switchTo().window(window);
-			break;
-		}
-		
+
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastTemp2Course, user,
 				mangage_adhoc_courses_membership_window);
 

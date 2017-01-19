@@ -390,13 +390,10 @@ public class TC17929And17941And17944PastCourses {
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
 
 		wait.until(ExpectedConditions.visibilityOf(mange_adhoc_course_enrollments.admin_dashboard_link));
+		driver.switchTo().frame(0);
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastTempCourse, user,
 				mangage_adhoc_courses_membership_window);
-		for (String window : driver.getWindowHandles()) {
-			driver.switchTo().window(window);
-			break;
-		}
-
+		
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastTemp2Course, user,
 				mangage_adhoc_courses_membership_window);
 
