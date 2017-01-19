@@ -173,20 +173,17 @@ public class TestSuitePreSetGeneric {
 		 // Copy neccessary recordings from bank to course\courses
 			System.out.println("gen1");
 			if(CoursesForRegularRecordings.size()!=0)
-				course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", CoursesForRegularRecordings, 0, record,copy, confirm_menu);
-			Thread.sleep(4000);
+				course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", CoursesForRegularRecordings, 0, record,copy, confirm_menu);	
 			System.out.println("a6");
 			if(CoursesForAdditionalContent.size()!=0)
-			course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", CoursesForAdditionalContent, 1, record,copy, confirm_menu);
-			Thread.sleep(4000);
+			course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", CoursesForAdditionalContent, 1, record,copy, confirm_menu);	
 			System.out.println("a7");
 			if(CoursesForStudentRecordings.size()!=0)
-			course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", CoursesForStudentRecordings, 2, record,copy, confirm_menu);
-			Thread.sleep(4000);
+			course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", CoursesForStudentRecordings, 2, record,copy, confirm_menu);	
 			System.out.println("a7");
 			if(CoursesForProcRecordings.size()!=0)
 			course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", CoursesForProcRecordings, 3, record,copy, confirm_menu);
-			Thread.sleep(4000);	
+		
 			
 			// verify recordings status is clear from the bank
 			System.out.println("0");

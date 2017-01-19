@@ -591,7 +591,7 @@ public class CoursesHelperPage extends Page {
 		}
 		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 		wait.until(ExpectedConditions.elementToBeClickable(record_helper_page.check_all_checkbox));
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		while (!record_helper_page.check_all_checkbox.isSelected()) {
 			new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(record_helper_page.check_all_checkbox));
 			new WebDriverWait(driver, 10)
@@ -1777,12 +1777,10 @@ public class CoursesHelperPage extends Page {
 		}
 
 		// copy_menu.selectTargetCourseFromCourseList(destination_course_name);
-		copy_menu.selectTargetCourseFromCourseListThatStartWith(des_start_with);
-		Thread.sleep(2000);
+		copy_menu.selectTargetCourseFromCourseListThatStartWith(des_start_with);	
 		copy_menu.clickOnCopyButton();
-		Thread.sleep(1000);
 		confirmation_menu.clickOnOkButton();
-		Thread.sleep(3000);
+		
 	/*	if ((type_of_recordings == 0) || (type_of_recordings == 2) || (type_of_recordings == 3)) {
 			record_helper_page.checkStatusExistenceForMaxTTime(600);
 		}*/
