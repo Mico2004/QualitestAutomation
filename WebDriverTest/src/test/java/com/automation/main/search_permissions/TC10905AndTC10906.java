@@ -120,15 +120,15 @@ public class TC10905AndTC10906 {
 						
 		// pre preconditions
 		//Enter as INSTRACTOR
-//		tegrity.loginCourses("SuperUser");
-//				
-//		//1.copy one record from each tab                               
-//		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 0, record, copy, confirm_menu);
-//		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 1, record, copy, confirm_menu);
-//		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 2, record, copy, confirm_menu);
-//		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 3, record, copy, confirm_menu);
-//		
-//		course.signOut();
+		tegrity.loginCourses("SuperUser");
+				
+		//1.copy one record from each tab                               
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 0, record, copy, confirm_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 1, record, copy, confirm_menu);
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 2, record, copy, confirm_menu);
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 3, record, copy, confirm_menu);
+		
+		course.signOut();
 				
 		//1.1 wait until we finish copying records
 		tegrity.loginCourses("User1");
