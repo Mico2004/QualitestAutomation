@@ -37,7 +37,7 @@ import junitx.util.PropertyManager;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC10902AndTC10903And10907And10908 {
+public class TC10902AndTC10903AndTC10907AndTC10908 {
 
 	// Set Property for ATU Reporter Configuration
 	{
