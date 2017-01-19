@@ -132,13 +132,14 @@ public class TC21578LoginAsGuestUI {
 		
 		/// 2.login as admin
 		tegrity.loginAdmin("Admin");
-		Thread.sleep(2000);
+	
 		
 		//pretest enable public visibility  
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Course Settings");		
 		Thread.sleep(2000);		
 		
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
+		admin_course_settings_page.makeSureThatOnOffMakeThisCoursePublicSelected();
 		admin_course_settings_page.clickOnSaveButton();
 		Thread.sleep(2000);
 		
