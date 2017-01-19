@@ -184,7 +184,7 @@ public class TC10902AndTC10903And10907And10908 {
 			tegrity.loginCourses("User1");
 						
 			//2.1.Open some course for that.
-			current_course = course.selectCourseThatStartingWith("Ab");
+			course.selectCourseThatStartingWith(current_course);
 				
 			for(int number_of_tab = 0 ; number_of_tab <2 ; number_of_tab++){
 				

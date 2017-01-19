@@ -141,7 +141,7 @@ public class TestSuitePreSetCopyRecordings_SearchPermissions {
 	@Test(description = "Login course page")
 	public void loginCourses() throws InterruptedException {
 		System.out.println("b0");
-		  final List<Integer> CourseAbContent = Arrays.asList(0,2); //For Ab		
+		  final List<Integer> CourseAbContent = Arrays.asList(0,2,3); //For Ab		
 		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
 			{
 				put(PropertyManager.getProperty("course1"),CourseAbContent);			
