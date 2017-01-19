@@ -2,14 +2,12 @@ package com.automation.main.course_detailes_content_page;
 
 
 
-import javax.swing.ListModel;
+
 import java.text.DateFormat;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
@@ -39,6 +37,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+import junitx.util.PropertyManager;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -143,23 +142,18 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		// 1. Make sure there is at least one student recording.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-		
-		
-		String current_course = course.selectCourseThatStartingWith("abc");
-		record.returnToCourseListPage();
+			
+		String current_course =  PropertyManager.getProperty("course2");
 		course.deleteAllRecordingsInCourseStartWith("abc", 2, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 2, record, copy, confirm_menu);
-		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record);
+		course.verifyRecordingsStatusIsClear("abc", 2,record);
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
-		
+			
 		// 2. Login as an STUDENT.
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
 		
 		// 3. Enter to the course page.
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(1000);
 		
 		// 4. Click on "Student recordings" tab.
 		record.clickOnStudentRecordingsTab();
@@ -182,7 +176,7 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		
 		// 9. Validate the bookmark symbol is displayed in the "ex1" recording information.
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000);
+		
 		record.verifyIndexRecordingHaveBookmark(1);
 		
 		// 10. Sign out.
@@ -194,8 +188,7 @@ public class TC15754ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		// 12. Open the course that contains "ex1" recording.
 		course.selectCourseThatStartingWith(current_course);
 		record.clickOnStudentRecordingsTab();
-		Thread.sleep(1000);
-		
+			
 		// 13. Validate the bookmark symbol is not displayed in the "ex1" recording information.
 		record.verifyIndexRecordingHaveNoBookmark(1);
 		
