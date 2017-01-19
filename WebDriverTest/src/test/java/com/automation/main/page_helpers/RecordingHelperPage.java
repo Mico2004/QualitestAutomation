@@ -6369,4 +6369,17 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			
 		}	
 	}
+
+	public void deleteAllTheBookmarks() {
+		
+		try {		
+			int size = bookmarks_names.size();	
+			for(int number_of_bookamrks = 0 ; number_of_bookamrks < size;  number_of_bookamrks++){
+				deleteBookmarkInBookmarkTab(bookmarks_names.get(0).getText());	
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
 }

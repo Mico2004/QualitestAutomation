@@ -117,6 +117,12 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings_page.makeSureThatMakeCoursePublicIsSelected();
 		course_settings_page.clickOnOkButton();
+			
+		//pre test - delete the bookmarks if there's any	
+		if(record.isBookmarkTabDisplay()){
+			record.clickOnBookmarksTab();
+			record.deleteAllTheBookmarks();
+		}
 		
 		//5.Click on student tab
 		record.clickOnStudentRecordingsTab();
