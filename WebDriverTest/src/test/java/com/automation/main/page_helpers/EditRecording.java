@@ -181,7 +181,7 @@ public class EditRecording extends Page {
 //			else Thread.sleep(3000);
 //		}
 		
-		new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElement(header, "Success"));
+		new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(header, "Success"));
 		confirm_menu.clickOnOkButtonAfterEditRecord();
 			
 		//return to the course
@@ -253,7 +253,7 @@ public class EditRecording extends Page {
 			break;
 		}
 		
-		new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElement(header, "Success"));
+		new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(header, "Success"));
 		confirm_menu.clickOnOkButtonAfterAddCloseCaptioning();
 			
 		}catch(Exception e){

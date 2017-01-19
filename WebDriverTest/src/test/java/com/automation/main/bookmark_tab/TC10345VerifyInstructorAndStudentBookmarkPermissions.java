@@ -156,33 +156,6 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 		//11.Click on recording tab
 		record.clickOnRecordingsTab();
 		
-		//pre test -unpublish one of them + one of regular recording
-		for(int number_of_tab = 0 ; number_of_tab <2 ; number_of_tab++){
-		
-		if(number_of_tab == 1){
-			//12.Click on student tab
-			record.clickOnStudentRecordingsTab();
-		}
-		
-		//13.check several recordings respective checkboxes
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		
-		//14.unpublish one recording
-		record.clickOnRecordingTaskThenPublish();
-		publish_window.waitForPageToLoad();
-	
-		//15.Select the "Never" radio box
-		publish_window.chooseRadioButton("Never");
-		
-		//16.Press the "Save" button
-		publish_window.clickOnSaveButton();
-		publish_window.verifyPublishWindowClosed();
-		
-		}
-		
-		//15.Click on recording tab
-		record.clickOnRecordingsTab();
-		
 		//pre test -Make sure to upload a 2 Recgular recordings and 2 proctoring recordings  to the course as Instructor A 
 		for(int number_of_tab = 0 ; number_of_tab <2 ; number_of_tab++){
 			
@@ -192,28 +165,56 @@ public class TC10345VerifyInstructorAndStudentBookmarkPermissions {
 			
 			for(int number_of_record = 0 ; number_of_record <2 ; number_of_record++) {
 				
-				//16.check several recordings respective checkboxes
+				//12.check several recordings respective checkboxes
 				if(number_of_record == 0) {
 					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 				} else {
 					record.unselectallCheckbox();
 					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
 				}
-				//17.click on the recording tasks->edit recording properties option
+				//13.click on the recording tasks->edit recording properties option
 				record.toEditRecordingPropertiesMenu();
 				edit_recording_properties_window.waitForPageToLoad();			
 				
-				//18.Change the owner of the record to be student record 
+				//14.Change the owner of the record to be student record 
 				edit_recording_properties_window.changeOwner(PropertyManager.getProperty("User1"));
 			
-				//19.Click the "Save" button
+				//15.Click the "Save" button
 				edit_recording_properties_window.clickOnSaveButton();
 				
-				//19.Click on Ok button
+				//16.Click on Ok button
 				confirm_menu.clickOnOkButtonAfterConfirmEditRecordingProperties();
 			}
 			
 		}
+			
+		//17.Click on recording tab
+		record.clickOnRecordingsTab();
+		
+		//pre test -unpublish one of them + one of regular recording
+		for(int number_of_tab = 0 ; number_of_tab <2 ; number_of_tab++){
+		
+		if(number_of_tab == 1){
+			//18.Click on student tab
+			record.clickOnStudentRecordingsTab();
+		}
+		
+		//19.check several recordings respective checkboxes
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+		
+		//20.unpublish one recording
+		record.clickOnRecordingTaskThenPublish();
+		publish_window.waitForPageToLoad();
+	
+		//21.Select the "Never" radio box
+		publish_window.chooseRadioButton("Never");
+		
+		//22.Press the "Save" button
+		publish_window.clickOnSaveButton();
+		publish_window.verifyPublishWindowClosed();
+		
+		}
+		
 		record.signOut();
 				
 		//20.Log in as Instructor A

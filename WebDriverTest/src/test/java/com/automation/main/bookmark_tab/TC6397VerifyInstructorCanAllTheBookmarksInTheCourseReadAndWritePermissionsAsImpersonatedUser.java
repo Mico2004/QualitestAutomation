@@ -173,7 +173,7 @@ public class TC6397VerifyInstructorCanAllTheBookmarksInTheCourseReadAndWritePerm
 			//10.Click on the "Bookmarks" tab
 			record.clickOnBookmarksTab();
 			
-			//11.The bookmark you added is displayed with the correct details
+			//11.The bookmark that we added is displayed with the correct details
 			if(type_of_user == 2){
 				String student1 = bookmarksName.get(1);	
 				//.verify that the bookmark student2 is not display

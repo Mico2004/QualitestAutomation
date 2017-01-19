@@ -53,7 +53,7 @@ public class AdminCourseSettingsPage extends Page {
 	
 	// This function insure that make this course public is on
 	public void makeSureThatOnOffMakeThisCoursePublicSelected() {
-		forceWebElementToBeUnselected(checkbox_on_off_of_make_this_course_publicly_visible, "Make this course public is on");
+		forceWebElementToBeSelected(checkbox_on_off_of_make_this_course_publicly_visible, "Make this course public is on");
 	}
 	
 	// This function insure that make this course public is off
