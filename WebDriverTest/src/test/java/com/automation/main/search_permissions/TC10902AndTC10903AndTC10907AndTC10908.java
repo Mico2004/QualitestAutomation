@@ -92,9 +92,9 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 		
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC10902VerifyThatStudentsCantFindWhatTheyreNotSupposedToOnTheAllCoursesLevel at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC10902VerifyThatStudentsCantFindWhatTheyreNotSupposedToOnTheAllCoursesLevel at " + DateToStr,
-		 "Starting the test: TC10902VerifyThatStudentsCantFindWhatTheyreNotSupposedToOnTheAllCoursesLevel at " + DateToStr, LogAs.PASSED, null);
+		 System.out.println("Starting the test: TC10902AndTC10903AndTC10907AndTC10908 at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC10902AndTC10903AndTC10907AndTC10908 at " + DateToStr,
+		 "Starting the test: TC10902AndTC10903AndTC10907AndTC10908 at " + DateToStr, LogAs.PASSED, null);
 		
 	}
 	
@@ -354,6 +354,10 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 	public void test10902() throws InterruptedException
 	{
 		
+		Date curDate = new Date();
+		String DateToStr = DateFormat.getInstance().format(curDate);
+		System.out.println("Starting the test: TC10902 Verify that Students can't find Tests AND unpublished regular/other student's recordings AND other user's private tags AND other Student's bookmarks on the all courses level at " + DateToStr);
+			
 		//7.Login as the Student from the precondition
 		tegrity.loginCourses("User4");
 		
@@ -438,6 +442,10 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 	public void test10903() throws InterruptedException
 	{
 		
+		Date curDate = new Date();
+		String DateToStr = DateFormat.getInstance().format(curDate);
+		System.out.println("Starting the test: TC10903 Verify that Students can't find Tests AND unpublished regular/other student's recordings AND other user's private tags AND other Student's bookmarks on the course level at " + DateToStr);
+				
 		//7.Login as the Student from the precondition
 		tegrity.loginCourses("User4");
 		
@@ -526,6 +534,10 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 	public void test10907() throws InterruptedException
 
 	{
+		Date curDate = new Date();
+		String DateToStr = DateFormat.getInstance().format(curDate);
+		System.out.println("Starting the test: TC10907 Verify that Guests can't find Tests AND unpublished regular/student recordings AND private tags AND Student bookmarks on the all courses level at " + DateToStr);
+		
 		//pre condition -make the course public 
 		//Login as INSTRUCTOR
 		tegrity.loginCourses("User1");
@@ -626,6 +638,8 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
 		
+		//17 log out
+		record.signOut();
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
@@ -636,6 +650,10 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 	@Test(description = "TC10908 Verify that Guests can't find Tests AND unpublished regular/student recordings AND private tags AND Student bookmarks on the course level")
 	public void test10908() throws InterruptedException
 	{
+		Date curDate = new Date();
+		String DateToStr = DateFormat.getInstance().format(curDate);
+		System.out.println("Starting the test: TC10908 Verify that Guests can't find Tests AND unpublished regular/student recordings AND private tags AND Student bookmarks on the course level at " + DateToStr);
+			
 		//pre condition -make the course public 
 		//Login as INSTRUCTOR
 		tegrity.loginCourses("User1");
@@ -736,6 +754,8 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 		course_settings_page.makeSureThatMakeCoursePublicIsUnSelected();
 		course_settings_page.clickOnOkButton();
 		
+		//17 log out
+		record.signOut();
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

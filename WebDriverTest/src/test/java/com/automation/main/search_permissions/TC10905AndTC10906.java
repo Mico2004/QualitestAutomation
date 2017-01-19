@@ -108,9 +108,9 @@ public class TC10905AndTC10906 {
 		
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC10905VerifyStudentsCantFindContentFromUnenrolledCoursesNonpublicOnAllCoursesLevel at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC10905VerifyStudentsCantFindContentFromUnenrolledCoursesNonpublicOnAllCoursesLevel at " + DateToStr,
-		 "Starting the test: TC10905VerifyStudentsCantFindContentFromUnenrolledCoursesNonpublicOnAllCoursesLevel at " + DateToStr, LogAs.PASSED, null);
+		 System.out.println("Starting the test: TC10905AndTC10906 at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC10905AndTC10906 at " + DateToStr,
+		 "Starting the test: TC10905AndTC10906 at " + DateToStr, LogAs.PASSED, null);
 		
 	}
 	
@@ -260,6 +260,10 @@ public class TC10905AndTC10906 {
 	 
 	@Test(description = "TC10905 Verify Students can't find content from unenrolled courses (non-public) on all courses level")
 	public void test10905() throws InterruptedException, AWTException{
+		
+		Date curDate = new Date();
+		String DateToStr = DateFormat.getInstance().format(curDate);
+		System.out.println("Starting the test: TC10905 Verify Students can't find content from unenrolled courses (non-public) on all courses level at " + DateToStr);
 		
 		//2.add 2 bookmark to the user4(Student)
 		tegrity.loginCourses("User4");
@@ -436,6 +440,11 @@ public class TC10905AndTC10906 {
 	@Test(description = "TC10906 Verify Instructor can find content from unenrolled courses through past courses")
 	public void test10906() throws InterruptedException, AWTException
 	{
+		
+		Date curDate = new Date();
+		String DateToStr = DateFormat.getInstance().format(curDate);
+		System.out.println("Starting the test: TC10906 Verify Instructor can find content from unenrolled courses through past courses at " + DateToStr);
+		
 		
 		//1.add 2 bookmark to the user4(Student)
 		tegrity.loginCourses("User1");
