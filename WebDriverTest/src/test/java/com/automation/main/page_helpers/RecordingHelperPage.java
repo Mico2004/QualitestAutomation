@@ -984,23 +984,6 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 	}
 
-	// This function clicks on signout link, and return to login page
-	public void clickOnSignOut() throws InterruptedException {
-		try {
-		//	signout_link.click();
-			((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");
-			System.out.println("Click on signout link.");
-			ATUReports.add(time +" Click on signout link.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} catch (Exception e) {
-			System.out.println("Not clicked on signout link.");
-			ATUReports.add(time +" Not clicked on signout link.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-		}
-
-		Thread.sleep(8000);
-	}
-
 	// This function get recording name.
 	// It check if the recording name is exist as first recording, if so it
 	// returns true.
@@ -1125,23 +1108,42 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	// with max timeout
 	public boolean checkThatRecordingStatusTargetIndexIsEmpty(int index, int time_interval)
 			throws InterruptedException {
-		for (int i = 0; i < time_interval; i++) {
-			WebElement el = getStaleElem(By.id("RecordingStatus" + Integer.toString(index)),driver,5);
-			String recording_status = el.getText();
-			if (recording_status.equals("")) {
-				System.out.println("Recordings in index: " + index + " status empty");
-				ATUReports.add(time +" Recordings in index: " + index + " status empty", LogAs.PASSED, null);
-				Assert.assertTrue(true);
-				return true;
-			}
-			Thread.sleep(1000);
+		
+		try{
 			
-		}
-
-		System.out.println("Recordings in index: " + index + " status not empty");
-		ATUReports.add(time +" Recordings in index: " + index + " status not empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		Assert.assertTrue(false);
-		return false;
+		WebElement el = driver.findElement(By.id("RecordingStatus" + Integer.toString(index)));	
+		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(el, "Moving/Copying")));
+		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(el, "Being copied from")));
+		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(el, "Being moved from")));		
+		new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(el, "Recording is being edited.")));
+		ATUReports.add(time +" There is not more status for any recording", LogAs.PASSED,null);		
+		return true;
+		
+		}catch(org.openqa.selenium.TimeoutException msg){
+			
+			ATUReports.add(time +" Timeout for status disappearing is over but status is still displayed",LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			Assert.assertTrue(false);
+			return false;
+		
+		}		
+		
+//		for (int i = 0; i < time_interval; i++) {
+//			WebElement el = getStaleElem(By.id("RecordingStatus" + Integer.toString(index)),driver,5);
+//			String recording_status = el.getText();
+//			if (recording_status.equals("")) {
+//				System.out.println("Recordings in index: " + index + " status empty");
+//				ATUReports.add(time +" Recordings in index: " + index + " status empty", LogAs.PASSED, null);
+//				Assert.assertTrue(true);
+//				return true;
+//			}
+//			Thread.sleep(1000);
+//			
+//		}
+//
+//		System.out.println("Recordings in index: " + index + " status not empty");
+//		ATUReports.add(time +" Recordings in index: " + index + " status not empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//		Assert.assertTrue(false);
+//		return false;
 	}
 
 	// this function check that recording status in target ind ex is not target
@@ -2648,7 +2650,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 
 	/// clicks on content task->upload additonal content file by path
-	public void toUploadAdditionalContentFile() throws InterruptedException, Exception {
+	public void toUploadAdditionalContentFile() throws InterruptedException {
 //		Robot robot = new Robot();
 //		robot.delay(3000);
 //		robot.mouseMove(0, -100);
@@ -3400,7 +3402,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 
 	/// clicks on content task->upload additonal content file by path
-	public void toUploadAdditionalContentLink() throws InterruptedException, Exception {
+	public void toUploadAdditionalContentLink() throws InterruptedException, AWTException {
 		Robot robot = new Robot();
 		robot.delay(3000);
 		robot.mouseMove(0, -100);
