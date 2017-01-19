@@ -119,7 +119,7 @@ public class TC15896DeleteALastRecording {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verfed that only selected recording displayed in List of Recordings");
-			ATUReports.add("Verfed that only selected recording displayed in List of Recordings", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Verfed that only selected recording displayed in List of Recordings", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
@@ -133,7 +133,7 @@ public class TC15896DeleteALastRecording {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Not verfied that Recordings tab is displayed without any recordings.");
-			ATUReports.add("Verfied that Recordings tab is displayed without any recordings.", "True.", "False.", LogAs.FAILED, null);
+			ATUReports.add("Verfied that Recordings tab is displayed without any recordings.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
