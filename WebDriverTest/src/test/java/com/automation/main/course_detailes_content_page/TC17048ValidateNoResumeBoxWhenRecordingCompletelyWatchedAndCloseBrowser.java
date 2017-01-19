@@ -149,23 +149,21 @@ public class TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBro
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
-		
+
 		// 2. Repeat for INSTRUCTOR and STUDENT.
 		for(int type_of_user=0; type_of_user<2; type_of_user++) {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+			
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
-				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
+				tegrity.loginCourses("User4");		
 			}
 				
 			// 4. Click on a certain course.
 			course.selectCourseThatStartingWith("abc");
-			Thread.sleep(1000);
+			
 			
 			// 5. Click on a certain recording.
 			// 6. Click on the first chapter and wait the player will start to play.
@@ -212,7 +210,6 @@ public class TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBro
 			
 			// 10. Open the recording course you just watch.
 			course.selectCourseThatStartingWith("abc");
-			Thread.sleep(1000);
 			
 			// 11. Click on the recording you just watched.
 			record.verifyFirstExpandableRecording();
@@ -223,7 +220,6 @@ public class TC17048ValidateNoResumeBoxWhenRecordingCompletelyWatchedAndCloseBro
 						
 			// Sign out
 			top_bar_helper.signOut();
-			Thread.sleep(1000);
 		}
 		
 		System.out.println("Done.");

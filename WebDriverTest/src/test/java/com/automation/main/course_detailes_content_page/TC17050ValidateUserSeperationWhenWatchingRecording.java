@@ -148,16 +148,12 @@ public class TC17050ValidateUserSeperationWhenWatchingRecording {
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
-		
-
+	
 		// 2. Login as an INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
-		
+	
 		// 3. Click on a certain course.
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(1000);
 			
 		// 4. Click on a certain recording.
 		record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
@@ -176,16 +172,13 @@ public class TC17050ValidateUserSeperationWhenWatchingRecording {
 			
 		// 7. Sign out.
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
 			
 		// 8. Login as another STUDENT/INSTRUCTOR user who is enrolled to the same course.
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
-		
-			
+
+					
 		// 9. Open the recording course you just watch.
 		course.selectCourseThatStartingWith(current_course);
-		Thread.sleep(1000);
 			
 		// 10. Click on the recording you just watched.
 		record.clickElement(record.first_recording_title);

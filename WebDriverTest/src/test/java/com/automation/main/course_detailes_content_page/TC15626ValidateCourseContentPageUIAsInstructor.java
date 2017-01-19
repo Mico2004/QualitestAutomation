@@ -142,8 +142,8 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 2. Validate that "Enable student testing" is checked in "Advance service setting".
 		admin_dash_board_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
-		Thread.sleep(3000);
-		
+	
+		advanced_service_settings_page.waitForThePageToLoad();
 		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_student_testing_checkbox, "Enable student testing checkbox");
 		advanced_service_settings_page.clickOnOkbutton();
 		
@@ -167,8 +167,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		
 		// 9. Click "Ok" button.
 		course_settings_page.clickOnOkButton();
-		Thread.sleep(1000);
-		
+	
 		// 10. Add Student recordings, Test recordings, Additional content to the course you are about to test.
 		record.returnToCourseListPage();
 		

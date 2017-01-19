@@ -141,19 +141,15 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 		for(int type_of_user=0; type_of_user<2; type_of_user++) {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
-				tegrity.loginCourses("User1");
-			
+				tegrity.loginCourses("User1");		
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
-				tegrity.loginCourses("User4");
-			
+				tegrity.loginCourses("User4");		
 			}
-			
-			
+				
 			// 4. Click on a certain course.
 			course.selectCourseThatStartingWith(current_course);
-		
-			
+				
 			// 5. Click on a certain recording.
 			// 6. Click on the first chapter and wait the player will start to play.
 			String first_recording_name = record.getFirstRecordingTitle();
@@ -219,30 +215,27 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 				break;
 			}
 			top_bar_helper.signOut();
-			Thread.sleep(2000);
-			
+					
 			// 13. Delete the coockies and validate that the "Resume Watching" does not display.
 			driver.manage().deleteAllCookies();
 			
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
-				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				tegrity.loginCourses("User1");			
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
-				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
+				tegrity.loginCourses("User4");		
 			}
 			
 			course.selectCourseThatStartingWith(current_course);
-			Thread.sleep(1000);
+			
 			record.clickElement(record.first_recording_title);
 			Thread.sleep(2000);
 			record.verifyWebElementNotDisplayed(record.list_of_resume_buttons.get(0), "Resume box");
 						
 			// Sign out
 			top_bar_helper.signOut();
-			Thread.sleep(1000);
+			
 		}
 		
 		System.out.println("Done.");

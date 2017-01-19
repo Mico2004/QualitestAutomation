@@ -77,31 +77,15 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 	public void setup() {
 
 		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
-//			capability=DesiredCapabilities.internetExplorer();
-//			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
-//			
-//		driver=new InternetExplorerDriver(capability);
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( ScreenshotOf.DESKTOP));
-
-		
-		//ATUReports.setWebDriver(driver);
-		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
-
 		record = PageFactory.initElements(driver, RecordingHelperPage.class);
-		copy = PageFactory.initElements(driver, CopyMenu.class);
-		
-		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-		
+		copy = PageFactory.initElements(driver, CopyMenu.class);	
+		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);	
 		top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
-		search_page = PageFactory.initElements(driver, SearchPage.class);
-		
-		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);
-		
-		edit_recording = PageFactory.initElements(driver, EditRecording.class);
-		
+		search_page = PageFactory.initElements(driver, SearchPage.class);	
+		bottom_footer = PageFactory.initElements(driver, BottomFooter.class);	
+		edit_recording = PageFactory.initElements(driver, EditRecording.class);	
 		add_additional_content_link_window = PageFactory.initElements(driver, AddAdditionalContentLinkWindow.class);
 		course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
@@ -149,25 +133,21 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
 		
 		// 2. Repeat for INSTRUCTOR and STUDENT.
 		for(int type_of_user=0; type_of_user<2; type_of_user++) {
 			if(type_of_user==0) {
 				// 3. Login as an INSTRUCTOR/STUDENT.
-				tegrity.loginCourses("User1");
-				Thread.sleep(1000);
+				tegrity.loginCourses("User1");		
 			} else {
 				// 3. Login as an INSTRUCTOR/STUDENT.
 				tegrity.loginCourses("User4");
-				Thread.sleep(1000);
 			}
 			
 			
 			// 4. Click on a certain course.
 			course.selectCourseThatStartingWith(current_course);
-			Thread.sleep(1000);
-			
+				
 			// 5. Click on a certain recording.
 			// 6. Click on the first chapter and wait the player will start to play.
 			record.waitUntilFirstRecordingMovingCopyingstatusDissaper();
@@ -180,7 +160,6 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 			
 			// 8. Click the "> Courses" breadcrumb link.
 			player_page.returnToRecordingPageByNameAsUserOrGuest(current_course, record);
-			Thread.sleep(1000);
 			
 			// 9. Click on the recording you just watched.
 			record.verifyFirstExpandableRecording();
@@ -191,7 +170,6 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 						
 			// Sign out
 			top_bar_helper.signOut();
-			Thread.sleep(1000);
 		}
 
 		System.out.println("Done.");

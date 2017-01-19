@@ -152,8 +152,7 @@ public class TC15686ValidateTheRecordingNameOfNewRecordingIsDisplayedInBold {
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// 5. Open the "Course details" page.
 		course.selectCourseThatStartingWith("Ba");
-		Thread.sleep(1000);
-		
+			
 		// 6. Validate the regular new recording is displayed in bold.
 		String recording_title = record.getFirstRecordingTitle();
 		record.recordingBoldFont(record.first_recording_title);

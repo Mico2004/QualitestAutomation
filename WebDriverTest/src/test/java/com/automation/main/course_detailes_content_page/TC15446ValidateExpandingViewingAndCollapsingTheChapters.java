@@ -176,7 +176,7 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 		
 		// 6. Click on a recording's title.
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		
 		// 6.1. Recording collapsed.
 		record.verifyThatRecordingCollapsed();
@@ -194,14 +194,14 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 		
 		// 7. Click on a '>' symbol left to recording's title.
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		
 		// 7.1. Recording expanded.
 		record.verifyThatRecordingExpanded();
 		
 		// 8. Click on a '>' symbol left to recording's title.
 		record.clickElement(record.first_recording_title);
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		
 		// 8.1. Recording collapsed.
 		record.verifyThatRecordingCollapsed();

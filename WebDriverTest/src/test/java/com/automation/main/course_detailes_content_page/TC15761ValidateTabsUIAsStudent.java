@@ -166,12 +166,9 @@ public class TC15761ValidateTabsUIAsStudent {
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record);
 		// 8. Logout.
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
-		
-		
+
 		// 9. Login as a STUDENT.
 		tegrity.loginCourses("User4");
-		Thread.sleep(1000);
 		
 		// 10. Open "Course details" page as an STUDENT.
 		course.selectCourseThatStartingWith("Ba");
@@ -191,7 +188,8 @@ public class TC15761ValidateTabsUIAsStudent {
 		
 		// Post test
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
+		
+		
 		tegrity.loginCourses("SuperUser");
 		course.selectCourseThatStartingWith("Ba");
 		record.clickOnCourseTaskThenCourseSettings();

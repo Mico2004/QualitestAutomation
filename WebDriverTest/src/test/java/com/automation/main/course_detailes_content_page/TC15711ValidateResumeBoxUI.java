@@ -150,12 +150,9 @@ public class TC15711ValidateResumeBoxUI {
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
 		// Logout.
 		top_bar_helper.signOut();
-		Thread.sleep(1000);
-		
 		
 		// 2. Login as an INSTRUCTOR.
 		tegrity.loginCourses("User1");
-		Thread.sleep(1000);
 		
 		// 3. Click on a certain course.
 		String current_course = course.selectCourseThatStartingWith("Ba");
