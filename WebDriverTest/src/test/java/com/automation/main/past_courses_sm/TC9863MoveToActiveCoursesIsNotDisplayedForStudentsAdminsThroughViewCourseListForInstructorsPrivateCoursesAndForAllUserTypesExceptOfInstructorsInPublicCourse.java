@@ -136,6 +136,7 @@ public class TC9863MoveToActiveCoursesIsNotDisplayedForStudentsAdminsThroughView
 			}
 			
 			//4.Hover over the "Course Tasks"
+			record.waitForThePageToLoad();
 			record.moveToElementAndPerform(record.course_task_button, driver);
 		
 			//5.The "Move to Active Courses" option is not exist
