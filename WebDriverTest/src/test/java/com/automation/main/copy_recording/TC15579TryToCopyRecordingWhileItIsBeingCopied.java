@@ -292,14 +292,10 @@ public class TC15579TryToCopyRecordingWhileItIsBeingCopied {
 		record.returnToCourseListPage();
 			
 		// 21. Select second destination course
-		course.clickOnTargetCourseName(second_target_course);
-		
-		wait.until(ExpectedConditions.visibilityOf(record.first_recording_title));
-		//Thread.sleep(3000);
-		
+		course.selectCourseThatStartingWith(second_target_course);
+	
 		// 22. Verify that recording is copied successfully
-		// 23.1. Recording is displayed in "Recordings" tab
-		
+		// 23.1. Recording is displayed in "Recordings" tab		
 		List<String> recordings_of_second_target_course = record.getCourseRecordingList();
 		
 		//System.out.println("#of recordings: " + recordings_of_second_target_course.size());
