@@ -321,6 +321,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement move_to_active_courses;
 	@FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a/div[2]/p[2]")
 	public WebElement first_chapter_recording;
+	@FindBy(css = ".btn.btn-default.btn-later")
+	public WebElement not_now_button;
 	public ConfirmationMenu confirm_menu;	
 	public CopyMenu copyMenu;
 	
@@ -5589,7 +5591,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			robotil.pressAndReleaseKey(KeyEvent.VK_TAB);
 		}
 		robotil.pressAndReleaseKey(KeyEvent.VK_ENTER);
-		Thread.sleep(3000);
+		Thread.sleep(7000);
 		
 		
 		robotil.pressKey(KeyEvent.VK_ALT);
@@ -6363,8 +6365,9 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	public void returnBackIfWeMoveToTheInstallionsPage() {
 		
 		try{
-		if(recording_button.isDisplayed()){
+		if(not_now_button.isDisplayed()){
 			driver.navigate().back();
+			waitForThePageToLoad();	
 		}
 		
 		}catch(Exception e){

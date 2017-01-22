@@ -109,6 +109,7 @@ public class TC6805VerifyThatWhenTheCourseTestingPolicyIsEnabledTheRecorderIsLau
 		admin_dash_board_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
 		
 		//4.*check* the Enable student testing (Remote Proctoring Mode) checkbox
+				
 		advanced_service_settings_page.waitForThePageToLoad();
 		advanced_service_settings_page.forceWebElementToBeSelected(advanced_service_settings_page.enable_student_testing_checkbox, "Enable student testing (Remote Proctoring Mode)");
 		
@@ -148,7 +149,7 @@ public class TC6805VerifyThatWhenTheCourseTestingPolicyIsEnabledTheRecorderIsLau
 				record.clickOnStudentRecordingsTab();
 			}
 
-		//14.Use the "Start a Test" button
+		//14.Use the "Start a Test" button	
 		record.clickElementJS(record.start_test_button);
 	
 		//15.The "Start a Test" modal window is displayed
@@ -162,7 +163,6 @@ public class TC6805VerifyThatWhenTheCourseTestingPolicyIsEnabledTheRecorderIsLau
 		
 		//18. if we move to the installstion we need to go back
 		record.returnBackIfWeMoveToTheInstallionsPage();
-		
 		
 		}
 		
