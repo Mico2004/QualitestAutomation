@@ -229,8 +229,7 @@ public class TC17042ValidateResumeBoxWhenNavigatingBackWhileRecordingPlaying {
 			
 			course.selectCourseThatStartingWith(current_course);
 			
-			record.clickElement(record.first_recording_title);
-			Thread.sleep(2000);
+			record.verifyFirstExpandableRecording();
 			record.verifyWebElementNotDisplayed(record.list_of_resume_buttons.get(0), "Resume box");
 						
 			// Sign out

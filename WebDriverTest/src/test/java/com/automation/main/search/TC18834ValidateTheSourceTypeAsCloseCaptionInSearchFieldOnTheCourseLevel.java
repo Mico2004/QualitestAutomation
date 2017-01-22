@@ -199,6 +199,10 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 				search_page.verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfoundForAdminDashboard(current_course, text_from_caption_for_test);
 			}
 			
+			// need this for later
+			search_page.moveToElementAndPerform(search_page.breadcrumbs_box, driver);
+			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
+			
 			// 5.3. The recording chapter icon is displayed.
 			search_page.verifyWebElementDisplayed(search_page.video_thumbnails_list.get(0), "The recording capter icon");
 			
@@ -219,7 +223,6 @@ public class TC18834ValidateTheSourceTypeAsCloseCaptionInSearchFieldOnTheCourseL
 			search_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultAddicnalCont();
 			
 			// 6. Hover over the chapter icon.
-			Point before_hovring = search_page.video_wrap_link_to_focus_list.get(0).getLocation();
 			search_page.moveToElementAndPerform(search_page.video_wrap_link_to_focus_list.get(0), driver);
 			Thread.sleep(2000);
 			

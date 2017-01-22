@@ -141,9 +141,10 @@ public class TC21578LoginAsGuestUI {
 		admin_course_settings_page.makeSureThatLockMakeThisCoursePublicUnSelected();
 		admin_course_settings_page.makeSureThatOnOffMakeThisCoursePublicSelected();
 		admin_course_settings_page.clickOnSaveButton();
-		Thread.sleep(2000);
+
 		
 		/// 3.verify select 'Require first time users to accept a EULA'
+		admin_dashboard_page.waitForPageToLoad();
 		admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
 		advanced_services_setting_page.waitForVisibility(advanced_services_setting_page.eula_checkbox);
 		advanced_services_setting_page.clickOnEulaCheckboxAndClickOk(driver, confirm_menu);
