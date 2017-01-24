@@ -22,6 +22,7 @@ import com.automation.main.page_helpers.AdminDashboardViewCourseList;
 import com.automation.main.page_helpers.ConfirmationMenu;
 import com.automation.main.page_helpers.CopyMenu;
 import com.automation.main.page_helpers.CoursesHelperPage;
+import com.automation.main.page_helpers.DeleteMenu;
 import com.automation.main.page_helpers.EditRecording;
 import com.automation.main.page_helpers.EditRecordingPropertiesWindow;
 import com.automation.main.page_helpers.LoginHelperPage;
@@ -71,6 +72,7 @@ public class TC10905AndTC10906 {
 	public CoursesHelperPage course;
 	public RecordingHelperPage record;
 	public ConfirmationMenu confirm_menu;
+	public DeleteMenu delete_Menu;
 	public PlayerPage player_page;
 	WebDriver driver;
 	WebDriverWait wait;
@@ -102,6 +104,7 @@ public class TC10905AndTC10906 {
 		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
 		publish_window = PageFactory.initElements(driver, PublishWindow.class);
+		delete_Menu = PageFactory.initElements(driver,DeleteMenu.class);
 		search_page = PageFactory.initElements(driver, SearchPage.class);	
 		admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);	
 		edit_recording = PageFactory.initElements(driver, EditRecording.class);
@@ -129,7 +132,14 @@ public class TC10905AndTC10906 {
 		//Enter as INSTRACTOR
 		tegrity.loginCourses("SuperUser");
 				
-		//1.copy one record from each tab                               
+		//0.delete the all records in ad
+		course.deleteAllRecordingsInCourseStartWith("ad", 0, record, delete_Menu);
+		course.deleteAllRecordingsInCourseStartWith("ad", 1, record, delete_Menu);
+		course.deleteAllRecordingsInCourseStartWith("ad", 2, record, delete_Menu);
+		course.deleteAllRecordingsInCourseStartWith("ad", 3, record, delete_Menu);
+		
+		
+		//1.copy one record from each tab  
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 0, record, copy, confirm_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 2, record, copy, confirm_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 3, record, copy, confirm_menu);
