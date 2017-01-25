@@ -64,8 +64,6 @@ public class Page {
 	DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 	Date date = new Date();
 	
-
-
 	// Set Property for ATU Reporter Configuration
 	{
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
@@ -123,8 +121,7 @@ public class Page {
 		}
 			
 	}
-	
-	
+		
 	public void clickElementJS(WebElement element) // clicking element
 	{
 		String text = null;
@@ -151,7 +148,6 @@ public class Page {
 		}
 
 	}
-	
 	
 	public void clickElementWithOutIdJS(WebElement element) // clicking element
 	{
@@ -225,9 +221,6 @@ public class Page {
 			}
 		}
 	}
-
-
-	
 
 	public boolean verifyElement(WebElement element) {
 		try {
@@ -376,7 +369,6 @@ public class Page {
 		
 	}
 	
-	
 	/// hover to element and click on it
 	public void moveToElementAndClick(WebElement element, WebDriver driver) throws NoSuchElementException {
 		waitForVisibility(element);
@@ -406,7 +398,6 @@ public class Page {
 		}
 	}
 
-	
 	public void moveToElementAndPerform(WebElement element, WebDriver driver) throws NoSuchElementException, InterruptedException {
 
 
@@ -454,7 +445,6 @@ public class Page {
 		}
 	}
 	
-	
 	public String getBackGroundColor(WebElement element)// get background by an
 														// element
 	{
@@ -478,8 +468,6 @@ public class Page {
 		}
 
 	}
-
-
 
 	public void loadPage(String Url, String title) throws InterruptedException {/// load
 																				/// page
@@ -530,7 +518,6 @@ public class Page {
 
 	}
 	
-	
 	public  boolean isElementPresent(WebElement element) {
 		boolean flag = false;
 		try {
@@ -544,7 +531,6 @@ public class Page {
 		return flag;
 	}
 	
-
 	/// verify correct date
 	public void verifyDate(String date) {
 		String[] split = date.split("/");
@@ -712,7 +698,6 @@ public class Page {
 		Thread.sleep(3000);
 	}
 	
-	
 	// this function returns true if element has underline or not
 	public boolean verifyUnderlineCss(WebElement element, WebDriver driver) throws InterruptedException {
 		String underline = "";
@@ -831,8 +816,6 @@ public class Page {
 			}
 	}
 	
-	
-	
 	// get font color by an element
 	public String getColorFromCssElement(WebElement element,String cssVal) {
 		String text = element.getCssValue(cssVal).toString();
@@ -846,7 +829,6 @@ public class Page {
 		return String.format("#%02x%02x%02x", number1, number2, number3);
 	}
 	
-
 	// This function get WebElement and String, and force that WebElement to be
 	// selected
 	public void forceWebElementToBeSelected(WebElement web_element, String description) {
@@ -931,7 +913,6 @@ public class Page {
 		}		
 	}
 	
-
 	// This function verify that WebElement is not displayed, and String with
 	// description
 	public void verifyWebElementNotDisplayed(WebElement web_element, String description) {
@@ -952,7 +933,6 @@ public class Page {
 		}
 	}
 	
-
 	// This function verify that WebElement title/hint is target string
 	public void verifyWebElementHaveTargetAttributeTitle(WebElement web_element, String target_text) {
 		if (web_element.getAttribute("title").replaceAll("  ", " ").equals(target_text.replaceAll("  ", " "))) {
@@ -996,12 +976,10 @@ public class Page {
 			ATUReports.add(time +" String do not send to WebElement.", string_to_send, "", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
-	
-	
+
 	// Verify that
 	// The next result display below the current result in case there is next
 	// result.
-
 	public void verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(List<WebElement> list,int number) {
 
 		if (list.size() > 1) {
@@ -1043,10 +1021,9 @@ public class Page {
 			   }
 		 }
 	}
-	// Verify that
-		// The next result display below the current result in case there is next
-		// result.
-		public void verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultOneResult(List<WebElement> list) {
+	
+	// Verify that// The next result display below the current result in case there is next// result.
+	public void verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResultOneResult(List<WebElement> list) {
 			if (list.size() > 1) {
 				boolean not_correct = false;
 				int prepoint = list.get(0).getLocation().y;
@@ -1116,18 +1093,28 @@ public class Page {
 	// (by location) to the second
 	public void isFirstWebElementToTheRightSecondWebElement(WebElement first_webelement, WebElement second_webelement) {
 		if (first_webelement.getLocation().x <= second_webelement.getLocation().x) {
-			System.out.println("The first WebElement is to the right to the second WebElement.");
-			ATUReports.add(time +" The first WebElement is to the right to the second WebElement.", "True.", "True.",
-					LogAs.PASSED, null);
-			Assert.assertTrue(true);
+			System.out.println("The " + first_webelement.getText() +" is to the right to the " + second_webelement.getText());
+			ATUReports.add(time +" The " + first_webelement.getText() +" is to the right to the " + second_webelement.getText(), "True.", "True.",
+					LogAs.PASSED, null);	
 		} else {
-			System.out.println("The first WebElement is not to the right to the second WebElement.");
-			ATUReports.add(time +" The first WebElement is to the right to the second WebElement.", "True.", "False.",
-					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
+			System.out.println("The " + first_webelement.getText() +" is to the right to the " + second_webelement.getText());
+			ATUReports.add(time +" The " + first_webelement.getText() +" is to the right to the " + second_webelement.getText(), "True.", "False.",
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
 		}
 	}
 
+	// This function get two WebElement and check if the first is below to the second (by location)
+	public void isFirstWebElementBelowSecondWebElement(WebElement first_webelement, WebElement second_webelement) {
+		if (first_webelement.getLocation().y >= second_webelement.getLocation().y) {
+			System.out.println("The " + first_webelement.getText() +" is below to the " + second_webelement.getText());
+			ATUReports.add(time +" The " + first_webelement.getText() +" is below to the " + second_webelement.getText(), "True.", "True.",
+					LogAs.PASSED, null);
+		} else {
+			System.out.println("The " + first_webelement.getText() +" is below to the " + second_webelement.getText());
+			ATUReports.add(time +" The " + first_webelement.getText() +" is to the right to the " + second_webelement.getText(), "True.", "False.",
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
 	// This function get WebElement and excpected text, and check if that text
 	// appear in the WebElement
 	public void verifyWebElementTargetText(WebElement web_element, String target_text) {
@@ -1143,10 +1130,6 @@ public class Page {
 		}
 	}
 	
-	
-	
-	
-
 	// This function verify that there is vertical scrolling
 	public void verifyThereVerticalScrolling() {
 		boolean scrolling_bar = (boolean) ((JavascriptExecutor) driver).executeScript(
@@ -1464,6 +1447,7 @@ public class Page {
 		}
 
 	}
+	
 	public String getPreSetTimeStamp(){
 		
 		System.out.println((PropertyManager.getProperty("User1")).substring(5, PropertyManager.getProperty("User1").length()));
@@ -1496,6 +1480,7 @@ public class Page {
 			ATUReports.add(time +" Error", e.getMessage(), LogAs.WARNING, null);
 		}
 	}
+	
 	public void waitForContentOfTabToLoad(String initialCourseText,WebElement element) {
 		try {
 			System.out.println("waitForCoursesFrameToLoad1");
@@ -1510,6 +1495,7 @@ public class Page {
 
 		}
 	}
+	
 	public String[] getStringFromElement(List<WebElement> text)/// text
 	/// extracted
 	/// from
@@ -1525,6 +1511,7 @@ public class Page {
 		}	
 		return linkTexts;
 	}
+	
 	public String getUniversityName(){		
 		
 		return universityName.split(" ")[0];		

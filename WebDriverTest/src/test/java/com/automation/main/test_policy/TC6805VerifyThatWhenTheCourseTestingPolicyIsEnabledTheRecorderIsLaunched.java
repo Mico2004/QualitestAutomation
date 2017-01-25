@@ -31,6 +31,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 
 import java.awt.AWTException;
+import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -96,7 +97,7 @@ public class TC6805VerifyThatWhenTheCourseTestingPolicyIsEnabledTheRecorderIsLau
 		
 	// @Parameters({"web","title"}) in the future
 	@Test (description="TC6805 Verify that when the Course Testing Policy is enabled - the recorder is launched")
-	public void test6805() throws InterruptedException, AWTException {
+	public void test6805() throws InterruptedException, AWTException, MalformedURLException {
 		
 		//1.Open tegrity "Login page"
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
@@ -159,7 +160,7 @@ public class TC6805VerifyThatWhenTheCourseTestingPolicyIsEnabledTheRecorderIsLau
 		start_test_window.clickElementJS(start_test_window.accept_button);
 		
 		//17.verify that The modal window is closed and the PC/Mac Recorder opens.
-		record.startingATestThruogthKeys();
+		record.test();
 		
 		//18. if we move to the installstion we need to go back
 		record.returnBackIfWeMoveToTheInstallionsPage();
