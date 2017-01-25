@@ -215,6 +215,8 @@ public class TC10905AndTC10906 {
 			} else if(number_of_tab ==3) {			
 					//4.2.get the first test recording title 
 					record.clickOnTestsTab();
+					record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+					edit_recording_properties_window.changeNameOfRecord(record,confirm_menu);
 					first_test_recording = record.getFirstRecordingTitleTest();
 				}	
 			}
