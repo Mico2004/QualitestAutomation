@@ -43,7 +43,6 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import autoitx4java.AutoItX;
 
 import java.io.StringReader;
 import java.util.Set;
@@ -59,7 +58,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
-import com.jacob.com.LibraryLoader;
+
 
 import Client.Robotil;
 
@@ -5607,11 +5606,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		ATUReports.add(time +" verify that The modal window is closed and the PC/Mac Recorder opens." ,LogAs.PASSED, null);		
 	}
 	
-	public void test(){
-		File file = new File("lib", "src/test/resources/jacob-1.15-M4-x64.dll"); //path to the jacob dll 
-		System.setProperty(LibraryLoader.JACOB_DLL_PATH, file.getAbsolutePath());
-		AutoItX x = new AutoItX();
-	}
+
 	
 
 	public void checkThatTheirAreNoRecordsInTheRecordingsPage() {
