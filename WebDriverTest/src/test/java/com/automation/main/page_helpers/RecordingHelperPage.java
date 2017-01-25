@@ -46,7 +46,7 @@ import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import autoitx4java.AutoItX;
-
+import com.jacob.com.LibraryLoader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -63,7 +63,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
-import com.jacob.com.LibraryLoader;
+
 
 import Client.Robotil;
 
@@ -5644,6 +5644,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		ATUReports.add(time +" verify that The modal window is closed and the PC/Mac Recorder opens." ,LogAs.PASSED, null);		
 	}
 	
+
 	public void test() throws MalformedURLException{
 		File file = new File("lib", "src/test/resources/jacob-1.18-x64.dll"); //path to the jacob dll 
 		System.setProperty(LibraryLoader.JACOB_DLL_PATH, file.getAbsolutePath());
@@ -5665,6 +5666,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		//new Actions(autoitDriver).sendKeys(selectAll).build().perform();
 	}
 	
+
 	
 
 	public void checkThatTheirAreNoRecordsInTheRecordingsPage() {
