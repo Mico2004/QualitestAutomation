@@ -138,7 +138,6 @@ public class TC10905AndTC10906 {
 		course.deleteAllRecordingsInCourseStartWith("ad", 2, record, delete_Menu);
 		course.deleteAllRecordingsInCourseStartWith("ad", 3, record, delete_Menu);
 		
-		
 		//1.copy one record from each tab  
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 0, record, copy, confirm_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "ad", 2, record, copy, confirm_menu);

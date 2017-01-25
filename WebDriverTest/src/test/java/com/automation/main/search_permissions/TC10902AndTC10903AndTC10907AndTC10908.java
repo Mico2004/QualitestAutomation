@@ -136,7 +136,7 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 			tag_window.clickElementJS(tag_window.apply_button);
 		
 			//26.delete all the bookmarks
-			if(type_of_user == 1) {
+			if(record.isBookmarkTabDisplay()) {
 				
 				record.clickOnBookmarksTab();					
 				record.deleteBookmarkInBookmarkTab("InsTestUnclearStu");
