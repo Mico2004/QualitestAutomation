@@ -191,8 +191,7 @@ public class TC21988ValidateRecordingTasksUI {
 				// 11. The informartive message: 
 				// "To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right." 
 				// is displayed.
-				boolean is_target_message_shown = record.isTargetMessageShownUnderRecordingTasks("To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right.");
-				
+				boolean is_target_message_shown = record.isTargetMessageShownUnderRecordingTasks("To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right.",record.disable_message_recording_task);				
 				if (is_target_message_shown) {
 					System.out.println("The message: To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right. is shown");
 					ATUReports.add("Target message: To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right.", "True", "True", LogAs.PASSED, null);
