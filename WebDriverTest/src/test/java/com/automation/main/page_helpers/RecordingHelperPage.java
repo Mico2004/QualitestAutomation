@@ -1035,18 +1035,13 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 	
 	
-	public void mouseHoverJScript(WebElement HoverElement) {
-		
+	public void mouseHoverJScript(WebElement HoverElement) {	
 			if (isElementPresent(HoverElement)) {
-					
 				String mouseOverScript = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('mouseover', true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject) { arguments[0].fireEvent('onmouseover');}";
 				((JavascriptExecutor) driver).executeScript(mouseOverScript,HoverElement);
-
 			} else {
 				System.out.println("Element was not visible to hover");
-
 			}
-		
 	}
 
 	public void verifyAllCheckedboxSelected() throws InterruptedException {// verify// all// check// box// are// selected// or// not

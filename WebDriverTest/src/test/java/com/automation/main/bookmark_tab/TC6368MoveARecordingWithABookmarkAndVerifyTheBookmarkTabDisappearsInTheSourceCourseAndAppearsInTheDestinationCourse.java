@@ -98,6 +98,17 @@ public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsI
 		//2.pre test - Login as INSTRUCTOR 
 		tegrity.loginCourses("User1");
 		
+		//pre test - enter to abc and delete all the bookmarks
+		course.selectCourseThatStartingWith("abc");
+		
+		//if theres bookmark delete them
+		if(record.isBookmarkTabDisplay()){
+			record.clickOnBookmarksTab();
+			record.deleteAllTheBookmarks();		
+		}
+		
+		record.returnToCourseListPage();
+		
 		//0 - for regular recording ,1- for student user
 		for(int type_of_user = 0; type_of_user < 2; type_of_user++) {
 		
@@ -143,6 +154,7 @@ public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsI
 		}
 		
 		//11.Check a recording with at least one bookmark
+		record.pressViewButtonAndSelect("Duration");
 		record.verifyIndexRecordingHaveBookmark(1);
 		
 		//12.Select the recording with the bookmark icon 
