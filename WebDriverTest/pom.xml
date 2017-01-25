@@ -19,6 +19,20 @@
 		 <scope>system</scope>
 		 <systemPath>C:\Robotil.jar</systemPath>
       </dependency> 
+       <dependency>
+         <groupId>AutoItx</groupId>
+         <artifactId>AutoItx</artifactId>
+         <version>1.0</version>
+		 <scope>system</scope>
+		 <systemPath>C:\AutoItX4Java.jar</systemPath>
+      </dependency>
+         <dependency>
+         <groupId>jacob</groupId>
+         <artifactId>jacob</artifactId>
+         <version>1.0</version>
+		 <scope>system</scope>
+		 <systemPath>C:\jacob.jar</systemPath>
+      </dependency>   
       <dependency>
     <groupId>org.apache.poi</groupId>
     <artifactId>poi</artifactId>
@@ -101,11 +115,18 @@
 	<artifactId>selenium-grid-hub</artifactId>
 	<version>1.0.5</version>
 </dependency>
-  		
-  	
   	</dependencies>
   </dependencyManagement>
   <build>
+   <resources>
+      <resource>
+        <directory>src/test/resources</directory>
+        <includes>
+          <include>jacob-${jacob-external.version}-x64.dll</include>
+        </includes>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
    <plugins>
    <plugin>
     <groupId>org.apache.maven.plugins</groupId>
@@ -126,10 +147,8 @@
             <target>1.7</target>
         </configuration>
     </plugin>
- 
- </plugins>
 
- 
+ </plugins>
  </build>
 
 </project>
