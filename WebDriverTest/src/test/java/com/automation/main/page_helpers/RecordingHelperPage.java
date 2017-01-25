@@ -30,6 +30,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -46,6 +48,8 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import autoitx4java.AutoItX;
 
 import java.io.StringReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -328,6 +332,13 @@ public class RecordingHelperPage extends Page {
 	public WebElement first_chapter_recording;
 	@FindBy(css = ".btn.btn-default.btn-later")
 	public WebElement not_now_button;
+	@FindBy(css = ".divider")
+	public List<WebElement> dividers;	
+	@FindBy(xpath=".//*[@id='scrollableArea']/div[1]/div[2]/div/div[1]/div[1]/ul/li/ul/li[1]/em")
+	public WebElement disable_message_recording_task;
+	@FindBy(xpath=".//*[@id='scrollableArea']/div[1]/div[2]/div/div[1]/div[1]/ul/li/ul/li[13]/em")
+	public WebElement multiple_message_recording_task;
+	
 	public ConfirmationMenu confirm_menu;	
 	public CopyMenu copyMenu;
 	
@@ -2484,12 +2495,40 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 	}
 
 	// Check that target message shown under Recording Tasks
-	public boolean isTargetMessageShownUnderRecordingTasks(String target_message) {
-		return driver
-				.findElement(By.xpath(".//*[@id='scrollableArea']/div[1]/div[2]/div/div[1]/div[1]/ul/li/ul/li[1]/em"))
-				.getText().equals(target_message);
+	public boolean isTargetMessageShownUnderRecordingTasks(String target_message, WebElement element) {
+		return element.getText().equals(target_message);
 	}
+	
+	public void verifyThatMessageShownUnderRecordingTasks(){
+		boolean is_target_message_shown = isTargetMessageShownUnderRecordingTasks("To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right.",disable_message_recording_task);
+		
+		if (is_target_message_shown) {
+			System.out.println("The message: To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right. is shown");
+			ATUReports.add("Target message: To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right.", "True", "True", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("The message: To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right. is not shown");
+			ATUReports.add("Target message: To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right.", "True", "Fail", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+	
 
+	public void verifyThatMessageShownUnderRecordingTasksWhenChooseTwoRecording(){ 
+		boolean is_target_message_shown = isTargetMessageShownUnderRecordingTasks("To edit a recording or its properties please select only one recording at a time.",multiple_message_recording_task);
+		
+		if (is_target_message_shown) {
+			System.out.println("The message: To edit a recording or its properties please select only one recording at a time. is shown");
+			ATUReports.add("Target message: To edit a recording or its properties please select only one recording at a time.", "True", "True", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("The message: To edit a recording or its properties please select only one recording at a time. is not shown");
+			ATUReports.add("Target message: To edit a recording or its properties please select only one recording at a time.", "True", "Fail", LogAs.FAILED, null);
+			Assert.assertTrue(false);
+		}
+	}
+	
+	
 	// Check if Move is appear and if it enable or disable under Recording Task
 	// menu
 	public boolean isMoveTaskDisableOrEnable() {
@@ -2709,9 +2748,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			Assert.assertTrue(false);
 		}
 	}
-
 	
-
 	////// upload additional content
 	public void uploadFile(String path) throws Exception {
 
@@ -3810,16 +3847,16 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	// verify element is disabled using his element and his name
 	public void verifyElementIsDisabled(WebElement element, String element_name) {
+			
+		System.out.println(element.getAttribute("class").equals("disabled"));
 		if (element.getAttribute("class").equals("disabled")) {
-			System.out.println(element_name + "is disabled");
-			ATUReports.add(element_name + " is disabled", element_name, " not clickable", " not clickable",
-					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println(element_name + " is disabled");
+			ATUReports.add(element_name + " is disabled", element_name, " not clickable", " not clickable",LogAs.PASSED, null);
 			Assert.assertTrue(true);
 
 		} else {
-			System.out.println(element_name + "is enabled");
-			ATUReports.add(element_name + " is enabled", element_name, "not clickable", "clickable", LogAs.FAILED,
-					null);
+			System.out.println(element_name + " is enabled");
+			ATUReports.add(element_name + " is enabled", element_name, "not clickable", "clickable", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -5607,11 +5644,27 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		ATUReports.add(time +" verify that The modal window is closed and the PC/Mac Recorder opens." ,LogAs.PASSED, null);		
 	}
 	
-	public void test(){
-		File file = new File("lib", "src/test/resources/jacob-1.15-M4-x64.dll"); //path to the jacob dll 
+	public void test() throws MalformedURLException{
+		File file = new File("lib", "src/test/resources/jacob-1.18-x64.dll"); //path to the jacob dll 
 		System.setProperty(LibraryLoader.JACOB_DLL_PATH, file.getAbsolutePath());
-		AutoItX x = new AutoItX();
+		AutoItX autoitDriver = new AutoItX();
+		autoitDriver.winWait("[CLASS:#32770]", "", 10);
+		String title = "Tegrity Recorder - Proctoring Mode";
+		if(autoitDriver.winExists("[CLASS:#32770]")){
+			System.out.println("verify that The modal window is closed and the PC/Mac Recorder opens." );
+			ATUReports.add(time +" verify that The modal window is closed and the PC/Mac Recorder opens." ,LogAs.PASSED, null);		
+		} else{
+			System.out.println("Not verify that The modal window is closed and the PC/Mac Recorder opens." );
+			ATUReports.add(time +"Not verify that The modal window is closed and the PC/Mac Recorder opens." ,LogAs.PASSED, null);		
+		}
+		//autoitDriver.winActivate(title);
+		//autoitDriver.winWaitActive(title);
+		
+		autoitDriver.winClose("[CLASS:#32770]");
+		//String selectAll = Keys.chord(Keys.ALT, Keys.F4);
+		//new Actions(autoitDriver).sendKeys(selectAll).build().perform();
 	}
+	
 	
 
 	public void checkThatTheirAreNoRecordsInTheRecordingsPage() {
@@ -6398,5 +6451,37 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			e.printStackTrace();
 			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
+	}
+
+	public void verifyThatRecordingTaskButtonAsTheSameRowAsViewAndCourseTaskButtons() {
+		
+		Point recordingTaskPoint = recording_tasks_button.getLocation();
+		Point viewButtonPoint = view_button.getLocation();
+		Point courseTaskPoint = course_task_button.getLocation();
+		
+		
+		if ((recordingTaskPoint.y == viewButtonPoint.y && viewButtonPoint.y  == courseTaskPoint.y) && (viewButtonPoint.x < courseTaskPoint.x && courseTaskPoint.x < recordingTaskPoint.x)) {
+			System.out.println("The " + recording_tasks_button.getText() +" is as the same row as " + view_button.getText()+ " and " + course_task_button.getText());
+			ATUReports.add(time +" The " + recording_tasks_button.getText() +" is as the same row as " + view_button.getText()+ " and " + course_task_button.getText(), "True.", "True.",
+					LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("The " + recording_tasks_button.getText() +" is not as the same row as " + view_button.getText()+ " and " + course_task_button.getText());
+			ATUReports.add(time +"The " + recording_tasks_button.getText() +" is not as the same row as " + view_button.getText()+ " and " + course_task_button.getText(), "True.", "False.",
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	public void checkCorrectEnableDisableStatus(boolean is_enable_disable, boolean need_to_be_enable_disable, String button) {
+		if (is_enable_disable == need_to_be_enable_disable) {
+			System.out.println("The button: " + button + " is correct.");
+			ATUReports.add("The button: " + button, "Correct", "Correct", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("The button: " + button + " is not correct.");
+			ATUReports.add("The button: " + button, "Correct", "Incorrect", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
 	}
 }
