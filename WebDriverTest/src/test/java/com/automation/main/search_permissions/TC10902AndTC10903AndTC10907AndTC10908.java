@@ -351,7 +351,7 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 	}
 	
 	@Test(description = "TC10902 Verify that Students can't find Tests AND unpublished regular/other student's recordings AND other user's private tags AND other Student's bookmarks on the all courses level")
-	public void test10902() throws InterruptedException
+	public void test10902VerifyThatStudentsCantFindTestsBookmarkAndTagAndRecordingsOnAllCoursesLevel() throws InterruptedException
 	{
 		
 		Date curDate = new Date();
@@ -439,8 +439,8 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 	}
 	
 	@Test(description = "TC10903 Verify that Students can't find Tests AND unpublished regular/other student's recordings AND other user's private tags AND other Student's bookmarks on the course level")
-	public void test10903() throws InterruptedException
-	{
+	public void test10903VerifyThatStudentsCantFindTestsBookmarkAndTagAndRecordingsOnTheCoursesLevel() throws InterruptedException
+	{			
 		
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
@@ -531,8 +531,7 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 	}
 	
 	@Test(description = "TC10907 Verify that Guests can't find Tests AND unpublished regular/student recordings AND private tags AND Student bookmarks on the all courses level")
-	public void test10907() throws InterruptedException
-
+	public void test10907VerifyThatGuestsCantFindTestsBookmarkAndTagAndRecordingsOnAllCoursesLevel() throws InterruptedException
 	{
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
@@ -648,8 +647,8 @@ public class TC10902AndTC10903AndTC10907AndTC10908 {
 	}
 
 	@Test(description = "TC10908 Verify that Guests can't find Tests AND unpublished regular/student recordings AND private tags AND Student bookmarks on the course level")
-	public void test10908() throws InterruptedException
-	{
+	public void test10908VerifyThatGuestsCantFindTestsBookmarkAndTagAndRecordingsOnTheCoursesLevel() throws InterruptedException
+	{			
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
 		System.out.println("Starting the test: TC10908 Verify that Guests can't find Tests AND unpublished regular/student recordings AND private tags AND Student bookmarks on the course level at " + DateToStr);

@@ -268,7 +268,7 @@ public class TC10905AndTC10906 {
 	 }
 	 
 	@Test(description = "TC10905 Verify Students can't find content from unenrolled courses (non-public) on all courses level")
-	public void test10905() throws InterruptedException, AWTException{
+	public void test10905VerifyThatStudentsCantFindContentFromUnrolledCoursesOnAllCoursesLevel() throws InterruptedException, AWTException{
 		
 		Date curDate = new Date();
 		String DateToStr = DateFormat.getInstance().format(curDate);
@@ -447,7 +447,7 @@ public class TC10905AndTC10906 {
 	}
 	
 	@Test(description = "TC10906 Verify Instructor can find content from unenrolled courses through past courses")
-	public void test10906() throws InterruptedException, AWTException
+	public void test10906VerifyThatInstructorCanFindContentFromUnrolledCoursesThroughPastCourses() throws InterruptedException, AWTException
 	{
 		
 		Date curDate = new Date();

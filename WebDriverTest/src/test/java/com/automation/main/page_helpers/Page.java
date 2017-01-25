@@ -417,7 +417,7 @@ public class Page {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public boolean isClickable(WebElement driver) {// is element clickable
 		try {
 
