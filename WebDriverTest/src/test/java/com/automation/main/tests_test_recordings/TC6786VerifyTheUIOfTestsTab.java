@@ -208,7 +208,7 @@ public class TC6786VerifyTheUIOfTestsTab {
 		//# RSS Feed
 		//# Podcast
 		//# Video Podcast
-		record.moveToElementAndPerform(record.course_task_button, driver);
+		record.moveToElementAndClick(record.course_task_button, driver);
 		record.verifyWebElementDisplayed(record.course_settings_button, "Course Settings");
 		record.verifyWebElementDisplayed(record.upload_recording, "Upload a Recording");
 		record.verifyWebElementDisplayed(record.upload_video_file, "Upload Video File");
@@ -240,7 +240,7 @@ public class TC6786VerifyTheUIOfTestsTab {
 		//			"edit recording properties",
 		//			"share recording"
 		// are all displayed and enabled.
-		record.moveToElementAndPerform(record.recording_tasks_button, driver);
+		record.moveToElementAndClick(record.recording_tasks_button, driver);
 		record.verifyThatMessageShownUnderRecordingTasks();
 		record.checkCorrectEnableDisableStatus(record.isMoveTaskDisableOrEnable(), false, "Move");
 		record.checkCorrectEnableDisableStatus(record.isCopyTaskDisableOrEnable(), false, "Copy");
@@ -267,7 +267,7 @@ public class TC6786VerifyTheUIOfTestsTab {
 		//# Edit Recording Properties
 		//# Share Recording
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		record.moveToElementAndPerform(record.recording_tasks_button, driver);
+		record.moveToElementAndClick(record.recording_tasks_button, driver);
 		record.checkCorrectEnableDisableStatus(record.isMoveTaskDisableOrEnable(), true, "Move");
 		record.checkCorrectEnableDisableStatus(record.isCopyTaskDisableOrEnable(), true, "Copy");
 		record.checkCorrectEnableDisableStatus(record.isDeleteTaskDisableOrEnable(), true, "Delete");
@@ -281,7 +281,7 @@ public class TC6786VerifyTheUIOfTestsTab {
 			
 		//20.Select at least two recordings & hover over the "Recording Tasks" button
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox2);
-		record.moveToElementAndPerform(record.recording_tasks_button, driver);
+		record.moveToElementAndClick(record.recording_tasks_button, driver);
 		
 		//21.The following items *should be selectable*:
 		//** Move
