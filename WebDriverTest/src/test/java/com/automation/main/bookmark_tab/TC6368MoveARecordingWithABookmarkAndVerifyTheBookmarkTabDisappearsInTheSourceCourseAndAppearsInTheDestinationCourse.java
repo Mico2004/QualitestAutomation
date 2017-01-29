@@ -60,6 +60,7 @@ public class TC6368MoveARecordingWithABookmarkAndVerifyTheBookmarkTabDisappearsI
 	String recordName;
 	boolean isDeleteDisplay;
 	Hashtable<String,String> bookmarksNameAndTime = new Hashtable<String,String>();
+	
 	@BeforeClass
 	public void setup() {
 
