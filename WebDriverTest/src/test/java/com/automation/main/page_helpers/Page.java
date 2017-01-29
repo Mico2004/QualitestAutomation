@@ -406,9 +406,9 @@ public class Page {
 			Robot robot = new Robot();
 			robot.mouseMove(-100, 100);
 			Actions builder = new Actions(driver);
-			//Action mouseOver = builder.moveToElement(element).build();
-			//mouseOver.perform();
-			builder.moveToElement(element).clickAndHold().release().build().perform();
+			Action mouseOver = builder.moveToElement(element).build();
+			mouseOver.perform();
+			//builder.moveToElement(element).clickAndHold().release().build().perform();
 			
 		} catch (NoSuchElementException e) {
 			e.printStackTrace();
