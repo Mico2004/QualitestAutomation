@@ -3579,6 +3579,32 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		}
 
 	}
+	
+	// This function click on Recording Task then on Share Recording in the sub
+	// menu
+	public void clickOnRecordingTaskThenShareRecording() throws InterruptedException {
+		WebElement element=recording_tasks_button;
+		String id="ShareRecording";
+		try {
+			System.out.println("clickOnRecordingTaskThen1");
+			waitForVisibility(element);
+			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
+			System.out.println("clickOnRecordingTaskThen1");
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));		
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window is displayed", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			return;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("clickOnRecordingTaskThen6");
+			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			System.out.println(id+" window not displayed");
+			Assert.assertTrue(false);
+		}
+
+	}
 
 	// Wait until recording list is empty with max timeout
 	public void waitUntilRecordingListIsEmptyWithMaxTimeOut(int max_time_out) throws InterruptedException {
@@ -5675,38 +5701,6 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			System.out.println("The recordings displayed in the recording page." );
 			ATUReports.add(time +" Verify that The recordings aren't displayed in the recording page." ,"The recordings aren't displayed in the recording page.","The recordings displayed in the recording page.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
 		}			
-	}
-
-	public void verifyThatWeHaveHintToWebElement(WebElement element, String text) {		
-		try {
-			String title = element.getAttribute("title");
-			if(title.equals(text)){
-				System.out.println("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title );
-				ATUReports.add(time +" Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is display.",LogAs.PASSED, null);		
-			}else{
-				System.out.println("Not Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title);
-				ATUReports.add(time +" Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is not display.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
-			}
-		}catch(Exception e){
-			e.getMessage();
-			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		}	
-	}
-
-	public void verifyWebElementisCheckable(WebElement element) {
-		try {
-			String type = element.getAttribute("type");
-			if(type.equals("checkbox")){
-				System.out.println("Verify that the element: " +element.getText() + "is checkable.");
-				ATUReports.add(time +" Verify that the element: " +element.getText() + "is checkable.","The element is checkable.","The element is checkable.",LogAs.PASSED, null);		
-			}else{
-				System.out.println("Not Verify that the element: " +element.getText() + "is checkable.");
-				ATUReports.add(time +" Not Verify that the element: " +element.getText() + "is checkable." ,"The element is checkable.","The element is not checkable.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
-			}
-		}catch(Exception e){
-			e.getMessage();
-			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		}	
 	}
 
 	public void verifyAllTheTagCheckedboxNotSelected() {

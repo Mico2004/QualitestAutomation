@@ -947,7 +947,53 @@ public class Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	// This function verify that WebElement title/hint is target string
+	public void verifyThatTheTextOfWebElemenetIsAsExpected(WebElement web_element, String target_text) {
+		if (web_element.getText().equals(target_text)) {
+			System.out.println(target_text + " is displayed as expected.");
+			ATUReports.add(time +" Target text is displayed as expected.", target_text, target_text, LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println(target_text + " is not displayed as expected.");
+			ATUReports.add(time +" Target text is not displayed as expected.", target_text, web_element.getText(),
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	public void verifyThatWeHaveHintToWebElement(WebElement element, String text) {		
+		try {
+			String title = element.getAttribute("title");
+			if(title.equals(text)){
+				System.out.println("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title );
+				ATUReports.add(time +" Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is display.",LogAs.PASSED, null);		
+			}else{
+				System.out.println("Not Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title);
+				ATUReports.add(time +" Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is not display.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+			}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
 
+	public void verifyWebElementisCheckable(WebElement element) {
+		try {
+			String type = element.getAttribute("type");
+			if(type.equals("checkbox")){
+				System.out.println("Verify that the element: " +element.getText() + "is checkable.");
+				ATUReports.add(time +" Verify that the element: " +element.getText() + "is checkable.","The element is checkable.","The element is checkable.",LogAs.PASSED, null);		
+			}else{
+				System.out.println("Not Verify that the element: " +element.getText() + "is checkable.");
+				ATUReports.add(time +" Not Verify that the element: " +element.getText() + "is checkable." ,"The element is checkable.","The element is not checkable.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+			}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
+	
 	// This function "send" string to WebElement
 	public void sendStringToWebElement(WebElement we, String string_to_send) {
 		try {
@@ -1106,16 +1152,30 @@ public class Page {
 
 	// This function get two WebElement and check if the first is below to the second (by location)
 	public void isFirstWebElementBelowSecondWebElement(WebElement first_webelement, WebElement second_webelement) {
-		if (first_webelement.getLocation().y >= second_webelement.getLocation().y) {
+		if (first_webelement.getLocation().y <= second_webelement.getLocation().y) {
 			System.out.println("The " + first_webelement.getText() +" is below to the " + second_webelement.getText());
 			ATUReports.add(time +" The " + first_webelement.getText() +" is below to the " + second_webelement.getText(), "True.", "True.",
 					LogAs.PASSED, null);
 		} else {
-			System.out.println("The " + first_webelement.getText() +" is below to the " + second_webelement.getText());
-			ATUReports.add(time +" The " + first_webelement.getText() +" is to the right to the " + second_webelement.getText(), "True.", "False.",
+			System.out.println("The " + first_webelement.getText() +" is not below to the " + second_webelement.getText());
+			ATUReports.add(time +" The " + first_webelement.getText() +" is not below to the " + second_webelement.getText(), "True.", "False.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 	}
+	// This function get two WebElement and check if the first is below to the second (by location)
+	public void isFirstWebElementEqualsHorizontallyOrVerticalSecondWebElement(WebElement first_webelement, WebElement second_webelement) {
+		if (first_webelement.getLocation().y == second_webelement.getLocation().y || first_webelement.getLocation().x == second_webelement.getLocation().x) {
+			System.out.println("The " + first_webelement.getText() +" equals horizontally or vertical " + second_webelement.getText());
+			ATUReports.add(time +" The " + first_webelement.getText() +" equals horizontally or vertical " + second_webelement.getText(), "True.", "True.",
+					LogAs.PASSED, null);
+		} else {
+			System.out.println("The " + first_webelement.getText() +" not equals horizontally or vertical " + second_webelement.getText());
+			ATUReports.add(time +" The " + first_webelement.getText() +" not equals horizontally or vertical " + second_webelement.getText(), "True.", "False.",
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
+	
+	
 	// This function get WebElement and excpected text, and check if that text
 	// appear in the WebElement
 	public void verifyWebElementTargetText(WebElement web_element, String target_text) {
@@ -1291,16 +1351,14 @@ public class Page {
 		for (String next : list) {
 			if (target_string.contains(next)) {
 				System.out.println("Verfied that element: " + target_string + " in the list.");
-				ATUReports.add(time +" Verfied that element: " + target_string + " in the list.", "True.", "True.",
-						LogAs.PASSED, null);
+				ATUReports.add(time +" Verfied that element: " + target_string + " in the list.", "True.", "True.",LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return next;
 			}
 		}
 
 		System.out.println("Not verfied that element: " + target_string + " in the list.");
-		ATUReports.add(time +" Verfied that element: " + target_string + " in the list.", "True.", "False.", LogAs.FAILED,
-				null);
+		ATUReports.add(time +" Verfied that element: " + target_string + " in the list.", "True.", "False.", LogAs.FAILED,null);
 		Assert.assertTrue(false);
 		return null;
 	}
@@ -1511,6 +1569,25 @@ public class Page {
 			i++;
 		}	
 		return linkTexts;
+	}
+	
+	public void verifyThatTheElementIsLabel(WebElement url_label) {
+			
+			if(url_label.getTagName().equals("label")){
+				System.out.println("Verfied that element: " + url_label.getText() + " is a label.");
+				ATUReports.add(time +"Verfied that element: " + url_label.getText() + " is a label.", "True.", "True.",LogAs.PASSED, null);		
+			} else {
+				System.out.println("Not Verfied that element: " + url_label.getText() + " is a label.");
+				ATUReports.add(time +"Not Verfied that element: " + url_label.getText() + " is a label.", "True.", "False.", LogAs.FAILED,null);
+			}
+	}
+	
+	public void openNewTab(){
+		
+		Actions builder = new Actions(driver);
+		Action mouseOver = builder.moveToElement(driver.findElement(By.tagName("body"))).sendKeys(Keys.chord(Keys.CONTROL, "n")).build();
+		mouseOver.perform();
+	  	
 	}
 	
 	public String getUniversityName(){		

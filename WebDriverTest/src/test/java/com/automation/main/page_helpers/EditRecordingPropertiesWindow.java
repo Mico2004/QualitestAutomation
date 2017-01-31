@@ -36,6 +36,7 @@ import junitx.util.PropertyManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class EditRecordingPropertiesWindow extends Page {
+	
 	public EditRecordingPropertiesWindow(WebDriver browser) {
 		super(browser);
 		// TODO Auto-generated constructor stub
@@ -316,8 +317,6 @@ public class EditRecordingPropertiesWindow extends Page {
 		record.toEditRecordingPropertiesMenu();
 		changeRecordingName(new_recording_name, confirm_menu);	
 	}
-	
-	
 	
 	public void verifyInfomativeText() {
 		

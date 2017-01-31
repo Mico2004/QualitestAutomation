@@ -101,7 +101,6 @@ public class AdvancedServiceSettingsPage extends Page {
 		}
 	}
 	
-	
 	/// click on eula check box if not selected
 	public String clickOnEulaCheckboxAndClickOk(WebDriver driver, ConfirmationMenu confirm) throws Exception {
 		String eula = "-1";
@@ -165,6 +164,7 @@ public class AdvancedServiceSettingsPage extends Page {
 		return eula;
 
 	}
+	
 	public String showInstitutionTestPolicyAndClickOk(ConfirmationMenu confirm){
 		
 		String message = null;
@@ -195,7 +195,6 @@ public class AdvancedServiceSettingsPage extends Page {
 		return message;
 	}
 	
-
 	public void enableStudyTestingCheckboxAndClickOk(ConfirmationMenu confirm){
 		try {
 			waitForVisibility(enable_student_testing_checkbox);	
@@ -221,7 +220,7 @@ public class AdvancedServiceSettingsPage extends Page {
 		}
 	}
 		
-		public void enableYotubeCheckboxAndClickOk(ConfirmationMenu confirm){
+	public void enableYotubeCheckboxAndClickOk(ConfirmationMenu confirm){
 			waitForVisibility(enable_youtube_integration);
 			
 			try {
@@ -276,7 +275,6 @@ public class AdvancedServiceSettingsPage extends Page {
 		
 	
 	}
-	
 	
 	/// uncheck on eula check box if selected
 	public void disableEulaCheckboxAndClickOk(ConfirmationMenu confirm) {
