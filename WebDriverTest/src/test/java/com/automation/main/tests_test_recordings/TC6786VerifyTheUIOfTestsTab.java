@@ -185,7 +185,7 @@ public class TC6786VerifyTheUIOfTestsTab {
 		record.isFirstWebElementToTheRightSecondWebElement(record.student_recordings_tab,record.test_tab);
 		
 		//16.2 There's a "View" button below the tabs, on the left
-		record.isFirstWebElementBelowSecondWebElement(record.view_button,record.test_tab);
+		record.isFirstWebElementBelowSecondWebElement(record.test_tab,record.view_button);
 		
 		//16.3 There's a "Course Tasks" button, to the right of the "View" button
 		record.isFirstWebElementToTheRightSecondWebElement(record.view_button , record.course_task_button);
