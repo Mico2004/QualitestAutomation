@@ -101,8 +101,6 @@ public class ShareRecordingWindow extends Page{
 			try{
 			wait.until(ExpectedConditions.visibilityOf(share_recording_title));
 			wait.until(ExpectedConditions.visibilityOf(get_direct_link));
-			wait.until(ExpectedConditions.visibilityOf(checkbox_embed_player));
-			wait.until(ExpectedConditions.visibilityOf(checkbox_embed_player));
 			wait.until(ExpectedConditions.visibilityOf(facebook_button));
 			wait.until(ExpectedConditions.visibilityOf(okButton));
 	

@@ -185,6 +185,7 @@ public class TC7970ValidateUIOfShareRecordingDialogWindowAndElementsDescription 
 		
 		//20.Hover over facebook logo and "Facebook" hint is displayed
 		share_recording_window.moveToElementAndPerform(share_recording_window.facebook_button, driver);
+		//record.mouseHoverJScript(share_recording_window.facebook_button);
 		share_recording_window.verifyThatWeHaveHintToWebElement(share_recording_window.facebook_button,"Facebook");
 		
 		//21.Hover over tweet logo and "tweet" hint is displayed
@@ -204,7 +205,7 @@ public class TC7970ValidateUIOfShareRecordingDialogWindowAndElementsDescription 
 		share_recording_window.verifyThatWeHaveHintToWebElement(share_recording_window.okButton,"OK");
 		
 		//25.Verify the "OK" button is displayed the right buttom of the window. 
-		share_recording_window.isFirstWebElementBelowSecondWebElement(share_recording_window.okButton, share_recording_window.facebook_button);
+		share_recording_window.isFirstWebElementBelowSecondWebElement(share_recording_window.facebook_button , share_recording_window.okButton);
 		share_recording_window.isFirstWebElementToTheRightSecondWebElement(share_recording_window.facebook_button, share_recording_window.okButton);
 		share_recording_window.clickElementJS(share_recording_window.okButton);
 		

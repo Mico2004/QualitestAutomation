@@ -404,7 +404,7 @@ public class Page {
 		waitForVisibility(element);
 		try {
 			Robot robot = new Robot();
-			robot.mouseMove(-100, 100);
+			robot.mouseMove(-100,-100);
 			Actions builder = new Actions(driver);
 			Action mouseOver = builder.moveToElement(element).build();
 			mouseOver.perform();
@@ -1164,6 +1164,8 @@ public class Page {
 	}
 	// This function get two WebElement and check if the first is below to the second (by location)
 	public void isFirstWebElementEqualsHorizontallyOrVerticalSecondWebElement(WebElement first_webelement, WebElement second_webelement) {
+		System.out.println(first_webelement.getLocation().x);
+		System.out.println(second_webelement.getLocation().x);
 		if (first_webelement.getLocation().y == second_webelement.getLocation().y || first_webelement.getLocation().x == second_webelement.getLocation().x) {
 			System.out.println("The " + first_webelement.getText() +" equals horizontally or vertical " + second_webelement.getText());
 			ATUReports.add(time +" The " + first_webelement.getText() +" equals horizontally or vertical " + second_webelement.getText(), "True.", "True.",
@@ -1171,7 +1173,7 @@ public class Page {
 		} else {
 			System.out.println("The " + first_webelement.getText() +" not equals horizontally or vertical " + second_webelement.getText());
 			ATUReports.add(time +" The " + first_webelement.getText() +" not equals horizontally or vertical " + second_webelement.getText(), "True.", "False.",
-					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 	}
 	
