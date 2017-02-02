@@ -113,7 +113,7 @@ public class TC7970ValidateUIOfShareRecordingDialogWindowAndElementsDescription 
 		
 		//*End of precondition*
 		
-		//6.Login as Instructor.
+		//6.0-Login as Instructor,1-Login as Admin,2-Login as HdAdmin.
 		for(int type_of_user = 0 ;type_of_user <3 ; type_of_user++ ){
 		
 		if(type_of_user == 0) {

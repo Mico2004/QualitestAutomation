@@ -24,7 +24,7 @@ public class ShareRecordingWindow extends Page{
 	@FindBy(id = "ModalDialogHeaderWrap")
 	public WebElement share_recording_background;
 	@FindBy(id = "ModalDialogHeader")
-	WebElement share_recording_title;
+	public WebElement share_recording_title;
 	@FindBy(id = "InfoText")
 	public WebElement get_direct_link;
 	@FindBy(id="playerState")
@@ -43,6 +43,12 @@ public class ShareRecordingWindow extends Page{
 	public WebElement okButton;
 	@FindBy(xpath=".//*[@id='shareRecordingWindow']/form/div[1]/div[1]/label")
 	public WebElement url_label;
+	@FindBy(xpath=".//*[@id='shareRecordingWindow']/form/div[1]/div[3]/label")
+	public WebElement Embed_label;
+	@FindBy(xpath=".//*[@id='shareRecordingWindow']/form/div[1]/div[2]/label")
+	public WebElement Embed_label_frame;
+	@FindBy(id="iframeRecordingUrl")
+	public WebElement iframe_link;
 	@FindBy(id="sharedRecordingUrl")
 	public WebElement url_link;
 	@FindBy(xpath=".//*[@id='shareRecordingWindow']/form/div[1]/div[5]/p")
@@ -160,12 +166,38 @@ public class ShareRecordingWindow extends Page{
 
 		public void checkThatTheUrlIsValid() {
 			String url = url_link.getText();
-			if(url.contains(universityName)) {		
+			if(url.contains(pageUrl)) {		
 				System.out.println("Veirfy that the url is vaild.");
 				ATUReports.add(time +" Veirfy that the url is vaild.","Success.", "Success.", LogAs.PASSED, null);
 			} else {
 				System.out.println("Not Veirfy that the url is vaild.");
 				ATUReports.add(time +" Veirfy that the url is vaild.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}	
+		}
+		
+		
+		//verify that the frame link contains:** src="//<UniversityUrl>/embeddedPlayer.htm?recordingId=(anything)&playbackToken=(anything) ** frameborder=0** allowfullscreen# 
+		public void checkThatTheIframeIsValid(LoginHelperPage tegrity) {	
+			try{
+				String id = iframe_link.getAttribute("id");
+				String iframe_url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
+				String[] split_iframe =  iframe_url.split("&playbackToken=");
+				String[] split_iframe_2 = split_iframe[0].split("recordingId=");
+				String[] split_iframe_3 = split_iframe[1].split(" ");
+				String universityName = tegrity.getPageUrl().substring(8);	
+			
+				String string_to_check = "src=\"//" + universityName + "/embeddedPlayer.htm?recordingId="  + split_iframe_2[1] + "&playbackToken=" +split_iframe_3[0] + " frameborder=\"0\" allowfullscreen";
+			
+				if(iframe_url.contains(string_to_check)){
+					System.out.println("Veirfy that the frame link is valid.");
+					ATUReports.add(time +" Veirfy that the frame link is valid.","Success.", "Success.", LogAs.PASSED, null);
+				} else {
+					System.out.println("Not Veirfy that the frame link is valid." + iframe_url);
+					ATUReports.add(time +"Not Veirfy that the frame link is valid." + iframe_url, "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}
+			}catch(Exception e){
+				e.getMessage();
+				ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
 		}
 }

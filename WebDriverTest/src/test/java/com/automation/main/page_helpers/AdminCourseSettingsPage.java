@@ -86,6 +86,10 @@ public class AdminCourseSettingsPage extends Page {
 		forceWebElementToBeSelected(checkbox_lock_require_authentication, "Make this course require authentication");
 	}
 	
+	public void makeSureThatOnOffRquireAuthenticatiouNnlock(){
+		forceWebElementToBeUnselected(checkbox_lock_require_authentication, "Make this course require authentication");
+	}
+	
 	// This function clicks on save button
 	public void clickOnSaveButton() {
 		try {

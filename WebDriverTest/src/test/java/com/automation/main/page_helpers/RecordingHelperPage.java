@@ -3455,15 +3455,19 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 
 	/// clicks on content task->course settings
 	public void toCourseSettingsPage() throws InterruptedException, Exception {
-		Robot robot = new Robot();
-		robot.delay(3000);
-		robot.mouseMove(0, -100);
-		Thread.sleep(2000);
-		course_tasks_button.click();
-		Thread.sleep(2000);
-		course_settings_button.click();
-		Thread.sleep(2000);
-
+		try {
+			Robot robot = new Robot();
+			robot.delay(3000);
+			robot.mouseMove(0, -100);
+			Thread.sleep(2000);
+			course_tasks_button.click();
+			Thread.sleep(2000);
+			course_settings_button.click();
+			Thread.sleep(2000);
+		} catch (Exception e) {
+			e.printStackTrace();
+			ATUReports.add(time +e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 	}
 
 	/// Validate the top bar menu "Guest | Disclaimer | help | sign out"

@@ -962,6 +962,37 @@ public class Page {
 		}
 	}
 	
+	// This function verify that WebElement title/hint is target string
+	public void verifyThatTheTextOfWebElemenetContainsTargetString(WebElement web_element, String target_text) {
+		String id = web_element.getAttribute("id");
+		String element_string = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
+		if (element_string.contains(target_text)) {
+			System.out.println("The " +target_text +" appeared as expected.");
+			ATUReports.add(time +" The " +target_text +" appeared as expected.", target_text, target_text, LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("The " +target_text +" not appeared as expected.");
+			ATUReports.add(time +" The " +target_text +" not appeared as expected.", target_text, web_element.getText(),
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	// This function verify that WebElement title/hint is target string
+	public void veirfyThatTheTextOfWebElementNotContainsTargetString(WebElement web_element, String target_text) {
+		if (!web_element.getText().contains(target_text)) {
+			System.out.println(" The " +target_text +"is not appeared as expected.");
+			ATUReports.add(time +" The " +target_text +"is not appeared as expected.", target_text, target_text, LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} else {
+			System.out.println(" The " +target_text +"appeared not as expected.");
+			ATUReports.add(time +" The " +target_text +"appeared not as expected.", target_text, web_element.getText(),
+					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+	}
+	
+	
 	public void verifyThatWeHaveHintToWebElement(WebElement element, String text) {		
 		try {
 			String title = element.getAttribute("title");
