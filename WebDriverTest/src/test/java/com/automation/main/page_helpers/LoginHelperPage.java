@@ -52,22 +52,13 @@ public class LoginHelperPage extends Page {
 		super(driver);
 
 		setPageTitle("Tegrity Lecture Capture");	
-<<<<<<< HEAD
-		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
-=======
 
-		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
-
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 		//setPageUrl("https://awsserverautomation3-qabr.tegrity.com");
-<<<<<<< HEAD
-		setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
+		//setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
 		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
-=======
 		///setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
 		setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
->>>>>>> branch 'master' of https://github.com/Mico2004/QualitestAutomation
 
 
 
