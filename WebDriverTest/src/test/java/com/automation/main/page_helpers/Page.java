@@ -1623,6 +1623,31 @@ public class Page {
 	  	
 	}
 	
+	public void openNewBrowserWithThatLink(String url_for_playing) {
+		
+		String current_handler = driver.getWindowHandle();
+		Actions builder = new Actions(driver);
+		Action mouseOver = builder.moveToElement(driver.findElement(By.tagName("body"))).sendKeys(Keys.chord(Keys.CONTROL, "n")).build();
+		mouseOver.perform();
+		
+		Set<String> allHandles = driver.getWindowHandles();
+															
+		driver.switchTo().window(current_handler);
+		driver.close();
+		
+		if(driver instanceof FirefoxDriver){
+			driver.findElement(By.tagName("body")).sendKeys(Keys.CONTROL + "w");
+		}
+						
+		for(String handler: allHandles) {
+		    if(!handler.equals(current_handler)){
+				driver.switchTo().window(handler);
+				break;
+			 }
+	  	}
+		driver.get(url_for_playing);
+	}
+	
 	public String getUniversityName(){		
 		
 		return universityName.split(" ")[0];		

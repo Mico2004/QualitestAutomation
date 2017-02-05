@@ -379,10 +379,6 @@ public class PlayerPage extends Page {
 		
 	}
 	
-	public void verifySearchReturnAnyListAsUserOrGuest(String searchString){
-		
-	}
-	
 	public boolean checkThatTheTimeIsValid(String time){
 	
 		DateFormat df = new SimpleDateFormat("h:mm:ss",Locale.US);

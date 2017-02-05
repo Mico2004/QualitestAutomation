@@ -6479,4 +6479,8 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			Assert.assertTrue(false);
 		}
 	}
+
+	public void changeUrl(String url_for_playing) {
+		driver.get(url_for_playing);	
+	}
 }

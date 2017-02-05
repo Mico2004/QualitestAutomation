@@ -118,8 +118,8 @@ public class ShareRecordingWindow extends Page{
 		}
 
 		public void verifyUrlIsValid(PlayerPage player) throws InterruptedException {
-			String url = url_link.getText();
-			
+			String id = url_link.getAttribute("id");
+			String url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
 			if(!url.contains("playbackToken")){
 				System.out.println("The url doesn't contains playbacktoken.");
 				ATUReports.add(time +" The url doesn't contains playbacktoken.","Success.", "Success.", LogAs.PASSED, null);
@@ -199,5 +199,11 @@ public class ShareRecordingWindow extends Page{
 				e.getMessage();
 				ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
+		}
+
+		public String getPlayerUrl() {
+			String id = url_link.getAttribute("id");
+			String url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
+			return url;
 		}
 }
