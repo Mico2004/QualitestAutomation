@@ -321,12 +321,13 @@ public class CalendarPage extends Page {
     		System.out.println(e.getText());
     		System.out.println(color);
     		String grey = "rgba(102, 102, 102, 1)";
+    		String blue = "rgba(255, 255, 255, 1)";
     		String backgroundColor =  "rgba(238, 238, 238, 1)";
-    		if(dayNewNumber.equals("1") && e.getCssValue("background-color").toString().equals(backgroundColor)){ // it's will click on the column of the week so we ingore it
+    		if(e.getCssValue("background-color").toString().equals(backgroundColor)){ // it's will click on the column of the week so we ingore it
     			count++;
     			continue;
     		}
-    		if(color.equals(grey)){		
+    		if(color.equals(grey) || color.equals(blue)){		
     			((JavascriptExecutor) driver).executeScript("arguments[0].click();",e);
     			ATUReports.add(time +" Verify the day from the calendar.", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
     			System.out.println("Verify the day from the calendar.");
