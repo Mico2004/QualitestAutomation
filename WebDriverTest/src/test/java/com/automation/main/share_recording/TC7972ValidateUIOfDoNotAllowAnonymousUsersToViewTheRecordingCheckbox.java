@@ -207,7 +207,7 @@ public class TC7972ValidateUIOfDoNotAllowAnonymousUsersToViewTheRecordingCheckbo
 		share_recording_window.verifyWebElementNotDisplayed(share_recording_window.Embed_label, "Embed a simplified player");
 		
 		//33.The URL's playbackToken parameter was excluded from the URL
-		share_recording_window.veirfyThatTheTextOfWebElementNotContainsTargetString(share_recording_window.url_link, "playbackToken");
+		share_recording_window.verifyIfThePlaybackTokenIsAppearedInTheLink(false);
 		
 		//34.All other dialog entities remained as they are: ** Title - Share Recording** informative text - Get a direct link to this recording to postin emails, web pages, etc.
 		share_recording_window.verifyThatTheTextOfWebElemenetIsAsExpected(share_recording_window.share_recording_title, "Share Recording");

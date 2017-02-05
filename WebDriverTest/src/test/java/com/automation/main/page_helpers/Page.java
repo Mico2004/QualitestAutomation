@@ -992,7 +992,6 @@ public class Page {
 		}
 	}
 	
-	
 	public void verifyThatWeHaveHintToWebElement(WebElement element, String text) {		
 		try {
 			String title = element.getAttribute("title");
@@ -1207,7 +1206,6 @@ public class Page {
 					LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 	}
-	
 	
 	// This function get WebElement and excpected text, and check if that text
 	// appear in the WebElement

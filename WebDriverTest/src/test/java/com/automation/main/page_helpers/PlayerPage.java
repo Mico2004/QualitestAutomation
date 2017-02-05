@@ -9,6 +9,7 @@ import org.apache.commons.collections.functors.SwitchTransformer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -1486,5 +1487,25 @@ public class PlayerPage extends Page {
 			System.out.println("There isn't bookmarks in the list.");
 			ATUReports.add(time +" There isn't bookmarks in the list." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}		
-  }	
+  }
+	
+	
+	public void verifyBreadcrumbsAreNotDisplayed() {
+		try {
+		if(breadcrumbs_box_elements_list.get(0).isDisplayed() || breadcrumbs_box_elements_list.get(1).isDisplayed()) {
+			System.out.println("Not Verify that the breadcrumbs are not displayed.");
+			ATUReports.add(time +" Not Verify that the breadcrumbs are not displayed." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+		}
+		else{
+			System.out.println("Verify that the breadcrumbs are not displayed.");
+			ATUReports.add(time +" Verify that the breadcrumbs are not displayed.", "True.", "True.", LogAs.PASSED, null);
+		}
+		}catch (IndexOutOfBoundsException e){
+			System.out.println("Verify that the breadcrumbs are not displayed.");
+			ATUReports.add(time +" Verify that the breadcrumbs are not displayed.", "True.", "True.", LogAs.PASSED, null);
+		}catch(NoSuchElementException e) {
+			System.out.println("Verify that the breadcrumbs are not displayed.");
+			ATUReports.add(time +" Verify that the breadcrumbs are not displayed.", "True.", "True.", LogAs.PASSED, null);
+		}
+	}
 }

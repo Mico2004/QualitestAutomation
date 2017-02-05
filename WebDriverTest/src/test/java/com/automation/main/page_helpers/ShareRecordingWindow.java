@@ -206,4 +206,20 @@ public class ShareRecordingWindow extends Page{
 			String url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
 			return url;
 		}
+		
+		public void verifyIfThePlaybackTokenIsAppearedInTheLink(boolean shouldApread) {
+			String id = url_link.getAttribute("id");
+			String iframe_url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
+			
+			if(iframe_url.contains("playbackToken") && shouldApread == true) {
+				System.out.println("Veirfy that the frame link is valid.");
+				ATUReports.add(time +" Veirfy that the frame link is valid.","Success.", "Success.", LogAs.PASSED, null);
+			} else if(!iframe_url.contains("playbackToken") && shouldApread == false){
+				System.out.println("Veirfy that the frame link is valid.");
+				ATUReports.add(time +" Veirfy that the frame link is valid.","Success.", "Success.", LogAs.PASSED, null);			
+			} else {
+				System.out.println("Not Veirfy that the frame link is valid." + iframe_url);
+				ATUReports.add(time +"Not Veirfy that the frame link is valid." + iframe_url, "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		}		
 }

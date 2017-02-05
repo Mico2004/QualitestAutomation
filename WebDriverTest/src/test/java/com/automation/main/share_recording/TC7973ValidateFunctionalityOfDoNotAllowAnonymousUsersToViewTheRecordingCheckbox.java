@@ -83,8 +83,8 @@ public class TC7973ValidateFunctionalityOfDoNotAllowAnonymousUsersToViewTheRecor
 			
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC7972ValidateUIOfDoNotAllowAnonymousUsersToViewTheRecordingCheckbox at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC7972ValidateUIOfDoNotAllowAnonymousUsersToViewTheRecordingCheckbox at " + DateToStr, "Starting the test: TC7972ValidateUIOfDoNotAllowAnonymousUsersToViewTheRecordingCheckbox at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test: TC7973ValidateFunctionalityOfDoNotAllowAnonymousUsersToViewTheRecordingCheckbox at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test: TC7973ValidateFunctionalityOfDoNotAllowAnonymousUsersToViewTheRecordingCheckbox at " + DateToStr, "Starting the test: TC7973ValidateFunctionalityOfDoNotAllowAnonymousUsersToViewTheRecordingCheckbox at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -93,8 +93,8 @@ public class TC7973ValidateFunctionalityOfDoNotAllowAnonymousUsersToViewTheRecor
 	}
 		
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC7972 Validate UI of 'Do not allow anonymous users to view the recording' checkbox")
-	public void test7972() throws InterruptedException{
+	@Test (description="TC7973 Validate UI of 'Do not allow anonymous users to view the recording' checkbox")
+	public void test7973() throws InterruptedException{
 		
 		//1.Enter the university
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
