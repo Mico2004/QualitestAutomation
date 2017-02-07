@@ -165,7 +165,8 @@ public class ShareRecordingWindow extends Page{
 		}
 
 		public void checkThatTheUrlIsValid() {
-			String url = url_link.getText();
+			String id = url_link.getAttribute("id");
+			String url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
 			if(url.contains(pageUrl)) {		
 				System.out.println("Veirfy that the url is vaild.");
 				ATUReports.add(time +" Veirfy that the url is vaild.","Success.", "Success.", LogAs.PASSED, null);
