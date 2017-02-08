@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,6 +56,19 @@ public class ShareRecordingWindow extends Page{
 	public WebElement share_title;
 	@FindBy(xpath=".//*[@id='shareRecordingWindow']/form/div[1]/div[4]/label")
 	public WebElement anonymous_users_label;
+	@FindBy(id="iFrameCodeArea")
+	public WebElement textbox_mvs_player;
+	@FindBy(id="reslove_iFrame")
+	public WebElement resolve_iframe;
+	@FindBy(id="Play")
+	public WebElement play_iframe;
+	@FindBy(xpath=".//*[@id='main']/div/div[2]/a")
+	public WebElement full_screen_button;
+	@FindBy(id="reloadThisPage")
+	public WebElement reload_the_page;
+	@FindBy(id="toggleProtocol")
+	public WebElement http_toggle;
+	
 	
 	public ShareRecordingWindow(WebDriver browser) {
 		super(browser);
@@ -165,15 +179,20 @@ public class ShareRecordingWindow extends Page{
 		}
 
 		public void checkThatTheUrlIsValid() {
-			String id = url_link.getAttribute("id");
-			String url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
-			if(url.contains(pageUrl)) {		
-				System.out.println("Veirfy that the url is vaild.");
-				ATUReports.add(time +" Veirfy that the url is vaild.","Success.", "Success.", LogAs.PASSED, null);
-			} else {
-				System.out.println("Not Veirfy that the url is vaild.");
-				ATUReports.add(time +" Veirfy that the url is vaild.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			}	
+			try{
+				String id = url_link.getAttribute("id");
+				String url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
+				if(url.contains(pageUrl)) {		
+					System.out.println("Veirfy that the url is vaild.");
+					ATUReports.add(time +" Veirfy that the url is vaild.","Success.", "Success.", LogAs.PASSED, null);
+				} else {
+					System.out.println("Not Veirfy that the url is vaild.");
+					ATUReports.add(time +" Veirfy that the url is vaild.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
 		}
 		
 		
@@ -208,7 +227,14 @@ public class ShareRecordingWindow extends Page{
 			return url;
 		}
 		
+		public String getFrameUrl() {
+			String id = iframe_link.getAttribute("id");
+			String url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
+			return url;
+		}
+		
 		public void verifyIfThePlaybackTokenIsAppearedInTheLink(boolean shouldApread) {
+			try { 
 			String id = url_link.getAttribute("id");
 			String iframe_url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
 			
@@ -221,6 +247,68 @@ public class ShareRecordingWindow extends Page{
 			} else {
 				System.out.println("Not Veirfy that the frame link is valid." + iframe_url);
 				ATUReports.add(time +"Not Veirfy that the frame link is valid." + iframe_url, "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			} 
+			}catch(Exception e){
+				e.printStackTrace();
+				ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
+		}
+
+		public Point veirfyPlayingLogoInTheMiddleOfTheImage() {
+			
+			try { 
+			waitForVisibility(play_iframe);
+			String width = play_iframe.getCssValue("width");
+			String height = play_iframe.getCssValue("height");
+			String margin_top = play_iframe.getCssValue("margin-top");
+			String margin_left = play_iframe.getCssValue("margin-left");
+			Point point = play_iframe.getLocation();
+			
+			if(width.equals("73px") && height.equals("73px") && margin_top.equals("115.5px") && margin_left.equals("171.5px")){
+				System.out.println("Veirfy that player logo in the middle of the image.");
+				ATUReports.add(time +" Veirfy that player logo in the middle of the image.","Success.", "Success.", LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("Not Veirfy that player logo in the middle of the image.");
+				ATUReports.add(time +"Not Veirfy that player logo in the middle of the image.","Success.", "Success.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));				
+				Assert.assertTrue(false);
+			}
+			 return point;
+			}catch(Exception e){
+				e.getMessage();
+				ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+				return null;
+			}
+			
+		}
+
+		public void verifyTheLocationOfTheFullScreen(Point play_location) {
+			try{
+				Point full_screen_loc =  full_screen_button.getLocation();
+				if (full_screen_loc.x  <= play_location.x && full_screen_loc.y > play_location.y ) {
+					System.out.println("verify the location of the full screen button.");
+					ATUReports.add(time +"verify the location of the full screen button.", "True.", "True.",LogAs.PASSED, null);
+				} else {
+					System.out.println("Not verify the location of the full screen button.");
+					ATUReports.add(time +"Not verify the location of the full screen button.", "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}
+				}catch(Exception e){
+					e.printStackTrace();
+					ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}		
+		}
+
+		public void moveToPlayFrame() throws InterruptedException {
+			driver.switchTo().defaultContent();
+			driver.switchTo().frame(driver.findElement(By.xpath(".//*[@id='placeHolder']/iframe")));
+			Thread.sleep(2000);
+			driver.switchTo().frame(driver.findElement(By.id("Player")));		
+		}
+
+		public void moveToFullScreenFrame()throws InterruptedException  {
+			driver.switchTo().defaultContent();
+			Thread.sleep(1000);
+			driver.switchTo().frame(driver.findElement(By.xpath(".//*[@id='placeHolder']/iframe")));
 		}		
 }

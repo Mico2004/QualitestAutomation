@@ -101,27 +101,7 @@ public class Page {
 		}
 
 	}
-	
-	public void dragAndDrop(WebElement drag,WebElement drop){
-		
-		waitForVisibility(drag);
-		waitForVisibility(drop);
 			
-		try {
-			Actions act=new Actions(driver);
-			act.dragAndDrop(drag, drop).build().perform();
-			System.out.println("drag and drop on WebElement.");
-			ATUReports.add(time +" drag and drop on WebElement.", "True.", "True.", LogAs.PASSED, null);
-			Assert.assertTrue(true);
-
-		} catch (NoSuchElementException e) {
-			System.out.println("Not drag and drop on WebElement.");
-			ATUReports.add(time +" Not drag and drop on WebElement.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-		}
-			
-	}
-		
 	public void clickElementJS(WebElement element) // clicking element
 	{
 		String text = null;
@@ -173,6 +153,26 @@ public class Page {
 
 	}
 
+	public void dragAndDrop(WebElement drag,WebElement drop){
+		
+		waitForVisibility(drag);
+		waitForVisibility(drop);
+			
+		try {
+			Actions act=new Actions(driver);
+			act.dragAndDrop(drag, drop).build().perform();
+			System.out.println("drag and drop on WebElement.");
+			ATUReports.add(time +" drag and drop on WebElement.", "True.", "True.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+
+		} catch (NoSuchElementException e) {
+			System.out.println("Not drag and drop on WebElement.");
+			ATUReports.add(time +" Not drag and drop on WebElement.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		}
+			
+	}
+	
 	// clicking element
 	public void clickElementWithDescription(WebElement element, String description) {
 		try {
@@ -1194,8 +1194,7 @@ public class Page {
 	}
 	// This function get two WebElement and check if the first is below to the second (by location)
 	public void isFirstWebElementEqualsHorizontallyOrVerticalSecondWebElement(WebElement first_webelement, WebElement second_webelement) {
-		System.out.println(first_webelement.getLocation().x);
-		System.out.println(second_webelement.getLocation().x);
+		try{
 		if (first_webelement.getLocation().y == second_webelement.getLocation().y || first_webelement.getLocation().x == second_webelement.getLocation().x) {
 			System.out.println("The " + first_webelement.getText() +" equals horizontally or vertical " + second_webelement.getText());
 			ATUReports.add(time +" The " + first_webelement.getText() +" equals horizontally or vertical " + second_webelement.getText(), "True.", "True.",
@@ -1204,21 +1203,30 @@ public class Page {
 			System.out.println("The " + first_webelement.getText() +" not equals horizontally or vertical " + second_webelement.getText());
 			ATUReports.add(time +" The " + first_webelement.getText() +" not equals horizontally or vertical " + second_webelement.getText(), "True.", "False.",
 					LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		}	
+		}
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 	}
 	
 	// This function get WebElement and excpected text, and check if that text
 	// appear in the WebElement
 	public void verifyWebElementTargetText(WebElement web_element, String target_text) {
-		if (web_element.getText().contains(target_text)) {
-			System.out.println("Verified that target web element have target text: " + target_text);
-			ATUReports.add(time +" WebElement have target text.", target_text, target_text, LogAs.PASSED, null);
-			Assert.assertTrue(true);
-		} else {
-			System.out.println("Not verified that target web element have target text: " + target_text + " != "
-					+ web_element.getText());
-			ATUReports.add(time +" WebElement have target text.", target_text, web_element.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
+		try{
+			if (web_element.getText().contains(target_text)) {
+				System.out.println("Verified that target web element have target text: " + target_text);
+				ATUReports.add(time +" WebElement have target text.", target_text, target_text, LogAs.PASSED, null);
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("Not verified that target web element have target text: " + target_text + " != "
+						+ web_element.getText());
+				ATUReports.add(time +" WebElement have target text.", target_text, web_element.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				Assert.assertTrue(false);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 	

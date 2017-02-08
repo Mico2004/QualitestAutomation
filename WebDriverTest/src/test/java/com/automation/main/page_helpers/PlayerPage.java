@@ -160,13 +160,7 @@ public class PlayerPage extends Page {
 	// This function get as input number of seconds.
 	// It will check if the player plays for this number of seconds.
 	public boolean verifyTimeBufferStatusForXSec(int seconds) throws InterruptedException {
-		if (seconds <= 0) {
-			System.out.println("Please give positive number of seconds as input for verifing buffer status.");
-			ATUReports.add(time +" Please give positive number of seconds as input for verifing buffer status.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(false);
-			return false;
-		}
-
+	
 		// Wait for switching frame		
 			try {
 				getIntoFrame(0);	
@@ -210,6 +204,71 @@ public class PlayerPage extends Page {
 
 		
 
+		String initial_second = "";
+		// waitForVisibility(pause_button);
+
+		int i = 0;
+		int max_buffering_waiting_time = 30;
+		int j_buffering_time = 0;
+		int k_same_buffering_time = 0;
+		while (i < seconds) {
+			i++;
+			Thread.sleep(2500);
+
+			try {
+				String current_second = time_buffer_status.getText().split("/")[0].split(":")[2];
+
+				// System.out.println(current_second);
+				// System.out.println(initial_second);
+				if (initial_second.equals(current_second)) {
+					k_same_buffering_time++;
+					i--;
+					j_buffering_time++;
+					
+					if(k_same_buffering_time == 10) {
+						System.out.println("The time buffer status is not moving in seconds.");
+						ATUReports.add(time +" The time buffer.", "The time buffer is moving correctly.",
+								"The time buffer status is not moving in seconds.", LogAs.WARNING, null);
+						// Assert.assertTrue(false);
+						return false;
+					}
+				}
+				initial_second = current_second;
+			} catch (Exception msg) {
+				i--;
+				j_buffering_time++;
+
+				if (j_buffering_time == max_buffering_waiting_time) {
+					System.out.println("The time buffer status is stuck on Buffering status and not moving.");
+					ATUReports.add(time +" The time buffer.", "The time buffer is moving correctly.",
+							"The time buffer status is stuck on Buffering status and not moving.", LogAs.WARNING, null);
+					// Assert.assertTrue(false);
+					return false;
+				}
+			}
+		}
+
+		System.out.println("The time buffer is moving correctly.");
+		ATUReports.add(time +" The time buffer.", "The time buffer is moving correctly.",
+				"The time buffer is moving correctly.", LogAs.PASSED, null);
+		Assert.assertTrue(true);
+		return true;
+	}
+	
+	public boolean verifyTimeBufferStatusForXSeciFrame(int seconds) throws InterruptedException{
+		try {
+			(new WebDriverWait(driver, 45))
+					.until(ExpectedConditions.presenceOfElementLocated(By.id("PauseButton_Img")));
+			System.out.println("Player shows pause button.");
+			ATUReports.add(time +" Player.", "Player shows pause button.", "Player shows pause button.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		} catch (Exception msg) {
+			System.out.println("Player not shows pause button.");
+			ATUReports.add(time +" Player.", "Player shows pause button.", "Player not shows pause button.", LogAs.FAILED,
+					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+			return false;
+		}
 		String initial_second = "";
 		// waitForVisibility(pause_button);
 
