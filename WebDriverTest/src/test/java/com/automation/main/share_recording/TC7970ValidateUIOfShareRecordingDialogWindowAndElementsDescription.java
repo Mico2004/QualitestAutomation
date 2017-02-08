@@ -154,7 +154,7 @@ public class TC7970ValidateUIOfShareRecordingDialogWindowAndElementsDescription 
 		share_recording_window.verifyThatTheElementIsLabel(share_recording_window.url_label);
 		
 		//14.Verify the URL contain a link (full URL ) to the page where user will be able to watch the recording.
-		share_recording_window.checkThatTheUrlIsValid();
+		share_recording_window.checkThatTheUrlIsValid(tegrity);
 		
 		//15.Verify that upon clicking anywhere in the textbox field, automatically select the entire text in the textbox.
 		share_recording_window.veirfyThatClickingOnTheTextSelectTheEntireTextInTheTextbox(share_recording_window.url_link);

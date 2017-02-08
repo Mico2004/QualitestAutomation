@@ -178,11 +178,11 @@ public class ShareRecordingWindow extends Page{
 			}		
 		}
 
-		public void checkThatTheUrlIsValid() {
+		public void checkThatTheUrlIsValid(LoginHelperPage tegrity) {
 			try{
 				String id = url_link.getAttribute("id");
 				String url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
-				if(url.contains(pageUrl)) {		
+				if(url.contains(tegrity.getPageUrl())) {		
 					System.out.println("Veirfy that the url is vaild.");
 					ATUReports.add(time +" Veirfy that the url is vaild.","Success.", "Success.", LogAs.PASSED, null);
 				} else {
