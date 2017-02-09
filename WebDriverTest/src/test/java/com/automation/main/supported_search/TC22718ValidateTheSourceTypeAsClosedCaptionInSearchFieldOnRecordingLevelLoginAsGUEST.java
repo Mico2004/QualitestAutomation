@@ -169,7 +169,6 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		record.clickOnCourseTaskThenCourseSettings();
 		course_settings.makeSureThatMakeCoursePublicIsSelected();
 		course_settings.clickOnOkButton();
-		Thread.sleep(1000);
 		
 		//4. select record and add close caption
 		record.waitForVisibility(record.recordings_tab); 
@@ -189,14 +188,15 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 
 		///////start test
 		tegrity.waitForVisibility(tegrity.passfield);
+		
 		// 2.login as guest
 		tegrity.loginAsguest();
 		course.waitForVisibility(course.first_course_button);
+		
 		// 3.Click on course
-		Thread.sleep(1500);
 		course.selectCourseThatStartingWith("Ab");
+		
 		/// 4.Click on one of the Recording link
-			Thread.sleep(1000);
 	     record.waitForVisibility(record.first_recording);
 
 	     ///5.Click on one of the Recording link ,wait first if recording is still being copied from recording bank
@@ -232,7 +232,7 @@ public class TC22718ValidateTheSourceTypeAsClosedCaptionInSearchFieldOnRecording
 		Thread.sleep(2000);
 		
 		///10.The next result display below the current result in case there is next result.
-		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,2);
+		player_page.verifyThatNextResultDisplayBelowCurrentResultInCaseThereIsNextResult(player_page.search_result,1);
 
 		///11.search results page in the format as follows: "recording name - Search Results".
 

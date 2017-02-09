@@ -100,8 +100,7 @@ public class TC7315ValidateDiscardingChangesFunctionlity  {
 		int recordNumber = record.checkExistenceOfNonEditRecordingsStatusInRecordings();
 		record.unselectallCheckbox();
 		record.selectIndexCheckBox(recordNumber);
-			
-			
+					
 		//4.click on the recording tasks->edit recording properties option
 		record.toEditRecordingPropertiesMenu();
 			
