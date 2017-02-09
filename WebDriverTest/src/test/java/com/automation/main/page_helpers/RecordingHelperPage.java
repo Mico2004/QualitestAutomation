@@ -2026,7 +2026,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				Assert.assertTrue(true);
 			} else {
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
-				Thread.sleep(1000);
+				Thread.sleep(1500);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check_all_checkbox);
 				System.out.println("Unselecet all the checkboxs.");
 				ATUReports.add(time +" Unselecet all the checkboxs.", LogAs.PASSED, null);
@@ -4301,6 +4301,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				return;
 			} else {
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", check);			
+				Thread.sleep(500);
 				//checkbox.click();
 				if (!check.isSelected()) {
 					System.out.println("The checkbox: " + check.getText() + " is not selected");
