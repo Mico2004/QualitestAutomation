@@ -94,13 +94,11 @@ public class TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack
 		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		
-
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
 		 System.out.println("Starting the test: TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack at " + DateToStr);
 		 ATUReports.add("Message window.", "Starting the test: TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack at " + DateToStr,
-		 "Starting the test: TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack at " + DateToStr, LogAs.PASSED, null);	
-		
+		 "Starting the test: TC17049ValidateNoResumeBoxRecordingCompletelyWatchedAndNavigateBack at " + DateToStr, LogAs.PASSED, null);		
 	}
 	
 	

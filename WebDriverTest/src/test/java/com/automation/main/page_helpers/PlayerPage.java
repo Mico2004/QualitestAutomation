@@ -1146,7 +1146,7 @@ public class PlayerPage extends Page {
 		String caption_to = null;
 		int time_out = 0;
 		while (!player_timer.getText().contains(seconds)) {
-			if (time_out == 120) {
+			if (time_out >= 120) {
 				System.out.println("time out");
 				Assert.assertTrue(false);
 				ATUReports.add(time +" Time out", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));

@@ -232,7 +232,7 @@ public class TC15657ValidateBookmarkIconIsDisplayedWhenAddingBookmarkThrougthThe
 		}
 		
 		// 25. Add a bookmark througth the "bookmarks and links" control.
-		player_page.verifyTimeBufferStatusForXSec(5);
+		player_page.verifyTimeBufferStatusForXSec(2);
 		player_page.addTargetBookmark("Second recording bookmark");
 	
 		
