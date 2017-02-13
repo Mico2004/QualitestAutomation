@@ -2925,7 +2925,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		} catch(Exception e) {
 			e.printStackTrace();
 			ATUReports.add(time +" the page can't load " + e.getMessage() ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(true);
+			Assert.assertTrue(false);
 
 		}
 	}

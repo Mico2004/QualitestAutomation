@@ -308,7 +308,7 @@ public class ShareRecordingWindow extends Page{
 
 		public void moveToFullScreenFrame()throws InterruptedException  {
 			driver.switchTo().defaultContent();
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			driver.switchTo().frame(driver.findElement(By.xpath(".//*[@id='placeHolder']/iframe")));
 		}		
 }
