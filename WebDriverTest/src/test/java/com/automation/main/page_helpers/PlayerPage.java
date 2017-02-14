@@ -249,7 +249,7 @@ public class PlayerPage extends Page {
 		}
 
 		System.out.println("The time buffer is moving correctly.");
-		ATUReports.add(time +" The time buffer.", "The time buffer is moving correctly.",
+		ATUReports.add("The time buffer.", "The time buffer is moving correctly.",
 				"The time buffer is moving correctly.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		return true;
