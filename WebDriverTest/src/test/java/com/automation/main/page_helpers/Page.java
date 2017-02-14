@@ -109,7 +109,7 @@ public class Page {
 			text = element.getText();
 			String id = element.getAttribute("id");
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
-			ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
 					null);		
 		} catch (Exception msg) {
 
@@ -118,10 +118,10 @@ public class Page {
 				wait.until(ExpectedConditions.elementToBeClickable(element));
 				element.click();
 				System.out.println("Clicked on " + element.getText() + " element");
-				ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
 						null);
 			} catch (Exception e1) {
-				ATUReports.add(time +" Clicked on " + text + " element", "Clicked succeeded.", "Clicked failed:"+msg.getMessage(), LogAs.WARNING,
+				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked failed:"+msg.getMessage(), LogAs.WARNING,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				
 			}
@@ -376,12 +376,12 @@ public class Page {
 			Actions builder = new Actions(driver);
 			builder.moveToElement(element).click().build().perform();
 			System.out.println("Hovered and clicked on WebElement.");
-			ATUReports.add(time +" Hovered and clicked on WebElement.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add("Hovered and clicked on WebElement.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 
 		} catch (NoSuchElementException e) {
 			System.out.println("Not hovered and clicked on WebElement.");
-			ATUReports.add(time +" Hovered and clicked on WebElement.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Hovered and clicked on WebElement.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -587,13 +587,13 @@ public class Page {
 			for (int second = 0;second<=60; second++) {		
 				if (second >= 60) {
 				System.out.println("LogOut from user not succeeded.");
-				ATUReports.add(time +"  Login page timeout", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add("Login page timeout", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}		
 				if (driver.getTitle().equals("Tegrity Lecture Capture"))// check// if// element// is// present
 				{
 					System.out.println("Signout from user succeeded");
-					ATUReports.add(time +" Sign Out succeeded", LogAs.PASSED, null);
+					ATUReports.add("Sign Out succeeded", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					break;
 				} else if(driver.getTitle().equals("Tegrity - Courses")){
@@ -952,11 +952,11 @@ public class Page {
 	public void verifyThatTheTextOfWebElemenetIsAsExpected(WebElement web_element, String target_text) {
 		if (web_element.getText().equals(target_text)) {
 			System.out.println(target_text + " is displayed as expected.");
-			ATUReports.add(time +" Target text is displayed as expected.", target_text, target_text, LogAs.PASSED, null);
+			ATUReports.add("Target text is displayed as expected.", target_text, target_text, LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} else {
 			System.out.println(target_text + " is not displayed as expected.");
-			ATUReports.add(time +" Target text is not displayed as expected.", target_text, web_element.getText(),
+			ATUReports.add("Target text is not displayed as expected.", target_text, web_element.getText(),
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
@@ -997,10 +997,10 @@ public class Page {
 			String title = element.getAttribute("title");
 			if(title.equals(text)){
 				System.out.println("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title );
-				ATUReports.add(time +" Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is display.",LogAs.PASSED, null);		
+				ATUReports.add("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is display.",LogAs.PASSED, null);		
 			}else{
 				System.out.println("Not Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title);
-				ATUReports.add(time +" Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is not display.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+				ATUReports.add("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is not display.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
 			}
 		}catch(Exception e){
 			e.getMessage();
@@ -1184,11 +1184,11 @@ public class Page {
 	public void isFirstWebElementBelowSecondWebElement(WebElement first_webelement, WebElement second_webelement) {
 		if (first_webelement.getLocation().y <= second_webelement.getLocation().y) {
 			System.out.println("The " + first_webelement.getText() +" is below to the " + second_webelement.getText());
-			ATUReports.add(time +" The " + first_webelement.getText() +" is below to the " + second_webelement.getText(), "True.", "True.",
+			ATUReports.add("The " + first_webelement.getText() +" is below to the " + second_webelement.getText(), "True.", "True.",
 					LogAs.PASSED, null);
 		} else {
 			System.out.println("The " + first_webelement.getText() +" is not below to the " + second_webelement.getText());
-			ATUReports.add(time +" The " + first_webelement.getText() +" is not below to the " + second_webelement.getText(), "True.", "False.",
+			ATUReports.add("The " + first_webelement.getText() +" is not below to the " + second_webelement.getText(), "True.", "False.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
 	}
@@ -1197,11 +1197,11 @@ public class Page {
 		try{
 		if (first_webelement.getLocation().y == second_webelement.getLocation().y || first_webelement.getLocation().x == second_webelement.getLocation().x) {
 			System.out.println("The " + first_webelement.getText() +" equals horizontally or vertical " + second_webelement.getText());
-			ATUReports.add(time +" The " + first_webelement.getText() +" equals horizontally or vertical " + second_webelement.getText(), "True.", "True.",
+			ATUReports.add("The " + first_webelement.getText() +" equals horizontally or vertical " + second_webelement.getText(), "True.", "True.",
 					LogAs.PASSED, null);
 		} else {
 			System.out.println("The " + first_webelement.getText() +" not equals horizontally or vertical " + second_webelement.getText());
-			ATUReports.add(time +" The " + first_webelement.getText() +" not equals horizontally or vertical " + second_webelement.getText(), "True.", "False.",
+			ATUReports.add(" The " + first_webelement.getText() +" not equals horizontally or vertical " + second_webelement.getText(), "True.", "False.",
 					LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		}catch(Exception e){
@@ -1354,18 +1354,18 @@ public class Page {
 
 			if (web_element.getAttribute("value").equals(target_input)) {
 				System.out.println("Target keys sent to WebElement: " + target_input);
-				ATUReports.add(time +" Target keys sent.", target_input, target_input, LogAs.PASSED, null);
+				ATUReports.add("Target keys sent.", target_input, target_input, LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Target keys sent: " + target_input + ", but not appear in the input itself: "
 						+ web_element.getAttribute("value"));
-				ATUReports.add(time +" Target keys send.", target_input, web_element.getAttribute("value"), LogAs.FAILED,
-						null);
+				ATUReports.add(" Target keys send.", target_input, web_element.getAttribute("value"), LogAs.FAILED,
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
 		} catch (Exception msg) {
 			System.out.println("Fail to sent target keys: " + target_input);
-			ATUReports.add(time +" Target keys sent.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Target keys sent.", "True.", "False", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -1614,10 +1614,10 @@ public class Page {
 			
 			if(url_label.getTagName().equals("label")){
 				System.out.println("Verfied that element: " + url_label.getText() + " is a label.");
-				ATUReports.add(time +"Verfied that element: " + url_label.getText() + " is a label.", "True.", "True.",LogAs.PASSED, null);		
+				ATUReports.add("Verfied that element: " + url_label.getText() + " is a label.", "True.", "True.",LogAs.PASSED, null);		
 			} else {
 				System.out.println("Not Verfied that element: " + url_label.getText() + " is a label.");
-				ATUReports.add(time +"Not Verfied that element: " + url_label.getText() + " is a label.", "True.", "False.", LogAs.FAILED,null);
+				ATUReports.add("Not Verfied that element: " + url_label.getText() + " is a label.", "True.", "False.", LogAs.FAILED,null);
 			}
 	}
 	

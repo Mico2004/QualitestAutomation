@@ -85,7 +85,7 @@ public class AdminDashboardViewCourseList extends Page {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-			ATUReports.add(time +" Loading 'All courses admin' page failed" + e.getMessage(),  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Loading 'All courses admin' page failed" + e.getMessage(),  LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}
@@ -96,7 +96,7 @@ public class AdminDashboardViewCourseList extends Page {
 	
 		driver.get(url);
 		System.out.println("Moving to the course through get method.");
-		ATUReports.add(time +" Moving to the course through get method", LogAs.PASSED, null);		
+		ATUReports.add("Moving to the course through get method", LogAs.PASSED, null);		
 		new WebDriverWait(driver, 30).until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[1]"), "class", "active"));
 		
 	}

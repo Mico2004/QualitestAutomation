@@ -95,11 +95,11 @@ public class AdminCourseSettingsPage extends Page {
 		try {
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();", save_button);			
 			System.out.println("Clicked on save button.");
-			ATUReports.add(time +" Clicked on save button.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add("Clicked on save button.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch(Exception msg) {
 			System.out.println("Fail to click on save button.");
-			ATUReports.add(time +" Clicked on save button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Clicked on save button.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 	}

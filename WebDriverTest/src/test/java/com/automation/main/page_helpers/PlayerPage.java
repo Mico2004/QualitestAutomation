@@ -260,11 +260,11 @@ public class PlayerPage extends Page {
 			(new WebDriverWait(driver, 45))
 					.until(ExpectedConditions.presenceOfElementLocated(By.id("PauseButton_Img")));
 			System.out.println("Player shows pause button.");
-			ATUReports.add(time +" Player.", "Player shows pause button.", "Player shows pause button.", LogAs.PASSED, null);
+			ATUReports.add("Player.", "Player shows pause button.", "Player shows pause button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Player not shows pause button.");
-			ATUReports.add(time +" Player.", "Player shows pause button.", "Player not shows pause button.", LogAs.FAILED,
+			ATUReports.add("Player.", "Player shows pause button.", "Player not shows pause button.", LogAs.FAILED,
 					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return false;
@@ -292,7 +292,7 @@ public class PlayerPage extends Page {
 					
 					if(k_same_buffering_time == 10) {
 						System.out.println("The time buffer status is not moving in seconds.");
-						ATUReports.add(time +" The time buffer.", "The time buffer is moving correctly.",
+						ATUReports.add("The time buffer.", "The time buffer is moving correctly.",
 								"The time buffer status is not moving in seconds.", LogAs.WARNING, null);
 						// Assert.assertTrue(false);
 						return false;
@@ -305,7 +305,7 @@ public class PlayerPage extends Page {
 
 				if (j_buffering_time == max_buffering_waiting_time) {
 					System.out.println("The time buffer status is stuck on Buffering status and not moving.");
-					ATUReports.add(time +" The time buffer.", "The time buffer is moving correctly.",
+					ATUReports.add("The time buffer.", "The time buffer is moving correctly.",
 							"The time buffer status is stuck on Buffering status and not moving.", LogAs.WARNING, null);
 					// Assert.assertTrue(false);
 					return false;
@@ -314,7 +314,7 @@ public class PlayerPage extends Page {
 		}
 
 		System.out.println("The time buffer is moving correctly.");
-		ATUReports.add(time +" The time buffer.", "The time buffer is moving correctly.",
+		ATUReports.add("The time buffer.", "The time buffer is moving correctly.",
 				"The time buffer is moving correctly.", LogAs.PASSED, null);
 		Assert.assertTrue(true);
 		return true;
@@ -1553,18 +1553,18 @@ public class PlayerPage extends Page {
 		try {
 		if(breadcrumbs_box_elements_list.get(0).isDisplayed() || breadcrumbs_box_elements_list.get(1).isDisplayed()) {
 			System.out.println("Not Verify that the breadcrumbs are not displayed.");
-			ATUReports.add(time +" Not Verify that the breadcrumbs are not displayed." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			ATUReports.add("Not Verify that the breadcrumbs are not displayed." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
 		}
 		else{
 			System.out.println("Verify that the breadcrumbs are not displayed.");
-			ATUReports.add(time +" Verify that the breadcrumbs are not displayed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add("Verify that the breadcrumbs are not displayed.", "True.", "True.", LogAs.PASSED, null);
 		}
 		}catch (IndexOutOfBoundsException e){
 			System.out.println("Verify that the breadcrumbs are not displayed.");
-			ATUReports.add(time +" Verify that the breadcrumbs are not displayed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add("Verify that the breadcrumbs are not displayed.", "True.", "True.", LogAs.PASSED, null);
 		}catch(NoSuchElementException e) {
 			System.out.println("Verify that the breadcrumbs are not displayed.");
-			ATUReports.add(time +" Verify that the breadcrumbs are not displayed.", "True.", "True.", LogAs.PASSED, null);
+			ATUReports.add("Verify that the breadcrumbs are not displayed.", "True.", "True.", LogAs.PASSED, null);
 		}
 	}
 }
