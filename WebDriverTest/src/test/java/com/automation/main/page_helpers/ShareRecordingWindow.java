@@ -82,11 +82,11 @@ public class ShareRecordingWindow extends Page{
 			String background_rec = rec.getBackGroundColor(rec.background);
 			String menu_background = getBackGroundColor(share_recording_background);
 			if (background_rec.equals(menu_background)) {
-				ATUReports.add(time +" edit Properties menu background color is same as recording background color","Success.", "Success.", LogAs.PASSED, null);
-				System.out.println("edit Properties menu background color is same as recording background color");
+				ATUReports.add("menu background color is same as recording background color","Success.", "Success.", LogAs.PASSED, null);
+				System.out.println("menu background color is same as recording background color");
 				Assert.assertTrue(true);
 			} else {
-				ATUReports.add(time +" edit Properties menu background color is not  same as recording background color","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add("menu background color is not  same as recording background color","Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				System.out.println("edit Propertiese menu background color is  not same as recording background color");
 				Assert.assertTrue(false);
 			}
@@ -104,10 +104,10 @@ public class ShareRecordingWindow extends Page{
 				
 				if (infoText.equals("Get a direct link to this recording to post in emails, web pages, etc.")) {
 					System.out.println("Valid Infomative Text.");
-					ATUReports.add(time +" Valid Infomative Text.","Success.", "Success.", LogAs.PASSED, null);
+					ATUReports.add("Valid Infomative Text.","Success.", "Success.", LogAs.PASSED, null);
 				} else {
 					System.out.println("Not Valid Infomative Text.");
-					ATUReports.add(time +" Not Valid Infomative Text.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add("Not Valid Infomative Text.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 			} catch (Exception e) {	
 				e.printStackTrace();
@@ -171,10 +171,10 @@ public class ShareRecordingWindow extends Page{
 			if(element.getAttribute("ng-click").equals("select($event)")){
 				clickElementJS(element);
 				System.out.println("Veirfy that clicking on the text select the entire text in the textbox.");
-				ATUReports.add(time +" Veirfy that clicking on the text select the entire text in the textbox.","Success.", "Success.", LogAs.PASSED, null);
+				ATUReports.add("Veirfy that clicking on the text select the entire text in the textbox.","Success.", "Success.", LogAs.PASSED, null);
 			} else {
 				System.out.println("Not Veirfy that clicking on the text select the entire text in the textbox.");
-				ATUReports.add(time +" Veirfy that clicking on the text select the entire text in the textbox.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add("Veirfy that clicking on the text select the entire text in the textbox.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}		
 		}
 
@@ -184,14 +184,14 @@ public class ShareRecordingWindow extends Page{
 				String url = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");	
 				if(url.contains(tegrity.getPageUrl())) {		
 					System.out.println("Veirfy that the url is vaild.");
-					ATUReports.add(time +" Veirfy that the url is vaild.","Success.", "Success.", LogAs.PASSED, null);
+					ATUReports.add("Veirfy that the url is vaild.","Success.", "Success.", LogAs.PASSED, null);
 				} else {
 					System.out.println("Not Veirfy that the url is vaild.");
-					ATUReports.add(time +" Veirfy that the url is vaild.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(" Veirfy that the url is vaild.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 			}catch(Exception e){
 				e.printStackTrace();
-				ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			}
 		}
 		
@@ -266,11 +266,11 @@ public class ShareRecordingWindow extends Page{
 			
 			if(width.equals("73px") && height.equals("73px") && margin_top.equals("115.5px") && margin_left.equals("171.5px")){
 				System.out.println("Veirfy that player logo in the middle of the image.");
-				ATUReports.add(time +" Veirfy that player logo in the middle of the image.","Success.", "Success.", LogAs.PASSED, null);
+				ATUReports.add("Veirfy that player logo in the middle of the image.","Success.", "Success.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Not Veirfy that player logo in the middle of the image.");
-				ATUReports.add(time +"Not Veirfy that player logo in the middle of the image.","Success.", "Success.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));				
+				ATUReports.add("Not Veirfy that player logo in the middle of the image.","Success.", "Success.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));				
 				Assert.assertTrue(false);
 			}
 			 return point;
@@ -288,14 +288,14 @@ public class ShareRecordingWindow extends Page{
 				Point full_screen_loc =  full_screen_button.getLocation();
 				if (full_screen_loc.x  <= play_location.x && full_screen_loc.y > play_location.y ) {
 					System.out.println("verify the location of the full screen button.");
-					ATUReports.add(time +"verify the location of the full screen button.", "True.", "True.",LogAs.PASSED, null);
+					ATUReports.add("verify the location of the full screen button.", "True.", "True.",LogAs.PASSED, null);
 				} else {
 					System.out.println("Not verify the location of the full screen button.");
-					ATUReports.add(time +"Not verify the location of the full screen button.", "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add("Not verify the location of the full screen button.", "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}
 				}catch(Exception e){
 					e.printStackTrace();
-					ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add(e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				}		
 		}
 
