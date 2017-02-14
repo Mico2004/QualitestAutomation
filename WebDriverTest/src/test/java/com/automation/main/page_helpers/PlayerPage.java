@@ -164,7 +164,7 @@ public class PlayerPage extends Page {
 		// Wait for switching frame		
 			try {
 				getIntoFrame(0);	
-				ATUReports.add(time +" Switching to player frame.", "Success to switch to player frame.",
+				ATUReports.add("Switching to player frame.", "Success to switch to player frame.",
 						"Success to switch to player frame.", LogAs.PASSED, null);
 			} catch (Exception msg) {			
 					System.out.println("Switching to player frame.");
@@ -185,11 +185,11 @@ public class PlayerPage extends Page {
 			(new WebDriverWait(driver, 45))
 					.until(ExpectedConditions.presenceOfElementLocated(By.id("PauseButton_Img")));
 			System.out.println("Player shows pause button.");
-			ATUReports.add(time +" Player.", "Player shows pause button.", "Player shows pause button.", LogAs.PASSED, null);
+			ATUReports.add("Player.", "Player shows pause button.", "Player shows pause button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception msg) {
 			System.out.println("Player not shows pause button.");
-			ATUReports.add(time +" Player.", "Player shows pause button.", "Player not shows pause button.", LogAs.FAILED,
+			ATUReports.add("Player.", "Player shows pause button.", "Player not shows pause button.", LogAs.FAILED,
 					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 			return false;
@@ -227,7 +227,7 @@ public class PlayerPage extends Page {
 					
 					if(k_same_buffering_time == 10) {
 						System.out.println("The time buffer status is not moving in seconds.");
-						ATUReports.add(time +" The time buffer.", "The time buffer is moving correctly.",
+						ATUReports.add("The time buffer.", "The time buffer is moving correctly.",
 								"The time buffer status is not moving in seconds.", LogAs.WARNING, null);
 						// Assert.assertTrue(false);
 						return false;
@@ -240,7 +240,7 @@ public class PlayerPage extends Page {
 
 				if (j_buffering_time == max_buffering_waiting_time) {
 					System.out.println("The time buffer status is stuck on Buffering status and not moving.");
-					ATUReports.add(time +" The time buffer.", "The time buffer is moving correctly.",
+					ATUReports.add("The time buffer.", "The time buffer is moving correctly.",
 							"The time buffer status is stuck on Buffering status and not moving.", LogAs.WARNING, null);
 					// Assert.assertTrue(false);
 					return false;
