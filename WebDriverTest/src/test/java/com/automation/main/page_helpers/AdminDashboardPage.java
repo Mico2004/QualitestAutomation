@@ -151,13 +151,13 @@ public class AdminDashboardPage extends Page {
 					((JavascriptExecutor) driver).executeScript("arguments[0].click();", targetLink);								
 					System.out.println("clickOnTargetSubmenuCourses7");
 					System.out.println("Click on target submenu of Courses: "+linkText  );
-					ATUReports.add(time +" Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
+					ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Clicked on target submenu.", LogAs.PASSED, null);
 					Assert.assertTrue(true);
 					return;
 				} catch (Exception msg) {
 					System.out.println("Not click on target submenu of Courses: " + targetLink.getText().toString());
 					System.out.println("ERROR msg: " + msg.getMessage());
-					ATUReports.add(time +" Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					ATUReports.add("Click on target submenu of Courses:"+linkText, "Clicked on target submenu.", "Not click on target submenu.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 					return;
 	

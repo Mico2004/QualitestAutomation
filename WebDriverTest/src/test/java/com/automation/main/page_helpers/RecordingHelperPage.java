@@ -2063,17 +2063,17 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		try {	
 			if (checkbox.isSelected()) {
 				System.out.println("The Checkbox " +checkbox.getText() + "is selected");
-				ATUReports.add(time +" The Checkbox " +checkbox.getText() + "is selected", LogAs.PASSED, null);
+				ATUReports.add("The Checkbox " +checkbox.getText() + "is selected", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {			
 				System.out.println("The Checkbox " +checkbox.getText() + "is not selected");
-				ATUReports.add(time +" The Checkbox " +checkbox.getText() + "is not selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add("The Checkbox " +checkbox.getText() + "is not selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(true);
 			}
 
 		} catch (Exception msg) {
 			System.out.println("The Checkbox " +checkbox.getText() + "is not selected");
-			ATUReports.add(time +" The Checkbox " +checkbox.getText() + "is not selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("The Checkbox " +checkbox.getText() + "is not selected", LogAs.FAILED,  new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(true);
 		}
 	}
@@ -2925,7 +2925,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 		} catch(Exception e) {
 			e.printStackTrace();
 			ATUReports.add(time +" the page can't load " + e.getMessage() ,LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-			Assert.assertTrue(true);
+			Assert.assertTrue(false);
 
 		}
 	}
@@ -3595,14 +3595,14 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\""+id+"\").click();");
 			System.out.println("clickOnRecordingTaskThen1");
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ModalDialogHeader")));		
-			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window is displayed", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 			return;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			System.out.println("clickOnRecordingTaskThen6");
-			ATUReports.add(time +" Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
+			ATUReports.add("Select Recording Tasks -> "+id+" menu items", id+" window is displayed",
 					id+" window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			System.out.println(id+" window not displayed");
 			Assert.assertTrue(false);
@@ -4273,18 +4273,18 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			waitForVisibility(checkbox);
 			if (checkbox.isSelected()) {
 				System.out.println("select the Checkbox " + checkbox.getAttribute("id"));
-				ATUReports.add(time +" select the Checkbox " + checkbox.getAttribute("id"), "Selected/Already selected.", "Already selected.", LogAs.PASSED, null);
+				ATUReports.add("select the Checkbox " + checkbox.getAttribute("id"), "Selected/Already selected.", "Already selected.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
 			} else {			
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);			
 				System.out.println("Checkbox is selected ");
-				ATUReports.add(time +" select the Checkbox " + checkbox.getAttribute("id"), "Success to select.", "Sucess to select.", LogAs.PASSED, null);
+				ATUReports.add("select the Checkbox " + checkbox.getAttribute("id"), "Success to select.", "Sucess to select.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
 			System.out.println("Checkbox is not selected.");
-			ATUReports.add(time +" Fail to select the Checkbox" + checkbox.getAttribute("id"), "Success select.", "Fail to select.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			ATUReports.add("Fail to select the Checkbox" + checkbox.getAttribute("id"), "Success select.", "Fail to select.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 
@@ -4296,7 +4296,7 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 			waitForVisibility(check);
 			if (!check.isSelected()) {
 				System.out.println("The checkbox: " + check.getText() + " is not selected");
-				ATUReports.add(time +" The checkbox: " + check.getText() + " is not selected", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
+				ATUReports.add("The checkbox: " + check.getText() + " is not selected", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 				return;
 			} else {
@@ -4305,17 +4305,17 @@ public boolean isRecordingExist(String recording_name, boolean need_to_be_exists
 				//checkbox.click();
 				if (!check.isSelected()) {
 					System.out.println("The checkbox: " + check.getText() + " is not selected");
-					ATUReports.add(time +" The checkbox: " + check.getText() + " is not selected", LogAs.PASSED,new CaptureScreen(ScreenshotOf.DESKTOP));
+					ATUReports.add("The checkbox: " + check.getText() + " is not selected", LogAs.PASSED,null);
 					Assert.assertTrue(true);
 				} else {
 					System.out.println("The checkbox: " + check.getText() + " is selected");
-					ATUReports.add(time +" The checkbox: " + check.getText() + " is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+					ATUReports.add("The checkbox: " + check.getText() + " is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 					Assert.assertTrue(false);
 				}
 			}
 		} catch (Exception e) {
 			System.out.println("one checkbox is selected");
-			ATUReports.add(time +" one checkbox is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.DESKTOP));
+			ATUReports.add("one checkbox is selected", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 

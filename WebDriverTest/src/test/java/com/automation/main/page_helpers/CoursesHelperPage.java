@@ -289,7 +289,7 @@ public class CoursesHelperPage extends Page {
 			Thread.sleep(1000);
 			if(isElementPresent(By.id("CourseTitle"))) {
 				System.out.println("successflly select the course.");
-				ATUReports.add(time +" successflly select the course.", LogAs.PASSED, null);
+				ATUReports.add("successflly select the course.", LogAs.PASSED, null);
 				break;			
 			}			
 		}
@@ -297,7 +297,7 @@ public class CoursesHelperPage extends Page {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("CourseTitle")));		
 		}catch(TimeoutException e){
 			System.out.println("Course wasn't selected successfully: couese title isn't visible");
-			ATUReports.add(time +" Course wasn't selected successfully: couese title isn't visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
+			ATUReports.add("Course wasn't selected successfully: couese title isn't visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
 			Assert.assertTrue(false);
 		}
 		
@@ -451,7 +451,7 @@ public class CoursesHelperPage extends Page {
 				System.out.println("select4");		
 				waitForVisibility(recording_tasks_button);
 				System.out.println("selected the course: " + target_course_name);
-				ATUReports.add(time +" select the course: " + target_course_name, LogAs.PASSED, null);
+				ATUReports.add("select the course: " + target_course_name, LogAs.PASSED, null);
 				// wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("CourseTitle"),
 				// target_course_name));
 				return target_course_name;
@@ -460,7 +460,7 @@ public class CoursesHelperPage extends Page {
 
 		return target_course_name;
 	}catch (Exception e){
-		ATUReports.add(time +" Selecting a course failed (screenshot)", e.getMessage(),
+		ATUReports.add("Selecting a course failed (screenshot)", e.getMessage(),
 				LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE) );
 		e.printStackTrace();
 		Assert.assertTrue(false);
