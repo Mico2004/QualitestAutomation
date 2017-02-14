@@ -1354,7 +1354,7 @@ public class Page {
 
 			if (web_element.getAttribute("value").equals(target_input)) {
 				System.out.println("Target keys sent to WebElement: " + target_input);
-				ATUReports.add("Target keys sent.", target_input, target_input, LogAs.PASSED, null);
+				ATUReports.add("Target keys sent: " + target_input, "True.", "True.", LogAs.PASSED, null);
 				Assert.assertTrue(true);
 			} else {
 				System.out.println("Target keys sent: " + target_input + ", but not appear in the input itself: "
