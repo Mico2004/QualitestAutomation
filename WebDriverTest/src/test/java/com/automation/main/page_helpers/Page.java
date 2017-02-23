@@ -1383,6 +1383,29 @@ public class Page {
 				 }
 	  	}
 	}
+	
+	public void moveToTheOtherTab(String current_handler) throws InterruptedException{
+		
+		Set<String> allHandles = driver.getWindowHandles();								
+							
+		for(String handler: allHandles) {
+		    if(!handler.equals(current_handler)){
+				driver.switchTo().window(handler);
+				break;
+				 }
+	  	}
+	}
+	
+	public void checkIfStringContainOnlyUpperLatters(String label) {
+		
+			if (!label.equals(label.toLowerCase())){
+				System.out.println("Verfied that the element: " + label + " contain only upper letters.");
+				ATUReports.add(time +"Verfied that the element: " + label + " contain only upper letters.", "True.", "True.",LogAs.PASSED, null);		
+			} else {
+				System.out.println("Not verfied that the element: " + label + " contain only upper letters.");
+				ATUReports.add(time +" Verfied that hte element: " + label + " contain only upper letters.", "True.", "False.", LogAs.FAILED,null);
+			}
+	}
 
 	// This function verify that element contains one of the elements of the
 	// list

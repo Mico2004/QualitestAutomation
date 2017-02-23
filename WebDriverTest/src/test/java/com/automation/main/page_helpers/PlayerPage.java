@@ -187,7 +187,7 @@ public class PlayerPage extends Page {
 			System.out.println("Player shows pause button.");
 			ATUReports.add("Player.", "Player shows pause button.", "Player shows pause button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
-		} catch (Exception msg) {
+		} catch (org.openqa.selenium.TimeoutException msg) {
 			System.out.println("Player not shows pause button.");
 			ATUReports.add("Player.", "Player shows pause button.", "Player not shows pause button.", LogAs.FAILED,
 					new CaptureScreen(ScreenshotOf.BROWSER_PAGE));

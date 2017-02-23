@@ -158,29 +158,7 @@ public class EditRecording extends Page {
 		
 		System.out.println("Click on the apply.");
 		ATUReports.add(time +" Click on the apply.", "True.", "True.", LogAs.PASSED, null);
-		
-//		int numberOfAttempts = 0;
-//		//click on the ok
-//		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){		
-//			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
-//			String message = getTextFromWebElement(ie,5);
-//			if(message.contains("Success")){
-//				confirm_menu.clickOnOkButtonAfterEditRecord();
-//				break;
-//			} else if(message.contains("Error")) {
-//				ATUReports.add(time +" Get an error while click on apply.", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-//				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
-//				System.out.println("Get an error while click on apply.");	
-//				clickElement(ApplyButton);
-//				numberOfAttempts++;
-//				if(numberOfAttempts == 5) {
-//					ATUReports.add(time +" Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-//					Assert.assertTrue(false);
-//				}
-//			}
-//			else Thread.sleep(3000);
-//		}
-		
+			
 		new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(header, "Success"));
 		confirm_menu.clickOnOkButtonAfterEditRecord();
 			
