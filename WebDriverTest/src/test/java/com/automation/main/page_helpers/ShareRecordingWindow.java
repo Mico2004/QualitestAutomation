@@ -68,8 +68,7 @@ public class ShareRecordingWindow extends Page{
 	public WebElement reload_the_page;
 	@FindBy(id="toggleProtocol")
 	public WebElement http_toggle;
-	
-	
+
 	public ShareRecordingWindow(WebDriver browser) {
 		super(browser);
 		// TODO Auto-generated constructor stub
