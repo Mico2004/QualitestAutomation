@@ -691,7 +691,7 @@ public class PlayerPage extends Page {
 			Thread.sleep(1000);
 			search_box.clear();
 			for (String handler : driver.getWindowHandles()) {
-				driver.switchTo().window(handler);
+				driver. switchTo().window(handler);
 				break;
 			}
 			driver.switchTo().frame(0);
