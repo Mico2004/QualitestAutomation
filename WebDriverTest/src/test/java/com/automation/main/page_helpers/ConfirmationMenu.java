@@ -76,7 +76,7 @@ public class ConfirmationMenu extends Page {
 			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}  
-		Thread.sleep(1000);	
+		Thread.sleep(2000);	
 	}
 	
 	// This function clicks on ok button of copy menu

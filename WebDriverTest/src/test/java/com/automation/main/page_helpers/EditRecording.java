@@ -364,26 +364,16 @@ public class EditRecording extends Page {
 		
 		clickElement(ApplyButton);
 		Thread.sleep(2000);
-		int numberOfAttempts = 0;
-		//click on the ok
-		while(record.isElementPresent(By.cssSelector("#ModalDialogHeader"))){	
-			WebElement ie = record.getStaleElem(By.cssSelector("#ModalDialogHeader"),driver,5);		
-			String message = getTextFromWebElement(ie,5);
-			if(message.contains("Success")){
-				confirm_menu.clickOnOkButtonAfterEditRecord();
-				break;
-			} else if(message.contains("Error")) {
-				ATUReports.add(time +" Get an error while click on apply.", LogAs.WARNING, null);
-				confirm_menu.clickOnOkButtonAfterErrorClickOnTheApply();	
-				System.out.println("Get an error while click on apply.");	
-				clickElement(ApplyButton);
-				if(numberOfAttempts == 5) {
-					ATUReports.add(time +" Get an error while click on apply.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-					Assert.assertTrue(false);
-				}
-			}
-			else Thread.sleep(3000);
+		System.out.println("The file close caption was added.");
+		ATUReports.add(time +" The file close caption was added.", "True.", "True.", LogAs.PASSED, null);
+		
+		for(String window_handler: driver.getWindowHandles()) {
+			driver.switchTo().window(window_handler);
+			break;
 		}
+		
+		new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(header, "Success"));
+		confirm_menu.clickOnOkButton();
 		
 		//return to the course
 		clickElement(Breadcrumbs);	
