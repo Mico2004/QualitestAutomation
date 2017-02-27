@@ -1387,13 +1387,15 @@ public class Page {
 	public void moveToTheOtherTab(String current_handler) throws InterruptedException{
 		
 		Set<String> allHandles = driver.getWindowHandles();								
-							
+		Thread.sleep(3000);
+		
 		for(String handler: allHandles) {
 		    if(!handler.equals(current_handler)){
 				driver.switchTo().window(handler);
 				break;
 				 }
 	  	}
+		
 	}
 	
 	public void checkIfStringContainOnlyUpperLatters(String label) {
