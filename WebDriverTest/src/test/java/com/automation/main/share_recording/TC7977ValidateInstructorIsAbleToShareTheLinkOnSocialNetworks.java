@@ -2,6 +2,8 @@ package com.automation.main.share_recording;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.browserlaunchers.locators.GoogleChromeLocator;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -33,6 +35,7 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -69,6 +72,10 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 	public String facebook_url = "https://www.facebook.com";
 	public String twitter_url = "https://www.twitter.com";
 	public String google_url = "https://plus.google.com";
+	public String tumblr_url = "https://www.tumblr.com/";
+	Date date = new Date();
+	SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmss");
+	String new_date_for_twitter="New TestKey"+sdf.format(date);
 
 
 	@BeforeClass
@@ -155,14 +162,23 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 			
 		//15.Enter the crdentials and click on the login button
 		share_recording_window.moveToTheOtherTab(current_handler);		
-		facebook_login_page.sendKeysToWebElementInput(facebook_login_page.facebook_email, facebook_login_page.mail);
-		facebook_login_page.sendKeysToWebElementInput(facebook_login_page.facebook_pass, facebook_login_page.password);
-		current_handler = driver.getWindowHandle();
-		facebook_login_page.clickElementJS(facebook_login_page.facebook_login_button);
+		if(!(driver instanceof InternetExplorerDriver)) {		
+			facebook_login_page.sendKeysToWebElementInput(facebook_login_page.facebook_email, facebook_login_page.mail);
+			facebook_login_page.sendKeysToWebElementInput(facebook_login_page.facebook_pass, facebook_login_page.password);
+			current_handler = driver.getWindowHandle();
+			facebook_login_page.clickElementJS(facebook_login_page.facebook_login_button);
 		
-		//16.Click on the "Post" button
-		facebook_login_page.clickElementJS(facebook_login_page.facebook_post_button);
-		
+			//16.Click on the "Post" button
+			facebook_login_page.clickElementJS(facebook_login_page.facebook_post_button);
+		} else {
+			//16.Click on the "Post" button
+			current_handler = driver.getWindowHandle();
+			facebook_login_page.clickElement(facebook_login_page.facebook_post_button);
+			driver.switchTo().alert().accept();
+			driver.switchTo().alert().accept();
+		}
+			
+		Thread.sleep(6000);
 		//17.Open your facebook timeline page	
 		facebook_login_page.moveToTheOtherTab(current_handler);
 		record.changeUrl(facebook_url);
@@ -178,7 +194,8 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 		share_recording_window.moveToTheOtherTabAndCloseTheOldTab(current_handler);
 		
 		//19.The recording page is loaded and the recording is being played.	
-		tegrity.loginCourses("User1");
+		if(driver instanceof FirefoxDriver)
+			tegrity.loginCourses("User1");
 		player_page.verifyTimeBufferStatusForXSec(2);
 		player_page.exitInnerFrame();
 		
@@ -193,23 +210,18 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 				
 		//23.Click on the facebook logo again
 		share_recording_window.waitForPageToLoad();
+		current_handler = driver.getWindowHandle();
 		share_recording_window.clickElementJS(share_recording_window.facebook_button);
 		
 		//24.The post page is displayed without needing to enter credentials again
+		share_recording_window.moveToTheOtherTab(current_handler);	
 		share_recording_window.verifyWebElementNotDisplayed(facebook_login_page.facebook_email, "mail");
 		share_recording_window.verifyWebElementNotDisplayed(facebook_login_page.facebook_pass, "password");
+		current_handler = driver.getWindowHandle();
 		
 		//25.Go back to Tegrity share recording dialog
-		driver.navigate().back();
-		
-		//26.Click on the checkbox of any (published) recording, hover over "Recording Tasks" & click on "Share Recording"
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-							
-		//27.Click on "Rcording Tasks">"Share Recording" 
-		record.clickOnRecordingTaskThenShareRecording();
-		
-		//28.Click on the "twitter" icon. 
-		share_recording_window.waitForPageToLoad();
+		share_recording_window.moveToTheOtherTabAndCloseTheOldTab(current_handler);
+		current_handler = driver.getWindowHandle();
 		share_recording_window.clickElementJS(share_recording_window.tweet_button);
 		
 		//29.Enter your twitter credentials
@@ -218,14 +230,16 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 		twitter_login_page.sendKeysToWebElementInput(twitter_login_page.twitter_pass, twitter_login_page.password);
 		
 		//30.Click 'Login and tweet' button
-		twitter_login_page.clickElement(twitter_login_page.twitter_login_button);
 		
-		//31.clikck on post the tweet to twitter
-		String status_for_twitter = twitter_login_page.getStatus();
+		twitter_login_page.status_of_uploading.sendKeys(new_date_for_twitter);
+		twitter_login_page.clickElementWithOutIdJS(twitter_login_page.twitter_login_button);
+			
+		//31.click on post the tweet to twitter
+		String status_for_twitter = twitter_login_page.getStatus();	
+		current_handler = driver.getWindowHandle();	
 		twitter_login_page.clickElement(twitter_login_page.twitter_post_button);
 		
-		//32.Open your twitter feed page
-		current_handler = driver.getWindowHandle();	
+		//32.Open your twitter feed page	
 		twitter_login_page.moveToTheOtherTab(current_handler);
 		record.changeUrl(twitter_url);
 		current_handler = driver.getWindowHandle();
@@ -235,13 +249,7 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 		
 		//34.Go back to Tegrity share recording dialog
 		record.changeUrl(tegrity.pageUrl);
-		
-		//35.Login as instructor
-		tegrity.loginCourses("User1");
-			
-		//36.Click on any course where that user is the Instructor in
-		course.selectCourseThatStartingWith("Ab");
-			
+					
 		//37.Click on the checkbox of any (published) recording, hover over "Recording Tasks" & click on "Share Recording"
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 			
@@ -260,10 +268,12 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 		google_plus_login_page.clickElementJS(google_plus_login_page.google_login_button);
 		
 		//41.Click on Post
-		google_plus_login_page.clickElementJS(google_plus_login_page.google_post_button);
-		
-		//42.Open you Google+ feed page
 		current_handler = driver.getWindowHandle();	
+		google_plus_login_page.waitForVisibility(google_plus_login_page.google_post_button.get(1));
+		google_plus_login_page.clickElement(google_plus_login_page.google_post_button.get(1));
+		
+		//42.Open you Google+ feed page	
+		Thread.sleep(3000);
 		google_plus_login_page.moveToTheOtherTab(current_handler);
 		record.changeUrl(google_url);
 		current_handler = driver.getWindowHandle();
@@ -275,6 +285,7 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 		google_plus_login_page.clickElement(google_plus_login_page.tegrity_url.get(2));
 		
 		//45 Playback begin in guest mode (Only help link and no breadcrumbs)
+		google_plus_login_page.moveToTheOtherTabAndCloseTheOldTab(current_handler);
 		tegrity.loginCourses("User1");
 		player_page.verifyTimeBufferStatusForXSec(2);
 		player_page.exitInnerFrame();
@@ -290,6 +301,7 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 				
 		//49.Click on the "Tumblr" icon
 		share_recording_window.waitForPageToLoad();
+		current_handler = driver.getWindowHandle();
 		share_recording_window.clickElementJS(share_recording_window.tumblr_button);
 		
 		//50.Enter your Tumblr credentials
@@ -300,16 +312,16 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 		tumbler_login_page.clickElementJS(tumbler_login_page.tumblr_login_button);
 				
 		//51.Click on Post
-		google_plus_login_page.clickElementJS(google_plus_login_page.google_post_button);
+		//google_plus_login_page.clickElementJS(google_plus_login_page.google_post_button);
 				
 		//52.Open you Google+ feed page
-		current_handler = driver.getWindowHandle();	
-		google_plus_login_page.moveToTheOtherTab(current_handler);
-		record.changeUrl(google_url);
-		current_handler = driver.getWindowHandle();
+		//current_handler = driver.getWindowHandle();	
+		//google_plus_login_page.moveToTheOtherTab(current_handler);
+		//record.changeUrl(google_url);
+		//current_handler = driver.getWindowHandle();
 				
 		//53.* * * * The post has the following elements:** <university url>    ** Tegrity recordings: '<recording name>'
-		google_plus_login_page.verifyRecordingAndUniversityNameAreDisplay(tegrity.getPageUrl());
+		//google_plus_login_page.verifyRecordingAndUniversityNameAreDisplay(tegrity.getPageUrl());
 		
 		
 		

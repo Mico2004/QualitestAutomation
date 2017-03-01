@@ -80,6 +80,8 @@ public class PlayerPage extends Page {
 	WebElement bookmarks_title;
 	@FindBy(css = "#undefined_TXT")
 	WebElement course_breadcrumbs;
+	@FindBy(css = "#undefined_TXT")
+	public List<WebElement> searchResult;
 	@FindBy(xpath = "//*[@id=\"tegrityBreadcrumbsBox\"]/li[2]/a")
 	WebElement course_name_breadcrumbs;
 	@FindBy(xpath = "//*[@id=\"playerContainer\"]")
@@ -131,6 +133,22 @@ public class PlayerPage extends Page {
 	WebElement ControlPanelDivTextBox;
 	@FindBy(id= "VolumeSliderDiv")
 	WebElement VolumeSliderDiv;
+	@FindBy(id= "QuestionButton_Img")
+	public WebElement questionButton;
+	@FindBy(id= "PrintButton_Img")
+	public WebElement printButton;
+	@FindBy(id= "IndexButton_Img")
+	public WebElement showChapters;
+	@FindBy(id= "DownloadButton_Img")
+	public WebElement downloadButton;
+	@FindBy(id= "Instructor")
+	public WebElement instructorController;
+	@FindBy(id= "BookmarkControl")
+	public WebElement bookmarkController;
+	@FindBy(id= "FullScreen_Img")
+	public WebElement fullScreen;
+	@FindBy(id= "ScreenAVPlayer")
+	public WebElement player;
 	@FindBy(id= "VolumeSliderButton")
 	WebElement VolumeSliderButton;
 	@FindBy(id= "FastForwardSliderButton_Img")
@@ -1567,4 +1585,22 @@ public class PlayerPage extends Page {
 			ATUReports.add("Verify that the breadcrumbs are not displayed.", "True.", "True.", LogAs.PASSED, null);
 		}
 	}
+	
+	public void verifySearchResultsAreNotDisplayed() {
+	try{
+		if(searchResult.get(2).isDisplayed() || searchResult.get(3).isDisplayed()) {
+			System.out.println("Not Verify that the search results are not displayed.");
+			ATUReports.add("Not Verify that the search results are not displayed." , "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+	}	else{
+		System.out.println("Verify that the search results are not displayed.");
+		ATUReports.add("Verify that the search results are not displayed.", "True.", "True.", LogAs.PASSED, null);
+	}
+	}catch (IndexOutOfBoundsException e){
+		System.out.println("Verify that the search results are not displayed.");
+		ATUReports.add("Verify that the search results are not displayed.", "True.", "True.", LogAs.PASSED, null);
+	}catch(NoSuchElementException e) {
+		System.out.println("Verify that the search results are not displayed.");
+		ATUReports.add("Verify that the search results are not displayed.", "True.", "True.", LogAs.PASSED, null);
+	}
+  }
 }

@@ -32,7 +32,7 @@ public class FacebookLoginPage extends Page {
 	public WebElement facebook_pass;
 	@FindBy(id="loginbutton")
 	public WebElement facebook_login_button;
-	@FindBy(id="u_0_k")
+	@FindBy(css="#u_0_k")
 	public WebElement facebook_post_button;
 	@FindBy(css=".userContentWrapper._5pcr")
 	public List<WebElement> facebook_cards_warpper;
@@ -45,8 +45,8 @@ public class FacebookLoginPage extends Page {
 	public void verifyRecordingAndUniversityNameAreDisplay(String recording_name ,LoginHelperPage tegrity ) {
 		String url = tegrity.pageUrl.substring(8);
 		try{
-			new WebDriverWait(driver, 3).until(ExpectedConditions.textToBePresentInElement(facebook_cards_warpper.get(0), recording_name));	
-			new WebDriverWait(driver, 3).until(ExpectedConditions.textToBePresentInElement(facebook_cards_warpper.get(0),url.toUpperCase()));
+			new WebDriverWait(driver, 5).until(ExpectedConditions.textToBePresentInElement(facebook_cards_warpper.get(1), recording_name));	
+			new WebDriverWait(driver, 5).until(ExpectedConditions.textToBePresentInElement(facebook_cards_warpper.get(1),url.toUpperCase()));
 			
 			System.out.println("The University Name: " + tegrity.pageUrl + " is display and the recording name is: " + recording_name + " display also.");
 			ATUReports.add(time +"The University Name: " + tegrity.pageUrl + " is display and the recording name is: " + recording_name + " display also.", LogAs.PASSED, null);

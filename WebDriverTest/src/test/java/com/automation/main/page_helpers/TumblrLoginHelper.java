@@ -31,7 +31,7 @@ public class TumblrLoginHelper extends Page {
 	public WebElement tumblr_next;
 	@FindBy(id="login-passwd")
 	public WebElement tumblr_pass;
-	@FindBy(id="login-signin")
+	@FindBy(id="submits")
 	public WebElement tumblr_login_button;
 	@FindBy(id="u_0_k")
 	public WebElement facebook_post_button;

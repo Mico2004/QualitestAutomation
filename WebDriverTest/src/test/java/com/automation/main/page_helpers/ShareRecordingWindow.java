@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import atu.testng.reports.ATUReports;
@@ -68,6 +69,8 @@ public class ShareRecordingWindow extends Page{
 	public WebElement reload_the_page;
 	@FindBy(id="toggleProtocol")
 	public WebElement http_toggle;
+	@FindBy(id="player")
+	public WebElement playerFrame;
 
 	public ShareRecordingWindow(WebDriver browser) {
 		super(browser);
@@ -301,8 +304,9 @@ public class ShareRecordingWindow extends Page{
 		public void moveToPlayFrame() throws InterruptedException {
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame(driver.findElement(By.xpath(".//*[@id='placeHolder']/iframe")));
-			Thread.sleep(2000);
-			driver.switchTo().frame(driver.findElement(By.id("Player")));		
+			//new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(playerFrame));
+			Thread.sleep(3000);
+			driver.switchTo().frame(0);		
 		}
 
 		public void moveToFullScreenFrame()throws InterruptedException  {

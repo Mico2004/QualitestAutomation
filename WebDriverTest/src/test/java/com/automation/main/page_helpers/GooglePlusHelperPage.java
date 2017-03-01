@@ -34,8 +34,8 @@ public class GooglePlusHelperPage extends Page {
 	public WebElement google_pass;
 	@FindBy(id="signIn")
 	public WebElement google_login_button;
-	@FindBy(id=".ZFr60d.CeoRYc")
-	public WebElement google_post_button;
+	@FindBy(css=".RveJvd.snByac")
+	public List<WebElement> google_post_button;
 	@FindBy(css=".Ihwked.UB0dDd.GcESAf.XkfHGe.hE2QI")
 	public List<WebElement> google_cards_warpper;
 	@FindBy(css=".Gu1oT")
@@ -49,7 +49,7 @@ public class GooglePlusHelperPage extends Page {
 	public void verifyRecordingAndUniversityNameAreDisplay(String pageUrl) {
 		
 		String url = pageUrl.substring(8);
-		if(tegrity_label.get(2).equals("Tegrity")) {
+		if(tegrity_label.get(2).getText().equals("Tegrity")) {
 			System.out.println("The label name is: Tegrity and is display on the status.");
 			ATUReports.add(time+ " The label name is: Tegrity and is display on the status.", LogAs.PASSED, null);
 		} else {
@@ -57,7 +57,7 @@ public class GooglePlusHelperPage extends Page {
 			ATUReports.add(time + " The label name is: Tegrity and is not display on the status.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 		
-		if(tegrity_url.get(2).equals(url)) {
+		if(tegrity_url.get(2).getText().equals(url)) {
 			System.out.println("The url name is: " + url + " and is display on the status.");
 			ATUReports.add(time+ " The url name is: " + url + "is display on the status.", LogAs.PASSED, null);
 		} else {

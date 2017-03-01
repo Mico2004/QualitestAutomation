@@ -30,14 +30,17 @@ public class TwitterLoginPage extends Page {
 	public WebElement twitter_email;
 	@FindBy(id="password")
 	public WebElement twitter_pass;
-	@FindBy(id=".button.selected.submit")
-	public WebElement twitter_login_button;
 	@FindBy(css=".button.selected.submit")
+	public WebElement twitter_login_button;
+	@FindBy(xpath=".//*[@id='update-form']/div[3]/fieldset[2]/input[2]")
 	public WebElement twitter_post_button;
 	@FindBy(css=".TweetTextSize.js-tweet-text.tweet-text")
 	public List<WebElement> twitter_cards_warpper;
 	@FindBy(css="#status")
 	public WebElement status_of_uploading;
+	@FindBy(css=".twitter-timeline-link")
+	public List<WebElement> twitter_links;
+	
 	public String mail = "techinstructor1";
 	public String password = "dushi19920";
 	
@@ -51,9 +54,9 @@ public class TwitterLoginPage extends Page {
 			System.out.println("The recording name is: " + recording_name + "and is not display on the status.");
 			ATUReports.add(time + " The recording name is: " + recording_name + "and is not display on the status.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
-		String url = twitter_cards_warpper.get(0).getAttribute("Title");
+		String url = twitter_links.get(0).getAttribute("title");
 		String[] url_to_compare = Status.split(" ");
-		if(url_to_compare[2].equals(url)){
+		if(url_to_compare[4].equals(url)){
 			System.out.println("The url name is: " + url + " and is display on the status.");
 			ATUReports.add(time+ " The url name is: " + url + "is display on the status.", LogAs.PASSED, null);
 		} else {
@@ -64,6 +67,7 @@ public class TwitterLoginPage extends Page {
 	}
 	
 	public String getStatus() {
+		waitForVisibility(status_of_uploading);
 		return status_of_uploading.getText();
 	}
 		
