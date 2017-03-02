@@ -308,6 +308,7 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 		share_recording_window.moveToTheOtherTab(current_handler);		
 		tumbler_login_page.sendKeysToWebElementInput(tumbler_login_page.tumblr_email, tumbler_login_page.mail);
 		tumbler_login_page.clickElementJS(tumbler_login_page.tumblr_next);
+		tumbler_login_page.clickElementJS(tumbler_login_page.tumblr_next2);
 		tumbler_login_page.sendKeysToWebElementInput(tumbler_login_page.tumblr_pass, tumbler_login_page.password);
 		tumbler_login_page.clickElementJS(tumbler_login_page.tumblr_login_button);
 				
@@ -322,10 +323,7 @@ public class TC7977ValidateInstructorIsAbleToShareTheLinkOnSocialNetworks {
 				
 		//53.* * * * The post has the following elements:** <university url>    ** Tegrity recordings: '<recording name>'
 		//google_plus_login_page.verifyRecordingAndUniversityNameAreDisplay(tegrity.getPageUrl());
-		
-		
-		
-		
+			
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	}		

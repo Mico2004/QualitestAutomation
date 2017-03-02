@@ -304,7 +304,6 @@ public class ShareRecordingWindow extends Page{
 		public void moveToPlayFrame() throws InterruptedException {
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame(driver.findElement(By.xpath(".//*[@id='placeHolder']/iframe")));
-			//new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOf(playerFrame));
 			Thread.sleep(3000);
 			driver.switchTo().frame(0);		
 		}
