@@ -274,6 +274,8 @@ public class RecordingHelperPage extends Page {
 	public WebElement download;
 	@FindBy(css = ".bookmark")
 	List<WebElement> bookmarks_list;
+	@FindBy(id = "GetSupport")
+	public WebElement getSupport;
 	@FindBy(css=".video-outer:nth-of-type(2)")
 	public WebElement visibleFirstChapter;
 	@FindBy(css = ".video-thumbnail")

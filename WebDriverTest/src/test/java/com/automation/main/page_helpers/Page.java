@@ -269,6 +269,54 @@ public class Page {
 		
 	}
 	
+	public void verifyPlaceHolderIsDisplay(WebElement element ,String name) {
+		
+		try {
+		if(element.getAttribute("placeholder").equals(name)){
+			System.out.println("The place holder is: " +element.getAttribute("placeholder") + " and is equals to: " + name);
+			ATUReports.add(time + " The place holder is: " +element.getAttribute("placeholder") + " and is equals to: " + name,"Success.","Success.",LogAs.PASSED,null);		
+		} else {
+			System.out.println("The place holder is: " +element.getAttribute("placeholder") + " and is not equals to: " + name);
+			ATUReports.add(time +" The place holder is: " +element.getAttribute("placeholder") + " and is equals to: " + name,element.getText(),"Success.","Failed.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+		}catch(org.openqa.selenium.NoSuchElementException e){
+			System.out.println("The place holder is: " +element.getAttribute("placeholder") + " and is not equals to: " + name);
+			ATUReports.add(time +" The place holder is: " +element.getAttribute("placeholder") + " and is equals to: " + name,element.getText(),"Success.","Failed.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+	
+	public void verifyThatThisElementIsEditable(WebElement element){
+		try {
+			if(element.getTagName().equals("input") || element.getTagName().equals("textarea")){
+				System.out.println("The element: " +element.getAttribute("id") +" is editable.");
+				ATUReports.add(time + "The element: " +element.getAttribute("id") +" is editable.","Success.","Success.",LogAs.PASSED,null);		
+			} else {
+				System.out.println("The element: " +element.getAttribute("id") +" is editable.");
+				ATUReports.add(time + "The element: " +element.getAttribute("id") +" is editable.","Success.","Failed.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			}	
+			}catch(Exception e){
+				e.printStackTrace();
+				ATUReports.add(time +e.getMessage(),"Success.","Failed.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+	}
+	
+	public void verifyThatTextAreaIsEmpty(WebElement element) {
+		try {
+			String id = element.getAttribute("id");
+			String value = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");
+			if(value.equals("")) {
+				System.out.println("Verify that The texteara is empty.");
+				ATUReports.add(time + " Verify that The texteara is empty.","Success.","Success.",LogAs.PASSED,null);		
+			} else{
+				System.out.println("not Verify that The texteara is empty.");
+				ATUReports.add(time + " Verify that The texteara is empty.","Success.","Failed.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			ATUReports.add(time +e.getMessage(),"Success.","Failed.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    }
+	}
+	
 	public void waitForVisibility(WebElement element, int seconds)// visibility of an element
 	{
 		try {
@@ -1001,6 +1049,24 @@ public class Page {
 			}else{
 				System.out.println("Not Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title);
 				ATUReports.add("Verify that we can see hint to the webElement: " +element.getText() + " the hint is: " + title ,"The hint is display.","The hint is not display.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
+			}
+		}catch(Exception e){
+			e.getMessage();
+			ATUReports.add(e.getMessage(), "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
+	
+	public void verifyThatTheElementIsReadOnly(WebElement element) {		
+		try {
+			String title = element.getAttribute("ng-disabled");
+			if(title != null){
+				if(title.equals("isDisabledField")){
+					System.out.println("Verify that the element: " +element.getText() + " is readonly." );
+					ATUReports.add("Verify that the element: " +element.getText() + " is readonly.","Success.","Success.",LogAs.PASSED, null);		
+				}
+				}else{
+				System.out.println("Not Verify that the element: " +element.getText() + " is readonly."  + title);
+				ATUReports.add("Verify that the element: " +element.getText() + " is readonly." ,"Success.","Success.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));					
 			}
 		}catch(Exception e){
 			e.getMessage();

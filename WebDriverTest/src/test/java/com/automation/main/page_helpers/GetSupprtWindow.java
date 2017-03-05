@@ -1,5 +1,6 @@
 package com.automation.main.page_helpers;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,15 +18,24 @@ public class GetSupprtWindow extends Page {
 		// TODO Auto-generated constructor stub
 	}
 	@FindBy(id = "supportWindow") WebElement support_window_title;
-	@FindBy(id = "email-field") WebElement from_email_field;
-	@FindBy(id = "name-field") WebElement from_name_field;
-	@FindBy(id = "email-field2") WebElement to_email_field;
-	@FindBy(id = "name-field2") WebElement to_name_field;
-	@FindBy(id = "subject-field") WebElement subject_field;
-	@FindBy(id = "textarea-field") WebElement comments_field;
-	@FindBy(xpath = "//*[@id=\"supportWindow\"]/div[2]/form/span[1]")public WebElement support_window_info;
-	@FindBy(tagName = "Cancel") WebElement cancel_button;
-	@FindBy(css=".btn.btn-primary.pull-right" ) WebElement send_button;
+	@FindBy(id = "email-field")
+	public WebElement from_email_field;
+	@FindBy(id = "name-field")
+	public WebElement from_name_field;
+	@FindBy(id = "email-field2") 
+	public WebElement to_email_field;
+	@FindBy(id = "name-field2") 
+	public WebElement to_name_field;
+	@FindBy(id = "subject-field")
+	public WebElement subject_field;
+	@FindBy(id = "textarea-field")
+	public WebElement comments_field;
+	@FindBy(xpath = "//*[@id=\"supportWindow\"]/div[2]/form/span[1]")
+	public WebElement support_window_info;
+	@FindBy(xpath = ".//*[@id='supportWindow']/div[2]/form/div[5]/button[2]")
+	public WebElement cancel_button;
+	@FindBy(xpath=".//*[@id='supportWindow']/div[2]/form/div[5]/button[1]" )
+	public WebElement send_button;
 	
 	
 
@@ -49,6 +59,7 @@ public class GetSupprtWindow extends Page {
 	///verify support window is displayed
 	public void verifySupportWindow()
 	{
+		waitForVisibility(support_window_title);
 		if(support_window_title.isDisplayed())
 		{
 			ATUReports.add(time +" support window is visible", LogAs.PASSED, null);
@@ -94,4 +105,40 @@ public class GetSupprtWindow extends Page {
 			Assert.assertTrue(false);
 	    }
 	}
+
+	public void verifyThatTheEmailAdressFieldHelpDeskOrPlaceHolder() {
+		
+		try {
+			String id = to_email_field.getAttribute("id");
+			String mail = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");
+			if(mail.equals("helpdesk@mheducation.com")) {
+				System.out.println("Verify that the email address is: " + mail);
+				ATUReports.add(time + " Verify that the email address is: " + mail,"Success.","Success.",LogAs.PASSED,null);		
+			} else{
+				verifyPlaceHolderIsDisplay(to_email_field, "E-mail address");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			ATUReports.add(time +e.getMessage(),"Success.","Failed.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    }
+	}
+	
+public void verifyThatTheSupportEmailHasDefultValue() {
+		
+		try {
+			String id = to_name_field.getAttribute("id");
+			String supportEmail = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");
+			if(supportEmail.equals("Institution Help Desk")) {
+				System.out.println("Verify that the support email has defult value of institution Help Desk.");
+				ATUReports.add(time + " Verify that the support email has defult value of institution Help Desk.","Success.","Success.",LogAs.PASSED,null);		
+			} else{
+				System.out.println("not Verify that the support email has defult value of institution Help Desk.");
+				ATUReports.add(time + " Verify that the support email has defult value of institution Help Desk.","Success.","Failed.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));		
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			ATUReports.add(time +e.getMessage(),"Success.","Failed.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+	    }
+	}
+	
 }
