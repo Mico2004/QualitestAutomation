@@ -1,8 +1,16 @@
 package com.automation.main.page_helpers;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
+
+import atu.testng.reports.ATUReports;
+import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 public class EmailAndConnectionSettingsPage extends Page {
 
@@ -18,6 +26,11 @@ public class EmailAndConnectionSettingsPage extends Page {
 	@FindBy(id="connect-field") public WebElement connect_checkbox;
 	@FindBy(id="ApplyChangesButton")public  WebElement ok_button;
 	@FindBy(id="CancelButton") public WebElement cancel_button;
+	@FindBy(id="email-field2") public WebElement smtp_server;
+	@FindBy(id="port-field") public WebElement smtp_port;
+	@FindBy(id="user-field") public WebElement smtp_user_id;
+	@FindBy(id="password-field") public WebElement smtp_user_password;
+	
 	
 	
 	///fill email setting page using sending user,admin email,helpdesk email
@@ -56,6 +69,60 @@ public class EmailAndConnectionSettingsPage extends Page {
 			System.out.println("confirmation failed");
 
 			e.printStackTrace();
+		}
+	}
+
+	public void waitForThePageToLoad(){
+		try {
+		
+			wait.until(ExpectedConditions.visibilityOf(sending_user));
+			wait.until(ExpectedConditions.visibilityOf(admin_email));
+			wait.until(ExpectedConditions.visibilityOf(helpdesk_email));
+			wait.until(ExpectedConditions.visibilityOf(smtp_server));
+			
+		} catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(time +e.getMessage(), "Success.", "Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+	
+	
+	
+	public void cleanAllOptionsAndPutMail() {
+
+		try { 
+		sending_user.clear();
+		admin_email.clear();
+		smtp_port.clear();
+		smtp_server.clear();
+		smtp_user_id.clear();
+		smtp_user_password.clear();
+		helpdesk_email.clear();
+		
+		System.out.println("Clear all the fields in the page.");
+		ATUReports.add(time +" Clear all the fields in the page.", "Success.", "Success.", LogAs.PASSED, null);
+		
+		if(!connect_checkbox.isSelected()) {
+			System.out.println("The checkbox: " + connect_checkbox.getText() + " is not selected");
+			ATUReports.add("The checkbox: " + connect_checkbox.getText() + " is not selected", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+			
+		} else {
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", connect_checkbox);			
+			System.out.println("The checkbox: " + connect_checkbox.getText() + " is not selected");
+			ATUReports.add("The checkbox: " + connect_checkbox.getText() + " is not selected", LogAs.PASSED, null);
+		}
+			
+		helpdesk_email.sendKeys("qtautomationtest@mailinator.com");
+		admin_email.sendKeys("qtautomationtest@mailinator.com");
+		System.out.println("The email of helpdesk and adminstator was change.");
+		ATUReports.add("The email of helpdesk and adminstator was change.", LogAs.PASSED, null);
+		
+		} catch (Exception e) {
+		
+			e.printStackTrace();
+			ATUReports.add(time +" Not clear all the fields in the page.", "Success.", "Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
 		}
 	}
 

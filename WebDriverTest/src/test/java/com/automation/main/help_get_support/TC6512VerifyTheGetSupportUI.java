@@ -108,7 +108,7 @@ public class TC6512VerifyTheGetSupportUI {
 		get_support_window.verifyThatTheElementIsReadOnly(get_support_window.to_email_field);
 		
 		//8.Support email address field has the value of the helpdesk email or a placeholder text of "Email address".
-		get_support_window.verifyThatTheEmailAdressFieldHelpDeskOrPlaceHolder();
+		get_support_window.verifyThatTheEmailAdressFieldHelpDeskOrPlaceHolder("helpdesk@mheducation.com");
 		
 		//9. Support title field- Support title field is read only.
 		get_support_window.verifyThatTheElementIsReadOnly(get_support_window.to_name_field);

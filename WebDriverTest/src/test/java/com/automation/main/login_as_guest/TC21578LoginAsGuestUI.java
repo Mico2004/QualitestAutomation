@@ -92,20 +92,14 @@ public class TC21578LoginAsGuestUI {
 		delete_menu = PageFactory.initElements(driver, DeleteMenu.class);
 		course = PageFactory.initElements(driver, CoursesHelperPage.class);
 		confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
-
-		wait = new WebDriverWait(driver, 30);
 		move_window = PageFactory.initElements(driver, MoveWindow.class);
 		erp_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
 		admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
 		advanced_services_setting_page = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
 		mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
-
 		create_new_course_window = PageFactory.initElements(driver, CreateNewCourseWindow.class);
-
 		mange_adhoc_users_page = PageFactory.initElements(driver, ManageAdhocUsersPage.class);
-
 		create_new_user_window = PageFactory.initElements(driver, CreateNewUserWindow.class);
-
 		mangage_adhoc_courses_membership_window = PageFactory.initElements(driver,
 				ManageAdHocCoursesMembershipWindow.class);
 		help_page = PageFactory.initElements(driver, HelpPage.class);

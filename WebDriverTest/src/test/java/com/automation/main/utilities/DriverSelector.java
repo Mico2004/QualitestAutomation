@@ -1,12 +1,18 @@
 package com.automation.main.utilities;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.MarionetteDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.Listeners;
 import atu.testng.reports.ATUReports;
@@ -40,21 +46,26 @@ public class DriverSelector {
 
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "null" })
 	public static WebDriver getDriver(BrowserType type) {
 		WebDriver driver = null;
 		DesiredCapabilities capability = null;
+		LoggingPreferences logPrefs = new LoggingPreferences();
+		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
 		switch (type) {
 		case Firefox:
 			System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");	
-			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+			DesiredCapabilities capabilities = DesiredCapabilities.firefox();		
+			capability.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);		
 			capabilities.setCapability("marionette", true);		
 			driver = new FirefoxDriver(capabilities);	
 			//driver = new MarionetteDriver();	
 			break;
 		case Chrome:
 			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-			driver = new ChromeDriver();
+		    capability = DesiredCapabilities.chrome();
+		    capability.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);		
+			driver = new ChromeDriver(capability);
 			driver.manage().window().maximize();
 			// capability=DesiredCapabilities.chrome();
 			// capability.setPlatform(Platform.WIN8_1);
@@ -62,7 +73,8 @@ public class DriverSelector {
 		case IE:
 			System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
 			capability = DesiredCapabilities.internetExplorer();
-			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);			
+			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);	
+			capability.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);		
 			//capability.setCapability("nativeEvents",false);			
 			capability.setCapability("ignoreZoomSetting", true);
 			//capability.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);

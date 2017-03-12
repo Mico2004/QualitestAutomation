@@ -1,8 +1,13 @@
 package com.automation.main.page_helpers;
 
+import java.util.List;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
@@ -36,9 +41,15 @@ public class GetSupprtWindow extends Page {
 	public WebElement cancel_button;
 	@FindBy(xpath=".//*[@id='supportWindow']/div[2]/form/div[5]/button[1]" )
 	public WebElement send_button;
+	@FindBy(id="inboxfield")
+	public WebElement mailinator_mail_edittext;	
+	@FindBy(xpath="html/body/section[1]/div/div[3]/div[2]/div[2]/div[1]/span/button" )
+	public WebElement mailinator_mail_go;	
+	@FindBy(css=".innermail.ng-binding")
+	public List<WebElement> mail_time_of_sending;
+	@FindBy(xpath="html/body")
+	public WebElement contant_of_mail ;
 	
-	
-
 	///verify support window is not displayed
 	public void verifyNoSupportWindow()
 	{
@@ -73,6 +84,47 @@ public class GetSupprtWindow extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	// This function verify that copy menu open
+	public void verifyThatGetSupportMenuOpen() {
+				boolean is_closed = isGetSupportMenuClosed();
+				
+				if(!is_closed) {
+					System.out.println("Get support menu is open.");
+					ATUReports.add(time +" Get support menu.", "Open.", "Open.", LogAs.PASSED, null);
+					Assert.assertTrue(true);
+				} else {
+					System.out.println("Get support menu is close.");
+					ATUReports.add(time +" Get support menu.", "Open.", "Close.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					Assert.assertTrue(false);
+				}
+			}
+	
+	// This function verify that copy menu close
+	public void verifyThatGetSupportMenuClose() {
+		boolean is_closed = isGetSupportMenuClosed();
+		
+		if(!is_closed) {
+			System.out.println("Get support menu is open.");
+			ATUReports.add(time +" Get support menu.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			Assert.assertTrue(false);
+		} else {
+			System.out.println("Copy Get support is close.");
+			ATUReports.add(time +" Get support menu.", "Close.", "Close.", LogAs.PASSED, null);
+			Assert.assertTrue(true);
+		}
+	}
+	
+	// This function return true if copy menu is closed and false if it is open
+	public boolean isGetSupportMenuClosed() {
+			try {
+				support_window_title.isDisplayed();
+				return false;
+			} catch (org.openqa.selenium.NoSuchElementException msg) {
+				return true;
+			}
+		}
+	
 	///fill support window blank fields and send it to your email
 	public void fillSupportWindowAndSend(String from_email,String from_name,String subject,String comments,ConfirmationMenu confirm ,WebDriver driver)
 	{ try {
@@ -106,12 +158,12 @@ public class GetSupprtWindow extends Page {
 	    }
 	}
 
-	public void verifyThatTheEmailAdressFieldHelpDeskOrPlaceHolder() {
+	public void verifyThatTheEmailAdressFieldHelpDeskOrPlaceHolder(String Email) {
 		
 		try {
 			String id = to_email_field.getAttribute("id");
 			String mail = (String)((JavascriptExecutor) driver).executeScript("return document.getElementById(\""+id+"\").value;");
-			if(mail.equals("helpdesk@mheducation.com")) {
+			if(mail.equals(Email)) {
 				System.out.println("Verify that the email address is: " + mail);
 				ATUReports.add(time + " Verify that the email address is: " + mail,"Success.","Success.",LogAs.PASSED,null);		
 			} else{
@@ -123,7 +175,7 @@ public class GetSupprtWindow extends Page {
 	    }
 	}
 	
-public void verifyThatTheSupportEmailHasDefultValue() {
+	public void verifyThatTheSupportEmailHasDefultValue() {
 		
 		try {
 			String id = to_name_field.getAttribute("id");
@@ -139,6 +191,34 @@ public void verifyThatTheSupportEmailHasDefultValue() {
 			e.printStackTrace();
 			ATUReports.add(time +e.getMessage(),"Success.","Failed.",LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 	    }
+	}
+
+	
+	public String getTheGgidFromTheUrl(String url) {
+		
+		String[] urlsplit = url.split("/");
+	
+ 		return urlsplit[4];	
+	}
+	
+	public String getTheUniverstyNameFromTheUrl(String url) {
+		
+		String[] urlsplit = url.split("/");
+	
+ 		return urlsplit[1];	
+	}
+
+	public String getUserAgentByLogs() {
+		 LogEntries logEntries = driver.manage().logs().get(LogType.BROWSER);
+		 String user_agent = null;  
+		 for (LogEntry entry : logEntries) {
+	          //  System.out.println(new Date(entry.getTimestamp()) + " " + entry.getLevel() + " " + entry.getMessage());
+	            if(entry.getMessage().contains("User-Agent")){
+	            	user_agent = entry.getMessage();
+	            	break;
+	        }
+	    }
+	        return user_agent;
 	}
 	
 }
