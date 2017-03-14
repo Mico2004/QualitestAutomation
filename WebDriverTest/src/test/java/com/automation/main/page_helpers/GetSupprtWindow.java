@@ -299,4 +299,16 @@ public class GetSupprtWindow extends Page {
 		return split[0];
 	}
 	
+	
+	public void waitForTheMailToLoad(){
+		try{
+		
+		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(mail_time_of_sending.get(0)));
+		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(mail_time_of_sending.get(3)));
+		
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}	
+	}
 }
