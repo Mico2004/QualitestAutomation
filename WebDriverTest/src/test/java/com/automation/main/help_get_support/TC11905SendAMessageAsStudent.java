@@ -1,9 +1,6 @@
 package com.automation.main.help_get_support;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.logging.LogEntries;
-import org.openqa.selenium.logging.LogEntry;
-import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -30,15 +27,11 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import junitx.util.PropertyManager;
-
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.util.Date;
-import java.util.Locale;
-
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC6514SendAMessageAsInstructor {
+public class TC11905SendAMessageAsStudent {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -64,7 +57,7 @@ public class TC6514SendAMessageAsInstructor {
 	DesiredCapabilities capability;
 	String url_of_mail = "https://www.mailinator.com";
 	String DateToStr;
-	String user_Agent,user_Agent2;
+	String user_Agent, recording_name,course_id;
 
 	@BeforeClass
 	public void setup() {
@@ -83,8 +76,8 @@ public class TC6514SendAMessageAsInstructor {
 			
 		 Date curDate = new Date();
 		 DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println("Starting the test: TC6514SendAMessageAsInstructor at " + DateToStr);
-		 ATUReports.add("Message window.", "Starting the test: TC6514SendAMessageAsInstructor at " + DateToStr, "Starting the test: TC6514SendAMessageAsInstructor at " + DateToStr, LogAs.PASSED, null);	
+		 System.out.println("Starting the test:  TC11905SendAMessageAsStudent at " + DateToStr);
+		 ATUReports.add("Message window.", "Starting the test:  TC11905SendAMessageAsStudent at " + DateToStr, "Starting the test:  TC11905SendAMessageAsStudent at " + DateToStr, LogAs.PASSED, null);	
 	}
 
 	@AfterClass
@@ -94,8 +87,8 @@ public class TC6514SendAMessageAsInstructor {
 		
 	
 	// @Parameters({"web","title"}) in the future
-	@Test (description="TC6514 Send a message as Instructor")
-	public void test6514() throws InterruptedException, ParseException {
+	@Test (description="TC11905 Send a message as Instructor")
+	public void test11905() throws InterruptedException {
 		
 		//1.log in courses page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
@@ -114,56 +107,60 @@ public class TC6514SendAMessageAsInstructor {
 		//5.Click on ok after the confirm on the email setting
 		confirm_menu.clickOnOkButtonAfterConfirmEmailSetting();
 		
-		//5.endPrecondition : sign out
+		//6.endPrecondition : sign out
 		email_and_connection_settings_page.signOut();
 		
-		//6.login as instructor
-		tegrity.loginCourses("User1");
-			
-		for(int CorusePageOrRecordingPage = 0 ; CorusePageOrRecordingPage < 2 ; CorusePageOrRecordingPage++){
+		//7.login as student
+		tegrity.loginCourses("User4");
+		
+		for(int CorusePageOrRecordingPage = 0 ; CorusePageOrRecordingPage < 3 ; CorusePageOrRecordingPage++){
 		
 		if(CorusePageOrRecordingPage == 1) {
 			course.selectCourseThatStartingWith("Ab");
+		} else if(CorusePageOrRecordingPage == 2) {	
+			course.selectCourseThatStartingWith("Ab");
+			recording_name = record.getFirstRecordingTitle();
+			record.verifyFirstExpandableRecording();
+			record.clickOnTheFirstCaptherWithOutTheExpand();
 		}
 		
-		//7.Hover over the "Help" link	
+		//8.Hover over the "Help" link	
 		String url =  course.getCurrentUrlCoursePage(); 
 		course.moveToElementAndPerform(course.help, driver);
 			
-		//8.Click the "Get Support" link
+		//9.Click the "Get Support" link
 		course.clickElementJS(course.get_support);
 		
-		//9.Verify that *From* field contain the email you registered
+		//10.*Get Support* form is displayed in new window.
 		get_support_window.waitForThePageToLoad();
+		get_support_window.verifyThatGetSupportMenuOpen();
+		
+		//11.Verify that *From* field contain the email you registered with and below it is your *User Name*
 		get_support_window.verifyThatTheEmailAdressFieldHelpDeskOrPlaceHolder("qtautomationtest@mailinator.com");
 		
-		//10.put the mail in the to field
+		//12.Enter the text in *Subject* textfield (Not mandatory)
+		get_support_window.sendKeysToWebElementInput(get_support_window.subject_field, "Test 11905 " + DateToStr );
+	
+		//13.Enter the text in *Comments* textfield (Not mandatory)
+		get_support_window.sendKeysToWebElementInput(get_support_window.comments_field,"Test 11905");
+		
+		//14.put the mail in the to field
 		get_support_window.sendKeysToWebElementInput(get_support_window.from_email_field,"test@test.com");
 		
-		//10.User name field. Used name of the logged user as default value.
+		//15.User name field. Used name of the logged user as default value.
 		get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(course.user_name, get_support_window.from_name_field.getAttribute("value"));
 		
-		//11.Enter the text in *Subject* textfield (Not mandatory)
-		get_support_window.sendKeysToWebElementInput(get_support_window.subject_field, "Test 6514 " + DateToStr );
-		
-		//12.Enter the text in *Comments* textfield (Not mandatory)
-		get_support_window.sendKeysToWebElementInput(get_support_window.comments_field,"Test 6514");
-		
-		//13.Press the *Send* button
+		//16.Press the *Send* button
 		get_support_window.clickElement(get_support_window.send_button);
 		
-		//14. *Get Support* window is closed.
+		//17.*Get Support* window is closed.
 		get_support_window.verifyThatGetSupportMenuClose();
 				
-		//15. *Email sent successfully* message is displayed.
+		//18. *Email sent successfully* message is displayed.
 		confirm_menu.clickOnOkButtonAfterConfirmEmailSentSuccessfully();
 				
 		//16. *User Agent:* <Press F12 -> refresh the page if needed -> Network -> Choose a line -> Headers -> Request Headers -> User-Agent -> +Compare+>
-		if(CorusePageOrRecordingPage == 0) { 
-			user_Agent = get_support_window.getUserAgentByLogs();
-		} else {
-			user_Agent2 = get_support_window.getUserAgentByLogs();
-		}
+		user_Agent = get_support_window.getUserAgentByLogs();
 		
 		//17.Open the Helpdesk email in new tab\window
 		record.changeUrl(url_of_mail);
@@ -185,7 +182,7 @@ public class TC6514SendAMessageAsInstructor {
 		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"test@test.com");
 			
 		//22 *From:* <User Name> (<From email>) <Comments>
-		String userName = PropertyManager.getProperty("User1");
+		String userName = PropertyManager.getProperty("User4");
 		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"From: " + userName);
 				
 		//23.Separator line
@@ -201,23 +198,28 @@ public class TC6514SendAMessageAsInstructor {
 		String customer_Name =  get_support_window.moveToUpperCase(get_support_window.getTheUniverstyNameFromTheUrl(url));
 		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Customer Name: " +customer_Name);
 		
-		if(CorusePageOrRecordingPage == 1){
+		if(CorusePageOrRecordingPage == 1 || CorusePageOrRecordingPage == 2){
 			//26.*Course Id:* <Course Id>
-			String course_id =  get_support_window.getTheGgidFromTheUrl(url);
+			if(CorusePageOrRecordingPage == 1){
+				course_id =  get_support_window.getTheGgidFromTheUrl(url);
+			}
 			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Course ID: " +course_id);
 		
 			//26.1 *Course Name:* <Course name>
-			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Course Name: " +PropertyManager.getProperty("course1"));
+			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Course Name: " +PropertyManager.getProperty("course1"));		
+		} 
+		if (CorusePageOrRecordingPage == 2){
+			//7. *Recording ID:* <Recording Id>
+			String recording_id =  get_support_window.getTheGgidFromTheUrlForRecording(url);
+			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Recording ID: " +recording_id);
 			
-			//27. *Page URL:* <Full page URL>
-			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"User Agent: " +user_Agent2);
-		}
-		else {
-			//27. *Page URL:* <Full page URL>
-			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"User Agent: " +user_Agent);
-		
+			//26.2 8. *Recording Name:* <recording name>
+			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Recording Name: " +recording_name);
 		}
 		//27. *Page URL:* <Full page URL>
+		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"User Agent: " +user_Agent);
+				
+		//28. *Page URL:* <Full page URL>
 		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Page URL: " +url);
 		
 		//28.return back to the course page

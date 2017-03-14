@@ -96,7 +96,7 @@ public class GetSupprtWindow extends Page {
 		}
 	}
 	
-	// This function verify that copy menu open
+	// This function verify that support menu open
 	public void verifyThatGetSupportMenuOpen() {
 				boolean is_closed = isGetSupportMenuClosed();
 				
@@ -120,7 +120,7 @@ public class GetSupprtWindow extends Page {
 			ATUReports.add(time +" Get support menu.", "Close.", "Open.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		} else {
-			System.out.println("Copy Get support is close.");
+			System.out.println("Get support is close.");
 			ATUReports.add(time +" Get support menu.", "Close.", "Close.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		}
@@ -130,11 +130,14 @@ public class GetSupprtWindow extends Page {
 	public boolean isGetSupportMenuClosed() {
 			try {
 				new WebDriverWait(driver,30).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id='supportWindow']/div[2]/form/div[5]/button[1]")));	
-				support_window_title.isDisplayed();
+				send_button.isDisplayed();
 				return false;
 			} catch (org.openqa.selenium.NoSuchElementException msg) {
 				return true;
-			} catch (org.openqa.selenium.TimeoutException msg) {
+			} catch (org.openqa.selenium.StaleElementReferenceException msg) {
+				return true;
+			}
+			catch (org.openqa.selenium.TimeoutException msg) {
 				return false;
 			}
 		}
@@ -228,6 +231,14 @@ public class GetSupprtWindow extends Page {
  		return urlsplit[5];	
 	}
 	
+	public String getTheGgidFromTheUrlForRecording(String url) {
+		
+		String[] urlsplit = url.split("/");
+		String[] urlsplit2 = urlsplit[5].split("\\?");
+ 		
+		return urlsplit2[0];	
+	}
+	
 	public String getTheUniverstyNameFromTheUrl(String url) {
 		
 		String[] urlsplit = url.split("/");
@@ -286,5 +297,6 @@ public class GetSupprtWindow extends Page {
 		String strToReturn =new String(chr);
 		String[] split =strToReturn.split("\\.");
 		return split[0];
-	}	
+	}
+	
 }

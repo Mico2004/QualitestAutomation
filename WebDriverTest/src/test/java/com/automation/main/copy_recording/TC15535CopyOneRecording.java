@@ -170,8 +170,6 @@ public class TC15535CopyOneRecording {
 
 		}
 
-
-
 		//9.take recorder name for later 
 		String destination_course_name = course_list.get(1);
 		System.out.println(destination_course_name);
