@@ -173,6 +173,7 @@ public class TC11905SendAMessageAsStudent {
 		get_support_window.clickElement(get_support_window.mailinator_mail_go);
 		 	
 		//20.Verify that sent mail is received.
+		get_support_window.waitForVisibility(get_support_window.mail_time_of_sending.get(3));
 		get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(get_support_window.mail_time_of_sending.get(3), "moments ago");
 	
 		//21.Verify received email by the next order: Received mail from: <Various. Depends on who sent it>
