@@ -318,10 +318,9 @@ public class GetSupprtWindow extends Page {
 	}
 
 	public void clickOnTheFirstMail() throws InterruptedException {
-		clickElementJSCSS(mail_time_of_sending.get(0));
-		driver.switchTo().frame("publicshowmaildivcontent");
+		clickElement(mail_time_of_sending.get(0));
 		for(int i = 0;  i<5 ; i++) {
-			if(!isElemenetDisplayed(By.xpath("html/body"))){
+			if(!isElemenetDisplayed(By.xpath(".//*[@id='publicInboxCtrl']/div[1]"))){
 				clickElementJSCSS(mail_time_of_sending.get(0));
 				driver.switchTo().frame("publicshowmaildivcontent");
 			} else {
