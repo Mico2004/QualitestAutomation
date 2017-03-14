@@ -1,8 +1,7 @@
 package com.automation.main.page_helpers;
 
-import java.util.HashSet;
-import java.util.List;
 
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
@@ -13,7 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -585,7 +583,7 @@ public class ConfirmationMenu extends Page {
 
 	public void clickOnOkButtonAfterConfirmEmailSetting() throws InterruptedException {
 		try {
-
+			Thread.sleep(1500);
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
@@ -594,7 +592,7 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
-			ok_button.click();
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", ok_buttonCss);
 			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
@@ -608,7 +606,7 @@ public class ConfirmationMenu extends Page {
 	public void clickOnOkButtonAfterConfirmEmailSentSuccessfully() throws InterruptedException {
 		// TODO Auto-generated method stub
 		try {
-
+			Thread.sleep(1000);
 			if (!header_title_list.get(0).getText().contains("Success")) {
 				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
@@ -617,7 +615,7 @@ public class ConfirmationMenu extends Page {
 				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertEquals(false, true);
 			}
-			ok_button.click();
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", ok_button);
 			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
@@ -716,6 +714,27 @@ public class ConfirmationMenu extends Page {
 		}
 		Thread.sleep(2000);
 	}
+	
+	public void clickOnOkButtonAfterGettingErrorFromSendingMail(String Massage) throws InterruptedException
+	{
+		try {		
+			if (!header_title_list.get(0).getText().contains("Error")) {
+				ATUReports.add(time +" Error window title is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("Error window title is wrong.");
+			}
+			if (!error_msg_body_list.get(0).getText().contains(Massage)) {
+				System.out.println("Error window description is wrong.");
+				ATUReports.add(time +" Error window description is wrong.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", ok_button);	
+			System.out.println("Clicked on OK button.");
+			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
+		} catch (Exception e) {
+			ATUReports.add(time +" Clicked on OK button", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		Thread.sleep(2000);
+	}
+	
 	
 	public void clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses(String description) throws InterruptedException {
 		try {

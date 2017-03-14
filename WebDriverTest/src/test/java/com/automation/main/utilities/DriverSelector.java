@@ -1,6 +1,7 @@
 package com.automation.main.utilities;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 
 import org.openqa.selenium.WebDriver;
@@ -55,10 +56,10 @@ public class DriverSelector {
 		switch (type) {
 		case Firefox:
 			System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");	
-			DesiredCapabilities capabilities = DesiredCapabilities.firefox();		
+			capability = DesiredCapabilities.firefox();		
 			capability.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);		
-			capabilities.setCapability("marionette", true);		
-			driver = new FirefoxDriver(capabilities);	
+			capability.setCapability("marionette", true);		
+			driver = new FirefoxDriver(capability);	
 			//driver = new MarionetteDriver();	
 			break;
 		case Chrome:
@@ -129,4 +130,17 @@ public class DriverSelector {
 		return type;
 	}
 
+	public static WebDriver changeToChromeDriver(){
+		WebDriver driver = null;
+		DesiredCapabilities capability = null;
+		LoggingPreferences logPrefs = new LoggingPreferences();
+		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+	    capability = DesiredCapabilities.chrome();
+	    capability.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);		
+		driver = new ChromeDriver(capability);
+	
+		return driver;
+	}
+	
 }

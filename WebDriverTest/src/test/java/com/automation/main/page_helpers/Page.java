@@ -1279,6 +1279,7 @@ public class Page {
 	// appear in the WebElement
 	public void verifyWebElementTargetText(WebElement web_element, String target_text) {
 		try{
+			waitForVisibility(web_element);
 			if (web_element.getText().contains(target_text)) {
 				System.out.println("Verified that target web element have target text: " + target_text);
 				ATUReports.add(time +" WebElement have target text.", target_text, target_text, LogAs.PASSED, null);
@@ -1287,8 +1288,21 @@ public class Page {
 				System.out.println("Not verified that target web element have target text: " + target_text + " != "
 						+ web_element.getText());
 				ATUReports.add(time +" WebElement have target text.", target_text, web_element.getText(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				Assert.assertTrue(false);
 			}
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+	}
+	
+	//This function clear the text in the webElement
+	public void clearTheTextInTheTextArea(WebElement element ,String discription) {
+		
+		try{	
+			element.clear();
+			System.out.println("clearing the element: " + discription) ;
+			ATUReports.add(time +"clearing the element: " + discription, "True.", "True.", LogAs.PASSED, null);
+		
 		}catch(Exception e){
 			e.printStackTrace();
 			ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));

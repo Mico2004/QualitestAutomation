@@ -29,9 +29,12 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
+import junitx.util.PropertyManager;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Locale;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -61,7 +64,7 @@ public class TC6514SendAMessageAsInstructor {
 	DesiredCapabilities capability;
 	String url_of_mail = "https://www.mailinator.com";
 	String DateToStr;
-	
+	String user_Agent,user_Agent2;
 
 	@BeforeClass
 	public void setup() {
@@ -108,19 +111,22 @@ public class TC6514SendAMessageAsInstructor {
 		email_and_connection_settings_page.waitForThePageToLoad();
 		email_and_connection_settings_page.cleanAllOptionsAndPutMail();
 		
+		confirm_menu.clickOnOkButtonAfterConfirmEmailSetting();
+		
 		//5.endPrecondition : sign out
 		email_and_connection_settings_page.signOut();
 		
 		//6.login as instructor
 		tegrity.loginCourses("User1");
 		
-		//7.Hover over the "Help" link
+		
 		for(int CorusePageOrRecordingPage = 0 ; CorusePageOrRecordingPage < 2 ; CorusePageOrRecordingPage++){
 		
 		if(CorusePageOrRecordingPage == 1) {
 			course.selectCourseThatStartingWith("Ab");
 		}
-			
+		
+		//7.Hover over the "Help" link	
 		String url =  course.getCurrentUrlCoursePage(); 
 		course.moveToElementAndPerform(course.help, driver);
 			
@@ -128,6 +134,7 @@ public class TC6514SendAMessageAsInstructor {
 		course.clickElementJS(course.get_support);
 		
 		//9.Verify that *From* field contain the email you registered
+		get_support_window.waitForThePageToLoad();
 		get_support_window.verifyThatTheEmailAdressFieldHelpDeskOrPlaceHolder("qtautomationtest@mailinator.com");
 		
 		//10.put the mail in the to field
@@ -143,7 +150,7 @@ public class TC6514SendAMessageAsInstructor {
 		get_support_window.sendKeysToWebElementInput(get_support_window.comments_field,"Test 6514");
 		
 		//13.Press the *Send* button
-		get_support_window.clickElementJS(get_support_window.send_button);
+		get_support_window.clickElement(get_support_window.send_button);
 		
 		//14. *Get Support* window is closed.
 		get_support_window.verifyThatGetSupportMenuClose();
@@ -153,9 +160,9 @@ public class TC6514SendAMessageAsInstructor {
 				
 		//16. *User Agent:* <Press F12 -> refresh the page if needed -> Network -> Choose a line -> Headers -> Request Headers -> User-Agent -> +Compare+>
 		if(CorusePageOrRecordingPage == 0) { 
-			String user_Agent = get_support_window.getUserAgentByLogs();
+			user_Agent = get_support_window.getUserAgentByLogs();
 		} else {
-			String user_Agent2 = get_support_window.getUserAgentByLogs();
+			user_Agent2 = get_support_window.getUserAgentByLogs();
 		}
 		
 		//17.Open the Helpdesk email in new tab\window
@@ -166,42 +173,50 @@ public class TC6514SendAMessageAsInstructor {
 		get_support_window.sendKeysToWebElementInput(get_support_window.mailinator_mail_edittext, "qtautomationtest");
 		
 		//19.press on go
-		get_support_window.clickElementJS(get_support_window.mailinator_mail_go);
+		get_support_window.clickElement(get_support_window.mailinator_mail_go);
 		 	
 		//20.Verify that sent mail is received.
 		get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(get_support_window.mail_time_of_sending.get(3), "moments ago");
 	
 		//21.Verify received email by the next order: Received mail from: <Various. Depends on who sent it>
-		get_support_window.clickElement(get_support_window.mail_time_of_sending.get(1));
+		get_support_window.clickElement(get_support_window.mail_time_of_sending.get(0));
 		driver.switchTo().frame("publicshowmaildivcontent");
+		
 		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"test@test.com");
 			
 		//22 *From:* <User Name> (<From email>) <Comments>
-		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"From: " + course.user_name);
+		String userName = PropertyManager.getProperty("User1");
+		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"From: " + userName);
 				
 		//23.Separator line
-		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"<hr/>");
+		//get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"<hr/>");
 		
 		//24. *User ID:* <User Id>
-		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"User ID: " +course.user_name.getText().toLowerCase());
+		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"User ID: " +userName.toLowerCase());
 			
 		//25. *User Name:* <User Name>
-		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"User Name: " +course.user_name.getText());
+		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"User Name: " +userName);
 		
 		//26.*Customer Name:* <Institution Name>
-		String customer_Name =  get_support_window.getTheUniverstyNameFromTheUrl(url);
+		String customer_Name =  get_support_window.moveToUpperCase(get_support_window.getTheUniverstyNameFromTheUrl(url));
 		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Customer Name: " +customer_Name);
 		
 		if(CorusePageOrRecordingPage == 1){
 			//26.*Course Id:* <Course Id>
-			String course_id =  get_support_window.getTheUniverstyNameFromTheUrl(url);
-			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Course Id: " +course_id);
+			String course_id =  get_support_window.getTheGgidFromTheUrl(url);
+			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Course ID: " +course_id);
 		
 			//26.1 *Course Name:* <Course name>
-			String course_name =  get_support_window.getTheUniverstyNameFromTheUrl(url);
-			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Course Id: " +course_name);
+			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Course Name: " +PropertyManager.getProperty("course1"));
+			
+			//27. *Page URL:* <Full page URL>
+			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"User Agent: " +user_Agent2);
 		}
-	
+		else {
+			//27. *Page URL:* <Full page URL>
+			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"User Agent: " +user_Agent);
+		
+		}
 		//27. *Page URL:* <Full page URL>
 		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Page URL: " +url);
 		

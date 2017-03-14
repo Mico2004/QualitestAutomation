@@ -26,10 +26,11 @@ public class EmailAndConnectionSettingsPage extends Page {
 	@FindBy(id="connect-field") public WebElement connect_checkbox;
 	@FindBy(id="ApplyChangesButton")public  WebElement ok_button;
 	@FindBy(id="CancelButton") public WebElement cancel_button;
-	@FindBy(id="email-field2") public WebElement smtp_server;
+	@FindBy(id="smtp-field") public WebElement smtp_server;
 	@FindBy(id="port-field") public WebElement smtp_port;
 	@FindBy(id="user-field") public WebElement smtp_user_id;
 	@FindBy(id="password-field") public WebElement smtp_user_password;
+	
 	
 	
 	
@@ -117,6 +118,8 @@ public class EmailAndConnectionSettingsPage extends Page {
 		admin_email.sendKeys("qtautomationtest@mailinator.com");
 		System.out.println("The email of helpdesk and adminstator was change.");
 		ATUReports.add("The email of helpdesk and adminstator was change.", LogAs.PASSED, null);
+		
+		clickElement(ok_button);
 		
 		} catch (Exception e) {
 		
