@@ -139,7 +139,8 @@ public class TC11905SendAMessageAsStudent {
 		get_support_window.verifyThatTheEmailAdressFieldHelpDeskOrPlaceHolder("qtautomationtest@mailinator.com");
 		
 		//12.Enter the text in *Subject* textfield (Not mandatory)
-		get_support_window.sendKeysToWebElementInput(get_support_window.subject_field, "Test 11905 " + DateToStr );
+		String subject = "Test 11905 " + DateToStr ;
+		get_support_window.sendKeysToWebElementInput(get_support_window.subject_field, subject);
 	
 		//13.Enter the text in *Comments* textfield (Not mandatory)
 		get_support_window.sendKeysToWebElementInput(get_support_window.comments_field,"Test 11905");
@@ -174,7 +175,7 @@ public class TC11905SendAMessageAsStudent {
 		 	
 		//20.Verify that sent mail is received.
 		get_support_window.waitForTheMailToLoad();
-		get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(get_support_window.mail_time_of_sending.get(3), "moments ago");
+		get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(get_support_window.mail_time_of_sending.get(2), subject);
 	
 		//21.Verify received email by the next order: Received mail from: <Various. Depends on who sent it>
 		get_support_window.clickElement(get_support_window.mail_time_of_sending.get(0));

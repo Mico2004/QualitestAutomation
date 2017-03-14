@@ -144,7 +144,8 @@ public class TC6514SendAMessageAsInstructor {
 		get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(course.user_name, get_support_window.from_name_field.getAttribute("value"));
 		
 		//11.Enter the text in *Subject* textfield (Not mandatory)
-		get_support_window.sendKeysToWebElementInput(get_support_window.subject_field, "Test 6514 " + DateToStr );
+		String subject = "Test 6514 " + DateToStr ;
+		get_support_window.sendKeysToWebElementInput(get_support_window.subject_field, subject );
 		
 		//12.Enter the text in *Comments* textfield (Not mandatory)
 		get_support_window.sendKeysToWebElementInput(get_support_window.comments_field,"Test 6514");
@@ -176,7 +177,7 @@ public class TC6514SendAMessageAsInstructor {
 		get_support_window.clickElement(get_support_window.mailinator_mail_go);
 		 	
 		//20.Verify that sent mail is received.
-		get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(get_support_window.mail_time_of_sending.get(3), "moments ago");
+		get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(get_support_window.mail_time_of_sending.get(2), subject);
 	
 		//21.Verify received email by the next order: Received mail from: <Various. Depends on who sent it>
 		get_support_window.clickElement(get_support_window.mail_time_of_sending.get(0));
