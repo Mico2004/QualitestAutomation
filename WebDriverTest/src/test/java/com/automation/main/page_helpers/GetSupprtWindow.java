@@ -247,8 +247,9 @@ public class GetSupprtWindow extends Page {
 	}
 	
 	public String getUserAgentByLogs() {
-		 LogEntries les = driver.manage().logs().get(LogType.PERFORMANCE);
-		 String user_agent = null;  
+		String user_agent = null; 
+		try{
+		LogEntries les = driver.manage().logs().get(LogType.PERFORMANCE);
 		 for (LogEntry le : les) {
 		    	if(le.getMessage().contains("User-Agent")){
 	            	JSONObject gson = new JSONObject(le.getMessage());
@@ -260,6 +261,10 @@ public class GetSupprtWindow extends Page {
 	            	break;
 	        }
 		 }
+		}catch(Exception e){
+			e.printStackTrace();
+			ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
 	        return user_agent;
 	}
 	
@@ -310,5 +315,19 @@ public class GetSupprtWindow extends Page {
 			e.printStackTrace();
 			ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}	
+	}
+
+	public void clickOnTheFirstMail() throws InterruptedException {
+		clickElementJSCSS(mail_time_of_sending.get(0));
+		driver.switchTo().frame("publicshowmaildivcontent");
+		for(int i = 0;  i<5 ; i++) {
+			if(!isElemenetDisplayed(By.xpath("html/body"))){
+				clickElementJSCSS(mail_time_of_sending.get(0));
+				driver.switchTo().frame("publicshowmaildivcontent");
+			} else {
+				Thread.sleep(1000);
+				break;			
+			}
+		}
 	}
 }

@@ -178,9 +178,7 @@ public class TC11905SendAMessageAsStudent {
 		get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(get_support_window.mail_time_of_sending.get(2), subject);
 	
 		//21.Verify received email by the next order: Received mail from: <Various. Depends on who sent it>
-		get_support_window.clickElementJSCSS(get_support_window.mail_time_of_sending.get(0));
-		driver.switchTo().frame("publicshowmaildivcontent");
-		
+		get_support_window.clickOnTheFirstMail();
 		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"test@test.com");
 			
 		//22 *From:* <User Name> (<From email>) <Comments>
@@ -211,11 +209,11 @@ public class TC11905SendAMessageAsStudent {
 			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Course Name: " +PropertyManager.getProperty("course1"));		
 		} 
 		if (CorusePageOrRecordingPage == 2){
-			//7. *Recording ID:* <Recording Id>
+			//26.2 *Recording ID:* <Recording Id>
 			String recording_id =  get_support_window.getTheGgidFromTheUrlForRecording(url);
 			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Recording ID: " +recording_id);
 			
-			//26.2 8. *Recording Name:* <recording name>
+			//26.3. *Recording Name:* <recording name>
 			get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Recording Name: " +recording_name);
 		}
 		//27. *Page URL:* <Full page URL>

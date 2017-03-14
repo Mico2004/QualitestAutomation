@@ -177,12 +177,11 @@ public class TC6514SendAMessageAsInstructor {
 		get_support_window.clickElement(get_support_window.mailinator_mail_go);
 		 	
 		//20.Verify that sent mail is received.
+		get_support_window.waitForTheMailToLoad();
 		get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(get_support_window.mail_time_of_sending.get(2), subject);
 	
 		//21.Verify received email by the next order: Received mail from: <Various. Depends on who sent it>
-		get_support_window.clickElement(get_support_window.mail_time_of_sending.get(0));
-		driver.switchTo().frame("publicshowmaildivcontent");
-		
+		get_support_window.clickOnTheFirstMail();		
 		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"test@test.com");
 			
 		//22 *From:* <User Name> (<From email>) <Comments>
