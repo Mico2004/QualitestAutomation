@@ -52,7 +52,7 @@ public class GetSupprtWindow extends Page {
 	public WebElement send_button;
 	@FindBy(id="inboxfield")
 	public WebElement mailinator_mail_edittext;	
-	@FindBy(xpath="html/body/section[1]/div/div[3]/div[2]/div[2]/div[1]/span/button" )
+	@FindBy(css=".btn.btn-dark" )
 	public WebElement mailinator_mail_go;	
 	@FindBy(css=".innermail.ng-binding")
 	public List<WebElement> mail_time_of_sending;
@@ -303,8 +303,8 @@ public class GetSupprtWindow extends Page {
 	public void waitForTheMailToLoad(){
 		try{
 		
-		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(mail_time_of_sending.get(0)));
-		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(mail_time_of_sending.get(3)));
+		new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOf(mail_time_of_sending.get(0)));
+		new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOf(mail_time_of_sending.get(3)));
 		
 		}catch(Exception e){
 			e.printStackTrace();
