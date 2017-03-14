@@ -127,6 +127,33 @@ public class Page {
 
 	}
 	
+	public void clickElementJSCSS(WebElement element) // clicking element
+	{
+		String text = null;
+		try {
+			text = element.getText();
+			String className = element.getAttribute("class");
+			((JavascriptExecutor) driver).executeScript("document.document.querySelector(\"" + className + "\").click();");
+			ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+					null);		
+		} catch (Exception msg) {
+
+			try {
+				System.out.println("Clicked failed trying again with selenium");
+				wait.until(ExpectedConditions.elementToBeClickable(element));
+				element.click();
+				System.out.println("Clicked on " + element.getText() + " element");
+				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked succeeded..", LogAs.PASSED,
+						null);
+			} catch (Exception e1) {
+				ATUReports.add("Clicked on " + text + " element", "Clicked succeeded.", "Clicked failed:"+msg.getMessage(), LogAs.WARNING,
+						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				
+			}
+		}
+
+	}
+	
 	public void clickElementWithOutIdJS(WebElement element) // clicking element
 	{
 		String text = element.getText();
