@@ -89,7 +89,7 @@ public class EmailAndConnectionSettingsPage extends Page {
 	
 	
 	
-	public void cleanAllOptionsAndPutMail() {
+	public void cleanAllOptionsAndPutMail(String email) {
 
 		try { 
 		sending_user.clear();
@@ -114,8 +114,8 @@ public class EmailAndConnectionSettingsPage extends Page {
 			ATUReports.add("The checkbox: " + connect_checkbox.getText() + " is not selected", LogAs.PASSED, null);
 		}
 			
-		helpdesk_email.sendKeys("qtautomationtest@mailinator.com");
-		admin_email.sendKeys("qtautomationtest@mailinator.com");
+		helpdesk_email.sendKeys(email);
+		admin_email.sendKeys(email);
 		System.out.println("The email of helpdesk and adminstator was change.");
 		ATUReports.add("The email of helpdesk and adminstator was change.", LogAs.PASSED, null);
 		

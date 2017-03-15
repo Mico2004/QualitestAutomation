@@ -102,7 +102,7 @@ public class TC6513TryToSendAMessageWithoutUserEmail {
 				
 		//4.set mail and clean all other options
 		email_and_connection_settings_page.waitForThePageToLoad();
-		email_and_connection_settings_page.cleanAllOptionsAndPutMail();
+		email_and_connection_settings_page.cleanAllOptionsAndPutMail("qualitestautomation@sharklasers.com");
 		
 		confirm_menu.clickOnOkButtonAfterConfirmEmailSetting();
 				

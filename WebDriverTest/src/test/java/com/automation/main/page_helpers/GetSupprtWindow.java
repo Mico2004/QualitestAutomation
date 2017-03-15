@@ -15,15 +15,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
+
 
 public class GetSupprtWindow extends Page {
 
@@ -50,14 +46,31 @@ public class GetSupprtWindow extends Page {
 	public WebElement cancel_button;
 	@FindBy(xpath=".//*[@id='supportWindow']/div[2]/form/div[5]/button[1]" )
 	public WebElement send_button;
-	@FindBy(id="inboxfield")
-	public WebElement mailinator_mail_edittext;	
-	@FindBy(css=".btn.btn-dark" )
-	public WebElement mailinator_mail_go;	
-	@FindBy(css=".innermail.ng-binding")
+	//@FindBy(id="#inbox-id>input")
+	//public WebElement mailinator_mail_edittext;	
+	//@FindBy(css=".btn.btn-dark" )
+	//public WebElement mailinator_mail_go;	
+	@FindBy(css=".td4")
 	public List<WebElement> mail_time_of_sending;
-	@FindBy(xpath="html/body")
+	@FindBy(css=".td2")
+	public List<WebElement> mail_index_of_sending;
+	@FindBy(css=".email_body")
 	public WebElement contant_of_mail ;
+	@FindBy(id="inbox-id" )
+	public WebElement changeGuerrillamailButton;	
+	@FindBy(css="#inbox-id>input")
+	public WebElement guerrillaMailEdittext;	
+	@FindBy(css=".save.button.small")
+	public WebElement guerrillaMailSet;
+	@FindBy(css=".email-excerpt")
+	public List<WebElement> mail_subject_of_sending;
+	@FindBy(id="back_to_inbox_link")
+	public WebElement backButton;
+	@FindBy(css=".td1>input")
+	public List<WebElement> firstCheckbox;
+	@FindBy(id="del_button")
+	public WebElement deleteButton;
+	
 	@FindBy(xpath=".//*[@id='supportWindow']/div[2]/form/span[2]")
 	public WebElement error_massage ;
 	
@@ -308,9 +321,17 @@ public class GetSupprtWindow extends Page {
 	public void waitForTheMailToLoad(){
 		try{
 		
-		new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOf(mail_time_of_sending.get(0)));
-		new WebDriverWait(driver, 20).until(ExpectedConditions.visibilityOf(mail_time_of_sending.get(3)));
-		
+		new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(mail_time_of_sending.get(0)));
+		new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(mail_index_of_sending.get(0)));
+		for(int i = 0 ; i < 5 ; i++){		
+			String val = driver.findElements(By.cssSelector(".td2")).get(0).getCssValue("font-weight").toString();
+			if(val.equals("bold")){
+				Thread.sleep(1000);
+				break;
+			} else {
+				Thread.sleep(5000);
+			}
+		}
 		}catch(Exception e){
 			e.printStackTrace();
 			ATUReports.add(time + e.getMessage(), "True.", "False.",LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -318,11 +339,10 @@ public class GetSupprtWindow extends Page {
 	}
 
 	public void clickOnTheFirstMail() throws InterruptedException {
-		clickElement(mail_time_of_sending.get(0));
+		clickElement(mail_subject_of_sending.get(0));
 		for(int i = 0;  i<5 ; i++) {
-			if(!isElemenetDisplayed(By.xpath(".//*[@id='publicInboxCtrl']/div[1]"))){
-				clickElementJSCSS(mail_time_of_sending.get(0));
-				driver.switchTo().frame("publicshowmaildivcontent");
+			if(!isElemenetDisplayed(By.cssSelector(".email_from"))){
+				clickElement(mail_subject_of_sending.get(0));
 			} else {
 				Thread.sleep(1000);
 				break;			

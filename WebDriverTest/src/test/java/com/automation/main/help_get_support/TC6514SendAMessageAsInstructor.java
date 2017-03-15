@@ -109,7 +109,7 @@ public class TC6514SendAMessageAsInstructor {
 		
 		//4.set mail and clean all other options
 		email_and_connection_settings_page.waitForThePageToLoad();
-		email_and_connection_settings_page.cleanAllOptionsAndPutMail();
+		email_and_connection_settings_page.cleanAllOptionsAndPutMail("qualitestautomation@sharklasers.com");
 		
 		//5.Click on ok after the confirm on the email setting
 		confirm_menu.clickOnOkButtonAfterConfirmEmailSetting();
@@ -171,17 +171,19 @@ public class TC6514SendAMessageAsInstructor {
 		
 		//.Email is displayed.
 		//18.enter the mail username 
-		get_support_window.sendKeysToWebElementInput(get_support_window.mailinator_mail_edittext, "qtautomationtest");
+		get_support_window.clickElementJS(get_support_window.changeGuerrillamailButton);
+		get_support_window.sendKeysToWebElementInput(get_support_window.guerrillaMailEdittext, "qualitestautomation");
 		
 		//19.press on go
-		get_support_window.clickElement(get_support_window.mailinator_mail_go);
+		get_support_window.clickElement(get_support_window.guerrillaMailSet);
 		 	
 		//20.Verify that sent mail is received.
 		get_support_window.waitForTheMailToLoad();
-		get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(get_support_window.mail_time_of_sending.get(2), subject);
+		get_support_window.verifyThatCssValueIsAsExpected(get_support_window.mail_index_of_sending.get(0), "font-weight", "700");
+		//get_support_window.verifyThatTheTextOfWebElemenetIsAsExpected(get_support_window.mail_time_of_sending.get(2), subject);
 	
 		//21.Verify received email by the next order: Received mail from: <Various. Depends on who sent it>
-		get_support_window.clickOnTheFirstMail();		
+		get_support_window.clickElement(get_support_window.mail_index_of_sending.get(0));	
 		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"test@test.com");
 			
 		//22 *From:* <User Name> (<From email>) <Comments>
@@ -220,7 +222,16 @@ public class TC6514SendAMessageAsInstructor {
 		//27. *Page URL:* <Full page URL>
 		get_support_window.verifyWebElementTargetText(get_support_window.contant_of_mail,"Page URL: " +url);
 		
-		//28.return back to the course page
+		//28. click on the back button
+		get_support_window.clickElementJS(get_support_window.backButton);
+		
+		//29. select the first item to delete
+		record.SelectOneCheckBoxOrVerifyAlreadySelected(get_support_window.firstCheckbox.get(0));
+		
+		//30. click on the delete button
+		get_support_window.clickElementJS(get_support_window.deleteButton);
+		
+		//31.return back to the course page
 		record.changeUrl(url);
 		
 		}

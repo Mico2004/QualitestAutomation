@@ -1099,7 +1099,6 @@ public class Page {
 		}	
 	}
 
-	
 	public void verifyWebElementisCheckable(WebElement element) {
 		try {
 			String type = element.getAttribute("type");
@@ -1787,6 +1786,31 @@ public class Page {
 	public String getUniversityName(){		
 		
 		return universityName.split(" ")[0];		
+	}
+	
+	public void verifyThatCssValueIsAsExpected(WebElement element,String cssVal , String ExpectedResult) {
+		
+		String val; 
+		try {
+			val = element.getCssValue(cssVal).toString();
+			if(val !=null) {
+				if( val.equals(ExpectedResult)){
+					System.out.println("Verify that the expected Css val: " + cssVal +" is as expected "  + ExpectedResult );
+					ATUReports.add(time +"Verify that the expected Css val: " + cssVal +" is as expected "  + ExpectedResult, "True.", "True.", LogAs.PASSED,null);
+				} else {
+					System.out.println("Not Verify that the expected Css val: " + cssVal +" is as expected "  + ExpectedResult );
+					ATUReports.add(time +"Not Verify that the expected Css val: " + cssVal +" is as expected "  + ExpectedResult, "True.", "False", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				}
+			} else { 
+				System.out.println("Not Verify that the expected Css val: " + cssVal +" is as expected "  + ExpectedResult );
+				ATUReports.add(time +"Not Verify that the expected Css val: " + cssVal +" is as expected "  + ExpectedResult, "True.", "False", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			}
+		} catch (Exception msg) {
+			msg.printStackTrace();
+			ATUReports.add(msg.getMessage(), "True.", "False.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		}
+		
+		
 	}
 }
 
