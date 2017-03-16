@@ -130,17 +130,6 @@ public class DriverSelector {
 		return type;
 	}
 
-	public static WebDriver changeToChromeDriver(){
-		WebDriver driver = null;
-		DesiredCapabilities capability = null;
-		LoggingPreferences logPrefs = new LoggingPreferences();
-		logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-	    capability = DesiredCapabilities.chrome();
-	    capability.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);		
-		driver = new ChromeDriver(capability);
-	
-		return driver;
-	}
+
 	
 }

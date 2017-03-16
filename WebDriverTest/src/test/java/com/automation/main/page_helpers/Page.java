@@ -1798,8 +1798,7 @@ public class Page {
 					System.out.println("Verify that the expected Css val: " + cssVal +" is as expected "  + ExpectedResult );
 					ATUReports.add(time +"Verify that the expected Css val: " + cssVal +" is as expected "  + ExpectedResult, "True.", "True.", LogAs.PASSED,null);
 				} else {
-					System.out.println("Not Verify that the expected Css val: " + cssVal +" is as expected "  + ExpectedResult );
-					ATUReports.add(time +"Not Verify that the expected Css val: " + cssVal +" is as expected "  + ExpectedResult, "True.", "False", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+					
 				}
 			} else { 
 				System.out.println("Not Verify that the expected Css val: " + cssVal +" is as expected "  + ExpectedResult );

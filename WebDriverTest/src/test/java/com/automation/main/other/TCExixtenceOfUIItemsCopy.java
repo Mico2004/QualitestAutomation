@@ -120,7 +120,7 @@ String os;
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("User1");// log in courses page
 		initializeCourseObject();
-		course.selectCourse(record);
+		//course.selectCourse(record);
 		course.selectCourseThatStartingWith("Ab");
 		Thread.sleep(2000);
 		record.verifyRecordingMenuColor(record.copy_button);

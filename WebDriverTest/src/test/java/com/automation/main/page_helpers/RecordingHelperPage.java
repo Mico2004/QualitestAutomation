@@ -456,7 +456,6 @@ public class RecordingHelperPage extends Page {
 		ATUReports.add(time +" There is not more status for any recording", LogAs.PASSED,null);		
 	}
 
-	
 	public void checkStatusExistenceUnpublish() throws InterruptedException {
 		System.out.println("Begin Status Check");	
 		try{
@@ -476,10 +475,6 @@ public class RecordingHelperPage extends Page {
 		
 		ATUReports.add(time +" There is not more status for any recording", LogAs.PASSED,null);		
 	}
-
-	
-	
-	
 
 	// This function check for all recordings if they are clickable.
 	// if all recordings clickable it return true,

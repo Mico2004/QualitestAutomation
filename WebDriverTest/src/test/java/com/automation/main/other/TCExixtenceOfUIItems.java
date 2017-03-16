@@ -121,7 +121,7 @@ public void closeBroswer() {
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 		tegrity.loginCourses("Instructor");// log in courses page
 		initializeCourseObject();
-		course.selectCourse(record);
+		//course.selectCourse(record);
 		record.verifyRecordingMenuColor();
 		record.verifyDisabledMenu();
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);

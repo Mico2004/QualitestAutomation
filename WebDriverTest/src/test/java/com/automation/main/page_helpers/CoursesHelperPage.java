@@ -257,22 +257,6 @@ public class CoursesHelperPage extends Page {
 		}
 	}
 
-	public String selectCourse(RecordingHelperPage rec) throws InterruptedException {// select
-																						// courses
-		String course_name = null;
-		try {
-			waitForVisibility(course_button);
-			course_name = course_button.getText();
-			clickElement(course_button);
-			Thread.sleep(3000);
-			ATUReports.add(time +"  clicked course", LogAs.PASSED, new CaptureScreen(ScreenshotOf.DESKTOP));
-		} catch (Exception e) {
-			ATUReports.add(time +"  clicked course failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-		}
-		Assert.assertTrue(rec.verifyElementTest(rec.recording_tasks_button));
-		return course_name;
-	}
-
 	//// select course by name
 	public void selectCourseByName(final String destination_course_name) throws InterruptedException {
 
@@ -326,7 +310,6 @@ public class CoursesHelperPage extends Page {
 			}
 		}*/
 	}
-
 
 	/// verify setting option for every instructor course in recording page
 	public boolean verifyCoursesForInstructor(String xml_url) throws InterruptedException {
@@ -468,8 +451,6 @@ public class CoursesHelperPage extends Page {
 	}
 	}
 
-
-	
 	// This function get two courses (starting with), first the source, second
 	// the destination
 	// third arg is type of recordings 0 - Recordings, 1 - Additional content, 2
@@ -569,7 +550,6 @@ public class CoursesHelperPage extends Page {
 		record_helper_page.returnToCourseListPage(this);
 	}
 
-	
 	// This function copy all recordings from source course to SEVERAL courses at once
 	public void copyRecordingFromCourseStartWithToCourseStartWithOfType(String source_course, List<String> destinationCourses,
 			int type_of_recordings, RecordingHelperPage record_helper_page, CopyMenu copy_menu,
@@ -656,16 +636,11 @@ public class CoursesHelperPage extends Page {
 		record_helper_page.returnToCourseListPage(this);
 	}
 	
-	
-	
-	
-	
 	// This function get course start with name as 1st arg,
 	// as 2nd arg it get type when: 0 - Recordings, 1 - Additional Content, 2 -
 	// Student Recordings, 3 - Test
 	// record object as 3rd arg and delete obj as 4th arg
 	// it will delete all recordings
-
 	public void verifyRecordingsStatusIsClear(String source_course, int type_of_recordings,
 			RecordingHelperPage record_helper_page) throws InterruptedException {
 
@@ -804,7 +779,6 @@ public class CoursesHelperPage extends Page {
 		return currUrl;
 	}
 	
-	
 	// verify there is no past courses tab
 	public void verifyNoPastCoursesTab() {
 		try {
@@ -838,7 +812,6 @@ public class CoursesHelperPage extends Page {
 		}
 	}
 	
-
 	// verify course name exists in course list
 	public boolean verifyCourseExist(String name) {
 		List <String> courses=getCourseList();
@@ -1132,8 +1105,6 @@ public class CoursesHelperPage extends Page {
 			Assert.assertTrue(true);
 		}
 	}
-
-
 
 	// verify there is no disclaimer link
 	public void verifyNoDisclaimerLink() {
