@@ -36,10 +36,10 @@ import java.util.Date;
 public class UpdateCheck {
 
 	// Set Property for ATU Reporter Configuration
-	{
+	/*{
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
 
-	}
+	}*/
 
 	public LoginHelperPage tegrity;
 	public CoursesHelperPage course;
@@ -100,13 +100,17 @@ public class UpdateCheck {
 		
 		Thread.sleep(3000);
 		
-		if(admin.versionChanged())
+		if(admin.versionChanged()){
 			org.testng.Assert.assertTrue(true);
-		else
-			org.testng.Assert.assertTrue(false);	
+			System.out.println("Version changed");
+		}
+		else{
+			org.testng.Assert.assertTrue(false);
+			System.out.println("Version didn't changed");
+		}
 		
 	}catch(Exception e){
-		
+		System.out.println("Version didn't changed");
 		org.testng.Assert.assertTrue(false);
 		
 	}
