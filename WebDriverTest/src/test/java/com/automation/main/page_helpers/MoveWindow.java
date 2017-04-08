@@ -63,6 +63,8 @@ public class MoveWindow extends Page {
 	public WebElement move_menu_background;
 	@FindBy(id = "courseListSelect")
 	public WebElement course_list_select;
+	@FindBy(xpath = "//*[@id=\"members_dropdown\"]/div[3]/div")
+	public WebElement courseList;
 	// This function clicks on delete button of copy menu
 	public void clickOnMoveRecordings() throws InterruptedException {
 		try {
@@ -419,4 +421,32 @@ public class MoveWindow extends Page {
 	   
 	   
    }
+   
+   
+   public void adminSelectInstructor(String insName, int flag, MoveWindow move_window){
+
+	   try{
+		   System.out.println("adminSelectInstructor1");
+		   wait.until(ExpectedConditions.visibilityOf(courseList));			
+		   courseList.click();
+		   System.out.println("adminSelectInstructor2");
+	   }catch(Exception e){
+		   try{
+		   if(flag==0){
+			   System.out.println("adminSelectInstructor3");
+			   move_window.sendKeysToWebElementInput(move_window.instructorTextBox, insName.substring(0, insName.length()-2));
+			   flag=-1; 
+			   courseList.click();
+			      	  			
+		   	}
+		   }catch(Exception ex){
+			   ATUReports.add("Instructor "+insName+" wasn't found in the list", LogAs.FAILED, null);
+		   }   	  		
+	   }
+	   System.out.println("adminSelectInstructor4");
+	   ATUReports.add("Instructor "+insName+" was found in the list", LogAs.PASSED, null);      
+   }  
+
+
+
 }

@@ -22,14 +22,16 @@ import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class LoginHelperPage extends Page {
 	// Set Property for ATU Reporter Configuration
-		{
-			System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");		
-		}
-		
+	{
+		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");		
+	}
+
 	@FindBy(name = "UserName")
 	public WebElement usernamefield;
 	@FindBy(name = "Password")
@@ -46,7 +48,7 @@ public class LoginHelperPage extends Page {
 	public WebElement Login_as_guest_info;
 	private CoursesHelperPage course;
 
-	
+
 
 	public LoginHelperPage(WebDriver driver) throws Exception {
 		super(driver);
@@ -56,7 +58,7 @@ public class LoginHelperPage extends Page {
 		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com");	
 		//setPageUrl("https://awsserverautomation3-qabr.tegrity.com");
 		//setPageUrl("https://awsserverautomation-perf-5.tegrity.com");	
-		setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
+		//setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 
 	}
 
@@ -98,8 +100,9 @@ public class LoginHelperPage extends Page {
 	}
 
 	public void loginCourses(String user_name) throws InterruptedException// login
-																			// courses
+	// courses
 	{	
+		isMHCampuseUp();
 		initializeCourse();
 		try {
 			waitForVisibility(usernamefield);
@@ -110,8 +113,8 @@ public class LoginHelperPage extends Page {
 			clickElementJS(button_login);
 			try {
 				new WebDriverWait(driver, 30).until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
-			} catch (TimeoutException e) {
-				ATUReports.add("Login Timeout (Screenshot)", PropertyManager.getProperty(user_name), "Login Success", LogAs.FAILED,
+			} catch (TimeoutException e) {			
+				ATUReports.add("Login Timeout (Screenshot)", PropertyManager.getProperty(user_name), "Login Failed", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 
@@ -122,7 +125,7 @@ public class LoginHelperPage extends Page {
 					System.out.println("Clicked on accept Eula button");
 					ATUReports.add("Click on EULA accept",PropertyManager.getProperty(user_name) ,"Accept clicked", "Accept clicked", LogAs.PASSED, null);
 					new WebDriverWait(driver, 30)
-							.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
+					.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
 					;
 				} catch (Exception msg) {
 					System.out.println("No EULA button.");
@@ -145,13 +148,14 @@ public class LoginHelperPage extends Page {
 		}catch(Exception e){
 			System.out.println("No Courses for the user");
 		}
-	
+
 	}
 
 	public void loginAdmin(String user_name) throws InterruptedException// login
-																		// courses
+	// courses
 	{
 		try {
+			isMHCampuseUp();
 			waitForVisibility(usernamefield);
 			waitForVisibility(button_login);
 			waitForVisibility(passfield);
@@ -172,6 +176,7 @@ public class LoginHelperPage extends Page {
 	public void loginCoursesByParameter(String user_name) throws InterruptedException// login
 	// courses
 	{
+		isMHCampuseUp();
 		initializeCourse();
 		try {
 			waitForVisibility(usernamefield);
@@ -182,7 +187,7 @@ public class LoginHelperPage extends Page {
 			clickElementJS(button_login);
 			try {
 				new WebDriverWait(driver, 30)
-						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
+				.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
 			} catch (TimeoutException e) {
 				ATUReports.add(time +" Login Timeout (Screenshot)", user_name, "Login Success", "Login Success", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -195,7 +200,7 @@ public class LoginHelperPage extends Page {
 					System.out.println("Clicked on accept Eula button");
 					ATUReports.add(time +" Click on EULA accept",user_name ,"Accept clicked", "Accept clicked", LogAs.PASSED, null);
 					new WebDriverWait(driver, 30)
-							.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
+					.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
 					;
 				} catch (Exception msg) {
 					System.out.println("No EULA button.");
@@ -222,6 +227,7 @@ public class LoginHelperPage extends Page {
 	/// login as guest
 	public void loginAsguest() throws InterruptedException {
 		try {		
+			isMHCampuseUp();
 			initializeCourse();
 			waitForVisibility(usernamefield);
 			waitForVisibility(button_login);
@@ -239,19 +245,19 @@ public class LoginHelperPage extends Page {
 					String url=urlArray[0]+urlArray[1]+urlArray[2]+urlArray[3]+urlArray[4];
 					driver.get(url);
 					new WebDriverWait(driver, 15).until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity - Courses")));
-		}catch(Exception ex ){
-				ATUReports.add(time +" Login as guest button isn't visible", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));			
-			}
-		}							
+				}catch(Exception ex ){
+					ATUReports.add(time +" Login as guest button isn't visible", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));			
+				}
+			}							
 			try {
 				new WebDriverWait(driver, 30)
-						.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
+				.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
 			} catch (TimeoutException e) {
 				ATUReports.add(time +" Login Timeout (Screenshot)","Login Success","Login Failed", LogAs.FAILED,
 						new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				Assert.assertTrue(false);
 			}
-			
+
 			if (driver.getTitle().contains("Tegrity - Courses")) {
 				ATUReports.add(time +" Tegrity courses home page is visible","Course List page is displayed",
 						"Course List page is displayed", LogAs.PASSED, null);
@@ -318,4 +324,59 @@ public class LoginHelperPage extends Page {
 		verifyWebElementNotDisplayed(Login_as_guest_info, "The text: Some courses may allow guest access");
 	}
 
+	// Check if MHCampus is up
+	private void isMHCampuseUp(){
+		try{
+			URL obj;
+
+			HttpURLConnection con;	
+
+			String env="";
+
+			if(getEnvironment().equals("QA"))
+				env="https://login-aws-qa.mhcampus.com/Nagios/RestApiHealthCheck.ashx";
+			else 
+				return;
+
+			obj = new URL(env);
+
+			con = (HttpURLConnection) obj.openConnection();
+
+			con.setRequestMethod("GET");
+
+			if(con.getResponseCode()!=200){	
+
+				System.out.println("MHCampus are updating, wait 20 minutes");
+
+				Thread.sleep(1200000);
+
+				isMHCampuseUp();	
+
+			}
+
+		}catch(Exception ex){
+			System.out.println(ex.getMessage());
+
+		}		
+	}
+
+
+	// return MHCampuse environment by parsing the course1(local properties) string
+	public String getEnvironment(){
+		String course1 = PropertyManager.getProperty("course1");
+
+		if(course1.contains("-qa-"))
+			return "QA";
+
+		else if (course1.contains("-qabr"))
+			return "QALV";
+
+		else if (course1.contains("-perf"))
+			return "PERF";
+
+		else 
+			return "PRODUCTION";	
+	}
 }
+
+

@@ -1,10 +1,5 @@
 package com.automation.main.page_helpers;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -34,7 +29,7 @@ import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class AdminDashboardPage extends Page {
+public class VersionChanged extends Page {
 	
 	WebElement targetLink;
 	
@@ -44,7 +39,7 @@ public class AdminDashboardPage extends Page {
 
 	}
 
-	public AdminDashboardPage(WebDriver browser) {
+	public VersionChanged(WebDriver browser) {
 		super(browser);
 		// TODO Auto-generated constructor stub
 		
@@ -321,31 +316,12 @@ public class AdminDashboardPage extends Page {
 }
 	
 	public boolean versionChanged(){
-		
-			IOUtility IOHelper=new IOUtility();
-			
-		try{
-			
-			String uInformation=universityInformation.getText();
-		
-			String currentVersion=uInformation.substring(uInformation.indexOf(".")-1,uInformation.length());
-		
-			String lastVersion=parser.pathToText("\\\\teg-fs1\\QA\\Test Library\\Qualitest Automation\\CurrentVersion\\CurrentVersion.txt");
-		
+		String uInformation=universityInformation.getText();
+		String currentVersion=uInformation.substring(uInformation.indexOf(".")-1,uInformation.length());
+		String lastVersion=parser.pathToText("\\\\teg-fs1\\QA\\Test Library\\Qualitest Automation\\CurrentVersion\\CurrentVersion.txt");
 		if(currentVersion.equals(lastVersion))
 			return false;
-		
-		else{
-			
-			IOHelper.writeTextToPath(currentVersion,"\\\\teg-fs1\\QA\\Test Library\\Qualitest Automation\\CurrentVersion\\CurrentVersion.txt");
-			
-			return true;
-		 }
-		}catch(Exception e){
-			System.out.println("Catch: "+e.getMessage());
-			return false;
-			
-		}
+		return true;
 		
 	} 
 	
