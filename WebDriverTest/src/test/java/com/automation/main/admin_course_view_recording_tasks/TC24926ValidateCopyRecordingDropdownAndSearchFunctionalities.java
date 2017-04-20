@@ -174,14 +174,14 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 
 				WebElement members_value = driver.findElement(By.id("members_value"));
 				members_value.sendKeys("aaaaaadssdfafaasa");
-				WaitDriverUtility.waitAndGetElementText(driver,members_value,"No results found");
+				boolean isInstructorExist = WaitDriverUtility.waitAndGetElementText(driver, members_value, "No results found");
 				Thread.sleep(1000);
 				
 				// 12. The dropdown is displaying an informative text "No Results"
 				String dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
 				Thread.sleep(1000);
 
-				if(dropdown_result.equals("No results found")) {
+				if(isInstructorExist) {
 					System.out.println("Dropdown list opened with the text: No results found");
 					ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: No results found", LogAs.PASSED, null);
 					Assert.assertTrue(true);
@@ -203,14 +203,14 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				WebElement members_value1 = driver.findElement(By.id("members_value"));
 				members_value1.clear();
 				members_value1.sendKeys(PropertyManager.getProperty("User4"));
-				WaitDriverUtility.waitAndGetElementText(driver,members_value,"No results found");
+				boolean isExistingStudent = WaitDriverUtility.waitAndGetElementText(driver, members_value, "No results found");
 				Thread.sleep(1000);
 				
 				// 16. The dropdown is displaying an informative text "No Results"
 				dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
 				Thread.sleep(1000);
 				
-				if(dropdown_result.equals("No results found")) {
+				if(isExistingStudent) {
 					System.out.println("Dropdown list opened with the text: No results found");
 					ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: No results found", LogAs.PASSED, null);
 					Assert.assertTrue(true);
@@ -224,13 +224,13 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				WebElement members_value2 = driver.findElement(By.id("members_value"));
 				members_value2.clear();
 				members_value2.sendKeys("kosins1");
-				WaitDriverUtility.waitAndGetElementText(driver,members_value,"No results found");
-				
+				boolean isExternalInstructorExist = WaitDriverUtility.waitAndGetElementText(driver, members_value, "No results found");
+
 				// 18. The dropdown is displaying an informative text "No Results".
 				dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
 				Thread.sleep(1000);
 				
-				if(dropdown_result.equals("No results found")) {
+				if(isExternalInstructorExist) {
 					System.out.println("Dropdown list opened with the text: No results found");
 					ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: No results found", LogAs.PASSED, null);
 					Assert.assertTrue(true);
