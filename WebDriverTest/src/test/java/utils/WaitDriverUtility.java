@@ -21,7 +21,7 @@ public class WaitDriverUtility {
     public static boolean waitAndGetElementText(WebDriver webDriver, WebElement textBox, String expectedText) {
 
 
-        int timeoutInSeconds = 5;
+        int timeoutInSeconds = 10;
 
         while (timeoutInSeconds > 0) {
             System.out.println("trying to capture the following text: " + expectedText);

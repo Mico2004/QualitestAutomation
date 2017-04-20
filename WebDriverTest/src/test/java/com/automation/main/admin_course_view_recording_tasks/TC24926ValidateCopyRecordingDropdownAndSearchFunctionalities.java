@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,6 +39,7 @@ import atu.testng.reports.utils.Utils;
 import java.text.DateFormat;
 import java.util.Date;
 import junitx.util.PropertyManager;
+import utils.WaitDriverUtility;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
@@ -169,13 +171,16 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				record.clickOnRecordingTaskThenCopy();
 			
 				// 11. Click on the text field, and write an instuctor name which does not exist (like "aaaaaadfasdasdaa").
-				driver.findElement(By.id("members_value")).sendKeys("aaaaaadssdfafaasa");
+
+				WebElement members_value = driver.findElement(By.id("members_value"));
+				members_value.sendKeys("aaaaaadssdfafaasa");
+				WaitDriverUtility.waitAndGetElementText(driver,members_value,"No results found");
 				Thread.sleep(1000);
 				
 				// 12. The dropdown is displaying an informative text "No Results"
 				String dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
 				Thread.sleep(1000);
-				
+
 				if(dropdown_result.equals("No results found")) {
 					System.out.println("Dropdown list opened with the text: No results found");
 					ATUReports.add("Dropdown list opened with the text.", "Text: No results found", "Text: No results found", LogAs.PASSED, null);
@@ -195,8 +200,10 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				Thread.sleep(2000);
 				
 				// 15. Click on the text field, and write the name of the (existing) student.
-				driver.findElement(By.id("members_value")).clear();
-				driver.findElement(By.id("members_value")).sendKeys(PropertyManager.getProperty("User4"));
+				WebElement members_value1 = driver.findElement(By.id("members_value"));
+				members_value1.clear();
+				members_value1.sendKeys(PropertyManager.getProperty("User4"));
+				WaitDriverUtility.waitAndGetElementText(driver,members_value,"No results found");
 				Thread.sleep(1000);
 				
 				// 16. The dropdown is displaying an informative text "No Results"
@@ -214,9 +221,10 @@ public class TC24926ValidateCopyRecordingDropdownAndSearchFunctionalities {
 				}
 				
 				// 17. Click on the text field, and write the name of the (existing) instuctor which exists only in another university.
-				driver.findElement(By.id("members_value")).clear();
-				driver.findElement(By.id("members_value")).sendKeys("kosins1");
-				Thread.sleep(1000);
+				WebElement members_value2 = driver.findElement(By.id("members_value"));
+				members_value2.clear();
+				members_value2.sendKeys("kosins1");
+				WaitDriverUtility.waitAndGetElementText(driver,members_value,"No results found");
 				
 				// 18. The dropdown is displaying an informative text "No Results".
 				dropdown_result = driver.findElements(By.cssSelector(".angucomplete-searching.ng-binding")).get(1).getText();
