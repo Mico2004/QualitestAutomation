@@ -34,7 +34,7 @@ import java.util.List;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSeeOnlyHisBookmarksAndTheInstructorsBookmarks {
+public class  TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSeeOnlyHisBookmarksAndTheInstructorsBookmarks {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -65,6 +65,9 @@ public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSee
 	List<String> bookmarksName = new ArrayList<String>();
 	String course_name;
 	String student1;
+	String [] instructorAndStudents = {"User1","User3","User4"};
+
+
 	
 	@BeforeClass
 	public void setup() {
@@ -99,7 +102,10 @@ public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSee
 	public void test6387() throws InterruptedException {
 		
 		//1.Enter the university
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+		for (String user : instructorAndStudents){
+			deleteBookmarkByUser(user);
+		}
 				
 		for(int type_of_recording = 0; type_of_recording < 2; type_of_recording++) {
 			
@@ -111,17 +117,26 @@ public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSee
 						
 			if(type_of_user == 0){
 				//2.Login as INSTRUCTOR 
-				tegrity.loginCourses("User1");		
+				tegrity.loginCourses("User1");
+				System.out.println("Login as INSTRUCTOR ");
 			} else if(type_of_user == 1) {
 				//2.Login as STUDENT
 				tegrity.loginCourses("User4");
+				System.out.println("Login as STUDENT");
+
+
 			} else {
 				//2.Login as STUDENT
 				tegrity.loginCourses("User3");
+				System.out.println("Login as STUDENT");
+
 			}
 				
 			//3.Click on the course that mentioned in the preconditions
-			course_name = course.selectCourseThatStartingWith("Ab");	
+			course_name = course.selectCourseThatStartingWith("Ab");
+
+				record.deleteExistsBookmark();
+				record.clickOnRecordingsTab();
 			
 			if(type_of_recording == 1) {
 				record.clickOnStudentRecordingsTab();
@@ -218,6 +233,7 @@ public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSee
 				//20.Click on each bookmark link thet you created before
 				time = bookmarksNameAndTime.get(bookmarksName.get(bookmark_number));
 				record.clickOnTheTargetBookmark(bookmarksName.get(bookmark_number));
+
 				
 				//15.The recording starts to play from the bookmark time and is displayed in the seek bar.
 				player_page.checkThatWeStartTheRecordFromThisTime(time);
@@ -257,6 +273,19 @@ public class TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSee
 					
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+	}
+
+	private void deleteBookmarkByUser(String user){
+		try {
+			tegrity.loginCourses(user);
+			course.selectCourseThatStartingWith("Ab");
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		record.deleteExistsBookmark();
+		record.signOut();
+
 	}
 	
 }
