@@ -6512,5 +6512,15 @@ public class RecordingHelperPage extends Page {
         });
     }
 
+    public List<String> getTheCurrentRecordesNamesList(WebDriver currentDriver) {
+        List<String> currentRecordsNames = new ArrayList<>();
+        List<WebElement>  recordingIsSelected = currentDriver.findElements(By.className("recordingTitle"));
+        for (WebElement element : recordingIsSelected){
+            String recordText = element.findElement(By.cssSelector("a")).getText();
+            currentRecordsNames.add(recordText);
+        }
+        return currentRecordsNames;
+    }
+
 
 }
