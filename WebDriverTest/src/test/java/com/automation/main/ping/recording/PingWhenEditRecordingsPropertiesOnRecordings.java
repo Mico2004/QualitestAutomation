@@ -29,6 +29,12 @@ import java.util.List;
 public class PingWhenEditRecordingsPropertiesOnRecordings extends BaseTest {
 
 
+    {
+        System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
+
+    }
+
+
     public ConfirmationMenu confirmation_menu;
     public LoginHelperPage tegrity;
     public CoursesHelperPage course;
