@@ -83,9 +83,8 @@ public class LogInAsAnotherUser {
     }
 
     public void deleteTheFirstRecored() {
-        List<WebElement> recordingIsSelected = driver.findElements(By.className("recordingData"));
-        WebElement element = recordingIsSelected.get(0).findElement(By.cssSelector("input"));
-        element.click();
+        findAndClickAtCheckBoxRecord(0);
+
         WaitDriverUtility.sleepInSeconds(1);
         WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("RecordingTasks"), 10);
         expendAndClickOnDropList("DeleteTask2");
@@ -93,6 +92,11 @@ public class LogInAsAnotherUser {
         WaitDriverUtility.waitToPageBeLoaded(driver);
         driver.switchTo().parentFrame();
         WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("DeleteButton"), 10).click();
+    }
+
+    public void findAndClickAtCheckBoxRecord(int i) {
+        List<WebElement> recordingIsSelected = driver.findElements(By.className("recordingData"));
+        recordingIsSelected.get(i).findElement(By.cssSelector("input")).click();
     }
 
     private void expendAndClickOnDropList(String optionElementIdToClick) {
@@ -113,6 +117,21 @@ public class LogInAsAnotherUser {
             System.out.println(optionElementIdToClick + " window not displayed");
             Assert.assertTrue(false);
         }
+    }
+
+    public void renameRecord(String newName,int index){
+        findAndClickAtCheckBoxRecord(index);
+        WaitDriverUtility.sleepInSeconds(1);
+        WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("RecordingTasks"), 10);
+        expendAndClickOnDropList("EditRecordingProperties");
+        WaitDriverUtility.waitToPageBeLoaded(driver);
+        driver.switchTo().parentFrame();
+        WebElement recordNameTextBox = WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("recordingTItle"), 10);
+        recordNameTextBox.clear();
+        recordNameTextBox.sendKeys(newName);
+        WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("EditButton"), 10).click();
+        WebElement alertWindow = WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("alertWindow"), 30);
+        alertWindow.findElement(By.tagName("button")).click();
     }
 
     public void killWebDriver() {
