@@ -111,7 +111,7 @@ public class PingWhenEditRecordingsPropertiesOnRecordings extends BaseTest {
         boolean isRecordRenamed = false;
 
         while (timeOut > 0) {
-
+            System.out.println("waiting for 1 second to new recordigs number be changed");
             WaitDriverUtility.sleepInSeconds(1);
             List<String> courseRecordingListAfterRenaming = record.getTheCurrentRecordesNamesList(driver);
             Assert.assertEquals(courseRecordingListBeforeRenaming.size(), courseRecordingListAfterRenaming.size());
@@ -119,9 +119,12 @@ public class PingWhenEditRecordingsPropertiesOnRecordings extends BaseTest {
             for (int i = 0; i < courseRecordingListAfterRenaming.size(); i++) {
                 if (courseRecordingListAfterRenaming.get(i).equals(newName)) {
                     isRecordRenamed = true;
+                    break;
                 }
             }
-
+            if (isRecordRenamed){
+                break;
+            }
             timeOut--;
         }
 
