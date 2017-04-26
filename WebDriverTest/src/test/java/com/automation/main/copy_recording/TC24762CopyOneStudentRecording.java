@@ -55,7 +55,7 @@ public class TC24762CopyOneStudentRecording {
 		public void setup() {
 		
 
-				System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+				System.setProperty("webdriver.chrome.driver", "c:/selenium-drivers/chromedriver.exe");
 				driver = new ChromeDriver();///// MUST FOR TEST TO GET XML
 				
 				tegrity = PageFactory.initElements(driver, LoginHelperPage.class);

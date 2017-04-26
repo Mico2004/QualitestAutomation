@@ -521,7 +521,7 @@ public class TC21599GuestPremissions {
 		   driver.quit();
      
 		 ////////set up for download file
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "c:/selenium-drivers/chromedriver.exe");
 		driver = new ChromeDriver();
 		
 

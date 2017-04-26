@@ -74,7 +74,7 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 	public void setup() {
 
 		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
+//		System.setProperty("webdriver.ie.driver", "c:/selenium-drivers/IEDriverServer.exe");
 //			capability=DesiredCapabilities.internetExplorer();
 //			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
 //			
@@ -156,7 +156,7 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 		record.verifyThatRecordingChaptersAreDisplySequentially();
 		
 		// 4.3. The recording chapters contain the ordinal numbers.
-		// 4.4. The recording chapters contain the length from – to in a format as follows: “X:XX:XX – X:XX:XX".
+		// 4.4. The recording chapters contain the length from ï¿½ to in a format as follows: ï¿½X:XX:XX ï¿½ X:XX:XX".
 		record.verifyRecordingChaptersContainsOrdinalNumberAndContainLengthFromToInAFormat();
 		
 		
@@ -190,7 +190,7 @@ public class TC15446ValidateExpandingViewingAndCollapsingTheChapters {
 			ATUReports.add("Verifed that chapter icon become a bit bigger in size.", "True.", "False.", LogAs.FAILED, null);
 		}
 		
-		// 5.2. The ‘>’ video player symbol is displayed over the chapter preview.
+		// 5.2. The ï¿½>ï¿½ video player symbol is displayed over the chapter preview.
 		record.verifyWebElementDisplayed(driver.findElements(By.cssSelector(".play-button")).get(0), "Play symbol");
 		
 		// 6. Click on a recording's title.

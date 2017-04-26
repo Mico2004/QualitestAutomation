@@ -49,7 +49,7 @@ public class TC15553TryCopyWithoutSelectingCourse {
 	public void setup() {
 
 		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
+//		System.setProperty("webdriver.ie.driver", "c:/selenium-drivers/IEDriverServer.exe");
 //			capability=DesiredCapabilities.internetExplorer();
 //			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
 //			

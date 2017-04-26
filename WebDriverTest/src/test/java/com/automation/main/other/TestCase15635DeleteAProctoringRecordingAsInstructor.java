@@ -73,7 +73,7 @@ public class TestCase15635DeleteAProctoringRecordingAsInstructor {
     @BeforeClass
 	public void setup() throws InterruptedException {
 
-		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
+		System.setProperty("webdriver.ie.driver", "c:/selenium-drivers/IEDriverServer.exe");
 		capability=DesiredCapabilities.internetExplorer();
 		capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
 		

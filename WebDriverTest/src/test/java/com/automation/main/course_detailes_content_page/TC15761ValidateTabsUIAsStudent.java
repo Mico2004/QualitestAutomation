@@ -76,7 +76,7 @@ public class TC15761ValidateTabsUIAsStudent {
 	public void setup() {
 
 		
-//		System.setProperty("webdriver.ie.driver", "src/test/resources/IEDriverServer.exe");
+//		System.setProperty("webdriver.ie.driver", "c:/selenium-drivers/IEDriverServer.exe");
 //			capability=DesiredCapabilities.internetExplorer();
 //			capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,true);
 //			
@@ -177,13 +177,13 @@ public class TC15761ValidateTabsUIAsStudent {
 		// 11.1. The "Recordings" tab is displayed under the course name.
 		record.verifyWebElementDisplayed(record.recordings_tab, "Recording tab");
 		
-		// 11.2. The "Additional Content" tab is displayed next to the ‘Recordings’ tab.
+		// 11.2. The "Additional Content" tab is displayed next to the ï¿½Recordingsï¿½ tab.
 		record.verifyWebElementDisplayed(record.additional_content_tab, "Additional content tab");
 		
-	 	// 11.3. The "Student Recordings" tab is displayed next to the ‘Additional Content’ tab.
+	 	// 11.3. The "Student Recordings" tab is displayed next to the ï¿½Additional Contentï¿½ tab.
 		record.verifyWebElementDisplayed(record.student_recordings_tab, "Student recordings tab");
 		
-		// 11.4. The "Tests" tab is not displayed next to the ‘Student Recordings’ tab(only INSTRACTORS).
+		// 11.4. The "Tests" tab is not displayed next to the ï¿½Student Recordingsï¿½ tab(only INSTRACTORS).
 		record.verifyNoTestsTab();
 		
 		// Post test

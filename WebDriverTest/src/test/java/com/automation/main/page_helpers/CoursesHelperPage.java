@@ -889,7 +889,7 @@ public class CoursesHelperPage extends Page {
 		String active_course_api = "https://" + university_name + ".tegrity.com/api/courses/active";
 		if (driver instanceof InternetExplorerDriver) {
 			driver.quit();
-			System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "c:/selenium-drivers/chromedriver.exe");
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();
 			tegrity = PageFactory.initElements(driver, LoginHelperPage.class);

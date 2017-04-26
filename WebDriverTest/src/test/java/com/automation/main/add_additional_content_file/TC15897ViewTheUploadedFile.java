@@ -226,11 +226,11 @@ public class TC15897ViewTheUploadedFile {
 		///check  download
 		////////set up for download file
 
-		//System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "c:/selenium-drivers/chromedriver.exe");
 		//driver = new ChromeDriver();
 		//driver.manage().window().maximize();
 		
-		System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");	
+		System.setProperty("webdriver.gecko.driver", "c:/selenium-drivers/geckodriver.exe");
 		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 		capabilities.setCapability("marionette", true);		
 		FirefoxProfile fxProfile = new FirefoxProfile();
@@ -356,7 +356,7 @@ public class TC15897ViewTheUploadedFile {
 				///check  download
 		////////set up for download file
 
-//				System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+//				System.setProperty("webdriver.chrome.driver", "c:/selenium-drivers/chromedriver.exe");
 //				prefs = new HashMap<String, Object>();
 //				//To Turns off multiple download warning
 //				prefs.put("profile.default_content_settings.popups", 0);
@@ -373,7 +373,7 @@ public class TC15897ViewTheUploadedFile {
 //				driver = new ChromeDriver(cap);
 //				driver.manage().window().maximize();
 
-				System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");	
+				System.setProperty("webdriver.gecko.driver", "c:/selenium-drivers/geckodriver.exe");
 				capabilities = DesiredCapabilities.firefox();
 				capabilities.setCapability("marionette", true);		
 				fxProfile = new FirefoxProfile();

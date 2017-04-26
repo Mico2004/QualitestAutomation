@@ -165,11 +165,11 @@ public class TC15463AddPngFile {
 
 		//////// set up for download file
 
-		//System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "c:/selenium-drivers/chromedriver.exe");
 		//driver = new ChromeDriver();
 		//driver.manage().window().maximize();
 
-		System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");	
+		System.setProperty("webdriver.gecko.driver", "c:/selenium-drivers/geckodriver.exe");
 		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 		capabilities.setCapability("marionette", true);		
 		FirefoxProfile fxProfile = new FirefoxProfile();

@@ -83,7 +83,7 @@ public class TestSuitePreSetCopyRecordings_Login {
 		// capability=DesiredCapabilities.internetExplorer();
 		// capability.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING,false);
 		//
-		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "c:/selenium-drivers/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
