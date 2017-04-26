@@ -1,39 +1,6 @@
 package com.automation.main.page_helpers;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.DirectoryNotEmptyException;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.Listeners;
-//import com.automation.objects.RecordingObject;
+import Client.Robotil;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -43,11 +10,21 @@ import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import autoitx4java.AutoItX;
 import com.jacob.com.LibraryLoader;
+import org.openqa.selenium.*;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.Listeners;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
 
-import java.io.StringReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Result;
@@ -56,13 +33,23 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.net.MalformedURLException;
+import java.nio.file.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.xml.sax.InputSource;
-
-
-import Client.Robotil;
+//import com.automation.objects.RecordingObject;
 
 @Listeners({ATUReportsListener.class, ConfigurationListener.class, MethodListener.class})
 public class RecordingHelperPage extends Page {
@@ -155,9 +142,9 @@ public class RecordingHelperPage extends Page {
     public List<String> recording_list_duration_string;
     List<String> recordings_list_recorder_name_string;
     @FindBy(xpath = "//*[@id=\"Recording1\"]/strong ")
-    public WebElement first_recording; /// first recording
+    public WebElement first_recording; /// first helper
     @FindBy(xpath = "//*[@id=\"scrollableArea\"]/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a")
-    WebElement first_video_recording;/// first video in first recording
+    WebElement first_video_recording;/// first video in first helper
     @FindBy(xpath = ".//*[@id='scrollableArea']/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[3]/a/div[2]")
     WebElement second_record_player;
     @FindBy(xpath = "//*[@id=\"scrollableArea\"]/div[2]/div/div/div/accordion/div/div[1]/div[2]/div/div[2]/a/div[2]")
@@ -419,7 +406,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // This function check for existence in status of any recording for t time
+    // This function check for existence in status of any helper for t time
     // If after t time there is still status, then it will Assert error + log it
     // Otherewise it will pass
     public void checkStatusExistenceForMaxTTime(int time_in_sec) throws InterruptedException {
@@ -449,7 +436,7 @@ public class RecordingHelperPage extends Page {
             ATUReports.add(time + " Timeout for status disappearing is over but status is still displayed", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
         }
 
-        ATUReports.add(time + " There is not more status for any recording", LogAs.PASSED, null);
+        ATUReports.add(time + " There is not more status for any helper", LogAs.PASSED, null);
     }
 
     public void checkStatusExistenceUnpublish() throws InterruptedException {
@@ -468,7 +455,7 @@ public class RecordingHelperPage extends Page {
             ATUReports.add(time + " Timeout for status disappearing is over but status is still displayed", LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
         }
 
-        ATUReports.add(time + " There is not more status for any recording", LogAs.PASSED, null);
+        ATUReports.add(time + " There is not more status for any helper", LogAs.PASSED, null);
     }
 
     // This function check for all recordings if they are clickable.
@@ -497,7 +484,7 @@ public class RecordingHelperPage extends Page {
     }
 
     // This function check for all recordings if any of them have status.
-    // If there is recording that have status it will return true,
+    // If there is helper that have status it will return true,
     // otherwise it will return false
     public boolean checkExistenceOfStatusInRecordings() throws InterruptedException {
         int i = 1;
@@ -547,7 +534,7 @@ public class RecordingHelperPage extends Page {
         System.out.println("returnToCourseListPage7");
     }
 
-    // This function clicks on title of recording in index i
+    // This function clicks on title of helper in index i
     public void clickOnRecordingTitleInIndex(int index) throws InterruptedException {
         System.out.println("Click on title in index: " + index);
         WebElement element = first_recording;
@@ -569,24 +556,24 @@ public class RecordingHelperPage extends Page {
 
     }
 
-    // This function clicks on first recording title
+    // This function clicks on first helper title
     public void clickOnRecordingInIndex(int index) {
         driver.findElement(By.xpath("//*[@id='Recording" + Integer.toString(index) + "']/strong")).click();
     }
 
-    // This function clicks on first recording title
+    // This function clicks on first helper title
     public void clickOnFirstRecordingTitle() {
         first_recording_title.click();
 
     }
 
-    // This function return first recording title
+    // This function return first helper title
     public String getFirstRecordingTitle() {
         try {
             waitForVisibility(first_recording_title);
             System.out.println("The first record is: " + first_recording_title.getText());
         } catch (Exception e) {
-            ATUReports.add(time + " Timeout for first recording", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            ATUReports.add(time + " Timeout for first helper", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
             return null;
         }
@@ -597,7 +584,7 @@ public class RecordingHelperPage extends Page {
         try {
             waitForVisibility(second_recording_title);
         } catch (Exception e) {
-            ATUReports.add(time + " Timeout for second recording", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            ATUReports.add(time + " Timeout for second helper", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
             return null;
         }
@@ -624,7 +611,7 @@ public class RecordingHelperPage extends Page {
         return FirstRecordByName.getText();
     }
 
-    // This function waits until first recording status "Being Copied from"
+    // This function waits until first helper status "Being Copied from"
     // dissaper
     public void waitUntilFirstRecordingBeingCopiedFromStatusDissaper() throws InterruptedException {
         int time_counter = 0;
@@ -643,8 +630,8 @@ public class RecordingHelperPage extends Page {
             }
         }
 
-        System.out.println("Being copied from disappeared from first recording.");
-        ATUReports.add(time + " Being copied from dissapear from first recording.", LogAs.PASSED, null);
+        System.out.println("Being copied from disappeared from first helper.");
+        ATUReports.add(time + " Being copied from dissapear from first helper.", LogAs.PASSED, null);
         Assert.assertTrue(true);
     }
 
@@ -885,6 +872,19 @@ public class RecordingHelperPage extends Page {
 
     // This function clicks on checkbox which is checking all checkbox.
 
+    public String clickTheFirstCheckBoxOfRecordingsByIndex(int index) {
+        List<String> recording_names_list = getCourseRecordingList();
+            String checkbox_indexed = "Checkbox1";
+            WebElement checkBox = driver.findElement(By.id(checkbox_indexed));
+            if (!checkBox.isSelected()) {
+                checkBox.click();
+                return recording_names_list.get(index);
+            }
+
+            return null;
+    }
+
+
     public List<String> checkAllCheckBox() {
         System.out.println("checkAllCheckBox1");
         wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
@@ -899,8 +899,8 @@ public class RecordingHelperPage extends Page {
                 int j = i + 1;
                 String checkbox_indexed = "Checkbox" + Integer.toString(j);
                 if (!driver.findElement(By.id(checkbox_indexed)).isSelected()) {
-                    System.out.println("Not all recording checked.");
-                    ATUReports.add(time + " Select several recordings", "All recording checked", "Not all recording checked.",
+                    System.out.println("Not all helper checked.");
+                    ATUReports.add(time + " Select several recordings", "All helper checked", "Not all helper checked.",
                             LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
                     Assert.assertTrue(false);
 
@@ -908,8 +908,8 @@ public class RecordingHelperPage extends Page {
                 }
             }
 
-            System.out.println("All recording checked.");
-            ATUReports.add(time + " All recording checked.", "All recording checked", "All recording checked", LogAs.PASSED,
+            System.out.println("All helper checked.");
+            ATUReports.add(time + " All helper checked.", "All helper checked", "All helper checked", LogAs.PASSED,
                     null);
             Assert.assertTrue(true);
             return recording_names_list;
@@ -917,9 +917,9 @@ public class RecordingHelperPage extends Page {
         return null;
     }
 
-    // This function get String as recording name, and compare this string to
+    // This function get String as helper name, and compare this string to
     // all title of all recordings in course.
-    // It will return true if the recording found. Otherwise it will return
+    // It will return true if the helper found. Otherwise it will return
     // false.
 
     public boolean isRecordingExist(String recording_name, boolean need_to_be_exists) {
@@ -992,8 +992,8 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // This function get recording name.
-    // It check if the recording name is exist as first recording, if so it
+    // This function get helper name.
+    // It check if the helper name is exist as first helper, if so it
     // returns true.
     // Otherwise it return false.
     public boolean isRecordingExistAsTopRecording(String recording_name, boolean need_to_be_exists) {
@@ -1087,7 +1087,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // verify recording menu color
+    // verify helper menu color
     public void verifyRecordingMenuColor() throws InterruptedException {
 
         String grey_color = "rgba(128, 128, 128, 1)";
@@ -1107,7 +1107,7 @@ public class RecordingHelperPage extends Page {
 
     }
 
-    // this function check that recording status in target index is empty
+    // this function check that helper status in target index is empty
     // with max timeout
     public boolean checkThatRecordingStatusTargetIndexIsEmpty(int index, int time_interval)
             throws InterruptedException {
@@ -1119,7 +1119,7 @@ public class RecordingHelperPage extends Page {
             new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(el, "Being copied from")));
             new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(el, "Being moved from")));
             new WebDriverWait(driver, 450).until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(el, "Recording is being edited.")));
-            ATUReports.add(time + " There is not more status for any recording", LogAs.PASSED, null);
+            ATUReports.add(time + " There is not more status for any helper", LogAs.PASSED, null);
             return true;
 
         } catch (org.openqa.selenium.TimeoutException msg) {
@@ -1149,7 +1149,7 @@ public class RecordingHelperPage extends Page {
 //		return false;
     }
 
-    // this function check that recording status in target ind ex is not target
+    // this function check that helper status in target ind ex is not target
     // status
     // with max timeout
     public boolean checkThatRecordingStatusTargetIndexIsNotXWithTimeout(int index, String is_not, int time_interval)
@@ -1173,7 +1173,7 @@ public class RecordingHelperPage extends Page {
         return false;
     }
 
-    // this function return true if copy displayed in recording tasks menu,
+    // this function return true if copy displayed in helper tasks menu,
     // and false otherwise
     public boolean isCopyButtonDisplayedInRecordingTasks() {
         try {
@@ -1274,7 +1274,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // this function get index and return status of recording in that index
+    // this function get index and return status of helper in that index
     public String getIndexRecordingStatus(int index) {
         try {
             String recording_status = driver.findElement(By.id("RecordingStatus" + Integer.toString(index))).getText();
@@ -1284,7 +1284,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // This function select first recording from recording list
+    // This function select first helper from helper list
     public void selectIndexCheckBox(int index) throws InterruptedException {
         try {
             Thread.sleep(700);
@@ -1304,14 +1304,14 @@ public class RecordingHelperPage extends Page {
 
         if (recording_list_names.contains(name)) {
             Assert.assertTrue(true);
-            ATUReports.add(time + " recording copied successfully", LogAs.PASSED, null);
+            ATUReports.add(time + " helper copied successfully", LogAs.PASSED, null);
         } else {
             Assert.assertTrue(false);
-            ATUReports.add(time + " recording not copied", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            ATUReports.add(time + " helper not copied", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
         }
     }
 
-    // take recording list of elements and extracts its name
+    // take helper list of elements and extracts its name
     public List<String> convertRecordingsListToNames() {
         int i = 1;
         recording_list_names = new ArrayList<String>();
@@ -1326,7 +1326,7 @@ public class RecordingHelperPage extends Page {
         return recording_list_names; // System.out.println(i);
     }
 
-    // take recording list of elements and extracts its recorder name
+    // take helper list of elements and extracts its recorder name
     public List<String> convertRecordingsListToRecorderName() {
         int i = 1;
         recordings_list_recorder_name_string = new ArrayList<String>();
@@ -1340,7 +1340,7 @@ public class RecordingHelperPage extends Page {
         return recordings_list_recorder_name_string;
     }
 
-    // take recording list of elements and extracts its recording date
+    // take helper list of elements and extracts its helper date
     public List<String> convertRecordingsListToDate() {
         int i = 1;
         recordings_list_date_string = new ArrayList<String>();
@@ -1360,14 +1360,14 @@ public class RecordingHelperPage extends Page {
         return recordings_list_date_string;// System.out.println(i);
     }
 
-    // take recording list of elements and extracts its duration time of
-    // recording
+    // take helper list of elements and extracts its duration time of
+    // helper
     public List<String> convertRecordingsListToDuration() {
         int i = 1;
         recording_list_duration_string = new ArrayList<String>();
         for (WebElement el : recordings_list_duratuon) {
             String duration = el.getText();
-            // if((!recording.equals("Recordings"))&&(!recording.equals("Recording
+            // if((!helper.equals("Recordings"))&&(!helper.equals("Recording
             // Tasks")))
             {
                 duration = trimDuration(duration);
@@ -1379,7 +1379,7 @@ public class RecordingHelperPage extends Page {
         return recording_list_duration_string;
     }
 
-    /// create new recording list object
+    /// create new helper list object
 /*	public List<RecordingObject> createRecordingObjectList() {
         convertRecordingsListToDuration();
 		convertRecordingsListToDate();
@@ -1402,7 +1402,7 @@ public class RecordingHelperPage extends Page {
         return arr[1];
     }
 
-    /// verify recording is expandable
+    /// verify helper is expandable
     public void verifyFirstExpandableRecording() throws InterruptedException {
 
         System.out.println("Click on title in index: " + 1);
@@ -1411,30 +1411,30 @@ public class RecordingHelperPage extends Page {
         try {
             waitForVisibility(element);
             ((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
-            System.out.println("recording chapter was expaned");
-            ATUReports.add(time + " recording chapter was expaned", LogAs.PASSED, null);
+            System.out.println("helper chapter was expaned");
+            ATUReports.add(time + " helper chapter was expaned", LogAs.PASSED, null);
             Thread.sleep(1500);
             Assert.assertTrue(true);
             return;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("recording chapter wasn't expaned");
-            ATUReports.add(time + " recording chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println("helper chapter wasn't expaned");
+            ATUReports.add(time + " helper chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
 
         if (isElementPresent(firsr_record_player_name)) {
-            ATUReports.add(time + " video recording was displayed", LogAs.PASSED, null);
-            System.out.println("video recording was displayed");
+            ATUReports.add(time + " video helper was displayed", LogAs.PASSED, null);
+            System.out.println("video helper was displayed");
             Assert.assertTrue(true);
         } else {
-            ATUReports.add(time + " video recording was not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-            System.out.println("video recording was not displayed");
+            ATUReports.add(time + " video helper was not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println("video helper was not displayed");
             Assert.assertTrue(false);
         }
     }
 
-    /// verify recording is expandable
+    /// verify helper is expandable
     public void verifyFirstExpandableTestRecording(int index) throws InterruptedException {
 
         System.out.println("Click on title in index: " + Integer.toString(index));
@@ -1443,25 +1443,25 @@ public class RecordingHelperPage extends Page {
         try {
             waitForVisibility(element);
             ((JavascriptExecutor) driver).executeScript("document.getElementById(\"" + id + "\").click();");
-            System.out.println("recording chapter was expaned");
-            ATUReports.add(time + " recording chapter was expaned", LogAs.PASSED, null);
+            System.out.println("helper chapter was expaned");
+            ATUReports.add(time + " helper chapter was expaned", LogAs.PASSED, null);
             Thread.sleep(1500);
             Assert.assertTrue(true);
             return;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("recording chapter wasn't expaned");
-            ATUReports.add(time + " recording chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println("helper chapter wasn't expaned");
+            ATUReports.add(time + " helper chapter wasn't expaned", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
 
         if (isElementPresent(firsr_record_player_name)) {
-            ATUReports.add(time + " video recording was displayed", LogAs.PASSED, null);
-            System.out.println("video recording was displayed");
+            ATUReports.add(time + " video helper was displayed", LogAs.PASSED, null);
+            System.out.println("video helper was displayed");
             Assert.assertTrue(true);
         } else {
-            ATUReports.add(time + " video recording was not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-            System.out.println("video recording was not displayed");
+            ATUReports.add(time + " video helper was not displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println("video helper was not displayed");
             Assert.assertTrue(false);
         }
     }
@@ -1632,7 +1632,7 @@ public class RecordingHelperPage extends Page {
         Assert.assertTrue(true);
     }
 
-    /// verify if recorder name of source recording matches the destination copy
+    /// verify if recorder name of source helper matches the destination copy
     public void VerifyRecorderNameAsOriginal(String name) {
         for (String original_recorder : recordings_list_recorder_name_string) {
 
@@ -1662,13 +1662,13 @@ public class RecordingHelperPage extends Page {
 
     }
 
-    /// selects recording by name
+    /// selects helper by name
     public void selectRecordingByName(String original_recorder_name) throws InterruptedException {
         try {
             wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recorded by"));
         } catch (Exception e) {
             System.out.println("There are not recordings in the course tab");
-            ATUReports.add(time + " Select recording", "RecordingName: " + original_recorder_name, "Recording clicked", "There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            ATUReports.add(time + " Select helper", "RecordingName: " + original_recorder_name, "Recording clicked", "There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
         WebElement recording = null;
@@ -1690,8 +1690,8 @@ public class RecordingHelperPage extends Page {
         } catch (WebDriverException e) {
             handlesClickIsNotVisible(recording);
             waitForVisibility(visibleFirstChapter);
-            System.out.println(" no such recording found");
-            ATUReports.add(time + " no such recording", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println(" no such helper found");
+            ATUReports.add(time + " no such helper", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
 
         }
@@ -1702,7 +1702,7 @@ public class RecordingHelperPage extends Page {
             wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recorded by"));
         } catch (Exception e) {
             System.out.println("There are not recordings in the course tab");
-            ATUReports.add(time + " Select recording", "RecordingName: " + original_recorder_name, "Recording clicked", "There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            ATUReports.add(time + " Select helper", "RecordingName: " + original_recorder_name, "Recording clicked", "There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
         WebElement recording = null;
@@ -1724,15 +1724,15 @@ public class RecordingHelperPage extends Page {
         } catch (WebDriverException e) {
             handlesClickIsNotVisible(recording);
             waitForVisibility(visibleFirstChapter);
-            System.out.println(" no such recording found");
-            ATUReports.add(time + " no such recording", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println(" no such helper found");
+            ATUReports.add(time + " no such helper", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
 
         }
         return differentRecordName;
     }
 
-    // this function check if index recording is clickable
+    // this function check if index helper is clickable
     public boolean isIndexRecordingClickable(int index) {
         try {
             if (driver.findElement(By.id("Recording" + Integer.toString(index))).getAttribute("disabled").equals(true)) {
@@ -1747,8 +1747,8 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // this function get recording name and DeleteMenu object, and delete that
-    // recording if it exists.
+    // this function get helper name and DeleteMenu object, and delete that
+    // helper if it exists.
     public void deleteTargetRecordingIfExist(String recording_name, DeleteMenu delete_menu)
             throws InterruptedException {
         List<String> recording_list = getCourseRecordingList();
@@ -1765,7 +1765,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // this function get recording name and select it checkbox
+    // this function get helper name and select it checkbox
     public void selectTargetRecordingCheckbox(String recording_name) throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(checkbox));
         List<String> recording_list = getCourseRecordingList();
@@ -1788,7 +1788,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // This function check if recording in target index is select
+    // This function check if helper in target index is select
     public boolean isIndexRecordingSelected(int index) {
         try {
             driver.findElement(By.id("Checkbox" + Integer.toString(index))).isSelected();
@@ -1897,7 +1897,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // this function return true if move displayed in recording tasks menu,
+    // this function return true if move displayed in helper tasks menu,
     // and false otherwise
     public boolean isMoveButtonDisplayedInRecordingTasks() {
         try {
@@ -1948,8 +1948,8 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // this function get user name and return index of recording of this user if
-    // such recording exist
+    // this function get user name and return index of helper of this user if
+    // such helper exist
     public int getTargetUserNameRecordingIndex(String username) {
         int num_of_recordings = getCourseRecordingList().size();
 
@@ -1963,8 +1963,8 @@ public class RecordingHelperPage extends Page {
         return 0;
     }
 
-    // this function get user name and return index of recording of other user
-    // if such recording exist
+    // this function get user name and return index of helper of other user
+    // if such helper exist
     public int getOtherThenTargetUserNameRecordingIndex(String username) {
         int num_of_recordings = getCourseRecordingList().size();
 
@@ -1978,7 +1978,7 @@ public class RecordingHelperPage extends Page {
         return 0;
     }
 
-    // This function unselect index recording from recording list
+    // This function unselect index helper from helper list
     public void unselectIndexCheckBox(int index) {
         try {
             WebElement checkbox = driver.findElement(By.id("Checkbox" + Integer.toString(index)));
@@ -2065,8 +2065,8 @@ public class RecordingHelperPage extends Page {
     }
 
 
-    // This function get recording name.
-    // It check if the recording name is exist as first recording, if so it
+    // This function get helper name.
+    // It check if the helper name is exist as first helper, if so it
     // returns true.
     // Otherwise it return false.
     public boolean isRecordingExistAsNewestRecording(String recording_name, boolean need_to_be_exists) {
@@ -2097,7 +2097,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // verify recording menu color
+    // verify helper menu color
     public void verifyRecordingMenuColor(WebElement el) throws InterruptedException {
 
         String grey_color = "rgba(128, 128, 128, 1)";
@@ -2122,7 +2122,7 @@ public class RecordingHelperPage extends Page {
         Thread.sleep(2000);
     }
 
-    // verify recording menu color
+    // verify helper menu color
 
     public void verifyColorButton(String color) throws InterruptedException {
 
@@ -2160,7 +2160,7 @@ public class RecordingHelperPage extends Page {
 
     }
 
-    // This function waits until first recording status "Being Copied from"
+    // This function waits until first helper status "Being Copied from"
     // dissaper
     public void waitUntilFirstRecordingBeingMovedFromStatusDissaper() throws InterruptedException {
         int time_counter = 0;
@@ -2179,8 +2179,8 @@ public class RecordingHelperPage extends Page {
                 }
             } else break;
         }
-        System.out.println("Being moved from dissapear from first recording.");
-        ATUReports.add(time + " Being moved from dissapear from first recording.", LogAs.PASSED, null);
+        System.out.println("Being moved from dissapear from first helper.");
+        ATUReports.add(time + " Being moved from dissapear from first helper.", LogAs.PASSED, null);
         Assert.assertTrue(true);
     }
 
@@ -2214,12 +2214,12 @@ public class RecordingHelperPage extends Page {
     public void verifyErrorStatus(WebElement element) {
         String status = element.getText();
         if (status.equals("Error")) {
-            System.out.println(" recording status is Error");
+            System.out.println(" helper status is Error");
             Assert.assertTrue(true);
-            ATUReports.add(time + " verify recording status is Error", "status", "Error", "Error", LogAs.PASSED, null);
+            ATUReports.add(time + " verify helper status is Error", "status", "Error", "Error", LogAs.PASSED, null);
         } else {
-            System.out.println(" recording status is not Error");
-            ATUReports.add(time + " verify recording status is Error", "status", "Error", "Not Error", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println(" helper status is not Error");
+            ATUReports.add(time + " verify helper status is Error", "status", "Error", "Not Error", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
     }
@@ -2279,7 +2279,7 @@ public class RecordingHelperPage extends Page {
 
     }
 
-    // check if recording has a being copied from status
+    // check if helper has a being copied from status
 
     public boolean recordingBeingEditedStatus(WebElement element) {
         String val = element.getText();
@@ -2294,7 +2294,7 @@ public class RecordingHelperPage extends Page {
 
     }
 
-    // this function gets recording name and clicks it checkbox
+    // this function gets helper name and clicks it checkbox
     public int clickCheckBoxByName(String reco) {
         convertRecordingsListToNames();
         int index = recording_list_names.indexOf(reco) + 1;
@@ -2303,7 +2303,7 @@ public class RecordingHelperPage extends Page {
     }
 
 
-    // check if recording has a being copied from status
+    // check if helper has a being copied from status
     public boolean hasBeingcopiedfromStatus(WebElement element) {
         String val = element.getText();
         if (val.equals("Being copied from")) {
@@ -2321,7 +2321,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // check if recording has a being copied from status
+    // check if helper has a being copied from status
     public boolean hasMovingCopyingStatus(WebElement element) {
         String val = element.getText();
         if (val.equals("Moving/Copying")) {
@@ -2371,17 +2371,17 @@ public class RecordingHelperPage extends Page {
     public void verifyNoStartRecording() {
         try {
             if (start_recording_button.isDisplayed()) {
-                ATUReports.add(time + " Click on start recording button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-                System.out.println("Click on start recording button.");
+                ATUReports.add(time + " Click on start helper button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+                System.out.println("Click on start helper button.");
                 Assert.assertTrue(false);
             } else {
-                ATUReports.add(time + " No start recording button", LogAs.PASSED, null);
-                System.out.println("No start recording button");
+                ATUReports.add(time + " No start helper button", LogAs.PASSED, null);
+                System.out.println("No start helper button");
                 Assert.assertTrue(true);
             }
         } catch (Exception e) {
-            ATUReports.add(time + " No start recording button", LogAs.PASSED, null);
-            System.out.println("No start recording button");
+            ATUReports.add(time + " No start helper button", LogAs.PASSED, null);
+            System.out.println("No start helper button");
             Assert.assertTrue(true);
         }
     }
@@ -2405,7 +2405,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    /// Verify that next menu items are not displayed:1.'Upload recording,2.
+    /// Verify that next menu items are not displayed:1.'Upload helper,2.
     /// 'Add Additional Content File',3. 'Add Additional Content Link'
     /// 4. 'Take In Class Notes',5. 'Get Live Webcast',6. 'Upload Video File',7.
     /// 'Upload Audio File'
@@ -2436,7 +2436,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    /// changing recording ownership
+    /// changing helper ownership
     public void changeRecordingOwnership(ConfirmationMenu confirm_menu, EditRecordingPropertiesWindow erp_window,
                                          String new_owner, WebElement checkbox_element) throws InterruptedException {
         int i = 1;
@@ -2478,30 +2478,30 @@ public class RecordingHelperPage extends Page {
     }
 
     public void verifyThatMessageShownUnderRecordingTasks() {
-        boolean is_target_message_shown = isTargetMessageShownUnderRecordingTasks("To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right.", disable_message_recording_task);
+        boolean is_target_message_shown = isTargetMessageShownUnderRecordingTasks("To make changes to helper(s) please select one or more recordings from the list below using the checkboxes on the right.", disable_message_recording_task);
 
         if (is_target_message_shown) {
-            System.out.println("The message: To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right. is shown");
-            ATUReports.add("Target message: To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right.", "True", "True", LogAs.PASSED, null);
+            System.out.println("The message: To make changes to helper(s) please select one or more recordings from the list below using the checkboxes on the right. is shown");
+            ATUReports.add("Target message: To make changes to helper(s) please select one or more recordings from the list below using the checkboxes on the right.", "True", "True", LogAs.PASSED, null);
             Assert.assertTrue(true);
         } else {
-            System.out.println("The message: To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right. is not shown");
-            ATUReports.add("Target message: To make changes to recording(s) please select one or more recordings from the list below using the checkboxes on the right.", "True", "Fail", LogAs.FAILED, null);
+            System.out.println("The message: To make changes to helper(s) please select one or more recordings from the list below using the checkboxes on the right. is not shown");
+            ATUReports.add("Target message: To make changes to helper(s) please select one or more recordings from the list below using the checkboxes on the right.", "True", "Fail", LogAs.FAILED, null);
             Assert.assertTrue(false);
         }
     }
 
 
     public void verifyThatMessageShownUnderRecordingTasksWhenChooseTwoRecording() {
-        boolean is_target_message_shown = isTargetMessageShownUnderRecordingTasks("To edit a recording or its properties please select only one recording at a time.", multiple_message_recording_task);
+        boolean is_target_message_shown = isTargetMessageShownUnderRecordingTasks("To edit a helper or its properties please select only one helper at a time.", multiple_message_recording_task);
 
         if (is_target_message_shown) {
-            System.out.println("The message: To edit a recording or its properties please select only one recording at a time. is shown");
-            ATUReports.add("Target message: To edit a recording or its properties please select only one recording at a time.", "True", "True", LogAs.PASSED, null);
+            System.out.println("The message: To edit a helper or its properties please select only one helper at a time. is shown");
+            ATUReports.add("Target message: To edit a helper or its properties please select only one helper at a time.", "True", "True", LogAs.PASSED, null);
             Assert.assertTrue(true);
         } else {
-            System.out.println("The message: To edit a recording or its properties please select only one recording at a time. is not shown");
-            ATUReports.add("Target message: To edit a recording or its properties please select only one recording at a time.", "True", "Fail", LogAs.FAILED, null);
+            System.out.println("The message: To edit a helper or its properties please select only one helper at a time. is not shown");
+            ATUReports.add("Target message: To edit a helper or its properties please select only one helper at a time.", "True", "Fail", LogAs.FAILED, null);
             Assert.assertTrue(false);
         }
     }
@@ -2716,13 +2716,13 @@ public class RecordingHelperPage extends Page {
         Point record = recordings_tab.getLocation();
 
         if ((additional_content_tab.isDisplayed()) && (additonal.getX() > record.getX())) {
-            System.out.println("additional content tab is on right of recording tab");
-            ATUReports.add(time + " additional content tab is on right of recording tab", LogAs.PASSED, null);
+            System.out.println("additional content tab is on right of helper tab");
+            ATUReports.add(time + " additional content tab is on right of helper tab", LogAs.PASSED, null);
             Assert.assertTrue(true);
             return;
         } else {
-            System.out.println("additional content tab is not on right of recording tab");
-            ATUReports.add(time + " additional content tab is on right of recording tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println("additional content tab is not on right of helper tab");
+            ATUReports.add(time + " additional content tab is on right of helper tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
     }
@@ -2919,18 +2919,18 @@ public class RecordingHelperPage extends Page {
         try {
             String status = element.getText();
             if (status.equals("Error")) {
-                System.out.println(" recording status is Error");
+                System.out.println(" helper status is Error");
                 Assert.assertTrue(false);
-                ATUReports.add(time + " verify recording status is Error", "status", "Error", "Error", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+                ATUReports.add(time + " verify helper status is Error", "status", "Error", "Error", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             } else {
-                System.out.println(" recording status is not Error");
-                ATUReports.add(time + " verify recording status isnot  Error", "status", "Error", "Not Error", LogAs.PASSED,
+                System.out.println(" helper status is not Error");
+                ATUReports.add(time + " verify helper status isnot  Error", "status", "Error", "Not Error", LogAs.PASSED,
                         null);
                 Assert.assertTrue(true);
             }
         } catch (Exception e) {
-            System.out.println(" recording status is not Error");
-            ATUReports.add(time + " verify recording status isnot  Error", "status", "Error", "Not Error", LogAs.PASSED, null);
+            System.out.println(" helper status is not Error");
+            ATUReports.add(time + " verify helper status isnot  Error", "status", "Error", "Not Error", LogAs.PASSED, null);
             Assert.assertTrue(true);
 
         }
@@ -2995,7 +2995,7 @@ public class RecordingHelperPage extends Page {
         return false;
     }
 
-    // This function return the i-th recorder username of the i-th recording
+    // This function return the i-th recorder username of the i-th helper
     public String getIndexRecorderNameOfRecording(int index) {
         String recorder_username = driver.findElement(By.id("RecordedBy" + Integer.toString(index))).getText();
         return recorder_username.substring(13, recorder_username.length());
@@ -3027,8 +3027,8 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // This function get target recording name, and target status, and checks if
-    // that recording have that status
+    // This function get target helper name, and target status, and checks if
+    // that helper have that status
     public void verifyTargetRecordingHaveTargetStatus(String target_recording, String target_status) {
         List<String> recording_list = getCourseRecordingList();
 
@@ -3041,8 +3041,8 @@ public class RecordingHelperPage extends Page {
 
     }
 
-    // This function get target recording name. Return true if it exists in
-    // recording list, and false otherwise.
+    // This function get target helper name. Return true if it exists in
+    // helper list, and false otherwise.
     public boolean isTargetRecordingExist(String target_recording_name) {
         List<String> current_recording_list = getCourseRecordingList();
 
@@ -3055,39 +3055,39 @@ public class RecordingHelperPage extends Page {
         return false;
     }
 
-    // This function verify that target recording not exist in recording list
+    // This function verify that target helper not exist in helper list
     public void verifyThatTargetRecordingNotExistInRecordingList(String target_recording) {
         boolean is_exist = isTargetRecordingExist(target_recording);
 
         if (!is_exist) {
-            System.out.println("Target recording not exist in recording list.");
-            ATUReports.add(time + " Recording list.", "Target recording not exist.", "Target recording not exist.",
+            System.out.println("Target helper not exist in helper list.");
+            ATUReports.add(time + " Recording list.", "Target helper not exist.", "Target helper not exist.",
                     LogAs.PASSED, null);
             Assert.assertTrue(true);
         } else {
-            System.out.println("Target recording exist in recording list.");
-            ATUReports.add(time + " Recording list.", "Target recording not exist.", "Target recording exist.", LogAs.FAILED,
+            System.out.println("Target helper exist in helper list.");
+            ATUReports.add(time + " Recording list.", "Target helper not exist.", "Target helper exist.", LogAs.FAILED,
                     null);
             Assert.assertTrue(false);
         }
     }
 
-    // This function verify that target recording exist in recording list
+    // This function verify that target helper exist in helper list
     public void verifyThatTargetRecordingExistInRecordingList(String target_recording) {
         boolean is_exist = isTargetRecordingExist(target_recording);
 
         if (is_exist) {
-            System.out.println("Target recording:" + target_recording + " exist in recording list.");
-            ATUReports.add(time + " Recording list.", "Target recording exist.", "Target recording exist.", LogAs.PASSED, null);
+            System.out.println("Target helper:" + target_recording + " exist in helper list.");
+            ATUReports.add(time + " Recording list.", "Target helper exist.", "Target helper exist.", LogAs.PASSED, null);
             Assert.assertTrue(true);
         } else {
-            System.out.println("Target recording:" + target_recording + " not exist in recording list.");
-            ATUReports.add(time + " Target recording:" + target_recording + " not exist in recording list.", "Target recording exist.", "Target recording not exist.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println("Target helper:" + target_recording + " not exist in helper list.");
+            ATUReports.add(time + " Target helper:" + target_recording + " not exist in helper list.", "Target helper exist.", "Target helper not exist.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
     }
 
-    // This function select first recording without target status?
+    // This function select first helper without target status?
     public String selectRecordingWithOutTargetStatus(String target_status) throws InterruptedException {
         // wait.until(ExpectedConditions.elementToBeClickable(checkbox));
         List<String> current_recording_list = getCourseRecordingList();
@@ -3242,17 +3242,17 @@ public class RecordingHelperPage extends Page {
                 (searchbox.getLocation().y < recording_button.getLocation().x) &&
                 (recording_button.getLocation().y) < recording_tasks_button.getLocation().y) {
             System.out.println("Verifed that Start Recording button is displayed.");
-            ATUReports.add(time + " Start recording button.", "Displayed.", "Displayed.", LogAs.PASSED, null);
+            ATUReports.add(time + " Start helper button.", "Displayed.", "Displayed.", LogAs.PASSED, null);
             Assert.assertTrue(true);
 
         } else {
             System.out.println("Not verified that Start Recording button is displayed.");
-            ATUReports.add(time + " Start recording button.", "Displayed.", "Not displayed.", LogAs.PASSED, null);
+            ATUReports.add(time + " Start helper button.", "Displayed.", "Not displayed.", LogAs.PASSED, null);
             Assert.assertTrue(false);
         }
     }
 
-    // This function verify that it is recording page
+    // This function verify that it is helper page
     public void verifyThatItIsRecordingsPage() {
         if ((recordings_tab.isDisplayed()) && (recording_tasks_button.isDisplayed())) {
             System.out.println("Course details page is displayed.");
@@ -3265,15 +3265,15 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // This function verify that no recording exist in the course
+    // This function verify that no helper exist in the course
     public void verifyThatNoRecordingExistInTheCourse() {
         if (getNumberOfRecordings() == 0) {
-            System.out.println("Verified that no recording exist in the course.");
-            ATUReports.add(time + " Recording list.", "No recording is exist.", "No recording is exist.", LogAs.PASSED, null);
+            System.out.println("Verified that no helper exist in the course.");
+            ATUReports.add(time + " Recording list.", "No helper is exist.", "No helper is exist.", LogAs.PASSED, null);
             Assert.assertTrue(true);
         } else {
-            System.out.println("Not verified that no recording exist in the course.");
-            ATUReports.add(time + " Recording list.", "No recording is exist.", "There is recording in the recording list.",
+            System.out.println("Not verified that no helper exist in the course.");
+            ATUReports.add(time + " Recording list.", "No helper is exist.", "There is helper in the helper list.",
                     LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
@@ -3375,7 +3375,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // this function gets recording name and clicks it checkbox
+    // this function gets helper name and clicks it checkbox
     public int clickAdditionalContentCheckBoxByName(String reco) {
         convertAdditionalContantListToNames();
         int index = additional_content_list_names.indexOf(reco) + 1;
@@ -3589,7 +3589,7 @@ public class RecordingHelperPage extends Page {
 
     }
 
-    // Wait until recording list is empty with max timeout
+    // Wait until helper list is empty with max timeout
     public void waitUntilRecordingListIsEmptyWithMaxTimeOut(int max_time_out) throws InterruptedException {
         for (int i = 0; i < max_time_out; i++) {
             if (getCourseRecordingList().size() == 0) {
@@ -3600,7 +3600,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    /// this function upublish recording by giving a tab
+    /// this function upublish helper by giving a tab
     public void unpublishFirstRecording(WebElement tab, PublishWindow publish) {
         waitForVisibility(tab);
         try {
@@ -3645,13 +3645,13 @@ public class RecordingHelperPage extends Page {
     }
 
 
-    /// to publish recording window
+    /// to publish helper window
     public void toPublishRecording(PublishWindow publish) {
         try {
             Robot robot = new Robot();
             robot.mouseMove(-100, -100);
             moveToElementAndClick(recording_tasks_button, driver);
-            System.out.println("moved to recording task button");
+            System.out.println("moved to helper task button");
             waitForVisibility(publish_button);
             publish_button.click();
             waitForVisibility(publish.publish_window_title);
@@ -4000,10 +4000,10 @@ public class RecordingHelperPage extends Page {
     }
 
     /// this function verifies podcast url pattern it gets university
-    /// url+recording string of chracters
+    /// url+helper string of chracters
     // first convert string of xml to xml file then it get attribute only url
     /// and chooses if it contains
-    // university url+recording string of chracters if it does 2 conditions are
+    // university url+helper string of chracters if it does 2 conditions are
     /// matched and then it verifies last condition:pattern with '0'-'f' and '-'
     public ArrayList<String> podcastUrlVerification(String xml, String podcast_url, LoginHelperPage teg) {
 
@@ -4045,23 +4045,23 @@ public class RecordingHelperPage extends Page {
 
             }
             if (!arrayList.isEmpty()) {
-                System.out.println("first part(university url) of rss url and third(recording characters)  verified");
-                ATUReports.add(time + " first part(university url) of rss url and third(recording characters)  verified",
+                System.out.println("first part(university url) of rss url and third(helper characters)  verified");
+                ATUReports.add(time + " first part(university url) of rss url and third(helper characters)  verified",
                         "podcast", "clickable", "not clickable", LogAs.PASSED, null);
                 Assert.assertTrue(true);
 
             } else {
                 System.out
-                        .println("first part(university url) of rss url and third(recording characters) not verified");
-                ATUReports.add(time + " first part(university url) of rss url and third(recording characters) not verified",
+                        .println("first part(university url) of rss url and third(helper characters) not verified");
+                ATUReports.add(time + " first part(university url) of rss url and third(helper characters) not verified",
                         "podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
                 Assert.assertTrue(false);
 
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            System.out.println("first part(university url) of rss url and third(recording characters) not verified");
-            ATUReports.add(time + " first part(university url) of rss url and third(recording characters) not verified",
+            System.out.println("first part(university url) of rss url and third(helper characters) not verified");
+            ATUReports.add(time + " first part(university url) of rss url and third(helper characters) not verified",
                     "podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
@@ -4072,10 +4072,10 @@ public class RecordingHelperPage extends Page {
 
 
     /// this function verifies podcast url pattern it gets university
-    /// url+recording string of chracters
+    /// url+helper string of chracters
     // first convert string of xml to xml file then it get attribute only url
     /// and chooses if it contains
-    // university url+recording string of chracters if it does 2 conditions are
+    // university url+helper string of chracters if it does 2 conditions are
     /// matched and then it verifies last condition:pattern with '0'-'f' and '-'
     public ArrayList<String> RssUrlVerification(String xml, String rss_url) {
 
@@ -4112,23 +4112,23 @@ public class RecordingHelperPage extends Page {
 
             }
             if (!arrayList.isEmpty()) {
-                System.out.println("first part(university url) of rss url and third(recording characters)  verified");
-                ATUReports.add(time + " first part(university url) of rss url and third(recording characters)  verified",
+                System.out.println("first part(university url) of rss url and third(helper characters)  verified");
+                ATUReports.add(time + " first part(university url) of rss url and third(helper characters)  verified",
                         "podcast", "clickable", "not clickable", LogAs.PASSED, null);
                 Assert.assertTrue(true);
 
             } else {
                 System.out
-                        .println("first part(university url) of rss url and third(recording characters) not verified");
-                ATUReports.add(time + " first part(university url) of rss url and third(recording characters) not verified",
+                        .println("first part(university url) of rss url and third(helper characters) not verified");
+                ATUReports.add(time + " first part(university url) of rss url and third(helper characters) not verified",
                         "podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
                 Assert.assertTrue(false);
 
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            System.out.println("first part(university url) of rss url and third(recording characters) not verified");
-            ATUReports.add(time + " first part(university url) of rss url and third(recording characters) not verified",
+            System.out.println("first part(university url) of rss url and third(helper characters) not verified");
+            ATUReports.add(time + " first part(university url) of rss url and third(helper characters) not verified",
                     "podcast", "clickable", "not clickable", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
@@ -4222,6 +4222,7 @@ public class RecordingHelperPage extends Page {
         }
         waitForVisibility(recording_tasks_button);
         moveToElementAndClick(recording_tasks_button, driver);
+        waitForVisibility(copy_button);
         copy_button.click(); // solve
         copyMenu = PageFactory.initElements(driver, CopyMenu.class);
         copyMenu.selectTargetCourseFromCourseList(targetCourse);
@@ -4324,7 +4325,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // This function get recording name and return it's index if the recording
+    // This function get helper name and return it's index if the helper
     // exist
     public int getTargetRecordingIndex(String target_recording) {
         int target_recording_index = 0;
@@ -4338,7 +4339,7 @@ public class RecordingHelperPage extends Page {
                 }
             }
         } else {
-            System.out.println("Target recording is not exist.");
+            System.out.println("Target helper is not exist.");
             return -1;
         }
         return target_recording_index;
@@ -4540,13 +4541,13 @@ public class RecordingHelperPage extends Page {
             case "Request Captions":
                 webElement = request_captions_button;
                 break;
-            case "Edit recording":
+            case "Edit helper":
                 webElement = edit_rec_button;
                 break;
-            case "Edit recording properties":
+            case "Edit helper properties":
                 webElement = edit_rec_properties_button;
                 break;
-            case "Share recording":
+            case "Share helper":
                 webElement = share_recording_button;
                 break;
             case "Tag":
@@ -4567,7 +4568,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // This function waits until first recording status "Moving\Copying"
+    // This function waits until first helper status "Moving\Copying"
     // dissaper
     public void waitUntilFirstRecordingMovingCopyingstatusDissaper() throws InterruptedException {
         int time_counter = 0;
@@ -4583,8 +4584,8 @@ public class RecordingHelperPage extends Page {
             }
         }
 
-        System.out.println("Moving/Copying dissapear from first recording.");
-        ATUReports.add(time + " Moving/Copying dissapear from first recording.", LogAs.PASSED, null);
+        System.out.println("Moving/Copying dissapear from first helper.");
+        ATUReports.add(time + " Moving/Copying dissapear from first helper.", LogAs.PASSED, null);
         Assert.assertTrue(true);
     }
 
@@ -4609,30 +4610,30 @@ public class RecordingHelperPage extends Page {
         this.checkbox = checkbox;
     }
 
-    // This function get index i, and check that recording in this index have no
+    // This function get index i, and check that helper in this index have no
     // bookmark
     public void verifyIndexRecordingHaveNoBookmark(int index) {
         if (bookmarks_list.get(index - 1).getAttribute("class").contains("ng-hide")) {
-            System.out.println("Verified that target recording have no bookmark.");
-            ATUReports.add(time + " Target recording have no bookmark.", "True.", "True.", LogAs.PASSED, null);
+            System.out.println("Verified that target helper have no bookmark.");
+            ATUReports.add(time + " Target helper have no bookmark.", "True.", "True.", LogAs.PASSED, null);
             Assert.assertTrue(true);
         } else {
-            System.out.println("Not verified that target recording have no bookmark.");
-            ATUReports.add(time + " Target recording have no bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println("Not verified that target helper have no bookmark.");
+            ATUReports.add(time + " Target helper have no bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
     }
 
-    // This function get index i, and check that recording in this index have
+    // This function get index i, and check that helper in this index have
     // bookmark
     public void verifyIndexRecordingHaveBookmark(int index) {
         if (bookmarks_list.get(index - 1).getAttribute("class").equals("bookmark")) {
-            System.out.println("Verified that target recording have bookmark.");
-            ATUReports.add(time + " Target recording have bookmark.", "True.", "True.", LogAs.PASSED, null);
+            System.out.println("Verified that target helper have bookmark.");
+            ATUReports.add(time + " Target helper have bookmark.", "True.", "True.", LogAs.PASSED, null);
             Assert.assertTrue(true);
         } else {
-            System.out.println("Not verified that target recording have bookmark.");
-            ATUReports.add(time + " Target recording have bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println("Not verified that target helper have bookmark.");
+            ATUReports.add(time + " Target helper have bookmark.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
     }
@@ -4647,7 +4648,7 @@ public class RecordingHelperPage extends Page {
         return driver.findElement(By.id("RecordingDate" + Integer.toString(index)));
     }
 
-    // This function verify that recording chapters are display sequentially.
+    // This function verify that helper chapters are display sequentially.
     public void verifyThatRecordingChaptersAreDisplySequentially() {
         WebElement pre_web_element = video_wraps_of_chapters_of_opened_recording_list.get(0);
         for (int i = 1; i < video_wraps_of_chapters_of_opened_recording_list.size(); i++) {
@@ -4659,25 +4660,25 @@ public class RecordingHelperPage extends Page {
                 if (pre_web_element.getLocation().y < curr_web_element.getLocation().y) {
                     pre_web_element = curr_web_element;
                 } else {
-                    System.out.println("Not verified that recording chapters are display sequentially.");
+                    System.out.println("Not verified that helper chapters are display sequentially.");
                     ATUReports.add(time + " Recording chapters are display sequentially.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
                     Assert.assertTrue(false);
                 }
             }
         }
-        System.out.println("Verified that recording chapters are display sequentially.");
+        System.out.println("Verified that helper chapters are display sequentially.");
         ATUReports.add(time + " Recording chapters are display sequentially.", "True.", "True.", LogAs.PASSED, null);
         Assert.assertTrue(true);
     }
 
-    // This function verify that it's possible to scroll the recordings listing page to get to each recording.
+    // This function verify that it's possible to scroll the recordings listing page to get to each helper.
     public void verifyPossibleToScrollTheRecordingList() throws InterruptedException {
         List<WebElement> recordings_list = driver.findElements(By.cssSelector(".recordingTitle"));
         for (WebElement webElement : recordings_list) {
 //			org.openqa.selenium.interactions.Action move_to_element = moveToElement(webElement, driver);
 //			if(move_to_element==null) {
 //				System.out.println("It is not possible to scroll the recordings list page.");
-//				ATUReports.add(time +" It is possible to scroll the recording list page.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//				ATUReports.add(time +" It is possible to scroll the helper list page.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 //				Assert.assertTrue(false);
 //			}
 //			move_to_element.perform();
@@ -4686,12 +4687,12 @@ public class RecordingHelperPage extends Page {
         }
 
         System.out.println("It is possible to scroll the recordings list page.");
-        ATUReports.add(time + " It is possible to scroll the recording list page.", "True.", "True.", LogAs.PASSED, null);
+        ATUReports.add(time + " It is possible to scroll the helper list page.", "True.", "True.", LogAs.PASSED, null);
         Assert.assertTrue(true);
     }
 
     // This function verify that when scrolling the page down, Once the menu bar is scrolled to the upper part of the page, His position become's absolute and he does not leave the frame.
-    // For recording page that have more then 1 page of recordings
+    // For helper page that have more then 1 page of recordings
     public void verifyWhenScrollingThePageDownMenuBarIsScrolledToTheUpperPartOfThePage() throws InterruptedException {
         verifyPossibleToScrollTheRecordingList();
         List<WebElement> recordings_list = driver.findElements(By.cssSelector(".recordingTitle"));
@@ -4712,8 +4713,8 @@ public class RecordingHelperPage extends Page {
 
 
     // This function verifys that
-    // The recording chapters contain the ordinal numbers.
-    // The recording chapters contain the length from � to in a format as follows: �X:XX:XX � X:XX:XX".
+    // The helper chapters contain the ordinal numbers.
+    // The helper chapters contain the length from � to in a format as follows: �X:XX:XX � X:XX:XX".
     public void verifyRecordingChaptersContainsOrdinalNumberAndContainLengthFromToInAFormat() {
 
         List<WebElement> ordinal_numbers_and_length = driver.findElements(By.cssSelector(".duration"));
@@ -4754,8 +4755,8 @@ public class RecordingHelperPage extends Page {
                     (end_min > 59) &&
                     (init_sec > 59) &&
                     (end_sec > 59)) {
-                System.out.println("The recording chapters contain the length from - to in an incorrect format.");
-                ATUReports.add(time + " The recording chapters contain the length from � to in an correct format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+                System.out.println("The helper chapters contain the length from - to in an incorrect format.");
+                ATUReports.add(time + " The helper chapters contain the length from � to in an correct format.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
                 Assert.assertTrue(false);
             }
 
@@ -4764,8 +4765,8 @@ public class RecordingHelperPage extends Page {
         ATUReports.add(time + " Recording chapters contain the ordinal numbers.", "True.", "True.", LogAs.PASSED, null);
         Assert.assertTrue(true);
 
-        System.out.println("The recording chapters contain the length from - to in an correct format.");
-        ATUReports.add(time + " The recording chapters contain the length from � to in an correct format.", "True.", "True.", LogAs.PASSED, null);
+        System.out.println("The helper chapters contain the length from - to in an correct format.");
+        ATUReports.add(time + " The helper chapters contain the length from � to in an correct format.", "True.", "True.", LogAs.PASSED, null);
         Assert.assertTrue(true);
 
     }
@@ -4775,45 +4776,45 @@ public class RecordingHelperPage extends Page {
         return driver.findElements(By.cssSelector(".video-wrap")).size();
     }
 
-    // This function verify that the recording chapters contain the image preview.
+    // This function verify that the helper chapters contain the image preview.
     public void verifyThatRecordingChaptersContainImagePreview() {
         int number_of_recordings = getNumberOfChaptersOfOpenedExpandedRecordings();
 
         if (number_of_recordings == driver.findElements(By.cssSelector(".thumbnail-image")).size()) {
-            System.out.println("Verified that the recording capters contain the image preview.");
+            System.out.println("Verified that the helper capters contain the image preview.");
             ATUReports.add(time + " Recording chapters contain the image preview.", "True.", "True.", LogAs.PASSED, null);
             Assert.assertTrue(true);
         } else {
-            System.out.println("Not verified that the recording capters contain the image preview.");
+            System.out.println("Not verified that the helper capters contain the image preview.");
             ATUReports.add(time + " Recording chapters contain the image preview.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
     }
 
-    // This function verify that recording collapsed.
+    // This function verify that helper collapsed.
     public void verifyThatRecordingCollapsed() {
         verifyWebElementNotDisplayed(driver.findElements(By.cssSelector(".video-wrap")).get(0), "Recording chapters");
     }
 
-    // This function verify that recording expanded.
+    // This function verify that helper expanded.
     public void verifyThatRecordingExpanded() {
         verifyWebElementDisplayed(driver.findElements(By.cssSelector(".video-wrap")).get(0), "Recording chapters");
     }
 
-    // This function verify that the blue bookmark icon is displayed prior to the recording adding date (If bookmarks/notes exist).
+    // This function verify that the blue bookmark icon is displayed prior to the helper adding date (If bookmarks/notes exist).
     public void verifyThatBookmarkIconDisplayedLeftToRecordingDateIfExist() {
         for (WebElement webElement : recordings_list_date) {
             String[] splited_date_bookmark = webElement.getText().split("\n");
             if (splited_date_bookmark.length == 2) {
                 if (!splited_date_bookmark[0].equals("bookmark")) {
-                    System.out.println("Not verify that the bookmark icon is displayed prior to the recording date.");
-                    ATUReports.add(time + " Verify that the bookmark icon is displayed prior to the recording date.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+                    System.out.println("Not verify that the bookmark icon is displayed prior to the helper date.");
+                    ATUReports.add(time + " Verify that the bookmark icon is displayed prior to the helper date.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
                     Assert.assertTrue(false);
                 }
             }
         }
-        System.out.println("Verify that the bookmark icon is displayed prior to the recording date.");
-        ATUReports.add(time + " Verify that the bookmark icon is displayed prior to the recording date.", "True.", "True.", LogAs.PASSED, null);
+        System.out.println("Verify that the bookmark icon is displayed prior to the helper date.");
+        ATUReports.add(time + " Verify that the bookmark icon is displayed prior to the helper date.", "True.", "True.", LogAs.PASSED, null);
         Assert.assertTrue(true);
     }
 
@@ -4879,14 +4880,14 @@ public class RecordingHelperPage extends Page {
             if ((mm > 0) && (dd > 0) && (yyyy > 1000) && (mm < 13) && (dd < 31) && (yyyy < 10000)) {
                 continue;
             } else {
-                System.out.println("Not verfied that the format of recording adding date is: mm/dd/yyyy.");
-                ATUReports.add(time + " Verfied that the format of recording adding date is: mm/dd/yyyy.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+                System.out.println("Not verfied that the format of helper adding date is: mm/dd/yyyy.");
+                ATUReports.add(time + " Verfied that the format of helper adding date is: mm/dd/yyyy.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
                 Assert.assertTrue(false);
             }
         }
 
-        System.out.println("Verfied that the format of recording adding date is: mm/dd/yyyy.");
-        ATUReports.add(time + " Verfied that the format of recording adding date is: mm/dd/yyyy.", "True.", "True.", LogAs.PASSED, null);
+        System.out.println("Verfied that the format of helper adding date is: mm/dd/yyyy.");
+        ATUReports.add(time + " Verfied that the format of helper adding date is: mm/dd/yyyy.", "True.", "True.", LogAs.PASSED, null);
         Assert.assertTrue(true);
 
     }
@@ -4994,7 +4995,7 @@ public class RecordingHelperPage extends Page {
 
     }
 
-    // This function clicks on recording tasks then download
+    // This function clicks on helper tasks then download
     // This function click on Recorind Task then on copy in the sub menu
     public void clickOnRecordingTasksThenDownload() throws InterruptedException {
 
@@ -5023,7 +5024,7 @@ public class RecordingHelperPage extends Page {
 
     }
 
-    // This function go over all recording status and checks that recording status of type which available for delete that recordings
+    // This function go over all helper status and checks that helper status of type which available for delete that recordings
 
     public void checkExistenceOfNonDeleteRecordingsStatusInRecordings() throws InterruptedException {
         int i = 0;
@@ -5195,7 +5196,7 @@ public class RecordingHelperPage extends Page {
     }
 
 
-    // This function go over all recording status and checks that recording status of type which available for delete that recordings
+    // This function go over all helper status and checks that helper status of type which available for delete that recordings
     public void checkExistenceOfNonDeleteItemsStatusInAdditionalContent() throws InterruptedException {
         int i = 1;
         wait.until(ExpectedConditions.attributeContains(By.xpath("//*[@id=\"main\"]/div[2]/ul/li[3]"), "class", "active"));
@@ -5422,7 +5423,7 @@ public class RecordingHelperPage extends Page {
             return 0;
 
         } catch (Exception e) {
-            ATUReports.add(time + " Retrieving clear status recording failed", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            ATUReports.add(time + " Retrieving clear status helper failed", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             return 0;
         }
     }
@@ -5530,7 +5531,7 @@ public class RecordingHelperPage extends Page {
                 driver.navigate().refresh();
                 new WebDriverWait(driver, seconds).until(ExpectedConditions.visibilityOf(first_recording));
             } catch (Exception ex) {
-                ATUReports.add(time + " Waiting for first recording to appear", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+                ATUReports.add(time + " Waiting for first helper to appear", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             }
         }
 
@@ -5604,7 +5605,7 @@ public class RecordingHelperPage extends Page {
 //		robot.keyPress(KeyEvent.VK_ENTER);
 //		robot.keyRelease(KeyEvent.VK_ENTER);
 //
-//		 // paste the path of the recording
+//		 // paste the path of the helper
 //		 robot.delay(2000);
 //		 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 //		 StringSelection stringSelection = new StringSelection(path);
@@ -5626,8 +5627,8 @@ public class RecordingHelperPage extends Page {
 //		 robot.keyRelease(KeyEvent.VK_ENTER);
 //		 robot.delay(7000);
 
-        System.out.println("Upload recording from the tegrity application.");
-        ATUReports.add(time + " Upload recording from the tegrity application.", LogAs.PASSED, null);
+        System.out.println("Upload helper from the tegrity application.");
+        ATUReports.add(time + " Upload helper from the tegrity application.", LogAs.PASSED, null);
 
     }
 
@@ -5681,11 +5682,11 @@ public class RecordingHelperPage extends Page {
         List<String> source_recording_list = getCourseRecordingList();
 
         if (source_recording_list.size() == 0) {
-            System.out.println("The recordings aren't displayed in the recording page.");
-            ATUReports.add(time + " Verify that The recordings aren't displayed in the recording page.", "The recordings aren't displayed in the recording page.", "The recordings aren't displayed in the recording page.", LogAs.PASSED, null);
+            System.out.println("The recordings aren't displayed in the helper page.");
+            ATUReports.add(time + " Verify that The recordings aren't displayed in the helper page.", "The recordings aren't displayed in the helper page.", "The recordings aren't displayed in the helper page.", LogAs.PASSED, null);
         } else {
-            System.out.println("The recordings displayed in the recording page.");
-            ATUReports.add(time + " Verify that The recordings aren't displayed in the recording page.", "The recordings aren't displayed in the recording page.", "The recordings displayed in the recording page.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println("The recordings displayed in the helper page.");
+            ATUReports.add(time + " Verify that The recordings aren't displayed in the helper page.", "The recordings aren't displayed in the helper page.", "The recordings displayed in the helper page.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
         }
     }
 
@@ -5749,13 +5750,13 @@ public class RecordingHelperPage extends Page {
         try {
             for (int i = 0; i < recording_tags.size(); i++) {
                 if (!recording_tags.get(i).isDisplayed()) {
-                    ATUReports.add(time + " Not Verify that tags appered on the first recording.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-                    System.out.println("Not Verify that tags appered on the first recording.");
+                    ATUReports.add(time + " Not Verify that tags appered on the first helper.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+                    System.out.println("Not Verify that tags appered on the first helper.");
                 }
             }
 
-            ATUReports.add(time + " Verify that tags appered on the first recording.", "Success.", "Success.", LogAs.PASSED, null);
-            System.out.println("Verify that tags appered on the first recording.");
+            ATUReports.add(time + " Verify that tags appered on the first helper.", "Success.", "Success.", LogAs.PASSED, null);
+            System.out.println("Verify that tags appered on the first helper.");
 
         } catch (Exception e) {
             e.getMessage();
@@ -5763,20 +5764,20 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // verify tag is display in the select recording
+    // verify tag is display in the select helper
     public void verifyTagApperedUderTheSelectRecording(String tag) {
 
         try {
             Thread.sleep(1000);
             for (int i = 0; i < recording_tags.size(); i++) {
                 if (recording_tags.get(i).getText().equals(tag)) {
-                    ATUReports.add(time + " Verify that the tag: " + tag + " appered on the first recording.", "Success.", "Success.", LogAs.PASSED, null);
-                    System.out.println("Verify that the tag: " + tag + " appered on the first recording.");
+                    ATUReports.add(time + " Verify that the tag: " + tag + " appered on the first helper.", "Success.", "Success.", LogAs.PASSED, null);
+                    System.out.println("Verify that the tag: " + tag + " appered on the first helper.");
                     return;
                 }
             }
-            ATUReports.add(time + " Not Verify that the tag: " + tag + " appered on the first recording.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-            System.out.println("Not Verify that the tag: " + tag + " appered on the first recording.");
+            ATUReports.add(time + " Not Verify that the tag: " + tag + " appered on the first helper.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println("Not Verify that the tag: " + tag + " appered on the first helper.");
 
         } catch (Exception e) {
             e.getMessage();
@@ -5787,11 +5788,11 @@ public class RecordingHelperPage extends Page {
     public void verifyTagNotAppearedUderTheSelectRecordings() {
         try {
             if (!recording_tags.isEmpty()) {
-                ATUReports.add(time + " Verify that student can't see the tag on first recording.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-                System.out.println("Verify that student can't see the tag on first recording.");
+                ATUReports.add(time + " Verify that student can't see the tag on first helper.", "Success.", "Fail.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+                System.out.println("Verify that student can't see the tag on first helper.");
             } else {
-                ATUReports.add(time + " Verify that student can't see the tag on first recording.", "Success.", "Success.", LogAs.PASSED, null);
-                System.out.println("Verify that student can't see the tag on first recording.");
+                ATUReports.add(time + " Verify that student can't see the tag on first helper.", "Success.", "Success.", LogAs.PASSED, null);
+                System.out.println("Verify that student can't see the tag on first helper.");
             }
         } catch (Exception e) {
             e.getMessage();
@@ -6069,7 +6070,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    // static text 'recording:' followed by: recording name
+    // static text 'helper:' followed by: helper name
     public void verifyRecordingfollowedByRecordingName(String recordName, int bookmark_number) {
         try {
             WebElement recording = driver.findElement(By.xpath(".//*[@id='ItemUrl" + Integer.toString(bookmark_number + 1) + "']/span[1]"));
@@ -6078,12 +6079,12 @@ public class RecordingHelperPage extends Page {
             String newNameWithOutSpace = recrodingSplit[1].substring(0);
             System.out.println(recordName);
             System.out.println(newNameWithOutSpace);
-            if (recrodingSplit[0].equals("recording") && recordName.equals(newNameWithOutSpace)) {
-                System.out.println("Verify static text 'recording:' followed by: recording name.");
-                ATUReports.add(time + " Verify static text 'recording:' followed by: recording name.", "Success.", "Success.", LogAs.PASSED, null);
+            if (recrodingSplit[0].equals("helper") && recordName.equals(newNameWithOutSpace)) {
+                System.out.println("Verify static text 'helper:' followed by: helper name.");
+                ATUReports.add(time + " Verify static text 'helper:' followed by: helper name.", "Success.", "Success.", LogAs.PASSED, null);
             } else {
-                System.out.println("Not Verify static text 'recording:' followed by: recording name.");
-                ATUReports.add(time + " Not Verify static text 'recording:' followed by: recording name.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+                System.out.println("Not Verify static text 'helper:' followed by: helper name.");
+                ATUReports.add(time + " Not Verify static text 'helper:' followed by: helper name.", "Success.", "Fail", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             }
         } catch (Exception e) {
             e.getMessage();
@@ -6174,7 +6175,7 @@ public class RecordingHelperPage extends Page {
         }
     }
 
-    //Click on regular recording bookmark
+    //Click on regular helper bookmark
     public String clickOnRegularRecordingBookmark(String bookmarkType) {
 
         String nameOfBookmark = null;
@@ -6206,7 +6207,7 @@ public class RecordingHelperPage extends Page {
         return nameOfBookmark;
     }
 
-    //Click on regular recording bookmark
+    //Click on regular helper bookmark
     public void clickOnTheTargetBookmark(String bookmarkName) {
 
         try {
@@ -6305,7 +6306,7 @@ public class RecordingHelperPage extends Page {
             wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recorded by"));
         } catch (Exception e) {
             System.out.println("There are not recordings in the course tab");
-            ATUReports.add(time + " Select recording", "RecordingName: " + original_recorder_name, "Recording clicked", "There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            ATUReports.add(time + " Select helper", "RecordingName: " + original_recorder_name, "Recording clicked", "There are no recordings in the course tab", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
         WebElement recording = null;
@@ -6332,8 +6333,8 @@ public class RecordingHelperPage extends Page {
         } catch (WebDriverException e) {
             handlesClickIsNotVisible(recording);
             waitForVisibility(visibleFirstChapter);
-            System.out.println(" no such recording found");
-            ATUReports.add(time + " no such recording", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+            System.out.println(" no such helper found");
+            ATUReports.add(time + " no such helper", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
         return statusNumber;

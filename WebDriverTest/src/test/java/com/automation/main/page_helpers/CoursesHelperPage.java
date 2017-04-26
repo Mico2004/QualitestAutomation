@@ -49,6 +49,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+import utils.WaitDriverUtility;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class CoursesHelperPage extends Page {
@@ -112,6 +113,9 @@ public class CoursesHelperPage extends Page {
 	public WebElement recording_tasks_button;
 	public ConfirmationMenu confirm_menu;
 	public LoginHelperPage tegrity;
+
+	@FindBy(id = "TotalNewRecordingsCounter")
+	public WebElement totalNewRecordingsCounter;
 	
 
 	// Set Property for ATU Reporter Configuration
@@ -311,7 +315,7 @@ public class CoursesHelperPage extends Page {
 		}*/
 	}
 
-	/// verify setting option for every instructor course in recording page
+	/// verify setting option for every instructor course in helper page
 	public boolean verifyCoursesForInstructor(String xml_url) throws InterruptedException {
 		size = course_list.size();
 		System.out.println(size);
@@ -1310,17 +1314,17 @@ public class CoursesHelperPage extends Page {
 						.getLocation().x < new_recordings_title_and_number_of_new_recordings.get(1).getLocation().x)
 				&& (new_recordings_title_and_number_of_new_recordings.get(0).getText().equals("New Recordings"))) {
 			System.out.println(new_recordings_title_and_number_of_new_recordings.get(0).getText());
-			System.out.println("Verified UI of New Recordings text and total quantity of new recording UI.");
-			ATUReports.add(time +" New recording text and total quantity of new recordings UI.", "Verified.", "Verified.",
+			System.out.println("Verified UI of New Recordings text and total quantity of new helper UI.");
+			ATUReports.add(time +" New helper text and total quantity of new recordings UI.", "Verified.", "Verified.",
 					LogAs.PASSED, null);
 		} else {
-			System.out.println("Not verified UI of New Recordings text and total quantity of new recording UI.");
-			ATUReports.add(time +" New recording text and total quantity of new recordings UI.", "Verified.", "Not verified.",
+			System.out.println("Not verified UI of New Recordings text and total quantity of new helper UI.");
+			ATUReports.add(time +" New helper text and total quantity of new recordings UI.", "Verified.", "Not verified.",
 					LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		}
 	}
 
-	// This function verify that the page caption ‘Courses’ is displayed at the
+	// This function verify that the page caption ï¿½Coursesï¿½ is displayed at the
 	// top left of the page
 	public void verifyCoursesDisplayedTopLeft() {
 		if ((courses_heading.getLocation().y < public_courses_tab.getLocation().y)
@@ -1335,7 +1339,7 @@ public class CoursesHelperPage extends Page {
 		}
 	}
 
-	// This function verify the ‘Active Courses’ tab is displayed under the page
+	// This function verify the ï¿½Active Coursesï¿½ tab is displayed under the page
 	// caption.
 	public void verifyActiveCoursesTabDisplayedUnderThePageHeading() {
 		if (courses_heading.getLocation().y < active_courses_tab_button.getLocation().y) {
@@ -1350,8 +1354,8 @@ public class CoursesHelperPage extends Page {
 	}
 
 	// This function verify that every course record contains information as
-	// follows: course name: ‘X recording(s) – Y new | last updated:
-	// mm/dd/yyyy’.
+	// follows: course name: ï¿½X helper(s) ï¿½ Y new | last updated:
+	// mm/dd/yyyyï¿½.
 	public void verifyEveryCourseRecordContainsCorrectInformation() throws InterruptedException {
 		int number_of_courses = getCourseList().size();
 
@@ -1426,13 +1430,13 @@ public class CoursesHelperPage extends Page {
 			System.out.println(
 					"Not verified that total quantity of new recordings in the course is displayed on the right side of the course line.");
 			ATUReports.add(
-					"Total quantity of new recording in the course displayed on the right side of the course line.",
+					"Total quantity of new helper in the course displayed on the right side of the course line.",
 					"True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 			System.out.println(
 					"Verified that total quantity of new recordings in the course is displayed on the right side of the course line.");
 			ATUReports.add(
-					"Total quantity of new recording in the course displayed on the right side of the course line.",
+					"Total quantity of new helper in the course displayed on the right side of the course line.",
 					"True.", "True.", LogAs.PASSED, null);
 		}
 	}
@@ -1504,13 +1508,13 @@ public class CoursesHelperPage extends Page {
 			System.out.println(
 					"Not verified that total quantity of new recordings in the course is not displayed on the right side of the course line.");
 			ATUReports.add(
-					"Total quantity of new recording in the course not displayed on the right side of the course line.",
+					"Total quantity of new helper in the course not displayed on the right side of the course line.",
 					"True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 		} else {
 			System.out.println(
 					"Verified that total quantity of new recordings in the course is not displayed on the right side of the course line.");
 			ATUReports.add(
-					"Total quantity of new recording in the course not displayed on the right side of the course line.",
+					"Total quantity of new helper in the course not displayed on the right side of the course line.",
 					"True.", "True.", LogAs.PASSED, null);
 		}
 	}
@@ -1708,7 +1712,7 @@ public class CoursesHelperPage extends Page {
 	// - Student Recordings, 3 - Tests
 	// 4th arg - record object, 5th arg - copy menu object, 6th arg - confirm
 	// menu object
-	// it copies oe recording from source to destination under the tab chosen
+	// it copies oe helper from source to destination under the tab chosen
 	// in third argument
 	public void copyOneRecordingFromCourseStartWithToCourseStartWithOfType(String source_start_with,
 			String des_start_with, int type_of_recordings, RecordingHelperPage record_helper_page, CopyMenu copy_menu,
@@ -1771,23 +1775,23 @@ public class CoursesHelperPage extends Page {
 	public void verifyNoStartRecording() {
 		try {
 			if (start_recording_button.isDisplayed()) {
-				ATUReports.add(time +" Click on start recording button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-				System.out.println("Click on start recording button.");
+				ATUReports.add(time +" Click on start helper button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				System.out.println("Click on start helper button.");
 				Assert.assertTrue(false);
 			} else {
-				ATUReports.add(time +" No start recording button", LogAs.PASSED, null);
-				System.out.println("No start recording button");
+				ATUReports.add(time +" No start helper button", LogAs.PASSED, null);
+				System.out.println("No start helper button");
 				Assert.assertTrue(true);
 			}
 		} catch (Exception e) {
-			ATUReports.add(time +" No start recording button", LogAs.PASSED, null);
-			System.out.println("No start recording button");
+			ATUReports.add(time +" No start helper button", LogAs.PASSED, null);
+			System.out.println("No start helper button");
 			Assert.assertTrue(true);
 		}
 	}
 
-	// This function validate that target course have at least one recording,
-	// and if not it will copy one recording from bank to this course
+	// This function validate that target course have at least one helper,
+	// and if not it will copy one helper from bank to this course
 	public String validateThereIsRecordingInCourseStartWithIfThereIsNotCopyOneRecordingToThisCourse(
 			String target_course_start_with, String recording_bank_start_with, RecordingHelperPage record,
 			CopyMenu copy, ConfirmationMenu confirm) throws InterruptedException {
@@ -1826,4 +1830,33 @@ public class CoursesHelperPage extends Page {
 		return linkTexts;
 	}
 
+	public int getTheCurrentNewRecordingsNumber() {
+		waitForVisibility(totalNewRecordingsCounter);
+		String theCurrentNewRecordins = totalNewRecordingsCounter.getText();
+		return Integer.parseInt(theCurrentNewRecordins);
+	}
+
+	public String 	getRecordsCoursQuntity(String name){
+		int numberOfCourses = getCourseList().size();
+		for (int i = 1; i <numberOfCourses; i++) {
+			String courseName = WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("Course" + i), 10).getText();
+			if (courseName.equals(name)){
+				return WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("RecordingsCounter" + i), 10).getText();
+			}
+		}
+		return null;
+	}
+
+	public String 	getDateOfRecordsCourse(String name){
+		int numberOfCourses = getCourseList().size();
+		for (int i = 1; i <numberOfCourses; i++) {
+			String courseName = WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("Course" + i), 10).getText();
+			if (courseName.equals(name)){
+				String fullElementText = WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("UpdateDate" + i), 10).getText();
+				String[] splited = fullElementText.split(":");
+				return splited[1].trim();
+			}
+		}
+		return null;
+	}
 }

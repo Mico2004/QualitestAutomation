@@ -1,4 +1,4 @@
-package com.automation.main.ping.recording;
+package com.automation.main.ping.helper;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
@@ -24,8 +24,8 @@ public class LogInAsAnotherUser {
 
     private ConfirmationMenu confirmation_menu;
     private LoginHelperPage tegrity;
-    private CoursesHelperPage course;
-    private RecordingHelperPage record;
+    public CoursesHelperPage course;
+    public RecordingHelperPage record;
     private DeleteMenu delete_menu;
     private MoveWindow move_window;
     private AdminDashboardPage admin_dashboard_page;

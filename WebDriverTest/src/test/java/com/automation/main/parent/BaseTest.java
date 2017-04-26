@@ -27,7 +27,7 @@ public class BaseTest implements BasicTest {
         }
 
         if (status == ITestResult.FAILURE) {
-            System.out.println("the test has failed");
+            System.out.println("the test has failed "+testResult.getThrowable().getMessage());
             ATUReports.add("Message window." + testResult.getThrowable().getMessage(), "Done.", "Done.", LogAs.FAILED, null);
         }
 

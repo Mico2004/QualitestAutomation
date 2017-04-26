@@ -1,7 +1,6 @@
-package com.automation.main.ping.recording;
+package com.automation.main.ping;
 
 
-import Client.Robotil;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -9,9 +8,9 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import com.automation.main.page_helpers.*;
 import com.automation.main.parent.BaseTest;
+import com.automation.main.ping.helper.LogInAsAnotherUser;
 import com.automation.main.utilities.DriverSelector;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -20,7 +19,6 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import utils.WaitDriverUtility;
 
-import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
@@ -103,7 +101,7 @@ public class PingWhenEditRecordingsPropertiesOnRecordings extends BaseTest {
 
         String newName = "new Name";
 
-        //delete recording
+        //delete helper
         int theIndexOfRecordToRename = getTheIndexOfRecordToRename(logInAsAnotherUser, recordToRename);
         logInAsAnotherUser.renameRecord(newName, theIndexOfRecordToRename);
 

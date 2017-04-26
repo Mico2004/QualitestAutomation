@@ -7,7 +7,7 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import com.automation.main.page_helpers.*;
-import com.automation.main.ping.recording.LogInAsAnotherUser;
+import com.automation.main.ping.helper.LogInAsAnotherUser;
 import com.automation.main.utilities.DriverSelector;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -99,7 +99,7 @@ public class TC9159ValidatePingWhenDeletedRecordingsOnRecordingsTab {
         LogInAsAnotherUser logInAsAnotherUser = new LogInAsAnotherUser();
         logInAsAnotherUser.openAnotherSession("User1");
 
-        //delete recording
+        //delete helper
         logInAsAnotherUser.deleteTheFirstRecored();
         //check the list of student recordings
         Assert.assertTrue(checkIfRecordingsListHasChanged(courseRecordingListFromStudentBrowser));

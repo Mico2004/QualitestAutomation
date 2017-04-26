@@ -70,4 +70,10 @@ public class WaitDriverUtility {
     public static WebElement getElementParent(WebElement element) {
         return element.findElement(By.xpath(".."));
     }
+
+    public static void waitToElementVisibility(WebElement webElement,WebDriver driver) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement element = wait.until(
+                ExpectedConditions.visibilityOf(webElement));
+    }
 }
