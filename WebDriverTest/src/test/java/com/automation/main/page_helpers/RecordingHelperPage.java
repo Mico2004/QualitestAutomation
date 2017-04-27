@@ -850,13 +850,10 @@ public class RecordingHelperPage extends Page {
         }
 
         for (int i = 0; i < recordings_list.size(); i++) {
-            System.out.println("getCourseRecordingListfor" + i);
             String current_name = recordings_list.get(i).getText();
             if (current_name.equals("Recordings")) {
-                System.out.println("getCourseRecordingListif" + i);
                 continue;
             } else if (current_name.equals("Recording Tasks")) {
-                System.out.println("getCourseRecordingListelse" + i);
                 continue;
             }
             recording_names_list.add(current_name);
@@ -874,10 +871,11 @@ public class RecordingHelperPage extends Page {
 
     public String clickTheFirstCheckBoxOfRecordingsByIndex(int index) {
         List<String> recording_names_list = getCourseRecordingList();
-            String checkbox_indexed = "Checkbox1";
+            String checkbox_indexed = "Checkbox"+index;
             WebElement checkBox = driver.findElement(By.id(checkbox_indexed));
             if (!checkBox.isSelected()) {
                 checkBox.click();
+
                 return recording_names_list.get(index);
             }
 

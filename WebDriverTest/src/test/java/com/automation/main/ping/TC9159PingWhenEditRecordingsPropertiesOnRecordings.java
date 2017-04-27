@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class PingWhenEditRecordingsPropertiesOnRecordings extends BaseTest {
+public class TC9159PingWhenEditRecordingsPropertiesOnRecordings extends BaseTest {
 
 
     {
@@ -68,9 +68,9 @@ public class PingWhenEditRecordingsPropertiesOnRecordings extends BaseTest {
 
         Date curDate = new Date();
         String DateToStr = DateFormat.getInstance().format(curDate);
-        System.out.println("Starting the test: PingWhenEditRecordingsPropertiesOnRecordings at " + DateToStr);
-        ATUReports.add("Message window.", "Starting the test: PingWhenEditRecordingsPropertiesOnRecordings at " + DateToStr,
-                "Starting the test: PingWhenEditRecordingsPropertiesOnRecordings at " + DateToStr, LogAs.PASSED, null);
+        System.out.println("Starting the test: TC9159PingWhenEditRecordingsPropertiesOnRecordings at " + DateToStr);
+        ATUReports.add("Message window.", "Starting the test: TC9159PingWhenEditRecordingsPropertiesOnRecordings at " + DateToStr,
+                "Starting the test: TC9159PingWhenEditRecordingsPropertiesOnRecordings at " + DateToStr, LogAs.PASSED, null);
     }
 
 
