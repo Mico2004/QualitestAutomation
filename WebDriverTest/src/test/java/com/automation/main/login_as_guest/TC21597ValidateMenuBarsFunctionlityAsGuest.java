@@ -49,7 +49,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import io.appium.java_client.SwipeElementDirection;
 
-@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
+//@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC21597ValidateMenuBarsFunctionlityAsGuest {
 	// Set Property for ATU Reporter Configuration
 	{

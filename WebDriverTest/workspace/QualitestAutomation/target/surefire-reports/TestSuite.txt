@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: TestSuite
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 83.709 sec <<< FAILURE! - in TestSuite
-loginCourses(com.automation.main.TestCaseSearchCourseInMoveWindow)  Time elapsed: 65.071 sec  <<< FAILURE!
-junit.framework.AssertionFailedError: timeout
-	at com.automation.main.TestCaseSearchCourseInMoveWindow.loginCourses(TestCaseSearchCourseInMoveWindow.java:106)
-

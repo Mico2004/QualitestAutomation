@@ -44,7 +44,7 @@ import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
 
-@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
+//@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel {
 
 	// Set Property for ATU Reporter Configuration
