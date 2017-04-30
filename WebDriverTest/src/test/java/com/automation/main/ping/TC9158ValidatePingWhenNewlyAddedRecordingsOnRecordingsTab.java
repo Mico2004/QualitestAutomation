@@ -24,7 +24,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
 
-//@Listeners({ATUReportsListener.class, ConfigurationListener.class, MethodListener.class})
+@Listeners({ATUReportsListener.class, ConfigurationListener.class, MethodListener.class})
 public class TC9158ValidatePingWhenNewlyAddedRecordingsOnRecordingsTab extends BaseTest {
 
 

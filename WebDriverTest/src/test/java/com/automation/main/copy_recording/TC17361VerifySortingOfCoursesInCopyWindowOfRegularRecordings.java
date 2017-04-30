@@ -29,7 +29,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.reports.utils.Utils;
 
-//@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
+@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC17361VerifySortingOfCoursesInCopyWindowOfRegularRecordings {
 
 	public TC17361VerifySortingOfCoursesInCopyWindowOfRegularRecordings() {

@@ -25,7 +25,7 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.utils.Utils;
 
-//@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
+@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class VerifySortingOfCoursesInCopyWindowOfRegularRecordings {
 
 	public VerifySortingOfCoursesInCopyWindowOfRegularRecordings() {

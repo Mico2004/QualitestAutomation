@@ -2,6 +2,9 @@ package com.automation.main.other;
 
 import java.awt.List;
 
+import atu.testng.reports.listeners.ATUReportsListener;
+import atu.testng.reports.listeners.ConfigurationListener;
+import atu.testng.reports.listeners.MethodListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -10,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.automation.main.page_helpers.ConfirmationMenu;
@@ -22,7 +26,7 @@ import com.automation.main.page_helpers.RecordingHelperPage;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.utils.Utils;
 
-//@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
+@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class VerifySortingOfCoursesInMoveWindowOfREgularRecording {
 
 	public VerifySortingOfCoursesInMoveWindowOfREgularRecording() {

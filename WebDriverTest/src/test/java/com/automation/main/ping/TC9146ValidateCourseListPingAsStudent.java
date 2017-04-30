@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-//@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
+@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC9146ValidateCourseListPingAsStudent extends BaseTest {
 
 
