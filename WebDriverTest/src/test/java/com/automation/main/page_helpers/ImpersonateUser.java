@@ -10,30 +10,30 @@ import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junit.framework.Assert;
 
-public class ImpersonateUser extends Page{
+public class ImpersonateUser extends Page {
 
-		public ImpersonateUser(WebDriver browser) {
-			super(browser);
-			// TODO Auto-generated constructor stub
-		}
-		
-		@FindBy(xpath=".//*[@id='tegrityBreadcrumbsBox']/li/a")
-		public WebElement  AdminDashboard;
-		@FindBy(id="CustomizeHeading")
-		public WebElement ImpersonateUserTitle;
-		@FindBy(css=".btn.btn-default.ng-scope")
-		public WebElement impersonateButton;
-		@FindBy(css="#user-field")
-		public WebElement userField;
-		
-		
-		
-		// the function enter the user id and press on impersonate 
-		public void EnterTheUserIdAndPressOnImpersonate(String user)
-		{		
-			sendKeysToWebElementInput(userField, user);
-			clickElementWithOutIdJS(impersonateButton);		
-		}
-	
-	
+    public ImpersonateUser(WebDriver browser) {
+        super(browser);
+        // TODO Auto-generated constructor stub
+    }
+
+    @FindBy(xpath = ".//*[@id='tegrityBreadcrumbsBox']/li/a")
+    public WebElement AdminDashboard;
+    @FindBy(id = "CustomizeHeading")
+    public WebElement ImpersonateUserTitle;
+    @FindBy(css = ".btn.btn-default.ng-scope")
+    public WebElement impersonateButton;
+    @FindBy(css = "label[for='user-field")
+    public WebElement userField;
+    @FindBy(css = "a[title='Impersonate user']")
+    public WebElement toolTip;
+
+
+    // the function enter the user id and press on impersonate
+    public void EnterTheUserIdAndPressOnImpersonate(String user) {
+        sendKeysToWebElementInput(userField, user);
+        clickElementWithOutIdJS(impersonateButton);
+    }
+
+
 }

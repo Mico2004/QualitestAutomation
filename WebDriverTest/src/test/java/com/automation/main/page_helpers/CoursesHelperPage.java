@@ -1833,6 +1833,10 @@ public class CoursesHelperPage extends Page {
 	public int getTheCurrentNewRecordingsNumber() {
 		waitForVisibility(totalNewRecordingsCounter);
 		String theCurrentNewRecordins = totalNewRecordingsCounter.getText();
+		if (Integer.parseInt(theCurrentNewRecordins)==0){
+			System.out.println("Get the the new recordings number in recursively");
+			return  getTheCurrentNewRecordingsNumber();
+		}
 		return Integer.parseInt(theCurrentNewRecordins);
 	}
 
