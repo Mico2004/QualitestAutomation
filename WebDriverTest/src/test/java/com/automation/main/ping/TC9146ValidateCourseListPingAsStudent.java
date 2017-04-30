@@ -146,7 +146,7 @@ public class TC9146ValidateCourseListPingAsStudent extends BaseTest {
         logInAsAnotherUser.openAnotherSession("SuperUser");
 
         RecordingHelperPage record = logInAsAnotherUser.record;
-        int indexOfRecordFromRecordName = record.getIndexOfRecordFromRecordName(recordName);
+        int indexOfRecordFromRecordName = record.getIndexOfRecordFromRecordName(recordName)+1;
         record.clickTheFirstCheckBoxOfRecordingsByIndex(indexOfRecordFromRecordName);
         try {
             record.clickOnRecordingTaskThenDelete();
