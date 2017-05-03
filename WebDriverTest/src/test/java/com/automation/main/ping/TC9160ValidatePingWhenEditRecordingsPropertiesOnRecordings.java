@@ -17,6 +17,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import utils.ATUManager;
 import utils.WaitDriverUtility;
 
 import java.text.DateFormat;
@@ -88,12 +89,17 @@ public class TC9160ValidatePingWhenEditRecordingsPropertiesOnRecordings extends 
         tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
         tegrity.loginCourses("User2");// log in courses page
+
+        ATUManager.asserIsTrueAndReport(true,"Sign in as Student","","");
+
         initializeCourseObject();
 
         // 2. Get full name of Ab course.
         course.selectCourseThatStartingWith("abc");
         List<String> courseRecordingListBeforeRenaming = record.getTheCurrentRecordesNamesList(driver);
         String recordToRename = courseRecordingListBeforeRenaming.get(0);
+        ATUManager.asserIsTrueAndReport(true,"Trying to rename "+recordToRename+" to new Name","","");
+
 
         //login as instructor
         LogInAsAnotherUser logInAsAnotherUser = new LogInAsAnotherUser();
@@ -104,6 +110,9 @@ public class TC9160ValidatePingWhenEditRecordingsPropertiesOnRecordings extends 
         //delete helper
         int theIndexOfRecordToRename = getTheIndexOfRecordToRename(logInAsAnotherUser, recordToRename);
         logInAsAnotherUser.renameRecord(newName, theIndexOfRecordToRename);
+        ATUManager.asserIsTrueAndReport(true,"The record have been renamed successfully","","");
+
+
 
         int timeOut = 60;
         boolean isRecordRenamed = false;
@@ -126,7 +135,7 @@ public class TC9160ValidatePingWhenEditRecordingsPropertiesOnRecordings extends 
             timeOut--;
         }
 
-        Assert.assertTrue(isRecordRenamed);
+        ATUManager.asserIsTrueAndReport(isRecordRenamed,"the record name should be changed","","");
 
         record.signOut();
 
