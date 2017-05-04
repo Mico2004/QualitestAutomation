@@ -24,6 +24,7 @@ import org.testng.annotations.Listeners;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
+import utils.WaitDriverUtility;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -875,11 +876,18 @@ public class RecordingHelperPage extends Page {
             WebElement checkBox = driver.findElement(By.id(checkbox_indexed));
             if (!checkBox.isSelected()) {
                 checkBox.click();
-
                 return recording_names_list.get(index);
             }
-
             return null;
+    }
+
+    public void clickCheckBoxByIndex(int index) {
+        List<String> recording_names_list = getCourseRecordingList();
+        String checkbox_indexed = "Checkbox"+index;
+        WebElement checkBox = driver.findElement(By.id(checkbox_indexed));
+        if (!checkBox.isSelected()) {
+            checkBox.click();
+        }
     }
 
 
@@ -6519,6 +6527,37 @@ public class RecordingHelperPage extends Page {
             currentRecordsNames.add(recordText);
         }
         return currentRecordsNames;
+    }
+
+    //Return the current drop down element
+    public List<WebElement> getTheViewDropDownElements() {
+        moveToElement(view_button,driver).perform();
+        List<WebElement> dropListElements = new ArrayList<>();
+        WebElement elementParent = WaitDriverUtility.getElementParent(view_button);
+        dropListElements.addAll(elementParent.findElements(By.cssSelector("ul>li>a"))); //to get view,title,date,duration elements
+        dropListElements.addAll(elementParent.findElements(By.cssSelector("ul>li>span"))); //Sort by
+        dropListElements.addAll(elementParent.findElements(By.cssSelector("div>li>span")));//tags
+        dropListElements.addAll(elementParent.findElements(By.cssSelector("div>div>label"))); //Show all recordings
+        return dropListElements;
+    }
+
+    public List<WebElement> getRecordingsAsElements() {
+        moveToElement(recording_tasks_button,driver).perform();
+        List<WebElement> dropListElements = new ArrayList<>();
+        WebElement elementParent = WaitDriverUtility.getElementParent(recording_tasks_button);
+        dropListElements.add(elementParent.findElements(By.cssSelector("ul>li>em")).get(0)); //Message about checking checlbox
+        dropListElements.addAll(elementParent.findElements(By.cssSelector("ul>li>a"))); //Sort by
+        return dropListElements;
+    }
+
+    public List<WebElement> getCourseTaskDropDownElements() {
+        WaitDriverUtility.sleepInSeconds(1);
+        moveToElement(course_task_button,driver).perform();
+        List<WebElement> dropListElements = new ArrayList<>();
+        WebElement elementParent = WaitDriverUtility.getElementParent(course_task_button);
+        dropListElements.addAll(elementParent.findElements(By.cssSelector("ul>li>a"))); //Message about checking checlbox
+        dropListElements.addAll(elementParent.findElements(By.cssSelector("ul>li>span"))); //Sort by
+        return dropListElements;
     }
 
 

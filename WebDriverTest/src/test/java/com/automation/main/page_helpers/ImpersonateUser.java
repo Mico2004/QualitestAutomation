@@ -1,14 +1,10 @@
 package com.automation.main.page_helpers;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import atu.testng.reports.ATUReports;
-import atu.testng.reports.logging.LogAs;
-import atu.testng.selenium.reports.CaptureScreen;
-import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junit.framework.Assert;
+import utils.WaitDriverUtility;
 
 public class ImpersonateUser extends Page {
 
@@ -29,11 +25,23 @@ public class ImpersonateUser extends Page {
     public WebElement toolTip;
 
 
+    @FindBy(id = "user-field")
+    public WebElement textBox;
+
     // the function enter the user id and press on impersonate
     public void EnterTheUserIdAndPressOnImpersonate(String user) {
         sendKeysToWebElementInput(userField, user);
         clickElementWithOutIdJS(impersonateButton);
     }
+
+    public void enterAsAnotherUser(String userName){
+        WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("user-field"),10);
+        textBox.sendKeys(userName);
+        impersonateButton.click();
+
+    }
+
+
 
 
 }

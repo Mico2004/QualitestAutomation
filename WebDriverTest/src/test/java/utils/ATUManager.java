@@ -14,7 +14,7 @@ public class ATUManager {
             ATUReports.add(description, expectedValue, actualValue, LogAs.PASSED, null);
         } catch (AssertionError e) {
             System.out.println("The assertion description: "+description);
-            ATUReports.add("Message window." + e.getMessage(), "Done.", "Done.", LogAs.FAILED, null);
+            ATUReports.add( description + "Stacktrace "+e.getMessage(), "Done.", "Done.", LogAs.FAILED, null);
         }
     }
 }

@@ -23,6 +23,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+import utils.ATUManager;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class CourseSettingsPage extends Page {
@@ -550,4 +551,16 @@ public class CourseSettingsPage extends Page {
 		uncheckCourseVisibility();
 	}
 
+	public void enableStudentTesting() {
+		if(!enable_student_testing_checkbox.isSelected()){
+			enable_student_testing_checkbox.click();
+			ATUManager.asserIsTrueAndReport(true,"Enable student testing","","");
+			return;
+		}
+		try {
+			clickOnOkButton();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 }

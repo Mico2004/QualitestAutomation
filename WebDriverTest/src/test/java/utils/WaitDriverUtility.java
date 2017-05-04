@@ -61,7 +61,7 @@ public class WaitDriverUtility {
 
     public static void sleepInSeconds(int timeInSeconds) {
         try {
-            Thread.sleep(1000*timeInSeconds);
+            Thread.sleep(1000 * timeInSeconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -71,9 +71,29 @@ public class WaitDriverUtility {
         return element.findElement(By.xpath(".."));
     }
 
-    public static void waitToElementVisibility(WebElement webElement,WebDriver driver) {
+    public static void waitToElementVisibility(WebElement webElement, WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement element = wait.until(
                 ExpectedConditions.visibilityOf(webElement));
     }
+
+    public static void switchToNewTab(WebDriver driver, String expectedBrowserTitle) {
+        int timeOut = 10;
+        sleepInSeconds(2);
+        while (timeOut > 0) {
+            String currentTab = driver.getWindowHandle();
+            for (String tab : driver.getWindowHandles()) {
+                if (!tab.equals(currentTab)) {
+                    driver.close();
+                    driver.switchTo().window(tab);
+                    if (driver.getTitle().equals(expectedBrowserTitle)) {
+                        return;
+                    }
+                    WaitDriverUtility.sleepInSeconds(1);
+                    timeOut--;
+                }
+            }
+        }
+    }
+
 }

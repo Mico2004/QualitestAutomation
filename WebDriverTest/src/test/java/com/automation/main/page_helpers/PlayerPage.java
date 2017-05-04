@@ -1601,4 +1601,5 @@ public class PlayerPage extends Page {
             ATUReports.add("Verify that the search results are not displayed.", "True.", "True.", LogAs.PASSED, null);
         }
     }
+
 }

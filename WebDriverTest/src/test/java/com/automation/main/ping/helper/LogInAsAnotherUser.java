@@ -132,6 +132,7 @@ public class LogInAsAnotherUser {
         WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("EditButton"), 10).click();
         WebElement alertWindow = WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("alertWindow"), 30);
         alertWindow.findElement(By.tagName("button")).click();
+
     }
 
     public void killWebDriver() {
