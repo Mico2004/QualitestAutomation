@@ -127,7 +127,7 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
         WaitDriverUtility.switchToNewTab(driver,"Tegrity - Courses");
         initPages();
         initializeCourseObject();
-        commonCourseName = course.selectCourseThatStartingWith("abc");
+        course.selectCourseByName(commonCourseName);
 
         WaitDriverUtility.waitToPageBeLoaded(driver);
         record.clickOnRecordingInIndex(1);
@@ -160,25 +160,14 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
         driver.quit();
     }
 
-    private void validateCourseCrumbExistAndClick() {
-
-        WebElement courseCrumb = WaitDriverUtility.waitForElementBeDisplayed(driver, By.cssSelector("a[title='" + commonCourseName + "']"), 10);
-        courseCrumb.click();
-        WaitDriverUtility.sleepInSeconds(1);
-        WaitDriverUtility.waitToPageBeLoaded(driver);
-        boolean isTestedCoursePageDisplayed = driver.getTitle().contains("Tegrity - "+commonCourseName);
-        ATUManager.asserIsTrueAndReport(isTestedCoursePageDisplayed,"After clicking on breadCrumbs the course page should be displayed","","");
-    }
-
 
     private void prepareDataTest() throws InterruptedException {
         tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
         tegrity.loginCourses("SuperUser");
         WaitDriverUtility.waitToPageBeLoaded(driver);
         initializeCourseObject();
-        course.selectCourseThatStartingWith("BankValid");
 
-        commonCourseName = "abcawsserverautomation-qa-119042017015101_Name";
+        course.selectCourseThatStartingWith("BankValid");
 
         record.clickOnRecordingsTab();
         selectAndCopy();
