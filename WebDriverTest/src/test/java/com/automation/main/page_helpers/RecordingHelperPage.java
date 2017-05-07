@@ -24,6 +24,7 @@ import org.testng.annotations.Listeners;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
+import utils.ATUManager;
 import utils.WaitDriverUtility;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -173,7 +174,7 @@ public class RecordingHelperPage extends Page {
     @FindBy(id = "CopyTask2")
     public WebElement copy_button2;
     @FindBy(xpath = "//*[@class=\"recordingInfoContainer ng-scope\"]/div")
-    List<WebElement> record_list;
+    public List<WebElement> chapterBackground;
     @FindBy(id = "TestsTab")
     public WebElement test_tab;
     @FindBy(id = "EditRecordingProperties")
@@ -872,18 +873,18 @@ public class RecordingHelperPage extends Page {
 
     public String clickTheFirstCheckBoxOfRecordingsByIndex(int index) {
         List<String> recording_names_list = getCourseRecordingList();
-            String checkbox_indexed = "Checkbox"+index;
-            WebElement checkBox = driver.findElement(By.id(checkbox_indexed));
-            if (!checkBox.isSelected()) {
-                checkBox.click();
-                return recording_names_list.get(index);
-            }
-            return null;
+        String checkbox_indexed = "Checkbox" + index;
+        WebElement checkBox = driver.findElement(By.id(checkbox_indexed));
+        if (!checkBox.isSelected()) {
+            checkBox.click();
+            return recording_names_list.get(index);
+        }
+        return null;
     }
 
     public void clickCheckBoxByIndex(int index) {
         List<String> recording_names_list = getCourseRecordingList();
-        String checkbox_indexed = "Checkbox"+index;
+        String checkbox_indexed = "Checkbox" + index;
         WebElement checkBox = driver.findElement(By.id(checkbox_indexed));
         if (!checkBox.isSelected()) {
             checkBox.click();
@@ -921,6 +922,29 @@ public class RecordingHelperPage extends Page {
             return recording_names_list;
         }
         return null;
+    }
+
+    public void clickAllCheckBoxAndVerifyOtherCheckBoxisSelected(boolean isUncheck) {
+        boolean isAllCheckBoxOnTheExpectedStatus=true;
+        String expectedDescription = "Shouldn't";
+        if (isUncheck) {
+            expectedDescription = "Should";
+        }
+        wait.until(ExpectedConditions.visibilityOf(check_all_checkbox));
+
+        wait.until(ExpectedConditions.elementToBeClickable(check_all_checkbox));
+        ((JavascriptExecutor) driver).executeScript("document.getElementById(\"CheckAll\").click();");
+        List<String> recording_names_list = getCourseRecordingList();
+
+        for (int i = 0; i < recording_names_list.size(); i++) {
+            int j = i + 1;
+            String checkbox_indexed = "Checkbox" + Integer.toString(j);
+            if (driver.findElement(By.id(checkbox_indexed)).isSelected() != isUncheck) {
+                isAllCheckBoxOnTheExpectedStatus=false;
+            }
+        }
+        ATUManager.asserIsTrueAndReport(isAllCheckBoxOnTheExpectedStatus, "The other checkBoxs " + expectedDescription + " be selected", "", "");
+
     }
 
     // This function get String as helper name, and compare this string to
@@ -1835,7 +1859,7 @@ public class RecordingHelperPage extends Page {
 
 
 /*		try {   // old clickOnAdditionContentTab implementation
-			Thread.sleep(1000);
+            Thread.sleep(1000);
 			waitForVisibility(additional_content_tab);
 			additional_content_tab.click();
 			System.out.println("Clicked on additional tab");
@@ -6521,8 +6545,8 @@ public class RecordingHelperPage extends Page {
 
     public List<String> getTheCurrentRecordesNamesList(WebDriver currentDriver) {
         List<String> currentRecordsNames = new ArrayList<>();
-        List<WebElement>  recordingIsSelected = currentDriver.findElements(By.className("recordingTitle"));
-        for (WebElement element : recordingIsSelected){
+        List<WebElement> recordingIsSelected = currentDriver.findElements(By.className("recordingTitle"));
+        for (WebElement element : recordingIsSelected) {
             String recordText = element.findElement(By.cssSelector("a")).getText();
             currentRecordsNames.add(recordText);
         }
@@ -6531,7 +6555,7 @@ public class RecordingHelperPage extends Page {
 
     //Return the current drop down element
     public List<WebElement> getTheViewDropDownElements() {
-        moveToElement(view_button,driver).perform();
+        moveToElement(view_button, driver).perform();
         List<WebElement> dropListElements = new ArrayList<>();
         WebElement elementParent = WaitDriverUtility.getElementParent(view_button);
         dropListElements.addAll(elementParent.findElements(By.cssSelector("ul>li>a"))); //to get view,title,date,duration elements
@@ -6542,7 +6566,7 @@ public class RecordingHelperPage extends Page {
     }
 
     public List<WebElement> getRecordingsAsElements() {
-        moveToElement(recording_tasks_button,driver).perform();
+        moveToElement(recording_tasks_button, driver).perform();
         List<WebElement> dropListElements = new ArrayList<>();
         WebElement elementParent = WaitDriverUtility.getElementParent(recording_tasks_button);
         dropListElements.add(elementParent.findElements(By.cssSelector("ul>li>em")).get(0)); //Message about checking checlbox
@@ -6552,14 +6576,13 @@ public class RecordingHelperPage extends Page {
 
     public List<WebElement> getCourseTaskDropDownElements() {
         WaitDriverUtility.sleepInSeconds(1);
-        moveToElement(course_task_button,driver).perform();
+        moveToElement(course_task_button, driver).perform();
         List<WebElement> dropListElements = new ArrayList<>();
         WebElement elementParent = WaitDriverUtility.getElementParent(course_task_button);
         dropListElements.addAll(elementParent.findElements(By.cssSelector("ul>li>a"))); //Message about checking checlbox
         dropListElements.addAll(elementParent.findElements(By.cssSelector("ul>li>span"))); //Sort by
         return dropListElements;
     }
-
 
 
 }

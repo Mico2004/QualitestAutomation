@@ -3,8 +3,10 @@ package com.automation.main.validator.ui;
 import com.automation.main.impersonate.helper.ElementCoordinates;
 import com.automation.main.impersonate.helper.LocationCalculator;
 import com.automation.main.page_helpers.RecordingHelperPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utils.ATUManager;
+import utils.WaitDriverUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,11 @@ public class CourseUiValidator {
         this.locationCalculator = new LocationCalculator();
     }
 
+    public void validateStartRecordingsAtRightTop(){
+        ElementCoordinates startNewRecordings = new ElementCoordinates(record.start_recording_button, 1330, 1660, 130, 200);
+        locationCalculator = new LocationCalculator();
+        locationCalculator.isElementLocatedAtExpectedLocation(startNewRecordings);
+    }
     public void validateTabsAreDisplayedAtCorrectPosition() {
         ElementCoordinates startNewRecordings = new ElementCoordinates(record.start_recording_button, 1330, 1660, 130, 200);
         locationCalculator = new LocationCalculator();
@@ -63,21 +70,28 @@ public class CourseUiValidator {
         ATUManager.asserIsTrueAndReport(isCourseTaskOnRightToViewButton, "The check box to select/deselect all the records in the course is displayed on the right of the Recording Task.", "", "");
 
 
-
-
     }
 
     public void validateAllDropDownOnPage() {
         List<WebElement> theDropDownElements = null;
-        theDropDownElements = record.getTheViewDropDownElements();
-        validateDropDown(theDropDownElements, "View", expectedViewDropDownText);
+        validateViewDropDown();
 
         theDropDownElements = record.getRecordingsAsElements();
         validateDropDown(theDropDownElements, "Recording Tasks", expectedRecordingsTask);
 
+        validateCourseTaskDropDown();
+    }
+
+    public void validateViewDropDown() {
+        List<WebElement> theDropDownElements = null;
+        theDropDownElements = record.getTheViewDropDownElements();
+        validateDropDown(theDropDownElements, "View", expectedViewDropDownText);
+    }
+
+    public void validateCourseTaskDropDown() {
+        List<WebElement> theDropDownElements = null;
         theDropDownElements = record.getCourseTaskDropDownElements();
         validateDropDown(theDropDownElements, "Course Tasks", expectedCourseTaskTexts);
-
     }
 
     private void validateDropDown(List<WebElement> dropDownElements, String dropDownName, String expectedText) {
@@ -121,5 +135,49 @@ public class CourseUiValidator {
             return true;
         }
         return false;
+    }
+
+    public void validateRecordingInformation() {
+        record.waitForVisibility(record.first_recording);
+        record.first_recording.click();
+        boolean timeFormatCorrect = isTimeFormatCorrect();
+        ATUManager.asserIsTrueAndReport(timeFormatCorrect,"The record should be in the following Length: X:XX:XX","","");
+        boolean isrecordedByDisplayed = isRecordedByDisplayed();
+        ATUManager.asserIsTrueAndReport(isrecordedByDisplayed,"Verify the format : 'Recorded by: Username.'","","");
+        boolean isdateFormatCorrrect = isDateFormatCorrrect();
+        ATUManager.asserIsTrueAndReport(isdateFormatCorrrect,"expecting the following date format: dd/mm/yyyy","","");
+    }
+
+    private boolean isTimeFormatCorrect() {
+        record.waitForVisibility(record.first_recording);
+        WebElement a = WaitDriverUtility.getElementParent(record.first_recording);
+        WebElement div = WaitDriverUtility.getElementParent(a);
+        String recordingsLenght = div.findElement(By.cssSelector("div>span>#RecordingLength1")).getText();
+        return recordingsLenght.matches("length: ([0-9]:[0-9][0-9]:[0-9][0-9])");
+    }
+
+    private boolean isRecordedByDisplayed() {
+        record.waitForVisibility(record.first_recording);
+        WebElement a = WaitDriverUtility.getElementParent(record.first_recording);
+        WebElement div = WaitDriverUtility.getElementParent(a);
+        String recordingsLenght = div.findElement(By.cssSelector("div>#RecordedBy1")).getText();
+        return recordingsLenght.matches("recorded by: (.*)");
+    }
+
+    private boolean isDateFormatCorrrect() {
+        record.waitForVisibility(record.first_recording);
+        String recordingsLenght = record.driver.findElement(By.id("RecordingDate1")).getText();
+        return recordingsLenght.matches("[1-9]{1,2}(/|-)[0-9]{2}(/|-)[0-9]{4}");
+    }
+
+    private boolean isBookmark() {
+        record.waitForVisibility(record.first_recording);
+        String recordingsLenght = record.driver.findElement(By.id("RecordingDate1")).getText();
+        return recordingsLenght.matches("[1-9]{1,2}(/|-)[0-9]{2}(/|-)[0-9]{4}");
+    }
+
+    public void checkIfChaptersAreDisplayed(){
+        boolean displayed = record.driver.findElements(By.className("panel-body")).get(0).isDisplayed();
+        ATUManager.asserIsTrueAndReport(displayed,"The recording chapters are displayed to the USER","","");
     }
 }

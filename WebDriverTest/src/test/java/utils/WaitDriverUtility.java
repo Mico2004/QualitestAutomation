@@ -96,4 +96,11 @@ public class WaitDriverUtility {
         }
     }
 
+    public static String getCursorType(WebElement element) {
+        String cursor = element.getCssValue("cursor");
+        if (cursor != null){
+            return cursor;
+        }
+        throw  new RuntimeException("Couldn't get the cursor type !");
+    }
 }
