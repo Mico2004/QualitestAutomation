@@ -10,6 +10,7 @@ import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import autoitx4java.AutoItX;
 import com.jacob.com.LibraryLoader;
+import junitx.framework.FileAssert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -3339,7 +3340,10 @@ public class RecordingHelperPage extends Page {
         String download_path = System.getProperty("user.home") + File.separatorChar + "Downloads" + File.separatorChar + file_name;
 
         Path download_path_to_delete = Paths.get(download_path);
+
+
         String resource_file_path = System.getProperty("user.dir") + "\\src\\test\\resources\\resouces-to-upload\\" + file_name;
+        verifyFilesAreEquals(download_path,resource_file_path);
         String file1_md5 = getMD5Sum(resource_file_path);
         String file2_md5 = getMD5Sum(download_path);
         try {
@@ -3369,6 +3373,21 @@ public class RecordingHelperPage extends Page {
             ATUReports.add(time + " 2 files are  not equal so file is invalid " + file1_md5 + " " + file2_md5, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
+
+    }
+
+    private void verifyFilesAreEquals(String download_path, String resourceFile) {
+
+        File actualFile = new File(download_path);
+        File expectedFile = new File(resourceFile);
+        try {
+            FileAssert.assertBinaryEquals(actualFile,expectedFile);
+        } catch (Exception e) {
+            System.out.println("failed "+e);
+            ATUManager.asserIsTrueAndReport(false,"Trying the new compring","","");
+        }
+
+        ATUManager.asserIsTrueAndReport(true,"Trying the new compring","","");
 
     }
 

@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -38,7 +37,6 @@ import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
-import utils.CopyResourcesFromNetwork;
 
 public class TC15471UploadTheFile {
 	// Set Property for ATU Reporter Configuration
@@ -75,12 +73,7 @@ public class TC15471UploadTheFile {
 
 	@BeforeClass
 	public void setup() {
-		CopyResourcesFromNetwork copyResourcesFromNetwork = new CopyResourcesFromNetwork();
-
-			copyResourcesFromNetwork.copyFileByName("ss");
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-
-
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
 		wait = new WebDriverWait(driver, 30);
