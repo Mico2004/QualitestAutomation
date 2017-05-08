@@ -3344,35 +3344,35 @@ public class RecordingHelperPage extends Page {
 
         String resource_file_path = System.getProperty("user.dir") + "\\src\\test\\resources\\resouces-to-upload\\" + file_name;
         verifyFilesAreEquals(download_path,resource_file_path);
-        String file1_md5 = getMD5Sum(resource_file_path);
-        String file2_md5 = getMD5Sum(download_path);
-        try {
-            Files.delete(download_path_to_delete);
-            File fileTemp = new File(download_path);
-            if (fileTemp.exists()) {
-                System.out.println("fail to delete file");
-                ATUReports.add(time + " fail to delete file", "delete old file", " deleted successfully", "not deleted",
-                        LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-                Assert.assertTrue(false);
-            }
-        } catch (NoSuchFileException x) {
-            System.err.format("%s: no such" + " file or directory%n", download_path);
-        } catch (DirectoryNotEmptyException x) {
-            System.err.format("%s not empty%n", download_path);
-        } catch (IOException x) {
-            // File permission problems are caught here.
-            System.err.println(x);
-        }
-        if (file1_md5.equals(file2_md5)) {
-            System.out.println("2 files are equal so file is valid");
-            ATUReports.add(time + " 2 files are equal so file is valid", LogAs.PASSED, null);
-            Assert.assertTrue(true);
-
-        } else {
-            System.out.println("2 files are  not equal so file is invalid");
-            ATUReports.add(time + " 2 files are  not equal so file is invalid " + file1_md5 + " " + file2_md5, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-            Assert.assertTrue(false);
-        }
+//        String file1_md5 = getMD5Sum(resource_file_path);
+//        String file2_md5 = getMD5Sum(download_path);
+//        try {
+//            Files.delete(download_path_to_delete);
+//            File fileTemp = new File(download_path);
+//            if (fileTemp.exists()) {
+//                System.out.println("fail to delete file");
+//                ATUReports.add(time + " fail to delete file", "delete old file", " deleted successfully", "not deleted",
+//                        LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//                Assert.assertTrue(false);
+//            }
+//        } catch (NoSuchFileException x) {
+//            System.err.format("%s: no such" + " file or directory%n", download_path);
+//        } catch (DirectoryNotEmptyException x) {
+//            System.err.format("%s not empty%n", download_path);
+//        } catch (IOException x) {
+//            // File permission problems are caught here.
+//            System.err.println(x);
+//        }
+//        if (file1_md5.equals(file2_md5)) {
+//            System.out.println("2 files are equal so file is valid");
+//            ATUReports.add(time + " 2 files are equal so file is valid", LogAs.PASSED, null);
+//            Assert.assertTrue(true);
+//
+//        } else {
+//            System.out.println("2 files are  not equal so file is invalid");
+//            ATUReports.add(time + " 2 files are  not equal so file is invalid " + file1_md5 + " " + file2_md5, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+//            Assert.assertTrue(false);
+//        }
 
     }
 
