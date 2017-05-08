@@ -3347,14 +3347,14 @@ public class RecordingHelperPage extends Page {
 //        String file1_md5 = getMD5Sum(resource_file_path);
 //        String file2_md5 = getMD5Sum(download_path);
 //        try {
-//            Files.delete(download_path_to_delete);
-//            File fileTemp = new File(download_path);
-//            if (fileTemp.exists()) {
-//                System.out.println("fail to delete file");
-//                ATUReports.add(time + " fail to delete file", "delete old file", " deleted successfully", "not deleted",
-//                        LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-//                Assert.assertTrue(false);
-//            }
+            Files.delete(download_path_to_delete);
+            File fileTemp = new File(download_path);
+            if (fileTemp.exists()) {
+                System.out.println("fail to delete file");
+                ATUReports.add(time + " fail to delete file", "delete old file", " deleted successfully", "not deleted",
+                        LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+                Assert.assertTrue(false);
+            }
 //        } catch (NoSuchFileException x) {
 //            System.err.format("%s: no such" + " file or directory%n", download_path);
 //        } catch (DirectoryNotEmptyException x) {
