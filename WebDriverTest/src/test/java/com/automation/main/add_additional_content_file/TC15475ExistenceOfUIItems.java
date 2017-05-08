@@ -119,7 +119,7 @@ public class TC15475ExistenceOfUIItems {
 		public void test15475() throws Exception {
 		
 			//////pre-conditions!!!!100 mb is already default
-			String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\chromedriver_win32.zip";
+			String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\chromedriver_win32.zip";
 			String file_name = "chromedriver_win32.zip";
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	

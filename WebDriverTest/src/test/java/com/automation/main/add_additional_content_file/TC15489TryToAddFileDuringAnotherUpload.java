@@ -117,7 +117,7 @@ public class TC15489TryToAddFileDuringAnotherUpload {
 
 			@Test (description="TC 15489 Try To Add File During Another Upload")
 			public void test15489() throws Exception {
-				String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\chromedriver_win32.zip";
+				String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\chromedriver_win32.zip";
 				String file_name ="chromedriver_win32.zip";
 				// 1.load page
 				tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

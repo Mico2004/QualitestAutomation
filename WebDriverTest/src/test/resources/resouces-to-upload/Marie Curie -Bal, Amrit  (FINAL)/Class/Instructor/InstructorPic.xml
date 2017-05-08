@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DATA id="InstructorPic" time="0" stream="true" dur="380528" type="Image"><SGMTS><SGMT inx="1" time="0" dur="380528" type="Image" fmt="PNG" width="320" height="240"><SMPL inx="1" time="0" dur="380528" src="UserImage.png"/></SGMT></SGMTS><PREL><ITEM src="UserImage.png" type="Image" fmt="PNG"/></PREL></DATA>

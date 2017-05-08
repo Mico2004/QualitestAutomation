@@ -83,7 +83,7 @@ public class TC10905AndTC10906 {
 	String student_bookmark_unclear,student_bookmark_important,student_tag1,student_tag2,caption_student,first_chapter_recording_name,first_reqular_recording;
 	String first_student_recording,first_test_recording,first_link_recording,first_file_recording,first_link_name,first_record_tag,first_recording_bookmarks;
 	String ins_bookmark_unclear,ins_bookmark_important,ins_tag1,ins_tag2;
-	String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testXls.xls";
+	String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testXls.xls";
 	
 	@BeforeTest
 	public void setup() {
@@ -169,7 +169,7 @@ public class TC10905AndTC10906 {
 		record.clickOnRecordingTaskThenEditRecording();
 						
 		//2.3.add caption to the first chapter
-		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";	
+		String path = System.getProperty("user.dir") + "\\src\\test\\resources\\resouces-to-upload\\CloseCaption.srt";
 		caption_student = "QualitestAutomationCaption";	
 		edit_recording.addCaptionSrtToFirstChapterRecording(path);
 						

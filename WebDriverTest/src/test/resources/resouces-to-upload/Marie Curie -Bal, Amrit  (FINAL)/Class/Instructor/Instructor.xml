@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DATA id="Instructor" stream="true" time="0" dur="380528" type="Image,VideoAudio">
+    <PREL>
+        <ITEM type="VideoAudio" src="Instructor1.mp4" vcodec="{34363248-0000-0010-8000-00AA00389B71}" acodec="{000000FF-0000-0010-8000-00AA00389B71}"/>
+    </PREL>
+    <SGMTS>
+        <SGMT inx="1" type="Audio" fmt="MP4" time="0" dur="380528">
+            <SMPL inx="1" time="0" dur="380528" src="Instructor1.mp4" ftime="0" timer="false" mute="true"/>
+        </SGMT>
+    </SGMTS>
+</DATA>

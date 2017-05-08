@@ -120,7 +120,7 @@ public class TC15461AddGifFile {
 	@Test (description="TC 15461 Add Gif File")
 	public void test15461() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testGif.gif";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testGif.gif";
 		String file_name = "Moshik_testGif.gif";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

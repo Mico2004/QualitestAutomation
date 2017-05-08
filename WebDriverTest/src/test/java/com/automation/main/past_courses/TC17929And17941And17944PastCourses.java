@@ -83,7 +83,7 @@ public class TC17929And17941And17944PastCourses {
 
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 		
-		fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testDocx.docx";
+		fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testDocx.docx";
 
 		wait = new WebDriverWait(driver, 30);
 		page=PageFactory.initElements(driver, Page.class);

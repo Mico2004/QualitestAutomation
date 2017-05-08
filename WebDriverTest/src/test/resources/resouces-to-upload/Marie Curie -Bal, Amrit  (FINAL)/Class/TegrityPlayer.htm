@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<!-- Set to your current installed browser version. -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<!-- This line removes the image toolbar that appears when mouse is over the image -->
+		<meta http-equiv="imagetoolbar" content="no"/> 
+		<title>Tegrity Player</title>
+		<xml:namespace ns="urn:schemas-microsoft-com:vml" prefix="v"/>
+		<!-- Enables support for VML -->
+		<style type="text/css"> 
+			v\:* { behavior: url(#default#VML); }
+		</style>
+		<!-- Changes the page text fonts -->
+		<style type="text/css">
+			body {font-family: Verdana, Helvetica, sans-serif;}
+		</style>
+		<script type="text/javascript" src="Request.js"></script>
+		<script type="text/javascript" src="XmlUtils.js"></script>
+		<script type="text/javascript" src="SessionXmlParser.js"></script>
+		
+		<!-- Session Meta Data file in JSON format and a JSON parser -->
+		<script type="text/javascript" src="Session.js"></script>
+		<script type="text/javascript" src="SessionJsonParser.js"></script>
+		
+		<script type="text/javascript">
+			
+			var bLocal = (window.location.protocol + "").toLowerCase() == "file:";
+			var bDebug = false; //window.location.hostname == "localhost";
+						
+			var oSessionParser = (bLocal || bDebug) && typeof(oSessionData) == "object" ? new SessionJsonParser(oSessionData) : new SessionXmlParser("./Session.xml");
+			
+			document.writeln('<script type="text/javascript" src="' + oSessionParser.GetPlayerJSFile() + '"></'+'script>');
+
+		</script>
+	</head>   
+	<body leftmargin=0 topmargin=0 rightmargin=0 bottomnargin=0 oncontextmenu="return false;" ondragstart="return false;" onselectstart="return false;" ><!-- Prvents the right click menu and the text selection --> 
+		<script type="text/javascript">
+			
+			function InitPlayer()
+			{
+				// Quit if this function has already been called.
+				if(typeof arguments.callee.done != "undefined") return;
+				// Flag this function so we don't do the same thing twice.
+				arguments.callee.done = true;
+				// Kill the timer.
+				if(nTimerID)
+				{
+					clearInterval(nTimerID);
+					nTimerID = null;
+				}
+				PlayerMain(oSessionParser,Request.GetArgList(),false);
+			};
+			
+			// Show the "Loading session, Please wait." Image.
+			ShowLoadingIndication(oSessionParser,true);
+			
+			// Wait till the Player is loaded.
+			if( /WebKit/i.test(navigator.userAgent) || document.all) // Safari & IE.
+			{
+				var nTimerID = setInterval(function(){ if(/loaded|complete/.test(document.readyState)) { InitPlayer(); } }, 100);
+			}
+			else if(document.addEventListener) // FF.
+			{
+				document.addEventListener("DOMContentLoaded", function(){ setTimeout(InitPlayer,500); }, false);
+			}
+		</script>
+	</body>
+</html>

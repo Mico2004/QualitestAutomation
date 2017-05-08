@@ -166,7 +166,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		
 		record.clickOnRecordingTaskThenEditRecording();
 		
-		String path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\CloseCaption.srt";
+		String path = System.getProperty("user.dir") + "\\src\\test\\resources\\resouces-to-upload\\CloseCaption.srt";
 		edit_recording.addCaptionSrtToFirstChapterRecording(path);
 		
 		Thread.sleep(5000);
@@ -264,7 +264,7 @@ public class TC22690ValidateSourceTypeAsClosedCaptionInSearchFieldOnTheRecording
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
 		record.clickOnRecordingTaskThenEditRecording();
 		
-		path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\sync.srt";
+		path = System.getProperty("user.dir") + "\\src\\test\\resources\\resouces-to-upload\\sync.srt";
 		edit_recording.addCaptionSrtToFirstChapterRecording(path);
 		
 		Thread.sleep(5000);

@@ -120,7 +120,7 @@ public class TC15455AddMp3File {
 	@Test (description="TC 15455 Add Mp3 File")
 	public void test15455() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testMp3.mp3";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testMp3.mp3";
 		String file_name = "Moshik_testMp3.mp3";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

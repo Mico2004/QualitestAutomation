@@ -3339,7 +3339,7 @@ public class RecordingHelperPage extends Page {
         String download_path = System.getProperty("user.home") + File.separatorChar + "Downloads" + File.separatorChar + file_name;
 
         Path download_path_to_delete = Paths.get(download_path);
-        String resource_file_path = System.getProperty("user.dir") + "\\workspace\\QualitestAutomation\\resources\\documents\\" + file_name;
+        String resource_file_path = System.getProperty("user.dir") + "\\src\\test\\resources\\resouces-to-upload\\" + file_name;
         String file1_md5 = getMD5Sum(resource_file_path);
         String file2_md5 = getMD5Sum(download_path);
         try {
@@ -5583,7 +5583,7 @@ public class RecordingHelperPage extends Page {
 
     public void uploadRecordingThruogthKeys() throws AWTException, InterruptedException {
 
-        String path = "\\workspace\\QualitestAutomation\\resources\\documents\\Marie Curie -Bal, Amrit  (FINAL)";
+        String path = "\\src\\test\\resources\\resouces-to-upload\\Marie Curie -Bal, Amrit  (FINAL)";
         path = System.getProperty("user.dir") + path;
 
         Robotil robotil = new Robotil("localhost", 5555);

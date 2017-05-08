@@ -120,7 +120,7 @@ public class TC15456AddMp4File {
 	@Test (description="TC 15456 Add Mp4 File")
 	public void test15456() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testMp4.mp4";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testMp4.mp4";
 		String file_name = "Moshik_testMp4.mp4";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

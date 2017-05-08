@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+	<title>Tegrity Player Start Page</title>
+	<script type="text/javascript" src="./Class/Request.js"></script>
+	<script type="text/javascript">
+		
+		//-----------------------------------------------------------------------
+		// This number is used by the Skeleton Updater module and should by sync with the current Player version iff the skeleton has been updated.
+		// Changing this number will yield recording(s) skeleton update.
+		var SKELETON_VERSION = 288;
+
+		//-----------------------------------------------------------------------
+		function Size(nWidth,nHeight)
+		{
+			this.width	= Number(nWidth);
+			this.height = Number(nHeight);
+			
+			// Methods.
+			this.toString = function()
+			{
+				return "Size[ W:" + this.width + " H:"  + this.height + " ]";
+			} // Size.toString
+		} // Size
+	
+		//-----------------------------------------------------------------------
+		function GetPlayerOptimalSize(oSize)
+		{		
+			var LAYOUT_TYPE_STAND_ALONE = 1;
+			var LAYOUT_TYPE_VIEWER			= 2;
+			var LAYOUT_TYPE_NOTES				= 3;
+			
+			// Set layout type.
+			var eLayoutType;
+			
+			if(Request.ClientVariables("Notes") && Request.ClientVariables("Notes") == "true")
+				eLayoutType	= LAYOUT_TYPE_NOTES;
+			else if(Request.ClientVariables("Viewer") && Request.ClientVariables("Viewer") == "true")
+				eLayoutType = LAYOUT_TYPE_VIEWER;
+			else
+				eLayoutType = LAYOUT_TYPE_STAND_ALONE;
+			
+			var oPlayerSize;
+			
+			// Try getting the Player size from the IFrame.
+			try
+			{
+				oPlayerSize	= document.getElementById("GPSIFrame").contentWindow.GetPlayerOptimalSize(oSize, eLayoutType); 
+			}catch(e){}
+	
+			// Validate return size.
+			if(!oPlayerSize || typeof oPlayerSize != "object" || typeof oPlayerSize.width != "number" || typeof oPlayerSize.height != "number")
+			{
+				// Set defaults. (Best fit for 4x3 Screens)
+				switch(eLayoutType)
+				{
+				case LAYOUT_TYPE_STAND_ALONE:
+					oPlayerSize = new Size(990,603);
+					break;
+				case LAYOUT_TYPE_VIEWER:
+					oPlayerSize = new Size(990,575);
+					break;
+				case LAYOUT_TYPE_NOTES:
+					oPlayerSize = new Size(660,892);
+					break;
+				} // switch
+			}
+			return oPlayerSize; 
+		} // GetPlayerOptimalSize
+	
+		//-----------------------------------------------------------------------
+		function OpenSessionWindow()
+		{
+			var oAvaiablePlayerSize = new Size(-1,-1); 
+			var oPlayerSize = GetPlayerOptimalSize(oAvaiablePlayerSize);
+			//alert("Available " + oAvaiablePlayerSize + " Optimal " + oPlayerSize)
+			
+			var windowprops = "menubars=no,toolbars=no,resizable=yes,status=no,scrollbars=no,channelmode=no,height=" + oPlayerSize.height + ",width=" + oPlayerSize.width + ",top=15,left=15";
+			var popupname = "TegritySessionWindow"+ (new Date()).getTime();
+			window.open("./Class/TegrityPlayer.htm?"+Request.m_QueryString,popupname, windowprops); 
+		} // OpenSessionWindow
+	  
+	</script>
+</head>
+<body onload="OpenSessionWindow();">
+	<iframe id="GPSIFrame" style="width:1px;height:1px;display:none;visibility:hidden;" src="./Class/GetPlayerSize.htm"></iframe>
+	<span>Your Tegrity recording should begin shortly. If it does not, try clicking <a href="javascript:;" onclick="OpenSessionWindow();">here</a></span>
+</body>
+</html>

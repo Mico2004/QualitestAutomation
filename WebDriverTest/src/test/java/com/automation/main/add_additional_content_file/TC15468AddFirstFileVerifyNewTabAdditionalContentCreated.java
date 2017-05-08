@@ -119,7 +119,7 @@ public class TC15468AddFirstFileVerifyNewTabAdditionalContentCreated {
 
 	@Test (description="TC 15468 Add First File Verify New Tab Additional Content Created")
 	public void test15468() throws Exception {
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\additional_file.doc";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\additional_file.doc";
 		String file_name = "additional_file.doc";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

@@ -120,7 +120,7 @@ public class TC15457AddMovFile {
 	@Test (description="TC 15457 Add Mov File")
 	public void test15457() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testMov.mov";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testMov.mov";
 		String file_name = "Moshik_testMov.mov";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

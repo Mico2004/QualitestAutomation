@@ -120,7 +120,7 @@ public class TC15451AddRtfFile {
 	@Test (description="TC 15451 Add Rtf File")
 	public void test15451() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\sample.rtf";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\sample.rtf";
 		String file_name = "sample.rtf";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

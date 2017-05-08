@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DATA id="Screen" stream="true" time="0" dur="380528" type="VideoAudio">
+	<PREL>
+		<ITEM type="VideoAudio" src="Screen.mp4" vcodec="{34363248-0000-0010-8000-00AA00389B71}" acodec="{000000FF-0000-0010-8000-00AA00389B71}"/>
+	</PREL>
+	<SGMTS>
+		<SGMT inx="1" type="VideoAudio" fmt="MP4" time="0" dur="380528">
+			<SMPL inx="1" time="0" dur="380528" src="Screen.mp4" ftime="0" timer="true" mute="false" width="1152" height="720"/>
+		</SGMT>
+	</SGMTS>
+</DATA>

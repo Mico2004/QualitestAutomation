@@ -110,7 +110,7 @@ public void setup() {
 	
 	@Test (description="TC 15467 Cancel The Adding")
 public void test15467() throws Exception {
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_Cancel.doc";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_Cancel.doc";
 		String file_name = "Moshik_Cancel.doc";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

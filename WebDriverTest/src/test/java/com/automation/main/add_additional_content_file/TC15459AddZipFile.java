@@ -120,7 +120,7 @@ public class TC15459AddZipFile {
 	@Test (description="TC 15459 Add Zip File")
 	public void test15459() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testZip.zip";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testZip.zip";
 		String file_name = "Moshik_testZip.zip";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

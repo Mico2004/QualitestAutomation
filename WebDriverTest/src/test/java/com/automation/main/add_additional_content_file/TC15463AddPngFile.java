@@ -120,7 +120,7 @@ public class TC15463AddPngFile {
 	@Test (description="TC 15463 Add Png File")
 	public void test15463() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testPng.png";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testPng.png";
 		String file_name = "Moshik_testPng.png";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

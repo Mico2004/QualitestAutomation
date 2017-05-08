@@ -120,7 +120,7 @@ public class TC15462AddJpgFile {
 	@Test (description="TC 15462 Add Jpg File")
 	public void test15462() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testJpg.jpg";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testJpg.jpg";
 		String file_name = "Moshik_testJpg.jpg";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

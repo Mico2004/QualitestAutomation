@@ -120,7 +120,7 @@ public class TC15450AddDocxFile {
 	@Test (description="TC 15450 Add Docx File")
 	public void test15450() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testDocx.docx";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testDocx.docx";
 		String file_name = "Moshik_testDocx.docx";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

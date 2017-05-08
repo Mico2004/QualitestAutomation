@@ -119,7 +119,7 @@ public class TC15448AddPptFile {
 	@Test (description="TC 15448 Add Ppt File")
 	public void test15448() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testPpt.ppt";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testPpt.ppt";
 		String file_name = "Moshik_testPpt.ppt";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

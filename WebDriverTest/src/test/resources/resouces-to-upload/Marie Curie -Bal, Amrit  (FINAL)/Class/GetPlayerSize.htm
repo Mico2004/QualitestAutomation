@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>GetPlayerSize Implementation</title>
+		<script type="text/javascript" src="XmlUtils.js"></script>    
+		<script type="text/javascript" src="SessionXmlParser.js"></script>
+		<!-- Session Meta Data file in JSON format and a JSON parser -->
+		<script type="text/javascript" src="Session.js"></script>
+		<script type="text/javascript" src="SessionJsonParser.js"></script>
+		<script type="text/javascript">
+		
+			var bLocal = (window.location.protocol + "").toLowerCase() == "file:";
+			var bDebug = false; //window.location.hostname == "localhost";
+						
+			var oSessionParser = (bLocal || bDebug) && typeof(oSessionData) == "object" ? new SessionJsonParser(oSessionData) : new SessionXmlParser("./Session.xml");
+	
+			document.writeln('<script type="text/javascript" src="' + oSessionParser.GetPlayerJSFile() + '"></'+'script>');	
+		
+		</script>   
+	</head>   
+	<body>
+		<script type="text/javascript">
+			// Globals.
+			var g_oPlayerSizeMng = null;
+	
+			//-----------------------------------------------------------------------
+			function CreatePlayerSizeManager(eLayoutType)
+			{
+				try
+				{
+					g_oPlayerSizeMng = new PlayerSizeManager(oSessionParser,eLayoutType);
+				}
+				catch(e){}
+			} // CreatePlayerSizeManager
+
+			//-----------------------------------------------------------------------
+			function GetPlayerOptimalSize(oAvailableSize,eLayoutType)
+			{
+				var oPlayerSize = null;
+				
+				try
+				{
+					if(!IsObject(g_oPlayerSizeMng))
+						CreatePlayerSizeManager(eLayoutType);
+				
+					oPlayerSize = g_oPlayerSizeMng.GetPlayerOptimalSize(oAvailableSize);
+				}
+				catch(e){}
+			
+				return oPlayerSize;
+			} // GetPlayerSize
+
+		</script>
+	</body>
+</html>

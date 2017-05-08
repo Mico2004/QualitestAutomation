@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DATA id="Print" stream="true" time="0" dur="380528" type="Image">
+	<PREL>
+		<ITEM src="Print1.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print10.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print11.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print12.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print13.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print14.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print15.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print2.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print3.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print4.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print5.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print6.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print7.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print8.jpeg" type="Image" fmt="JPEG"/><ITEM src="Print9.jpeg" type="Image" fmt="JPEG"/></PREL>
+	<SGMTS>
+		<SGMT inx="1" type="Image" fmt="PNG" time="0" dur="380528">
+			<SMPL inx="1" time="0" dur="9054" src="Print1.jpeg" width="640" height="400" fmt="JPEG">The Life and Works of Marie Curie  The Discovery of Radioactivity, Polonium, and Radium</SMPL>
+			<SMPL inx="2" time="9054" dur="36055" src="Print2.jpeg" width="640" height="400" fmt="JPEG">Biography: Childhood in Poland</SMPL>
+			<SMPL inx="3" time="45109" dur="51060" src="Print3.jpeg" width="640" height="400" fmt="JPEG">Biography: Life in France</SMPL>
+			<SMPL inx="4" time="96169" dur="39054" src="Print4.jpeg" width="640" height="400" fmt="JPEG">Background to Curie’s Work</SMPL>
+			<SMPL inx="5" time="135223" dur="21043" src="Print5.jpeg" width="640" height="400" fmt="JPEG">Scientific Discoveries:   Radioactivity of Thorium</SMPL>
+			<SMPL inx="6" time="156266" dur="9044" src="Print6.jpeg" width="640" height="400" fmt="JPEG">Scientific Discoveries: Polonium</SMPL>
+			<SMPL inx="7" time="165310" dur="6056" src="Print7.jpeg" width="640" height="400" fmt="JPEG">Scientific Discoveries: Radium</SMPL>
+			<SMPL inx="8" time="171366" dur="30062" src="Print8.jpeg" width="640" height="400" fmt="JPEG">Proving Polonium &amp; Radium Existed</SMPL>
+			<SMPL inx="9" time="201428" dur="27064" src="Print9.jpeg" width="640" height="400" fmt="JPEG">Historical Context: World War I</SMPL>
+			<SMPL inx="10" time="228492" dur="27074" src="Print10.jpeg" width="640" height="400" fmt="JPEG">Historical Context: Postwar</SMPL>
+			<SMPL inx="11" time="255566" dur="42063" src="Print11.jpeg" width="640" height="400" fmt="JPEG">Death from Radiation</SMPL>
+			<SMPL inx="12" time="297629" dur="18044" src="Print12.jpeg" width="640" height="400" fmt="JPEG">Awards and Honors</SMPL>
+			<SMPL inx="13" time="315673" dur="33048" src="Print13.jpeg" width="640" height="400" fmt="JPEG">Curie’s Contribution and Legacy</SMPL>
+			<SMPL inx="14" time="348721" dur="21043" src="Print14.jpeg" width="640" height="400" fmt="JPEG">Applications</SMPL>
+			<SMPL inx="15" time="369764" dur="10764" src="Print15.jpeg" width="640" height="400" poi="370765" fmt="JPEG">Famous Quotes</SMPL>
+		</SGMT>
+	</SGMTS>
+</DATA>

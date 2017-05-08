@@ -120,7 +120,7 @@ public class TC15460AddRarFile {
 	@Test (description="TC 15460 Add Rar File")
 	public void test15460() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testRar.rar";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testRar.rar";
 		String file_name = "Moshik_testRar.rar";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

@@ -120,7 +120,7 @@ public class TC15454AddAviFile {
 	@Test (description="TC 15454 Add Avi File")
 	public void test15454() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testAvi.avi";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testAvi.avi";
 		String file_name = "Moshik_testAvi.avi";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

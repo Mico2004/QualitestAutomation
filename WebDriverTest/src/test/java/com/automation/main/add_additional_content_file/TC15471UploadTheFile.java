@@ -38,6 +38,7 @@ import com.automation.main.utilities.DriverSelector;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import utils.CopyResourcesFromNetwork;
 
 public class TC15471UploadTheFile {
 	// Set Property for ATU Reporter Configuration
@@ -74,7 +75,9 @@ public class TC15471UploadTheFile {
 
 	@BeforeClass
 	public void setup() {
+		CopyResourcesFromNetwork copyResourcesFromNetwork = new CopyResourcesFromNetwork();
 
+			copyResourcesFromNetwork.copyFileByName("ss");
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
 
@@ -120,7 +123,7 @@ public class TC15471UploadTheFile {
 	@Test (description="TC 15471 Upload The File")
 	public void test15471() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\NewFile.docx";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\NewFile.docx";
 		String file_name = "NewFile.docx";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

@@ -115,7 +115,7 @@ public class TC15466AddFewFilesWithSameTitle {
 
 		@Test (description="TC 15466 Add Few Files With Same Title")
 		public void test15466() throws Exception {
-			String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\addFewFilesFile.txt";
+			String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\addFewFilesFile.txt";
 			String file_name = "addFewFilesFile.txt";
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

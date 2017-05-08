@@ -120,7 +120,7 @@ public class TC15464AddXlsFile {
 	@Test (description="TC 15464 Add Xls File")
 	public void test15464() throws Exception {
 
-		String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\Moshik_testXls.xls";
+		String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\Moshik_testXls.xls";
 		String file_name = "Moshik_testXls.xls";
 		// 1.load page
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);

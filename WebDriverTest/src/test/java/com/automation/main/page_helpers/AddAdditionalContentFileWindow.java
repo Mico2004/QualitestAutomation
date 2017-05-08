@@ -104,7 +104,7 @@ public class AddAdditionalContentFileWindow extends Page {
 	/// upload a file by giving its string path
 	public void uploadFileByPath(String path, ConfirmationMenu confirm) throws InterruptedException  {
 
-		String file_name = path.substring(51);
+		String file_name = extractTheFileName(path);
 		// select_upload_additional_file.click();
 		Thread.sleep(2000);
 
@@ -117,6 +117,11 @@ public class AddAdditionalContentFileWindow extends Page {
 		confirm.waitForVisibility(confirm.ok_button);
 		confirm.clickOnOkButtonAfterConfirmAddAdditionalContentFile(file_name);
 
+	}
+
+	private String extractTheFileName(String path) {
+		String[] split = path.split("\\\\");
+		return split[split.length-1];
 	}
 
 	/// verify Add Additional Content File info

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<SESSION>
+	<HEAD>
+		<PROPS>
+			<PROP name="FormatVersion" value="1.0"/>
+			<PROP name="CreatorApp" value="TegMacRecorder"/>
+			<PROP name="CreatorVer" value="3019"/>
+			<PROP name="MultiAVStreams" value="true"/>
+			<PROP name="TimeZone" value="GMT-06:00"/>
+			<PROP name="SessionDateTime" value="1449120435394"/>
+			<PROP name="Duration" value="380528"/>
+			<PROP name="SessionAudio" value="Instructor/AudioAll.mp4"/>
+			<PROP name="SessionAudioPodcast" value="Instructor/AudioPodcast.mp3"/>
+			<PROP name="SessionVideoPodcast" value="Projector/VideoPodcast.mp4"/>
+			<PROP name="MacSupport" value="MP4"/>
+			<PROP name="ViewerId" value="wexlerc"/>
+			<PROP name="AuthToken" value="azbHyUceWqJWO--1sjW1xWakF1ShhPd0hxWAr5qZi-aN5Su4BKErOL_84eYg3WzI"/>
+			<PROP name="DrmKey" value="677a9a11-a9c9-4d41-b146-a9096e18a483"/><PROP name="SessionGUID" value="27A7A8C6-800D-48ea-AC2F-2046E5024167"/><PROP name="SessionTitle" value="Marie Curie -Bal, Amrit  (FINAL)"/><PROP name="CourseGUID" value="e81d0e0e-cbef-4c5d-a49c-eeb11495484f"/><PROP name="CourseId" value="bankvalidrecordingawsserverautomation1"/><PROP name="CourseTitle" value="BankValidRecordingawsserverautomation1"/><PROP name="InstructorId" value="mickaelins1"/><PROP name="InstructorTitle" value="mickaelins1"/></PROPS>
+		<PLAYER src="C:/Program Files (x86)/Tegrity/Recorder/Recording/1.0/Code/Player.js"/>
+		<LAYOUT src="C:/Program Files (x86)/Tegrity/Recorder/Recording/1.0/Layout/NewDefaultLayout"/>
+		<SERVER src="http://missouri.tegrity.com"/>
+	</HEAD>
+	<TMLN time="0" dur="383105">
+		<SGMTS>
+			<SGMT inx="1" type="Play" time="0" dur="380275"/>
+			<SGMT inx="2" type="Pause" time="380275" dur="2830"/>
+		</SGMTS>
+	</TMLN>
+	<DATA>
+		<CTRLS>
+			<CTRL id="Instructor">
+				<LAYER z-order="1" src="Instructor/InstructorPic.xml" stream-id="InstructorPic"/>
+			</CTRL>
+			<CTRL id="Projector">
+				<LAYER z-order="1" src="Projector/Screen.xml" stream-id="Screen"/>
+			</CTRL>
+			<CTRL id="Index">
+				<LAYER z-order="1" src="Index/Index.xml" stream-id="Index"/>
+			</CTRL>
+			<CTRL id="Print">
+				<LAYER z-order="1" src="Print/Print.xml" stream-id="Print"/>
+			</CTRL>
+			<CTRL id="Search">
+				<LAYER z-order="1" src="Search/Search.xml" stream-id="Search"/>
+			</CTRL>
+		</CTRLS>
+	</DATA>
+</SESSION>

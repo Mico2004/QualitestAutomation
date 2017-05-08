@@ -117,7 +117,7 @@ public class TC15470AddFileWithTheSameTitleExistingLink {
 
 		@Test (description="TC 15470 Add File With The Same Title Existing Link")
 		public void test15470() throws Exception {                                           
-			String fullPathToFile = "\\workspace\\QualitestAutomation\\resources\\documents\\SameTitle.doc";
+			String fullPathToFile = "\\src\\test\\resources\\resouces-to-upload\\SameTitle.doc";
 			String file_name = "SameTitle.doc";
 			// 1.load page
 			tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
