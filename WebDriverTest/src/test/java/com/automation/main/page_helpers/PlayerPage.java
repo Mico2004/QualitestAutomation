@@ -851,7 +851,7 @@ public class PlayerPage extends Page {
                     moveToElementAndPerform(we, driver);
                     clickElementWithOutIdJS(bookmarks_buttons.get(2));
                 }
-                Thread.sleep(500);
+                Thread.sleep(1000);
                 if (bookmark_list.size() > 0) {
                     clickElementWithOutIdJS(driver.findElement(By.xpath(".//*[@id='BookmarkList']/div/img[3]")));
                 }
