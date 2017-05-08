@@ -197,14 +197,8 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			//9.Search the Recording by entering the "Recording Title" you chose before and press ENTER.	
 			;///get first recording name the one we played
 
-            String recording_to_search = verifyThereIsOverTwoSearchResults(record.recording_list_names, player_page.search_result);
+            String recording_to_search = verifyThereIsOverTwoSearchResults(record.recording_list_names, course_name);
 
-			System.out.println(player_page.breadcrumbs_box_elements_list.get(1).getText());
-			System.out.println(player_page.breadcrumbs_box_elements_list.get(0).getText());
-			///13.The breadcrumb structure is displayed as follows: "> Courses > course name".
-			player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
-			
-			driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
 			Thread.sleep(2000);
 			
 			
@@ -247,7 +241,7 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
 			ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		}
 
-    private String verifyThereIsOverTwoSearchResults(List<String> recording_list_names, List<WebElement> search_result) {
+    private String verifyThereIsOverTwoSearchResults(List<String> recording_list_names, String course_name) {
 
         for (String recordName:recording_list_names){
             player_page.verifySearchForRecordingExist(recordName);
@@ -255,6 +249,7 @@ public class TC22656ValidateTheSourceTypeAsRecordingTitleInSearchFieldOnRecordin
                 driver.switchTo().window(handler);
                 break;
             }
+            player_page.verifyBreadcrumbsForSearcRecordingAsAdmin(course_name);
             driver.switchTo().frame(driver.findElement(By.id("playerContainer")));
             WaitDriverUtility.sleepInSeconds(1);
             List<WebElement> elements = driver.findElements(By.xpath("//*[contains(@id, 'SearchResult_')]"));
