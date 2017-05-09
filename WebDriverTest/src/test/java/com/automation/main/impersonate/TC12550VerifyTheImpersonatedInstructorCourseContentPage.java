@@ -117,7 +117,18 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
 
 
         tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-        tegrity.loginCourses("Admin");
+
+        runTestAsDiffrentUser("Admin");
+
+        runTestAsDiffrentUser("HelpdeskAdmin");
+
+        driver.quit();
+
+
+    }
+
+    private void runTestAsDiffrentUser(String user) throws InterruptedException {
+        tegrity.loginCourses(user);
         WaitDriverUtility.waitToPageBeLoaded(driver);
         admin_dashboard_page.clickOnTargetSubmenuUsers("Impersonate User");
         WaitDriverUtility.waitToPageBeLoaded(driver);
@@ -130,6 +141,7 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
         course.selectCourseByName(commonCourseName);
 
         WaitDriverUtility.waitToPageBeLoaded(driver);
+        WaitDriverUtility.sleepInSeconds(1);
         record.clickOnRecordingInIndex(1);
 
         record.clickOnTheFirstCaptherWithOutTheExpand();
@@ -157,7 +169,6 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
         ATUManager.asserIsTrueAndReport(!targetRecordingExist,"The record should not be exist at this point","","");
 
         advancedServiceSettingsPage.signOut();
-        driver.quit();
     }
 
 
