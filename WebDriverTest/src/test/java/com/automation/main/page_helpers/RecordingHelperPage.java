@@ -19,6 +19,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -3338,7 +3339,7 @@ public class RecordingHelperPage extends Page {
     /// verify downloaded file is valid
     public void VerifyDownloadedFileIsValid(String file_name) throws Exception {
         String download_path = System.getProperty("user.home") + File.separatorChar + "Downloads" + File.separatorChar + file_name;
-
+        waitForDownloadBeFinished(download_path);
         Path download_path_to_delete = Paths.get(download_path);
 
 
@@ -3374,6 +3375,23 @@ public class RecordingHelperPage extends Page {
             Assert.assertTrue(false);
         }
 
+    }
+
+    private void waitForDownloadBeFinished(String pathToDownloadedFile) {
+        int timeOut = 10;
+        while (timeOut>0) {
+            File downloadedFile = new File(pathToDownloadedFile);
+            WaitDriverUtility.sleepInSeconds(1);
+            if (downloadedFile.canWrite()){
+
+                System.out.println("the download has finished successfully");
+                return;
+            }
+            System.out.println("waiting 1 second to download be finished");
+
+
+            timeOut--;
+        }
     }
 
     private void verifyFilesAreEquals(String download_path, String resourceFile) {
