@@ -3,14 +3,17 @@ package com.automation.main.add_additional_content_file;
 import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -40,6 +43,7 @@ import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 
 public class TC15455AddMp3File {
+
 	// Set Property for ATU Reporter Configuration
 	{
 		System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
@@ -169,17 +173,34 @@ public class TC15455AddMp3File {
 		///driver = new ChromeDriver();
 		//driver.manage().window().maximize();
 
-		System.setProperty("webdriver.gecko.driver", "c:/selenium-drivers/geckodriver.exe");
-		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-		capabilities.setCapability("marionette", true);		
-		FirefoxProfile fxProfile = new FirefoxProfile();
-	    fxProfile.setPreference("browser.download.folderList",2);
-	    fxProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
-	    fxProfile.setPreference("browser.download.manager.showWhenStarting",false);
-	    fxProfile.setPreference("browser.download.dir",System.getProperty("user.home") + File.separatorChar + "Downloads" + File.separatorChar);    
-	    fxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk" ,"audio/mp3;audio/mpeg3;audio/x-mpeg-3" );
-	    capabilities.setCapability(FirefoxDriver.PROFILE, fxProfile);		
-		driver = new FirefoxDriver(capabilities);	
+//		System.setProperty("webdriver.gecko.driver", "c:/selenium-drivers/geckodriver.exe");
+//		DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+//		capabilities.setCapability("marionette", true);
+//		FirefoxProfile fxProfile = new FirefoxProfile();
+//	    fxProfile.setPreference("browser.download.folderList",2);
+//	    fxProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
+//	    fxProfile.setPreference("browser.download.manager.showWhenStarting",false);
+//	    fxProfile.setPreference("browser.download.dir",System.getProperty("user.home") + File.separatorChar + "Downloads" + File.separatorChar);
+//	    fxProfile.setPreference("browser.helperApps.neverAsk.saveToDisk" ,"audio/mp3;audio/mpeg3;audio/x-mpeg-3" );
+//	    capabilities.setCapability(FirefoxDriver.PROFILE, fxProfile);
+//		driver = new FirefoxDriver(capabilities);
+		System.setProperty("webdriver.chrome.driver","c:/selenium-drivers/chromedriver.exe");
+		String downloadFilepath = System.getProperty("user.home") + File.separatorChar + "Downloads" ;
+
+		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+		chromePrefs.put("profile.default_content_settings.popups", 0);
+		chromePrefs.put("download.default_directory", downloadFilepath);
+		ChromeOptions options = new ChromeOptions();
+		HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
+		options.setExperimentalOption("prefs", chromePrefs);
+		options.addArguments("--test-type");
+		options.addArguments("--disable-extensions"); //to disable browser extension popup
+
+		DesiredCapabilities cap = DesiredCapabilities.chrome();
+		cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
+		cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+		cap.setCapability(ChromeOptions.CAPABILITY, options);
+		driver = new ChromeDriver(cap);
 		
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
