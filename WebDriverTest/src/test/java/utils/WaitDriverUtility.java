@@ -78,13 +78,36 @@ public class WaitDriverUtility {
     }
 
     public static void switchToNewTab(WebDriver driver, String expectedBrowserTitle) {
+        try {
+            int timeOut = 10;
+            sleepInSeconds(2);
+            while (timeOut > 0) {
+                String currentTab = driver.getWindowHandle();
+                for (String tab : driver.getWindowHandles()) {
+                    if (!tab.equals(currentTab)) {
+                        driver.close();
+                        driver.switchTo().window(tab);
+                        WaitDriverUtility.sleepInSeconds(1);
+
+                        if (driver.getTitle().equals(expectedBrowserTitle)) {
+                            return;
+                        }
+                        timeOut--;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void switchToNewTabAndDoNotCloseOther(WebDriver driver, String expectedBrowserTitle) {
         int timeOut = 10;
         sleepInSeconds(2);
         while (timeOut > 0) {
             String currentTab = driver.getWindowHandle();
             for (String tab : driver.getWindowHandles()) {
                 if (!tab.equals(currentTab)) {
-                    driver.close();
                     driver.switchTo().window(tab);
                     if (driver.getTitle().equals(expectedBrowserTitle)) {
                         return;
@@ -98,9 +121,9 @@ public class WaitDriverUtility {
 
     public static String getCursorType(WebElement element) {
         String cursor = element.getCssValue("cursor");
-        if (cursor != null){
+        if (cursor != null) {
             return cursor;
         }
-        throw  new RuntimeException("Couldn't get the cursor type !");
+        throw new RuntimeException("Couldn't get the cursor type !");
     }
 }

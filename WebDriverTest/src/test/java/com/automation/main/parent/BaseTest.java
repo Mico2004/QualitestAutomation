@@ -2,6 +2,7 @@ package com.automation.main.parent;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeSuite;
@@ -9,6 +10,8 @@ import org.testng.annotations.BeforeSuite;
 
 public class BaseTest implements BasicTest {
 
+
+    protected  WebDriver driver;
 
     @BeforeSuite
     private void beforeSuite(){
@@ -31,5 +34,11 @@ public class BaseTest implements BasicTest {
             ATUReports.add("Message window." + testResult.getThrowable().getMessage(), "Done.", "Done.", LogAs.FAILED, null);
         }
 
+        if (driver!=null){
+            driver.quit();
+        }
+
     }
+
+
 }

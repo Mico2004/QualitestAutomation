@@ -41,7 +41,7 @@ public class TC9705VerifyTheImpersonateUserUI extends BaseTest {
     public MoveWindow move_window;
     public AdminDashboardPage admin_dashboard_page;
     public AdminDashboardViewCourseList admin_dashboard_view_course_list;
-    WebDriver driver;
+
     WebDriverWait wait;
     public static WebDriver thread_driver;
     CopyMenu copy;
