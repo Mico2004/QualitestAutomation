@@ -131,7 +131,7 @@ public class TC12646VerifyTheImpersonatedStudentCourseContentPage extends BaseTe
 
     private void saveCoursesListBeforeImpersonate() {
         LogInAsAnotherUser logInAsAnotherUser = new LogInAsAnotherUser();
-        logInAsAnotherUser.openAnotherSession("User3");
+        logInAsAnotherUser.openAnotherSession("User3",true);
         logInAsAnotherUser.getDriver().navigate().back();
         courseListBeforeImpersonate = logInAsAnotherUser.course.getCourseList();
         logInAsAnotherUser.getDriver().quit();

@@ -97,7 +97,7 @@ public class TC9159ValidatePingWhenDeletedRecordingsOnRecordingsTab {
 
         //login as instructor
         LogInAsAnotherUser logInAsAnotherUser = new LogInAsAnotherUser();
-        logInAsAnotherUser.openAnotherSession("User1");
+        logInAsAnotherUser.openAnotherSession("User1",true);
 
         //delete helper
         logInAsAnotherUser.deleteTheFirstRecored();
@@ -132,7 +132,7 @@ public class TC9159ValidatePingWhenDeletedRecordingsOnRecordingsTab {
     @BeforeMethod
     private void verifyThereIsRecordings() {
         LogInAsAnotherUser logInAsAnotherUser = new LogInAsAnotherUser();
-        logInAsAnotherUser.openAnotherSession("User1");
+        logInAsAnotherUser.openAnotherSession("User1",true);
         List<String> listOfCurrentRecordings = logInAsAnotherUser.getListOfCurrentRecordings();
         if (listOfCurrentRecordings.size() > 0) {
             return;

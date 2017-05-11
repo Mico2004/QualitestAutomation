@@ -120,7 +120,7 @@ public class TC9158ValidatePingWhenNewlyAddedRecordingsOnRecordingsTab extends B
 
 
     private void createRecordsAsInstructor(String commonCourseName, LogInAsAnotherUser logInAsAnotherUser) throws InterruptedException {
-        logInAsAnotherUser.openAnotherSession("SuperUser");
+        logInAsAnotherUser.openAnotherSession("SuperUser",true);
         WebDriver insDriver = logInAsAnotherUser.getDriver();
         insDriver.navigate().back();
         WaitDriverUtility.waitToPageBeLoaded(insDriver);

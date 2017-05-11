@@ -35,12 +35,12 @@ public class LogInAsAnotherUser {
     public static WebDriver thread_driver;
     CopyMenu copy;
 
-    public void openAnotherSession(String user) {
+    public void openAnotherSession(String user,boolean isUserFromPropertiesFile) {
         initBrowser();
 
         try {
             tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-            tegrity.loginCourses(user);// log in courses page
+            tegrity.loginCourses(user,isUserFromPropertiesFile);// log in courses page
             initializeCourseObject();
             course.selectCourseThatStartingWith("abc");
             record.clickOnRecordingsTab();

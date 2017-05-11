@@ -126,4 +126,14 @@ public class WaitDriverUtility {
         }
         throw new RuntimeException("Couldn't get the cursor type !");
     }
+`
+    public static void switchToMainTabAndCloseOthersTabs(WebDriver driver, String impersonateTabId) {
+        for (String tab : driver.getWindowHandles()) {
+            if (!tab.equals(impersonateTabId)) {
+                driver.close();
+            }
+        }
+        driver.switchTo().window(impersonateTabId);
+        WaitDriverUtility.sleepInSeconds(1);
+    }
 }

@@ -46,7 +46,7 @@ public class CreateNewUserWindow extends Page {
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucNewUserControl_ucDialog_EmailTextBox") WebElement email_input;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucNewUserControl_ucDialog_txtPassword") WebElement password_input;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucNewUserControl_ucDialog_txtConfPassword") WebElement confirm_password_input;
-	@FindBy(id="ctl00_ContentPlaceHolder1_ucNewUserControl_ucDialog_btnOK") WebElement ok_button;
+	@FindBy(id="ctl00_ContentPlaceHolder1_ucNewUserControl_ucDialog_btnOK") public WebElement ok_button;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucNewUserControl_ucDialog_btnCancel") WebElement cancel_button;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucNewUserControl_ucDialog_pDialog") WebElement create_new_user_modal_window;
 	

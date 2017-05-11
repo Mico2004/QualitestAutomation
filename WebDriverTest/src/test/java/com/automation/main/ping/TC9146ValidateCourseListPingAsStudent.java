@@ -143,7 +143,7 @@ public class TC9146ValidateCourseListPingAsStudent extends BaseTest {
 
     private void deleteRecording(String recordName) {
         LogInAsAnotherUser logInAsAnotherUser = new LogInAsAnotherUser();
-        logInAsAnotherUser.openAnotherSession("SuperUser");
+        logInAsAnotherUser.openAnotherSession("SuperUser",true);
 
         RecordingHelperPage record = logInAsAnotherUser.record;
         int indexOfRecordFromRecordName = record.getIndexOfRecordFromRecordName(recordName)+1;
@@ -204,7 +204,7 @@ public class TC9146ValidateCourseListPingAsStudent extends BaseTest {
     }
 
     private void createRecordsAsInstructor(String commonCourseName, LogInAsAnotherUser logInAsAnotherUser) throws InterruptedException {
-        logInAsAnotherUser.openAnotherSession("SuperUser");
+        logInAsAnotherUser.openAnotherSession("SuperUser",true);
         WebDriver insDriver = logInAsAnotherUser.getDriver();
         insDriver.navigate().back();
         WaitDriverUtility.waitToPageBeLoaded(insDriver);
