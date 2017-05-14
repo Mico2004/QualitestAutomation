@@ -6146,7 +6146,7 @@ public class RecordingHelperPage extends Page {
             String newNameWithOutSpace = recrodingSplit[1].substring(0);
             System.out.println(recordName);
             System.out.println(newNameWithOutSpace);
-            if (recrodingSplit[0].equals("helper") && recordName.equals(newNameWithOutSpace)) {
+            if (recrodingSplit[0].equals("recording") && recordName.equals(newNameWithOutSpace)) {
                 System.out.println("Verify static text 'helper:' followed by: helper name.");
                 ATUReports.add(time + " Verify static text 'helper:' followed by: helper name.", "Success.", "Success.", LogAs.PASSED, null);
             } else {

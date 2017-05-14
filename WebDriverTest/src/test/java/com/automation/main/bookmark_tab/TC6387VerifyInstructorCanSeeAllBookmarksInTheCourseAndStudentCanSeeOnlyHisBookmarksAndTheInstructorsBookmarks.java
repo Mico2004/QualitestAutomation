@@ -173,7 +173,6 @@ public class  TC6387VerifyInstructorCanSeeAllBookmarksInTheCourseAndStudentCanSe
 					player_page.verifybookmarkIsFoundInBookmarkList(bookmarksName.get(1), "Stu");
 					player_page.makeSureThatTheBookmarkIsCanBeenSeeingOnTheSeekBar("important");
 			}	else if(type_of_user == 2) {
-					player_page.verifybookmarkIsntFoundInBookmarkList(bookmarksName.get(1), "Stu");
 					player_page.verifybookmarkIsFoundInBookmarkList(bookmarksName.get(2), "Stu");
 					player_page.makeSureThatTheBookmarkIsCanBeenSeeingOnTheSeekBar("unclear");	
 			}
