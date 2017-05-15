@@ -267,7 +267,7 @@ public class SearchPage extends Page {
 	
 	// This function waits until spinner image disappear
 	public void waitUntilSpinnerImageDisappear() throws InterruptedException {
-		for(int i=0; i<60; i++) {
+		for(int i=0; i<120; i++) {
 			try {
 				Thread.sleep(1000);
 				if(loading_spinner.isDisplayed()) {
