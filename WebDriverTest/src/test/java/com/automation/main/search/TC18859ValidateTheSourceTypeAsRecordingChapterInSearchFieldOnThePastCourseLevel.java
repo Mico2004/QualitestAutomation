@@ -39,7 +39,6 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import utils.WaitDriverUtility;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel {
@@ -285,14 +284,14 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 
 				// 5. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
 				top_bar_helper.searchForTargetText(recording_chapter);
-				Thread.sleep(2000);
+				Thread.sleep(3000);
 				// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
 				search_page.verifyLoadingSpinnerImage();
-				isDisplayed = search_page.waitUntilSpinnerImageDisappear();
-				if (!isDisplayed){
+				System.out.println("Waiting for get results");
+				isDisplayed = search_page.checkSearchResultsDisplayed();
+				if (isDisplayed){
 					break;
 				}
-				WaitDriverUtility.sleepInSeconds(2);
 				timeOut--;
 			}
 		} catch (InterruptedException e) {

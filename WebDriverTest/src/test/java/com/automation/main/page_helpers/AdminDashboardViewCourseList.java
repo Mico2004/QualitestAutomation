@@ -131,14 +131,16 @@ public class AdminDashboardViewCourseList extends Page {
 
 	/// clcik link by its first characters
 	public String clickOnCourseLinkStartingWith(String word) {
+		String linkTest;
 		try {
 
 			for (WebElement e : courses_link) {
 				if (e.getText().startsWith(word)) {
+					linkTest = e.getText();
 					e.click();
 					System.out.println("Clicked on first course link.");
 					ATUReports.add(time +" Clicked on first course link.", "Success.", "Success.", LogAs.PASSED, null);
-					return e.getText();
+					return linkTest;
 				}
 			}
 
