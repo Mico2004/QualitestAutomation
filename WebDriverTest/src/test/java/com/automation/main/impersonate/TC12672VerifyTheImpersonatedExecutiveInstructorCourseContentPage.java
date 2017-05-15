@@ -135,6 +135,7 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
 
         WaitDriverUtility.waitToPageBeLoaded(driver);
         WaitDriverUtility.sleepInSeconds(1);
+        record.waitForVisibility(record.first_recording);
         record.clickOnRecordingInIndex(1);
 
         record.clickOnTheFirstCaptherWithOutTheExpand();
