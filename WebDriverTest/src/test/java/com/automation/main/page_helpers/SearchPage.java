@@ -57,7 +57,9 @@ public class SearchPage extends Page {
 	
 	//The breadcrumb structure displayed as follows: "> Courses > Course name > X results found for: "search_criterion". (X seconds)".
 	public void verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfound(String course_name, String searching_criterion) throws InterruptedException {
-		
+
+
+
 		String structure_displayed = breadcrumbs_box.getText();
 		
 		String[] splited_structure_displayed = structure_displayed.split(">");
@@ -74,6 +76,8 @@ public class SearchPage extends Page {
 		
 		String[] splited_third_structure_displayed = splited_structure_displayed[3].trim().split(" ");
 		String third_structure = splited_third_structure_displayed[0] + " results found for: \"" + searching_criterion + "\". " + splited_third_structure_displayed[splited_third_structure_displayed.length-2] +" seconds)";
+
+
 
 		
 		if((splited_structure_displayed[1].trim().equals("Courses")) &&
@@ -263,7 +267,7 @@ public class SearchPage extends Page {
 	
 	// This function waits until spinner image disappear
 	public void waitUntilSpinnerImageDisappear() throws InterruptedException {
-		for(int i=0; i<30; i++) {
+		for(int i=0; i<60; i++) {
 			try {
 				Thread.sleep(1000);
 				if(loading_spinner.isDisplayed()) {
