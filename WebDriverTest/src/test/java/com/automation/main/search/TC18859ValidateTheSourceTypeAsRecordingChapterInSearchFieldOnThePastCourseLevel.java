@@ -2,15 +2,12 @@ package com.automation.main.search;
 
 
 import java.util.Date;
-import java.util.List;
 import java.text.DateFormat;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
@@ -42,7 +39,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
-import junitx.util.PropertyManager;
+import utils.WaitDriverUtility;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel {
@@ -147,34 +144,34 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		// 2. move course from the bank to the past courses 
 		record.signOut();	
 		
-		tegrity.loginCourses("SuperUser");
-		
-		//2.1 enter to the bank
-		course.selectCourseThatStartingWith("BankValid");
-
-		
-		// 2.2 get to the student tab
-		record.clickOnStudentRecordingsTab();
-
-		
-		// 2.3 select the first checkbox and enter to the copy menu
-		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
-		record.clickOnRecordingTaskThenCopy();
-	
-		copy.selectTargetCourseFromCourseList(current_course);
-		Thread.sleep(1000); 
-		
-		// 2.4 select the copy button and wait for the record to move
-		copy.clickOnCopyButton();
-		Thread.sleep(1000); 
-	
-		// 2.5 click on the ok button
-		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
-		
-		record.checkStatusExistenceForMaxTTime(360);
-		 		
-		record.signOut();
-		
+//		tegrity.loginCourses("SuperUser");
+//
+//		//2.1 enter to the bank
+//		course.selectCourseThatStartingWith("BankValid");
+//
+//
+//		// 2.2 get to the student tab
+//		record.clickOnStudentRecordingsTab();
+//
+//
+//		// 2.3 select the first checkbox and enter to the copy menu
+//		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
+//		record.clickOnRecordingTaskThenCopy();
+//
+//		copy.selectTargetCourseFromCourseList(current_course);
+//		Thread.sleep(1000);
+//
+//		// 2.4 select the copy button and wait for the record to move
+//		copy.clickOnCopyButton();
+//		Thread.sleep(1000);
+//
+//		// 2.5 click on the ok button
+//		confirm_menu.clickOnOkButtonAfterConfirmCopyRecording();
+//
+//		record.checkStatusExistenceForMaxTTime(360);
+//
+//		record.signOut();
+//
 	 	/// end pre test
 		
 		// 1. Validate there is recording in past courses Tab. Search input specified shall be case-insensitive.
@@ -205,17 +202,10 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		
 		course.selectCourseThatStartingWith(current_course);
 		
-		// 4. Set the focus to the field with a mouse pointer.
-		top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
-			
-		// 5. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
-		top_bar_helper.searchForTargetText(recording_chapter);
+		waitingForGetResults(recording_chapter);
+
 		Thread.sleep(2000);
-			
-		// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
-		search_page.verifyLoadingSpinnerImage();
-		search_page.waitUntilSpinnerImageDisappear();
-			
+
 		// 5.2. The breadcrumb structure displayed as follows: "Courses > X results found for: "search_criterion". (X seconds)".
 		search_page.verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfound(current_course, recording_chapter);
 			
@@ -283,5 +273,30 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
+	}
+
+	private void waitingForGetResults(String recording_chapter) {
+
+		try {
+			boolean isDisplayed = true;
+			int timeOut =30;
+			while (timeOut>0) {
+				top_bar_helper.clickElementJS(top_bar_helper.search_box_field);
+
+				// 5. Search the "Recording Chapter" that we mentioned in the preconditions and press ENTER.
+				top_bar_helper.searchForTargetText(recording_chapter);
+				Thread.sleep(2000);
+				// 5.1. In case the search process takes a long time, the animated spinner icon shall be displayed within the Search results page.
+				search_page.verifyLoadingSpinnerImage();
+				isDisplayed = search_page.waitUntilSpinnerImageDisappear();
+				if (!isDisplayed){
+					break;
+				}
+				WaitDriverUtility.sleepInSeconds(2);
+				timeOut--;
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }
