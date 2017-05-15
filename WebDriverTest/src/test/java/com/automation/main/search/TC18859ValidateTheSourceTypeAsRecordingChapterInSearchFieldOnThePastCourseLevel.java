@@ -293,6 +293,8 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 					break;
 				}
 				driver.navigate().back();
+                Thread.sleep(1000);
+
 				timeOut--;
 			}
 		} catch (InterruptedException e) {
