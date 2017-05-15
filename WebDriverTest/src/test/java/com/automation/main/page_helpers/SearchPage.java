@@ -266,19 +266,24 @@ public class SearchPage extends Page {
 	}
 	
 	// This function waits until spinner image disappear
-	public void waitUntilSpinnerImageDisappear() throws InterruptedException {
-		for(int i=0; i<120; i++) {
+	public boolean waitUntilSpinnerImageDisappear() throws InterruptedException {
+		boolean isDisplayed = true;
+		for(int i=0; i<30; i++) {
+
 			try {
 				Thread.sleep(1000);
 				if(loading_spinner.isDisplayed()) {
 					Thread.sleep(100);
 				} else {
+					isDisplayed=false;
 					break;
 				}
 			} catch(Exception msg) {
 				break;
 			}
+
 		}
+		return isDisplayed;
 	}
 	
 	// This function click on the chapter icon of recording in target index
