@@ -292,6 +292,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 				if (isDisplayed){
 					break;
 				}
+				driver.navigate().back();
 				timeOut--;
 			}
 		} catch (InterruptedException e) {
