@@ -21,7 +21,9 @@ import utils.ATUManager;
 import utils.WaitDriverUtility;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Listeners({ATUReportsListener.class, ConfigurationListener.class, MethodListener.class})
 public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage extends BaseTest {
@@ -47,8 +49,9 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
     private CourseSettingsPage courseSettingsPage;
     private ImpersonateUser impersonateUserPage;
     private PlayerPage playerPage;
-
+    ManageAdhocCoursesEnrollmentsPage manageAdhocCoursesEnrollmentsPage;
     private String commonCourseName;
+    ManageAdHocCoursesMembershipWindow windowmanageAdHocCoursesMembershipWindow;
 
     String userToImpersonate = "ExcutiveAdmin";
 
@@ -87,8 +90,8 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
         courseSettingsPage = PageFactory.initElements(driver, CourseSettingsPage.class);
         impersonateUserPage = PageFactory.initElements(driver, ImpersonateUser.class);
         playerPage = PageFactory.initElements(driver, PlayerPage.class);
-
-
+        manageAdhocCoursesEnrollmentsPage = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
+        windowmanageAdHocCoursesMembershipWindow = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);;
     }
 
 
@@ -100,12 +103,17 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
 
     @Test()
     public void test() throws InterruptedException {
+        setCommonCourse();
+
+        enrolleSuperUserAndExcutiveAdminToSameCourse();
 
         //login as Administrator
         loginAsAdminAndEnableStudentTesting();
 
+
         //login as Instructor and enable all settings course
         loginAsInsAndEnableAllCourseSettings();
+
 
         //login As ins and add Student recordings, Test recordings, Additional content to the course
         prepareDataTest();
@@ -119,6 +127,36 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
 
 
     }
+
+    private void enrolleSuperUserAndExcutiveAdminToSameCourse() {
+        try {
+            tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+            tegrity.loginCourses("Admin");
+            WaitDriverUtility.waitToPageBeLoaded(driver);
+            List<String> users= new ArrayList<String>();
+
+            users.add(PropertyManager.getProperty(userToImpersonate));
+            users.add(PropertyManager.getProperty("SuperUser"));
+            admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+            WaitDriverUtility.sleepInSeconds(3);
+            manageAdhocCoursesEnrollmentsPage.enrollInstructorToCourse(commonCourseName, users, windowmanageAdHocCoursesMembershipWindow);
+            driver.navigate().back();
+            admin_dashboard_page.signOut();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private void setCommonCourse() throws InterruptedException {
+        tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+        tegrity.loginCourses("User1",true);
+        WaitDriverUtility.waitToPageBeLoaded(driver);
+        initializeCourseObject();
+        commonCourseName = course.selectCourseThatStartingWith("abc");
+        record.signOut();
+    }
+
+
 
     private void runTestAsDiffrentUser(String user) throws InterruptedException {
         tegrity.loginCourses(user);

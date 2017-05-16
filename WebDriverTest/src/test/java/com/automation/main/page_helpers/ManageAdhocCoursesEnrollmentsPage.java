@@ -1,20 +1,13 @@
 package com.automation.main.page_helpers;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
-import org.apache.tools.ant.taskdefs.Javadoc;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
@@ -22,6 +15,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+import utils.WaitDriverUtility;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class ManageAdhocCoursesEnrollmentsPage extends Page {
@@ -43,12 +37,12 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	@FindBy(id = "ctl00_ContentPlaceHolder1_btnSearch")
 	WebElement filter_search_button;
 	@FindBy(id = "ctl00_ContentPlaceHolder1_TegrityCourseRepeater_ctl00_LinkButton3")
-	WebElement first_course_membership_button;
+	public WebElement first_course_membership_button;
 	@FindBy(partialLinkText = "Admin Dashboard")
 	public WebElement admin_dashboard_link;
 	@FindBy(id = "ctl00_ContentPlaceHolder1_TegrityCourseRepeater_ctl00_LinkButton2")
 	WebElement first_course_delete_button;
-	@FindBy(css = ".clsGridListEntryInfo1") WebElement first_course_name;
+	public @FindBy(css = ".clsGridListEntryInfo1") WebElement first_course_name;
 	@FindBy(xpath="//div[@id='contentDIV']/table/tbody") WebElement contentTable;
 
 	public void clickOnNewCourse() {
@@ -195,13 +189,16 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
 		Thread.sleep(5000);
 		// Add selected user to instructor list
-		mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
-		Thread.sleep(5000);
+				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
+			Thread.sleep(5000);
+			clickOkInAlertIfPresent();
+			Thread.sleep(5000);
 	    }
 		mangage_adhoc_courses_membership_window.ok_button.click();
-		Thread.sleep(1000);
-		driver.switchTo().alert().accept();
+		Thread.sleep(2000);
+		clickOkInAlertIfPresent();
 	}
+
 	/// enrolls student or students list to course
 		public void enrollStudentsToCourse(String course,List<String>  users,ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window) throws InterruptedException {
 			String u="";
