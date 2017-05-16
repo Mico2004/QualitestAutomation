@@ -111,9 +111,7 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
         //login as Instructor and enable all settings course
         loginAsInsAndEnableAllCourseSettings();
 
-        //login As ins and add Student recordings, Test recordings, Additional content to the course
         prepareDataTest();
-
 
         tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
@@ -139,6 +137,7 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
 
         WaitDriverUtility.waitToPageBeLoaded(driver);
         WaitDriverUtility.sleepInSeconds(1);
+        record.waitForVisibility(record.first_recording);
         record.clickOnRecordingInIndex(1);
 
         record.clickOnTheFirstCaptherWithOutTheExpand();
@@ -176,7 +175,7 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
         initializeCourseObject();
 
         course.selectCourseThatStartingWith("BankValid");
-
+//
         record.clickOnRecordingsTab();
         selectAndCopy();
 
@@ -203,6 +202,7 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
 
     private void selectAndCopy() throws InterruptedException {
         record.clickCheckBoxByIndex(1);
+        record.clickCheckBoxByIndex(2);
         record.copyRecordsToAnotherCourse(commonCourseName);
         confirmation_menu.clickOnOkButton();
     }
@@ -222,6 +222,7 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
         WaitDriverUtility.waitToPageBeLoaded(driver);
         initializeCourseObject();
         commonCourseName = course.selectCourseThatStartingWith("abc");
+        record.waitForVisibility(record.recordings_tab);
         record.clickOnCourseTaskThenCourseSettings();
         courseSettingsPage.checkAllCourseSettingsCheckboxs();
         courseSettingsPage.clickOnOkButton();
