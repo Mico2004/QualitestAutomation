@@ -257,7 +257,7 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
         tegrity.loginCourses(userToImpersonate);
         WaitDriverUtility.waitToPageBeLoaded(driver);
         initializeCourseObject();
-        commonCourseName = course.selectCourseThatStartingWith("Ab");
+        course.selectCourseByName(commonCourseName);
         record.clickOnCourseTaskThenCourseSettings();
         courseSettingsPage.checkAllCourseSettingsCheckboxs();
         courseSettingsPage.clickOnOkButton();
