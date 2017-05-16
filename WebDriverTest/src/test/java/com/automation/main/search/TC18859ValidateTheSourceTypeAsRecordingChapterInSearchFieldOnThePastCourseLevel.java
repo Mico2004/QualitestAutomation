@@ -39,6 +39,7 @@ import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
+import utils.WaitDriverUtility;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePastCourseLevel {
@@ -234,10 +235,10 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		player_page.verifyTimeBufferStatusForXSec(5);
 			
 		// 7. Click on the back cursor in the browser to navigate to the search results page.
-		driver.navigate().back();
-		search_page.waitUntilSpinnerImageDisappear();
-		Thread.sleep(2000);
-			
+		goBackToPageResults();
+//		search_page.waitUntilSpinnerImageDisappear();
+//		Thread.sleep(2000);
+//
 		// 8. Click on title of the chapter.
 		search_page.exitInnerFrame();
 		search_page.clickOnChapterTitleOfRecordingInTargetIndex(1);
@@ -246,10 +247,10 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		player_page.verifyTimeBufferStatusForXSec(10);
 			
 		// 9. Click on the back cursor in the browser to navigate to the search results page.
-		driver.navigate().back();
-		search_page.waitUntilSpinnerImageDisappear();
-		Thread.sleep(2000);
-			
+		goBackToPageResults();
+//		search_page.waitUntilSpinnerImageDisappear();
+//		Thread.sleep(2000);
+//
 		// 10. Click on the recording title of the chapter.
 		search_page.exitInnerFrame();
 		search_page.clickOnRecordingTitleOfChapterOfRecordingInTargetIndex(1);
@@ -258,10 +259,11 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		player_page.verifyTimeBufferStatusForXSec(10);
 			
 		// 11. Click on the back cursor in the browser to navigate to the search results page.
-		driver.navigate().back();
-		search_page.waitUntilSpinnerImageDisappear();
-		Thread.sleep(2000);
-			
+		goBackToPageResults();
+//		driver.navigate().back();
+//		search_page.waitUntilSpinnerImageDisappear();
+//		Thread.sleep(2000);
+//
 		// 12. Click on the course name in the breadcrumb.
 		search_page.exitInnerFrame();
 		search_page.clickBackToCourseInBreadcrumbs();
@@ -272,6 +274,29 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 		
+	}
+
+	private void goBackToPageResults() {
+		int timeOut = 30;
+		driver.navigate().back();
+		WaitDriverUtility.waitToPageBeLoaded(driver);
+		try {
+			boolean isDisplayed = search_page.checkSearchResultsDisplayed();
+			WaitDriverUtility.sleepInSeconds(3);
+			while (timeOut > 0||!isDisplayed){
+				driver.navigate().forward();
+				WaitDriverUtility.waitToPageBeLoaded(driver);
+				driver.navigate().back();
+				WaitDriverUtility.sleepInSeconds(6);
+				isDisplayed = search_page.checkSearchResultsDisplayed();
+				if (isDisplayed){
+					return;
+				}
+				timeOut--;
+			}
+		} catch (InterruptedException e) {
+
+		}
 	}
 
 	private void waitingForGetResults(String recording_chapter) {
