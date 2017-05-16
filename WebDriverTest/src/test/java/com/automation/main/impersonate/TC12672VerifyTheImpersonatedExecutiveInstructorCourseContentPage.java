@@ -152,7 +152,7 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
         tegrity.loginCourses("User1",true);
         WaitDriverUtility.waitToPageBeLoaded(driver);
         initializeCourseObject();
-        commonCourseName = course.selectCourseThatStartingWith("abc");
+        commonCourseName = course.selectCourseThatStartingWith("Ab");
         record.signOut();
     }
 
@@ -257,7 +257,9 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
         tegrity.loginCourses(userToImpersonate);
         WaitDriverUtility.waitToPageBeLoaded(driver);
         initializeCourseObject();
+        course.waitForVisibility(course.first_course_button);
         course.selectCourseByName(commonCourseName);
+        record.waitForVisibility(record.recordings_tab);
         record.clickOnCourseTaskThenCourseSettings();
         courseSettingsPage.checkAllCourseSettingsCheckboxs();
         courseSettingsPage.clickOnOkButton();
