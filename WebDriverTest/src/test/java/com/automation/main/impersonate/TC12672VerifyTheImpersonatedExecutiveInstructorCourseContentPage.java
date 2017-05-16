@@ -200,6 +200,7 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
 
     private void selectAndCopy() throws InterruptedException {
         record.clickCheckBoxByIndex(1);
+        System.out.println("*********** Trying to copy to "+commonCourseName);
         record.copyRecordsToAnotherCourse(commonCourseName);
         confirmation_menu.clickOnOkButton();
     }
