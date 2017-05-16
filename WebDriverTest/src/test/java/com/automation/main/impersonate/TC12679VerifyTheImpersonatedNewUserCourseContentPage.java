@@ -190,6 +190,7 @@ public class TC12679VerifyTheImpersonatedNewUserCourseContentPage extends BaseTe
 
         WaitDriverUtility.waitToPageBeLoaded(driver);
         WaitDriverUtility.sleepInSeconds(1);
+        record.waitForVisibility(record.first_recording);
         record.clickOnRecordingInIndex(1);
 
         record.clickOnTheFirstCaptherWithOutTheExpand();
@@ -263,6 +264,7 @@ public class TC12679VerifyTheImpersonatedNewUserCourseContentPage extends BaseTe
 
     private void selectAndCopy() throws InterruptedException {
         record.clickCheckBoxByIndex(1);
+        record.clickCheckBoxByIndex(2);
         record.copyRecordsToAnotherCourse(commonCourseName);
         confirmation_menu.clickOnOkButton();
     }
