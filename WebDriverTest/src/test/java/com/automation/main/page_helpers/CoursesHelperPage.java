@@ -284,6 +284,7 @@ public class CoursesHelperPage extends Page {
 		try{
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("CourseTitle")));		
 		}catch(TimeoutException e){
+
 			System.out.println("Course wasn't selected successfully: couese title isn't visible");
 			ATUReports.add("Course wasn't selected successfully: couese title isn't visible", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));	
 			Assert.assertTrue(false);
@@ -1862,5 +1863,20 @@ public class CoursesHelperPage extends Page {
 			}
 		}
 		return null;
+	}
+
+	public  void  clickAtCourseUsingName(String courseToFind){
+		List<String> courseList = getCourseList();
+		System.out.println(courseList.size()+" courses are displayed");
+		for (int i = 1; i <courseList.size() ; i++) {
+			WebElement course = driver.findElement(By.id("Course"+i));
+			if (course.getText().equals(courseToFind)){
+				System.out.println("clicking at the required course");
+				course.click();
+				return;
+			}
+		}
+		throw new RuntimeException("Attempt to clicking at the required course has failed");
+
 	}
 }

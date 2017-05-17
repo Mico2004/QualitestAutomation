@@ -105,17 +105,18 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
 
     @Test()
     public void test() throws InterruptedException {
-        createCourse();
+//        createCourse();
 
-        enrolleSuperUserAndExcutiveAdminToSameCourse();
+        commonCourseName = "excutiveTest1495007629886";
+//        enrolleSuperUserAndExcutiveAdminToSameCourse();
 
         //login as Administrator
-        loginAsAdminAndEnableStudentTesting();
+//        loginAsAdminAndEnableStudentTesting();
 
         //login as Instructor and enable all settings course
 
         //login As ins and add Student recordings, Test recordings, Additional content to the course
-        prepareDataTest();
+//        prepareDataTest();
 
         loginAsInsAndEnableAllCourseSettings();
 
@@ -291,11 +292,12 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
     }
 
     private void loginAsInsAndEnableAllCourseSettings() throws InterruptedException {
+        tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
         tegrity.loginCourses(userToImpersonate);
         WaitDriverUtility.waitToPageBeLoaded(driver);
         initializeCourseObject();
         course.waitForVisibility(course.first_course_button);
-        course.selectCourseThatStartingWith(commonCourseName);
+        course.clickAtCourseUsingName(commonCourseName);
         record.waitForVisibility(record.first_recording);
         record.clickOnCourseTaskThenCourseSettings();
         courseSettingsPage.checkAllCourseSettingsCheckboxs();
