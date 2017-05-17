@@ -1,8 +1,11 @@
 package com.automation.main.search;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.DateFormat;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -73,6 +76,8 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
+    ConfirmationMenu confirmationMenu;
+
 	@BeforeClass
 	public void setup() {
 
@@ -100,6 +105,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
 		player_page = PageFactory.initElements(driver, PlayerPage.class);
 		edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
+		confirmationMenu = PageFactory.initElements(driver, ConfirmationMenu.class);
 		
 		 Date curDate = new Date();
 		 String DateToStr = DateFormat.getInstance().format(curDate);
@@ -134,7 +140,9 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		// 1. getting the name of the past course
 		tegrity.loginCourses("User1");
 		initializeCourseObject();
-		
+
+		movePastCourseWhichActiveToPast();
+
 		course.clickOnPastCoursesTabButton();
 		
 		String current_course = course.selectCourseThatStartingWith("PastCourseA");
@@ -325,5 +333,25 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	private void movePastCourseWhichActiveToPast() throws InterruptedException {
+		List<String> courseList = course.getCourseList();
+		List<String> coursesToMoveToPast =new ArrayList<>();
+
+		for (String course : courseList){
+			if (course.startsWith("Past")){
+				coursesToMoveToPast.add(course);
+			}
+		}
+
+		for (String pastCourse : coursesToMoveToPast){
+			course.selectCourseByName(pastCourse);
+			course.waitForVisibility(record.first_recording);
+			record.clickOnCourseTaskThenMoveToPastCourses();
+			confirmationMenu.clickOnOkButton();
+			driver.navigate().back();
+			WaitDriverUtility.sleepInSeconds(2);
+		}
+
 	}
 }
