@@ -105,18 +105,17 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
 
     @Test()
     public void test() throws InterruptedException {
-//        createCourse();
+        createCourse();
 
-        commonCourseName = "excutiveTest1495007629886";
-//        enrolleSuperUserAndExcutiveAdminToSameCourse();
+        enrolleSuperUserAndExcutiveAdminToSameCourse();
 
         //login as Administrator
-//        loginAsAdminAndEnableStudentTesting();
+        loginAsAdminAndEnableStudentTesting();
 
         //login as Instructor and enable all settings course
 
         //login As ins and add Student recordings, Test recordings, Additional content to the course
-//        prepareDataTest();
+        prepareDataTest();
 
         loginAsInsAndEnableAllCourseSettings();
 
