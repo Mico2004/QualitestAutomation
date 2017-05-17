@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 import utils.WaitDriverUtility;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -106,6 +107,7 @@ public class TC24925ValidateMoveRecordingDropdownAndSearchFunctionalities {
         tegrity.loginCourses("User1");// log in courses page
         initializeCourseObject();
 
+        movePastCourseWhichActiveToPast();
         // 2. Get full name of Ab course.
         String source_course_name = course.selectCourseThatStartingWith("Ab");
         String url = course.getCurrentUrlCoursePage();
@@ -232,7 +234,8 @@ public class TC24925ValidateMoveRecordingDropdownAndSearchFunctionalities {
                 Thread.sleep(1000);
 
                 // 20. The user is displayed in the drop down list.
-                String existingInstructorName = driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).getText();
+                WebElement dropDownResults = WaitDriverUtility.waitForElementBeDisplayed(driver, By.cssSelector(".angucomplete-title.ng-scope.ng-binding"), 4);
+                String existingInstructorName = dropDownResults.getText();
                 Thread.sleep(1000);
 
                 if (existingInstructorName.equals(username)) {
@@ -385,6 +388,28 @@ public class TC24925ValidateMoveRecordingDropdownAndSearchFunctionalities {
 
         System.out.println("Done.");
         ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
+
+    }
+
+    private void movePastCourseWhichActiveToPast() throws InterruptedException {
+        List<String> courseList = course.getCourseList();
+        List<String> coursesToMoveToPast =new ArrayList<>();
+
+        for (String course : courseList){
+            if (course.startsWith("Past")){
+                coursesToMoveToPast.add(course);
+            }
+        }
+
+        for (String pastCourse : coursesToMoveToPast){
+            course.selectCourseByName(pastCourse);
+            course.waitForVisibility(record.first_recording);
+            record.clickOnCourseTaskThenMoveToPastCourses();
+            confirmation_menu.clickOnOkButton();
+            driver.navigate().back();
+
+            WaitDriverUtility.sleepInSeconds(2);
+        }
 
     }
 
