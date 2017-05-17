@@ -110,14 +110,14 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
         //login as Administrator
         loginAsAdminAndEnableStudentTesting();
 
-
         //login as Instructor and enable all settings course
-        loginAsInsAndEnableAllCourseSettings();
+
 
 
         //login As ins and add Student recordings, Test recordings, Additional content to the course
         prepareDataTest();
 
+        loginAsInsAndEnableAllCourseSettings();
 
         tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
@@ -259,7 +259,7 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
         initializeCourseObject();
         course.waitForVisibility(course.first_course_button);
         course.selectCourseByName(commonCourseName);
-        record.waitForVisibility(record.recordings_tab);
+        record.waitForVisibility(record.first_recording);
         record.clickOnCourseTaskThenCourseSettings();
         courseSettingsPage.checkAllCourseSettingsCheckboxs();
         courseSettingsPage.clickOnOkButton();
