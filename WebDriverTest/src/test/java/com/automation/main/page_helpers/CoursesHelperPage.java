@@ -1872,7 +1872,7 @@ public class CoursesHelperPage extends Page {
 			WebElement course = driver.findElement(By.id("Course"+i));
 			if (course.getText().equals(courseToFind)){
 				System.out.println("clicking at the required course");
-				course.click();
+				clickElementJS(course);
 				return;
 			}
 		}
