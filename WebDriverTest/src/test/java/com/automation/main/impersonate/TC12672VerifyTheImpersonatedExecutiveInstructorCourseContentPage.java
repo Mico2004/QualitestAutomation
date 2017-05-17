@@ -295,7 +295,7 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
         WaitDriverUtility.waitToPageBeLoaded(driver);
         initializeCourseObject();
         course.waitForVisibility(course.first_course_button);
-        course.selectCourseByName(commonCourseName);
+        course.selectCourseThatStartingWith(commonCourseName);
         record.waitForVisibility(record.first_recording);
         record.clickOnCourseTaskThenCourseSettings();
         courseSettingsPage.checkAllCourseSettingsCheckboxs();
