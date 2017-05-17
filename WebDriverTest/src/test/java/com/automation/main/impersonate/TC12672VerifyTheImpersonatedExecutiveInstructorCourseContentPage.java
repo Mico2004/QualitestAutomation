@@ -52,6 +52,7 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
     ManageAdhocCoursesEnrollmentsPage manageAdhocCoursesEnrollmentsPage;
     private String commonCourseName;
     ManageAdHocCoursesMembershipWindow windowmanageAdHocCoursesMembershipWindow;
+    CreateNewCourseWindow createNewCourseWindow;
 
     String userToImpersonate = "ExcutiveAdmin";
 
@@ -91,7 +92,8 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
         impersonateUserPage = PageFactory.initElements(driver, ImpersonateUser.class);
         playerPage = PageFactory.initElements(driver, PlayerPage.class);
         manageAdhocCoursesEnrollmentsPage = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
-        windowmanageAdHocCoursesMembershipWindow = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);;
+        createNewCourseWindow = PageFactory.initElements(driver, CreateNewCourseWindow.class);
+        windowmanageAdHocCoursesMembershipWindow = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
     }
 
 
@@ -103,7 +105,7 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
 
     @Test()
     public void test() throws InterruptedException {
-        setCommonCourse();
+        createCourse();
 
         enrolleSuperUserAndExcutiveAdminToSameCourse();
 
@@ -111,8 +113,6 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
         loginAsAdminAndEnableStudentTesting();
 
         //login as Instructor and enable all settings course
-
-
 
         //login As ins and add Student recordings, Test recordings, Additional content to the course
         prepareDataTest();
@@ -126,6 +126,43 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
         runTestAsDiffrentUser("HelpdeskAdmin");
 
 
+    }
+
+    private void createCourse() {
+        try {
+        tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+        tegrity.loginCourses("Admin");
+        WaitDriverUtility.waitToPageBeLoaded(driver);
+        admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+
+        WaitDriverUtility.sleepInSeconds(3);
+        System.out.println("Past4");
+        manageAdhocCoursesEnrollmentsPage.waitForThePageToLoad();
+        manageAdhocCoursesEnrollmentsPage.clickOnNewCourse();
+        manageAdhocCoursesEnrollmentsPage.waitForVisibility(createNewCourseWindow.course_id_input);
+
+        commonCourseName = "excutiveTest"+System.currentTimeMillis();
+
+            createNewCourseWindow.createNewCourse(commonCourseName, commonCourseName);
+            for(int j=0;j<5;j++) {
+                try {
+                    driver.switchTo().alert().accept();
+                    break;
+                } catch (Exception msg) {
+                    Thread.sleep(1000);
+                }
+            }
+
+        for(String window: driver.getWindowHandles()) {
+            driver.switchTo().window(window);
+            break;
+        }
+
+        manageAdhocCoursesEnrollmentsPage.signOut();
+
+        } catch (InterruptedException e) {
+
+        }
     }
 
     private void enrolleSuperUserAndExcutiveAdminToSameCourse() {
