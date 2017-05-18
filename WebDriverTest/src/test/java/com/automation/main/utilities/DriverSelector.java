@@ -2,10 +2,12 @@ package com.automation.main.utilities;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.MarionetteDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -133,4 +135,26 @@ public class DriverSelector {
     }
 
 
-}
+    public static WebDriver getDriverForDownloadFile(String pathToDownloadFolder) {
+        System.setProperty("webdriver.chrome.driver", rootPath + "/chromedriver.exe");
+        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        chromePrefs.put("profile.default_content_settings.popups", 0);
+        chromePrefs.put("download.default_directory", pathToDownloadFolder);
+        ChromeOptions options = new ChromeOptions();
+        HashMap<String, Object> chromeOptionsMap = new HashMap<String, Object>();
+        options.setExperimentalOption("prefs", chromePrefs);
+        options.addArguments("--test-type");
+        options.addArguments("--disable-extensions"); //to disable browser extension popup
+
+        DesiredCapabilities cap = DesiredCapabilities.chrome();
+        cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
+        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        cap.setCapability(ChromeOptions.CAPABILITY, options);
+        return new ChromeDriver(cap);
+    }
+
+
+
+
+
+    }
