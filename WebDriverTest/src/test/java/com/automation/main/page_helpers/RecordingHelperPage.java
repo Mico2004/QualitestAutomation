@@ -3338,10 +3338,13 @@ public class RecordingHelperPage extends Page {
 
     /// verify downloaded file is valid
     public void VerifyDownloadedFileIsValid(String file_name) throws Exception {
-        String download_path = System.getProperty("user.home") + File.separatorChar + "Downloads" + File.separatorChar + file_name;
-        waitForDownloadBeFinished(download_path);
-        Path download_path_to_delete = Paths.get(download_path);
 
+        String download_path = System.getProperty("user.home") + File.separatorChar + "Downloads" + File.separatorChar + file_name;
+        waitToFileBeDownloaded(download_path);
+
+        waitForDownloadBeFinished(download_path);
+
+        Path download_path_to_delete = Paths.get(download_path);
 
         String resource_file_path = System.getProperty("user.dir") + "\\src\\test\\resources\\resouces-to-upload\\" + file_name;
 //        verifyFilesAreEquals(download_path,resource_file_path);
@@ -3375,6 +3378,21 @@ public class RecordingHelperPage extends Page {
             Assert.assertTrue(false);
         }
 
+    }
+
+    private void waitToFileBeDownloaded(String pathToFile) {
+        int timeOut = 20;
+
+        while (timeOut > 0){
+            File downloadedFile = new File(pathToFile);
+            if (downloadedFile.isFile()){
+                System.out.println("The download has finished");
+                return;
+            }
+            WaitDriverUtility.sleepInSeconds(1);
+            timeOut--;
+        }
+        throw new RuntimeException("The download has failed after 20 seconds");
     }
 
     private void waitForDownloadBeFinished(String pathToDownloadedFile) {
