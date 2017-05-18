@@ -47,6 +47,7 @@ import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import atu.testng.reports.logging.LogAs;
 import junitx.util.PropertyManager;
+import utils.WaitDriverUtility;
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
 public class TestSuitePreSetCopyRecordings_PastCourses {
@@ -153,6 +154,7 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		}
 
 		System.out.println("before 3");
+		WaitDriverUtility.sleepInSeconds(2);
 		driver.switchTo().frame(0);
 		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PastCourseB, PropertyManager.getProperty("User1"),
 				mangage_adhoc_courses_membership_window);
