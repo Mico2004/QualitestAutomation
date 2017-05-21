@@ -87,7 +87,7 @@ public class WaitDriverUtility {
                     if (!tab.equals(currentTab)) {
                         driver.close();
                         driver.switchTo().window(tab);
-                        WaitDriverUtility.sleepInSeconds(1);
+                        WaitDriverUtility.sleepInSeconds(2);
 
                         if (driver.getTitle().equals(expectedBrowserTitle)) {
                             return;
