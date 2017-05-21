@@ -163,6 +163,9 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
         } catch (InterruptedException e) {
 
         }
+
+
+
     }
 
     private void enrolleSuperUserAndExcutiveAdminToSameCourse() {
@@ -275,6 +278,7 @@ public class TC12672VerifyTheImpersonatedExecutiveInstructorCourseContentPage ex
 
     private void selectAndCopy() throws InterruptedException {
         record.clickCheckBoxByIndex(1);
+        record.clickCheckBoxByIndex(2);
         System.out.println("*********** Trying to copy to "+commonCourseName);
         record.copyRecordsToAnotherCourse(commonCourseName);
         confirmation_menu.clickOnOkButton();
