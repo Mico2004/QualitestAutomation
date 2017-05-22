@@ -150,7 +150,9 @@ public class DriverSelector {
         cap.setCapability(ChromeOptions.CAPABILITY, chromeOptionsMap);
         cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         cap.setCapability(ChromeOptions.CAPABILITY, options);
-        return new ChromeDriver(cap);
+        ChromeDriver chromeDriver = new ChromeDriver(cap);
+        chromeDriver.manage().window().maximize();
+        return chromeDriver;
     }
 
 

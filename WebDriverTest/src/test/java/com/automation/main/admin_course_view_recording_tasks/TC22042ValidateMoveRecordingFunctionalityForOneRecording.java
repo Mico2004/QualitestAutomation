@@ -1,46 +1,33 @@
 package com.automation.main.admin_course_view_recording_tasks;
 
 
-
-import java.util.List;
+import atu.testng.reports.ATUReports;
+import atu.testng.reports.listeners.ATUReportsListener;
+import atu.testng.reports.listeners.ConfigurationListener;
+import atu.testng.reports.listeners.MethodListener;
+import atu.testng.reports.logging.LogAs;
+import com.automation.main.page_helpers.*;
+import com.automation.main.parent.BaseTest;
+import com.automation.main.utilities.DriverSelector;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.WaitDriverUtility;
 
-import com.automation.main.page_helpers.AdminDashboardPage;
-import com.automation.main.page_helpers.AdminDashboardViewCourseList;
-import com.automation.main.page_helpers.ConfirmationMenu;
-import com.automation.main.page_helpers.CopyMenu;
-import com.automation.main.page_helpers.CoursesHelperPage;
-import com.automation.main.page_helpers.DeleteMenu;
-import com.automation.main.page_helpers.LoginHelperPage;
-import com.automation.main.page_helpers.MoveWindow;
-import com.automation.main.page_helpers.RecordingHelperPage;
-import com.automation.main.utilities.DriverSelector;
-
-import atu.testng.reports.ATUReports;
-import atu.testng.reports.listeners.ATUReportsListener;
-import atu.testng.reports.listeners.ConfigurationListener;
-import atu.testng.reports.listeners.MethodListener;
-import atu.testng.reports.logging.LogAs;
-import atu.testng.reports.utils.Utils;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 
 
-@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
+@Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class})
+public class TC22042ValidateMoveRecordingFunctionalityForOneRecording extends BaseTest {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -69,9 +56,8 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
     @BeforeClass
 	public void setup() {
 
-
 		driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-		
+
 		//ATUReports.setWebDriver(driver);
 		//ATUReports.add("set driver", true);
 		tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
@@ -106,10 +92,12 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 		course.courses = course.getCoursesListFromElement(course.course_list);
 	}
 
-	
-	@Test(description = "TC 22042 Validate Move Recording Functionality For One Recording")
+
+	@Test(groups= {"AddRecordingToAb","AddSrudentRecordingToAb","AddSTestRecordingToAb"})
 	public void test22042() throws InterruptedException//
+
 	{
+
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
 		// Loop through login as Admin / Help Disk Admin
@@ -154,7 +142,7 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 			
 			// 2. check that we have old records in the abc course
 			List<String> list_of_records = record.getCourseRecordingList();
-			
+
 			if(list_of_records.size() == 0) {
 				System.out.println("their isn't old records in this course so the test will not work");
 				ATUReports.add("their isn't old records in this course so the test will not work", LogAs.FAILED, null);
@@ -163,10 +151,10 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				System.out.println("their is an old records in this course");
 				ATUReports.add("their is an old records in this course", LogAs.PASSED, null);
 				Assert.assertTrue(true);
-			
-			
+
+
 			}
-			
+
 			// 3. Logout.
 			record.signOut();
 		
@@ -221,7 +209,8 @@ public class TC22042ValidateMoveRecordingFunctionalityForOneRecording {
 				
 				// 14. The text is written on the field. There is also a dropdown list opened which contains several existing instructor which may match the search.
 				// 15. Click ,on the dropdown list, on the name of the instructor who belongs to this course when it is displayed on the list.
-				driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();
+				WaitDriverUtility.waitForElementBeDisplayed(driver,By.cssSelector(".angucomplete-title.ng-scope.ng-binding"),10).click();
+//				driver.findElement(By.cssSelector(".angucomplete-title.ng-scope.ng-binding")).click();
 				Thread.sleep(1000);
 				
 				// 16. The chosen name displays on the text field for search (near "list courses" button).

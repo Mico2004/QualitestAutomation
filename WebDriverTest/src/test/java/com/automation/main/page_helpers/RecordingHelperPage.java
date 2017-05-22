@@ -623,7 +623,6 @@ public class RecordingHelperPage extends Page {
         while (statusName.contains("Being copied from")) {
             time_counter++;
             Thread.sleep(1000);
-
             if (time_counter > 220) {
                 System.out.println("Timeout - Being copied from still appears after 220 seconds");
                 ATUReports.add(time + " Timeout - Being copied from still appears after 220 seconds", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -927,7 +926,7 @@ public class RecordingHelperPage extends Page {
     }
 
     public void clickAllCheckBoxAndVerifyOtherCheckBoxisSelected(boolean isUncheck) {
-        boolean isAllCheckBoxOnTheExpectedStatus=true;
+        boolean isAllCheckBoxOnTheExpectedStatus = true;
         String expectedDescription = "Shouldn't";
         if (isUncheck) {
             expectedDescription = "Should";
@@ -942,7 +941,7 @@ public class RecordingHelperPage extends Page {
             int j = i + 1;
             String checkbox_indexed = "Checkbox" + Integer.toString(j);
             if (driver.findElement(By.id(checkbox_indexed)).isSelected() != isUncheck) {
-                isAllCheckBoxOnTheExpectedStatus=false;
+                isAllCheckBoxOnTheExpectedStatus = false;
             }
         }
         ATUManager.asserIsTrueAndReport(isAllCheckBoxOnTheExpectedStatus, "The other checkBoxs " + expectedDescription + " be selected", "", "");
@@ -1282,7 +1281,7 @@ public class RecordingHelperPage extends Page {
 
     // This function click on Recorind Task then on move in the sub menu
     public void clickOnRecordingTaskThenMove() throws InterruptedException {
-
+        waitUntilTheListBeAvilable();
         WebElement element = recording_tasks_button;
         String id = "MoveTask2";
         try {
@@ -1303,6 +1302,26 @@ public class RecordingHelperPage extends Page {
                     id + " window isn't displayed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             System.out.println(id + " window not displayed");
             Assert.assertTrue(false);
+        }
+    }
+
+    private void waitUntilTheListBeAvilable() {
+        int areListAvilable = 0;
+        int timeOut = 60;
+        List<String> courseRecordingList = getCourseRecordingList();
+        while (timeOut>0){
+            for (int i = 1; i < courseRecordingList.size(); i++) {
+                WebElement recording = WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("RecordingStatus" + i), 10);
+                String textFromWebElement = getTextFromWebElement(recording, 10);
+                if (!textFromWebElement.contains("Moving") || !textFromWebElement.contains("Copying")) {
+                    areListAvilable++;
+                }
+            }
+            if(areListAvilable==courseRecordingList.size()){
+                break;
+            };
+            timeOut--;
+            WaitDriverUtility.sleepInSeconds(1);
         }
     }
 
@@ -3383,9 +3402,9 @@ public class RecordingHelperPage extends Page {
     private void waitToFileBeDownloaded(String pathToFile) {
         int timeOut = 20;
 
-        while (timeOut > 0){
+        while (timeOut > 0) {
             File downloadedFile = new File(pathToFile);
-            if (downloadedFile.isFile()){
+            if (downloadedFile.isFile()) {
                 System.out.println("The download has finished");
                 return;
             }
@@ -3397,10 +3416,10 @@ public class RecordingHelperPage extends Page {
 
     private void waitForDownloadBeFinished(String pathToDownloadedFile) {
         int timeOut = 10;
-        while (timeOut>0) {
+        while (timeOut > 0) {
             File downloadedFile = new File(pathToDownloadedFile);
             WaitDriverUtility.sleepInSeconds(1);
-            if (downloadedFile.canWrite()){
+            if (downloadedFile.canWrite()) {
 
                 System.out.println("the download has finished successfully");
                 return;
@@ -3417,13 +3436,13 @@ public class RecordingHelperPage extends Page {
         File actualFile = new File(download_path);
         File expectedFile = new File(resourceFile);
         try {
-            FileAssert.assertBinaryEquals(actualFile,expectedFile);
+            FileAssert.assertBinaryEquals(actualFile, expectedFile);
         } catch (Exception e) {
-            System.out.println("failed "+e);
-            ATUManager.asserIsTrueAndReport(false,"Trying the new compring","","");
+            System.out.println("failed " + e);
+            ATUManager.asserIsTrueAndReport(false, "Trying the new compring", "", "");
         }
 
-        ATUManager.asserIsTrueAndReport(true,"Trying the new compring","","");
+        ATUManager.asserIsTrueAndReport(true, "Trying the new compring", "", "");
 
     }
 
