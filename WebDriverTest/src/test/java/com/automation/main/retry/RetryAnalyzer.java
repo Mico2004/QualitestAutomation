@@ -1,7 +1,6 @@
 package com.automation.main.retry;
 
 import org.testng.IRetryAnalyzer;
-import org.testng.ITestNGMethod;
 import org.testng.ITestResult;
 
 
@@ -11,7 +10,7 @@ public class RetryAnalyzer implements IRetryAnalyzer {
     int retryLimit = 2;
 	/*
 	 * (non-Javadoc)
-	 * @see org.testng.IRetryAnalyzer#retry(org.testng.ITestResult)
+	 * @see org.testng.IRetryAnalyzer#retry(org.testng.ITestResult)~
 	 *
 	 * This method decides how many times a test needs to be rerun.
 	 * TestNg will call this method every time a test fails. So we
@@ -24,7 +23,7 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 
     @Override
     public boolean retry(ITestResult result) {
-
+        System.out.println("The following test will run again: "+result.getInstanceName());
         if(counter < retryLimit)
         {
             counter++;
