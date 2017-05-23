@@ -1879,4 +1879,16 @@ public class CoursesHelperPage extends Page {
 		throw new RuntimeException("Attempt to clicking at the required course has failed");
 
 	}
+
+	public List<String> getPastCourses() {
+		List<String> courseList = getCourseList();
+		List<String> pastsCourse = new ArrayList<>();
+
+		for (String course : courseList){
+			if (course.startsWith("Past")){
+				pastsCourse.add(course);
+			}
+		}
+		return pastsCourse;
+	}
 }

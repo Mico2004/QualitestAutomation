@@ -399,7 +399,10 @@ public class CopyMenu extends Page {
 		List<String> course_list_text = new ArrayList<String>();
 
 		for (int i = 0; i < course_list.size(); i++) {
-			course_list_text.add(course_list.get(i).getText());
+			String optionText = course_list.get(i).getText();
+			if (!optionText.contains("select a type")){
+				course_list_text.add(course_list.get(i).getText());
+			}
 		}
 
 		return course_list_text;

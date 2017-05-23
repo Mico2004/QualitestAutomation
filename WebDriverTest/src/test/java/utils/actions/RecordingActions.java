@@ -1,10 +1,10 @@
-package utils;
+package utils.actions;
 
 import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.ping.helper.LogInAsAnotherUser;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.actions.ActionsParent;
 
 /**
  * Created by Lenovo on 21/05/2017.

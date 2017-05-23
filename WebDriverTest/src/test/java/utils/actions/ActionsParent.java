@@ -1,6 +1,7 @@
-package utils;
+package utils.actions;
 
 import com.automation.main.page_helpers.*;
+import com.automation.main.ping.helper.LogInAsAnotherUser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -25,14 +26,22 @@ public abstract class ActionsParent {
     }
 
     public ActionsParent() {
+
     }
 
-    private void initPageObjects(){
+    protected void initPageObjects(){
 
         tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
         admin_dashboard_page = PageFactory.initElements(driver, AdminDashboardPage.class);
         mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
         confirmation_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+    }
+
+    protected LogInAsAnotherUser login (String userName,boolean thisUserFromPropFile){
+        LogInAsAnotherUser anotherUser = new LogInAsAnotherUser();
+        anotherUser.openAnotherSession(userName, thisUserFromPropFile);
+        anotherUser.getDriver().navigate().back();
+        return anotherUser;
     }
 
 }

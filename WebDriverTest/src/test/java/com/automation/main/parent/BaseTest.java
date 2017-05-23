@@ -7,7 +7,8 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeSuite;
-import utils.RecordingActions;
+import utils.actions.PastCourseActions;
+import utils.actions.RecordingActions;
 
 
 public class BaseTest implements BasicTest {
@@ -47,8 +48,8 @@ public class BaseTest implements BasicTest {
         RecordingActions recordingActions = new RecordingActions();
         try {
             recordingActions.addRecordingsToCourse("Ab");
-        } catch (InterruptedException e) {
-
+        } catch (Exception e) {
+            System.out.println("Fails to add recodrindg to course that starting with Ab");
         }
     }
 
@@ -58,8 +59,8 @@ public class BaseTest implements BasicTest {
         RecordingActions recordingActions = new RecordingActions();
         try {
             recordingActions.addStudentRecordingsToCourse("Ab");
-        } catch (InterruptedException e) {
-
+        } catch(Exception e) {
+            System.out.println("Fails to add student recodrindgs to course that starting with Ab");
         }
     }
 
@@ -70,8 +71,18 @@ public class BaseTest implements BasicTest {
         RecordingActions recordingActions = new RecordingActions();
         try {
             recordingActions.addTestsRecordingsToCourse("Ab");
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
+            System.out.println("Fails to add test recodrindgs to course that starting with Ab");
+        }
+    }
 
+    @BeforeGroups(groups = "pastCourse")
+    public void moveCoursesToPast(){
+        PastCourseActions pastCourseActions = new PastCourseActions();
+        try {
+            pastCourseActions.unActivePastCourses();
+        } catch (Exception e) {
+            System.out.println("Couldn't moving past courses which are active to past");
         }
     }
 }

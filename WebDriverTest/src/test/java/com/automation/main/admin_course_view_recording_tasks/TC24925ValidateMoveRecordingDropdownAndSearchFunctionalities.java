@@ -98,7 +98,7 @@ public class TC24925ValidateMoveRecordingDropdownAndSearchFunctionalities {
     }
 
 
-    @Test(description = "TC 24925 Validate Move Recording Dropdown And Search Functionalities")
+    @Test(description = "TC 24925 Validate Move Recording Dropdown And Search Functionalities",groups = "pastCourse")
     public void test24925() throws InterruptedException//
     {
         tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
