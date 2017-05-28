@@ -2,17 +2,49 @@ package com.automation.main.parent;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
+import com.automation.main.page_helpers.*;
+import com.automation.main.utilities.DriverSelector;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import utils.actions.PastCourseActions;
-import utils.actions.RecordingActions;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 
-public class BaseTest implements BasicTest {
-
+public class BaseTest extends GroupsManger implements BasicTest {
+    public ManageAdhocCoursesEnrollmentsPage mange_adhoc_course_enrollments;
+    public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
+    public EditRecordingPropertiesWindow edit_recording_properties_window;
+    public PlayerPage player_page;
+    public AdminDashboardViewCourseList admin_dashboard_view_course_list;
+    public AdminDashboardPage admin_dash_board_page;
+    public CourseSettingsPage course_settings_page;
+    public AddAdditionalContentLinkWindow add_additional_content_link_window;
+    public EditRecording edit_recording;
+    public BottomFooter bottom_footer;
+    public SearchPage search_page;
+    public TopBarHelper top_bar_helper;
+    public LoginHelperPage tegrity;
+    public CoursesHelperPage course;
+    public RecordingHelperPage record;
+    public ConfirmationMenu confirm_menu;
+    WebDriverWait wait;
+    public static WebDriver thread_driver;
+    CopyMenu copy;
+    String current_course;
+    String targetCourse;
+    String clickedRecording;
+    DesiredCapabilities capability;
+    ConfirmationMenu confirmationMenu;
 
     protected  WebDriver driver;
 
@@ -22,6 +54,17 @@ public class BaseTest implements BasicTest {
 
     }
 
+    @BeforeMethod(alwaysRun = true)
+    public void printTestDeatils(ITestContext result){
+
+        String testName = result.getAllTestMethods()[0].getTestClass().getName();
+//                result.getInstanceName();
+        Date curDate = new Date();
+        String DateToStr = DateFormat.getInstance().format(curDate);
+        System.out.println("Starting the test: " + testName + "at " + DateToStr);
+        ATUReports.add("Message window.", "Starting the test: " + testName + " at " + DateToStr,
+                "Starting the test: " + testName + " at " + DateToStr, LogAs.PASSED, null);
+    }
     @AfterMethod
     public void tearDownTest(ITestResult testResult) {
 
@@ -39,50 +82,34 @@ public class BaseTest implements BasicTest {
         if (driver!=null){
             driver.quit();
         }
-
     }
 
-    @BeforeGroups(groups = "AddRecordingToAb")
-    public void addRecordingToAb(){
+    @BeforeClass
+    public void initPageObjects(){
+        driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+        ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( CaptureScreen.ScreenshotOf.DESKTOP));
 
-        RecordingActions recordingActions = new RecordingActions();
-        try {
-            recordingActions.addRecordingsToCourse("Ab");
-        } catch (Exception e) {
-            System.out.println("Fails to add recodrindg to course that starting with Ab");
-        }
+        tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
+
+        record = PageFactory.initElements(driver, RecordingHelperPage.class);
+        copy = PageFactory.initElements(driver, CopyMenu.class);
+
+        confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
+
+        top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
+        search_page = PageFactory.initElements(driver, SearchPage.class);
+
+        bottom_footer = PageFactory.initElements(driver, BottomFooter.class);
+        mangage_adhoc_courses_membership_window = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
+        edit_recording = PageFactory.initElements(driver, EditRecording.class);
+        mange_adhoc_course_enrollments = PageFactory.initElements(driver, ManageAdhocCoursesEnrollmentsPage.class);
+        add_additional_content_link_window = PageFactory.initElements(driver, AddAdditionalContentLinkWindow.class);
+        course_settings_page = PageFactory.initElements(driver, CourseSettingsPage.class);
+        admin_dash_board_page = PageFactory.initElements(driver, AdminDashboardPage.class);
+        admin_dashboard_view_course_list = PageFactory.initElements(driver, AdminDashboardViewCourseList.class);
+        player_page = PageFactory.initElements(driver, PlayerPage.class);
+        edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
+        confirmationMenu = PageFactory.initElements(driver, ConfirmationMenu.class);
     }
 
-    @BeforeGroups(groups = "AddSrudentRecordingToAb")
-    public void addSrudentRecordingToAb(){
-
-        RecordingActions recordingActions = new RecordingActions();
-        try {
-            recordingActions.addStudentRecordingsToCourse("Ab");
-        } catch(Exception e) {
-            System.out.println("Fails to add student recodrindgs to course that starting with Ab");
-        }
-    }
-
-
-    @BeforeGroups(groups = "AddSTestRecordingToAb")
-    public void addTestRecordingToAb(){
-
-        RecordingActions recordingActions = new RecordingActions();
-        try {
-            recordingActions.addTestsRecordingsToCourse("Ab");
-        } catch (Exception e) {
-            System.out.println("Fails to add test recodrindgs to course that starting with Ab");
-        }
-    }
-
-    @BeforeGroups(groups = "pastCourse")
-    public void moveCoursesToPast(){
-        PastCourseActions pastCourseActions = new PastCourseActions();
-        try {
-            pastCourseActions.unActivePastCourses();
-        } catch (Exception e) {
-            System.out.println("Couldn't moving past courses which are active to past");
-        }
-    }
 }

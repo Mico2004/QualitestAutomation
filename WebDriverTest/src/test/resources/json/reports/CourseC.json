@@ -1,0 +1,13 @@
+{
+  "courseType":"C",
+  "isPastCourse":"false",
+  "instructors":[
+    "ReportInsB"
+  ],
+  "students":["ReportStudB"],
+  "uploudRecByinsA":[""],
+  "uploudRecByinsB":["RegularRecording_c_1"],
+  "uploudRecByStuA":["StudentRecording_c_1",""],
+  "uploudTestRecByStuA":[""],
+  "mainInstructor":"ReportInsB"
+}

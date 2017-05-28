@@ -883,6 +883,18 @@ public class RecordingHelperPage extends Page {
         return null;
     }
 
+    public String clickTheFirstCheckBoxRecordingsByIndex(int index) {
+        List<String> recording_names_list = getCourseRecordingList();
+        String checkbox_indexed = "Checkbox" + index;
+        WebElement checkBox = driver.findElement(By.id(checkbox_indexed));
+        if (!checkBox.isSelected()) {
+            checkBox.click();
+            return recording_names_list.get(index - 1);
+        }
+        return null;
+    }
+
+
     public void clickCheckBoxByIndex(int index) {
         List<String> recording_names_list = getCourseRecordingList();
         String checkbox_indexed = "Checkbox" + index;
@@ -1309,7 +1321,7 @@ public class RecordingHelperPage extends Page {
         int areListAvilable = 0;
         int timeOut = 60;
         List<String> courseRecordingList = getCourseRecordingList();
-        while (timeOut>0){
+        while (timeOut > 0) {
             for (int i = 1; i < courseRecordingList.size(); i++) {
                 WebElement recording = WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("RecordingStatus" + i), 10);
                 String textFromWebElement = getTextFromWebElement(recording, 10);
@@ -1317,9 +1329,10 @@ public class RecordingHelperPage extends Page {
                     areListAvilable++;
                 }
             }
-            if(areListAvilable==courseRecordingList.size()){
+            if (areListAvilable == courseRecordingList.size()) {
                 break;
-            };
+            }
+            ;
             timeOut--;
             WaitDriverUtility.sleepInSeconds(1);
         }
@@ -1331,6 +1344,7 @@ public class RecordingHelperPage extends Page {
             String recording_status = driver.findElement(By.id("RecordingStatus" + Integer.toString(index))).getText();
             return recording_status;
         } catch (Exception msg) {
+            System.out.println("The status of recording on index " + index + " return null.  " + msg);
             return null;
         }
     }
@@ -6658,5 +6672,19 @@ public class RecordingHelperPage extends Page {
         return dropListElements;
     }
 
+    public void waitForRecordingsStatusBeDisappear(String recordngName) {
+
+        int timeOut = 60;
+        while (timeOut > 0) {
+            System.out.println("Waiting for " + recordngName + " status be disappear !  ");
+            int targetRecordingIndex = getTargetRecordingIndex(recordngName);
+            String recordingStatus = getIndexRecordingStatus(targetRecordingIndex);
+            if (recordingStatus.isEmpty() || recordingStatus == null) {
+                return;
+            }
+            WaitDriverUtility.sleepInSeconds(1);
+            timeOut--;
+        }
+    }
 
 }

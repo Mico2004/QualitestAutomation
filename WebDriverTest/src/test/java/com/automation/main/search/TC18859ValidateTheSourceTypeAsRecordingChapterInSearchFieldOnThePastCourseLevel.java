@@ -132,7 +132,8 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 	
 	@Test(description = "TC 18859 Validate The Source Type As RecordingChapterInSearchFieldOnThePastCourseLevel")
 	public void test18859() throws Exception
-	{
+		{
+
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
 
 		//pre test to unroll course from active courses to past courses 

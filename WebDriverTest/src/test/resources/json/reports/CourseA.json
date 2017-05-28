@@ -1,0 +1,14 @@
+{
+  "courseType":"A",
+  "isPastCourse":"false",
+  "instructors":[
+    "ReportInsA","ReportInsB"
+  ],
+  "students":["ReportStudA","ReportStudB"],
+  "uploudRecByinsA":["RegularRecordings_a_1","RegularRecordings_a_1_deleted"],
+  "uploudRecByinsB":["RegularRecordings_a_upb",""],
+  "uploudRecByStuA":["StudentRecording_a_1",""],
+  "uploudTestRecByStuA":["Test1Recording",""],
+  "recordingsToDelete":["RegularRecordings_a_1_deleted",""],
+  "mainInstructor":"ReportInsA"
+}

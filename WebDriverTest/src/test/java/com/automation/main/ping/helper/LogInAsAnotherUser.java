@@ -43,7 +43,6 @@ public class LogInAsAnotherUser {
             tegrity.loginCourses(user,isUserFromPropertiesFile);// log in courses page
             initializeCourseObject();
             course.selectCourseThatStartingWith("abc");
-            record.clickOnRecordingsTab();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

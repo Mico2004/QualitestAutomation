@@ -2,6 +2,7 @@ package utils;
 
 import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
+import atu.testng.selenium.reports.CaptureScreen;
 import org.junit.Assert;
 
 
@@ -14,7 +15,7 @@ public class ATUManager {
             ATUReports.add(description, expectedValue, actualValue, LogAs.PASSED, null);
         } catch (AssertionError e) {
             System.out.println("The assertion description: "+description);
-            ATUReports.add( description + "Stacktrace "+e.getMessage(), "Done.", "Done.", LogAs.FAILED, null);
+            ATUReports.add( description + "Stacktrace "+e.getMessage(), "Done.", "Done.", LogAs.FAILED,new CaptureScreen(CaptureScreen.ScreenshotOf.DESKTOP));
         }
     }
 }

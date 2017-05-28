@@ -50,6 +50,7 @@ import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
+import utils.WaitDriverUtility;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
@@ -283,15 +284,15 @@ public class Page {
 			Thread.sleep(500);	
 			wait.until(ExpectedConditions.visibilityOf(element));
 		} catch (org.openqa.selenium.TimeoutException e) {
-			System.out.println("Waiting for element visibiliy failed");
+			System.out.println("Waiting for element visibiliy failed" +e);
 			ATUReports.add(time +" Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
 		} catch (org.openqa.selenium.NoSuchElementException e) {
-			System.out.println("Waiting for element visibiliy failed");
+			System.out.println("Waiting for element visibiliy failed"+e);
 			ATUReports.add(time +" Waiting for element visibility","Element is visibile before timout","Element was not found",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();	
 		} catch (Exception e) {
-			System.out.println("Waiting for element visibiliy failed");
+			System.out.println("Waiting for element visibiliy failed"+e);
 			ATUReports.add(time +" Waiting for element visibility",element.getText(),"Element is visibile before timout","Element is not visible after timeout",LogAs.WARNING,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			e.printStackTrace();
 		}
@@ -1815,6 +1816,19 @@ public class Page {
 		}
 		
 		
+	}
+
+	public void waitForFrameAndGoIn(){
+		int timeOut = 60;
+		while (timeOut>0) {
+			try {
+                driver.switchTo().frame(0);
+                return;
+            } catch (Exception e) {
+                WaitDriverUtility.sleepInSeconds(1);
+                timeOut--;
+            }
+		}
 	}
 }
 

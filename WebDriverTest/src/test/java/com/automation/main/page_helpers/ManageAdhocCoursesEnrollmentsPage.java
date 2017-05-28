@@ -172,7 +172,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	/// enrolls instructor or instructor list to course
 	public void enrollInstructorToCourse(String course,List<String>  users,
 			ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window) throws InterruptedException {
-		driver.switchTo().frame(0);
+		waitForFrameAndGoIn();
 		Thread.sleep(2000);
 		// Search target course name
 		searchAndFilterCourses(course);
@@ -191,6 +191,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		// Add selected user to instructor list
 				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
 			Thread.sleep(5000);
+			waitForAlert(10);
 			clickOkInAlertIfPresent();
 			Thread.sleep(5000);
 	    }
@@ -227,10 +228,11 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		    }
 			mangage_adhoc_courses_membership_window.ok_button.click();
 			Thread.sleep(1000);
-			driver.switchTo().alert().accept();
+			waitForAlert(10);
+			clickOkInAlertIfPresent();
 			ATUReports.add(time +" Enrolled "+u+"to course "+course+" as student ","user enrolled to course","user enrolled to course", LogAs.PASSED, null);
 			}catch(Exception e){
-				ATUReports.add(time +" Enrolled "+u+"to course "+course+" as student ","user enrolled to course","user not enrolled to course", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+				ATUReports.add(time +" Enrolled "+u+"to course "+course+" as student "+e,"user enrolled to course","user not enrolled to course", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				
 				
 			}
@@ -258,7 +260,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		mangage_adhoc_courses_membership_window.ok_button.click();
 		Thread.sleep(2000);
 		System.out.println("d4");
-		driver.switchTo().alert().accept();
+
 		System.out.println("clicked on ok");
 		System.out.println("d5");
 		ATUReports.add(time +" unEnrolled "+user+" from course "+course,"user unenrolled from course","user unenrolled from course", LogAs.PASSED, null);
