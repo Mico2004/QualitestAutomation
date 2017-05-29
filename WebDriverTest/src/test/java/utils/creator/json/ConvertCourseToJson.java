@@ -14,7 +14,7 @@ public class ConvertCourseToJson {
 
 
     private List<String> createdUsers;
-    String pathToJson = System.getProperty("user.dir") + "\\src\\test\\resources\\json\\CreatedCourse\\course";
+    String pathToJson = "\\\\teg-fs1\\qa\\Test Library\\Qualitest Automation\\Test-resources\\reportCourseData\\Course";
 
     public void convertToJson(List<String> users, String courseName, CourseTypeTemplate courseTypeTemplate) {
         createdUsers = users;
@@ -34,7 +34,6 @@ public class ConvertCourseToJson {
         ObjectMapper mapper = new ObjectMapper();
         try {
             File newCourseJsonFile = new File(pathToJson + course.getCourseType() + ".json");
-
             if (!newCourseJsonFile.exists()) {
                 newCourseJsonFile.createNewFile();
             }
