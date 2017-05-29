@@ -15,6 +15,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import utils.ATUManager;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -39,12 +40,13 @@ public class BaseTest extends GroupsManger implements BasicTest {
     public ConfirmationMenu confirm_menu;
     WebDriverWait wait;
     public static WebDriver thread_driver;
-    CopyMenu copy;
-    String current_course;
-    String targetCourse;
-    String clickedRecording;
-    DesiredCapabilities capability;
-    ConfirmationMenu confirmationMenu;
+    public CopyMenu copy;
+    public String current_course;
+    public String targetCourse;
+    public String clickedRecording;
+    public DesiredCapabilities capability;
+    public ConfirmationMenu confirmationMenu;
+    public CustomAnalysisPage customAnalysisPage;
 
     protected  WebDriver driver;
 
@@ -110,6 +112,23 @@ public class BaseTest extends GroupsManger implements BasicTest {
         player_page = PageFactory.initElements(driver, PlayerPage.class);
         edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
         confirmationMenu = PageFactory.initElements(driver, ConfirmationMenu.class);
+         customAnalysisPage = PageFactory.initElements(driver, CustomAnalysisPage.class);
+    }
+
+    public void initializeCourseObject() throws InterruptedException {
+
+        course = PageFactory.initElements(driver, CoursesHelperPage.class);
+        course.courses = course.getCoursesListFromElement(course.course_list);
+    }
+
+    public void login(String userName,boolean isUserFromPropertiesFile){
+        try {
+            tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+            initializeCourseObject();
+            tegrity.loginCourses(userName,isUserFromPropertiesFile);
+        } catch (Exception e) {
+            ATUManager.asserIsTrueAndReport(false,"Login as "+userName+" has failed !","","");
+        }
     }
 
 }

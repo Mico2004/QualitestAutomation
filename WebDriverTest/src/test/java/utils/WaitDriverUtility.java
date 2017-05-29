@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class WaitDriverUtility {
 
     public static WebElement waitForElementBeDisplayed(WebDriver webDriver, By by, long timeoutInSeconds) {
@@ -135,5 +137,29 @@ public class WaitDriverUtility {
         }
         driver.switchTo().window(impersonateTabId);
         WaitDriverUtility.sleepInSeconds(1);
+    }
+
+    public static void waitForChildElementBeDisplayed(WebElement parent,By by){
+        int timeOut = 10;
+
+        while (timeOut > 0) {
+            List<WebElement> elements = parent.findElements(by);
+            if (elements.size()>0){
+                return;
+            }
+            sleepInSeconds(1);
+            timeOut--;
+        }
+        throw new RuntimeException("the child element does not located !" + by);
+
+    }
+
+    public static void verifyAllCheckBoxAreChecked(List<WebElement> checkboxes){
+        for (WebElement singleCheckBox: checkboxes){
+            if (!singleCheckBox.isSelected()){
+                ATUManager.asserIsTrueAndReport(false,"There is checkBox that not checked");
+            }
+        }
+        ATUManager.asserIsTrueAndReport(true,"The all checkBoxes are checked");
     }
 }

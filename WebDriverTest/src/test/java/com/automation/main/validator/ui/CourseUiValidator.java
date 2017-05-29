@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CourseUiValidator {
+public class CourseUiValidator extends UiValidatorParent {
 
     RecordingHelperPage record;
     LocationCalculator locationCalculator;
@@ -114,13 +114,7 @@ public class CourseUiValidator {
         return isAlign;
     }
 
-    private List<String> convertListElementToListOfElementText(List<WebElement> elements) {
-        List<String> texts = new ArrayList<>();
-        for (WebElement webElement : elements) {
-            texts.add(webElement.getText());
-        }
-        return texts;
-    }
+
 
     private boolean verifyTwoListsAreEqule(String[] listA, List<String> listB) {
         int expectedMatches = 0;
