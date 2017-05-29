@@ -32,7 +32,7 @@ public class CustomAnalysisUiValidator extends UiValidatorParent {
         verifyTheSelectedOptionByDefault(actualDropDown.get(0));
 
         for (String expected : expectedList) {
-            boolean contains = options.contains(expected);
+            boolean contains = options.contains(expected.toLowerCase());
             if (!contains) {
                 ATUManager.asserIsTrueAndReport(false, "Report Type DropDown does not contain '" + expected + "'", "", "");
             }
