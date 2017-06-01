@@ -1,19 +1,17 @@
 package com.automation.main.report.page;
 
 import com.automation.main.page_helpers.Page;
-import com.automation.main.validator.ui.CustomAnalysisUiValidator;
+import com.automation.main.validator.ui.CustomAnalysisInstructorUiValidator;
+import com.automation.main.validator.ui.UiReportActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-/**
- * Created by Lenovo on 29/05/2017.
- */
-public class AbstractReportPage extends Page {
+public class AbstractInstructorReportPage extends Page {
 
-    public AbstractReportPage(WebDriver browser) {
+    public AbstractInstructorReportPage(WebDriver browser) {
         super(browser);
     }
 
@@ -35,19 +33,19 @@ public class AbstractReportPage extends Page {
     @FindBy(css = ".controls>label>input")
     protected List<WebElement> inCloudedUsageCheckBoxes;
 
-    @FindBy(name = "searchCourse")
+    @FindBy(css = "select[ng-model=\"selected.Course\"]")
     protected WebElement searchCourseTextBox;
 
-    @FindBy(name = "searchInstructor")
+    @FindBy(css = "select[ng-model=\"selected.Instructor\"]")
     protected WebElement searchInstructor;
 
-    @FindBy(name = "searchRecording")
+    @FindBy(css = "select[ng-model=\"selected.Recording\"]")
     protected WebElement searchRecording;
 
-    @FindBy(name = "searchDownloader")
+    @FindBy(css = "select[ng-model=\"selected.Downloader\"]")
     protected WebElement searchDownloader;
 
-    @FindBy(name = "searchViewer")
+    @FindBy(css = "select[ng-model=\"selected.Viewer\"]")
     protected WebElement searchViewer;
 
     @FindBy(id = "typeReport")
@@ -62,7 +60,10 @@ public class AbstractReportPage extends Page {
     @FindBy(css = "input[data-ng-model=\"data.dateTillInput\"]")
     protected WebElement dateTill;
 
-    protected CustomAnalysisUiValidator customAnalysisUiValidator = new CustomAnalysisUiValidator();
-    @FindBy(name = "searchRecording")
+    protected UiReportActions customAnalysisAdminUiValidator = new CustomAnalysisInstructorUiValidator();
+
+    @FindBy(css = "select[ng-model=\"selected.Recording\"]")
     protected WebElement searchRecordingTextBox;
+
+
 }

@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC12833ReportPreTest extends BaseTest {
+    public class TC12833ReportPreTest extends BaseTest {
 
 
     //create 2 instructors

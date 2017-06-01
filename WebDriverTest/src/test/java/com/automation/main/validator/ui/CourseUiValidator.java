@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CourseUiValidator extends UiValidatorParent {
+public class CourseUiValidator{
 
     RecordingHelperPage record;
     LocationCalculator locationCalculator;
@@ -101,6 +101,14 @@ public class CourseUiValidator extends UiValidatorParent {
         boolean isAlign = isDropDownAligne(dropDownElements, dropDownName);
         ATUManager.asserIsTrueAndReport(isAlign, "Verify " + dropDownName + "down texts are alignToLeft", "", "");
 
+    }
+
+    public List<String> convertListElementToListOfElementText(List<WebElement> elements) {
+        List<String> texts = new ArrayList<>();
+        for (WebElement webElement : elements) {
+            texts.add(webElement.getText().toLowerCase());
+        }
+        return texts;
     }
 
     private boolean isDropDownAligne(List<WebElement> theViewDropDownElements, String ignorElementByText) {

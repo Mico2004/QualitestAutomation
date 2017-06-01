@@ -1,29 +1,30 @@
-package com.automation.main.page_helpers;
+package com.automation.main.page_helpers.report.admin;
 
-import com.automation.main.report.page.AbstractReportPage;
+import com.automation.main.page_helpers.CustomAnalysisDropDown;
+import com.automation.main.report.page.AbstractAdminReportPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.ATUManager;
 
-public class ViewingReportByChapterDiv extends AbstractReportPage implements CustomAnalysisDropDown {
+public class ViewingAdminReportByChapterDiv extends AbstractAdminReportPage implements CustomAnalysisDropDown {
 
 
     @FindBy(css = "option[value='1']")
     protected WebElement option;
 
 
-    public ViewingReportByChapterDiv(WebDriver browser) {
+    public ViewingAdminReportByChapterDiv(WebDriver browser) {
         super(browser);
     }
 
     @Override
     public void verifyUi() {
         try {
-            customAnalysisUiValidator.validateDropDownResultsSortedInAlphabeticalOrder(driver, searchCourseTextBox, "Course", "abc");
-            customAnalysisUiValidator.validateDropDownResultsSortedInAlphabeticalOrder(driver, searchRecordingTextBox, "Recording", "Regular");
-            customAnalysisUiValidator.validateCalendar(dateFrom, driver, "data.dateFromInput");
-            customAnalysisUiValidator.validateCalendar(dateTill, driver, "data.dateTillInput");
+            customAnalysisAdminUiValidator.validateDropDownResultsSortedInAlphabeticalOrder(driver, searchCourseTextBox, "Course", "abc");
+            customAnalysisAdminUiValidator.validateDropDownResultsSortedInAlphabeticalOrder(driver, searchRecordingTextBox, "Recording", "Regular");
+            customAnalysisAdminUiValidator.validateCalendar(dateFrom, driver, "data.dateFromInput");
+            customAnalysisAdminUiValidator.validateCalendar(dateTill, driver, "data.dateTillInput");
         } catch (Exception e) {
             ATUManager.asserIsTrueAndReport(false, "Some of elements not found on " + getDropDownType() + " section" + e);
 
