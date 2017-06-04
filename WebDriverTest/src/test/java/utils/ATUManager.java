@@ -14,21 +14,21 @@ public class ATUManager {
             Assert.assertTrue(isTrue);
             ATUReports.add(description, expectedValue, actualValue, LogAs.PASSED, null);
         } catch (AssertionError e) {
-            System.out.println("The assertion description: "+description);
-            ATUReports.add( description + "Stacktrace "+e.getMessage(), "Done.", "Done.", LogAs.FAILED,new CaptureScreen(CaptureScreen.ScreenshotOf.DESKTOP));
+            System.out.println("The assertion description: " + description);
+            ATUReports.add(description + "Stacktrace " + e.getMessage(), "Done.", "Done.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.DESKTOP));
         }
     }
+
     public static void asserIsTrueAndReport(boolean isTrue, String description) {
         setSystemProperty();
-        try {
-            Assert.assertTrue(isTrue);
+        if (isTrue) {
             ATUReports.add(description, "", "", LogAs.PASSED, null);
-        } catch (Exception e) {
-            System.out.println("The assertion description: "+description);
-            ATUReports.add( description + "Stacktrace "+e.getMessage(), "Done.", "Done.", LogAs.FAILED,new CaptureScreen(CaptureScreen.ScreenshotOf.DESKTOP));
+        } else {
+            ATUReports.add(description + "Stacktrace ", "Done.", "Done.", LogAs.FAILED, new CaptureScreen(CaptureScreen.ScreenshotOf.DESKTOP));
         }
     }
-    private static void setSystemProperty(){
+
+    private static void setSystemProperty() {
         System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
     }
 }
