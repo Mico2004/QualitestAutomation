@@ -29,10 +29,14 @@ public class TC8732ValidateCustomAnalysisUIAsInstructor extends BaseTest {
 
    @Test
     public void test() throws InterruptedException {
-       login(course.instructorA.userName,false);
-       customAnalysisPage.navigateToCustomAnalysis();
-       customAnalysisInsUiValidator.setExpectedReportTypeDropDownOption("Viewing report by chapter,Recording Report,Downloading Report");
-       customAnalysisInsUiValidator.verifyingReportTypeFunctionality(customAnalysisPage.reportTypeDropDown);
-       customAnalysisInsUiValidator.validateDropDownUi(driver);
-    }
+       try {
+           login(course.instructorA.userName,false);
+           customAnalysisPage.navigateToCustomAnalysis();
+           customAnalysisInsUiValidator.setExpectedReportTypeDropDownOption("Viewing report by chapter,Recording Report,Downloading Report");
+           customAnalysisInsUiValidator.verifyingReportTypeFunctionality(customAnalysisPage.reportTypeDropDown);
+           customAnalysisInsUiValidator.validateDropDownUi(driver);
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+   }
 }
