@@ -60,7 +60,11 @@ public class CustomAnalysisInstructorUiValidator extends UiValidatorParent {
         textInTitle.remove(0);
         textInTitle.remove(textInTitle.size() - 1);
         boolean ordered = Ordering.natural().isOrdered(textInTitle);
-        ATUManager.asserIsTrueAndReport(ordered, "The drop down result should be sorted in alphabetical order");
+        try {
+            ATUManager.asserIsTrueAndReport(ordered, "The drop down result should be sorted in alphabetical order");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         element.click();
 
     }
