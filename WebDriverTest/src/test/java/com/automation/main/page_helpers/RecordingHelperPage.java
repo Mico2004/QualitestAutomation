@@ -6674,7 +6674,7 @@ public class RecordingHelperPage extends Page {
 
     public void waitForRecordingsStatusBeDisappear(String recordngName) {
 
-        int timeOut = 60;
+        int timeOut = 120;
         while (timeOut > 0) {
             System.out.println("Waiting for " + recordngName + " status be disappear !  ");
             int targetRecordingIndex = getTargetRecordingIndex(recordngName);

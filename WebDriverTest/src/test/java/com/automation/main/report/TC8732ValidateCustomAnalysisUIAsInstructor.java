@@ -5,6 +5,7 @@ import atu.testng.reports.listeners.ATUReportsListener;
 import atu.testng.reports.listeners.ConfigurationListener;
 import atu.testng.reports.listeners.MethodListener;
 import com.automation.main.parent.BaseTest;
+import com.automation.main.report.entity.Course;
 import com.automation.main.validator.ui.CustomAnalysisInstructorUiValidator;
 import com.automation.main.validator.ui.UiReportActions;
 import org.testng.annotations.BeforeTest;

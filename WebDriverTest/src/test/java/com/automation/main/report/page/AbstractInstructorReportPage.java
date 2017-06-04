@@ -34,19 +34,19 @@ public class AbstractInstructorReportPage extends Page {
     protected List<WebElement> inCloudedUsageCheckBoxes;
 
     @FindBy(css = "select[ng-model=\"selected.Course\"]")
-    protected WebElement searchCourseTextBox;
+    public WebElement searchCourseTextBox;
 
     @FindBy(css = "select[ng-model=\"selected.Instructor\"]")
-    protected WebElement searchInstructor;
+    public WebElement searchInstructor;
 
     @FindBy(css = "select[ng-model=\"selected.Recording\"]")
-    protected WebElement searchRecording;
+    public WebElement searchRecording;
 
     @FindBy(css = "select[ng-model=\"selected.Downloader\"]")
-    protected WebElement searchDownloader;
+    public WebElement searchDownloader;
 
     @FindBy(css = "select[ng-model=\"selected.Viewer\"]")
-    protected WebElement searchViewer;
+    public WebElement searchViewer;
 
     @FindBy(id = "typeReport")
     protected WebElement typeReport;
@@ -63,7 +63,7 @@ public class AbstractInstructorReportPage extends Page {
     protected UiReportActions customAnalysisAdminUiValidator = new CustomAnalysisInstructorUiValidator();
 
     @FindBy(css = "select[ng-model=\"selected.Recording\"]")
-    protected WebElement searchRecordingTextBox;
+    public WebElement searchRecordingTextBox;
 
 
 }

@@ -23,7 +23,7 @@ public class ATUManager {
         try {
             Assert.assertTrue(isTrue);
             ATUReports.add(description, "", "", LogAs.PASSED, null);
-        } catch (AssertionError e) {
+        } catch (Exception e) {
             System.out.println("The assertion description: "+description);
             ATUReports.add( description + "Stacktrace "+e.getMessage(), "Done.", "Done.", LogAs.FAILED,new CaptureScreen(CaptureScreen.ScreenshotOf.DESKTOP));
         }

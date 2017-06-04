@@ -4,6 +4,7 @@ import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import com.automation.main.page_helpers.*;
+import com.automation.main.report.page.DefaultInstructorContentSection;
 import com.automation.main.utilities.DriverSelector;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -47,6 +48,8 @@ public class BaseTest extends GroupsManger implements BasicTest {
     public DesiredCapabilities capability;
     public ConfirmationMenu confirmationMenu;
     public CustomAnalysisPage customAnalysisPage;
+    protected DefaultInstructorContentSection defaultInstructorContentSection;
+
 
     protected  WebDriver driver;
 
@@ -113,6 +116,7 @@ public class BaseTest extends GroupsManger implements BasicTest {
         edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
         confirmationMenu = PageFactory.initElements(driver, ConfirmationMenu.class);
          customAnalysisPage = PageFactory.initElements(driver, CustomAnalysisPage.class);
+        defaultInstructorContentSection = PageFactory.initElements(driver,DefaultInstructorContentSection.class);
     }
 
     public void initializeCourseObject() throws InterruptedException {

@@ -1,8 +1,8 @@
 package utils.creator.json;
 
-import com.automation.main.report.Course;
-import com.automation.main.report.Instructor;
-import com.automation.main.report.Student;
+import com.automation.main.report.entity.Course;
+import com.automation.main.report.entity.Instructor;
+import com.automation.main.report.entity.Student;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;

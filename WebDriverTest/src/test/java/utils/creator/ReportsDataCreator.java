@@ -25,6 +25,7 @@ public class ReportsDataCreator extends DataCreator {
     private long currentDate;
     String courseType ;
 
+
     public ReportsDataCreator() {
 
         Date current = new Date();
@@ -107,7 +108,6 @@ public class ReportsDataCreator extends DataCreator {
     }
 
     public void addRecordingsToCourse() {
-
         String targetCourse = getFullCourseName("Coures" + courseType);
         CourseTypeTemplate courseTypeTemplate = getCourseTypeTemplate(courseType);
         String insOfCourse = getFullSigngleUser(courseTypeTemplate.mainInstructor);
@@ -117,12 +117,15 @@ public class ReportsDataCreator extends DataCreator {
              recordingActions.addRegularRecordingsToCourseByNames(targetCourse, courseTypeTemplate.uploudRecByInsA,ActionsParent.RecordingType.Regular);
 ////
             editRecordingActions.changeTheRecordingOwner(targetCourse,courseTypeTemplate.uploudRecByInsA,userUplouder, ActionsParent.RecordingType.Regular,null);
-////
+
+
             userUplouder = getFullSigngleUser("ReportInsB");
 ////
             recordingActions.addRegularRecordingsToCourseByNames(targetCourse, courseTypeTemplate.uploudRecByInsB,ActionsParent.RecordingType.Regular);
 ////
             editRecordingActions.changeTheRecordingOwner(targetCourse,courseTypeTemplate.uploudRecByInsB,userUplouder, ActionsParent.RecordingType.Regular,null);
+            activatedStudents();
+
 ////
 //            //student
            userUplouder = getFullSigngleUser("ReportStudA");
@@ -145,6 +148,14 @@ public class ReportsDataCreator extends DataCreator {
             e.printStackTrace();
             ATUManager.asserIsTrueAndReport(false, "Fails to copy recordings", "", "");
 
+        }
+    }
+
+    private void activatedStudents() {
+        for (String user:createdUsers) {
+            if (user.startsWith("ReportStud")){
+                usersActions.activatedStudent(user);
+            }
         }
     }
 

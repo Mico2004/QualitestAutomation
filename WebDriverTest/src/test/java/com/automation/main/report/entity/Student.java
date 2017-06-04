@@ -1,7 +1,7 @@
-package com.automation.main.report;
+package com.automation.main.report.entity;
 
 
-public class Instructor implements TegrityUser {
+public class Student implements TegrityUser {
 
     String userName;
 

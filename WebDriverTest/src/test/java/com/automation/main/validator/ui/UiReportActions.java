@@ -10,6 +10,8 @@ import java.util.List;
  */
 public interface UiReportActions {
 
+    void validateDropBox(CustomAnalysisInstructorUiValidator.DropDownType downType, WebElement element);
+
     List<String> convertListElementToListOfElementText(List<WebElement> elements);
 
     void verifyingReportTypeFunctionality(List<WebElement> actualDropDown);

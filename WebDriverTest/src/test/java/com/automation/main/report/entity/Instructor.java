@@ -1,9 +1,9 @@
-package com.automation.main.report;
+package com.automation.main.report.entity;
 
 
-public class Student implements TegrityUser {
+public class Instructor implements TegrityUser {
 
-    String userName;
+    public String userName;
 
     @Override
     public String getUserName() {

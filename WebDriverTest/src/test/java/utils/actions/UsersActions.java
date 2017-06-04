@@ -44,7 +44,19 @@ public class UsersActions extends ActionsParent {
         /// 12.disable checkbox
         advancedServiceSettingsPage.disableEulaCheckboxAndClickOk(confirmation_menu);
         driver.quit();
+    }
 
+    public void activatedStudent(String studentName){
+        login(studentName, false);
+        List<String> courseList = coursesHelperPage.getCourseList();
+        for (String course : courseList){
+            coursesHelperPage.selectCourseThatStartingWith(course);
+            if (recordingHelperPage.first_recording.isDisplayed()){
+                recordingHelperPage.clickOnFirstRecordingTitle();
+            }
+            driver.navigate().back();
+        }
+        driver.quit();
     }
 
 }

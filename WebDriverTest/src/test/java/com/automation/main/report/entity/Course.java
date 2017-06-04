@@ -1,4 +1,4 @@
-package com.automation.main.report;
+package com.automation.main.report.entity;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package utils.creator;
 
-import com.automation.main.report.Course;
+import com.automation.main.report.entity.Course;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
