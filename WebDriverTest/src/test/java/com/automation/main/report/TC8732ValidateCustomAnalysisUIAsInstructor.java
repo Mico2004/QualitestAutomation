@@ -18,17 +18,18 @@ import utils.creator.CourseLoader;
 public class TC8732ValidateCustomAnalysisUIAsInstructor extends BaseTest {
 
     UiReportActions customAnalysisInsUiValidator = new CustomAnalysisInstructorUiValidator();
-    CourseLoader courseLoader = new CourseLoader();
+
     Course course;
 
     @BeforeTest
     public void setPreconditions(){
-        course = courseLoader.getCourseByType("A");
     }
 
 
    @Test
     public void test() throws InterruptedException {
+       CourseLoader courseLoader = new CourseLoader();
+       course = courseLoader.getCourseByType("A");
        try {
            login(course.instructorA.userName,false);
            customAnalysisPage.navigateToCustomAnalysis();
