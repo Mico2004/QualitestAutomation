@@ -56,7 +56,6 @@ public class LoginHelperPage extends Page {
         setPageTitle("Tegrity Lecture Capture");
         setPageUrl(urlToUniversity);
         addUniversityToSystemProperties(urlToUniversity);
-        System.setProperty("UniversityURL", urlToUniversity);
         //setPageUrl("https://awsserverautomation3-qabr.tegrity.com");
         //setPageUrl("https://awsserverautomation-perf-5.tegrity.com");
 		setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
