@@ -121,7 +121,7 @@ public class CustomAnalysisInstructorUiValidator extends UiValidatorParent {
     private boolean isContainsDots(String s) {
         char[] chars = s.toCharArray();
         for (char c : chars) {
-            if (c == '…') {
+            if (c == '\u00a6') {
                 return true;
             }
         }
