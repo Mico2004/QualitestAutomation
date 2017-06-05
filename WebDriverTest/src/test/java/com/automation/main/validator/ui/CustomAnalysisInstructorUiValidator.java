@@ -108,7 +108,7 @@ public class CustomAnalysisInstructorUiValidator extends UiValidatorParent {
         for (WebElement element : options) {
             boolean isLonger = element.getAttribute("title").length() > 41;
             if (isLonger) {
-                boolean isChanged = isContainsDots(element.getText());
+                boolean isChanged = element.getText().length() >= 41;
                 if (!isChanged) {
                     ATUManager.asserIsTrueAndReport(false, "When the text is longer then 41 characters end of the text should be added '...', text with error " + element.getText());
                 }
