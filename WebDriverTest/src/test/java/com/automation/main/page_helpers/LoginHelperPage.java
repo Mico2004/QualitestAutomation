@@ -52,14 +52,26 @@ public class LoginHelperPage extends Page {
 
     public LoginHelperPage(WebDriver driver) throws Exception {
         super(driver);
-
-
+        String urlToUniversity = "https://awsserverautomation-qa-1.tegrity.com";
         setPageTitle("Tegrity Lecture Capture");
-		//setPageUrl("https://awsserverautomation-qa-5.tegrity.com");
+        setPageUrl(urlToUniversity);
+        addUniversityToSystemProperties(urlToUniversity);
+        System.setProperty("UniversityURL", urlToUniversity);
         //setPageUrl("https://awsserverautomation3-qabr.tegrity.com");
         //setPageUrl("https://awsserverautomation-perf-5.tegrity.com");
 		setPageUrl(DriverSelector.setDriverUniversity(System.getProperty("University")));
 
+    }
+
+    private void addUniversityToSystemProperties(String urlToUniversity) {
+        String university = null;
+        if (urlToUniversity != null) {
+            university = urlToUniversity;
+        } else {
+            university = System.getProperty("University");
+        }
+        System.out.println("Running tests against "+university+" university");
+        System.setProperty("UniversityURL", university);
     }
 
     public void setUserText(String text) {
