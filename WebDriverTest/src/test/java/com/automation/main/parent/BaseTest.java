@@ -49,13 +49,13 @@ public class BaseTest extends GroupsManger implements BasicTest {
     public ConfirmationMenu confirmationMenu;
     public CustomAnalysisPage customAnalysisPage;
     protected DefaultInstructorContentSection defaultInstructorContentSection;
-
-
     protected  WebDriver driver;
+
+//    set ATU reporter configurations
+    {System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");}
 
     @BeforeSuite
     private void beforeSuite(){
-        System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
 
     }
 
