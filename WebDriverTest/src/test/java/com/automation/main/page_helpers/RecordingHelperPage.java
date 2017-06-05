@@ -6665,10 +6665,10 @@ public class RecordingHelperPage extends Page {
     public List<WebElement> getCourseTaskDropDownElements() {
         WaitDriverUtility.sleepInSeconds(1);
         moveToElement(course_task_button, driver).perform();
+        WaitDriverUtility.sleepInSeconds(1);
         List<WebElement> dropListElements = new ArrayList<>();
         WebElement elementParent = WaitDriverUtility.getElementParent(course_task_button);
-        dropListElements.addAll(elementParent.findElements(By.cssSelector("ul>li>a"))); //Message about checking checlbox
-        dropListElements.addAll(elementParent.findElements(By.cssSelector("ul>li>span"))); //Sort by
+        dropListElements = driver.findElements(By.cssSelector("div[ng-include=\"'Content/templates/courses/details/menus/courseTasks.html'\"]>ul>li>ul>li"));
         return dropListElements;
     }
 

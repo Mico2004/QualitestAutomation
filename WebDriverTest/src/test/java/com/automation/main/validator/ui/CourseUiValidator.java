@@ -106,7 +106,9 @@ public class CourseUiValidator{
     public List<String> convertListElementToListOfElementText(List<WebElement> elements) {
         List<String> texts = new ArrayList<>();
         for (WebElement webElement : elements) {
-            texts.add(webElement.getText().toLowerCase());
+            if (!webElement.getText().isEmpty()){
+                texts.add(webElement.getText());
+            }
         }
         return texts;
     }
