@@ -25,8 +25,6 @@ public class ViewingInstructorReportByChapterSection extends AbstractInstructorR
             customAnalysisAdminUiValidator.validateDropDownResultsSortedInAlphabeticalOrder(driver, searchRecordingTextBox, "Recording", "Regular");
             customAnalysisAdminUiValidator.validateCalendar(dateFrom, driver, "data.dateFromInput");
             customAnalysisAdminUiValidator.validateCalendar(dateTill, driver, "data.dateTillInput");
-            customAnalysisAdminUiValidator.validateGroupsDropDowns(groupOne);
-
         } catch (Exception e) {
             ATUManager.asserIsTrueAndReport(false, "Some of elements not found on " + getDropDownType() + " section" + e);
 

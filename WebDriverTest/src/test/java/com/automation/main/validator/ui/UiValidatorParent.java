@@ -1,5 +1,6 @@
 package com.automation.main.validator.ui;
 
+import atu.testng.reports.ATUReports;
 import com.automation.main.page_helpers.CustomAnalysisDropDown;
 import com.automation.main.report.content.DropBox;
 import org.openqa.selenium.By;
@@ -102,6 +103,7 @@ public abstract class UiValidatorParent implements UiReportActions {
     @Override
     public void validateGroupsDropDowns(List<WebElement> option) {
         List<String> actualList = convertListElementToListOfElementText(option);
+        WaitDriverUtility.getElementParent(option.get(0)).click();
         String[] splitted = groupDropDown.split(",");
         for (String expectedValue : splitted) {
             boolean contains = actualList.contains(expectedValue.toLowerCase());
@@ -118,6 +120,7 @@ public abstract class UiValidatorParent implements UiReportActions {
         element.click();
         WebElement dataPicker = WaitDriverUtility.waitForElementBeDisplayed(driver, By.cssSelector("div[data-ng-model=\"" + ngModel + "\"]"), 10);
         ATUManager.asserIsTrueAndReport(dataPicker.isDisplayed(), "The calendar should be displayed ");
+        ATUReports.getWebDriver().findElement(By.tagName("Body")).click();
     }
 
     @Override
