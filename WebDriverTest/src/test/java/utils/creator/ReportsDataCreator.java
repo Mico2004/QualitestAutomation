@@ -142,7 +142,6 @@ public class ReportsDataCreator extends DataCreator {
 
             ConvertCourseToJson convertCourseToJson = new ConvertCourseToJson();
             convertCourseToJson.convertToJson(createdUsers,targetCourse,courseTypeTemplate);
-            System.out.println("Ssss");
 
         } catch (Exception e) {
             e.printStackTrace();

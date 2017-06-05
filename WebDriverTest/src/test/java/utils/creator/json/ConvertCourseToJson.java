@@ -12,9 +12,12 @@ import java.util.List;
 
 public class ConvertCourseToJson {
 
+    public ConvertCourseToJson() {
+        setPathToUniversityDataFolder();
+    }
 
     private List<String> createdUsers;
-    String pathToJson = "\\\\teg-fs1\\qa\\Test Library\\Qualitest Automation\\Test-resources\\reportCourseData\\Course";
+    String pathToJson = "\\\\teg-fs1\\qa\\Test Library\\Qualitest Automation\\Test-resources\\reportCourseData";
 
     public void convertToJson(List<String> users, String courseName, CourseTypeTemplate courseTypeTemplate) {
         createdUsers = users;
@@ -33,6 +36,7 @@ public class ConvertCourseToJson {
 
         ObjectMapper mapper = new ObjectMapper();
         try {
+            setPathToUniversityDataFolder();
             File newCourseJsonFile = new File(pathToJson + course.getCourseType() + ".json");
             if (!newCourseJsonFile.exists()) {
                 newCourseJsonFile.createNewFile();
@@ -40,6 +44,24 @@ public class ConvertCourseToJson {
             mapper.writeValue(newCourseJsonFile, course);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setPathToUniversityDataFolder() {
+        try {
+            String pageUrl = System.getProperty("UniversityURL");
+            String s = pageUrl.replaceAll("https://\\b", "");
+            String universityName = s.replaceAll(".tegrity.com\\b", "");
+            File universityFolder = new File(pathToJson + "\\" + universityName);
+            if (!universityFolder.exists()) {
+                System.out.println("Creating folder at " + pathToJson + " for storing course details");
+                universityFolder.mkdir();
+            }
+            pathToJson = pathToJson + "\\" + universityName + "\\Course";
+
+
+        } catch (Exception e) {
+
         }
     }
 

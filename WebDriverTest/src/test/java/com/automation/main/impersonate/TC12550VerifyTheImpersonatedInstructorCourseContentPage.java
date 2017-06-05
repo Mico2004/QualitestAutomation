@@ -9,12 +9,10 @@ import atu.testng.reports.logging.LogAs;
 import com.automation.main.impersonate.helper.LocationCalculator;
 import com.automation.main.page_helpers.*;
 import com.automation.main.parent.BaseTest;
-import com.automation.main.utilities.DriverSelector;
+import com.automation.main.report.entity.Course;
 import com.automation.main.validator.ui.CourseUiValidator;
 import junitx.util.PropertyManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
@@ -22,6 +20,8 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utils.ATUManager;
 import utils.WaitDriverUtility;
+import utils.creator.CourseLoader;
+import utils.creator.json.ConvertCourseToJson;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -31,6 +31,7 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
 
 
     {
+
         System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
     }
 
@@ -60,9 +61,6 @@ public class TC12550VerifyTheImpersonatedInstructorCourseContentPage extends Bas
 
     @BeforeClass
     public void setup() {
-
-
-        driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
 
         initPages();
 
