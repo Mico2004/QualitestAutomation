@@ -110,7 +110,7 @@ public class CustomAnalysisInstructorUiValidator extends UiValidatorParent {
             if (isLonger) {
                 boolean isChanged = element.getText().contains("…");
                 if (!isChanged) {
-                    ATUManager.asserIsTrueAndReport(false, "When the text is longer then 41 characters end of the text should be added '...'");
+                    ATUManager.asserIsTrueAndReport(false, "When the text is longer then 41 characters end of the text should be added '...', text with error "+element.getText());
 
                 }
             }
