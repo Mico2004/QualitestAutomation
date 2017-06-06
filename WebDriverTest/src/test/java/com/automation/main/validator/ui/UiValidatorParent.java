@@ -85,7 +85,7 @@ public abstract class UiValidatorParent implements UiReportActions {
         String attribute = selectElement.getAttribute("ng-init");
 
         boolean isContainsYear = attribute.contains("Year");
-        ATUManager.asserIsTrueAndReport(isContainsYear, "Year is set bu default");
+        ATUManager.asserIsTrueAndReport(isContainsYear, "The default time aggregation is year" );
 
         selectElement.click();
         List<WebElement> options = driver.findElements(By.cssSelector(cssSelector + ">option"));
@@ -94,7 +94,7 @@ public abstract class UiValidatorParent implements UiReportActions {
         for (String singleText : split) {
             boolean contains = textsOfDropDown.contains(singleText.toLowerCase());
             if (!contains) {
-                ATUManager.asserIsTrueAndReport(false, singleText + " does not contain in time aggregation DD");
+                ATUManager.asserIsTrueAndReport(false, singleText + " does not contain in time aggregation dropDown");
             }
         }
         ATUManager.asserIsTrueAndReport(true, " Time aggregation DD contains the expected options");
@@ -111,7 +111,7 @@ public abstract class UiValidatorParent implements UiReportActions {
                 ATUManager.asserIsTrueAndReport(false, "The dropDown does not contain " + expectedValue + " text");
             }
         }
-        ATUManager.asserIsTrueAndReport(true, "The dropDown contain text required text");
+        ATUManager.asserIsTrueAndReport(true, "The dropBox contain required texts as expected");
 
     }
 
