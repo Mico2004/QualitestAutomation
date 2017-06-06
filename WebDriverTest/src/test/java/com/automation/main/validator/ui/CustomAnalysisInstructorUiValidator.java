@@ -19,7 +19,7 @@ import java.util.List;
 
 public class CustomAnalysisInstructorUiValidator extends UiValidatorParent {
 
-    public enum DropDownType {
+    public enum DropDownType  {
         Course(""), Recording("Recording"), Inst("instructor"), student("student"), Viewer("Viewer");
         private String val;
 

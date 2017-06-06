@@ -2,6 +2,7 @@ package utils.creator;
 
 import com.automation.main.report.entity.Course;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import utils.UniversityConfigure;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,10 +36,7 @@ public class CourseLoader implements EntityLoader {
 
     private void setPathToUniversityDataFolder() {
         try {
-            String pageUrl = System.getProperty("UniversityURL");
-
-            String s = pageUrl.replaceAll("https://\\b", "");
-            String universityName = s.replaceAll(".tegrity.com\\b", "");
+            String universityName = UniversityConfigure.getUniversityName();
             pathToJson = pathToJson + "\\" + universityName + "\\Course";
 
         } catch (Exception e) {

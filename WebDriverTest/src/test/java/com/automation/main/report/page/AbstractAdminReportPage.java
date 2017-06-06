@@ -15,54 +15,54 @@ public class AbstractAdminReportPage extends Page {
     }
 
     @FindBy(css = "select[ng-model=\"group1\"]>option")
-    protected List<WebElement> groupOne;
+    public List<WebElement> groupOne;
 
     @FindBy(css = "select[ng-model=\"group2\"]>option")
-    protected List<WebElement> groupTwo;
+    public List<WebElement> groupTwo;
 
     @FindBy(css = "select[ng-model=\"group3\"]>option")
-    protected List<WebElement> groupThree;
+    public List<WebElement> groupThree;
 
     @FindBy(css = "select[ng-model=\"group4\"]>option")
-    protected List<WebElement> groupFour;
+    public List<WebElement> groupFour;
 
     @FindBy(css = ".controls>label")
-    protected List<WebElement> inCloudedUsageLabels;
+    public List<WebElement> inCloudedUsageLabels;
 
     @FindBy(css = ".controls>label>input")
-    protected List<WebElement> inCloudedUsageCheckBoxes;
+    public List<WebElement> inCloudedUsageCheckBoxes;
 
     @FindBy(name = "searchCourse")
-    protected WebElement searchCourseTextBox;
+    public WebElement searchCourseTextBox;
 
     @FindBy(name = "searchInstructor")
-    protected WebElement searchInstructor;
+    public WebElement searchInstructor;
 
     @FindBy(name = "searchRecording")
-    protected WebElement searchRecording;
+    public WebElement searchRecording;
 
     @FindBy(name = "searchDownloader")
-    protected WebElement searchDownloader;
+    public WebElement searchDownloader;
 
     @FindBy(name = "searchViewer")
-    protected WebElement searchViewer;
+    public WebElement searchViewer;
 
     @FindBy(id = "typeReport")
-    protected WebElement typeReport;
+    public WebElement typeReport;
 
     @FindBy(css = "option[value='0']")
-    protected WebElement option;
+    public WebElement option;
 
     @FindBy(css = "input[data-ng-model=\"data.dateFromInput\"]")
-    protected WebElement dateFrom;
+    public WebElement dateFrom;
 
     @FindBy(css = "input[data-ng-model=\"data.dateTillInput\"]")
-    protected WebElement dateTill;
+    public WebElement dateTill;
 
-    protected CustomAnalysisAdminUiValidator customAnalysisAdminUiValidator = new CustomAnalysisAdminUiValidator();
+    public CustomAnalysisAdminUiValidator customAnalysisAdminUiValidator = new CustomAnalysisAdminUiValidator();
 
     @FindBy(name = "searchRecording")
-    protected WebElement searchRecordingTextBox;
+    public WebElement searchRecordingTextBox;
 
 
 }

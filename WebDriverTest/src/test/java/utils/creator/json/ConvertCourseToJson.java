@@ -4,6 +4,7 @@ import com.automation.main.report.entity.Course;
 import com.automation.main.report.entity.Instructor;
 import com.automation.main.report.entity.Student;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import utils.UniversityConfigure;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,9 +50,7 @@ public class ConvertCourseToJson {
 
     private void setPathToUniversityDataFolder() {
         try {
-            String pageUrl = System.getProperty("UniversityURL");
-            String s = pageUrl.replaceAll("https://\\b", "");
-            String universityName = s.replaceAll(".tegrity.com\\b", "");
+            String universityName = UniversityConfigure.getUniversityName();
             File universityFolder = new File(pathToJson + "\\" + universityName);
             if (!universityFolder.exists()) {
                 System.out.println("Creating folder at " + pathToJson + " for storing course details");

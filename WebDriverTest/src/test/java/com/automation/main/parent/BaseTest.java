@@ -4,6 +4,7 @@ import atu.testng.reports.ATUReports;
 import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import com.automation.main.page_helpers.*;
+import com.automation.main.report.page.DefaultAdminAutocompleteContentSection;
 import com.automation.main.report.page.DefaultInstructorContentSection;
 import com.automation.main.utilities.DriverSelector;
 import org.openqa.selenium.WebDriver;
@@ -49,6 +50,7 @@ public class BaseTest extends GroupsManger implements BasicTest {
     public ConfirmationMenu confirmationMenu;
     public CustomAnalysisPage customAnalysisPage;
     protected DefaultInstructorContentSection defaultInstructorContentSection;
+    protected DefaultAdminAutocompleteContentSection defaultAdminAutocompleteContentSection;
     protected  WebDriver driver;
 
 //    set ATU reporter configurations
@@ -117,6 +119,7 @@ public class BaseTest extends GroupsManger implements BasicTest {
         confirmationMenu = PageFactory.initElements(driver, ConfirmationMenu.class);
          customAnalysisPage = PageFactory.initElements(driver, CustomAnalysisPage.class);
         defaultInstructorContentSection = PageFactory.initElements(driver,DefaultInstructorContentSection.class);
+        defaultAdminAutocompleteContentSection = PageFactory.initElements(driver,DefaultAdminAutocompleteContentSection.class);
     }
 
     public void initializeCourseObject() throws InterruptedException {

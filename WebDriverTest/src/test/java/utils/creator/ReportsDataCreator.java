@@ -20,6 +20,7 @@ public class ReportsDataCreator extends DataCreator {
     private String users = "ReportInsA,ReportInsB,ReportStudA,ReportStudB";
     private String courses = "CouresA,CouresB,CouresC,CouresD";
     String pathToJson = "\\src\\test\\resources\\json\\reports\\Course";
+
     public List<String> createdUsers;
     public List<String> createdCourses;
     private long currentDate;
@@ -31,6 +32,7 @@ public class ReportsDataCreator extends DataCreator {
         Date current = new Date();
         currentDate = current.getTime();
     }
+
 
     public void createUsers() {
         usersActions.disableEulaPage();

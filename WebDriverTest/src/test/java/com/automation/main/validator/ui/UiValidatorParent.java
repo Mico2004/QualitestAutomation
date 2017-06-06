@@ -2,7 +2,6 @@ package com.automation.main.validator.ui;
 
 import atu.testng.reports.ATUReports;
 import com.automation.main.page_helpers.CustomAnalysisDropDown;
-import com.automation.main.report.content.DropBox;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -141,4 +140,6 @@ public abstract class UiValidatorParent implements UiReportActions {
             throw new RuntimeException("Couldn't find the expected option");
         }
     }
+
+
 }
