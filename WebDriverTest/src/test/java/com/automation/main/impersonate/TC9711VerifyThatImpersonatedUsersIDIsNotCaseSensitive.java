@@ -153,8 +153,10 @@ import java.util.List;
     }
 
     private String getUpperOrMixedText(String text, boolean upperOrMixed) {
+        String theNameBeforeChanging = text;
 
         if (upperOrMixed) {
+            ATUManager.asserIsTrueAndReport(true,"The user name change form '"+theNameBeforeChanging+"' to "+text.toUpperCase());
             return text.toUpperCase();
         }
 
@@ -166,6 +168,8 @@ import java.util.List;
                 chars[i] = Character.toUpperCase(chars[i]);
             }
         }
+        ATUManager.asserIsTrueAndReport(true,"Some of letters of user name are being uppercase, before '"+theNameBeforeChanging+"' after"+text.toUpperCase());
+
         return String.copyValueOf(chars);
     }
 
@@ -180,68 +184,6 @@ import java.util.List;
 
         ATUManager.asserIsTrueAndReport(areListCoursesMatches && equals, "List of displayed courses is correct for this user, with "+description+" name", "", "");
 
-    }
-
-
-    private void prepareDataTest() throws InterruptedException {
-        tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-        tegrity.loginCourses("SuperUser");
-        WaitDriverUtility.waitToPageBeLoaded(driver);
-        initializeCourseObject();
-
-        course.selectCourseThatStartingWith("BankValid");
-
-        record.clickOnRecordingsTab();
-        selectAndCopy();
-        selectAndCopy();
-
-
-        //adding student recording
-        record.clickOnStudentRecordingsTab();
-        selectAndCopy();
-
-        //adding test recording
-        record.clickOnTestsTab();
-        selectAndCopy();
-
-        //adding addition content
-        addAdditionalContent();
-        record.signOut();
-    }
-
-    private void addAdditionalContent() throws InterruptedException {
-        record.clickOnAdditionContentTab();
-        record.clickCheckBoxByIndex(1);
-        record.clickOnContentTaskThenCopy();
-        copy.selectTargetCourseFromCourseList(commonCourseName);
-        copy.clickOnCopyButton();
-    }
-
-    private void selectAndCopy() throws InterruptedException {
-        record.clickCheckBoxByIndex(1);
-        record.copyRecordsToAnotherCourse(commonCourseName);
-        confirmation_menu.clickOnOkButton();
-    }
-
-    private void loginAsAdminAndEnableStudentTesting() throws InterruptedException {
-        tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-        tegrity.loginCourses("Admin");
-        WaitDriverUtility.waitToPageBeLoaded(driver);
-        admin_dashboard_page.clickOnTargetSubmenuAdvancedServices("Advanced Service Settings");
-        advancedServiceSettingsPage.enableStudyTestingCheckboxAndClickOk(confirmation_menu);
-        advancedServiceSettingsPage.signOut();
-        System.out.println("student is enable to testing");
-    }
-
-    private void loginAsInsAndEnableAllCourseSettings() throws InterruptedException {
-        tegrity.loginCourses("User1");
-        WaitDriverUtility.waitToPageBeLoaded(driver);
-        initializeCourseObject();
-        commonCourseName = course.selectCourseThatStartingWith("abc");
-        record.clickOnCourseTaskThenCourseSettings();
-        courseSettingsPage.checkAllCourseSettingsCheckboxs();
-        courseSettingsPage.clickOnOkButton();
-        record.signOut();
     }
 
 }
