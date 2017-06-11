@@ -84,7 +84,7 @@ public abstract class UiValidatorParent implements UiReportActions {
         String attribute = selectElement.getAttribute("ng-init");
 
         boolean isContainsYear = attribute.contains("Year");
-        ATUManager.asserIsTrueAndReport(isContainsYear, "The default time aggregation is year" );
+        ATUManager.asserIsTrueAndReport(isContainsYear, "The default time aggregation is year");
 
         selectElement.click();
         List<WebElement> options = driver.findElements(By.cssSelector(cssSelector + ">option"));
@@ -101,16 +101,17 @@ public abstract class UiValidatorParent implements UiReportActions {
 
     @Override
     public void validateGroupsDropDowns(List<WebElement> option) {
+        String theGroupName= getTheGroupName(option);
         List<String> actualList = convertListElementToListOfElementText(option);
         WaitDriverUtility.getElementParent(option.get(0)).click();
         String[] splitted = groupDropDown.split(",");
         for (String expectedValue : splitted) {
             boolean contains = actualList.contains(expectedValue.toLowerCase());
             if (!contains) {
-                ATUManager.asserIsTrueAndReport(false, "The dropDown does not contain " + expectedValue + " text");
+                ATUManager.asserIsTrueAndReport(false, "The " + theGroupName + "dropDown does not contain " + expectedValue + " text");
             }
         }
-        ATUManager.asserIsTrueAndReport(true, "The dropBox contain required texts as expected");
+        ATUManager.asserIsTrueAndReport(true, "The " + theGroupName + " dropBox contain required texts as expected");
 
     }
 
@@ -139,6 +140,16 @@ public abstract class UiValidatorParent implements UiReportActions {
         } else {
             throw new RuntimeException("Couldn't find the expected option");
         }
+    }
+
+    private String getTheGroupName(List<WebElement> options) {
+        for (WebElement element : options) {
+            String selected = element.getAttribute("selected");
+            if (selected != null && selected.equals("true")) {
+                return element.getText();
+            }
+        }
+        throw new RuntimeException("Fails to get group name");
     }
 
 

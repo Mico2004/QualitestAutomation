@@ -51,18 +51,20 @@ public class BaseTest extends GroupsManger implements BasicTest {
     public CustomAnalysisPage customAnalysisPage;
     protected DefaultInstructorContentSection defaultInstructorContentSection;
     protected DefaultAdminAutocompleteContentSection defaultAdminAutocompleteContentSection;
-    protected  WebDriver driver;
+    protected WebDriver driver;
 
-//    set ATU reporter configurations
-    {System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");}
+    //    set ATU reporter configurations
+    {
+        System.setProperty("atu.reporter.config", "src/test/resources/atu.properties");
+    }
 
     @BeforeSuite
-    private void beforeSuite(){
+    private void beforeSuite() {
 
     }
 
     @BeforeMethod(alwaysRun = true)
-    public void printTestDeatils(ITestContext result){
+    public void printTestDeatils(ITestContext result) {
 
         String testName = result.getAllTestMethods()[0].getTestClass().getName();
 //                result.getInstanceName();
@@ -72,6 +74,7 @@ public class BaseTest extends GroupsManger implements BasicTest {
         ATUReports.add("Message window.", "Starting the test: " + testName + " at " + DateToStr,
                 "Starting the test: " + testName + " at " + DateToStr, LogAs.PASSED, null);
     }
+
     @AfterMethod
     public void tearDownTest(ITestResult testResult) {
 
@@ -82,19 +85,19 @@ public class BaseTest extends GroupsManger implements BasicTest {
         }
 
         if (status == ITestResult.FAILURE) {
-            System.out.println("the test has failed "+testResult.getThrowable().getMessage());
+            System.out.println("the test has failed " + testResult.getThrowable().getMessage());
             ATUReports.add("Message window." + testResult.getThrowable().getMessage(), "Done.", "Done.", LogAs.FAILED, null);
         }
 
-        if (driver!=null){
+        if (driver != null) {
             driver.quit();
         }
     }
 
     @BeforeClass
-    public void initPageObjects(){
+    public void initPageObjects() {
         driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-        ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen( CaptureScreen.ScreenshotOf.DESKTOP));
+        ATUReports.add("selected browser type", LogAs.PASSED, new CaptureScreen(CaptureScreen.ScreenshotOf.DESKTOP));
 
         tegrity = PageFactory.initElements(driver, LoginHelperPage.class);
 
@@ -103,7 +106,7 @@ public class BaseTest extends GroupsManger implements BasicTest {
 
         confirm_menu = PageFactory.initElements(driver, ConfirmationMenu.class);
 
-        top_bar_helper = PageFactory.initElements(driver,TopBarHelper.class);
+        top_bar_helper = PageFactory.initElements(driver, TopBarHelper.class);
         search_page = PageFactory.initElements(driver, SearchPage.class);
 
         bottom_footer = PageFactory.initElements(driver, BottomFooter.class);
@@ -117,9 +120,9 @@ public class BaseTest extends GroupsManger implements BasicTest {
         player_page = PageFactory.initElements(driver, PlayerPage.class);
         edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
         confirmationMenu = PageFactory.initElements(driver, ConfirmationMenu.class);
-         customAnalysisPage = PageFactory.initElements(driver, CustomAnalysisPage.class);
-        defaultInstructorContentSection = PageFactory.initElements(driver,DefaultInstructorContentSection.class);
-        defaultAdminAutocompleteContentSection = PageFactory.initElements(driver,DefaultAdminAutocompleteContentSection.class);
+        customAnalysisPage = PageFactory.initElements(driver, CustomAnalysisPage.class);
+        defaultInstructorContentSection = PageFactory.initElements(driver, DefaultInstructorContentSection.class);
+        defaultAdminAutocompleteContentSection = PageFactory.initElements(driver, DefaultAdminAutocompleteContentSection.class);
     }
 
     public void initializeCourseObject() throws InterruptedException {
@@ -128,14 +131,22 @@ public class BaseTest extends GroupsManger implements BasicTest {
         course.courses = course.getCoursesListFromElement(course.course_list);
     }
 
-    public void login(String userName,boolean isUserFromPropertiesFile){
+    public void login(String userName, boolean isUserFromPropertiesFile) {
         try {
             tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
             initializeCourseObject();
-            tegrity.loginCourses(userName,isUserFromPropertiesFile);
+            tegrity.loginCourses(userName, isUserFromPropertiesFile);
         } catch (Exception e) {
-            ATUManager.asserIsTrueAndReport(false,"Login as "+userName+" has failed !","","");
+            ATUManager.asserIsTrueAndReport(false, "Login as " + userName + " has failed !", "", "");
         }
     }
+
+    @AfterMethod
+    public void initWebDriverAfterTestGetFailure(ITestResult testResult) {
+        if (testResult.getStatus() == ITestResult.FAILURE) {
+            driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
+        }
+    }
+
 
 }

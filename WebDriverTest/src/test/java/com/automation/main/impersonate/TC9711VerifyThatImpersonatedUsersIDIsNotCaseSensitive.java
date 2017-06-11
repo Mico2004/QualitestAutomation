@@ -10,11 +10,11 @@ import com.automation.main.page_helpers.*;
 import com.automation.main.parent.BaseTest;
 import com.automation.main.ping.helper.LogInAsAnotherUser;
 import com.automation.main.utilities.DriverSelector;
-import com.automation.main.validator.ui.CourseUiValidator;
 import junitx.util.PropertyManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -26,8 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 @Listeners({ATUReportsListener.class, ConfigurationListener.class, MethodListener.class})
-    public class TC9711VerifyThatImpersonatedUsersIDIsNotCaseSensitive extends BaseTest {
-
+public class TC9711VerifyThatImpersonatedUsersIDIsNotCaseSensitive extends BaseTest {
 
 
     {
@@ -107,7 +106,7 @@ import java.util.List;
     public void test() throws InterruptedException {
 
 
-       // login as student and save the list courses names
+        // login as student and save the list courses names
         saveCoursesListBeforeImpersonate();
 
 
@@ -117,19 +116,19 @@ import java.util.List;
         //save the main tab id
         impersonateTabId = driver.getWindowHandle();
 
-        runTestAsDiffrentUser("Admin",true);
+        runTestAsDiffrentUser("Admin", true);
 
-        runTestAsDiffrentUser("Admin",false);
+        runTestAsDiffrentUser("Admin", false);
 
 
-        runTestAsDiffrentUser("HelpdeskAdmin",true);
+        runTestAsDiffrentUser("HelpdeskAdmin", true);
 
-        runTestAsDiffrentUser("HelpdeskAdmin",false);
+        runTestAsDiffrentUser("HelpdeskAdmin", false);
     }
 
     private void saveCoursesListBeforeImpersonate() {
         LogInAsAnotherUser logInAsAnotherUser = new LogInAsAnotherUser();
-        logInAsAnotherUser.openAnotherSession("User3",true);
+        logInAsAnotherUser.openAnotherSession("User3", true);
         logInAsAnotherUser.getDriver().navigate().back();
         courseListBeforeImpersonate = logInAsAnotherUser.course.getCourseList();
         logInAsAnotherUser.getDriver().quit();
@@ -141,7 +140,7 @@ import java.util.List;
         admin_dashboard_page.clickOnTargetSubmenuUsers("Impersonate User");
         WaitDriverUtility.waitToPageBeLoaded(driver);
         String instructor = PropertyManager.getProperty("User3");
-        instructor = getUpperOrMixedText(instructor,isUpperCase);
+        instructor = getUpperOrMixedText(instructor, isUpperCase);
         impersonateUserPage.enterAsAnotherUser(instructor);
         WaitDriverUtility.waitToPageBeLoaded(driver);
         WaitDriverUtility.switchToNewTabAndDoNotCloseOther(driver, "Tegrity - Courses");
@@ -156,7 +155,7 @@ import java.util.List;
         String theNameBeforeChanging = text;
 
         if (upperOrMixed) {
-            ATUManager.asserIsTrueAndReport(true,"The user name change form '"+theNameBeforeChanging+"' to "+text.toUpperCase());
+            ATUManager.asserIsTrueAndReport(true, "The user name change form '" + theNameBeforeChanging + "' to " + text.toUpperCase());
             return text.toUpperCase();
         }
 
@@ -168,21 +167,21 @@ import java.util.List;
                 chars[i] = Character.toUpperCase(chars[i]);
             }
         }
-        ATUManager.asserIsTrueAndReport(true,"Some of letters of user name are being uppercase, before '"+theNameBeforeChanging+"' after"+text.toUpperCase());
+        ATUManager.asserIsTrueAndReport(true, "Some of letters of user name are being uppercase, before '" + theNameBeforeChanging + "' after" + text.toUpperCase());
 
         return String.copyValueOf(chars);
     }
 
     private void validateCoursesListAreCorrect(boolean isUpperCase) {
-        String description="mixed";
-        if (isUpperCase){
-            description ="upper case";
+        String description = "mixed";
+        if (isUpperCase) {
+            description = "upper case";
         }
         List<String> afterImpersonate = course.getCourseList();
         boolean areListCoursesMatches = afterImpersonate.size() == courseListBeforeImpersonate.size();
         boolean equals = afterImpersonate.equals(courseListBeforeImpersonate);
 
-        ATUManager.asserIsTrueAndReport(areListCoursesMatches && equals, "List of displayed courses is correct for this user, with "+description+" name", "", "");
+        ATUManager.asserIsTrueAndReport(areListCoursesMatches && equals, "List of displayed courses is correct for this user, with " + description + " name", "", "");
 
     }
 

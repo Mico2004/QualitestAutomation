@@ -23,9 +23,11 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 
     @Override
     public boolean retry(ITestResult result) {
-        System.out.println("The following test will run again: "+result.getInstanceName());
         if(counter < retryLimit)
         {
+
+            System.out.println("The following test will run again: "+result.getInstanceName());
+
             counter++;
             return true;
         }

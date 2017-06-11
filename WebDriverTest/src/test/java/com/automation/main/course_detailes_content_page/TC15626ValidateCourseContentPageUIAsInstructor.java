@@ -226,7 +226,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		record.verifyFormatOfRecordingRecordedBy();
 		
 		
-		// 16.3. Recording adding date: “mm/dd/yyyy” (right aligned).
+		// 16.3. Recording adding date: ï¿½mm/dd/yyyyï¿½ (right aligned).
 		record.verifyFormatOfRecordingsAddingDate();
 	
 		
@@ -239,7 +239,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		record.verifyThatRecordingChaptersAreDisplySequentially();
 		
 		// 17.3. The recording chapters contain the ordinal numbers.
-		// 17.4. The recording chapters contain the length from – to in a format as follows: “X:XX:XX – X:XX:XX"
+		// 17.4. The recording chapters contain the length from ï¿½ to in a format as follows: ï¿½X:XX:XX ï¿½ X:XX:XX"
 		record.verifyRecordingChaptersContainsOrdinalNumberAndContainLengthFromToInAFormat();
 		
 		// 17.5. The recording chapters contain the image preview.
@@ -263,7 +263,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 			ATUReports.add("Verifed that chapter icon become a bit bigger in size.", "True.", "False.", LogAs.FAILED, null);
 		}
 		
-		// 18.2. The ‘>’ video player symbol is displayed over the chapter preview. 
+		// 18.2. The ï¿½>ï¿½ video player symbol is displayed over the chapter preview. 
 		record.verifyWebElementDisplayed(driver.findElements(By.cssSelector(".play-button")).get(0), "Play symbol");
 
 		// 19. Click on a recording's title.
@@ -308,7 +308,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		Thread.sleep(1000);
 		
 		// 23.1. The exact link the user has hovered over becomes underlined.
-		if((record.breadcrumbs_courses_link.getCssValue("text-decoration")).equals("underline")) {
+		if((record.breadcrumbs_courses_link.getCssValue("text-decoration")).contains("underline")) {
 			System.out.println("Verfied that hovering over breadcrumbs courses link have underline.");
 			ATUReports.add("Verfied that hovering over breadcrumbs courses link have underline.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
@@ -374,21 +374,21 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		// 31.2. The button background-color changes (brighter).
 		String hovred_start_test_button_background = record.getBackGroundColor(record.start_test_button);
 		
-		if(hovred_start_test_button_background.equals(init_start_test_background)) {
-			System.out.println("The Start a Test button background-color not changed.");
-			ATUReports.add("The Start a Test button background-color changed.", "True.", "False.", LogAs.FAILED, null);
-			Assert.assertTrue(false);
-		} else {
+		if(!hovred_start_test_button_background.equals(init_start_test_background)) {
 			System.out.println("The Start a Test button background-color changed.");
 			ATUReports.add("The Start a Test button background-color changed.", "True.", "True.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
+		} else {
+			System.out.println("The Start a Test button background-color not changed.");
+			ATUReports.add("The Start a Test button background-color changed.", "True.", "False.", LogAs.FAILED, null);
+			Assert.assertTrue(false);
 		}
 
 		// 32. Validate tabs are displayed correctlly.
 		// 32.1. The "Recordings" tab is displayed under the course name.
-		// 32.2. The "Additional Content" tab is displayed next to the ‘Recordings’ tab.
-		// 32.3. The "Student Recordings" tab is displayed next to the ‘Additional Content’ tab.
-		// 32.4. The "Tests" tab is displayed next to the ‘Student Recordings’ tab.
+		// 32.2. The "Additional Content" tab is displayed next to the ï¿½Recordingsï¿½ tab.
+		// 32.3. The "Student Recordings" tab is displayed next to the ï¿½Additional Contentï¿½ tab.
+		// 32.4. The "Tests" tab is displayed next to the ï¿½Student Recordingsï¿½ tab.
 		record.tabsLocationVerified();
 
 		// 33. Return to course list
@@ -418,7 +418,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		// 39.1. The hint with the name of the menu item is displayed to the user. 
 		record.verifyWebElementHaveTargetAttributeTitle(record.view_button, "View");
 		
-		// 39.2. The 'View’ menu element consists of the items as follows: 'Sort By' ‘Title’, ‘Date’, ‘Duration ’, ‘ Tags ' with gray separator (might be Tags under it).
+		// 39.2. The 'Viewï¿½ menu element consists of the items as follows: 'Sort By' ï¿½Titleï¿½, ï¿½Dateï¿½, ï¿½Duration ï¿½, ï¿½ Tags ' with gray separator (might be Tags under it).
 		record.verifyWebElementDisplayed(record.sort_by_title, "Title");
 		record.verifyWebElementDisplayed(record.sort_by_date, "Date");
 		record.verifyWebElementDisplayed(record.sort_by_duration, "Duration");
@@ -432,7 +432,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		// 40.1. The hint with the name of the menu item is displayed to the user. 
 		record.verifyWebElementHaveTargetAttributeTitle(record.course_task_button, "Course Tasks");
 		
-		// 40.2. The ‘Course Tasks’ menu element consists of the items as follows: ‘Course Settings’, ‘Upload a Recording',‘Upload Video File’, ‘Upload Audio File’(not in mac,‘Add Additional Content File’, ‘Add Additional Content Link’, Get Live Webcast’ ‘Subscribe to Your Course’s...’ menu sections separator (grayed out text), ‘RSS Feed’, ‘Podcast’, ‘Video Podcast’.
+		// 40.2. The ï¿½Course Tasksï¿½ menu element consists of the items as follows: ï¿½Course Settingsï¿½, ï¿½Upload a Recording',ï¿½Upload Video Fileï¿½, ï¿½Upload Audio Fileï¿½(not in mac,ï¿½Add Additional Content Fileï¿½, ï¿½Add Additional Content Linkï¿½, Get Live Webcastï¿½ ï¿½Subscribe to Your Courseï¿½s...ï¿½ menu sections separator (grayed out text), ï¿½RSS Feedï¿½, ï¿½Podcastï¿½, ï¿½Video Podcastï¿½.
 		record.verifyWebElementDisplayed(record.course_settings_button, "Course Settings");
 		record.verifyWebElementDisplayed(record.upload_recording, "Upload a Recording");
 		record.verifyWebElementDisplayed(record.upload_video_file, "Upload Video File");
@@ -442,7 +442,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		record.verifyWebElementDisplayed(record.rssfeed, "RSS Feed");
 		record.verifyWebElementDisplayed(record.podcast_button, "Podcast");
 		record.verifyWebElementDisplayed(record.video_podcast, "Video Podcast");
-		record.verifyWebElementDisplayed(record.SubscribeToACourse, "Subscribe to Your Course’s...");
+		record.verifyWebElementDisplayed(record.SubscribeToACourse, "Subscribe to Your Courseï¿½s...");
 		
 		
 		// 41. Hover over "Recording Tasks" element.
@@ -452,7 +452,7 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		// 41.1. The hint with the name of the menu item is displayed to the user. 
 		record.verifyWebElementHaveTargetAttributeTitle(record.recording_tasks_button, "Recording Tasks");
 		
-		// 41.2. The ‘Recording Tasks’ menu element consists of the items as follows: ‘Move’, ‘Copy’, ‘Delete’, 'Publish', 'Tag',’, ‘Download Recording’. menu sections separation line (grayed out), ‘Edit Recording’, ‘Edit Recording Properties’, ‘Share Recording'.
+		// 41.2. The ï¿½Recording Tasksï¿½ menu element consists of the items as follows: ï¿½Moveï¿½, ï¿½Copyï¿½, ï¿½Deleteï¿½, 'Publish', 'Tag',ï¿½, ï¿½Download Recordingï¿½. menu sections separation line (grayed out), ï¿½Edit Recordingï¿½, ï¿½Edit Recording Propertiesï¿½, ï¿½Share Recording'.
 		record.verifyWebElementDisplayed(record.move_button, "Move");
 		record.verifyWebElementDisplayed(record.copy_button, "Copy");
 		record.verifyWebElementDisplayed(record.delete_button, "Delete");
@@ -485,15 +485,6 @@ public class TC15626ValidateCourseContentPageUIAsInstructor {
 		record.clickElement(record.searchbox);
 		Thread.sleep(1000);
 		record.verifyRecordingSortedByDate(record.convertRecordingsListToDate());
-		
-		// TODO: 45. Validate the recordings are separated with gray line - Not for automation, recheck it.
-//		Thread.sleep(2000);
-//		
-//		System.out.println(driver.findElement(By.cssSelector(".recordingInfoContainer")));
-//
-//		System.out.println(driver.findElement(By.cssSelector(".recordingInfoContainer.ng-scope")).getCssValue("border-bottom-color"));
-//		System.out.println(driver.findElement(By.cssSelector(".recordingInfoContainer.ng-scope")).getCssValue("border-bottom-style"));
-//		System.out.println(driver.findElement(By.cssSelector(".recordingInfoContainer.ng-scope")).getAttribute("border-bottom-width"));
 		
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);

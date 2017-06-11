@@ -61,7 +61,8 @@ public class CustomAnalysisInstructorUiValidator extends UiValidatorParent {
         textInTitle.remove(textInTitle.size() - 1);
         boolean ordered = Ordering.natural().isOrdered(textInTitle);
         try {
-            ATUManager.asserIsTrueAndReport(ordered, "The drop down result should be sorted in alphabetical order");
+            String theCourseName = WaitDriverUtility.getElementParent(element).findElement(By.tagName("span")).getText();
+            ATUManager.asserIsTrueAndReport(ordered, "The "+theCourseName+" drop down result should be sorted in alphabetical order");
         } catch (Exception e) {
             e.printStackTrace();
         }
