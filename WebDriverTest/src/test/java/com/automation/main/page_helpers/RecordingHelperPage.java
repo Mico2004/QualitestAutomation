@@ -3004,9 +3004,10 @@ public class RecordingHelperPage extends Page {
     // Verify that recooding has no status on the index record
     public void verifyNoStatusInTheIndex(int index) {
         try {
-
-            String status = driver.findElement(By.id(("RecordingStatus") + Integer.toString(index))).getText();
-            if (status.equals("")) {
+            waitForVisibility(first_recording_status);
+            WebDriverWait wait = new WebDriverWait(driver, 20);
+            Boolean isNotStatus = wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("RecordingStatus1"), ""));
+            if (isNotStatus) {
                 System.out.println("Verify no status in the index:" + index);
                 ATUReports.add(time + " Verify no status in the index:" + index, "status", "Empty", "Empty", LogAs.PASSED, null);
                 Assert.assertTrue(true);
@@ -3016,7 +3017,7 @@ public class RecordingHelperPage extends Page {
                 Assert.assertTrue(false);
             }
         } catch (Exception e) {
-            System.out.println("Not Verify no status in the index:" + index);
+            System.out.println("Not Verify no status in the index:" + index + " stacktrace : " + e.toString());
             ATUReports.add(time + " verify no status in the index:" + index, "status", "Empty", "Not Empty", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
@@ -3743,23 +3744,16 @@ public class RecordingHelperPage extends Page {
 
     public void veirfyStatusNotPublishOnTheFirstRecord() {
 
-        try {
-            waitForVisibility(first_recording_status);
-            String firstStatus = first_recording_status.getText();
-            if (firstStatus.equals("Not Published")) {
-                System.out.println("veirfy that the status is not publish on the first record.");
-                ATUReports.add(time + " veirfy that the status is not publish on the first record.", "True.", "True.", LogAs.PASSED, null);
-            } else {
-                System.out.println("Not veirfy that the status is not publish on the first record.");
-                ATUReports.add(time + " Not veirfy that the status is not publish on the first record.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-            }
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        Boolean isNotStatus = wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("RecordingStatus1"), "Not Published"));
 
-        } catch (Exception msg) {
-            System.out.println("Not veirfy that the status is not publish on the first record.");
+        if (isNotStatus) {
+            System.out.println("veirfy that the status is not publish on the first record.");
+            ATUReports.add(time + " veirfy that the status is not publish on the first record.", "True.", "True.", LogAs.PASSED, null);
+        } else {
+            System.out.println("veirfy that the status is not publish on the first record.");
             ATUReports.add(time + " Not veirfy that the status is not publish on the first record.", "True.", "False.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
-            Assert.assertTrue(false);
         }
-
     }
 
 
@@ -4366,8 +4360,11 @@ public class RecordingHelperPage extends Page {
 
     // verify check box is selected
     public void SelectOneCheckBoxOrVerifyAlreadySelected(WebElement checkbox) throws InterruptedException {
+
         try {
             waitForVisibility(checkbox);
+            WaitDriverUtility.sleepInSeconds(4);
+
             if (checkbox.isSelected()) {
                 System.out.println("select the Checkbox " + checkbox.getAttribute("id"));
                 ATUReports.add("select the Checkbox " + checkbox.getAttribute("id"), "Selected/Already selected.", "Already selected.", LogAs.PASSED, null);
@@ -4380,7 +4377,7 @@ public class RecordingHelperPage extends Page {
                 Assert.assertTrue(true);
             }
         } catch (Exception e) {
-            System.out.println("Checkbox is not selected.");
+            System.out.println("Checkbox is not selected. stackTrace" + e.toString());
             ATUReports.add("Fail to select the Checkbox" + checkbox.getAttribute("id"), "Success select.", "Fail to select.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
             Assert.assertTrue(false);
         }
