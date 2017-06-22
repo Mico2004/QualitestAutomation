@@ -207,6 +207,8 @@ public class AdvancedServiceSettingsPage extends Page {
 				ATUReports.add(time +" Click studnet testing checkbox", "studnet testing checkbox status", "Success select", "Success select",
 						LogAs.PASSED, null);
 			} else {
+				WebDriverWait wait = new WebDriverWait(driver, 20);
+				wait.until(ExpectedConditions.elementToBeClickable(cancel));
 				cancel.click();
 				System.out.println("already checked Enable student testing checkbox");
 				ATUReports.add(time +" already  checked Enable student testing checkbox", "student testing checkbox status", "Success select",
