@@ -82,24 +82,26 @@ public class WaitDriverUtility {
     public static void switchToNewTab(WebDriver driver, String expectedBrowserTitle) {
         try {
             int timeOut = 10;
+
             sleepInSeconds(2);
             while (timeOut > 0) {
-                String currentTab = driver.getWindowHandle();
-                for (String tab : driver.getWindowHandles()) {
-                    if (!tab.equals(currentTab)) {
-                        driver.close();
-                        driver.switchTo().window(tab);
-                        WaitDriverUtility.sleepInSeconds(2);
+                    String currentTab = driver.getWindowHandle();
+                    for (String tab : driver.getWindowHandles()) {
+                        if (!tab.equals(currentTab)) {
+                            driver.close();
+                            driver.switchTo().window(tab);
+                            System.out.println("waiting 5 sec and then switching tabs");
+                            WaitDriverUtility.sleepInSeconds(5);
 
-                        if (driver.getTitle().equals(expectedBrowserTitle)) {
-                            return;
+                            if (driver.getTitle().equals(expectedBrowserTitle)) {
+                                System.out.println("Switching tabs successfully completed");
+                                return;
+                            }
+                            timeOut--;
                         }
-                        timeOut--;
                     }
-                }
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
