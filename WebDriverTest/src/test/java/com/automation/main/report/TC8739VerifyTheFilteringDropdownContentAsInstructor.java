@@ -30,6 +30,8 @@ public class TC8739VerifyTheFilteringDropdownContentAsInstructor extends BaseTes
     @Test
     public void test() throws InterruptedException {
 
+        defaultInstructorContentSection = PageFactory.initElements(driver, DefaultInstructorContentSection.class);
+
         login(course.instructorA.userName, false);
         customAnalysisPage.navigateToCustomAnalysis();
         defaultInstructorContentSection = PageFactory.initElements(driver, DefaultInstructorContentSection.class);

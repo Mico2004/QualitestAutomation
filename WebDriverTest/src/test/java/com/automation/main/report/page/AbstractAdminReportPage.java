@@ -64,5 +64,14 @@ public class AbstractAdminReportPage extends Page {
     @FindBy(name = "searchRecording")
     public WebElement searchRecordingTextBox;
 
+    @FindBy(css = "button[title=\"Run Report\"]")
+    public WebElement runReportButton;
+
+    @FindBy(id = "reportForm")
+    public WebElement resultOfReport;
+
+    @FindBy(css = "select[ng-model=\"$parent.time\"]")
+    public WebElement aggretionTimeDropDown;
+
 
 }

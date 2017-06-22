@@ -1322,16 +1322,19 @@ public class RecordingHelperPage extends Page {
         int timeOut = 60;
         List<String> courseRecordingList = getCourseRecordingList();
         while (timeOut > 0) {
-            for (int i = 1; i < courseRecordingList.size(); i++) {
+            for (int i = 1; i < courseRecordingList.size()+1; i++) {
                 WebElement recording = WaitDriverUtility.waitForElementBeDisplayed(driver, By.id("RecordingStatus" + i), 10);
                 String textFromWebElement = getTextFromWebElement(recording, 10);
                 if (!textFromWebElement.contains("Moving") || !textFromWebElement.contains("Copying")) {
                     areListAvilable++;
                 }
+                if (areListAvilable == courseRecordingList.size()) {
+
+                    return;
+                }
             }
-            if (areListAvilable == courseRecordingList.size()) {
-                break;
-            }
+
+            areListAvilable=0;
             ;
             timeOut--;
             WaitDriverUtility.sleepInSeconds(1);

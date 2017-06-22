@@ -121,7 +121,7 @@ public class BaseTest extends GroupsManger implements BasicTest {
         edit_recording_properties_window = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
         confirmationMenu = PageFactory.initElements(driver, ConfirmationMenu.class);
         customAnalysisPage = PageFactory.initElements(driver, CustomAnalysisPage.class);
-        defaultInstructorContentSection = PageFactory.initElements(driver, DefaultInstructorContentSection.class);
+
         defaultAdminAutocompleteContentSection = PageFactory.initElements(driver, DefaultAdminAutocompleteContentSection.class);
     }
 
@@ -140,13 +140,5 @@ public class BaseTest extends GroupsManger implements BasicTest {
             ATUManager.asserIsTrueAndReport(false, "Login as " + userName + " has failed !", "", "");
         }
     }
-
-    @AfterMethod
-    public void initWebDriverAfterTestGetFailure(ITestResult testResult) {
-        if (testResult.getStatus() == ITestResult.FAILURE) {
-            driver = DriverSelector.getDriver(DriverSelector.getBrowserTypeByProperty());
-        }
-    }
-
 
 }

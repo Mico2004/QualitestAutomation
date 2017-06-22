@@ -18,6 +18,5 @@ public class TC12866VerifyTheFilteringAutocompleteContentAsAdmin extends BaseTes
         login("Admin", true);
         customAnalysisPage.navigateToCustomAnalysis();
         defaultAdminAutocompleteContentSection.verifyUi();
-
     }
 }

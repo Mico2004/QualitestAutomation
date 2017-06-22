@@ -13,7 +13,7 @@ public class WaitDriverUtility {
 
     public static WebElement waitForElementBeDisplayed(WebDriver webDriver, By by, long timeoutInSeconds) {
 
-        System.out.println("waiting for element be displayed");
+        System.out.println("waiting for element be displayed "+by);
         WebDriverWait wait = new WebDriverWait(webDriver, timeoutInSeconds);
         return wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
@@ -162,4 +162,6 @@ public class WaitDriverUtility {
         }
         ATUManager.asserIsTrueAndReport(true,"The all checkBoxes are checked");
     }
+
+
 }

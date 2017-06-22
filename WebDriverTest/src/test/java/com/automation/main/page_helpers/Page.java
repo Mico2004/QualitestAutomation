@@ -1830,5 +1830,11 @@ public class Page {
             }
 		}
 	}
+
+	protected void switchToFrameById(By by){
+		WebElement frame = driver.findElement(by);
+		waitForVisibility(frame,10);
+		driver.switchTo().frame(frame);
+	}
 }
 
