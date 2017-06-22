@@ -217,7 +217,7 @@ public class TC18859ValidateTheSourceTypeAsRecordingChapterInSearchFieldOnThePas
 
 		// 5.2. The breadcrumb structure displayed as follows: "Courses > X results found for: "search_criterion". (X seconds)".
 		search_page.verfiyBreadcrumbStructureDisplayedAsCoursesCoursenameXresultsfound(current_course, recording_chapter);
-			
+		WaitDriverUtility.waitForWebElementsListBePopulated(driver,By.cssSelector(".video-thumbnail"));
 		// 5.3. The recording chapter icon is displayed.
 		search_page.verifyWebElementDisplayed(search_page.video_thumbnails_list.get(0), "The recording capter icon");
 			

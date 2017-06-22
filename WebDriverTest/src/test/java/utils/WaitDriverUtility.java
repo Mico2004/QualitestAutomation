@@ -166,4 +166,17 @@ public class WaitDriverUtility {
     }
 
 
+    public static void waitForWebElementsListBePopulated(WebDriver driver,By by) {
+        int timeout = 20;
+        List<WebElement> elements1 = driver.findElements(by);
+        while ( timeout > 0) {
+            if (elements1.size()>0){
+                return;
+            }
+            timeout--;
+            sleepInSeconds(1);
+        }
+        throw new RuntimeException("Couldn't located the list of element " + by);
+
+    }
 }
