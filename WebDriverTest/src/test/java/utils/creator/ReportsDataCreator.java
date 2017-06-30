@@ -2,6 +2,7 @@ package utils.creator;
 
 
 import com.automation.main.ping.helper.LogInAsAnotherUser;
+import com.automation.main.report.entity.CourseViewManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import junitx.util.PropertyManager;
 import utils.ATUManager;
@@ -138,8 +139,9 @@ public class ReportsDataCreator extends DataCreator {
             recordingActions.addRegularRecordingsToCourseByNames(targetCourse, courseTypeTemplate.uploudTestRecByStuA,ActionsParent.RecordingType.Test);
             editRecordingActions.changeTheRecordingOwner(targetCourse,courseTypeTemplate.uploudTestRecByStuA,insOfCourse, ActionsParent.RecordingType.Test,userUplouder);
 
+            watchRecordingsAsStudents();
 
-            //delete the required recordings
+//            delete the required recordings
             recordingActions.deleteRecordings(insOfCourse,false,targetCourse, ActionsParent.RecordingType.Regular,courseTypeTemplate.recordingsToDelete);
 
             ConvertCourseToJson convertCourseToJson = new ConvertCourseToJson();
@@ -204,4 +206,25 @@ public class ReportsDataCreator extends DataCreator {
     public void setCourseType(String courseType) {
         this.courseType = courseType;
     }
+
+    public void watchRecordingsAsStudents(){
+        CourseTypeTemplate course = getCourseTypeTemplate(courseType);
+        CourseViewManager courseViewManager = course.courseViewManager;
+        String fullCourseName = getFullCourseName("Coures" + courseType);
+        //instructors
+        for (String insViewer:courseViewManager.getInstructorViewer()){
+            if (!insViewer.isEmpty()){
+                String fullSigngleUser = getFullSigngleUser(insViewer);
+                recordingActions.watchRecording(fullSigngleUser,courseViewManager.getInstructorRecordings(),fullCourseName);
+            }
+        }
+
+        for (String stuViewer:courseViewManager.getStudentViewers()){
+            if (!stuViewer.isEmpty()){
+                String fullSigngleUser = getFullSigngleUser(stuViewer);
+                recordingActions.watchRecording(fullSigngleUser,courseViewManager.getStudentRecordings(),fullCourseName);
+            }
+        }
+    }
+
 }

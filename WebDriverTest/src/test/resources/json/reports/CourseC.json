@@ -9,5 +9,11 @@
   "uploudRecByinsB":["RegularRecording_c_1"],
   "uploudRecByStuA":["StudentRecording_c_1",""],
   "uploudTestRecByStuA":[""],
-  "mainInstructor":"ReportInsB"
+  "mainInstructor":"ReportInsB",
+  "views":{
+    "studentViewers":["ReportStudB"],
+    "studentRecordings  ":["RegularRecording_c_1","StudentRecording_c_1"],
+    "instructorViewer":[""],
+    "instructorRecordings":[""]
+  }
 }

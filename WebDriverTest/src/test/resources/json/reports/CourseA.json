@@ -10,5 +10,12 @@
   "uploudRecByStuA":["StudentRecording_a_1",""],
   "uploudTestRecByStuA":["Test1Recording",""],
   "recordingsToDelete":["RegularRecordings_a_1_deleted",""],
-  "mainInstructor":"ReportInsA"
+  "mainInstructor":"ReportInsA",
+  "views":{
+    "studentViewers":["ReportStudA","ReportStudB"],
+    "studentRecordings":["RegularRecordings_a_1","RegularRecordings_a_1_deleted","RegularRecordings_a_upb","StudentRecording_a_1"],
+    "instructorViewer":["ReportInsA"],
+    "instructorRecordings":["RegularRecordings_a_1"]
+
+  }
 }

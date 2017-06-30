@@ -23,6 +23,9 @@ public class Course {
     public List<String> listOfStudentRecording;
     public List<String> listOfTestRecording;
 
+    public CourseViewManager courseViewManager;
+
+
     public Course() {
 
     }
@@ -85,5 +88,13 @@ public class Course {
 
     public void setIsCoursePast(Student isCoursePast) {
         this.isCoursePast = isCoursePast;
+    }
+
+    public CourseViewManager getCourseViewManager() {
+        return courseViewManager;
+    }
+
+    public void setCourseViewManager(CourseViewManager courseViewManager) {
+        this.courseViewManager = courseViewManager;
     }
 }

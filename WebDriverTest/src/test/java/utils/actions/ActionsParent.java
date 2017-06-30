@@ -30,6 +30,7 @@ public abstract class ActionsParent {
     protected EditRecordingPropertiesWindow editRecordingPropertiesWindow;
     protected AdvancedServiceSettingsPage advancedServiceSettingsPage;
     protected DeleteMenu deleteMenu;
+    protected PlayerPage playerPage;
 
 
     public enum RecordingType {
@@ -63,9 +64,10 @@ public abstract class ActionsParent {
         windowmanageAdHocCoursesMembershipWindow = PageFactory.initElements(driver, ManageAdHocCoursesMembershipWindow.class);
         recordingHelperPage = PageFactory.initElements(driver, RecordingHelperPage.class);
         coursesHelperPage = PageFactory.initElements(driver, CoursesHelperPage.class);
-        editRecordingPropertiesWindow = PageFactory.initElements(driver,EditRecordingPropertiesWindow.class);
-        advancedServiceSettingsPage = PageFactory.initElements(driver,AdvancedServiceSettingsPage.class);
-         deleteMenu = PageFactory.initElements(driver,DeleteMenu.class);;
+        editRecordingPropertiesWindow = PageFactory.initElements(driver, EditRecordingPropertiesWindow.class);
+        advancedServiceSettingsPage = PageFactory.initElements(driver, AdvancedServiceSettingsPage.class);
+        deleteMenu = PageFactory.initElements(driver, DeleteMenu.class);
+        playerPage = PageFactory.initElements(driver, PlayerPage.class);
     }
 
     protected LogInAsAnotherUser login(String userName, boolean thisUserFromPropFile) {
@@ -82,24 +84,38 @@ public abstract class ActionsParent {
 
         switch (recordingType) {
             case Regular:
-                recordingHelperPage.clickOnRecordingsTab();
+                if (recordingHelperPage.recordings_tab.isDisplayed()){
+                    recordingHelperPage.clickOnRecordingsTab();
+                }
+
                 break;
             case Test:
-                recordingHelperPage.clickOnTestsTab();
+                if (recordingHelperPage.test_tab.isDisplayed()){
+                    recordingHelperPage.clickOnTestsTab();
+                }
+
                 break;
             case student:
-                recordingHelperPage.clickOnStudentRecordingsTab();
+                if (recordingHelperPage.student_recordings_tab.isDisplayed()){
+                    recordingHelperPage.clickOnStudentRecordingsTab();
+                }
+
                 break;
             case additionalContent:
-                recordingHelperPage.clickOnAdditionContentTab();
+                if (recordingHelperPage.additional_content_tab.isDisplayed()){
+                    {
+                        recordingHelperPage.clickOnAdditionContentTab();
+                    }
+                }
+
         }
     }
 
-    boolean isPopulatedList(List<String> listToCheck){
+    boolean isPopulatedList(List<String> listToCheck) {
 
-        if (listToCheck !=null){
-            for (String value : listToCheck){
-                if (!value.isEmpty()){
+        if (listToCheck != null) {
+            for (String value : listToCheck) {
+                if (!value.isEmpty()) {
                     return true;
                 }
             }

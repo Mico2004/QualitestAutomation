@@ -1,5 +1,6 @@
 package utils.creator.json;
 
+import com.automation.main.report.entity.CourseViewManager;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -38,5 +39,9 @@ public class CourseTypeTemplate {
 
     @JsonProperty("mainInstructor")
     public String mainInstructor;
+
+    @JsonProperty("views")
+    public CourseViewManager courseViewManager;
+
 
 }

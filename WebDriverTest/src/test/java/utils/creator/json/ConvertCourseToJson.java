@@ -34,10 +34,11 @@ public class ConvertCourseToJson {
         course.setListOfRegularRecording(courseTypeTemplate.uploudRecByInsA);
         course.setListOfStudentRecording(courseTypeTemplate.uploudRecByStuA);
         course.setListOfTestRecording(courseTypeTemplate.uploudTestRecByStuA);
+        course.setCourseViewManager(courseTypeTemplate.courseViewManager);
 
         ObjectMapper mapper = new ObjectMapper();
         try {
-            setPathToUniversityDataFolder();
+
             File newCourseJsonFile = new File(pathToJson + course.getCourseType() + ".json");
             if (!newCourseJsonFile.exists()) {
                 newCourseJsonFile.createNewFile();
@@ -47,6 +48,7 @@ public class ConvertCourseToJson {
             e.printStackTrace();
         }
     }
+
 
     private void setPathToUniversityDataFolder() {
         try {

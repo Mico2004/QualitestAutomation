@@ -4,6 +4,7 @@ import com.automation.main.page_helpers.CoursesHelperPage;
 import com.automation.main.page_helpers.RecordingHelperPage;
 import com.automation.main.ping.helper.LogInAsAnotherUser;
 import org.openqa.selenium.WebDriver;
+import utils.WaitDriverUtility;
 
 import java.util.List;
 
@@ -107,6 +108,7 @@ public class RecordingActions extends ActionsParent {
                 thereIsRecordingToCopy = true;
             } else {
                 for (String recordingName : recordingsNames) {
+
                     editRecordingActions = new EditRecordingActions();
                     if (!recordingName.isEmpty()) {
                         recordingHelperPage.waitForRecordingsStatusBeDisappear(recordingName);
@@ -147,6 +149,48 @@ public class RecordingActions extends ActionsParent {
                 e.printStackTrace();
             }
             driver.quit();
+        }
+
+    }
+
+
+    public void watchRecording(String user, List<String> instructorRecordings, String fullCourseName) {
+        login(user, false);
+        coursesHelperPage.selectCourseThatStartingWith(fullCourseName);
+        String currentUrlCoursePage = coursesHelperPage.getCurrentUrlCoursePage();
+        for (String reco:instructorRecordings){
+            System.out.println("Trying to watch "+reco);
+            searchRecordingThenClick(reco);
+            recordingHelperPage.clickOnFirstVisibleChapter();
+            WaitDriverUtility.sleepInSeconds(2);
+
+            try {
+                playerPage.verifyTimeBufferStatusForXSec(10);// check source display
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            ///// to go back to crecording window handler
+            for (String handler : driver.getWindowHandles()) {
+                driver.switchTo().window(handler);
+
+            }
+
+            driver.get(currentUrlCoursePage);
+        }
+
+        this.driver.quit();
+
+    }
+
+    private void searchRecordingThenClick(String reco) {
+        for(RecordingType type:RecordingType.values()){
+            clickAtRecordngsType(type);
+            boolean isExists = recordingHelperPage.checkIfRecoringsExistByName(reco);
+            if (isExists){
+                recordingHelperPage.clickAtRecordingByName(reco);
+                return;
+            }
         }
 
     }
