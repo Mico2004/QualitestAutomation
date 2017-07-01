@@ -158,36 +158,36 @@ public class RecordingActions extends ActionsParent {
         login(user, false);
         coursesHelperPage.selectCourseThatStartingWith(fullCourseName);
         String currentUrlCoursePage = coursesHelperPage.getCurrentUrlCoursePage();
-        for (String reco:instructorRecordings){
-            System.out.println("Trying to watch "+reco);
-            searchRecordingThenClick(reco);
-            recordingHelperPage.clickOnFirstVisibleChapter();
-            WaitDriverUtility.sleepInSeconds(2);
+        if (instructorRecordings != null && instructorRecordings.size() > 0) {
+            for (String reco : instructorRecordings) {
+                System.out.println("Trying to watch " + reco);
+                searchRecordingThenClick(reco);
+                recordingHelperPage.clickOnFirstVisibleChapter();
+                WaitDriverUtility.sleepInSeconds(2);
 
-            try {
-                playerPage.verifyTimeBufferStatusForXSec(10);// check source display
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                try {
+                    playerPage.verifyTimeBufferStatusForXSec(10);// check source display
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                ///// to go back to crecording window handler
+                for (String handler : driver.getWindowHandles()) {
+                    driver.switchTo().window(handler);
+
+                }
+                driver.get(currentUrlCoursePage);
             }
-
-            ///// to go back to crecording window handler
-            for (String handler : driver.getWindowHandles()) {
-                driver.switchTo().window(handler);
-
-            }
-
-            driver.get(currentUrlCoursePage);
+            this.driver.quit();
         }
-
-        this.driver.quit();
 
     }
 
     private void searchRecordingThenClick(String reco) {
-        for(RecordingType type:RecordingType.values()){
+        for (RecordingType type : RecordingType.values()) {
             clickAtRecordngsType(type);
             boolean isExists = recordingHelperPage.checkIfRecoringsExistByName(reco);
-            if (isExists){
+            if (isExists) {
                 recordingHelperPage.clickAtRecordingByName(reco);
                 return;
             }

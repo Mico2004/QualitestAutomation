@@ -212,19 +212,33 @@ public class ReportsDataCreator extends DataCreator {
         CourseViewManager courseViewManager = course.courseViewManager;
         String fullCourseName = getFullCourseName("Coures" + courseType);
         //instructors
-        for (String insViewer:courseViewManager.getInstructorViewer()){
-            if (!insViewer.isEmpty()){
-                String fullSigngleUser = getFullSigngleUser(insViewer);
-                recordingActions.watchRecording(fullSigngleUser,courseViewManager.getInstructorRecordings(),fullCourseName);
+        boolean validList = isValidList(courseViewManager.getInstructorViewer());
+        if (validList){
+            for (String insViewer:courseViewManager.getInstructorViewer()){
+                if (!insViewer.isEmpty()){
+                    String fullSigngleUser = getFullSigngleUser(insViewer);
+
+                    recordingActions.watchRecording(fullSigngleUser,courseViewManager.getInstructorRecordings(),fullCourseName);
+                }
             }
         }
 
-        for (String stuViewer:courseViewManager.getStudentViewers()){
-            if (!stuViewer.isEmpty()){
-                String fullSigngleUser = getFullSigngleUser(stuViewer);
-                recordingActions.watchRecording(fullSigngleUser,courseViewManager.getStudentRecordings(),fullCourseName);
+        validList = isValidList(courseViewManager.getStudentViewers());
+        if (validList){
+            for (String stuViewer:courseViewManager.getStudentViewers()){
+                if (!stuViewer.isEmpty()){
+                    String fullSigngleUser = getFullSigngleUser(stuViewer);
+                    recordingActions.watchRecording(fullSigngleUser,courseViewManager.getStudentRecordings(),fullCourseName);
+                }
             }
         }
+    }
+
+    private boolean isValidList(List<String>list){
+        if (list!=null&&list.size()>0){
+            return true;
+        }
+        return false;
     }
 
 }
