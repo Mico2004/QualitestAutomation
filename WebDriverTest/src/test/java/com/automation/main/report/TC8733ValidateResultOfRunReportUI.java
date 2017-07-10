@@ -15,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import utils.ATUManager;
 import utils.creator.CourseLoader;
 
 
@@ -41,9 +42,12 @@ public class TC8733ValidateResultOfRunReportUI extends BaseTest {
         String instructor = course.instructorA.getUserName();
 
         runReportPage = PageFactory.initElements(driver, RunReportAsAdmin.class);
+        ATUManager.asserIsTrueAndReport(true,"Sign in as Admin");
         validateByAggregtionTimeByUser(admin);
 
         runReportPage = PageFactory.initElements(driver, RunReportPageUiAbstractPage.class);
+
+        ATUManager.asserIsTrueAndReport(true,"Sign in as instructor");
         validateByAggregtionTimeByUser(instructor);
 
     }

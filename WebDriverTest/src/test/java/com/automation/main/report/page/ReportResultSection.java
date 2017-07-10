@@ -75,6 +75,9 @@ public class ReportResultSection extends AbstractInstructorReportPage {
     }
 
     public void validateColumnsAreDisplayedCorrectlyAfterSelectTimeAggregation(AggregationTime aggregationTimeType) {
+
+        validateHeaderBackgroundColorIsGray();
+
         List<WebElement> div = driver.findElements(By.tagName("div"));
 
         String theTextOfHeader = validateAggretionTime(aggregationTimeType, div);
@@ -104,6 +107,12 @@ public class ReportResultSection extends AbstractInstructorReportPage {
         ATUManager.asserIsTrueAndReport(backgroundColor.contains("rgba(0, 0, 0, 0)"), "The grand total row background color should be white");
 
 
+    }
+
+    private void validateHeaderBackgroundColorIsGray() {
+        WebElement element = driver.findElement(By.cssSelector("tr[valign=\"top\"]>td:nth-child(2)"));
+        String cssValue = element.getCssValue("background-color");
+        ATUManager.asserIsTrueAndReport(cssValue.equals("rgba(169, 169, 169, 1)"),"validated the header background color is \"DarkGray\"");
     }
 
     private String validateAggretionTime(AggregationTime aggregationTime, List<WebElement> elements) {
