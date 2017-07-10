@@ -22,6 +22,7 @@ import atu.testng.reports.logging.LogAs;
 import atu.testng.selenium.reports.CaptureScreen;
 import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
+import utils.ATUManager;
 import utils.UniversityConfigure;
 
 import java.net.HttpURLConnection;
@@ -59,7 +60,6 @@ public class LoginHelperPage extends Page {
     }
 
     public void setUserText(String text) {
-
         setElementText(usernamefield, text);
     }
 
@@ -81,6 +81,7 @@ public class LoginHelperPage extends Page {
     public void fillUserFromProperyFile(String user_name)// fill user name
     {
         String user = PropertyManager.getProperty(user_name);
+        ATUManager.asserIsTrueAndReport(true,"User with name : '"+user+"' sign in");
         setUserText(user);
 
     }
@@ -109,6 +110,8 @@ public class LoginHelperPage extends Page {
                 fillUserFromProperyFile(user_name);
             } else {
                 setUserText(user_name);
+                ATUManager.asserIsTrueAndReport(true,"User with name : '"+user_name+"' sign in");
+
             }
             fillPass();
             clickElementJS(button_login);
