@@ -191,7 +191,11 @@ public class LoginHelperPage extends Page {
                     Assert.assertTrue(false);
                 }
             } else if (driver.getTitle().contains("Tegrity - Courses")) {
-                ATUReports.add("Tegrity courses home page is visible", PropertyManager.getProperty(user_name), "Course List page is displayed",
+                if (PropertyManager.getProperty(user_name)!=null){
+                    user_name = PropertyManager.getProperty(user_name);
+                }
+
+                ATUReports.add("Tegrity courses home page is visible", user_name, "Course List page is displayed",
                         "Course List page is displayed", LogAs.PASSED, null);
             }
         } catch (Exception e) {
