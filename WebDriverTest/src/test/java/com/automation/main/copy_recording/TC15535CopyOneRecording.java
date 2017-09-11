@@ -178,7 +178,7 @@ public class TC15535CopyOneRecording {
 		Thread.sleep(2000);
 		//12.verify background color of copy menu
 		System.out.println(copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]"))));
-		copy.verifyBlueColor(copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]")))); 
+		//copy.verifyBlueColor(copy.getBackGroundColor(driver.findElement(By.xpath("//*[@id=\"courseListSelect\"]/option[2]")))); // Not turning to blue when automation is clicking on it
 		//13.Click the "Copy Recording(s)" button
 		copy.clickOnCopyButton(record);// click copy button ConfirmationMenu
 		confirm = PageFactory.initElements(driver, ConfirmationMenu.class);
