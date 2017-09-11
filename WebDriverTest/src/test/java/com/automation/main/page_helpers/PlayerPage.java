@@ -801,7 +801,7 @@ public class PlayerPage extends Page {
         sendStringToWebElement(bookmark_input_text, target_bookmark);
         Thread.sleep(3000);
         clickElementJS(add_bookmark_button);
-        //Thread.sleep(500);
+        Thread.sleep(1000);
         //String timeToReturn =  time_buffer_status.getText();
         System.out.println(time_buffer_status.getText());
         System.out.println("Target bookmark added.");
