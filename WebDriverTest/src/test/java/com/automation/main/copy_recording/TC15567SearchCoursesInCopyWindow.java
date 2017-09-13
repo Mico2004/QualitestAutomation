@@ -144,7 +144,7 @@ public class TC15567SearchCoursesInCopyWindow {
 			Assert.assertTrue(true);
 		} else {
 			System.out.println("Course list is changed");
-			ATUReports.add("Course list.", "Course list is not changed.", "Course list is changed.", LogAs.FAILED, null);
+			ATUReports.add("Course list.", "Course list is not changed.", "Course list is changed.", LogAs.FAILED,new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
 		}
 		
