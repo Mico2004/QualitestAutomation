@@ -71,7 +71,7 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 	String targetCourse;
 	String clickedRecording;
     DesiredCapabilities capability;
-    String recodingDateNumber;
+
 	String bookmark ;
 	
 	@BeforeClass
@@ -236,27 +236,13 @@ public class TC24617ValidateBookmarkIconIsDisplayedForAnHelpDeskAdmin {
 			Assert.assertTrue(false);
 		}
 		
-		String recording_date = record.getIndexDateWebElement(1).getText();
+		String recording_date = record.getIndexDateWebElement(1).getText().trim();
 		
-		if(driver instanceof InternetExplorerDriver) {
-			recodingDateNumber = recording_date.split(" ")[1];
-			bookmark = recording_date.split(" ")[0];
-		} else {		
-			recodingDateNumber = recording_date.split("\n")[1];
-			bookmark = recording_date.split("\n")[0];
-		}
+
 		try {
 			Date date = new Date();
-			date.parse(recodingDateNumber);
-			if(bookmark.equals("bookmark")) {
-				System.out.println("Verified that bookmark sign is to the left of recording date.");
-				ATUReports.add("Verified that bookmark sign is to the left of recording date.", "True.", "True.", LogAs.PASSED, null);
-				Assert.assertTrue(true);
-			} else {
-				System.out.println("Bookmark text is not found.");
-				ATUReports.add("Bookmark text.", "Found.", "Not found.", LogAs.FAILED, null);
-				Assert.assertTrue(false);
-			}
+			date.parse(recording_date);
+
 		} catch(Exception msg) {
 			msg.printStackTrace();
 			System.out.println("Date is not correct/wrong.");

@@ -145,7 +145,7 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 		// 1. For this test you need course with at least one recording.
 		tegrity.loginCourses("SuperUser");
 		initializeCourseObject();
-				
+
 		course.deleteAllRecordingsInCourseStartWith("abc", 0, record, delete_menu);
 		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "abc", 0, record, copy, confirm_menu);
 		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
@@ -212,11 +212,10 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 	
 		// 15. Login as HelpDesk Admin.
 		tegrity.loginCourses("ExcutiveAdmin");
-				
+
 		// 16. Click on the Preconditional Course.
 		course.selectCourseThatStartingWith(courseName);
-	
-		
+
 		// 17. Validate that bookmark sign is displayed in the recording, left of recording date.
 		if(first_recording_name.equals(record.getFirstRecordingTitle())) {
 			record.verifyIndexRecordingHaveBookmark(1);
@@ -225,28 +224,14 @@ public class TC24615ValidateBookmarkIconIsDisplayedForAnExcutiveAdminUser {
 			ATUReports.add("Recording list.", "Recording which instructor add bookmark is displayed.", "Recording is not displayed.", LogAs.FAILED, null);
 			Assert.assertTrue(false);
 		}
-		
-		String recording_date = record.getIndexDateWebElement(1).getText();
-		
-		if(driver instanceof InternetExplorerDriver) {
-			recodingDateNumber = recording_date.split(" ")[1];
-			bookmark = recording_date.split(" ")[0];
-		} else {		
-			recodingDateNumber = recording_date.split("\n")[1];
-			bookmark = recording_date.split("\n")[0];
-		}
+
+		String recording_date = record.getIndexDateWebElement(1).getText().trim();
+
+
 		try {
 			Date date = new Date();
-			date.parse(recodingDateNumber);
-			if(bookmark.equals("bookmark")) {
-				System.out.println("Verified that bookmark sign is to the left of recording date.");
-				ATUReports.add("Verified that bookmark sign is to the left of recording date.", "True.", "True.", LogAs.PASSED, null);
-				Assert.assertTrue(true);
-			} else {
-				System.out.println("Bookmark text is not found.");
-				ATUReports.add("Bookmark text.", "Found.", "Not found.", LogAs.FAILED, null);
-				Assert.assertTrue(false);
-			}
+			Date.parse(recording_date);
+
 		} catch(Exception msg) {
 			msg.printStackTrace();
 			System.out.println("Date is not correct/wrong.");
