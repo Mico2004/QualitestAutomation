@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import junitx.util.PropertyManager;
+import org.jfree.ui.about.SystemProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -115,30 +116,35 @@ public class TestSuitePreSetCopyRecordings_PastCoursesSm {
 		//2.Login as INSTRUCTOR
 		tegrity.loginCourses("User1");
 
+		boolean existInPastList=false;
+
 		for(int i=10; i<12;i++) {
 
+			existInPastList=false;
 			if(i==10)
-				PastCourse= "PastCourseC";
+				PastCourse= PropertyManager.getProperty("course10");
 			else
-				PastCourse= "PastCourseD";
+				PastCourse= PropertyManager.getProperty("course11");
 
+			if(!course.verifyCourseExistWithCourseList(PastCourse, course.getCourseList())) {
 
-			//adding one recording to the pastCourseA
-			//1.Click on the 'Past Courses' tab*
-			course.clickOnPastCoursesTabButton();
+				existInPastList=true;
+				//adding one recording to the pastCourseA
+				//1.Click on the 'Past Courses' tab*
+				course.clickOnPastCoursesTabButton();
 
 			//2.Select the past course
-			course.selectCourseThatStartingWith(PastCourse);
+				course.selectCourseThatStartingWith(PastCourse);
 
 			//3.move the course to active courses
-			record.clickOnCourseTaskThenMoveToActiveCourses();
+				record.clickOnCourseTaskThenMoveToActiveCourses();
 
 			//4.click on the ok after moving to active courses
-			confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to active courses");
+				confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to active courses");
 
 			//5.return to the courses page
-			record.returnToCourseListPage();
-
+				record.returnToCourseListPage();
+			}
 			//6.copy on record to pastcoursesA
 			course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", PastCourse, 0, record, copy, confirm_menu);
 
@@ -148,10 +154,11 @@ public class TestSuitePreSetCopyRecordings_PastCoursesSm {
 			//8.wait until the moving will finish
 			record.checkStatusExistenceForMaxTTime(220);
 
-			//9.move to pass courses
+
+				//9.move to pass courses
 			record.clickOnCourseTaskThenMoveToPastCourses();
 
-			//10.click on the ok after moving to past courses
+				//10.click on the ok after moving to past courses
 			confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to past courses");
 
 			record.returnToCourseListPage();
