@@ -661,7 +661,9 @@ public class Page {
 	/// sign out from any page except Login page
 	public void signOut()  {
 		try {
-			Thread.sleep(500);
+			wait.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity EULA")));
+			wait.until(ExpectedConditions.not(ExpectedConditions.titleContains("Tegrity Lecture Capture")));
+			wait.until(ExpectedConditions.elementToBeClickable(sign_out));
 			System.out.println("signOut1");		 
 			((JavascriptExecutor) driver).executeScript("document.getElementById(\"SignOutLink\").click();");			
 			new WebDriverWait(driver, 25).until(ExpectedConditions.titleContains("Tegrity Lecture Capture"));

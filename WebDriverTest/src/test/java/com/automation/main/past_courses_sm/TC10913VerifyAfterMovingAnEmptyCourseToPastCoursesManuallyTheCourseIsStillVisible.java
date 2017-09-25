@@ -91,16 +91,35 @@ public class TC10913VerifyAfterMovingAnEmptyCourseToPastCoursesManuallyTheCourse
 	public void test10913() throws InterruptedException {
 		
 		//1.Enter the university
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
+		tegrity.loginCourses("User1");
+
+		initializeCourseObject();
+
+		//1.Click on the 'Past Courses' tab*
+		course.clickOnPastCoursesTabButton();
+
+		//2.Select the past course
+		course.selectCourseThatStartingWith("PastCourseD");
+
+		//3.move the course to active courses
+		record.clickOnCourseTaskThenMoveToActiveCourses();
+
+		//4.click on the ok after moving to active courses
+		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to active courses");
+
+		//5.return to the courses page
+		record.signOut();
 				
 		//2.Pre - test Login as INSTRUCTOR 
 		tegrity.loginCourses("User1");
 		
 		//3.delete all the records in ad course
-		course.deleteAllRecordingsInCourseStartWith("ad", 0, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("ad", 1, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("ad", 2, record, delete_menu);
-		course.deleteAllRecordingsInCourseStartWith("ad", 3, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("PastCourseD", 0, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("PastCourseD", 1, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("PastCourseD", 2, record, delete_menu);
+		course.deleteAllRecordingsInCourseStartWith("PastCourseD", 3, record, delete_menu);
 		
 		//4.sign out
 		record.signOut();
@@ -109,7 +128,7 @@ public class TC10913VerifyAfterMovingAnEmptyCourseToPastCoursesManuallyTheCourse
 		tegrity.loginCourses("User1");
 		
 		//6.Open the empty course
-		String course_name = course.selectCourseThatStartingWith("ad");
+		String course_name = course.selectCourseThatStartingWith("PastCourseD");
 		
 		//7.Hover over the "Course Tasks"
 		record.moveToElementAndPerform(record.course_task_button, driver);
@@ -151,7 +170,7 @@ public class TC10913VerifyAfterMovingAnEmptyCourseToPastCoursesManuallyTheCourse
 		course.verifyCourseExist(course_name);
 		
 		//18.post test - return the course ad to active courses
-		course.selectCourseThatStartingWith("ad");
+		course.selectCourseThatStartingWith("PastCourseD");
 		
 		//19.Hover over the "Course Tasks"
 		record.moveToElementAndPerform(record.course_task_button, driver);
@@ -161,7 +180,23 @@ public class TC10913VerifyAfterMovingAnEmptyCourseToPastCoursesManuallyTheCourse
 				
 		//21.Click on the ok after moving to past courses
 		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to active courses");
-			
+
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("ab", "PastCourseD", 0, record,copy, confirm_menu);
+
+		//22.Open the empty course
+		course_name = course.selectCourseThatStartingWith("PastCourseD");
+
+		//23.Hover over the "Course Tasks"
+		record.moveToElementAndPerform(record.course_task_button, driver);
+
+		//24.Click on the 'Course Tasks - Move to Past Courses'
+		record.clickOnCourseTaskThenMoveToPastCourses();
+
+		//25.Click on the ok after moving to past courses
+		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to past courses");
+
+
+
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	

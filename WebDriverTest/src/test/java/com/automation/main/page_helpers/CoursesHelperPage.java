@@ -137,19 +137,24 @@ public class CoursesHelperPage extends Page {
 	// Otherwise it will return false.
 	public boolean clickOnTargetCourseName(String course_name) {
 		// waitForVisibility(course_list.get(0));
+	try {
+		wait.until(ExpectedConditions.visibilityOf(first_course_button));
 		for (int i = 0; i < course_list.size(); i++) {
 			wait.until(ExpectedConditions.elementToBeClickable(course_list.get(i)));
 			String current_course = course_list.get(i).getText();
 			if (current_course.equals(course_name)) {
 				clickElementWithOutIdJS(course_list.get(i));
 				System.out.println("Clicked on target course name: " + course_name);
-				ATUReports.add(time +" Clicked on target course name: " + course_name, LogAs.PASSED, null);
+				ATUReports.add(time + " Clicked on target course name: " + course_name, LogAs.PASSED, null);
 				return true;
 			}
 		}
+	}catch(Exception ex) {
 
 		System.out.println("Not clicked on target course name: " + course_name);
-		ATUReports.add(time +" Not clicked on target course name" + course_name, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		ATUReports.add(time + " Not clicked on target course name" + course_name, LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		return false;
+	}
 		return false;
 	}
 	
@@ -211,7 +216,7 @@ public class CoursesHelperPage extends Page {
 		try{	
 		new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfAllElements(course_list));
 		}catch(Exception e){
-			
+			System.out.println(e.getMessage());
 			
 		}for (WebElement course : course_list) {
 			current_course_list.add(course.getText());
@@ -390,6 +395,7 @@ public class CoursesHelperPage extends Page {
 	public void clickOnPastCoursesTabButton() {
 		try {
 			String initialCourseText=courseFrame.getText();
+			waitForVisibility(past_courses_tab_button);
 			past_courses_tab_button.click();			
 			waitForContentOfTabToLoad(initialCourseText,courseFrame);
 			//fluentWaitInvisibility(first_course_button, 10, 150);

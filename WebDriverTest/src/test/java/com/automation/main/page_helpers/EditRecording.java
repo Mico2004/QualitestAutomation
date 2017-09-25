@@ -149,6 +149,8 @@ public class EditRecording extends Page {
 		
 		//changing the name of the title
 		Thread.sleep(4000);
+		waitForVisibility(ChapterName);
+		wait.until(ExpectedConditions.elementToBeClickable(ChapterName));
 		ChapterName.clear();
 		ChapterName.sendKeys(target_name);
 		

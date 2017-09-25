@@ -853,6 +853,7 @@ public class RecordingHelperPage extends Page {
         }
 
         for (int i = 0; i < recordings_list.size(); i++) {
+            waitForVisibility(recordings_list.get(i));
             String current_name = recordings_list.get(i).getText();
             if (current_name.equals("Recordings")) {
                 continue;
@@ -878,7 +879,11 @@ public class RecordingHelperPage extends Page {
         WebElement checkBox = driver.findElement(By.id(checkbox_indexed));
         if (!checkBox.isSelected()) {
             checkBox.click();
-            return recording_names_list.get(index);
+
+            if(recording_names_list.size()==1)
+                return recording_names_list.get(0);
+            else
+                return recording_names_list.get(index);
         }
         return null;
     }

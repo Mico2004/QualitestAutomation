@@ -134,7 +134,7 @@ public class PreTest {
 	public void preTest() throws InterruptedException, UnsupportedEncodingException, FileNotFoundException
 	{
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		
+
 		// 1. Login as INSTRUCTOR.
 		tegrity.loginAdmin("Admin");
 		
@@ -157,7 +157,7 @@ public class PreTest {
 		
 		List<String> created_course_list = new ArrayList<String>();
 		
-		for(int i = 0; i < 9; i++) {
+		for(int i = 0; i < 11; i++) {
 			String course_name = "";
 			if (i == 0) {
 				course_name = "Ab" + university_name + sdf.format(date);
@@ -179,24 +179,24 @@ public class PreTest {
 				course_name = "PastCourseA" + university_name + sdf.format(date);
 			} else if (i == 8) {
 				course_name = "PastCourseB" + university_name + sdf.format(date);
+			}else if (i == 9) {
+				course_name = "PastCourseC" + university_name + sdf.format(date);
+			}else if (i == 10) {
+				course_name = "PastCourseD" + university_name + sdf.format(date);
 			}
 			
 			created_course_list.add(course_name);
 			
 			wait.until(ExpectedConditions.visibilityOf(mange_adhoc_course_enrollments.new_course_button));
+
 			mange_adhoc_course_enrollments.clickOnNewCourse();
+
 			create_new_course_window.waitForVisibility(create_new_course_window.course_id_input);
-			
-			create_new_course_window.createNewCourse(course_name + "_Name", course_name);
-			
-			for(int j=0;j<5;j++) {
-				try {
-					driver.switchTo().alert().accept();
-					break;
-				} catch (Exception msg) {
-					Thread.sleep(1000);
-				}
-			}		
+
+			if(i!=5 && i!=6)
+				create_new_course_window.createNewCourse(course_name + "_Name", course_name);
+
+			create_new_course_window.clickOkInAlertIfPresent();
 		}
 		
 		for(String window: driver.getWindowHandles()) {
@@ -211,17 +211,6 @@ public class PreTest {
 	
 		// 2. Click on user builder href link
 		admin_dashboard_page.clickOnTargetSubmenuUsers("Manage Ad-hoc Users (User Builder)");
-				
-		// 3. Click on create course href link 
-		for(int i=0; i<5; i++ ) {
-			try {
-				driver.switchTo().frame(0);
-				break;
-			} catch(Exception msg) {
-				Thread.sleep(1000);
-			}
-		}
-		
 
 		// 4. Create four dynamic users	
 		List<String> created_new_user = new ArrayList<String>(); 
@@ -271,7 +260,7 @@ public class PreTest {
 		
 		writer.println("Password=111");
 		writer.println("Admin=mickael");
-		writer.println("Browser=firefox");//for manual testing
+		writer.println("Browser=chrome");//for manual testing
 		writer.println("HelpdeskAdmin=hdadmin");
 		writer.println("ExcutiveAdmin=executivead");
 		writer.println("StaticCourse=automationMultipleEnrollmentCourse Name");
@@ -295,7 +284,7 @@ public class PreTest {
 		}
 		
 	 
-		for(int i=0; i < 9; i++) {
+		for(int i=0; i < 11; i++) {
 			// Search target course name
 			mange_adhoc_course_enrollments.searchAndFilterCourses(created_course_list.get(i));
 			
@@ -624,7 +613,30 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(4));
 
 
-			} else if (i == 7) {
+			} else if (i == 7 || i==8 || i==9 || i==10) {
+
+				// Search target user name in membership window
+				mangage_adhoc_courses_membership_window.searchForUser("executivead");
+
+				// Select first user from user list (the only user it found because of the uniq of the search)
+				mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
+
+				// Add selected user to instructor list
+				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
+
+				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse("executivead");
+
+				// Search target user name in membership window
+				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(1));
+
+				// Select first user from user list (the only user it found because of the uniq of the search)
+				mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
+
+				// Add selected user to instructor list
+				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
+
+				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(1));
+
 				// Search target user name in membership window
 				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(0));	
 
@@ -659,64 +671,8 @@ public class PreTest {
 				mangage_adhoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse(created_new_user.get(3));
 				
 				
-				// Search target user name in membership window
-				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(4));	
 
-				// Select first user from user list (the only user it found because of the uniq of the search)
-				mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
 
-				// Add selected user to instructor list
-				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
-
-				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(4));
-
-				
-			} else if (i == 8) {
-				// Search target user name in membership window
-				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(0));	
-
-				// Select first user from user list (the only user it found because of the uniq of the search)
-				mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
-
-				// Add selected user to instructor list
-				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
-				
-				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(0));
-
-				
-				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(4));	
-
-				// Select first user from user list (the only user it found because of the uniq of the search)
-				mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
-
-				// Add selected user to instructor list
-				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
-				
-				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(4));
-				
-				
-				// Search target user name in membership window
-				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(3));	
-
-				// Select first user from user list (the only user it found because of the uniq of the search)
-				mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
-
-			    // Add selected user to instructor list
-				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToStudentList();
-				
-
-				mangage_adhoc_courses_membership_window.waitMaxTimeUntillStudentEnrollToCourse(created_new_user.get(3));
-				
-				// Search target user name in membership window
-				mangage_adhoc_courses_membership_window.searchForUser(created_new_user.get(4));	
-
-				// Select first user from user list (the only user it found because of the uniq of the search)
-				mangage_adhoc_courses_membership_window.selectFirstUserFromUserList();
-
-				// Add selected user to instructor list
-				mangage_adhoc_courses_membership_window.clickOnAddSelectedUserToInstructorList();
-
-				mangage_adhoc_courses_membership_window.waitMaxTimeUntillInstructorEnrollToCourse(created_new_user.get(4));
 				
 			}
 			mangage_adhoc_courses_membership_window.waitForVisibility(mangage_adhoc_courses_membership_window.ok_button);
@@ -739,93 +695,77 @@ public class PreTest {
 		
 		// write the courses to the local properties
 		for(int i = 1; i <= created_course_list.size(); i++) {			
-		if(i!=6 || i!=7)
+		if(i!=6 && i!=7)
 			writer.println("course"+i+"=" + created_course_list.get(i-1)+"_Name");
 		else
 			writer.println("course"+i+"=" + created_course_list.get(i-1));
 		}
 		System.out.println(file_to_write.getPath());
+		writer.flush();
 		writer.close();
+
 		
-		//add records to the past courseA+B
-		tegrity.loginCoursesByParameter(SuperUsername);
+
+
+
+		tegrity.loginCoursesByParameter(created_new_user.get(0));
+
+		initializeCourseObject();
+
+		course.signOut();
+
+		tegrity.loginCoursesByParameter(created_new_user.get(1));
+
+		initializeCourseObject();
+
+		course.signOut();
+
+		tegrity.loginCoursesByParameter(created_new_user.get(2));
+
+		initializeCourseObject();
+
+		course.signOut();
+
+		tegrity.loginCoursesByParameter(created_new_user.get(3));
+
+		initializeCourseObject();
+
+		course.signOut();
+
+		tegrity.loginCoursesByParameter(created_new_user.get(4));
+
 		initializeCourseObject();
 	    course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseA", 3, record, copy, confirm_menu);
 	    course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseB", 3, record, copy, confirm_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseC", 3, record, copy, confirm_menu);
+		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValid", "PastCourseD", 3, record, copy, confirm_menu);
 	    course.verifyRecordingsStatusIsClear("BankValid", 3, record);
 		course.signOut();
-			
-		//1.login as Admin	
+
+		//1.login as Admin
 		tegrity.loginAdmin("Admin");
-		
+
 		/// 2.Click the "Course Builder" link
 		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
-		
+
 		///3.Click the "Membership" link related to the course+unenroll
 		mange_adhoc_course_enrollments.waitForThePageToLoad();
-		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PropertyManager.getProperty("course8"), user1Username,mangage_adhoc_courses_membership_window);
-	
-        // 3.Click the "Membership" link related to the course+unenroll
-		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(PropertyManager.getProperty("course9"), user1Username,mangage_adhoc_courses_membership_window);
+
+
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(created_course_list.get(7), created_new_user.get(0),mangage_adhoc_courses_membership_window);
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(created_course_list.get(7), created_new_user.get(4),mangage_adhoc_courses_membership_window);
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(created_course_list.get(8), created_new_user.get(0),mangage_adhoc_courses_membership_window);
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(created_course_list.get(8), created_new_user.get(4),mangage_adhoc_courses_membership_window);
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(created_course_list.get(9), created_new_user.get(0),mangage_adhoc_courses_membership_window);
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(created_course_list.get(9), created_new_user.get(4),mangage_adhoc_courses_membership_window);
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(created_course_list.get(10), created_new_user.get(0),mangage_adhoc_courses_membership_window);
+		mange_adhoc_course_enrollments.unEnrollInstructorToCourse(created_course_list.get(10), created_new_user.get(4),mangage_adhoc_courses_membership_window);
 		mange_adhoc_course_enrollments.exitInnerFrame();
 		
 		tegrity.signOut();
 			
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
-		
-		
-//		System.out.println("6"); 
-//		tegrity.loginCoursesByParameter(user1Username);		
-//		initializeCourseObject();	
-//		course.selectCourseThatStartingWith("PastCourseA");	
-//		wait.until(ExpectedConditions.visibilityOf(record.course_title));
-//		String past_courseA = record.course_title.getText().toString();		
-//		record.returnToCourseListPage();		
-//		course.selectCourseThatStartingWith("PastCourseB");
-//		wait.until(ExpectedConditions.visibilityOf(record.course_title));
-//		String past_courseB = record.course_title.getText().toString();		
-//		record.returnToCourseListPage();
-//		record.signOut();
-//		wait.until(ExpectedConditions.visibilityOf(tegrity.usernamefield));
-		
-//		Thread.sleep(4000);		
-//
-//
-//		for (String window : driver.getWindowHandles()) {
-//			driver.switchTo().window(window);
-//			break;
-//		}
-//
-//		mange_adhoc_course_enrollments.clickOnAdminDashboard();
-//		Thread.sleep(2000);
-//		admin_dashboard_page.signOut();		
-//		tegrity.loginCoursesByParameter(SuperUsername);
-//		course.verifyRecordingsStatusIsClear("BankValid", 3, record);		
-		
-		
-	//	tegrity.loginCourses("User1");
-		
-		
-		
-		
-		// Make reading from user.properties, and then login with user1, ... , user4 + superuser 
-		// Or make function that login with user name and not taking the username from the properties and then login
-		// By looping created user
-		
-		
-//		// Login with each user, click on eula if needed, and logout
-//		for (String user_name: created_new_user)
-//		{
-//			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ButtonLogin")));
-//			
-//			tegrity.loginCourses(user_name);
-//			
-//			wait.until(ExpectedConditions.elementToBeClickable(By.id("SignOutLink")));
-//			
-//			driver.findElement(By.id("SignOutLink")).click();
-//		}
-
 		
 	}
 

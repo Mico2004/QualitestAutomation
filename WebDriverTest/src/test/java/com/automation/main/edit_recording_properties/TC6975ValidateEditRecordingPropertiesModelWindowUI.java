@@ -109,7 +109,7 @@ public class TC6975ValidateEditRecordingPropertiesModelWindowUI {
 		//getting the information for later
 		String racordingName = record.getFirstRecordingTitle();
 		WebElement creationDate = record.getIndexDateWebElement(1);
-		String creationDateString = creationDate.getText();
+		String creationDateString = creationDate.getText().trim();
 		
 		//3.click on the recording tasks drop_down button
 		record.mouseHoverJScript(record.recording_tasks_button);

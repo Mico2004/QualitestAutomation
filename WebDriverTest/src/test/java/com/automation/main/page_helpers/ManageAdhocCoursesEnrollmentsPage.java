@@ -1,11 +1,16 @@
 package com.automation.main.page_helpers;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import atu.testng.reports.ATUReports;
@@ -74,23 +79,26 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	public void clickOnFilterButton() {
 		try {
 			wait.until(ExpectedConditions.visibilityOf(filter_search_button));
+
+			String text = contentTable.getText();
+
 			filter_search_button.click();
+
 			System.out.println("Clicked on filter button.");
-			
+
+			wait.until(ExpectedConditions.not(ExpectedConditions.textToBe(By.xpath("//div[@id='contentDIV']/table/tbody"),text)));
+
 		} catch (Exception msg) {
 			System.out.println("Not clicked on filter button.");
 		}
 	}
 
 	public void setFilterSearchBox(String set_to) throws InterruptedException {
-		for(int i=0; i<30; i++) {
-			try {
-				wait.until(ExpectedConditions.visibilityOf(filter_search_input));				
+		try{
+				wait.until(ExpectedConditions.elementToBeClickable(filter_search_input));
 				filter_search_input.clear();				
 				filter_search_input.sendKeys(set_to);
-				if (filter_search_input.getAttribute("value").equals(set_to)) {
-					break;
-				}
+				wait.until(ExpectedConditions.textToBePresentInElementValue(filter_search_input,set_to));
 				Thread.sleep(1000);
 				System.out.println("Filter search box setted to: " + set_to);
 			} catch (Exception msg) {
@@ -98,7 +106,7 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 				msg.getMessage();
 				System.out.println("Filter search box fail set to: " + set_to);
 			}
-		}
+
 	}
 
 	public boolean searchAndFilterCourses(String course_name) throws InterruptedException {
@@ -120,7 +128,17 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 	
 	public boolean firstCourseIsDisplayed(){
 		return first_course_name.isDisplayed();
-		
+
+	}
+
+	// course displayed by index
+	public boolean CourseIsDisplayedByIndex(int i){
+		try{
+		return driver.findElement(By.id("ctl00_ContentPlaceHolder1_TegrityCourseRepeater_ctl0"+i+"_LinkButton2")).isDisplayed();
+	}catch(NoSuchElementException e){
+		return false;
+	}
+
 	}
 
 	public boolean clickOnFirstCourseMembershipButton() throws InterruptedException {
@@ -163,6 +181,43 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 			Thread.sleep(3000);
 		} catch (Exception msg) {
 			System.out.println("Fail to click on first course delete button. ");
+			Assert.assertTrue(false);
+			return false;
+		}
+		return true;
+	}
+
+
+	/// click on course delete according to the course index (parameter) - mickaele
+	public boolean clickOnCourseDeleteButtonByIndex(int i) {
+		try {
+			waitForVisibility(first_course_delete_button);
+
+			String text=getCourseNameByIndex(i).getText();
+
+			WebElement courseDeleteButton=getDeleteButtonByIndex(i);
+
+			wait.until(ExpectedConditions.elementToBeClickable(courseDeleteButton));
+
+			courseDeleteButton.click();
+
+			System.out.println("Clicked on course delete button according to index");
+
+			waitForAlert(60);
+
+			clickOkInAlertIfPresent();
+
+			Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(120, TimeUnit.SECONDS)
+					.pollingEvery(5, TimeUnit.MILLISECONDS);
+
+			wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(contentTable,text)));
+
+		//	wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(getCourseNameByIndex(i),text)));
+
+			Thread.sleep(3000);
+
+		} catch (Exception msg) {
+			System.out.println("Fail to click on index course delete button. "+msg.getMessage());
 			Assert.assertTrue(false);
 			return false;
 		}
@@ -250,19 +305,28 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 		Thread.sleep(1000);
 		/// 5.unroll instructor
 		System.out.println("d1");
-		mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list, user);
+		boolean onList=mangage_adhoc_courses_membership_window.selectIrUserFromUserList(mangage_adhoc_courses_membership_window.instructor_elements_list, user);
 		Thread.sleep(3000);
 		System.out.println("d2");
-		mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
-		Thread.sleep(2000);
-		System.out.println("d3");
-		waitForVisibility(mangage_adhoc_courses_membership_window.ok_button);
-		mangage_adhoc_courses_membership_window.ok_button.click();
-		Thread.sleep(2000);
-		System.out.println("d4");
+		if(onList) {
+			mangage_adhoc_courses_membership_window.clickOnRemoveSelectedUserToInstructorList();
+			Thread.sleep(2000);
+			System.out.println("d3");
+			waitForVisibility(mangage_adhoc_courses_membership_window.ok_button);
+			mangage_adhoc_courses_membership_window.ok_button.click();
+			Thread.sleep(2000);
+			System.out.println("d4");
+			System.out.println("clicked on ok");
+			System.out.println("d5");
+		}else{
+			waitForVisibility(mangage_adhoc_courses_membership_window.ok_button);
+			mangage_adhoc_courses_membership_window.ok_button.click();
+			waitForAlert(10);
+			clickOkInAlertIfPresent();
 
-		System.out.println("clicked on ok");
-		System.out.println("d5");
+		}
+		waitForAlert(10);
+		clickOkInAlertIfPresent();
 		ATUReports.add(time +" unEnrolled "+user+" from course "+course,"user unenrolled from course","user unenrolled from course", LogAs.PASSED, null);
 	}catch(Exception e){
 		ATUReports.add(time +" unEnrolled "+user+" from course "+course,"user unenrolled from course","failed", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
@@ -321,6 +385,67 @@ public class ManageAdhocCoursesEnrollmentsPage extends Page {
 				Assert.assertTrue(false);
 			}
 		}
-		
+
+    // [M.E] Check if a specific course equels to one of courses in the list
+	// courseList - the course list
+	// index - the specific course according to it's location on the list (manage ad hock course page)
+		public boolean CourseByIndexNameEqualsToOneOfaList(List<String> courseList,int index){
+
+			try{
+
+				String text=getCourseNameByIndex(index).getText();
+
+				boolean isOnTheList=false;
+
+				for(String str: courseList) {
+					if(str.trim().contains(text) || text.toLowerCase().contains("bank") )
+						return true;
+				}
+				return false;
+
+
+			}catch(Exception e){
+
+				System.out.println(e.getLocalizedMessage());
+
+			}
+
+			return false;
+
+		}
+
+		// [M.E] gets the delete button of a specific course according to index
+		public WebElement getDeleteButtonByIndex(int i){
+			return driver.findElement(By.id("ctl00_ContentPlaceHolder1_TegrityCourseRepeater_ctl0"+i+"_LinkButton2"));
+
+		}
+
+		// [M.E] gets the webelement of a course according to it's position in the list
+		public WebElement getCourseNameByIndex(int index){
+			try{
+
+				WebElement delete=getDeleteButtonByIndex(index);
+
+				WebElement parent1=delete.findElement(By.xpath("./.."));
+
+				WebElement parent2=parent1.findElement(By.xpath("./.."));
+
+				WebElement courseName=parent2.findElement(By.xpath("./td[2]"));
+
+
+				return courseName;
+
+			}catch(Exception e){
+
+				System.out.println(e.getMessage());
+
+				return null;
+			}
+
+
+		}
+
+
+
 		
 }

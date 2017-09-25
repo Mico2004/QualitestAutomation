@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import org.junit.internal.ExactComparisonCriteria;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -37,17 +38,31 @@ public class AdminDashboardViewCourseList extends Page {
 		// TODO Auto-generated constructor stub
 	}
 
-	@FindBy(id = "gs_FriendlyName")WebElement course_name_search_box;
-	@FindBy(id = "jqg_gridData_1") WebElement first_course_in_list_checkbox;
-	@FindBy(id = "cb_gridData") WebElement first_checkbox;
+	@FindBy(id = "gs_FriendlyName")public WebElement course_name_search_box;
+	@FindBy(id = "jqg_gridData_1") public WebElement first_course_in_list_checkbox;
+	@FindBy(id = "cb_gridData") public WebElement first_checkbox;
+	@FindBy(id = "gs_FriendlyName") public  WebElement course_name_textbox;
+	@FindBy(id = "gs_AairsCourseId") public WebElement course_id_textbox;
 	@FindBy(id = "gridData_FriendlyName") WebElement course_name;
 	@FindBy(css = ".linksStyle") public WebElement first_course_link;
 	@FindBy(xpath = "//*[@id=\"2\"]/td[5]/a") WebElement second_course_link;
 	@FindBy(xpath = ".//*[@id='1']/td[6]") WebElement first_instructor_ids;
 	@FindBy(xpath = "//*[@id=\"main\"]/div[1]/h2") WebElement all_courses_title;
 	@FindBy(xpath =".//*[@id='tegrityBreadcrumbsBox']/li/a")WebElement adminDashboard;
+	@FindBy(xpath =".//*[@id='gview_gridData']/div[2]/div/table/thead/tr[2]/th[6]/div/table/tbody/tr/td[2]/a/img") public WebElement idFilterButton;
+	@FindBy(xpath =".//*[@id='gview_gridData']/div[2]/div/table/thead/tr[2]/th[5]/div/table/tbody/tr/td[2]/a") public WebElement nameFilterButton;
+	@FindBy(xpath =".//*[@id='sopt_menu']/li[1]/a/table/tbody/tr/td[2]")	public WebElement containFilterOption;
+	@FindBy(xpath =".//*[@id='sopt_menu']/li[2]/a/table/tbody/tr/td[2]")	public WebElement doNotContainFilterOption;
+	@FindBy(xpath =".//*[@role='listbox']")	public WebElement pageingDropDown;
+	@FindBy(xpath =".//*[@role='listbox']/option[3]")	public WebElement pageingDropDown_thirdOption;
+	@FindBy(xpath =".//*[@id='archiveOrPurgeCoursesWindow']/div/div[1]/div[2]/input")	public WebElement delete;
+	@FindBy(xpath =".//*[@id='archiveOrPurgeCoursesWindow']//button[1]") public WebElement purgeButton;
 	@FindBy(className = "linksStyle") List<WebElement> courses_link;
 	@FindBy (css = ".btn.btn-default.btn-menu.nolink") WebElement courseTasks;
+
+
+
+
 	
 	// @FindBy(id = "ctl00_ContentPlaceHolder1_txtSearch") WebElement
 	// filter_search_input;
@@ -171,6 +186,84 @@ public class AdminDashboardViewCourseList extends Page {
 		waitForVisibility(first_instructor_ids);
 		return first_instructor_ids.getText();
 	}
-	
+
+
+
+	// clicks on purge button - fill the delete confirmation - click on final purge
+	public void purge(){
+		try {
+            waitForVisibility(courseTasks);
+
+			courseTasks.click();
+
+			waitForVisibility(driver.findElement(By.xpath("//*[@id='ddCoursesArchive']/li/ul/li[2]")));
+
+			WebElement purge = driver.findElement(By.xpath("//*[@id='ddCoursesArchive']/li/ul/li[2]"));
+
+			purge.click();
+
+			waitForVisibility(delete);
+
+			delete.sendKeys("DELETE");
+
+			wait.until(ExpectedConditions.elementToBeClickable(purgeButton));
+
+			purgeButton.click();
+
+			ATUReports.add(time +" Succeeded to Purge", "Success", "Success", LogAs.PASSED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+
+			ATUReports.add(time +" Failed to purge", "Success", e.getMessage(), LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
+		}
+
+
+	}
+
+	// check or uncheck checkbox of a specific course
+	public void checkOrUncheckCourseCheckbox(boolean check, String courseName){
+
+		try {
+
+			wait.until(ExpectedConditions.elementToBeClickable(first_course_in_list_checkbox));
+
+			wait.until(ExpectedConditions.elementToBeClickable(first_course_link));
+
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//a[text()='" + courseName + "']")));
+
+			WebElement courseNameElement = driver.findElement(By.xpath(".//a[text()='" + courseName + "']"));
+
+			WebElement courseNameElementParent = courseNameElement.findElement(By.xpath("./.."));
+
+			WebElement courseNameElementParent2 = courseNameElementParent.findElement(By.xpath("./.."));
+
+			WebElement checkbox = courseNameElementParent2.findElement(By.xpath("./td[1]/input"));
+
+			waitForVisibility(checkbox);
+
+			if(check && !checkbox.isSelected()) {
+				checkbox.click();
+                wait.until(ExpectedConditions.elementToBeSelected(checkbox));
+			}
+
+			else if(!check && checkbox.isSelected()) {
+				checkbox.click();
+				wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeSelected(checkbox)));
+			}
+
+		}catch ( Exception e){
+
+			System.out.println(e.getMessage());
+
+			Assert.assertTrue(false);
+
+		}
+
+
+
+	}
+
 	
 }

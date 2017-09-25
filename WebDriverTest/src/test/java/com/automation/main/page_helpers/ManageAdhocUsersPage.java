@@ -3,14 +3,13 @@ package com.automation.main.page_helpers;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -39,20 +38,40 @@ public class ManageAdhocUsersPage extends Page {
 
 	@FindBy(id = "ctl00_ContentPlaceHolder1_lbNewUser")
 	public WebElement new_user_button;
-	@FindBy(xpath = ".//*[@id='tegrityBreadcrumbsBox']/li/a")
-	WebElement to_admin_dashboard;
+	@FindBy(xpath = ".//*[@id='tegrityBreadcrumbsBox']/li/a") WebElement to_admin_dashboard;
 	@FindBy(xpath="//div[@id='contentDIV']/table/tbody") WebElement contentTable;
 	@FindBy(id = "ctl00_ContentPlaceHolder1_txtSearch") WebElement filter_search_user_input;
 	@FindBy(id = "ctl00_ContentPlaceHolder1_btnSearch") WebElement filter_search_button;
 
 	public void clickOnNewUser() throws InterruptedException {
 		       try{
-		    	   new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(new_user_button));		    
-		    	   new_user_button.click();
-		    	   System.out.println("Clicked on new user button.");
+					driver.switchTo().frame(0);
+
+					new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(new_user_button));
+
+					new_user_button.click();
+
+					System.out.println("Clicked on new user button.");
 		    	   
-			} catch (Exception msg) {
-					ATUReports.add(time +" Not clicked on new user link", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			} catch (NoSuchFrameException msg) {
+				   try {
+					   new WebDriverWait(driver, 40).until(ExpectedConditions.visibilityOf(new_user_button));
+
+					   new_user_button.click();
+
+					    System.out.println("Clicked on new user button.");
+
+				   }catch(Exception e){
+
+					     System.out.println(msg.getMessage());
+
+					     ATUReports.add(time +" Not clicked on new user link", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+
+				   }
+
+
+
+
 					
 			}
 		}
@@ -121,5 +140,127 @@ public class ManageAdhocUsersPage extends Page {
 			Assert.assertTrue(false);
 		}
 	}
+
+
+	// [M.E] check if current user is equal to one of the local properties users
+	public boolean userByIndexNameEqualsToOneOfaList(List<String> userList,int index){
+
+		try{
+			index+=2;
+			String text=getUserIdByIndex(index).getText();
+
+			boolean isOnTheList=false;
+
+			for(String str: userList) {
+				if(str.trim().contains(text))
+					return true;
+			}
+			return false;
+
+
+		}catch(Exception e){
+
+			System.out.println(e.getLocalizedMessage());
+
+		}
+
+		return false;
+
+	}
+
+	public WebElement getDeleteButtonByIndex(int i){
+
+		return driver.findElement(By.id("ctl00_ContentPlaceHolder1_rptUserBuilder_ctl0"+i+"_lbDelUser"));
+
+	}
+
+	public WebElement getUserIdByIndex(int index){
+		try{
+
+			return driver.findElement(By.xpath(".//*[@id='contentDIV']//tr["+(index+2)+"]/td[1]"));
+
+		}catch(Exception e){
+
+			System.out.println(e.getMessage());
+
+			return null;
+		}
+
+
+	}
+
+	// [M.E] user displayed by index
+	public boolean userIsDisplayedByIndex(int i){
+		try{
+			return driver.findElement(By.xpath(".//*[@id='ctl00_ContentPlaceHolder1_rptUserBuilder_ctl0"+i+"_lbDelUser']")).isDisplayed();
+		}catch(NoSuchElementException e){
+			return false;
+		}
+
+	}
+
+    //[M.E] Delete a user according to it's position (i)
+	public boolean clickOnUserDeleteButtonByIndex(int i) {
+		try {
+			waitForVisibility(getUserIdByIndex(i));
+
+			String text=getUserIdByIndex(i).getText();
+
+			WebElement userDeleteButton=getDeleteButtonByIndex(i);
+
+			wait.until(ExpectedConditions.elementToBeClickable(userDeleteButton));
+
+			userDeleteButton.click();
+
+			System.out.println("Clicked on course delete button according to index");
+
+			waitForAlert(60);
+
+			clickOkInAlertIfPresent();
+
+			Wait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(120, TimeUnit.SECONDS)
+					.pollingEvery(5, TimeUnit.MILLISECONDS);
+
+			wait.until(ExpectedConditions.not(ExpectedConditions.textToBePresentInElement(contentTable,text)));
+
+			Thread.sleep(3000);
+
+		} catch (Exception msg) {
+			System.out.println("Fail to click on index course delete button. ");
+			Assert.assertTrue(false);
+			return false;
+		}
+		return true;
+	}
+
+	// [M.E] waits for the list to refresh by comparing previous text with current
+	public void waitForFilterToComplete(){
+
+		try {
+
+			String text = contentTable.getText();
+
+			for (int i = 0; i < 60; i++) {
+
+				if (!contentTable.getText().equals(text))
+					break;
+
+				text = contentTable.getText();
+
+				Thread.sleep(4000);
+
+
+			}
+		}catch (Exception e){
+
+			System.out.println(e);
+
+			Assert.assertTrue(false);
+
+		}
+	}
+
+
+
 
 }

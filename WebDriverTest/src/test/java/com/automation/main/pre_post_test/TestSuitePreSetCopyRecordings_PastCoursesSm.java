@@ -2,11 +2,15 @@ package com.automation.main.pre_post_test;
 
 import java.text.DateFormat;
 import java.util.Date;
+
+import junitx.util.PropertyManager;
+import org.jfree.ui.about.SystemProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ReporterConfig;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
@@ -61,6 +65,7 @@ public class TestSuitePreSetCopyRecordings_PastCoursesSm {
 	public CreateNewUserWindow create_new_user_window;
 	public ManageAdHocCoursesMembershipWindow mangage_adhoc_courses_membership_window;
 	public EditRecordingPropertiesWindow erp_window;
+	String PastCourse="";
 
 	@BeforeClass
 	public void setup() {
@@ -107,41 +112,58 @@ public class TestSuitePreSetCopyRecordings_PastCoursesSm {
 		
 		//1.Enter the university
 		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		
-		//2.Login as INSTRUCTOR 
+
+		//2.Login as INSTRUCTOR
 		tegrity.loginCourses("User1");
-		
-		//adding one recording to the pastCourseA
-		//1.Click on the 'Past Courses' tab*
-		course.clickOnPastCoursesTabButton();
-						
-		//2.Select the past course
-		course.selectCourseThatStartingWith("PastCourseA");
-						
-		//3.move the course to active courses
-		record.clickOnCourseTaskThenMoveToActiveCourses();
-				
-		//4.click on the ok after moving to active courses
-		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to active courses");
-				
-		//5.return to the courses page
-		record.returnToCourseListPage();
-				
-		//6.copy on record to pastcoursesA
-		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "PastCourseA", 0,record, copy, confirm_menu);
-				
-		//7.Select the past course
-		course.selectCourseThatStartingWith("PastCourseA");
-				
-		//8.wait until the moving will finish
-		record.checkStatusExistenceForMaxTTime(220);
-				
-		//9.move to pass courses
-		record.clickOnCourseTaskThenMoveToPastCourses();
-				
-		//10.click on the ok after moving to past courses
-		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to past courses");
-			
+
+		boolean existInPastList=false;
+
+		for(int i=10; i<12;i++) {
+
+			existInPastList=false;
+			if(i==10)
+				PastCourse= PropertyManager.getProperty("course10");
+			else
+				PastCourse= PropertyManager.getProperty("course11");
+
+			if(!course.verifyCourseExistWithCourseList(PastCourse, course.getCourseList())) {
+
+				existInPastList=true;
+				//adding one recording to the pastCourseA
+				//1.Click on the 'Past Courses' tab*
+				course.clickOnPastCoursesTabButton();
+
+			//2.Select the past course
+				course.selectCourseThatStartingWith(PastCourse);
+
+			//3.move the course to active courses
+				record.clickOnCourseTaskThenMoveToActiveCourses();
+
+			//4.click on the ok after moving to active courses
+				confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to active courses");
+
+			//5.return to the courses page
+				record.returnToCourseListPage();
+			}
+			//6.copy on record to pastcoursesA
+			course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", PastCourse, 0, record, copy, confirm_menu);
+
+			//7.Select the past course
+			course.selectCourseThatStartingWith(PastCourse);
+
+			//8.wait until the moving will finish
+			record.checkStatusExistenceForMaxTTime(220);
+
+
+				//9.move to pass courses
+			record.clickOnCourseTaskThenMoveToPastCourses();
+
+				//10.click on the ok after moving to past courses
+			confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to past courses");
+
+			record.returnToCourseListPage();
+
+		}
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 

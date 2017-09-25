@@ -102,13 +102,13 @@ public class TC10951VerifyMoveFunctionalityForAManualPastCourse {
 		//2.Login as INSTRUCTOR 
 		tegrity.loginCourses("User1");
 		
-		//pre-test!! move record to the pastCourseA
+		//pre-test!! move record to the pastCourseC
 		
 		//3.Click on the 'Past Courses' tab*
 		course.clickOnPastCoursesTabButton();
 				
 		//4.Select the past course
-		course.selectCourseThatStartingWith("PastCourseA");
+		course.selectCourseThatStartingWith("PastCourseC");
 				
 		//5.move the course to active courses
 		record.clickOnCourseTaskThenMoveToActiveCourses();
@@ -120,10 +120,10 @@ public class TC10951VerifyMoveFunctionalityForAManualPastCourse {
 		record.returnToCourseListPage();
 		
 		//8.copy on record to pastcoursesA
-		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "PastCourseA", 0,record, copy, confirm_menu);
+		course.copyOneRecordingFromCourseStartWithToCourseStartWithOfType("Ab", "PastCourseC", 0,record, copy, confirm_menu);
 		
 		//9.Select the past course
-		course.selectCourseThatStartingWith("PastCourseA");
+		course.selectCourseThatStartingWith("PastCourseC");
 		
 		//10.wait until the moving will finish
 		record.checkStatusExistenceForMaxTTime(220);
@@ -143,10 +143,10 @@ public class TC10951VerifyMoveFunctionalityForAManualPastCourse {
 		course.clickOnPastCoursesTabButton();
 		
 		//get the second course for later use
-		String PastCourseB = PropertyManager.getProperty("course9");
+		String PastCourseB = PropertyManager.getProperty("course11");
 		
 		//15.Select the past course
-		course.selectCourseThatStartingWith("PastCourseA");
+		course.selectCourseThatStartingWith("PastCourseC");
 		
 		//16.Select a recording
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);

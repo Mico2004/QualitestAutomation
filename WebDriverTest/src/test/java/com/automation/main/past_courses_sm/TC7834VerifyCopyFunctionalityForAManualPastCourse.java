@@ -97,10 +97,10 @@ public class TC7834VerifyCopyFunctionalityForAManualPastCourse {
 		course.clickOnPastCoursesTabButton();
 		
 		//get the second course for later use
-		String PastCourseB = PropertyManager.getProperty("course9");
+		String PastCourseB = PropertyManager.getProperty("course11");
 		
 		//4.Select the past course
-		course.selectCourseThatStartingWith("PastCourseA");
+		course.selectCourseThatStartingWith("PastCourseC");
 		
 		//5.Select a recording
 		record.SelectOneCheckBoxOrVerifyAlreadySelected(record.checkbox);
