@@ -133,7 +133,101 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		System.out.println("PastCourseA"+university_name+user.substring(5, user.length()));
 		String PastCourseA="PastCourseA"+university_name+user.substring(5, user.length());
 		String PastCourseB="PastCourseB"+university_name+user.substring(5, user.length());
-		
+
+
+		///////////////////
+		tegrity.loginAdmin("Admin");
+
+		/// 2.Click the "Course Builder" link
+		admin_dashboard_page.clickOnTargetSubmenuCourses("Manage Ad-hoc Courses / Enrollments (Course Builder)");
+
+		/// 3.Click the "Membership" link related to the course+unenroll
+		/// instructor 1
+		System.out.println("before 3");
+
+		List<String> UserName = new ArrayList<>(Arrays.asList(PropertyManager.getProperty("User1"),PropertyManager.getProperty("SuperUser")));
+
+		mange_adhoc_course_enrollments.enrollInstructorToCourse(PropertyManager.getProperty("course8"),UserName ,
+				mangage_adhoc_courses_membership_window);
+		Thread.sleep(4000);
+
+		for (String window : driver.getWindowHandles()) {
+			driver.switchTo().window(window);
+			break;
+		}
+
+		mange_adhoc_course_enrollments.enrollInstructorToCourse(PropertyManager.getProperty("course8"),UserName ,
+				mangage_adhoc_courses_membership_window);
+		Thread.sleep(4000);
+
+		for (String window : driver.getWindowHandles()) {
+			driver.switchTo().window(window);
+			break;
+		}
+
+
+
+		mange_adhoc_course_enrollments.clickOnAdminDashboard();
+		Thread.sleep(2000);
+		admin_dashboard_page.signOut();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////
+
+
+
+		System.out.println("b0");
+		final List<Integer> CourseAbContent = Arrays.asList(0,1,2,3); //For Ab
+		final List<Integer> CoursePastAContent = Arrays.asList(0,1,2,3); //For PAST A
+		final List<Integer> CoursePastBContent = Arrays.asList(0,3); //For PAST B
+
+		Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
+			{
+				put(PropertyManager.getProperty("course1"),CourseAbContent);
+				put(PropertyManager.getProperty("course8"),CoursePastAContent);
+				put(PropertyManager.getProperty("course9"),CoursePastBContent);
+			}
+		};
+		TestSuitePreSetGeneric h=new TestSuitePreSetGeneric(driver);
+		System.out.println("b1");
+		h.GenricPreset(CoursesAndContent);
+
+
+
+
+
+		///////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
 		tegrity.loginAdmin("Admin");
 
@@ -170,132 +264,10 @@ public class TestSuitePreSetCopyRecordings_PastCourses {
 		admin_dashboard_page.signOut();
 		
 		
-		System.out.println("b0");
-		  final List<Integer> CourseAbContent = Arrays.asList(0,1,2,3); //For Ab	
-		  final List<Integer> CoursePastAContent = Arrays.asList(0,1,2,3); //For PAST A
-		  final List<Integer> CoursePastBContent = Arrays.asList(0,3); //For PAST B
-		  
-		  Map<String,List<Integer>> CoursesAndContent = new HashMap<String,List<Integer>>() {
-			{
-				put(PropertyManager.getProperty("course1"),CourseAbContent);	
-				put(PropertyManager.getProperty("course8"),CoursePastAContent);
-				put(PropertyManager.getProperty("course9"),CoursePastBContent);
-			}
-			};
-		TestSuitePreSetGeneric h=new TestSuitePreSetGeneric(driver);
-		System.out.println("b1");
-		h.GenricPreset(CoursesAndContent);
+
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	
-	/*
-		
-		
-		
-		tegrity.loginCourses("SuperUser");// log in courses page
-		initializeCourseObject();
-
-		// Copy all recording from Bank Valid Recording to course starting with 
-		// Ab and to past courses, before hand checks if there are any recordings in those pages
-		
-		course.waitForVisibility(course.active_courses_tab_button);
-		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("wrapper"), "recordings -"));
-
-		course.selectCourseThatStartingWith("Ab"); 	
-		boolean	additionalExist=record.tabExists(1); 
-		boolean	StudentExist=record.tabExists(2); 
-		boolean	TestExist=record.tabExists(3); 
-		System.out.println(additionalExist+""+StudentExist+""+TestExist);
-		record.returnToCourseListPage(course);
-		System.out.println("pastpreset1");
-		course.deleteAllRecordingsInCourseStartWith("Ab", 0, record,delete_menu);
-		System.out.println("pastpreset2");
-		if(additionalExist)
-		course.deleteAllRecordingsInCourseStartWith("Ab", 1, record,delete_menu);
-		System.out.println("pastpreset3");
-		if(StudentExist)
-		course.deleteAllRecordingsInCourseStartWith("Ab", 2, record,delete_menu);
-		System.out.println("pastpreset4");
-		if(TestExist)
-		course.deleteAllRecordingsInCourseStartWith("Ab", 3, record,delete_menu);
-		System.out.println("pastpreset5");
-		
-		course.selectCourseThatStartingWith("PastCourseA");
-		System.out.println("pastpreset6");
-		additionalExist=record.tabExists(1);
-		StudentExist=record.tabExists(2); 
-		TestExist=record.tabExists(3);
-		System.out.println("a2"); 
-		record.returnToCourseListPage(course);
-		Thread.sleep(4000);
-		System.out.println("a3");
-		
-		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 0, record,
-		delete_menu); 
-		
-		if(additionalExist)
-		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 1, record,
-		delete_menu); 
-		
-		if(StudentExist)
-		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 2, record,
-		delete_menu); 
-		
-		if(TestExist)
-		course.deleteAllRecordingsInCourseStartWith("PastCourseA", 3, record,
-		delete_menu);
-		Thread.sleep(4000);
-		
-		System.out.println("a5");
-		course.deleteAllRecordingsInCourseStartWith("PastCourseB", 0, record,
-		delete_menu); 
-		System.out.println("a5.1");
-		Thread.sleep(4000); 
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 0, record, copy, confirm_menu);
-		Thread.sleep(4000); 
-		System.out.println("a6");
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType("BankValidRecording", "Ab", 1, record, copy, confirm_menu);
-		Thread.sleep(4000); 
-		System.out.println("a7"); 
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "Ab", 2, record, copy, confirm_menu);
-		Thread.sleep(4000); 
-		System.out.println("a7");
-		// Copy all student recordings from Bank Valid Recording to course 
-		//starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "Ab", 3, record, copy, confirm_menu);
-		Thread.sleep(4000);
-		System.out.println("a8");
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "PastCourseA", 3, record, copy, confirm_menu);
-		Thread.sleep(4000);
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType( "BankValidRecording", "PastCourseA", 0, record, copy, confirm_menu);
-		Thread.sleep(4000); 
-		// Copy all additional content from Bank Valid Recording to course 
-		// starting with Ab
-	
-
-		
-		System.out.println("a9");
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "PastCourseA", 1, record, copy, confirm_menu);
-		Thread.sleep(4000);
-
-		System.out.println("a10"); 
-		// Copy all student recordings from Bank Valid Recording to course 
-		// starting with Ab
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "PastCourseA", 2, record, copy, confirm_menu);
-		Thread.sleep(4000); System.out.println("a11");
-		course.copyRecordingFromCourseStartWithToCourseStartWithOfType(	"BankValidRecording", "PastCourseB",0, record, copy, confirm_menu);
-		Thread.sleep(4000); System.out.println("a12");
-		course.verifyRecordingsStatusIsClear("BankValidRecording", 0,record);
-		System.out.println("1"); Thread.sleep(4000);
-		course.verifyRecordingsStatusIsClear("BankValidRecording", 2,record); 
-		System.out.println("3"); Thread.sleep(4000);
-		course.verifyRecordingsStatusIsClear("BankValidRecording", 3,record); 
-		System.out.println("4"); Thread.sleep(4000);
-		course.signOut();
-
-
-		System.out.println("Done.");
-		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);*/
 
 	
 

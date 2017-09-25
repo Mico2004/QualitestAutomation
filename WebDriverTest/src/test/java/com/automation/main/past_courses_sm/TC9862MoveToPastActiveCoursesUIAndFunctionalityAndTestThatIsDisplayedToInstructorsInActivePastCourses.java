@@ -90,37 +90,40 @@ public class TC9862MoveToPastActiveCoursesUIAndFunctionalityAndTestThatIsDisplay
 	public void test9862() throws InterruptedException {
 		
 		//1.Enter the university
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);	
+		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
+		tegrity.loginCourses("User1");
+
+		initializeCourseObject();
+
+		//1.Click on the 'Past Courses' tab*
+		course.clickOnPastCoursesTabButton();
+
+		//2.Select the past course
+		course.selectCourseThatStartingWith("PastCourseD");
+
+		//3.move the course to active courses
+		record.clickOnCourseTaskThenMoveToActiveCourses();
+
+		//4.click on the ok after moving to active courses
+		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to active courses");
+
+		//5.return to the courses page
+		record.signOut();
+
 		
 		//2.0-Login as INSTRUCTOR , 1- Login as Executive admin  ; 2- Impersonate User
-		for(int type_of_user = 0; type_of_user < 3; type_of_user++) {
+		for(int type_of_user = 0; type_of_user < 2; type_of_user++) {
 			
 		if(type_of_user == 0) {
 			tegrity.loginCourses("User1");
 		}else if(type_of_user ==1) {
 			tegrity.loginAdmin("ExcutiveAdmin");
-		} else {		
-			tegrity.loginAdmin("Admin");
-			
-			//14.Click on "Impersonate User" under the "Users" section
-			admin_dash_board_page.waitForPageToLoad();
-			admin_dash_board_page.clickOnTargetSubmenuUsers("Impersonate User");
-			
-			//15.Enter the Instructor's ID you logged in with in step 4 in the text field and click on "Impersonate"
-			String current_handler = driver.getWindowHandle();		
-			impersonate_user.EnterTheUserIdAndPressOnImpersonate(PropertyManager.getProperty("User1"));
-		
-			//16.Move to the open tab and close the old tab		
-			course.waitForThePageToLoad();
-			record.moveToTheOtherTabAndCloseTheOldTab(current_handler);
 		}
 			
 		//3.Click on one of the active courses	
-		if(type_of_user == 0 || type_of_user == 2){
-			course_name = course.selectCourseThatStartingWith("Ba");
-		} else {
-			course_name = course.selectCourseThatStartingWith("Ab");		
-		}
+		course_name = course.selectCourseThatStartingWith("PastCourseD");
+
 		//4.Hover over the "Course Tasks"
 		record.moveToElementAndPerform(record.course_task_button, driver);
 		
@@ -206,7 +209,21 @@ public class TC9862MoveToPastActiveCoursesUIAndFunctionalityAndTestThatIsDisplay
 		//30.sign out from user
 		record.signOut();
 		}
-				
+
+		tegrity.loginCourses("User1");
+
+		initializeCourseObject();
+
+
+		course.selectCourseThatStartingWith("PastCourseD");
+
+		//3.move the course to past courses
+		record.clickOnCourseTaskThenMoveToPastCourses();
+
+		//4.click on the ok after moving to past courses
+		confirm_menu.clickOnOkButtonAfterMoveToPastCoursesOrActiveCourses("The course was successfully moved to past courses");
+
+
 		System.out.println("Done.");
 		ATUReports.add("Message window.", "Done.", "Done.", LogAs.PASSED, null);
 	
