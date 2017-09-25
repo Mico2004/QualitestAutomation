@@ -119,10 +119,8 @@ public class TC21578LoginAsGuestUI {
 
 	@Test (description="TC 21578 Login As GuestUI")
 	public void test21578() throws Exception {
-		//// pre condition
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
-		tegrity.loadPage(tegrity.pageUrl, tegrity.pageTitle);
+
+
 
 
 		// 1.load page
