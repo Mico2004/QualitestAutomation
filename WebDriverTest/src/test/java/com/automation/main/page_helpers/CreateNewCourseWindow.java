@@ -76,11 +76,14 @@ public class CreateNewCourseWindow extends Page {
 	
 		try{
 		//		wait.until(ExpectedConditions.visibilityOf(title_modal_window));
+
+
 			setCourseName(course_name);
 			wait.until(ExpectedConditions.textToBePresentInElementValue(course_name_input, course_name));
 			setCourseId(course_id);
 			wait.until(ExpectedConditions.textToBePresentInElementValue(course_id_input, course_id));
-			clickOnOkButton();		
+			clickOnOkButton();
+			fluentWaitInvisibility(ok_button,60,5);
 			System.out.println("New course created. Course name: " + course_name + ". Course id: " + course_id);
 			waitForAlert(60);
 		}catch(Exception e){
