@@ -24,6 +24,7 @@ import atu.testng.selenium.reports.CaptureScreen.ScreenshotOf;
 import junitx.util.PropertyManager;
 import utils.ATUManager;
 import utils.UniversityConfigure;
+import utils.WaitDriverUtility;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -216,6 +217,8 @@ public class LoginHelperPage extends Page {
     // courses
     {
         try {
+
+
             isMHCampuseUp();
             waitForVisibility(usernamefield);
             waitForVisibility(button_login);
@@ -224,6 +227,7 @@ public class LoginHelperPage extends Page {
             fillPass();
             clickElementJS(button_login);
             new WebDriverWait(driver, 30).until(ExpectedConditions.titleContains("Tegrity"));
+            WaitDriverUtility.waitToPageBeLoaded(driver);
             ATUReports.add("Login as", PropertyManager.getProperty(user_name), "Success login", "Success login", LogAs.PASSED, null);
         } catch (Exception e) {
             ATUReports.add("Login as", PropertyManager.getProperty(user_name), "Success login", "Success fail (Screenshot)", LogAs.FAILED,
