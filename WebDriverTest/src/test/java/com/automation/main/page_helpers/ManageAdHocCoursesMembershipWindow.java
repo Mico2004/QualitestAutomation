@@ -13,6 +13,7 @@ import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -42,6 +43,7 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_txtSerach") WebElement search_user_input;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_btnSearch") WebElement search_user_button;
 	@FindBy(css="#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers>option") WebElement first_user_of_user_list;
+	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxAllUsers") WebElement users_list;
 	@FindBy(css="#ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxInstructors>option") WebElement	first_user_of_instructors_list;
 	@FindBy(id="ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ButtonAddInstructor")
 	public WebElement add_selected_as_instructor_button;
@@ -89,8 +91,10 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 	
 	public boolean selectFirstUserFromUserList() {
 		try {
-			wait.until(ExpectedConditions.visibilityOf(first_user_of_user_list));
+			Thread.sleep(500);
+			wait.until(ExpectedConditions.elementToBeClickable(first_user_of_user_list));
 			first_user_of_user_list.click();
+			wait.until(ExpectedConditions.elementToBeSelected(first_user_of_user_list));
 			System.out.println("First user selected from user list.");
 			return true;
 		} catch (Exception msg) {
@@ -346,5 +350,107 @@ public class ManageAdHocCoursesMembershipWindow extends Page {
 			
 			
 		}
+	}
+
+
+	public boolean isMembershipDisplayedByIndex(int index){
+		try{
+
+			wait.until(ExpectedConditions.visibilityOf(search_user_input));
+			Thread.sleep(3000);
+			WebElement memberShipOption=driver.findElement(By.xpath("//*[@id='ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxInstructors']/option["+index+"]"));
+
+			if(memberShipOption.isDisplayed())
+				return true;
+
+			}catch(Exception e){
+				e.getMessage();
+				return false;
+		}
+		return false;
+	}
+
+	public boolean MembershipByIndexIdEqualsToOneOfaList(List userList,int index){
+
+		try{
+
+			WebElement membership=getMembershipByIndex(index);
+
+
+			String membershipText=membership.getText();
+
+			boolean isOnTheList=false;
+
+			int i=0;
+
+			while(userList.get(i)!=null){
+
+				if( userList.get(i)==membershipText ){
+
+					isOnTheList=true;
+					return true;
+
+				}
+				i++;
+
+			}
+
+			return false;
+
+		}catch(Exception e){
+
+			System.out.println(e.getLocalizedMessage());
+
+		}
+
+		return false;
+
+	}
+
+	// select user from the list according to an index
+	public boolean selectUserFromUserListByIndex(int i) {
+		try {
+			wait.until(ExpectedConditions.visibilityOf(first_user_of_user_list));
+			driver.findElement(By.xpath("//*[@id='ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxInstructors']/option["+i+"]")).click();
+			System.out.println("First user selected from user list.");
+			return true;
+		} catch (Exception msg) {
+			System.out.println("Fail to select first user from user list.");
+			return false;
+		}
+	}
+
+
+	// select user from the list according to an index
+	public String getUserTextFromUserListByIndex(int i) {
+		try {
+			wait.until(ExpectedConditions.visibilityOf(first_user_of_user_list));
+			String text =driver.findElement(By.xpath("//*[@id='ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxInstructors']/option["+i+"]")).getText();
+			System.out.println("First user selected from user list.");
+			return text;
+		} catch (Exception msg) {
+			System.out.println("Fail to select first user from user list.");
+			return "";
+		}
+	}
+	// wait for instructor option (by index) not to be selected
+	public boolean waitForInstructorNotToBeSelected(int i){
+		try{
+
+			wait.until(ExpectedConditions.elementSelectionStateToBe(driver.findElement(By.xpath("//*[@id='ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxInstructors']/option["+i+"]")),false));
+					return true;
+
+		}catch(Exception e){
+			e.getMessage();
+			return false;
+
+		}
+
+
+	}
+
+	public WebElement getMembershipByIndex(int i){
+		return driver.findElement(By.xpath("//*[@id='ctl00_ContentPlaceHolder1_ucAddMemberships_ucDialog_ListBoxInstructors']/option["+i+"]"));
+
 	}
 }
