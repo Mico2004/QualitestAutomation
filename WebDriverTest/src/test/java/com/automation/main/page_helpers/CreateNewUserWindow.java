@@ -115,17 +115,30 @@ public class CreateNewUserWindow extends Page {
 	public void createNewUser(String user_name, String user_id, String email, String password, String confirm_password) throws InterruptedException  {
 		try {
 			setUserName(user_name);
+
 			setUserId(user_id);
+
 			setEmail(email);
+
 			setPassword(password);
+
 			setConfirmPassword(confirm_password);
-			clickOnOkButton();		
+
+			clickOnOkButton();
+
+			fluentWaitInvisibility(ok_button,60,5);
+
 			waitForAlert(60);
-			driver.switchTo().alert().accept();					
+
+			driver.switchTo().alert().accept();
+
 			System.out.println("New user created. Username: " + user_name + ". User id: " + user_id + ". Password: " + password);
+
 			ATUReports.add(time +" User Creation",user_name,"New User was created","New User was created",LogAs.PASSED,null);
-		} catch (Exception e) {	
+		} catch (Exception e) {
+
 			System.out.println("NoAlertPresentException"+e.getMessage());
+
 			ATUReports.add(time +" No Alert Present Exception: "+e.getMessage(),LogAs.WARNING, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 				
 			}
