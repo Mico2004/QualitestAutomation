@@ -298,11 +298,11 @@ DONT UNCOMMENT THIS !!!  */
 
 		view_page.waitForVisibility(view_page.first_course_link);
 
-		String courseName=PropertyManager.getProperty("course1").split("_")[0];
+	/*	String courseName=PropertyManager.getProperty("course1").split("_")[0];
 
-		String courseDate=courseName.split("-")[2];
+		String courseDate=courseName.split("-")[2];*/
 
-		view_page.setElementText(view_page.course_name_textbox,courseDate);
+		view_page.setElementText(view_page.course_name_textbox,"bank");
 
 		wait.until(ExpectedConditions.elementToBeClickable(view_page.nameFilterButton));
 
@@ -319,8 +319,6 @@ DONT UNCOMMENT THIS !!!  */
 		Thread.sleep(2500);
 
 		view_page.first_checkbox.click();
-
-		view_page.checkOrUncheckCourseCheckbox(false,bankCourseName);
 
 		view_page.purge();
 
