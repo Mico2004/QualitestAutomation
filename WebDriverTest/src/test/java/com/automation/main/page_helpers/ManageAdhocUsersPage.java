@@ -146,8 +146,8 @@ public class ManageAdhocUsersPage extends Page {
 	public boolean userByIndexNameEqualsToOneOfaList(List<String> userList,int index){
 
 		try{
-			index+=2;
-			String text=getUserIdByIndex(index).getText();
+
+			String text=getUserIdByIndex(index+2).getText();
 
 			boolean isOnTheList=false;
 
@@ -177,7 +177,7 @@ public class ManageAdhocUsersPage extends Page {
 	public WebElement getUserIdByIndex(int index){
 		try{
 
-			return driver.findElement(By.xpath(".//*[@id='contentDIV']//tr["+(index+2)+"]/td[1]"));
+			return driver.findElement(By.xpath(".//*[@id='contentDIV']//tr["+(index)+"]/td[1]"));
 
 		}catch(Exception e){
 
