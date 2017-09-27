@@ -175,6 +175,7 @@ public class ManageAdhocUsersPage extends Page {
 	}
 
 	public WebElement getUserIdByIndex(int index){
+
 		try{
 
 			return driver.findElement(By.xpath(".//*[@id='contentDIV']//tr["+(index)+"]/td[1]"));
