@@ -73,7 +73,8 @@ public class ConfirmationMenu extends Page {
 		} catch (Exception e) {
 			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
-		}  
+		}
+
 		Thread.sleep(2000);
 
 	}
