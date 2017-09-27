@@ -68,7 +68,6 @@ public class ConfirmationMenu extends Page {
 			}
 			waitForVisibility(ok_button);		
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();",ok_button);
-
 			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
