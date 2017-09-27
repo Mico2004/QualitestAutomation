@@ -49,7 +49,7 @@ import junitx.util.PropertyManager;
 
 
 @Listeners({ ATUReportsListener.class, ConfigurationListener.class, MethodListener.class })
-public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveInstructorStudentPermissionsAndValidateThatYourPermissionsAreLikeGuest {
+public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHave {
 
 	// Set Property for ATU Reporter Configuration
 	{
@@ -57,7 +57,7 @@ public class TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveI
 
 	}
 
-	public TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHaveInstructorStudentPermissionsAndValidateThatYourPermissionsAreLikeGuest() {
+	public TC21921EnterAsAnInstructorStudentToAPublicCourseInWhichYouDontHave() {
 		// TODO Auto-generated constructor stub
 	}
 
