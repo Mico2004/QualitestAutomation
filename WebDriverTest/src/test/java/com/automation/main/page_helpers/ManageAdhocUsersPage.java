@@ -146,8 +146,8 @@ public class ManageAdhocUsersPage extends Page {
 	public boolean userByIndexNameEqualsToOneOfaList(List<String> userList,int index){
 
 		try{
-			index+=2;
-			String text=getUserIdByIndex(index).getText();
+
+			String text=getUserIdByIndex(index+2).getText();
 
 			boolean isOnTheList=false;
 
@@ -175,9 +175,10 @@ public class ManageAdhocUsersPage extends Page {
 	}
 
 	public WebElement getUserIdByIndex(int index){
+
 		try{
 
-			return driver.findElement(By.xpath(".//*[@id='contentDIV']//tr["+(index+2)+"]/td[1]"));
+			return driver.findElement(By.xpath(".//*[@id='contentDIV']//tr["+(index)+"]/td[1]"));
 
 		}catch(Exception e){
 
@@ -204,7 +205,7 @@ public class ManageAdhocUsersPage extends Page {
 		try {
 			waitForVisibility(getUserIdByIndex(i));
 
-			String text=getUserIdByIndex(i).getText();
+			String text=getUserIdByIndex(i+2).getText();
 
 			WebElement userDeleteButton=getDeleteButtonByIndex(i);
 
@@ -226,7 +227,7 @@ public class ManageAdhocUsersPage extends Page {
 			Thread.sleep(3000);
 
 		} catch (Exception msg) {
-			System.out.println("Fail to click on index course delete button. ");
+			System.out.println("Fail to click on index course delete button. " +msg.getMessage());
 			Assert.assertTrue(false);
 			return false;
 		}

@@ -68,14 +68,15 @@ public class ConfirmationMenu extends Page {
 			}
 			waitForVisibility(ok_button);		
 			((JavascriptExecutor) driver).executeScript("arguments[0].click();",ok_button);
-			wait.until(ExpectedConditions.not(ExpectedConditions.visibilityOf(ok_button)));
 			ATUReports.add(time +" Clicked on OK button.", LogAs.PASSED, null);
 			Assert.assertTrue(true);
 		} catch (Exception e) {
 			ATUReports.add(time +" Fail click on OK button.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
 			Assert.assertTrue(false);
-		}  
-		Thread.sleep(2000);	
+		}
+
+		Thread.sleep(2000);
+
 	}
 	
 	// This function clicks on ok button of copy menu

@@ -854,7 +854,7 @@ public class RecordingHelperPage extends Page {
 
         for (int i = 0; i < recordings_list.size(); i++) {
             waitForVisibility(recordings_list.get(i));
-            String current_name = recordings_list.get(i).getText();
+            String current_name =getTextFromWebElement(recordings_list.get(i),5);
             if (current_name.equals("Recordings")) {
                 continue;
             } else if (current_name.equals("Recording Tasks")) {
