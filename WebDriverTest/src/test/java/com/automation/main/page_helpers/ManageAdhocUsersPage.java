@@ -205,7 +205,7 @@ public class ManageAdhocUsersPage extends Page {
 		try {
 			waitForVisibility(getUserIdByIndex(i));
 
-			String text=getUserIdByIndex(i).getText();
+			String text=getUserIdByIndex(i+2).getText();
 
 			WebElement userDeleteButton=getDeleteButtonByIndex(i);
 
@@ -227,7 +227,7 @@ public class ManageAdhocUsersPage extends Page {
 			Thread.sleep(3000);
 
 		} catch (Exception msg) {
-			System.out.println("Fail to click on index course delete button. ");
+			System.out.println("Fail to click on index course delete button. " +msg.getMessage());
 			Assert.assertTrue(false);
 			return false;
 		}
