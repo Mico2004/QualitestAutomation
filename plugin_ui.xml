@@ -1,3 +1,5 @@
 <application>
-  <component name="PluginManagerConfigurable" installedProportions="0.50128204" />
+  <component name="PluginManagerConfigurable" installedProportions="0.50128204">
+    <option name="installedSortByStatus" value="true" />
+  </component>
 </application>
